@@ -1,0 +1,77 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>SE_Chatter 理论学习</title>
+<style>
+<!--      A:link {text-decoration: none; color: 0000ff}      
+                                 A:visited {text-decoration: none; color: 000077}      
+                                 A:active {text-decoration: none; color: ff0000}      
+                                 A:hover {text-decoration: underline; color: cc0000}   -->
+</style>
+</head>
+
+<body bgcolor="#FFFFFF">
+<center>
+<table width=630 border=0>
+<tr><td>
+<h3>Documentation for small/prototyping projects</h3>
+
+    The following thoughts are my personal opinions on interpreting the CMM for small or prototyping projects. The key practices of the CMM are written from the perspective of large, government contracting organizations, but the CMM has been successfully applied across a broad range of environments. 
+<p>
+    It is fair to say that the practices set expectations for what the normative behavior of organizations will be in satisfying the CMM. I think it is also fair to say that the practices apply to small or prototyping projects, but the expectations for degree of documentation and formality may be quite different from those for a large, government contracting organization. There is a chapter in the TR-25 on "Interpreting the CMM," and this note is basically a restatement of some of that material with examples. 
+<p>
+
+    The CMM has a strong emphasis on documenting your process and implementing the process as documented -- say what you do; do what you say. It is our expectation that even small projects or prototyping projects can be expected to satisfy the goals of each key process area that is applicable -- including the documentation requirements. Understanding the appropriate degree of documentation that is critical to consistent, high-quality performance of the process is essential to defining usable processes regardless of the application domain, environment, size, or any of the other drivers that influence interpretation of the CMM. 
+<p>
+
+    Some of the issues that must be considered in judging a specific implementation include: 
+<p>
+
+    Mapping of roles. For example, in a small project, the project manager/task leader may fulfill the functions of SCM manager, SCM group, SCCB, project manager, project software manager, software manager, estimater, system engineering group, customer liaison, etc. Is the functionality in the CMM addressed? Who is addressing it? 
+Understanding "documented." Documentation may be via SDFs, e-mail, notes, memos, a formal plan/standard/procedure, etc. Documents may be on-line or on paper. 
+Formality of the process. For example, an SCCB is an appropriate control mechanism for large projects, but for small projects the approval and review of changes may be the responsibility of the project manager/task leader. 
+Granularity, packaging, and frequency. For example, software plans may be packaged in several volumes for a large project; for a small project, plans and requirements may all be gathered together in a single loose-leaf binder. Phrases such as "periodic" and "as appropriate" need to be defined or interpreted to suit the needs of a particular environment. 
+The challenge in using the CMM intelligently for small/prototyping projects is making a reasonable professional judgement as to the sufficiency of a process. Adding to the challenge is the fact that the criteria bounding these judgements are continuous. How small is "small"? How informal is appropriate for prototyping? 
+<p>
+
+
+<h3>Small projects</h3>
+
+    What is a small project? Some organizations would say 10-20 people; others 2-3. The general concepts of the CMM apply even at the level of the individual professional, as Watts Humphrey is currently demonstrating with his work on the Personal Software Process. 
+<p>
+
+    Consider an organization, perhaps with a thousand people, but projects are small: typically 3-5 people for 1-3 months. Can such an organization satisfy the project management KPAs at Level 2 without incurring excessive overhead? 
+<p>
+
+    From a project perspective, a two-week slip is not a big deal. If the project was scheduled to last a month, a two-week slip is still not a major risk. If there are a thousand projects, and each slips its schedule by 50%, that is a big deal for the organization as a whole. It may be appropriate to interpret "project" and "organization" in the CMM as synonyms for this organization and treat the 3-5 person efforts as "tasks" that need to be collectively planned and tracked. Tracking will be almost binary -- is it planned? is it complete? -- since the entire development cycle is near the granularity of a monthly status reporting cycle. The plan for each project/task will be on the order of a one-page task order (which will include the written requirements for what is to be built). 
+<p>
+
+    For the small organization, say less than 20 people, a more-of-the-same argument would hold. The process focus might be the responsibility of the president of the company. There might not be an independent SQA group; individuals from other "projects" might act in the (objective) SQA role as part of a peer review system (this could also be true for large organizations that have a "TQM culture"). Policies, standards, and procedures might be combined into a single (short) document, perhaps in a loose-leaf binder. 
+<p>
+
+
+<h3>Prototyping projects</h3>
+    Consider a prototyping project. The entire project may last six months and go through four or five prototyping cycles. The customer does not know exactly what is needed -- that's why they're prototyping. The requirements for the first prototype will be documented by the customer, but neither the requirements nor the plan will be very elaborate. Even the ending criteria may be vaguely stated as "whenever the customer doesn't want to prototype any more." The requirements and plans for successive prototypes may be embedded in the code/design/action items from the last prototype, but they should identify when further refinement of the plan will be performed. 
+<p>
+
+    This is certainly not as formally stated as the practices in the CMM would indicate, yet it could be a well-controlled and effective process for managing a prototyping project. 
+<p>
+
+    There is a distinction between prototyping and hacking. Hacking has become a pejorative term, denoting an undisciplined, ad hoc approach to software. Prototyping, if properly implemented, is not hacking. There is a range of approaches to developing software: prototyping, rapid prototyping, evolutionary development, incremental delivery, full-scale development, etc. Each has different expectations for degree of rigor and formality that are appropriate in its environment; each can be misapplied in the wrong environment; each can fully satisfy the CMM in an effective manner if intelligently implemented. 
+<p>
+
+
+<h3>Interpreting the CMM</h3>
+    The CMM is aimed at solving systematic problems in the way we manage software projects. Perhaps the best way to tell if a process implementation is sufficient is whether or not you're having significant problems related to the process. If you and your customer disagree over what a product should be doing, you may want to look at Requirements Management; if you're having schedule and cost problems, you may want to think about Software Project Planning and Software Project Tracking & Oversight; if you've lost the product, you might want to consider Software Configuration Management. 
+<p>
+
+    If you don't have any project management problems, maybe you're at Level 2 (or higher) -- although I'd make the caveat that managers should ask the people doing the work whether there are problems before concluding there aren't any. 
+<p>
+
+    The CMM is not a process description or a process model. It is a description of key process attributes that may be realized in many different ways. Unfortunately, a side effect of making the CMM flexible enough to apply across a broad range of application domains, environments, sizes, etc., is that we create ambiguity that needs to be appropriately interpreted in each context in which the CMM is applied. 
+<p>
+
+</td></tr></table></center>
+</body>
+</html>

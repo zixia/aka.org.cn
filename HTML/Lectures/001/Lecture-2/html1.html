@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>diff&amp;patch</TITLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#0000ff" VLINK="#800080" BACKGROUND="velvet.jpg">
+<B><I><U><FONT FACE="宋体" LANG="ZH-CN" SIZE=4> 
+<P ALIGN="JUSTIFY"><a href="html2.html"><img src="next.gif" width="16" height="16" border="0"></a><a href="index.html"><img src="toc.gif" width="16" height="16" border="0"></a></P>
+<P ALIGN="JUSTIFY">diff</P>
+</font></u></i></B><FONT FACE="宋体" LANG="ZH-CN"> 
+<P ALIGN="JUSTIFY">　　diff是生成源码补丁的必备工具。其命令格式为：</P></FONT><DIR><FONT FACE="宋体" LANG="ZH-CN">
+
+</font><P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　</font><FONT FACE="Courier New">diff [</FONT><FONT FACE="宋体" LANG="ZH-CN">命令行选项</FONT><FONT FACE="Courier New">] </FONT><FONT FACE="宋体" LANG="ZH-CN">原始文件</FONT><FONT FACE="Courier New"> </FONT><FONT FACE="宋体" LANG="ZH-CN">新文件</font></P></DIR><FONT FACE="宋体" LANG="ZH-CN">
+
+<P ALIGN="JUSTIFY">常用命令行选项如下：</P>
+</FONT><P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　　</font><FONT FACE="Courier New">-r&#9;</FONT><FONT FACE="宋体" LANG="ZH-CN">递归处理目录&#9;　　　　</FONT><FONT FACE="Courier New">-u&#9;</FONT><FONT FACE="宋体" LANG="ZH-CN">输出统一格式</FONT><FONT FACE="Courier New">(unified format)</font></P>
+<P><FONT FACE="System" LANG="ZH-CN">　　　</font><FONT FACE="Courier New">-N&#9;patch</FONT><FONT FACE="System" LANG="ZH-CN">里包含新文件　　　</FONT><FONT FACE="Courier New">-a&#9;patch</FONT><FONT FACE="System" LANG="ZH-CN">里可以包含二进制文件</font></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">　　它的输出在stdout上，所以你可能需要把它重定向到一个文件。diff的输出有“传统格式”和“统一格式”之分，现在大都使用统一格式：</P>
+<P ALIGN="JUSTIFY">　　传统格式示例：</P>
+</FONT><P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　　</font><FONT FACE="Lucida Console">[hahalee@builder]$ diff a.txt b.txt</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　　</font><FONT FACE="Lucida Console">1a2</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　　</font><FONT FACE="Lucida Console">&gt; here we insert a new line</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　　</font><FONT FACE="Lucida Console">3d3</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　　</font><FONT FACE="Lucida Console">&lt; why not this third line?</font></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">　　统一格式示例：</P>
+</FONT><P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　　</font><FONT FACE="Lucida Console">[hahalee@builder]$ diff -u a.txt b.txt</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　　</font><FONT FACE="Lucida Console">--- a.txt Thu Apr 6 15:58:34 2000</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　　</font><FONT FACE="Lucida Console">+++ b.txt Thu Apr 6 15:57:53 2000</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　　</font><FONT FACE="Lucida Console">@@ -1,3 +1,3 @@</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　　</font><FONT FACE="Lucida Console">This is line one</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　　</font><FONT FACE="Lucida Console">+here we insert a new line</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　　</font><FONT FACE="Lucida Console">and this is line two</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　　</font><FONT FACE="Lucida Console">-why not this third line?</font></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">　　通过比较可以看出，传统格式的patch文件比较小，除了要删除/插入的行外没有冗余信息。统一格式则保存了上下文（缺省是上下各三行，最少需要两行），这样，patch的时候可以允许行号不精确匹配的情况出现。另外，在patch文件的开头明确地用---和+++标示出原始文件和当前文件，也方便阅读。要选用统一格式，用 u 开关。</P>
+<P ALIGN="JUSTIFY">　　通常，我们需要对整个软件包做修改，并生成一个patch文件，下面是典型的操作过程。这里就要用到前面介绍的几个命令行开关了：</P>
+</FONT><P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　</font><FONT FACE="Lucida Console">tar xzvf software.tar.gz&#9;&#9;&#9;# </FONT><FONT FACE="宋体" LANG="ZH-CN">展开原始软件包，其目录为</FONT><FONT FACE="Lucida Console">software</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　</font><FONT FACE="Lucida Console">cp </FONT><FONT FACE="System" LANG="ZH-CN">_</FONT><FONT FACE="Lucida Console">a software software-orig&#9;&#9;# </FONT><FONT FACE="宋体" LANG="ZH-CN">做个修改前的备份</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　</font><FONT FACE="Lucida Console">cd software</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　</font><FONT FACE="Lucida Console">[</FONT><FONT FACE="宋体" LANG="ZH-CN">修改，测试……</FONT><FONT FACE="Lucida Console">]</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　</font><FONT FACE="Lucida Console">cd ..</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　</font><FONT FACE="Lucida Console">diff </FONT><FONT FACE="System" LANG="ZH-CN">_</FONT><FONT FACE="Lucida Console">ruNa software-orig software &gt; software-my.patch</font></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">　　现在我们就可以保存software-my.patch做为这次修改的结果，至于原始软件包，可以不必保存。等到下次需要再修改的时候，可以用patch命令把这个补丁打进原始包，再继续工作。比如是在linux kernel 上做的工作，就不必每次保存几十兆修改后的源码了。这是好处之一，好处之二是维护方便，由于unified patch格式有一定的模糊匹配能力，能减少原软件包升级带来的维护工作量(见后)</P>
+<P ALIGN="JUSTIFY">　</P>
+</FONT><B><I><U><FONT FACE="宋体" LANG="ZH-CN" SIZE=4><P ALIGN="JUSTIFY">patch</P>
+</font></u></i></B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">　　patch命令跟diff配合使用，把生成的补丁应用到现有代码上。常用命令行选项：</P>
+<P ALIGN="JUSTIFY">　　patch [命令行选项] [待patch的文件[patch]]</P>
+<P ALIGN="JUSTIFY">　　-pn&#9;&#9;patch level(n是数字)&#9;&#9;-b[后缀]&#9;生成备份，缺省是.orig</P>
+<P ALIGN="JUSTIFY">为了说明什么是patch level，这里看一个patch文件的头标记。</P>
+</FONT><P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　</font><FONT FACE="Lucida Console">diff -ruNa xc.orig/config/cf/Imake.cf xc.bsd/config/cf/Imake.cf</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　</font><FONT FACE="Lucida Console">--- xc.orig/config/cf/Imake.cf Fri Jul 30 12:45:47 1999</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN">　　</font><FONT FACE="Lucida Console">+++ xc.new/config/cf/Imake.cf Fri Jan 21 13:48:44 2000</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="宋体" LANG="ZH-CN">　　这个patch如果直接应用，它会去找xc.orig/config/cf目录下的Imake.cf文件，假如你的源码树的根目录是缺省的xc而不是xc.orig，除了mv xc xc.orig之外，有无简单的方法应用此patch呢？patch level就是为此而设：patch会把目标路径名砍去开头patch level个节(由/分开的部分)。在本例中，可以用下述命令：cd xc; patch </font><FONT FACE="System" LANG="ZH-CN">_</FONT><FONT FACE="宋体" LANG="ZH-CN">p1 &lt; /pathname/xxx.patch 完成操作。注意，由于没有指定patch文件，patch程序默认从stdin读入，所以用了输入重定向。</font></P>
+<FONT FACE="宋体" LANG="ZH-CN"> 
+<P ALIGN="JUSTIFY">　　如果patch成功，缺省是不建备份文件的(注：FreeBSD下的patch工具缺省是保存备份)，如果你需要，可以加上 
+  b 开关。这样把修改前的文件以“原文件名.orig”的名字做备份。如果你喜欢其它后缀名，也可以用“b 后缀”来指定。</P>
+<P ALIGN="JUSTIFY">　　如果patch失败，patch会把成功的patch行给patch上，同时（无条件）生成备份文件和一个.rej文件。.rej文件里是没有成功提交的patch行，需要手工patch上去。这种情况在原码升级的时候有可能会发生。</P>
+<P ALIGN="JUSTIFY">　　关于二进制文件的说明：binary文件可以原始方式存入patch文件。diff可以生成(加-a选项),patch也可以识别。如果觉得这样的patch文件太难看，解决方法之一是用uuencode处理该binary文件。</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY"><a href="index.html"><img src="next.gif" width="16" height="16" border="0"><img src="toc.gif" width="16" height="16" border="0"></a></P>
+</FONT> 
+</BODY>
+</HTML>

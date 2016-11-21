@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>BASH 中的其他高级问题</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+    <META NAME="AUTHOR" CONTENT="Yongming Wei">
+    <META NAME="CREATED" CONTENT="20000329;17342600">
+    <META >
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="velvet.jpg">
+
+<A HREF="bash-spec.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="perl-history.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=LEFT>4&nbsp;&nbsp;&nbsp;&nbsp;BASH 中的其他高级问题</H1>
+
+<UL>
+    <LI>
+    <P>BASH 中对返回值的处理
+  </LI>
+    <LI>
+    <P>用 BASH 设计简单用户界面
+  </LI>
+    <LI>
+    <P>在 BASH 中读取用户输入
+  </LI>
+    <LI>
+    <P>一些特殊的惯用法
+  </LI>
+    <LI>
+    <P>BASH 程序的调试
+  </LI>
+    <LI>
+    <P>关于 BASH2
+  </LI>
+</UL>
+
+<H3>4.1&nbsp;&nbsp;&nbsp;&nbsp;BASH 中对返回值的处理</H3>
+<P>无论是在 Shell 中对 BASH 脚本返回值的处理，还是在脚本中对函数返回值的处理，都是通过 &quot;$?&quot; 系统变量来获得。BASH 
+  要求返回值必须为一个整数，不能用 return 语句返回字符串变量。</P>
+<BR>
+
+<H3>4.2&nbsp;&nbsp;&nbsp;&nbsp;用 BASH 设计简单用户界面</H3>
+<P><I> </I>BASH 中提供了一个小的语句格式，可以让程序快速的设计出一个字符界面的用户交互选择的菜单，该功能就是由 select 语句来实现的，select 
+  语句的语法为：</P>
+<P><b><i><font color="#FFFFFF">select var in [list]<br>
+  do<br>
+  　statments use $var<br>
+  done</font></i></b></P>
+<P> 上面的语法结构在执行后，BASH 会将 [list] 中的所有项加上数字列在屏幕上等待用户选择，在用户作出选择后，变量 $var 中就包含了那个被选中的字符串，然后就可以对该变量进行需要的操作了。我们可以从下面的<a href="select">例子</a>中更直观的来理解这个功能： 
+</P>
+<P> <font color="#FFFFFF"><b>#!/bin/bash <br>
+  <br>
+  OPTIONS="Hello Quit" <br>
+  select opt in $OPTIONS; do <br>
+  　if [ "$opt" = "Quit" ]; then <br>
+  　　echo done <br>
+  　　exit <br>
+  　elif [ "$opt" = "Hello" ]; then <br>
+  　　　echo Hello World <br>
+  　　else <br>
+  　　　clear <br>
+  　　　echo bad option <br>
+  　fi <br>
+  done <br>
+  <br>
+  exit 0</b></font></P>
+<P>大家可以试着执行上面的程序，看看是什么执行结果。</P>
+<P>&nbsp;</P>
+<p></P>
+
+<H3>4.3&nbsp;&nbsp;&nbsp;&nbsp;在 BASH 中读取用户输入</H3>
+<P>BASH 中通过 read 函数来实现读取用户输入的功能，如下面这段程序：</P>
+<P> <b><font color="#FFFFFF">#!/bin/bash<br>
+  <br>
+  echo Please enter your name<br>
+  read NAME <br>
+  echo "Hi! $NAME !"<br>
+  <br>
+  exit 0</font></b></P>
+<P>上面这个脚本读取用户的输入，并回显在屏幕上。</P>
+<P>另外 BASH 中还提供另外一种称为 here documents 的结构，可以将用户需要通过键盘输入的字符串改为从程序体中直接读入，如密码。下面的<a href="here">小程序</a>演示了这个功能：</P>
+<P><b><font color="#FFFFFF">#!/bin/bash <br>
+  <br>
+  passwd="aka@tsinghua" <br>
+  ftp -n localhost <&lt;FTPFTP<br>
+  user anonymous $passwd <br>
+  binary <br>
+  bye <br>
+  FTPFTP <br>
+  <br>
+  exit 0 </font></b></P>
+<P>这个程序在用户需要通过键盘敲入一些字符时，通过程序内部的动作来模拟键盘输入。请注意 here documents 的基本结构为：</P>
+<P><font color="#FFFFFF"><b><i>command &lt;&lt;SOMESPECIALSTRING<br>
+  statments<br>
+  ...<br>
+  SOMESPECIALSTRING</i></b></font></P>
+<P>这里要求在需要键盘输入的命令后，直接加上 &lt;&lt;符号，然后跟上一个特别的字符串，在该串后按顺序输入本来应该由键盘输入的所有字符，在所有需要输入的字符都结束后，重复一遍前面 
+  &lt;&lt;符号后的“特别的字符串”即表示该输入到此结束。</P>
+<P>&nbsp;</P>
+<H3>4.4 一些特殊的惯用法</H3>
+<p>在 BASH 中 () 一对括号一般被用于求取括号中表达式的值或命令的执行结果，如：(a=hello; echo $a) ，其作用相当于 `...` 
+  。 </p>
+<p>: 有两个含义，一是表示空语句，有点类似于 C 语言中的单个 &quot;;&quot; 。表示该行是一个空命令，如果被用在 while/until 
+  的头结构中，则表示值 0，会使循环一直进行下去，如下例：</p>
+<p><b><i><font color="#FFFFFF">while : <br>
+  do <br>
+  　operation-1 <br>
+  　operation-2 <br>
+  　... <br>
+  　operation-n <br>
+  done </font></i></b></p>
+<p>另外 : 还可以用于求取后面变量的值，比如：</p>
+<p><b><font color="#FFFFFF">#!/bin/bash <br>
+  <br>
+  : ${HOSTNAME?} {USER?} {MAIL?} <br>
+  echo $HOSTNAME <br>
+  echo $USER <br>
+  echo $MAIL <br>
+  <br>
+  exit 0 </font></b></p>
+<p>在 BASH 中 export 命令用于将系统变量输出到外层的 Shell 中了。</p>
+<p>&nbsp;</p>
+<h3>4.5 BASH 程序的调试</h3>
+<p>用 <font color="#FFFFFF">bash -x bash-script</font> 命令，可以查看一个出错的 BASH 脚本到底错在什么地方，可以帮助程序员找出脚本中的错误。</p>
+<p>另外用 trap 语句可以在 BASH 脚本出错退出时打印出一些变量的值，以供程序员检查。trap 语句必须作为继 &quot;#!/bin/bash&quot; 
+  后的第一句非注释代码，一般 trap 命令被写作： <font color="#FFFFFF">trap 'message $checkvar1 $checkvar2' 
+  EXIT</font> 。</p>
+<p>&nbsp;</p>
+<h3>4.6 关于 BASH2</h3>
+<p>使用 bash -version 命令可以看出当前你正在使用的 BASH 是什么版本，一般版本号为1.14或其他版本。而现在机器上一般还安装了一个版本号为 
+  2.0 的 BASH 。该 BASH 也在 /bin 目录下。BASH2 提供了一些新功能，有兴趣的同叙可以自己去看相关资料，或直接 man bash2 
+  即可。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<P>&nbsp; </P>
+<P ALIGN=CENTER>
+<IMG SRC="striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="bash-spec.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="perl-history.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+</BODY>
+</HTML>
+

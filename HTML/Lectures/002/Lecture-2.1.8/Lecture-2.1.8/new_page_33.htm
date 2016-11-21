@@ -1,0 +1,87 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>UDP服务器程序</title>
+<meta name="Microsoft Theme" content="blank 001, default">
+<meta name="Microsoft Border" content="tl, default">
+</head>
+
+<body background="_themes/blank/blbkgnd.gif" bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/new_page_33.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="UDP服务器程序"></strong></font><br>
+<a href="index.htm"><img src="_derived/home_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="主页" align="middle"></a> <a href="new_page_12.htm"><img src="_derived/up_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="上一层" align="middle"></a> <a href="new_page_35.htm"><img src="_derived/new_page_35.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="程序流程" align="middle"></a> <img src="_derived/new_page_33.htm_cmp_blank000_hbtn_p.gif" width="140" height="32" border="0" alt="UDP服务器程序" align="middle"> <a href="new_page_34.htm"><img src="_derived/new_page_34.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="UDP客户端程序" align="middle"></a></p>
+<p align="center">　</p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<p>#include &lt;stdio.h&gt; </p>
+<p>#include &lt;stdlib.h&gt; </p>
+<p>#include &lt;errno.h&gt; </p>
+<p>#include &lt;string.h&gt; </p>
+<p>#include &lt;sys/types.h&gt; </p>
+<p>#include &lt;netinet/in.h&gt; </p>
+<p>#include &lt;sys/socket.h&gt; </p>
+<p>#include &lt;sys/wait.h&gt;</p>
+<p>#define MYPORT 3490 /* 监听端口 */</p>
+<p>　</p>
+<p>void main() </p>
+<p>{ </p>
+<blockquote>
+  <p>int sockfd; /* 数据端口 */ </p>
+  <p>struct sockaddr_in my_addr; /* 自身的地址信息 */ </p>
+  <p>struct sockaddr_in their_addr; /* 连接对方的地址信息 */ </p>
+  <p>int sin_size, retval; </p>
+  <p>char buf[128];</p>
+  <p>　</p>
+  <p>if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) == -1) { </p>
+  <blockquote>
+    <p>perror(&quot;socket&quot;); </p>
+    <p>exit(1); </p>
+  </blockquote>
+  <p>}</p>
+  <p>　</p>
+  <p>my_addr.sin_family = AF_INET; </p>
+  <p>my_addr.sin_port = htons(MYPORT); /* 网络字节顺序 */ </p>
+  <p>my_addr.sin_addr.s_addr = INADDR_ANY; /* 自动填本机IP */ </p>
+  <p>bzero(&amp;(my_addr.sin_zero), 8); /* 其余部分置0 */</p>
+  <p>　</p>
+  <p>if (bind(sockfd, (struct sockaddr *)&amp;my_addr, sizeof(my_addr)) == -1) { 
+  </p>
+  <blockquote>
+    <p>perror(&quot;bind&quot;); </p>
+    <p>exit(1); </p>
+  </blockquote>
+  <p>}</p>
+  <p>　</p>
+  <p>/* 主循环 */</p>
+  <p>while(1) {&nbsp; </p>
+  <blockquote>
+    <p>retval = recvfrom(sockfd, buf, 128, 0, (struct sockaddr 
+    *)&amp;their_addr, &amp;sin_size); </p>
+    <p>printf(&quot;Received datagram from 
+    %s\n&quot;,inet_ntoa(their_addr.sin_addr));</p>
+    <p>if (retval == 0) { </p>
+    <blockquote>
+      <p>perror (“recvfrom&quot;); </p>
+      <p>close(sockfd); </p>
+      <p>break; </p>
+    </blockquote>
+    <p>}</p>
+    <p>retval = sendto(sockfd, buf, 128, 0, (struct sockaddr *)&amp;their_addr, 
+    sin_size); </p>
+  </blockquote>
+  <p>}</p>
+</blockquote>
+<p>}</p>
+　
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+</html>

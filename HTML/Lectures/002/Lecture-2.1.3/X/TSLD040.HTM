@@ -1,0 +1,49 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>KDE±à³Ì: KDE</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>KDE±à³Ì: KDE</H1> 
+ <P><UL>
+class MainWindow : public KTMainWindow
+<BR>{
+<BR>   Q_OBJECT
+<BR>  public:
+<BR>     MainWindow ( char * name );
+<BR>   public slots:
+<BR>    void fileOpen();
+<BR>    void fileSave();
+<BR>};
+<BR> void MainWindow::fileOpen()
+<BR>{
+<BR>    QString tmpFile; 
+<BR>    KURL filename = KFileDialog::getOpenURL( QString::null, "*", this );
+<BR>    if( KIO::NetAccess::download( filename.url(), tmpFile ) )
+<BR>    {     KIO::NetAccess::removeTempFile( tmpFile );   }
+<BR>}
+<BR>void MainWindow::fileSave()
+<BR>{
+<BR>   KURL filename=KFileDialog::getSaveURL( QString::null, "*", this );
+<BR>}
+</UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld039.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld041.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld040.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

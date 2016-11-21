@@ -1,0 +1,232 @@
+<HTML
+><HEAD
+><TITLE
+>Good development practice</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.56"><LINK
+REL="HOME"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Good licensing and copyright practice: the practice"
+HREF="x169.html"><LINK
+REL="NEXT"
+TITLE="Good distribution-making practice"
+HREF="x210.html"></HEAD
+><BODY
+CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+></TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x169.html"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x210.html"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN184"
+>5. Good development practice</A
+></H1
+><P
+>Most of these are concerned with ensuring portability, not only across
+Linuxes but to other Unixes as well.  Being portable to other Unixes 
+is not just a worthy form of professionalism and hackerly politeness, 
+it's valuable insurance against future changes in Linux itself.</P
+><P
+>Finally, other people <I
+CLASS="EMPHASIS"
+>will</I
+> try to build
+your code on non-Linux systems; portability minimizes the number of
+annoying perplexed email messages you will get.</P
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN189"
+>5.1. Write either pure ANSI C or a portable scripting language</A
+></H2
+><P
+>For portability and stability, you should write either in ANSI C or a
+scripting language that is guaranteed portable because it has just one
+cross-platform implementation.</P
+><P
+>Scripting languages that qualify include Python, Perl, Tcl,
+Emacs Lisp, and PHP.  Plain old shell does <I
+CLASS="EMPHASIS"
+>not</I
+>
+qualify; there are too many different implementations with subtle
+idiosyncracies, and the shell environment is subject to disruption by
+user customizations such as shell aliases.</P
+><P
+>Java holds promise as a portable language, but the Linux-available 
+implementations are still scratchy and poorly integrated with Linux.
+Java is still a bleeding-edge choice, though one likely to become more
+popular as it matures.</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN195"
+>5.2. Follow good C portability practices</A
+></H2
+><P
+>If you are writing C, do feel free to use the full ANSI features --
+including function prototypes, which will help you spot cross-module
+inconsistancies.  The old-style K&#38;R compilers are history.</P
+><P
+>On the other hand, do <I
+CLASS="EMPHASIS"
+>not</I
+> assume that GCC-specific 
+features such as the `-pipe' option or nested functions are available.
+These will come around and bite you the second somebody ports to a
+non-Linux, non-GCC system.</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN200"
+>5.3. Use autoconf/automake/autoheader</A
+></H2
+><P
+>If you're writing C, use autoconf/automake/autoheader to handle
+portability issues, do system-configuration probes, and tailor your
+makefiles.  People building from sources today expect to be able to
+type "configure; make" and get a clean build -- and rightly so.</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN203"
+>5.4. Sanity-check your code before release</A
+></H2
+><P
+>If you're writing C, test-compile with -Wall and clean up the
+errors at least once before each release.  This catches a surprising
+number of errors.  For real thoroughness, compile with -pedantic as
+well.</P
+><P
+>If you're writing Perl, check your code with perl -c (and maybe
+-T, if applicable).  Use perl -w and 'use strict' religiously.  (See
+the Perl documentation for discussion.)</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN207"
+>5.5. Sanity-check your documentation and READMEs before release</A
+></H2
+><P
+>Run a spell-checker on them.  If you look like you can't spell and
+don't care, people will assume you code is sloppy and careless too.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x169.html"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x210.html"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Good licensing and copyright practice: the practice</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Good distribution-making practice</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

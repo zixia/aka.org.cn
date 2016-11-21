@@ -1,0 +1,45 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>打开显示服务器</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>打开显示服务器</H1> 
+ <P><UL>
+<LI><H2>在任何Ｘ程序运行之前必须与显示器服务器（display server）建立一个连接
+</H2>
+</UL><UL>
+<LI><H2>服务器名：机器名＋显示器号＋屏幕号
+</H2>
+<UL>
+<LI> hostname:display_number.screen
+<LI> 在程序指定，否则由Display环境变量指定
+<LI> 一个Ｘ服务器（Ｘ server）可以控制多个屏幕（终端），只要它们属于一个显示器
+<BR>Display *XOpenDisplay(name)  /* open a display on the named server.
+<BR>                            	　　 If successful  then all the screens on 
+<BR>　　　　　                              the display may be used . */
+<BR>    　　　char *name;             /* e.g. nokia-bbs:0.0*/
+<BR>XCloseDisplay(display)              /* close a display completely */
+</UL></UL><UL>
+<LI><H2> 当一个客户连接结束时，Ｘserver就释放这个连接的资源</H2>
+</UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld007.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld009.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld008.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

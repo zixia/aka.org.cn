@@ -1,0 +1,14 @@
+第六讲  信号, 终端和控制台
+
+    讲座以概念解释为主, 重点讲述信号, 终端相关的系统调用, 函数和编程要点.
+	
+    主要内容:
+
+	* 信号. 概念, 机制, 沿革, 可重入性
+	* 不可靠信号. signal 相同调用
+	* 可靠信号. 信号集操作, sig* 系统调用
+	* 与信号相关的库函数. sleep, system, abort 等 
+	* 线程中的信号处理. 概念, pthread_sigmask, pthread_kill, sigwait 等.
+	* 终端编程. 基本终端 I/O, ncurses 库, newt 库.
+	* 伪终端. 概念, 编程.
+	* 控制台上的图形编程. SVGALib, FrameBuffer, GGI, Algero.

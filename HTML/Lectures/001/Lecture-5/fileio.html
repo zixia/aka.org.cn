@@ -1,0 +1,282 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>文件I/O</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312-80">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        PRE { color: #ffffff; font-family: "fixed" }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="images/velvet.jpg">
+
+<A HREF="fs.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="stdio.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=CENTER>5.2&nbsp;&nbsp;文件I/O<BR><BR>
+</H1>
+
+<UL>
+    <LI><P>基本概念</LI>
+    <LI><P>相关系统调用</LI>
+    <LI><P>Open 以及文件的打开标志</LI>
+    <LI><P>原子操作</LI>
+    <LI><P>文件共享</LI>
+    <LI><P>dup 和 dup2</LI>
+    <LI><P>fcntl 和 ioctl</LI>
+    <LI><P>容易混淆的概念</LI>
+</UL>
+
+<H3>5.2.1&nbsp;&nbsp;基本概念</H3>
+<UL>
+    <LI>文件描述符. STD??_FILENO, OPEN_MAX</LI>
+    <LI>文件描述符和索引节点的关系</LI>
+</UL>
+
+<H3>5.2.2&nbsp;&nbsp;相关系统调用</H3>
+<UL>
+    <LI>open/creat/close</LI>
+    <LI>mode_t: primitive system type</LI>
+    <LI>系统调用的返回值</LI>
+
+<PRE>
+===============================================================================
+        #include &lt;sys/types.h&gt;
+        #include &lt;sys/stat.h&gt;
+        #include &lt;fcntl.h&gt;
+
+        int open(const char *pathname, int flags);
+        int open(const char *pathname, int flags, mode_t mode);
+        int creat(const char *pathname, mode_t mode);
+-------------------------------------------------------------------------------
+        #include &lt;unistd.h&gt;
+
+        int close(int fd);
+===============================================================================
+</PRE>
+
+    <LI>lseek</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;sys/types.h&gt;
+       #include &lt;unistd.h&gt;
+
+       off_t lseek(int fildes, off_t offset, int whence);
+===============================================================================
+</PRE>
+
+<P ALIGN=CENTER>清单 5-1: 建立有洞的文件 (hole.c)</P>
+<PRE>
+===============================================================================
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;stdio.h&gt;
+
+char buf1 [] = "abcdefghij";
+char buf2 [] = "ABCDEFGHIJ";
+
+void err_sys (const char* info)
+{
+    perror (info);
+    exit (1);
+}
+
+int main (void)
+{
+    int fd;
+
+    if ( (fd = creat ("file.hole", 0644)) &lt; 0)
+        err_sys ("create error");
+    
+    if (write (fd, buf1, 10) != 10)
+        err_sys ("buf1 write error");
+    
+    if (lseek (fd, 40960, SEEK_SET) == -1)
+        err_sys ("lseek error");
+    
+    if (write (fd, buf2, 10) != 10)
+        err_sys ("buf2 write error");
+    
+    exit (0);
+}
+===============================================================================
+</PRE>
+
+    <LI>read/write</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+
+       ssize_t read(int fd, void *buf, size_t count);
+       ssize_t write(int fd, const void *buf, size_t count);
+===============================================================================
+</PRE>
+
+    <LI>I/O 效率问题</LI>
+</UL>
+
+<H3>5.2.3&nbsp;&nbsp;Open 以及文件的打开标志</H3>
+<UL>
+    <LI>Open 的原型</LI>
+
+<PRE>
+===============================================================================
+        #include &lt;sys/types.h&gt;
+        #include &lt;sys/stat.h&gt;
+        #include &lt;fcntl.h&gt;
+
+        int open(const char *pathname, int flags, ... /*, mode_t mode*/);
+===============================================================================
+</PRE>
+
+    <LI>文件的打开标志: flags</LI>
+
+<PRE>
+===============================================================================
+       O_CREAT
+       O_EXCL
+       O_NOCTTY
+       O_TRUNC
+       O_APPEND
+       O_NONBLOCK/O_NDELAY
+       O_SYNC
+===============================================================================
+</PRE>
+
+    <LI>文件的访问许可: mode</LI>
+<PRE>
+===============================================================================
+       S_IRWXU                               00700
+       S_IRUSR (S_IREAD)                     00400
+       S_IWUSR (S_IWRITE)                    00200
+       S_IXUSR (S_IEXEC)                     00100
+
+       S_IRWXG                               00070
+       S_IRGRP                               00040
+       S_IWGRP                               00020
+       S_IXGRP                               00010
+
+       S_IRWXO                               00007
+       S_IROTH                               00004
+       S_IWOTH                               00002
+       S_IXOTH                               00001
+===============================================================================
+</PRE>
+    <LI>指定 O_CREATE 时, 必须指定 mode</LI>
+    <LI>新文件的文件许可: (mode & ~umask)</LI>
+    <LI>creat 等价于 open (pathname, O_CREAT | O_WRONLY | O_TRUNC, mode)</LI>
+</UL>
+
+<H3>5.2.4&nbsp;&nbsp;原子操作</H3>
+<UL>
+    <LI>问题: 两个进程同时向一个文件追加记录</LI>
+    <LI>原子操作的概念</LI>
+    <LI>上述问题的解决办法</LI>
+    <LI>另外一个问题: 创建文件</LI>
+</UL>
+
+<H3>5.2.5&nbsp;&nbsp;文件共享</H3>
+<UL>
+    <LI>内核中用于文件的数据结构</LI>
+
+<P ALIGN=CENTER><IMG SRC="images/file.gif" ALT="opened file"><BR>
+图 5-6  进程的文件信息</P>
+
+    <LI>共享的是哪些信息</LI>
+    <LI>系统调用到底发生了哪些改变: write, write with O_APPEND, lseek</LI>
+</UL>
+
+<H3>5.2.6&nbsp;&nbsp;dup 和 dup2</H3>
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+
+       int dup(int oldfd);
+       int dup2(int oldfd, int newfd);
+===============================================================================
+</PRE>
+<UL>
+    <LI>dup 的复制行为</LI>
+    <LI>dup2 的复制行为. dup2 是一个原子操作</LI>
+    <LI>复制后共享什么</LI>
+</UL>
+
+<H3>5.2.7&nbsp;&nbsp;fcntl 和 ioctl</H3>
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+       #include &lt;fcntl.h&gt;
+
+       int fcntl(int fd, int cmd);
+       int fcntl(int fd, int cmd, long arg);
+       int fcntl(int fd, int cmd, struct flock * lock);
+------------------------------------------------------------------------------
+       #include &lt;sys/ioctl.h&gt;
+
+       int ioctl(int d, int request, ...)
+===============================================================================
+</PRE>
+
+<UL>
+    <LI>fcntl 用途1: 复制描述符 (cmd=F_DUPFD)</LI>
+    <LI>fcntl 用途2: 获取/设置文件描述符标志 (cmd=F_GETFD or F_SETFD). 唯一标志: FD_CLOEXEC</LI>
+    <LI>fcntl 用途3: 获取/设置文件状态标志 (cmd=F_GETFL or F_SETFL). 只能修改: O_APPEND, O_NONBLOCK 和 O_ASYNC</LI>
+    <LI>fcntl 用途4: 获取/设置记录锁 (cmd=F_GETLK, F_SETLK or F_SETLKW)</LI>
+    <LI>fcntl 用途5: 获取/设置异步 I/O (cmd=F_GETOWN, F_SETOWN, F_GETSIG* or F_SETSIG*)</LI>
+    <LI>ioctl -- 任何不能用前述函数完成的工作均可以通过该函数完成.</LI>
+</UL>
+
+<PRE>
+===============================================================================
+    ioctl 的适用类型    常量名称      还要包含的头文件
+    磁盘卷标            DIOxxx        &lt;disklabel.h&gt;
+    文件 I/O            FIOxxx        &lt;ioctl.h&gt;
+    磁带 I/O            MTIOxxx       &lt;mtio.h&gt;
+    套接字 I/O          SIOxxx        &lt;ioctl.h&gt;
+    终端 I/O            TIOxxx        &lt;termios.h&gt;
+===============================================================================
+</PRE>
+
+<H3>5.2.8&nbsp;&nbsp;容易混淆的概念</H3>
+<UL>
+    <LI>进程的文件描述符: 文件描述符标志以及指向内核文件表的指针</LI>
+    <LI>内核文件表: 文件状态标志, 文件当前位置以及指向 vnode 的指针</LI>
+    <LI>vnode: 文件对象的属性</LI>
+    <LI>磁盘上的文件: inode + 数据</LI>
+</UL>
+
+<P>
+<BR><BR>
+</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="images/striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="fs.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="stdio.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+</BODY>
+</HTML>
+

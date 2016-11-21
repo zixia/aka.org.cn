@@ -1,0 +1,19 @@
+static pthread_key_t con_key;
+
+/* Once-only initialisation of the key */
+static pthread_once_t con_key_once = PTHREAD_ONCE_INIT;
+static pthread_once_t sig_handler_once = PTHREAD_ONCE_INIT;
+
+/* Allocate the key */
+static void con_key_alloc()
+{
+    pthread_key_create (&con_key, NULL);
+}
+
+/* Set console info */
+void set_coninfo (void* data)
+{
+    pthread_once (&con_key_once, con_key_alloc);
+    pthread_setspecific (con_key, data);
+}
+

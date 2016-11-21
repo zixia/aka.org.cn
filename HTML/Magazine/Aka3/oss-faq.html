@@ -1,0 +1,126 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>AKA杂志第三期：Open Source的FAQ</title>
+</head>
+
+<body>
+<div align="center"><center>
+
+<table border="0" width="630">
+  <tr>
+    <td></td>
+    <td bgcolor="#EEEDB7"><p align="center"><strong><big><big>　</big></big></strong></p>
+    <p align="center"><strong><big><big>Open Source的FAQ</big></big></strong></p>
+    <p align="center"><font size="2">作者：</font><small>Eric Raymond</small></p>
+    <p align="center"><font size="2">翻译: wclee[AKA]</font></p>
+    <h1 align="center"><a href="cover2.html"><font size="2">[返回]</font></a></h1>
+    <hr>
+    <p>(下文用Q代表问题，A代表回答)<br>
+    <br>
+    <big><strong>Q:有多少人在使用open source的软件?</strong></big><br>
+    <br>
+    A: 不好说。 因为大多数开放源码软件都是通过Internet免费下载而传播的,没有人有确切的统计数字。而且许多处于公司环境里的用户由于政治原因隐藏了这个事实。据说Linux有大约400万-2700万用户,最好的估计可以达到这个范围的上限.(根据IDG的统计,商业Linux的使用在1998增加了212%)<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; Netcraft Web Server survy统计了在欧洲Internet上使用的web服务器的使用情况.它持续地表明open-source的Apache 
+    Web服务器拥有超过50%的市场份额,击败了有更多宣传的私有软件产品诸如Netscape和微软的服务器套件,并且这个份额在稳定地增长.<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; Internet Operating System Counter收集了了关于在欧洲Internet上操作系统的使用情况的数据.它也表明Linux是那里与Internet相连的最流行的操作系统.<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 间接地说,发email或者用web的人也总是在使用open-source软件.Internet运转的各个部件(邮件传输,web服务器,FTP服务器)几乎都是open-source.<br>
+    <br>
+    <big><strong>Q:open-source软件不是很难有可靠的技术支持么?</strong></big></p>
+    <p>A:绝对不!Infoworld的&quot;1997年度最佳产品&quot;奖应该已经一劳永逸地推翻了这个神话。读一下这篇文章和它的分析,包括了如下引用:<br>
+    ......在商业环境中使用Linux的读者说他们发现获得的支持远远比以前使用的商业软件印象要深.</p>
+    <p>Linux不是一个例外.实际上,商业用户通常发现成熟的open source的产品远比封闭方式厂商的产品要容易上手, 
+    并且当需要时,技术支持是绝对便宜和容易得到的.<br>
+    <br>
+    <br>
+    <big><strong>Q:但对于open source的操作系统没有任何实际的应用程序,是吗?</strong></big></p>
+    <p>A:Oracle,Informix,和InterBase算吗?Word Perfect和Corel办公套件呢?你检查过ApplixWare和<br>
+    StarOffice套件么?我们已经得到他们的支持,实际上还有更多.<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 我们一直以一种closed的开发者无法比拟的步伐开发和移植更多更好的应用程序.比如到Linux 
+    Mall去看一下当前在Linux上可以使用的office套件和开发工具是如此之多.Linux商务解决方案(这个web页面)提供了一系列Linux上主流的商务应用的列表.<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 有这么一种广泛传播的说法,说那些目前支持和编写大部分Open 
+    <br>
+    Source的技术人员不愿意写友好的GUI用户界面的'真正的'OFFICE类型应用程序。但有某些好的迹象表明这种说法是错误的(比如GIMP,KDE,Gnome项目)<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 更重要的是,没有什么好的理由相信上述说法是真的。15年以前人们说&quot;写自由软件的人们作了一些好的玩具和演示,但他们不知道如何去做真正的工具&quot;。FSF证明他们错了。5年前,还是这些人说“是的,GNU是一个好玩的程序员的工具，但是他们永远不会作出一个可行的操作系统。&quot; 
+    Linux证明他们又错了。现在他们又说&quot;OK,Linux是一个黑客们的漂亮的沙盒,它在Internet上作的很好,但它永远也无法作出正宗的最终用户的应用程序。 
+    &quot;如果这些说反话的家伙这次对了,这将是破天荒的头一次.<br>
+    <br>
+    <br>
+    <big><strong>Q:Close Source不是有助与防止黑客攻击吗?</strong></big></p>
+    <p>A:这真是绝妙的反话,正如任何密码破解者会告诉你的一样。通过隐藏来达到安全的目的是行不通的。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 
+    这之所以行不通的原因在于这些破坏安全的家伙比好人们(他们有许多其他的事情要担心)更有激情,更有耐心.无论源码是开放的还是封闭的, 
+    坏家伙们总会发现漏洞(看一下最近的一个例子, windows缓冲区溢出之道).<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 封闭源码有3个方面糟糕的地方:</p>
+    <p>&nbsp;&nbsp;&nbsp; 1.他们创造了一种错误的安全感.</p>
+    <p>&nbsp;&nbsp;&nbsp; 2.他们以为好人们不会去发现漏洞并且修复这些漏洞.</p>
+    <p>&nbsp;&nbsp;&nbsp; 3.当一个漏洞被披露时, 
+    想分发可信赖的补丁是很困难的. </p>
+    <p>&nbsp;&nbsp;&nbsp; 实际上,开放源码的操作系统和应用程序通常比他们对应的封闭对手要安全的多.(比如)当&quot;Ping 
+    o'Death&quot;在1997年被发现时,Linux在几个小时之内作出了补丁,而封闭源码操作系统却花费好几个月也无法修正错误.<br>
+    <br>
+    <big><strong>Q:你们反对知识产权么?</strong></big></p>
+    <p>A:对于是否想法应该被专有, 专利是好还是坏, 
+    或者任何相关的争论，open source运动并没有明确的态度。我们认为支持open 
+    source运动的经济自利的刺激的论据已经足够多了,所以无需再进行任何关于这方面的“道德十字军东征”了。<br>
+    <br>
+    <br>
+    <strong><big>Q:open source和Linux有什么关系?</big></strong></p>
+    <p>A:Linux是一个open source的操作系统,而且到现在为止是最成功的open 
+    source的平台.Linux在教育行业,Internet服务应用程序, 
+    软件开发以及在不断增长的小型商业应用是非常流行的。几个成功的公司销售Linux和Linux应用程序.<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 但不只是Linux才是open-source.还有许多其他的open source的操作系统和应用程序,包括Netscape的Web浏览器的Navigator和Communicator客户端产品都是这样的.<br>
+    <br>
+    <br>
+    <big><strong>Q:Open source和free software有什么关系?</strong></big></p>
+    <p><br>
+    A:OpenSource是freesoftware的市场化计划(行销手段).。它是对freeSoftware的支持，更倾向于注重实际效果而不是意识形态方面的大肆宣扬。成功的主体没有改变，失败的态度和象征主义却变了。看一下markering 
+    for hacker的讨论可以了解的更多。<br>
+    <br>
+    这样就很清楚我们在谈论哪一种软件,我们公开了这个定义并且已经使得Open 
+    Source成为一种&quot;认证商标&quot;(一种特殊形式的商标), 
+    已被用于那些符合定义的软件.<br>
+    <br>
+    <big><strong>Q:不是还有其他团体叫&quot;open source&quot;or &quot;Open 
+    Source&quot;吗?</strong></big><br>
+    </p>
+    <p>A:有好几个呢.&quot;open source&quot;这个术语在智力团体中有一个技术上的含义;他指那些可以通过公开手段可以获得的智力资源,比如报纸。一个是分发大笔合同文本的公司.一个是NeXT系统的供应商(已经倒闭).幸运的是,他们属于不同的商标种类.<br>
+    <br>
+    <br>
+    <big><strong>Q:我怎样使用'open source'这个术语?</strong></big></p>
+    <p>A:'open source'这个术语本身是一个集合名词.在复合词的时候把它用做形容词性的名词,比如'open 
+    source software',遵循通常的英语用法,并使用连字符(&quot;-&quot;).一般不必使用短语的大写形式,除非是指这个认证商标本身或者指Open 
+    Source运动.每一篇文档(引用或者第一次引用时)都必须指出'Open Source'时Open 
+    Source Initiative的注册商标.<br>
+    <br>
+    <big><strong>Q:你可以给我一些Open Source常用的例子来用用?</strong></big></p>
+    <p>A:一句话的版本：<strong>Open Source通过支持独立的同行检验（peer 
+    review）和源码的快速演变来提高软件的可靠性和质量.</strong><br>
+    <br>
+    &nbsp;&nbsp;&nbsp; Open Source通过支持独立的同行检验（peer review）和源码的快速演变来提高软件的可靠性和质量.欲被认证成为open 
+    source,一个程序的许可证必须保证自由阅读,再分发,修改和使用的权利.想知道跟多的信息,请访问以下WEB站点,http://www.opensource.org. 
+    <br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 这整个站点就是一个完整的阐述。 <br>
+    <br>
+    <br>
+    Eric S. Raymond &lt;esr@thyrsus.com&gt;</p>
+    <hr>
+    <p><font size="2">校对: waterbird [AKA]</font></p>
+    <p align="center"><a href="cover2.html"><strong><font size="2">[返回]</font></strong></a></p>
+    <p align="center">　</td>
+  </tr>
+</table>
+</center></div>
+</body>
+</html>

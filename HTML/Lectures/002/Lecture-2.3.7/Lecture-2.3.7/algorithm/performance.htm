@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=x-gbk">
+  <title>Performance of the Scheduling Algorithm</title>
+</head>
+<body>
+<h3 class="HeadB"> Performance of the Scheduling Algorithm</h3>
+<p class="Body">Let us try to outline some pitfalls of the Linux scheduler.
+As it will turnout, some of these limitations become significant on large
+systems with manyusers. On a single workstation that is running a few tens
+of processes ata time, the Linux scheduler is quite efficient. Since Linux
+was born on anIntel 80386 and continues to be most popular in the PC world,
+we considerthe current Linux scheduler quite appropriate.</p>
+<h4 class="HeadC">(1).The algorithm does not scale well</h4>
+<h4 class="HeadC">(2)&nbsp; The predefined quantum is too large for high
+system loads</h4>
+ 
+<h4 class="HeadC">(3)&nbsp; I/O-bound process boosting strategy is not optimal</h4>
+ 
+<h4 class="HeadC">(4)Support for real-time applications is weak</h4>
+<p class="Body">Future versions of Linux will likely address this problem,
+either by implementingSVR4's "fixed preemption points" or by making the kernel
+fully preemptive.</p>
+<h3>Issues of&nbsp; Real-time Scheduler</h3>
+<p class="Body">*&nbsp; kernel preemption is just one of several necessary
+conditions forimplementing an effective real-time scheduler. <br>
+*&nbsp; real-time processes often must use resourcesalso needed by conventional
+processes. <br>
+*&nbsp; A real-time process may thus end upwaiting until a lower-priority
+process releases some resource. This phenomenonis called <em class="Emphasis">
+priority inversion</em>. <br>
+* A&nbsp; real-timeprocess could require a kernel service that is granted
+on behalf of anotherlower-priority process (for example, a kernel thread).
+This phenomenon iscalled <em class="Emphasis">hidden scheduling</em>.</p>
+<p class="Body"> An effective real-timescheduler should address and resolve
+such problems.</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+</body>
+</html>

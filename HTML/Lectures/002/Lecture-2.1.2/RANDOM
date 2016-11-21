@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Prints different random integer from 1 to 65536
+
+a=$RANDOM
+echo $a
+
+exit 0

@@ -1,0 +1,224 @@
+<HTML
+><HEAD
+><TITLE
+>Good development practice</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.56"><LINK
+REL="HOME"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Good licensing and copyright practice: the practice"
+HREF="x169.html"><LINK
+REL="NEXT"
+TITLE="Good distribution-making practice"
+HREF="x210.html"></HEAD
+><BODY
+CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+></TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x169.html"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x210.html"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+>
+  <H1
+CLASS="SECT1"
+><A
+NAME="AEN184"
+>5. 制作项目发布包的好经验</A
+></H1
+>
+  <P
+>本章节主要内容侧重于确保程序的可移植性，这不仅限于各种Linux系统，而且也针对各种UNIX系统。对其他UNIX系统保持可移植性并非是故意卖弄技术或者是遵守黑客的礼节，而是一种保持未来Linux自身发展不分裂的保障手段。</P
+>
+  <P
+>另外，如果其他人试图将你的项目移植到其他非Linux系统上，一个可移植性好的项目可以让你最大限度的避开各种烦人的Email质询。</P
+>
+  <DIV
+CLASS="SECT2"
+>
+    <H2
+CLASS="SECT2"
+><A
+NAME="AEN189"
+>5.1. </A
+>写标准ANSI C程序或者可移植的脚本程序</H2
+>
+    <P
+>要有可移植性和稳定性，你最好只用ANSI C写程序，要不就用某种教本语言，这样能够保持可移植性的原因是他们底层的实现对于不同平台是一致的。</P
+>
+    <P
+>有资格被成为跨平台的脚本语言包括 Python、Perl、Tcl、Emacs Lisp 和 PHP。普通的老式Shell则不具有好的可移植性；因为他们在不同平台上的实现有许多细微的语法差别，而且Shell的外壳环境极易受到用户个性化设置（如alias设置）的干扰。</P
+>
+    <P
+>Java总是声称自己是跨平台的语言，但是Java在Linux上的实现还非常少而且与Linux系统的集成度还比较差。虽然Java以后成熟了将会变得非常流行，不过时下还是不要选她的好。</P
+>
+  </DIV
+><DIV
+CLASS="SECT2"
+>
+    <H2
+CLASS="SECT2"
+><A
+NAME="AEN195"
+>5.2. </A
+>遵守C程序的可移植惯例</H2
+>
+    <P
+>如果你用C写程序，请记住一定要完全遵从ANSI标准——包括函数原型，这样可以帮助你去掉跨平台模块的不一致性。老的K&R编译器已经成为了历史。</P
+>
+    <P
+>另外，不要认为一些GCC特有的特征，比如“-pipe”编译选项以及嵌套函数等，在所有平台上都有效。因为这样的选项会在其他人试图将项目移植到非Linux、非GCC系统上时起作用并被“咬”一口。</P
+>
+  </DIV
+><DIV
+CLASS="SECT2"
+>
+    <H2
+CLASS="SECT2"
+><A
+NAME="AEN200"
+>5.3. </A
+>使用autoconf/automake/autoheader工具</H2
+>
+    <P
+>如果用C写程序，记住一定要用autoconf/automake/autoheader工具来处理各种移植性的问题，用这些工具完成系统配置信息的收集，制作makefile文件。现在许多人在打算编译源码时只希望通过“configure; 
+      make”这样简单的命令就可以得到干净利落的编译，事实上大家就是这么干的。</P
+>
+  </DIV
+><DIV
+CLASS="SECT2"
+>
+    <H2
+CLASS="SECT2"
+><A
+NAME="AEN203"
+>5.4. </A
+>发布前要仔细的检查代码</H2
+>
+    <P
+>用C写程序，至少在每次发布之前要记得用 -Wall 编译选项重新编译一遍并去除编译中遇到的任何错误。这么做可以帮助你发现不少没有想到的错误。要是想更彻底的检查，那就用 
+      -pedantic 选项再编译一遍。</P
+>
+    <P
+>如果是写Perl程序，可以用 perl -c 命令（或者 -T 选项）来检查代码中的错误。使用 perl -w 和“use strict”来做更严格的检查（请阅读Perl的文档获取更多的信息）。</P
+>
+  </DIV
+><DIV
+CLASS="SECT2"
+>
+    <H2
+CLASS="SECT2"
+><A
+NAME="AEN207"
+>5.5. </A
+>发布前要仔细的检查文档和Readmes文件</H2
+>
+    <P
+>文档发布前最好用拼写检查工具查一遍。如果你看起来没有能力拼写正确，而且也不关心文档的错字、错词，那么其他人很自然的联想到你的代码是否也同样是乱七八糟和粗心大意呢？</P
+>
+  </DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x169.html"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x210.html"
+>Next</A
+></TD
+></TR
+><TR
+>
+      <TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>选择好的许可证和版权（实践篇）</TD
+>
+      <TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+>
+      <TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>制作项目发布包的好经验</TD
+>
+    </TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

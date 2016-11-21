@@ -1,0 +1,232 @@
+<html>
+<head><title>关于GIRL构件</title></head>
+<body>
+<h1 align=center>关于GIRL构件</h1>
+<hr>
+<p>在GIRL系统中，定义和使用构件是核心任务。在GIRL源文件中，对构件类进行定义。在
+C/C++程序中，通过GIRL提供的库函数创建构件类的实例。应用程序可以把构件类实例作为
+主窗口按照阻塞或者非阻塞的方式弹出，也可以把构件实例作为自窗口安装到其他构件类
+实例中。。
+<p>构件类可以继承并且构成层次关系。构件类的三种成份为：数据储存槽、数据接收槽、
+信号连接槽。它们都可以被继承。数据储存槽、数据接收槽可以进行新的连接，但不能重新
+定义。信号连接槽可以重新定义响应函数，但不能修改与之相连接的信号。
+<p>构件类的总基类是girlWidget。任何构件类都直接或间接地继承这个类。
+<p>应用程序通过句柄访问槽，槽的句柄可以通过如下函数获得：<ul>
+<li>ghandle girl_get_slot(girlWidget *pwidget,const char *slot_name);
+</ul>
+<p>每个类，都可以拥有一个私有数据空间。（每继承一次增加一个私有数据空间）。所有
+对槽的操作均可以访问本类层次的私有数据空间。私有数据指针在构件实例创建的时候为NULL。
+任何一个信号槽服务函数都可以分配新的私有空间、重新分配私有空间或者删除私有空间，
+并返回新的私有空间的指针。在构件实例被删除的时候，私有数据指针必须被设置成NULL。
+（在实例创建时发送sig_create、在实例删除之前发送sig_destroy，以便于私有数据空间的
+创建与删除。）
+<h2>1。数据储存槽</h2>
+<p>数据储存槽是一个可以和其它数据储存槽或数据接收槽相连接的数据。在定义时必须说明
+数据类型。系统为数据槽提供了写入和读出函数。
+<p>可以在子类中定义新的数据储存槽。但不能重新定义或者删除已经定义的槽。
+<p>数据储存槽可以和数据储存槽或者数据接收槽进行连接。如果与数据储存槽连接，则被连接
+的槽必须具有完全相同的数据类型。并且所有被连接的槽共享同一个数据储存单元。如果与数据
+接收槽相连接，则被连接的槽必须具有完全相同的数据类型。只要对数据储存槽写入数据，数据
+接收槽就同时接收到相同的数据。数据储存槽可以被继承。但不能被重新定义或者删除。子类
+可以定义新的数据储存槽。可以被重新连接。
+<h3>1.1。应用程序通过下列函数访问数据储存槽：</h3><ul>
+<li>void *girl_load_dataslot(girlWidget *pwidget,ghandle dataslot,girlObject *pgobj,void *pprivate);
+<p>该函数把数据写入指定的数据储存槽。在类型不匹配的情况下，调用无效。pprivate和
+返回值分别为旧、新的私有数据指针。
+<li>girlObject *girl_unload_dataslot(girlWidget *pwidget,ghandle dataslot,void *pprivate);
+<p>该函数从给定数据储存槽中读出数据，并且把数据储存槽中的数据清除掉。如果数据槽中
+没有数据，将返回NULL。（即使有资源文件存在，也会返回NULL）
+<p>如果数据槽中有数据，该调用将触发与本数据储存槽连接的所有数据接收槽。所有数据接收槽
+的接收函数都将收到NULL。同样，与本数据储存槽连接的所有数据储存槽中的数据都被清除掉。
+<li>girlObject *girl_read_dataslot(const girlWidget *pwidget, ghandle dataslot);
+<p>该函数从数据储存槽中读取数据。如果数据储存槽还没有储存过任何数据，则返回NULL。
+（如果需要实现资源文件，可以首先试图从资源文件获得数据）
+<li>ghandle girl_get_dataslot_type(girlWidget *pwidget,ghandle dataslot);
+<p>该函数获取数据储存槽的类型。
+</ul>
+<h3>1.2。在GIRL中定义数据储存槽的形式：</h3>
+<p><a href="yacc.html#dataslotdefinition" name="dataslotdefinition">dataslot(<i>数据储存槽标识符</i>)=<i>类型标识符</i></a>
+<h3>1.3。在GIRL中把数据写入数据储存槽的形式：</h3>
+<p><a href="yacc.html#slotassign" name="slotassign"><i>数据储存槽标识符</i><-<i>数据</i></a>
+<p>如果数据储存槽在基类和子类中都接收到数据，那么只有子类中的数据被接收到，仅会触发
+与之相连接的数据接收槽。数据接收槽接收的数据是子类的数据。如果数据类型不符合，则无效。
+<h3>1.4。连接数据储存槽的形式：</h3>
+<p><a href="yacc.html#slotlink" name="slotlink"><i>数据储存槽标识符</i>-><i>连接编号</i></a>
+<p>连接编号是一个常量整数。在同一个构件类的定义中，连接编号相同的槽将被连接。
+<h2>2。数据接收槽</h2>
+<p>数据接收槽是一个可以接收数据、读出数据的接口。应用程序需要给出接口数据类型、
+接收函数、读出函数。
+<p>数据接收槽可以和数据储存槽或者数据接收槽进行连接。与数据储存槽的连接见上节。如果与
+数据接收槽连接，则被连接的接收槽必须具有完全相同的数据类型。只要任何一个数据接收槽接
+收到数据，与之相连接的接收槽就接收到相同的数据。数据接收槽可以被继承，但不能被重新定义
+或者删除。子类可以定义新的数据接收槽。
+<h3>2.1。数据接收槽函数的原型：</h3><ul>
+<li>接收函数原型：void *(*receive_func)(girlWidget *pwidget,ghandle receiver,girlObject *pgobject,void *pprivate);
+<p>把数据发送到数据接收槽。如果pgobject为NULL，将导致所有与之相连接的数据储存槽中的
+数据被卸载（被卸载的数据立即被删除）所有与之相连接的数据接收槽都将接收到同样的
+pgobject，即使pgobject为NULL也是如此。
+<li>读出函数的原型：const girlObject *(*read_func)(const girlWidget *pwidget,ghandle receiver,const void *pprivate);
+<p>从给出数据接收槽中读取数据。
+</ul>
+<h3>2.2。在GIRL中定义数据接收槽的形式：</h3>
+<p><a href="yacc.html#receiverdefinition" name="receiverdefinition">receiver(<i>数据接收槽标识符</i>)=(<i>类型标识符</i>:<i>接收函数</i>,<i>读出函数</i>)</a>
+<p>如果在接收函数的位置给出NULL，则在本数据接收槽收到数据的时候没有任何动作。如果在
+读出函数的位置给出NULL，则在从数据接收槽读出数据时永远返回NULL。
+<h3>2.3。在GIRL中应用数据接收槽的形式：</h3>
+<p><a href="yacc.html#slotassign" name="slotassign"><i>数据接收槽标识符</i>&lt-<i>数据</i>&lt-<i>数据</i>...</a>
+<p>如果基类和子类都向数据接收槽发送了数据，那么首先发送基类数据、而后发送子类数据。
+与之相连的所有数据接收槽将按照相同的顺序获得数据。并且与之相连接的所有数据储存槽的
+内容都随着数据接收槽相应地变化。
+<h3>2.4。在GIRL中连接数据接收槽的形式：</h3>
+<p><a href="yacc.html#slotlink" name="slotlink"><i>数据接收槽标识符</i>-&gt<i>连接编号</i></a>
+<p>连接编号是一个常量整数。
+<h2>3。信号连接槽</h2>
+<p>信号连接槽可以和任意多个信号进行连接。连接到同一个槽上的所有信号必须具有相同的
+数据类型。任何一个信号出现，将导致信号连接槽函数被调用。
+<p>子类可以重新定义信号连接槽的服务函数。但不能修改与之相连的信号。
+<h3>3.1。信号槽服务函数的原型为：</h3><ul>
+<li>void *(*signal_func)(bool *pbabsorb,girlWidget *pwidget,girlObject *pgobj,void *pprivate);
+<p>其中参数pbabsorb如果返回真，则该信号被本次调用吸收。如果返回假，则需要把该信号
+重新发送给当前构件的父构件。
+<p>参数pwidget给出了接收信号的构件，pgobj给出了信号数据（对于无数据信号，pgobj==NULL），
+pprivate给出了本构件类的私有数据指针。
+<p>函数的返回值是新的私有数据指针。
+</ul>
+<h3>3.2。在GIRL中定义信号连接槽的方式：</h3>
+<p><a href="yacc.html#signalslotdefinition" name="signalslotdefinition">signal(<i>信号连接槽标识符</i>)=<i>服务函数</i>(<i>信号标识符</i>,...)</a>
+<p>重新定义信号连接槽按如下方式：
+<p><a href="yacc.html#signalslotredefinition" name="signalslotredefinition">signal(<i>信号连接槽标识符</i>)=<i>服务函数</i></a>
+<h2>4。数据储存槽、数据接收槽连接的相关问题</h2>
+<h3>4.1。数据发送顺序</h3>
+<p>如果，GIRL对多个被连接到一起的数据储存槽、数据接收槽发送了数据，除了在1、2节中提到
+的顺序之外，系统将不能保证数据储存槽、数据接收槽接收数据顺序。
+<p>例如：dslot1、dslot2、reslot1、reslot2基类c1中被连接到了一起。
+<p>并且在GIRL模块对基类的定义中给出：
+<p>dslot1&lt-data01
+<p>dslot2&lt-data02
+<p>reslot1&lt-data030&lt-data031
+<p>reslot2&lt-data040&lt-data041
+<p>在GIRL模块对子类的定义中给出：
+<p>dslot1&lt-data11
+<p>dslos2&lt-data12
+<p>reslot1&lt-data130&lt-data131
+<p>reslot2&lt-data140&lt-data141
+<p>那么系统所能确保的只有：<ul>
+<li>data01不会被发送给dslot1、dslot2、reslot1、reslot2；
+<li>data02不会被发送给dslot1、dslot2、reslot1、reslot2；
+<li>data030在data031之前被发送到dslot1、dslot2、reslot1、reslot2；
+<li>data031在data130之前被发送到dslot1、dslot2、reslot1、reslot2；
+<li>data130在data131之前被发送到dslot1、dslot2、reslot1、reslot2；
+<li>data040在data041之前被发送到dslot1、dslot2、reslot1、reslot2；
+<li>data041在data140之前被发送到dslot1、dslot2、reslot1、reslot2；
+<li>data140在data141之前被发送到dslot1、dslot2、reslot1、reslot2。
+</ul>
+<p>所有数据可能在满足上述两个条件的情况下以任何顺序进行发送。
+<p>显而易见的是，对连接了的数据槽分别发送数据将导致结果的不确定性，因此应该避免
+这种情况的出现。
+<p>为了避免上述问题，应该在一组被连接的数据储存槽、数据接收槽中指定一个在GIRL源文件中
+接收数据的槽（即可以是数据储存槽，也可以是数据接收槽）。
+<p>当然，如果是由应用程序，而不是GIRL模块实施发送，那么可以完全地控制数据的发送过程。
+<h3>4.2。简写形式</h3><ul>
+<li>显而易见的是，把多个数据储存槽、数据接收槽连接的连接写入一条指令要比分别给出简便得多。
+为此，如果需要连接一个构件类中的数据储存槽或数据接收槽，那么：
+<p><i>数据储存槽标识符</i>,<i>数据接收槽标识符</i>,...-&gt<i>连接编号</i>
+<p>上述指令把所有给出的数据储存槽、数据接收槽连接起来，并赋予指定编号。
+<p>但是，对于与子构件（发送到数据储存槽或数据接收槽的构件）的数据储存槽、数据接收槽的
+连接，不能使用上述简写形式。
+<li>允许在定义数据储存槽、数据接收槽的同时定义连接。其形式如下：
+<p>dataslot(<i>数据储存槽标识符</i>)=<i>类型标识符</i>-&gt<i>连接编号</i>
+<p>receiver(<i>数据接收槽标识符</i>)=(<i>类型标识符</i>:<i>接收函数</i>,<i>读出函数</i>)-&gt<i>连接编号</i>
+<li>如果有多于一个数据储存槽具有相同的类型，那么可以以如下形式一次性定义：
+<p>dataslot(<i>数据储存槽标识符</i>,...)=<i>类型标识符</i>[-&gt<i>连接编号</i>]
+<p>在这种情况下，如果给出了连接编号，本指令定义的所有数据储存槽都被连接在一起。
+<li>在安装子构件时，往往可能遇到以类似的形式重复安装多个构件的情况。例如：向弹出菜单
+添加多个菜单项构件；向工具条添加多个图标按钮。为了简化书写格式，GIRL给出了table语句：
+<p><a href="yacc.html#table" name="table">table [<i>表头</i>]  { <i>表项</i> <i>表项</i> ... ; ... }</a>
+<p>下面给出例子以说明table的作用：<pre>
+MyMenu : menubar {
+	subwidgets<-table [ menuitem { icon<-$1 label<-$2 } ]  {
+		new_pixmap "&New";
+		open_pixmap "&Open";
+		save_pixmap "&Save";
+		null "Save &as";
+	}
+	<-seperator
+	<-menuitem { label<-"E&xit" }
+}
+</pre>
+<p>在上例中，$1、$2分别表示表中的第一项、第二项。给出null表示取消该项目。
+<p>与宏替换相比，table语句的好处在于可以给出十分复杂的表项。
+<p>需要指出的是，table语句只能出现在向数据储存槽或数据接收槽发送数据的语句中。
+</ul>
+<h3>4.3。连接的限制</h3>
+<p>为了避免死循环，发送到数据储存槽或数据接收槽的子构件的任何数据储存槽、数据接收槽
+都不能和接收子构件的数据储存槽或数据接收槽相连接。不论是直接连接还是间接连接，都将
+导致死循环。
+<p>在同一个类中，任何一个数据储存槽或者数据接收槽都不能被连接到不同的连接编号。给出
+这样的限制是因为根本没有这样的作必要。因为被连接的数据储存槽、数据接收槽就相当于同一个
+槽。如果其中任何一个槽被连接到不同的编号，那么将导致不同的编号实际上也被连接到同一个槽中。
+<p>例如：
+<p>dataslot(data1)=girl_integer-&gt1
+<p>data1-&gt2
+<p>dataslot(data2)=girl_integer-&gt2
+<p>dataslot(data3)=girl_integer-&gt1
+<p>如果允许data1同时被连接到编号1、2，那么实际上data2、data3也被连接了。允许这样的连接
+除了引起混淆之外没有任何作用。
+<h2>5。GIRL说明与定义</h2>
+<h3>5.1。GIRL构件说明</h3>
+<p>GIRL构件的说明，应该给出最少的、但是可以完全确定新构件的信息。这些信息是：<ul>
+<li>基类；
+<li>所有数据储存槽、数据接收槽的名称、类型和连接；
+<li>所有信号连接槽的名称及与之相连接的信号。
+</ul>
+<p>为此，说明数据储存槽的方式：
+<p>dataslot <i>数据储存槽标识符</i>(<i>类型</i>)[-&gt<i>连接编号</i>],...
+<p>说明数据接收槽的方式：
+<p>recevier <i>数据接收槽标识符</i>(<i>类型</i>)[-&gt<i>连接编号</i>],...
+<p>说明信号连接槽的方式：
+<p>signal <i>信号连接槽标识符</i>(<i>信号标识符</i>,...),...
+<p>综上所述，构件说明形式应为（只能出现在import结构中）：
+<p><a href="yacc.html#widgetdescribe" name="widgetdescribe">widget <i>构件类标识符</i>(<i>基类</i>:<i>数据储存槽说明</i>|<i>数据接收槽说明</i>|<i>信号连接槽说明</i>,...),...</a>
+<h3>5.2。GIRL构件定义</h3>
+<p>在GIRL源文件中按照如下形式定义GIRL构件类。下述定义不能出现在import结构中。
+<p><a href="yacc.html#widgetdefinition" name="widgetdefinition"><i>界面构件类标识符</i> : <i>基类标识符</i> <i>对各种槽的定义、连接、应用</i>...;</a>
+<h3>5.3。GIRL构件值</h3>
+<p>在对数据储存槽、数据接收槽发送数据的时候，往往需要给出构件值。
+<p>给出构件值必须：<ul>
+<li>可以向数据储存槽、数据接收槽发送数据；
+<li>不允许涉及信号；
+<li>不允许定义新数据储存槽和新数据接收槽。
+</ul>
+<p>给出构件值的形式如下（只能出现在对数据储存槽、数据接收槽发送数据的结构中）：
+<p><a href="yacc.html#widgetvalue" name="widgetvalue"><i>基构件类标识符</i>(<i>数据储存槽</i>&lt-<i>数据</i>|<i>数据接收槽</i>&lt-<i>数据</i>...|<i>数据储存槽</i>-&gt<i>连接编号</i>|<i>数据接收槽</i>-&gt<i>连接编号</i>,...)</a>
+<h2>6。访问、服务函数</h2>
+<p>在说明槽的时候已经给出了槽服务函数。下面用于访问构件整体的函数：<ul>
+<li>girlWidget *girl_fetch_widget(ghandle identifier);
+<p>该函数创建给定构件类标识符所表示的构件类的实例。如果没有定义给定标识符、或者给定标识符
+定义的不是构件类则返回NULL。
+<li>void girl_launch_model(girlWidget *pwidget);
+<p>该函数把给出构件作为阻塞主窗口弹出、并显示在本应用程序打开的display上。除非本主窗口被
+删除，本进程的其它主窗口不能获得输入焦点。
+<li>void girl_launch_nonmodel(girlWidget *pwidget);
+<p>该函数把给出构件作为非阻塞主窗口弹出、并显示在本应用程序打开的display上。即使本主窗口
+仍然被显示，本进程的其它主窗口也可以获得输入焦点。
+<li>void girl_stall_widget(girlWidget *pwidget);
+<p>该函数使得给出构件被固化。提供该函数的主要目的是：在向list构件中增加、删除大量构件的
+情况下，首先固化构件以避免随着子构件的添加、删除更新界面造成的性能下降。
+<li>void girl_waken_widget(girlWidget *pwidget);
+<p>该函数用于重新唤醒给出构件。必须被用于固化了的构件。
+<li>void *girl_reset_widget_private ( girlWidget *pwidget,void *pnewprivate);
+<p>重新设定构件的私有数据。返回值为本构件实例原来的私有数据空间。
+<li>girlWidget *girl_get_base_instance(girlWidget *pwidget);
+<p>返回本构件实例的基类实例。这个函数通常被用于向基类发送函数或者直接调用基类信号响应函数。
+</ul>
+<hr>
+<table align=center width=100% border=2><tr>
+<td><center><a href="index.html">返回首页</a></center>
+<td><center><a href="access.html">上一页：在C/C++中访问GIRL对象</a></center>
+<td><center><a href="accelerator.html">下一页：GIRL对加速键的支持</a></center>
+<td><center><a href="malito:blazing@263.net">与我联系</a></center>
+</tr></table>
+</body>
+</html>

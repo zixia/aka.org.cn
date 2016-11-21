@@ -1,0 +1,118 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>cvs</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080" BACKGROUND="velvet.jpg">
+<P ALIGN="JUSTIFY"><a href="html2.html"><img src="prev.gif" width="16" height="16" border="0"></a><a href="html4.html"><img src="next.gif" width="16" height="16" border="0"></a><a href="index.html"><img src="toc.gif" width="16" height="16" border="0"></a></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY"><FONT FACE="宋体" LANG="ZH-CN" COLOR="#ffff00">　　CVS，顾名思义，是个可以用在小组协作环境下的源码版本管理系统。同类的软件有AT&amp;T的SCCS（Source 
+  Code Control System），还有PVCS等。在OpenSource项目里CVS用得最为广泛, Linux kernel不使用CVS来维护，下面我们将会参考FreeBSD的源码管理来做示例。CVS是个相当复杂的系统，FreeBSD甚至设有专门的“CVS管理员”（CVS 
+  </font><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">“</FONT><FONT FACE="宋体" LANG="ZH-CN" COLOR="#ffff00">Maester</FONT><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">”</FONT><FONT FACE="宋体" LANG="ZH-CN" COLOR="#ffff00">）来全面负责项目的CVS 
+  repository维护。</font></P>
+<FONT FACE="宋体" LANG="ZH-CN" COLOR="#ffff00">
+<P ALIGN="JUSTIFY">　　下面介绍与CVS相关的若干概念和术语：</P>
+<P ALIGN="JUSTIFY">　　　　Repository:　　　“源码仓库”，CVS存放的项目源码历史档案</P>
+<P ALIGN="JUSTIFY">　　　　CVSROOT:　　　　　该环境变量指明CVS Repository存放的目录</P>
+<P ALIGN="JUSTIFY">　　　　Module:　　　 　　模块。就是CVSROOT下的顶级目录名</P>
+<P ALIGN="JUSTIFY">　　　　Vendor Branch:　　分支。在一套Repository里可以存放多个代码分支的历史</P>
+<P ALIGN="JUSTIFY">　　　　Release Tag:　　　发行标记。对于每一个版本，可以用符号来做标记</P>
+<P ALIGN="JUSTIFY">　　下面是一个CVS repository的版本衍生图，大致描绘了FreeBSD的版本发行情况。图中的RELENG_3和RELENG_4表示“Release Engine”，也就是Vendor Branch，每个Branch分头发展，等某个Branch的开发到了一定的质量水准，就做个Release Tag。比如最近的4.0-RELEASE的Release Tag是REL_4_0。</P>
+<P ALIGN="JUSTIFY">　　这些不同的Branch都存放在同一个Repository Tree里。</P>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY">　<IMG SRC="Image2.jpg" WIDTH=550 HEIGHT=357></P>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY">　　CVS是个很复杂的系统，可以参考下面两个URL获得进一步的信息：</P>
+</FONT><P ALIGN="JUSTIFY"><FONT FACE="宋体" LANG="ZH-CN" COLOR="#ffff00">&#9;&#9;</font><A HREF="http://www.cyclic.com/"><FONT FACE="Lucida Console" COLOR="#ffff00">http://www.cyclic.com</FONT></A></P>
+<P ALIGN="JUSTIFY"><FONT FACE="宋体" LANG="ZH-CN" COLOR="#ffff00">&#9;&#9;</font><A HREF="http://www.loria.fr/~molli/cvs-index.html"><FONT FACE="Lucida Console" COLOR="#ffff00">http://www.loria.fr/~molli/cvs-index.html</FONT></A></P>
+<FONT FACE="宋体" LANG="ZH-CN" COLOR="#ffff00"><P ALIGN="JUSTIFY">（在cvs软件包里含有详细的文档，应当查阅info版本。几个ps文件都太老了）</P>
+<P ALIGN="JUSTIFY">下面介绍CVS的基本用法。</P>
+<P ALIGN="JUSTIFY">① Import 导入/创建CVS Repository Tree</P>
+<P ALIGN="JUSTIFY">　　首先建一个目录作为你的CVSROOT，然后用cvs init命令对其初始化（建立一系列log,config文件）。然后到工作目录下使用cvs import命令：</P>
+</FONT><P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">[hahalee@builder]$ mkdir /home/hahalee/CVS</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">[hahalee@builder]$ export CVSROOT=/home/hahalee/CVS</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">[hahalee@builder]$ cvs init</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="宋体" LANG="ZH-CN" COLOR="#ffff00">[hahalee@builder]$ cvs import </FONT><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">_</FONT><FONT FACE="宋体" LANG="ZH-CN" COLOR="#ffff00">b 0.5.0 hftpd RELENG_0 REL_0</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">N hftpd/tar.h</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">N hftpd/auth.h</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">[blah...blah...blah...]</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">N hftpd/docs/rfcs/rfc0959.txt</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">N hftpd/docs/rfcs/rfc2428.txt</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">No conflicts created by this import</FONT><FONT FACE="宋体" LANG="ZH-CN" COLOR="#ffff00">&#9;</font></P><P ALIGN="JUSTIFY">
+<FONT FACE="宋体" LANG="ZH-CN" COLOR="#ffff00">　　上述操作在$CVSROOT下生成hftpd目录，可以看到里面都是后缀为“,v”的文件，这就是import进来的Repository。RELENG_0是vendor-tag，REL_0是release-tag。vendor-tag就是vendor branch tag，可以理解为</font><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">”</FONT><FONT FACE="宋体" LANG="ZH-CN" COLOR="#ffff00">code name</FONT><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">”</FONT><FONT FACE="宋体" LANG="ZH-CN" COLOR="#ffff00">。</font></P><FONT FACE="宋体" LANG="ZH-CN" COLOR="#ffff00">
+<P ALIGN="JUSTIFY">② Checkout 创建私有工作目录/Export</P>
+<P ALIGN="JUSTIFY">　　换一个空目录，运行 cvs checkout modules_name 即可：</P>
+</FONT><P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">[hahalee@builder]$ cvs checkout hftpd#  hftpd</FONT><FONT FACE="宋体" LANG="ZH-CN" COLOR="#ffff00">是我们的</FONT><FONT FACE="Lucida Console" COLOR="#ffff00">module</FONT><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　</FONT><FONT FACE="Lucida Console" COLOR="#ffff00">name</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">cvs checkout: Updating hftpd</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">U hftpd/AUTHORS</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">U hftpd/COPYING</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">[blah blah blah]&#9;&#9;&#9;&#9;&#9;&#9;&#9;# </FONT><FONT FACE="宋体" LANG="ZH-CN" COLOR="#ffff00">省略许多</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">[hahalee@builder t]$ ls -l</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="宋体" LANG="ZH-CN" COLOR="#ffff00">　　　总共</font><FONT FACE="Lucida Console" COLOR="#ffff00"> 0</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">drwxrwxr-x 5 hahalee hahalee 1253 Apr 7 20:08 hftpd</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">[hahalee@builder t]$ find ./ -type d</font></P>
+<FONT FACE="宋体" LANG="ZH-CN" COLOR="#ffff00"><P ALIGN="JUSTIFY">　　从最后一条命令的输出可看到，checkout的工作目录里多了CVS目录。里面记载了CVS相关的信息，可以方便后续的cvs操作。如果纯粹是为了拷贝出最新的source tree，可以用export，此时不会建立CVS目录。</P>
+<P ALIGN="JUSTIFY">③ Update 更新</P>
+<P>　　当你完成某一部分代码的时候，先不忙提交，可以把别人可能做了的其他修改update过来然后统一编译调试无误后再提交，这是team work的准则。在checkout出来的工作目录下（不管什么子目录），直接cvsup update 就可以了，当然你要先把CVSROOT环境变量设置好。</P>
+<P>④ Commit 提交</P>
+<P>　　很简单，cvs commit。但你必须要在checkout出来的工作目录里提交才行:</P>
+</FONT><P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">[hahalee@builder]$ cvs commit</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">cvs commit: Examining .</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">cvs commit: Examining docs</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">cvs commit: Examining docs/man</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">cvs commit: Examining docs/rfcs</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">cvs commit: Examining tools</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">Checking in AUTHORS;</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">/home/hahalee/CVS/hftpd/AUTHORS,v &lt;-- AUTHORS</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">new revision: 0.6; previous revision: 0.5</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">done</font></P>
+<FONT FACE="宋体" LANG="ZH-CN" COLOR="#ffff00"><P>　　关于并发提交冲突：任何用户可以随意checkout他们自己的工作拷贝，commit也是不受限制的。这样，当用户a和b分别checkout了1.2版的c.c，然后各自对c.c做了修改，a提交了他的修改，然后，当b提交的时候，冲突就产生了。</P>
+<P>　　这时候，cvs会做以下动作：</P>
+<OL>
+
+<LI>告诉用户b，对c.c的提交发生冲突</LI>
+<LI>对用户b当前的c.c做备份文件.#c.c.1.2</LI>
+<LI>试图合并a和b的修改，生成新的c.c</LI></OL>
+<DIR>
+
+<P> 然后，用户b应当修改c.c，去掉/合并冲突的行，并以版本1.4提交。</P></DIR>
+
+<P>⑤ Diff</P>
+<P>　　可以用类似rcsdiff的方法用cvs生成patch，命令行语法也类似</P>
+</FONT><P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">[hahalee@builder]$ cvs diff -u -r0.5 AUTHORS</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">Index: AUTHORS</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">===================================================================</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">RCS file: /home/hahalee/CVS/hftpd/AUTHORS,v</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">retrieving revision 0.5</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">retrieving revision 0.6</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">diff -u -r0.5 -r0.6</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">--- AUTHORS 2000/04/07 10:46:02 0.5</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">+++ AUTHORS 2000/04/07 14:05:57 0.6</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">@@ -1,3 +1,4 @@</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">+ah! let me in!</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">So then, who can't spell</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">Develloppopotamus?</font></P>
+<P ALIGN="JUSTIFY"><FONT FACE="System" LANG="ZH-CN" COLOR="#ffff00">　　　</font><FONT FACE="Lucida Console" COLOR="#ffff00">Quite a lot of us.</font></P>
+<FONT FACE="宋体" LANG="ZH-CN" COLOR="#ffff00"> 
+<P>　　还有一个rdiff，用来生成两个不同的release 之间的patch。</P>
+<P>⑥ 其他操作</P>
+<P>　　　cvs 的其他<a href="index.html"><img src="toc.gif" width="16" height="16" border="0"></a>操作还包括有：</P>
+<P>　　　admin&#9;&#9;&#9;管理功能</P>
+<P>　　　tag&#9;&#9;&#9;对某一版本做符号标记</P>
+<P>　　　release&#9;&#9;取消checkout,删除工作目录（release在这里是“释放”的意思）</P>
+<P>　　　add,remove&#9; 往repository里添加/删除文件</P>
+<P>　　　history&#9;&#9;查看repository操作历史记录</P>
+<P>⑦ CVS 的多平台特性以及C/S扩展</P>
+<P>　　cvs是多平台的，开发可以在多种平台比如，可以把linux上的CVS Repository通过samba export出来在Windows平台上做开发。现在很多软件包里包含有*NIX/Windows/MacOS等多平台支持代码，cvs的跨平台特性可提供最好的多平台开发支持。</P>
+<P>　　不过，cvs的操作是直接基于文件系统的，在需要大量远程协作的场合问题很多，远程的NFS mount效率太差，也会有安全问题。新版本的cvs自身内建了Client/Server支持，也可以利用Unix上传统的远程交互手段来通讯。</P>
+<P>　　1，通过rsh（也可用ssh替换）</P>
+<P>　　2，使用cvs自带的C/S用户认证：pserver（缺省端口2401）</P>
+<P>　　3，使用kerberos的gserver、kserver</P>
+<P>&nbsp;</P>
+<P><a href="html2.html"><img src="prev.gif" width="16" height="16" border="0"></a><a href="html4.html"><img src="next.gif" width="16" height="16" border="0"></a> 
+  <a href="index.html"><img src="toc.gif" width="16" height="16" border="0"></a> 
+</P>
+</FONT> 
+</BODY>
+</HTML>

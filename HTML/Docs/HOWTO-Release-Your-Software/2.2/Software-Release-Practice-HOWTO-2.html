@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="SGML-Tools 1.0.9">
+ <TITLE>Software Release Practice HOWTO: Good project- and archive- naming practice</TITLE>
+ <LINK HREF="Software-Release-Practice-HOWTO-3.html" REL=next>
+ <LINK HREF="Software-Release-Practice-HOWTO-1.html" REL=previous>
+ <LINK HREF="Software-Release-Practice-HOWTO.html#toc2" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="Software-Release-Practice-HOWTO-3.html">Next</A>
+<A HREF="Software-Release-Practice-HOWTO-1.html">Previous</A>
+<A HREF="Software-Release-Practice-HOWTO.html#toc2">Contents</A>
+<HR>
+<H2><A NAME="s2">2. Good project- and archive- naming practice</A></H2>
+
+<P>As the load on maintainers of archives like Metalab, the PSA site and CPAN
+increases, there is an increasing trend for submissions to be processed
+partly or wholly by programs (rather than entirely by a human).
+<P>This makes it more important for project and archive-file names to fit
+regular patterns that computer programs can parse and understand.
+<P>
+<H2><A NAME="ss2.1">2.1 Use GNU-style names with a stem and major.minor.patch numbering.</A>
+</H2>
+
+<P>It's helpful to everybody if your archive files all have GNU-like
+names -- all-lower-case alphanumeric stem prefix, followed by a dash,
+followed by a version number, extension, and other suffixes.
+<P>Let's suppose you have a project you call `foobar' at version 1,
+release 2, level 3.  If it's got just one archive part (presumably the
+sources), here's what its names should look
+<P>
+<DL>
+<DT><B>foobar-1.2.3.tar.gz</B><DD><P>The source archive
+<P>
+<DT><B>foobar.lsm</B><DD><P>The LSM file (assuming you're submitting to Metalab).
+<P>
+</DL>
+<P>Please <EM>don't</EM> use these:
+<P>
+<DL>
+<DT><B>foobar123.tar.gz</B><DD><P>This looks to many programs like an archive
+for a project called`foobar123' with no version number.
+<P>
+<DT><B>foobar1.2.3.tar.gz</B><DD><P>This looks to many programs like an archive
+for a project called `foobar1' at version 2.3.
+<P>
+<DT><B>foobar-v1.2.3.tar.gz</B><DD><P>Many programs think this goes with a
+project called `foobar-v1'.
+<P>
+<DT><B>foo_bar-1.2.3.tar.gz</B><DD><P>The underscore is hard for people to speak,
+type, and remember
+<P>
+<DT><B>FooBar-1.2.3.tar.gz</B><DD><P>Unless you <EM>like</EM> looking like a
+marketing weenie.  This is also hard for people to speak, type, and remember.
+</DL>
+<P>If you have to differentiate between source and binary archives, or
+between different kinds of binary, or express some kind of build
+option in the file name, please treat that as a file extension to go
+<EM>after</EM> the version number. That is, please do this:
+<P>
+<DL>
+<DT><B>foobar-1.2.3.src.tar.gz            </B><DD><P>sources
+<P>
+<DT><B>foobar-1.2.3.bin.tar.gz            </B><DD><P>binaries, type not specified
+<P>
+<DT><B>foobar-1.2.3.bin.ELF.tar.gz        </B><DD><P>ELF binaries
+<P>
+<DT><B>foobar-1.2.3.bin.ELF.static.tar.gz </B><DD><P>ELF binaries statically linked 
+<P>
+<DT><B>foobar-1.2.3.bin.SPARC.tar.gz      </B><DD><P>SPARC binaries
+</DL>
+<P>Please <EM>don't</EM> use names like `foobar-ELF-1.2.3.tar.gz', because
+programs have a hard time telling type infixes (like `-ELF') from the
+stem.
+<P>A good general form of name has these parts in order:
+<P>
+<OL>
+<LI>project prefix</LI>
+<LI>dash</LI>
+<LI>version number</LI>
+<LI>dot</LI>
+<LI>"src" or "bin" (optional)</LI>
+<LI>dot or dash (dot preferred)</LI>
+<LI>binary type and options (optional)</LI>
+<LI>archiving and compression extensions</LI>
+</OL>
+<P>
+<H2><A NAME="ss2.2">2.2 But respect local conventions where appropriate</A>
+</H2>
+
+<P>Some projects and communities have well-defined conventions for names and
+version numbers that aren't necessarily compatible with the above advice.
+For instance, Apache modules are generally named like mod_foo, and have
+both their own version number and the version of Apache with which they
+work.  Likewise, Perl modules have version numbers that can be treated as
+floating point numbers (e.g., you might see 1.303 rather than 1.3.3), and
+the distributions are generally named Foo-Bar-1.303.tar.gz for version
+1.303 of module Foo::Bar.
+<P>Look for and respect the conventions of specialized
+communities and developers; for general use, follow the above
+guidelines.
+<H2><A NAME="ss2.3">2.3 Try hard to choose a name prefix that is unique and easy to type</A>
+</H2>
+
+<P>The stem prefix should be common to all a project's files, and it
+should be easy to read, type, and remember.  So please don't use
+underscores.  And don't capitalize or BiCapitalize without extremely
+good reason -- it messes up the natural human-eyeball search order and
+looks like some marketing weenie trying to be clever.
+<P>It confuses people when two different projects have the same stem name.
+So try to check for collisions before your first release.  A good place
+to check is the 
+<A HREF="http://metalab.unc.edu/pub/Linux">index file of Metalab</A>.
+<P>
+<HR>
+<A HREF="Software-Release-Practice-HOWTO-3.html">Next</A>
+<A HREF="Software-Release-Practice-HOWTO-1.html">Previous</A>
+<A HREF="Software-Release-Practice-HOWTO.html#toc2">Contents</A>
+</BODY>
+</HTML>

@@ -1,0 +1,2226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0058)http://www.gnu.org/manual/automake/html_mono/automake.html -->
+<HTML><HEAD><TITLE>automake</TITLE>
+<META content="text/html; charset=gb2312" http-equiv=Content-Type><!-- This HTML file has been created by texi2html 1.52
+     from ../texi/automake.texi on 7 November 1998 -->
+<META content="MSHTML 5.00.2014.210" name=GENERATOR></HEAD>
+<BODY>
+<H1>GNU Automake</H1>
+<H2>For version 1.3, 3 April 1998</H2>
+<ADDRESS>David MacKenzie and Tom Tromey</ADDRESS>
+<P>
+<P>
+<HR>
+
+<P>
+<H1>Table of Contents</H1>
+<UL>
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC1" 
+  name=TOC1>Introduction</A> 
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC2" 
+  name=TOC2>General ideas</A> 
+  <UL>
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC3" 
+    name=TOC3>General Operation</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC4" 
+    name=TOC4>Depth</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC5" 
+    name=TOC5>Strictness</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC6" 
+    name=TOC6>The Uniform Naming Scheme</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC7" 
+    name=TOC7>How derived variables are named</A> </LI></UL>
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC8" 
+  name=TOC8>Some example packages</A> 
+  <UL>
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC9" 
+    name=TOC9>A simple example, start to finish</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC10" 
+    name=TOC10>A classic program</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC11" 
+    name=TOC11>Building etags and ctags</A> </LI></UL>
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC12" 
+  name=TOC12>Creating a <TT>`Makefile.in'</TT></A> 
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC13" 
+  name=TOC13>Scanning <TT>`configure.in'</TT></A> 
+  <UL>
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC14" 
+    name=TOC14>Configuration requirements</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC15" 
+    name=TOC15>Other things Automake recognizes</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC16" 
+    name=TOC16>Auto-generating aclocal.m4</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC17" 
+    name=TOC17>Autoconf macros supplied with Automake</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC18" 
+    name=TOC18>Writing your own aclocal macros</A> </LI></UL>
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC19" 
+  name=TOC19>The top-level <TT>`Makefile.am'</TT></A> 
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC20" 
+  name=TOC20>Building Programs and Libraries</A> 
+  <UL>
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC21" 
+    name=TOC21>Building a program</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC22" 
+    name=TOC22>Building a library</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC23" 
+    name=TOC23>Special handling for LIBOBJS and ALLOCA</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC24" 
+    name=TOC24>Building a Shared Library</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC25" 
+    name=TOC25>Variables used when building a program</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC26" 
+    name=TOC26>Yacc and Lex support</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC27" 
+    name=TOC27>C++ and other languages</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC28" 
+    name=TOC28>Automatic de-ANSI-fication</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC29" 
+    name=TOC29>Automatic dependency tracking</A> </LI></UL>
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC30" 
+  name=TOC30>Other Derived Objects</A> 
+  <UL>
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC31" 
+    name=TOC31>Executable Scripts</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC32" 
+    name=TOC32>Header files</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC33" 
+    name=TOC33>Architecture-independent data files</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC34" 
+    name=TOC34>Built sources</A> </LI></UL>
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC35" 
+  name=TOC35>Other GNU Tools</A> 
+  <UL>
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC36" 
+    name=TOC36>Emacs Lisp</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC37" 
+    name=TOC37>Gettext</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC38" 
+    name=TOC38>Guile</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC39" 
+    name=TOC39>Libtool</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC40" 
+    name=TOC40>Java</A> </LI></UL>
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC41" 
+  name=TOC41>Building documentation</A> 
+  <UL>
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC42" 
+    name=TOC42>Texinfo</A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC43" 
+    name=TOC43>Man pages</A> </LI></UL>
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC44" 
+  name=TOC44>What Gets Installed</A> 
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC45" 
+  name=TOC45>What Gets Cleaned</A> 
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC46" 
+  name=TOC46>What Goes in a Distribution</A> 
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC47" 
+  name=TOC47>Support for test suites</A> 
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC48" 
+  name=TOC48>Changing Automake's Behavior</A> 
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC49" 
+  name=TOC49>Miscellaneous Rules</A> 
+  <UL>
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC50" 
+    name=TOC50>Interfacing to <CODE>etags</CODE></A> 
+    <LI><A 
+    href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC51" 
+    name=TOC51>Handling new file extensions</A> </LI></UL>
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC52" 
+  name=TOC52>Conditionals</A> 
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC53" 
+  name=TOC53>The effect of <CODE>--gnu</CODE> and <CODE>--gnits</CODE></A> 
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC54" 
+  name=TOC54>The effect of <CODE>--cygnus</CODE></A> 
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC55" 
+  name=TOC55>When Automake Isn't Enough</A> 
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC56" 
+  name=TOC56>Distributing <TT>`Makefile.in'</TT>s</A> 
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC57" 
+  name=TOC57>Some ideas for the future</A> 
+  <LI><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC58" 
+  name=TOC58>Index</A> </LI></UL>
+<P>
+<HR>
+
+<P>
+<P>@dircategory GNU admin @direntry * automake: (automake). Making Makefile.in's 
+</P>
+<P>@dircategory Individual utilities @direntry * aclocal: (automake)Invoking 
+aclocal. Generating aclocal.m4 </P>
+<P>Copyright (C) 1995, 96 Free Software Foundation, Inc. 
+<P>This is the first edition of the GNU Automake documentation,<BR>and is 
+consistent with GNU Automake 1.3.<BR>
+<P>Published by the Free Software Foundation <BR>59 Temple Place - Suite 330, 
+<BR>Boston, MA 02111-1307 USA <BR></P>
+<P>Permission is granted to make and distribute verbatim copies of this manual 
+provided the copyright notice and this permission notice are preserved on all 
+copies. </P>
+<P>Permission is granted to copy and distribute modified versions of this manual 
+under the conditions for verbatim copying, provided that the entire resulting 
+derived work is distributed under the terms of a permission notice identical to 
+this one. </P>
+<P>Permission is granted to copy and distribute translations of this manual into 
+another language, under the above conditions for modified versions, except that 
+this permission notice may be stated in a translation approved by the Free 
+Software Foundation. </P>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC1" 
+name=SEC1>Introduction</A></H1>
+<P>Automake is a tool for automatically generating <TT>`Makefile.in'</TT>s from 
+files called <TT>`Makefile.am'</TT>. Each <TT>`Makefile.am'</TT> is basically a 
+series of <CODE>make</CODE> macro definitions (with rules being thrown in 
+occasionally). The generated <TT>`Makefile.in'</TT>s are compliant with the GNU 
+Makefile standards. </P>
+<P>The GNU Makefile Standards Document (see section `Makefile Conventions' in 
+<CITE>The GNU Coding Standards</CITE>) is long, complicated, and subject to 
+change. The goal of Automake is to remove the burden of Makefile maintenance 
+from the back of the individual GNU maintainer (and put it on the back of the 
+Automake maintainer). </P>
+<P>The typical Automake input files is simply a series of macro definitions. 
+Each such file is processed to create a <TT>`Makefile.in'</TT>. There should 
+generally be one <TT>`Makefile.am'</TT> per directory of a project. </P>
+<P>Automake does constrain a project in certain ways; for instance it assumes 
+that the project uses Autoconf (see section `The Autoconf Manual' in <CITE>The 
+Autoconf Manual</CITE>), and enforces certain restrictions on the 
+<TT>`configure.in'</TT> contents. </P>
+<P>Automake requires <CODE>perl</CODE> in order to generate the 
+<TT>`Makefile.in'</TT>s. However, the distributions created by Automake are 
+fully GNU standards-compliant, and do not require <CODE>perl</CODE> in order to 
+be built. </P>
+<P>Mail suggestions and bug reports for Automake to <A 
+href="mailto:automake-bugs@gnu.org">automake-bugs@gnu.org</A>. </P>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC2" 
+name=SEC2>General ideas</A></H1>
+<P>There are a few basic ideas that will help understand how Automake works. 
+</P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC3" 
+name=SEC3>General Operation</A></H2>
+<P>Automake works by reading a <TT>`Makefile.am'</TT> and generating a 
+<TT>`Makefile.in'</TT>. Certain macros and targets defined in the 
+<TT>`Makefile.am'</TT> instruct automake to generate more specialized code; for 
+instances a <SAMP>`bin_PROGRAMS'</SAMP> macro definition will cause targets for 
+compiling and linking to be generated. </P>
+<P>The macro definitions and targets in the <TT>`Makefile.am'</TT> are copied 
+into the generated file. This allows you to add arbitrary code into the 
+generated <TT>`Makefile.in'</TT>. For instance the Automake distribution 
+includes a non-standard <CODE>cvs-dist</CODE> target, which the Automake 
+maintainer uses to make distributions from his source control system. </P>
+<P>Note that GNU make extensions are not recognized by Automake. Using such 
+extensions in a <TT>`Makefile.am'</TT> will lead to errors or confusing 
+behavior. </P>
+<P>Automake tries to group comments with adjoining targets (or variable 
+definitions) in an intelligent way. </P>
+<P>A target defined in <TT>`Makefile.am'</TT> generally overrides any such 
+target of a similar name that would be automatically generated by 
+<CODE>automake</CODE>. Although this is a supported feature, it is generally 
+best to avoid making use of it, as sometimes the generated rules are very 
+particular. </P>
+<P>Similarly, a variable defined in <TT>`Makefile.am'</TT> will override any 
+definition of the variable that <CODE>automake</CODE> would ordinarily create. 
+This feature is more often useful than the ability to override a target 
+definition. Be warned that many of the variables generated by 
+<CODE>automake</CODE> are considered to be for internal use only, and their 
+names might change in future releases. </P>
+<P>When examining a variable definition, Automake will recursively examine 
+variables referenced in the definition. E.g., if Automake is looking at the 
+content of <SAMP>`foo_SOURCES'</SAMP> in this snippet </P><PRE>xs = a.c b.c
+foo_SOURCES = c.c $(xs)
+</PRE>
+<P>it would use the files <TT>`a.c'</TT>, <TT>`b.c'</TT>, and <TT>`c.c'</TT> as 
+the contents of <SAMP>`foo_SOURCES'</SAMP>. </P>
+<P>Automake also allows a form of comment which is <EM>not</EM> copied into the 
+output; all lines beginning with <SAMP>`##'</SAMP> are completely ignored by 
+Automake. </P>
+<P>It is customary to make the first line of <TT>`Makefile.am'</TT> read: </P><PRE>## Process this file with automake to produce Makefile.in
+</PRE>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC4" 
+name=SEC4>Depth</A></H2>
+<P><CODE>automake</CODE> supports three kinds of directory hierarchy: "flat", 
+"shallow", and "deep". </P>
+<P>A <EM>flat</EM> package is one in which all the files are in a single 
+directory. The <TT>`Makefile.am'</TT> for such a package by definition lacks a 
+<CODE>SUBDIRS</CODE> macro. An example of such a package is 
+<CODE>termutils</CODE>. <A name=IDX1></A></P>
+<P>A <EM>deep</EM> package is one in which all the source lies in 
+subdirectories; the top level directory contains mainly configuration 
+information. GNU cpio is a good example of such a package, as is GNU 
+<CODE>tar</CODE>. The top level <TT>`Makefile.am'</TT> for a deep package will 
+contain a <CODE>SUBDIRS</CODE> macro, but no other macros to define objects 
+which are built. </P>
+<P>A <EM>shallow</EM> package is one in which the primary source resides in the 
+top-level directory, while various parts (typically libraries) reside in 
+subdirectories. Automake is one such package (as is GNU <CODE>make</CODE>, which 
+does not currently use <CODE>automake</CODE>). </P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC5" 
+name=SEC5>Strictness</A></H2>
+<P>While Automake is intended to be used by maintainers of GNU packages, it does 
+make some effort to accommodate those who wish to use it, but do not want to use 
+all the GNU conventions. </P>
+<P>To this end, Automake supports three levels of <EM>strictness</EM>---the 
+strictness indicating how stringently Automake should check standards 
+conformance. </P>
+<P>The valid strictness levels are: </P>
+<DL compact>
+  <DT><SAMP>`foreign'</SAMP> 
+  <DD>Automake will check for only those things which are absolutely required 
+  for proper operations. For instance, whereas GNU standards dictate the 
+  existence of a <TT>`NEWS'</TT> file, it will not be required in this mode. The 
+  name comes from the fact that Automake is intended to be used for GNU 
+  programs; these relaxed rules are not the standard mode of operation. 
+  <DT><SAMP>`gnu'</SAMP> 
+  <DD>Automake will check--as much as possible--for compliance to the GNU 
+  standards for packages. This is the default. 
+  <DT><SAMP>`gnits'</SAMP> 
+  <DD>Automake will check for compliance to the as-yet-unwritten Gnits 
+  standards. These are based on the GNU standards, but are even more detailed. 
+  Unless you are a Gnits standards contributor, it is recommended that you avoid 
+  this option until such time as the Gnits standard is actually published. 
+</DD></DL>
+<P>For more information on the precise implications of the strictness level, see 
+See section <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC53">The 
+effect of <CODE>--gnu</CODE> and <CODE>--gnits</CODE></A>. </P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC6" 
+name=SEC6>The Uniform Naming Scheme</A></H2>
+<P>Automake variables generally follow a uniform naming scheme that makes it 
+easy to decide how programs (and other derived objects) are built, and how they 
+are installed. This scheme also supports <CODE>configure</CODE> time 
+determination of what should be built. </P>
+<P>At <CODE>make</CODE> time, certain variables are used to determine which 
+objects are to be built. These variables are called <EM>primary</EM> variables. 
+For instance, the primary variable <CODE>PROGRAMS</CODE> holds a list of 
+programs which are to be compiled and linked. <A name=IDX2></A></P>
+<P>A different set of variables is used to decide where the built objects should 
+be installed. These variables are named after the primary variables, but have a 
+prefix indicating which standard directory should be used as the installation 
+directory. The standard directory names are given in the GNU standards (see 
+section `Directory Variables' in <CITE>The GNU Coding Standards</CITE>). 
+Automake extends this list with <CODE>pkglibdir</CODE>, 
+<CODE>pkgincludedir</CODE>, and <CODE>pkgdatadir</CODE>; these are the same as 
+the non-<SAMP>`pkg'</SAMP> versions, but with <SAMP>`@PACKAGE@'</SAMP> appended. 
+For instance, <CODE>pkglibdir</CODE> is defined as 
+<CODE>$(datadir)/@PACKAGE@</CODE>. <A name=IDX3></A></P>
+<P>For each primary, there is one additional variable named by prepending 
+<SAMP>`EXTRA_'</SAMP> to the primary name. This variable is used to list objects 
+which may or may not be built, depending on what <CODE>configure</CODE> decides. 
+This variable is required because Automake must statically know the entire list 
+of objects to be built in order to generate a <TT>`Makefile.in'</TT> that will 
+work in all cases. </P>
+<P>For instance, <CODE>cpio</CODE> decides at configure time which programs are 
+built. Some of the programs are installed in <CODE>bindir</CODE>, and some are 
+installed in <CODE>sbindir</CODE>: </P><PRE>EXTRA_PROGRAMS = mt rmt
+bin_PROGRAMS = cpio pax
+sbin_PROGRAMS = @PROGRAMS@
+</PRE>
+<P>Defining a primary variable without a prefix (eg <CODE>PROGRAMS</CODE>) is an 
+error. </P>
+<P>Note that the common <SAMP>`dir'</SAMP> suffix is left off when constructing 
+the variable names; thus one writes <SAMP>`bin_PROGRAMS'</SAMP> and not 
+<SAMP>`bindir_PROGRAMS'</SAMP>. </P>
+<P>Not every sort of object can be installed in every directory. Automake will 
+flag those attempts it finds in error. Automake will also diagnose obvious 
+misspellings in directory names. </P>
+<P>Sometimes the standard directories--even as augmented by Automake--- are not 
+enough. In particular it is sometimes useful, for clarity, to install objects in 
+a subdirectory of some predefined directory. To this end, Automake allows you to 
+extend the list of possible installation directories. A given prefix (eg 
+<SAMP>`zar'</SAMP>) is valid if a variable of the same name with 
+<SAMP>`dir'</SAMP> appended is defined (eg <SAMP>`zardir'</SAMP>). </P>
+<P>For instance, until HTML support is part of Automake, you could use this to 
+install raw HTML documentation: </P><PRE>htmldir = $(prefix)/html
+html_DATA = automake.html
+</PRE>
+<P>The special prefix <SAMP>`noinst'</SAMP> indicates that the objects in 
+question should not be installed at all. </P>
+<P>The special prefix <SAMP>`check'</SAMP> indicates that the objects in 
+question should not be built until the <CODE>make check</CODE> command is run. 
+</P>
+<P>Possible primary names are <SAMP>`PROGRAMS'</SAMP>, <SAMP>`LIBRARIES'</SAMP>, 
+<SAMP>`LISP'</SAMP>, <SAMP>`SCRIPTS'</SAMP>, <SAMP>`DATA'</SAMP>, 
+<SAMP>`HEADERS'</SAMP>, <SAMP>`MANS'</SAMP>, and <SAMP>`TEXINFOS'</SAMP>. <A 
+name=IDX4></A><A name=IDX5></A><A name=IDX6></A><A name=IDX7></A><A 
+name=IDX8></A><A name=IDX9></A><A name=IDX10></A><A name=IDX11></A></P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC7" 
+name=SEC7>How derived variables are named</A></H2>
+<P>Sometimes a Makefile variable name is derived from some text the user 
+supplies. For instance program names are rewritten into Makefile macro names. 
+Automake canonicalizes this text, so that it does not have to follow Makefile 
+variable naming rules. All characters in the name except for letters, numbers, 
+and the underscore are turned into underscores when making macro references. 
+E.g., if your program is named <CODE>sniff-glue</CODE>, the derived variable 
+name would be <CODE>sniff_glue_SOURCES</CODE>, not 
+<CODE>sniff-glue_SOURCES</CODE>. </P>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC8" 
+name=SEC8>Some example packages</A></H1>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC9" 
+name=SEC9>A simple example, start to finish</A></H2>
+<P>Let's suppose you just finished writing <CODE>zardoz</CODE>, a program to 
+make your head float from vortex to vortex. You've been using 
+<CODE>autoconf</CODE> to provide a portability framework, but your 
+<TT>`Makefile.in'</TT>s have been ad-hoc. You want to make them bulletproof, so 
+you turn to <CODE>automake</CODE>. </P>
+<P>The first step is to update your <TT>`configure.in'</TT> to include the 
+commands that <CODE>automake</CODE> needs. The simplest way to do this is to add 
+an <CODE>AM_INIT_AUTOMAKE</CODE> call just after <CODE>AC_INIT</CODE>: </P><PRE>AM_INIT_AUTOMAKE(zardoz, 1.0)
+</PRE>
+<P>Since your program doesn't have any complicating factors (e.g., it doesn't 
+use <CODE>gettext</CODE>, it doesn't want to build a shared library), you're 
+done with this part. That was easy! </P>
+<P>Now you must regenerate <TT>`configure'</TT>. But to do that, you'll need to 
+tell <CODE>autoconf</CODE> how to find the new macro you've used. The easiest 
+way to do this is to use the <CODE>aclocal</CODE> program to generate your 
+<TT>`aclocal.m4'</TT> for you. But wait... you already have an 
+<TT>`aclocal.m4'</TT>, because you had to write some hairy macros for your 
+program. <CODE>aclocal</CODE> lets you put your own macros into 
+<TT>`acinclude.m4'</TT>, so simply rename and then run: </P><PRE>mv aclocal.m4 acinclude.m4
+aclocal
+autoconf
+</PRE>
+<P>Now it is time to write your <TT>`Makefile.am'</TT> for <CODE>zardoz</CODE>. 
+<CODE>zardoz</CODE> is a user program, so you want to install it where the rest 
+of the user programs go. <CODE>zardoz</CODE> also has some Texinfo 
+documentation. Your <TT>`configure.in'</TT> script uses 
+<CODE>AC_REPLACE_FUNCS</CODE>, so you need to link against 
+<SAMP>`@LIBOBJS@'</SAMP>. So here's what you'd write: </P><PRE>bin_PROGRAMS = zardoz
+zardoz_SOURCES = main.c head.c float.c vortex9.c gun.c
+zardoz_LDADD = @LIBOBJS@
+
+info_TEXINFOS = zardoz.texi
+</PRE>
+<P>Now you can run <CODE>automake --add-missing</CODE> to generate your 
+<TT>`Makefile.in'</TT> and grab any auxiliary files you might need, and you're 
+done! </P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC10" 
+name=SEC10>A classic program</A></H2>
+<P><CODE>hello</CODE> is renowned for its classic simplicity and versatility. 
+This section shows how Automake could be used with the Hello package. The 
+examples below are from the latest GNU Hello, but all the maintainer-only code 
+has been stripped out, as well as all copyright comments. </P>
+<P>Of course, GNU Hello is somewhat more featureful than your traditional 
+two-liner. GNU Hello is internationalized, does option processing, and has a 
+manual and a test suite. GNU Hello is a deep package. </P>
+<P>Here is the <TT>`configure.in'</TT> from GNU Hello: </P><PRE>dnl Process this file with autoconf to produce a configure script.
+AC_INIT(src/hello.c)
+AM_INIT_AUTOMAKE(hello, 1.3.11)
+AM_CONFIG_HEADER(config.h)
+
+dnl Set of available languages.
+ALL_LINGUAS="de fr es ko nl no pl pt sl sv"
+
+dnl Checks for programs.
+AC_PROG_CC
+AC_ISC_POSIX
+
+dnl Checks for libraries.
+
+dnl Checks for header files.
+AC_STDC_HEADERS
+AC_HAVE_HEADERS(string.h fcntl.h sys/file.h sys/param.h)
+
+dnl Checks for library functions.
+AC_FUNC_ALLOCA
+
+dnl Check for st_blksize in struct stat
+AC_ST_BLKSIZE
+
+dnl internationalization macros
+AM_GNU_GETTEXT
+AC_OUTPUT([Makefile doc/Makefile intl/Makefile po/Makefile.in \
+           src/Makefile tests/Makefile tests/hello],
+   [chmod +x tests/hello])
+</PRE>
+<P>The <SAMP>`AM_'</SAMP> macros are provided by Automake (or the Gettext 
+library); the rest are standard Autoconf macros. </P>
+<P>The top-level <TT>`Makefile.am'</TT>: </P><PRE>EXTRA_DIST = BUGS ChangeLog.O
+SUBDIRS = doc intl po src tests
+</PRE>
+<P>As you can see, all the work here is really done in subdirectories. </P>
+<P>The <TT>`po'</TT> and <TT>`intl'</TT> directories are automatically generated 
+using <CODE>gettextize</CODE>; they will not be discussed here. </P>
+<P>In <TT>`doc/Makefile.am'</TT> we see: </P><PRE>info_TEXINFOS = hello.texi
+hello_TEXINFOS = gpl.texi
+</PRE>
+<P>This is sufficient to build, install, and distribute the Hello manual. </P>
+<P>Here is <TT>`tests/Makefile.am'</TT>: </P><PRE>TESTS = hello
+EXTRA_DIST = hello.in testdata
+</PRE>
+<P>The script <TT>`hello'</TT> is generated by <CODE>configure</CODE>, and is 
+the only test case. <CODE>make check</CODE> will run this test. </P>
+<P>Last we have <TT>`src/Makefile.am'</TT>, where all the real work is done: 
+</P><PRE>bin_PROGRAMS = hello
+hello_SOURCES = hello.c version.c getopt.c getopt1.c getopt.h system.h 
+hello_LDADD = @INTLLIBS@ @ALLOCA@
+localedir = $(datadir)/locale
+INCLUDES = -I../intl -DLOCALEDIR=\"$(localedir)\"
+</PRE>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC11" 
+name=SEC11>Building etags and ctags</A></H2>
+<P>Here is another, trickier example. It shows how to generate two programs 
+(<CODE>ctags</CODE> and <CODE>etags</CODE>) from the same source file 
+(<TT>`etags.c'</TT>). The difficult part is that each compilation of 
+<TT>`etags.c'</TT> requires different <CODE>cpp</CODE> flags. </P><PRE>bin_PROGRAMS = etags ctags
+ctags_SOURCES =
+ctags_LDADD = ctags.o
+
+etags.o: etags.c
+        $(COMPILE) -DETAGS_REGEXPS -c etags.c
+
+ctags.o: etags.c
+        $(COMPILE) -DCTAGS -o ctags.o -c etags.c
+</PRE>
+<P>Note that <CODE>ctags_SOURCES</CODE> is defined to be empty--that way no 
+implicit value is substituted. The implicit value, however, is used to generate 
+<CODE>etags</CODE> from <TT>`etags.o'</TT>. </P>
+<P><CODE>ctags_LDADD</CODE> is used to get <TT>`ctags.o'</TT> into the link 
+line. <CODE>ctags_DEPENDENCIES</CODE> is generated by Automake. </P>
+<P>The above rules won't work if your compiler doesn't accept both 
+<SAMP>`-c'</SAMP> and <SAMP>`-o'</SAMP>. The simplest fix for this is to 
+introduce a bogus dependency (to avoid problems with a parallel 
+<CODE>make</CODE>): </P><PRE>etags.o: etags.c ctags.o
+        $(COMPILE) -DETAGS_REGEXPS -c etags.c
+
+ctags.o: etags.c
+        $(COMPILE) -DCTAGS -c etags.c &amp;&amp; mv etags.o ctags.o
+</PRE>
+<P>Also, these explicit rules do not work if the de-ANSI-fication feature is 
+used; supporting that requires a little more work: </P><PRE>etags._o: etags._c ctags.o
+        $(COMPILE) -DETAGS_REGEXPS -c etags.c
+
+ctags._o: etags._c
+        $(COMPILE) -DCTAGS -c etags.c &amp;&amp; mv etags._o ctags.o
+</PRE>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC12" 
+name=SEC12>Creating a <TT>`Makefile.in'</TT></A></H1>
+<P>To create all the <TT>`Makefile.in'</TT>s for a package, run the 
+<CODE>automake</CODE> program in the top level directory, with no arguments. 
+<CODE>automake</CODE> will automatically find each appropriate 
+<TT>`Makefile.am'</TT> (by scanning <TT>`configure.in'</TT>; see section <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC13">Scanning 
+<TT>`configure.in'</TT></A>) and generate the corresponding 
+<TT>`Makefile.in'</TT>. Note that <CODE>automake</CODE> has a rather simplistic 
+view of what constitutes a package; it assumes that a package has only one 
+<TT>`configure.in'</TT>, at the top. If your package has multiple 
+<TT>`configure.in'</TT>s, then you must run <CODE>automake</CODE> in each 
+directory holding a <TT>`configure.in'</TT>. </P>
+<P>You can optionally give <CODE>automake</CODE> an argument; <SAMP>`.am'</SAMP> 
+is appended to the argument and the result is used as the name of the input 
+file. This feature is generally only used to automatically rebuild an 
+out-of-date <TT>`Makefile.in'</TT>. Note that <CODE>automake</CODE> must always 
+be run from the topmost directory of a project, even if being used to regenerate 
+the <TT>`Makefile.in'</TT> in some subdirectory. This is necessary because 
+<CODE>automake</CODE> must scan <TT>`configure.in'</TT>, and because 
+<CODE>automake</CODE> uses the knowledge that a <TT>`Makefile.in'</TT> is in a 
+subdirectory to change its behavior in some cases. </P>
+<P><CODE>automake</CODE> accepts the following options: </P>
+<DL compact>
+  <DT><CODE>-a</CODE> 
+  <DD>
+  <DT><CODE>--add-missing</CODE> 
+  <DD>Automake requires certain common files to exist in certain situations; for 
+  instance <TT>`config.guess'</TT> is required if <TT>`configure.in'</TT> runs 
+  <CODE>AC_CANONICAL_HOST</CODE>. Automake is distributed with several of these 
+  files; this option will cause the missing ones to be automatically added to 
+  the package, whenever possible. In general if Automake tells you a file is 
+  missing, try using this option. 
+  <DT><CODE>--amdir=<VAR>dir</VAR></CODE> 
+  <DD>Look for Automake data files in directory <VAR>dir</VAR> instead of in the 
+  installation directory. This is typically used for debugging. 
+  <DT><CODE>--build-dir=<VAR>dir</VAR></CODE> 
+  <DD>Tell Automake where the build directory is. This option is used when 
+  including dependencies into a <TT>`Makefile.in'</TT> generated by <CODE>make 
+  dist</CODE>; it should not be used otherwise. 
+  <DT><CODE>--cygnus</CODE> 
+  <DD>Causes the generated <TT>`Makefile.in'</TT>s to follow Cygnus rules, 
+  instead of GNU or Gnits rules. See section <A 
+  href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC54">The 
+  effect of <CODE>--cygnus</CODE></A> for more information. 
+  <DT><CODE>--foreign</CODE> 
+  <DD>Set the global strictness to <SAMP>`foreign'</SAMP>. See section <A 
+  href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC5">Strictness</A> 
+  for more information. 
+  <DT><CODE>--gnits</CODE> 
+  <DD>Set the global strictness to <SAMP>`gnits'</SAMP>. See section <A 
+  href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC53">The 
+  effect of <CODE>--gnu</CODE> and <CODE>--gnits</CODE></A> for more 
+  information. 
+  <DT><CODE>--gnu</CODE> 
+  <DD>Set the global strictness to <SAMP>`gnu'</SAMP>. See section <A 
+  href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC53">The 
+  effect of <CODE>--gnu</CODE> and <CODE>--gnits</CODE></A> for more 
+  information. This is the default strictness. 
+  <DT><CODE>--help</CODE> 
+  <DD>Print a summary of the command line options and exit. 
+  <DT><CODE>-i</CODE> 
+  <DD>
+  <DT><CODE>--include-deps</CODE> 
+  <DD>Include all automatically generated dependency information (see section <A 
+  href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC29">Automatic 
+  dependency tracking</A>) in the generated <TT>`Makefile.in'</TT>. This is 
+  generally done when making a distribution; see section <A 
+  href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC46">What 
+  Goes in a Distribution</A>. 
+  <DT><CODE>--generate-deps</CODE> 
+  <DD>Generate a file concatenating all automatically generated dependency 
+  information (see section <A 
+  href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC29">Automatic 
+  dependency tracking</A>) into one file, <TT>`.dep_segment'</TT>. This is 
+  generally done when making a distribution; see section <A 
+  href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC46">What 
+  Goes in a Distribution</A>. It is useful when maintaining a 
+  <TT>`SMakefile'</TT> or makefiles for other platforms 
+  (<TT>`Makefile.DOS'</TT>, etc.) It can only be used in conjunction with 
+  <CODE>--include-deps</CODE>, <CODE>--srcdir-name</CODE>, and 
+  <CODE>--build-dir</CODE>. Note that if this option is given, no other 
+  processing is done. 
+  <DT><CODE>--no-force</CODE> 
+  <DD>Ordinarily <CODE>automake</CODE> creates all <TT>`Makefile.in'</TT>s 
+  mentioned in <TT>`configure.in'</TT>. This option causes it to only update 
+  those <TT>`Makefile.in'</TT>s which are out of date with respect to one of 
+  their dependents. 
+  <DT><CODE>-o <VAR>dir</VAR></CODE> 
+  <DD>
+  <DT><CODE>--output-dir=<VAR>dir</VAR></CODE> 
+  <DD>Put the generated <TT>`Makefile.in'</TT> in the directory <VAR>dir</VAR>. 
+  Ordinarily each <TT>`Makefile.in'</TT> is created in the directory of the 
+  corresponding <TT>`Makefile.am'</TT>. This option is used when making 
+  distributions. 
+  <DT><CODE>--srcdir-name=<VAR>dir</VAR></CODE> 
+  <DD>Tell Automake the name of the source directory associated with the current 
+  build. This option is used when including dependencies into a 
+  <TT>`Makefile.in'</TT> generated by <CODE>make dist</CODE>; it should not be 
+  used otherwise. 
+  <DT><CODE>-v</CODE> 
+  <DD>
+  <DT><CODE>--verbose</CODE> 
+  <DD>Cause Automake to print information about which files are being read or 
+  created. 
+  <DT><CODE>--version</CODE> 
+  <DD>Print the version number of Automake and exit. </DD></DL>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC13" 
+name=SEC13>Scanning <TT>`configure.in'</TT></A></H1>
+<P>Automake scans the package's <TT>`configure.in'</TT> to determine certain 
+information about the package. Some <CODE>autoconf</CODE> macros are required 
+and some variables must be defined in <TT>`configure.in'</TT>. Automake will 
+also use information from <TT>`configure.in'</TT> to further tailor its output. 
+</P>
+<P>Automake also supplies some <CODE>autoconf</CODE> macros to make the 
+maintenance easier. These macros can automatically be put into your 
+<TT>`aclocal.m4'</TT> using the <CODE>aclocal</CODE> program. </P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC14" 
+name=SEC14>Configuration requirements</A></H2>
+<P>The simplest way to meet the basic Automake requirements is to use the macro 
+<CODE>AM_INIT_AUTOMAKE</CODE> (see section <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC17">Autoconf 
+macros supplied with Automake</A>). But if you prefer, you can do the required 
+steps by hand: <A name=IDX12></A></P>
+<UL>
+  <LI>Define the variables <CODE>PACKAGE</CODE> and <CODE>VERSION</CODE> with 
+  <CODE>AC_SUBST</CODE>. <A name=IDX13></A><A 
+  name=IDX14></A><CODE>PACKAGE</CODE> should be the name of the package as it 
+  appears when bundled for distribution. For instance, Automake defines 
+  <CODE>PACKAGE</CODE> to be <SAMP>`automake'</SAMP>. <CODE>VERSION</CODE> 
+  should be the version number of the release that is being developed. We 
+  recommend that you make <TT>`configure.in'</TT> the only place in your package 
+  where the version number is defined; this makes releases simpler. Automake 
+  doesn't do any interpretation of <CODE>PACKAGE</CODE> or <CODE>VERSION</CODE>, 
+  except in <SAMP>`Gnits'</SAMP> mode (see section <A 
+  href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC53">The 
+  effect of <CODE>--gnu</CODE> and <CODE>--gnits</CODE></A>). 
+  <LI>Use the macro <CODE>AC_ARG_PROGRAM</CODE> if a program or script is 
+  installed. <A name=IDX15></A>
+  <LI>Use <CODE>AC_PROG_MAKE_SET</CODE> if the package is not flat. <A 
+  name=IDX16></A>
+  <LI>Use <CODE>AM_SANITY_CHECK</CODE> to make sure the build environment is 
+  sane. 
+  <LI>Use <CODE>AM_PROG_INSTALL</CODE> if any scripts (see section <A 
+  href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC31">Executable 
+  Scripts</A>) are installed by the package. Otherwise, use 
+  <CODE>AC_PROG_INSTALL</CODE>. <A name=IDX17></A><A name=IDX18></A>
+  <LI>Use <CODE>AM_MISSING_PROG</CODE> to see whether the programs 
+  <CODE>aclocal</CODE>, <CODE>autoconf</CODE>, <CODE>automake</CODE>, 
+  <CODE>autoheader</CODE>, and <CODE>makeinfo</CODE> are in the build 
+  environment. Here is how this is done: <PRE>missing_dir=`cd $ac_aux_dir &amp;&amp; pwd`
+AM_MISSING_PROG(ACLOCAL, aclocal, $missing_dir)
+AM_MISSING_PROG(AUTOCONF, autoconf, $missing_dir)
+AM_MISSING_PROG(AUTOMAKE, automake, $missing_dir)
+AM_MISSING_PROG(AUTOHEADER, autoheader, $missing_dir)
+AM_MISSING_PROG(MAKEINFO, makeinfo, $missing_dir)
+</PRE></LI></UL>
+<P>Here are the other macros which Automake requires but which are not run by 
+<CODE>AM_INIT_AUTOMAKE</CODE>: </P>
+<DL compact>
+  <DT><CODE>AC_OUTPUT</CODE> 
+  <DD>Automake uses this to determine which files to create. Listed files named 
+  <CODE>Makefile</CODE> are treated as <TT>`Makefile'</TT>s. Other listed files 
+  are treated differently. Currently the only difference is that a 
+  <TT>`Makefile'</TT> is removed by <CODE>make distclean</CODE>, while other 
+  files are removed by <CODE>make clean</CODE>. <A name=IDX19></A></DD></DL>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC15" 
+name=SEC15>Other things Automake recognizes</A></H2>
+<P>Automake will also recognize the use of certain macros and tailor the 
+generated <TT>`Makefile.in'</TT> appropriately. Currently recognized macros and 
+their effects are: </P>
+<DL compact>
+  <DT><CODE>AC_CONFIG_HEADER</CODE> 
+  <DD>Automake requires the use of <CODE>AM_CONFIG_HEADER</CODE>, which is 
+  similar to <CODE>AC_CONFIG_HEADER</CODE> but does some useful 
+  Automake-specific work. <A name=IDX20></A>
+  <DT><CODE>AC_CONFIG_AUX_DIR</CODE> 
+  <DD>Automake will look for various helper scripts, such as 
+  <TT>`mkinstalldirs'</TT>, in the directory named in this macro invocation. If 
+  not seen, the scripts are looked for in their "standard" locations (either the 
+  top source directory, or in the source directory corresponding to the current 
+  <TT>`Makefile.am'</TT>, whichever is appropriate). <A name=IDX21></A>FIXME: 
+  give complete list of things looked for in this directory 
+  <DT><CODE>AC_PATH_XTRA</CODE> 
+  <DD>Automake will insert definitions for the variables defined by 
+  <CODE>AC_PATH_XTRA</CODE> into each <TT>`Makefile.in'</TT> that builds a C 
+  program or library. <A name=IDX22></A>
+  <DT><CODE>AC_CANONICAL_HOST</CODE> 
+  <DD>
+  <DT><CODE>AC_CHECK_TOOL</CODE> 
+  <DD>Automake will ensure that <TT>`config.guess'</TT> and 
+  <TT>`config.sub'</TT> exist. Also, the <TT>`Makefile'</TT> variables 
+  <SAMP>`host_alias'</SAMP> and <SAMP>`host_triplet'</SAMP> are introduced. <A 
+  name=IDX23></A><A name=IDX24></A><A name=IDX25></A><A name=IDX26></A>
+  <DT><CODE>AC_CANONICAL_SYSTEM</CODE> 
+  <DD>This is similar to <CODE>AC_CANONICAL_HOST</CODE>, but also defines the 
+  <TT>`Makefile'</TT> variables <SAMP>`build_alias'</SAMP> and 
+  <SAMP>`target_alias'</SAMP>. <A name=IDX27></A><A name=IDX28></A><A 
+  name=IDX29></A>
+  <DT><CODE>AC_FUNC_ALLOCA</CODE> 
+  <DD>
+  <DT><CODE>AC_FUNC_GETLOADAVG</CODE> 
+  <DD>
+  <DT><CODE>AC_FUNC_MEMCMP</CODE> 
+  <DD>
+  <DT><CODE>AC_STRUCT_ST_BLOCKS</CODE> 
+  <DD>
+  <DT><CODE>AC_FUNC_FNMATCH</CODE> 
+  <DD>
+  <DT><CODE>AM_FUNC_STRTOD</CODE> 
+  <DD>
+  <DT><CODE>AC_REPLACE_FUNCS</CODE> 
+  <DD>
+  <DT><CODE>AC_REPLACE_GNU_GETOPT</CODE> 
+  <DD>
+  <DT><CODE>AM_WITH_REGEX</CODE> 
+  <DD>Automake will ensure that the appropriate dependencies are generated for 
+  the objects corresponding to these macros. Also, Automake will verify that the 
+  appropriate source files are part of the distribution. Note that Automake does 
+  not come with any of the C sources required to use these macros, so 
+  <CODE>automake -a</CODE> will not install the sources. See section <A 
+  href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC22">Building 
+  a library</A> for more information. <A name=IDX30></A><A name=IDX31></A><A 
+  name=IDX32></A><A name=IDX33></A><A name=IDX34></A><A name=IDX35></A><A 
+  name=IDX36></A><A name=IDX37></A><A name=IDX38></A><A name=IDX39></A>
+  <DT><CODE>LIBOBJS</CODE> 
+  <DD>Automake will detect statements which put <SAMP>`.o'</SAMP> files into 
+  <CODE>LIBOBJS</CODE>, and will treat these additional files as if they were 
+  discovered via <CODE>AC_REPLACE_FUNCS</CODE>. <A name=IDX40></A>
+  <DT><CODE>AC_PROG_RANLIB</CODE> 
+  <DD>This is required if any libraries are built in the package. <A 
+  name=IDX41></A>
+  <DT><CODE>AC_PROG_CXX</CODE> 
+  <DD>This is required if any C++ source is included. <A name=IDX42></A>
+  <DT><CODE>AM_PROG_LIBTOOL</CODE> 
+  <DD>Automake will turn on processing for <CODE>libtool</CODE> (see section 
+  `The Libtool Manual' in <CITE>The Libtool Manual</CITE>). <A name=IDX43></A>
+  <DT><CODE>AC_PROG_YACC</CODE> 
+  <DD>If a Yacc source file is seen, then you must either use this macro or 
+  define the variable <SAMP>`YACC'</SAMP> in <TT>`configure.in'</TT>. The former 
+  is preferred. <A name=IDX44></A><A name=IDX45></A>
+  <DT><CODE>AC_DECL_YYTEXT</CODE> 
+  <DD>This macro is required if there is Lex source in the package. <A 
+  name=IDX46></A>
+  <DT><CODE>AC_PROG_LEX</CODE> 
+  <DD>If a Lex source file is seen, then this macro must be used. <A 
+  name=IDX47></A>
+  <DT><CODE>ALL_LINGUAS</CODE> 
+  <DD>If Automake sees that this variable is set in <TT>`configure.in'</TT>, it 
+  will check the <TT>`po'</TT> directory to ensure that all the named 
+  <SAMP>`.po'</SAMP> files exist, and that all the <SAMP>`.po'</SAMP> files that 
+  exist are named. <A name=IDX48></A>
+  <DT><CODE>AM_C_PROTOTYPES</CODE> 
+  <DD>This is required when using automatic de-ANSI-fication, see section <A 
+  href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC28">Automatic 
+  de-ANSI-fication</A>. <A name=IDX49></A>
+  <DT><CODE>AM_GNU_GETTEXT</CODE> 
+  <DD>This macro is required for packages which use GNU gettext (see section <A 
+  href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC37">Gettext</A>). 
+  It is distributed with gettext. If Automake sees this macro it ensures that 
+  the package meets some of gettext's requirements. <A name=IDX50></A>
+  <DT><CODE>AM_MAINTAINER_MODE</CODE> 
+  <DD>This macro adds a <SAMP>`--enable-maintainer-mode'</SAMP> option to 
+  <CODE>configure</CODE>. If this is used, <CODE>automake</CODE> will cause 
+  "maintainer-only" rules to be turned off by default in the generated 
+  <TT>`Makefile.in'</TT>s. This macro is disallowed in <SAMP>`Gnits'</SAMP> mode 
+  (see section <A 
+  href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC53">The 
+  effect of <CODE>--gnu</CODE> and <CODE>--gnits</CODE></A>). <A name=IDX51></A>
+  <DT><CODE>AC_SUBST</CODE> 
+  <DD>
+  <DT><CODE>AC_CHECK_TOOL</CODE> 
+  <DD>
+  <DT><CODE>AC_CHECK_PROG</CODE> 
+  <DD>
+  <DT><CODE>AC_CHECK_PROGS</CODE> 
+  <DD>
+  <DT><CODE>AC_PATH_PROG</CODE> 
+  <DD>
+  <DT><CODE>AC_PATH_PROGS</CODE> 
+  <DD>For each of these macros, the first argument is automatically defined as a 
+  variable in each generated <TT>`Makefile.in'</TT>. <A name=IDX52></A><A 
+  name=IDX53></A><A name=IDX54></A><A name=IDX55></A><A name=IDX56></A><A 
+  name=IDX57></A></DD></DL>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC16" 
+name=SEC16>Auto-generating aclocal.m4</A></H2>
+<P>Automake includes a number of Autoconf macros which can be used in your 
+package; some of them are actually required by Automake in certain situations. 
+These macros must be defined in your <TT>`aclocal.m4'</TT>; otherwise they will 
+not be seen by <CODE>autoconf</CODE>. </P>
+<P>The <CODE>aclocal</CODE> program will automatically generate 
+<TT>`aclocal.m4'</TT> files based on the contents of <TT>`configure.in'</TT>. 
+This provides a convenient way to get Automake-provided macros, without having 
+to search around. Also, the <CODE>aclocal</CODE> mechanism is extensible for use 
+by other packages. </P>
+<P>At startup, <CODE>aclocal</CODE> scans all the <SAMP>`.m4'</SAMP> files it 
+can find, looking for macro definitions. Then it scans <TT>`configure.in'</TT>. 
+Any mention of one of the macros found in the first step causes that macro, and 
+any macros it in turn requires, to be put into <TT>`aclocal.m4'</TT>. </P>
+<P>The contents of <TT>`acinclude.m4'</TT>, if it exists, are also automatically 
+included in <TT>`aclocal.m4'</TT>. This is useful for incorporating local macros 
+into <TT>`configure'</TT>. </P>
+<P><CODE>aclocal</CODE> accepts the following options: </P>
+<DL compact>
+  <DT><CODE>--acdir=<VAR>dir</VAR></CODE> 
+  <DD>Look for the macro files in <VAR>dir</VAR> instead of the installation 
+  directory. This is typically used for debugging. 
+  <DT><CODE>--help</CODE> 
+  <DD>Print a summary of the command line options and exit. 
+  <DT><CODE>-I <VAR>dir</VAR></CODE> 
+  <DD>Add the directory <VAR>dir</VAR> to the list of directories searched for 
+  <SAMP>`.m4'</SAMP> files. 
+  <DT><CODE>--output=<VAR>file</VAR></CODE> 
+  <DD>Cause the output to be put into <VAR>file</VAR> instead of 
+  <TT>`aclocal.m4'</TT>. 
+  <DT><CODE>--print-ac-dir</CODE> 
+  <DD>Prints the name of the directory which <CODE>aclocal</CODE> will search to 
+  find the <SAMP>`m4'</SAMP> files. When this option is given, normal processing 
+  is suppressed. This option can be used by a package to determine where to 
+  install a macro file. 
+  <DT><CODE>--verbose</CODE> 
+  <DD>Print the names of the files it examines. 
+  <DT><CODE>--version</CODE> 
+  <DD>Print the version number of Automake and exit. </DD></DL>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC17" 
+name=SEC17>Autoconf macros supplied with Automake</A></H2>
+<DL compact>
+  <DT><CODE>AM_CONFIG_HEADER</CODE> 
+  <DD>Automake will generate rules to automatically regenerate the config 
+  header. If you do use this macro, you must create the file 
+  <TT>`stamp-h.in'</TT> in your source directory. It can be empty. <A 
+  name=IDX58></A>
+  <DT><CODE>AM_CYGWIN32</CODE> 
+  <DD>Check to see if this <CODE>configure</CODE> is being run in the 
+  <SAMP>`Cygwin32'</SAMP> environment. (FIXME xref). If so, define output 
+  variable <CODE>EXEEXT</CODE> to <SAMP>`.exe'</SAMP>; otherwise define it to 
+  the empty string. Automake recognizes this macro and uses it to generate 
+  <TT>`Makefile.in'</TT>s which will automatically work under 
+  <SAMP>`Cygwin32'</SAMP>. In the <SAMP>`Cygwin32'</SAMP> environment, 
+  <CODE>gcc</CODE> generates executables whose names end in <SAMP>`.exe'</SAMP>, 
+  even if this was not specified on the command line. Automake adds special code 
+  to <TT>`Makefile.in'</TT> to gracefully deal with this. 
+  <DT><CODE>AM_FUNC_STRTOD</CODE> 
+  <DD>If the <CODE>strtod</CODE> function is not available, or does not work 
+  correctly (like the one on SunOS 5.4), add <TT>`strtod.o'</TT> to output 
+  variable <CODE>LIBOBJS</CODE>. <A name=IDX59></A>
+  <DT><CODE>AM_FUNC_ERROR_AT_LINE</CODE> 
+  <DD>If the function <CODE>error_at_line</CODE> is not found, then add 
+  <TT>`error.o'</TT> to <CODE>LIBOBJS</CODE>. <A name=IDX60></A>
+  <DT><CODE>AM_FUNC_MKTIME</CODE> 
+  <DD>Check for a working <CODE>mktime</CODE> function. If not found, add 
+  <TT>`mktime.o'</TT> to <SAMP>`LIBOBJS'</SAMP>. <A name=IDX61></A>
+  <DT><CODE>AM_FUNC_OBSTACK</CODE> 
+  <DD>Check for the GNU obstacks code; if not found, add <TT>`obstack.o'</TT> to 
+  <SAMP>`LIBOBJS'</SAMP>. <A name=IDX62></A>
+  <DT><CODE>AM_C_PROTOTYPES</CODE> 
+  <DD>Check to see if function prototypes are understood by the compiler. If so, 
+  define <SAMP>`PROTOTYPES'</SAMP> and set the output variables <SAMP>`U'</SAMP> 
+  and <SAMP>`ANSI2KNR'</SAMP> to the empty string. Otherwise, set 
+  <SAMP>`U'</SAMP> to <SAMP>`_'</SAMP> and <SAMP>`ANSI2KNR'</SAMP> to 
+  <SAMP>`./ansi2knr'</SAMP>. Automake uses these values to implement automatic 
+  de-ANSI-fication. <A name=IDX63></A>
+  <DT><CODE>AM_HEADER_TIOCGWINSZ_NEEDS_SYS_IOCTL</CODE> 
+  <DD>If the use of <CODE>TIOCGWINSZ</CODE> requires 
+  <TT>`&lt;sys/ioctl.h&gt;'</TT>, then define <CODE>GWINSZ_IN_SYS_IOCTL</CODE>. 
+  Otherwise <CODE>TIOCGWINSZ</CODE> can be found in 
+  <TT>`&lt;termios.h&gt;'</TT>. <A name=IDX64></A>
+  <DT><CODE>AM_INIT_AUTOMAKE</CODE> 
+  <DD>Runs many macros that most <TT>`configure.in'</TT>'s need. This macro has 
+  two required arguments, the package and the version number. By default this 
+  macro <CODE>AC_DEFINE</CODE>'s <SAMP>`PACKAGE'</SAMP> and 
+  <SAMP>`VERSION'</SAMP>. This can be avoided by passing in a non-empty third 
+  argument. 
+  <DT><CODE>AM_PATH_LISPDIR</CODE> 
+  <DD>Searches for the program <CODE>emacs</CODE>, and, if found, sets the 
+  output variable <CODE>lispdir</CODE> to the full path to Emacs' site-lisp 
+  directory. <A name=IDX65></A>
+  <DT><CODE>AM_PROG_CC_STDC</CODE> 
+  <DD>If the C compiler in not in ANSI C mode by default, try to add an option 
+  to output variable <CODE>CC</CODE> to make it so. This macro tries various 
+  options that select ANSI C on some system or another. It considers the 
+  compiler to be in ANSI C mode if it handles function prototypes correctly. If 
+  you use this macro, you should check after calling it whether the C compiler 
+  has been set to accept ANSI C; if not, the shell variable 
+  <CODE>am_cv_prog_cc_stdc</CODE> is set to <SAMP>`no'</SAMP>. If you wrote your 
+  source code in ANSI C, you can make an un-ANSIfied copy of it by using the 
+  <CODE>ansi2knr</CODE> option. <A name=IDX66></A>
+  <DT><CODE>AM_PROG_INSTALL</CODE> 
+  <DD>Like <CODE>AC_PROG_INSTALL</CODE>, but also defines 
+  <CODE>INSTALL_SCRIPT</CODE>. <A name=IDX67></A>
+  <DT><CODE>AM_PROG_LEX</CODE> 
+  <DD>Like <CODE>AC_PROG_LEX</CODE> with <CODE>AC_DECL_YYTEXT</CODE>, but uses 
+  the <CODE>missing</CODE> script on systems that do not have lex. <SAMP>`HP-UX 
+  10'</SAMP> is one such system. <A name=IDX68></A>
+  <DT><CODE>AM_SANITY_CHECK</CODE> 
+  <DD>This checks to make sure that a file created in the build directory is 
+  newer than a file in the source directory. This can fail on systems where the 
+  clock is set incorrectly. This macro is automatically run from 
+  <CODE>AM_INIT_AUTOMAKE</CODE>. <A name=IDX69></A>
+  <DT><CODE>AM_SYS_POSIX_TERMIOS</CODE> 
+  <DD>Check to see if POSIX termios headers and functions are available on the 
+  system. If so, set the shell variable <CODE>am_cv_sys_posix_termios</CODE> to 
+  <SAMP>`yes'</SAMP>. If not, set the variable to <SAMP>`no'</SAMP>. <A 
+  name=IDX70></A>
+  <DT><CODE>AM_TYPE_PTRDIFF_T</CODE> 
+  <DD>Define <SAMP>`HAVE_PTRDIFF_T'</SAMP> if the type <SAMP>`ptrdiff_t'</SAMP> 
+  is defined in <TT>`&lt;stddef.h&gt;'</TT>. <A name=IDX71></A>
+  <DT><CODE>AM_WITH_DMALLOC</CODE> 
+  <DD>Add support for the <CODE>dmalloc</CODE> package. If the user configures 
+  with <SAMP>`--with-dmalloc'</SAMP>, then define <CODE>WITH_DMALLOC</CODE> and 
+  add <SAMP>`-ldmalloc'</SAMP> to <CODE>LIBS</CODE>. The <CODE>dmalloc</CODE> 
+  package can be found at <A 
+  href="ftp://ftp.letters.com/src/dmalloc/dmalloc.tar.gz">ftp://ftp.letters.com/src/dmalloc/dmalloc.tar.gz</A> 
+  <A name=IDX72></A>
+  <DT><CODE>AM_WITH_REGEX</CODE> 
+  <DD>Adds <SAMP>`--with-regex'</SAMP> to the <CODE>configure</CODE> command 
+  line. If specified (the default), then the <SAMP>`regex'</SAMP> regular 
+  expression library is used, <TT>`regex.o'</TT> is put into 
+  <SAMP>`LIBOBJS'</SAMP>, and <SAMP>`WITH_REGEX'</SAMP> is defined.. If 
+  <SAMP>`--without-regex'</SAMP> is given, then the <SAMP>`rx'</SAMP> regular 
+  expression library is used, and <TT>`rx.o'</TT> is put into 
+  <SAMP>`LIBOBJS'</SAMP>. <A name=IDX73></A></DD></DL>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC18" 
+name=SEC18>Writing your own aclocal macros</A></H2>
+<P>Aclocal doesn't have any built-in knowledge of any macros, so it is easy to 
+extend it with your own macros. </P>
+<P>This is mostly used for libraries which want to supply their own Autoconf 
+macros for use by other programs. For instance the <CODE>gettext</CODE> library 
+supplies a macro <CODE>AM_GNU_GETTEXT</CODE> which should be used by any package 
+using <CODE>gettext</CODE>. When the library is installed, it installs this 
+macro so that <CODE>aclocal</CODE> will find it. </P>
+<P>A file of macros should be a series of <CODE>AC_DEFUN</CODE>'s. Aclocal also 
+understands <CODE>AC_REQUIRE</CODE>, so it is safe to put each macro in a 
+separate file. </P>
+<P>A macro file's name should end in <SAMP>`.m4'</SAMP>. Such files should be 
+installed in <TT>`$(datadir)/aclocal'</TT>. </P>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC19" 
+name=SEC19>The top-level <TT>`Makefile.am'</TT></A></H1>
+<P>In non-flat packages, the top level <TT>`Makefile.am'</TT> must tell Automake 
+which subdirectories are to be built. This is done via the <CODE>SUBDIRS</CODE> 
+variable. <A name=IDX74></A></P>
+<P>The <CODE>SUBDIRS</CODE> macro holds a list of subdirectories in which 
+building of various sorts can occur. Many targets (eg <CODE>all</CODE>) in the 
+generated <TT>`Makefile'</TT> will run both locally and in all specified 
+subdirectories. Note that the directories listed in <CODE>SUBDIRS</CODE> are not 
+required to contain <TT>`Makefile.am'</TT>s; only <TT>`Makefile'</TT>s (after 
+configuration). This allows inclusion of libraries from packages which do not 
+use Automake (such as <CODE>gettext</CODE>). The directories mentioned in 
+<CODE>SUBDIRS</CODE> must be direct children of the current directory. For 
+instance, you cannot put <SAMP>`src/subdir'</SAMP> into <CODE>SUBDIRS</CODE>. 
+</P>
+<P>In a deep package, the top-level <TT>`Makefile.am'</TT> is often very short. 
+For instance, here is the <TT>`Makefile.am'</TT> from the Hello distribution: 
+</P><PRE>EXTRA_DIST = BUGS ChangeLog.O README-alpha
+SUBDIRS = doc intl po src tests
+</PRE>
+<P>It is possible to override the <CODE>SUBDIRS</CODE> variable if, like in the 
+case of GNU <CODE>Inetutils</CODE>, you want to only build a subset of the 
+entire package. In your <TT>`Makefile.am'</TT> include: </P><PRE>SUBDIRS = @SUBDIRS@
+</PRE>
+<P>Then in your <TT>`configure.in'</TT> you can specify: </P><PRE>SUBDIRS = "src doc lib po"
+AC_SUBST(SUBDIRS)
+</PRE>
+<P>The upshot of this is that automake is tricked into building the package to 
+take the subdirs, but doesn't actually bind that list until 
+<CODE>configure</CODE> is run. </P>
+<P><CODE>SUBDIRS</CODE> can contain configure substitutions (eg 
+<SAMP>`@DIRS@'</SAMP>); Automake itself does not actually examine the contents 
+of this variable. </P>
+<P>If <CODE>SUBDIRS</CODE> is defined, then your <TT>`configure.in'</TT> must 
+include <CODE>AC_PROG_MAKE_SET</CODE>. </P>
+<P>The use of <CODE>SUBDIRS</CODE> is not restricted to just the top-level 
+<TT>`Makefile.am'</TT>. Automake can be used to construct packages of arbitrary 
+depth. </P>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC20" 
+name=SEC20>Building Programs and Libraries</A></H1>
+<P>A large part of Automake's functionality is dedicated to making it easy to 
+build C programs and libraries. </P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC21" 
+name=SEC21>Building a program</A></H2>
+<P>In a directory containing source that gets built into a program (as opposed 
+to a library), the <SAMP>`PROGRAMS'</SAMP> primary is used. Programs can be 
+installed in <SAMP>`bindir'</SAMP>, <SAMP>`sbindir'</SAMP>, 
+<SAMP>`libexecdir'</SAMP>, <SAMP>`pkglibdir'</SAMP>, or not at all 
+(<SAMP>`noinst'</SAMP>). </P>
+<P>For instance: </P><PRE>bin_PROGRAMS = hello
+</PRE>
+<P>In this simple case, the resulting <TT>`Makefile.in'</TT> will contain code 
+to generate a program named <CODE>hello</CODE>. The variable 
+<CODE>hello_SOURCES</CODE> is used to specify which source files get built into 
+an executable: </P><PRE>hello_SOURCES = hello.c version.c getopt.c getopt1.c getopt.h system.h 
+</PRE>
+<P>This causes each mentioned <SAMP>`.c'</SAMP> file to be compiled into the 
+corresponding <SAMP>`.o'</SAMP>. Then all are linked to produce 
+<TT>`hello'</TT>. </P>
+<P>If <SAMP>`prog_SOURCES'</SAMP> is needed, but not specified, then it defaults 
+to the single file <TT>`prog.c'</TT>. In the example above, the definition of 
+<CODE>hello_SOURCES</CODE> is actually redundant. <A name=IDX75></A><A 
+name=IDX76></A></P>
+<P>Multiple programs can be built in a single directory. Multiple programs can 
+share a single source file. The source file must be listed in each 
+<SAMP>`_SOURCES'</SAMP> definition. </P>
+<P>Header files listed in a <SAMP>`_SOURCES'</SAMP> definition will be included 
+in the distribution but otherwise ignored. In case it isn't obvious, you should 
+not include the header file generated by <TT>`configure'</TT> in an 
+<SAMP>`_SOURCES'</SAMP> variable; this file should not be distributed. Lex 
+(<SAMP>`.l'</SAMP>) and yacc (<SAMP>`.y'</SAMP>) files can also be listed; see 
+section <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC26">Yacc and 
+Lex support</A>. </P>
+<P>Automake must know all the source files that could possibly go into a 
+program, even if not all the files are built in every circumstance. Any files 
+which are only conditionally built should be listed in the appropriate 
+<SAMP>`EXTRA_'</SAMP> variable. For instance, if <TT>`hello-linux.c'</TT> were 
+conditionally included in <CODE>hello</CODE>, the <TT>`Makefile.am'</TT> would 
+contain: </P><PRE>EXTRA_hello_SOURCES = hello-linux.c
+</PRE>
+<P>Similarly, sometimes it is useful to determine the programs that are to be 
+built at configure time. For instance, GNU <CODE>cpio</CODE> only builds 
+<CODE>mt</CODE> and <CODE>rmt</CODE> under special circumstances. </P>
+<P>In this case, you must notify <CODE>automake</CODE> of all the programs that 
+can possibly be built, but at the same time cause the generated 
+<TT>`Makefile.in'</TT> to use the programs specified by <CODE>configure</CODE>. 
+This is done by having <CODE>configure</CODE> substitute values into each 
+<SAMP>`_PROGRAMS'</SAMP> definition, while listing all optionally built programs 
+in <CODE>EXTRA_PROGRAMS</CODE>. <A name=IDX77></A></P>
+<P>If you need to link against libraries that are not found by 
+<CODE>configure</CODE>, you can use <CODE>LDADD</CODE> to do so. This variable 
+actually can be used to add any options to the linker command line. <A 
+name=IDX78></A></P>
+<P>Sometimes, multiple programs are built in one directory but do not share the 
+same link-time requirements. In this case, you can use the 
+<SAMP>`<VAR>prog</VAR>_LDADD'</SAMP> variable (where <VAR>prog</VAR> is the name 
+of the program as it appears in some <SAMP>`_PROGRAMS'</SAMP> variable, and 
+usually written in lowercase) to override the global <CODE>LDADD</CODE>. (If 
+this variable exists for a given program, then that program is not linked using 
+<CODE>LDADD</CODE>.) <A name=IDX79></A></P>
+<P>For instance, in GNU cpio, <CODE>pax</CODE>, <CODE>cpio</CODE>, and 
+<CODE>mt</CODE> are linked against the library <TT>`libcpio.a'</TT>. However, 
+<CODE>rmt</CODE> is built in the same directory, and has no such link 
+requirement. Also, <CODE>mt</CODE> and <CODE>rmt</CODE> are only built on 
+certain architectures. Here is what cpio's <TT>`src/Makefile.am'</TT> looks like 
+(abridged): </P><PRE>bin_PROGRAMS = cpio pax @MT@
+libexec_PROGRAMS = @RMT@
+EXTRA_PROGRAMS = mt rmt
+
+LDADD = ../lib/libcpio.a @INTLLIBS@
+rmt_LDADD =
+
+cpio_SOURCES = ...
+pax_SOURCES = ...
+mt_SOURCES = ...
+rmt_SOURCES = ...
+</PRE>
+<P><SAMP>`prog_LDADD'</SAMP> is inappropriate for passing program-specific 
+linker flags (except for <SAMP>`-l'</SAMP> and <SAMP>`-L'</SAMP>). So, use the 
+<SAMP>`prog_LDFLAGS'</SAMP> variable for this purpose. <A name=IDX80></A></P>
+<P>It is also occasionally useful to have a program depend on some other target 
+which is not actually part of that program. This can be done using the 
+<SAMP>`prog_DEPENDENCIES'</SAMP> variable. Each program depends on the contents 
+of such a variable, but no further interpretation is done. </P>
+<P>If <SAMP>`prog_DEPENDENCIES'</SAMP> is not supplied, it is computed by 
+Automake. The automatically-assigned value is the contents of 
+<SAMP>`prog_LDADD'</SAMP>, with most configure substitutions, <SAMP>`-l'</SAMP>, 
+and <SAMP>`-L'</SAMP> options removed. The configure substitutions that are left 
+in are only <SAMP>`@LIBOBJS@'</SAMP> and <SAMP>`@ALLOCA@'</SAMP>; these are left 
+because it is known that they will not cause an invalid value for 
+<SAMP>`prog_DEPENDENCIES'</SAMP> to be generated. </P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC22" 
+name=SEC22>Building a library</A></H2>
+<P>Building a library is much like building a program. In this case, the name of 
+the primary is <SAMP>`LIBRARIES'</SAMP>. Libraries can be installed in 
+<CODE>libdir</CODE> or <CODE>pkglibdir</CODE>. </P>
+<P>See section <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC24">Building 
+a Shared Library</A>, for information on how to build shared libraries using 
+Libtool and the <SAMP>`LTLIBRARIES'</SAMP> primary. </P>
+<P>Each <SAMP>`_LIBRARIES'</SAMP> variable is a list of the libraries to be 
+built. For instance to create a library named <TT>`libcpio.a'</TT>, but not 
+install it, you would write: </P><PRE>noinst_LIBRARIES = libcpio.a
+</PRE>
+<P>The sources that go into a library are determined exactly as they are for 
+programs, via the <SAMP>`_SOURCES'</SAMP> variables. Note that the library name 
+is canonicalized (see section <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC7">How 
+derived variables are named</A>), so the <SAMP>`_SOURCES'</SAMP> variable 
+corresponding to <TT>`liblob.a'</TT> is <SAMP>`liblob_a_SOURCES'</SAMP>, not 
+<SAMP>`liblob.a_SOURCES'</SAMP>. </P>
+<P>Extra objects can be added to a library using the 
+<SAMP>`library_LIBADD'</SAMP> variable. This should be used for objects 
+determined by <CODE>configure</CODE>. Again from cpio: <A name=IDX81></A><A 
+name=IDX82></A></P><PRE>libcpio_a_LIBADD = @LIBOBJS@ @ALLOCA@
+</PRE>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC23" 
+name=SEC23>Special handling for LIBOBJS and ALLOCA</A></H2>
+<P>Automake explicitly recognizes the use of <CODE>@LIBOBJS@</CODE> and 
+<CODE>@ALLOCA@</CODE>, and uses this information, plus the list of 
+<CODE>LIBOBJS</CODE> files derived from <TT>`configure.in'</TT> to automatically 
+include the appropriate source files in the distribution (see section <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC46">What 
+Goes in a Distribution</A>). These source files are also automatically handled 
+in the dependency-tracking scheme, see See section <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC29">Automatic 
+dependency tracking</A>. </P>
+<P><CODE>@LIBOBJS@</CODE> and <CODE>@ALLOCA@</CODE> are specially recognized in 
+any <SAMP>`_LDADD'</SAMP> or <SAMP>`_LIBADD'</SAMP> variable. </P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC24" 
+name=SEC24>Building a Shared Library</A></H2>
+<P>Building shared libraries is a relatively complex matter. For this reason, 
+GNU Libtool (see section `The Libtool Manual' in <CITE>The Libtool 
+Manual</CITE>) was created to help build shared libraries in a 
+platform-independent way. </P>
+<P>Automake uses Libtool to build libraries declared with the 
+<SAMP>`LTLIBRARIES'</SAMP> primary. Each <SAMP>`_LTLIBRARIES'</SAMP> variable is 
+a list of shared libraries to build. For instance, to create a library named 
+<TT>`libgettext.a'</TT> and its corresponding shared libraries, and install them 
+in <SAMP>`libdir'</SAMP>, write: </P><PRE>lib_LTLIBRARIES = libgettext.la
+</PRE>
+<P>Note that shared libraries <EM>must</EM> be installed, so 
+<SAMP>`noinst_LTLIBRARIES'</SAMP> and <SAMP>`check_LTLIBRARIES'</SAMP> are not 
+allowed. </P>
+<P>For each library, the <SAMP>`library_LIBADD'</SAMP> variable contains the 
+names of extra libtool objects (<SAMP>`.lo'</SAMP> files) to add to the shared 
+library. The <SAMP>`library_LDFLAGS'</SAMP> variable contains any additional 
+libtool flags, such as <SAMP>`-version-info'</SAMP> or <SAMP>`-static'</SAMP>. 
+</P>
+<P>Where an ordinary library might include <CODE>@LIBOBJS@</CODE>, a libtool 
+library must use <CODE>@LTLIBOBJS@</CODE>. This is required because the object 
+files that libtool operates on do not necessarily end in <SAMP>`.o'</SAMP>. The 
+libtool manual contains more details on this topic. </P>
+<P>For libraries installed in some directory, <CODE>automake</CODE> will 
+automatically supply the appropriate <SAMP>`-rpath'</SAMP> option. However, for 
+libraries determined at configure time (and thus mentioned in 
+<CODE>EXTRA_LTLIBRARIES</CODE>), <CODE>automake</CODE> does not know the 
+eventual installation directory; for such libraries you must add the 
+<SAMP>`-rpath'</SAMP> option to the appropriate <SAMP>`_LDFLAGS'</SAMP> variable 
+by hand. </P>
+<P>See section `The Libtool Manual' in <CITE>The Libtool Manual</CITE>, for more 
+information. </P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC25" 
+name=SEC25>Variables used when building a program</A></H2>
+<P>Occasionally it is useful to know which <TT>`Makefile'</TT> variables 
+Automake uses for compilations; for instance you might need to do your own 
+compilation in some special cases. </P>
+<P>Some variables are inherited from Autoconf; these are <CODE>CC</CODE>, 
+<CODE>CFLAGS</CODE>, <CODE>CPPFLAGS</CODE>, <CODE>DEFS</CODE>, 
+<CODE>LDFLAGS</CODE>, and <CODE>LIBS</CODE>. <A name=IDX83></A></P>
+<P>There are some additional variables which Automake itself defines: </P>
+<DL compact>
+  <DT><CODE>INCLUDES</CODE> 
+  <DD>A list of <SAMP>`-I'</SAMP> options. This can be set in your 
+  <TT>`Makefile.am'</TT> if you have special directories you want to look in. 
+  <CODE>automake</CODE> already provides some <SAMP>`-I'</SAMP> options 
+  automatically. In particular it generates <SAMP>`-I$(srcdir)'</SAMP> and a 
+  <SAMP>`-I'</SAMP> pointing to the directory holding <TT>`config.h'</TT> (if 
+  you've used <CODE>AC_CONFIG_HEADER</CODE> or <CODE>AM_CONFIG_HEADER</CODE>). 
+  <CODE>INCLUDES</CODE> can actually be used for other <CODE>cpp</CODE> options 
+  besides <SAMP>`-I'</SAMP>. For instance, it is sometimes used to pass 
+  arbitrary <SAMP>`-D'</SAMP> options to the compiler. 
+  <DT><CODE>COMPILE</CODE> 
+  <DD>This is the command used to actually compile a C source file. The filename 
+  is appended to form the complete command line. 
+  <DT><CODE>LINK</CODE> 
+  <DD>This is the command used to actually link a C program. </DD></DL>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC26" 
+name=SEC26>Yacc and Lex support</A></H2>
+<P>Automake has somewhat idiosyncratic support for Yacc and Lex. </P>
+<P>Automake assumes that the <SAMP>`.c'</SAMP> file generated by yacc (or lex) 
+should be named using the basename of the input file. That is, for a yacc source 
+file <TT>`foo.y'</TT>, automake will cause the intermediate file to be named 
+<TT>`foo.c'</TT> (as opposed to <TT>`y.tab.c'</TT>, which is more traditional). 
+</P>
+<P>The extension of a yacc source file is used to determine the extension of the 
+resulting <SAMP>`C'</SAMP> or <SAMP>`C++'</SAMP> file. Files with the extension 
+<SAMP>`.y'</SAMP> will be turned into <SAMP>`.c'</SAMP> files; likewise, 
+<SAMP>`.yy'</SAMP> will become <SAMP>`.cc'</SAMP>; <SAMP>`.y++'</SAMP>, 
+<SAMP>`c++'</SAMP>; and <SAMP>`.yxx'</SAMP>, <SAMP>`.cxx'</SAMP>. Likewise, lex 
+source files can be used to generate <SAMP>`C'</SAMP> or <SAMP>`C++'</SAMP>; the 
+extensions <SAMP>`.l'</SAMP>, <SAMP>`.ll'</SAMP>, <SAMP>`.l++'</SAMP>, and 
+<SAMP>`.lxx'</SAMP> are recognized. </P>
+<P>You should never explicitly mention the intermediate (<SAMP>`C'</SAMP> or 
+<SAMP>`C++'</SAMP>) file in any <SAMP>`SOURCES'</SAMP> variable; only list the 
+source file. </P>
+<P>The intermediate files generated by yacc (or lex) will be included in any 
+distribution that is made. That way the user doesn't need to have yacc or lex. 
+</P>
+<P>If a yacc source file is seen, then your <TT>`configure.in'</TT> must define 
+the variable <SAMP>`YACC'</SAMP>. This is most easily done by invoking the macro 
+<SAMP>`AC_PROG_YACC'</SAMP>. </P>
+<P>Similarly, if a lex source file is seen, then your <TT>`configure.in'</TT> 
+must define the variable <SAMP>`LEX'</SAMP>. You can use 
+<SAMP>`AC_PROG_LEX'</SAMP> to do this. Automake's lex support also requires that 
+you use the <SAMP>`AC_DECL_YYTEXT'</SAMP> macro--automake needs to know the 
+value of <SAMP>`LEX_OUTPUT_ROOT'</SAMP>. </P>
+<P>Automake makes it possible to include multiple yacc (or lex) source files in 
+a single program. Automake uses a small program called <CODE>ylwrap</CODE> to 
+run <CODE>yacc</CODE> (or <CODE>lex</CODE>) in a subdirectory. This is necessary 
+because yacc's output filename is fixed, and a parallel make could conceivably 
+invoke more than one instance of <CODE>yacc</CODE> simultaneously. 
+<CODE>ylwrap</CODE> is distributed with automake. It should appear in the 
+directory specified by <SAMP>`AC_CONFIG_AUX_DIR'</SAMP>, or the current 
+directory if that macro is not used in <TT>`configure.in'</TT>. </P>
+<P>For <CODE>yacc</CODE>, simply managing locking is insufficient. 
+<CODE>yacc</CODE> output also always uses the same symbol names internally, so 
+it isn't possible to link two <CODE>yacc</CODE> parsers into the same 
+executable. </P>
+<P>We recommend using the following renaming hack used in <CODE>gdb</CODE>: <PRE>#define	yymaxdepth c_maxdepth
+#define	yyparse	c_parse
+#define	yylex	c_lex
+#define	yyerror	c_error
+#define	yylval	c_lval
+#define	yychar	c_char
+#define	yydebug	c_debug
+#define	yypact	c_pact	
+#define	yyr1	c_r1			
+#define	yyr2	c_r2			
+#define	yydef	c_def		
+#define	yychk	c_chk		
+#define	yypgo	c_pgo		
+#define	yyact	c_act		
+#define	yyexca	c_exca
+#define yyerrflag c_errflag
+#define yynerrs	c_nerrs
+#define	yyps	c_ps
+#define	yypv	c_pv
+#define	yys	c_s
+#define	yy_yys	c_yys
+#define	yystate	c_state
+#define	yytmp	c_tmp
+#define	yyv	c_v
+#define	yy_yyv	c_yyv
+#define	yyval	c_val
+#define	yylloc	c_lloc
+#define yyreds	c_reds
+#define yytoks	c_toks
+#define yylhs	c_yylhs
+#define yylen	c_yylen
+#define yydefred c_yydefred
+#define yydgoto	c_yydgoto
+#define yysindex c_yysindex
+#define yyrindex c_yyrindex
+#define yygindex c_yygindex
+#define yytable	 c_yytable
+#define yycheck	 c_yycheck
+</PRE>
+<P>For each define, replace the <SAMP>`c_'</SAMP> prefix with whatever you like. 
+These defines work for <CODE>bison</CODE>, <CODE>byacc</CODE>, and traditional 
+<CODE>yacc</CODE>s. If you find a parser generator that uses a symbol not 
+covered here, please report the new name so it can be added to the list. </P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC27" 
+name=SEC27>C++ and other languages</A></H2>
+<P>Automake includes full support for C++, and rudimentary support for other 
+languages. Support for other languages will be improved based on demand. </P>
+<P>Any package including C++ code must define the output variable 
+<SAMP>`CXX'</SAMP> in <TT>`configure.in'</TT>; the simplest way to do this is to 
+use the <CODE>AC_PROG_CXX</CODE> macro. </P>
+<P>A few additional variables are defined when a C++ source file is seen: </P>
+<DL compact>
+  <DT><CODE>CXX</CODE> 
+  <DD>The name of the C++ compiler. <A name=IDX84></A>
+  <DT><CODE>CXXFLAGS</CODE> 
+  <DD>Any flags to pass to the C++ compiler. <A name=IDX85></A>
+  <DT><CODE>CXXCOMPILE</CODE> 
+  <DD>The command used to actually compile a C++ source file. The file name is 
+  appended to form the complete command line. <A name=IDX86></A>
+  <DT><CODE>CXXLINK</CODE> 
+  <DD>The command used to actually link a C++ program. <A 
+name=IDX87></A></DD></DL>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC28" 
+name=SEC28>Automatic de-ANSI-fication</A></H2>
+<P>Although the GNU standards allow the use of ANSI C, this can have the effect 
+of limiting portability of a package to some older compilers (notably SunOS). 
+</P>
+<P>Automake allows you to work around this problem on such machines by 
+"de-ANSI-fying" each source file before the actual compilation takes place. </P>
+<P>If the <TT>`Makefile.am'</TT> variable <CODE>AUTOMAKE_OPTIONS</CODE> <A 
+name=IDX88></A>(section <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC48">Changing 
+Automake's Behavior</A>) contains the option <CODE>ansi2knr</CODE> <A 
+name=IDX89></A>then code to handle de-ANSI-fication is inserted into the 
+generated <TT>`Makefile.in'</TT>. </P>
+<P>This causes each C source file in the directory to be treated as ANSI C. If 
+an ANSI C compiler is available, it is used. If no ANSI C compiler is available, 
+the <CODE>ansi2knr</CODE> program is used to convert the source files into 
+K&amp;R C, which is then compiled. </P>
+<P>The <CODE>ansi2knr</CODE> program is simple-minded. It assumes the source 
+code will be formatted in a particular way; see the <CODE>ansi2knr</CODE> man 
+page for details. </P>
+<P>De-ANSI-fication support requires the source files <TT>`ansi2knr.c'</TT> and 
+<TT>`ansi2knr.1'</TT> to be in the same package as the ANSI C source; these 
+files are distributed with Automake. Also, the package <TT>`configure.in'</TT> 
+must call the macro <CODE>AM_C_PROTOTYPES</CODE>. <A name=IDX90></A></P>
+<P>Automake also handles finding the <CODE>ansi2knr</CODE> support files in some 
+other directory in the current package. This is done by prepending the relative 
+path to the appropriate directory to the <CODE>ansi2knr</CODE> option. For 
+instance, suppose the package has ANSI C code in the <TT>`src'</TT> and 
+<TT>`lib'</TT> subdirs. The files <TT>`ansi2knr.c'</TT> and 
+<TT>`ansi2knr.1'</TT> appear in <TT>`lib'</TT>. Then this could appear in 
+<TT>`src/Makefile.am'</TT>: </P><PRE>AUTOMAKE_OPTIONS = ../lib/ansi2knr
+</PRE>
+<P>If no directory prefix is given, the files are assumed to be in the current 
+directory. </P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC29" 
+name=SEC29>Automatic dependency tracking</A></H2>
+<P>As a developer it is often painful to continually update the 
+<TT>`Makefile.in'</TT> whenever the include-file dependencies change in a 
+project. <CODE>automake</CODE> supplies a way to automatically track dependency 
+changes, and distribute the dependencies in the generated 
+<TT>`Makefile.in'</TT>. </P>
+<P>Currently this support requires the use of GNU <CODE>make</CODE> and 
+<CODE>gcc</CODE>. It might become possible in the future to supply a different 
+dependency generating program, if there is enough demand. In the meantime, this 
+mode is enabled by default if any C program or library is defined in the current 
+directory, so you may get a <SAMP>`Must be a separator'</SAMP> error from 
+non-GNU make. </P>
+<P>When you decide to make a distribution, the <CODE>dist</CODE> target will <A 
+name=IDX91></A>re-run <CODE>automake</CODE> with <SAMP>`--include-deps'</SAMP> 
+and other options. This will cause the previously generated dependencies to be 
+inserted into the generated <TT>`Makefile.in'</TT>, and thus into the 
+distribution. This step also turns off inclusion of the dependency generation 
+code, so that those who download your distribution but don't use GNU 
+<CODE>make</CODE> and <CODE>gcc</CODE> will not get errors. </P>
+<P>When added to the <TT>`Makefile.in'</TT>, the dependencies have all 
+system-specific dependencies automatically removed. This can be done by listing 
+the files in <SAMP>`OMIT_DEPENDENCIES'</SAMP>. <A name=IDX92></A>For instance 
+all references to system header files are removed by <CODE>automake</CODE>. 
+Sometimes it is useful to specify that a certain header file should be removed. 
+For instance if your <TT>`configure.in'</TT> uses <SAMP>`AM_WITH_REGEX'</SAMP>, 
+then any dependency on <TT>`rx.h'</TT> or <TT>`regex.h'</TT> should be removed, 
+because the correct one cannot be known until the user configures the package. 
+</P>
+<P>As it turns out, <CODE>automake</CODE> is actually smart enough to handle the 
+particular case of the regular expression header. It will also automatically 
+omit <TT>`libintl.h'</TT> if <SAMP>`AM_GNU_GETTEXT'</SAMP> is used. </P>
+<P>Automatic dependency tracking can be suppressed by putting 
+<CODE>no-dependencies</CODE> in the variable <CODE>AUTOMAKE_OPTIONS</CODE>. <A 
+name=IDX93></A><A name=IDX94></A></P>
+<P>If you unpack a distribution made by <CODE>make dist</CODE>, and you want to 
+turn on the dependency-tracking code again, simply re-run <CODE>automake</CODE>. 
+</P>
+<P>The actual dependency files are put under the build directory, in a 
+subdirectory named <TT>`.deps'</TT>. These dependencies are machine specific. It 
+is safe to delete them if you like; they will be automatically recreated during 
+the next build. </P>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC30" 
+name=SEC30>Other Derived Objects</A></H1>
+<P>Automake can handle derived objects which are not C programs. Sometimes the 
+support for actually building such objects must be explicitly supplied, but 
+Automake will still automatically handle installation and distribution. </P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC31" 
+name=SEC31>Executable Scripts</A></H2>
+<P>It is possible to define and install programs which are scripts. Such 
+programs are listed using the <SAMP>`SCRIPTS'</SAMP> primary name. 
+<CODE>automake</CODE> doesn't define any dependencies for scripts; the 
+<TT>`Makefile.am'</TT> should include the appropriate rules. <A 
+name=IDX95></A></P>
+<P><CODE>automake</CODE> does not assume that scripts are derived objects; such 
+objects must be deleted by hand; see section <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC45">What 
+Gets Cleaned</A> for more information. </P>
+<P><CODE>automake</CODE> itself is a script that is generated at configure time 
+from <TT>`automake.in'</TT>. Here is how this is handled: </P><PRE>bin_SCRIPTS = automake
+</PRE>
+<P>Since <CODE>automake</CODE> appears in the <CODE>AC_OUTPUT</CODE> macro, a 
+target for it is automatically generated. </P>
+<P>Script objects can be installed in <CODE>bindir</CODE>, <CODE>sbindir</CODE>, 
+<CODE>libexecdir</CODE>, or <CODE>pkgdatadir</CODE>. </P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC32" 
+name=SEC32>Header files</A></H2>
+<P>Header files are specified by the <SAMP>`HEADERS'</SAMP> family of variables. 
+Generally header files are not installed, so the <CODE>noinst_HEADERS</CODE> 
+variable will be the most used. <A name=IDX96></A></P>
+<P>All header files must be listed somewhere; missing ones will not appear in 
+the distribution. Often it is clearest to list uninstalled headers with the rest 
+of the sources for a program. See section <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC21">Building 
+a program</A>. Headers listed in a <SAMP>`_SOURCES'</SAMP> variable need not be 
+listed in any <SAMP>`_HEADERS'</SAMP> variable. </P>
+<P>Headers can be installed in <CODE>includedir</CODE>, 
+<CODE>oldincludedir</CODE>, or <CODE>pkgincludedir</CODE>. </P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC33" 
+name=SEC33>Architecture-independent data files</A></H2>
+<P>Automake supports the installation of miscellaneous data files using the 
+<SAMP>`DATA'</SAMP> family of variables. <A name=IDX97></A></P>
+<P>Such data can be installed in the directories <CODE>datadir</CODE>, 
+<CODE>sysconfdir</CODE>, <CODE>sharedstatedir</CODE>, 
+<CODE>localstatedir</CODE>, or <CODE>pkgdatadir</CODE>. </P>
+<P>By default, data files are not included in a distribution. </P>
+<P>Here is how <CODE>automake</CODE> installs its auxiliary data files: </P><PRE>pkgdata_DATA = clean-kr.am clean.am ...
+</PRE>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC34" 
+name=SEC34>Built sources</A></H2>
+<P>Occasionally a file which would otherwise be called "source" (eg a C 
+<SAMP>`.h'</SAMP> file) is actually derived from some other file. Such files 
+should be listed in the <CODE>BUILT_SOURCES</CODE> variable. <A 
+name=IDX98></A></P>
+<P>Built sources are also not compiled by default. You must explicitly mention 
+them in some other <SAMP>`_SOURCES'</SAMP> variable for this to happen. </P>
+<P>Note that, in some cases, <CODE>BUILT_SOURCES</CODE> will work in somewhat 
+suprising ways. In order to get the built sources to work with automatic 
+dependency tracking, the <TT>`Makefile'</TT> must depend on 
+<CODE>$(BUILT_SOURCES)</CODE>. This can cause these sources to be rebuilt at 
+what might seem like funny times. </P>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC35" 
+name=SEC35>Other GNU Tools</A></H1>
+<P>Since Automake is primarily intended to generate <TT>`Makefile.in'</TT>s for 
+use in GNU programs, it tries hard to interoperate with other GNU tools. </P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC36" 
+name=SEC36>Emacs Lisp</A></H2>
+<P>Automake provides some support for Emacs Lisp. The <SAMP>`LISP'</SAMP> 
+primary is used to hold a list of <SAMP>`.el'</SAMP> files. Possible prefixes 
+for this primary are <SAMP>`lisp_'</SAMP> and <SAMP>`noinst_'</SAMP>. Note that 
+if <CODE>lisp_LISP</CODE> is defined, then <TT>`configure.in'</TT> must run 
+<CODE>AM_PATH_LISPDIR</CODE> (see section <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC17">Autoconf 
+macros supplied with Automake</A>). <A name=IDX99></A><A name=IDX100></A><A 
+name=IDX101></A></P>
+<P>By default Automake will byte-compile all Emacs Lisp source files using the 
+Emacs found by <CODE>AM_PATH_LISPDIR</CODE>. If you wish to avoid 
+byte-compiling, simply define the variable <SAMP>`ELCFILES'</SAMP> to be empty. 
+<A name=IDX102></A>Byte-compiled Emacs Lisp files are not portable among all 
+versions of Emacs, so it makes sense to turn this off if you expect sites to 
+have more than one version of Emacs installed. Furthermore, many packages don't 
+actually benefit from byte-compilation. Still, we recommand that you leave it 
+enabled by default. It is probably better for sites with strange setups to cope 
+for themselves than to make the installation less nice for everybody else. </P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC37" 
+name=SEC37>Gettext</A></H2>
+<P>If <CODE>AM_GNU_GETTEXT</CODE> is seen in <TT>`configure.in'</TT>, then 
+Automake turns on support for GNU gettext, a message catalog system for 
+internationalization (see section `GNU Gettext' in <CITE>GNU gettext 
+utilities</CITE>). </P>
+<P>The <CODE>gettext</CODE> support in Automake requires the addition of two 
+subdirectories to the package, <TT>`intl'</TT> and <TT>`po'</TT>. Automake 
+ensure that these directories exist and are mentioned in <CODE>SUBDIRS</CODE>. 
+</P>
+<P>Furthermore, Automake checks that the definition of 
+<SAMP>`ALL_LINGUAS'</SAMP> in <TT>`configure.in'</TT> corresponds to all the 
+valid <SAMP>`.po'</SAMP> files, and nothing more. </P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC38" 
+name=SEC38>Guile</A></H2>
+<P>Automake provides some automatic support for writing Guile modules. Automake 
+will turn on Guile support if the <CODE>AM_INIT_GUILE_MODULE</CODE> macro is 
+used in <TT>`configure.in'</TT>. </P>
+<P>Right now Guile support just means that the <CODE>AM_INIT_GUILE_MODULE</CODE> 
+macro is understood to mean: 
+<UL>
+  <LI><CODE>AM_INIT_AUTOMAKE</CODE> is run. 
+  <LI><CODE>AC_CONFIG_AUX_DIR</CODE> is run, with a path of <TT>`..'</TT>. 
+</LI></UL>
+<P>As the Guile module code matures, no doubt the Automake support will grow as 
+well. </P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC39" 
+name=SEC39>Libtool</A></H2>
+<P>Automake provides support for GNU Libtool (see section `The Libtool Manual' 
+in <CITE>The Libtool Manual</CITE>) with the <SAMP>`LTLIBRARIES'</SAMP> primary. 
+See section <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC24">Building 
+a Shared Library</A>. </P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC40" 
+name=SEC40>Java</A></H2>
+<P>Automake provides some minimal support for Java compilation with the 
+<SAMP>`JAVA'</SAMP> primary. </P>
+<P>Any <SAMP>`.java'</SAMP> files listed in a <SAMP>`_JAVA'</SAMP> variable will 
+be compiled with <CODE>JAVAC</CODE> at build time. By default, 
+<SAMP>`.class'</SAMP> files are not included in the distribution. </P>
+<P>Currently Automake enforces the restriction that only one 
+<SAMP>`_JAVA'</SAMP> primary can be used in a given <TT>`Makefile.am'</TT>. The 
+reason for this restriction is that, in general, it isn't possible to know which 
+<SAMP>`.class'</SAMP> files were generated from which <SAMP>`.java'</SAMP> files 
+-- so it would be impossible to know which files to install where. </P>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC41" 
+name=SEC41>Building documentation</A></H1>
+<P>Currently Automake provides support for Texinfo and man pages. </P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC42" 
+name=SEC42>Texinfo</A></H2>
+<P>If the current directory contains Texinfo source, you must declare it with 
+the <SAMP>`TEXINFOS'</SAMP> primary. Generally Texinfo files are converted into 
+info, and thus the <CODE>info_TEXINFOS</CODE> macro is most commonly used here. 
+Note that any Texinfo source file must end in the <SAMP>`.texi'</SAMP> or 
+<SAMP>`.texinfo'</SAMP> extension. <A name=IDX103></A><A name=IDX104></A></P>
+<P>If the <SAMP>`.texi'</SAMP> file <CODE>@include</CODE>s 
+<TT>`version.texi'</TT>, then that file will be automatically generated. 
+<TT>`version.texi'</TT> defines three Texinfo macros you can reference: 
+<CODE>EDITION</CODE>, <CODE>VERSION</CODE>, and <CODE>UPDATED</CODE>. The first 
+two hold the version number of your package (but are kept separate for clarity); 
+the last is the date the primary file was last modified. The 
+<TT>`version.texi'</TT> support requires the <CODE>mdate-sh</CODE> program; this 
+program is supplied with Automake. </P>
+<P>Sometimes an info file actually depends on more than one <SAMP>`.texi'</SAMP> 
+file. For instance, in GNU Hello, <TT>`hello.texi'</TT> includes the file 
+<TT>`gpl.texi'</TT>. You can tell Automake about these dependencies using the 
+<SAMP>`<VAR>texi</VAR>_TEXINFOS'</SAMP> variable. Here is how Hello does it: <A 
+name=IDX105></A><A name=IDX106></A></P><PRE>info_TEXINFOS = hello.texi
+hello_TEXINFOS = gpl.texi
+</PRE>
+<P>By default, Automake requires the file <TT>`texinfo.tex'</TT> to appear in 
+the same directory as the Texinfo source. However, if you used 
+<CODE>AC_CONFIG_AUX_DIR</CODE> in <TT>`configure.in'</TT>, then 
+<TT>`texinfo.tex'</TT> is looked for there. Automake supplies 
+<TT>`texinfo.tex'</TT> if <SAMP>`--add-missing'</SAMP> is given. </P>
+<P>If your package has Texinfo files in many directories, you can use the 
+variable <CODE>TEXINFO_TEX</CODE> to tell automake where to find the canonical 
+<TT>`texinfo.tex'</TT> for your package. The value of this variable should be 
+the relative path from the current <TT>`Makefile.am'</TT> to 
+<TT>`texinfo.tex'</TT>: </P><PRE>TEXINFO_TEX = ../doc/texinfo.tex
+</PRE>
+<P>The option <SAMP>`no-texinfo.tex'</SAMP> can be used to eliminate the 
+requirement for <TT>`texinfo.tex'</TT>. Use of the variable 
+<CODE>TEXINFO_TEX</CODE> is preferable, however, because that allows the 
+<CODE>dvi</CODE> target to still work. </P>
+<P>Automake generates an <CODE>install-info</CODE> target; some people 
+apparently use this. By default, info pages are installed by <SAMP>`make 
+install'</SAMP>. This can be prevented via the <CODE>no-installinfo</CODE> 
+option. </P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC43" 
+name=SEC43>Man pages</A></H2>
+<P>A package can also include man pages. (Though see the GNU standards on this 
+matter, section `Man Pages' in <CITE>The GNU Coding Standards</CITE>.) Man pages 
+are declared using the <SAMP>`MANS'</SAMP> primary. Generally the 
+<CODE>man_MANS</CODE> macro is used. Man pages are automatically installed in 
+the correct subdirectory of <CODE>mandir</CODE>, based on the file extension. <A 
+name=IDX107></A><A name=IDX108></A></P>
+<P>By default, man pages are installed by <SAMP>`make install'</SAMP>. However, 
+since the GNU project does not require man pages, many maintainers do not expend 
+effort to keep the man pages up to date. In these cases, the 
+<CODE>no-installman</CODE> option will prevent the man pages from being 
+installed by default. The user can still explicitly install them via <SAMP>`make 
+install-man'</SAMP>. <A name=IDX109></A><A name=IDX110></A></P>
+<P>Here is how the documentation is handled in GNU <CODE>cpio</CODE> (which 
+includes both Texinfo documentation and man pages): </P><PRE>info_TEXINFOS = cpio.texi
+man_MANS = cpio.1 mt.1
+</PRE>
+<P>Texinfo source and info pages are all considered to be source for the 
+purposes of making a distribution. </P>
+<P>Man pages are not currently considered to be source, because it is not 
+uncommon for man pages to be automatically generated. </P>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC44" 
+name=SEC44>What Gets Installed</A></H1>
+<P>Naturally, Automake handles the details of actually installing your program 
+once it has been built. All <CODE>PROGRAMS</CODE>, <CODE>SCRIPTS</CODE>, 
+<CODE>LIBRARIES</CODE>, <CODE>LISP</CODE>, <CODE>DATA</CODE> and 
+<CODE>HEADERS</CODE> are automatically installed in the appropriate places. </P>
+<P>Automake also handles installing any specified info and man pages. </P>
+<P>Automake generates separate <CODE>install-data</CODE> and 
+<CODE>install-exec</CODE> targets, in case the installer is installing on 
+multiple machines which share directory structure--these targets allow the 
+machine-independent parts to be installed only once. The <CODE>install</CODE> 
+target depends on both of these targets. <A name=IDX111></A><A 
+name=IDX112></A><A name=IDX113></A></P>
+<P>Automake also generates an <CODE>uninstall</CODE> target, an 
+<CODE>installdirs</CODE> target, and an <CODE>install-strip</CODE> target. <A 
+name=IDX114></A><A name=IDX115></A><A name=IDX116></A></P>
+<P>It is possible to extend this mechanism by defining an 
+<CODE>install-exec-local</CODE> or <CODE>install-data-local</CODE> target. If 
+these targets exist, they will be run at <SAMP>`make install'</SAMP> time. <A 
+name=IDX117></A><A name=IDX118></A></P>
+<P>Variables using the standard directory prefixes <SAMP>`data'</SAMP>, 
+<SAMP>`info'</SAMP>, <SAMP>`man'</SAMP>, <SAMP>`include'</SAMP>, 
+<SAMP>`oldinclude'</SAMP>, <SAMP>`pkgdata'</SAMP>, or <SAMP>`pkginclude'</SAMP> 
+(eg <SAMP>`data_DATA'</SAMP>) are installed by <SAMP>`install-data'</SAMP>. </P>
+<P>Variables using the standard directory prefixes <SAMP>`bin'</SAMP>, 
+<SAMP>`sbin'</SAMP>, <SAMP>`libexec'</SAMP>, <SAMP>`sysconf'</SAMP>, 
+<SAMP>`localstate'</SAMP>, <SAMP>`lib'</SAMP>, or <SAMP>`pkglib'</SAMP> (eg 
+<SAMP>`bin_PROGRAMS'</SAMP>) are installed by <SAMP>`install-exec'</SAMP>. </P>
+<P>Any variable using a user-defined directory prefix with <SAMP>`exec'</SAMP> 
+in the name (eg <SAMP>`myexecbin_PROGRAMS'</SAMP> is installed by 
+<SAMP>`install-exec'</SAMP>. All other user-defined prefixes are installed by 
+<SAMP>`install-data'</SAMP>. </P>
+<P>Automake generates support for the <SAMP>`DESTDIR'</SAMP> variable in all 
+install rules; see See section `Makefile Conventions' in <CITE>The GNU Coding 
+Standards</CITE>. <A name=IDX119></A></P>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC45" 
+name=SEC45>What Gets Cleaned</A></H1>
+<P>The GNU Makefile Standards specify a number of different clean rules. 
+Generally the files that can cleaned are determined automatically by Automake. 
+Of course, Automake also recognizes some variables that can be defined to 
+specify additional files to clean. These variables are 
+<CODE>MOSTLYCLEANFILES</CODE>, <CODE>CLEANFILES</CODE>, 
+<CODE>DISTCLEANFILES</CODE>, and <CODE>MAINTAINERCLEANFILES</CODE>. <A 
+name=IDX120></A><A name=IDX121></A><A name=IDX122></A><A name=IDX123></A></P>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC46" 
+name=SEC46>What Goes in a Distribution</A></H1>
+<P>The <CODE>dist</CODE> target in the generated <TT>`Makefile.in'</TT> can be 
+used to generate a gzip'd <CODE>tar</CODE> file for distribution. The tar file 
+is named based on the <SAMP>`PACKAGE'</SAMP> and <SAMP>`VERSION'</SAMP> 
+variables; more precisely it is named 
+<SAMP>`<VAR>package</VAR>-<VAR>version</VAR>.tar.gz'</SAMP>. <A 
+name=IDX124></A><A name=IDX125></A><A name=IDX126></A></P>
+<P>For the most part, the files to distribute are automatically found by 
+Automake: all source files are automatically included in a distribution, as are 
+all <TT>`Makefile.am'</TT>s and <TT>`Makefile.in'</TT>s. Automake also has a 
+built-in list of commonly used files which, if present in the current directory, 
+are automatically included. This list is printed by <SAMP>`automake 
+--help'</SAMP>. Also, files which are read by <CODE>configure</CODE> (ie, the 
+source files corresponding to the files specified in the <CODE>AC_OUTPUT</CODE> 
+invocation) are automatically distributed. </P>
+<P>Still, sometimes there are files which must be distributed, but which are not 
+covered in the automatic rules. These files should be listed in the 
+<CODE>EXTRA_DIST</CODE> variable. Note that <CODE>EXTRA_DIST</CODE> can only 
+handle files in the current directory; files in other directories will cause 
+<CODE>make dist</CODE> runtime failures. <A name=IDX127></A></P>
+<P>If you define <CODE>SUBDIRS</CODE>, automake will recursively include the 
+subdirectories in the distribution. If <CODE>SUBDIRS</CODE> is defined 
+conditionally (see section <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC52">Conditionals</A>), 
+automake will normally include all directories that could possibly appear in 
+<CODE>SUBDIRS</CODE> in the distribution. If you need to specify the set of 
+directories conditionally, you can set the variable <CODE>DIST_SUBDIRS</CODE> to 
+the exact list of subdirectories to include in the distribution. <A 
+name=IDX128></A></P>
+<P>Occasionally it is useful to be able to change the distribution before it is 
+packaged up. If the <CODE>dist-hook</CODE> target exists, it is run after the 
+distribution directory is filled, but before the actual tar (or shar) file is 
+created. One way to use this is for distributing files in subdirectories for 
+which a new <TT>`Makefile.am'</TT> is overkill: </P><PRE>dist-hook:
+        mkdir $(distdir)/random
+        cp -p random/a1 random/a2 $(distdir)/random
+</PRE>
+<P>Automake also generates a <CODE>distcheck</CODE> target which can be help to 
+ensure that a given distribution will actually work. <CODE>distcheck</CODE> 
+makes a distribution, and then tries to do a <CODE>VPATH</CODE> build. <A 
+name=IDX129></A></P>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC47" 
+name=SEC47>Support for test suites</A></H1>
+<P>Automake supports a two forms of test suite. </P>
+<P>If the variable <CODE>TESTS</CODE> is defined, its value is taken to be a 
+list of programs to run in order to do the testing. The programs can either be 
+derived objects or source objects; the generated rule will look both in 
+<VAR>srcdir</VAR> and <TT>`.'</TT>. Programs needing data files should look for 
+them in <VAR>srcdir</VAR> (which is both an environment variable and a make 
+variable) so they work when building in a separate directory (@xref{Build 
+Directories,,,autoconf}), and in particular for the <CODE>distcheck</CODE> 
+target (see section <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC46">What 
+Goes in a Distribution</A>). </P>
+<P>The number of failures will be printed at the end of the run. If a given test 
+program exits with a status of 77, then its result is ignored in the final 
+count. This feature allows non-portable tests to be ignored in environments 
+where they don't make sense. </P>
+<P>The variable <CODE>TESTS_ENVIRONMENT</CODE> can be used to set environment 
+variables for the test run; the environment variable <CODE>srcdir</CODE> is set 
+in the rule. If all your test programs are scripts, you can also set 
+<CODE>TESTS_ENVIRONMENT</CODE> to an invocation of the shell (eg <SAMP>`$(SHELL) 
+-x'</SAMP>); this can be useful for debugging the tests. <A name=IDX130></A><A 
+name=IDX131></A></P>
+<P>If <SAMP>`dejagnu'</SAMP> appears in <CODE>AUTOMAKE_OPTIONS</CODE>, then the 
+a <CODE>dejagnu</CODE>-based test suite is assumed. The value of the variable 
+<CODE>DEJATOOL</CODE> is passed as the <CODE>--tool</CODE> argument to 
+<CODE>runtest</CODE>; it defaults to the name of the package. </P>
+<P>The variable <CODE>RUNTESTDEFAULTFLAGS</CODE> holds the <CODE>--tool</CODE> 
+and <CODE>--srcdir</CODE> flags that are passed to dejagnu by default; this can 
+be overridden if necessary. <A name=IDX132></A></P>
+<P>The variables <CODE>EXPECT</CODE>, <CODE>RUNTEST</CODE> and 
+<CODE>RUNTESTFLAGS</CODE> can also be overridden to provide project-specific 
+values. For instance, you will need to do this if you are testing a compiler 
+toolchain, because the default values do not take into account host and target 
+names. <A name=IDX133></A><A name=IDX134></A><A name=IDX135></A><A 
+name=IDX136></A><A name=IDX137></A></P>
+<P>In either case, the testing is done via <SAMP>`make check'</SAMP>. </P>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC48" 
+name=SEC48>Changing Automake's Behavior</A></H1>
+<P>Various features of Automake can be controlled by options in the 
+<TT>`Makefile.am'</TT>. Such options are listed in a special variable named 
+<CODE>AUTOMAKE_OPTIONS</CODE>. Currently understood options are: <A 
+name=IDX138></A></P>
+<DL compact>
+  <DT><CODE>gnits</CODE> 
+  <DD>
+  <DT><CODE>gnu</CODE> 
+  <DD>
+  <DT><CODE>foreign</CODE> 
+  <DD>
+  <DT><CODE>cygnus</CODE> 
+  <DD>Set the strictness as appropriate. The <CODE>gnits</CODE> option also 
+  implies <CODE>readme-alpha</CODE> and <CODE>check-news</CODE>. 
+  <DT><CODE>ansi2knr</CODE> 
+  <DD>
+  <DT><CODE>path/ansi2knr</CODE> 
+  <DD>Turn on automatic de-ANSI-fication. See section <A 
+  href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC28">Automatic 
+  de-ANSI-fication</A>. If preceeded by a path, the generated 
+  <TT>`Makefile.in'</TT> will look in the specified directory to find the 
+  <TT>`ansi2knr'</TT> program. Generally the path should be a relative path to 
+  another directory in the same distribution (though Automake currently does not 
+  check this). 
+  <DT><CODE>check-news</CODE> 
+  <DD>Cause <CODE>make dist</CODE> to fail unless the current version number 
+  appears in the first few lines of the <TT>`NEWS'</TT> file. 
+  <DT><CODE>dejagnu</CODE> 
+  <DD>Cause <CODE>dejagnu</CODE>-specific rules to be generated. See section <A 
+  href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC47">Support 
+  for test suites</A>. 
+  <DT><CODE>dist-shar</CODE> 
+  <DD>Generate a <CODE>dist-shar</CODE> target as well as the ordinary 
+  <CODE>dist</CODE> target. This new target will create a shar archive of the 
+  distribution. <A name=IDX139></A>
+  <DT><CODE>dist-zip</CODE> 
+  <DD>Generate a <CODE>dist-zip</CODE> target as well as the ordinary 
+  <CODE>dist</CODE> target. This new target will create a zip archive of the 
+  distribution. <A name=IDX140></A>
+  <DT><CODE>dist-tarZ</CODE> 
+  <DD>Generate a <CODE>dist-tarZ</CODE> target as well as the ordinary 
+  <CODE>dist</CODE> target. This new target will create a compressed tar archive 
+  of the distribution; a traditional <CODE>tar</CODE> and <CODE>compress</CODE> 
+  will be assumed. Warning: if you are actually using <CODE>GNU tar</CODE>, then 
+  the generated archive might contain nonportable constructs. <A 
+name=IDX141></A>
+  <DT><CODE>no-dependencies</CODE> 
+  <DD>This is similar to using <SAMP>`--include-deps'</SAMP> on the command 
+  line, but is useful for those situations where you don't have the necessary 
+  bits to make automatic dependency tracking work See section <A 
+  href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC29">Automatic 
+  dependency tracking</A>. In this case the effect is to effectively disable 
+  automatic dependency tracking. 
+  <DT><CODE>no-installinfo</CODE> 
+  <DD>The generated <TT>`Makefile.in'</TT> will not cause info pages to be built 
+  or installed by default. However, <CODE>info</CODE> and 
+  <CODE>install-info</CODE> targets will still be available. This option is 
+  disallowed at <SAMP>`GNU'</SAMP> strictness and above. <A name=IDX142></A><A 
+  name=IDX143></A>
+  <DT><CODE>no-installman</CODE> 
+  <DD>The generated <TT>`Makefile.in'</TT> will not cause man pages to be 
+  installed by default. However, an <CODE>install-man</CODE> target will still 
+  be available for optional installation. This option is disallowed at 
+  <SAMP>`GNU'</SAMP> strictness and above. <A name=IDX144></A>
+  <DT><CODE>no-texinfo.tex</CODE> 
+  <DD>Don't require <TT>`texinfo.tex'</TT>, even if there are texinfo files in 
+  this directory. 
+  <DT><CODE>readme-alpha</CODE> 
+  <DD>If this release is an alpha release, and the file <TT>`README-alpha'</TT> 
+  exists, then it will be added to the distribution. If this option is given, 
+  version numbers are expected to follow one of two forms. The first form is 
+  <SAMP>`<VAR>MAJOR</VAR>.<VAR>MINOR</VAR>.<VAR>ALPHA</VAR>'</SAMP>, where each 
+  element is a number; the final period and number should be left off for 
+  non-alpha releases. The second form is 
+  <SAMP>`<VAR>MAJOR</VAR>.<VAR>MINOR</VAR><VAR>ALPHA</VAR>'</SAMP>, where 
+  <VAR>ALPHA</VAR> is a letter; it should be omitted for non-alpha releases. 
+  <DT><VAR>version</VAR> 
+  <DD>A version number (eg <SAMP>`0.30'</SAMP>) can be specified. If Automake is 
+  not newer than the version specified, creation of the <TT>`Makefile.in'</TT> 
+  will be suppressed. </DD></DL>
+<P>Unrecognized options are diagnosed by <CODE>automake</CODE>. </P>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC49" 
+name=SEC49>Miscellaneous Rules</A></H1>
+<P>There are a few rules and variables that didn't fit anywhere else. </P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC50" 
+name=SEC50>Interfacing to <CODE>etags</CODE></A></H2>
+<P><CODE>automake</CODE> will generate rules to generate <TT>`TAGS'</TT> files 
+for use with GNU Emacs under some circumstances. </P>
+<P>If any C source code or headers are present, then <CODE>tags</CODE> and 
+<CODE>TAGS</CODE> targets will be generated for the directory. <A 
+name=IDX145></A></P>
+<P>At the topmost directory of a multi-directory package, a <CODE>tags</CODE> 
+target file will be generated which, when run, will generate a <TT>`TAGS'</TT> 
+file that includes by reference all <TT>`TAGS'</TT> files from subdirectories. 
+</P>
+<P>Also, if the variable <CODE>ETAGS_ARGS</CODE> is defined, a <CODE>tags</CODE> 
+target will be generated. This variable is intended for use in directories which 
+contain taggable source that <CODE>etags</CODE> does not understand. <A 
+name=IDX146></A></P>
+<P>Here is how Automake generates tags for its source, and for nodes in its 
+Texinfo file: </P><PRE>ETAGS_ARGS = automake.in --lang=none \
+ --regex='/^@node[ \t]+\([^,]+\)/\1/' automake.texi
+</PRE>
+<P>If you add filenames to <SAMP>`ETAGS_ARGS'</SAMP>, you will probably also 
+want to set <SAMP>`TAGS_DEPENDENCIES'</SAMP>. The contents of this variable are 
+added directly to the dependencies for the <CODE>tags</CODE> target. <A 
+name=IDX147></A></P>
+<P>Automake will also generate an <CODE>ID</CODE> target which will run 
+<CODE>mkid</CODE> on the source. This is only supported on a 
+directory-by-directory basis. <A name=IDX148></A></P>
+<H2><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC51" 
+name=SEC51>Handling new file extensions</A></H2>
+<P>It is sometimes useful to introduce a new implicit rule to handle a file type 
+that Automake does not know about. If this is done, you must notify GNU Make of 
+the new suffixes. This can be done by putting a list of new suffixes in the 
+<CODE>SUFFIXES</CODE> variable. <A name=IDX149></A></P>
+<P>For instance, currently automake does not provide any Java support. If you 
+wrote a macro to generate <SAMP>`.class'</SAMP> files from <SAMP>`.java'</SAMP> 
+source files, you would also need to add these suffixes to the list: </P><PRE>SUFFIXES = .java .class
+</PRE>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC52" 
+name=SEC52>Conditionals</A></H1>
+<P>Automake supports a simple type of conditionals. </P>
+<P><A name=IDX150></A>Before using a conditional, you must define it by using 
+<CODE>AM_CONDITIONAL</CODE> in the <CODE>configure.in</CODE> file. The 
+<CODE>AM_CONDITIONAL</CODE> macro takes two arguments. </P>
+<P>The first argument to <CODE>AM_CONDITIONAL</CODE> is the name of the 
+conditional. This should be a simple string starting with a letter and 
+containing only letters, digits, and underscores. </P>
+<P>The second argument to <CODE>AM_CONDITIONAL</CODE> is a shell condition, 
+suitable for use in a shell if statement. The condition is evaluated when 
+<CODE>configure</CODE> is run. </P>
+<P>Conditionals typically depend upon options which the user provides to the 
+<CODE>configure</CODE> script. Here is an example of how to write a conditional 
+which is true if the user uses the <SAMP>`--enable-debug'</SAMP> option. </P><PRE>AC_ARG_ENABLE(debug,
+[  --enable-debug    Turn on debugging],
+[case "${enableval}" in
+  yes) debug=true ;;
+  no)  debug=false ;;
+  *) AC_MSG_ERROR(bad value ${enableval} for --enable-debug) ;;
+esac],[debug=false])
+AM_CONDITIONAL(DEBUG, test x$debug = xtrue)
+</PRE>
+<P>Here is an example of how to use that conditional in <TT>`Makefile.am'</TT>: 
+</P><PRE>if DEBUG
+DBG = debug
+else
+DBG =
+endif
+noinst_PROGRAMS = $(DBG)
+</PRE>
+<P>This trivial example could also be handled using EXTRA_PROGRAMS (see section 
+<A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#SEC21">Building 
+a program</A>). </P>
+<P>You may only test a single variable in an <CODE>if</CODE> statement. The 
+<CODE>else</CODE> statement may be omitted. Conditionals may be nested to any 
+depth. </P>
+<P>Note that conditionals in Automake are not the same as conditionals in GNU 
+Make. Automake conditionals are checked at configure time by the 
+<TT>`configure'</TT> script, and affect the translation from 
+<TT>`Makefile.in'</TT> to <TT>`Makefile'</TT>. They are based on options passed 
+to <TT>`configure'</TT> and on results that <TT>`configure'</TT> has discovered 
+about the host system. GNU Make conditionals are checked at make time, and are 
+based on variables passed to the make program or defined in the 
+<TT>`Makefile'</TT>. </P>
+<P>Automake conditionals will work with any make program. </P>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC53" 
+name=SEC53>The effect of <CODE>--gnu</CODE> and <CODE>--gnits</CODE></A></H1>
+<P>The <SAMP>`--gnu'</SAMP> option (or <SAMP>`gnu'</SAMP> in the 
+<SAMP>`AUTOMAKE_OPTIONS'</SAMP> variable) causes <CODE>automake</CODE> to check 
+the following: </P>
+<UL>
+  <LI>The files <TT>`INSTALL'</TT>, <TT>`NEWS'</TT>, <TT>`README'</TT>, 
+  <TT>`COPYING'</TT>, <TT>`AUTHORS'</TT>, and <TT>`ChangeLog'</TT> are required 
+  at the topmost directory of the package. 
+  <LI>The options <SAMP>`no-installman'</SAMP> and <SAMP>`no-installinfo'</SAMP> 
+  are prohibited. </LI></UL>
+<P>Note that this option will be extended in the future to do even more 
+checking; it is advisable to be familiar with the precise requirements of the 
+GNU standards. Also, <SAMP>`--gnu'</SAMP> can require certain non-standard GNU 
+programs to exist for use by various maintainer-only targets; for instance in 
+the future <CODE>pathchk</CODE> might be required for <SAMP>`make dist'</SAMP>. 
+</P>
+<P>The <SAMP>`--gnits'</SAMP> option does everything that <SAMP>`--gnu'</SAMP> 
+does, and checks the following as well: </P>
+<UL>
+  <LI><SAMP>`make dist'</SAMP> will check to make sure the <TT>`NEWS'</TT> file 
+  has been updated to the current version. 
+  <LI>The file <TT>`COPYING.LIB'</TT> is prohibited. The LGPL is apparently 
+  considered a failed experiment. 
+  <LI><SAMP>`VERSION'</SAMP> is checked to make sure its format complies with 
+  Gnits standards. 
+  <LI>If <SAMP>`VERSION'</SAMP> indicates that this is an alpha release, and the 
+  file <TT>`README-alpha'</TT> appears in the topmost directory of a package, 
+  then it is included in the distribution. This is done in 
+  <SAMP>`--gnits'</SAMP> mode, and no other, because this mode is the only one 
+  where version number formats are constrained, and hence the only mode where 
+  <CODE>automake</CODE> can automatically determine whether 
+  <TT>`README-alpha'</TT> should be included. 
+  <LI>The file <TT>`THANKS'</TT> is required. </LI></UL>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC54" 
+name=SEC54>The effect of <CODE>--cygnus</CODE></A></H1>
+<P>Cygnus Solutions has slightly different rules for how a 
+<TT>`Makefile.in'</TT> is to be constructed. Passing <SAMP>`--cygnus'</SAMP> to 
+<CODE>automake</CODE> will cause any generated <TT>`Makefile.in'</TT> to comply 
+with Cygnus rules. </P>
+<P>Here are the precise effects of <SAMP>`--cygnus'</SAMP>: </P>
+<UL>
+  <LI>Info files are always created in the build directory, and not in the 
+  source directory. 
+  <LI><TT>`texinfo.tex'</TT> is not required if a Texinfo source file is 
+  specified. The assumption is that the file will be supplied, but in a place 
+  that <CODE>automake</CODE> cannot find. This assumption is an artifact of how 
+  Cygnus packages are typically bundled. 
+  <LI><SAMP>`make dist'</SAMP> will look for files in the build directory as 
+  well as the source directory. This is required to support putting info files 
+  into the build directory. 
+  <LI>Certain tools will be searched for in the build tree as well as in the 
+  user's <SAMP>`PATH'</SAMP>. These tools are <CODE>runtest</CODE>, 
+  <CODE>expect</CODE>, <CODE>makeinfo</CODE> and <CODE>texi2dvi</CODE>. 
+  <LI><CODE>--foreign</CODE> is implied. 
+  <LI>The options <SAMP>`no-installinfo'</SAMP> and 
+  <SAMP>`no-dependencies'</SAMP> are implied. 
+  <LI>The macros <SAMP>`AM_MAINTAINER_MODE'</SAMP> and 
+  <SAMP>`AM_CYGWIN32'</SAMP> are required. 
+  <LI>The <CODE>check</CODE> target doesn't depend on <CODE>all</CODE>. </LI></UL>
+<P>GNU maintainers are advised to use <SAMP>`gnu'</SAMP> strictness in 
+preference to the special Cygnus mode. </P>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC55" 
+name=SEC55>When Automake Isn't Enough</A></H1>
+<P>Automake's implicit copying semantics means that many problems can be worked 
+around by simply adding some <CODE>make</CODE> targets and rules to 
+<TT>`Makefile.in'</TT>. <CODE>automake</CODE> will ignore these additions. </P>
+<P>There are some caveats to doing this. Although you can overload a target 
+already used by <CODE>automake</CODE>, it is often inadvisable, particularly in 
+the topmost directory of a non-flat package. However, various useful targets 
+have a <SAMP>`-local'</SAMP> version you can specify in your 
+<TT>`Makefile.in'</TT>. Automake will supplement the standard target with these 
+user-supplied targets. </P>
+<P>The targets that support a local version are <CODE>all</CODE>, 
+<CODE>info</CODE>, <CODE>dvi</CODE>, <CODE>check</CODE>, 
+<CODE>install-data</CODE>, <CODE>install-exec</CODE>, <CODE>uninstall</CODE>, 
+and the various <CODE>clean</CODE> targets (<CODE>mostlyclean</CODE>, 
+<CODE>clean</CODE>, <CODE>distclean</CODE>, and <CODE>maintainer-clean</CODE>). 
+Note that there are no <CODE>uninstall-exec-local</CODE> or 
+<CODE>uninstall-data-local</CODE> targets; just use 
+<CODE>uninstall-local</CODE>. It doesn't make sense to uninstall just data or 
+just executables. <A name=IDX151></A><A name=IDX152></A><A name=IDX153></A><A 
+name=IDX154></A><A name=IDX155></A><A name=IDX156></A><A name=IDX157></A></P>
+<P>For instance, here is one way to install a file in <TT>`/etc'</TT>: </P><PRE>install-data-local:
+        $(INSTALL_DATA) $(srcdir)/afile /etc/afile
+</PRE>
+<P>Some targets also have a way to run another target, called a <EM>hook</EM>, 
+after their work is done. The hook is named after the principal target, with 
+<SAMP>`-hook'</SAMP> appended. The targets allowing hooks are 
+<CODE>install-data</CODE>, <CODE>install-exec</CODE>, <CODE>dist</CODE>, and 
+<CODE>distcheck</CODE>. <A name=IDX158></A><A name=IDX159></A><A 
+name=IDX160></A></P>
+<P>For instance, here is how to create a hard link to an installed program: </P><PRE>install-exec-hook:
+        ln $(bindir)/program $(bindir)/proglink
+</PRE>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC56" 
+name=SEC56>Distributing <TT>`Makefile.in'</TT>s</A></H1>
+<P>Automake places no restrictions on the distribution of the resulting 
+<TT>`Makefile.in'</TT>s. We still encourage software authors to distribute their 
+work under terms like those of the GPL, but doing so is not required to use 
+Automake. </P>
+<P>Some of the files that can be automatically installed via the 
+<CODE>--add-missing</CODE> switch do fall under the GPL; examine each file to 
+see. </P>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC57" 
+name=SEC57>Some ideas for the future</A></H1>
+<P>Here are some things that might happen in the future: </P>
+<UL>
+  <LI>HTML support. 
+  <LI>The output will be cleaned up. For instance, only variables which are 
+  actually used will appear in the generated <TT>`Makefile.in'</TT>. 
+  <LI>There will be support for automatically recoding a distribution. The 
+  intent is to allow a maintainer to use whatever character set is most 
+  convenient locally, but for all distributions to be Unicode or ISO 10646 with 
+  the UTF-8 encoding. 
+  <LI>Support for automatically generating packages (eg Debian packages, RPM 
+  packages, Solaris packages, etc). This will happen more quickly if someone 
+  with package-building experience can tell me what would be helpful. 
+  <LI>Rewrite in Guile. This won't happen in the near future, but it will 
+  eventually happen. </LI></UL>
+<H1><A href="http://www.gnu.org/manual/automake/html_mono/automake.html#TOC58" 
+name=SEC58>Index</A></H1>
+<P>Jump to: <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#cindex__">_</A> 
+- <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#cindex_a">a</A> 
+- <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#cindex_b">b</A> 
+- <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#cindex_c">c</A> 
+- <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#cindex_d">d</A> 
+- <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#cindex_e">e</A> 
+- <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#cindex_h">h</A> 
+- <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#cindex_i">i</A> 
+- <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#cindex_l">l</A> 
+- <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#cindex_m">m</A> 
+- <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#cindex_n">n</A> 
+- <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#cindex_o">o</A> 
+- <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#cindex_p">p</A> 
+- <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#cindex_r">r</A> 
+- <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#cindex_s">s</A> 
+- <A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#cindex_t">t</A> 
+
+<P>
+<H2><A name=cindex__>_</A></H2>
+<DIR>
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX79">_LDADD</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX80">_LDFLAGS</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX81">_LIBADD</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX75">_SOURCES</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX106">_TEXINFOS</A> 
+</LI></DIR>
+<H2><A name=cindex_a>a</A></H2>
+<DIR>
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX88">AUTOMAKE_OPTIONS</A>, 
+<A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX93">AUTOMAKE_OPTIONS</A>, 
+<A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX138">AUTOMAKE_OPTIONS</A> 
+</LI></DIR>
+<H2><A name=cindex_b>b</A></H2>
+<DIR>
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX28">build_alias</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX98">BUILT_SOURCES</A> 
+</LI></DIR>
+<H2><A name=cindex_c>c</A></H2>
+<DIR>
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX121">CLEANFILES</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX84">CXX</A> 
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX86">CXXCOMPILE</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX85">CXXFLAGS</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX87">CXXLINK</A> 
+</LI></DIR>
+<H2><A name=cindex_d>d</A></H2>
+<DIR>
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX8">DATA</A>, 
+<A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX97">DATA</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX134">DEJATOOL</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX119">DESTDIR</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX128">DIST_SUBDIRS</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX122">DISTCLEANFILES</A> 
+</LI></DIR>
+<H2><A name=cindex_e>e</A></H2>
+<DIR>
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX102">ELCFILES</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX146">ETAGS_ARGS</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX135">EXPECT</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX127">EXTRA_DIST</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX77">EXTRA_PROGRAMS</A> 
+</LI></DIR>
+<H2><A name=cindex_h>h</A></H2>
+<DIR>
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX9">HEADERS</A>, 
+<A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX96">HEADERS</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX25">host_alias</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX26">host_triplet</A> 
+</LI></DIR>
+<H2><A name=cindex_i>i</A></H2>
+<DIR>
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX104">info_TEXINFOS</A> 
+</LI></DIR>
+<H2><A name=cindex_l>l</A></H2>
+<DIR>
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX78">LDADD</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX83">LDFLAGS</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX82">LIBADD</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX5">LIBRARIES</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX6">LISP</A>, 
+<A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX99">LISP</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX100">lisp_LISP</A> 
+</LI></DIR>
+<H2><A name=cindex_m>m</A></H2>
+<DIR>
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX123">MAINTAINERCLEANFILES</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX108">man_MANS</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX10">MANS</A>, 
+<A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX107">MANS</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX120">MOSTLYCLEANFILES</A> 
+</LI></DIR>
+<H2><A name=cindex_n>n</A></H2>
+<DIR>
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX101">noinst_LISP</A> 
+</LI></DIR>
+<H2><A name=cindex_o>o</A></H2>
+<DIR>
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX92">OMIT_DEPENDENCIES</A> 
+</LI></DIR>
+<H2><A name=cindex_p>p</A></H2>
+<DIR>
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX2">PROGRAMS</A>, 
+<A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX4">PROGRAMS</A> 
+</LI></DIR>
+<H2><A name=cindex_r>r</A></H2>
+<DIR>
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX136">RUNTEST</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX132">RUNTESTDEFAULTFLAGS</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX137">RUNTESTFLAGS</A> 
+</LI></DIR>
+<H2><A name=cindex_s>s</A></H2>
+<DIR>
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX7">SCRIPTS</A>, 
+<A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX95">SCRIPTS</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX76">SOURCES</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX1">SUBDIRS</A>, 
+<A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX74">SUBDIRS</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX149">SUFFIXES</A> 
+</LI></DIR>
+<H2><A name=cindex_t>t</A></H2>
+<DIR>
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX147">TAGS_DEPENDENCIES</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX29">target_alias</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX130">TESTS</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX131">TESTS_ENVIRONMENT</A> 
+
+<LI><A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX11">TEXINFOS</A>, 
+<A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX103">TEXINFOS</A>, 
+<A 
+href="http://www.gnu.org/manual/automake/html_mono/automake.html#IDX105">TEXINFOS</A> 
+</LI></DIR>
+<P></P>
+<P>
+<HR>
+
+<P>This document was generated on 7 November 1998 using the <A 
+href="http://wwwinfo.cern.ch/dis/texi2html/">texi2html</A> translator version 
+1.52.</P></BODY></HTML>

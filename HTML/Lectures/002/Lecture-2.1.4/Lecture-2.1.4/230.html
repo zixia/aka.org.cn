@@ -1,0 +1,240 @@
+<html>
+<head>
+<title>文件处理</title>
+</head>
+
+<body>
+<h1 align=center>2.3 使用 automake</h1>
+<p>一般操作
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Automake 工作时，读取一个叫'Makefile.am'的文件，并生成一个'Makefile.in'文件。Makefile.am中定义的宏和目标,会指导automake生成指定的代码。例如，宏'bin_PROGRAMS'将导致编译和连接的目标被生成。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Makefile.am中包含的目标和定义的宏被拷贝到生成的文件中去，这允许你添加任意代码到生成的Makefile.in文件中去。例如，使一个Automake发布中包含一个非标准的dvs-dist目标，Automake的维护者用它来从它的源码控制系统制作一个发布。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;请注意，GNU生成的扩展名不被Automake所识别，在一个'Makefile.am'中使用这样一个扩展名会导致错误。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Automake试图以一种聪明的方式将相邻的目标（或变量定义）注释重组。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;通常,Makefile.am中定义的目标会覆盖任何由automake自动生成的有相似名字的这样的目标。尽管这是种被支持的属性，但最好避免这么做，因为有些时候，生成的规则很严格。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;类似的，Makefile.am中定义的变量会覆盖任何由automake自动生成的变量定义。这一特性经常要比目标定义的覆盖能力更常用。请注意，很多automake生成的变量只用于内部使用，在将来发布时他们的名字可能会变化。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;当测试一个变量定义时，Automake降递归的测试在定义中引用的变量。例如，如果Automake看到这段snippet程序中的'foo_SOURCES'：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;xs = a.c b.c
+<p>&nbsp;&nbsp;&nbsp;&nbsp;foo_SOURCES = c.c $(xs)
+<p>&nbsp;&nbsp;&nbsp;&nbsp;它将使用文件：'a.c','b.c'和'c.c' 作为foo_SOURCES的内容.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Automake 也允许不被拷贝到输出的注释形式,所有以'##'开头的行将被Automake 完全忽略.
+<br>    
+<p>深度
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Automake 支持三种目录层次:'flat', 'shallow', 'deep'.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;flat: 所有的文件都在一个目录中. 相应的Makefile.am中缺少SUBDIRS宏. termutils 是一个例子.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;deep: 所有的资源都在子目录中,指定曾目录主要包含配置信息.GNU cpio 是一个很好的例子.GNU tar.相应的最顶层Makefile.am中将包含一个SUBDIR宏,但没有其他的宏来定义要创建的对象.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;shallow: 主资源存在于最顶层目录,而不同的部分(典型的,库函数)在子目录中.Automake 就是这样的一个包. 
+<br>
+<p>严格性
+<p>&nbsp;&nbsp;&nbsp;&nbsp;当Automake 被GNU包维护者使用时,它的确努力去适应,但不要试图使用所有的GNU惯例.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;目前,Automake 支持三种严格性标准:
+<p>&nbsp;&nbsp;&nbsp;&nbsp;foreign:Automake 将只检查绝对必须的东西.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;gnu:Automake 将尽可能多的检查以适应GNU标准, 这是默认项.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;gnits:Automake 将进行检查，以适应“尚未成文”的Gnits标准。 他们基于GNU标准，但更详尽。除非您是Gnits标准的制定者。建议您最好避免这个选项，指导该标准正式发布。
+<br>
+<p>统一命名规范
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Automake变量一般遵循一套统一的命名规范以很容易的决定如何创建和安装程序（和其他派生对象）。给规范还支持configure时动态决定创建规则。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在make时，一些变量被用于决定那些对象要被创建。写变量叫做primary variables。例如，PROGRAM变量包括一个要被编译和连接的程序列表。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;另一个变量集用于决定被创建变量被安装到哪里。这些变量以相应的主变量命名，但加一个前缀，表示那些标准目录应被用作安装路径。这些标准目录的名称规定在GNU标准中。Automake用pkglibdir， pkgincludedir 和 pkgdatadir来展开这一列表。他们和没有pkg前缀的版本一样，只不过有‘@PACHAGE@’扩展，PKGLIBDIR被定义为 $(DATADIR)/@PACKAGE@.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;对每一个主变量，有一个EXTRA_前缀的变量。这个变量用于列出所有对象，至于哪些变量被创建，哪些变量不被创建则取决于configure。之所以需要这个变量，是因为Automake必须静态的指导要创建对象的完整列表以便生成一个‘Makefile。in’文件。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;例如，cpio 在configure时决定创建那些程序。一些程序被安装在bindir，一些被安装在sbindir：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;EXTRA_PROGRAMS = mt rmt
+<p>&nbsp;&nbsp;&nbsp;&nbsp;bin_PROGRAMS = cpoi pax
+<p>&nbsp;&nbsp;&nbsp;&nbsp;sbin_PRGRAMS = @PROGRAMS@
+<p>&nbsp;&nbsp;&nbsp;&nbsp;定义没有前缀的主变量是错误的（如：PROGRAMS）。值得注意的是，“dir”在作为构成变量名时会被忽略。一次，我们写成bin_PROGRAMS 而不是bindir_PROGRAMS.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;不是每一种对象都得以安装在每个目录下。Automake 将标记那些他认为是错误的尝试，他也能够诊断一些明显的目录名拼写错误。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;有时标准目录--被Automake使用的--不过用。特别的，有时为了清晰，将对象安装在一些预定义的子目录，是很有用的。Automake允许你增加安装目录。如果以一个变量名（如，zar）加上dir的另一个变量（如，zardir）被定义了，那么他也是合法的。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;例如，如果HTML没支持Automake的一下部分，你就可以用他来安装HTML源文件：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;htmldir = $(prefix)/html
+<p>&nbsp;&nbsp;&nbsp;&nbsp;html_DATA = automake.html
+<p>&nbsp;&nbsp;&nbsp;&nbsp;“noinst”前缀专门指定有问题的对象不被安装。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;“check”前缀表示有问题的对象知道make check命令被执行猜被创建。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;可用的主变量是 'PROGRAMS','LIBRARIES','LISP','SCRIPTS','DATA','HEADERS','MANS'和'TEXINFOS'
+导出变量是如何命名的
+<p>&nbsp;&nbsp;&nbsp;&nbsp;有时一个Makefile变量名有一些用户支持的文本导出。例如程序名被重写进Makefile宏名称。Automake读取这些文本，所以他不必遵循命名规则。当生成后引用时名称中的字符除了字母，数字，下划线夺回被转换为下划线。例如，如果你的程序里有sniff-glue,则导出变量名将会是sniff_glue_SOURCES,而不是sniff-glue_SOURCES.
+<br>
+<p>一些例子
+<br>
+<p>一个完整简单的例子
+<p>&nbsp;&nbsp;&nbsp;&nbsp;假设你写了一个名为zardoz的程序。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;第一步，更新你的configure.in文件以包含automake所需的命令。最简单的办法就是在AC_INIT后加一个AM_INIT_AUTOMAKE调用：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_INIT_AUTOMAKE(zardoz, 1.0)
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果你的程序没有任何复杂的因素。这是最简单的办法。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;现在，你必须重建‘configure’文件。这样做，你必须告诉autoconf如何找到你所用的新宏。最简单的方式是使用aclocal程序来	生成你的‘aclocal.m4’.aclocal让你将你的宏加进‘acincluide.m4’,所以你只需重命名并运行他
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;mv aclocal.m4 acinclude.m4
+<p>&nbsp;&nbsp;&nbsp;&nbsp;aclocal
+<p>&nbsp;&nbsp;&nbsp;&nbsp;autoconf
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;现在是为你的zardoz写Makefile.am的时候了。zardoz是一个用户程序，所以逆向将他安装在其他用户程序安装的目录。zardoz还有		一些Texinfo文档。你的configure.in脚本使用AC_REPLACE_FUNCS，所以你需要链接‘@LIBOBJS@’
+<p>&nbsp;&nbsp;&nbsp;&nbsp;bin_PROGRAMS = zardoz
+<p>&nbsp;&nbsp;&nbsp;&nbsp;zardoz_SOURCES = main.c head.c float.c vortex9.c gun.c
+<p>&nbsp;&nbsp;&nbsp;&nbsp;zardoz_LDADD = @LIBOBJS@
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;info_TEXINFOS = zardoz.texi
+<br>	
+<p>&nbsp;&nbsp;&nbsp;&nbsp;现在你可以运行Automake以生成你的Makefile.in文件。
+<br>
+<br>
+<p>一个经典的程序
+<p>&nbsp;&nbsp;&nbsp;&nbsp;hello 以其简单和多面幸而闻名。着一段将显示在Hello包Automake如何被使用。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面是
+<p>&nbsp;&nbsp;&nbsp;&nbsp;dnl用 autoconf 处理它以产生一个 configure 脚本.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AC_INIT(src/hello.c)
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_INIT_AUTOMAKE(hello, 1.3.11)
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_CONFIG_HEADER(config.h)
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;dnl Set of available languages
+<p>&nbsp;&nbsp;&nbsp;&nbsp;ALL_LINGUAS="de fr es ko nl no pl pt sl sv"
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;dnl Checks for programs.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AC_PROG_CC
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AC_ISC_POSIX
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;dnl Checks for libraries.
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;dnl Checks for header files.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AC_STDC_HEADERS
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AC_HAVE_HEADERS(string.h fcntl.h sys/file.h sys/param.h)
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;dnl Checks for library functions.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AC_FUNC_ALLOCA
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;dnl Check for st_blksize in struct stat
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AC_ST_BLKSIZE
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;dnl internationalization macros
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_GNU_GETTEXT
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AC_OUTPUT([Makefile doc/Makefile intl/Makefile po/Makefile.in \
+           src/Makefile tests/Makefile tests/hello],
+   [chmod +x tests/hello])
+
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;'AM_'宏由Automake（或Gettext 库）提供；其余的是Autoconf标准宏。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;top-level ‘Makefile.am’:
+<p>&nbsp;&nbsp;&nbsp;&nbsp;EXTRA_DIST = BUGS ChangeLog.O
+<p>&nbsp;&nbsp;&nbsp;&nbsp;SUBDIRS = doc intl po src tests
+<p>&nbsp;&nbsp;&nbsp;&nbsp;--如你所见,这里所有的工作时在子目录中真正完成的.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;--'po' 和 'intl'目录是用 gettextize自动生成的,这里不做进一步讨论.
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在'doc/Makefile.am'文件中我们看到:
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;info_TEXINFOS = hello.texi
+<p>&nbsp;&nbsp;&nbsp;&nbsp;hello_TEXINFOS = gpl.texi
+<p>&nbsp;&nbsp;&nbsp;&nbsp;--这已足以创建,安装和发布手册.
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这里是'tests/Makefile.am'文件:
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;TESTS = hello
+<p>&nbsp;&nbsp;&nbsp;&nbsp;EXTRA_DIST = hello.in testdata
+<p>&nbsp;&nbsp;&nbsp;&nbsp;--脚本'hello'被configure创建,并且是唯一的测试.make check将运行它.
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;最后是,'src/Makefile.am',所有的真正的工作是在这里完成的:
+<p>&nbsp;&nbsp;&nbsp;&nbsp;bin_PROGRAMS = hello
+<p>&nbsp;&nbsp;&nbsp;&nbsp;hello_SOURCES = hello.c version.c getopt.c getopt1.c getopt.h system.h 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;hello_LDADD = @INTLLIBS@ @ALLOCA@
+<p>&nbsp;&nbsp;&nbsp;&nbsp;localedir = $(datadir)/locale
+<p>&nbsp;&nbsp;&nbsp;&nbsp;INCLUDES = -I../intl -DLOCALEDIR=\"$(localedir)\"
+<br>
+<p>创建一个'Makefile.in'文件
+<p>&nbsp;&nbsp;&nbsp;&nbsp;要为一个包创建所有的'Makefile.in',在顶层目录运行automake不带参数的程序.automake将自动查找每个适当的'Makefile.am'文件,并声称相应的'Makefile.in'文件.请注意,automake会简要的察看一下包的构成;它假定一个包在顶层只有一个'configure.in'文件.如果你的包有多个'configure.in'文件,那么你必须在每一个含有'configure.in'文件的目录运行一次'automake'程序.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;你可以随意送给automake一个参数;'.am'会加到变量名的后面,并且作为输入文件的文件名.这一特性通常被用来自动重建一个'过时的''Makefile.in'文件.注意,automake必须在最顶级的目录运行,及时仅仅为了重新生成某个子目录中的'Makefile.in'文件.
+
+<p>automake接受以下可选参数:
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-a
+<p>&nbsp;&nbsp;&nbsp;&nbsp;--add-missing
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<p>&nbsp;&nbsp;&nbsp;&nbsp;在某些特殊情况下,Automake需要某些公共文件存在.例如,如果'configure.in'运行 AC_CANONICAL_HOST时,就需要'config.guess'.Automake需要几个这样的文件,这一选项会让automake自动的将一些缺失文件加进包中(如果可能的话).一般的,如果Automake告诉你某个文件不存在,你可以试一试这个选项.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;--amdir = dir
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<p>&nbsp;&nbsp;&nbsp;&nbsp;在dir所制定的目录而不是安装目录下寻找Automake的数据文件,经常用于调试.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;--build-dir = dir
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<p>&nbsp;&nbsp;&nbsp;&nbsp;告诉Automake创建目录在哪里.这一选项只用于将'dependencies'加进一个由make dist生成的'Makefile.in'文件中.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;--cygnus
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<p>&nbsp;&nbsp;&nbsp;&nbsp;将使得所生成的'Makefile.in'文件遵循Cygnus规则,而不是GNU或Gnits规则.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;--foreign
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<p>&nbsp;&nbsp;&nbsp;&nbsp;设置全局严格性为'gnits'.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;--gnu
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<p>&nbsp;&nbsp;&nbsp;&nbsp;设置全局严格性为'gnu'.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;--help
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<p>&nbsp;&nbsp;&nbsp;&nbsp;帮助
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-i
+<p>&nbsp;&nbsp;&nbsp;&nbsp;--include-deps
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<p>&nbsp;&nbsp;&nbsp;&nbsp;将所有自动创建时的依赖信息包括在'Makefile.in'中.通常在制作发行时用到.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;--generate-deps
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<p>&nbsp;&nbsp;&nbsp;&nbsp;创建一个'.dep_segment'文件,它合并了所有的自动生成时的依赖信息,通常用于制作发行.这在维护'SMakefile'或其他平台上的'Makefile'(如Makefile.Dos)时非常有用.它只能与--include-deps, --srcdir-name和 --build-dir 联合使用.注意这一选项不作其他任何处理.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;--no-force
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<p>&nbsp;&nbsp;&nbsp;&nbsp;一般的,automake创建在'configure.in'中提及的所有'Makefile.in'文件.这一选项将导致,automake只更新那些对于与自身相关的东西过了时的'Makefile.in'文件.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-o dir
+<p>&nbsp;&nbsp;&nbsp;&nbsp;--output-dir = dir
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<p>&nbsp;&nbsp;&nbsp;&nbsp;将生成的'Makefile.in'放在指定的dir目录中.通常,'Makefile.in'放在与之相对应的'Makefile.am'所在目录中的.在制作发布时使用.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;--srcdir-name = dir
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<p>&nbsp;&nbsp;&nbsp;&nbsp;告诉Automake与当前创建动作相关的源文件目录的名字.个选项仅被用于将自动创建时的依赖信息包括在'Makefile.in'中.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-v
+<p>&nbsp;&nbsp;&nbsp;&nbsp;--verbose
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<p>&nbsp;&nbsp;&nbsp;&nbsp;时Automake打印出正在读取或创建的文件的信息.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;--version
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<p>&nbsp;&nbsp;&nbsp;&nbsp;打印Automake的版本号.
+<br>
+<p>扫描'configure.in'文件
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Automake扫描包的'configure.in'文件来决定某些关于包的信息.'configure.in'中必须定义一些变量并且需要一些autoconf 宏.Automake也会利用'configure.in'文件的信息来定制它的输出.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Automake还支持一些autoconf宏以使维护更为简单.
+<br>
+<p>配置需求
+<p>&nbsp;&nbsp;&nbsp;&nbsp;满足Automake基本要求的最简单方法是使用'AM_INIT_AUTOMAKE'宏.但如果你愿意,你可以手工来做.
+<br>
+<p>自动生成 aclocale.m4
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Automake包括很多Autoconf宏,其中有些在某些情况下游Automake使用,这些宏必须被定义在你的'aclocal.m4'中.否则,autoconf将看不到他们.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;acloal程序将根据'configure.in'自动生成'aclocal.m4'.这提供了一个方便的途径来得到Automake提供的宏.
+<br>
+<p>Automake所支持的Autoconf宏
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_CONFIG_HEADER
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_CYGWIN32
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_FUNC_STRTOD
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_FUNC_ERROR_AT_LINE
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_FUNC_MKTIME
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_FUNC_OBSTACK
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_C_PROTOTYPES
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_HEADER_TOCGWINSZ_NEEDS_SYS_IOCTL
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_INIT_AUTOMAKE
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_PATH_LISPDIR
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_PROG_CC_STDC	
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_PROG_INTALL
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_PROG_LEX
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_SANITY_CHECK
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_SYS_POSIX_TERMIOS
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_TYPE_PTRDIFF_T
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_WITH_DMALLOC
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AM_WITH_REGEX
+	
+<br>
+<p>编写你自己的aclocal宏
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Aclocal并没有特定的宏机制,因此你可以用你自己的宏来扩展它.这以特性经常被用以制作做那些想让自己的Autoconf宏被其他应用程序使用的库.例如,gettext库支持一个AM_GNU_GETTEXT宏,它可以被任何使用gettext库的包所使用.当该库被安装后,它会安装这个宏,这样,aclocal就能够找到他了.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;宏的名称应以'.m4'结尾,这样的文件将被安装在'$(datadir)/aclocal'中.
+<br>
+
+<p>最顶层'Makefile.am'
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在non-flat包中,顶层'Makefile.am'必须告诉Automake哪些子目录将被创建.这是通过SUBDIRS变量定义的.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;SUBDIRS宏包含一个子目录列表,以规定各种创建的过程.'Makefile'中很多目标(如,all)将不止运行所在目录中,还要运行于所有指定的子目录中.注意,在SUBDIRS中列出的目录并不需要包含'Makefile.am'文件而只需要'Makefile'文件.这将允许包含位于不使用Automake的包(如,gettext)中的库.另外,SUBDIRS之中的目录必须是当前目录的直接子目录.比如,你不能在SUBDIRS中指定'src/subdir'.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在deep型的包中,顶层'Makefile.am'文件通常非常短.例如,下面是HELLO发布中的'Makefile.am':
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;EXTRA_DIST = BUGS ChangeLog.O README-alpha
+<p>&nbsp;&nbsp;&nbsp;&nbsp;SUBDIRS = doc intl po src tests
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果你只想创建一个包的子集,你可以覆盖SUBDIRS(就如同GNU inetutils的情形)在你的'Makefile.am'中包括:
+<p>&nbsp;&nbsp;&nbsp;&nbsp;SUBDIRS = @SUBDIRS@
+<p>&nbsp;&nbsp;&nbsp;&nbsp;让后在你的'configure.in'中你可以指定:
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;SUBDIRS = "src doc lib po"
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AC_SUBST(SUBDIRS)
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这样做的结果是automake被欺骗了,它会在指定目录创建包,但并不真正绑定那个列表直到运行configure.
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;SUBDIRS可以包含配置的替代(如,'@DIRS@');Automake 自己并不真正检测这一变量的内容.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果 SUBDIRS 被定义了,那么你的'configure.in' 就必须包含AC_PROG_MAKE_SET.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;SUBDIRS 的使用并不局限于顶层'Makefile.am'.Automake 可被用来构造任意深度的包.
+<br>
+<p>参考文献
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href=Automake.htm>Automake.htm</a>
+
+<p align=right><a href=200.html>回家</a></p>
+</body>
+</html>

@@ -1,0 +1,24 @@
+[- $Zixia::times = $udat{times}++ -]
+[- Execute('head') -] 
+[+ $Zixia::t->index() +]
+<br>
+[- Execute('index') -]
+<br>
+[+ $Zixia::t->misc() +]
+<p>
+[+ $Zixia::t->content() +]
+<br>
+<h2>Aka讲座报名（2000年秋季学期）工作已经结束</h2>
+<p><font color=yellow> 注意：即使没有能够报名，你也可以自由的、免费的来听取我们的讲座。同时 AKA 热情欢迎你参加我们我们以后的讲座和其他活动。
+<br><br><br>
+另外：本次系列讲座专门设立了一个邮件列表，以便更方便、快捷的将<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每次讲座的预告和其他信息通知给大家。通过向：<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="mailto:linuxStuding-subscribe@egroups.com">linuxStudying-subscribe@egroups.com</a> 发一封任意标题和正文<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;的信件即可加入我们的邮件列表，当然你也可以通过向：<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="mailto:linuxStuding-unsubscribe@egroups.com">linuxStudying-unsubscribe@egroups.com</a> 发一封任意标题和正<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文的信件来方便的退出该邮件列表。需要注意的是，263的免费邮<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱好像不被该邮件列表接受。<br>
+<br><br>
+</font>
+[- Execute('end') -]
+

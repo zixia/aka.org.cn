@@ -1,0 +1,63 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta name="Microsoft Theme" content="blank 000, default">
+<meta name="Microsoft Border" content="tlb, default">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/use_dbpool.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="使用连接池"></strong></font><br>
+<a href="dbpool_conf.htm"><img src="../_derived/back_cmp_blank000_back.gif" width="100" height="20" border="0" alt="上一页" align="middle"></a> <a href="../index.htm"><img src="../_derived/home_cmp_blank000_home.gif" width="100" height="20" border="0" alt="主页" align="middle"></a> <a href="index.htm"><img src="../_derived/up_cmp_blank000_up.gif" width="100" height="20" border="0" alt="上一层" align="middle"></a></p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<p>配置好自己的数据库后（因为修改了conf/resin.conf，所以resin需要从新启动才会更新，使用命令/usr/local/resin/bin/httpd.sh 
+stop;/usr/local/resin/bin/httpd.sh start），可以使用下面的JSP页面进行测试：</p>
+<p>cd /usr/local/resin/doc<br>
+建立dbpool_test.jsp并输入如下代码：</p>
+<p><font face="Comic Sans MS">&lt;%@page import=&quot;java.sql.*&quot; %&gt;<br>
+&lt;%@page import=&quot;javax.sql.*&quot; %&gt;<br>
+&lt;%@page import=&quot;com.caucho.sql.*&quot; %&gt;<br>
+&lt;html&gt;<br>
+&lt;body&gt;<br>
+&lt;%<br>
+Connection conn = DBPool.getPool(&quot;ORCL&quot;).getConnection();<br>
+//</font>这里的 <font face="Comic Sans MS">ORCL </font>应该是你的 <font face="Comic Sans MS">conf/resin.conf 
+</font>中 <font face="Comic Sans MS">DBPool </font>配置部分中的 <font face="Comic Sans MS">ID 
+</font>的值<font face="Comic Sans MS"><br>
+try {<br>
+&nbsp;&nbsp;&nbsp; Statement stmt;<br>
+&nbsp;&nbsp;&nbsp; ResultSet rs;<br>
+&nbsp;&nbsp;&nbsp; stmt = conn.createStmtStatement();<br>
+&nbsp;&nbsp;&nbsp; rs = stmt.executeQuery( &quot;select count(*) as ct from 
+dept&quot; );<br>
+&nbsp;&nbsp;&nbsp; out.println( rs.getInt(&quot;ct&quot;) );<br>
+&nbsp;&nbsp;&nbsp; rs.close();<br>
+&nbsp;&nbsp;&nbsp; stmt.close();<br>
+}catch( Exception e ){<br>
+&nbsp;&nbsp;&nbsp; out.println( &quot;Error&quot; );<br>
+} finally {<br>
+ conn.close();<br>
+//conn</font>一定要<font face="Comic Sans MS">close()</font>，否则将永远不会被数据库连接池回收。<font face="Comic Sans MS"><br>
+}<br>
+%&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;</font></p>
+　
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="right">
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table></body>
+
+</html>

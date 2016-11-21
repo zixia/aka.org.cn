@@ -1,0 +1,73 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta name="Microsoft Theme" content="blank 000, default">
+<meta name="Microsoft Border" content="tlb, default">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/simple_bean.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="Hello, World!"></strong></font><br>
+<a href="../index.htm"><img src="../_derived/home_cmp_blank000_home.gif" width="100" height="20" border="0" alt="主页" align="middle"></a> <a href="index.htm"><img src="../_derived/up_cmp_blank000_up.gif" width="100" height="20" border="0" alt="上一层" align="middle"></a> <a href="qa.htm"><img src="../_derived/next_cmp_blank000_next.gif" width="100" height="20" border="0" alt="下一页" align="middle"></a></p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<p>我们来书写一个最简单的JavaBean，它提供了一个唯一的方法，可以返回一个字符串：“Hello, 
+World!”</p>
+<p>cd /usr/local/resin/doc/WEB-INF/classes<br>
+mkdir net<br>
+mkdir net/zixia<br>
+cd net/zixia</p>
+<p>1、建立HelloWorld.java文件，并且输入下面的代码：</p>
+<p><font face="Comic Sans MS">package net.zixia;</font></p>
+<p><font face="Comic Sans MS">public class HelloWorld{<br>
+&nbsp;&nbsp;&nbsp; public String greeting(){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return &quot;Hello, World!&quot;;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+}</font></p>
+<p>cd /usr/local/resin/doc</p>
+<p>2、建立HelloWorld.jsp文件，并且输入下面的代码：</p>
+<p><font face="Comic Sans MS">&lt;jsp:useBean id=&quot;HelloWorld&quot; 
+class=&quot;net.zixia.HelloWorld&quot;/&gt;<br>
+&lt;html&gt;<br>
+&lt;body&gt;<br>
+&lt;h1&gt;&lt;%= HelloWorld.greeting() %&gt;&lt;/h1&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;</font></p>
+<p>3、在浏览器中输入：http://ur-resin-host:8080/HelloWorld.jsp将会看到：</p>
+　
+<!--mstheme--></font><table border="1" bordercolordark="#666666" bordercolorlight="#CCCCCC">
+  <tr>
+    <td><!--mstheme--><font face="宋体">
+      <h1>Hello, World!</h1>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="宋体">
+<p>　</p>
+<p>4、流程分析：</p>
+<ol>
+  <li>HelloWorld.jsp得到请求，被调用；</li>
+  <li>HelloWorld.jsp的第一行：使用net.zixia.HelloWorld这个JavaBean，并且赋予其id为HelloWorld；</li>
+  <li>遇到纯HTML，使用out.print直接输出；</li>
+  <li>&lt;%= HelloWorld.greeting() %&gt;这个将会使用out.print( 
+    HelloWorld.greeting() )来替换，HelloWorld的greeting()方法返回一个字符串“Hello, 
+    World!”，然后被out.print打印出来；</li>
+  <li>遇到最后的HTML，输出，结束。</li>
+</ol>
+　
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="right">
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table></body>
+
+</html>

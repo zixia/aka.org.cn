@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>不可靠信号</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        PRE { color: #ffffff; font-family: "fixed" }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="velvet.jpg">
+
+<A HREF="signal.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="reliable.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=CENTER>7.2&nbsp;&nbsp;不可靠信号<BR><BR>
+</H1>
+
+<UL>
+    <LI>signal 系统调用</LI>
+    <LI>不可靠信号的问题</LI>
+</UL>
+
+<H3>7.2.1&nbsp;&nbsp;signal 系统调用</H3>
+<UL>
+    <LI>利用 signal 函数可设置某信号的关联动作: 捕获, 忽略和默认处理</LI>
+<PRE>
+===============================================================================
+       #include &lt;signal.h&gt;
+
+       void (*signal(int signum, void (*handler)(int)))(int);
+-------------------------------------------------------------------------------
+handler 可取如下值:
+    * 用户定义的信号处理器
+    * SIG_IGN: 忽略信号
+    * SIG_DFL: 重置为信号的默认处理
+-------------------------------------------------------------------------------
+返回值为先前的设置, 若发生错误, 则返回 SIG_ERR.
+-------------------------------------------------------------------------------
+Linux 的 signal 函数有如下特点:
+    * 在可靠信号系统调用的基础上实现, 是库函数.
+    * 默认的原语类似 System V, 即信号发生时, 信号的处置重置为默认值.
+    * 如果包含 &lt;bsd/signal.h&gt;, 则具有 BSD signal 的原语, 即发生信号时, 
+      信号处置的设置值不变.
+===============================================================================
+</PRE>
+
+    <LI>SIG_IGN, SIG_DEF 和 SIG_ERR 的定义</LI>
+
+<PRE>
+===============================================================================
+    #define SIG_ERR (void (*)()) -1
+    #define SIG_DFL (void (*)()) 0
+    #define SIG_IGN (void (*)()) 1
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>7.2.2&nbsp;&nbsp;不可靠信号的问题</H3>
+<UL>
+    <LI>发生信号时, 信号的关联动作被重置为默认设置. 这可能导致信号丢失</LI>
+
+<PRE>
+===============================================================================
+        void sig_int ();               /* my signal handling function */
+        ...
+        signal (SIGINT, sig_int);      /* establish handler */
+        ...
+
+    sig_int ()
+    {
+        signal (SIGINT, sig_int);      
+                               /* reestablish handler for next occurrence */
+
+        ...                           /* process the signal ... */
+
+    }
+-------------------------------------------------------------------------------
+    * 在进入 sig_int 与再次调用 signal 之间发生的 SIGINT 信号将不会被捕获,
+      而由于默认设置将最终导致进程终止.
+===============================================================================
+</PRE>
+
+    <LI>无法暂时关闭信号 (即阻塞信号), 而只能忽略信号, 这同样会导致信号丢失</LI>
+
+<PRE>
+===============================================================================
+    int sig_int_flag;                  /* set nonzero when signal occure */
+
+    main ()
+    {
+        void sig_int ();               /* my signal handling function */
+        ...
+        signal (SIGINT, sig_int);      /* establish handler */
+        ...
+        while (sig_int_flag == 0)
+            pause ();                  /* go to sleep, waiting for signal */
+        ...
+    }
+
+    sig_int ()
+    {
+        signal (SIGINT, sig_int);      
+                               /* reestablish handler for next occurrence */
+       sig_int_flag = 1;       /* set flag for main loop to examine */
+    }
+-------------------------------------------------------------------------------
+    * 正常情况下, 上述程序将在发生 SIGINT 信号时继续运行.
+    * 但在测试 sig_int_flag 的值为零, 然后在调用 pause 之前发生了 SIGINT 信号,
+      则 pause 函数将导致进程永远休眠.
+===============================================================================
+</PRE>
+
+</UL>
+
+<P>
+<BR><BR>
+</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="signal.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="reliable.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+</BODY>
+</HTML>
+

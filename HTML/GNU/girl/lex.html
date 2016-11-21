@@ -1,0 +1,79 @@
+<html>
+<head><title>GIRL词法</title></head>
+<body>
+<h1 align=center>GIRL词法</h1>
+<hr>
+文件girl.l按照lex的规则定义了GIRL的词法。下面给出其内容及相应的解释（斜体字）：
+<pre>
+D    [0-9]
+L    [A-Za-z]
+B    [ \t\n]+
+H    [A-Fa-f]
+%%
+module                  return  _MODULE_;
+version                 return  _VERSION_;
+import                  return  _IMPORT_;
+type                    return  _TYPE_;
+integer                 return  _INTEGER_;
+float                   return  _FLOAT_;
+string                  return  _STRING_;
+color                   return  _COLOR_;
+cursor                  return  _CURSOR_;
+font                    return  _FONT_;
+pixmap                  return  _PIXMAP_;
+bmp                     return  _BMP_;
+jpeg                    return  _JPEG_;
+png                     return  _PNG_;
+ppm                     return  _PPM_;
+ps                      return  _PS_;
+tiff                    return  _TIFF_;
+xpm                     return  _XPM_;
+widget                  return  _WIDGET_;
+signal                  return  _SIGNAL_;
+dataslot                return  _DATASLOT_;
+receiver                return  _RECEIVER_;
+table                   return  _TABLE_;
+null                    return  _NULL_;
+
+"$"{D}+                 return  TABLEITEM;
+
+[+-]?{D}+\.{D}+         return  FLOAT;<i>浮点数</i>
+[+-]?{D}+[Ee]{D}+       return  FLOAT;<i>浮点数</i>
+[+-]?{D}+\.{D}+[Ee]{D}+ return  FLOAT;<i>浮点数</i>
+[+-]?[1-9]{D}*          return  INTEGER;<i>十进制整数</i>
+[+-]?0[0-7]*            return  INTEGER;<i>八进制整数</i>
+[+-]?0[xX]({D}|{H})+    return  INTEGER;<i>十六进制整数</i>
+\"([^\"]|\\\"|\"\")*\"  return  STRING;<i>字符串</i>
+({L}|_)({L}|{D}|_)*     return  IDENTIFIER;<i>标识符</i>
+
+"="                     return  EQUAL;
+"."                     return  DOT;
+","                     return  COMMA;
+":"                     return  COLON;
+";"                     return  SEMICOLON;
+"&lt-"                    return  SENDSLOT;
+"-&gt"                    return  LINKSLOT;
+"("                     return  LPAREN;
+")"                     return  RPAREN;
+"["                     return  LBRACKET;
+"]"                     return  RBRACKET;
+"{"                     return  LBRACE;
+"}"                     return  RBRACE;
+
+"#{"                    ;<i>读出字符直到遇到"#}"，并且读出的字符写入生成的头文件.i.h中。</i>
+"%{"                    ;<i>读出字符直到遇到"%}"，并且把读出的字符写入生成的C源文件.i.c中。</i>
+"%%{"                   ;<i>读出字符直到遇到"%%}"，并且把读出的字符写入生成的C++源文件.i.cpp中。</i>
+
+"//".*$			;<i>忽略注解。</i>
+"/*"			;<i>忽略注解，直到遇到"*/"。</i>
+
+{B}			;<i>忽略空白。</i>
+</pre>
+<hr>
+<table align=center width=100% border=2><tr>
+<td><center><a href="index.html">返回首页</a></center>
+<td><center><a href="yacc.html">GIRL语法</a></center>
+<td><center><a href="malito:blazing@263.net">与我联系</a></center>
+</tr></table>
+</body>
+</html>

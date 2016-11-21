@@ -1,0 +1,6688 @@
+<Student>
+	<UserName>杜古</UserName>
+	<Email>alfan@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>宋雪松</UserName>
+	<Email>songxs@email.com.cn</Email>
+	<Address>13021065988</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>孙桂玉</UserName>
+	<Email>gysun@udtech.com.cn</Email>
+	<Address>62531330</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>吴鹏程</UserName>
+	<Email>ipchengwu@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李勇</UserName>
+	<Email>liyongc@legend.com</Email>
+	<Address>13621029159或82899999转3687</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>陈薇</UserName>
+	<Email>cwei.@263.net</Email>
+	<Address>BP:65233388-65285</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Old</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>哈斯</UserName>
+	<Email>h_hans@263.net</Email>
+	<Address>82303945 语言学院园内 办公楼322</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>朱璇</UserName>
+	<Email>jjj_round@263.net</Email>
+	<Address>66803322-10998</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>贾涛</UserName>
+	<Email>jiatom@263.net</Email>
+	<Address>62775586   清华13＃143</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张黎明</UserName>
+	<Email>laoage@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘先华</UserName>
+	<Email>lxh@arch.cs.pku.edu.cn</Email>
+	<Address>62765828-817 北京大学理科一号楼1433N</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>田广智</UserName>
+	<Email>tianguangzhi99</Email>
+	<Address>62777270,13910294435</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>荆崇波</UserName>
+	<Email>chongbo@bit.edu.cn</Email>
+	<Address>68911370</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>彭臻</UserName>
+	<Email>pzpark@263.net</Email>
+	<Address>62774247</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李欣喜</UserName>
+	<Email>armos@263.net</Email>
+	<Address>62774194(dorm)清华大学30#315</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王挺昊</UserName>
+	<Email>bachg@263.net</Email>
+	<Address>13301077664</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>沈超</UserName>
+	<Email>xiaoshen@chinaren.com</Email>
+	<Address>63223946、北方交通大学3#</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>雷卫华</UserName>
+	<Email>leiwh@263.net</Email>
+	<Address>02787549457 华中科技大学</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>陈琳</UserName>
+	<Email>henxycn@sina.com</Email>
+	<Address>010-82899999-2488</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>鲁异</UserName>
+	<Email>l_yi@263.net</Email>
+	<Address>62779682 清华大学28＃522</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>齐继国</UserName>
+	<Email>qijiguo@263.net</Email>
+	<Address>62778794</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>冯超</UserName>
+	<Email>fengc123@163.net</Email>
+	<Address>13033346226</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张伟</UserName>
+	<Email>zhangw@pku.edu.cn</Email>
+	<Address>95800-6815710(可以网上呼）</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>范佳伦</UserName>
+	<Email>disha@263.net</Email>
+	<Address>62778551</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>于晖</UserName>
+	<Email>huiyuyu@263.net</Email>
+	<Address>62787257-439/402</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>杨云</UserName>
+	<Email>notyy@china.com</Email>
+	<Address>021-126-711080</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张显敖</UserName>
+	<Email>simon@boe.com.cn</Email>
+	<Address>13621397705</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Old</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张兵</UserName>
+	<Email>zhbing@boe.com.cn</Email>
+	<Address>84563451</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>管雪涛</UserName>
+	<Email>gxt@arch.cs.pku.edu.cn</Email>
+	<Address>95828-29031</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张海昆</UserName>
+	<Email>zhanghk00@mails.tsinghua.edu.cn</Email>
+	<Address>62774409 清华大学26＃416</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>马洪志</UserName>
+	<Email>mahz@legend.com</Email>
+	<Address>62986638-5563 北京8688信箱</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>熊竞</UserName>
+	<Email>jxiong@ict.ac.cn</Email>
+	<Address>62565533-9312</Address>
+	<Gender>Male</Gender>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>向鑫</UserName>
+	<Email>xiangxin99@mails.tsinghua.edu.cn</Email>
+	<Address>62777270 清华大学34＃513A</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>田广智</UserName>
+	<Email>tianguangzhi99@mails.tsinghua.edu.cn</Email>
+	<Address>62777270 </Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>舒丹</UserName>
+	<Email>shudan75@263.net</Email>
+	<Address>62777270 清华大学34#513A</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>林雪梅</UserName>
+	<Email>linxm@legend.com</Email>
+	<Address>13910768285</Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Old</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张韶峰</UserName>
+	<Email>sgyq@263.net</Email>
+	<Address>62778683清华大学14#340</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>余振建</UserName>
+	<Email>castor2000@263.net</Email>
+	<Address>62777099清华大学9#401</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>冯浩然</UserName>
+	<Email>snowgrass@263.net</Email>
+	<Address>62776181清华大学24#109</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>钱岭</UserName>
+	<Email>lingqian@lucent.com</Email>
+	<Address>68748088-8574</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张毅</UserName>
+	<Email>zngy@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+</Student>
+<Student>
+	<UserName>孙玮</UserName>
+	<Email>sunwei@lsad.tsinghua.edu.cn</Email>
+	<Address>62778086(1#287) BP:68154488-57911</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>秦涛</UserName>
+	<Email>qinshitao@263.net</Email>
+	<Address>62774429 清华大学26#218</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>黄德海</UserName>
+	<Email>ferret2001@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>周一鸣</UserName>
+	<Email>oneming@263.net</Email>
+	<Address>191-1148499</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>梁征强</UserName>
+	<Email>liangzhengqiang@263.net</Email>
+	<Address>0451-6413213 哈尔滨工业大学942信箱</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘礼</UserName>
+	<Email>liuyicai@263.net</Email>
+	<Address>63226835 北方交通大学18#522，手机：13021012102</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>周小波</UserName>
+	<Email>zxbuo@student.dlut.edu.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王茂基</UserName>
+	<Email>yishao12@126.com</Email>
+	<Address>0531-2968243山东师范大学</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李道兵</UserName>
+	<Email>nichloas_lee@263.net</Email>
+	<Address>62762523 北京大学 37#213</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>师纪卫</UserName>
+	<Email>shi803@yeah.net</Email>
+	<Address>63041317</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Old</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>白松涛</UserName>
+	<Email>cattom2000@263.net</Email>
+	<Address>62778544 清华大学14＃105</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>李勇</UserName>
+	<Email>liyongc@legend.com</Email>
+	<Address>82899999-3687</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>周俊</UserName>
+	<Email>zj_Tracy@263.net</Email>
+	<Address>82324806 北航11＃309</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+</Student>
+<Student>
+	<UserName>曹兴邦</UserName>
+	<Email>yecth@263.net</Email>
+	<Address>62778321</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘乃嘉</UserName>
+	<Email>youngcow@263.net</Email>
+	<Address>62779681</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>刘安华</UserName>
+	<Email>liuah@sina.com</Email>
+	<Address>62777172</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>袁正刚</UserName>
+	<Email>yuanzg@fulong.com.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>杨中</UserName>
+	<Email>yangzhongyz@263.net</Email>
+	<Address>13601146097</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>纪晓东</UserName>
+	<Email>onlyjxd@263.net</Email>
+	<Address>96318呼71211 或 62774130清华大学34#516A室</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李飒</UserName>
+	<Email>leeza@263.net</Email>
+	<Address>191-1207516,62778752,清华大学14＃459</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张伟</UserName>
+	<Email>zhangwei.@263.net</Email>
+	<Address>62777125</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>季铮锋</UserName>
+	<Email>thinking@chinaren.com</Email>
+	<Address>9#317</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>朱晶</UserName>
+	<Email>glasswort@263.net</Email>
+	<Address>62778485</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>刘少锋</UserName>
+	<Email>qingfengl@263.net</Email>
+	<Address>62791607</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>何祥</UserName>
+	<Email>HX98@mails.tsinghua.edu.cn</Email>
+	<Address>62777119 清华大学9#324</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>方春江</UserName>
+	<Email>flyriver@263.net</Email>
+	<Address>62775584</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>于冰</UserName>
+	<Email>trueice@trueice.dhs.org</Email>
+	<Address>62779645 清华大学28#429</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李晓强</UserName>
+	<Email>iamlxq@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>雷霆</UserName>
+	<Email>leiting00@mails.tsinghua.edu.cn</Email>
+	<Address>62778997 清华大学31#119</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>马坚</UserName>
+	<Email>mj@geoagent.pku.edu.cn</Email>
+	<Address>62763373</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>薛江波</UserName>
+	<Email>jbxue@buaa.edu.cn</Email>
+	<Address>82317653 北航网络中心</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>黄俊峰</UserName>
+	<Email>huangjunfeng@263.net</Email>
+	<Address>清华大学28#楼407</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>杨葳</UserName>
+	<Email>yangwei@founder.com.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>黄俊峰</UserName>
+	<Email>huangjunfeng@263.net</Email>
+	<Address>清华大学28#楼407</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>宫丽杰</UserName>
+	<Email>googoo@263.net</Email>
+	<Address></Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王刚</UserName>
+	<Email>valume_1@sina.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Old</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>闫立财</UserName>
+	<Email>yanlicai@263.net</Email>
+	<Address>北京邮电大学94#</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>罗文</UserName>
+	<Email>hemudu@263.net</Email>
+	<Address>62777099 清华大学9＃401</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Old</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>夏永祥</UserName>
+	<Email>xiayx@sdp.ee.tsinghua.edu.cn</Email>
+	<Address>62773228,清华大学19#403</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>陈长庆</UserName>
+	<Email>ccq_cd@chinaren.com</Email>
+	<Address>198-10039621清华大学34#413A</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>韩冰</UserName>
+	<Email>merlin@sina.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>孙建光</UserName>
+	<Email>jerrysun@sina.com</Email>
+	<Address>北京市2657#网络教育事业部</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>陈磊</UserName>
+	<Email>erdongsanshi@sina.com.cn</Email>
+	<Address>62177722-66078</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>葛慧</UserName>
+	<Email>chenlei@cosix.com.cn</Email>
+	<Address>68909613</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张淯淳</UserName>
+	<Email>zycin263@263.net</Email>
+	<Address>清华大学14#203,62779003</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>陈昊</UserName>
+	<Email>iasc@263.net</Email>
+	<Address>13910846609</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>李振星</UserName>
+	<Email>leezhx@263.net</Email>
+	<Address>62565533转3303</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>周尚民</UserName>
+	<Email>smzhou@sina.com</Email>
+	<Address>010-62158899-229</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>高亮</UserName>
+	<Email>highlight@263.net</Email>
+	<Address>027-87556063</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>刘祥德</UserName>
+	<Email>shunder@263.net</Email>
+	<Address>62778618 清华大学14#246</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王力哲</UserName>
+	<Email>wlz@ict.ac.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>唐健</UserName>
+	<Email>tjian263@263.net</Email>
+	<Address>62776293 清华大学22#406</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张建锋</UserName>
+	<Email>shihang@263.net</Email>
+	<Address>62750930-855</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李超</UserName>
+	<Email>super_lcm@163.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>牟磊育</UserName>
+	<Email>lymu@sina.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>喻海滔</UserName>
+	<Email>yuht@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>印志刚</UserName>
+	<Email>202891@sina.com</Email>
+	<Address>13901377883</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Old</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>刘德兵</UserName>
+	<Email>dbliu@cti.com.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>闫雪</UserName>
+	<Email>isno@sina.com</Email>
+	<Address>62349987</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李铁</UserName>
+	<Email>leechell@163.net</Email>
+	<Address>82387070</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>邹丽妮</UserName>
+	<Email>zou8li14@sina.com.cn</Email>
+	<Address>86541818 呼62136</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>孟德军</UserName>
+	<Email>analysist@china.com</Email>
+	<Address>北京市海淀区同方大厦B座7层</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>郭黎武</UserName>
+	<Email>alex.guo@mail.ewingstech.com</Email>
+	<Address>65919107</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李扬</UserName>
+	<Email>rizi@2911.net</Email>
+	<Address>北京市海淀区同方大厦B座7层</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王巍</UserName>
+	<Email>cacawang@intec.iscas.ac.cn</Email>
+	<Address>010-82620803</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>谢鑫军</UserName>
+	<Email>xj_xie@hotmail.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>康恒</UserName>
+	<Email>archon.mail@263.net</Email>
+	<Address>13621122860</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王涛</UserName>
+	<Email>cwxd@www.bjpeu.edu.cn</Email>
+	<Address>(010)69745566-4161</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>杨文军</UserName>
+	<Email>ywj00@mails.tsinghua.edu.cn</Email>
+	<Address>62771461(实验室)</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张永华</UserName>
+	<Email>yh.zhang@boe.com.cn</Email>
+	<Address>13501295545</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王惊雷</UserName>
+	<Email>layming@263.net</Email>
+	<Address>62775281 清华大学 13#342</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>邢睿</UserName>
+	<Email>流星雨0881@sina.com</Email>
+	<Address></Address>
+</Student>
+<Student>
+	<UserName>陈峰</UserName>
+	<Email>fengchen_cn@yeah.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>郑宁</UserName>
+	<Email>zhengnx@21cn.com</Email>
+	<Address>62775009 清华大学19#608</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>赵前</UserName>
+	<Email>zhaoqian@263.net</Email>
+	<Address>13910626003  海淀区成府路207号3楼</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>谢晓东</UserName>
+	<Email>ddong@boesoft.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>赵耀</UserName>
+	<Email>jingo@chinaren.com</Email>
+	<Address>62777133</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>饶锋</UserName>
+	<Email>steverun@chinaren.net</Email>
+	<Address>021-65640319,复旦大学南区14-204</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>兰洁</UserName>
+	<Email>margrate@263.net</Email>
+	<Address>95968-194962 北师大</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>孙辉</UserName>
+	<Email>sun_h@263.net</Email>
+	<Address></Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>何金江</UserName>
+	<Email>hejinjiang@263.net</Email>
+	<Address>62779593</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>赵峪</UserName>
+	<Email>zyx@chinaren.com</Email>
+	<Address>62777146</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>胡海生</UserName>
+	<Email>hanson@ccermail.net</Email>
+	<Address>68941785</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>田野</UserName>
+	<Email>nbsp@263.net</Email>
+	<Address>62777148清华大学9#412</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>胡检文</UserName>
+	<Email>hu_jw@263.net</Email>
+	<Address>62294433-713</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>郑威</UserName>
+	<Email>perfectsolaris@263.net</Email>
+	<Address>010-62761133</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>陈小明</UserName>
+	<Email>neck@263.net</Email>
+	<Address>0254893045</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘海峰</UserName>
+	<Email>liuhf@ercist.iscas.ac.cn</Email>
+	<Address>62561197-4中科院软件所1#510</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>熊雁凌</UserName>
+	<Email>ling@ercist.iscas.ac.cn</Email>
+	<Address>62561197-4</Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>周强</UserName>
+	<Email>qing__jing@163.net</Email>
+	<Address>62986638--2411</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>袁勋</UserName>
+	<Email>xyuan@ercist.iscas.ac.cn</Email>
+	<Address>中科院软件所 信息安全中心 100080</Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>杨磊</UserName>
+	<Email>yanglei@cyberresource.com.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>郑卫国</UserName>
+	<Email>zhengwg@263.net</Email>
+	<Address>62775893 清华大学22#107</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>hailand</UserName>
+	<Email>php1900@sina.com</Email>
+	<Address></Address>
+</Student>
+<Student>
+	<UserName>侯彧</UserName>
+	<Email>yuhou@263.net</Email>
+	<Address>62775358 清华大学15＃231</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘弘利</UserName>
+	<Email>henrylau@263.net</Email>
+	<Address>68239988呼6026</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张国泽</UserName>
+	<Email>yczgz@263.net</Email>
+	<Address>呼机：95812-72399</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张南宁</UserName>
+	<Email>badpig@263.net</Email>
+	<Address>82387346</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>刘在东</UserName>
+	<Email>liu1979@263.net</Email>
+	<Address>62285752</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName> 巩剑</UserName>
+	<Email>jianzi625@263.net</Email>
+	<Address>13021265248</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王少斌</UserName>
+	<Email>shaobinabc@263.net</Email>
+	<Address>68338833-12820</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>杨宏涛</UserName>
+	<Email>york-y@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>程辉</UserName>
+	<Email>healworld@263.net</Email>
+	<Address>63229760</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>郭辉</UserName>
+	<Email>wusman@263.net</Email>
+	<Address>62283741--50</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>徐成龙</UserName>
+	<Email>xclong@263.net</Email>
+	<Address>62764673</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>陈亚娟</UserName>
+	<Email>chen.ya.j@263.net</Email>
+	<Address>62284859北邮学四303</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>柳文源</UserName>
+	<Email>liuwy@cn.ibm.com</Email>
+	<Address>65391188-3981</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>李治国</UserName>
+	<Email>hust_lzg@263.net</Email>
+	<Address></Address>
+</Student>
+<Student>
+	<UserName>王勇</UserName>
+	<Email>wyong68@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>李湛</UserName>
+	<Email>lizhan@21cn.com</Email>
+	<Address>68943302 北京理工大学12#331</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>彭荣华</UserName>
+	<Email>pzrh@263.net</Email>
+	<Address>62779715</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>郭岗</UserName>
+	<Email>guogang_bacon@263.net</Email>
+	<Address>010-62285572</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>宋善鹏</UserName>
+	<Email>spsong@lcc.icm.ac.cn</Email>
+	<Address>62558482</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>杨和东</UserName>
+	<Email>hdyang@cim.com.cn</Email>
+	<Address>68515544-2425</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>郑武</UserName>
+	<Email>zanywoo@263.net</Email>
+	<Address>62285456 北邮 8＃1109</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王焱</UserName>
+	<Email>wangyan@bj.tom.com</Email>
+	<Address>13501373109</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张勖</UserName>
+	<Email>selina_zhang@263.net</Email>
+	<Address></Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>苟小刚</UserName>
+	<Email>meffort@263.net</Email>
+	<Address>62765301</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>许杨春</UserName>
+	<Email>xuyc@sina.com</Email>
+	<Address>13001046845,86422233-723</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>胡良霖</UserName>
+	<Email>hulianglin@263.net</Email>
+	<Address>62755745[北京大学]</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张建</UserName>
+	<Email>ZJ_WIND@263.NET</Email>
+	<Address>64885477北京信息工程学院2公寓416室</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>徐豪俊</UserName>
+	<Email>xuisxu@263.net</Email>
+	<Address>95858-979172</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>栗云天</UserName>
+	<Email>eagleabysm@263.net</Email>
+	<Address>62791507</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>唐君</UserName>
+	<Email>nothinking@21cn.com</Email>
+	<Address>清华16＃205,62775138</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>蔡浩原</UserName>
+	<Email>blankblock@263.net</Email>
+	<Address>96300-583353</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>田春峰</UserName>
+	<Email>accesine@btamail.net.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>廖渊</UserName>
+	<Email>espark@china.com</Email>
+	<Address>191-5260728</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>贾宇</UserName>
+	<Email>y.jia@263.net</Email>
+	<Address>62285743北京邮电大学240#</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>逄新利</UserName>
+	<Email>pangxinli@263.net</Email>
+	<Address>13601059516</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>赵朝华</UserName>
+	<Email>zhaoch@hichina.com</Email>
+	<Address>13910845561</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>冯钰</UserName>
+	<Email>f_yu@263.net</Email>
+	<Address>82899999-4153</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>肖期升</UserName>
+	<Email>xqsh-zz@263.net</Email>
+	<Address>62778472</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张奕滔</UserName>
+	<Email>zyt@software.ict.ac.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>乔俊琪</UserName>
+	<Email>blackjade@263.net</Email>
+	<Address>北京理工大学8#520 Tel:68941569 Mobie:13301035240</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王海峰</UserName>
+	<Email>haifeng_w@263.net</Email>
+	<Address>62764758 北大45/3055</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>郑磊</UserName>
+	<Email>zealman@263.net</Email>
+	<Address>62763334</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>黄海艺</UserName>
+	<Email>seant@263.net</Email>
+	<Address>010-62251188-2201</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘子正</UserName>
+	<Email>liuzizheng@263.net</Email>
+	<Address>68943308 北理工12#335</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>孟**</UserName>
+	<Email>mhss@sohu.com</Email>
+	<Address>NULL</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王军</UserName>
+	<Email>wangjun990@sina.com</Email>
+	<Address>13951748262</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>常耀中</UserName>
+	<Email>yzhchang@263.net</Email>
+	<Address>Tel：62284515</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>姚宏</UserName>
+	<Email>lucian_museful@sina.com</Email>
+	<Address>13301058602</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>钟靖华</UserName>
+	<Email>postoffice@263.net</Email>
+	<Address>62778268清华25#218</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>赵强</UserName>
+	<Email>jiegun@263.net</Email>
+	<Address>13910293329</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李咏</UserName>
+	<Email>liyong@pubms.pku.edu.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>卢浩东</UserName>
+	<Email>lushd99@sina.com</Email>
+	<Address>62565533-3307</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>赵飞冉</UserName>
+	<Email>cfanzfr@sina.com</Email>
+	<Address>BP:95900-3790830</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>劳家博</UserName>
+	<Email>laojb@263.net</Email>
+	<Address>65102160-538</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>黄岳</UserName>
+	<Email>cert@huang.com.cn</Email>
+	<Address>63951155-2451</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李路</UserName>
+	<Email>lilu@nsfocus.com</Email>
+	<Address>13910090804</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李定亮</UserName>
+	<Email>zero100@netease.com</Email>
+	<Address>13910053279</Address>
+	<Gender>Male</Gender>
+	<Age>Young</Age>
+</Student>
+<Student>
+	<UserName>罗爱国</UserName>
+	<Email>log@nsfocus.com</Email>
+	<Address>13601264474</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>顾勇</UserName>
+	<Email>stoney@263.net</Email>
+	<Address>191-1211163</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>钟忻</UserName>
+	<Email>vieri_z@263.net</Email>
+	<Address>清华大学34＃408</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>陈保平</UserName>
+	<Email>sjz.chenbp@95868.com</Email>
+	<Address>0311-7920629</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Old</Age>
+</Student>
+<Student>
+	<UserName>尹慧德</UserName>
+	<Email>yhuide@21cn.com</Email>
+	<Address>62570409</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>赵继泽</UserName>
+	<Email>jizezhao@itp.ac.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>薛尤贵</UserName>
+	<Email>everfat@263.net</Email>
+	<Address>tele:62285750 北邮</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>薛亮</UserName>
+	<Email>everfat@sohu.com</Email>
+	<Address>BP:191-5284866</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>胡海生</UserName>
+	<Email>hanson@ccermail.net</Email>
+	<Address>68941785</Address>
+</Student>
+<Student>
+	<UserName>杨红</UserName>
+	<Email>yhsd@263.net</Email>
+	<Address>95900-1057601 北邮</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>蒋志祥</UserName>
+	<Email>luckyideal@china.com</Email>
+	<Address>63967023</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>李建清</UserName>
+	<Email>jq.li@263.net</Email>
+	<Address>62759697</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>何浩</UserName>
+	<Email>littlemice@263.net</Email>
+	<Address>62312919</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>jancook</UserName>
+	<Email>jancook@sohu.com</Email>
+	<Address></Address>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>鲁巍</UserName>
+	<Email>luwei98@mails.tsinghua.edu.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>cwebb</UserName>
+	<Email>chris.webb@hotbot.com</Email>
+	<Address>+19493889322</Address>
+</Student>
+<Student>
+	<UserName>陆新宇</UserName>
+	<Email>lu_xinyu@263.net</Email>
+	<Address>62777058 清华大学9#102</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘昊飞</UserName>
+	<Email>mjam@sina.com</Email>
+	<Address>62777058清华9#102</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张长军</UserName>
+	<Email>zool@zixia.net</Email>
+	<Address>62779548清华28#309</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>李芳鹏</UserName>
+	<Email>fangpeng@sina.com</Email>
+	<Address>64999063 SINOPEC FINANCE DEPARTMENT</Address>
+	<Gender>Male</Gender>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>常嘉岳</UserName>
+	<Email>changjiayue@263.net</Email>
+	<Address>BP 1278285033</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>赵鹏</UserName>
+	<Email>b9973056@bupt.edu.cn</Email>
+	<Address>62283147</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>赵延波</UserName>
+	<Email>ybzhao@21cn.com</Email>
+	<Address>82611839</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李承宇</UserName>
+	<Email>slee@ezlinux.com.cn</Email>
+	<Address>82387070</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>徐兴建</UserName>
+	<Email>x.x.j@263.net</Email>
+	<Address>13501364892</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王丰锦</UserName>
+	<Email>wfg@software.ict.ac.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>吴财军</UserName>
+	<Email>wucaijun2000@263.net</Email>
+	<Address>191-1290766(汉字)</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>祝观艳</UserName>
+	<Email>zhugy@hichina.com</Email>
+	<Address></Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张波</UserName>
+	<Email>boozhang@sdb.ac.cn</Email>
+	<Address>68744458-212</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>曲宁</UserName>
+	<Email>Hippo@Chinaren.com</Email>
+	<Address>62761653 北京大学32#219</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张杰</UserName>
+	<Email>zhj_gw@263.net</Email>
+	<Address>清华大学13＃245</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>毕鹏</UserName>
+	<Email>maggiebi@263.net</Email>
+	<Address>62774304</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>杨磊</UserName>
+	<Email>gordonncnews@sina.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>李明军</UserName>
+	<Email>jingling_01@163.net</Email>
+	<Address>0931-2890020</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>郑传波</UserName>
+	<Email>zhengcb@netpower.com.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李祖松</UserName>
+	<Email>lisoon@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+</Student>
+<Student>
+	<UserName>郭家春</UserName>
+	<Email>chunjia_guo@263.net</Email>
+	<Address>62775573清华大学13#121</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张勇</UserName>
+	<Email>zhangyong@88win.com</Email>
+	<Address>85181002#234</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>宋东</UserName>
+	<Email>dongs88@hotmail.com</Email>
+	<Address>62295333-139</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>朱继峰</UserName>
+	<Email>zjf@ercist.iscas.ac.cn</Email>
+	<Address>62561197-4中科院软件所</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>杨勇</UserName>
+	<Email>yyang98@mails.tsinghua.edu.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>武威</UserName>
+	<Email>wuerlang@263.net</Email>
+	<Address>192-4997607</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>朱春梅</UserName>
+	<Email>zcm76131@263.net</Email>
+	<Address></Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>陈翔</UserName>
+	<Email>async_driver@sina.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王争</UserName>
+	<Email>wz980705@263.net</Email>
+	<Address>电子科技大学980705班</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>孙旭</UserName>
+	<Email>silentspring@chinaren.com</Email>
+	<Address>62774672清华大学26#111</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>江卫</UserName>
+	<Email>jiangwzl@elong.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Old</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>周欣宇</UserName>
+	<Email>linuxz@163.net</Email>
+	<Address>13910636186</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Old</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>许主洪</UserName>
+	<Email>steven_hoi@263.net</Email>
+	<Address>清华大学9#306</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>丁宏伟</UserName>
+	<Email>ding99@mails.tsinghua.edu.cn</Email>
+	<Address>13501308163</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>代刚</UserName>
+	<Email>daigang99@263.net</Email>
+	<Address>62283011</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>周良</UserName>
+	<Email>intelly@163.net</Email>
+	<Address>17#502</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>刘文锋</UserName>
+	<Email>wenf_liu@263.net</Email>
+	<Address>62778180: 清华大学1#235</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>李贺武</UserName>
+	<Email>lihewu98@mails.tsinghua.edu.cn</Email>
+	<Address>62772375 华业大厦2408</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>原涛</UserName>
+	<Email>Tedyt@yeah.net</Email>
+	<Address>13910304230</Address>
+</Student>
+<Student>
+	<UserName>董利江</UserName>
+	<Email>donglj@hichina.com</Email>
+	<Address>65547878-6919</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王强</UserName>
+	<Email>wq7210@sina.com</Email>
+	<Address>66820278</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张濮</UserName>
+	<Email>zero_point@263.net</Email>
+	<Address>62774694清华大学26#506</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>石继东</UserName>
+	<Email>stonk@263.net</Email>
+	<Address>66812288-19813</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>安冀苗</UserName>
+	<Email>ajm@kangxi.com.cn</Email>
+	<Address>北京朝阳东土城路14号建达大厦21层</Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王俊鹏</UserName>
+	<Email>wang_jp@staff.ccidnet.com</Email>
+	<Address>13611352245</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>罗鸣华</UserName>
+	<Email>MingHua_L@sina.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>周俊峰</UserName>
+	<Email>showking@263.net</Email>
+	<Address>62285731 北邮</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>陈鹏洋</UserName>
+	<Email>bobo_chan@21cn.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>孙苌江</UserName>
+	<Email>colorwolfsun@263.net</Email>
+	<Address>95968-36114 北大应用文理学院5235</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘黎明</UserName>
+	<Email>arthurlau@163.com</Email>
+	<Address>13651076284</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王虎</UserName>
+	<Email>wanghu@neu-alpine.com</Email>
+	<Address>010-88091411</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>陈霖</UserName>
+	<Email>mylinker@263.net</Email>
+	<Address>64445739 北化118#</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>朱照龙</UserName>
+	<Email>dragon-zhu@263.net</Email>
+	<Address>南京鉅盛科技5楼</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>齐良培</UserName>
+	<Email>lpqi@etang.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>李金茂</UserName>
+	<Email>ljm0518@sina.com</Email>
+	<Address>62770926-133</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张大坤</UserName>
+	<Email>persistzhang@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>吴疆</UserName>
+	<Email>wujiang999@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王乐珩</UserName>
+	<Email>joyfire@263.net</Email>
+	<Address>北方交大131#</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>盛文亮</UserName>
+	<Email>sheng_wenliang@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>申林</UserName>
+	<Email>abansl@263.net</Email>
+	<Address>62777115 清华大学9#319</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>江文进</UserName>
+	<Email>yelf@263.net</Email>
+	<Address>62779803 清华大学27#210</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李彦志</UserName>
+	<Email>beinghard@263.net</Email>
+	<Address>62777124</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>杨欣</UserName>
+	<Email>vagrant@sina.com</Email>
+	<Address>13910844304</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>黎明</UserName>
+	<Email>fight4u@antionline.org</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张航进</UserName>
+	<Email>hjzhang@ercist.iscas.ac.cn</Email>
+	<Address>62645412</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>胡哲</UserName>
+	<Email>tar-xzvf@263.net</Email>
+	<Address>62779435清华28#112</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>赵耀</UserName>
+	<Email>zhao.yao@263.net</Email>
+	<Address>62285734 北京邮电大学1#208</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王洪彬</UserName>
+	<Email>whb-www@263.net</Email>
+	<Address>13641008239</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>林杰</UserName>
+	<Email>juechun@263.net</Email>
+	<Address>（010-62285736）北京邮电大学239# 97401 （邮编：100876）</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>徐梅</UserName>
+	<Email>xumei_bit@263.net</Email>
+	<Address>65242288-82698</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>冯大可</UserName>
+	<Email>embeddedqt@263.net</Email>
+	<Address>62783582</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>杨鑫</UserName>
+	<Email>buptyx@263.net</Email>
+	<Address>62284430</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王私奉</UserName>
+	<Email>sfwang@infosec.cs.pku.edu.cn</Email>
+	<Address>62762982</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>唐宁</UserName>
+	<Email>zfdning@163.net</Email>
+	<Address>(0571)7931588 浙江大学1213# 310027</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李年长</UserName>
+	<Email>kokoley@263.net</Email>
+	<Address>62778571</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>易学能</UserName>
+	<Email>xnyi@263.net</Email>
+	<Address>(0719)5233076</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>杨圣武</UserName>
+	<Email>yysw@263.net</Email>
+	<Address>62777058</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>毛昀</UserName>
+	<Email>maoyun9@yahoo.com</Email>
+	<Address>13910675433</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>贺萌</UserName>
+	<Email>hornet@263.net</Email>
+	<Address>13910666314</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>李挺屹</UserName>
+	<Email>ltywater@263.net</Email>
+	<Address>62565615-211</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>马军</UserName>
+	<Email>gdp2001@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>曹勇刚</UserName>
+	<Email>cao_yg@safepro.buaa.edu.cn</Email>
+	<Address>95810-呼1034353 北航1＃楼121</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>于国卫</UserName>
+	<Email>ygw_sz@yeah.net</Email>
+	<Address>0755-6787390</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Old</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘发彪</UserName>
+	<Email>telefar@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>韩伟红</UserName>
+	<Email>hanweihong@sohu.com</Email>
+	<Address>13601059516</Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>黄平</UserName>
+	<Email>pingh@cstnet.net.cn</Email>
+	<Address>6253 3520 --177</Address>
+</Student>
+<Student>
+	<UserName>吕铁铮</UserName>
+	<Email>lvtz@btamail.net.cn</Email>
+	<Address>物理所82649328</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>董晓虎</UserName>
+	<Email>sleepy-cat@263.net</Email>
+	<Address>62775251 13#343</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>香勇</UserName>
+	<Email>xoy@me.tsinghua.edu.cn</Email>
+	<Address>62782688</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>秦伟俊</UserName>
+	<Email>hotcelery@263.net</Email>
+	<Address>清华大学9＃204  62777094</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>舒国强</UserName>
+	<Email>duckar@sina.com</Email>
+	<Address>82620803-803</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>陈志兵</UserName>
+	<Email>fred-chen@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张可新</UserName>
+	<Email>kexinzh@ict.ac.cn</Email>
+	<Address></Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张茂华</UserName>
+	<Email>maohuazhang@yeah.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>何萌</UserName>
+	<Email>gold100@yeah.net</Email>
+	<Address></Address>
+</Student>
+<Student>
+	<UserName>李扬</UserName>
+	<Email>mynews@fnmail.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>姜建农</UserName>
+	<Email>davek@btamail.net.cn</Email>
+	<Address>13501378761</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Old</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>陈刚</UserName>
+	<Email>chengangabc@263.net</Email>
+	<Address>(010)68208003</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>许治坤</UserName>
+	<Email>san@netguard.com.cn</Email>
+	<Address>13641141411</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王英键</UserName>
+	<Email>kerberos@china.com</Email>
+	<Address>13910422724</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>牛奎光</UserName>
+	<Email>bullsun@263.net</Email>
+	<Address>62777151 清华大学9#420</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王强</UserName>
+	<Email>neuwq@263.net</Email>
+	<Address>024-23955684 东北大学405# 110004</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>   于爱华</UserName>
+	<Email>yahcontec@china.com</Email>
+	<Address></Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>徐华</UserName>
+	<Email>ahaxuhua@263.net</Email>
+	<Address>62791704 清华大学计算机系</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>殷培</UserName>
+	<Email>atombomb@263.net</Email>
+	<Address>62777122 清华9#306</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>ivrognas</UserName>
+	<Email>ivrognasse@hotmail.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李辉</UserName>
+	<Email>huili263@263.net</Email>
+	<Address>62784946  62791559</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>胡小龙</UserName>
+	<Email>huxlpst@263.net</Email>
+	<Address>13501360635</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>高塽</UserName>
+	<Email>gaoshuang99@mails.tsinghua.edu.cn</Email>
+	<Address>62791584清华大学33#111</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>佟小龙</UserName>
+	<Email>tongxl@dy-public.sd.cninfo.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>琚磊</UserName>
+	<Email>julei@elec.bnu.edu.cn</Email>
+	<Address>62200839 北京师范大学</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>韩鹏</UserName>
+	<Email>newchess@21cn.com</Email>
+	<Address>13651218864</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>黄焱</UserName>
+	<Email>hngyn@263.net</Email>
+	<Address>清华大学17＃楼410房间 62777380</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>贺志军</UserName>
+	<Email>zhijunhe@sina.com</Email>
+	<Address>13621294093</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>杨才高</UserName>
+	<Email>caigao@china.com</Email>
+	<Address>2892023 中国深圳</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>贺志军</UserName>
+	<Email>zhijunhe@sina.com</Email>
+	<Address>13621294093</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>沙瀛</UserName>
+	<Email>shaying@ncic.ac.cn</Email>
+	<Address>62587953</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李振民</UserName>
+	<Email>lzm2000@263.net</Email>
+	<Address>95922-1030672,62778797</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>chulibin</UserName>
+	<Email>chulibin@sohu.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Old</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>蓝盛</UserName>
+	<Email>lansea@china.com</Email>
+	<Address>13910638871</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>熊军</UserName>
+	<Email>junxiong@btamail.net.cn</Email>
+	<Address>13601146927</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>侯月文</UserName>
+	<Email>houyuewen@263.net</Email>
+	<Address>62988187</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>姚冀清</UserName>
+	<Email>yaojq@elec.bnu.edu.cn</Email>
+	<Address>13641063558</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>罗康文</UserName>
+	<Email>kwluo@bnu.edu.cn</Email>
+	<Address>62206910</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李庆</UserName>
+	<Email>bnuqli@263.net</Email>
+	<Address>62208855</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王海</UserName>
+	<Email>firecool@chinaren.com</Email>
+	<Address>清华大学</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王虹宇</UserName>
+	<Email>ruster@263.net</Email>
+	<Address>62204617</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王继喆</UserName>
+	<Email>wangjizhe@intec.iscas.ac.cn</Email>
+	<Address>82620803-805</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>appleton</UserName>
+	<Email>appleton.jl@263.net</Email>
+	<Address>62779681 清华大学28＃521</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>谭星宇</UserName>
+	<Email>tatartan@263.net</Email>
+	<Address>62762093北京大学46搂1016</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>Zolu</UserName>
+	<Email>daft@sohu.com</Email>
+	<Address>32165465 jinan </Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>汤海京</UserName>
+	<Email>thjthj@netease.com</Email>
+	<Address>62986638--5567</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>詹明</UserName>
+	<Email>zhanming2000@hotmail.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王天邑</UserName>
+	<Email>wangcity@8848.net</Email>
+	<Address>95900-2760640</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>孙勇</UserName>
+	<Email>findsun@263.net</Email>
+	<Address>13910065230</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李兵</UserName>
+	<Email>libing001@263.net</Email>
+	<Address>62283334-2297</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>邢建峰</UserName>
+	<Email>Jimphon@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>刘斌</UserName>
+	<Email>robin.china@263.net</Email>
+	<Address>191-8419807</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>赵志文</UserName>
+	<Email>zhaozhiwen@sina.com</Email>
+	<Address>82649179</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张文月</UserName>
+	<Email>zwy@cnnic.net.cn</Email>
+	<Address></Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李昕</UserName>
+	<Email>simjon@263.net</Email>
+	<Address>62777125 清华大学9＃312</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>牛峰</UserName>
+	<Email>niu_feng_bit@263.net</Email>
+	<Address>68943308北京理工大学</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李耀亮</UserName>
+	<Email>michael.l@263.net</Email>
+	<Address>62777158 清华大学23＃319</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张谷令</UserName>
+	<Email>wls_zgl@sina.com</Email>
+	<Address>191-1138975</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>蒙井阳</UserName>
+	<Email>mjylm@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王志鹏</UserName>
+	<Email>wangzhip@china.com</Email>
+	<Address>62619750-3034 北京349信箱6分箱 100080</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>董永斌</UserName>
+	<Email>dybmfc@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>辛军</UserName>
+	<Email>programit@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘蕾</UserName>
+	<Email>halfwolf@263.net</Email>
+	<Address>63221613 北交大314#</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>程光瑶</UserName>
+	<Email>gycheng@ercist.iscas.ac.cn</Email>
+	<Address>62645412</Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李俊林</UserName>
+	<Email>center@mail.tsinghua.edu.cn</Email>
+	<Address>62783633</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>涂彬</UserName>
+	<Email>tubingth@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>陈定权</UserName>
+	<Email>cdq@cscd.ac.cn</Email>
+	<Address>010-62560213</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张俭恭</UserName>
+	<Email>zjg5297@china.com</Email>
+	<Address>62560213 中科院</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>贺铁林</UserName>
+	<Email>hetielin@sina.com.cn</Email>
+	<Address>68241279 中科院研究生院</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>朱小平</UserName>
+	<Email>droplet@163.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>于学军</UserName>
+	<Email>yxj@xdsc.com.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Old</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王继瑜</UserName>
+	<Email>wang_jiyu@founder.com.cn</Email>
+	<Address>62982266-1472</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>贺铁林</UserName>
+	<Email>hetielin@sina.com.cn</Email>
+	<Address>68241279 中科院研究生院</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张丙晨</UserName>
+	<Email>zhangbingchen@china.com</Email>
+	<Address>13621051440</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>林培斌</UserName>
+	<Email>xeme@263.net</Email>
+	<Address>62143049</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>马永征</UserName>
+	<Email>myz@sdb.ac.cn</Email>
+	<Address>13910066378 中科院计算机网络信息中心</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>哈斯</UserName>
+	<Email>h_hans@263.net</Email>
+	<Address>82303945 语言学院办公楼3层 322</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>毕学尧</UserName>
+	<Email>bxy@mail.ihep.ac.cn</Email>
+	<Address>95800-534360</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张清振</UserName>
+	<Email>zhangqingzhen@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>吕志远</UserName>
+	<Email>lzy@arch.cs.pku.edu.cn</Email>
+	<Address>62765828-816</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李滕</UserName>
+	<Email>liteng231@sina.com.cn</Email>
+	<Address>027-87850255</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>臧金奎</UserName>
+	<Email>zangjk@263.net</Email>
+	<Address>62778684</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李军</UserName>
+	<Email>skyhorse99@263.net</Email>
+	<Address>62780909-9705</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>潘志强</UserName>
+	<Email>panzq32@263.net</Email>
+	<Address>62284722 北京邮电大学5#111</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>章准平</UserName>
+	<Email>justinzhang@263.net</Email>
+	<Address>010-62777112</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张凯</UserName>
+	<Email>esn@263.net</Email>
+	<Address>62774892 清华大学19#106</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>逄新利</UserName>
+	<Email>PANGXINLI@263.NET</Email>
+	<Address>13601059516</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>韩伟红</UserName>
+	<Email>hanweihong@sohu.com</Email>
+	<Address>13601059516</Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>Lu Huany</UserName>
+	<Email>lhy21cn@163.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>姚杰岭</UserName>
+	<Email>yaojl@263.net</Email>
+	<Address>84693311-715</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>金化年</UserName>
+	<Email>jinhn@21cn.com</Email>
+	<Address>68744458-205</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王文新</UserName>
+	<Email>lease_lean@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>周劲</UserName>
+	<Email>whitewhale@263.net</Email>
+	<Address>62761774 北京大学</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>鲁义明</UserName>
+	<Email>lu_yi_ming@sina.com</Email>
+	<Address>电话: 13910806514</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Old</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>谢忻</UserName>
+	<Email>xiexin76@sina.com</Email>
+	<Address>62784706</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张海涛</UserName>
+	<Email>hai-tao_zhang@agilent.com</Email>
+	<Address>62294188-6658</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>杜炤</UserName>
+	<Email>dzflying@263.net</Email>
+	<Address></Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李峭</UserName>
+	<Email>liqbuaa@263.net</Email>
+	<Address>82317202  BP: 191-1224717</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>朱琳</UserName>
+	<Email>朱琳612@263.net</Email>
+	<Address></Address>
+</Student>
+<Student>
+	<UserName>高秋彬</UserName>
+	<Email>forest3@263.net</Email>
+	<Address>62775798 清华大学24#508</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>唐杰</UserName>
+	<Email>jebtang@kali.com.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张虎</UserName>
+	<Email>hzhang@chess-tech.com.cn</Email>
+	<Address>01064425566~129</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Old</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>詹春燕</UserName>
+	<Email>zhanyanzi@263.net</Email>
+	<Address>0451-6418272</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>马皓</UserName>
+	<Email>mah@pku.edu.cn</Email>
+	<Address>62753007</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王威</UserName>
+	<Email>solaris888@msn.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>宋现锋</UserName>
+	<Email>song.pku@263.net</Email>
+	<Address>62762398</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张大鹏</UserName>
+	<Email>lunar@sanfront.com.cn</Email>
+	<Address>191-1128871</Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张亚宁</UserName>
+	<Email>gladsavage@sina.com</Email>
+	<Address>62551004</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>黄晓昱</UserName>
+	<Email>huangxy@legend.com</Email>
+	<Address>13011089891</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>邓鹏</UserName>
+	<Email>dengpp@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>邹鹏程</UserName>
+	<Email>zoupch@necas.nec.co.jp</Email>
+	<Address>62294433-452</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>周泽明</UserName>
+	<Email>tym@ns.cetin.net.cn</Email>
+	<Address>62269273</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>程凯</UserName>
+	<Email>scarecrow2000@sohu.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>严玉</UserName>
+	<Email>yanyu@zhhz.suda.edu.cn</Email>
+	<Address>0512-5210491</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>韩捷</UserName>
+	<Email>jie.han@nokia.com</Email>
+	<Address>13801106912</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>朱庆嘉</UserName>
+	<Email>dizzy@ynmail.com</Email>
+	<Address>电话;0592-2193588</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王勇</UserName>
+	<Email>away621@263.net</Email>
+	<Address>bp:129-2556914</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+</Student>
+<Student>
+	<UserName>葛新征</UserName>
+	<Email>newmarch@263.net</Email>
+	<Address>电话:025-8744128</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>李之成</UserName>
+	<Email>hjpy@sina.com</Email>
+	<Address>010-82640078 88楼311室</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>梁青</UserName>
+	<Email>liangqing0@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>丁程</UserName>
+	<Email>doric@china.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>赵艳明</UserName>
+	<Email>zhaoyyy2@263.net</Email>
+	<Address>62282187</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>薛巍</UserName>
+	<Email>xw98@mails.tsinghua.edu.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>吴睿</UserName>
+	<Email>my-diablo@163.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>漆犇　</UserName>
+	<Email>dayanday@263.net</Email>
+	<Address>13601184837</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>赵蕾</UserName>
+	<Email>qbbj@263.net</Email>
+	<Address>82320765</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>赵亮</UserName>
+	<Email>zhaol@fengniao.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>李奇峰</UserName>
+	<Email>lqifn2163.com</Email>
+	<Address>0737-4223435</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘宗建</UserName>
+	<Email>liuzongjian@263.net</Email>
+	<Address>62761692 北京大学</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>柳敏</UserName>
+	<Email>irena@263.net</Email>
+	<Address>13621093902</Address>
+</Student>
+<Student>
+	<UserName>张猛</UserName>
+	<Email>zmwillow@263.net</Email>
+	<Address>13651353350</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>范永先</UserName>
+	<Email>fyx1970@263.net</Email>
+	<Address>BP:95812-16110</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Old</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>邹向荣</UserName>
+	<Email>zouxr@cic.tsinghua.edu.cn</Email>
+	<Address>13601379778</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>杨胜春</UserName>
+	<Email>ysc@sina.com</Email>
+	<Address>62777058 清华大学9＃102</Address>
+	<Gender>Male</Gender>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>沙铁军</UserName>
+	<Email>stj@necas.nec.co.jp</Email>
+	<Address>13651371499</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>宋斐</UserName>
+	<Email>sf06@263.net</Email>
+	<Address>68338800-98801</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>何新年</UserName>
+	<Email>hexn@ggw.com.cn</Email>
+	<Address>13662580036</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>廖若雪</UserName>
+	<Email>riso@softstar.net.cn</Email>
+	<Address>13910833740 北京大学38楼207</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王云</UserName>
+	<Email>kingcloud@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>马军锋</UserName>
+	<Email>mjfqh@263.net</Email>
+	<Address>62284521</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>常进</UserName>
+	<Email>changjin99@mails.tsinghua.edu.cn</Email>
+	<Address>62778400</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>yzj</UserName>
+	<Email>tian_nong@sina.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>赵坚毅</UserName>
+	<Email>zxs5673@sina.com</Email>
+	<Address>62517830</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>陈超</UserName>
+	<Email>tshirt@263.net</Email>
+	<Address>62762989 北京大学32#224</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName></UserName>
+	<Email>zyyang@0451.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>汤纯</UserName>
+	<Email>ctang@adoir.com</Email>
+	<Address>013805160821</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Old</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>黃相全</UserName>
+	<Email>huang99@mails.tsinghua.edu.cn</Email>
+	<Address>62791552 清华大学32#201</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>朱长才</UserName>
+	<Email>czhu@mmrc.iss.ac.cn</Email>
+	<Address>62639383</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>杨伟强</UserName>
+	<Email>wqyang@mmrc.iss.ac.cn</Email>
+	<Address>192-7322902</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+</Student>
+<Student>
+	<UserName>王骥</UserName>
+	<Email>ww2130@netease.com</Email>
+	<Address>13611249530</Address>
+</Student>
+<Student>
+	<UserName>张雷虎</UserName>
+	<Email>zlhu@263.net</Email>
+	<Address>82417614</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>宋薇薇</UserName>
+	<Email>swwgirl@263.net</Email>
+	<Address>62791537</Address>
+</Student>
+<Student>
+	<UserName>傅直全</UserName>
+	<Email>422228770923841</Email>
+	<Address>62775163清华大学16#310</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>李栋</UserName>
+	<Email>dong_li@is-one.net</Email>
+	<Address>13910294912</Address>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李道兵</UserName>
+	<Email>nichloas_lee@263.net</Email>
+	<Address>62762523 北京大学37#213</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>李国庆</UserName>
+	<Email>gqli@bjmail.net</Email>
+	<Address>13601361830</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Old</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>陈颖</UserName>
+	<Email>ayingcy@263.net</Email>
+	<Address>62283931</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王勇</UserName>
+	<Email>snowjay@ox.ios.ac.cn</Email>
+	<Address>13011007463</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张小宝</UserName>
+	<Email>zxb16@263.net</Email>
+	<Address>62285498</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张春</UserName>
+	<Email>zcspring@sina.com</Email>
+	<Address>62284661北京邮电大学20#（100876）</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>许辉跃</UserName>
+	<Email>xuhuiyue@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>任旻</UserName>
+	<Email>renmin@software.ict.cn</Email>
+	<Address>191-1230145</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>攻兵</UserName>
+	<Email>mynews@fnmail.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘腾蛟</UserName>
+	<Email>liutengjiao@263.net</Email>
+	<Address>62284613</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张小军</UserName>
+	<Email>xiaojun.zhang@sohu.com</Email>
+	<Address>北邮62284510</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张丹</UserName>
+	<Email>skill@263.net</Email>
+	<Address>62283827</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>尹慧德</UserName>
+	<Email>yhd98@21cn.edu.cn</Email>
+	<Address>62570409</Address>
+</Student>
+<Student>
+	<UserName>原永涛</UserName>
+	<Email>hynos2@263.net</Email>
+	<Address>62284575北京邮电大学244#</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张光泰</UserName>
+	<Email>zgtih@netbig.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张小玮</UserName>
+	<Email>shunaska@263.net</Email>
+	<Address>13601312465</Address>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>宁凯</UserName>
+	<Email>ningkai@263.net</Email>
+	<Address>62285744</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>顾思斌</UserName>
+	<Email>xayata@263.net</Email>
+	<Address>62285365</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>谢晓芹</UserName>
+	<Email>xqtse@263.net</Email>
+	<Address>62781461</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王荣健</UserName>
+	<Email>rongjianwang@263.net</Email>
+	<Address>62284887 </Address>
+</Student>
+<Student>
+	<UserName>陆俊秀</UserName>
+	<Email>lujx00@mails.tsinghua.edu.cn</Email>
+	<Address>62791682</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>路彬</UserName>
+	<Email>lubin9@263.net</Email>
+	<Address>63716734</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>万静芳</UserName>
+	<Email>meecat@263.net</Email>
+	<Address></Address>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张骏</UserName>
+	<Email>ZJZJ351@263.NET</Email>
+	<Address>北理工1#楼351室(68942742)</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>彭洪镇</UserName>
+	<Email>linux_news@elong.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张骏</UserName>
+	<Email>zjzj351@263.net</Email>
+	<Address>(68942742)北理工9120004班</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>戴闻亭</UserName>
+	<Email>wwdai@263.net</Email>
+	<Address>62791366</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>吕蕴卓</UserName>
+	<Email>lyzmailbox@sina.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王卓威</UserName>
+	<Email>holybear@263.net</Email>
+	<Address>82317614</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>陈源</UserName>
+	<Email>masques@263.net</Email>
+	<Address>62284369北京邮电大学 学三-210</Address>
+	<Gender>Male</Gender>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>郭红艳</UserName>
+	<Email>guohy@263.net</Email>
+	<Address>62582844</Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>孔升阳</UserName>
+	<Email>shengyang@iol.ru</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>董淼</UserName>
+	<Email>dongmiao@eyou.com</Email>
+	<Address>(022)27408200</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+</Student>
+<Student>
+	<UserName>何达</UserName>
+	<Email>heda@sina.com</Email>
+	<Address>13001288230</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>hoboo</UserName>
+	<Email>hoboo@sohu.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘进平</UserName>
+	<Email>liujp@mcm.com.cn</Email>
+	<Address>6616888-6610</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>胡虎</UserName>
+	<Email>huhu00@mails.tsinghua.edu.cn</Email>
+	<Address>62774027</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>邹勇</UserName>
+	<Email>zouy@intec.iscas.ac.cn</Email>
+	<Address>191-1213199 中科院软件所</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>邢江宁</UserName>
+	<Email>doudou_online@263.net</Email>
+	<Address>025-3599252</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>董秀蕾</UserName>
+	<Email>dongxl@cpums.edu.cn</Email>
+	<Address>63051722</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>贺江帆</UserName>
+	<Email>hejiangfan@china.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>赵蕾</UserName>
+	<Email>misszhaolei@263.net</Email>
+	<Address>62622200呼713991</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>严昌浩</UserName>
+	<Email>ychprivate@263.net</Email>
+	<Address>武汉华工 东13#416 87555919</Address>
+</Student>
+<Student>
+	<UserName>滕林</UserName>
+	<Email>tenglin@163.net</Email>
+	<Address>13910218987</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>黄景楠</UserName>
+	<Email>huangjnb@legend.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>石超</UserName>
+	<Email>sfc720@yeah.net</Email>
+	<Address>0991-96960-32270</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>zc</UserName>
+	<Email>zc.icefox@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>齐亮</UserName>
+	<Email>cavendish@eyou.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>吴震华</UserName>
+	<Email>wu_zhh@sina.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张人剑</UserName>
+	<Email>programmer_1@263.net</Email>
+	<Address>025-6630566-55</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>余珂</UserName>
+	<Email>yuke@intec.iscas.ac.cn</Email>
+	<Address>实验室电话82620803-801</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>信欣</UserName>
+	<Email>andyxin@sina.com</Email>
+	<Address>13002989903</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>陈军</UserName>
+	<Email>lodechen@sina.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>姚林朋</UserName>
+	<Email>woodmoon@citiz.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>朱震</UserName>
+	<Email>hope_zz@sina.com</Email>
+	<Address>传呼：1921375515</Address>
+</Student>
+<Student>
+	<UserName>张明杰</UserName>
+	<Email>mjxlzhang@163.net</Email>
+	<Address>(020)87521122</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李颛欣颛</UserName>
+	<Email>lizx77@263.net</Email>
+	<Address>62778259 25#209</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>guxinyu</UserName>
+	<Email>guxy@neu-alpine.com</Email>
+	<Address></Address>
+</Student>
+<Student>
+	<UserName>巴特尔</UserName>
+	<Email>dr_bart@263.net</Email>
+	<Address>62791307</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>jj</UserName>
+	<Email>wiran@china.com</Email>
+	<Address>28</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王民生</UserName>
+	<Email>forestgump@263.net</Email>
+	<Address>62774394清华大学26＃403</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>周明亮</UserName>
+	<Email>markiszml@21cn.com</Email>
+	<Address>0769-5593942</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>李德尔</UserName>
+	<Email>deerli@uestc.edu.cn</Email>
+	<Address>028-3201922</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张楠</UserName>
+	<Email>madsys@263.net</Email>
+	<Address>中科院信息安全中心</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>楚发</UserName>
+	<Email>chufa@etang.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>舒丹</UserName>
+	<Email>shudan75@263.net</Email>
+	<Address>62777270 清华大学34#513a</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>杜歆</UserName>
+	<Email>duxin@dial.zju.edu.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>邓艳兵</UserName>
+	<Email>dyb790223@sina.com.cn</Email>
+	<Address>027-85729732</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>丁丁</UserName>
+	<Email>dingfire@263.net</Email>
+	<Address>清华24＃412</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>沈传宁</UserName>
+	<Email>scning@263.net</Email>
+	<Address>13021129974</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>黄永灿</UserName>
+	<Email>ychuang@263.net</Email>
+	<Address>13001098818</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>魏郧峰</UserName>
+	<Email>weiyfh@sina.com.cn</Email>
+	<Address>010-62347205-8031</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>周丽</UserName>
+	<Email>julia@kinpobj.com.cn</Email>
+	<Address>191-2935290</Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘海涛</UserName>
+	<Email>htliu@cams.tsinghua.edu.cn</Email>
+	<Address>清华大学27#319</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+</Student>
+<Student>
+	<UserName>贾记春</UserName>
+	<Email>skyside@sohu.com</Email>
+	<Address>66413155-8010</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>高秋彬</UserName>
+	<Email>forest3@263.net</Email>
+	<Address>62775798 清华大学24#508</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>赵颖奇</UserName>
+	<Email>it110@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>梁勇</UserName>
+	<Email>lythesco@263.net</Email>
+	<Address>13501104242</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>熊振宇</UserName>
+	<Email>xiongzhy@sp.cs.tsinghua.edu.cn</Email>
+	<Address>13910109554 清华大学22#110</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>顾农</UserName>
+	<Email>gn@compsys.ia.ac.cn</Email>
+	<Address>82614501</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李黎</UserName>
+	<Email>tennisboyqq</Email>
+	<Address>13651399440</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>帅猛</UserName>
+	<Email>shuaimeng@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>孙永东</UserName>
+	<Email>sunyd@21cn.com</Email>
+	<Address>13021198644</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Old</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>陈拥军</UserName>
+	<Email>chyonjun@263.net</Email>
+	<Address>62256622-2599</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Old</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>薛江波</UserName>
+	<Email>rapy_tech@263.net</Email>
+	<Address>82317653 北航1#125</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>黄颖锋</UserName>
+	<Email>yingfhuang@263.net</Email>
+	<Address>86611083</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>宋斌</UserName>
+	<Email>songbine@sina.com</Email>
+	<Address>84015276,北京市安定门东大街乙2号</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>秦大川</UserName>
+	<Email>qindc99@mails.tsinghua.edu.cn</Email>
+	<Address>62773500</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>吕慧勤</UserName>
+	<Email>rilson@263.net</Email>
+	<Address>62283307北京邮电大学</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>周兰</UserName>
+	<Email>zllsyb@263.net</Email>
+	<Address></Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>彭胜任</UserName>
+	<Email>Peng-rn2263.net</Email>
+	<Address>95800-526720</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>何宜铭</UserName>
+	<Email>hansel@263.net</Email>
+	<Address>62283162</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张衍圣</UserName>
+	<Email>oneye@etang.com</Email>
+	<Address>62791409 清华大学#32 512</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Old</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘海龙</UserName>
+	<Email>hailong_liu@263.net</Email>
+	<Address>95800-711904</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>咸德宏</UserName>
+	<Email>hackz@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>周泽明</UserName>
+	<Email>zzm1972@ns.cetin.net.cn</Email>
+	<Address>62269273(H),62761133-2202</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Old</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>李恒金</UserName>
+	<Email>lhj@mail.cumtb.edu.cn</Email>
+	<Address>13501129970,62331999</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘敏</UserName>
+	<Email>lm@safepro.buaa.edu.cn</Email>
+	<Address></Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>姜斌</UserName>
+	<Email>auther_bin@263.net</Email>
+	<Address>62501558-863</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>顾翔</UserName>
+	<Email>guxiang@sina.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>应理航</UserName>
+	<Email>yinglh99@mails.tsinghua.edu.cn</Email>
+	<Address>13301035201</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>赵国光</UserName>
+	<Email>z_g_g@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>臧大昕</UserName>
+	<Email>zdx@safepro.buaa.edu.cn</Email>
+	<Address>82317649   北航2－83＃ 100083</Address>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>崔瑞峰</UserName>
+	<Email>cuirf@legend.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>强磊</UserName>
+	<Email>qianglei01@263.net</Email>
+	<Address>62284853 北邮粤苑324</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>万勇</UserName>
+	<Email>incats@sina.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>武小林</UserName>
+	<Email>wuxlc@legend.com</Email>
+	<Address>62986638转2706</Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>曾益民</UserName>
+	<Email>zengym@legend.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>雷勇</UserName>
+	<Email>leo_me@263.net</Email>
+	<Address>62773269</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>陈翔</UserName>
+	<Email>chenxiang@digitalchina.com.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName> 刘振红</UserName>
+	<Email>realredsunny@163.net</Email>
+	<Address></Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>realred</UserName>
+	<Email>realredsunny@163.net</Email>
+	<Address></Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>武小林</UserName>
+	<Email>wuxlc@legend.com</Email>
+	<Address>62986638转2706</Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘维权</UserName>
+	<Email>liuwqb@legend.com</Email>
+	<Address>62975458 </Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>詹满明</UserName>
+	<Email>zhanmm@sina.com</Email>
+	<Address>13021223838</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>黄建军</UserName>
+	<Email>huangchong@email.com.cn</Email>
+	<Address>010-64181919-8032</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>谢晓东</UserName>
+	<Email>lilyxd@sina.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张大鹏</UserName>
+	<Email>moonlunar@163.net</Email>
+	<Address>191-1128871</Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>邓朝阳</UserName>
+	<Email>dzhy@singapore-china.com</Email>
+	<Address>64218312</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>于辰</UserName>
+	<Email>ROAMINGFISH@hotmail.com</Email>
+	<Address>13301006371</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>孙晶</UserName>
+	<Email>jessie_sun@sina.com</Email>
+	<Address>64106688-27</Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>吴娜</UserName>
+	<Email>selena1978@sina.com</Email>
+	<Address>13910810772  </Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>tangbing</UserName>
+	<Email>tony0484@sina.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>裘阳</UserName>
+	<Email>qiu-yang@sina.com</Email>
+	<Address>13910417660</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>杨威</UserName>
+	<Email>ywjames@263.net</Email>
+	<Address>82899999-2682</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>严彦</UserName>
+	<Email>yyquick@263.net</Email>
+	<Address>北航8#204 82325897</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李道会</UserName>
+	<Email>doran_li@263.net</Email>
+	<Address>62791556清华大学32＃204</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>汤宁</UserName>
+	<Email>tangning@campus.com.cn</Email>
+	<Address>68727712</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>何宇</UserName>
+	<Email>cq_hy@263.net</Email>
+	<Address>023-62651418 重庆交通学院132#</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘勇</UserName>
+	<Email>odmh@163.net</Email>
+	<Address>62751767</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张巍</UserName>
+	<Email>zw@8848.net</Email>
+	<Address>198-10025375</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王炳立</UserName>
+	<Email>arbing2263.net</Email>
+	<Address>62304466-2130</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>周桂虔</UserName>
+	<Email>zhougq@263.net</Email>
+	<Address>2816-15972</Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>桂艳峰</UserName>
+	<Email>guiyanfeng@263.net</Email>
+	<Address>62764287</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>姜震</UserName>
+	<Email>jiangzhen_jz@263.net</Email>
+	<Address>82317202</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>周晔</UserName>
+	<Email>zhouye@tomogroup.com</Email>
+	<Address>13601132654</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>李诚</UserName>
+	<Email>lcbuaa@263.net</Email>
+	<Address>82325051北航7#338</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张镭</UserName>
+	<Email>zhangl@lsec.cc.ac.cn</Email>
+	<Address>82640106 中关村88楼216</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>曹恺</UserName>
+	<Email>garycao@263.net</Email>
+	<Address>13501384731</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>占铭</UserName>
+	<Email>wojimo_cn@21cn.com</Email>
+	<Address>62539016</Address>
+	<Gender>Male</Gender>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>贾锐</UserName>
+	<Email>jiarui@red.semi.ac.cn</Email>
+	<Address>82304252(o)</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>严必高</UserName>
+	<Email>bgyan@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>雷环利</UserName>
+	<Email>cclei@ccnu.edu.cn</Email>
+	<Address></Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>丁阳</UserName>
+	<Email>ding_yang@263.net</Email>
+	<Address>北京大学37#417</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+</Student>
+<Student>
+	<UserName>周一鸣</UserName>
+	<Email>ttd111@263.net</Email>
+	<Address>192-1148499</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>程晓军</UserName>
+	<Email>chengxj00@mails.tsinghua.edu.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>陈天河</UserName>
+	<Email>ctianh@sohu.com</Email>
+	<Address>82619074</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>赵振帅</UserName>
+	<Email>zhenshuai@sina.com</Email>
+	<Address>68423388-69512,68981840</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王健君</UserName>
+	<Email>panda-7981@263.net</Email>
+	<Address>95960-8177179</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>周永彬</UserName>
+	<Email>zhouyongbin@sina.com</Email>
+	<Address>010-62645412</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>CYNTHIA</UserName>
+	<Email>goldpharaoh@sina.com</Email>
+	<Address></Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>苏宁</UserName>
+	<Email>cronin@etang.com</Email>
+	<Address>(021)65114919</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>陈强兵</UserName>
+	<Email>cqb@ufsoft.com.cn</Email>
+	<Address>13641071117/北京上地开拓路15号测试部</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>陈馨</UserName>
+	<Email>xin.chen@fibrlink.com</Email>
+	<Address>13910654191</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>蒋琛</UserName>
+	<Email>ada_jiang@263.net</Email>
+	<Address>62791447清华大学32＃619</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘健</UserName>
+	<Email>llliujian@263.net</Email>
+	<Address>62774675清华大学26#118</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘东</UserName>
+	<Email>liudong750808@263.net</Email>
+	<Address>62776744</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王乐</UserName>
+	<Email>wl_soft@263.net</Email>
+	<Address>BP:191-1221640</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王光磊 </UserName>
+	<Email>cobrawgl@263.net</Email>
+	<Address>010-64487433</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>陈华</UserName>
+	<Email>goldenyears@sina.com.cn</Email>
+	<Address>010-68702020-2034</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>史志洁</UserName>
+	<Email>szj@peopledaily.com.cn</Email>
+	<Address>65091679</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘海涛</UserName>
+	<Email>wtolht@263.net</Email>
+	<Address>65093388呼8622</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>汪敏</UserName>
+	<Email>wangmin@bigfoot.com</Email>
+	<Address>13910839079</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>谈峥嵘</UserName>
+	<Email>corba.com.cn@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王春水</UserName>
+	<Email>wang@bfa.edu.cn</Email>
+	<Address>62032674</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>虞盛超</UserName>
+	<Email>zsyusc@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>董岚</UserName>
+	<Email>mythdl@yeah.net</Email>
+	<Address></Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>蒋旭春</UserName>
+	<Email>jjiang@novell.com</Email>
+	<Address>86-10-68028855-259ext</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>史实</UserName>
+	<Email>sendtoshi@263.net</Email>
+	<Address>13910066352</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>尚宇亮</UserName>
+	<Email>roselove@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>胡宇</UserName>
+	<Email>lhjyx@chinaren.com</Email>
+	<Address>04514866469 黑龙江商学院224#</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>许强</UserName>
+	<Email>xuqiang35@sina.com</Email>
+	<Address>64201188-142</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王捷</UserName>
+	<Email>jannet-wang</Email>
+	<Address>（电话，地址）02787868634 武汉大学新H3-318</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>黄敏</UserName>
+	<Email>kuangshu@263.net</Email>
+	<Address>0731-5113275</Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Old</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘辉</UserName>
+	<Email>tophuiliu@china.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>赵继泽</UserName>
+	<Email>jizezhao@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘晓曦</UserName>
+	<Email>liouxiao@263.net</Email>
+	<Address>13901215424</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>黎达文</UserName>
+	<Email>darkay@21cn.com</Email>
+	<Address>广东中山火炬开发区24幢9楼</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>戴亮</UserName>
+	<Email>dailiang@sina.com</Email>
+	<Address>62285826</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>金峰</UserName>
+	<Email>jinfengs@163.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>何海洋</UserName>
+	<Email>he_hai_yang@163.com</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>纵程毅</UserName>
+	<Email>darkbug@263.net</Email>
+	<Address>13301062190</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>龙浩晖</UserName>
+	<Email>785500@sina.com</Email>
+	<Address>027-87543538华工东11舍405实</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王忠</UserName>
+	<Email>wz5@sina.com.cn</Email>
+	<Address>64576813 首都机场</Address>
+	<Gender>Male</Gender>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王玉成</UserName>
+	<Email>wangyca@legend.com</Email>
+	<Address>010-62986638-5298</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Old</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>郭朝阳</UserName>
+	<Email>bluegcy@263.net</Email>
+	<Address>62751797-8023,北京大学理科一号楼1716E房间</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>李波</UserName>
+	<Email>liber@263.net</Email>
+	<Address>13910626668</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>刘勇</UserName>
+	<Email>lysdyt@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>罗于红</UserName>
+	<Email>hongzi@263.net</Email>
+	<Address>13621226230</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>张欣</UserName>
+	<Email>zhangxinj@legend.com</Email>
+	<Address>北京8688信箱软件事业部</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>尚健</UserName>
+	<Email>kidwater@263.net</Email>
+	<Address>13910008373</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>何江灏</UserName>
+	<Email>heokheok@sina.com</Email>
+	<Address>88027255-135</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>于滨</UserName>
+	<Email>yubin_6@sina.com</Email>
+	<Address>010-62984668-230</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>李斌</UserName>
+	<Email>lbyy@sina.com.cn</Email>
+	<Address>13621140125</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>夏建军</UserName>
+	<Email>xia_jianjun@263.net</Email>
+	<Address>13910833772</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张锐</UserName>
+	<Email>real.z@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>胡广斌</UserName>
+	<Email>gbhu@sitechasia.com</Email>
+	<Address>13601257567</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>刘立鹏</UserName>
+	<Email>lp.liu@263.net</Email>
+	<Address>62177732</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>倪鸥</UserName>
+	<Email>anha@263.net</Email>
+	<Address>027-95950-6076900</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>陈广</UserName>
+	<Email>cg8000@sohu.com</Email>
+	<Address>62304029-23</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王凯</UserName>
+	<Email>yan.bobo@263.net</Email>
+	<Address>82331432 北航1-34#</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>江滢</UserName>
+	<Email>jcylinder@163.net</Email>
+	<Address></Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>辛朝文</UserName>
+	<Email>xcw@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Old</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>罗达雄</UserName>
+	<Email>mbeetle@263.net</Email>
+	<Address>13621273220</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>陈海涛</UserName>
+	<Email>cht@mx.cei.gov.cn</Email>
+	<Address>68457656/57/58转213</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>郭宏斌</UserName>
+	<Email>guohongbin@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张龙</UserName>
+	<Email>zhanglong_net@btamail.net.cn</Email>
+	<Address>68945588-5075</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>桑玉民</UserName>
+	<Email>symg@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>崔峰</UserName>
+	<Email>fcui@sp.com.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李志敏</UserName>
+	<Email>gdt_lizhimin@263.net</Email>
+	<Address></Address>
+</Student>
+<Student>
+	<UserName>解开颜</UserName>
+	<Email>thomasxie@263.net</Email>
+	<Address>13501331418</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>洪湖鹏</UserName>
+	<Email>nuisancee@sina.com</Email>
+	<Address>清华大学25＃210</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>赵艳红</UserName>
+	<Email>pzhaoshi@sina.com</Email>
+	<Address></Address>
+	<Gender>Female</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>毕黎明</UserName>
+	<Email>bb_2001@sohu.com</Email>
+	<Address>62317146</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>赵军辉</UserName>
+	<Email>zjunh@263.net</Email>
+	<Address>68911841</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王生</UserName>
+	<Email>nanoman@8848.net</Email>
+	<Address>13641322101</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>唐巍巍</UserName>
+	<Email>tww@263.net</Email>
+	<Address>62898265</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>孙福卓</UserName>
+	<Email>flyelite@sina.com</Email>
+	<Address>65669605-315</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>江庆铭</UserName>
+	<Email>jiangqm@263.net</Email>
+	<Address>13651205137</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王志强</UserName>
+	<Email>coolwzq@263.net</Email>
+	<Address>62630003转146,83160088呼2206855</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李胜威</UserName>
+	<Email>david.liiii@163.com</Email>
+	<Address></Address>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>蒋飞飞</UserName>
+	<Email>feiya@sohu.com</Email>
+	<Address>010-62524868-313</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>蒋乐洋</UserName>
+	<Email>jiangleyang@163.net</Email>
+	<Address>67732099，65883216-219</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+</Student>
+<Student>
+	<UserName>吴娜</UserName>
+	<Email>na.wu@sony.com.cn</Email>
+	<Address></Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>李彪军</UserName>
+	<Email>microthink@263.net</Email>
+	<Address>tel:01088431226/82667660-1018 Mp:13601352756 北京海淀区海淀路52号太平洋大厦909-915室/海淀区金庄1号院2栋201</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>丛鹏</UserName>
+	<Email>wdz77@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>朱代祥</UserName>
+	<Email>mboy_cn@sina.com</Email>
+	<Address>13611233131</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>严彦</UserName>
+	<Email>yyquick@263.net</Email>
+	<Address>010-82325897</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>张晓坤</UserName>
+	<Email>zhangxiaokun@sina.com</Email>
+	<Address>138011894826</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Old</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>郭小平</UserName>
+	<Email>powerlord@263.net</Email>
+	<Address>13641057600</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>xiewei</UserName>
+	<Email>xiewei@gentek.com.cn</Email>
+	<Address>13501757603</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Old</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>李章兵</UserName>
+	<Email>lizhangbing@263.net</Email>
+	<Address>0732-8272948  湖南湘潭</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Old</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王曙</UserName>
+	<Email>star_wang@sina.com</Email>
+	<Address>13901296967 诺方信业</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>赵东炜</UserName>
+	<Email>jackyz@163.net</Email>
+	<Address>13021171244</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>于胜利</UserName>
+	<Email>yushengli.668@263.net</Email>
+	<Address>0471-3600447</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>左惠萍</UserName>
+	<Email>zuo-hp@chincom.com</Email>
+	<Address></Address>
+	<Gender>Female</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>陈海涛</UserName>
+	<Email>cht@mx.cei.gov.cn</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>杨笑宇</UserName>
+	<Email>jobd@sina.com</Email>
+	<Address>13910010277</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>胡长城</UserName>
+	<Email>fcxiao2000@mail.biti.edu.cn</Email>
+	<Address>117425</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>王威伟</UserName>
+	<Email>www88888888@sina.com.cn</Email>
+	<Address>62348386</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>SoSo</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>方宁</UserName>
+	<Email>fang_ning@263.net</Email>
+	<Address></Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王守义</UserName>
+	<Email>wangsyb@legend.com</Email>
+	<Address>13701143738</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>伊永生</UserName>
+	<Email>yiys2000@sina.com</Email>
+	<Address>13910707175</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>李勇</UserName>
+	<Email>yongleon@huawei.com</Email>
+	<Address>62882218</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Old</Age>
+</Student>
+<Student>
+	<UserName>柳长华</UserName>
+	<Email>liu_changhua@founder.com.cn</Email>
+	<Address>13910396933 北京海淀区上地五街9号方正大厦516#</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>Linux</Lecture>
+</Student>
+<Student>
+	<UserName>王波</UserName>
+	<Email>wbbf@sina.com.cn</Email>
+	<Address>62071440</Address>
+	<Gender>Male</Gender>
+	<From>Corp</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>
+<Student>
+	<UserName>匡宏波</UserName>
+	<Email>lishxia@263.net</Email>
+	<Address>0738-8362190</Address>
+	<Gender>Male</Gender>
+	<From>Univ</From>
+	<Age>Young</Age>
+	<Satisfy>Good</Satisfy>
+	<Lecture>NewTech</Lecture>
+</Student>

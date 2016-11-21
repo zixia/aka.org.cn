@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>线程中的信号处理</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        PRE { color: #ffffff; font-family: "fixed" }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="velvet.jpg">
+
+<A HREF="function.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="terminal.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=CENTER>7.5&nbsp;&nbsp;线程中的信号处理<BR><BR>
+</H1>
+
+<UL>
+        <LI>概念</LI>
+        <LI>pthread_sigmask</LI>
+        <LI>pthread_kill 和 sigwait</LI>
+</UL>
+
+<H3>7.5.1&nbsp;&nbsp;概念</H3>
+<UL>
+    <LI>按照 POSIX, 异步 (外部) 信号发送到整个进程.</LI>
+    <LI>所有线程共享同一个设置, 即通过 sigaction 设置的线程处置方法.</LI>
+    <LI>每个线程有自己的信号掩码, 线程库根据该掩码决定将信号发送到哪个线程.</LI>
+    <LI>由于 Linux 线程实现上的独特性, 外部信号始终发送到特定的线程.</LI>
+</UL>
+
+<H3>7.5.2&nbsp;&nbsp;pthread_sigmask</H3>
+<UL>
+    <LI>pthread_sigmask 用来定义线程的信号掩码</LI>
+    <LI>其接口与 sigprocmask 一样</LI>
+<PRE>
+===============================================================================
+       #include &lt;pthread.h&gt;
+       #include &lt;signal.h&gt;
+
+       int pthread_sigmask (int how, const sigset_t *newmask, sigset_t *oldmask);
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>7.5.3&nbsp;&nbsp;pthread_kill 和 sigwait</H3>
+<PRE>
+===============================================================================
+       #include &lt;pthread.h&gt;
+       #include &lt;signal.h&gt;
+
+       int pthread_kill (pthread_t thread, int signo);
+       int sigwait (const sigset_t *set, int *sig);
+===============================================================================
+</PRE>
+
+<UL>
+    <LI>pthread_kill 向特定的线程发送信号.</LI>
+    <LI>sigwait 暂定调用线程, 直到 set 中定义的某个信号递达调用线程.</LI>
+    <LI>sigwait 返回时, sig 中保存的是接收到的信号编号.</LI>
+    <LI>sigwait 所等待的信号必须在所有线程中阻塞, 而不仅仅是调用线程.</LI>
+</UL>
+
+<P>
+<BR><BR>
+</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="function.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="terminal.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+</BODY>
+</HTML>
+

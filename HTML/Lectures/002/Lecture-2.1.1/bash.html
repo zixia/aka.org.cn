@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>Bash 命令行与脚本</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+    <META NAME="GENERATOR" CONTENT="StarOffice/5.1 (Linux)">
+    <META NAME="AUTHOR" CONTENT="Yongming Wei">
+    <META NAME="CREATED" CONTENT="20000329;17342600">
+    <META >
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="velvet.jpg">
+
+<A HREF="utilities.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=CENTER>1.11&nbsp;&nbsp;Bash 命令行与脚本<BR><BR>
+</H1>
+
+<UL>
+    <LI><P>Bash 介绍</LI>
+    <LI><P>重要的命令行机制 (I/O 重定向, 管道, ...)</LI>
+    <LI><P>Bash 脚本介绍</LI>
+    <LI><P>变量</LI>
+    <LI><P>控制结构</LI>
+    <LI><P>范例</LI>
+</UL>
+
+<H3>1.11.1&nbsp;&nbsp;Bash 介绍</H3>
+<P>
+bash（Bourne Again SHell）是自由软件基金会发布的 Bourne Shell 的兼容程序。它包含了许多其他优秀 s
+hell 的良好特性，功能十分全面。很多 Linux 版本都提供 bash。
+</P>
+
+<H3>1.11.2&nbsp;&nbsp;重要的命令行机制</H3>
+<PRE>
+变量
+命令补全
+特殊字符：" '
+别名
+重定向
+管道
+历史表
+命令行编辑
+</PRE>
+
+<H3>1.11.3&nbsp;&nbsp;Bash 脚本介绍</H3>
+<P>#TODO#</P>
+
+<H3>1.11.4&nbsp;&nbsp;变量</H3>
+<P>环境变量</P>
+<P>自定义变量</P>
+<P>特殊变量：$0, $1, $2, $*, $#, $$, $!, $?</P>
+<P>特殊字符："", '', ``, {}, (), []</P>
+
+<H3>1.11.5&nbsp;&nbsp;控制结构</H3>
+<P>if</P>
+<P>test</P>
+<P>while</P>
+<P>until</P>
+<P>for</P>
+<P>case</P>
+<PRE>
+    在 Bash 脚本中，控制结构（例如 if、case、for 和 while）要依靠一条命令的出口状态来决定
+下一步做什么。当一个命令执行时，它返回一个出口状态：表示该命令是否成功的一个数字。通常，
+出口状态值是 0 就表示命令执行成功。一个非零的出口状态值表示
+该命令出现故障了。
+    现在用户可以设计这样一个脚本，它的功能是在使用 vi 编辑器打开一个文件之前，对这个文件做一个备
+份。具体的形式如下：
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+    #!/bin/sh
+    if cp "$1" "#$1"
+    then
+         vi "$1"
+    else
+         echo "Failed to create backup copy"
+    fi
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+    这个脚本说明了 if-then-else 结构的语法，也显示了 cp 命令的出口状态值是如何被 if 结构用来
+决定下一步操作。假如 cp 的返回值是 0，脚本将调用 vi 编辑这个文件；否则，脚本将显示故障信息，
+然后退出。
+    不要忘记结束符 fi，它的作用是结束 if 结构。忘记使用 fi 是 Bash 脚本中常见的错误之一。
+    Bash 包含了 test 命令，它可以允许用户计算表达式的值，并使用表达式的值作为命令的出口状态值。
+假设用户想要建立一个能够编辑现有文件的脚本。使用 test，可以按照如下的方式编写这个脚本：
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+    #!/bin/sh
+    if test -f  "$1"
+    then
+         vi "$1"
+    else
+         echo "No such file"
+    fi
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+    test 命令的一个更简短的格式是将 test 去掉，只在一个方括号内留下命令选项。使用这种方式，
+可以将上面这个脚本写成如下形式：
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+    #!/bin/sh
+    if [ -f  "$1" ]
+    then
+         vi "$1"
+    else
+         echo "No such file"
+    fi
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+    左方括号（[）其实是一个指向 /usr/bin/test 的符号链接。用户可以通过输入 ls -l /usr/bin/[ 来验
+证这个链接。
+    另一个使用广泛的控制结构是 for 循环。下面的脚本功能是分别将 1 到 10 累加成一个数：
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+    #!/bin/sh
+    sum=0
+    for i in 1  2  3  4  5  6  7  8  9  10
+    do
+         sum='expr  $sum + $i'
+    done
+    echo  "Sum = $sum"
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+    这个例子也说明了如何使用 expr 命令来计算一个表达式的值。
+</PRE>
+
+<H3>1.11.6&nbsp;&nbsp;范例</H3>
+<P>#DEMO#</P>
+
+<P>
+<BR><BR>
+</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="utilities.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+</BODY>
+</HTML>
+

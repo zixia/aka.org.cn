@@ -1,0 +1,1369 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8"> 
+<META NAME="Generator" CONTENT="vi, the real one :)">
+<META NAME="Author" CONTENT="Pablo Saratxaga">
+<META NAME="KeyWords" CONTENT="Linux, locales, languages, l10n, i18n">
+<META NAME="Keywords" CONTENT="arab, Arabic, Catalan, catalଠczech, danish, finnish">
+<META NAME="Keywords" CONTENT="greek, esperanto, estonian, faroese, armenian">
+<META NAME="Keywords" CONTENT="spanish, euskara, basque, gaelic, thai">
+<META NAME="Keywords" CONTENT="galego, georgian, croatian, hungarian">
+<META NAME="Keywords" CONTENT="indonesian, bahasa, icelandic, hebrew, japanese">
+<META NAME="Keywords" CONTENT="greenlandic, lithuanian, latvian, dutch">
+<META NAME="Keywords" CONTENT="norwegian, polish, portuguese, romanian">
+<META NAME="Keywords" CONTENT="russian, slovak, slovenian, serbian, swedish">
+<META NAME="Keywords" CONTENT="breton, brezh, turkish, vietnamese, walon, chinese">
+<META NAME="Keywords" CONTENT="inuktitut">
+<meta name="description" content="Many Linux locales -- You can find here packages to add support for several locales to Linux"> 
+<TITLE>Babel's Tower (Locales for Linux)</TITLE>
+<LINK REL=stylesheet HREF="../mainstyle.css" TYPE="text/css">
+</HEAD>
+
+<BODY bgcolor="#e9e9fe" background="../pics/backdrop.gif">
+<font face="Arial,Helvetica">
+
+<A NAME="_Top">
+<H2 align="center">Locales for Linux</H2>
+
+<P>
+One of my current occupations is pushing for interest in the localization
+(often abbreviated <b>l10n</b>) of the Linux operating system to as many
+languages as possible; for that I created some supplementary locales
+support in addition to those distributed with GNU libc. They are available
+here in rpm package format, handy for those of you that use that format.
+Otherwise, for languages not supproted by default by GNU libc, the sources
+of locale/charset definitions are available. THe compiled locales can be
+created by running: <b>localedef -i xx_YY -f ZZZZZ -u mnemonic.ds xx</b><br>.
+With <b>xx</b> being the iso language code, <b>YY</b> the iso country code,
+and <b>ZZZZ</b> the charset to be used.
+<BR>
+</P>
+You can read a good explanation about localization, its meaning,
+its implications, and some vocabulary, from 
+<A HREF="http://www.mozilla.org/docs/refList/i18n/">Mozilla i18n &amp; l10n Guidelines</A>
+page and the comprehensive <A HREF="http://cns-web.bu.edu/pub/djohnson/web_files/i18n/i18n.html">
+Concepts of C/UNIX Internationalization</A> page of Dave Johnson.
+<P>
+And you can visit this very interesting and complete site on charsets encodings:
+<A HREF="http://czyborra.com/charsets/">http://czyborra.com/charsets/</A>
+<P>
+
+<h2>How to use them?</h2>
+<P>
+That is indeed quite easy.<br>
+First you need to install the package corresponding to the language(s) you
+want support for, of course.<br>
+After that you need to instruct Linux which language(s) to use, there 
+are several variables that deal with the locales, first each locale
+category has its own: <b>LC_CTYPE, LC_TIME, LC_COLLATE, LC_NUMERIC,</b>
+and <b>LC_MONETARY</b>, and the <b>LC_ALL</b> that overwrites and sets all
+the previous ones. So you can choose different locales for each category, but
+that is seldom done. There are also two other environnement variables that
+deal with locales: <b>LANG</b> and <b>LANGUAGE</b> they are quite similar
+and work like <b>LC_ALL</b> in that they define the default locales for
+all categories, but contrary to <b>LC_ALL</b>, they don't overwrite explicitely
+defined <b>LC_*</b> variables. So, for facility, generally only <b>LANG</b>
+is used to define the locale. <b>LANGUAGE</b> is somewhat a GNU extension
+to <b>LANG</b>, not all programs recognize it (but very few don't, and
+they are each time lesser), but the nice thing is that it allows to specify
+<b><i>multiple</i></b> locales, in order of preference. That is very handy,
+specially for people using a language which has few translations, but that
+know also other languages; or to people using minoritary languages.<br>
+So my advice is to use <b>LANG</b> if you only need one locale, and
+both <b>LANG</b> and <b>LANGUAGE</b> if you want several ones.
+<P>
+<h3>The format</h3>
+<P>
+The format of a locale name is <b>ll</b>[<b>_CC</b>[<b>.EEEE</b>]][<b>@dddd</b>]
+where <b>ll</b> is the two letters iso code for <i>languages</i> (ISO 639),
+in lowercase; <b>CC</b> is the two letter iso code for <i>countries</i>
+(ISO 3166), in uppercase; <b>EEEEE</b> is the charset encoding, in uppercase
+(there isn't really any standardization on the format; so it is generally
+omitted); and <b>ddddd</b> is an eventual dialectal variant, when the country
+or the charset encoding is not enough to distinguish two locales of the
+same language (exemples of that are <b>no</b> (Bokmål Norwegian) and
+<b>no@nynorsk</b> (Nynorsk Norwegian); or my <b>*@euro</b> that use the
+euro for the monetary symbol, or <b>es@tradicional</b> which uses the
+traditional sorting order of spanish, etc...) 
+<P>
+<P>
+<h3>Finally...</h3>
+<P>
+So, from the above, you need to edit your <b>$HOME/.profile</b> (or whatever
+file is sourced at login time, be it <b>$HOME/.Xclients</b>,
+<b>$HOME/.xinitrc</b> or others) and put:<br>
+<pre>
+export LANG=xx
+export LANGUAGE=xx:yy:zz:aa_BB 
+</pre>
+With <b>xx</b> being your preferred language, <b>yy</b>, <b>zz</b>,
+<b>aa_BB</b>, etc being other possible locales you may want.
+<P>
+That's all !<br>
+Now all programs will correctly display the letters of your language
+(no more filtring of 8th bit by less or tin...), and (provided they had
+been transalted) man pages, programs interfaces and menus, etc, will
+show in your language.<br>
+Enjoy !
+<P>
+
+<A NAME="#be"><A NAME="#hi">
+<h2>Wanted Info...</h2>
+<P>
+...on Bielorussian, Laotian, Hindi,...<br>
+If your language is not listed here you can contribute to the Linux
+effort by enabling support for it. 
+<P>
+
+<TABLE border=2>
+
+<TR>
+<TH></TH>
+<TD><A HREF="locales-2.1-1mdk.noarch.rpm">locales-2.1-1mdk.noarch.rpm</A> (73088) </TD>
+<TD>These are the base files for language localization. You also need to install the specific locales-?? for the language(s) you want. Then the user need to set the LANG variable to their preferred language in their ~/.profile configuration file.  
+This packages only contains some few compatibility entries.
+</TD>
+</TR>
+
+<TR>
+<TH></TH>
+<TD><A HREF="locales-2.1-1mdk.src.rpm">locales-2.1-1mdk.src.rpm</A> (362471) </TD>
+<TD>
+This is the source for the various locales-?? files not yet on standard
+glibc distribution; and the spec file describing how they are built.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="af"><img src="bulle-af.gif" width=48 eight=48><br><A HREF="#more_af">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Afrikaans - Afrikaans</b></font></center><br>
+<A HREF="locales-af-2.1-1mdk.noarch.rpm">locales-af-2.1-1mdk.noarch.rpm</A> (16894) </TD>
+<TD>
+Hierdie is die basislêers vir Afrikaanse lokalisasie. 
+U benodig dit om die Afrikaanse 8-bis karakters korrek 
+te vertoon, vir korrekte alfabetiese sorterting en ook om
+datums en getalle in die Afrikaanse standaardvorm te vertoon.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="ar"><img src="bulle-ar.gif" width=48 eight=48><br><A HREF="#more_ar">more</A></TH>
+<TD><center><font size="+1" color="red"><b> - Arabic</b></font></center><br>
+<A HREF="locales-ar-2.1-1mdk.noarch.rpm">locales-ar-2.1-1mdk.noarch.rpm</A> (14926) </TD>
+<TD>
+These are the base files for Arabic language localization; you need it to correctly display 8bits arabic characters, and for proper alfabetical sorting and representation of dates and numbers according to arabic language conventions. Note that this package doesn't handle right-to-left and left-to-right switching when displaying nor the isolate-initial-medial-final shapes of letters; it is to the xterm, application or virtual console driver to do that.    
+<font color="red">[Anyone willing to translate the description into
+arabic ? -- <A HREF="mailto:srtxg@ping.be">Pablo</A>]</font>
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="bg"><img src="bulle-bg.gif" width=48 eight=48></TH>
+<TD><center><font size="+1" color="red"><b>Bulgarian - Български</b></font></center><br>
+<A HREF="locales-bg-2.1-1mdk.noarch.rpm">locales-bg-2.1-1mdk.noarch.rpm</A> (16394) </TD>
+<TD>
+Тези файлове съдържат основните регионални характеристики на българския език;
+теса необходими за правилното представяне на 8 - битовите букви на кирилицата
+на екрана, за правилната азбучна подредба и за представяне на датата и числата
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="br"><img src="bulle-br.gif" width=48 eight=48><br><A HREF="#more_br">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Breton - Brezhoneg</b></font></center><br>
+<A HREF="locales-br-2.1-1mdk.noarch.rpm">locales-br-2.1-1mdk.noarch.rpm</A> (28068) </TD>
+<TD>
+Kement-mañ a zo restroù diazez evit broelañ diouzh ar Vrezhoneg ; ret
+eo evit diskwel ent reizh arouezennoù breizhat 8bit, rummañ dre al
+lizherenneg, taolennañ an deizadoù hag an niveroù hervez kendivizadoù
+ar brezhoneg.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="ca"><img src="bulle-ca.gif" width=48 eight=48><br><A HREF="#more_ca">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Catalan - Català</b></font></center><br>
+<A HREF="locales-ca-2.1-1mdk.noarch.rpm">locales-ca-2.1-1mdk.noarch.rpm</A> (29361) </TD>
+<TD>
+Aquests són els arxius bàsics per a l'adaptació del sistema a les
+peculiaritats de la llengua catalana; són necessaris perquè
+les vocals accentuades, la ce trencada, etc. apareguin correctament,
+i perquè les dates, els nombres i l'ordre alfabètic s'adaptin 
+a les convencions de la dita llengua. 
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="cs"><img src="bulle-cs.gif" width=48 eight=48></TH>
+<TD><center><font size="+1" color="red"><b>Czech - Český jazyk
+<!-- Czech language is also called Čeština in czech --></b></font></center><br>
+<A HREF="locales-cs-2.1-1mdk.noarch.rpm">locales-cs-2.1-1mdk.noarch.rpm</A> (15893) </TD>
+<TD>
+Zde jsou soubory nutné pro správnou českou lokalizaci; potřebujete je
+pro správné zobrazování českých 8bitových znaků a pro správné české
+třídění a rprezentaci data a čísel podle českých konvencí.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="cy"><img src="bulle-cy.gif" width=48 eight=48><br><A HREF="#more_cy">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Welsh - Cymraeg</b></font></center><br> 
+<A HREF="locales-cy-2.1-1mdk.noarch.rpm">locales-cy-2.1-1mdk.noarch.rpm</A> (16368) </TD>
+<TD>
+Dyma'r ffeiliau sylfaenol i'r lleoliaeth Cymraeg; mae angen rhain er mwyn
+dangos yn iawn y cymeriadau Cymraeg 8-bit, a threfniant y wyddor, 
+dyddiadau a rhifau yn ôl yr arfer Cymraeg.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="da"><img src="bulle-da.gif" width=48 eight=48></TH>
+<TD><center><font size="+1" color="red"><b>Danish - Dansk</b></font></center><br>
+<A HREF="locales-da-2.1-1mdk.noarch.rpm">locales-da-2.1-1mdk.noarch.rpm</A> (27494) </TD>
+<TD>
+Her er de basale filer for dansk sprog tilpasning. De er nødvendige for
+at vise de danske 8bit tegn, sortere alfabetisk og repræsentere datoer
+og tal korrekt ifølge dansk retskrivning.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="de"><img src="bulle-de.gif" width=48 eight=48></TH>
+<TD><center><font size="+1" color="red"><b>German - Deutsch</b></font></center><br>
+<A HREF="locales-de-2.1-1mdk.noarch.rpm">locales-de-2.1-1mdk.noarch.rpm</A> (143700) </TD>
+<TD>
+Dies sind die Basisdateien für die deutsche Sprachanpassung; sie
+werden für die korrekte Darstellung deutscher 8-Bit-Zeichen,
+die deutsche Sortierreihenfolge sowie Datums- und Zahlendarstellung
+benötigt.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="el"><img src="bulle-el.gif" width=48 eight=48></TH>
+<TD><center><font size="+1" color="red"><b>Greek - Ελληνικα</b></font></center><br>
+<A HREF="locales-el-2.1-1mdk.noarch.rpm">locales-el-2.1-1mdk.noarch.rpm</A> (16932) </TD>
+<TD>
+Αυτά είναι τα βασικά αρχεία για υποστήριξη
+ελληνικής γλώσσας. Τα χρειάζεστε για τη
+σωστή απεικόνιση 8bit ελληνικών χαρακτήρων,
+καθώς και για την σωστή ταξινόμηση και
+απεικόνιση ημερομηνιών και αριθμών σύμφωνα
+με τις συμβάσεις της ελληνικής γλώσσας.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="en"><img src="bulle-en.gif" width=48 eight=48></TH>
+<TD><center><font size="+1" color="red"><b>English</b></font></center><br>
+<A HREF="locales-en-2.1-1mdk.noarch.rpm">locales-en-2.1-1mdk.noarch.rpm</A> (130876) </TD>
+<TD>
+These are the base files for English language localization.
+ Contains: en_CA en_DK en_GB en_IE en_US
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="eo"><img src="bulle-eo.gif" width=48 eight=48><br><A HREF="#more_eo">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Esperanto</b></font></center><br>
+<A HREF="locales-eo-2.1-1mdk.noarch.rpm">locales-eo-2.1-1mdk.noarch.rpm</A> (16456) </TD>
+<TD>
+Tiuj ĉi estas la bazaj dosieroj por la esperantlingva lokaĵo; vi bezonas
+ilin por ĝuste vidi 8-bitajn Esperanto-signojn kaj por ĝusta
+alfabeta ordo, datindikoj kaj nombroj konvene al la konvencioj
+en esperanta medio.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="es"><img src="bulle-es.gif" width=48 eight=48><br><A HREF="#more_es">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Spanish - Castellano</b></font></center><br>
+<A HREF="locales-es-2.1-1mdk.noarch.rpm">locales-es-2.1-1mdk.noarch.rpm</A> (247141) </TD>
+<TD>
+Este paquete incluye las definiciones de locales para el castellano.
+Este paquete contiene lo necesario para la visualisación correcta de
+los caracteres 8bits del idioma español, para el orden alfabético
+y para la representación correcta de los números y fechas según
+las convenciones del castellano.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="et"><img src="bulle-et.gif" width=48 eight=48></TH>
+<TD><center><font size="+1" color="red"><b>Estonian - Eesti</b></font></center><br>
+<A HREF="locales-et-2.1-1mdk.noarch.rpm">locales-et-2.1-1mdk.noarch.rpm</A> (16261) </TD>
+<TD>
+Siin on vajalikud failid Linuxi eestindamiseks. Need on vajalikud
+8-bitiliste eesti sümbolite korrektseks esitamiseks ning õige
+tähestikulise järjestuse jaoks. Samuti numbrite ja kuupäevade
+eesti keele reeglitele vastavaks esituseks.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="ethiopic"><img src="bulle-ethiopic.gif" width=48 eight=48><br><A HREF="#more_ethiopic">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Ethiopic - <image src="ethiopic.gif"></b></font></center><br>
+</TD>
+<TD>
+<font color="red">[...I need Info...
+  -- <A HREF="mailto:srtxg@ping.be">Pablo</A>]</font>
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="eu"><img src="bulle-eu.gif" width=48 eight=48><br><A HREF="euskara/">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Basque - Euskara</b></font></center><br>
+<A HREF="locales-eu-2.1-1mdk.noarch.rpm">locales-eu-2.1-1mdk.noarch.rpm</A> (28807) </TD>
+<TD>
+Linux-ek euskaraz badaki ! Hauek dira euskarazko egokitzapenerako
+oinarrizko artxiboak; euskarazko 8 biteko karaktereak zuzen ikusi ahal
+izateko zein zenbakiak eta datak euskararen arauen arabera era egokian
+agertarazteko behar dira.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="fa"><img src="bulle-fa.gif" width=48 eight=48><br><A HREF="#more_fa">more</A></TH>
+<TD><center><font size="+1" color="red"><b> - Farsi</b></font></center><br>
+<A HREF="locales-fa-2.1-1mdk.noarch.rpm">...</A> (...) </TD>
+<TD>
+These are the base files for Farsi language localization; you need
+it to correctly display 8bits Farsi characters, and for proper
+alphabetical sorting and representation of dates and numbers according
+to Farsi language conventions.
+Note that this package doesn't handle right-to-left and left-to-right
+switching when displaying nor the isolate-initial-medial-final shapes
+of letters; it is to the xterm, application or virtual console driver
+to do that.
+<font color="red">[Anyone willing to translate the description into
+Farsi ? -- <A HREF="mailto:srtxg@ping.be">Pablo</A>]</font>
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="fi"><img src="bulle-fi.gif" width=48 eight=48></TH>
+<TD><center><font size="+1" color="red"><b>Finnish - Suomea</b></font></center><br>
+<A HREF="locales-fi-2.1-1mdk.noarch.rpm">locales-fi-2.1-1mdk.noarch.rpm</A> (27253) </TD>
+<TD>
+Tässä on perustiedot Linuxin suomentamiseen. Tarvitset sitä
+suomalaisten 8-bittisten merkkien oikeaan esittämiseen, 
+ja oikeaan aakkostamiseen ja päivien ja numeroiden 
+esitykseen suomenkielen käytännön mukaan.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="fo"><img src="bulle-fo.gif" width=48 eight=48></TH>
+<TD><center><font size="+1" color="red"><b>Faroese - Føroyskt</b></font></center><br>
+<A HREF="locales-fo-2.1-1mdk.noarch.rpm">locales-fo-2.1-1mdk.noarch.rpm</A> (16394) </TD>
+<TD>
+Hetta eru fílurnar tær tørvar til eina tillaging til føroyskt mál. Tær eru
+neyðugar fyri at vísa føroyskar 8-bit stavir, fyri at fáa rætt stavrað og
+vísa dagfestingar og tøl sambært føroyska siðvenju.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="fr"><img src="bulle-fr.gif" width=48 eight=48><br><A HREF="#more_fr">more</A></TH>
+<TD><center><font size="+1" color="red"><b>French - Français</b></font></center><br>
+<A HREF="locales-fr-2.1-1mdk.noarch.rpm">locales-fr-2.1-1mdk.noarch.rpm</A> (143748) </TD>
+<TD>
+Ce paquet contient les définitions de locales en langue française.
+Il permet aux applications de savoir quels caractères sont affichables
+et donc afficher correctemment les caractères accentués et l'ordre
+alphabetique; il contient aussi les definitions des representations
+des dates des nombres et des symboles monétaires en Belgique, Canada,
+Suisse, France et Luxembourg.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="ga"><img src="bulle-ga.gif" width=48 eight=48><br><A HREF="#more_ga">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Irish Gaelic - Gaeilge</b></font></center><br>
+<A HREF="locales-ga-2.1-1mdk.noarch.rpm">locales-ga-2.1-1mdk.noarch.rpm</A> (27872) </TD>
+<TD>
+Seo iad na bunchomhaid do leagan áitiúil na Gaeilge; ní mór duit
+iad a fháil chun tacar carachtar 8ngiotán a thaispeáint i gceart,
+agus sórtáil in ord aibitre agus dátaí agus uimhreacha a chur i
+láthair de réir coinbhinsiúnaigh na Gaeilge.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="gd"><img src="bulle-gd.gif" width=48 eight=48><br><A HREF="#more_gd">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Scottish Gaelic - </b></font></center><br>
+<A HREF="locales-gd-2.1-1mdk.noarch.rpm">locales-gd-2.1-1mdk.noarch.rpm</A> (27872) </TD>
+<TD>
+These are the base files for Scottish Gaelic language localization; you need
+it to correctly display 8bits gaelic characters, and for proper
+alphabetical sorting and representation of dates and numbers according
+to gaelic language conventions.
+<font color="red">[Anyone willing to translate the description into
+Scottish gaelic ? -- <A HREF="mailto:srtxg@ping.be">Pablo</A>]</font>
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="gl"><img src="bulle-gl.gif" width=48 eight=48><br><A HREF="#more_gl">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Galician - Galego</b></font></center><br>
+<A HREF="locales-gl-2.1-1mdk.noarch.rpm">locales-gl-2.1-1mdk.noarch.rpm</A> (29491) </TD>
+<TD>
+Este paquete inclúe as definicións de locais para o galego. Este paquete
+contén o preciso para a representacion correcta dos caracteres de 8 bits
+da fala galega, dos números e datas segundo as convencións do galego.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="gv"><img src="bulle-gv.gif" width=48 eight=48><br><A HREF="#more_gv">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Manx - </b></font></center><br>
+<A HREF="locales-gv-2.1-1mdk.noarch.rpm">locales-gv-2.1-1mdk.noarch.rpm</A> (27872) </TD>
+<TD>
+These are the base files for Manx Gaelic language localization; you need
+it to correctly display 8bits manx gaelic characters, and for proper
+alphabetical sorting and representation of dates and numbers according
+to Manx Gaelic language conventions.
+<font color="red">[Anyone willing to translate the description into
+Manx gaelic ? -- <A HREF="mailto:srtxg@ping.be">Pablo</A>]</font>
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="he"><img src="bulle-he.gif" width=48 eight=48><br><A HREF="#more_he">more</A></TH>
+<TD><center><font size="+1" color="red"><b><image src="he.gif"> - Hebrew</b></font></center><br>
+<A HREF="locales-he-2.1-1mdk.noarch.rpm">locales-he-2.1-1mdk.noarch.rpm</A> (15327) </TD>
+<TD>
+<P align=right>
+<!-- logical direction -->
+<!--
+‏
+המקום מכיל עמדות ללופויזציה בעברית (האלף-בית,
+לכתוב ב-8 ביטים, התאדיך). הכקום לא מכיל 
+אפשרות לכתיבה בשני הכיוונים. אתם צריכים בנוסף 
+להוסיף תוכנה xterm או console driver  מימין לשמאל.
+‎
+-->
+<!-- visual direction -->
+,תיב-ףלאה) תירבעב היצזיופולל תודמע ליכמ םוקמה
+ליכמ אל םוקמה .(ךיראתה , םיטיב 8-ב בותכל
+ףסונב םיכירצ םתא .םינוויכה ינשב הביתכל תורשפא
+.לאמשל ןימימ console driver וא xterm הנכות ףיסוהל
+</P>
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="hr"><img src="bulle-hr.gif" width=48 eight=48><br><A HREF="#more_hr">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Croatian - Hrvatska</b></font></center><br>
+<A HREF="locales-hr-2.1-1mdk.noarch.rpm">locales-hr-2.1-1mdk.noarch.rpm</A> (16332) </TD>
+<TD>
+Ovo su osnovne datoteke za lokalizaciju na Hrvatski jezik;
+potrebne su da bi se pravilno prikazali 8 bitni Hrvatski znakovi,
+za pravilno sortiranje po abecedi i prikaz datuma i brojeva
+po pravilima Hrvatskog jezika.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="hu"><img src="bulle-hu.gif" width=48 eight=48></TH>
+<TD><center><font size="+1" color="red"><b>Hungarian - Magyar</b></font></center><br>
+<A HREF="locales-hu-2.1-1mdk.noarch.rpm">locales-hu-2.1-1mdk.noarch.rpm</A> (17419) </TD>
+<TD>
+Ezek a szükséges fájlok a magyarításhoz. Szükség van rá a
+magyar helyesírás szabályainak megfelelő sorbarendezéshez,
+számok és dátumok megjelenítéséhez.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="hy"><img src="bulle-hy.gif" width=48 eight=48><br><A HREF="armenian/">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Armenian - <image src="hy.gif" alt="Հայացման"></b></font></center><br>
+<A HREF="locales-hy-2.1-1mdk.noarch.rpm">locales-hy-2.1-1mdk.noarch.rpm</A> (15760) </TD>
+<TD>
+<font size="+1" face="'ArmNet Helvetica'">
+Այստեղ ներկայացված ենհայացման հիմնական
+փաթեթները (ֆայլերը)։ Դրանք անհրաժեշտ
+են տվյալների ճշգրիտ խմբավորման եւ 
+ամսաթվերի ութվային արժեքների պատշաճ
+ներկայցման համար համաձայն հայոց
+լեզվիկանոնների։ 
+</font>
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="id"><img src="bulle-id.gif" width=48 eight=48><br><A HREF="#more_id">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Indonesian - Bahasa Indonesia</b></font></center><br>
+<A HREF="locales-id-2.1-1mdk.noarch.rpm">locales-id-2.1-1mdk.noarch.rpm</A> (15686) </TD>
+<TD>
+Ini adalah file untuk lokalisasi sistem ke dalam Bahasa Indonesia.
+File ini dibutuhkan bila Anda ingin menampilkan tanggal dan penomoran
+yang sesuai dengan kaidah Bahasa Indonesia.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="is"><img src="bulle-is.gif" width=48 eight=48><br><A HREF="#more_is">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Icelandic - Íslenska</b></font></center><br>
+<A HREF="locales-is-2.1-1mdk.noarch.rpm">locales-is-2.1-1mdk.noarch.rpm</A> (27123) </TD>
+<TD>
+Hér eru grunnskrár fyrir íslenska staðfærslu.
+Þú þarft á þessum skrám að halda ef 8 bita
+séríslenskir stafir eiga að birtast réttir, til að fá
+rétta stafrófsröð og til að dagsetningar og
+tölur birtist eins og venja er í íslensku.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="it"><img src="bulle-it.gif" width=48 eight=48></TH>
+<TD><center><font size="+1" color="red"><b>Italian - Italiano</b></font></center><br>
+<A HREF="locales-it-2.1-1mdk.noarch.rpm">locales-it-2.1-1mdk.noarch.rpm</A> (27140) </TD>
+<TD>
+Questi sono i files di base per l'adattamento della lingua italiana. Vi
+servono per visualizzare correttamente i caratteri a 8bit in italiano,
+per l'ordinamento alfabetico corretto e per la rappresentazione delle
+date e dei numeri in forma italiana.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="iu"><img src="bulle-iu.gif" width=48 eight=48><br><A HREF="#more_iu">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Inuktitut - <image src="iu.gif"></b></font></center><br>
+<A HREF="locales-iu-2.1-1mdk.noarch.rpm">...</A> (...) </TD>
+<TD>
+...coming soon...
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="ja"><img src="bulle-ja.gif" width=48 eight=48><br><A HREF="#more_ja">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Japanese - <image src="ja.gif" alt="日本語"></b></font></center><br>
+<A HREF="locales-ja-2.1-1mdk.noarch.rpm">locales-ja-2.1-1mdk.noarch.rpm</A> (1626706) </TD>
+<TD>
+これは日本語ロカライゼーション用基礎ファイル集です。これがないと，
+７・８ビット文字コードの表示もできず、日本式日付き表現・数値表現ができない。
+ただし、要注意点として：１６ビット文字コードが使えなかったので、
+このロカール（地域特有設定データ集）が完璧・正式に「正確」とはいいきれない。
+（多少「誤魔化し」を利かせて作ったからです）。
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="ka"><img src="bulle-ka.gif" width=48 eight=48><br><A HREF="georgian/">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Georgian - <image src="ka.gif" alt="ქართული"></b></font></center><br>
+<A HREF="locales-ka-2.1-1mdk.noarch.rpm">locales-ka-2.1-1mdk.noarch.rpm</A> (46743) </TD>
+<TD>
+<font size="+1" face="'BPG UTF8 M'">
+საბაზო ფაილები ქართულის ლოკალიზებისათვის.
+საჭიროა 8 ბიტიანი ფონტებით ქართული ანბანის სწორი ჩვენებისა
+და სორტირებისათვის. აგრეთვე - თარიღის, ფულის ნიშნებისა და
+რიცხვითი მნიშვნელობების მართებული წარმოდგენისათვის.
+</font>
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="kl"><img src="bulle-kl.gif" width=48 eight=48></TH>
+<TD><center><font size="+1" color="red"><b>Greenlandic - </b></font></center><br>
+<A HREF="locales-kl-2.1-1mdk.noarch.rpm">locales-kl-2.1-1mdk.noarch.rpm</A> (16407) </TD>
+<TD>
+These are the base files for Greenlandic language localization; you need it to correctly display 8bits Greenlandic characters, and for proper alphabetical sorting and representation of dates and numbers according to Grenlandic language conventions.
+<font color="red">[Anyone willing to translate the description into
+greenlandic ? -- <A HREF="mailto:srtxg@ping.be">Pablo</A>]</font>
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="ko"><img src="bulle-ko.gif" width=48 eight=48></TH>
+<TD><center><font size="+1" color="red"><b>Korean - <image src="ko.gif" alt="한글"> </b></font></center><br>
+<A HREF="locales-ko-2.1-1mdk.noarch.rpm">locales-ko-2.1-1mdk.noarch.rpm</A> (667999) </TD>
+<TD>
+이것들은 한국어에만 국한된 기초화일들이다
+당신은 한국어규정에 의한 적절한 날짜와 숫자들의 표시를
+8바이트와 7바이트의 한국어 코드로 정확히 배열하는데
+그것이 필요하다.
+
+그러나 이런 특정한 정의는 완전히 맞지 않다.
+나는 16바이트 부호의 정의들을 이용할 수 없었다.
+나는 작업을 할 수 있도록 속임수를 썼었다.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="kw"><img src="bulle-kw.gif" width=48 eight=48><br><A HREF="#more_kw">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Cornish - </b></font></center><br>
+<A HREF="locales-kw-2.1-1mdk.noarch.rpm">locales-kw-2.1-1mdk.noarch.rpm</A> (27872) </TD>
+<TD>
+These are the base files for Cornish language localization; you need
+it to correctly display 8bits cornish characters, and for proper
+alphabetical sorting and representation of dates and numbers according
+to Cornish language conventions.
+<font color="red">[Anyone willing to translate the description into
+Cornish ? -- <A HREF="mailto:srtxg@ping.be">Pablo</A>]</font>
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="lo"><img src="bulle-lo.gif" width=48 eight=48><br><A HREF="#more_lo">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Laotian - </b></font></center><br>
+<A HREF="locales-lo-2.1-1mdk.noarch.rpm">locales-lo-2.1-1mdk.noarch.rpm</A> (38699)</TD>
+<TD>
+These are the base files for Laotian language localization; you need
+it to correctly display 8bits lao characters, and for proper
+alphabetical sorting and representation of dates and numbers according
+to Laotian language conventions.
+<font color="red"><b>[THIS IS REALLY INCOMPLETE; OTHER THAN LC_CTYPE THE REST 
+IS STILL TO BE WRITTEN; ANYONE WANTING TO HELP ?
+-- PABLO (<A HREF="mailto:srtxg@chanae.alphanet.ch">srtxg@chanae.alphanet.ch</A>)]</b></font>
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="lt"><img src="bulle-lt.gif" width=48 eight=48><br><A HREF="lithuanian/">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Lithuanian - Lietuviškai</b></font></center><br>
+<A HREF="locales-lt-2.1-1mdk.noarch.rpm">locales-lt-2.1-1mdk.noarch.rpm</A> (16374) </TD>
+<TD>
+Čia yra pagrindinės rinkmenos lietuvybei pritaikyti;
+Jos reikalingos, norint teisingai matyti 8 bitų lietuviškus
+šriftus, abėcėles eiliškumą ir regioninių parametrų
+nustatymus (datos ir t.t.).
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="lv"><img src="bulle-lv.gif" width=48 eight=48></TH>
+<TD><center><font size="+1" color="red"><b>Latvian - Latviska</b></font></center><br>
+<A HREF="locales-lv-2.1-1mdk.noarch.rpm">locales-lv-2.1-1mdk.noarch.rpm</A> (16331) </TD>
+<TD>
+These are the base files for Latvian language localization; you need it to correctly display 8bits Latvian characters, and for proper alphabetical sorting and representation of dates and numbers according to Latvian language conventions.
+<font color="red">[Anyone willing to translate the description into
+latvian ? -- <A HREF="mailto:srtxg@ping.be">Pablo</A>]</font>
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="ms"><img src="bulle-ms.gif" width=48 eight=48><br></TH>
+<TD><center><font size="+1" color="red"><b>Malay - Bahasa Malayu</b></font></center><br>
+<A HREF="locales-ms-2.1-1mdk.noarch.rpm">...</A> (...) </TD>
+<TD>
+These are the base files for Malay language localization; you need it for
+proper alphabetical sorting and representation of dates and numbers according
+to Malay language conventions.
+<font color="red">[Anyone willing to translate the description into
+Malay ? -- <A HREF="mailto:srtxg@ping.be">Pablo</A>]</font>
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="ml"><img src="bulle-ml.gif" width=48 eight=48><br><A HREF="#more_ml">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Malayalam - </b></font></center><br>
+<A HREF="locales-ml-2.1-1mdk.noarch.rpm">...</A> (...) </TD>
+<TD>
+<font color="red">Still lot to do, if you want to help <A HREF="mailto:srtxg@ping.be">write me</A></font>
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="nl"><img src="bulle-nl.gif" width=48 eight=48><br><A HREF="#more_nl">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Dutch - Nederlands</b></font></center><br>
+<A HREF="locales-nl-2.1-1mdk.noarch.rpm">locales-nl-2.1-1mdk.noarch.rpm</A> (62181) </TD>
+<TD>
+Dit zijn de basisbestanden nodig voor de Nederlandse taalmodule; ze zijn
+noodzakelijk om de 8bits Nederlandse karakters correct weer te geven en
+voor een juiste alfabetische sortering en weergave van data en nummers
+volgens de Nederlandse Taalconventies
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="no"><img src="bulle-no.gif" width=48 eight=48></TH>
+<TD><center><font size="+1" color="red"><b>Norwegian - Norsk/Noreg</b></font></center><br>
+<A HREF="locales-no-2.1-1mdk.noarch.rpm">locales-no-2.1-1mdk.noarch.rpm</A> (27447) </TD>
+<TD>
+Dette er basisfilene for lokalisering til norsk språk. Du trenger dette
+for å vise norske 8-bitstegn på riktig måte og for å få riktig sortering
+etter alfabetet og visning av datoer og tall i samsvar med norske
+konvensjoner.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="oc"><img src="bulle-oc.gif" width=48 eight=48><br><A HREF="#more_oc">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Occitan - Occitan</b></font></center><br>
+<A HREF="locales-oc-2.1-1mdk.noarch.rpm">locales-oc-2.1-1mdk.noarch.rpm</A> (15983) </TD>
+<TD>
+Aicí avem empaquetat los fichièrs de basa per la lengua occitana&nbsp;: los
+programas n'an de besonh per afichar corrèctament los caractèrs dins lo
+fenestron, classar l'òrdre alfabetic e atanben comptar los jorns
+e los meses en occitan.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="pl"><img src="bulle-pl.gif" width=48 eight=48><br><A HREF="#more_pl">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Polish - Polski</b></font></center><br>
+<A HREF="locales-pl-2.1-1mdk.noarch.rpm">locales-pl-2.1-1mdk.noarch.rpm</A> (15849) </TD>
+<TD>
+Pliki do lokalizacji systemu dla języka polskiego. Niezbędne do poprawnego
+wyświetlania 8-mio bitowych polskich znaków diakrytycznych, sortowania,
+prezentowania dat i liczb zgodnie z regułami języka polskiego.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="pt"><img src="bulle-pt.gif" width=48 eight=48><br><A HREF="#more_pt">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Portuguese - Português</b></font></center><br>
+<A HREF="locales-pt-2.1-1mdk.noarch.rpm">locales-pt-2.1-1mdk.noarch.rpm</A> (62576) </TD>
+<TD>
+Estes são os arquivos básicos para a localização lingüística em português;
+eles são necessários para que o sistema mostre corretamente caracteres
+portugueses de 8 bits, e para que tenha as apropriadas ordenações
+alfabéticas e representação de datas e números de acordo com as convenções
+da língua portuguesa.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="ro"><img src="bulle-ro.gif" width=48 eight=48></TH>
+<TD><center><font size="+1" color="red"><b>Romanian - Româna</b></font></center><br>
+<A HREF="locales-ro-2.1-1mdk.noarch.rpm">locales-ro-2.1-1mdk.noarch.rpm</A> (15601) </TD>
+<TD>
+Acestea sînt fisierele de baza pentru localizarea în limba româna; sînt
+necesare pentru afisarea corecta a caracterelor românesti pe 8 biti precum
+si pentru sortarea alfabetica si reprezentarea datelor si numerelor conform
+cu conventiile din limba româna.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="ru"><img src="bulle-ru.gif" width=48 eight=48></TH>
+<TD><center><font size="+1" color="red"><b>Russian - Русский</b></font></center><br>
+<A HREF="locales-ru-2.1-1mdk.noarch.rpm">locales-ru-2.1-1mdk.noarch.rpm</A> (50117) </TD>
+<TD>
+Эти файлы содержат основные региональные установки
+для русского языка; они необходимы для
+правильного представления 8-битных букв
+кириллицы на экране, для правильной
+алфавитной сортировки и для представления
+дат и чисел в соответствии с правилами
+русского языка.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="sk"><img src="bulle-sk.gif" width=48 eight=48></TH>
+<TD><center><font size="+1" color="red"><b>Slovak - Slovenčina</b></font></center><br>
+<A HREF="locales-sk-2.1-1mdk.noarch.rpm">locales-sk-2.1-1mdk.noarch.rpm</A> (15679) </TD>
+<TD>
+Tu sú súbory potrebné pre správnu slovenskú lokalizáciu; potrebujete ich pre
+korektné zobrazovanie slovenských 8bitových znakov a pre správne triedenie a
+reprezentáciu dátumu a čísel podľa konvencií slovenského jazyka.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="sl"><img src="bulle-sl.gif" width=48 eight=48><br><A HREF="#more_sl">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Slovenian - Slovenščina</b></font></center><br>
+<A HREF="locales-sl-2.1-1mdk.noarch.rpm">locales-sl-2.1-1mdk.noarch.rpm</A> (15859) </TD>
+<TD>
+To so osnovne datoteke za lokalizacijo Linuxa na slovenski jezik; potrebujete
+jih za pravilni prikaz 8-bitnih slovenskih znakov in za pravilno urejanje
+po abecedi ter predstavitev datumov in številk glede na pravila slovenskega
+jezika.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="sr"><img src="bulle-sr.gif" width=48 eight=48></TH>
+<TD><center><font size="+1" color="red"><b>Serbian - Српска</b></font></center><br>
+<A HREF="locales-sr-2.1-1mdk.noarch.rpm">locales-sr-2.1-1mdk.noarch.rpm</A> (50457) </TD>
+<TD>
+Ово су основне датотеке за локализацију
+на Српски језик; потребне су да се
+правилно приказали 8 битни Српски
+знакови, за правилно сортирање по
+абецеди и приказ датума и бројева по
+правилима Српског језика.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="sv"><img src="bulle-sv.gif" width=48 eight=48></TH>
+<TD><center><font size="+1" color="red"><b>Swedish - Svenska</b></font></center><br>
+<A HREF="locales-sv-2.1-1mdk.noarch.rpm">locales-sv-2.1-1mdk.noarch.rpm</A> (62286) </TD>
+<TD>
+Detta är huvudfilerna för svenskt språkstöd. De behövs för att korrekt visa
+svenska 8 bitars tecken och för korrekt alfabetisk sortering. De gör även
+att datum och nummerformat visas på svenskt vis.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="th"><img src="bulle-th.gif" width=48 eight=48><br><A HREF="#more_th">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Thai - <image src="th.gif" alt="ภาษาไทย"></b></font></center><br>
+<A HREF="locales-th-2.1-1mdk.noarch.rpm">locales-th-2.1-1mdk.noarch.rpm</A> (42637) </TD>
+<TD>
+These are the base files for Thai language localization; you need
+it to correctly display 8bits Thai characters, and for proper
+alphabetical sorting and representation of dates and numbers according
+to Thai language conventions.
+<font color="red"><b>[
+Anyone willing to translate the description into Thai ? -
+ PABLO (<A HREF="mailto:srtxg@chanae.alphanet.ch">srtxg@chanae.alphanet.ch</A>)]</b></font>
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="tr"><img src="bulle-tr.gif" width=48 eight=48></TH>
+<TD><center><font size="+1" color="red"><b>Turkish - Türkçe</b></font></center><br>
+<A HREF="locales-tr-2.1-1mdk.noarch.rpm">locales-tr-2.1-1mdk.noarch.rpm</A> (15868) </TD>
+<TD>
+Bu dosyalar, Türkçe yerelleştirmesi için gerekli temel bileşenleri içerir.
+8bit türkçe karakterleri görmek, Türk diline uygun olarak alfabe, tarih ve
+sayı gösterimlerini ve sıralamalarını yapabilmek için bu dosyalara
+ihtiyacınız vardır.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="uk"><img src="bulle-uk.gif" width=48 eight=48><br><A HREF="#more_uk">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Ukrainian - Українська</b></font></center><br>
+<A HREF="locales-uk-2.1-1mdk.noarch.rpm">locales-uk-2.1-1mdk.noarch.rpm</A> (15627) </TD> 
+<TD>
+Базові файли дпя української
+локалізації; необхідні дпя 
+правильного відображення
+8-ми бітних символів українського
+алфавіту і також дпя правильного 
+сортування і подання дати і чисел
+у відповідності до стандартів
+української мови.
+</TD>
+
+<TR>
+<TH><A NAME="vi"><img src="bulle-vi.gif" width=48 eight=48><br><A HREF="viet/">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Vietnamese - <image src="vi.gif" alt="Tiếng Việt"></b></font></center><br>
+<A HREF="locales-vi-2.1-1mdk.noarch.rpm">locales-vi-2.1-1mdk.noarch.rpm</A> (49096) </TD>
+<TD>
+Đây là các file cơ sở cho tiếng Việt.
+Bạn cần những file này để có thể biểu
+diễn chính xác các kí tự tiếng Việt 8 bits,
+để sắp xếp và trình bày ngày tháng và
+số một cách chính xác theo đúng qui ước
+ngôn ngữ tiếng Việt.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="wa"><img src="bulle-wa.gif" width=48 eight=48><br><A HREF="walon/">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Walloon - Walon</b></font></center><br>
+<A HREF="locales-wa-2.1-1mdk.noarch.rpm">locales-wa-2.1-1mdk.noarch.rpm</A> (25508) </TD>
+<TD>
+Vochal les maisses fitchis pol lingädje walon. Vos nd avoz dandji po
+hågner les caracteres walons ecôdés so hût bits, po l' arindjmint
+alfabetike eyet po rprezinter les dates eyet les nombes è walon.
+</TD>
+</TR>
+
+<TR>
+<TH><A NAME="zh"><img src="bulle-zh.gif" width=48 eight=48><br><A HREF="#more_zh">more</A></TH>
+<TD><center><font size="+1" color="red"><b>Chinese - <image src="zh.gif" alt="汉语 / 漢語"></b></font></center><br>
+<A HREF="locales-zh-2.1-1mdk.noarch.rpm">locales-zh-2.1-1mdk.noarch.rpm</A> (547812) </TD>
+<TD>
+<font face="mingliu" size="+1">
+本檔包含了中文地方化(localization)的基本檔案;
+你需要這些檔案才能正確的 顯示中文的日期。將環境變數
+"LANG" 設定為 "zh_CN" 可以顯示簡體中文(國標 碼),設定為
+"zh_TW" 則可顯示繁體中文(大五碼)。
+</font>
+</TD>
+</TR>
+
+</TABLE>
+
+
+<P>
+<HR>
+<BR>
+My <A HREF="../pgp-key.asc">PGP public key</A>. (for more info on PGP
+you can look at
+<A HREF="http://www.pgp.net/pgpnet/">http://www.pgp.net/pgpnet/</A>)
+<BR>
+<A HREF="mailto:srtxg@ping.be">Anything to tell me?</A> 
+<hr>
+<br>
+Total number of hits since 1999-03-04: <IMG SRC="/cgi-bin/counter/counter.pl?counterID=pin19314_002&amp;digit=TUBE">
+<img src=/Counter/digits/TUBE/5TUBE.GIF border=0><img src=/Counter/digits/TUBE/3TUBE.GIF border=0><img src=/Counter/digits/TUBE/2TUBE.GIF border=0><img src=/Counter/digits/TUBE/9TUBE.GIF border=0>
+<a href="http://www.vim.org"><image src="../pics/vi.gif" border=O></A> 
+<a href="http://www.linuxnow.com" target="_new"><image src="../pics/linuxnow.gif" border=0></A>
+<hr></p>
+<center><b>The Linux Webring</b>:
+ [ <a href="http://www.webring.org/cgi-bin/webring?ring=linux;id=240;home" target="_top">Home</a> |
+ <a href="http://www.webring.org/cgi-bin/webring?index;ring=linux" target="_top">Index</a> |
+ <a href="http://www.webring.org/cgi-bin/webring?ring=linux;id=240;next" target="_top">Next</a> |
+ <a href="http://www.webring.org/cgi-bin/webring?ring=linux;id=240;prev" target="_top">Previous</a> |
+ <a href="http://www.webring.org/cgi-bin/webring?random;ring=linux" target="_top">Random</a> |
+ <a href="HTTP://www.webring.com/cgi-bin/webring?ring=linux;list">List</a> |
+ <a href="http://www.webring.org/cgi-bin/wrstats?ring=linux" target="_top">Stats</a> ]</center><p>
+<br>
+<hr>
+<br>
+<h2>More about some locales...</h2>
+
+<li><h3>Others</h3>
+<P>
+I haven't yet made any package for those locales, but here are some links
+you cna find interesting:
+<P>
+<li><A HREF="http://www.cdac.org.in/INDIC/">Mozilla Indic enabling</A>
+<P>
+
+<A NAME="more_ar">
+<li><h3>Arabic</h3>
+<P>
+The arabic locale package only have basic data, to tell the weekdays
+and month names, the alphabetical order; but it doesn't deal with
+the right-to-left displaying problem; nor with the handling of
+initial/medial/final/separate form of the letters. For that you will
+need an arabic aware terminal. I found one some time ago; but it was
+very old, and the C code not much portable; I have been unable to compile
+it on Linux. If you know about arabic enabled software 
+<A HREF="mailto:srtxg@chanae.alphanet.ch">let me know</A>.
+<P>
+It seems something is finally on the way !
+Look at this <A HREF="http://www.linux4arab.com/">http://www.linux4arab.com/</A>
+page (it is in arabic though, so it is a little hard to use if you haven't
+yet right-to-left support, as it is probably the case...<br>
+Myself I can't read arabic, so if someone could tell me what it provides
+(eg is there only a news site, or does it provide arabized versions of
+some programs, toolkits, etc.). Thanks.
+<P>
+And here another interesting link: 
+<A HREF="http://www.planux.com/linux/">http://www.planux.com/linux/</A>.
+it is written in english about topics related to Linux in arabic (news,
+book reviews, LUGS, software, etc)
+<P>
+Link to <A HREF="http://www.langbox.com/AraMosaic/mozilla/">Arabic enabled Mozilla</A>
+project. From there you can go to several interesting places about
+computer handling of RTL languages (Arabic, Hebrew)
+<P>
+The <a href="http://imagic.weizmann.ac.il/~dov/freesw/FriBidi/">
+Fribidi</a> library is a functions library that can do bidirectional conversion of
+text strings.
+<P>
+I added support for 
+<A HREF="http://www.langbox.com/fontara8.html" STYLE="font-weigth: bold; color: black"><b>iso-8859-6-8</b></A>,
+<A HREF="http://www.langbox.com/fontara16.html" STYLE="font-weigth: bold; color: black"><b>iso-8859-6-16</b></A>,
+<A HREF="http://www.langbox.com/asmo449.html" STYLE="font-weigth: bold; color: black"><b>ASMO 449+</b></A>, 
+<b>cp1256</b>, <b>xaterm-fontspecific</b> (extended encoding used by the fonts
+coming with xaterm) and the <b>mulearabic-{O,1,2}</b> font encodings to the 
+<A HREF="http://X-TT.dsl.gr.jp/">xtt</A>
+font server. My additions should be still considered beta, as several
+points are still open:<br>
+<li>the name of the fonts under X11
+<li>the unicode values of some chars
+<P> 
+There is an <i>arabic on Linux</i> mailing-list, you can join it by
+writting an email to 
+<A HREF="mailto:arabic-linux-request@marko.net">arabic-linux-request@marko.net</A>,
+it is definitively the place to be to discuss about the work to do to add
+arabic support to Linux (there is still a lot to do, all the most used 
+graphical toolkits and either linux console or ncurses (or both?) must
+resolve the RTL/LTR, at least).  More info at 
+<A HREF="http://www.marko.net/arabic/">http://www.marko.net/arabic/</A>
+<P>
+There is a nice looking True Type font there, however it uses yet 
+<b><i>another</i></b> encoding ! And worst, doesn't have a unicode table,
+so it can't be reopenend under another encoding by xtt, which maques it
+quite useless.
+There is (was?) however a program that allows, using the freetype library,
+to modify the unicode table of True Type fonts. The problem is that I have
+lost the URL; but if you find it (tell me the url !) you can add the proper
+unicode values fro the glyphs then use that font under X11 with xtt.
+You can of course use it as is (opening as *-microsoft-fontspecific), the
+glyphs are rendered under X11, no problem, the problem is that, as no known
+application seems to use that encoding, it is rather useless...
+<P>
+The vim (vi improved) editor has right-to-left writting support; look
+at his website: <A HREF="http://www.vim.org/">http://www.vim.org/</A>
+<P>
+For LaTeX there is the ArabTeX package, more info from
+<A HREF="http://www.sas.upenn.edu/African_Studies/Software/ArabTeX_12229.html">
+here</A>
+<P>
+
+<A NAME="more_br">
+<li><h3>Brezhoneg</h3>
+<P>
+<A HREF="http://perso.club-internet.fr/jdrapier/">Pennbajenn troidigezh vrezhonek KDE</A><br>
+<P>
+
+<A NAME="more_ca">
+<li><h3>Catalan</h3>
+<P>
+Actualment acollesc una llista de correu on la gent interessada en la
+traducció de Linux a català pot intercanviar idees i entrar en contacte
+entre ells/elles. Si ets interessat/da en aquest (esforç,projecte) de
+traducció pots unir-t'hi enviant un missatge amb <b>subscribe</b>
+al cos a l'adreça
+<A HREF="mailto:linux-ca-request@chanae.alphanet.ch?subject=subscribe">linux-ca-request@chanae.alphanet.ch</A>.
+Un cop feta la subscripció, pots enviar els missatges a
+linux-ca@chanae.alphanet.ch
+<P>
+Altres enllaços a pàgines catalanes:<br>
+<A HREF="http://www.softcatala.org">Soft Català</A><br>
+<A HREF="http://coulthard.upc.es/~roca/linux.html">http://coulthard.upc.es/~roca/linux.html</A><br>
+<A HREF="http://linux.catalunya.org/">http://linux.catalunya.org/</A><br>
+<P>
+<A HREF="http://www4.uji.es/~al011097">Ací</A>
+pots trobar el codi font *.po de la traducció al català d'altres programes
+<P>
+The source file of the catalan locale: <A HREF="ca_ES.gz">ca_ES</A>
+<P>
+<A HREF="http://caliu.listbot.com/">Exchange site for catalan linux users</A>
+<P>
+
+<A NAME="more_cy">
+<li><h3>Welsh</h3>
+<P>
+<A HREF="cy_GB.gz">This</A> locale needs to be checked, anyone willing to do please ?<br>
+
+<br>
+The <A HREF="http://www.bbc.co.uk/cymru/">BBC News</A>
+in welsh.
+<P>
+
+<A NAME="more_eo">
+<li><h3>Esperanto</h3>
+Linux must be one of the few Operating Systems with native esperanto
+support.
+<P> 
+Some links about esperanto:<br>
+<A HREF="http://www.esperanto.net/">http://www.esperanto.net/</A><br>
+<A HREF="http://www.esperanto.net/veb/">http://www.esperanto.net/veb/</A><br>
+For use of Esperanto with Linux there is the
+<A HREF="http://www.linux-howto.com/LDP/HOWTO/Esperanto-HOWTO.html">Esperanto-HOWTO</A>
+<P>
+Some more links about
+<A HREF="http://www.cyclic.com/~kingdon/esperanto/gnu-eo.html">esperanto and GNU</A>
+and a 
+<A HREF="http://www.cyclic.com/~kingdon/esperanto/linukso.html">Linux page</A>
+in esperanto.
+<P>
+
+<A NAME="more_es">
+<li><h3>Spanish</h3>
+<P>
+Añadí una locale <b>es@tradicional</b> que usa el orden alfabético tradicional
+(es decir <i>a,b,c,ch,d,...</i>), así si quiere puede  
+definir <b>LC_COLLATE=es@tradicional</b> y usar el orden alfabético
+tradicional, independientemente de que la locale que use con la variable
+<b>LANG</b> use o no el orden alfabético llamado <i>moderno</i><br>
+Aquií pongo también el archvio <A HREF="Netscape.es.bz2">Netscape.ad</A>
+en castellano, para Netscape 4.08. Hay que desarchivarlo y copiarlo como
+<b>/usr/X11R6/lib/X11/es/app-defaults/Netscape</b><br>
+<P>
+
+<A NAME="more_ethiopic">
+<li><h3>Ethiopic</h3>
+<P>
+There is a viewer for ethiopic texts on X11 stations; more info
+from
+<A HREF="http://www.sas.upenn.edu/African_Studies/Software/Ethiopic_Viewer_17981.html">
+here</A><br>
+And some preliminary work on making computers handle ethipic scripts
+is available 
+<A HREF="http://www.cs.indiana.edu/~dmulholl/admas/docs/elux.html">here</A>
+<P>
+
+<A NAME="more_eu">
+<li><h3>Euskara</h3>
+<P>
+It now has a page of ist own, click <A HREF="euskara/">here</A>
+<P>
+
+<A NAME="more_fa">
+<li><h3>Farsi (Iranian)</h3>
+<P>
+
+<P>
+
+<A NAME="more_fr">
+<li><h3>Français</h3>
+<P>
+Voici le fichier <A HREF="Netscape.fr.bz2">Netscape.ad</A>
+en français, pour Netscape 4.08. Il faut le desarchiver et le copier comme
+<b>/usr/X11R6/lib/X11/fr/app-defaults/Netscape</b><br>
+La <A HREF="http://perso.wanadoo.fr/vialatol/linux/">page de Vialatte Olivier</A>
+avec d'autres ficheirs de ressources pour netscape, et des conseils.<br>
+<P>
+
+<A NAME="more_ga">
+<li><h3>Gaeilge (Irish)</h3>
+<P>
+<A HREF="http://www.bnag.ie/">Bord na Gaeilge</A>,
+ Irish Language Governmental Body)<br>
+<A HREF="http://www.smo.uhi.ac.uk/gaeilge/gaeilge.html">http://www.smo.uhi.ac.uk/gaeilge/gaeilge.html</A>
+( A great source of links concerning Irish ) <br>
+<A HREF="http://www.indigo.ie/egt/lghlin/eolaire.html">http://www.indigo.ie/egt/lghlin/eolaire.html</A>
+( Another great source of Irish language links ) <br>
+<P>
+
+<A NAME="more_gl">
+<li><h3>Galego</h3>
+<P>
+<A HREF="http://www.geocities.com/Athens/Aegean/7229/">ProxectoRianxo</A>,
+o obxectivo deste proxecto é facer un traductor galego-castelán-galego
+que poida ser utilizado de forma gratuíta na WWW.
+<P>
+<A HREF="http://members.xoom.com/RamonFlores/">Páxinas galegas de Ramon Flores d'as Seixas</A>
+<P>
+
+<A NAME="more_he">
+<li><h3>Hebrew</h3>
+<P>
+The hebrew locale package only have basic data, to tell the weekdays
+and month names, the alphabetical order; but it doesn't deal with
+the right-to-left displaying problem. For that you will need
+an hebrew aware terminal.
+If you know about hebrew enabled software
+<A HREF="mailto:srtxg@chanae.alphanet.ch">let me know</A>.
+<P>
+The <A href="http://hebgtk.hectic.net/">GTk reflected widgets</A> are
+patches to the GTk+ lib that add support for right-to-left to text input
+widgets. It uses the <a href="http://imagic.weizmann.ac.il/~dov/freesw/FriBidi/">
+Fribidi</a> library.
+<P>
+Link to <A HREF="http://www.langbox.com/AraMosaic/mozilla/">Hebrew enabled Mozilla</A>
+project. It has several interesting pointers.
+<P> 
+The vim (vi improved) editor has right-to-left writting support; look
+at his website: <A HREF="http://www.vim.org/">http://www.vim.org/</A>
+<P>
+There is an ftp site with some <A HREF="ftp://ftp.kova.dhs.org/pub/kova/">
+Red Hat Hebrew extensions</A> rpm packages.
+<P>
+
+<A NAME="more_hr">
+<li><h3>Croatian</h3>
+<P>
+<ul>
+<li>There is a mailing list aimed at translators of Linux to croatian;
+   you can subscribe by sending <b>subscribe hr-translation</b> to
+   <A HREF="mailto:lokalizacija-subscribe@linux.hr">lokalizacija-subscribe@linux.hr</A>,
+  then you can write to the list trough the <b>lokalizacija@linux.hr</b>
+  address.
+<li>There is also a web site: 
+  <a href="http://lokalizacija.linux.hr/">http://lokalizacija.linux.hr/</a>
+</ul>
+<P>
+
+<A NAME="more_hy">
+<li><h3>Armenian</h3>
+<P>
+It now has a page of ist own, click <A HREF="armenian/">here</A>
+<P>
+
+<A NAME="more_id">
+<li><h3>Indonesian</h3>
+<P>
+It seems there is a localization effort underway; at least I just
+discovered a whole set of Indonesiant language HOWTOs; check the
+<A HREF="http://www.linux.or.id/">http://www.linux.or.id/</A> web page.
+<P>
+
+<A NAME="more_is">
+<li><h3>Icelandic</h3>
+<P>
+Microsoft has refused to translate Windows to Íslensk, but open source
+has showed its true power and its hability to best serve the real needs of
+the real people: the KDE desktop environement has been translated
+to Íslensk, read the full story
+<A HREF="http://www.mbl.is/frettir-ifx/?MIval=forsida&frontcatform=7&nid=400041&tp=1">here</A>
+<P>
+Various icelandic related links:<br>
+<A HREF="http://www.hi.is/~hkelle/linux_isl_rh42.html">
+description on how to enable icelandic letters in various software
+packages in linux (specific to Redhat)</A><br>
+<A HREF="http://thori.home.mindspring.com/kde/">
+the homepage of the icelandic kde-team</A>, taking care of the translation
+of the kde-environment.<br>
+<a href="http://www.hi.is/~ojs/vinix/">
+the homepage of Vinix</A>, the icelandic Linux and Unix usergroup.<br>
+<A HREF="http://www.linux.is/">a newspage not unlike slashdot.org</A>.<br>
+<P>
+
+<A NAME="more_iu">
+<li><h3>Inuktitut</h3>
+<P>
+Some links:<br>
+<A HREF="http://www.nunavut.com/">http://www.nunavut.com/</A><br>
+<A HREF="http://www.vaxxine.com/vermeulen/">Veurmeulen's CANADIAN ABORIGINAL SYLLABICS page</A><br>
+<A HREF="http://www.indigo.ie/egt/standards/iu/">Michael Everson's page on inuktitut</A><br>
+<P>
+
+<A NAME="more_ja">
+<li><h3>Japanese</h3>
+<P>
+As the current version of glibc (2.0) doesn't have full support for multibyte
+charsets I have needed to cheat a little; rewritting the locale definition
+to use the char definitions of iso-8859-1 and telling <b>localedef</b>
+to use iso-8859-1. As a result the sorting (LC_COLLATE) is wrong for non
+latin letters. The LC_CTYPE also isn't totally correct; but I make it
+so the functions like isprint() etc are able to correctly display
+japanese strings.
+<P>
+That means that, in practice, the japanese locales fullfill its role;
+putting <b>LANG=ja</b> you have date in japanese, and the programs
+are able to display japanese text.
+<P> 
+
+<A NAME="more_ka">
+<li><h3>Georgian</h3>
+<P>
+It now has a page of ist own, click <A HREF="georgian/">here</A>
+<P>
+
+<A NAME="more_lo">
+<li><h3>Laotian</h3>
+<P>
+It seems to be two different encodings, <b>mulelao-1</b> as used by the
+MULE (Multilingual Emacs) editor, which follows 
+<A HREF="http://charts.unicode.org/Unicode.charts/normal/U0E80.html">Unicode orderinig for laotian</A>
+(just switched positions by an offset of 0x0de0, in unicode lao chars
+section is from 0x0e80 to 0x0eff; and in mulealo-1 from 0xa0 to 0xff,
+following the same order), and the IBM encoding 
+<A HREF="http://www.unicode.org/pending/lao/cp01133.gif" STYLE="font-weigth: bold; color: black"><b>ibm-cp1133</b></A>
+<P>
+I added support for those two encodings in
+<A HREF="http://X-TT.dsl.gr.jp/">xtt</A>
+font server.
+<P>
+
+<A NAME="more_nl">
+<li><h3>Dutch</h3>
+<P>
+There is a project to translate the Gnome to Nederlands, check out
+the
+<A HREF="http://users.skynet.be/hobbiton/Gnome-nl">http://users.skynet.be/hobbiton/Gnome-nl</A>
+address. 
+<P>
+
+<A NAME="more_ml">
+<li><h3>Malayalam</h3>
+<P>
+Here are some urls I've collected so far...<br>
+<A HREF="http://www.bharatbhasha.org/bharatbhasha.html">BharatBhasha</A><br>
+<P>
+
+<A NAME="more_oc">
+<li><h3>Occitan</h3>
+<P>
+Here is the <A href="oc_FR.gz">oc_FR</a> locale file.<br>
+<P>
+
+<A NAME="more_pl">
+<li><h3>Polish</h3>
+<P>
+<ul>
+<li><a href="http://www.agh.edu.pl/ogonki/">Polska Strona Ogonkowa</a>
+<li><a href="http://ptm.linux.pl/">Projekt Tłumaczenia Manuali</a>
+<li><a href="http://ceti.pl/~kravietz/gnu/gnu_tp.html">GNU Translation Project</a>
+</ul>
+<P>
+
+<A NAME="more_pt">
+<li><h3>Portuguese</h3>
+<P>
+<A HREF="http://www.poli.org/">Projecto Português de Documentação do Linux</A>
+<P>
+
+<A NAME="more_sl">
+<li><h3>Slovenian</h3>
+<P>
+<A HREF="http://www.lugos.si/">Slovenian Linux user group</A>
+<P>
+
+<A NAME="more_th">
+<li><h3>Thai</h3> 
+<P>
+The Thai locale doesn't correctly work for alphabetical sorting in glibc 2.0;
+that is a bug on <b>GNU libc 2.0</b>; the <b>collating-element</b>
+directive only works when the elements are 7bit ascii only; if the elements
+are 8bit (like in Thai language) that doesn't work.<br>
+The good news is that is fixed in <b>GNU libc 2.1</b> and not only that, but
+glibc 2.1 includes a full Thai locale (but it isn't compiled by default on
+any Linux distribution I know of)
+<P>
+There is an open source project to add Thai support on software, you can reach
+it at <A HREF="http://software.thai.net/">http://software.thai.net/</A>.
+The locale definition I use comes from there.
+<P>
+The <A HREF="http://thaigate.rd.nacsis.ac.jp/refer/index.html">Thai
+Reference</A> page has useful links to several documents about handling
+of Thai language in computers.
+<P>
+Check also the <A HREF="http://linux.thai.net/">Thai Linux Workgroup</A>
+(note however that most of the pages are in Thai, you need Thai fonts
+to browse them).
+<P>
+The <A HREF="http://www.fedu.uec.ac.jp/ZzzThai/Linux/">ZzzThai's Linux Resources</A>
+a must page for Linux and Thai. You can find there the Thai-HOWTO and the
+<b>TE</b> (Thai Extensions) package.
+<P>
+The <A HREF="http://developer.thai.net/mozilla/">Mozilla Thai Enabling</A>
+project.
+<P>
+I added support for <b>tis620.2533-1</b> encoding to the
+<A HREF="http://X-TT.dsl.gr.jp/">xtt font server</A>.
+<P>    
+
+<A NAME="more_uk">
+<li><h3>Ukrainian</h3>
+<P>
+The <A HREF="http://www.cinet.cn.ua/koi8-r/NOC/ukr/index-u.html">Ukrainian Linux HOWTO</A>
+(in ukrainian) has a lot of useful info.  
+There is also the
+<A HREF="http://www.farm.org/mozilla/">Ukrainian enabled Mozilla</A>
+project.
+<P>
+
+<A NAME="more_vi">
+<li><h3>Vietnamese</h3>
+<P>
+It now has a page of ist own, click <A HREF="viet/">here</A>
+<P>
+
+<A NAME="more_wa">
+<li><h3>Walon</h3>
+<P>
+It now has a page of ist own, click <A HREF="walon/">here</A>
+<P>
+
+<A NAME="more_zh">
+<li><h3>Chinese</h3>
+<P>
+As the current version of glibc (2.0) doesn't have full support for multibyte
+charsets I have needed to cheat a little; rewritting the locale definition
+to use the char definitions of iso-8859-1 and telling <b>localedef</b>
+to use iso-8859-1. As a result the sorting (LC_COLLATE) is wrong for non
+latin letters. The LC_CTYPE also isn't totally correct; but I make it
+so the functions like isprint() etc are able to correctly display
+chinese strings.
+<P>
+That means that, in practice, the chinese locales fullfill its role;
+putting <b>LANG=zh_CN</b> or <b>LANG=zh_TW</b> you have dates
+in chinese, and the programs are able to display chinese text.
+<P>
+The package contains support for locales <b>zh_CN</b>, which uses the
+GuoBiao encoding used in Mainland China; and <b>zh_TW</b>, which
+uses the Big5 encoding in use in Taiwan.
+<P>
+Here is a link to the 
+<A HREF="http://cle.linux.org.tw/CLE/e_index.shtml">Chinese Linux Extensions</A>
+site. (<A HREF="http://cle.linux.org.tw/CLE/index.shtml">中文 Linux 延伸安裝套件</A>)
+<P>     
+
+</body>
+</HTML>

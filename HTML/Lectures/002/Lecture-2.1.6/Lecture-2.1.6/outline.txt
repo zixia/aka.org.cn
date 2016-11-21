@@ -1,0 +1,31 @@
+
+    本次讲座内容以 APUE 相关内容为蓝本, 重点突出 UNIX 相关特色或者
+在其他操作系统中编程时很少涉及的内容, 同时重点讲解 Linux 相关
+主题. 从而让能够让听众就 UNIX/Linux 上的文件系统, I/O 及进程和
+进程间通讯有一个较为深入的了解. 
+
+    讲座以概念解释为主, 重点讲述陌生的系统调用或函数.
+
+	主要内容包括:
+
+	* 文件系统构造. 索引节点, 目录结构和目录项等.
+	* 文件 I/O. Open 的打开标志, 追加模式和原子操作.
+	* 标准 I/O 库. 缓冲机制, 陌生的标准 I/O 库函数.
+	* 文件和目录. 目录项属性, 目录读取, 访问许可.
+	* 高级 I/O. I/O 端口读写, 记录锁定, I/O 多工, 内存映射, Linux 中的异步 I/O.
+	* 其他文件系统或 I/O 相关主题. 共享库, 系统文件操作, 时间和日期.
+	* 进程及进程环境. main 函数, 命令行参数及 popt 库, 环境变量, C 程序内存
+	  布局等.
+	* 进程控制. 进程状态, 进程创建和程序的执行等
+	* 线程. 线程的创建, 线程同步机制等. 实例分析.
+	* 进程关系. 进程组, 会话, 控制终端, Shell 中的命令执行.
+	* 守护进程. 实现方法.
+	* 进程间通讯. 管道, FIFO, System V IPC (重点是共享内存和信号量).
+
+参考书目:
+
+    1. W. Richard Stevens, Advanced Programming in the UNIX Environment.
+	2. John Goerzen, Linux Programming Bible.
+	3. Naba Barkakati, Red Hat Linux 6 Secrets.
+	4. Phil Cornes, Linux A-Z.
+	

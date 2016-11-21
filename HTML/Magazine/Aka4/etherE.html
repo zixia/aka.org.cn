@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Introduction to the Internet Protocols</TITLE>
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#eeedb7" LINK="#797E8C" VLINK="#4F4F4F" ALINK="#FF0000">
+
+<center><H4>Ethernet encapsulation: ARP</H4></center>
+<P>Copyright (C) 1987, Charles L. Hedrick. Anyone may reproduce this document, 
+in whole or in part, provided that: (1) any copy or republication of the entire 
+document must show Rutgers University as the source, and must include this 
+notice; and (2) any other use of this material must reference this manual and 
+Rutgers University, and the fact that the material is copyright by Charles 
+Hedrick and is used by permission. 
+<P>There was a brief discussion earlier about what IP datagrams look like on an 
+Ethernet. The discussion showed the Ethernet header and checksum. However it 
+left one hole: It didn't say how to figure out what Ethernet address to use when 
+you want to talk to a given Internet address. In fact, there is a separate 
+protocol for this, called ARP ("address resolution protocol"). (Note by the way 
+that ARP is not an IP protocol. That is, the ARP datagrams do not have IP 
+headers.) Suppose you are on system 128.6.4.194 and you want to connect to 
+system 128.6.4.7. Your system will first verify that 128.6.4.7 is on the same 
+network, so it can talk directly via Ethernet. Then it will look up 128.6.4.7 in 
+its ARP table, to see if it already knows the Ethernet address. If so, it will 
+stick on an Ethernet header, and send the packet. But suppose this system is not 
+in the ARP table. There is no way to send the packet, because you need the 
+Ethernet address. So it uses the ARP protocol to send an ARP request. 
+Essentially an ARP request says "I need the Ethernet address for 128.6.4.7". 
+Every system listens to ARP requests. When a system sees an ARP request for 
+itself, it is required to respond. So 128.6.4.7 will see the request, and will 
+respond with an ARP reply saying in effect "128.6.4.7 is 8:0:20:1:56:34". 
+(Recall that Ethernet addresses are 48 bits. This is 6 octets. Ethernet 
+addresses are conventionally shown in hex, using the punctuation shown.) Your 
+system will save this information in its ARP table, so future packets will go 
+directly. Most systems treat the ARP table as a cache, and clear entries in it 
+if they have not been used in a certain period of time. 
+<P>Note by the way that ARP requests must be sent as "broadcasts". There is no 
+way that an ARP request can be sent directly to the right system. After all, the 
+whole reason for sending an ARP request is that you don't know the Ethernet 
+address. So an Ethernet address of all ones is used, i.e. ff:ff:ff:ff:ff:ff. By 
+convention, every machine on the Ethernet is required to pay attention to 
+packets with this as an address. So every system sees every ARP requests. They 
+all look to see whether the request is for their own address. If so, they 
+respond. If not, they could just ignore it. (Some hosts will use ARP requests to 
+update their knowledge about other hosts on the network, even if the request 
+isn't for them.) Note that packets whose IP address indicates broadcast (e.g. 
+255.255.255.255 or 128.6.4.255) are also sent with an Ethernet address that is 
+all ones. 
+</BODY></HTML>

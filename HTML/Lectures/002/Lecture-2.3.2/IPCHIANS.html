@@ -1,0 +1,410 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>项目开发计划</TITLE>
+<META NAME="Template" CONTENT="E:\work\procedure\share\new format\模版.dot">
+</HEAD>
+<BODY LINK="#0000ff">
+
+<B><FONT FACE="宋体" LANG="ZH-CN" SIZE=5><P ALIGN="JUSTIFY"><A NAME="_Toc450997924"><A NAME="_Toc451004027"><A NAME="_Toc451329641"><A NAME="_Toc452174849"><A NAME="_Toc452175624"><A NAME="_Toc452175683">声明：</P>
+</B></FONT><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">本次讲座完后，不少朋友向我索取讲义，由于工作特别忙，我实在没时间再写一份讲义（非常的抱歉）。恰好有位</FONT> lisoleger <FONT FACE="宋体" LANG="ZH-CN">将他写的一份相关的文档</FONT>open<FONT FACE="宋体" LANG="ZH-CN">出来让我们下载，其中有部分内容与我昨天讲的相吻合，故将其作为本次讲座的讲义。并在此感谢这位</FONT>lisoleger,<FONT FACE="宋体" LANG="ZH-CN">他名叫：</FONT> zhixueyong.</P>
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY">防火墙实现技术分析</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">Yawl(yawl@docshow.net)</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"></FONT><A HREF="http://www.docshow.net/"><FONT SIZE=3>www.docshow.net</FONT></A></P>
+<FONT SIZE=3><P ALIGN="JUSTIFY">2000/3/15</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">1 </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>引言</P>
+<P ALIGN="JUSTIFY">本文以防火墙功能分类为框架</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>逐个探讨了每项功能的详细技术及实现</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>其中具体实现均取自</FONT><FONT SIZE=3>linux</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>系统</FONT><FONT SIZE=3>.</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">之所以采用</FONT><FONT SIZE=3>linux</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>系统作技术分析</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>主要是因为其本身已基本实现了防火墙系统的各类功能且经受了足够考验</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>因此具有极大的参考价值</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">本文所描述的功能如下</FONT><FONT SIZE=3>:</P>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI>NAT;</LI></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"><LI>负载均衡</FONT><FONT SIZE=3>(load balance,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>又称</FONT><FONT SIZE=3>virtual server);;</LI></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"><LI>包过滤</FONT><FONT SIZE=3>;</LI></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"><LI>日志</FONT><FONT SIZE=3>;</LI></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"><LI>流量统计</LI></P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY"><LI>VPN;</LI></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"><LI>内容安全</FONT><FONT SIZE=3>;</LI></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"><LI>身份验证</FONT><FONT SIZE=3>;</LI></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"><LI>入侵监测</FONT><FONT SIZE=3>.</LI></P></OL>
+
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">防火墙的核心功能</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>包过滤</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>伪装</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>负载均衡</FONT><FONT SIZE=3>)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>在</FONT><FONT SIZE=3>IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>层实现</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>其余大部分功能属于应用层实现</FONT><FONT SIZE=3>(VPN</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>除外</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>因为利用了封装机制</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>很难说究竟在那一层</FONT><FONT SIZE=3>).</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>尽管我们说核心功能在</FONT><FONT SIZE=3>IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>层实现</FONT><FONT SIZE=3>, </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>但实际上只是这些功能函数</FONT><FONT SIZE=3>(call_in_firewall(),call_fw_firewall(),call_out_firewall(),</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">ip_fw_masquerade(),</B>及<B>ip_fw_demasquerade()</B>等)在网络层被调用,真正在完成这些功能时也用到了上层协议(TCP/UDP/ICMP)的头信息(如根据端口,flag标志,ICMP类型进行过滤等).</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">2  linux</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>网络部分代码分析</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>注</FONT><FONT SIZE=3>:</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>加入这一部分主要是因为目前没有一篇文章结合最新的</FONT><FONT SIZE=3>2.2</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>内核讲述了</FONT><FONT SIZE=3>linux</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的网络原理</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>在此介绍一下其流程会有助于整体的理解</FONT><FONT SIZE=3>.)</P>
+<P ALIGN="JUSTIFY">Linux</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>网络层采用统一的缓冲区结构</FONT><FONT SIZE=3>skbuff(include/skbuff.h)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。底层从网络设备接收到数据帧后</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>分配一块内存</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>然后将数据整理成</FONT><FONT SIZE=3>skbuff</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的结构</FONT><FONT SIZE=3>.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>在网络协议处理的时候</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>数据均以</FONT><FONT SIZE=3>skbuff</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的形式在各层之间传递、处理</FONT><FONT SIZE=3>.</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">一个个单独的</FONT><FONT SIZE=3>skbuff</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>被组织成双向链表的形式</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY">Skbuff</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的强大功能在于它提供了众多指针</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>可以快速的定位协议头位置</FONT><FONT SIZE=3>;</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>它也同时保留了许多数据包信息</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>如使用的网络设备等</FONT><FONT SIZE=3>),</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>以便协议层根据需要灵活应用</FONT><FONT SIZE=3>.</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">整个网络层的流程如下</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>以两个进程通过</FONT><FONT SIZE=3>TCP/IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>进行通信为例</FONT><FONT SIZE=3>):</P>
+<P ALIGN="JUSTIFY">            <IMG SRC="Image1.gif" WIDTH=403 HEIGHT=396></P>
+<P ALIGN="JUSTIFY">IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>协议层有三个关键函数</FONT><FONT SIZE=3>:ip_rcv()</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>、</FONT><FONT SIZE=3>ip_forward()</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>、</FONT><FONT SIZE=3>ip_output(),</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>分别处理</FONT><FONT SIZE=3>IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>层的接收、转发和发送工作</FONT><FONT SIZE=3>.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>防火墙的功能函数将在此三个函数中调用</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">3</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>功能实现分析</P>
+<OL>
+<OL>
+
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY"><LI>NAT.</LI></P></OL>
+</OL>
+
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">简单的讲</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>网络地址转换</FONT><FONT SIZE=3>(NAT)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>是将一个</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>或一组</FONT><FONT SIZE=3>)IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>地址转换成另一个</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>或一组</FONT><FONT SIZE=3>)IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>地址</FONT><FONT SIZE=3>.</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">由于网络地址的缺乏和出于安全等因素的考虑</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>许多公司和机构采用了私有</FONT><FONT SIZE=3>IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>地址</FONT><FONT SIZE=3>(RFC 1918)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>来建立自己的内部网络</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>但为了实现与</FONT><FONT SIZE=3>internet</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的互连</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>必须对外表现为合法的</FONT><FONT SIZE=3>IP.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>通过带有</FONT><FONT SIZE=3>NAT</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>功能的路由器或防火墙</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>便可实现私有与合法</FONT><FONT SIZE=3>IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的转换</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">概念上</FONT><FONT SIZE=3>,NAT</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>可分为静态</FONT><FONT SIZE=3>NAT (static address translation)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和动态</FONT><FONT SIZE=3>NAT(dynamic address</P>
+<P ALIGN="JUSTIFY">translation):</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">静态</FONT><FONT SIZE=3>NAT-----------</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>私有</FONT><FONT SIZE=3>IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>与合法</FONT><FONT SIZE=3>IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>之间是一一映射关系</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>每一个内部</FONT><FONT SIZE=3>IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>都有一个外部</FONT><FONT SIZE=3>IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>与之对应</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>系统通过维持一张固定的映射表来实现此种功能</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">linux</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>中</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>在</FONT><FONT SIZE=3>2.2.4</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>版本中曾有专门的一部分处理静态的地址转换</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>并用相应的应用层工具</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">ipnatadm </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>来管理</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>但到了</FONT><FONT SIZE=3>2.2.13</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>内核</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>我主要看的版本</FONT><FONT SIZE=3>)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>中</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>无论是文件还是相关函数都有了</P>
+<P ALIGN="JUSTIFY">非常大的改变</FONT><FONT SIZE=3>.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>与静态地址转换相关的文件只有</FONT><FONT SIZE=3>/ipv4/ip_nat_dumb.c,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>其中只有</FONT><FONT SIZE=3>ip_do_nat()</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">一个函数</FONT><FONT SIZE=3>.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>此函数在</FONT><FONT SIZE=3>ip_forward(),</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和</FONT><FONT SIZE=3>ip_output()</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>中被调用</FONT><FONT SIZE=3>.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>其作用是修改转发和发送的包的</P>
+<P ALIGN="JUSTIFY">源和目的地址</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>仅此功能而已</FONT><FONT SIZE=3>).</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>但是我却未能发现与之相关的上层接口和应用层管理工具</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY">(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>编译内核时要指定</FONT><FONT SIZE=3>CONFIG_IP_ROUTE_NAT </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和</FONT><FONT SIZE=3>CONFIG_IP_MULYIPLE_TABLE).</P>
+<P ALIGN="JUSTIFY"> </P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">动态</FONT><FONT SIZE=3>NAT--------------</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>动态的决定外部与内部的</FONT><FONT SIZE=3>IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>地址之间的映射关系</FONT><FONT SIZE=3>.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>此时可用的合法</FONT><FONT SIZE=3>IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>数往往少于内部网的主机数</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>极端的情况便是</FONT><FONT SIZE=3>linux</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>中的</FONT><FONT SIZE=3>IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>伪装</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>多对一的映射</FONT><FONT SIZE=3>).</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">对实际的应用来说</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>此时仅仅改变</FONT><FONT SIZE=3>IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>地址已经不够</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>必须同时利用</FONT><FONT SIZE=3>TCP/UDP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的端口号来实现多台主机共用一个地址</FONT><FONT SIZE=3>.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>此时防火墙必须维持一个动态的映射表</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>且随时要对此表进行更新</FONT><FONT SIZE=3>.</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">原理如下图所示：</FONT><FONT SIZE=3> </P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"><IMG SRC="Image2.gif" WIDTH=555 HEIGHT=310></P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">                </P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">伪装功能相关文件有</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>均在</FONT><FONT SIZE=3> /ipv4</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>目录</FONT><FONT SIZE=3>):</P>
+<P ALIGN="JUSTIFY">ip_masq.c                    ip_masq_app.c              ip_masq_autofw.c</P>
+<P ALIGN="JUSTIFY">ip_masq_cuseeme.c            ip_masq_ftp.c               ip_masq_irc.c</P>
+<P ALIGN="JUSTIFY">ip_masq_mfw.c               ip_masq_mod.c              ip_masq_portfw.c</P>
+<P ALIGN="JUSTIFY">ip_masq_quake.c              ip_masq_raudio.c             ip_masq_user.c</P>
+<P ALIGN="JUSTIFY">ip_masq_vdolive.c</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">头文件有</FONT><FONT SIZE=3>:</P>
+<P ALIGN="JUSTIFY">#include &lt;net/ip_masq.h&gt;</P>
+<P ALIGN="JUSTIFY">#include &lt;linux/ip_masq.h&gt;</P>
+<P ALIGN="JUSTIFY">#ifdef CONFIG_IP_MASQUERADE_MOD</P>
+<P ALIGN="JUSTIFY">#include &lt;net/ip_masq_mod.h&gt;</P>
+<P ALIGN="JUSTIFY">#endif</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">其中最主要的文件是</FONT><FONT SIZE=3>ip_masq.c,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>它定义了对应用层的接口和实际的地址伪装处理过程</FONT><FONT SIZE=3>.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>其余文件大多是根据专门应用的扩展</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">流程为</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>没有结合包过滤</FONT><FONT SIZE=3>):</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">                 <IMG SRC="Image3.gif" WIDTH=274 HEIGHT=288></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">当</FONT><FONT SIZE=3>IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>层接受到信息</FONT><FONT SIZE=3>(ip_rcv)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>以后</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>在确定信息准确无误后</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>查路由</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>伪装的包和去往防火墙本身的包的目的地址均是防火墙的对外地址</FONT><FONT SIZE=3>,IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>层将用</FONT><FONT SIZE=3>ip_local_deliver()</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>进行处理</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>其中便调用了</FONT><FONT SIZE=3>ip_fw_demasquerade()</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。解伪装会将真正的目的地址和端口恢复出来，经过再次查路由，如果是发往本地的包</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>则交给相应的上层去处理</FONT><FONT SIZE=3>(tcp_ipv4_rcv, udp_rcv, raw_rcv </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>等</FONT><FONT SIZE=3>),</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>否则调用</FONT><FONT SIZE=3>ip_forward().</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">ip_fw_masquerade()</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>则在</FONT><FONT SIZE=3>ip_forward()</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>中被调用</FONT><FONT SIZE=3>.</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">具体算法</FONT><FONT SIZE=3>:</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">公开地址与内部地址的映射表采用的数据结构是ip_masq(在/include/net/ip_masq.h中定义),其格式为:</P>
+<P ALIGN="JUSTIFY">struct ip_masq {</P>
+<P ALIGN="JUSTIFY">&#9;struct list_head m_list, s_list, d_list;&#9;&#9;/* hashed d-linked list heads */</P>
+<P ALIGN="JUSTIFY">&#9;atomic_t refcnt;&#9;&#9;                        /* reference count */</P>
+<P ALIGN="JUSTIFY">&#9;struct timer_list timer;&#9;                    /* Expiration timer */</P>
+<P ALIGN="JUSTIFY">    /***********************************************************************</P>
+<P ALIGN="JUSTIFY">     以下几个是最重要的参数,分别为所用的协议(protocol),源、目的地址(saddr,daddr),源、目的端口(sport,dport)， 经伪装后的地址、端口(maddr,mport).   </P>
+<P ALIGN="JUSTIFY">     **********************************************************************/</P>
+<P ALIGN="JUSTIFY">&#9;__u16 &#9;&#9;protocol;&#9;/* Which protocol are we talking? */</P>
+<P ALIGN="JUSTIFY">&#9;__u16&#9;&#9;sport, dport, mport;&#9;/* src, dst &amp; masq ports */</P>
+<P ALIGN="JUSTIFY">&#9;__u32 &#9;&#9;saddr, daddr, maddr;&#9;/* src, dst &amp; masq addresses */</P>
+<P ALIGN="JUSTIFY">    /**********************************************************************/&#9;</P>
+<P ALIGN="JUSTIFY">    struct ip_masq_seq out_seq, in_seq;</P>
+<P ALIGN="JUSTIFY">&#9;struct ip_masq_app *app;                    /* bound ip_masq_app object */</P>
+<P ALIGN="JUSTIFY">&#9;void&#9;&#9;*app_data;&#9;                       /* Application private data */</P>
+<P ALIGN="JUSTIFY">&#9;struct ip_masq&#9;*control;&#9;               /* Master control connection */</P>
+<P ALIGN="JUSTIFY">&#9;atomic_t        n_control;&#9;               /* Number of "controlled" masqs */</P>
+<P ALIGN="JUSTIFY">&#9;unsigned  &#9;flags;        &#9;               /* status flags */</P>
+<P ALIGN="JUSTIFY">&#9;unsigned&#9;timeout;&#9;                           /* timeout */</P>
+<P ALIGN="JUSTIFY">&#9;unsigned&#9;state;&#9;&#9;                       /* state info */</P>
+<P ALIGN="JUSTIFY">&#9;struct ip_masq_timeout_table *timeout_table;</P>
+<P ALIGN="JUSTIFY">};</P>
+<P ALIGN="JUSTIFY">因为正常情况下linux不会用到32K以上的端口号,负责伪装的程序把61000-65096范围的</P>
+<P ALIGN="JUSTIFY">端口用作伪装,所以缺省情况下同时支持的最大伪装数是4096个.当然可以通过修改源程</P>
+<P ALIGN="JUSTIFY">序来更改.相关定义为:</P>
+<P ALIGN="JUSTIFY">#define PORT_MASQ_BEGIN&#9;61000</P>
+<P ALIGN="JUSTIFY">#define PORT_MASQ_END&#9;(PORT_MASQ_BEGIN+4096)</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">伪装部分在IP层被调用,它为IP层提供了四个函数作为调用接口:</P>
+<P ALIGN="JUSTIFY">   int ip_fw_masquerade(struct sk_buff **, __u32 maddr);  /*tcp,udp协议的伪装*/</P>
+<P ALIGN="JUSTIFY">   int ip_fw_demasquerade(struct sk_buff **);            /*tcp,udp协议的解伪装*/</P>
+<P ALIGN="JUSTIFY">   int ip_fw_masq_icmp(struct sk_buff **, __u32 maddr);   /*icmp协议的伪装*/</P>
+<P ALIGN="JUSTIFY">   int ip_fw_unmasq_icmp(struct sk_buff *);               /*icmp协议的解伪装*/</P>
+<P ALIGN="JUSTIFY">    </P>
+<P ALIGN="JUSTIFY">我们着重分析ip_fw_masquerade：</P>
+<P ALIGN="JUSTIFY">因为只有从内部网到外部网需要伪装,所以ip_fw_masquerade的调用出现在ip_forward()</P>
+<P ALIGN="JUSTIFY">函数中.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">ip_forward()的函数流程为:</P>
+<P ALIGN="JUSTIFY">1.因为ip_forward()接收的参数是一个skbuff,它首先利用skbuff的指针,把IP头找出:</P>
+<P ALIGN="JUSTIFY">struct iphdr *iph;&#9;/* Our header */</P>
+<P ALIGN="JUSTIFY">iph = skb-&gt;nh.iph</P>
+<P ALIGN="JUSTIFY">2.因为ip_forward()由ip_rcv()调用,而在ip_rcv()中已查过了路由,此处只需利用skbuff的指针定位路由信息即可:</P>
+<P ALIGN="JUSTIFY">struct rtable *rt;&#9;/* Route we use */</P>
+<P ALIGN="JUSTIFY">rt = (struct rtable*)skb-&gt;dst;</P>
+<P ALIGN="JUSTIFY">3.如果此IP包的生存时间(ttl)已到,则丢弃.</P>
+<P ALIGN="JUSTIFY">if (iph-&gt;ttl &lt;= 1)</P>
+<P ALIGN="JUSTIFY">                goto too_many_hops;</P>
+<P ALIGN="JUSTIFY">4.如果在选项中指定了严格的源路由功能(strict source routing) ,且此处无法达到,也丢弃:</P>
+<P ALIGN="JUSTIFY">if (opt-&gt;is_strictroute &amp;&amp; rt-&gt;rt_dst != rt-&gt;rt_gateway)</P>
+<P ALIGN="JUSTIFY">                goto sr_failed;</P>
+<P ALIGN="JUSTIFY">5.如果指定的伪装功能,且上层协议是ICMP,则在此处处理一部分,且跳过后面的包过滤处理</P>
+<P ALIGN="JUSTIFY">( Why ? ):</P>
+<P ALIGN="JUSTIFY">#ifdef CONFIG_IP_MASQUERADE</P>
+<P ALIGN="JUSTIFY">&#9;if(!(IPCB(skb)-&gt;flags&amp;IPSKB_MASQUERADED)) {</P>
+<P ALIGN="JUSTIFY">&#9;      if (iph-&gt;protocol == IPPROTO_ICMP) {</P>
+<P ALIGN="JUSTIFY">&#9;         </P>
+<P ALIGN="JUSTIFY">&#9;         ........</P>
+<P ALIGN="JUSTIFY">&#9;         </P>
+<P ALIGN="JUSTIFY">&#9;         fw_res = ip_fw_masq_icmp(&amp;skb, maddr);</P>
+<P ALIGN="JUSTIFY">                 if (fw_res)</P>
+<P ALIGN="JUSTIFY">&#9;&#9;    /* ICMP matched - skip firewall */</P>
+<P ALIGN="JUSTIFY">&#9;&#9;    goto skip_call_fw_firewall;</P>
+<P ALIGN="JUSTIFY">                 ........</P>
+<P ALIGN="JUSTIFY">                 </P>
+<P ALIGN="JUSTIFY">                 }</P>
+<P ALIGN="JUSTIFY">                 }</P>
+<P ALIGN="JUSTIFY">#endif          </P>
+<P ALIGN="JUSTIFY">6.如果上一步的前提不成立,则要经过一次包过滤.</P>
+<P ALIGN="JUSTIFY">fw_res=call_fw_firewall(PF_INET, dev2, iph, NULL, &amp;skb);</P>
+<P ALIGN="JUSTIFY">7.我们知道,在当前版本中,包过滤与伪装功能在许多地方是紧密联系在一次的,如采用同样的配置工具ipchains,同样的配置接口setsocketopt(),其中是否启动伪装的标志也在放火墙的chains中,即如果你指定了ipchains -A forward -j MASQ,则call_fw_firewall()会返回FW_MASQUERADE, 如果这样,程序将进行到调用ip_fw_masquerade()的地方.</P>
+<P ALIGN="JUSTIFY">skip_call_fw_firewall:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">  .......</P>
+<P ALIGN="JUSTIFY">  if (maddr == 0)</P>
+<P ALIGN="JUSTIFY">&#9;maddr = inet_select_addr(dev2, rt-&gt;rt_gateway, RT_SCOPE_UNIVERSE);</P>
+<P ALIGN="JUSTIFY">  ip_fw_masquerade(&amp;skb, maddr);</P>
+<P ALIGN="JUSTIFY">  .......</P>
+<P ALIGN="JUSTIFY">8.因为伪装可能改变了skbuff的一些信息,此时要重新定位一下IP头及其选项:</P>
+<P ALIGN="JUSTIFY">         iph = skb-&gt;nh.iph;</P>
+<P ALIGN="JUSTIFY">&#9; opt = &amp;(IPCB(skb)-&gt;opt);       </P>
+<P ALIGN="JUSTIFY">9.因为转发的数据总是要送出的,紧接着会调用call_out_firewall(),并把数据送出去.</P>
+<P ALIGN="JUSTIFY">(后面分析,此处略)&#9; </P>
+<P ALIGN="JUSTIFY">&#9;&#9;</P>
+<P ALIGN="JUSTIFY">ip_fw_demasquerade的调用出现在ip_local_deliver()中.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">1.如果需要,首先重组IP包:</P>
+<P ALIGN="JUSTIFY">  if (sysctl_ip_always_defrag == 0 &amp;&amp;</P>
+<P ALIGN="JUSTIFY">            (iph-&gt;frag_off &amp; htons(IP_MF|IP_OFFSET))) {</P>
+<P ALIGN="JUSTIFY">&#9;&#9;skb = ip_defrag(skb);</P>
+<P ALIGN="JUSTIFY">&#9;&#9;if (!skb)</P>
+<P ALIGN="JUSTIFY">&#9;&#9;&#9;return 0;</P>
+<P ALIGN="JUSTIFY">&#9;&#9;iph = skb-&gt;nh.iph;&#9;</P>
+<P ALIGN="JUSTIFY">2.然后调用ip_fw_demasquerade</P>
+<P ALIGN="JUSTIFY">ret = ip_fw_demasquerade(&amp;skb);</P>
+<P ALIGN="JUSTIFY">3.再次调用路由查找,根据真正的IP来发送此包.</P>
+<P ALIGN="JUSTIFY">ip_route_input(skb, iph-&gt;daddr, iph-&gt;saddr, iph-&gt;tos, skb-&gt;dev)</P>
+<P ALIGN="JUSTIFY">4.根据路由发往上层或是转发(略).&#9;&#9;</P>
+<P ALIGN="JUSTIFY">&#9;  &#9;  </P>
+<P ALIGN="JUSTIFY">下面我们便说明一下伪装是怎么工作的,即ip_fw_masquerade的流程:</P>
+<P ALIGN="JUSTIFY">因为经过伪装后的地址是防火墙连结公网的IP,这个值(maddr)已通过参数送到ip_fw_masquerade函数中:</P>
+<P ALIGN="JUSTIFY">int ip_fw_masquerade(struct sk_buff **skb_p, __u32 maddr)</P>
+<P ALIGN="JUSTIFY">其主要工作便是分配空闲端口,并改变IP头.</P>
+<P ALIGN="JUSTIFY">1.将 skbuff的h.raw指针指向IP的数据部分(一般是TCP,UDP的头),并得到数据部分长度和</P>
+<P ALIGN="JUSTIFY">传输层协议的数据偏移部分.</P>
+<P ALIGN="JUSTIFY"> h.raw = (char*) iph + iph-&gt;ihl * 4;</P>
+<P ALIGN="JUSTIFY"> size = ntohs(iph-&gt;tot_len) - (iph-&gt;ihl * 4);</P>
+<P ALIGN="JUSTIFY"> doff = proto_doff(iph-&gt;protocol, h.raw, size);</P>
+<P ALIGN="JUSTIFY">         /*doff holds transport protocol data offset*/</P>
+<P ALIGN="JUSTIFY">2.根据上层协议(iph-&gt;protocol)及需要,要一些校验和的工作(why?)         </P>
+<P ALIGN="JUSTIFY">3.检查是否已经有了合适的映射关系,有则返回相应的ip_masq结构.</P>
+<P ALIGN="JUSTIFY"> struct ip_masq&#9;*ms;</P>
+<P ALIGN="JUSTIFY"> ms = ip_masq_out_get_iph(iph);</P>
+<P ALIGN="JUSTIFY"> </P>
+<P ALIGN="JUSTIFY"> ip_masq_out_get_iph(最终是__ip_masq_out_get)会查找以&amp;ip_masq_s_table[]</P>
+<P ALIGN="JUSTIFY"> 开头的结构,检查是否已由相关的映射.</P>
+<P ALIGN="JUSTIFY"> if (d_addr==ms-&gt;daddr </P>
+<P ALIGN="JUSTIFY">     &amp;&amp; d_port==ms-&gt;dport</P>
+<P ALIGN="JUSTIFY">     &amp;&amp; s_addr==ms-&gt;saddr</P>
+<P ALIGN="JUSTIFY">     &amp;&amp; s_port==ms-&gt;sport</P>
+<P ALIGN="JUSTIFY">     &amp;&amp; protocol==ms-&gt;protocol</P>
+<P ALIGN="JUSTIFY">     &amp;&amp;((ms-&gt;flags&amp;(MASQ_DADDR_PASS|MASQ_DPORT_PASS</P>
+<P ALIGN="JUSTIFY">          |IP_MASQ_F_NO_SADDR|IP_MASQ_F_NO_SPORT)) == 0)</P>
+<P ALIGN="JUSTIFY">4.如果还没有建立映射,则新建:</P>
+<P ALIGN="JUSTIFY">ms = ip_masq_new(iph-&gt;protocol,</P>
+<P ALIGN="JUSTIFY">&#9;&#9;maddr, 0,</P>
+<P ALIGN="JUSTIFY">&#9;&#9;iph-&gt;saddr, h.portp[0],</P>
+<P ALIGN="JUSTIFY">&#9;&#9;iph-&gt;daddr, h.portp[1],</P>
+<P ALIGN="JUSTIFY">&#9;&#9;0);</P>
+<P ALIGN="JUSTIFY">ip_masq_new将负责寻找合适的端口.</P>
+<P ALIGN="JUSTIFY">5.现在,已经有了合适的ip_masq结构,即映射关系,则开始改头信息(地址和端口都改):</P>
+<P ALIGN="JUSTIFY">    iph-&gt;saddr = ms-&gt;maddr;</P>
+<P ALIGN="JUSTIFY"> &#9;h.portp[0] = ms-&gt;mport;</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">就是这么简单:-)</P>
+<P ALIGN="JUSTIFY">6.头变了,当然校验和有要重算一遍.至此过程结束.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">因为ICMP协议没有端口的概念，所以只能利用ICMP协议头中的ID项作为源端口使用，其余流程大同小异。</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">伪装模块留给上层的配置接口与包过滤相同</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>都是利用</FONT><FONT SIZE=3>setsocket</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>系统调用。这样可以保证系统总的系统调用数目和名称保持稳定。对于我们的专用系统来说，也可以采用增添新的系统调用的方式以增加处理的便利。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">int setsocket (int socket, IPPRPTO_IP, int command, void *data, int length).</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">伪装作为防火墙规则链中的行动项出现</FONT><FONT SIZE=3>(MASQ).</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>如果某个规则匹配后行动项是</FONT><FONT SIZE=3>MASQ,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>则调用伪装功能</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>如上文</FONT><FONT SIZE=3>).</P>
+<P ALIGN="JUSTIFY">             </P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">补充说明</FONT><FONT SIZE=3>:</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>算法的难度主要在于动态映射表的维护</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>包括端口号的分配</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>识别及超时处理等</FONT><FONT SIZE=3>),</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">还有就是在处理不同协议时会有额外的问题</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>如有的应用层协议需要对内建立连接</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY">linux</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>针对有此类要求的协议均做了相应处理</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">3.2</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>负载均衡</FONT><FONT SIZE=3>(load balance,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>又称</FONT><FONT SIZE=3>virtual server)</P>
+<P ALIGN="JUSTIFY">(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>严格的讲</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>负载均衡由多种不同实现技术</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>此处仅指在</FONT><FONT SIZE=3>IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>层实现的方法</FONT><FONT SIZE=3>.)</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">负载均衡也是利用</FONT><FONT SIZE=3>NAT</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>技术</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>但实现了不同的功能</FONT><FONT SIZE=3>.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>传统</FONT><FONT SIZE=3>NAT</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>是改变从内部网出来的数据包的</FONT><FONT SIZE=3> IP,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>而负载均衡则改变从外部网进来的数据包的</FONT><FONT SIZE=3>IP. </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>其目的是使数据处理工作分摊到不同的主机</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>这些主机往往是镜像关系</FONT><FONT SIZE=3>).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">                   <IMG SRC="Image4.gif" WIDTH=267 HEIGHT=141></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">若干服务器</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>往往处于停火区上</FONT><FONT SIZE=3>)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>对外体现为一个</FONT><FONT SIZE=3>IP,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>在经过防火墙后</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>经由一定的分配算法</FONT><FONT SIZE=3>, </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>数据包的目的地址有了变化</FONT><FONT SIZE=3>(NAT),</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>数据被均匀的交给多个主机</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">此时防火墙所维持的映射表并不复杂</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>并不像伪装需要维持一个动态的映射关系</FONT><FONT SIZE=3>.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>其核心在</P>
+<P ALIGN="JUSTIFY">于采用何种分配算法</FONT><FONT SIZE=3>.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>典型的算法有</FONT><FONT SIZE=3>:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">*Random:     </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>顾名思义</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>随机的分配一个服务器</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY">*Round Robin: </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>轮流分配</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY">*</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>询问主机</FONT><FONT SIZE=3>:    </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>防火墙询问主机以决定由谁处理</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>前提是</FONT><FONT SIZE=3>server </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>上必须有相应软件以进行</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">             </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>双方通信</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY">*</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>防火墙监测</FONT><FONT SIZE=3>:  </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>防火墙通过一定手段</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>来决定哪一个服务器负载最小</FONT><FONT SIZE=3>.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>如对所有机子发出</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">              ping</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>消息</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>以延迟时间作为判断标准</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY"> </P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">从公平和延迟时间的综合考虑</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>采用前两种可能较好</FONT><FONT SIZE=3>.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>在现有产品中</FONT><FONT SIZE=3>,checkpoint</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>实现了</P>
+<P ALIGN="JUSTIFY">所有算法</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>并将决定权交给了用户</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">负载均衡并没有出现在</FONT><FONT SIZE=3>linux</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的正式版本里</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>但有相应的补丁文件来实现此功能</FONT><FONT SIZE=3>.</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">详见</FONT><FONT SIZE=3>Linux Virtual Server Project( </FONT><A HREF="http://proxy.iinchina.net/~wensong/ippfvs/"><FONT SIZE=3>proxy.iinchina.net/~wensong/ippfvs/</FONT></A><FONT SIZE=3>)</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">主要有以下几个文件</FONT><FONT SIZE=3>:</P>
+<P ALIGN="JUSTIFY">ip_vs.c&#9;&#9;ip_vs_rr.c&#9; &#9;&#9;ip_vs_wrr.c&#9;&#9;ip_vs_wls.c&#9;</P>
+<P ALIGN="JUSTIFY">ip_vs.c </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>是主流程</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>其余的是三个分配算法</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>分别为</FONT><FONT SIZE=3>: Round Robin, Weighted Round Robin,</P>
+<P ALIGN="JUSTIFY">&#9;Weighted Least Connection .</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">具体算法</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>未分析</FONT><FONT SIZE=3>).</P>
+<P ALIGN="JUSTIFY">                          </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">3.3</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>包过滤</FONT><FONT SIZE=3>.</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">包过滤在理论上是在</FONT><FONT SIZE=3>IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>层工作</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>可为了完成丰富的功能</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>必须同时利用其他层的信息</FONT><FONT SIZE=3>.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>如用于端口过滤</FONT><FONT SIZE=3>,SYN</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>过滤</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>设备相关过滤时</FONT><FONT SIZE=3>.                </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Linux </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>内核中有三条内置的规则链</FONT><FONT SIZE=3>(input chain, forward chain, output chain),</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>分别对应接收检测</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>转发检测和发送检测</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>内置链不可删除</FONT><FONT SIZE=3>),</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>每一条</FONT><FONT SIZE=3>chain </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>包含一系列过滤规则及链的缺省策略</FONT><FONT SIZE=3>.</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">其实现过程如下</FONT><FONT SIZE=3>:</P>
+<P ALIGN="JUSTIFY">*</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>在不同检测点进入相应过滤链</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY">*</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>顺序检查每一条过滤规则</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>找出与之匹配的规则</FONT><FONT SIZE=3>(ACCEPT, REJECT, DENY, MASQ,REDICT, </P>
+<P ALIGN="JUSTIFY">         RETURN).</P>
+<P ALIGN="JUSTIFY">*</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>当遇到第一条比配的规则时采取以下行动</FONT><FONT SIZE=3>:</P>
+<P ALIGN="JUSTIFY">           a.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>将规则应用于此数据包</FONT><FONT SIZE=3>;</P>
+<P ALIGN="JUSTIFY">           b.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>每条规则都包含有</FONT><FONT SIZE=3>packet</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和</FONT><FONT SIZE=3>byte</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>数的计数器</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>当匹配时</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>此计数器加一</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY">            (</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>用</FONT><FONT SIZE=3>ipchains –L –v </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>可察看通过每条链的包与比特数</FONT><FONT SIZE=3>.)</P>
+<P ALIGN="JUSTIFY">           c.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>如果设置记录功能</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>则记录</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY">*</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>当没有规则匹配时</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>采用链的缺省策略</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">相关文件为</FONT><FONT SIZE=3>:ipfw.c, ipfw.h(IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>包过滤功能</FONT><FONT SIZE=3>),firewall.c, firewall.h(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>通用包过滤功能接口</FONT><FONT SIZE=3>).</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">具体流程为</FONT><FONT SIZE=3>:</P>
+<P ALIGN="JUSTIFY">        .</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"><IMG SRC="Image5.gif" WIDTH=556 HEIGHT=202></P>
+<P ALIGN="JUSTIFY">结合代码来说</FONT><FONT SIZE=3>:</P>
+<P ALIGN="JUSTIFY"> ip_rcv()</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>是</FONT><FONT SIZE=3>IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>层的接收函数</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>它首先检查</FONT><FONT SIZE=3>:</P><DIR>
+
+<P ALIGN="JUSTIFY">a.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>长度是否正确</FONT><FONT SIZE=3>;</P>
+<P ALIGN="JUSTIFY">b..</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>版本号是否正确</FONT><FONT SIZE=3>(4? 6?);</P>
+<P ALIGN="JUSTIFY">c.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>校验和是否正确</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY">if (skb-&gt;len &lt; sizeof(struct iphdr))</P>
+<P ALIGN="JUSTIFY">&#9;&#9;goto inhdr_error; </P>
+<P ALIGN="JUSTIFY">&#9;if (iph-&gt;ihl &lt; 5 || iph-&gt;version != 4 || ip_fast_csum((u8 *)iph, iph-&gt;ihl) != 0)</P>
+<P ALIGN="JUSTIFY">&#9;&#9;goto inhdr_error;</P>
+<P ALIGN="JUSTIFY"></P></DIR>
+
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">在确定这些信息无误后</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>则调用包过滤检测</FONT><FONT SIZE=3>:</P>
+<P ALIGN="JUSTIFY">fwres = call_in_firewall(PF_INET, dev, iph, &amp;rport, &amp;skb);</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">fwres</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>返回的便是匹配出来的规则</FONT><FONT SIZE=3>.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>如果不接受</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>则立即丢弃</FONT><FONT SIZE=3>:</P>
+<P ALIGN="JUSTIFY">f (fwres &lt; FW_ACCEPT &amp;&amp; fwres != FW_REJECT)</P>
+<P ALIGN="JUSTIFY">&#9;&#9;goto drop;</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">否则查找路由</FONT><FONT SIZE=3>:</P>
+<P ALIGN="JUSTIFY">ip_route_input(skb, iph-&gt;daddr, iph-&gt;saddr, iph-&gt;tos, dev) </P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">如果</FONT><FONT SIZE=3>IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>包有其他选项</FONT><FONT SIZE=3>(iph-&gt;ihl &gt; 5),</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>则需多加一段处理</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>略</FONT><FONT SIZE=3>).</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">此时路由信息已包括在了</FONT><FONT SIZE=3>skbuff</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>数据结构的</FONT><FONT SIZE=3>dst </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>项中</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>紧接着调用</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">  skb-&gt;dst-&gt;input(skb) </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>继续处理</FONT><FONT SIZE=3> .</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">对发往本地高层协议的包</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>则实际调用了</FONT><FONT SIZE=3>ip_local_deliver(),</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">对转往其他机子的包</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>则实际调用</FONT><FONT SIZE=3>ip_forward()</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>处理</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY">     </P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">值得注意的是</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>经伪装的包在回来时</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>其目的</FONT><FONT SIZE=3>IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>是防火墙的</FONT><FONT SIZE=3>IP,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>经路由后</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>也送入</FONT><FONT SIZE=3>ip_local_deliver()</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>处理</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>在</FONT><FONT SIZE=3>ip_local_deliver()</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>内部先解伪装</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>然后再查一次路由</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>发往本地的直接送往高层</FONT><FONT SIZE=3>,,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>否则依然调用</FONT><FONT SIZE=3>ip_forward().</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">ip_forward()</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>中则包含了</FONT><FONT SIZE=3>call_fw_firewall()</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的调用</FONT><FONT SIZE=3>.</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">在发往底层的时候</FONT><FONT SIZE=3>(ip_output,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>最终是</FONT><FONT SIZE=3>ip_queue_xmit),</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>调用了</FONT><FONT SIZE=3>call_out_firewall().                </P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">整个包过滤部分的初始化工作在</FONT><FONT SIZE=3>ip_fw.c</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>中有定义</FONT><FONT SIZE=3>:   </P>
+<P ALIGN="JUSTIFY">ip_fw_init()</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">察看</FONT><FONT SIZE=3>call_in_firewall,  call_fw_firewall ,  call_out_firewall</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的定义后发现</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>其核心过程</P>
+<P ALIGN="JUSTIFY">都在于</FONT><FONT SIZE=3>ip_fw_check() </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>这个函数</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>它完成了数据包与规则的实际匹配</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">ip_fw_check()</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>函数分析：</P>
+<P ALIGN="JUSTIFY">防火墙的规则链由</FONT><FONT SIZE=3>ip_chain</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>数据结构</FONT><FONT SIZE=3>(ip_fw.c)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>描述</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>其中包含了指向链中第一条规则的指针和链的缺省策略</FONT><FONT SIZE=3>.</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">每个规则由</FONT><FONT SIZE=3>ip_fwkernel</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>数据结构</FONT><FONT SIZE=3>(ip_fw.c)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>描述</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>其中的重要一项是</FONT><FONT SIZE=3>ip_fw</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>数据结构</FONT><FONT SIZE=3>(ip_fw.h):</P>
+<P ALIGN="JUSTIFY">struct ip_fw </P>
+<P ALIGN="JUSTIFY">{</P>
+<P ALIGN="JUSTIFY">&#9;struct in_addr fw_src, fw_dst;&#9;&#9;        /* Source and destination IP addr */</P>
+<P ALIGN="JUSTIFY">&#9;struct in_addr fw_smsk, fw_dmsk;&#9;        / * Mask for src and dest IP addr */</P>
+<P ALIGN="JUSTIFY">&#9;__u32 fw_mark;                       /* ID to stamp on packet */</P>
+<P ALIGN="JUSTIFY">&#9;__u16 fw_proto;                       /* Protocol, 0 = ANY */</P>
+<P ALIGN="JUSTIFY">&#9;__u16 fw_flg;&#9;&#9;&#9;                /* Flags word */</P>
+<P ALIGN="JUSTIFY">        __u16 fw_invflg;                   /* Inverse flags */</P>
+<P ALIGN="JUSTIFY">&#9;__u16 fw_spts[2];                      /* Source port range. */</P>
+<P ALIGN="JUSTIFY">        __u16 fw_dpts[2];                  /* Destination port range. */</P>
+<P ALIGN="JUSTIFY">&#9;__u16 fw_redirpt;                      /* Port to redirect to. */ </P>
+<P ALIGN="JUSTIFY">&#9;__u16 fw_outputsize;                   /* Max amount to output to NETLINK */</P>
+<P ALIGN="JUSTIFY">&#9;char  fw_vianame[IFNAMSIZ];&#9;        /* name of interface "via" */</P>
+<P ALIGN="JUSTIFY">&#9;__u8  fw_tosand, fw_tosxor;&#9;            /* Revised packet priority */</P>
+<P ALIGN="JUSTIFY">};</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">其中包含了要匹配的所有信息</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>源、目的地址，源、目的端口，协议，</FONT><FONT SIZE=3>flag</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>标志，接口名等</FONT><FONT SIZE=3>)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，</P>
+<P ALIGN="JUSTIFY">尽管时间信息并没有加进去，但我们可已通过不同时间更换不同规则的策略来处理与时间有关的规则。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">ip_fw_check()</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>所做的就是将每一个</FONT><FONT SIZE=3>ip</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>包与规则链中的每一条规则</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>实际就是</FONT><FONT SIZE=3>ip_fw</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>数据结构所描述的内容</FONT><FONT SIZE=3>)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>按照链表的组织顺序一一比较</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>若匹配则并返回规则的行动项</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">规则的修改通过</FONT><FONT SIZE=3>setsockopt</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>系统调用实现，其格式和命令请参看</FONT><FONT SIZE=3>man</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>文档（</FONT><FONT SIZE=3>man ipfw</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>）</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">3.4</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>日志</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">在</FONT><FONT SIZE=3>linux</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>系统中</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>内核产生的信息可用</FONT><FONT SIZE=3>printk()</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>函数打印出来</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>其语法与</FONT><FONT SIZE=3>printf()</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>基本一致</FONT><FONT SIZE=3>.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>如在系统启动时所看到信息都是通过此函数打印到屏幕的</FONT><FONT SIZE=3>.printk</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>打出的信息往往以</FONT><FONT SIZE=3>&lt;0&gt;&lt;2&gt;…&lt;7&gt;</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>这样的被括号括起来数字开头</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>这些数字说明了消息的重要级别</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>其中</FONT><FONT SIZE=3>&lt;0&gt;</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>级别最高</FONT><FONT SIZE=3>.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>高于一定的优先级的信息会打印到屏幕上</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>否则保留在系统的缓冲区中</FONT><FONT SIZE=3>.</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">在系统正式启动后</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>往往启动</FONT><FONT SIZE=3>klogd</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>守护进程通过</FONT><FONT SIZE=3>syslog()</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>系统调用</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>或读取</FONT><FONT SIZE=3>proc</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>文件系统</FONT><FONT SIZE=3>(cat  /proc/kmsg)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>来从系统缓冲区中得到经</FONT><FONT SIZE=3>printk</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>发出的信息</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>注意缓冲区中的信息经一次读取后便清空</FONT><FONT SIZE=3>).</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">另一个守护进程</FONT><FONT SIZE=3>syslogd</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>又从</FONT><FONT SIZE=3>klogd</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>处得到信息</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>在将按优先级处理后</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>根据</FONT><FONT SIZE=3>/etc/syslog.conf</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的设置将日志存储与不同的文件</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>如</FONT><FONT SIZE=3>/var/log/messages.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>如果启动了</FONT><FONT SIZE=3>ipchains</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的日志功能</FONT><FONT SIZE=3>(-l </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>参数</FONT><FONT SIZE=3>),</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>最终的日志便存储在其中</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">在</FONT><FONT SIZE=3>ip_fw.c</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>中定义了一个专门的函数写日志</FONT><FONT SIZE=3>: </P>
+<P ALIGN="JUSTIFY">static void dump_packet( )</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">函数很简短</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>只是定义了一个格式</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>再用</FONT><FONT SIZE=3>printk()</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>打出来</FONT><FONT SIZE=3>.</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">如果关掉</FONT><FONT SIZE=3>klogd,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>而用</FONT><FONT SIZE=3>cat  /proc/kmsg</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的话</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>则可直接看到其打印的信息</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>如</FONT><FONT SIZE=3>:</P>
+<P ALIGN="JUSTIFY">&lt;6&gt; Packet log : input DENY etho PROTO=17  192.168.2.1:53  192.18.168.1.1:1025   </P>
+<P ALIGN="JUSTIFY">   L=34 S=0x00 I=18 F=0x0000 T=254 </P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">第一个</FONT><FONT SIZE=3>”&lt;6&gt;” </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>说明了消息的优先级</FONT><FONT SIZE=3>(KERN_INFO)</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">如果观察</FONT><FONT SIZE=3>/var/log/messages</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的记录</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>则发现</FONT><FONT SIZE=3>syslogd</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>给每条记录都加上了时间</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">如果要打印任何其他信息</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>都可通过修改</FONT><FONT SIZE=3>dump_packet( )</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>来实现</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">3.5</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>流量统计</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">linux</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>本身只提供经过每条规则链的包数量与比特数量的统计</FONT><FONT SIZE=3>(ipchains –L –v</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>可察看</FONT><FONT SIZE=3>).</P>
+<P ALIGN="JUSTIFY"> </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>对于防火墙较重要的以</FONT><FONT SIZE=3>IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>为坐标的流量并未统计</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"> </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>我们可采用两种办法</FONT><FONT SIZE=3>:</P>
+<P ALIGN="JUSTIFY"> </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>一</FONT><FONT SIZE=3>:</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>在内核中引入一个新的数据结构来描述每个</FONT><FONT SIZE=3>IP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>及其服务的流量</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>为了效率</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>可</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">   </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>采用树状链表</FONT><FONT SIZE=3>),</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>每当一个数据包来的时候</FONT><FONT SIZE=3>.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>查找此结构</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>并将相应的计数器加一</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY"> </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>二</FONT><FONT SIZE=3>:</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>通过日志记录</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>用统计的办法来得出流量</FONT><FONT SIZE=3>.</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">因为前者增大了网络层处理的开销</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>尤其是一个大的站点有很分散的人访问</FONT><FONT SIZE=3>),</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>后者应该是</P>
+<P ALIGN="JUSTIFY">一种最为理想的方式</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">3.6 VPN</P>
+<P ALIGN="JUSTIFY">VPN</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>还没用并入而且在短时间内也不会并入</FONT><FONT SIZE=3>linux</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>系统内核</FONT><FONT SIZE=3>.</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">目前有三种实现方法</FONT><FONT SIZE=3>:</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">一</FONT><FONT SIZE=3>:FreeS/WAN project, </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>遵循</FONT><FONT SIZE=3>IPSEC &amp; IKE</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>标准</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>提供了标准的</FONT><FONT SIZE=3>VPN</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>解决办法</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY">  </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>目前已推出了</FONT><FONT SIZE=3>1.3 </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>版</FONT><FONT SIZE=3>.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>通过补丁的办法实现与内核的合成</FONT><FONT SIZE=3>.</P>
+<P ALIGN="JUSTIFY">  </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>详见</FONT><A HREF="http://www.freeswan.org/"><FONT SIZE=3>www.freeswan.org</FONT></A></P>
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">具体实现</FONT><FONT SIZE=3>:</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">如果将</FONT><FONT SIZE=3>freeswan</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>编入内核</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>在查看网络设备时</FONT><FONT SIZE=3>(ifconfig),</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>会发现多了一个设备</FONT><FONT SIZE=3>ipsec0, </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>我们可以通过设置路由表使去往另一机构的数据通过此设备发送</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>所有通过</FONT><FONT SIZE=3>ipsecN</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>设备的数据包均经过标准加密算法加密并重新打包后发往</FONT><FONT SIZE=3>ppp0</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>（或其他连往外部接口的设备），从这个设备将数据真正发送出去。</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">二</FONT><FONT SIZE=3>:</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>利用</FONT><FONT SIZE=3>ssh</P>
+<P ALIGN="JUSTIFY">ssh</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>可以实现加密的</FONT><FONT SIZE=3>telnet</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和</FONT><FONT SIZE=3>X11</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>会话</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>其加密也可与隧道机制一起构成</FONT><FONT SIZE=3>VPN</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>解决方案</FONT><FONT SIZE=3>.</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">具体实现可参阅</FONT><FONT SIZE=3>VPN mini HOWTO,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>但这并不是</FONT><FONT SIZE=3>”</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>标准</FONT><FONT SIZE=3>”</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的解决办法</FONT><FONT SIZE=3>. </P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">三</FONT><FONT SIZE=3>: </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>利用</FONT><FONT SIZE=3>PPTP</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">目前</FONT><FONT SIZE=3>linux</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>上已有了</FONT><FONT SIZE=3>pptp</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的</FONT><FONT SIZE=3>server</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和</FONT><FONT SIZE=3>client</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>端程序</FONT><FONT SIZE=3>.</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">缺点：</FONT><FONT SIZE=3>pptp</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>不支持加密。</P>
+<P ALIGN="JUSTIFY"></A></A></A></A></A></A></P></FONT></BODY>
+</HTML>

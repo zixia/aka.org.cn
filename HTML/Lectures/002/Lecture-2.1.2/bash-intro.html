@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>BASH 的历史和概貌</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+    <META NAME="AUTHOR" CONTENT="Yongming Wei">
+    <META NAME="CREATED" CONTENT="20000329;17342600">
+    <META >
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="velvet.jpg">
+
+<A HREF="bash-syntax.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=LEFT>1&nbsp;&nbsp;&nbsp;&nbsp;BASH 的历史和概貌</H1>
+
+<UL>
+  <LI> 
+    <P>BASH 是什么的缩写 
+  </LI>
+  <LI> 
+    <P>Linux 中的其他 Shell 
+  </LI>
+  <LI> 
+    <P>BASH 的主要特点 
+  </LI>
+</UL>
+<p>为什么要学习 BASH 编程呢？因为 BASH 是每个 Linux 发行版都带有的一个标准基础软件，所以学会在 BASH 下编制一些小程序就可以让你对 
+  Linux 系统的管理应付自如；其次 BASH 非常简单，如果不深究 BASH 语法中的细节的话，你可以用 1 个小时就学会他，应该说 BASH 比 HTML 
+  要更容易学；最后即使你不打算用 BASH 编程，但是 Linux 系统中的许多配置文件和脚本都是 BASH 的语法，不懂一点 BASH 的知识就不能很好的理解和使用 
+  Linux 。其实最简单的 BASH 就和 DOS 下的批处理文件类似，只要把要执行的命令一行一行写出来就行。</p>
+<p><br>
+</p>
+<H3>1.1&nbsp;&nbsp;&nbsp;&nbsp;BASH 是什么的缩写</H3>
+<P>BASH = GNU Bourne-Again SHell，BASH 是 GNU 组织开发和推广的一个项目，不过也有一种风趣的说法认为 BASH = 
+  Born-Again Shell。</P>
+<P>BASH 是 Linux 操作系统上的一个 Shell，是由 /bin/bash 解释执行的。BASH 支持 IEEE POSIX P1003.2/ISO 
+  9945.2 脚本语言工具标准。</P>
+<BR>
+
+<H3>1.2&nbsp;&nbsp;&nbsp;&nbsp;Linux 系统中的其他 Shell</H3>
+<P>Shell 的概念是从 UNIX 系统中引用过来的，在 Linux 和 UNIX 系统里现在存在这多种不同的 Shell 可以使用。最常用的几种是 </P>
+<P>Bourne shell (sh) <br>
+  C shell (csh) <br>
+  Korn shell (ksh)</P>
+<P>三种shell 都有它们的优点和缺点：</P>
+<P>Bourne shell 的作者是 Steven Bourne，它是 UNIX 最初使用的 Shell 并且在每种 UNIX 上都可以使用。Bourne 
+  Shell 在 Shell 编程方面相当优秀，但在处理与用户的交互方面作得不如其他几种 Shell； </P>
+<P>C Shell 由 Bill Joy 所写，它更多的考虑了用户界面的友好性，支持象命令补齐（command-line completion）等一些 Bourne 
+  Shell 所不支持的特性，普遍认为C shell 的编程接口做的不如 Bourne Shell，但 C Shell 还是被很多 C 程序员使用，因为 
+  C Shell 的语法和 C 语言很相似，这也是 C Shell 名称的由来； </P>
+<P>Korn Shell (ksh) 由 Dave Korn 所写，它集合了 C Shell 和 Bourne Shell 的优点并且和 Bourne Shell 
+  完全兼容。 </P>
+<P>除了这些 Shell 以外，许多其他的 Shell 程序吸收了这些原来的 Shell 程序的优点而成为新的 Shell 。在 Linux 上常见的有 
+  tcsh (csh 的扩展)，Bourne Again shell(bash, sh 的扩展), 和Public Domain Korn shell (pdksh, 
+  ksh 的扩展)。</P>
+<P>BASH 是大多数 Linux 系统的缺省 Shell。 BASH 只是 Linux 操作系统上的一种 Shell，虽然他是一个比较优秀和主流的 Shell，但是针对不同用户的不同需要和喜好，在 
+  Linux 操作系统上还有几种其他的 Shell，如：ksh、csh、zsh 等。</P>
+<P><I> </I> </P>
+
+<H3>1.3&nbsp;&nbsp;&nbsp;&nbsp;BASH 的主要特点</H3>
+<P> Bourne Again shell (bash), 正如它的名字所暗示的，是 Bourne shell 的扩展。BASH 与 Bourne shell 
+  完全向后兼容，并且在 Bourne shell 的基础上增加和增强了很多特性。BASH 也包含了很多 csh 和 Korn Shell 里的优点，使得 
+  BASH 有很灵活和强大的编程接口，同时又有很友好的用户界面。为什么要用 BASH 来代替 sh 呢？Bourne Shell 最大的缺点在于它处理用户的输入方面，在 
+  Bourne shell 里键入命令会很麻烦，尤其当你键入很多相似的命令时，而 BASH 准备了几种特性使命令的输入变得更容易。 BASH 的新功能包括 
+  命令补齐、通配符、命令历史记录、别名等。
+<P>BASH 是一种解释执行的语言，我们还见过其他一些解释性的语言，如 BASIC 语言、Perl 语言、TCL/TL 等等。解释执行的语言的与编译型语言（如 
+  C 语言）的最大不同就在于运行速度和使用方便程度上。BASH 和后面我们要讲解的 Perl 语言都是解释性语言，他们编写起来很方便，也很快捷，但是由于是解释执行，所以运行速度和效率必将大打折扣。故而今天介绍的 
+  BASH 和 Perl 这两种解释性语言最好的用途就是一些用于完成特定功能的常用的小工具或小程序，对于一些大型的项目、计算复杂的工程或有高级需求的应用还是用 
+  C 语言甚至汇编语言比较好。 
+<P>下面给出一些 BASH 所不适用的范围：
+<P>资源型敏感，对 CPU 负担重的程序 <br>
+  复杂的大项目 <br>
+  需要灵活处理文件的程序，BASH 只能逐行读出文件进行处理 <br>
+  需要图形用户界面的程序<br>
+  需要直接与系统硬件打交道的程序 <br>
+  需要访问 I/O 端口和网络套接字的程序<br>
+  需要使用库或和以前的其他代码整合的程序 </P>
+<P>如果遇到上面这些程序，我们推荐最好用其他编程语言，如：Perl, Tcl, Python 或者直接用 C, C++, Java 。</P>
+<P>&nbsp;</P>
+<P><BR>
+  <BR>
+</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="bash-syntax.html"><IMG SRC="next.gif" ALT="Next"></A> 
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A> 
+</BODY>
+</HTML>
+

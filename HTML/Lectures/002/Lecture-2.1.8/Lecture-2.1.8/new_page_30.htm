@@ -1,0 +1,55 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>不定长参数</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta name="Microsoft Theme" content="blank 001, default">
+<meta name="Microsoft Border" content="tl, default">
+</head>
+
+<body background="_themes/blank/blbkgnd.gif" bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/new_page_30.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="不定长参数"></strong></font><br>
+<a href="index.htm"><img src="_derived/home_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="主页" align="middle"></a> <a href="new_page_16.htm"><img src="_derived/up_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="上一层" align="middle"></a> <a href="new_page_17.htm"><img src="_derived/new_page_17.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="获得本机IP" align="middle"></a> <a href="new_page_18.htm"><img src="_derived/new_page_18.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="对方连接本机的哪个IP？" align="middle"></a> <a href="new_page_19.htm"><img src="_derived/new_page_19.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="如何使用DNS" align="middle"></a> <a href="new_page_20.htm"><img src="_derived/new_page_20.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="文件流方式" align="middle"></a> <a href="new_page_21.htm"><img src="_derived/new_page_21.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="读取一行语句" align="middle"></a> <img src="_derived/new_page_30.htm_cmp_blank000_hbtn_p.gif" width="140" height="32" border="0" alt="不定长参数" align="middle"> <a href="new_page_22.htm"><img src="_derived/new_page_22.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="以Daemon方式运行" align="middle"></a> <a href="new_page_23.htm"><img src="_derived/new_page_23.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="端口重用" align="middle"></a> <a href="new_page_24.htm"><img src="_derived/new_page_24.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="用户登录及权限设置" align="middle"></a></p>
+<p align="center">　</p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+<p><font size="6">如何使用不定长参数？</font></p>
+<!--mstheme--></font><pre><font size="5">注意：不定长参数需要使用stdarg.h这个头文件。</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre>　</pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">#include &lt;stdarg.h&gt;</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">#include &lt;stdio.h&gt;</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre>　</pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void outs(char *fmt, ...)
+{
+    static char tmp[80];
+    va_list ap;</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    sprintf(tmp, &quot;%s\r\n&quot;, fmt);</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    va_start(ap, fmt);</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    vprintf(tmp, ap);</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    va_end(ap);</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre>　</pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">void foo(char *fmt, ...)
+{
+     va_list ap;
+     int d;
+     char c, *p, *s;</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">     va_start(ap, fmt);
+     while (*fmt)
+          switch(*fmt++) {
+          case 's':           /* string */
+               s = va_arg(ap, char *);
+               printf(&quot;string %s\n&quot;, s);
+               break;
+          case 'd':           /* int */
+               d = va_arg(ap, int);
+               printf(&quot;int %d\n&quot;, d);
+               break;
+          case 'c':           /* char */
+               /* need a cast here since va_arg only
+                  takes fully promoted types */
+               c = (char) va_arg(ap, int);
+               printf(&quot;char %c\n&quot;, c);
+               break;
+          }
+     va_end(ap);
+}</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">void main()</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">{</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">	outs(&quot;Hello, %s&quot;, username);</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">	foo(&quot;sdc&quot;, username, usercount, 'A');</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre>　</pre><!--mstheme--><font face="宋体">　<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+</html>

@@ -1,0 +1,2688 @@
+%!PS
+%%Version: 3.15
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%ident	"@(#)lp:filter/postscript/postscript/dpost.ps	1.1"
+%
+% Version 3.16 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/VR /Varitimes#Roman def
+/VI /Varitimes#Italic def
+/VB /Varitimes#Bold def
+/VX /Varitimes#BoldItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation neg rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	/Symbol /S Sdefs cf
+	/Times-Roman /S1 S1defs cf
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put} {pop pop} ifelse} forall
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+
+/Sdefs [
+	/bracketlefttp		[220 500]
+	/bracketleftbt		[220 500]
+	/bracketrighttp		[-70 380]
+	/bracketrightbt		[-70 380]
+	/braceleftbt		[220 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	% NeWSprint's \(br is too low, compensate
+	statusdict /product get (NeWS Server) eq {
+		/radicalex		[-50 100 500 0]
+		/parenleftex		[-20 100 0 0]
+
+	} {
+		/radicalex		[-50 0 500 0]
+		/parenleftex		[-20 -170 0 0]
+	} ifelse
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+save
+mark
+1 pagesetup
+14 B f
+(The Slab Allocator:)2 1196 1 2332 1240 t
+(An Object-Caching Kernel Memory Allocator)4 2793 1 1533 1400 t
+12 I f
+(Jeff Bonwick)1 627 1 2616 1700 t
+(Sun Microsystems)1 881 1 2489 1840 t
+10 B f
+(Abstract)1484 2444 w
+10 R f
+( comprehensive design over-)3 1234(This paper presents a)3 926 2 590 2606 t
+( kernel memory allocator.)3 1124(view of the SunOS 5.4)4 1036 2 590 2726 t
+( based on a set of object-caching)6 1464(This allocator is)2 696 2 590 2846 t
+( of allocating complex)3 920(primitives that reduce the cost)4 1240 2 590 2966 t
+( These)1 308( state between uses.)3 823(objects by retaining their)3 1029 3 590 3086 t
+( prove equally effective for manag-)5 1504(same primitives)1 656 2 590 3206 t
+( data pages and temporary)4 1087(ing stateless memory \(e.g.)3 1073 2 590 3326 t
+( they are space-ef\256cient and fast.)5 1472(buffers\) because)1 688 2 590 3446 t
+(The allocator's object caches respond dynamically)5 2160 1 590 3566 t
+( an object-)2 463(to global memory pressure, and employ)5 1697 2 590 3686 t
+( that improves the system's overall)5 1486(coloring scheme)1 674 2 590 3806 t
+( allocator)1 412( The)1 251( and bus balance.)3 801(cache utilization)1 696 4 590 3926 t
+( features)1 370(also has several statistical and debugging)5 1790 2 590 4046 t
+( detect a wide range of problems throughout)7 1836(that can)1 324 2 590 4166 t
+(the system.)1 458 1 590 4286 t
+11 B f
+(1. Introduction)1 755 1 590 4586 t
+10 R f
+(The allocation and freeing of objects are among the)8 2160 1 590 4748 t
+( fast ker-)2 382( A)1 144( kernel.)1 313(most common operations in the)4 1321 4 590 4868 t
+( How-)1 311(nel memory allocator is therefore essential.)5 1849 2 590 4988 t
+( initializing and)2 704(ever, in many cases the cost of)6 1456 2 590 5108 t
+( cost of allocating)3 767(destroying the object exceeds the)4 1393 2 590 5228 t
+( while improve-)2 690( Thus,)1 309( memory for it.)3 683(and freeing)1 478 4 590 5348 t
+( bene\256cial, even greater)3 1039(ments in the allocator are)4 1121 2 590 5468 t
+( by caching frequently used)4 1207(gains can be achieved)3 953 2 590 5588 t
+( that their basic structure is preserved)6 1725(objects so)1 435 2 590 5708 t
+(between uses.)1 562 1 590 5828 t
+( begins with a discussion of object)6 1491(The paper)1 419 2 840 5990 t
+(caching, since the interface that this requires will)7 2160 1 590 6110 t
+( next section)2 567( The)1 244( the allocator.)2 608(shape the rest of)3 741 4 590 6230 t
+( Section)1 367(then describes the implementation in detail.)5 1793 2 590 6350 t
+( buffer address distribution)3 1136(4 describes the effect of)4 1024 2 590 6470 t
+( utilization and bus)3 857(on the system's overall cache)4 1303 2 590 6590 t
+(balance, and shows how a simple coloring scheme)7 2160 1 590 6710 t
+( the)1 221( 5 compares)2 632( Section)1 433(can improve both.)2 874 4 590 6830 t
+( to several other well-known)4 1198(allocator's performance)1 962 2 590 6950 t
+( that it is)3 519(kernel memory allocators and \256nds)4 1641 2 590 7070 t
+(generally superior in both space)4 1339 1 3110 2424 t
+10 I f
+(and)4491 2424 w
+10 R f
+(time. Finally,)1 587 1 4683 2424 t
+( debugging)1 516(Section 6 describes the allocator's)4 1644 2 3110 2544 t
+( of prob-)2 397(features, which can detect a wide variety)6 1763 2 3110 2664 t
+(lems throughout the system.)3 1152 1 3110 2784 t
+11 B f
+( Caching)1 428(2. Object)1 471 2 3110 3084 t
+10 R f
+(Object caching is a technique for dealing with)7 2160 1 3110 3246 t
+( The)1 227( frequently allocated and freed.)4 1299(objects that are)2 634 3 3110 3366 t
+( an)1 166(idea is to preserve the invariant portion of)7 1994 2 3110 3486 t
+(object's initial state \320 its)4 1204 1 3110 3606 t
+10 I f
+(constructed)4383 3606 w
+10 R f
+(state \320)1 352 1 4918 3606 t
+( have to be destroyed)4 940(between uses, so it does not)5 1220 2 3110 3726 t
+( For)1 227(and recreated every time the object is used.)7 1933 2 3110 3846 t
+( only needs)2 503(example, an object containing a mutex)5 1657 2 3110 3966 t
+(to have)1 307 1 3110 4086 t
+10 CW f
+(mutex_init\(\))3485 4086 w
+10 R f
+(applied once \320 the \256rst)4 1024 1 4246 4086 t
+( object can then be)4 796( The)1 224(time the object is allocated.)4 1140 3 3110 4206 t
+(freed and reallocated many times without incurring)6 2160 1 3110 4326 t
+( of)1 224(the expense)1 583 2 3110 4446 t
+10 CW f
+(mutex_destroy\(\))4085 4446 w
+10 R f
+(and)5126 4446 w
+10 CW f
+(mutex_init\(\))3110 4566 w
+10 R f
+( embedded)1 444( object's)1 351( An)1 190(each time.)1 420 4 3865 4566 t
+( counts, lists of)3 663(locks, condition variables, reference)3 1497 2 3110 4686 t
+( qual-)1 244(other objects, and read-only data all generally)6 1916 2 3110 4806 t
+(ify as constructed state.)3 961 1 3110 4926 t
+( the cost of con-)4 695(Caching is important because)3 1215 2 3360 5088 t
+( be signi\256cantly higher than)4 1196(structing an object can)3 964 2 3110 5208 t
+( example,)1 405( For)1 214( of allocating memory for it.)5 1217(the cost)1 324 4 3110 5328 t
+( SunOS 5.4 develop-)3 857(on a SPARCstation-2 running a)4 1303 2 3110 5448 t
+( the allocator presented here reduced)5 1629(ment kernel,)1 531 2 3110 5568 t
+( freeing a stream head)4 1016(the cost of allocating and)4 1144 2 3110 5688 t
+( the)1 162( As)1 183(from 33 microseconds to 5.7 microseconds.)5 1815 3 3110 5808 t
+( savings was due)3 713(table below illustrates, most of the)5 1447 2 3110 5928 t
+(to object caching:)2 726 1 3110 6048 t
+10 S f
+(_ ___________________________________________)1 2160 1 3110 6110 t
+10 R f
+(Stream Head Allocation + Free Costs \()6 1602 1 3280 6230 t
+10 S f
+(m)4882 6230 w
+10 R f
+(sec\))4940 6230 w
+10 S f
+(_ ___________________________________________)1 2160 1 3110 6240 t
+(_ ___________________________________________)1 2160 1 3110 6260 t
+10 R f
+( other)1 360(construction memory)1 1058 2 3784 6370 t
+( init.)1 307( allocation)1 575( destruction)1 477(allocator +)1 586 4 3234 6490 t
+10 S f
+(_ ___________________________________________)1 2160 1 3110 6510 t
+10 R f
+( 1.9)1 425( 9.4)1 619(old 23.6)1 773 3 3345 6630 t
+( 1.9)1 425( 3.8)1 619(new 0.0)1 792 3 3326 6750 t
+10 S f
+( \347)1 -2160(_ ___________________________________________)1 2160 2 3110 6770 t
+(\347)3110 6710 w
+(\347)3110 6610 w
+(\347)3110 6510 w
+(\347)3110 6410 w
+(\347)3110 6310 w
+(\347)3110 6210 w
+(\347)3674 6770 w
+(\347)3674 6760 w
+(\347)3674 6660 w
+(\347)3674 6560 w
+(\347)3674 6460 w
+(\347)3674 6360 w
+(\347)4388 6770 w
+(\347)4388 6760 w
+(\347)4388 6660 w
+(\347)4388 6560 w
+(\347)4388 6460 w
+(\347)4388 6360 w
+(\347)4963 6770 w
+(\347)4963 6760 w
+(\347)4963 6660 w
+(\347)4963 6560 w
+(\347)4963 6460 w
+(\347)4963 6360 w
+(\347)5270 6770 w
+(\347)5270 6710 w
+(\347)5270 6610 w
+(\347)5270 6510 w
+(\347)5270 6410 w
+(\347)5270 6310 w
+(\347)5270 6210 w
+10 R f
+( in a mul-)3 488(Caching is particularly bene\256cial)3 1422 2 3360 6974 t
+(tithreaded environment, where many of the most)6 2160 1 3110 7094 t
+cleartomark
+showpage
+restore
+%%EndPage: 1 1
+%%Page: 2 2
+save
+mark
+2 pagesetup
+10 R f
+( one or more)3 624(frequently allocated objects contain)3 1536 2 590 696 t
+( and other con-)3 637(embedded locks, condition variables,)3 1523 2 590 816 t
+(structible state.)1 613 1 590 936 t
+( an object cache is)4 1019(The design of)2 691 2 840 1140 t
+(straightforward:)590 1260 w
+10 B f
+(To allocate an object:)3 942 1 790 1422 t
+10 R f
+(if \(there's an object in the cache\))6 1360 1 922 1602 t
+(take it \(no construction required\);)4 1374 1 1054 1722 t
+(else)922 1842 w
+10 S f
+({)1110 1842 w
+10 R f
+(allocate memory;)1 704 1 1054 1962 t
+(construct the object;)2 826 1 1054 2082 t
+10 S f
+(})922 2202 w
+10 B f
+(To free an object:)3 780 1 790 2382 t
+10 R f
+(return it to the cache \(no destruction required\);)7 1921 1 922 2562 t
+10 B f
+(To reclaim memory from the cache:)5 1571 1 790 2742 t
+10 R f
+(take some objects from the cache;)5 1395 1 922 2922 t
+(destroy the objects;)2 793 1 922 3042 t
+(free the underlying memory;)3 1169 1 922 3162 t
+( must be initial-)3 694(An object's constructed state)3 1216 2 840 3366 t
+( \256rst brought)2 557(ized only once \320 when the object is)7 1603 2 590 3486 t
+( is populated, allo-)3 810( the cache)2 440( Once)1 289(into the cache.)2 621 4 590 3606 t
+(cating and freeing objects are fast, trivial operations.)7 2154 1 590 3726 t
+11 B f
+( Example)1 452(2.1. An)1 379 2 590 4026 t
+10 R f
+(Consider the following data structure:)4 1547 1 590 4230 t
+9 CW f
+(struct foo {)2 648 1 790 4392 t
+(kmutex_t foo_lock;)1 1080 1 1006 4512 t
+(kcondvar_t foo_cv;)1 972 1 1006 4632 t
+(struct bar *foo_barlist;)2 1296 1 1006 4752 t
+(int foo_refcnt;)1 1188 1 1006 4872 t
+(};)790 4992 w
+10 R f
+(Assume that a)2 600 1 590 5196 t
+10 CW f
+(foo)1259 5196 w
+10 R f
+(structure cannot be freed until)4 1269 1 1481 5196 t
+( it)1 177(there are no outstanding references to)5 1983 2 590 5316 t
+(\()590 5436 w
+10 CW f
+(foo_refcnt == 0)2 910 1 623 5436 t
+10 R f
+( all of its pending)4 756(\) and)1 215 2 1533 5436 t
+10 CW f
+(bar)2570 5436 w
+10 R f
+( are\) have completed)3 1103(events \(whatever they)2 1057 2 590 5556 t
+(\()590 5676 w
+10 CW f
+(foo_barlist == NULL)2 1170 1 623 5676 t
+10 R f
+( a)1 93( life cycle of)3 570(\). The)1 294 3 1793 5676 t
+( something like)2 653(dynamically allocated foo would be)4 1507 2 590 5796 t
+(this:)590 5916 w
+9 CW f
+(foo = kmem_alloc\(sizeof \(struct foo\),)4 1998 1 3310 696 t
+(KM_SLEEP\);)3526 816 w
+(mutex_init\(&foo->foo_lock, ...\);)1 1728 1 3310 936 t
+(cv_init\(&foo->foo_cv, ...\);)1 1458 1 3310 1056 t
+(foo->foo_refcnt = 0;)2 1080 1 3310 1176 t
+(foo->foo_barlist = NULL;)2 1296 1 3310 1296 t
+(use foo;)1 432 1 3310 1536 t
+(ASSERT\(foo->foo_barlist == NULL\);)2 1782 1 3310 1776 t
+(ASSERT\(foo->foo_refcnt == 0\);)2 1566 1 3310 1896 t
+(cv_destroy\(&foo->foo_cv\);)3310 2016 w
+(mutex_destroy\(&foo->foo_lock\);)3310 2136 w
+(kmem_free\(foo\);)3310 2256 w
+10 R f
+(Notice that between each use of a foo object we)9 2160 1 3110 2418 t
+( constitutes)1 486(perform a sequence of operations that)5 1674 2 3110 2538 t
+( of)1 128( All)1 206( no-op.)1 303(nothing more than a very expensive)5 1523 4 3110 2658 t
+( everything other than ``use foo'')5 1392(this overhead \(i.e.,)2 768 2 3110 2778 t
+(above\) can be eliminated by object caching.)6 1802 1 3110 2898 t
+11 B f
+( the)1 213( Case for Object Caching in)5 1495(2.2. The)1 452 3 3110 3210 t
+(Central Allocator)1 833 1 3110 3330 t
+10 R f
+(Of course, object caching can be implemented)6 2160 1 3110 3492 t
+( \320 any)2 332(without any help from the central allocator)6 1828 2 3110 3612 t
+( private implementation of the)4 1262(subsystem can have a)3 898 2 3110 3732 t
+( there are)2 472( However,)1 500(algorithm described above.)2 1188 3 3110 3852 t
+(several disadvantages to this approach:)4 1590 1 3110 3972 t
+( between an object)3 835( is a natural tension)4 893(\(1\) There)1 432 3 3110 4134 t
+( the)1 170(cache, which wants to keep memory, and)6 1790 2 3310 4254 t
+( system, which wants that memory)5 1513(rest of the)2 447 2 3310 4374 t
+( handle)1 306( caches cannot)2 613(back. Privately-managed)1 1041 3 3310 4494 t
+( have limited)2 658( They)1 331(this tension sensibly.)2 971 3 3310 4614 t
+(insight into the system's overall memory needs)6 1960 1 3310 4734 t
+(and)3310 4854 w
+10 I f
+(no)3499 4854 w
+10 R f
+( Simi-)1 302(insight into each other's needs.)4 1324 2 3644 4854 t
+( system has no knowledge)4 1113(larly, the rest of the)4 847 2 3310 4974 t
+( hence has)2 447(of the existence of these caches and)6 1513 2 3310 5094 t
+(no way to ``pull'' memory from them.)6 1582 1 3310 5214 t
+( central alloca-)2 630( private caches bypass the)4 1108(\(2\) Since)1 422 3 3110 5376 t
+(tor, they also bypass any accounting mechan-)6 1960 1 3310 5496 t
+( allocator may)2 597(isms and debugging features that)4 1363 2 3310 5616 t
+( the operating system)3 1011( makes)1 334(possess. This)1 615 3 3310 5736 t
+(more dif\256cult to monitor and debug.)5 1495 1 3310 5856 t
+( to)1 117( many instances of the same solution)6 1549(\(3\) Having)1 494 3 3110 6018 t
+(a common problem increases kernel code size)6 1960 1 3310 6138 t
+(and maintenance costs.)2 939 1 3310 6258 t
+( of coopera-)2 503(Object caching requires a greater degree)5 1657 2 3110 6420 t
+( the)1 172(tion between the allocator and its clients than)7 1988 2 3110 6540 t
+(standard)3110 6660 w
+10 CW f
+(kmem_alloc\(9F\)/kmem_free\(9F\))3590 6660 w
+10 R f
+( next section develops an)4 1192( The)1 261(interface allows.)1 707 3 3110 6780 t
+(interface to support constructed object caching in)6 2160 1 3110 6900 t
+(the central allocator.)2 833 1 3110 7020 t
+cleartomark
+showpage
+restore
+%%EndPage: 2 2
+%%Page: 3 3
+save
+mark
+3 pagesetup
+11 B f
+( Cache Interface)2 788(2.3. Object)1 554 2 590 696 t
+10 R f
+( here follows from two)4 1123(The interface presented)2 1037 2 590 858 t
+(observations:)590 978 w
+( of objects \(name, size, alignment,)5 1455(\(A\) Descriptions)1 705 2 590 1140 t
+( in the)2 374(constructor, and destructor\) belong)3 1586 2 790 1260 t
+( The)1 251( the central allocator.)3 956(clients \320 not in)3 753 3 790 1380 t
+( just ``know'' that)3 988(allocator should not)2 972 2 790 1500 t
+10 CW f
+( inode\))1 426(sizeof \(struct)1 845 2 790 1620 t
+10 R f
+(is a useful pool)3 650 1 2100 1620 t
+( assumptions are brittle)3 960( Such)1 269(size, for example.)2 731 3 790 1740 t
+( needs)1 263([Grunwald93A] and cannot anticipate the)4 1697 2 790 1860 t
+( modules)1 387(of third-party device drivers, streams)4 1573 2 790 1980 t
+(and \256le systems.)2 680 1 790 2100 t
+( belong in the)3 667( management policies)2 949(\(B\) Memory)1 544 3 590 2262 t
+( The)1 254( in its clients.)3 657(central allocator \320 not)3 1049 3 790 2382 t
+( want to allocate and free objects)6 1499(clients just)1 461 2 790 2502 t
+( about)1 270( shouldn't have to worry)4 1078(quickly. They)1 612 3 790 2622 t
+( underlying memory)2 972(how to manage the)3 988 2 790 2742 t
+(ef\256ciently.)790 2862 w
+( cache creation must)3 868(It follows from \(A\) that object)5 1292 2 590 3024 t
+( a full speci\256cation)3 787(be client-driven and must include)4 1373 2 590 3144 t
+(of the objects:)2 582 1 590 3264 t
+9 CW f
+( kmem_cache *kmem_cache_create\()2 1674(\(1\) struct)1 504 2 590 3426 t
+(char *name,)1 594 1 878 3546 t
+(size_t size,)1 648 1 878 3666 t
+(int align,)1 540 1 878 3786 t
+(void \(*constructor\)\(void *, size_t\),)3 1944 1 878 3906 t
+(void \(*destructor\)\(void *, size_t\)\);)3 1944 1 878 4026 t
+10 R f
+(Creates a cache of objects, each of size)7 1632 1 790 4188 t
+10 CW f
+(size)2485 4188 w
+10 R f
+(,)2725 4188 w
+( an)1 142(aligned on)1 443 2 790 4308 t
+10 CW f
+(align)1450 4308 w
+10 R f
+( align-)1 281(boundary. The)1 671 2 1798 4308 t
+( rounded up to the)4 975(ment will always be)3 985 2 790 4428 t
+(minimum allowable value, so)3 1255 1 790 4548 t
+10 CW f
+(align)2121 4548 w
+10 R f
+(can be)1 280 1 2470 4548 t
+( alignment is required.)3 926(zero whenever no special)3 1034 2 790 4668 t
+10 CW f
+(name)790 4788 w
+10 R f
+( statistics and)2 621(identi\256es the cache for)3 1032 2 1097 4788 t
+(debugging.)790 4908 w
+10 CW f
+(constructor)1336 4908 w
+10 R f
+(is a function that)3 714 1 2036 4908 t
+( one-time ini-)2 594(constructs \(that is, performs the)4 1366 2 790 5028 t
+( cache;)1 288(tialization of\) objects in the)4 1131 2 790 5148 t
+10 CW f
+(destruc-)2270 5148 w
+(tor)790 5268 w
+10 R f
+( construc-)1 416( The)1 233( if applicable.)2 586(undoes this,)1 499 4 1016 5268 t
+( destructor take a)3 765(tor and)1 306 2 790 5388 t
+10 CW f
+(size)1940 5388 w
+10 R f
+(argument so)1 518 1 2232 5388 t
+( can support families of similar)5 1551(that they)1 409 2 790 5508 t
+(caches, e.g. streams messages.)3 1960 1 790 5628 t
+10 CW f
+(kmem_cache_create)790 5748 w
+10 R f
+( opaque)1 381(returns an)1 465 2 1904 5748 t
+(descriptor for accessing the cache.)4 1402 1 790 5868 t
+(Next, it follows from \(B\) that clients should need)8 2160 1 590 6030 t
+( simple functions to allocate and free)6 1787(just two)1 373 2 590 6150 t
+(objects:)590 6270 w
+9 CW f
+( *kmem_cache_alloc\()1 1026(\(2\) void)1 396 2 590 6432 t
+(struct kmem_cache *cp,)2 1188 1 878 6552 t
+(int flags\);)1 594 1 878 6672 t
+10 R f
+( object will)2 472( The)1 224( cache.)1 287(Gets an object from the)4 977 4 790 6834 t
+(be in its constructed state.)4 1147 1 790 6954 t
+10 CW f
+(flags)2050 6954 w
+10 R f
+(is either)1 347 1 2403 6954 t
+10 CW f
+(KM_SLEEP)790 7074 w
+10 R f
+(or)1385 7074 w
+10 CW f
+(KM_NOSLEEP)1610 7074 w
+10 R f
+(, indicating)1 540 1 2210 7074 t
+( to wait for memory if)5 995(whether it's acceptable)2 965 2 3310 696 t
+(none is currently available.)3 1105 1 3310 816 t
+9 CW f
+( kmem_cache_free\()1 918(\(3\) void)1 396 2 3110 978 t
+(struct kmem_cache *cp,)2 1188 1 3398 1098 t
+(void *buf\);)1 594 1 3398 1218 t
+10 R f
+( object)1 306( The)1 249(Returns an object to the cache.)5 1405 3 3310 1380 t
+(must still be in its constructed state.)6 1479 1 3310 1500 t
+( needed the client can)4 900(Finally, if a cache is no longer)6 1260 2 3110 1662 t
+(destroy it:)1 411 1 3110 1782 t
+9 CW f
+( kmem_cache_destroy\()1 1080(\(4\) void)1 396 2 3110 1944 t
+(struct kmem_cache *cp\);)2 1242 1 3398 2064 t
+10 R f
+( associated)1 455(Destroys the cache and reclaims all)5 1505 2 3310 2226 t
+( objects must have)3 888( allocated)1 435(resources. All)1 637 3 3310 2346 t
+(been returned to the cache.)4 1103 1 3310 2466 t
+( a \257exible allocator)3 810(This interface allows us to build)5 1350 2 3110 2628 t
+( In)1 158( needs of its clients.)4 859(that is ideally suited to the)5 1143 3 3110 2748 t
+( it)1 101( However,)1 468( is a ``custom'' allocator.)4 1086(this sense it)2 505 4 3110 2868 t
+( compile-time)1 617(does not have to be built with)6 1543 2 3110 2988 t
+( its clients as most custom allocators)6 1593(knowledge of)1 567 2 3110 3108 t
+( Margolin71], nor)2 781(do [Bozman84A, Grunwald93A,)2 1379 2 3110 3228 t
+( adaptive-\256t)1 498(does it have to keep guessing as in the)8 1662 2 3110 3348 t
+(methods [Bozman84B, Leverett82, Oldehoeft85].)3 2160 1 3110 3468 t
+( clients to)2 439(Rather, the object-cache interface allows)4 1721 2 3110 3588 t
+(specify the allocation services they need on the \257y.)8 2102 1 3110 3708 t
+11 B f
+( Example)1 452(2.4. An)1 379 2 3110 4008 t
+10 R f
+( the use of object cach-)5 1027(This example demonstrates)2 1133 2 3110 4170 t
+( objects introduced in Section 2.1.)5 1418(ing for the ``foo'')3 742 2 3110 4290 t
+(The constructor and destructor routines are:)5 1783 1 3110 4410 t
+9 CW f
+(void)3110 4572 w
+(foo_constructor\(void *buf, int size\))3 1944 1 3110 4692 t
+({)3110 4812 w
+(struct foo *foo = buf;)4 1188 1 3326 4932 t
+(mutex_init\(&foo->foo_lock, ...\);)1 1728 1 3326 5172 t
+(cv_init\(&foo->foo_cv, ...\);)1 1458 1 3326 5292 t
+(foo->foo_refcnt = 0;)2 1080 1 3326 5412 t
+(foo->foo_barlist = NULL;)2 1296 1 3326 5532 t
+(})3110 5652 w
+(void)3110 5892 w
+(foo_destructor\(void *buf, int size\))3 1890 1 3110 6012 t
+({)3110 6132 w
+(struct foo *foo = buf;)4 1188 1 3326 6252 t
+(ASSERT\(foo->foo_barlist == NULL\);)2 1782 1 3326 6492 t
+(ASSERT\(foo->foo_refcnt == 0\);)2 1566 1 3326 6612 t
+(cv_destroy\(&foo->foo_cv\);)3326 6732 w
+(mutex_destroy\(&foo->foo_lock\);)3326 6852 w
+(})3110 6972 w
+cleartomark
+showpage
+restore
+%%EndPage: 3 3
+%%Page: 4 4
+save
+mark
+4 pagesetup
+10 R f
+(To create the foo cache:)4 989 1 590 738 t
+9 CW f
+(foo_cache = kmem_cache_create\("foo_cache",)2 2268 1 590 900 t
+(sizeof \(struct foo\), 0,)3 1242 1 806 1020 t
+(foo_constructor, foo_destructor\);)1 1782 1 806 1140 t
+10 R f
+(To allocate, use, and free a foo object:)7 1582 1 590 1344 t
+9 CW f
+(foo = kmem_cache_alloc\(foo_cache, KM_SLEEP\);)3 2376 1 590 1506 t
+(use foo;)1 432 1 590 1626 t
+(kmem_cache_free\(foo_cache, foo\);)1 1728 1 590 1746 t
+10 R f
+( because the)2 553(This makes foo allocation fast,)4 1357 2 840 1908 t
+( do nothing more than fetch an)6 1292(allocator will usually)2 868 2 590 2028 t
+( the cache.)2 711(already-constructed foo from)2 1449 2 590 2148 t
+10 CW f
+(foo_constructor)590 2268 w
+10 R f
+(and)1615 2268 w
+10 CW f
+(foo_destructor)1910 2268 w
+10 R f
+( to populate and drain the)5 1218(will be invoked only)3 942 2 590 2388 t
+(cache, respectively.)1 791 1 590 2508 t
+( illustrates a bene\256cial)3 1037(The example above)2 873 2 840 2670 t
+( reduces the)2 612( it)1 182( caching:)1 431(side-effect of object)2 935 4 590 2790 t
+(instruction-cache footprint of the code that)5 1920 1 590 2910 t
+10 I f
+(uses)2578 2910 w
+10 R f
+( by moving the rarely-executed con-)5 1554(cached objects)1 606 2 590 3030 t
+(struction and destruction code out of the hot path.)8 2048 1 590 3150 t
+11 B f
+( Allocator Implementation)2 1261(3. Slab)1 365 2 590 3450 t
+10 R f
+( the)1 185(This section describes the implementation of)5 1975 2 590 3612 t
+( kernel memory allocator, or ``slab allo-)6 1707(SunOS 5.4)1 453 2 590 3732 t
+( name derives from one of)5 1175( \(The)1 271( detail.)1 297(cator,'' in)1 417 4 590 3852 t
+(the allocator's main data structures, the)5 1684 1 590 3972 t
+10 I f
+(slab)2322 3972 w
+10 R f
+(. The)1 261 1 2489 3972 t
+( more distinc-)2 579(name stuck within Sun because it was)6 1581 2 590 4092 t
+( will be dis-)3 529( Slabs)1 293( or ``cache.'')2 552(tive than ``object'')2 786 4 590 4212 t
+(cussed in Section 3.2.\))3 926 1 590 4332 t
+(The terms)1 429 1 840 4494 t
+10 I f
+(object)1321 4494 w
+10 R f
+(,)1565 4494 w
+10 I f
+(buffer)1642 4494 w
+10 R f
+(, and)1 222 1 1881 4494 t
+10 I f
+(chunk)2156 4494 w
+10 R f
+(will be)1 303 1 2447 4494 t
+( or less interchangeably, depending on)5 1711(used more)1 449 2 590 4614 t
+( that piece of memory at the)6 1324(how we're viewing)2 836 2 590 4734 t
+(moment.)590 4854 w
+11 B f
+(3.1. Caches)1 573 1 590 5154 t
+10 R f
+( a)1 82(Each cache has)2 632 2 590 5316 t
+10 I f
+(front end)1 377 1 1342 5316 t
+10 R f
+(and)1757 5316 w
+10 I f
+(back end)1 370 1 1939 5316 t
+10 R f
+(which are)1 403 1 2347 5316 t
+(designed to be as decoupled as possible:)6 1657 1 590 5436 t
+9 R f
+(cache)1568 6066 w
+cleartomark restore
+%%BeginGlobal
+%ident	"@(#)lp:filter/postscript/postscript/draw.ps	1.1"
+%
+% Version 3.15 drawing procedures for dpost. Automatically pulled in, but only
+% when needed.
+%
+
+/inpath false def
+/savematrix matrix currentmatrix def
+
+/Dl {
+	inpath
+		{pop pop neg lineto}
+		{newpath neg moveto neg lineto stroke}
+	ifelse
+} bind def
+
+/De {
+	/y1 exch 2 div def
+	/x1 exch 2 div def
+	neg exch x1 add exch translate
+	x1 y1 scale
+	0 0 1 0 360
+	inpath
+		{1 0 moveto arc savematrix setmatrix}
+		{newpath arc savematrix setmatrix stroke}
+	ifelse
+} bind def
+
+/Da {
+	/dy2 exch def
+	/dx2 exch def
+	/dy1 exch def
+	/dx1 exch def
+	dy1 add neg exch dx1 add exch
+	dx1 dx1 mul dy1 dy1 mul add sqrt
+	dy1 dx1 neg atan
+	dy2 neg dx2 atan
+	inpath
+		{arc}
+		{newpath arc stroke}
+	ifelse
+} bind def
+
+/DA {
+	/dy2 exch def
+	/dx2 exch def
+	/dy1 exch def
+	/dx1 exch def
+	dy1 add neg exch dx1 add exch
+	dx1 dx1 mul dy1 dy1 mul add sqrt
+	dy1 dx1 neg atan
+	dy2 neg dx2 atan
+	inpath
+		{arcn}
+		{newpath arcn stroke}
+	ifelse
+} bind def
+
+/Ds {
+	/y2 exch def
+	/x2 exch def
+	/y1 exch def
+	/x1 exch def
+	/y0 exch def
+	/x0 exch def
+	x0 5 x1 mul add 6 div
+	y0 5 y1 mul add -6 div
+	x2 5 x1 mul add 6 div
+	y2 5 y1 mul add -6 div
+	x1 x2 add 2 div
+	y1 y2 add -2 div
+	inpath
+		{curveto}
+		{newpath x0 x1 add 2 div y0 y1 add -2 div moveto curveto stroke}
+	ifelse
+} bind def
+%%EndGlobal
+save mark
+9 R f
+1382 5868 1382 6228 Dl
+1958 5868 1382 5868 Dl
+1958 6228 1958 5868 Dl
+1382 6228 1958 6228 Dl
+(back end)1 330 1 821 5718 t
+1166 5760 806 5760 Dl
+(front end)1 335 1 2151 5718 t
+2511 5760 2123 5760 Dl
+(kmem)634 5934 w
+9 S f
+(_)859 5934 w
+9 R f
+(cache)904 5934 w
+9 S f
+(_)1109 5934 w
+9 R f
+(grow)1154 5934 w
+950 5976 590 5976 Dl
+1382 5976 950 5976 Dl
+1382 5976 1310 5994 Dl
+1382 5976 1310 5958 Dl
+(kmem)649 6198 w
+9 S f
+(_)874 6198 w
+9 R f
+(cache)919 6198 w
+9 S f
+(_)1124 6198 w
+9 R f
+(reap)1169 6198 w
+1022 6120 1382 6120 Dl
+590 6120 1022 6120 Dl
+590 6120 662 6102 Dl
+590 6120 662 6138 Dl
+(kmem)2007 5934 w
+9 S f
+(_)2232 5934 w
+9 R f
+(cache)2277 5934 w
+9 S f
+(_)2482 5934 w
+9 R f
+(alloc)2527 5934 w
+2318 5976 1958 5976 Dl
+2750 5976 2318 5976 Dl
+2750 5976 2678 5994 Dl
+2750 5976 2678 5958 Dl
+(kmem)2024 6198 w
+9 S f
+(_)2249 6198 w
+9 R f
+(cache)2294 6198 w
+9 S f
+(_)2499 6198 w
+9 R f
+(free)2544 6198 w
+2390 6120 2750 6120 Dl
+1958 6120 2390 6120 Dl
+1958 6120 2030 6102 Dl
+1958 6120 2030 6138 Dl
+10 R f
+( is the public interface to the)6 1311(The front end)2 599 2 840 6462 t
+( cache,)1 295( moves objects to and from the)6 1352(allocator. It)1 513 3 590 6582 t
+( back end when it needs more)6 1468(calling into the)2 692 2 590 6702 t
+(objects.)590 6822 w
+( \257ow of real)3 644(The back end manages the)4 1266 2 840 6984 t
+( in\257ux routine)2 663( The)1 261(memory through the cache.)3 1236 3 590 7104 t
+(\()3110 696 w
+10 CW f
+(kmem_cache_grow\(\))3143 696 w
+10 R f
+(\) gets memory from the)4 1107 1 4163 696 t
+( of it, and feeds those)5 894(VM system, makes objects out)4 1266 2 3110 816 t
+( out\257ux routine)2 765( The)1 287( the cache.)2 571(objects into)1 537 4 3110 936 t
+(\()3110 1056 w
+10 CW f
+(kmem_cache_reap\(\))3143 1056 w
+10 R f
+( by the VM)3 563(\) is invoked)2 544 2 4163 1056 t
+( some of that memory back \320)6 1275(system when it wants)3 885 2 3110 1176 t
+( that all back-end)3 735( Note)1 267( paging.)1 337(e.g., at the onset of)4 821 4 3110 1296 t
+( memory pressure.)2 826(activity is triggered solely by)4 1334 2 3110 1416 t
+(Memory \257ows in when the cache needs more)7 2160 1 3110 1536 t
+( the sys-)2 355(objects and \257ows back out when the rest of)8 1805 2 3110 1656 t
+( there are no arbitrary limits)5 1197(tem needs more pages;)3 963 2 3110 1776 t
+( by a)2 228( control is provided)3 828( Hysteresis)1 490(or watermarks.)1 614 4 3110 1896 t
+(working-set algorithm, described in Section 3.4.)5 1966 1 3110 2016 t
+( not a monolithic entity,)4 1043(The slab allocator is)3 867 2 3360 2178 t
+( a loose confederation of independent)5 1629(but rather is)2 531 2 3110 2298 t
+( so the)2 325( caches have no shared state,)5 1301(caches. The)1 534 3 3110 2418 t
+( locking instead of)3 825(allocator can employ per-cache)3 1335 2 3110 2538 t
+( with one)2 428(protecting the entire arena \(kernel heap\))5 1732 2 3110 2658 t
+( locking improves scalability)3 1206( Per-cache)1 466(global lock.)1 488 3 3110 2778 t
+( number of distinct caches to be)6 1456(by allowing any)2 704 2 3110 2898 t
+(accessed simultaneously.)1 1012 1 3110 3018 t
+(Each cache maintains its own statistics \320)6 1910 1 3360 3180 t
+( and free)2 456(total allocations, number of allocated)4 1704 2 3110 3300 t
+( per-cache statistics provide)3 1279( These)1 352(buffers, etc.)1 529 3 3110 3420 t
+( indicate)1 357( They)1 279( system behavior.)2 734(insight into overall)2 790 4 3110 3540 t
+(which parts of the system consume the most)7 2160 1 3110 3660 t
+( They)1 283(memory and help to identify memory leaks.)6 1877 2 3110 3780 t
+( in various subsys-)3 843(also indicate the activity level)4 1317 2 3110 3900 t
+( extent that allocator traf\256c is an accu-)7 1658(tems, to the)2 502 2 3110 4020 t
+( is)1 111( message allocation)2 818( \(Streams)1 431(rate approximation.)1 800 4 3110 4140 t
+(a direct measure of streams activity, for example.\))7 2059 1 3110 4260 t
+( to)1 128(The slab allocator is operationally similar)5 1782 2 3360 4422 t
+( ``QuickFit'')1 567(the ``CustoMalloc'' [Grunwald93A],)2 1593 2 3110 4542 t
+( ``Zone'' [VanSciver88] alloca-)3 1348([Weinstock88], and)1 812 2 3110 4662 t
+(tors, all of which maintain distinct freelists of the)8 2160 1 3110 4782 t
+( The)1 289(most commonly requested buffer sizes.)4 1871 2 3110 4902 t
+(Grunwald and Weinstock papers each demonstrate)5 2160 1 3110 5022 t
+(that a customized segregated-storage allocator \320)5 2160 1 3110 5142 t
+( has)1 178(one that)1 340 2 3110 5262 t
+10 I f
+(a priori)1 329 1 3673 5262 t
+10 R f
+(knowledge of the most com-)4 1223 1 4047 5262 t
+(mon allocation sizes \320 is usually optimal in both)8 2160 1 3110 5382 t
+(space)3110 5502 w
+10 I f
+(and)3406 5502 w
+10 R f
+( in this)2 371( slab allocator is)3 802(time. The)1 466 3 3631 5502 t
+(category, but has the advantage that its customiza-)7 2160 1 3110 5622 t
+( rather than being)3 746(tions are client-driven at run time)5 1414 2 3110 5742 t
+( is also true of)4 670( \(This)1 295(hard-coded at compile time.)3 1195 3 3110 5862 t
+(the Zone allocator.\))2 800 1 3110 5982 t
+( non-caching allocation routines,)3 1372(The standard)1 538 2 3360 6144 t
+10 CW f
+(kmem_alloc\(9F\))3110 6264 w
+10 R f
+(and)4021 6264 w
+10 CW f
+(kmem_free\(9F\))4262 6264 w
+10 R f
+(, use)1 228 1 5042 6264 t
+( startup, the system)3 904( At)1 202( internally.)1 477(object caches)1 577 4 3110 6384 t
+( size)1 212(creates a set of about 30 caches ranging in)8 1948 2 3110 6504 t
+( increments.)1 506(from 8 bytes to 9K in roughly 10-20%)7 1654 2 3110 6624 t
+10 CW f
+(kmem_alloc\(\))3110 6744 w
+10 R f
+(simply performs a)2 1185 1 4085 6744 t
+10 CW f
+(kmem_cache_alloc\(\))3110 6864 w
+10 R f
+(from the nearest-size)2 982 1 4288 6864 t
+( are rare,)2 390( larger than 9K, which)4 979(cache. Allocations)1 791 3 3110 6984 t
+(are handled directly by the back-end page supplier.)7 2095 1 3110 7104 t
+cleartomark
+showpage
+restore
+%%EndPage: 4 4
+%%Page: 5 5
+save
+mark
+5 pagesetup
+11 B f
+(3.2. Slabs)1 491 1 590 696 t
+10 R f
+(The)590 858 w
+10 I f
+(slab)783 858 w
+10 R f
+( of currency in the slab)5 987(is the primary unit)3 775 2 988 858 t
+( the allocator needs to grow a)6 1445(allocator. When)1 715 2 590 978 t
+( acquires an entire slab of)5 1197(cache, for example, it)3 963 2 590 1098 t
+( allocator reclaims)2 803( the)1 181( Similarly,)1 490(objects at once.)2 686 4 590 1218 t
+( relinquishing a)2 644(unused memory \(shrinks a cache\) by)5 1516 2 590 1338 t
+(complete slab.)1 585 1 590 1458 t
+( of one or more pages of virtu-)7 1292(A slab consists)2 618 2 840 1620 t
+( memory carved up into equal-size)5 1518(ally contiguous)1 642 2 590 1740 t
+(chunks, with a reference count indicating how many)7 2160 1 590 1860 t
+( bene\256ts)1 357( The)1 234( chunks have been allocated.)4 1228(of those)1 341 4 590 1980 t
+( this simple data structure to manage the)7 1808(of using)1 352 2 590 2100 t
+(arena are somewhat striking:)3 1174 1 590 2220 t
+10 B f
+(\(1\) Reclaiming unused memory is trivial.)5 1843 1 590 2382 t
+10 R f
+(When)2512 2382 w
+( count goes to zero the associated)6 1426(the slab reference)2 734 2 590 2502 t
+( a)1 92( Thus)1 281( the VM system.)3 730(pages can be returned to)4 1057 4 590 2622 t
+( the complex trees,)3 826(simple reference count replaces)3 1334 2 590 2742 t
+( most)1 249(bitmaps, and coalescing algorithms found in)5 1911 2 590 2862 t
+(other allocators [Knuth68, Korn85, Standish80].)4 1966 1 590 2982 t
+10 B f
+( freeing memory are fast,)4 1287(\(2\) Allocating and)2 873 2 590 3144 t
+(constant-time operations.)1 1114 1 590 3264 t
+10 R f
+(All we have to do is)5 957 1 1793 3264 t
+(move an object to or from a freelist and update a)10 2160 1 590 3384 t
+(reference count.)1 649 1 590 3504 t
+10 B f
+( external fragmentation \(unused)3 1647(\(3\) Severe)1 513 2 590 3666 t
+( unlikely.)1 430(buffers on the freelist\) is)4 1177 2 590 3786 t
+10 R f
+(Over time,)1 461 1 2289 3786 t
+( small,)1 289(many allocators develop an accumulation of)5 1871 2 590 3906 t
+( occurs as the allocator splits)5 1211( This)1 249(unusable buffers.)1 700 3 590 4026 t
+( For)1 208( to satisfy smaller requests.)4 1129(existing free buffers)2 823 3 590 4146 t
+( 32-byte and 40-byte)3 874(example, the right sequence of)4 1286 2 590 4266 t
+( result in a large accumulation of)6 1500(allocations may)1 660 2 590 4386 t
+( \320 even though no 8-byte buffers)6 1401(free 8-byte buffers)2 759 2 590 4506 t
+( segregated-)1 537( A)1 182(are ever requested [Standish80].)3 1441 3 590 4626 t
+( cannot suffer this fate, since the)6 1468(storage allocator)1 692 2 590 4746 t
+(only way to populate its 8-byte freelist is to actually)9 2160 1 590 4866 t
+( sequence of)2 544( Any)1 253( free 8-byte buffers.)3 860(allocate and)1 503 4 590 4986 t
+( no matter how)3 677(32-byte and 40-byte allocations \320)4 1483 2 590 5106 t
+( can only result in population of the 32-)8 1678(complex \320)1 482 2 590 5226 t
+( is)1 109( prior allocation)2 670( Since)1 296(byte and 40-byte freelists.)3 1085 4 590 5346 t
+( of future allocation [Weinstock88])4 1472(a good predictor)2 688 2 590 5466 t
+(these buffers are likely to be used again.)7 1663 1 590 5586 t
+( fragmen-)1 400(The other reason that slabs reduce external)6 1760 2 590 5748 t
+( that all objects in a slab are of the same)10 1817(tation is)1 343 2 590 5868 t
+( same lifetime distribution.*)3 1200(type, so they have the)4 960 2 590 5988 t
+(The resulting segregation of short-lived and long-)6 2160 1 590 6108 t
+( slab granularity reduces the likeli-)5 1509(lived objects at)2 651 2 590 6228 t
+( page being held hostage due to a)7 1433(hood of an entire)3 727 2 590 6348 t
+(single long-lived allocation [Barrett93, Hanson90].)4 2074 1 590 6468 t
+8 S1 f
+(____________________________________)590 6564 w
+8 R f
+(* The generic caches that back)5 1087 1 806 6684 t
+8 CW f
+(kmem_alloc\(\))1957 6684 w
+8 R f
+(are a)1 174 1 2576 6684 t
+( but they constitute a relatively small fraction)7 1559(notable exception,)1 601 2 590 6780 t
+( \320 all of the major consumers of)7 1221(of the arena in SunOS 5.4)5 939 2 590 6876 t
+(memory now use)2 561 1 590 6972 t
+8 CW f
+(kmem_cache_alloc\(\))1199 6972 w
+8 R f
+(.)2063 6972 w
+10 B f
+( \(per-buffer wasted)2 928(\(4\) Internal fragmentation)2 1232 2 3110 696 t
+( minimal.)1 419(space\) is)1 372 2 3110 816 t
+10 R f
+(Each buffer is exactly the right)5 1298 1 3972 816 t
+( so the only)3 536(size \(namely, the cache's object size\),)5 1624 2 3110 936 t
+( of the)2 275(wasted space is the unused portion at the end)8 1885 2 3110 1056 t
+( example, assuming 4096-byte pages, the)5 1755(slab. For)1 405 2 3110 1176 t
+( contain)1 329(slabs in a 400-byte object cache would each)7 1831 2 3110 1296 t
+( can view)2 428( We)1 219(10 buffers, with 96 bytes left over.)6 1513 3 3110 1416 t
+(this as equivalent 9.6 bytes of wasted space per)8 2160 1 3110 1536 t
+(400-byte buffer, or 2.4% internal fragmentation.)5 1969 1 3110 1656 t
+( contains)1 390(In general, if a slab)4 891 2 3110 1818 t
+10 I f
+(n)4448 1818 w
+10 R f
+(buffers, then the)2 715 1 4555 1818 t
+(internal fragmentation is at most 1/)5 1487 1 3110 1938 t
+10 I f
+(n)4597 1938 w
+10 R f
+(; thus the allo-)3 623 1 4647 1938 t
+( internal)1 365(cator can actually control the amount of)6 1795 2 3110 2058 t
+( How-)1 316( the slab size.)3 631(fragmentation by controlling)2 1213 3 3110 2178 t
+( are more likely to cause external)6 1444(ever, larger slabs)2 716 2 3110 2298 t
+( the probability of being able to)6 1332(fragmentation, since)1 828 2 3110 2418 t
+(reclaim a slab decreases as the number of buffers)8 2160 1 3110 2538 t
+( implementation)1 670( SunOS 5.4)2 495( The)1 231(per slab increases.)2 764 4 3110 2658 t
+(limits internal fragmentation to 12.5% \(1/8\), since)6 2160 1 3110 2778 t
+( empirical sweet-spot in the)4 1148(this was found to be the)5 1012 2 3110 2898 t
+( and external fragmenta-)3 1067(trade-off between internal)2 1093 2 3110 3018 t
+(tion.)3110 3138 w
+11 B f
+( Layout \320 Logical)3 904(3.2.1. Slab)1 531 2 3110 3438 t
+10 R f
+( slab are managed by a)5 1176(The contents of each)3 984 2 3110 3600 t
+10 CW f
+(kmem_slab)3110 3720 w
+10 R f
+(data structure that maintains the slab's)5 1584 1 3686 3720 t
+(linkage in the cache, its reference count, and its list)9 2160 1 3110 3840 t
+( turn, each buffer in the slab is)7 1361( In)1 162( buffers.)1 353(of free)1 284 4 3110 3960 t
+(managed by a)2 588 1 3110 4080 t
+10 CW f
+(kmem_bufctl)3767 4080 w
+10 R f
+( holds)1 260(structure that)1 541 2 4469 4080 t
+( and a back-)3 607(the freelist linkage, buffer address,)4 1553 2 3110 4200 t
+( slab)1 215( a)1 97( Pictorially,)1 528(pointer to the controlling slab.)4 1320 4 3110 4320 t
+( this \(bufctl-to-slab back-pointers not)4 1711(looks like)1 449 2 3110 4440 t
+(shown\):)3110 4560 w
+(one or more pages)3 758 1 3811 6746 t
+3110 6666 3182 6648 Dl
+3110 6666 3182 6684 Dl
+5270 6666 3110 6666 Dl
+5270 6666 5198 6684 Dl
+5270 6666 5198 6648 Dl
+(buf)3368 6326 w
+3110 6162 3110 6450 Dl
+3758 6162 3110 6162 Dl
+3758 6450 3758 6162 Dl
+3110 6450 3758 6450 Dl
+(buf)4016 6326 w
+3758 6162 3758 6450 Dl
+4406 6162 3758 6162 Dl
+4406 6450 4406 6162 Dl
+3758 6450 4406 6450 Dl
+(buf)4664 6326 w
+4406 6162 4406 6450 Dl
+5054 6162 4406 6162 Dl
+5054 6450 5054 6162 Dl
+4406 6450 5054 6450 Dl
+(un-)5096 6266 w
+(used)5071 6386 w
+5054 6162 5054 6450 Dl
+5270 6162 5054 6162 Dl
+5270 6450 5270 6162 Dl
+5054 6450 5270 6450 Dl
+(kmem)3201 5546 w
+(bufctl)3210 5666 w
+3110 5442 3110 5730 Dl
+3542 5442 3110 5442 Dl
+3542 5730 3542 5442 Dl
+3110 5730 3542 5730 Dl
+(kmem)3849 5546 w
+(bufctl)3858 5666 w
+3758 5442 3758 5730 Dl
+4190 5442 3758 5442 Dl
+4190 5730 4190 5442 Dl
+3758 5730 4190 5730 Dl
+(kmem)4497 5546 w
+(bufctl)4506 5666 w
+4406 5442 4406 5730 Dl
+4838 5442 4406 5442 Dl
+4838 5730 4838 5442 Dl
+4406 5730 4838 5730 Dl
+(kmem)4065 4826 w
+(slab)4110 4946 w
+3974 4722 3974 5010 Dl
+4406 4722 3974 4722 Dl
+4406 5010 4406 4722 Dl
+3974 5010 4406 5010 Dl
+(next slab in cache)3 736 1 4470 4754 t
+5270 4794 4406 4794 Dl
+5270 4794 5198 4812 Dl
+5270 4794 5198 4776 Dl
+4406 4938 5270 4938 Dl
+4406 4938 4478 4920 Dl
+4406 4938 4478 4956 Dl
+(prev slab in cache)3 741 1 3172 5018 t
+3110 4938 3974 4938 Dl
+3110 4938 3182 4920 Dl
+3110 4938 3182 4956 Dl
+3974 4794 3110 4794 Dl
+3974 4794 3902 4812 Dl
+3974 4794 3902 4776 Dl
+3110 6162 3326 5730 Dl
+3110 6161 3125 6089 Dl
+3110 6161 3158 6105 Dl
+3758 6162 3974 5730 Dl
+3758 6161 3773 6089 Dl
+3758 6161 3806 6105 Dl
+4406 6162 4622 5730 Dl
+4406 6161 4421 6089 Dl
+4406 6161 4454 6105 Dl
+3758 5586 3542 5586 Dl
+3758 5586 3686 5604 Dl
+3758 5586 3686 5568 Dl
+4406 5586 4190 5586 Dl
+4406 5586 4334 5604 Dl
+4406 5586 4334 5568 Dl
+3326 5442 4046 5010 Dl
+3326 5441 3378 5389 Dl
+3326 5441 3397 5420 Dl
+4622 5442 4334 5010 Dl
+4621 5441 4567 5392 Dl
+4621 5441 4596 5372 Dl
+cleartomark
+showpage
+restore
+%%EndPage: 5 5
+%%Page: 6 6
+save
+mark
+6 pagesetup
+11 B f
+( Layout for Small Objects)4 1249(3.2.2. Slab)1 531 2 590 696 t
+10 R f
+( slab is)2 336(For objects smaller than 1/8 of a page, a)8 1824 2 590 858 t
+( the slab data at)4 701(built by allocating a page, placing)5 1459 2 590 978 t
+( dividing the rest into equal-size)5 1565(the end, and)2 595 2 590 1098 t
+(buffers:)590 1218 w
+(one page)1 365 1 1488 1892 t
+590 1812 662 1794 Dl
+590 1812 662 1830 Dl
+2750 1812 590 1812 Dl
+2750 1812 2678 1830 Dl
+2750 1812 2678 1794 Dl
+(buf)689 1544 w
+590 1380 590 1668 Dl
+921 1380 590 1380 Dl
+921 1668 921 1380 Dl
+590 1668 921 1668 Dl
+(buf)1020 1544 w
+921 1380 921 1668 Dl
+1252 1380 921 1380 Dl
+1252 1668 1252 1380 Dl
+921 1668 1252 1668 Dl
+(...)1381 1544 w
+1252 1380 1252 1668 Dl
+1583 1380 1252 1380 Dl
+1583 1668 1583 1380 Dl
+1252 1668 1583 1668 Dl
+(buf)1683 1544 w
+1583 1380 1583 1668 Dl
+1914 1380 1583 1380 Dl
+1914 1668 1914 1380 Dl
+1583 1668 1914 1668 Dl
+(buf)2014 1544 w
+1914 1380 1914 1668 Dl
+2245 1380 1914 1380 Dl
+2246 1668 2246 1380 Dl
+1915 1668 2246 1668 Dl
+(un-)2288 1484 w
+(used)2263 1604 w
+2246 1380 2246 1668 Dl
+2462 1380 2246 1380 Dl
+2462 1668 2462 1380 Dl
+2246 1668 2462 1668 Dl
+(kmem)2481 1484 w
+(slab)2526 1604 w
+2462 1380 2462 1668 Dl
+2750 1380 2462 1380 Dl
+2750 1668 2750 1380 Dl
+2462 1668 2750 1668 Dl
+( the)1 172(Each buffer serves as its own bufctl while on)8 1988 2 590 2118 t
+( since)1 249( the linkage is actually needed,)5 1331(freelist. Only)1 580 3 590 2238 t
+( are essential)2 561( These)1 318(everything else is computable.)3 1281 3 590 2358 t
+(optimizations for small buffers \320 otherwise we)6 2160 1 590 2478 t
+( as much memory)3 797(would end up allocating almost)4 1363 2 590 2598 t
+(for bufctls as for the buffers themselves.)6 1658 1 590 2718 t
+( the)1 168(The freelist linkage resides at)4 1255 2 840 2880 t
+10 I f
+(end)2309 2880 w
+10 R f
+(of the)1 251 1 2499 2880 t
+( debug-)1 310(buffer, rather than the beginning, to facilitate)6 1850 2 590 3000 t
+( empirical observation)2 947( is driven by the)4 748(ging. This)1 465 3 590 3120 t
+( structure is typically)3 925(that the beginning of a data)5 1235 2 590 3240 t
+( a buffer is modi\256ed)4 910( If)1 148(more active than the end.)4 1102 3 590 3360 t
+( is easier to diagnose)4 900(after being freed, the problem)4 1260 2 590 3480 t
+(if the heap)2 437 1 590 3600 t
+10 I f
+(structure)1060 3600 w
+10 R f
+(\(freelist linkage\) is still intact.)4 1234 1 1454 3600 t
+( for)1 161(The allocator reserves an additional word)5 1749 2 840 3762 t
+(constructed objects so that the linkage doesn't)6 2160 1 590 3882 t
+(overwrite any constructed state.)3 1293 1 590 4002 t
+11 B f
+( Layout for Large Objects)4 1259(3.2.3. Slab)1 531 2 590 4302 t
+10 R f
+( but)1 167(The above scheme is ef\256cient for small objects,)7 1993 2 590 4464 t
+( could \256t only)3 610( It)1 136( ones.)1 250(not for large)2 529 4 590 4584 t
+10 I f
+(one)2157 4584 w
+10 R f
+(2K buffer)1 407 1 2343 4584 t
+( data.)1 239(on a 4K page because of the embedded slab)8 1921 2 590 4704 t
+( large \(multi-page\) slabs we lose the)6 1525(Moreover, with)1 635 2 590 4824 t
+( address from the)3 753(ability to determine the slab data)5 1407 2 590 4944 t
+( large objects the)3 814( for)1 187( Therefore,)1 521(buffer address.)1 638 4 590 5064 t
+( is identical to the logical layout.)6 1518(physical layout)1 642 2 590 5184 t
+( slab and bufctl data structures come)6 1620(The required)1 540 2 590 5304 t
+( per-cache)1 426( A)1 145( caches.)1 330(from their own \(small-object!\))3 1259 4 590 5424 t
+( buffer-to-bufctl)1 709(self-scaling hash table provides)3 1451 2 590 5544 t
+(conversion.)590 5664 w
+11 B f
+( Management)1 651(3.3. Freelist)1 590 2 590 5964 t
+10 R f
+( list)1 172(Each cache maintains a circular, doubly-linked)5 1988 2 590 6126 t
+( sorted, in)2 433( slab list is partially)4 860( The)1 232(of all its slabs.)3 635 4 590 6246 t
+( come)1 276(that the empty slabs \(all buffers allocated\))6 1884 2 590 6366 t
+( by the partial slabs \(some buffers)6 1563(\256rst, followed)1 597 2 590 6486 t
+( and \256nally the complete slabs)5 1278(allocated, some free\),)2 882 2 590 6606 t
+( freelist)1 320( cache's)1 342( The)1 232(\(all buffers free, refcnt == 0\).)5 1266 4 590 6726 t
+( slab,)1 220( Each)1 266(pointer points to its \256rst non-empty slab.)6 1674 3 590 6846 t
+( of available buffers.)3 924(in turn, has its own freelist)5 1236 2 590 6966 t
+( memory)1 385(This two-level freelist structure simpli\256es)4 1775 2 590 7086 t
+( reclaims a slab it)4 807( the allocator)2 577(reclaiming. When)1 776 3 3110 696 t
+( cache's)1 337(doesn't have to unlink each buffer from the)7 1823 2 3110 816 t
+(freelist \320 it just unlinks the slab.)6 1379 1 3110 936 t
+11 B f
+( Memory)1 436(3.4. Reclaiming)1 769 2 3110 1236 t
+10 R f
+(When)3110 1398 w
+10 CW f
+(kmem_cache_free\(\))3430 1398 w
+10 R f
+( slab)1 217(sees that the)2 548 2 4505 1398 t
+( not immediately)2 752(reference count is zero, it does)5 1408 2 3110 1518 t
+( the slab)2 357( it just moves)3 570( Instead,)1 382(reclaim the memory.)2 851 4 3110 1638 t
+( all the complete)3 759(to the tail of the freelist where)6 1401 2 3110 1758 t
+( that no complete slab)4 1013( ensures)1 357( This)1 269(slabs reside.)1 521 4 3110 1878 t
+( broken up unless all partial slabs have been)8 1870(will be)1 290 2 3110 1998 t
+(depleted.)3110 2118 w
+( asks)1 209(When the system runs low on memory it)7 1701 2 3360 2280 t
+( as much memory as it can.)6 1186(the allocator to liberate)3 974 2 3110 2400 t
+( retains a 15-second work-)4 1106(The allocator obliges, but)3 1054 2 3110 2520 t
+( prevent thrashing.)2 788(ing set of recently-used slabs to)5 1372 2 3110 2640 t
+( that system performance is)4 1210(Measurements indicate)1 950 2 3110 2760 t
+(fairly insensitive to the slab working-set interval.)6 2160 1 3110 2880 t
+( extremes \320)2 584(Presumably this is because the two)5 1576 2 3110 3000 t
+( on)1 163(zero working set \(reclaim all complete slabs)6 1997 2 3110 3120 t
+( working-set \(never reclaim)3 1243(demand\) and in\256nite)2 917 2 3110 3240 t
+( are both reasonable, albeit suboptimal,)5 1637(anything\) \320)1 523 2 3110 3360 t
+(policies.)3110 3480 w
+11 B f
+( Cache Effects)2 685(4. Hardware)1 636 2 3110 3780 t
+10 R f
+( utilization,)1 482(Modern hardware relies on good cache)5 1678 2 3110 3942 t
+( is important to design software with cache)7 1955(so it)1 205 2 3110 4062 t
+( a memory allocator there are)5 1276( For)1 218(effects in mind.)2 666 3 3110 4182 t
+( consider: the)2 578(two broad classes of cache effects to)6 1582 2 3110 4302 t
+( the cache foot-)3 674(distribution of buffer addresses and)4 1486 2 3110 4422 t
+( latter topic has)3 712( The)1 246( allocator itself.)2 690(print of the)2 512 4 3110 4542 t
+( Grunwald93B],)1 692(received some attention [Chen93,)3 1468 2 3110 4662 t
+( cache)1 259(but the effect of buffer address distribution on)7 1901 2 3110 4782 t
+( bus balance has gone largely)5 1517(utilization and)1 643 2 3110 4902 t
+(unrecognized.)3110 5022 w
+11 B f
+( Address Distribution)2 1069( of Buffer)2 501(4.1. Impact)1 590 3 3110 5334 t
+(on Cache Utilization)2 976 1 3110 5454 t
+10 R f
+( can)1 205(The address distribution of mid-size buffers)5 1955 2 3110 5616 t
+( par-)1 196( In)1 152(affect the system's overall cache utilization.)5 1812 3 3110 5736 t
+( where all buffers)3 736(ticular, power-of-two allocators \320)3 1424 2 3110 5856 t
+(are 2)1 227 1 3110 5976 t
+8 I f
+(n)3337 5926 w
+10 R f
+(bytes and are 2)3 691 1 3433 5976 t
+8 I f
+(n)4124 5926 w
+10 R f
+(-byte aligned \320 are pes-)4 1106 1 4164 5976 t
+( that every inode)3 794( for example,)2 611(simal.* Suppose,)1 755 3 3110 6096 t
+(\()3110 6216 w
+10 S f
+()3143 6216 w
+cleartomark restore
+%%BeginGlobal
+%ident	"@(#)lp:filter/postscript/font/devpost/charlib/~=	1.2"
+/build_~= {
+    pop
+    (\176) stringwidth pop neg size -.15 mul (\176\055) ashow
+} def
+%%EndGlobal
+save mark
+10 S f
+3143 6216 m
+55 build_~=
+3198 6216 m
+10 R f
+(300 bytes\) is assigned a 512-byte buffer, 512-byte)7 2072 1 3198 6216 t
+(aligned, and that only the \256rst dozen \256elds of an)9 2160 1 3110 6336 t
+( Then)1 296(inode \(48 bytes\) are frequently referenced.)5 1864 2 3110 6456 t
+( traf\256c will be)3 605(the majority of inode-related memory)4 1555 2 3110 6576 t
+8 S1 f
+(____________________________________)3110 6672 w
+8 R f
+( because they are easy to)5 897(* Such allocators are common)4 1047 2 3326 6792 t
+( SVr4 both employ)3 742( example, 4.4BSD and)3 856(implement. For)1 562 3 3110 6888 t
+(power-of-two methods [McKusick88, Lee89].)3 1488 1 3110 6984 t
+cleartomark
+showpage
+restore
+%%EndPage: 6 6
+%%Page: 7 7
+save
+mark
+7 pagesetup
+10 R f
+( Thus)1 279( 0 and 47 modulo 512.)5 1005(at addresses between)2 876 3 590 696 t
+( 512-byte boundaries will be)4 1275(the cache lines near)3 885 2 590 816 t
+( effect)1 275( In)1 165( the rest lie fallow.)4 842(heavily loaded while)2 878 4 590 936 t
+( \(48/512\) of the cache will be usable by)8 1796(only 9%)1 364 2 590 1056 t
+( would not suffer)3 781( caches)1 321(inodes. Fully-associative)1 1058 3 590 1176 t
+( trends are toward)3 741(this problem, but current hardware)4 1419 2 590 1296 t
+(simpler rather than more complex caches.)5 1708 1 590 1416 t
+( there's nothing special about)4 1432(Of course,)1 478 2 840 1578 t
+( many other mid-size)3 936( kernel contains)2 694(inodes. The)1 530 3 590 1698 t
+( bytes\) with the same)4 949(data structures \(e.g. 100-500)3 1211 2 590 1818 t
+(essential qualities: there are many of them, they)7 2160 1 590 1938 t
+( heavily used \256elds, and those)5 1339(contain only a few)3 821 2 590 2058 t
+(\256elds are grouped together at or near the beginning)8 2160 1 590 2178 t
+( artifact of the way data struc-)6 1262( This)1 247(of the structure.)2 651 3 590 2298 t
+( has not previously been recognized as)6 1655(tures evolve)1 505 2 590 2418 t
+(an important factor in allocator design.)5 1593 1 590 2538 t
+11 B f
+( Address Distribution)2 1069( of Buffer)2 501(4.2. Impact)1 590 3 590 2850 t
+(on Bus Balance)2 741 1 590 2970 t
+10 R f
+( across multi-)2 566(On a machine that interleaves memory)5 1594 2 590 3132 t
+( effects described above also)4 1286(ple main buses, the)3 874 2 590 3252 t
+( The)1 243( bus utilization.)2 680(have a signi\256cant impact on)4 1237 3 590 3372 t
+( for example, employs 256-byte)4 1333(SPARCcenter 2000,)1 827 2 590 3492 t
+( main buses [Cekleov92].)3 1150(interleaving across two)2 1010 2 590 3612 t
+( example above, we see that any)6 1522(Continuing the)1 638 2 590 3732 t
+(power-of-two allocator maps the \256rst half of every)7 2160 1 590 3852 t
+( and the second half to)5 966(inode \(the hot part\) to bus 0)6 1194 2 590 3972 t
+( almost all inode-related cache misses)5 1621( Thus)1 279(bus 1.)1 260 3 590 4092 t
+( is exacerbated)2 620( situation)1 385( The)1 228(are serviced by bus 0.)4 927 4 590 4212 t
+( since all of the inodes are)6 1144(by an in\257ated miss rate,)4 1016 2 590 4332 t
+(\256ghting over a small fraction of the cache.)7 1747 1 590 4452 t
+( a)1 145( On)1 256(These effects can be dramatic.)4 1509 3 840 4614 t
+( running LADDIS under a)4 1308(SPARCcenter 2000)1 852 2 590 4734 t
+( kernel, replacing the old)4 1123(SunOS 5.4 development)2 1037 2 590 4854 t
+( power-of-two buddy-system [Lee89]\))3 1664(allocator \(a)1 496 2 590 4974 t
+( allocator reduced bus imbalance from)5 1617(with the slab)2 543 2 590 5094 t
+( the primary cache)3 817( addition,)1 405( In)1 168(43% to just 17%.)3 770 4 590 5214 t
+(miss rate dropped by 13%.)4 1100 1 590 5334 t
+11 B f
+( Coloring)1 452(4.3. Slab)1 448 2 590 5634 t
+10 R f
+( incorporates a simple coloring)4 1377(The slab allocator)2 783 2 590 5796 t
+( buffers evenly throughout)3 1170(scheme that distributes)2 990 2 590 5916 t
+( utilization)1 468(the cache, resulting in excellent cache)5 1692 2 590 6036 t
+( concept is simple: each time)5 1237( The)1 229(and bus balance.)2 694 3 590 6156 t
+( buffer addresses start at a)5 1103(a new slab is created, the)5 1057 2 590 6276 t
+(slightly different offset \(color\) from the slab base)7 2160 1 590 6396 t
+( example, for a)3 640( For)1 211( page-aligned\).)1 612(\(which is always)2 697 4 590 6516 t
+( objects with 8-byte alignment, the)5 1428(cache of 200-byte)2 732 2 590 6636 t
+( 200,)1 231(\256rst slab's buffers would be at addresses 0,)7 1929 2 590 6756 t
+( next slab's)2 505( The)1 238( base.)1 252(400, ... relative to the slab)5 1165 4 590 6876 t
+( ... and so)3 449(buffers would be at offsets 8, 208, 408,)7 1711 2 590 6996 t
+( maximum slab color is determined by the)7 1804(on. The)1 356 2 3110 696 t
+( this exam-)2 478( In)1 158( unused space in the slab.)5 1100(amount of)1 424 4 3110 816 t
+( can \256t 20 200-byte)4 909(ple, assuming 4K pages, we)4 1251 2 3110 936 t
+( buffers consume)2 735( The)1 237( slab.)1 235(buffers in a 4096-byte)3 953 4 3110 1056 t
+(4000 bytes, the)2 684 1 3110 1176 t
+10 CW f
+(kmem_slab)3884 1176 w
+10 R f
+(data consumes 32)2 784 1 4486 1176 t
+( for)1 160(bytes, and the remaining 64 bytes are available)7 2000 2 3110 1296 t
+( slab color is 64, and)5 912( the maximum)2 614(coloring. Thus)1 634 3 3110 1416 t
+( 32, 40, 48,)3 504(the slab color sequence is 0, 8, 16, 24,)8 1656 2 3110 1536 t
+(56, 64, 0, 8, ...)4 607 1 3110 1656 t
+( of this coloring)3 672(One particularly nice property)3 1238 2 3360 1818 t
+(scheme is that mid-size power-of-two buffers)5 2160 1 3110 1938 t
+( of coloring, since)3 847(receive the maximum amount)3 1313 2 3110 2058 t
+( example, while 128)3 870( For)1 217(they are the worst-\256tting.)3 1073 3 3110 2178 t
+(bytes goes perfectly into 4096, it goes near-)7 2160 1 3110 2298 t
+( is what's actually)3 769(pessimally into 4096 - 32, which)5 1391 2 3110 2418 t
+(available \(because of the embedded slab data\).)6 1906 1 3110 2538 t
+11 B f
+( Management)1 651(4.4. Arena)1 530 2 3110 2838 t
+10 R f
+( arena management strategy deter-)4 1549(An allocator's)1 611 2 3110 3000 t
+( strategies)1 415( These)1 310(mines its dynamic cache footprint.)4 1435 3 3110 3120 t
+( sequential-\256t)1 647( broad categories:)2 843(fall into three)2 670 3 3110 3240 t
+( segregated-storage)1 819(methods, buddy methods, and)3 1341 2 3110 3360 t
+(methods [Standish80].)1 908 1 3110 3480 t
+( must typically search)3 901(A sequential-\256t allocator)2 1009 2 3360 3642 t
+( Such)1 289( to \256nd a good-\256tting buffer.)5 1299(several nodes)1 572 3 3110 3762 t
+( nature, condemned to a large cache)6 1503(methods are, by)2 657 2 3110 3882 t
+( to examine a signi\256cant number)5 1352(footprint: they have)2 808 2 3110 4002 t
+( nowhere near each other.)4 1066(of nodes that are generally)4 1094 2 3110 4122 t
+( only cache misses, but TLB misses)6 1514(This causes not)2 646 2 3110 4242 t
+( coalescing stages of buddy-system)4 1565( The)1 252(as well.)1 343 3 3110 4362 t
+(allocators [Knuth68, Lee89] have similar properties.)5 2133 1 3110 4482 t
+( allocator, such as the)4 1026(A segregated-storage)1 884 2 3360 4644 t
+( for dif-)2 370(slab allocator, maintains separate freelists)4 1790 2 3110 4764 t
+( generally have)2 643( allocators)1 429( These)1 312(ferent buffer sizes.)2 776 4 3110 4884 t
+( because allocating a buffer is so)6 1362(good cache locality)2 798 2 3110 5004 t
+( do is determine the)4 840( the allocator has to)4 830(simple. All)1 490 3 3110 5124 t
+( or)1 133(right freelist \(by computation, by table lookup,)6 2027 2 3110 5244 t
+( take a)2 312(by having it supplied as an argument\) and)7 1848 2 3110 5364 t
+( similarly)1 440( a buffer is)3 609( Freeing)1 423(buffer from it.)2 688 4 3110 5484 t
+( handful of)2 564( are only a)3 604(straightforward. There)1 992 3 3110 5604 t
+(pointers to load, so the cache footprint is small.)8 1957 1 3110 5724 t
+( advan-)1 325(The slab allocator has the additional)5 1585 2 3360 5886 t
+( mid-size buffers, most of the)5 1261(tage that for small to)4 899 2 3110 6006 t
+( bufctls, and)2 543(relevant information \320 the slab data,)5 1617 2 3110 6126 t
+( page.)1 278(buffers themselves \320 resides on a single)6 1882 2 3110 6246 t
+(Thus a single TLB entry covers most of the action.)9 2103 1 3110 6366 t
+cleartomark
+showpage
+restore
+%%EndPage: 7 7
+%%Page: 8 8
+save
+mark
+8 pagesetup
+11 B f
+(5. Performance)1 761 1 590 696 t
+10 R f
+( performance of the slab)4 1057(This section compares the)3 1103 2 590 858 t
+(allocator to three other well-known kernel memory)6 2160 1 590 978 t
+(allocators:)590 1098 w
+10 B f
+(SunOS 4.1.3)1 584 1 790 1260 t
+10 R f
+(, based on [Stephenson83], a)4 1376 1 1374 1260 t
+(sequential-\256t method;)1 883 1 790 1380 t
+10 B f
+(4.4BSD)790 1542 w
+10 R f
+( on [McKusick88], a power-of-)4 1341(, based)1 299 2 1110 1542 t
+(two segregated-storage method;)2 1291 1 790 1662 t
+10 B f
+(SVr4)790 1824 w
+10 R f
+( on [Lee89], a power-of-two)4 1396(, based)1 342 2 1012 1824 t
+( was)1 244( allocator)1 439( This)1 301(buddy-system method.)1 976 4 790 1944 t
+(employed in all previous)3 1015 1 790 2064 t
+10 B f
+(SunOS 5.x)1 460 1 1838 2064 t
+10 R f
+(releases.)2331 2064 w
+( each of these allocators)4 1058(To get a fair comparison,)4 1102 2 590 2226 t
+( the same SunOS 5.4 base system.)6 1498(was ported into)2 662 2 590 2346 t
+( comparing just allocators,)3 1120(This ensures that we are)4 1040 2 590 2466 t
+(not entire operating systems.)3 1173 1 590 2586 t
+11 B f
+( Comparison)1 617(5.1. Speed)1 520 2 590 2886 t
+10 R f
+( the time required to allocate)5 1240(On a SPARCstation-2)2 920 2 590 3048 t
+( is as)2 236(and free a buffer under the various allocators)7 1924 2 590 3168 t
+(follows:)590 3288 w
+10 S f
+(_ ___________________________________________)1 2157 1 590 3350 t
+10 R f
+(Memory Allocation + Free Costs)4 1354 1 991 3470 t
+10 S f
+(_ ___________________________________________)1 2157 1 590 3480 t
+(_ ___________________________________________)1 2157 1 590 3500 t
+10 R f
+( \()1 66(allocator time)1 848 2 641 3610 t
+10 S f
+(m)1555 3610 w
+10 R f
+(sec\) interface)1 661 1 1613 3610 t
+10 S f
+(_ ___________________________________________)1 2157 1 590 3630 t
+10 R f
+( kmem)1 547(slab 3.8)1 988 2 641 3750 t
+10 S f
+(_)2176 3750 w
+10 R f
+(cache)2226 3750 w
+10 S f
+(_)2452 3750 w
+10 R f
+(alloc)2502 3750 w
+( kmem)1 547(4.4BSD 4.1)1 988 2 641 3870 t
+10 S f
+(_)2176 3870 w
+10 R f
+(alloc)2226 3870 w
+( kmem)1 547(slab 4.7)1 988 2 641 3990 t
+10 S f
+(_)2176 3990 w
+10 R f
+(alloc)2226 3990 w
+( kmem)1 547(SVr4 9.4)1 988 2 641 4110 t
+10 S f
+(_)2176 4110 w
+10 R f
+(alloc)2226 4110 w
+( kmem)1 547( 25.0)1 471(SunOS 4.1.3)1 517 3 641 4230 t
+10 S f
+(_)2176 4230 w
+10 R f
+(alloc)2226 4230 w
+10 S f
+( \347)1 -2157(_ ___________________________________________)1 2157 2 590 4250 t
+(\347)590 4150 w
+(\347)590 4050 w
+(\347)590 3950 w
+(\347)590 3850 w
+(\347)590 3750 w
+(\347)590 3650 w
+(\347)590 3550 w
+(\347)590 3450 w
+(\347)1234 4250 w
+(\347)1234 4200 w
+(\347)1234 4100 w
+(\347)1234 4000 w
+(\347)1234 3900 w
+(\347)1234 3800 w
+(\347)1234 3700 w
+(\347)1234 3600 w
+(\347)1849 4250 w
+(\347)1849 4200 w
+(\347)1849 4100 w
+(\347)1849 4000 w
+(\347)1849 3900 w
+(\347)1849 3800 w
+(\347)1849 3700 w
+(\347)1849 3600 w
+(\347)2747 4250 w
+(\347)2747 4150 w
+(\347)2747 4050 w
+(\347)2747 3950 w
+(\347)2747 3850 w
+(\347)2747 3750 w
+(\347)2747 3650 w
+(\347)2747 3550 w
+(\347)2747 3450 w
+10 R f
+( 4.4BSD allocator offers both functional)5 1734(Note: The)1 426 2 590 4454 t
+( measure-)1 407( These)1 313(and preprocessor macro interfaces.)3 1440 3 590 4574 t
+( Non-binary)1 551( functional version.)2 840(ments are for the)3 769 3 590 4694 t
+( since)1 274(interfaces in general were not considered,)5 1886 2 590 4814 t
+( to drivers without expos-)4 1111(these cannot be exported)3 1049 2 590 4934 t
+( was)1 195( 4.4BSD allocator)2 751( The)1 229(ing the implementation.)2 985 4 590 5054 t
+(compiled)590 5174 w
+10 I f
+(without)1006 5174 w
+10 CW f
+(KMEMSTATS)1378 5174 w
+10 R f
+( by)1 145(de\256ned \(it's on)2 643 2 1962 5174 t
+(default\) to get the fastest possible code.)6 1626 1 590 5294 t
+(A)840 5456 w
+10 CW f
+(mutex_enter\(\)/mutex_exit\(\))987 5456 w
+10 R f
+(pair)2595 5456 w
+(costs 1.0)1 375 1 590 5576 t
+10 S f
+(m)1015 5576 w
+10 R f
+(sec, so the locking required to allocate)6 1677 1 1073 5576 t
+( a lower bound of 2.0)5 1019(and free a buffer imposes)4 1141 2 590 5696 t
+10 S f
+(m)590 5816 w
+10 R f
+( slab and 4.4BSD allocators are both very)7 1727(sec. The)1 375 2 648 5816 t
+( little work)2 477(close to this limit because they do very)7 1683 2 590 5936 t
+( implementation)1 667( 4.4BSD)1 360( The)1 228(in the common cases.)3 905 4 590 6056 t
+(of)590 6176 w
+10 CW f
+(kmem_alloc\(\))746 6176 w
+10 R f
+(is slightly faster, since it has)5 1238 1 1512 6176 t
+( reclaims memory\).)2 829(less accounting to do \(it never)5 1331 2 590 6296 t
+(The slab allocator's)2 947 1 590 6416 t
+10 CW f
+(kmem_cache_alloc\(\))1670 6416 w
+10 R f
+( it doesn't)2 428(interface is even faster, however, because)5 1732 2 590 6536 t
+( to use \320)3 452(have to determine which freelist \(cache\))5 1708 2 590 6656 t
+(the cache descriptor is passed as an argument to)8 2160 1 590 6776 t
+10 CW f
+(kmem_cache_alloc\(\))590 6896 w
+10 R f
+( event, the differ-)3 725( any)1 179(. In)1 176 3 1670 6896 t
+( between the slab and 4.4BSD)5 1474(ences in speed)2 686 2 590 7016 t
+( is to be expected, since)5 1058( This)1 258( small.)1 289(allocators are)1 555 4 3110 696 t
+( are operationally)2 810(all segregated-storage methods)2 1350 2 3110 816 t
+( good segregated-storage implementa-)3 1602(similar. Any)1 558 2 3110 936 t
+(tion should achieve excellent performance.)4 1747 1 3110 1056 t
+(The SVr4 allocator is slower than most buddy)7 1910 1 3360 1218 t
+( still provides reasonable, predictable)4 1649(systems but)1 511 2 3110 1338 t
+( most)1 282( SunOS 4.1.3 allocator, like)4 1352(speed. The)1 526 3 3110 1458 t
+( slow and)2 453(sequential-\256t methods, is comparatively)3 1707 2 3110 1578 t
+(quite variable.)1 579 1 3110 1698 t
+( caching are not visible)4 994(The bene\256ts of object)3 916 2 3360 1860 t
+(in the numbers above, since they only measure the)8 2160 1 3110 1980 t
+( table below shows)3 817( The)1 231(cost of the allocator itself.)4 1112 3 3110 2100 t
+( some of the most)4 815(the effect of object caching on)5 1345 2 3110 2220 t
+( SunOS 5.4 kernel)3 928(frequent allocations in the)3 1232 2 3110 2340 t
+(\(SPARCstation-2 timings, in microseconds\):)3 1814 1 3110 2460 t
+10 S f
+(_ ___________________________________________)1 2157 1 3110 2522 t
+10 R f
+(Effect of Object Caching)3 1024 1 3676 2642 t
+10 S f
+(_ ___________________________________________)1 2157 1 3110 2652 t
+(_ ___________________________________________)1 2157 1 3110 2672 t
+10 R f
+( improve-)1 585( with)1 399(allocation without)1 1071 3 3161 2782 t
+( ment)1 436( caching)1 463(type caching)1 1073 3 3161 2902 t
+10 S f
+(_ ___________________________________________)1 2157 1 3110 2922 t
+10 R f
+( 1.4x)1 491( 6.0)1 438(allocb 8.3)1 1030 3 3161 3042 t
+( 1.5x)1 491( 8.7)1 438(dupb 13.4)1 1030 3 3161 3162 t
+( 5.1x)1 491( 5.7)1 438(shalloc 29.3)1 1030 3 3161 3282 t
+( 3.7x)1 491( 10.9)1 438(allocq 40.0)1 1030 3 3161 3402 t
+(anonmap)3161 3522 w
+10 S f
+(_)3527 3522 w
+10 R f
+( 1.6x)1 491( 10.1)1 438(alloc 16.3)1 614 3 3577 3522 t
+( 1.3x)1 491( 98.0)1 438(makepipe 126.0)1 1030 3 3161 3642 t
+10 S f
+( \347)1 -2157(_ ___________________________________________)1 2157 2 3110 3662 t
+(\347)3110 3622 w
+(\347)3110 3522 w
+(\347)3110 3422 w
+(\347)3110 3322 w
+(\347)3110 3222 w
+(\347)3110 3122 w
+(\347)3110 3022 w
+(\347)3110 2922 w
+(\347)3110 2822 w
+(\347)3110 2722 w
+(\347)3110 2622 w
+(\347)3847 3662 w
+(\347)3847 3572 w
+(\347)3847 3472 w
+(\347)3847 3372 w
+(\347)3847 3272 w
+(\347)3847 3172 w
+(\347)3847 3072 w
+(\347)3847 2972 w
+(\347)3847 2872 w
+(\347)3847 2772 w
+(\347)4310 3662 w
+(\347)4310 3572 w
+(\347)4310 3472 w
+(\347)4310 3372 w
+(\347)4310 3272 w
+(\347)4310 3172 w
+(\347)4310 3072 w
+(\347)4310 2972 w
+(\347)4310 2872 w
+(\347)4310 2772 w
+(\347)4773 3662 w
+(\347)4773 3572 w
+(\347)4773 3472 w
+(\347)4773 3372 w
+(\347)4773 3272 w
+(\347)4773 3172 w
+(\347)4773 3072 w
+(\347)4773 2972 w
+(\347)4773 2872 w
+(\347)4773 2772 w
+(\347)5267 3662 w
+(\347)5267 3622 w
+(\347)5267 3522 w
+(\347)5267 3422 w
+(\347)5267 3322 w
+(\347)5267 3222 w
+(\347)5267 3122 w
+(\347)5267 3022 w
+(\347)5267 2922 w
+(\347)5267 2822 w
+(\347)5267 2722 w
+(\347)5267 2622 w
+10 R f
+( this section)2 528(All of the numbers presented in)5 1382 2 3360 3866 t
+( isola-)1 271(measure the performance of the allocator in)6 1889 2 3110 3986 t
+( allocator's effect on overall system per-)6 1744(tion. The)1 416 2 3110 4106 t
+(formance will be discussed in Section 5.3.)6 1735 1 3110 4226 t
+11 B f
+( Utilization Comparison)2 1148(5.2. Memory)1 638 2 3110 4526 t
+10 R f
+( consumes more memory than)4 1248(An allocator generally)2 912 2 3110 4688 t
+( to imperfect \256ts)3 784(its clients actually request due)4 1376 2 3110 4808 t
+( the free-)2 387(\(internal fragmentation\), unused buffers on)4 1773 2 3110 4928 t
+( the overhead of)3 744(list \(external fragmentation\), and)3 1416 2 3110 5048 t
+( ratio of)2 346( The)1 228( internal data structures.)3 1004(the allocator's)1 582 4 3110 5168 t
+( memory consumed is the)4 1219(memory requested to)2 941 2 3110 5288 t
+(allocator's)3110 5408 w
+10 I f
+(memory utilization)1 772 1 3575 5408 t
+10 R f
+( complementary)1 666(. The)1 257 2 4347 5408 t
+(ratio is the)2 452 1 3110 5528 t
+10 I f
+(memory wastage)1 689 1 3602 5528 t
+10 R f
+(or)4331 5528 w
+10 I f
+(total fragmentation)1 791 1 4454 5528 t
+10 R f
+(.)5245 5528 w
+( since the ker-)3 607(Good memory utilization is essential,)4 1553 2 3110 5648 t
+(nel heap consumes physical memory.)4 1527 1 3110 5768 t
+(An allocator's space ef\256ciency is harder to)6 1910 1 3360 5930 t
+( speed because it is workload-)5 1315(characterize than its)2 845 2 3110 6050 t
+( can do is to measure the)6 1143(dependent. The best we)3 1017 2 3110 6170 t
+( memory utilization under a \256xed)5 1405(various allocators')1 755 2 3110 6290 t
+( this end, each allocator was)5 1240( To)1 191(set of workloads.)2 729 3 3110 6410 t
+(subjected to the following workload sequence:)5 1901 1 3110 6530 t
+( measures the system's)3 1089( This)1 292( boot.)1 284(\(1\) System)1 495 4 3110 6692 t
+( prompt)1 326(memory utilization at the console login)5 1634 2 3310 6812 t
+(after rebooting.)1 623 1 3310 6932 t
+cleartomark
+showpage
+restore
+%%EndPage: 8 8
+%%Page: 9 9
+save
+mark
+9 pagesetup
+10 R f
+( spike in load, generated by the)6 1443( brief)1 245(\(2\) A)1 272 3 590 738 t
+(following trivial program:)2 1060 1 790 858 t
+9 CW f
+(fork\(\); fork\(\); fork\(\); fork\(\);)3 1674 1 890 1020 t
+(fork\(\); fork\(\); fork\(\); fork\(\);)3 1674 1 890 1140 t
+(fd = socket\(AF_UNIX, SOCK_STREAM, 0\);)4 1998 1 890 1260 t
+(sleep\(60\);)890 1380 w
+(close\(fd\);)890 1500 w
+10 R f
+( of which)2 475(This creates 256 processes, each)4 1485 2 790 1704 t
+( causes a temporary)3 930( This)1 284(creates a socket.)2 746 3 790 1824 t
+( demand for a variety of kernel data)7 1615(surge in)1 345 2 790 1944 t
+(structures.)790 2064 w
+( spike-)1 343( is another trivial)3 899( This)1 309(\(3\) Find.)1 409 4 590 2268 t
+(generator:)790 2388 w
+9 CW f
+(find /usr -mount -exec file {} \\;)6 1782 1 890 2550 t
+10 R f
+( is a standard timesharing bench-)5 1382( This)1 248(\(4\) Kenbus.)1 530 3 590 2754 t
+( generates a large amount of)5 1327(mark. Kenbus)1 633 2 790 2874 t
+( demand for)2 536(concurrent activity, creating large)3 1424 2 790 2994 t
+(both user and kernel memory.)4 1227 1 790 3114 t
+( was measured after each step.)5 1357(Memory utilization)1 803 2 590 3276 t
+( the results for a 16MB)5 979(The table below summarizes)3 1181 2 590 3396 t
+( allocator signi\256cantly)2 982( slab)1 229(SPARCstation-1. The)1 949 3 590 3516 t
+(outperformed the others, ending up with half the)7 2160 1 590 3636 t
+( are)1 166(fragmentation of the nearest competitor \(results)5 1994 2 590 3756 t
+(cumulative, so the ``kenbus'' column indicates the)6 2160 1 590 3876 t
+(fragmentation after all four steps were completed\):)6 2076 1 590 3996 t
+9 S f
+(________________________________________________)590 4068 w
+9 R f
+(Total Fragmentation \(waste\))2 1040 1 1314 4188 t
+9 S f
+(________________________________________________)590 4208 w
+(________________________________________________)590 4228 w
+9 R f
+( s/m)1 206( kenbus)1 386( \256nd)1 314( spike)1 355(allocator boot)1 746 5 664 4338 t
+9 S f
+(________________________________________________)590 4368 w
+9 R f
+( 233)1 254( 14%)1 328( 14%)1 340( 13%)1 339(slab 11%)1 749 5 664 4488 t
+( 210)1 254( 27%)1 328( 19%)1 340( 19%)1 347( 7%)1 275(SunOS 4.1.3)1 466 6 664 4608 t
+( 205)1 254( 45%)1 328( 43%)1 340( 43%)1 339(4.4BSD 20%)1 749 5 664 4728 t
+( 199)1 254( 46%)1 328( 45%)1 340( 45%)1 339(SVr4 23%)1 749 5 664 4848 t
+9 S f
+(________________________________________________ \347)1 0 1 590 4878 t
+(\347)590 4788 w
+(\347)590 4698 w
+(\347)590 4608 w
+(\347)590 4518 w
+(\347)590 4428 w
+(\347)590 4338 w
+(\347)590 4248 w
+(\347)590 4158 w
+(\347)1167 4878 w
+(\347)1167 4788 w
+(\347)1167 4698 w
+(\347)1167 4608 w
+(\347)1167 4518 w
+(\347)1167 4428 w
+(\347)1167 4338 w
+(\347)1167 4248 w
+(\347)1167 4158 w
+(\347)1494 4878 w
+(\347)1494 4858 w
+(\347)1494 4768 w
+(\347)1494 4678 w
+(\347)1494 4588 w
+(\347)1494 4498 w
+(\347)1494 4408 w
+(\347)1494 4318 w
+(\347)1846 4878 w
+(\347)1846 4858 w
+(\347)1846 4768 w
+(\347)1846 4678 w
+(\347)1846 4588 w
+(\347)1846 4498 w
+(\347)1846 4408 w
+(\347)1846 4318 w
+(\347)2173 4878 w
+(\347)2173 4858 w
+(\347)2173 4768 w
+(\347)2173 4678 w
+(\347)2173 4588 w
+(\347)2173 4498 w
+(\347)2173 4408 w
+(\347)2173 4318 w
+(\347)2502 4878 w
+(\347)2502 4788 w
+(\347)2502 4698 w
+(\347)2502 4608 w
+(\347)2502 4518 w
+(\347)2502 4428 w
+(\347)2502 4338 w
+(\347)2502 4248 w
+(\347)2502 4158 w
+(\347)2748 4878 w
+(\347)2748 4788 w
+(\347)2748 4698 w
+(\347)2748 4608 w
+(\347)2748 4518 w
+(\347)2748 4428 w
+(\347)2748 4338 w
+(\347)2748 4248 w
+(\347)2748 4158 w
+10 R f
+( the kenbus results,)3 880(The last column shows)3 1030 2 840 5082 t
+( units of scripts)3 683(which measure peak throughput in)4 1477 2 590 5202 t
+( performance is)2 656( Kenbus)1 381( minute \(s/m\).)2 600(executed per)1 523 4 590 5322 t
+( system,)1 369(primarily memory-limited on this 16MB)4 1791 2 590 5442 t
+( SunOS 4.1.3 allocator achieved)4 1399(which is why the)3 761 2 590 5562 t
+(better results than the 4.4BSD allocator despite)6 2160 1 590 5682 t
+( slab allocator)2 692( The)1 279( slower.)1 382(being signi\256cantly)1 807 4 590 5802 t
+(delivered the best performance by an 11% margin)7 2160 1 590 5922 t
+(because it is both fast)4 892 1 590 6042 t
+10 I f
+(and)1515 6042 w
+10 R f
+(space-ef\256cient.)1698 6042 w
+( handle on real-life performance the)5 1541(To get a)2 369 2 840 6204 t
+( week on)2 396(author used each of these allocators for a)7 1764 2 590 6324 t
+( 32MB)1 403(his personal desktop machine, a)4 1757 2 590 6444 t
+( machine is primarily used)4 1196(SPARCstation-2. This)1 964 2 590 6564 t
+( running simple commands and)4 1363(for reading e-mail,)2 797 2 590 6684 t
+( com-)1 254(scripts, and connecting to test machines and)6 1906 2 590 6804 t
+( results of this obviously non-)5 1372( The)1 249(pute servers.)1 539 3 590 6924 t
+(controlled experiment were:)2 1141 1 590 7044 t
+10 S f
+(_ ___________________________________________)1 2158 1 3110 596 t
+10 R f
+(Effect of One Week of Light Desktop Use)7 1743 1 3317 716 t
+10 S f
+(_ ___________________________________________)1 2158 1 3110 726 t
+(_ ___________________________________________)1 2158 1 3110 746 t
+10 R f
+(kernel fragmen-)1 939 1 4277 856 t
+( tation)1 652(allocator heap)1 1333 2 3162 976 t
+10 S f
+(_ ___________________________________________)1 2158 1 3110 996 t
+10 R f
+( 9%)1 542( MB)1 189(slab 6.0)1 1207 3 3162 1116 t
+( 17%)1 567( MB)1 189( 6.7)1 690(SunOS 4.1.3)1 517 4 3162 1236 t
+( 35%)1 567( MB)1 189(SVr4 8.5)1 1207 3 3162 1356 t
+( 38%)1 567( MB)1 189(4.4BSD 9.0)1 1207 3 3162 1476 t
+10 S f
+( \347)1 -2158(_ ___________________________________________)1 2158 2 3110 1496 t
+(\347)3110 1396 w
+(\347)3110 1296 w
+(\347)3110 1196 w
+(\347)3110 1096 w
+(\347)3110 996 w
+(\347)3110 896 w
+(\347)3110 796 w
+(\347)3110 696 w
+(\347)4030 1496 w
+(\347)4030 1446 w
+(\347)4030 1346 w
+(\347)4030 1246 w
+(\347)4030 1146 w
+(\347)4030 1046 w
+(\347)4030 946 w
+(\347)4030 846 w
+(\347)4773 1496 w
+(\347)4773 1446 w
+(\347)4773 1346 w
+(\347)4773 1246 w
+(\347)4773 1146 w
+(\347)4773 1046 w
+(\347)4773 946 w
+(\347)4773 846 w
+(\347)5268 1496 w
+(\347)5268 1396 w
+(\347)5268 1296 w
+(\347)5268 1196 w
+(\347)5268 1096 w
+(\347)5268 996 w
+(\347)5268 896 w
+(\347)5268 796 w
+(\347)5268 696 w
+10 R f
+(These numbers are consistent with the results)6 1910 1 3360 1700 t
+( In)1 173( described above.)2 759(from the synthetic workload)3 1228 3 3110 1820 t
+( slab allocator generates about half)5 1523(both cases, the)2 637 2 3110 1940 t
+( which in turn)3 654(the fragmentation of SunOS 4.1.3,)4 1506 2 3110 2060 t
+(generates about half the fragmentation of SVr4 and)7 2160 1 3110 2180 t
+(4.4BSD.)3110 2300 w
+11 B f
+( System Performance)2 1013(5.3. Overall)1 592 2 3110 2600 t
+10 R f
+( overall system)2 641(The kernel memory allocator affects)4 1519 2 3110 2762 t
+( previous sec-)2 584( In)1 156(performance in a variety of ways.)5 1420 3 3110 2882 t
+(tions we considered the effects of several individual)7 2160 1 3110 3002 t
+( caching, hardware cache and bus)5 1549(factors: object)1 611 2 3110 3122 t
+( now)1 234( We)1 232(effects, speed, and memory utilization.)4 1694 3 3110 3242 t
+( bottom-line)1 511( the)1 199( most important metric:)3 999(turn to the)2 451 4 3110 3362 t
+( SunOS)1 347( In)1 178(performance of interesting workloads.)3 1635 3 3110 3482 t
+( SVr4-based allocator was replaced by the)6 1858(5.4 the)1 302 2 3110 3602 t
+( table below)2 588( The)1 262(slab allocator described here.)3 1310 3 3110 3722 t
+(shows the net performance improvement in several)6 2160 1 3110 3842 t
+(key areas.)1 406 1 3110 3962 t
+10 S f
+(_ ___________________________________________)1 2154 1 3110 4024 t
+10 R f
+(System Performance Improvement)2 1408 1 3483 4144 t
+(with Slab Allocator)2 799 1 3771 4264 t
+10 S f
+(_ ___________________________________________)1 2154 1 3110 4274 t
+(_ ___________________________________________)1 2154 1 3110 4294 t
+10 R f
+( it measures)2 493( what)1 407(workload gain)1 993 3 3179 4404 t
+10 S f
+(_ ___________________________________________)1 2154 1 3110 4424 t
+10 R f
+( system)1 311( window)1 529(DeskBench 12%)1 999 3 3179 4544 t
+( timesharing)1 679(kenbus 17%)1 999 2 3179 4664 t
+( database)1 575(TPC-B 4%)1 974 2 3179 4784 t
+( service)1 315( NFS)1 416(LADDIS 3%)1 974 3 3179 4904 t
+( compilation)1 511( parallel)1 531( 5%)1 426(parallel make)1 548 4 3179 5024 t
+( typing)1 289( 5% many-user)2 1018(terminal server)1 609 3 3179 5144 t
+10 S f
+( \347)1 -2154(_ ___________________________________________)1 2154 2 3110 5164 t
+(\347)3110 5124 w
+(\347)3110 5024 w
+(\347)3110 4924 w
+(\347)3110 4824 w
+(\347)3110 4724 w
+(\347)3110 4624 w
+(\347)3110 4524 w
+(\347)3110 4424 w
+(\347)3110 4324 w
+(\347)3110 4224 w
+(\347)3110 4124 w
+(\347)3891 5164 w
+(\347)3891 5094 w
+(\347)3891 4994 w
+(\347)3891 4894 w
+(\347)3891 4794 w
+(\347)3891 4694 w
+(\347)3891 4594 w
+(\347)3891 4494 w
+(\347)3891 4394 w
+(\347)4281 5164 w
+(\347)4281 5094 w
+(\347)4281 4994 w
+(\347)4281 4894 w
+(\347)4281 4794 w
+(\347)4281 4694 w
+(\347)4281 4594 w
+(\347)4281 4494 w
+(\347)4281 4394 w
+(\347)5264 5164 w
+(\347)5264 5124 w
+(\347)5264 5024 w
+(\347)5264 4924 w
+(\347)5264 4824 w
+(\347)5264 4724 w
+(\347)5264 4624 w
+(\347)5264 4524 w
+(\347)5264 4424 w
+(\347)5264 4324 w
+(\347)5264 4224 w
+(\347)5264 4124 w
+10 R f
+(Notes:)3110 5368 w
+( are both memory-)3 911( and kenbus)2 589(\(1\) DeskBench)1 660 3 3110 5530 t
+(bound in 16MB, so most of the improvement)7 1960 1 3310 5650 t
+( space)1 304(here is due to the slab allocator's)6 1656 2 3310 5770 t
+(ef\256ciency.)3310 5890 w
+( causes very little kernel)4 1054( TPC-B workload)2 751(\(2\) The)1 355 3 3110 6052 t
+(memory allocation, so the allocator's speed is)6 1960 1 3310 6172 t
+( test was run)3 550( The)1 229(not a signi\256cant factor here.)4 1181 3 3310 6292 t
+( with enough memory that it)5 1236(on a large server)3 724 2 3310 6412 t
+( allocator\), so space)3 867(never paged \(under either)3 1093 2 3310 6532 t
+( 4% per-)2 383( The)1 233( factor either.)2 574(ef\256ciency is not a)3 770 4 3310 6652 t
+( to better)2 405(formance improvement is due solely)4 1555 2 3310 6772 t
+( cache)1 304(cache utilization \(5% fewer primary)4 1656 2 3310 6892 t
+(misses, 2% fewer secondary cache misses\).)5 1771 1 3310 7012 t
+cleartomark
+showpage
+restore
+%%EndPage: 9 9
+%%Page: 10 10
+save
+mark
+10 pagesetup
+10 R f
+( was run on a large server that)7 1388( make)1 267(\(3\) Parallel)1 505 3 590 696 t
+( of)1 122( workload generates a lot)4 1063( This)1 251(never paged.)1 524 4 790 816 t
+(allocator traf\256c, so the improvement here is)6 1960 1 790 936 t
+( object)1 281(attributable to the slab allocator's speed,)5 1679 2 790 1056 t
+( lower overall cache)3 871(caching, and the system's)3 1089 2 790 1176 t
+( fewer primary cache misses, 4%)5 1383(miss rate \(5%)2 577 2 790 1296 t
+(fewer secondary cache misses\).)3 1280 1 790 1416 t
+( on a large server)4 746( server was also run)4 848(\(4\) Terminal)1 566 3 590 1578 t
+( benchmark spent 25%)3 975( This)1 257(that never paged.)2 728 3 790 1698 t
+( old allocator,)2 582(of its time in the kernel with the)7 1378 2 790 1818 t
+( the)1 165( Thus,)1 301( with the new allocator.)4 1012(versus 20%)1 482 4 790 1938 t
+( to a 20%)3 440(5% bottom-line improvement is due)4 1520 2 790 2058 t
+(reduction in kernel time.)3 1006 1 790 2178 t
+11 B f
+( Features)1 443(6. Debugging)1 664 2 590 2478 t
+10 R f
+( \320)1 141(Programming errors that corrupt the kernel heap)6 2019 2 590 2640 t
+( memory, freeing a buffer)4 1123(such as modifying freed)3 1037 2 590 2760 t
+( pointer, or writing)3 863(twice, freeing an uninitialized)3 1297 2 590 2880 t
+( to)1 118(beyond the end of a buffer \320 are often dif\256cult)9 2042 2 590 3000 t
+( instrumented ker-)2 766( a thoroughly)2 565(debug. Fortunately,)1 829 3 590 3120 t
+( allocator can detect many of these)6 1637(nel memory)1 523 2 590 3240 t
+(problems.)590 3360 w
+( describes the debugging features)4 1406(This section)1 504 2 840 3522 t
+( features can be enabled)4 1001( These)1 308(of the slab allocator.)3 851 3 590 3642 t
+( just special debugging)3 949(in any SunOS 5.4 kernel \(not)5 1211 2 590 3762 t
+( kernel)1 342(versions\) by booting under kadb \(the)5 1818 2 590 3882 t
+( When)1 310(debugger\) and setting the appropriate \257ags.*)5 1850 2 590 4002 t
+(the allocator detects a problem, it provides detailed)7 2160 1 590 4122 t
+(diagnostic information on the system console.)5 1878 1 590 4242 t
+11 B f
+(6.1. Auditing)1 656 1 590 4542 t
+10 R f
+( records its activity in a)5 1020(In audit mode the allocator)4 1140 2 590 4704 t
+( information in)2 618( stores this)2 448( It)1 129(circular transaction log.)2 965 4 590 4824 t
+( version of the bufctl structure that)6 1639(an extended)1 521 2 590 4944 t
+( and)1 199(includes the thread pointer, hi-res timestamp,)5 1961 2 590 5064 t
+( corruption is)2 581( When)1 320( transaction.)1 512(stack trace of the)3 747 4 590 5184 t
+(detected by any of the other methods, the previous)8 2160 1 590 5304 t
+( affected buffer \(the likely suspects\))5 1567(owners of the)2 593 2 590 5424 t
+(can be determined.)2 772 1 590 5544 t
+11 B f
+( Veri\256cation)1 591(6.2. Freed-Address)1 932 2 590 5844 t
+10 R f
+(The buffer-to-bufctl hash table employed by large-)6 2160 1 590 6006 t
+( feature: if)2 435(object caches can be used as a debugging)7 1725 2 590 6126 t
+8 S1 f
+(____________________________________)590 6222 w
+8 R f
+( cost)1 157(* The availability of these debugging features adds no)8 1787 2 806 6342 t
+( word that indicates)3 727( per-cache \257ag)2 537( The)1 205(to most allocations.)2 691 4 590 6438 t
+(whether a hash table is present \320 i.e., whether the cache's)10 2160 1 590 6534 t
+( larger than 1/8 of a page \320 also contains the)10 1784(objects are)1 376 2 590 6630 t
+( single test checks all of these \257ags)7 1437( A)1 150(debugging \257ags.)1 573 3 590 6726 t
+( no)1 158(simultaneously, so the common case \(small objects,)6 2002 2 590 6822 t
+(debugging\) is unaffected.)2 822 1 590 6918 t
+10 R f
+(the hash lookup in)3 814 1 3110 696 t
+10 CW f
+(kmem_cache_free\(\))4002 696 w
+10 R f
+(fails,)5073 696 w
+( bogus)1 284(then the caller must be attempting to free a)8 1876 2 3110 816 t
+( allocator can verify)3 824(address. The)1 545 2 3110 936 t
+10 I f
+(all)4512 936 w
+10 R f
+(freed addresses)1 619 1 4651 936 t
+(by changing the ``large object'' threshold to zero.)7 2040 1 3110 1056 t
+11 B f
+( Use of Freed Memory)4 1078(6.3. Detecting)1 681 2 3110 1356 t
+10 R f
+( object is freed, the allocator applies its)7 1774(When an)1 386 2 3110 1518 t
+( 0xdeadbeef.)1 533(destructor and \256lls it with the pattern)6 1627 2 3110 1638 t
+( the allocator)2 557(The next time that object is allocated,)6 1603 2 3110 1758 t
+( It)1 131( contains the deadbeef pattern.)4 1264(veri\256es that it still)3 765 3 3110 1878 t
+(then \256lls the object with 0xbaddcafe and applies its)8 2160 1 3110 1998 t
+( deadbeef and baddcafe patterns are)5 1464(constructor. The)1 696 2 3110 2118 t
+(chosen to be readily human-recognizable in a)6 2160 1 3110 2238 t
+( memory)1 389( represent freed)2 683( They)1 295(debugging session.)1 793 4 3110 2358 t
+(and uninitialized data, respectively.)3 1441 1 3110 2478 t
+11 B f
+( Checking)1 483(6.4. Redzone)1 640 2 3110 2778 t
+10 R f
+(Redzone checking detects writes past the end of a)8 2160 1 3110 2940 t
+( allocator checks for redzone violations)5 1661(buffer. The)1 499 2 3110 3060 t
+(by adding a guard word to the end of each buffer)10 2160 1 3110 3180 t
+( unmodi\256ed when the buffer)4 1205(and verifying that it is)4 955 2 3110 3300 t
+(is freed.)1 329 1 3110 3420 t
+11 B f
+( Unmapping)1 595(6.5. Synchronous)1 852 2 3110 3720 t
+10 R f
+( algorithm retains)2 791(Normally, the slab working-set)3 1369 2 3110 3882 t
+( synchronous-)1 626( In)1 205(complete slabs for a while.)4 1329 3 3110 4002 t
+( allocator destroys complete)3 1240(unmapping mode the)2 920 2 3110 4122 t
+(slabs immediately.)1 843 1 3110 4242 t
+10 CW f
+(kmem_slab_destroy\(\))4130 4242 w
+10 R f
+( to the back-end page)4 893(returns the underlying memory)3 1267 2 3110 4362 t
+( subse-)1 314( Any)1 264(supplier, which unmaps the page\(s\).)4 1582 3 3110 4482 t
+( that slab will cause)4 840(quent reference to any object in)5 1320 2 3110 4602 t
+(a kernel data fault.)3 766 1 3110 4722 t
+11 B f
+( Mode)1 304(6.6. Page-per-buffer)1 985 2 3110 5022 t
+10 R f
+( is given an)3 566(In page-per-buffer mode each buffer)4 1594 2 3110 5184 t
+( pages\) so that every buffer can be)7 1531(entire page \(or)2 629 2 3110 5304 t
+( slab allocator)2 648( The)1 256(unmapped when it is freed.)4 1256 3 3110 5424 t
+( all)1 142(implements this by increasing the alignment for)6 2018 2 3110 5544 t
+( feature)1 352( \(This)1 320( page size.)2 520(caches to the system)3 968 4 3110 5664 t
+(requires an obscene amount of physical memory.\))6 2041 1 3110 5784 t
+11 B f
+( Detection)1 479(6.7. Leak)1 477 2 3110 6084 t
+10 R f
+( it easy)2 325(The timestamps provided by auditing make)5 1835 2 3110 6246 t
+( leak detector)2 577(to implement a crude kernel memory)5 1583 2 3110 6366 t
+( the user-level program has to do)6 1416( All)1 203(at user level.)2 541 3 3110 6486 t
+( scan the arena \(via /dev/kmem\),)5 1542(is periodically)1 618 2 3110 6606 t
+( new, persistent alloca-)3 950(looking for the appearance of)4 1210 2 3110 6726 t
+( buffer that was allocated)4 1108( example, any)2 609(tions. For)1 443 3 3110 6846 t
+( still allocated now is a)5 999(an hour ago and is)4 792 2 3110 6966 t
+10 I f
+(possible)4942 6966 w
+10 R f
+(leak.)3110 7086 w
+cleartomark
+showpage
+restore
+%%EndPage: 10 10
+%%Page: 11 11
+save
+mark
+11 pagesetup
+11 B f
+( Example)1 452(6.8. An)1 379 2 590 696 t
+10 R f
+( the slab allocator's response)4 1189(This example illustrates)2 971 2 590 858 t
+(to modi\256cation of a free snode:)5 1291 1 590 978 t
+8 R f
+(kernel memory allocator: buffer modi\256ed after being freed)7 1904 1 590 1110 t
+(modi\256cation occurred at offset 0x18 \(0xdeadbeef replaced by 0x34\))8 2211 1 590 1200 t
+( snode)1 212(buffer=ff8eea20 bufctl=ff8efef0 cache:)2 1305 2 590 1290 t
+8 S f
+(_)2107 1290 w
+8 R f
+(cache)2147 1290 w
+(previous transactions on buffer ff8eea20:)4 1329 1 590 1380 t
+( snode)1 212(thread=ff8b93a0 time=T-0.000089 slab=ff8ca8c0 cache:)3 1899 2 590 1560 t
+8 S f
+(_)2701 1560 w
+8 R f
+(cache)2741 1560 w
+(kmem)590 1650 w
+8 S f
+(_)789 1650 w
+8 R f
+(cache)829 1650 w
+8 S f
+(_)1009 1650 w
+8 R f
+(alloc+f8)1049 1650 w
+(specvp+48)590 1740 w
+(ufs)590 1830 w
+8 S f
+(_)687 1830 w
+8 R f
+(lookup+148)727 1830 w
+(lookuppn+3ac)590 1920 w
+(lookupname+28)590 2010 w
+(vn)590 2100 w
+8 S f
+(_)670 2100 w
+8 R f
+(open+a4)710 2100 w
+(copen+6c)590 2190 w
+(syscall+3e8)590 2280 w
+( snode)1 212(thread=ff8b94c0 time=T-1.830247 slab=ff8ca8c0 cache:)3 1899 2 590 2460 t
+8 S f
+(_)2701 2460 w
+8 R f
+(cache)2741 2460 w
+(kmem)590 2550 w
+8 S f
+(_)789 2550 w
+8 R f
+(cache)829 2550 w
+8 S f
+(_)1009 2550 w
+8 R f
+(free+128)1049 2550 w
+(spec)590 2640 w
+8 S f
+(_)731 2640 w
+8 R f
+(inactive+208)771 2640 w
+(closef+94)590 2730 w
+(syscall+3e8)590 2820 w
+(\(transaction log continues at ff31f410\))4 1246 1 590 3000 t
+(kadb[0]:)590 3090 w
+10 R f
+( features)1 365( These)1 321( similarly.)1 431(Other errors are handled)3 1043 4 590 3252 t
+( in debugging a wide range of)6 1318(have proven helpful)2 842 2 590 3372 t
+(problems during SunOS 5.4 development.)4 1715 1 590 3492 t
+11 B f
+( Directions)1 517(7. Future)1 478 2 590 3792 t
+( Other Types of Memory)4 1197(7.1. Managing)1 716 2 590 4092 t
+10 R f
+( via)1 162(The slab allocator gets its pages from segkmem)7 1998 2 590 4254 t
+(the routines)1 659 1 590 4374 t
+10 CW f
+(kmem_getpages\(\))1491 4374 w
+10 R f
+(and)2606 4374 w
+10 CW f
+(kmem_freepages\(\))590 4494 w
+10 R f
+( assumes nothing about)3 1053(; it)1 147 2 1550 4494 t
+( trans-)1 261(the underlying segment driver, resource maps,)5 1899 2 590 4614 t
+( the allocator respects this)4 1145( Since)1 307( etc.)1 193(lation setup,)1 515 4 590 4734 t
+( be trivial to plug in alternate)6 1394(\256rewall, it would)2 766 2 590 4854 t
+( ``getpages'' and)2 789( The)1 270(back-end page suppliers.)2 1101 3 590 4974 t
+( as addi-)2 414(``freepages'' routines could be supplied)4 1746 2 590 5094 t
+(tional arguments to)2 886 1 590 5214 t
+10 CW f
+(kmem_cache_create\(\))1585 5214 w
+10 R f
+(.)2725 5214 w
+( multiple types of)3 778(This would allow us to manage)5 1382 2 590 5334 t
+(memory \(e.g. normal kernel memory, device)5 2160 1 590 5454 t
+(memory, pageable kernel memory, NVRAM, etc.\))5 2160 1 590 5574 t
+(with a single allocator.)3 934 1 590 5694 t
+11 B f
+( Memory Allocation)2 955(7.2. Per-Processor)1 892 2 590 5994 t
+10 R f
+( of McKen-)2 507(The per-processor allocation techniques)3 1653 2 590 6156 t
+( would \256t nicely)3 716(ney and Slingwine [McKenney93])3 1444 2 590 6276 t
+( de\256ne a four-)3 643( They)1 290( of the slab allocator.)4 948(on top)1 279 4 590 6396 t
+( and)1 195(layer allocation hierarchy of decreasing speed)5 1965 2 590 6516 t
+( global, coalesce-to-page, and)3 1368(locality: per-CPU,)1 792 2 590 6636 t
+( correspond)1 493( latter three)2 506(coalesce-to-VM-block. The)1 1161 3 590 6756 t
+( allocator's front-end, back-end,)3 1363(closely to the slab)3 797 2 590 6876 t
+( in the)2 288( Even)1 282( layers, respectively.)2 858(and page-supplier)1 732 4 590 6996 t
+( lock contention, small per-processor)4 1686(absence of)1 474 2 3110 696 t
+(freelists could improve performance by eliminating)5 2160 1 3110 816 t
+(locking costs and reducing invalidation traf\256c.)5 1899 1 3110 936 t
+11 B f
+( Applications)1 631(7.3. User-level)1 705 2 3110 1236 t
+10 R f
+(The slab allocator could also be used as a user-level)9 2160 1 3110 1398 t
+( back-end page supplier)3 1109( The)1 266(memory allocator.)1 785 3 3110 1518 t
+(could be)1 349 1 3110 1638 t
+10 CW f
+(mmap\(2\))3519 1638 w
+10 R f
+(or)3972 1638 w
+10 CW f
+(sbrk\(2\))4115 1638 w
+10 R f
+(.)4535 1638 w
+11 B f
+(8. Conclusions)1 726 1 3110 1938 t
+10 R f
+( a simple, fast, and space-)5 1233(The slab allocator is)3 927 2 3110 2100 t
+( object-cache)1 540( The)1 225( memory allocator.)2 781(ef\256cient kernel)1 614 4 3110 2220 t
+( is based reduces the cost of)6 1198(interface upon which it)3 962 2 3110 2340 t
+(allocating and freeing complex objects and enables)6 2160 1 3110 2460 t
+( size and life-)3 612(the allocator to segregate objects by)5 1548 2 3110 2580 t
+( take advantage of object)4 1129( Slabs)1 308(time distribution.)1 723 3 3110 2700 t
+( to reduce internal and)4 964(size and lifetime segregation)3 1196 2 3110 2820 t
+( also)1 245( Slabs)1 334(external fragmentation, respectively.)2 1581 3 3110 2940 t
+(simplify reclaiming by using a simple reference)6 2160 1 3110 3060 t
+( slab allocator)2 652( The)1 259( coalescing.)1 517(count instead of)2 732 4 3110 3180 t
+( its)1 178(establishes a push/pull relationship between)4 1982 2 3110 3300 t
+( for)1 151(clients and the VM system, eliminating the need)7 2009 2 3110 3420 t
+( or watermarks to govern reclaiming.)5 1550(arbitrary limits)1 610 2 3110 3540 t
+( distributes buffers)2 799(The allocator's coloring scheme)3 1361 2 3110 3660 t
+( cache, improving the)3 1117(evenly throughout the)2 1043 2 3110 3780 t
+( cache utilization and bus balance.)5 1484(system's overall)1 676 2 3110 3900 t
+( pro-)1 221(In several important areas, the slab allocator)6 1939 2 3110 4020 t
+(vides measurably better system performance.)4 1836 1 3110 4140 t
+11 B f
+(Acknowledgements)3110 4440 w
+10 R f
+( the allocator)2 619(Neal Nuckolls \256rst suggested that)4 1541 2 3110 4602 t
+(should retain an object's state between uses, as our)8 2160 1 3110 4722 t
+(old streams allocator did \(it now uses the slab allo-)9 2160 1 3110 4842 t
+( VM)1 198( Kleiman suggested using)3 1069( Steve)1 293(cator directly\).)1 600 4 3110 4962 t
+( Irlam)1 301( Gordon)1 423( reclaiming.)1 537(pressure to regulate)2 899 4 3110 5082 t
+( of power-of-two)2 755(pointed out the negative effects)4 1405 2 3110 5202 t
+( cache utilization; Adrian Cockcroft)4 1596(alignment on)1 564 2 3110 5322 t
+( this might explain the bus imbal-)6 1441(hypothesized that)1 719 2 3110 5442 t
+(ance we were seeing on some machines \(it did\).)8 1973 1 3110 5562 t
+( Roger)1 324(I'd like to thank Cathy Bonwick,)5 1586 2 3360 5724 t
+( Rob Pike,)2 452(Faulkner, Steve Kleiman, Tim Marsland,)4 1708 2 3110 5844 t
+( Shannon, and Jim Voll for their)6 1417(Andy Roach, Bill)2 743 2 3110 5964 t
+( paper.)1 279(thoughtful comments on draft versions of this)6 1881 2 3110 6084 t
+( to David Robinson, Chaitanya Tikku,)5 1655(Thanks also)1 505 2 3110 6204 t
+( measure-)1 415(and Jim Voll for providing some of the)7 1745 2 3110 6324 t
+( Singhal for providing the tools)5 1308(ments, and to Ashok)3 852 2 3110 6444 t
+(to measure cache and bus activity.)5 1409 1 3110 6564 t
+(Most of all, I thank Cathy for putting up with)9 1910 1 3360 6726 t
+(me \(and without me\) during this project.)6 1666 1 3110 6846 t
+cleartomark
+showpage
+restore
+%%EndPage: 11 11
+%%Page: 12 12
+save
+mark
+12 pagesetup
+11 B f
+(References)590 696 w
+10 B f
+([Barrett93])590 858 w
+10 R f
+(David A. Barrett and Benjamin G.)5 1608 1 1142 858 t
+(Zorn,)590 978 w
+10 I f
+(Using Lifetime Predictors to Improve Memory)5 1906 1 844 978 t
+(Allocation Performance.)1 1017 1 590 1098 t
+10 R f
+( 1993)1 255(Proceedings of the)2 801 2 1694 1098 t
+(SIGPLAN Conference on Programming Language)4 2160 1 590 1218 t
+(Design and Implementation, pp. 187-196 \(1993\).)5 1999 1 590 1338 t
+10 B f
+([Boehm88])590 1500 w
+10 R f
+( and M. Weiser,)3 760(H. Boehm)1 450 2 1120 1500 t
+10 I f
+(Garbage)2395 1500 w
+( Environment.)1 648(Collection in an Uncooperative)3 1512 2 590 1620 t
+10 R f
+( v. 18, no. 9, pp)5 685(Software - Practice and Experience,)4 1475 2 590 1740 t
+(807-820 \(1988\).)1 657 1 590 1860 t
+10 B f
+([Bozman84A])590 2022 w
+10 R f
+( W. Buco, T. Daly, and)5 1029(G. Bozman,)1 499 2 1222 2022 t
+(W. Tetzlaff,)1 499 1 590 2142 t
+10 I f
+(Analysis of Free Storage Algorithms --)5 1622 1 1128 2142 t
+(Revisited.)590 2262 w
+10 R f
+( pp.)1 172(IBM Systems Journal, v. 23, no. 1,)6 1518 2 1060 2262 t
+(44-64 \(1984\).)1 557 1 590 2382 t
+10 B f
+([Bozman84B])590 2544 w
+10 R f
+(G. Bozman,)1 496 1 1214 2544 t
+10 I f
+(The Software Lookaside)2 999 1 1751 2544 t
+( Overhead with Linked Lists.)4 1217(Buffer Reduces Search)2 943 2 590 2664 t
+10 R f
+( v. 27, no. 3, pp.)5 835(Communications of the ACM,)3 1325 2 590 2784 t
+(222-227 \(1984\).)1 657 1 590 2904 t
+10 B f
+([Cekleov92])590 3066 w
+10 R f
+( Jean-Marc Frailong)2 885(Michel Cekleov,)1 703 2 1162 3066 t
+(and Pradeep Sindhu,)2 842 1 590 3186 t
+10 I f
+(Sun-4D Architecture.)1 862 1 1466 3186 t
+10 R f
+(Revision)2394 3186 w
+(1.4, 1992.)1 408 1 590 3306 t
+10 B f
+([Chen93])590 3468 w
+10 R f
+( Brian N. Bershad,)3 827(J. Bradley Chen and)3 888 2 1035 3468 t
+10 I f
+( System Structure on)3 995(The Impact of Operating)3 1165 2 590 3588 t
+( Performance.)1 602(Memory System)1 664 2 590 3708 t
+10 R f
+(Proceedings of the)2 805 1 1945 3708 t
+( on Operating Systems)3 944(Fourteenth ACM Symposium)2 1216 2 590 3828 t
+(Principles, v. 27, no. 5, pp. 120-133 \(1993\).)7 1805 1 590 3948 t
+10 B f
+([Grunwald93A])590 4110 w
+10 R f
+(Dirk Grunwald and Benjamin)3 1391 1 1359 4110 t
+(Zorn,)590 4230 w
+10 I f
+(CustoMalloc: Ef\256cient Synthesized Memory)3 1876 1 874 4230 t
+(Allocators.)590 4350 w
+10 R f
+( and Experience, v.)3 833(Software - Practice)2 806 2 1111 4350 t
+(23, no. 8, pp. 851-869 \(1993\).)5 1239 1 590 4470 t
+10 B f
+([Grunwald93B])590 4632 w
+10 R f
+( Zorn)1 269(Dirk Grunwald, Benjamin)2 1144 2 1337 4632 t
+(and Robert Henderson,)2 951 1 590 4752 t
+10 I f
+( Local-)1 299(Improving the Cache)2 871 2 1580 4752 t
+(ity of Memory Allocation.)3 1072 1 590 4872 t
+10 R f
+( the 1993)2 404(Proceedings of)1 611 2 1735 4872 t
+(SIGPLAN Conference on Programming Language)4 2160 1 590 4992 t
+(Design and Implementation, pp. 177-186 \(1993\).)5 1999 1 590 5112 t
+10 B f
+([Hanson90])590 5274 w
+10 R f
+(David R. Hanson,)2 750 1 1127 5274 t
+10 I f
+(Fast Allocation and)2 831 1 1919 5274 t
+( Object Lifetimes.)2 732(Deallocation of Memory Based on)4 1428 2 590 5394 t
+10 R f
+( and Experience, v. 20, no. 1, pp.)7 1380(Software - Practice)2 780 2 590 5514 t
+(5-12 \(1990\).)1 507 1 590 5634 t
+10 B f
+([Knuth68])590 5796 w
+10 R f
+(Donald E. Knuth,)2 741 1 1078 5796 t
+10 I f
+(The Art of Computer)3 888 1 1862 5796 t
+( Fundamental Algorithms.)2 1189(Programming, Vol I,)2 971 2 590 5916 t
+10 R f
+(Addison-Wesley, Reading, MA, 1968.)3 1564 1 590 6036 t
+10 B f
+([Korn85])590 6198 w
+10 R f
+(David G. Korn and Kiem-Phong Vo,)5 1588 1 1031 6198 t
+10 I f
+(In)2667 6198 w
+( a Better Malloc.)3 806(Search of)1 424 2 590 6318 t
+10 R f
+(Proceedings of the)2 829 1 1921 6318 t
+(Summer 1985 Usenix Conference, pp. 489-506.)5 1954 1 590 6438 t
+10 B f
+([Lee89])590 6600 w
+10 R f
+( Lee and R. E. Barkley,)5 1252(T. Paul)1 351 2 998 6600 t
+10 I f
+(A)2689 6600 w
+(Watermark-based Lazy Buddy System for Kernel)5 2160 1 590 6720 t
+(Memory Allocation.)1 838 1 590 6840 t
+10 R f
+( Summer)1 404(Proceedings of the)2 821 2 1525 6840 t
+(1989 Usenix Conference, pp. 1-13.)4 1432 1 590 6960 t
+10 B f
+([Leverett82])3110 696 w
+10 R f
+( G. Hibbard,)2 527(B. W. Leverett and P.)4 920 2 3673 696 t
+10 I f
+(An)5159 696 w
+( Storage Allocation.)2 871(Adaptive System for Dynamic)3 1289 2 3110 816 t
+10 R f
+( and Experience, v. 12, no. 3, pp.)7 1380(Software - Practice)2 780 2 3110 936 t
+(543-555 \(1982\).)1 657 1 3110 1056 t
+10 B f
+([Margolin71])3110 1218 w
+10 R f
+(B. Margolin, R. Parmelee, and M.)5 1535 1 3735 1218 t
+(Schatzoff,)3110 1338 w
+10 I f
+( Free Storage Algorithms.)3 1188(Analysis of)1 491 2 3591 1338 t
+10 R f
+( no. 4, pp. 283-304)4 890(IBM Systems Journal, v. 10,)4 1270 2 3110 1458 t
+(\(1971\).)3110 1578 w
+10 B f
+([McKenney93])3110 1740 w
+10 R f
+(Paul E. McKenney and Jack)4 1428 1 3842 1740 t
+(Slingwine,)3110 1860 w
+10 I f
+(Ef\256cient Kernel Memory Allocation on)4 1674 1 3596 1860 t
+(Shared-Memory Multiprocessors.)1 1400 1 3110 1980 t
+10 R f
+(Proceedings of)1 649 1 4621 1980 t
+(the Winter 1993 Usenix Conference, pp. 295-305.)6 2047 1 3110 2100 t
+10 B f
+([McKusick88])3110 2262 w
+10 R f
+( and)1 259(Marshall Kirk McKusick)2 1182 2 3829 2262 t
+(Michael J. Karels,)2 794 1 3110 2382 t
+10 I f
+(Design of a General Purpose)4 1307 1 3963 2382 t
+( Kernel.)1 360(Memory Allocator for the 4.3BSD UNIX)5 1800 2 3110 2502 t
+10 R f
+( Confer-)1 365(Proceedings of the Summer 1988 Usenix)5 1795 2 3110 2622 t
+(ence, pp. 295-303.)2 756 1 3110 2742 t
+10 B f
+([Oldehoeft85])3110 2904 w
+10 R f
+(Rodney R. Oldehoeft and Stephen J.)5 1532 1 3738 2904 t
+(Allan,)3110 3024 w
+10 I f
+(Adaptive Exact-Fit Storage Management.)3 1832 1 3438 3024 t
+10 R f
+( 28, pp. 506-511)3 739(Communications of the ACM, v.)4 1421 2 3110 3144 t
+(\(1985\).)3110 3264 w
+10 B f
+([Standish80])3110 3426 w
+10 R f
+(Thomas Standish,)1 781 1 3739 3426 t
+10 I f
+(Data Structure)1 661 1 4609 3426 t
+(Techniques.)3110 3546 w
+10 R f
+(Addison-Wesley, Reading, MA, 1980.)3 1564 1 3656 3546 t
+10 B f
+([Stephenson83])3110 3708 w
+10 R f
+(C. J. Stephenson,)2 748 1 3818 3708 t
+10 I f
+(Fast Fits: New)2 651 1 4619 3708 t
+(Methods for Dynamic Storage Allocation.)4 1734 1 3110 3828 t
+10 R f
+(Proceed-)4916 3828 w
+( ACM Symposium on Operating)4 1410(ings of the Ninth)3 750 2 3110 3948 t
+(Systems Principles, v. 17, no. 5, pp. 30-32 \(1983\).)8 2072 1 3110 4068 t
+10 B f
+([VanSciver88])3110 4230 w
+10 R f
+( Richard F.)2 513(James Van Sciver and)3 980 2 3777 4230 t
+(Rashid,)3110 4350 w
+10 I f
+(Zone Garbage Collection.)2 1099 1 3465 4350 t
+10 R f
+(Proceedings of)1 622 1 4648 4350 t
+( Mach Workshop, pp. 1-)4 1072(the Summer 1990 Usenix)3 1088 2 3110 4470 t
+(15.)3110 4590 w
+10 B f
+([Weinstock88])3110 4752 w
+10 R f
+( Weinstock and William)3 1049(Charles B.)1 446 2 3775 4752 t
+(A. Wulf,)1 365 1 3110 4872 t
+10 I f
+( Ef\256cient Algorithm for Heap)4 1220(QuickFit: An)1 537 2 3513 4872 t
+(Storage Allocation.)1 816 1 3110 4992 t
+10 R f
+(ACM SIGPLAN Notices, v.)3 1247 1 4023 4992 t
+(23, no. 10, pp. 141-144 \(1988\).)5 1289 1 3110 5112 t
+10 B f
+([Zorn93])3110 5274 w
+10 R f
+(Benjamin Zorn,)1 667 1 3552 5274 t
+10 I f
+(The Measured Cost of)3 991 1 4279 5274 t
+(Conservative Garbage Collection.)2 1404 1 3110 5394 t
+10 R f
+(Software - Prac-)2 683 1 4587 5394 t
+( 23, no. 7, pp. 733-756)5 1123(tice and Experience, v.)3 1037 2 3110 5514 t
+(\(1993\).)3110 5634 w
+11 B f
+(Author Information)1 952 1 3110 5934 t
+10 B f
+(Jeff Bonwick)1 566 1 3110 6096 t
+10 R f
+( likes to)2 335( He)1 183(is a kernel hacker at Sun.)5 1043 3 3709 6096 t
+( big, slow, old code and replace it with small,)9 1887(rip out)1 273 2 3110 6216 t
+( gets paid)2 423( still can't believe he)4 908( He)1 193(fast, new code.)2 636 4 3110 6336 t
+( received a B.S. in Mathematics)5 1323( author)1 291( The)1 224(for this.)1 322 4 3110 6456 t
+( University of Delaware \(1987\) and an)6 1780(from the)1 380 2 3110 6576 t
+( can be)2 310( He)1 188( Stanford \(1990\).)2 713(M.S. in Statistics from)3 949 4 3110 6696 t
+(\257amed electronically at)2 953 1 3110 6816 t
+10 I f
+(bonwick)4096 6816 w
+10 S1 f
+(@)4429 6816 w
+10 I f
+(eng.sun.com)4521 6816 w
+10 R f
+(.)5020 6816 w
+cleartomark
+showpage
+restore
+%%EndPage: 12 12
+%%Trailer
+done
+%%DocumentFonts: Times-Bold Times-Italic Times-Roman Courier Symbol
+%%Pages: 12
+
+

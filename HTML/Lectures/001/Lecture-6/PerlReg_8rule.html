@@ -1,0 +1,1054 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>Perl 正则表达式 8 大原则</TITLE>
+</HEAD>
+<BODY>
+
+<FONT FACE="隶书" LANG="ZH-CN" SIZE=6><P ALIGN="CENTER">Perl正则表达式讲解</P>
+</FONT>
+<P ALIGN="right"><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>&#9;</font><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>摘自</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>《Perl编程详解》</font></P>
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="right">感谢网友：<font color="#FF0000">rover</font>, <font color="#FF0000">wangmm</font>, 
+  <font color="#FF0000">simbar</font>, <font color="#FF0000">menshen</font> 的辛勤劳动。</P>
+<P ALIGN="right">&nbsp;</P>
+<P ALIGN="JUSTIFY"> 　　目录：<br>
+  　　　　<a href="#1">原则 1</a><br>
+  　　　　<a href="#2">原则 2</a><br>
+  　　　　<a href="#3">原则 3</a><br>
+  　　　　<a href="#4">原则 4</a><br>
+  　　　　<a href="#5">原则 5</a><br>
+  　　　　<a href="#6">原则 6</a><br>
+  　　　　<a href="#7">原则 7</a><br>
+  　　　　<a href="#8">原则 8</a><br>
+  　　　　<a href="#9">原则概括</a><br>
+  　　　　<a href="#10">正则表达式修饰符</a><br>
+  　　　　<a href="#11">匹配和 g 运算符</a><br>
+  　　　　<a href="#12">修饰符和环境</a><br>
+</FONT> 
+<hr>
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY"><B><a name="1"></a>9．3．1原则</b>1</P>
+<P ALIGN="JUSTIFY"> 正则表达式有三种形式：匹配、替换和转换。</P>
+<P ALIGN="JUSTIFY"> 在表 9-1 中列有三种正则表达式运算符。</P>
+<P ALIGN="CENTER"><IMG SRC="images/Image1.jpg" WIDTH=552 HEIGHT=106></P>
+<P ALIGN="JUSTIFY"> 接下来对每一个表达式给出详尽解释。</P>
+<P ALIGN="JUSTIFY"> 匹配：m/&lt;regexp&gt;/这种形式表明在//内部的正则表达将用于匹配 = ~或 !~左边的标量。为了语法上的简化用/&lt;regexp&gt;/，略去m。</P>
+<P ALIGN="JUSTIFY"> 替换：s/&lt;regexp&gt;/&lt;substituteText&gt;/这种形式表明正则表达式&lt;regexp&gt;将被文本&lt;substituteText&gt;替换，为了语法的简化用/&lt;regexp&gt;/&lt;substituteText&gt;略去s。</P>
+<P ALIGN="left"><IMG SRC="images/Image2.jpg" WIDTH=215 HEIGHT=216 align="right"><br>
+  ·转换：tr/&lt;charClass&gt;/&lt;substituteClass&gt;/这种形式包含一系列的字符—/&lt;charClass&gt;—同时把它们替换为&lt;substituteClass&gt;。</P>
+<P ALIGN="JUSTIFY"> 注意转换&lt;tr&gt;并不真正是一个正则表达式，但是对于用正则表达式难于处理的数据常使用它来进行操纵。因此，tr/[0-9]/9876543210.组成1223456789，987654321等字符串。</P>
+<P ALIGN="JUSTIFY"> 通过使用＝~(用英语讲:does，与“进行匹配”同)和!~(英语:doesn't，与“不匹配”同)把这些表达式捆绑到标量上。作为这种类型的例子，下面我们给出六个示例正则表达式及相应的定义：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY">$scalarName =~ s/a/b;&#9;   # substitute the character a for b, and return true if this can happern</P>
+<P ALIGN="JUSTIFY">$scalarName =~ m/a;&#9;        # does the scalar $scalarName have an a in it?</P>
+<P ALIGN="JUSTIFY">$scalarName =~ tr/A-Z/a-z/;  # translate all capital letter with lower case ones, and return ture if this happens</P>
+<P ALIGN="JUSTIFY">$scalarName !~ s/a/b/;&#9;   # substitute the character a for b, and return false if this indeed happens.</P>
+<P ALIGN="JUSTIFY">$scalarName !~ m/a/;&#9;        # does the scalar $scalarName match the character a? Return false if it does.</P>
+<P ALIGN="JUSTIFY">$scalarName !~ tr/0-9/a-j/;&#9;   # translate the digits for the letters a thru j, and return false if this happens.</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    如果我们输入像 horned toad =~ m/toad/ 这样的代码，则出现图 9-1 所示情况：</P>
+<P ALIGN="JUSTIFY">    另外，如果读者正在对特定变量 $_ 进行匹配(读者可能在while循环，map或grep中使用)，则可以不用!~和=~。因而，以下所有代码都会合法：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">my @elemente = (' al' ,' a2' ,' a3' ,' a4' ,' a5' );</P>
+<P ALIGN="JUSTIFY">foreach (@elements) {s/a/b/;}</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">程序使 @elements 等于b1，b2．b3，b4，b5。另外：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">       while(&lt;$FD&gt;) {print if (m/ERBOR/);}</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY">打印所有包含 error 字符串的行：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">      if (grep(/pattern/, @lines)) {print &quot; the variable \@lines has pattern in it!\n&quot;;}</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY">打印所有包含模式pattern内容的行，这直接引入下一原则。</P>
+<B>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY"><a name="2"></a>9．3．2 原则2</P>
+</B>
+<P ALIGN="JUSTIFY"> 正则表达式仅在标量上匹配。</P>
+<P ALIGN="JUSTIFY"> 注意这里标量的重要性，如果读者试一试如下代码：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY">    @arrayName = (' variablel', 'variable2');</P>
+<P ALIGN="JUSTIFY">    @arrayName =~ m/variable/; # looks for ' variable' in the array? No! use grep instead</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    那么@arrayName匹配不成功! @arrayName被Perl解释为2，于是这意味着读者在输入：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    ' 2' =~ m/variable/;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    至少讲这不能给出预想的结果。如果读者想这样做，输人为：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    grep(m/variable/, @arrayName);</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY">该函数通过@arrayName中的每一个元素进行循环，返回(在标量环境中)匹配的次数，同时在数组环境中返回匹配元素的实际列表。</P>
+<B>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY"><a name="3"></a>9．3．3 原则3</P>
+</B>
+<P ALIGN="JUSTIFY">对于给定的模式串，正则表达式只匹配最早出现的匹配项。匹配时缺省一次只匹配或替换一次。</P>
+<P ALIGN="JUSTIFY">这个原则使用称为“回溯”的过程指出如何匹配一个给定的字符串；如果发现了一个局部匹配进而找到使该匹配无效的东西，正则表达式在字符串中“回溯”最小的可能数量，这个数量的字符要保证不丢失任何匹配。</P>
+<P ALIGN="JUSTIFY"> 对于理解正则表达式正在做什么，这个原则是最有帮助的一个，同时不需要与Perl一样的形式来理解它正在做什么。假定有如下模式：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY">    ' Silly people do silly things if in silly moods'</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    同时想匹配如下模式：‘</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    ' silly moods'</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    那么正则表达式引擎匹配silly，接着遇到people的P，至此，正则表达式引擎知道第一个silly不匹配，于是正则表达式引擎移到 P 且继续寻求匹配。它接着遇到第二个silly，于是来匹配moods。然而得到的是字母 t(在thing中)，于是移到 things中的 t 处，继续进行匹配。当引擎遇到第三个silly并且尽力匹配moods时，匹配成功，匹配最后完成。所发生的情况如图 9-2 所示。</P>
+<P ALIGN="JUSTIFY">    当我们遇到通配符时回溯将变得更加重要。如果在同一正则表达式中有几个通配符，且所有的通配符交织在一起，那么这里就有病态情形出现，在这种情形下，回溯变得非常昂贵。看如下表达式：  ：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">     $line = m/expression.*matching.*could.*be.*very.*expensive.*/</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> .* 代表一个通配符，它意味着“匹配任意字符(换行符除外)零次或多次”。这个过程有可能花很长时间；如果在未匹配过的字符串末尾有可能匹配，那么引擎将发狂地回溯。为得到这方面的更多信息，请留意关于通配符方面的原则。</P>
+<P ALIGN="JUSTIFY"> 如果读者发现类似于上面的情形，那么通配符需将正则表达式分解成小功部分。换句话讲，简化自己的正则表达式。</P>
+<P ALIGN="CENTER"><IMG SRC="images/Image3.jpg" WIDTH=510 HEIGHT=404></P>
+<B>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY"><a name="4"></a>9．3．4 原则4</P>
+</B>
+<P ALIGN="JUSTIFY"> 正则表达式能够处理双引号字符串所能处理的任意和全部的字符。</P>
+<P ALIGN="JUSTIFY"> 在s///运算符(s/*//)，或者m//运算符m/*/的第一个分隔区，位于其中的条目确实能像双引号字符串一样对待(带有一些额外的附加功能，名义上的特殊正则表达式字符!后面描述)。读者可用他们进行内插：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY">    $variable = ' TEST' ;    $a =~ m/${variable}aha/;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">  和：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $a = " ${variable}aha" ;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    二者都指向同一字符串：前者在$a中匹配字符串TESTaha．后者把$a设置为字符串  TESTaha。因为正则表达式处理双引号字符串能处理的每个字符，所以可以执行下列操作：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $expression = ' hello';</P>
+<P ALIGN="JUSTIFY">    @arrayName = (' elem1', ' elem2');</P>
+<P ALIGN="JUSTIFY">    $variable =~ m/$expression/; # this equals m/hello/;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    在这里，我们简单地把$expression扩展为hello而得到m/hello/。这个技巧也可用于数组：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $variable =~ m/@arrayName/; # this equals m/elem1 elem2/;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    在这里，表达式等价于 m/elem1 elem2/。如果特殊变量$"被设置为 |．则表达式将等价于 m／elem | elem2／，正如我们看到的，它匹配字符串的elem或者elem2。这种方法也可应用于特殊字符：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $variable =~ m/\x01\27/;&#9;# match binary character x01, and</P>
+<P ALIGN="JUSTIFY">    &#9;&#9;&#9;&#9;# octal character 27.</P>
+<P ALIGN="JUSTIFY">    $variable =~ s/\t\t\t//;&#9;# substitute three tabs for three spaces.</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY">实际上，这里所讨论的除极少数例外以外，Perl处理在m//中的过程的确像处理在双引号中的一样。但是有例外：有某些对正则表达式引擎有明确意义的字符。那么，如果想匹配类似于正斜杠(/)或者园括引(())这样的字符会发生什么呢？这些字符对正则表达式引取有特殊意义：因而不能使用如下语句：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $variable＝~ m//usr/local/bin/;   # matches /usr/local/bin? NO! SYNTAX ERROR</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    因为Perl将把/解释为正则表达式的结束标记。这里有三种方法去匹配类似于上述特殊字符的方法。第一种方法是利用反料杠来“转义”想匹配的任意特殊字符一包括反斜杠。因而刚才给出的例子可变为：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $path =~ m/\/usr\/local\/bin/;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    该程序尽力匹配 $path中的/usr/local/bin。第二种方法是使用一个不同的正则表达式字符。如果有许多字符要匹配，那么使用反斜杠则会变得很难看(路径字符尤其不好)。</P>
+<P ALIGN="JUSTIFY">    幸运的是，Perl以一种合成形式来确决这个问题。因为在当读者输入m//或s///时需要给每个/加反斜杠，所以正则表达式允许读者将正则表达式的定界符(/)改为自己喜欢的任意字符。例如，我们可以使用双引号(")来避免大量的反斜杠：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $variable =~ m"/usr/local/bin";  # Note the quotation marks.</P>
+<P ALIGN="JUSTIFY">    $variable =~ m"\"help\"";        # If you are going to match quotation</P>
+<P ALIGN="JUSTIFY">                                     # marks, you need to backslash them here. (as per\")</P>
+<P ALIGN="JUSTIFY">    $variable =~ S" $variable" $variable";   # works in s///too.</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    出于好的初衷，我们在本书的前几章使用了这一约定。如果使用"作为读者的正则表达式字符，那么在用起来时它充当了好的记忆法，记住在这里所处理的实际上是字符串的变相反插入；否则，引号就远不如斜杠常用。</P>
+</FONT>
+<P ALIGN="JUSTIFY"><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> Perl允许使用{}()[]来书写正则表达式：</font></P>
+<P ALIGN="JUSTIFY"><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>$variable =~ m{this 
+  works well with vi or emacs because the parens bounce};</font></b></P>
+<B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY">    $variable =~ m(this also works well);</P>
+<P ALIGN="JUSTIFY">    $variable =~ s(substitute pattern) {for this pattern}sg;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    这一原则对我们处理多行正则表达式非常方便。因为在这里可以不用圆括号，所以读者可以开始把表达式作为“微型函数”对待(如果读者有像emacs或vi这样的合理的智能编辑器)，换句话讲，读者可在表达式的开始和结尾部分之间往返。</P>
+<P ALIGN="JUSTIFY">    第三种方法是利用函数quotemeta()来自动地加反斜杠。如果输入如下代码：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $variable =~ m" $scalar";</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    则$scalar将为被插且被转变为标量的值。这里有一个警告：任何一个特殊字符都将被正则表达式引擎影响，并且可能引起语法错误。因此，如果标量为：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $scalar = " ({";</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    那么输入如下代码：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $variabie =~ m" $scalar" ;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    就等价于是说：$variable =~ m"({"，而这是一个运行时语法错误。如果表达式为如下形式：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $scalar = quotemeta(' ({');</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    则表达式会使$scalar变为\(\{，且把$scalar替换为：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $variable =~ m" \(\{" ;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 这样才可以匹配到读者愿意匹配的字符串({。</P>
+<B>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY"><a name="5"></a>9．3．5 原则5</P>
+</B>
+<P ALIGN="JUSTIFY"> 正则表达式在求值的过程中产生两种情况：结果状态和反向引用。</P>
+<P ALIGN="JUSTIFY">每次对正则表达式求值时会得到：</P>
+<P ALIGN="JUSTIFY"> ．指示正则表达式匹配字符串的次数(结果状态)。</P>
+<P ALIGN="JUSTIFY"> ．如果希望保存部分匹配，则有—系列称为反向引用的变量。</P>
+<P ALIGN="JUSTIFY"> 接下来让我们依次学习他们：</P>
+<P ALIGN="JUSTIFY"> 1．结果状态</P>
+<P ALIGN="JUSTIFY"> 结果状态表示正则表达式匹配字符的次数。得到结果状念的方法是在标量环境下求正则表达式的值。以下所有例子使用了这—结果变量。</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY">    $pattern = ' simple always simple';</P>
+<P ALIGN="JUSTIFY">    $result = ($pattern =~ m"simple");</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    这里，result为1，因为模式simple位于simple always simPle中。同样的，给定simple always  simple：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $result = ($pattern =~ m" complex");</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    将使result为空，因为complex不是simple always simple的子字符串，接着：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $result = ($pattern =~ s" simple" complex");</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    使result为1，因为把simple替换为complex成功了。更进一步：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $pattern = ' simple simple';</P>
+<P ALIGN="JUSTIFY">    $result = ($pattern =~ s" simple" complex" g);</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    情况变得更复杂。在这里，$result为2，因为在simple always simple中simple出现两次，同时正则表达式的g修饰符被使用，这意味着“匹配尽可能多的次数”。(要更详细材料参看本章后面的修饰符)。同样地：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $pattern = ' simple still';</P>
+<P ALIGN="JUSTIFY">    if ($pattern =~ m" simple")</P>
+<P ALIGN="JUSTIFY">    {</P>
+<P ALIGN="JUSTIFY">        print " MATCHED!\n";</P>
+<P ALIGN="JUSTIFY">    }</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    在if子句中使用$pattern =~ m" simple"，而该子句基本上告诉Perl，如果模式$pattern包含有子串simple则打印Matched!  。</P>
+<P ALIGN="JUSTIFY">    2．反向引用</P>
+<P ALIGN="JUSTIFY">    反向引用有点复杂。假定想保存一些匹配供后用，那么为达到该目的，Perl有一个运算符(圆括号())，该运算符可用于包围读者希望匹配的一系列给定的字符。</P>
+<P ALIGN="JUSTIFY">    在正则表达式中用圆括号括住某模式就是告诉解释器“嗨，我希望保存那个数据。”    Perl解释器再应请求，且将查找到的匹配保存在一系列特珠的变量中($1,$2,$3…$65536)，这些变量可用来查询第一个、第二个、第三个等等圆括号匹配，这些变量于是可以通过查看相应的变量或在数组环境下对正则表达式进行求值而且进行访问。例如：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $text = " this matches ' THIS' not 'THAT' ";</P>
+<P ALIGN="JUSTIFY">    $text =~ m" ('TH..' )";</P>
+<P ALIGN="JUSTIFY">    print " $1\n";</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    在这里，字柳HIS被打印出来 —— Perl已经将它们保存在$1中，以后再打印$1。 然而，该例子揭示了更多内容，例如：</P>
+<P ALIGN="JUSTIFY">    1)通配符(字符点(.)匹配任意字符)。如果THIS不在字符串中，模式(TH..)将欣然匹配</P>
+<P ALIGN="JUSTIFY">THAT。</P>
+<P ALIGN="JUSTIFY"> 2)正则表达式匹配一行上出现的第一处模式。THIS因为首先出现，所以被匹配。同时，按缺省regexp行为，THIS将总是被匹配的第一个字符串。(可以用修饰符改变缺省值，详细情况稍后介绍)。</P>
+<P ALIGN="JUSTIFY">图 9-3 表示了这一匹配过程如何进行。</P>
+<P ALIGN="JUSTIFY">    在图 9-3 中每个圆括号与自已的数字变量一道运行。</P>
+<P ALIGN="CENTER"><IMG SRC="images/Image4.jpg" WIDTH=288 HEIGHT=268></P>
+<P ALIGN="JUSTIFY">这里有更多的例子：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $text = ' This is an example of backreferences';</P>
+<P ALIGN="JUSTIFY">    ($example, $backreferences) = ($text =~ m" (example).*(backreferences)" );</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">这里又用了通配符来分开两个文本字符串$example和$backreferences。这些字符串存放在$1和$2中，且随后立即赋给$example和$backrefercences。该过程在图9—4中说明。</P>
+<P ALIGN="CENTER"><IMG SRC="images/Image5.jpg" WIDTH=463 HEIGHT=270></P>
+<P ALIGN="JUSTIFY">        然而应注意的是仅当文本字符串匹配时，给$example和$bacbreference赋值的过程才发生。当文本字符串不匹配时，$example和backreferences是空的。这里有更好的同样的例子，该例子包含在if语句中，仅在匹配时打印$1和$2。</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    if ($text =~ m" (example).*(back)")</P>
+<P ALIGN="JUSTIFY">    {</P>
+<P ALIGN="JUSTIFY">        print $1;   # prints ' example' -- since the first parens match the text example.</P>
+<P ALIGN="JUSTIFY">        print $2;   # prints ' back' -- since the second parens match the text back</P>
+<P ALIGN="JUSTIFY">    }</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY">这样，如果正则表达式根本不匹配将发生什么？如果使用下面的模式：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1></font></B><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $text = ' This is an example of backreferences';</P>
+<P ALIGN="JUSTIFY"> $text =~ s" (examplar).*(back)" doesn't work";</P>
+<P ALIGN="JUSTIFY"> print $1;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> $1因正则表达式匹配不成功而不能被赋值。更重要地，Perl不会告诉读者它没有给$1赋任 何值。最后一例展示了关于正则表达式的两点重耍内容：</P>
+<P ALIGN="JUSTIFY"> 1)正则表达式是“要么全部要么什么也没有”的处理，只因为back字符串在模式内才能匹 配，所以：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> This is an example of backreferences'</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 并不意味着整个表达式达到匹配。因为exemplar不在字符串中，因而替换失败。</P>
+<P ALIGN="JUSTIFY"> 2)如果正则表达式失败，反向引用不能得到赋值。因此，不能肯定将打印出什么内容。当跟踪逻辑问题时，这就是让人吃惊的原因；且经常是Perl 
+  gotcha。$1只是一个正则变量，并且(与Perl语法相反)如果正则表达式失败则反向引用不被设置为“空白”。有人认为这是一个缺陷，然而另有人认为这是一个特色。不过，当分析下面的代码时第二点变得非常明显。</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> 1 $a = ' bedbugs bite';</P>
+<P ALIGN="JUSTIFY"> 2 $a =~ m" (bedbug)"; # sets $1 to be bedbug.</P>
+<P ALIGN="JUSTIFY"> 3</P>
+<P ALIGN="JUSTIFY"> 4 $b = ' this is nasty';</P>
+<P ALIGN="JUSTIFY"> 5 $b =~ m" (nasti)"; # does NOT set $1 (nasti is not in ' 
+  this is nasty' ).</P>
+<P ALIGN="JUSTIFY"> 6 # BUT $1 is still set to bedbug!</P>
+<P ALIGN="JUSTIFY"> 7 print $1; # prints ' bedbug'.</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 在这种情况下，$1为字符串bedbug，因为第5行的匹配失败！如果希望得到nasti，好吧，那是自己的问题。这种Perl化的行为可能让人不知所措。考虑的是自己要当心。</P>
+<P ALIGN="JUSTIFY"> 3．使用反向引用的一般构造法</P>
+<P ALIGN="JUSTIFY"> 如果想避免这种很平常的缺陷(读者想得到一个匹配，但是没有得到并且用前面的匹配为 替代而结束)，在把反向引用赋给变量时只要应用下列三个构造法之一：</P>
+<P ALIGN="JUSTIFY"> 1)短路方法。核查匹配，如果匹配发生，此时且只有此时用' &amp;&amp;'进行赋值，例如：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> ($scalarName =~ m" (nasti)" ) {$matched = $1;}</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 2)if子句。将匹配放于if子句中，如果if子句为真，此时且只有此时才为模式赋值。</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> if ($scalarName =~ m" (nasti)" ) {$matched = $1;}</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> else {print "$scalarName didn't match"; }</P>
+<P ALIGN="JUSTIFY"> 3)直接赋值。因为可以直接把正则表达式赋给一个数值，所以可始终利用这一点。</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> ($match1, $match2) = ($scalarName =~ m" (regexp1).*(regexp2)" 
+  );</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 读者的所有模式的匹配代码看起来应该与前述三个例子中的一个相似。缺少这些形式，那么就是在没有安全保证的条件下进行编码。如果读者从不想有这种类型的错误的话，那么这些形式将节省读者的大量时间。</P>
+<P ALIGN="JUSTIFY"> 4．在正则表达式中使用反向引用</P>
+<P ALIGN="JUSTIFY"> 当希望使用s" " "运算符或者用m" "运算符对一些复杂模式进行匹配很困难时，Perl提供了读者应意识到的有用功能。这个功能就是反向引用可以用于正则表达式自身。换句话说，如果用圆括号括住一组字符，那么就可以在正则表达式结束之前使用反向引用。如果想在s" 
+  " "的第二部分(带下划线)中使用反向引用，那么要使用语法$1，$2等。如果想在m" "或者s" " "的第一部分(带下划线)使用反向引用，那么使用语法\1\2等。下面是一些例子：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $string = ' far out';</P>
+<P ALIGN="JUSTIFY"> $string =~ s "(far)(out)" $2 $1"; # This makes string ' out 
+  far'.</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 我们在该例中只是将单词far out转换为out far。</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $string = ' sample examples';</P>
+<P ALIGN="JUSTIFY"> if ($string =~ m" (amp..) ex\1") {print " MATCHES!\n"; }</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 这个例子有点复杂。第—个模式(amp..)匹配字符串ample。这意味转整个模式成为字符串ample example，其中带下划线的文本对应于\1。因此，模式匹配的是 
+  sample examples。</P>
+<P ALIGN="JUSTIFY"> 下面是同样风格更复杂的例子；</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $string = ' bballball';</P>
+<P ALIGN="JUSTIFY"> $string =~ s" (b)\1(a...)\1\2" $1$2";</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 让我们详细地看看这个例子。该例完成匹配，但是原因不是太明显。对这个字符串的匹配有五个步骤：</P>
+<P ALIGN="JUSTIFY"> 1)在圆括号中的第一个b匹配字符串的开头，接着将其存放在\1和$1中。</P>
+<P ALIGN="JUSTIFY"> 2)\1于是匹配字符串中的第二个b，因为与b相等，而第二个字符碰巧是b。</P>
+<P ALIGN="JUSTIFY"> 3)(a..)匹配字符串all且被存在\2和$2中。</P>
+<P ALIGN="JUSTIFY"> 4)\1匹配下一个b。</P>
+<P ALIGN="JUSTIFY"> 5)因为\2等于all所以匹配下一个且是最后三个字符(all)。</P>
+<P ALIGN="JUSTIFY"> 将他们放到一起就得到正则表达式匹配bballball，或者说是整个字符串。既然$1等于' b'，$2等于all，则整个表达式：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $string = ' bballball' ;</P>
+<P ALIGN="JUSTIFY"> $string =~ s" (b)\1(a..)\1\2" $1$2";</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY">(在这个例子中)转换为如下代码：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $string =~ s" (b)b(all)ball" ball";</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 或者用行话讲，用bballball替换ball。 ’</P>
+<P ALIGN="JUSTIFY"> 正则表达式看起来很像图 9-5 所示。</P>
+<P ALIGN="CENTER"><IMG SRC="images/Image6.jpg" WIDTH=416 HEIGHT=418></P>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY"> s" " "中有一些复杂的反向引用。如果理解了最后一个例子。那么读者在理解Perl的正则表达式如何工作方面远远走在了前面。反向引用可能而且确实会变得更糟。</P>
+<P ALIGN="JUSTIFY"> 5．嵌套反向引用</P>
+<P ALIGN="JUSTIFY"> 嵌套反向引用对于复杂的难以用单一顺序(一个字符串跟在另一个字符串后面)进行匹配的字符串作用明显。例如下面的表达式：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> m" ((aaa)*)" ;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 使用 * 来匹配多次出现的aaa：即匹配",aaa,aaaaaa,aaaaaaaaa。换句话说，Perl匹配一行中有多个3a的模式。但是这个模式不会匹配aa。假定想匹配如下的字符串：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $string = ' softly slowly surely subtly';</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 那么使用嵌套园括号后下面的正则表达式会匹配：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $string = m" ((s...ly\s*)*)" ; # note nested parens.</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 在该例中，最外层的圆括号捕获全部字符串：softly slowly surely subtly 。最内层的圆括号捕获字符串的组合，这种组合是以s开头，以ly结尾且ly后跟空格形成的。因此，正则表达式先捕获surely，将其抛开，然后捕获slowly，将其抛开，然后捕获surely，最后捕获subtly。这里有一个问题，反向引用按什么顺序出现？读者可能在这个问题上很容易迷惑。是外层圆括号先出现呢，还是内层的内括圆号先出现？最简单的解决办法是记住以下三条原则：</P>
+<P ALIGN="JUSTIFY"> 1)在表达式中，一个反向引用越在前，它对应的反向引用编号就越小。例如：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $var =~ m" (a)(b)";</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 该例中，反向引用(a)变为$1，(b)变成了$2。</P>
+<P ALIGN="JUSTIFY"> 2)一个反向引用如果它包含范围越广，则它的反向引用编号就越小。例如：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $var =~ m" (c(a(b)*)*)";</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 该例中，包含全部内容(m "(c(a(b)*)*)" )的反向引用成为$1。有a嵌套在里面的表达式 m"(c(a(b)*)*)"成为$2。在(m"(c(a(b)*)*)" 
+  )中带有b的嵌套表达式成为$3。</P>
+<P ALIGN="JUSTIFY"> 3)在两个规则冲突的情况下，规则1优先。在语句$var =~ m" (a)(b(c))" 中，(a)成为$1，b(c)成为$2，(c)成为$3。</P>
+<P ALIGN="JUSTIFY"> 因而，在这个例子中，(s...ly\s*)*成为$1，(s...ly\s*)*成为$2。</P>
+<P ALIGN="JUSTIFY"> 注意这里有另一个问题。让我们一起返回到刚开始的复杂的正则表达式：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $string = 'softly slowly surely subtly'</P>
+<P ALIGN="JUSTIFY"> $string = m"(((s...ly\s*)*)"; # note nested parens.</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 这里(s...ly\s*)*匹配什么呢？它匹配多个字符串；首先是softly，接着是slowly，再接着是surely，最后是subtly。既然(s...ly\s*)*匹配多个字符串，那么Perl会抛弃掉第一个匹配而使$2成为subtly。</P>
+<P ALIGN="JUSTIFY">即便有这些规则，嵌套圆括号仍然可能引起混乱。要做的最好事情就是实践。再一次用这些逻辑的不同组合去实现正则表达式，然后把它们交给Perl解释器。这样做可让读者明白反向引用是以什么次序被Perl解释器进行解释的。</P>
+<B> 
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY"><a name="6"></a>9．3．6 原则6</P>
+</B> 
+<P ALIGN="JUSTIFY"> 正则表达式的能力的核心在于通配符和多重匹配运算符。通配符运算符允许匹配字符串中的多个字符。如果正在处理二进制数据，那么通配符就匹配一系列字符。多重匹配运算符可匹配零个、一个或多个字符。就讲解Perl的基础而言，到目前为止我们所使用的例子都是带启发性的，但功能并不是很强大。实际上，渎者可能会用C子程序去完成它们中的任意—个。Perl 
+  正则表达式集合的强大功能来自于其匹配文本的多模式能力，(即：通过前面提到的逻辑“速记法”来描述许多不向的数据模式)。Perl正好可提供最好的速记法。</P>
+<P ALIGN="JUSTIFY"> 1．通配符</P>
+<P ALIGN="JUSTIFY"> 通配符代表字符类。他没有如下字符串，但不知道他们是否大写：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> ．Kumquat</P>
+<P ALIGN="JUSTIFY"> ．Kristina</P>
+<P ALIGN="JUSTIFY"> ．Kentucky</P>
+<P ALIGN="JUSTIFY"> ．Key</P>
+<P ALIGN="JUSTIFY"> ．Keeping</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 这种情况下，如下的Perl表达式会匹配每个单词的第一个字符：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> [Kk]</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 这是字符类的一个例子。Perl中的所有通配符可以用括号[并把想匹配的字符类放在括号中最后加上结尾括号]这种方法表示。前面的通配符告诉正则表达式引擎"好，我正在这里查找"K"或者"R"。如果发现两者之一那么就匹配它”。下面是另一些使用通配符的例于：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $scalarName = ' this has a digit (1) in it';</P>
+<P ALIGN="JUSTIFY"> $scalarName =~ m" [0-9]"; # This matches any character between 
+  0 and 9, that is matches any digit.</P>
+<P ALIGN="JUSTIFY"> $scalarName =~ 'this has a capital letter (A) in it';</P>
+<P ALIGN="JUSTIFY"> $scalarName =~ m" [A-Z]"; # This matches any capital letter 
+  (A-Z).</P>
+<P ALIGN="JUSTIFY"> $scalarName =~ " this does not match, since the letter after 
+  the string 'AN' is an A"</P>
+<P ALIGN="JUSTIFY"> $scalarName =~ m" an[^A]";</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 前两个例子相当直观，[0-9]匹配this has a digit(1) in it中的数字1。[A—Z]匹配this 
+  has acapital letter(A) in it中的大写字符A。最后一例稍有点技巧，因为在这个模式中仅有一个an，所以可能被匹配的字符唯有最后的四个字符，即an 
+  A。</P>
+<P ALIGN="JUSTIFY"> 然而，通过询问模式an[^A]我们已经明确地告诉正则表达式去匹配a，接着是n，空格，最后一个为非A的字符。因而，该例中没有完成匹配。如果给定模式为 
+  match an A not an e，那么匹配就会完成，因为第一an被跳过后，第二个正好匹配！就像如下例子：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $scalarName = " This has a tab( ) or a newline in it so it 
+  matches";</P>
+<P ALIGN="JUSTIFY"> $scalarName =~ m" [\t\n]" # Matches either a tab or a newline.</P>
+<P ALIGN="JUSTIFY"> # matches since the tab is present.</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 这个例子说明了用匹配和通配符可以做的一些有趣的事情。首先，读者已经在""字符串插入的相同字符也可以在正则表达式和用括号表示的字符类中([t\n])插入。其中"\t"匹配制表符，"\n"匹配换行符。</P>
+<P ALIGN="JUSTIFY">其次．如果读者在[]里的开头部分放置一个^，则通配符会匹配非字符组中的字符。同样地，如果在[ ]中放置-，则通配符匹配给定的范围(在这个例子中是所有的数字[0-9]。所有的大写字母([A-Z])。这些运算符还可被合并，从而得到相当特别的通配符：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $a =~ m" [a-fh-z]"; # matches any lowercaes letter * except* 
+  g.</P>
+<P ALIGN="JUSTIFY"> $a =~ m" [^0-9a-zA-Z]"; # matches any nonword character. (i.e.,NOT</P>
+<P ALIGN="JUSTIFY"> # a character in 0-9, a-z or A-Z)</P>
+<P ALIGN="JUSTIFY"> $a =~ m" [0-9^A-Za-z]"; # a mistake, Does not</P>
+<P ALIGN="JUSTIFY"> # equal the above. Instead matches 0-9,</P>
+<P ALIGN="JUSTIFY"> $a =~ m" [\t\n]"; # matches a space character: tab, newline 
+  or blank).</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY"> 需许意的重要地方是第三个例子，在[0—9^A—Za—z]中的插入记号是一个字面上的插入记号，而不是代表否定，原因是它在字符类的中间出现。因此，如果读者想得到一个否定的字符类。那么就总是要把插入记号放在[]开头。也不要忘记用[]。如果读者忘记了[]，那么得到的将是一个字面上的文本字符串，而不是一个字符类。</P>
+<P ALIGN="JUSTIFY"> (1)公用通配符</P>
+<P ALIGN="JUSTIFY"> 碰巧某些通配符是公用的；当读者每次想匹配一个数字时，可能不愿意每次都必须要输入类似于[0-9]这样的代码。对于那些情况，Perl有几个方便的快捷通配符，使用它们后可使编程工作容易。下面是这些边配符以及它们代表的含义和它们对应的字符组合：</P>
+<P ALIGN="JUSTIFY"> ．\d — 匹配数字(字符组合[0-9])。</P>
+<P ALIGN="JUSTIFY"> ．\D — 匹配非数(字符组合[^0-9])。</P>
+<P ALIGN="JUSTIFY"> ．\w — 匹配单词字符(字符组合[a-zA-Z0-9_])(这里下划线算作一个单词字符)。</P>
+<P ALIGN="JUSTIFY"> ．\W — 匹配非单词字符(字符组合[^a-zA-Z0-9_])。</P>
+<P ALIGN="JUSTIFY"> ．\s — 匹配空格字符(字符组合[\t\n])(制表符、换行符、空格)。</P>
+<P ALIGN="JUSTIFY"> ．\S — 匹配非空格字符(字符组合[\t\n])。</P>
+<P ALIGN="JUSTIFY"> ．- 匹配任意字符(在某些情况下)换行符除外(字符组合[^\n])、当输入m"(.*)"S时匹配任意字符。参见本章后面的修饰符。</P>
+<P ALIGN="JUSTIFY"> ．$- 尽管它实际上并不是一个通配符(它不匹配任何具体字符)．但它是广泛使用的特殊字符；如果将其放在正则表达式的尾部则它匹配“行尾”。零宽度断言。</P>
+<P ALIGN="JUSTIFY"> ．^- 尽管实际上不是一个通配符，但如果它位于正则表达式的开头则它是匹配“行首”的特殊字符。零宽度断言。</P>
+<P ALIGN="JUSTIFY"> ．\b,\B- 与$和^相同；不匹配字符，但匹配单词边界(\b)或匹配无单周边(\B)。零宽度断言。</P>
+<P ALIGN="JUSTIFY"> 我们从表中注意到的第一点是“点”通配符(.)。它常与多重匹配运算符一道用于在条目间充当填充者。请看以下匹配：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $a = ' NOW is the time for all good men to come to the aid 
+  of their party';</P>
+<P ALIGN="JUSTIFY">$a =~ m" (Now).*(party)"; # matches, since ' .' matches any 
+</P>
+<P ALIGN="JUSTIFY">character except newline </P>
+<P ALIGN="JUSTIFY">and ' *' means match zero or more characters.</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> *捕获位于Now和party中间的所有字符，匹配是成功的。(在这种环境下的“所有”意味着“零或者更多，尽可能多”。这就是所谓的贪梦(greediness)；在我们后面谈到多重匹配运算时再谈它。)</P>
+<P ALIGN="JUSTIFY"> 下面是通配符的一些其他例子。注意我们在=~的左边使用了单引用字符串(这是一个测试表达式的简单方法)：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> 1 ' 1956.23' =~ m" (\d+)\.(\d+)"; # $1 = 1956, $2 = 23</P>
+<P ALIGN="JUSTIFY"> 2 ' 333e+12' =~ m" (\D+)"; # $1 = ' e+'</P>
+<P ALIGN="JUSTIFY"> 3 ' $hash($value)' =~ m" \$(\w+){\$(\w+)}"; # $1 = ' hash', 
+  $2 = 'value'</P>
+<P ALIGN="JUSTIFY"> 4 ' $hash($value)' =~ m" \$(\w+){(\w)*(\w+)(\w*)}"; # $1 = 
+  ' $', $2 = ' hash',</P>
+<P ALIGN="JUSTIFY"> # $3 = ' $', $4 = ' value'</P>
+<P ALIGN="JUSTIFY"> 5 ' VARIABLE = VALUE' =~ m" (\w+)(\s*) = (\s*)(\w+)"; # $1 
+  = ' VARIABLE', #$2 = ' ',</P>
+<P ALIGN="JUSTIFY"> # $3 = ' ', $4 = ' VALUE'</P>
+<P ALIGN="JUSTIFY"> 6 ' catch as catch can' =~ m" ^(.*)can$; # $1 = ' catch as 
+  catch'</P>
+<P ALIGN="JUSTIFY"> 7 ' can as catch catch' =~ m"^can(.*)$ # $1 = ' as catch catch'</P>
+<P ALIGN="JUSTIFY"> 8 ' word_with_underlines word2' =~ m" \b(\w+)\b; # $1 = word_with_underlines</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 每个例子中，我们使用了一个不同的通配符，在该程序中，用*表示在“一行中匹配零个或者多个通配符”。用+表示“在一行中匹配一个或者多个通配符”。这些例子中有些本身就是有用的：例5展示了使用\s*来加强表达式对付散乱空格的方法；例8示例了匹配一个单词的一般化方法；例4示范了使用关键字匹配哈希结构的一般化方法。</P>
+<P ALIGN="JUSTIFY"> 然而，特殊地．例1不是匹配Perl数字的通用方法。但是如果给出Perl支持的所有格式，那么这会是一个十分困难的问题。我们将在后面把它作为一个问题考虑。在该表中还有一个地方需要注意：一些适配符被标记为“零宽度断言”，我们在下面讲述仑们。</P>
+<P ALIGN="JUSTIFY"> (2)零宽度断言和正宽度断言</P>
+<P ALIGN="JUSTIFY"> 在表 9-2 中的字符就是读者可能称作的正宽度断言：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="CENTER">表 9-2 正声明</P>
+<P ALIGN="JUSTIFY"> \D 非数字</P>
+<P ALIGN="JUSTIFY"> \d 数字</P>
+<P ALIGN="JUSTIFY"> \w 单词</P>
+<P ALIGN="JUSTIFY"> \W 非单词</P>
+<P ALIGN="JUSTIFY"> \s 空格</P>
+<P ALIGN="JUSTIFY"> \S 非空格</P>
+<P ALIGN="JUSTIFY"> ' .' 换行符以外的任意字符。</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 这些断言在字符串中实际上匹配一个字符。正宽度意味着匹配一个字符，同时正则表达式引擎在匹配过程中“吃掉”它们。在表 9-3 
+  中列出的负宽度断言。</P>
+<P ALIGN="JUSTIFY"> 这些断言不是匹配一个字符，它们匹配的是一种条件。换句话讲，^cat匹配以cat开头的字符串，但并不匹配任一给定字符。请看下面的表达式：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $ziggurautString = ' this matches the word zigguraut';</P>
+<P ALIGN="JUSTIFY"> $ziggurautString =~ m" \bzigguraut\b";</P>
+<P ALIGN="JUSTIFY"> $ziggurautString =~ m" \Wzigguraut\W";</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="CENTER"> <IMG SRC="images/Image7.jpg" WIDTH=504 HEIGHT=98></P>
+<P ALIGN="JUSTIFY"> 第一个例子匹配成功，因为它是在两个非单词字符(单词边界)之间查找ziggurat。而字符串满足这种条件。</P>
+<P ALIGN="JUSTIFY"> 第二个例子没有完成匹配，为什么呢？因为在末尾的\W是正宽度断言，因此．必须匹配一个字符。但是在行未不是字符，而是一种条件。这是重要的区别。</P>
+<P ALIGN="JUSTIFY"> 更进一步讲，在第二个例子中即使实现了匹配，那么正则表达式引擎会消去涉及到的字符。因此，如果输入如下代码：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $ziggurautString = " This matches the word zigguraut now";</P>
+<P ALIGN="JUSTIFY"> $ziggurautString =~ s" \Wzigguraut\W" " g;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 最后得到的结果是 This matches the wordnow。原因是已经把单词和插入的空格替换掉了。因而：</P>
+<P ALIGN="JUSTIFY"> ·零宽度断言，例如\b\B能匹配没有字符的地方。它们在匹配的过程中不会去掉任一字符。下面是关于通配符匹配的其他例子：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $example = ' 111119';</P>
+<P ALIGN="JUSTIFY"> $example =~ m" \d\d\d"; # match the first three digits it 
+  can find in the string Matches ' 111'.</P>
+<P ALIGN="JUSTIFY"> $example = ' This is a set of words and not of numbers';</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> </FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> $example =~ m" of (\w\w\w\w\w)"; # Matches ' of words' ..Creates 
+  a backreference</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 请注意最后一个例子，该列中，因为在字符串的开头有一个of(在words前面)，所以模式匹配器会匹配这个特定的of。而不会去匹配后面的of(在numbers前面的那个)。最后一例也展示了我们将讨论论的问题。这就是如果想匹配五个单词字符的话，那么必须打印五次\w，这样就很烦恼。因此、为了便于匹配长模式，Perl提供了多重匹配运算符。我们接下来讨论这个问题。</P>
+<P ALIGN="JUSTIFY"> 2．多重匹配运算符</P>
+<P ALIGN="JUSTIFY"> PerI中有六个多重匹配运算符。主要用于避免编写重复代码，例如上一节提到的在一行中声明\w五次。渎者可把它们看作是速记的捷径。</P>
+<P ALIGN="JUSTIFY"> PerI的六个多重匹配运算符是：</P>
+<P ALIGN="JUSTIFY"> ·*——匹配零次，一次或多次。 ·?——匹配一次或者多次。</P>
+<P ALIGN="JUSTIFY"> ·?——匹配零次或者一次。</P>
+<P ALIGN="JUSTIFY"> ·{X}——匹配‘X’次。</P>
+<P ALIGN="JUSTIFY"> ·{X，}——匹配‘X’或者更多次。</P>
+<P ALIGN="JUSTIFY"> ·{X，Y}——匹配‘X’到‘Y’次。</P>
+<P ALIGN="JUSTIFY"> 这里有两个等价的例子，但是哪个易读呢？</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $example = ' This is a set of words and not of numbers';</P>
+<P ALIGN="JUSTIFY"> $example =~ m" of (\w\w\w\w\w)"; # Matches ' of word'.</P>
+<P ALIGN="JUSTIFY"> $example =~ m" of (\w{5})"; # Usage of {X} form. Matches 5 
+  characters,</P>
+<P ALIGN="JUSTIFY"> # and backreference $1 becomes the string ' words'.</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 读者可能发现第二个例子的代码易读。这个例子使用了多重匹配运算符来避免写重复、讨厌的代码。第二个例子也用符号来匹配不定数量的字符。正则表达式a*匹配”，a，aa或者aaa，或任意数量的a。也就是匹配零个或多个a，例如：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $example = ' this matches a set of words and not of numbers';</P>
+<P ALIGN="JUSTIFY"> $example =~ m" of(\w+)";</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 匹配的是字符串words(of(\w+) eq of words)，又如：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $example =~ m" of (\w(2,3))"; # Usage of {X,Y}. Matches the 
+  string ' wor'</P>
+<P ALIGN="JUSTIFY"> # (the first three letters of the first match it finds.</P>
+<P ALIGN="JUSTIFY"> matches the string ' wor' (' of \w{2,3}' equals ' of wor' 
+  here)</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 与直觉相反．下面代码中的m" "子句：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $example = ' this matches a set of words and not of numbers';</P>
+<P ALIGN="JUSTIFY"> $example =~ m" of(\d*)";</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 匹配该字符串，尽管我们正在用\d*来查找数字。什么原因呢？因为\d*表现为零个到多个，所以表达式匹配零个数字！然而：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $example =~ m" of(\d+)";</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 将不会匹配相同的字符串，因为表达式使用的是\d+而不是\d*。这样就意味着查找字符串中位于单词of后面的一个或多个数字，而这种条件是这个字符串不具有的。</P>
+<P ALIGN="JUSTIFY"> 3．贪婪</P>
+<P ALIGN="JUSTIFY"> 到目前为止，上面所有的例子陈述主要的一点是正则表达式引擎如何按给定的表达式匹配给定的字符串。即缺省情况下，多重匹配运算符是贪婪地。</P>
+<P ALIGN="JUSTIFY"> “贪婪”在这里是什么含义呢?“贪婪”意味着在缺省状态下，Perl的多重匹配运算符能捕获一个字符串中的最大数量的字符，同的仍然有能力来完成模式匹配。读者应掌握好这一点。理解了贪婪的Perl表达式的本质会节省大量时间，以免跟踪古怪的正则表达式行为。</P>
+<P ALIGN="JUSTIFY"> 这里有几个简单的关于贪婪行为的例子，例子中的贪婪行为能使程序员发疯。让我们从下面的语句开始：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $example = ' This is the best example of the greedy pattern 
+  match in Perl5';</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 假定在该例中想匹配is。相应地，要编写如下代码：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $example =~ m # This (.*) the#;</P>
+<P ALIGN="JUSTIFY"> print $1; # This does NOT print out the string ' is'!</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 读者希望打印$1时看到的是is。但是所得到的是下面的字符串：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> ' is the best example of'</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY">程序的工作过程如图 9-6 所示。</P>
+<P ALIGN="CENTER"><IMG SRC="images/Image8.jpg" WIDTH=510 HEIGHT=342></P>
+<P ALIGN="JUSTIFY"> 造成这种结果的原因是多重匹配运算符*的贪婪。运算符*取得所有的字符直到最后出现的字符串the(在greedy前的一个)。那么如果读者不小心，则在使用正则表达式后得到不可预料结果。</P>
+<P ALIGN="JUSTIFY"> 这里有更多例子：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY"> $example = ' sam I am';</P>
+<P ALIGN="JUSTIFY"> $example =~ m" (.*)am'; # matches the string ' sam I'</P>
+<P ALIGN="JUSTIFY"> $example = ' RECORD: 1 VALUE: A VALUE2: B';</P>
+<P ALIGN="JUSTIFY"> $example =~ m".RECORD';(.*)VALUE"; # matches ' 1 VALUE: A';</P>
+<P ALIGN="JUSTIFY"> $example = ' RECORD';</P>
+<P ALIGN="JUSTIFY"> $example =~ m" \w{2,3}"; # matches REC</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 最后一例显示出甚至数字多重匹配运算符也是贪婪的。虽然在RECORD中有两个单词字符，但是PerI更愿匹配三个，原因是它有这个能力。如果输入' 
+  RE' =~ m" \w{2,3}"，则只能匹配两个字符，因为这是可能匹配的最大数量。</P>
+<P ALIGN="JUSTIFY"> 4．回溯和多重通配符</P>
+<P ALIGN="JUSTIFY"> 好吧，已经准备很久了．现在到处理棘手题目的时候了。正如前面说过的，通配符和回溯的结合使正则表达式有极其缓慢的性能。如果读者理解了其中的原因，那么这是读者正“得到” 
+  正则表达式的好标志。</P>
+<P ALIGN="JUSTIFY"> 看以下例子：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> $string =~ m " has(.*)multiple(.*)wildcards";</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 这意味着正则表达式将查找(以数字顺序)：</P>
+<P ALIGN="JUSTIFY"> 1)模式has(m" has.*multiple.*wildcards")。</P>
+<P ALIGN="JUSTIFY"> 2)正则表达式能发现的最大文本直到它到达最后的multiple(m" has(.*)mMltiple(.*)</P>
+<P ALIGN="JUSTIFY"> wildcards)。</P>
+<P ALIGN="JUSTIFY"> 3)字符串multiple(m" has(.*)multiple(.*)wildcards")。</P>
+<P ALIGN="JUSTIFY"> 4)能发现的最大文本直到遇到最后的wildcards(m" has(.*)multiple(.*)wildcards")。</P>
+<P ALIGN="JUSTIFY"> 5)字符串wildcards(m" has(.*)multiple(.*)wildcards")。</P>
+<P ALIGN="JUSTIFY"> 接着考虑一下，使用以下的模式将会发生什么：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> has many multiple wildcards multiple WILDCARDS</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 所发生的一切是：</P>
+<P ALIGN="JUSTIFY"> 1)、Perl匹配has(i.e, m" has(.*)multiple(.*)wildcards);</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> has many multiple wildcards multiple WILDCARDS</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 2)Perl执行m" has(.*)multiple(.*)wildcards部分且吃掉它能够发现的所有字符，直到遇到最后的multiple，接着匹配：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> has many multipIe wildcards multiple WILDCARDS</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 3)Perl匹配字符串multiple(即m" has(.*)multiple(.*)wildcards):</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> has many multiple wildcards multiple WILDCARDS</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 4)Perl试图发现字符串wildcards但是失败了，接着读出字符串的其余部分：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> WILDCARDS does not match ' wildcards' !</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 5)现在Perl应做什么呢？因为有多个通配符(*)，所以Perl回溯。正则表达式可能犯错的地方是在第2步，即当它吃掉：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> has many multiple wildcards multiple WILDCARDS</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 时，因而，它正好返回到has后面：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> has many multiple wildcards multiple WILDCARDS</P>
+<P ALIGN="JUSTIFY"> ^goes back here</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 6)现在试图更正错误，仅捕获那些位于最后一个multiple之前的字符。因而，模式m"</P>
+<P ALIGN="JUSTIFY">has(.*)multiple(.*)wildcards" 匹配：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> has many multiple wildcards multiple WILDCARDS</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 7)在m" has(.*)multiple(.*)wildcards" 中的multiple随后匹配：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> has many multiple wildcards multiple WILDCARDS</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 8)接着通配符匹配空格——m" has(.*)multiple(.*)wildcards")匹配：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> has many multiple wildcards multiple WILDCARDS</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 9)最后，wildcards(m" has(.*)multiple(.*)wildcards")匹配：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> has many multiple wildcards multiple WILDCARDS</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 因而整个正则表达式匹配has many multiple wildcards。它给出了预料结果，但是得到该结果肯定走了弯路。肯定地说，Perl实施正则表达式的算法有些捷径来提高性能，但是刚才给出的逻辑基本上是正确的。我毫不犹豫地认为这个例子是本章中最主要的一个——</P>
+<P ALIGN="JUSTIFY">即使Perl高于有时也不能从语义上正确分祈正则表达式(很使他们恼火)。一遍又一遍地复习．直到充分理解结果。这之后，尽量按Perl的匹配方法跟踪以下代码：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> $pattern = " afbgchdjafbgche";</P>
+<P ALIGN="JUSTIFY"> $pattern =~ m" a(.*)b(.*)c(.*)d";</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 我们在此随意结出一个：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> afbgchdjafbgche (m" a(.*)b(.*)c(.*)d";)</P>
+<P ALIGN="JUSTIFY"> afbgchdjafbgche (m" a(.*)b(.*)c(.*)d";) -- greedy, goes to 
+  last ' b'</P>
+<P ALIGN="JUSTIFY"> afbgchdjafbgche (m" a(.*)b(.*)c(.*)d";)</P>
+<P ALIGN="JUSTIFY"> afbgchdjafbgche (m" a(.*)b(.*)c(.*)d";) -- matches g</P>
+<P ALIGN="JUSTIFY"> afbgchdjafbgche (m" a(.*)b(.*)c(.*)d";)</P>
+<P ALIGN="JUSTIFY"> afbgchdjafbgche (m" a(.*)b(.*)c(.*)d";) -- backtrack because 
+  no ' d'</P>
+<P ALIGN="JUSTIFY"> afbgchdjafbgche (m" a(.*)b(.*)c(.*)d";) -- now we take up 
+  everything to the next to last b</P>
+<P ALIGN="JUSTIFY"> afbgchdjafbgche (m" a(.*)b(.*)c(.*)d";)</P>
+<P ALIGN="JUSTIFY"> afbgchdjafbgche (m" a(.*)b(.*)c(.*)d";) -- now the second 
+  .* becomes greedy.</P>
+<P ALIGN="JUSTIFY"> afbgchdjafbgche (m" a(.*)b(.*)c(.*)d";)</P>
+<P ALIGN="JUSTIFY"> afbgchdjafbgche (m" a(.*)b(.*)c(.*)d";) -- still no d.darn.backtracks</P>
+<P ALIGN="JUSTIFY"> afbgchdjafbgche (m" a(.*)b(.*)c(.*)d";) -- wildcard becomes 
+  less greedy, gobbles to next to last c</P>
+<P ALIGN="JUSTIFY"> afbgchdjafbgche (m" a(.*)b(.*)c(.*)d";)</P>
+<P ALIGN="JUSTIFY"> afbgchdjafbgche (m" a(.*)b(.*)c(.*)d";) -- there is only one 
+  d in the expression and this matches up to it</P>
+<P ALIGN="JUSTIFY"> afbgchdjafbgche (m" a(.*)b(.*)c(.*)d";) -- a match! </P>
+<P ALIGN="JUSTIFY"> matches ' afbgchd'.</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 不是很标致，正如读者所看到的，如果读者有多个贪婪的多重匹配运算符，事情可能变得更糟，效率更低。也许从这个例子中得到的最简单的就是左边的多重匹配运算优先于右边的执行。下面这样的模式：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> m" (.*)(.*)";</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">在一个没有换行符的字符串中，将总是使第一个反向引用包含整个字符串，而第二个却什么也没有。像这种错误最好使用-Dr命令行选项进行处理，就像在Perl 
+  - Dr.script.p中一样。我们将在第21章讨论这一点。另外，如果读者不想有贪婪会发生什么？好吧，正如我们会在下节见到的，perl(与其他包不同)有能力处理字符的非贪婪形式。</P>
+<P ALIGN="JUSTIFY"> 5．非贪婪多重匹配运算符</P>
+<P ALIGN="JUSTIFY"> 贪婪可能是一件幸事，但是它也常会引起争论！举一个常用的C注释语句的例子(它是很平常的FAQ且是在文档中)。假定要匹配下面的粗体文本：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> /* this is a comment*/ /* another comment */</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 这里试图找出一个贪婪方式的解决方法。我们想匹配后跟所有文本的/* 直到包括 */。如果我们尝试以下代码：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> m" /\*.*\*/";</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 于是，将匹配：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> /* this is a comment*/ /* another comment */</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 又一次因为是greedy形式所以匹配全部字符串。</P>
+<P ALIGN="JUSTIFY"> 以下是笔者所能提供的最好的贪婪方式的解决办法：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> $commentmatcher =~ m" /\*([^*]*|\**[^/*])*\*/";</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 它不是所有解决方法中最好读的。(我们可以使用m" "使之更易读，后面将讲到。)我们</P>
+<P ALIGN="JUSTIFY">将在后面复习这点，因为理解了这个特殊表达式对在总体上掌握正则表达式有很大帮助！现在我们一起看看贪婪形式。对于非贪婪形式这里有一简单规则来记住它们：只要在一个贪婪多重运算符的后面添加?就可使之成为非贪婪。</P>
+<P ALIGN="JUSTIFY"> 因而，前面的commentmatcher成为：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> $commentmatcher =~ m" /\*(.*?)\*/";</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">这仍然不是最易读的形式，但是肯定比前面的要好！我们可以简单地描述这条语句如下：“取到/*，接着取最小数量的字符，再取结束的*/”，工作过程如图 
+  9-7 所示。</P>
+<P ALIGN="CENTER"><IMG SRC="images/Image9.jpg" WIDTH=433 HEIGHT=385></P>
+<P ALIGN="JUSTIFY"> “懒惰”是用于描述?的另一术语。正则表达式引擎可以北认为是缓慢地前移，直到遇到第一个可匹配的表达式。在该例中，它正是遇到一个*/以后移到下一步骤。如果读者输入以下代码：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> $line =~ m" (.*?)(.*?)(.*?)";</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 每个(.*?)符什么也不会匹配。什么原因呢?在这里匹配的最小数量的字符是零(因为读者已经输入*(零到多或全))。因而根据匹配零个字符的要求．每个(.*?)都完成自己的工作，且缓慢地把控制传到下一个(.*?)，返过来它又取零个字符。下面是懒惰匹配程序的通用规则。只要向他们添加字符类(如.、\d、或[123])，就可得到懒惰行为：</P>
+<P ALIGN="JUSTIFY"> ·*?——匹配零、一或多次，但匹配可能的最少次数。</P>
+<P ALIGN="JUSTIFY"> ·+?——匹配一或多次，但匹配可能的最少次数。</P>
+<P ALIGN="JUSTIFY"> ·??——匹配零次或一次，仍匹配可能的最少次数。</P>
+<P ALIGN="JUSTIFY"> ·{X}?——正好匹配“X”次</P>
+<P ALIGN="JUSTIFY"> ·{X, }?——匹配“X”或者更多次，但匹配可能的最少次数。</P>
+<P ALIGN="JUSTIFY"> ·{X,Y}?——匹配“X”到“Y”次，但匹配可能的最少次数。</P>
+<P ALIGN="JUSTIFY">这里有关于最小匹配程序的一些例子，以及那些与非贪婪模式匹配的例子：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> </font></B><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY">　　　 $example = ‘This is the time for a11good man to come to 
+  the aid of their party’ ;</P>
+<P ALIGN="JUSTIFY">　　　 $example = ~ m&quot; This (.*?) the&quot;;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">该例处配 ‘is’ ，如果它是贪婪地则会匹配 ‘ is the time for all good man to come 
+  to’。</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY">　　　 $example = ‘19992113333333333333331’；</P>
+<P ALIGN="JUSTIFY">　　　 if ($example = ~ m &quot; l (\d{3,}?)&quot; )</P>
+<P ALIGN="JUSTIFY">　　　 {</P>
+<P ALIGN="JUSTIFY">　　　 }</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">该表达式表示匹配后跟三个数（或更多数字）的l。然而，由于 ‘?’之后什么也没有，它基本上表示匹配后跟三个数字的1。因此，将匹配到‘1999’。</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY">　　　 $example = ‘1f999133333333333333331’；</P>
+<P ALIGN="JUSTIFY">　　　 if ($example = ~ m &quot; l (\d{3,}?)&quot; )</P>
+<P ALIGN="JUSTIFY"> {</P>
+<P ALIGN="JUSTIFY"> }</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">此处，我们有同样的表达式，但是模式匹配器发现的第一个1不满足条件．因为它后面跟 ‘f ’。于是匹配器找到下一个1，并且匹配1333。</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> $example = ‘ 1f999133333333333333331’;</P>
+<P ALIGN="JUSTIFY"> if ($example = ~ m &quot; l (\d{3,}?)1&quot; )</P>
+<P ALIGN="JUSTIFY"> {</P>
+<P ALIGN="JUSTIFY"> }</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY"> 该例中，匹配与前面不同的内容。我们已经要求无论我们用\d(3,)到什么数据字都必须跟有一个1。因而，虽然模式匹配器是懒惰的，但是它也必须走到表达式的最后以找到一个匹配。正如读者所看到的，对于正则表达式的逻辑，大家必须非常仔细。对于未入门的人，吃惊的东西太多。对于那些不知道自己正在干什么的人这里有很多方法来使他们不知所措。</P>
+<P ALIGN="JUSTIFY"> 掌握了正则表达式的原则就是向前迈了一大步。如果读者需了解更多信息，转到&quot;Perl调试&quot;部分，在那里我们将给出更多关于调试Perl正则表达式的信息。</P>
+<P ALIGN="JUSTIFY">　</P>
+<B> 
+<P ALIGN="JUSTIFY"><a name="7"></a>9．3．7 原则7</P>
+</B> 
+<P ALIGN="JUSTIFY">如果想匹配多个字符集则Perl使用称为替换的技术。</P>
+<B> 
+<P ALIGN="JUSTIFY">替换</P>
+</B> 
+<P ALIGN="JUSTIFY">替换是告诉Per1希望匹配两个或多个模式中的一个的方法。换言之，表达式：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY">　　　　 (able | baker | charlie)</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">告诉Per1在正则表达式中&quot;查找字符串able或者baker或者charlie&quot;。作为例子，以下面的语句开始：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY">$declaration = ‘ char string [80] ;’ or $declaration = ‘ unsigned 
+  char string [80];’</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">假定想匹配字符串char或unsigned char，一次匹配多个字符串将会是很方便的。下面的正则表达式二者都匹配：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY">　　　 foreach $declaration ( ‘ char string [80]’, ‘unsigned char 
+  string [80]’ )</P>
+<P ALIGN="JUSTIFY">　　　 {</P>
+<P ALIGN="JUSTIFY">　　　　　　　　 if ($declaration = ~ m &quot; (unsigned char | char 
+  )&quot; )</P>
+<P ALIGN="JUSTIFY">　　　　　　　 {</P>
+<P ALIGN="JUSTIFY">　　　　　　　　　　　 print &quot; :$1:&quot; ; # prints ‘ :char :’ first 
+  time around.</P>
+<P ALIGN="JUSTIFY">　　　　　　　　　　　 # prints ‘’ :unsigned char :’ second time around 
+  .</P>
+<P ALIGN="JUSTIFY">　　　　　　　 } </P>
+<P ALIGN="JUSTIFY">　　　 }</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">语法 | 意味着匹配unsigned char或者char且把已 匹配的字符串保存在反向引用中。替换可以是很微妙的，因为对于替换行为有一件重要的事情要记住：</P>
+<P ALIGN="JUSTIFY">·替换总是试图匹配阂括号中的第一个项目；如果匹配不成功，才尝试第二个样式的匹配，依次类推。</P>
+<P ALIGN="JUSTIFY"> 这就是所谓的极左匹配，它能解释人们接触正则表达式时所遇到的许多错误。拿前面的例子来说，假定改变了圆括号中条目的次序，那么该例子变为：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> $declaration = ‘ unsigned char string [80]’;</P>
+<P ALIGN="JUSTIFY"> $declaration = ~ m &quot; (char | unsigned char )&quot;;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">这能匹配字符串unsigned char （就像在unsigned char string [80] 中那样）吗？不能，它匹配char（即， 
+  unsigned char string [80]）。因为在列表中char处在第一位，所以比字符串unsigned char要有限。正则表达式匹配char，因而在反向引用中保存了错误的替换。这种错误信息很普通，所以这里指出一点：</P>
+<P ALIGN="JUSTIFY">·总是拿优先级最高的字符串先去匹配，最符殊的字符串先去匹配。如果读者不这么做，则会陷入痛苦的等待中，例如：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY">　　　 $line = ~ m &quot; (. * | word )&quot;;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">绝不会匹配word。这是因为word是<B>.</B>*（也就是四个任一字符）的一个实例。同时正则表达式极左匹配，所以首先拾取<B>.</B>*，因而：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> $line = &quot; wordstar&quot;;</P>
+<P ALIGN="JUSTIFY"> $line = ~ m &quot; (.* | word)&quot;;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">将匹配wordstar（即，整个字符串而不是word。<B>.</B>*匹配任何字符集，且因<B>.</B>*在替换中处于第一位，所以始终比&quot;word&quot;优先。因而没有匹配wordstar中的word：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY">　　　　 $line = ~ m &quot;(word | .*)&quot;; #since ‘ word’ is 
+  first.</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">在不知道某单词是否为定界符或者该单词是否为复数的情况下，替换是很有帮助的。例如，如下代码：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> $line = ‘ words’;</P>
+<P ALIGN="JUSTIFY"> $line = ‘ word’; </P>
+<P ALIGN="JUSTIFY"> $line = ~m &quot;word (s|$)&quot; sg; # word may be followed 
+  by the character ‘!’ or ‘$’.</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">两者都能匹配。该语法将匹配字符串word，无论word后跟字符串结束标记或者s。用下式替换$：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY">　　　 $line = ~ m &quot; word (s | \b)&quot;;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">这就得到处理复数的好方法。</P>
+<P ALIGN="JUSTIFY">　</P>
+<B> 
+<P ALIGN="JUSTIFY"><a name="8"></a>9．3．8 原则8</P>
+</B> 
+<P ALIGN="JUSTIFY">Perl用（?..）语法给正则表达式提供扩展名。</P>
+<P ALIGN="JUSTIFY">在Perl历史上的某一天（大约Perl 4向Perl5转变时），为了使正则表达式集合增长，人们决定Perl必须&quot;达到元字符标准&quot;。一些人争论道有太多的元字符存在，而另一些人不同意，直到键盘上没有太多的元字符为止。</P>
+<P ALIGN="JUSTIFY">到那是人们在认为形成一种独特的可用于多次扩展的构造是一个好主意。查看键盘后，发现一个相当普通的字符（？）在任何地方都不用。因此，它被定了下来。语法看起来像这样：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY">　　　 (? &lt;special character(s)&gt; &lt;text&gt;)</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">这里，&lt;special character(s)&gt;代表扩展名，&lt;text&gt;是表达式使用的文本。四个最常用的扩展名在表9-5中给出。</P>
+<B> 
+<P ALIGN="CENTER"><IMG SRC="images/Image10.jpg" WIDTH=525 HEIGHT=94></P>
+</B> 
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY">　 此外，有一个运算符(?#comment)允许用户把注嵌入正则表达式。不过因为x修饰符的出现(后面讨论)这个运算符已过时了。在其它方面，扩展名像其它正则表达式结构一样工作。把它们放到正则表达式中。如果输入：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY">　　　 $line = ~ m &quot; I love(?! oranges)&quot; ;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">则由于(?!禁止oranges跟着字符串I love，所以此行代码匹配love figs 而不是I love oranges。然而，这个表达式匹配的是I 
+  love orange或者I love ripe oranges，原因是它仅禁止以字符串oranges开头的字符串。可以输入：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY">　　　 $line = ~ m &quot; I love (?!. * orange )&quot;;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">来禁止这些字符串。</P>
+<P ALIGN="JUSTIFY">事实上，修饰符(?!是Perl语有中最容易理解的结构。人们希望它处理如下事情：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY">　　　 $line = ~ m &quot;(?! Oranges ) I love &quot;;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">使之不匹配oranges I love。这明显地不会成功。结构(?l)仅当下一个子串不是oranges时才匹配。 因而，在这个例子中，使匹配无效的唯一位置是在字符串的开头 
+  在其他任何位置都不会做任何工作。正则表达式向前执行，并已发现紧接着的六个字符不是&quot;oranges&quot;。因而要求满足，执行下一个要求。</P>
+<P ALIGN="JUSTIFY">另两个用得最多的表达式是(?<B>:…</B>)和(?=<B>…</B>) 。例如：(?<B>:…</B>)通过除去不必要的反向引用而使正则表达式更高效。如果输入：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY">　　　 $line = ~ m &quot; (?:int | unsigned int | char )\s*(\w+)&quot;;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">以得到变量名，而可能不希望保存变量的类型，因而用(?<B>:</B>)。表达式匹配给定类型，后跟空格，后跟变量名(\w＋)。但是把变量名保存在＄1中而不是$2中，(?：)被忽略。这样可节省时间和内存，尤其是在大型模式匹配中。</P>
+<P ALIGN="JUSTIFY">另一个表达成(?<B>:</B>)仅在使用g修饰符时有用，下面我们将仔细介绍。g修饰符可让读者在正则表达式中从读者停止的位置后面开始，不必从头再来。例如，如果有看起来像下面这样的数据：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY">　　　 BLOCK1 &lt;data&gt; BLOCK2 &lt;data2&gt; BLOCK3 &lt;data3&gt;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">而读者想首先匹配&lt;data&gt;，其次匹配&lt;data2&gt;，第三(最后)匹配&lt;data3&gt;，于是可输入：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY">　　　 $line = ~ m &quot; BLOCK \d(,*?) (BLOCK\d | $)&quot; g;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">第一次运行会匹配&lt;data&gt;，但是在第二个BLOCK之后，就把&quot;匹配指针&quot;放到了错误位置。如果输入为：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY">　　　 $line = ~ m &quot;BLOCK \d (.*?) (?=BLOCK\d)&quot;g;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">则由于说明&quot;匹配BLOCKl和BLOCK2之间的最少数量的文本&quot;所以匹配相同数量的文本。为了下一次匹配的目的而忽略了BLOCK2，以致于使下一次调用正则表达式能匹配&lt;data2&gt;。图9-8概括了二者之间的区别。用(?＝)形式可以现在输入如下语句：</P>
+<P ALIGN="JUSTIFY">用(?=)形式可以现在输入如下语句：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1> 
+<P ALIGN="JUSTIFY"> BLOCK 1 &lt;data&gt; BLOCK2 &lt;data2&gt; BLOCK3 &lt;data3&gt;</P>
+<P ALIGN="JUSTIFY"> while ($line = ~ m &quot;BLOCK\d(.*?) (?=BLOCK\d | $ )&quot;g)</P>
+<P ALIGN="JUSTIFY"> {</P>
+<P ALIGN="JUSTIFY">　　　　　　　 print &quot; $1 \n&quot;;</P>
+<P ALIGN="JUSTIFY"> }</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">并使其先打印出&lt;data&gt;，接着打印出&lt;data2&gt;，继而打印出&lt;data3&gt;。我们在下面介绍g修饰符时将了解更多的道理。</P>
+<P ALIGN="CENTER">　</P>
+<P ALIGN="CENTER"><IMG SRC="images/Image12.jpg" WIDTH=561 HEIGHT=354><br>
+  图 9-8 m" BLOCK(.*?)(?=BLOCK)" g 和 m" BLOCK(.*?)BLOCK" g之间的区别</P>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY"> <B><a name="9"></a>9．3．9正则表达式原则概括</B> </P>
+<P ALIGN="JUSTIFY">前一节知识应该足够让读者使用正则表达式。虽然称它们为“基本”的正则表达式，但是 我们将看到通过不同的组合，正则表达式在对付数据的战斗中可形成庞大的联盟——这常常是一场战争。八条原则——再声明一次——是：</P>
+</FONT> 
+<DIR><DIR>
+<DIR>
+<DIR>
+<P ALIGN="JUSTIFY">
+
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3>    </font><FONT FACE="Courier New" SIZE=3>·</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>原则1：正则表达式有三种不同形式(匹配(m//)，替换(s///)和转换(tr///))。</font></P><P ALIGN="JUSTIFY">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3>    </font><FONT FACE="Courier New" SIZE=3>·</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>原则2：正则表达式仅对标量匹配($scalar=~ m" a"; 可以工作; @array=~ m" a"把@array作为标量对待，但因此可能不会成功)。</font></P><P ALIGN="JUSTIFY">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3>    </font><FONT FACE="Courier New" SIZE=3>·</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>原则3：正则表达式匹配一给定模式的最早的可能匹配。缺省时，仅匹配或替换正则表达式一次($a = ' string string2'; $a=~s" string" "; 导致$a==' 1 string 2')。</font></P><P ALIGN="JUSTIFY">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3>    </font><FONT FACE="Courier New" SIZE=3>·</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>原则4：正则表达式能够处理双引号所能处理的任一和全部字符($a =~ m" $varb" 在匹配前把varb扩展为变量；因而，$varb=' a' $a=' as' $a=~S" $varb" " 使$a等于s)。</font></P><P ALIGN="JUSTIFY">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3>    </font><FONT FACE="Courier New" SIZE=3>·</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>原则5：正则表达式在求值过程中产生两种情况：结果状态和反向引用。是否$a=~ m"varb" 告诉如果$a中有子串varb出现，那么$a=~s"(word2)(word1)" $1 $2" </FONT><FONT FACE="Courier New" SIZE=3>“</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>调换”这两个单词。</font></P><P ALIGN="JUSTIFY">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3>    </font><FONT FACE="Courier New" SIZE=3>·</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>原则6：正则表达式的能力核心在于通配符和多重匹配运算符以及它们如何操作。$a =~ m" \w+" 匹配一个或多个单词字符；$a=~m" \d*" 匹配零个或多个数字。</font></P><P ALIGN="JUSTIFY">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3>    </font><FONT FACE="Courier New" SIZE=3>·</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>原则7：如果欲匹配不只一个字符集合，Perl使用叫做替换(alternation)的技术。如果输入m" (cat|dog)" 则相当于说明“匹配字符串cat或者" dog"。</font></P><P ALIGN="JUSTIFY">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3>    </font><FONT FACE="Courier New" SIZE=3>·</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>原则8：Perl用(?..)语法给正则表达式提供扩展名。</font></P></DIR>
+</DIR>
+</DIR>
+</DIR>
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3> 
+<P ALIGN="JUSTIFY">哇！读者怎样学所有这些原则？我建议先从简单的开始。如果学会了$a =~ m" ERROR" 是在$a中查找子串ERROR，那么就已经比在，C这样的低级语言中得到了的能力。在讨论完两个主要的概念即在正则表达式修饰符和环境之后我们将在下面给出许多实用的例子.</P>
+<P ALIGN="JUSTIFY">　</P>
+<B>
+<P ALIGN="JUSTIFY"><a name="10"></a>9．3．10正则表达式修访符</P>
+</B>
+<P ALIGN="JUSTIFY"> 上一节中所有正则表达式都具有如下形式：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY">    $a＝~m//；# m"  "is synony2n，as is m { }</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">或者：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $a＝~S///； # s" " " is synonym，as is s { } { }</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    二者都表示正则表达式的缺省形式，它们从表达式的头部开始，匹配或者替换一次。</P>
+<P ALIGN="JUSTIFY">    假定我们不想“匹配或替换一次”。假定我们想把表达式中的所有a替换为b，或者我们想：不分大小写地匹配。换句话讲，假定我们不想使用缺省行为。幸运地，有一些有帮助的修饰符，我们可以把它们增加到正则表达式中重载它们的行为来做缺省动作之外的事情。正则表达式修改过的形式看起来像下面这样：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $a =~ m//gismxo; $a =~ s///geimxo;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    用一个或者多个“附加”在后面的修饰符来转换Perl表达式的行为。我们先讲述在二者之间有共同特征的修饰符(s,m,i,x,o)进而讲述在二个运算符之间有不同含义的修饰符(e,g)。下面就来讲述它们。</P>
+<P ALIGN="JUSTIFY">    1．替换和匹配中的标识符</P>
+<P ALIGN="JUSTIFY">结构m" "和s" " " 有许多共同的运算符。它们列在下面的表9-6中。</P>
+<P ALIGN="JUSTIFY">    下面详细说明这五个修饰符。</P>
+<P ALIGN="JUSTIFY">    (1)x：扩展的可读性规范表达式</P>
+<P ALIGN="JUSTIFY">    正则表达式有时变得很乱，大家前面已看到了。但是那些还不及实际生活中有些表达式的一半。考虑下面的代码---粗略地——匹配Perl中的一个子程序：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $line＝~m" sub\s+(w+)\s+{(.*?)}\s*(?=sub)" s;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER"><IMG SRC="images/Image11.jpg" WIDTH=517 HEIGHT=129></P>
+<P ALIGN="JUSTIFY">    这些代码意味着什么?即使读者是一位Perl老手，即使给出了注释，这个表达式仍会迫使读者想上一小阵子。尤其缺少空格是件讨厌的事情，特殊字符的数目让读者感到头晕。    在Perl4中没有提供x运算符。因为x运算符使在正则表达式中放置空格以使它们易读及允订留出空间来放注释成为可能，所以说x运算符是特别的幸事。表达式:</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $line =~ m" sub\s+(\w+)\s+{(.*?)}\s*(?=sub)" s;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    变为：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $line =~ m{</P>
+<P ALIGN="JUSTIFY">             sub\s+ ( \w+ ) \s+         # matches the ' sub' keyword, subroutine name</P>
+<P ALIGN="JUSTIFY">                                       # and matches the white space afterwords.</P>
+<P ALIGN="JUSTIFY">             {    &#9;&#9;               # opening brace </P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">　</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">                 ( .*?)             # matches the text of the sub. and saves it </P>
+<P ALIGN="JUSTIFY">                                   # further use.</P>
+<P ALIGN="JUSTIFY">             }                         # closing brace</P>
+<P ALIGN="JUSTIFY">             \s*(?=sub)                # the next sub keyword</P>
+<P ALIGN="JUSTIFY">             }sx;   </P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    可是仍然很难看.尽管仍有众多令人头痛的特殊字符，但读者可以非常清楚地看出它们之间的逻辑关系。它更象是实际的逻辑思维过程.花括号放在正确的位置。既然能够写入注释,这就非常有助于给出正在执行内容的详细说明。</P>
+<P ALIGN="JUSTIFY">    然而，注意几个警告。既然在有正则表达式中允许有空格，那么滤掉后，下面的代码将不会匹配：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $line =" multi line string\nhere" ;</P>
+<P ALIGN="JUSTIFY">    $line =~ m" multi line string" X;    # this does not match the above because</P>
+<P ALIGN="JUSTIFY">                                         # the space above GETS MUNGED OUT.</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    注意x可读性函数仅在替换运算符的第一个括号处起作用(也就是在s{}{}中)。这是因为只有第一个括号把它的值内插为一个双引字符串。第二个括号中的一切都是字面上的。例如，下面的例子可能不去做读者想让它做的事情：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $line = 'aaaaaa' ;    # we want 'bbbbbb' after the substitute below.</P>
+<P ALIGN="JUSTIFY">    $line = ~ s{</P>
+<P ALIGN="JUSTIFY">                    a</P>
+<P ALIGN="JUSTIFY">              }</P>
+<P ALIGN="JUSTIFY">              {</P>
+<P ALIGN="JUSTIFY">                    b</P>
+<P ALIGN="JUSTIFY">              }     gx;   # we want to do a 'general' match, i.e., match</P>
+<P ALIGN="JUSTIFY">                          # ALL a's for b's. DOESN'T WORK!</P>
+<P ALIGN="JUSTIFY">     print $line;         # prints '               .  b                 b...etc'</P>
+<P ALIGN="JUSTIFY">&#9;&#9;&#9;  # six times over.&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;        </P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    这里发生的一切是由于在第二个括号中的项目没有留出空格。相反，a的每个实例(在这里留出了空格)用3个制表符，一个b和一个换行符替换，导致混乱。</P>
+<P ALIGN="JUSTIFY">    易读的正则表达式在处理更复杂事情时对保持头脑清醒有巨大作用。</P>
+<P ALIGN="JUSTIFY">    (2)i：大小写不敏感的匹配  *</P>
+<P ALIGN="JUSTIFY">    正则表达式缺省情况下是区分大小写的。使用i则表明将进行不区分大小写的匹配。</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">       $pattern = ' Exercise' ;</P>
+<P ALIGN="JUSTIFY">       $pattern =~ s"exer" EXER" i'    # matches first four characters of Exercise.(Exer)</P>
+<P ALIGN="JUSTIFY">       $pattern = ' Edward Peschko' ;</P>
+<P ALIGN="JUSTIFY">       $pattern == ???</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    在两种情况下都发生，他们匹配：第一种将Exercise变邮XERcise，第二种把Edward</P>
+<P ALIGN="JUSTIFY">Peschko变成Edmund Peschko。</P>
+<P ALIGN="JUSTIFY">    i修饰符在书写几个单调的正则表达式时确实是好的速记法，例如*pattern＝~ m" [Ee]</P>
+<P ALIGN="JUSTIFY">[Xx][Ee][Rr]"；    (3)s：把模式作为一行处理 </P>
+<P ALIGN="JUSTIFY">    没有修饰符，点(.)匹配除换行符之外的任何字符。有时这是有帮助的；有时却是非常令人沮丧的，特别是如果读者有长达多行的数据时。考虑下面的例子：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">            $line =</P>
+<P ALIGN="JUSTIFY">            BLOCK1:</P>
+<P ALIGN="JUSTIFY"> &lt;text here1&gt;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3></FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY">            END BLOCK</P>
+<P ALIGN="JUSTIFY">            BLOCK2:</P>
+<P ALIGN="JUSTIFY">             &lt;text here2&gt;</P>
+<P ALIGN="JUSTIFY">            END BLOCK'</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    现在假定读者想匹配在块＜text here[0-9＞之间的文本：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">           $line =~m{</P>
+<P ALIGN="JUSTIFY">                        BLOCK(\d+)</P>
+<P ALIGN="JUSTIFY">                             (.*?)</P>
+<P ALIGN="JUSTIFY">                        END\ BLOCK   # Note backslash, Space will be ignored otherwise</P>
+<P ALIGN="JUSTIFY">             }  </P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    没有成功，因为通配符(.)匹配除换行符之外的每一字符．所以正则表达式遇到第一个换行符时就陷入困境，进而就在那儿停止进行匹配。有时，像在下面这个例子中,用通配符(.)匹配除换行符之外的任何字符是很有帮助的。通过扩展，使通配符(\s)匹配[\n\t]而不是制表符和空格是很有帮助的。这就是s运算符的功能。它告诉Perl不要假定正在使用的字符串是一行。前面的例子在用一个s加到正则表达式末尾之后匹配成功.</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">         $line =~ m{</P>
+<P ALIGN="JUSTIFY">                      BLOCK(\d+)</P>
+<P ALIGN="JUSTIFY">                          (.*?)</P>
+<P ALIGN="JUSTIFY">                      END\ BLOCK   # Note backslash, Space will be ignored otherwise</P>
+<P ALIGN="JUSTIFY">             }s;    </P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    在末尾加s，现在匹配完成。</P>
+<P ALIGN="JUSTIFY">    (4)m：把模式看作多行</P>
+<P ALIGN="JUSTIFY">    m运算符与s运算符的功能相反。换句话讲,它是指:"把正则表达式看作多行而不是一行。” 这样基本上使^和$现在不仅匹配字符串的开头和结尾(分别地)，而且使^匹配换行符之后的任意字符且使$匹配一个换行符。在下面的例子中：  ’  ’</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">      $line = ' a</P>
+<P ALIGN="JUSTIFY">      b</P>
+<P ALIGN="JUSTIFY">      c';</P>
+<P ALIGN="JUSTIFY">      $line = ~m"      ????    </P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    m修饰符使反向引用$成为a而不是a\nb\nc。</P>
+<P ALIGN="JUSTIFY">    (5)o：仅编译正则表达式一次</P>
+<P ALIGN="JUSTIFY">    o修饰诗在处理长表达式时是有帮助的。输入如下语句：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">       $line =~ m" &lt;very long expression&gt;" ;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    在这里&lt;very long expression&gt;是一个段落，甚至有几页长。正如它所表示的，每次Perl遇到正则表达式时就编译它。这就要花时间，而且如果需要匹配的模式很复杂的话．那么所用的正则表达式将特别长。在Jeffreu Friedl的书中，有一个匹配e-mail地址的表达式。e-maiI地址长达6598字节!如果不用o修饰符就全完了,但是如果仅编辑它一次则是可使用的。然而，有一个应注意的警告。如果读者输入：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">      $line = ~m" $regex" o;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">  则读者向Perl承诺$regex将不会改变。如果改变了，Perl将不会注意读者的改变。因而，</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">      $regex = 'b';</P>
+<P ALIGN="JUSTIFY">      while ('bbbbb' =~ m" $regex o) { $regex = 'c';} </P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY"> 实际上是Perl中的一个无限循环。$regex改变了。但是在正则表达式中没有反映(然而,在每个程序中这没有限制用户用一个而且仅仅一个regexp。带有o的每个表达式实例在使用前编译).</P>
+<P ALIGN="JUSTIFY">    2．替换专用修饰符</P>
+<P ALIGN="JUSTIFY">    修饰符(s、m、x、i和o)即适用于替换又适用于匹配(s///,m//)，但是有几个修饰符是匹配专用。它们就是下面列出的g和e。</P>
+<P ALIGN="JUSTIFY">    (1)g：替换所有模式为它们的等价部分。</P>
+<P ALIGN="JUSTIFY">    缺省时，运算符s///仅在第一次发现字符时进行替换。如果想替换每个单—实例的内容为其他内容，就耍使用g运算符。下面的三个例子是等价的：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $pattern＝'NUM1 NUM2 NUM3；</P>
+<P ALIGN="JUSTIFY">    $pattern＝~s" NUM" LETTER" g；  #substitutes NUM for LETTER．</P>
+<P ALIGN="JUSTIFY">    $pattern＝~s" num" LETTER" gi； #Note -- you can stack these modifiers．</P>
+<P ALIGN="JUSTIFY">                                    #does exactly the same thing as the above．</P>
+<P ALIGN="JUSTIFY">    while($pattern＝~s" NUM" LETTER"){}</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">所有的例子导致$pattern LETTERl LETTER2 LETTER3。第1个例子依据条件这样做，第二个依据条件(gi标识符)，第三个慢慢地完成(每次s" NUM" LETTER"替换一次．首先是NUM1 LETTER2 LETTER3，其次是NUMl NUM2 LETTER3，最后是NUM1 NUM2 NUM3)。</P>
+<P ALIGN="JUSTIFY">(2)e：把s///的第二部分看作完整的“微型Perl程序”而不是一个字符串进行求值。用于s///的e修饰符是非常棒的．但是也是很让人投入的。读者可以用它来完成法术般的替换。我们在这里只简单地提及它，并给出一例。我们假定想要把如下字符串中的所有字母替换为相应的ASCII数字：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $string＝'hello';</P>
+<P ALIGN="JUSTIFY">    $string＝~ s{ ( \w)}   #we save the $1．</P>
+<P ALIGN="JUSTIFY">                {ord($1):=-" ";}egx;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    该例会打印出104 101 108 108 111。在这里每个字符被依次取出然后通过ord函数转换为数字。不用说，这在极短时间内可以处理非常强大的材料。这也会冒极难理解的危险。</P>
+<P ALIGN="JUSTIFY">我们建议读者把使用这一逻辑作为最后的方法，在所有的“技巧”都失败后才用。它的使用有时会隐藏做事的清晰方法。是上面的清晰呢，还是下面的更清晰? </P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $string＝turnToAscii($string);</P>
+<P ALIGN="JUSTIFY">    sub turnToAscii</P>
+<P ALIGN="JUSTIFY">    {</P>
+<P ALIGN="JUSTIFY">       my($string)＝@_;</P>
+<P ALIGN="JUSTIFY">       my($return，@letters);</P>
+<P ALIGN="JUSTIFY">       @ letters = split(//,$string);</P>
+<P ALIGN="JUSTIFY">       foreach $letter (@letters)</P>
+<P ALIGN="JUSTIFY">       {</P>
+<P ALIGN="JUSTIFY">           $letter = ord($letter)."  "if ($letter = ~ m" \w" );</P>
+<P ALIGN="JUSTIFY">       }</P>
+<P ALIGN="JUSTIFY">       $return = join(' ',@letter);</P>
+<P ALIGN="JUSTIFY">       $return;</P>
+<P ALIGN="JUSTIFY">    }</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY">后一个例子很明显且易于维护。然而，它在长度上是前者的十余倍而速度要慢几倍；当使用e时必须调用一个判断。</P>
+<P ALIGN="JUSTIFY">　</P>
+<B>
+<P ALIGN="JUSTIFY"><a name="11"></a>9．3．11匹配和g运算符</P>
+</B>
+<P ALIGN="JUSTIFY"> 修饰符(x、i、s和e)的工作与匹配运算符m//相同；，然而有一个明显的改变是g运算符的工作方式方面，而且读者将频繁地使用到它。</P>
+<P ALIGN="JUSTIFY"> 正如我们前面所看到的，在替换中的g运算符意味着要替换正则表达式的每一个实例。</P>
+<P ALIGN="JUSTIFY">然而，这在匹配环境下是毫无意义的,反向引用表明一个且仅有一个匹配。因而，Perl在m//中以不同于s///的方法使用g运算符。</P>
+<P ALIGN="JUSTIFY"> Perl给g运算符连结—个迭代程序。当用$string＝~m" " g匹配一次时，Perl会记住匹配发生的地方。这意味着读者可以使用迭代程序来匹配离开的地方。当Perl遇到字符串结尾时,重新设置迭代程序：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY">    $line = " hello stranger hello friend hello sam";</P>
+<P ALIGN="JUSTIFY">    while($line=~ m" hello (\w+)" sg)</P>
+<P ALIGN="JUSTIFY">    {</P>
+<P ALIGN="JUSTIFY">        print " $l\n"；</P>
+<P ALIGN="JUSTIFY">    }</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    这会输出：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    stranger</P>
+<P ALIGN="JUSTIFY">    friend</P>
+<P ALIGN="JUSTIFY">    sam</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">   接着退出，原因是内部的迭代程序到达表达式的尾部。这里有一个提示，如果读者正在使用g修饰符，那么对通过赋值匹配的变量的任何修改都会导致重新设置迭代程序。</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $line = " hello";</P>
+<P ALIGN="JUSTIFY">    while($line=~ m" hello" sg)</P>
+<P ALIGN="JUSTIFY">    {</P>
+<P ALIGN="JUSTIFY">        $line = $line;</P>
+<P ALIGN="JUSTIFY">    }</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY">这是一个无限循环!所以在匹配时要约束自己和避免修改字符串。(做一份拷贝来替代它)</P>
+<P ALIGN="JUSTIFY">　</P>
+<B>
+<P ALIGN="JUSTIFY"><a name="12"></a>9．3.12修饰符和环境</P>
+</B>
+<P ALIGN="JUSTIFY"> 如果在开始学习本章之前读者不熟悉Perl正则表达式，那么读者的头脑中可能会漂浮着同的修饰符、方法、特殊字符等等。让我们花点时间来看看使用正则表达式的不同形式，然后介绍一些常用的正则表达式例子结束本章。</P>
+<P ALIGN="JUSTIFY"> 这一切都与环境有关。记住，在Perl中，环境是王者，如果读者注意它，则通过辨识不同表达式所处的环境就可以做许多强有力的事情。我们简单地“结晶”一些我们到现在为止所见到的形式，然后增加几个新的。</P>
+<P ALIGN="JUSTIFY"> 1．标量环境下的替换（无修饰符） 这种情况的代码看起来如下所示：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1>
+<P ALIGN="JUSTIFY">    if($string =~ s" a" b")  {print：" Substituted Correctly" ;}</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    程序会打印Substituted Correctly，当字符串实际上匹配后给if返回l。同时它也会把a的所有实例替换为b。</P>
+<P ALIGN="JUSTIFY">    2．在标量环境下的替换(g修饰符)</P>
+<P ALIGN="JUSTIFY">    这种情况下返回成功匹配的次数。使用这种方法，如果读者输入以下代码：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    ($string =~ s" a" b" g) == ($string =~ s" a" b" g)</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    Perl将告诉读者是否$string中有与$string2中相同数量的a，同时进行替换。如果读者愿意可以在整个文件上使用它：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    undef $/;</P>
+<P ALIGN="JUSTIFY">    my $fh = new FileHandle(" File1");</P>
+<P ALIGN="JUSTIFY">    my $fh2 = new FileHandle(" File2");</P>
+<P ALIGN="JUSTIFY">    (($line = &lt;$fh&gt;) =~ s" a" b") == (($line2 = &lt;$fh2&gt;) =~ s" a" b");</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>
+<P ALIGN="JUSTIFY">这会计算两个文件中的a数，当再做替换时比较它们。</P>
+<P ALIGN="JUSTIFY">    3．在数组环境下的替换(无修饰符)和数组环境下的替换(g标识符)</P>
+<P ALIGN="JUSTIFY">    这两个较烦人。它们实际上做与标量环境下替换相同的工作。</P>
+<P ALIGN="JUSTIFY">    4．在标量环境下的匹配(无修饰符)</P>
+<P ALIGN="JUSTIFY">    这与在标量环境下不带修饰符的替换相同。如果读者输入：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    if($line =~ m"a") {print "Matched an a!\n" ;}</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    它只检查在$line中是否有一个a。如果输入：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    if($line＝~m" \b(\w+)\b"){print " $l\n";}</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    这会检查在$line中是否有单词，接着把它存放在$1中，打印它。同时：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    ($line＝~m" \b(\w+)\b")&amp;&amp;(print " $l\n";);</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    做同样的工作，仅使用短路来打印它。</P>
+<P ALIGN="JUSTIFY">  5.在数组环境下的匹配(无修饰符)</P>
+<P ALIGN="JUSTIFY">    这会匹配正则表达式能匹配的第一个位置，接着简单地把反向引用放入一个可快速访问的表中。例如：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    ($variable,$equals,$value) = ($line = ~m" (\w+)\s*(=)\s*(\w+)");</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    该代码取到第一个引用(\w+)，使之成为$variable；取到第二个引用(＝)使之成为$equals;然后取到第三个引用(\w+)，使之成为$value。</P>
+<P ALIGN="JUSTIFY">   6．在数组环境下匹配(g修姊符)</P>
+<P ALIGN="JUSTIFY">    取到正则表达式，尽可能多地应用它．然后把结果放人到由所有可能匹配组成的数组中，</P>
+<P ALIGN="JUSTIFY">例如：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $line = '1.2 3.4 beta 5.66';</P>
+<P ALIGN="JUSTIFY">    @matches = ($line =~m" (\d*\.\d+)" g);</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    将使@matches等于1.2，3.4，5.66。g修饰符完成迭代，首先匹配1.2，其次是3.4，第三是5.6。同样:</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    undef $/;</P>
+<P ALIGN="JUSTIFY">    my-$FD= new FileHandle(" file");</P>
+<P ALIGN="JUSTIFY">    @comments = (&lt;$FD&gt; =~m" /\*(.*?)\*/");</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    将生成一个包含文件$fd中所有注释的数组。</P>
+<P ALIGN="JUSTIFY">    7．标量环境下的匹配(g修饰符)</P>
+<P ALIGN="JUSTIFY">    最后，如果在标量环境下使用匹配运算符，那么读者得到与在正则表达式世界中甚至是在Perl世界中完全不同的行为。这就是我们谈到的“迭代”行为。如果输入以下代码：</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    $line = " BEGIN &lt;data&gt; BEGIN &lt;data2&gt; BEGIN &lt;data3&gt;";</P>
+<P ALIGN="JUSTIFY">    while($line =~ m" BEGIN(.*?)(?=BEGIN|$)" sg)</P>
+<P ALIGN="JUSTIFY">    {</P>
+<P ALIGN="JUSTIFY">       push(@blocks, $l);</P>
+<P ALIGN="JUSTIFY">    }</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">  这将匹配以下的文本(粗体)，随后在接下来的while迭代中把它加载@blocks中。</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=1><P ALIGN="JUSTIFY">    BEGIN &lt;data&gt; (%)BEGIN &lt;data2&gt; BEGIN &lt;data3&gt;</P>
+<P ALIGN="JUSTIFY">    BEGIN &lt;data&gt; BEGIN &lt;data2&gt;(%) BEGIN &lt;data3&gt;</P>
+<P ALIGN="JUSTIFY">    BEGIN &lt;data&gt; BEGIN &lt;data2&gt;(%) BEGIN &lt;data3&gt;</P>
+</font></B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">    通过(%)我们已经表明了每次迭代开始匹配的位置。注意本例中(?=)的用法。它是匹配正确方式所必须的；如果不用它，匹配程序将会被放在错误的地方。</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT></BODY>
+</HTML>

@@ -1,0 +1,186 @@
+
+
+<html>
+
+<head>
+
+<title>Whitepapers -  Project and Teams, by Grady Booch </title>     
+
+<meta keyword="Architecture and Design,ClearCase Attache,ClearCase MultiSite,ClearCase,Rational Rose">
+
+</head>
+
+
+
+
+<body basefont="Verdana, Arial, Helvetica" marginheight="0" text="#000000" bgcolor="#ffffff" topmargin="0" marginwidth="0" link="#000099" leftmargin="0" vlink="#6666cc">
+<!-- <body basefont="Verdana, Arial, Helvetica" marginheight="0" text="#000000" bgcolor="#ffffff" topmargin="0" marginwidth="0" link="#000099" size="2" leftmargin="0" vlink="#6666cc"> -->
+<center><table width=630 border=0><tr><td>
+<font size="3"><font face="arial, helvetica" size="+1">Projects and Teams</font><br>
+<i>by Grady Booch</i>
+
+<font size="-1"> 
+
+<p>Having a clearly-defined project, together with healthy team dynamics, are always essential ingredients to success, but object-oriented project teams present some unique challenges that Grady has addressed in various articles.</p>
+
+<p>We include the following two articles in this chapter:</p>
+
+<ul type="square">
+<li>The Object-Oriented Project describes a classification of the types of OO projects and observations of these with respect to architecture, rigor of development process, documentation, and process maturity.</li>
+<p>
+<li>Growing Mature Abstractionists discusses the important skill of abstraction on OO projects and the role of an abstractionist. Grady articulates what skills a good abstractionist will possess, and he describes how to recognize and cultivate abstractionists within the team.</li>
+<p>
+<li>There have also been a number of articles were incorporated into Object Solutions, so are not included here, but are summarized below:</li>
+<p>
+<li>When Bad Things Happen to Good Projects identifies certain project risks specific to OO projects and advises project teams to remain customer-focused. Grady presents a few case studies and recommendations for risk avoidance.</li>
+<li>The Five Habits of Successful Object-Oriented Projects discusses how the health of project teams is often easy to spot. Grady presents the five habits and how the absence of good habits is an indicator of likely project failure. The habits are: (1) A ruthless focus on the development of a system that provides a well-understood collection of essential minimal characteristics. (2) The existence of a culture that is centered on results, encourages communication, and yet is not afraid to fail. (3) The effective use of object-oriented modeling. (4) The existence of a strong architectural vision. (5) The application of a well-managed iterative and incremental development life cycle.</li>
+<p>
+<li>Rules of Thumb helps set the team's expectations and presents project planning guidelines.</li>
+<p>
+<li>The Development Team discusses the critical importance of people to a project's success. There must be a reasonable distribution of responsibilities among the team, into well-defined roles, which Grady enumerates. The central role and critical responsibilities of the architect are described.</li>
+</ul>
+
+<p><font size="3"><strong>The Object-Oriented Project</strong></font></p>
+
+<p>People can be divided into one of two groups: those who divide people into two groups, and those who don't.</p>
+
+<p>In trying to characterize the spread of object-oriented technology, it is possible to partition the marketplace along a number of different dimensions. For example, we might differentiate among projects completed by early adopters of the technology, versus projects in the steady state carried out by organizations that have already deployed significant object-oriented systems. Along this dimension, we see significant differences in approaches to risk management. In particular, inaugural projects tend to be more open to risk, simply because a typical goal of such projects is to calibrate the risk of the technology in the context of that organization's particular culture. In contrast, steady-state projects tend to be slightly more risk averse, largely because some critical business venture likely depends upon the project's outcome.</p>
+
+<p>Alternatively, we might divide the market according to object-oriented programming language. The cultural differences among C++, Smalltalk, and Eiffel projects, for example, are often striking. While it is unfair to apply stereotypes to any specific project, we can make some broad generalizations. For example, it is rare to find Smalltalk projects staffed with more than a couple of dozen developers; it is not uncommon to find C++ projects staffed with dozens if not a few hundred developers. Smalltalkers will thus gleefully make ad hominum attacks by noting the folly of large C++ projects (&quot;Small is beautiful&quot; is the appropriate rallying cry), but C++ers will often counter by pointing out the lack of disciplined development by some Smalltalkers. Such religious attacks are just plain silly, but for some projects they do sometimes reflect a deeper truth.</p>
+
+<p>Continuing, we might divide the object-oriented marketplace by domain: management information systems versus command and control systems versus process control, and so on. Along this dimension, the presence of the object-oriented paradigm is largely felt in the form of domain-specific frameworks. This view is significant in that it offers a focus for organizations intent upon applying object-oriented technology to a particular vertical market. Thus, today, we see frameworks being developed for securities trading, patient health care, telephone switching systems, and accounting systems. Interestingly, few such domain-specific frameworks are traded on the open market: rather, they serve as a competitive advantage for the company that created them, and so have a value far greater than could be commanded on the open reuse market.</p>
+
+<p>These three views are largely orthogonal: We find inaugural projects as well as more mature projects across virtually every application domain. The same is true of the scattering of languages versus application domain, although languages such as Smalltalk seem to have found a niche in securities trading, and languages such as Ada have found a niche in the transportation industry.</p>
+
+<p>There is yet another partitioning of the marketplace that we might consider, and it proves to be a particularly useful one because it tells us something about the maturity of the corresponding software development organization. Along this dimension, I classify each object-oriented project into one of two categories: projects that serve the needs of isolated application development, and projects that encompass the activities of a whole enterprise.</p>
+
+<p>Most organizations gain early experience in the object-oriented paradigm through the development of applications that are relatively independent of the rest of the business' computing activities. This is the domain of the grassroots developer, someone decides that object-oriented programming is a cool thing, and so plays with a low-cost compiler for a while, ultimately gaining enough experience to convince management to try it on some small project. Such early projects are usually characterized as only marginally disciplined, but that is not necessarily a bad thing, because any new technology requires some amount of exploratory development, and trying out these ideas on small projects creates an environment wherein failure is tolerated.</p>
+
+<p>An aside: Don't underestimate the importance of failure in object-oriented development. Designing simple object-oriented architectures is hard, and I guarantee that you will have false starts in your first projects. It is better that you gain this experience early with low-risk projects, rather than betting your company on the technology the first time.</p>
+
+<p>If the corresponding software development organization is sufficiently mature, early positive experience in small projects will naturally be carried over into larger ones. This is indeed a primary way that technology transfer happens in the market today. People carry with them their experience base of using object-oriented technology in the context of that organization's particular development culture.</p>
+
+<p>My rather unscientific data gathering suggests that most organizations are just at this cusp of changeover with regard to object-oriented technology. With a growing body of experience as to the real (as opposed to imagined) benefits of objects, we see more companies, rather than individual development projects, beginning to embrace the technology at an enterprise-wide level.</p>
+
+<p>However, some organizations never grow beyond this independent/isolated project stage, and are content to apply object-oriented technology to new projects of growing complexity, without consideration for the leverage that objects might provide across projects. This leads me to suggest the primary litmus test for classifying projects along their object-oriented maturity: isolated application development tends to focus on building relatively independent applications very well; whereas enterprise-wide development tends to focus on building families of programs.</p>
+
+<p>There are a number of important implications that derive from this distinction with respect to a team's interest in architecture, process, and documentation.</p>
+
+<ul type="square">
+<li>Perhaps foremost is the degree of focus upon architecture. Isolated application development tends to have only secondary concern for architecture, and unfortunately, tools that support that domain only encourage this view of the world. Development environments such as Microsoft's Visual C++, for example, provide wizards that eliminate some of the tedium of object-oriented development, but they also force you down to the details of a particular framework very quickly, making it difficult to raise your head above water to see a larger architectural vision of the program you are trying to build. More mature organizations respect the importance of architecture, and in some manner institutionalize it, typically by identifying and empowering a chief architect. Indeed, among those organizations I have seen that have tried to apply enterprise-wide object-oriented computing, those that neglect a system's architecture tend to fail. Why is this so? Simply stated, the central problem in building families of programs is not so much in crafting beautifully designed classes, but is more so a problem of crafting patterns of collaborative classes. These patterns do not just happen; they must be consciously architected and carried out consistently.</li>
+<p>
+<li>Another implication concerns the rigor of the development process. In isolated application development, the process is dominated by the personalities of the individual developers. This is not to say that this is a horrible practice: some of the world's most innovative software has sprung from the collective minds of a small, informal merry band of developers. However, this practice does not scale to enterprise-wide computing, nor does it work to achieve a predictable, sustainable software development effort. Those organizations that try to make this transition to enterprise-wide object-oriented computing without considering a more formal process tend to fail. At the other extreme, those organizations that try to leap to enterprise-wide processes without validating their process on smaller real projects also tend to fail. Of course, every organization has to find a balance between too much rigor and not enough. This has important implications for management: enterprise-wide object-oriented computing requires active management involvement, because the kinds of products and measures of goodness tend to be subtly different for object-oriented systems than for traditional processes. In the steady state, we can characterize the process of mature organizations as one of generating a steady stream of successive refinements to an architecture. This task is made particularly challenging in the face of a family of programs, because one must make risk trade-offs that may be suboptimal for certain individual programs, although optimal for the business at large. For example, the decision to use a particular object [database] management system might subvert the previous decisions of one ongoing project, although in the long run, across the enterprise, it might lead to considerable savings because of the use of common patterns.</li>
+<p>
+<li>Continuing, organizations that seek to build families of programs tend to view documentation very differently than their counterparts building isolated applications. For enterprise-wide computing, documentation must encompass the rationale of the architecture, if we are to ever build enduring systems that transcend the lifetimes of their creators. Documentation standards thus tend to be much more formal, and in fact, documentation is often treated as an important, reviewable deliverable. Isolated applications, on the other hand, do not represent such a capital investment in software, and so it is often more economical to throw people at the problem rather than properly document the system's design. Of course, the very real tendency is for larger projects to be documentation obsessed, thus (incorrectly) focusing upon documentation products at the expense of software products. Similarly, isolated application development tends to be product-driven, at the expense of writing meaningful documentation. In any case, a balance is required: the successful projects in both categories tend to view documentation as an important derived product of the development process. How many of you have programming style guides? Most would answer yes. How many of you have architectural style guides? Unfortunately, most would answer no, although such documents are essential in crafting families of programs.</li>
+</ul>
+
+<p>Does this mean that enterprise-wide object-oriented computing is the desired end point for every mature development organization? Not necessarily. To remain nimble in the marketplace, you have to know when to establish corporate guidelines and when to break them. However, the level of maturity that successful enterprise-wide computing represents is something to strive for. Object-oriented stuff is indeed a cool thing, but ultimately most of us are in the business to make real projects with whatever resources we can find. We tend to get the most leverage from object-orientation when we apply these concepts to building frameworks, and this can only happen if we raise our heads from our workstations from time to time, and recognize the need for a mature development process.</p>
+
+<p><font size="3"><strong>Growing Mature Abstractionists</strong></font></p>
+
+<p>Try the following exercise with the members of your budding object-oriented development organization: Generate a class hierarchy, given the following objects drawn from the domain of an information model for an insurance company, an insurance policy, a whole life policy, a universal life policy, a personal liability policy, an automobile insurance policy, and a property insurance policy.</p>
+
+<p>(Now we all wait while the theme song from &quot;Jeopardy&quot; plays.)</p>
+
+<p>You will get a variety of responses. Some of your developers, especially those who have not yet engaged in the world of object-oriented stuff, may respond with the question, &quot;So, what's a class?&quot; Your truly object-oriented developers might produce a tidy class hierarchy, illustrating the generalization/specialization of various classes of these objects. Your more seasoned developers will likely go further by introducing some intermediate abstract classes, (such as the class &quot;life insurance,&quot;) whose presence serves to simplify the hierarchy by providing a locus for certain common structure or common behavior. Your wild-eyed object-oriented zealots, look around, every company seems to have one of two of these types lurking about, will immediately launch into an impassioned plea as to why multiple inheritance is absolutely essential for such a problem, and will then sit down and hack out an executable prototype that defends their point of view.</p>
+
+<p>Well, all of the above responses are wrong.</p>
+
+<p>The &quot;right&quot; reply to this exercise is not a tidy class hierarchy, nor an elegant one, nor a running prototype, but rather, another question: &quot;Why am I building this hierarchy?&quot; Meaningful abstractions can never be crafted in the absence of a well-defined context. Stated more intensely, any such abstraction that we try to build without knowing why we are making this classification is usually vacuous, over-engineered, or both.</p>
+
+<p>Given the following three objects, which is the most different: a trout, a cow, or a lungfish? If I'm developing an information model for a restaurant, I'd probably say that the lungfish is the most different, since it's the one object of the three you'd likely never see on a menu. If I'm developing an information model for an aquarium, I'd probably choose the cow. (Gary Larson, cartoonist for the Far Side, might disagree with me, but I've never seen a cow particular skilled in doing the breast stroke, or the butterfly. Besides, who would pay money to see trained cows perform at Sea World?) If I'm studying the underlying genetic structure of these three objects, I'd likely select the trout as most different, since as it turns out, the cow and lung fish appear to be relatively close in their evolutionary development.</p>
+
+<p>Ask different biologists how many species there are, and you will get answers that range from 2 million to 50 million. It all depends upon why you are producing a particular classification.</p>
+
+<p>Classification is the central problem in all things object oriented. Classification is indeed at the root of the problem of identifying classes and objects, the first step in many approaches to object-oriented analysis and design. However, classification is hard. There is no magic available to automatically craft a profound class or class hierarchy: These tasks require individual creativity, intuition, and experience. Unfortunately, not everyone is good at it.</p>
+
+<p>My term for an analyst or developer gifted with skills in classification is an abstractionist. I have an unscientific rule of thumb that says, given a group of developers, only about 20-30% of them are probably really good at object-oriented abstraction. That doesn't mean that the remaining 70-80% are bad, evil, or inadequate programmers. Rather, it is a recognition of the fact that some people are better than others at looking at the world and discovering or inventing abstractions of reality.</p>
+
+<p>This is actually good news. Not everyone on a development team should be an abstractionist. I have seen more than a few object-oriented projects fail because every developer was almost equally skilled in classification, and as such, the team could never get consensus about the right collection of classes for the problem at hand. The principal symptom of such projects is that their architecture never stabilizes, because there are constant debates about whether or not certain seams in the system are expressed at the proper level of abstraction.</p>
+
+<p>Another reason this is good news is that it's a recognition of the different skill sets that many organizations have in place. Many smaller development shops are more homogeneous, but larger organizations tend to have a wide mixture of skills, ranging from earthy assembly language programmers, to elitist programmers working in avant-garde languages, to analysts, and to architects.</p>
+
+<p>Not everyone on a team needs to be an abstractionist, although some must be skilled at classification. Fortunately, these skills appear to be something that can be learned, although some are born abstractionists, just as some seem born to be artists.</p>
+
+<p>My observation is that a good abstractionist embodies at least the following three skills:</p>
+
+<ul type="square">
+<li>First, he or she usually has a good intuition for the clean separation of concerns between any two given abstractions. The classical object-oriented example of an object under a GUI system knowing how to draw itself is simplistic, in that it implies a close coupling between the object being displayed and the agent that offers a protocol for how the object displays itself. The abstractionist recognizes that a coupling indeed exists, and strives to separate the responsibilities of these two entities so that the assumptions each makes about the other are well-defined. This so-called contract model of programming, as suggested by Bertrand Meyer, is something that the skilled abstractionist practices regularly.</li>
+<p>
+<li>Second, the abstractionist is also a behaviorist, meaning that he or she can look beyond the structural attributes of an entity, and see its behavior in the world. A life insurance policy is more than just a record of the policy holder, the beneficiary, and the terms of the policy; each of these objects play a role in the context of some problem, and exhibits a behavior that distinguishes it from all other structurally similar abstractions. A life insurance policy may be redeemed, it may be canceled, its beneficiaries may be changed. These are all behaviors that define the abstraction, and hence are something that the skilled abstractionist should be able to draw out from the context of the problem.</li>
+<p>
+<li>Third, a good abstractionist is articulate. Abstractionists who serve as analysts, meaning that they are responsible for setting the desired behavior of the system, must work with end users and domain experts who likely do not understand the possibilities and limitations of an automated solution and who likely don't even themselves understand what they want their system to do. To blame the failure of a system on the excuse that its users never expressed clear requirements is usually an infantile response. One clear responsibility of the abstractionist as an analyst is to draw these requirements out and establish where the areas of uncertainty exist. This requires that the abstractionist be able to communicate well. Similarly, abstractionists who serve as designers must be able to take this object-oriented view of the problem domain, and translate it into something that other developers, who may have little domain knowledge, can understand. This too requires good communication skills. The developers I encounter who produce the most arcane code are often those who can't even write a decent e-mail message.</li>
+</ul>
+
+<p>I should note that the most mature abstractionists are those who seem to be able to recognize patterns that transcend individual classes.</p>
+
+<p>How can an organization identify the abstractionists who exist in their midst? I often use a very simple technique: CRC cards. The use of CRC cards has a number of documented benefits (some call CRC cards the poor man's object-oriented CASE tool), but one importance consequence of using them is that they serve to segment your developers. Specifically, you'll find some of your team really get engaged in a CRC card session, while others will sit on the sidelines. While this is not always a litmus test for abstractionists (someone might be unengaged because his/her goldfish just died, or was up too late the night before, either partying or programming), those who do engage are often the ones who are excited about and good at discovering abstractions of the real world.</p>
+
+<p>How can an organization grow an abstractionist? Well, as I said earlier, the important lesson is that abstraction can indeed be learned, and this flows from what I call the Nike school of software development: just do it. In other words, an abstractionist grows by developing more abstractions. This approach has two important implications. If you need to jump start your organization, perhaps because it is just beginning to leap into the object-oriented waters, you need to introduce a mentoring programming. This means introducing some more experienced object-oriented developers (from outside the company, or from internal groups who have completed an object-oriented pilot project) who serve to guide the work of the budding abstractionist. At first, this means exposing the neophyte developer to good object-oriented code and designs. As time unfolds, this means guiding the developers in using good abstractions, then eventually writing new ones of their own. The beauty of this approach is that it is self-sustaining: once you have a few good abstractionists, they can in turn mentor other promising neophyte abstractionists.</p>
+
+<p>The second implication of this approach is that the development organization must understand the role of failure. The Mona Lisa was not the first work of da Vinci; he had drawn thousands of images earlier in his career. So it is with classification: profound classifications are rare, clumsy ones are common, and so we must strive for writing at least some good ones. This comes about only if the developer has the opportunity and the time to try alternatives, and rejects those that just don't work. Now, this is a scary prospect: Most projects don't think they have time to throw things away. Rather, such projects tend to view code as a very precious commodity, something that the (electronic) pen having writ, the pen moves on. Of course, this is not reality. If an abstraction is genuinely bad and allowed to persist unchanged, it will fester and eventually become a cancer that disfigures the entire architecture. For this reason, we must take a pragmatic view of failure: Sometimes is it the right business decision to stick with a less-than-good abstraction, but only if one understands the risks and consequences therein. A good abstractionist can make such a trade-off, and one grows such abstractionists by letting them suffer the consequences of their own abstractions.</p>
+
+<p><strong>For a comprehensive summary of articles written by Grady Booch over the past few years, check out the <i><a href="http://www.cup.org/sgs/0137396163.html">Best of Booch</a></i> book, offered by SIGS books.</strong></p>
+<br>
+
+</font>
+
+<p><br>
+
+
+</td>
+
+
+
+  </tr>
+
+
+
+</table>
+
+
+
+  <!-- footer cell -->
+
+
+
+  
+
+
+
+
+
+
+
+<table width="568" cellpadding="0" border="0" cellspacing="0">
+
+
+
+  <tr>
+
+
+
+    <td width="568" bgcolor="#ffffff">&nbsp;</td>
+
+   
+
+  </tr>
+
+  
+
+</table>
+
+
+
+
+
+
+
+
+
+
+</td></tr></table></center>
+</body>
+
+</html>
+

@@ -1,0 +1,299 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0039)http://www.jera.com/techinfo/xpfaq.html -->
+<HTML><HEAD><TITLE>Extreme Programming FAQ</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META content="MSHTML 5.50.4134.600" name=GENERATOR></HEAD>
+<BODY bgColor=#ffffff>
+<H1>Extreme Programming FAQ</H1>
+<UL>
+  <LI><A href="http://www.jera.com/techinfo/xpfaq.html#intro">Introduction</A> 
+  <LI><A href="http://www.jera.com/techinfo/xpfaq.html#objections">Common 
+  Objections</A> 
+  <LI><A href="http://www.jera.com/techinfo/xpfaq.html#learningmore">Learning 
+  More</A> </LI></UL>
+<H2><A name=intro>Introduction</A></H2>
+<H3>What is Extreme Programming? Does it involve bungee cords?</H3>
+<P>Extreme Programming (or XP) is a set of values, principles and practices for 
+rapidly developing high-quality software that provides the highest value for the 
+customer in the fastest way possible. XP is extreme in the sense that it takes 
+12 well-known software development "best practices" to their logical extremes -- 
+turning them all up to "10" (or "11" for Spinal Tap fans). See Kent Beck's 
+introduction to Extreme Programming Explained for more details.</P>
+<H3>What does this have to do with <A 
+href="http://www.microsoft.com/windowsxp/">Windows XP</A>?</H3>
+<P>Absolutely nothing. In February 2001, Microsoft announced that the next 
+release of their consumer Windows operating system would be called "Windows XP". 
+The use of "XP" as shorthand for Extreme Programming predates Microsoft's use of 
+"XP" by 2-3 years.</P>
+<H3>Is XP a methodology?</H3>
+<P>No and yes. No, it's not a methodology in the sense of a lot of paperwork and 
+additional hoops for developers to jump through. But yes, in the sense that it 
+is a repeatable process for developing software, it is in fact a methodology, 
+although a lightweight one.</P>
+<P><A href="http://members.aol.com/~acockburn">Alistair Cockburn</A>, who 
+studies methodologies for a living, characterizes XP as a lightweight, 
+low-ceremony, high-discipline methodology.</P>
+<H3>Where did XP come from?</H3>
+<P>XP was originated by <A href="http://c2.com/ppr/about/author/kent.html">Kent 
+Beck</A>, based on his years of practice as an O-O software developer, and in 
+particular, his work with <A href="http://c2.com/cgi/wiki?WardCunningham">Ward 
+Cunningham</A> using the Smalltalk programming language. Because Smalltalk was 
+the first popular O-O language, Ward and Kent have been doing object-oriented 
+programming longer than just about anyone else. </P>
+<H3>What are the basic practices of XP?</H3>
+<P>The 12 core practices of XP are:</P>
+<OL>
+  <LI><B>The Planning Game</B>: Business and development cooperate to produce 
+  the maximum business value as rapidly as possible. The planning game happens 
+  at various scales, but the basic rules are always the same: 
+  <OL>
+    <LI>Business comes up with a list of desired features for the system. Each 
+    feature is written out as a <B>User Story</B>, which gives the feature a 
+    name, and describes in broad strokes what is required. User stories are 
+    typically written on 4x6 cards. 
+    <LI>Development estimates how much effort each story will take, and how much 
+    effort the team can produce in a given time interval (the iteration). 
+    <LI>Business then decides which stories to implement in what order, as well 
+    as when and how often to produce a production releases of the system. 
+  </LI></OL>
+  <LI><B>Small Releases</B>: Start with the smallest useful feature set. Release 
+  early and often, adding a few features each time. 
+  <LI><B>System Metaphor</B>: Each project has an organizing metaphor, which 
+  provides an easy to remember naming convention. 
+  <LI><B>Simple Design</B>: Always use the simplest possible design that gets 
+  the job done. The requirements will change tomorrow, so only do what's needed 
+  to meet today's requirements. 
+  <LI><B>Continuous Testing</B>: Before programmers add a feature, they write a 
+  test for it. When the suite runs, the job is done. Tests in XP come in two 
+  basic flavors. 
+  <OL>
+    <LI><B>Unit Tests</B> are written by the developers to test functionality as 
+    they write it. Each unit test typically tests only a single class, or a 
+    small cluster of classes. 
+    <LI><B>Acceptance Tests</B> (also known as <B>Functional Tests</B>) are 
+    specified by the customer to test that the overall system is functioning as 
+    specified. Acceptance tests typically test the entire system, or some large 
+    chunk of it. When all the acceptance tests pass for a given user story, that 
+    story is considered complete. </LI></OL>
+  <LI><B>Refactoring</B>: Refactor out any duplicate code generated in a coding 
+  session. You can do this with confidence that you didn't break anything 
+  because you have the tests. 
+  <LI><B>Pair Programming</B>: All production code is written by two programmers 
+  sitting at one machine. Essentially, all code is reviewed as it is written. 
+  <LI><B>Collective Code Ownership</B>: No single person "owns" a module. Any 
+  developer is expect to be able to work on any part of the codebase at any 
+  time. 
+  <LI><B>Continuous Integration</B>: All changes are integrated into the 
+  codebase at least daily. The tests have to run 100% both before and after 
+  integration. 
+  <LI><B>40-Hour Work Week</B>: Programmers go home on time. In crunch mode, up 
+  to one week of overtime is allowed. But multiple consecutive weeks of overtime 
+  are treated as a sign that something is very wrong with the process. 
+  <LI><B>On-site Customer</B>: Development team has continuous access to a real 
+  live customer, that is, someone who will actually be using the system. For 
+  commercial software with lots of customers, a customer proxy (usually the 
+  product manager) is used instead. 
+  <LI><B>Coding Standards</B>: Everyone codes to the same standards. Ideally, 
+  you shouldn't be able to tell by looking at it who on the team has touched a 
+  specific piece of code. </LI></OL>
+<H3>What does a typical extreme programming project look like?</H3>
+<P>The first thing you'd notice is that all the programmers are in a room 
+together, usually sitting around a large table in the middle of the room. The 
+programmers may have desks or offices nearby, but you can tell by the piles of 
+books are piled that the big table is where the action is.</P>
+<P>XP teams work in a series of fixed iteration cycles. Iterations typically 
+last 1, 2 or 3 weeks each depending on the team. (A given team will almost 
+always use same the iteration size for every iteration.) </P>
+<P>At the beginning of each iteration, the team gets together with the customer 
+for a planning meeting. In that meeting, they go over the features the customer 
+wants done in that iteration, breaking each feature down into individual 
+engineering tasks. Individual developers then sign up for specific tasks, and 
+estimate those tasks. No developer is allowed to sign up for more work in the 
+coming iteration than he completed in the previous iteration.</P>
+<P>During the rest of the iteration, the team will implement the features they 
+signed up for, pair programming on all production code. All code is written 
+test-first -- that is, the developers don't write any code until they have a 
+failing test case. The developers write unit tests to test individual classes 
+and subsystems. The customer provides functional or acceptance tests to validate 
+the features that the programmers are developing.</P>
+<P>At the end of the iteration (usually on a Friday), the programmers deliver a 
+working system to the customer. The system may not be complete, but all 
+functionality that is implemented works completely, without bugs. The customer 
+accepts delivery, and the team goes home early. The next Monday everyone meets 
+again to plan the next iteration, and the cycle repeats itself.</P>
+<P>Actual product release is almost a non-event. The customer takes delivered 
+system from some iteration, and distributes it to the end users. The system is 
+always very nearly defect-free, so the only question is when the developers have 
+added enough functionality to make it worthwhile for the end users to 
+upgrade.</P>
+<H3>How big a project will XP work with?</H3>
+<P>Easily up to a dozen programmers. Up to twice that with some difficulty. 
+Beyond that, you'll need something else, either augmenting XP with more 
+traditional heavyweight practices, or splitting the project among two or more 
+regular XP teams, with some teams becoming customers for other teams.</P>
+<H3><A name=xpvsuml>How does XP compare to UML?</A></H3>
+<P>XP is a development process; <A href="http://www.rational.com/uml/">UML</A> 
+is a design notation. Most XPers are fluent in UML, and periodically draw UML 
+diagrams on marker boards to work out design issues. Most XP projects don't have 
+reams of printed UML diagrams, although there may be a brief design overview 
+document that contains a few simple diagrams to show canonical class 
+relationships in the system.</P>
+<H3><A name=xpvsrup>How does XP compare to RUP?</A></H3>
+<P>The <A href="http://www.rational.com/rup/index.jsp">Rational Unified 
+Process</A>, or RUP, is a customizable "one size fits all process". It defines 
+lots of roles, processes and documents, but essentially all of them are 
+optional. <A href="http://c2.com/cgi/wiki?RobertCecilMartin">Robert C. 
+Martin</A> has made a pretty good case that <A 
+href="http://www.objectmentor.com/publications/RUPvsXP.pdf">XP is in fact a 
+minimal instance of RUP</A>.</P>
+<H3><A name=xpvscmm>How does XP compare to CMM?</A></H3>
+<P>General consensus on the XP mailing list is that XP is close to the spirit of 
+<A href="http://www.sei.cmu.edu/cmm/cmm.html">CMM</A>. However, real-world CMM 
+practitioners tend to place a much higher emphasis on ceremonial meetings and 
+paper documentation than XPers do, so it's unclear if an XP shop would receive a 
+high CMM rating.</P>
+<H3><A name=yagni>What does YAGNI mean?</A></H3>
+<P>"You aren't gonna need it," a general refrain when someone suggests building 
+functionality for the system that isn't required by any current user story. For 
+example:</P>
+<P>Programmer 1: "It says here we need to save the default number of widgets 
+between sessions. I'd better write a generalized object persistence 
+mechanism."</P>
+<P>Programmer 2: "YAGNI. Just write out a one-line text file for now. If we need 
+more later, we'll add it later."</P>
+<H3><A name=dtsttcpw>What does ''Do the simplest thing that could possibly 
+work.'' (DTSTTCPW) mean?</A></H3>
+<P>This is something an XP coach will say when he sees an XP developer doing 
+something that is needlessly complicated. In general, XP says don't overdesign 
+your system....</P>
+<H3><A name=simplest>How can you know one approach is simpler than 
+another?</A></H3>
+<P></P>
+<P>XP actually has a very specific definition of "simplest" (based on the list 
+in Extreme Programming Explained, p.109):</P>
+<OL>
+  <LI>The system (code plus tests) clearly communicates everything that needs to 
+  be communicated at the current instant in its development. This means that it 
+  runs every existing test, and that the source code clearly reveals the 
+  intention behind it to anyone who reads it. 
+  <LI>The system contains no duplicate code, unless that would violate (1). 
+  <LI>The system contains the minimum number of classes possible without 
+  violating (1) or (2). 
+  <LI>The system contains the minimum number of methods possible, consistent 
+  with (1) (2) and (3). </LI></OL>
+<H3><A name=oaoo>What does "Once and Only Once" (OAOO) mean?</A></H3>
+<P>Once and only once is just shorthand for the first two items in the XP 
+definition of "simplest". (1) says you need to say everything that needs to be 
+said once. (2) says you need to say it only once, avoiding duplication.</P>
+<H3><A name=glossary>Where can I get a more complete glossary of XP 
+terms?</A></H3>
+<P>There's a fairly extensive XP glossary available at <A 
+href="http://c2.com/cgi/wiki?XpGlossary">http://c2.com/cgi/wiki?XpGlossary</A>. 
+This is part of Ward Cunningham's amazing Wiki system.</P>
+<H2><A name=objections>Common Objections</A></H2>
+<H3>Isn't XP just undisciplined "hacking" or "cowboy coding"?</H3>
+<P>Don't let the lack of paperwork and meetings fool you. Unless you're at least 
+a CMM level 3 shop, XP is likely more disciplined than the way you produce 
+software today. Some examples of that discipline:</P>
+<UL>
+  <LI>XPers won't write any functionality that doesn't fulfill a specific, 
+  explicit customer need. 
+  <LI>XPers won't write any code without first writing a failing test 
+  <LI>XPers write all production code in pairs. 
+  <LI>XPers deliver a fully functional (albeit possibly feature limited) system 
+  at the end of each 1-3 week iteration. </LI></UL>
+<H3>Won't pair programming cut productivity in half?</H3>
+<P>It turns out that two programmers working as a pair are more than twice as 
+productive as a single programmer working alone, and also produce higher quality 
+code. The big gain is not, as you might think, in avoiding little syntax errors, 
+but rather in avoiding the big picture errors -- the ones where you blow an 
+entire afternoon barking up the wrong tree.</P>
+<P><A href="http://collaboration.csc.ncsu.edu/laurie/">Laurie Williams</A> has 
+done empirical studies of pair programming. Her work is summarized in the paper 
+<A 
+href="http://members.aol.com/humansandt/papers/pairprogrammingcostbene/pairprogrammingcostbene.htm">The 
+Costs and Benefits of Pair Programming</A>, which she co-wrote with <A 
+href="http://members.aol.com/~acockburn">Alistair Cockburn</A>. In this study, 
+after only a few pairing sessions, pairs of programmers were roughly as twice as 
+productive as solo programmers, yet produced substantially fewer defects.</P>
+<H3>With pair programming and collective code ownership, how are programmers 
+supposed to be recognized and compensated?</H3>
+<P>XP has collective <I>code</I> ownership, but individual <I>task</I> 
+ownership. Each developer signs up for tasks at the beginning of each iteration. 
+He is then responsible for completing those tasks by pairing with another 
+developer. At the end of each iteration, the customer decides if the task is 
+complete or not. After a year, you'll have a long list of completed tasks to 
+show your manager.</P>
+<H3>Isn't it annoying having someone looking over your shoulder while you 
+program?</H3>
+<P>Pair programming means two people working side-by-side on the same problem on 
+the same computer; if someone is looking over your shoulder, you're doing it 
+wrong. Typically, the person "driving" the keyboard and mouse will be focused 
+primarily on tactical issues in coding the current method, while the non-driver 
+will focus more on strategic issues, like how the method fits into the system, 
+and is it needed at all in the first places. It's kind of like a road rally, 
+where a driver and a navigator collaborate to get over a given course in the 
+best time.</P>
+<H3>Won't pair programming interfere with "flow", which requires solitude and 
+silence?</H3>
+<P>Pair programming appears to access another kind of flow, which is shared 
+between the two people pairing. There's some talking, but not a lot of idle 
+chitchat, and and it's easier to return to the state if someone interrupts 
+you.</P>
+<H3>How can you possibly test everything? Don't you get a combinatoric 
+explosion?</H3>
+<P>It's true that computation theory pretty much proves you can't validate every 
+possible state of a non-trivial system. However, in practice, an experience 
+programmer can produce a pretty good set of tests that will result in a high 
+degree of confidence that the system is working correctly.</P>
+<P>It's sort of like those probabilistic tests used to produce large prime 
+numbers for public-key cryptography. You can't tell for certain that a number is 
+prime without trying to factor it, but you can apply a number of simpler tests 
+that will verify its primeness to any degree of certainty that you want.</P>
+<H3>Won't simple design leave you with a program that won't scale well?</H3>
+<P>Simple design, practiced alone typically would have this result. But XP says 
+that after you do the simplest thing that could possibly work, you go back and 
+refactor your code until everything your code needs to express appears <A 
+href="http://www.jera.com/techinfo/xpfaq.html#oaoo">once and only once</A> 
+within the code base.</P>
+<H3>Won't <A href="http://www.jera.com/techinfo/xpfaq.html#yagni">YAGNI</A> lead 
+you to design dead-ends down the road?</H3>
+<P>General experience in the XP community is an unqualified "no". At the very 
+worst, it may happen, but so rarely that your wins from all the other YAGNIs 
+will more than pay for having to backtrack once in a while.</P>
+<H3>I don't think I [want to do/can sell my bosses on doing] all of the 
+practices. Can I leave some out and still be doing XP?</H3>
+<P>Many of the practices work well in isolation, so it's quite possible you'd be 
+better off using the ones you feel like than none at all. However there's a 
+synergistic effect to using all of them together that you'll be missing out on. 
+As a result, a lot of people in the XP community feel strongly that if you're 
+not using all 12 practices, you're not doing XP.</P>
+<P>As a practical matter, there's currently no XP certification authority. You 
+can do whatever you want, and no XP Gestapo is going to kick in your door. But 
+if you're not using all 12 practices, you probably could be going faster.</P>
+<H2><A name=learningmore>Learning More</A></H2>
+<H3>Where can I learn more about XP?</H3>
+<P>The best place to start is currently Kent Beck's book "Extreme Programming 
+Explained: Embracing Change", (available from <A 
+href="http://www.amazon.com/exec/obidos/ASIN/0201616416">Amazon.com</A> among 
+other places). This book is essentially the definitive guide to XP at the 
+moment, and a fairly quick read.</P>
+<P>Once you have an overview of XP, visit Ward Cunningham's <A 
+href="http://c2.com/ppr/wiki/RecentChanges/WikiWikiWeb.html">Wiki Wiki Web</A> 
+(or Wiki for short). Wiki is a simple, yet powerful hypertext system. Anyone can 
+add or modify any page on Wiki, so the system collects the knowledge of 
+thousands of people into a (semi) coherent whole. Started as a system for 
+cataloging Design Patterns, Wiki has grown to include literally hundreds of 
+pages related to XP. A good starting point is <A 
+href="http://c2.com/cgi/wiki?ExtremeProgrammingRoadmap">http://c2.com/cgi/wiki?ExtremeProgrammingRoadmap</A>.</P>
+<P>There's also a lively XP mailing list on Yahoo Groups (formerly eGroups). To 
+subscribe, send a blank email to <A 
+href="mailto:extremeprogramming-subscribe@yahoogroups.com">extremeprogramming-subscribe@yahoogroups.com</A>. 
+Or see the archives on the web at <A 
+href="http://groups.yahoo.com/group/extremeprogramming">http://groups.yahoo.com/group/extremeprogramming</A>. 
+</P>
+<HR>
+
+<P>XP FAQ &copy; 2001 John Brewer</P>
+<P>Send updates &amp; suggestions to <A 
+href="mailto:xpfaq@jera.com">xpfaq@jera.com</A></P></BODY></HTML>

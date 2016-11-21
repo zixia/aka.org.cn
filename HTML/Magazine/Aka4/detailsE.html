@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Introduction to the Internet Protocols</TITLE>
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+<META content="MSHTML 5.00.2014.210" name=GENERATOR></HEAD>
+<BODY TEXT="#000000" BGCOLOR="#eeedb7" LINK="#797E8C" VLINK="#4F4F4F" ALINK="#FF0000">
+<center><H4>Details about Internet addresses: subnets and broadcasting</H4></center>
+<P>Copyright (C) 1987, Charles L. Hedrick. Anyone may reproduce this document, 
+in whole or in part, provided that: (1) any copy or republication of the entire 
+document must show Rutgers University as the source, and must include this 
+notice; and (2) any other use of this material must reference this manual and 
+Rutgers University, and the fact that the material is copyright by Charles 
+Hedrick and is used by permission. 
+<P>As indicated earlier, Internet addresses are 32-bit numbers, normally written 
+as 4 octets (in decimal), e.g. 128.6.4.7. There are actually 3 different types 
+of address. The problem is that the address has to indicate both the network and 
+the host within the network. It was felt that eventually there would be lots of 
+networks. Many of them would be small, but probably 24 bits would be needed to 
+represent all the IP networks. It was also felt that some very big networks 
+might need 24 bits to represent all of their hosts. This would seem to lead to 
+48 bit addresses. But the designers really wanted to use 32 bit addresses. So 
+they adopted a kludge. The assumption is that most of the networks will be 
+small. So they set up three different ranges of address. Addresses beginning 
+with 1 to 126 use only the first octet for the network number. The other three 
+octets are available for the host number. Thus 24 bits are available for hosts. 
+These numbers are used for large networks. But there can only be 126 of these 
+very big networks. The Arpanet is one, and there are a few large commercial 
+networks. But few normal organizations get one of these "class A" addresses. For 
+normal large organizations, "class B" addresses are used. Class B addresses use 
+the first two octets for the network number. Thus network numbers are 128.1 
+through 191.254. (We avoid 0 and 255, for reasons that we see below. We also 
+avoid addresses beginning with 127, because that is used by some systems for 
+special purposes.) The last two octets are available for host addesses, giving 
+16 bits of host address. This allows for 64516 computers, which should be enough 
+for most organizations. (It is possible to get more than one class B address, if 
+you run out.) Finally, class C addresses use three octets, in the range 192.1.1 
+to 223.254.254. These allow only 254 hosts on each network, but there can be 
+lots of these networks. Addresses above 223 are reserved for future use, as 
+class D and E (which are currently not defined). 
+<P>Many large organizations find it convenient to divide their network number 
+into "subnets". For example, Rutgers has been assigned a class B address, 128.6. 
+We find it convenient to use the third octet of the address to indicate which 
+Ethernet a host is on. This division has no significance outside of Rutgers. A 
+computer at another institution would treat all datagrams addressed to 128.6 the 
+same way. They would not look at the third octet of the address. Thus computers 
+outside Rutgers would not have different routes for 128.6.4 or 128.6.5. But 
+inside Rutgers, we treat 128.6.4 and 128.6.5 as separate networks. In effect, 
+gateways inside Rutgers have separate entries for each Rutgers subnet, whereas 
+gateways outside Rutgers just have one entry for 128.6. Note that we could do 
+exactly the same thing by using a separate class C address for each Ethernet. As 
+far as Rutgers is concerned, it would be just as convenient for us to have a 
+number of class C addresses. However using class C addresses would make things 
+inconvenient for the rest of the world. Every institution that wanted to talk to 
+us would have to have a separate entry for each one of our networks. If every 
+institution did this, there would be far too many networks for any reasonable 
+gateway to keep track of. By subdividing a class B network, we hide our internal 
+structure from everyone else, and save them trouble. This subnet strategy 
+requires special provisions in the network software. It is described in RFC 950. 
+
+<P>0 and 255 have special meanings. 0 is reserved for machines that don't know 
+their address. In certain circumstances it is possible for a machine not to know 
+the number of the network it is on, or even its own host address. For example, 
+0.0.0.23 would be a machine that knew it was host number 23, but didn't know on 
+what network. 
+<P>255 is used for "broadcast". A broadcast is a message that you want every 
+system on the network to see. Broadcasts are used in some situations where you 
+don't know who to talk to. For example, suppose you need to look up a host name 
+and get its Internet address. Sometimes you don't know the address of the 
+nearest name server. In that case, you might send the request as a broadcast. 
+There are also cases where a number of systems are interested in information. It 
+is then less expensive to send a single broadcast than to send datagrams 
+individually to each host that is interested in the information. In order to 
+send a broadcast, you use an address that is made by using your network address, 
+with all ones in the part of the address where the host number goes. For 
+example, if you are on network 128.6.4, you would use 128.6.4.255 for 
+broadcasts. How this is actually implemented depends upon the medium. It is not 
+possible to send broadcasts on the Arpanet, or on point to point lines. However 
+it is possible on an Ethernet. If you use an Ethernet address with all its bits 
+on (all ones), every machine on the Ethernet is supposed to look at that 
+datagram. 
+<P>Although the official broadcast address for network 128.6.4 is now 
+128.6.4.255, there are some other addresses that may be treated as broadcasts by 
+certain implementations. For convenience, the standard also allows 
+255.255.255.255 to be used. This refers to all hosts on the local network. It is 
+often simpler to use 255.255.255.255 instead of finding out the network number 
+for the local network and forming a broadcast address such as 128.6.4.255. In 
+addition, certain older implementations may use 0 instead of 255 to form the 
+broadcast address. Such implementations would use 128.6.4.0 instead of 
+128.6.4.255 as the broadcast address on network 128.6.4. Finally, certain older 
+implementations may not understand about subnets. Thus they consider the network 
+number to be 128.6. In that case, they will assume a broadcast address of 
+128.6.255.255 or 128.6.0.0. Until support for broadcasts is implemented 
+properly, it can be a somewhat dangerous feature to use. 
+<P>Because 0 and 255 are used for unknown and broadcast addresses, normal hosts 
+should never be given addresses containing 0 or 255. Addresses should never 
+begin with 0, 127, or any number above 223. Addresses violating these rules are 
+sometimes referred to as "Martians", because of rumors that the Central 
+University of Mars is using network 225. </BODY></HTML>

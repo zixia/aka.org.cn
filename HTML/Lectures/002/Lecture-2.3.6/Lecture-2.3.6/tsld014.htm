@@ -1,0 +1,56 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>Virtual Linux Kernel Threads</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>Virtual Linux Kernel Threads</H1> 
+ <P><UL>
+<LI><H2>Bottom Half
+</H2>
+<UL>
+globally serialized; running at 1) schedule(), bad idea, now tq_scheduler, and softirq with kernel lock; 2)ret_from_syscall/interrupt
+<BR><BR>problems: 1) 32; 2) only one handler; 3)spin_lock held, no block 
+</UL></UL><UL>
+<LI><H2>Tasklets
+</H2>
+<UL>
+dynamically-registrable software interrupt
+<BR><BR>only run on one CPU at a time,  serialized wrt itself
+</UL></UL><UL>
+<LI><H2>Softirq
+</H2>
+<UL>
+32 enumerated software interrupts ;No shared variables, all the data are CPU local
+<BR><BR>It is multithreaded and does not require any global serialization
+</UL></UL><UL>
+<LI><H2>Software Interrupt
+</H2>
+<UL>
+running when a hardware interrupt returns, or schedule happens, or return to user space
+<BR><BR>Tasklets, softirqs and bottom halves (timer is a slow irq, but not interruptted), not trap
+</UL></UL><UL>
+<LI><H2>Interrupt Context, User Context
+</H2>
+<UL>
+in_interrupt(), in_irq(), in_softirq(), current()<BR></UL></UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld013.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld015.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld014.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

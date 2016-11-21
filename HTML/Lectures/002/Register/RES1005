@@ -1,0 +1,201 @@
+AutoID	UserID	UserName	Password	Email	Address	RegisteredClass	ListenedClass	SEX	IDENTITY	AGE	SATISFIY	LinuxWork	SUPPORT
+1	zixia	李卓桓	zixia	zixia@zixia.net	13601369910	NULL	NULL	NULL	NULL	NULL	NULL	Y	NULL
+2	rover	taopin	taopin	taopin@263.net	62775113	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	O	5	N	O
+3	period	张伟	bbs.	miniperiod@263.net	62774006 29#105	09\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	Y	T
+4	gale	单小丰	bree12	breeze_shan@chinaren.com	62773413 32#320	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	N	F
+5	ane	徐志平	810517	freenix@sina.com	62779508清华大学28#226	16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	O
+6	ninja	王勇	nin1ja	wyong@net.cs.pku.edu.cn	62761229	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	Y	T
+7	youngcow	刘乃嘉	liu1342	youngcow@elong.com	62779601 清华大学28#501	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t22	NULL	M	U	Y	4	N	T
+8	yanyaqin	严亚勤	970911	tinyfat@263.net	62779551清华大学28#312	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	3	Y	T
+9	has	哈斯	970911	yyq@edunix.cic.tsinghua.edu.cn	62779551清华大学28#312	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	4	Y	T
+10	linuxnew	罗颖明	ladies	luoyingming@263.net	62622200-3615	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15	NULL	M	U	Y	5	Y	T
+11	Lucifer	杜捷	791205	cyberiser@chinaren.com	62777118, 清华大学9号楼323	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	Y	T
+12	kwluo	罗康文	log1417	kwluo@netlab.dhs.org	62206910	11\t12\t13\t14\t15\t17\t18\t21\t22\t23	NULL	M	U	Y	4	N	T
+13	kouzh	张松	luck97	kouzh@chinaren.com	no	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15	NULL	M	U	Y	4	N	T
+14	Michael_Chu	禇扬清	cmichael	yqchu@sina.com	66210620-8863	02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	O	NULL	Y	O
+15	mima	郭高峰	ggf*	ggf@chinaren.com	清华大学1#449	01\t02\t03\t12\t13\t14\t15	NULL	M	U	Y	NULL	N	T
+16	Jordan	曾清国	12345	qingguozeng@263.net	62207165 13楼518	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	F
+17	zqg	曾清国	12345	qingguozeng@263.net	62207165 北京师范大学数99硕 100875	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	F
+18	qgzeng	曾清国	12345	qingguozeng@263.net	62207165 北京师范大学数99硕 100875	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	F
+19	zengqingguo	曾清国	12345	qingguozeng@263.net	62207165 北京师范大学数99硕 100875	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	F
+20	Alice	王莉	wangli	how_warm@163.net	北京市西城区金融街23号803室	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	F	C	Y	NULL	N	T
+21	yoko	卞志强	yhifnxk	bianzhq@263.net	62779650 28#434	11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	T
+22	erry	李峰厚	goodluck	quart@chinaren.com	62778255 清华大学25＃205	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	3	Y	T
+23	depend	王恺	501178	depend@263.net	62779644	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	Y	T
+24	tianxiezuo	刘志杰	lwerst99	lzj@linux2.ipc.pku.edu.cn	62763501 北大39#324	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15	NULL	M	U	Y	3	N	T
+25	embonnie	李超	linuxrat	embonnie@sina.com	62774805 清华大学8#321	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	F	U	Y	3	Y	T
+26	ysw	杨圣武	yyswu78	yysw@263.net	62777058 清华大学9#102	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	N	T
+27	qos	吴伟	shiwode	wuwei_sdt@263.net	62778632	02\t03\t09\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23	NULL	M	U	Y	3	Y	T
+28	cryingsnow	高伟	jovigao	flysnow2000@sina.com	13011897310	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	4	Y	T
+29	listentome	耿健	gj9650	gengjmail@sina.com	62771850	01\t02\t03\t04\t05\t06\t07\t08\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	N	T
+30	xiaocy	肖晨阳	xcy7963	xiaocy@mail.hunnu.edu.cn	07318872556	16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	NULL	Y	F
+31	Tiffany	赵锦芝	9751	lytzjz@yeah.net	0451-6416323	01\t02\t03\t09\t11\t12\t13\t14\t15\t22	NULL	F	U	Y	NULL	Y	T
+32	SunZunGun	商振刚	funny	SunZunGun@advantech.com.cn	62984346-505 上地研华	01\t03\t04\t05\t06\t07\t08\t11\t12\t13\t14\t16\t17\t18\t19\t20\t21\t22\t23	NULL	M	C	Y	4	Y	O
+33	tintin	丁建峰	ding0821	newdjf@yeah.net	010-62390459	03\t04\t05\t06\t07\t08\t09\t10\t14\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	T
+34	bowarrow	龚剑	781025	bowarrow@sina.com	62775168	01\t02\t03\t04\t05\t06\t07\t08\t09\t10	NULL	M	U	Y	3	Y	O
+35	phoena	昌明	Ming1979	phoena@ynet.com	手机13501319662	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	NULL	Y	T
+36	eat	邓大鹏	liuxx	dengdp@263.net	62778016	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	3	N	T
+37	huxw	XinweiHu	wsada	huxw@chinaren.com	(010)-62774188	04\t06\t07\t08\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	3	Y	T
+38	xuas	徐毅	721213	xuas@263.net	191-8565149  beijing	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	5	Y	O
+39	FrankCH	冯大可	fdkfdk	minx@thtfchain.com	13501399486	04\t10\t12\t19	NULL	M	U	Y	NULL	Y	O
+40	richard	刘志宏	l727272	liu_z_hong@21cn.com	010-88361860	01\t02\t03\t04\t05\t06\t07\t11\t12\t16\t17\t22\t23	NULL	M	C	Y	NULL	N	P
+41	littlewai	王大正	wangdz	littlewai@chinaren.com	62775415 清华大学15#417	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	Y	F
+42	planck	季威	Jw78!q	babyji@webpc.edu.cn	62349987 北京科技大学13斋437	01\t02\t03\t04\t06\t08\t11\t12\t13\t14\t15\t16\t18\t22\t23	NULL	M	U	Y	3	N	NULL
+43	zishuai	金石	jinshi1999	zishuai@chinaren.com	62779643,28#426	03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	3	N	T
+44	bachg	noch,:-(	gnuchina	bachg@sina.com	25#208	02\t04\t12\t13\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	F
+45	qoop	白金刚	lljpto21	qoop@chinaren.com	62776323 清华大学13#531	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	Y	T
+46	finger	赵仪	999133	finger@webpc.edu.cn	62785821--8007	01\t02\t04\t06\t07\t08\t09\t10\t14\t16\t17\t21\t22\t23	NULL	M	U	Y	3	Y	O
+47	lansheng	蓝盛	12345	lansheng@etide.com.cn	13910638871	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	5	Y	T
+48	cityhunter	夏明超	wsjqwhw	xmchao@cpqmail.cs.tsinghua.edu.cn	13601149457清华29#105	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15	NULL	M	U	Y	4	N	T
+49	kgao	高奎	wh0827	kgao@cti.com.cn	62620734-247	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t23\t24	NULL	M	U	Y	4	Y	T
+50	BeeGees	刘祥德	fwws120305	shunder@263.net	清华大学14＃246 (D)62778618 (O)62785854	02\t03\t08\t09\t10\t11\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	F
+51	liubg	刘炳刚	751007	liubg2000@sina.com	清华大学32＃321	01\t03\t05\t06\t07\t08\t09\t11\t12\t13	NULL	M	U	Y	NULL	N	T
+52	zc	赵晨	ce979225	heshili@public.bta.net.cn	96300呼520999	01\t02\t03\t04\t05\t06\t07\t08\t09\t11\t12\t13\t14\t15	NULL	M	C	Y	NULL	Y	NULL
+53	lipard	薛巍	740717	xw717@sina.com	29#107,62774008	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	NULL	Y	T
+54	freshsoul	段建钢	Lucky!	duanjg@sist.tsinghua.edu.cn	62779025	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	NULL	Y	T
+55	lalazhang	张志坚	781123	lalazhang@263.net	62762950 北京大学32#406	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	NULL	Y	F
+56	costa	毛昀	mao123	maoyun@263.net	62777063	01\t02\t03\t04\t06\t09\t11\t12\t13\t14\t15\t18\t20\t21\t22\t24	NULL	M	U	Y	5	Y	F
+57	Will	胡炜	ffffff	x-will@263.net	62779644	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	O
+58	pxfly	潘小飞	870103	pxfly@263.net	62779644	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	O
+59	Phelix	王海涛	wht	mylinuxdoc@sina.com	62778792	04\t05\t06\t07\t08\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	3	N	T
+60	sankeya	牟俊	moujun	mike_j@263.net	62774258清华大学26#617	01\t02\t03\t04\t05\t06\t07\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t22\t23	NULL	M	U	Y	3	N	F
+61	gang_hu	胡刚	197978	gang123@hu.com.cn	13601394711	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	3	Y	P
+62	colvin	高越	7411	colvin@email.com.cn	13601252379	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	5	Y	T
+63	luds	兰大桑	955537	luds@263.net	62784847	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	Y	O
+64	HunterYang	杨和东	1859665540	hdyang@yeah.net	010-68515544-2422	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	N	T
+65	tlk	童良凯	ascodeii	tlkyc@21cn.com	123	11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	3	Y	T
+66	suzhe	苏哲	sz0530	suzhe@gnuchina.org	31#321, 62783822	02\t03\t04\t05\t06\t07\t08\t09\t10\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	P
+67	jackwang	王强	wq111	wq7210@sina.com.cn	66820272\\66820273	01\t02\t03\t04\t05\t06\t07\t08\t09\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	NULL	Y	NULL	Y	T
+68	tin	戴闻亭	750824	wwdai@263.net	62774530 清华大学32＃320	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	NULL	N	NULL
+69	jkx	金科学	6473jwnz	jkx@mail.cumtb.edu.cn	62331237-205	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	O	4	Y	T
+70	real_rain	袁媛	329919	real_rain@chinaren.com	中国人民大学1#321	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	F	U	Y	5	Y	T
+71	shiyu	石宇	shiyu	shiyu_beijing@yahoo.com	(010)62242420	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	5	N	T
+72	jhy	姜洪宇	25482395	jhy_bj@sina.com	192-9400836	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	5	N	T
+73	tdx	汤海京	tdx7852	thjthj@netease.com	62785124	11\t12\t13\t14\t15\t20\t21\t22\t23\t24	NULL	M	C	Y	3	Y	F
+74	liutao	刘涛	937038	liutao9370@yahoo.com	62505912(h)	16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	NULL	Y	T
+75	apple	郭佳	jia guo	guojia2001@sina.com	62775745	01\t02\t05\t06\t07\t08\t11\t12\t13\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	F	U	Y	4	Y	NULL
+76	wenfeng	刘文锋	05237%	wenf_liu@netease.com	62778180	01\t02\t03\t04\t05\t06\t07\t08\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	3	N	T
+77	googo	谢建云	xiexie	xie@magicw3.com.cn	62774295	01\t02\t04\t05\t06\t07\t08\t09\t11\t12\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	T
+78	yinws	尹文生	yws6806	yinws@pim.tsinghua.edu.cn	62773269	01\t02\t03\t04\t05\t06\t07\t11\t12\t13\t16\t17\t18\t19\t20\t21\t23	NULL	M	U	O	3	Y	T
+79	nameless	黄超	appleg	chuang@mail.cic.tsinghua.edu.cn	62777150	01\t02\t05\t06\t07\t08\t11\t12\t13\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	Y	NULL
+80	symbo	汪敏	790053	symbo@263.net	82324751 北京航空航天大学	02\t03\t04\t05\t06\t07\t08\t09\t10	NULL	M	U	Y	NULL	Y	O
+81	mere	李贺武	mere123	daulyd@mail.tsinghua.edu.cn	62782006	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	T
+82	liudabin	刘大滨	199923	liudabin@sina.com	62775216 清华13#422	01\t02\t03\t04\t08\t11\t12\t13\t14\t15	NULL	M	U	Y	2	N	T
+83	trich	房胜	zhao1102	fangs@media.cs.tsinghua.edu.cn	62778812	01\t03\t05\t06\t07\t08\t09\t11\t13\t14\t15\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	NULL	Y	T
+84	fool	杨鸣	fuckyou	tony_y@126.com	62630930-3254	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	4	Y	T
+85	superman	李昌宏	wodemima	lichh1@sohu.com	62582825	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	N	F
+86	liyuhang	厉宇航	hang^2	liyuhang@263.net	62775274 清华13#328	01\t02\t03\t04\t05\t06\t07\t08\t09\t10	NULL	M	U	Y	5	Y	T
+87	simon	丁晓亮	simondd	dingsm@yeah.net	191-1110676	01\t03\t04\t05\t06\t07\t08\t09\t10\t16\t17\t18\t19\t20\t21\t22\t23	NULL	M	U	Y	4	Y	T
+88	xuxh	徐向华	276621xx	xu_xianghua@263.net	62782982	01\t02\t04\t05\t06\t07\t13\t16\t17\t18\t19\t21\t22\t23	NULL	M	U	Y	4	N	T
+89	linxs	林晓森	linxs97	linxs@chinaren.com	62779585	01\t02\t05\t06\t07\t08\t09\t16\t17\t18\t19\t20\t21\t22\t23	NULL	M	U	Y	4	Y	T
+90	pieng	郭琦	g006753	guo.qi@263.net	1#281	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	Y	T
+91	rocwzp	王志鹏	roc750523	wangzhip@china.com	62619750-3034	01\t04\t05\t06\t07\t08\t09\t10\t13\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	T
+92	xiaoqing	孙晓清	xiaoqing	xiaoqing@chinaren.com	62776586	01	NULL	NULL	NULL	NULL	NULL	NULL	NULL
+93	test	test	test	test	test	NULL	NULL	NULL	NULL	NULL	NULL	NULL	NULL
+94	valid	李伟东	fickle	valid@263.net	13910755666	11\t12\t13\t14\t15	NULL	M	C	Y	3	Y	T
+95	ddcat	蒙聪	mouse313	mc.mail@263.net	63229670 北方交通大学299#信箱	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	T
+96	dreamfuture	顾冉	971246	gu007cn@yahoo.com	62777134 清华9#409	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	3	N	T
+97	joyfire	王乐珩	617n99	joyfire@263.net	北方交大131#信箱	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	T
+98	makefire	苏旭春	suchun	makefire@263.net	北方交大19#227 tel:63229858	01\t02\t05\t13\t14\t15	NULL	M	U	Y	3	N	F
+99	grooly	黄光霖	hwanggl	hwanggl@netease.com	62777090 tsinghua 9#221	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	3	N	T
+100	lxzm	刘欣洲	11255	lxzm@china.com	028-5190444	01\t02\t03\t04\t05\t06\t07\t08\t09\t11\t12\t13\t14\t15	NULL	M	C	Y	4	Y	T
+101	bobos	杨洋	62774648	bobos@gnuchina.org	bp:83160088--73633(汉)	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	F
+102	wolzc	刘洋	wzdaxw	drakon@public.east.net.cn	62779903 清华大学27#616	NULL	NULL	M	U	Y	5	N	O
+103	flamingo	胡勤	qlnjrsf	flamingo@btamail.net.cn	62765289 北大33#225	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	T
+104	xieyi	谢忻	stu260	xiexin@scada.eea.tsinghua.edu.cn	62778742	01\t03\t04\t09\t10\t11\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	Y	T
+105	qingpingwu	吴情平	19770108	wuqing@263.net	62771653	NULL	NULL	M	U	Y	5	N	T
+106	lyd	刘亚东	97089614	dragon_fire@sohu.com	62779549	01\t02\t05\t06\t07\t08\t09\t10\t11\t12\t13\t15	NULL	F	U	Y	3	Y	T
+107	thinking	季铮锋	iloveyou	thinking@chinaren.com	62777114 清华大学9#317	01\t02\t03\t04\t05\t06\t07\t08\t09\t11\t12\t13\t14\t15	NULL	M	U	Y	5	N	T
+108	aweii	徐炜	xxxxxx	aweii@990.net	0510-7900506(家)	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	5	N	T
+109	hiro	唐珂	hikari	kunimi_hiro@sina.com	027-87552116	01\t02\t03\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	Y	F
+110	bluebloodrider	魏建将	456666	bluebloodrider@sina.com.cn	62778636	01\t02\t04\t05\t06\t07\t08\t09\t12\t13\t14\t17\t18\t19\t20\t21\t22\t23	NULL	M	U	Y	NULL	Y	T
+111	liuhaitao	刘海涛	791409	htliu@cams.tsinghua.edu.cn	62779834	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	NULL	Y	NULL
+112	philzhang	张永强	3www	pigprince	13011803140	03\t04\t09\t10	NULL	M	C	O	NULL	Y	T
+113	foxware	foxware	xjj123	foxware@263.net	62762315	02\t03\t04\t08\t09\t14\t15	NULL	M	C	Y	4	Y	T
+114	zying	邹勇	sheng	zou76@china.com	191-1213199	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	Y	F
+115	tipsyy	杨钰	asdfgh	tipsyy@sina.com	62327661-5357	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	5	Y	T
+116	123456	毕秀清	bxqlrn	lintel@163.net	13701033130	NULL	NULL	F	C	O	NULL	Y	T
+117	anda	陈彪	Fanso&ren	anda@263.net	62988822-7309	01\t02\t03\t04\t05\t06\t07\t12\t13\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	3	Y	T
+118	hqz	侯清濯	gaodai	hqz@mail.cic.tsinghua.edu.cn	13301076035	01\t02\t03\t04\t08\t09\t11\t12\t13\t14\t15	NULL	M	U	Y	3	Y	T
+119	tomodaqi	马朝阳	432706	ciscofarmer@263.net	62777335 清华大学23#535	01\t02\t03\t04\t05\t06\t07\t08\t09\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	2	N	T
+120	qubit6	蒙积林	961972	qubit6@chinaren.com	191-5270442	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	Y	O
+121	matthaus	朱嘉辰	tobeno1	matthaus@sina.com	13910658610	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	NULL	Y	T
+122	puke	崔铭	931572	cuiming@263.net	13910008032	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	3	Y	T
+123	wfg	王丰锦	wfg	wangfengjin@263.net	62587953-16	01\t02\t03\t04\t05\t06\t07\t08\t09\t12\t13\t14\t15\t16\t18\t20\t22\t23	NULL	M	U	Y	4	Y	O
+124	mianba	杨胜	123456	mianba@chinaren.com	62775147,13301060867	01\t02\t11\t12\t13\t14\t15	NULL	M	U	Y	5	Y	T
+125	qxb	钱秀槟	986031	qianxb@gnuchina.org	14#358	01\t02\t04\t05\t06\t07\t08\t11\t12\t13\t17\t18\t22	NULL	M	U	Y	3	Y	T
+126	luker	 刘斌	6999232	Luker123@263.com	69993232	01\t16\t17\t18\t19\t21\t23\t24	NULL	M	U	Y	4	Y	T
+127	forestLin	林云峰	chinese	linyunfeng@263.net	62774247 清华大学30#414	16\t17\t18\t19\t20\t21\t22\t23	NULL	M	U	Y	5	N	O
+128	colin	沈威	colin!@#	colin_s@china.com	68935218 或95900呼9142391西城区三里河路四号	01\t02\t03\t04\t05\t06\t07\t08\t10\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	4	Y	F
+129	lonic	王海滨	fidea	lonic@263.net	62777136	16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	3	Y	F
+130	che	che	cheilyfe	william_guo@fm365.com	63951155-2056	04\t05\t06\t07\t08\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	4	Y	T
+131	heda	何达	heda1234	heda@sina.com	13001288230	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	4	Y	O
+132	snow in whiter	李伟	19730620	yours_liwei@163.net	62788940	01\t02\t03\t11\t12\t13\t15\t21\t22\t23	NULL	M	U	Y	5	N	T
+133	coffer	吴云峰	wyfisme	coffer@bnu.edu.cn	13501245127	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	NULL	Y	F
+134	hans	哈斯	741216	h-hans@yeah.net	191-4995846	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16	NULL	M	C	Y	4	Y	F
+135	SunDance	盛文亮	singing	Sun.Dance@263.net	62048888呼3510	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	NULL	N	T
+136	jessica	王宁	wangning	wangning_2000@yeah.net	62776548  清华大学6#244	01\t02\t03	NULL	F	U	Y	5	N	NULL
+137	snowman	蔡洪旭	snow;man	snowman2000@china.com	62775815 清华大学10#127	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	N	F
+138	shwf	单维锋	swf1026	shwf@sina.com	1914997867	01\t02\t04\t05\t06\t07\t08\t11\t12\t13\t14\t15\t17\t18\t22	NULL	M	U	Y	5	Y	T
+139	qijichao	祁技超	qjc9523	qijichao@263.net	清华大学34＃211	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	N	T
+140	hj	黄敬	545609	huangjing.mail@263.net	62778325	01\t02\t03\t04\t05\t06\t07\t08\t09\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	NULL	N	O
+141	linu	周立胜	zxpzls1972	butgofly@263.net	62770926 紫光421#文通	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	Y	T
+142	dflan	兰登峰	ldfddmm	dflan@sina.com	bp:1278204489	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	NULL	Y	F
+143	pandage	王健君	197981	pandage@chinaren.com	62815101	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	Y	T
+144	mar	张弓	Bal70158023	zhangg@post.pim.tsinghua.edu.cn	62778258,THU-25#-208	01\t04\t05\t07\t08\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	NULL	Y	T
+145	coolswords	房健	mississippi	hoping@chinaren.com	清华大学9#112	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	N	T
+146	Airshow	程志锐	czRlover	cheng@cic.tsinghua.edu.cn	62778351	16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	T
+147	Sabrina	王锐洁	5823002	wrj.ww@263.net	8#206	01\t02\t03\t04\t05\t06\t07\t08\t09\t10	NULL	F	U	Y	NULL	N	T
+148	Garfield	陈伟峰	superman	cwf@dns.sce.tsinghua.edu.cn	清华大学14#549	03\t04\t05\t06\t07\t09\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	NULL	Y	T
+149	ddu123	都治国	du781109	ddu123@263.net	62775324	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	F
+150	kiyokawa	蒋东镭	lovejuan	jzh345@263.net	62779582    28#341	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	N	F
+151	magenta.jz	杨济	2118611	magenta_jz@263.net	电话：62779587	NULL	NULL	M	U	Y	NULL	Y	T
+152	flowers_rain	张华伟	801216	zhw1216@263.net	62779583   28#342	01\t02\t03\t04	NULL	NULL	NULL	NULL	NULL	NULL	NULL
+153	Alexandrite	孙文泱	Amethyst	sunwy@post.pim.tsinghua.edu.cn	62788681	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	Y	T
+154	flowersrain	张华伟	huawei	zhw1216@263.net	62779583   28#342	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	3	Y	F
+155	pasu	任宇福	&nbsp;	stnren@263.net	191-1132489	01\t02\t04\t05\t06\t07\t08\t09\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	3	Y	F
+156	beckhamwh	韦华	13888	jangwei@263.net	62779582 清华大学28#341	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	3	Y	F
+157	Leo	张魁麟	quelin	klzhang@chinaren.com	北方交通大学269＃ 63226851	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	NULL	Y	F
+158	frontbackboy	曹德芳	venture	frontbackboy@sina.com	清华大学9#214 phone:62777100	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	N	F
+159	woshitanhui	檀慧	991329	woshitanhui@263.net	62774756	01\t02\t03\t04\t05\t06\t07\t08\t09\t10	NULL	F	U	Y	5	N	F
+160	xiaogao	高崇南	cde	gaochongnan@263.net	bbs id:xiaogao	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	N	O
+161	javaman	许传波	750112	javaman@btamail.net.cn	68701439-141	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	NULL	Y	T
+162	zinniaz	左南	monkey38	zinniaz@263.net	11#417	01\t02\t03\t11\t12\t13	NULL	M	U	Y	NULL	N	T
+163	wjant	吴江	781018	wj_ant@263.net	34#407	01\t02\t03\t11\t12\t13\t14\t15	NULL	M	U	Y	5	N	T
+164	robin	zhangkuo	roibn712	zhangkuo@263.net	010-62777100清华大学9#214	02\t03	NULL	M	U	Y	NULL	Y	F
+165	seagull	王绚	wxhpr.	81wangxuan@263.net	62777100 清华大学9#214	02	NULL	M	U	Y	NULL	Y	F
+166	frcchang	张岳	25301a	frcchang@263.net	62777100 清华大学9#214	01\t02	NULL	M	U	Y	NULL	Y	F
+167	netboy2	吴一帆	214214	netboy2@263.net	62777100	01\t02\t03\t04\t05\t06\t07\t08\t11\t12\t13\t14\t15	NULL	M	U	Y	4	N	O
+168	hotants	秦伟俊	111111	hotcelery@263.net	62777094  清华大学9#204	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	N	T
+169	Michael	尹天宝	silenceisgold	ytb@hanwang.com.cn	62629237	01\t02\t04\t05\t06\t07\t08\t11\t12\t13\t14\t15\t16\t17\t22	NULL	M	C	Y	3	N	T
+170	zerlin	熊钊荣	354627	xzr_xzr@chinaren.com	28#328	01\t02\t03\t04\t07\t08\t11\t15	NULL	M	U	Y	NULL	N	T
+171	alexyumz	于明泽	woyaofd	alexyumz@263.net	62777094	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	O	4	N	F
+172	sexypanda	曹秉超	991125	sexypanda@sina.com	tel:62777094	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	3	N	F
+173	chingson	赵章界	340821	chingson@263.net	62587953-16	NULL	NULL	M	U	Y	5	Y	T
+174	ericyan	严格	akaasdf	ericyan@263.net	191-1226817	01\t02\t03\t05\t06\t07\t08\t09\t12\t13\t14\t15\t22	NULL	M	C	Y	4	N	T
+175	appleton	靳磊	751203	appleton.jl@263.net	62779623	05\t06\t07\t08\t09\t10\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	T
+176	yjlspace	杨晋邻	maverick	yjlspace@sina.com	62777144	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	N	F
+177	tqpiggy	唐峤	76924	tqxxx@263.net	67355260	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	NULL	Y	T
+178	Johnny.Fox`	赵乃岩	dragon	zhaony@263.net	清华大学34#410	02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	Y	T
+179	guoweihua	郭卫华	ilovexia	gwh@tec1.cs.tsinghua.edu.cn	13910726240	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	3	Y	T
+180	xuehouniao	马宁	991429	xuehouniao@chinaren.com	62777096     9#208	01\t02\t03\t04\t05\t06\t07\t08\t09\t10	NULL	NULL	NULL	NULL	NULL	NULL	NULL
+181	juice	赖瑾	juicecims	laibr@263.net	62774332,清华大学30＃605	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	F	U	Y	5	Y	T
+182	terminal	周明	33383	terminal99g@stumail.tsinghua.edu.cn	清华大学9＃223	01\t02\t04\t05\t06\t07\t08\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	3	Y	T
+183	l_s_feng	刘少锋	197795	qingfengl@263.net	191-5278369	02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	3	N	O
+184	blook	吴泽云	6803681	xia_tian@chinaren.com	010-62775652 清华大学13#244	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	5	Y	T
+185	Bruce	虞盛超	yusc	zsyusc@263.net	62613311转1401	02\t03\t04\t05\t06\t07\t08\t09\t10\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	N	O
+186	jinzhenhua	金振华	730903	jinzhenhua@263.net	62785965	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	NULL	N	NULL
+187	Maverick	张小京	Dec1980z	Maverickz@263.net	62774431	01\t02\t03\t04\t05\t11\t12\t13\t15\t22	NULL	M	U	Y	NULL	Y	T
+188	esn	张凯	defsdn	esn@chinaren.com	62773222(L),74892(D)	01\t02\t03\t04\t05\t06\t07\t08\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23	NULL	M	U	Y	NULL	N	T
+189	robotlee	李金茂	inside	ljm0518@sina.com	62770926-133	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	3	Y	T
+190	huang	黄晶晶	h991666	hbsxhjj@chinaren.com	62774439清华大学26#212	01\t05\t06\t07\t08\t11\t15\t21	NULL	M	U	Y	4	Y	O
+191	Wayne	洪伟	770516	tableau@chinaren.com	62775240 清华大学13#319	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t16\t17\t18\t19\t20\t21\t22\t23	NULL	M	U	Y	3	Y	F
+192	anwen	陈文娣	471116	chen_anwen@sina.com.cn	32#101	01\t14\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	F	U	Y	3	N	T
+193	xm.dong	董喜明	501178	Dong-xm	13021022680	11\t12\t13\t14\t15	NULL	NULL	NULL	NULL	NULL	NULL	NULL
+194	yuhui	于晖	290924	huiyuyu@chinaren.com	62056666-21810	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	NULL	N	T
+195	eric	Hu XL	13001251390	eric@bme.tsinghua.edu.cn	14#433	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	4	Y	T
+196	tomeinstein	吴伟伟	715809	abuck@chianren.com	62774478 清华大学26#123	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	U	Y	2	Y	T
+197	kyslone	杨昆仑	dc/ykl	yangkunlun@chinaren.com	62779435@清华大学28#112	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t17\t19\t22	NULL	M	U	Y	NULL	Y	T
+198	tigerjade	汤钧	hahaha	jun.tang@esstech.com.cn	68271188-307429	01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t16\t17\t18\t19\t20\t21\t22\t23\t24	NULL	M	C	Y	4	Y	T
+199	chaos	王晓哲	811230	wxz00@263.net	62776700 清华大学12#204	01\t02\t03\t05\t06	NULL	M	U	Y	4	N	T
+200	Lee	李志锋	0319441	lzf319@263.net	62774194 30#315	01\t05\t08\t11\t14\t15\t16\t17\t18\t22	NULL	M	U	Y	NULL	Y	T

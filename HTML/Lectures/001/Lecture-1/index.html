@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>第一讲</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+    <META NAME="GENERATOR" CONTENT="StarOffice/5.1 (Linux)">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
+    <META NAME="CREATED" CONTENT="20000329;17342600">
+    <META >
+    <STYLE>
+    <!--
+        H1 { color: #ffff00; font-family: "timmons", serif }
+        TD P { color: #ffff00 }
+        P { color: #ffff00 }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="velvet.jpg">
+
+<H1 ALIGN=CENTER>
+第一讲  Linux 编程入门与基本编程工具的使用
+</H1>
+
+<H2>主要内容</H2>
+<UL SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+        <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+        <A HREF="whatis.html">什么是 Linux</A></P>
+        <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+        <A HREF="history.html">Linux 的发展历史以及关键人物</A></P>
+        <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+        <A HREF="others.html">Linux 与其他操作系统</A></P>
+        <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+        <A HREF="basic.html">Linux 的编程常识</A></P>
+        <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+        <A HREF="scenario.html">Linux 上进行程序开发的典型场景</A></P>
+        <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+        <A HREF="vi.html">万年编辑器: vi</A></P>
+        <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+        <A HREF="prog_script.html">程序和脚本</A></P>
+        <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+        <A HREF="compiler.html">Linux 上的 C 编译器和调试器</A></P>
+        <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+        <A HREF="make.html">GNU make 和 makefile</A></P>
+        <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+        <A HREF="utilities.html">实用工具</A></P>
+        <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+        <A HREF="bash.html">Bash 命令行与脚本</A></P>
+</UL>
+
+<H2>整体思路</H2>
+<P>
+本讲是系列讲座的第一讲。其目的主要是通过介绍 Linux 上编程的基本工具以及一些新手必须掌握的技巧，迅速引导新手入门，以避免走弯路。<BR>
+首先对 Linux 作一简单介绍，然后通过讲解 Linux 上进行编程的常识以及典型场景的演示，使大家对 Linux 上的程序开发有一个感性认识。在此基础上，重点讲述 Linux 上 C 语言编程的基本工具，包括编译器和调试器，主要是它们的重要选项和基本用法。接下来讲述在项目组织和开发过程中非常重要的工具，即 GNU make 和 makefile。最后，介绍程序开发过程最为常用的工具，以及将这些工具有机组织起来的 Shell 机制，即命令行和脚本。
+</P>
+
+<H2>各部分要点</H2>
+<UL SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+    <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+    1.1  什么是 Linux</P>
+    <UL>
+        <LI>Linux 的发音</LI>
+        <LI>Linux 的官方定义</LI>
+        <LI>POSIX 及其重要地位</LI>
+        <LI>GNU 和 Linux 的关系</LI>
+        <LI>GPL 及其主要内容</LI>
+        <LI>Linux 的主要发行版</LI>
+    </UL>
+    <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+    1.2 Linux 的发展历史以及关键人物</P>
+    <UL>
+        <LI>UNIX, GNU, Linux 的关键人物及贡献</LI>
+        <LI>Linux 发展的重要里程碑</LI>
+    </UL>
+    <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+    1.3  Linux 与其他操作系统</P>
+    <UL>
+        <LI>Linux 与主要 UNIX 系统之间的关系</LI>
+        <LI>Linux 与 Windows 操作系统</LI>
+    </UL>
+    <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+    1.4  Linux 的编程常识</P>
+    <UL>
+        <LI>标准 (ANSI C, POSIX, SVID, XPG, ...)</LI>
+        <LI>函数库和系统调用</LI>
+        <LI>在线文档 (man, info, HOW-TO, ...)</LI>
+        <LI>C 语言编程风格</LI>
+        <LI>库和头文件的保存位置</LI>
+        <LI>共享库及其相关配置</LI>
+    </UL>
+    <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+    1.5  Linux 上进行程序开发的典型场景</P>
+    <UL>
+        <LI>控制台上的开发场景</LI>
+        <LI>X Window 上的开发场景</LI>
+    </UL>
+    <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+    1.6  万年编辑器: vi</P>
+    <UL>
+        <LI>vi 的工作模式</LI>
+        <LI>编辑模式</LI>
+        <LI>插入模式</LI>
+        <LI>命令模式</LI>
+        <LI>shell 切换</LI>
+        <LI>选项设置</LI>
+        <LI>vim 和 gvim 的高级特色</LI>
+    </UL>
+    <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+    1.7  程序和脚本</P>
+    <UL>
+        <LI>程序：编写, 编译, 调试和执行</LI>
+        <LI>脚本：编写, 执行</LI>
+    </UL>
+    <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+    1.8  Linux 上的 C/C++ 编译器和调试器</P>
+    <UL>
+        <LI>运行 gcc/egcs</LI>
+        <LI>gcc/egcs 的主要选项</LI>
+        <LI>gdb</LI>
+        <LI>gdb 的常用命令</LI>
+        <LI>gdb 使用范例</LI>
+        <LI>其他程序/库工具 (ar, objdump, nm, size, strings, strip, ...)</LI>
+    </UL>
+    <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+    1.9  GNU make 和 makefile</P>
+    <UL>
+        <LI>GNU make</LI>
+        <LI>makefile 基本结构</LI>
+        <LI>makefile 变量</LI>
+        <LI>GNU make 的主要预定义变量</LI>
+        <LI>隐含规则</LI>
+        <LI>makefile 范例</LI>
+        <LI>运行 make</LI>
+    </UL>
+    <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+    1.10  实用工具</P>
+    <UL>
+        <LI>正则表达式</LI>
+        <LI>压缩和归档工具 (gzip, bzip2, tar, ...)</LI>
+        <LI>搜索和排序 (grep, find, sort, ...)</LI>
+        <LI>文件编辑 (sed, tr)</LI>
+        <LI>文件比较 (cmp, comm, diff, ...)</LI>
+        <LI>其他 (ed, emacs, ...)</LI>
+    </UL>
+    <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+    1.11 Bash 命令行与脚本</P>
+    <UL>
+        <LI>Bash 介绍</LI>
+        <LI>重要的命令行机制 (I/O 重定向, 管道, ...)</LI>
+        <LI>Bash 脚本介绍</LI>
+        <LI>变量</LI>
+        <LI>控制结构</LI>
+        <LI>范例</LI>
+    </UL>
+</UL>
+
+<H2>练习</H2>
+<OL>
+    <LI>如果还没有安装 Linux 系统的话，请安装一种 Linux 发行版，并掌握 Linux 的基本使用。</LI>
+    <LI>在下面这些练习中需要编辑文件时，请使用 vi 编辑器。</LI>
+    <LI>编写一个 Bash 脚本，用来将当前目录树中（递归）所有 DOS 格式的文本文件转换为 UNIX 格式的文本文件，新文件名称添加后缀 .unix。</LI>
+    <LI>试着将自己在 DOS 或 Windows 下编写过的程序移植到 Linux，编译通过并测试正确性。</LI>
+    <LI>从网上下载 CCE 或 MiniGUI 的源代码，然后研究其 Makefile 的结构。</LI>
+    <LI>用 C 语言或自己喜欢的语言实现第 3 题。</LI>
+</OL>
+
+<H2>参考书目</H2>
+<OL>
+    <LI>Phil Cornes, <I>The Linux A - Z</I>, Prentice Hall Europe, 1997.<BR>
+       (中译本已由电子工业出版社出版, 童寿彬等译)</LI>
+    <LI>Naba Barkakati, <I>The Linux Secrets</I>, IDG Books Worldwide, Inc. 1999.<BR>
+       (中译本即将由电子工业出版社出版, 魏永明等译)</LI>
+    <LI>John Goerzen, <I>The Linux Programming Bible</I>, IDG Books Worldwide, Inc. 1999.<BR>
+       (中译本即将由电子工业出版社出版, 魏永明等译)</LI>
+</OL>
+
+<H2>进一步读物</H2>
+<UL>
+    <LI>W. Richard Stevens, <I>Advanced Programming in the UNIX Environment</I>, Chpater 1 and Chapter 2.</LI>
+</UL>
+
+<H2>反馈</H2>
+本讲由<A HREF="mailto:ymwei@263.net">魏永明</A>讲解。欢迎任何意见和建议，可发 email: <A HREF="mailto:ymwei@263.net">ymwei@263.net</A> 与魏永明联系。
+
+<P>
+<CENTER>
+<A HREF="../index.html">AKA 自由软件系列讲座</A>
+</CENTER>
+</P>
+
+</BODY>
+</HTML>
+

@@ -1,0 +1,57 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>New Page 1</title>
+<meta name="Microsoft Theme" content="blank 000, default">
+<meta name="Microsoft Border" content="tlb, default">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/servlet_objects.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="预定义的Object"></strong></font><br>
+<a href="servlet_req_resp.htm"><img src="../_derived/back_cmp_blank000_back.gif" width="100" height="20" border="0" alt="上一页" align="middle"></a> <a href="../index.htm"><img src="../_derived/home_cmp_blank000_home.gif" width="100" height="20" border="0" alt="主页" align="middle"></a> <a href="index.htm"><img src="../_derived/up_cmp_blank000_up.gif" width="100" height="20" border="0" alt="上一层" align="middle"></a> <a href="servlet_object_figure.htm"><img src="../_derived/next_cmp_blank000_next.gif" width="100" height="20" border="0" alt="下一页" align="middle"></a></p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="../_themes/blank/blbull1.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="宋体">Servlet<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="../_themes/blank/blbull1.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="宋体">Request<br>
+    1、HTTP请求的信息头<br>
+    2、输入流（InputStream)<br>
+    3、表单的输入信息<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="../_themes/blank/blbull1.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="宋体">Response<br>
+    1、HTTP回应的信息头<br>
+    2、输出流（OutputStream）<br>
+    3、Cookie的设置<br>
+    4、一些为了方便使用而提供的函数：<br>
+    &nbsp;&nbsp;&nbsp; a) 将页面从定向到其他URL；<br>
+    &nbsp;&nbsp;&nbsp; b) 错误页面设置；<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="../_themes/blank/blbull1.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="宋体">Session<br>
+    将非连续的HTTP请求通过管理，可以得到客户的连续的状态。<br>
+    Servlet的API隐藏了实现的细节。<br>
+    一般来说，Session的实现是为每一个用户的客户端存储一个Cookie值（JSPSESSION=nnnnnnn），通过这个唯一的值来保存客户的状态。<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="../_themes/blank/blbull1.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="宋体">ServletContext<br>
+    在每一个WEB的服务中，只存在一个ServletContex；<br>
+    每一个JVM只运行一个ServletContex；<br>
+    ServletContex负责存取资源；<br>
+    为了实现存取/共享数据，必须满足一下两个条件：<br>
+    &nbsp;&nbsp;&nbsp; a) 在JVM中运行；<br>
+    &nbsp;&nbsp;&nbsp; b) 如果是分布式应用，则被存取/共享的程序必须是可以被序列化的（Serializable）；<br>
+    Session的有效范围被限制在它所在的ServletContex中。<!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table msthemelist><!--mstheme--><font face="宋体">
+　
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="right">
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table></body>
+
+</html>

@@ -1,0 +1,713 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0056)http://www.sgi.com/developers/library/local/process.html -->
+<HTML><HEAD><TITLE>Developer Central - Localization at SGI</TITLE>
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+<META content="SGI, Developers, Library, Local, " name=Keywords>
+<META content="Localization Software Process" name=description>
+<SCRIPT language=JavaScript>
+<!-- begin javascript
+
+browser = (((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) >= 3 )) || ((navigator.appName == "Microsoft Internet Explorer") && (parseInt(navigator.appVersion) >= 4 )))
+
+
+var good = 0;
+
+if (browser) {
+        good = 1;
+}
+
+if (good == 1) {
+        //alert("Yippie!!");
+
+if (document.images) {
+  image1on = new Image();
+  image1on.src = "../../images/nav-dev_on.gif";
+  image2on = new Image();
+  image2on.src = "../../images/nav-prog_on.gif";
+  image3on = new Image();
+  image3on.src = "../../images/nav-lib_on.gif";
+  image4on = new Image();
+  image4on.src = "../../images/nav-mkt_on.gif";
+  image5on = new Image();
+  image5on.src = "../../images/nav-tech_on.gif";
+  image6on = new Image();
+  image6on.src = "../../images/nav-oss_on.gif";
+
+  image1off = new Image();
+  image1off.src = "../../images/nav-dev_off.gif";
+  image2off = new Image();
+  image2off.src = "../../images/nav-prog_off.gif";
+  image3off = new Image();
+  image3off.src = "../../images/nav-lib_off.gif";
+  image4off = new Image();
+  image4off.src = "../../images/nav-mkt_off.gif";
+  image5off = new Image();
+  image5off.src = "../../images/nav-tech_off.gif";
+  image6off = new Image();
+  image6off.src = "../../images/nav-oss_off.gif";
+
+  image1sel= new Image();
+  image1sel.src = "../../images/nav-dev_sel.gif";
+  image2sel = new Image();
+  image2sel.src = "../../images/nav-prog_sel.gif";
+  image3sel = new Image();
+  image3sel.src = "../../images/nav-lib_sel.gif";
+  image4sel = new Image();
+  image4sel.src = "../../images/nav-mkt_sel.gif";
+  image5sel = new Image();
+  image5sel.src = "../../images/nav-tech_sel.gif";
+  image6sel = new Image();
+  image6sel.src = "../../images/nav-oss_sel.gif";
+
+}
+}
+
+function turnOn(imageName) {
+  if (document.images) {
+    document[imageName].src = eval(imageName + "on.src");
+  }
+}
+
+function turnOff(imageName) {
+  if (document.images) {
+    document[imageName].src = eval(imageName + "off.src");
+  }
+}
+
+function turnSel(imageName) {
+  if (document.images) {
+    document[imageName].src = eval(imageName + "sel.src");
+  }
+}
+
+// -->
+</SCRIPT>
+<!-- ***********  ---><LINK href="process.files/developers.css" rel=stylesheet 
+type=text/css>
+<SCRIPT language=JavaScript>
+// create image objects and pre-load images
+
+  window.onerror=null;
+  window.defaultStatus = '';
+
+if (!document.images) {}
+  else {
+
+        nav_prd0 = new Image();
+        nav_prd0.src = "/images/common/nav_prod0.gif";
+        nav_prd1 = new Image();
+        nav_prd1.src = "/images/common/nav_prod1.gif";
+
+        nav_sol0 = new Image();
+        nav_sol0.src = "/images/common/nav_solutions0.gif";
+        nav_sol1 = new Image();
+        nav_sol1.src = "/images/common/nav_solutions1.gif";
+
+        nav_dev0 = new Image();
+        nav_dev0.src = "/images/common/nav_dev0.gif";
+        nav_dev1 = new Image();
+        nav_dev1.src = "/images/common/nav_dev1.gif";
+
+        nav_srv0 = new Image();
+        nav_srv0.src = "/images/common/nav_support0.gif";
+        nav_srv1 = new Image();
+        nav_srv1.src = "/images/common/nav_support1.gif";
+
+        nav_sal0 = new Image();
+        nav_sal0.src = "/images/common/nav_sales0.gif";
+        nav_sal1 = new Image();
+        nav_sal1.src = "/images/common/nav_sales1.gif";
+
+        nav_fun0 = new Image();
+        nav_fun0.src = "/images/common/nav_fun0.gif";
+        nav_fun1 = new Image();
+        nav_fun1.src = "/images/common/nav_fun1.gif";
+
+        nav_hom0 = new Image();
+        nav_hom0.src = "/images/common/nav_home0.gif";
+        nav_hom1 = new Image();
+        nav_hom1.src = "/images/common/nav_home1.gif";
+
+        nav_src0 = new Image();
+        nav_src0.src = "/images/common/nav_search0.gif";
+        nav_src1 = new Image();
+        nav_src1.src = "/images/common/nav_search1.gif";
+
+}
+
+
+</SCRIPT>
+
+<META content="MSHTML 5.00.2920.0" name=GENERATOR></HEAD>
+<BODY aLink=#ff0000 bgColor=#ffffff leftMargin=0 link=#420077 text=#000000 
+topMargin=0 vLink=#666666 MARGINWIDTH="0" MARGINHEIGHT="0"><!-- Match this include to the directory depth -->
+<SCRIPT language=Javascript>
+<!---
+
+  
+  function change(Name,Image,No,Msg) {
+
+   	if (!document.images) {}
+
+     	else {
+     		document [Name].src = eval(Image + No + ".src");
+	}
+  	if (Msg) self.status = eval(Image + "2");
+
+     return true
+
+  }
+
+//-->
+</SCRIPT>
+
+<TABLE border=0 cellPadding=0 cellSpacing=0 width=620>
+  <TBODY>
+  <TR>
+    <TD colSpan=3><A href="http://www.sgi.com/" 
+      onmouseout="change('hom','nav_hom',0)" 
+      onmouseover="change('hom','nav_hom',1)"><IMG alt="[Home] " border=0 
+      height=25 name=hom src="process.files/nav_home0.gif" width=48></A><A 
+      href="http://www.sgi.com/search/" onmouseout="change('src','nav_src',0)" 
+      onmouseover="change('src','nav_src',1)"><IMG alt="[Search] " border=0 
+      height=25 name=src src="process.files/nav_search0.gif" width=54></A><A 
+      href="http://www.sgi.com/sales/" onmouseout="change('sal','nav_sal',0)" 
+      onmouseover="change('sal','nav_sal',1)"><IMG alt="[How to Buy] " border=0 
+      height=25 name=sal src="process.files/nav_sales0.html" width=79></A><A 
+      href="http://www.sgi.com/products/" onmouseout="change('prd','nav_prd',0)" 
+      onmouseover="change('prd','nav_prd',1)"><IMG alt="[Products] " border=0 
+      height=25 name=prd src="process.files/nav_prod0.gif" width=70></A><A 
+      href="http://www.sgi.com/solutions/" 
+      onmouseout="change('sol','nav_sol',0)" 
+      onmouseover="change('sol','nav_sol',1)"><IMG alt="[Solutions] " border=0 
+      height=25 name=sol src="process.files/nav_solutions0.gif" width=73></A><A 
+      href="http://www.sgi.com/developers/"><IMG alt="[Developers] " border=0 
+      height=25 name=dev src="process.files/nav_dev1.html" width=81></A><A 
+      href="http://www.sgi.com/support/" onmouseout="change('srv','nav_srv',0)" 
+      onmouseover="change('srv','nav_srv',1)"><IMG alt="[Services and Support] " 
+      border=0 height=25 name=srv src="process.files/nav_support0.gif" 
+      width=128></A><A href="http://www.sgi.com/fun/" 
+      onmouseout="change('fun','nav_fun',0)" 
+      onmouseover="change('fun','nav_fun',1)"><IMG alt="[Serious Fun] " border=0 
+      height=25 name=fun src="process.files/nav_fun0.gif" width=87></A></TD></TR>
+  <TR>
+    <TD colSpan=3><IMG alt="" height=7 src="process.files/nav_dev_line.gif" 
+      width=620></TD></TR>
+  <TR>
+    <TD vAlign=top><A href="http://www.sgi.com/"><IMG alt=sgi border=0 
+      height=108 src="process.files/sgilogo.gif" width=130></A></TD>
+    <TD align=right colSpan=2>&nbsp;<BR><A 
+      href="http://www.sgi.com/developers/index.html"><IMG 
+      alt="Developer Central" border=0 height=55 
+      src="process.files/nav-devcentral.gif" width=203></A> <BR><!-- ***********  ---><A 
+      href="http://www.sgi.com/developers/devtools/index.html" 
+      onmouseout="if (good == 1) turnOff('image1')" 
+      onmouseover="if (good == 1) turnOn('image1')"><IMG alt="Developer Tools" 
+      border=0 height=55 name=image1 src="process.files/nav-dev_off.html" 
+      width=80></A><A href="http://www.sgi.com/developers/program/index.html" 
+      onmouseout="if (good == 1) turnOff('image2')" 
+      onmouseover="if (good == 1) turnOn('image2')"><IMG 
+      alt="Program &amp; Benefits" border=0 height=55 name=image2 
+      src="process.files/nav-prog_off.gif" width=75></A><A 
+      href="http://www.sgi.com/developers/library/index.html" 
+      onmouseout="if (good == 1) turnSel('image3')" 
+      onmouseover="if (good == 1) turnOn('image3')"><IMG alt=Library border=0 
+      height=55 name=image3 src="process.files/nav-lib_sel.gif" width=72></A><A 
+      href="http://www.sgi.com/developers/marketing/index.html" 
+      onmouseout="if (good == 1) turnOff('image4')" 
+      onmouseover="if (good == 1) turnOn('image4')"><IMG 
+      alt="Marketing Resources" border=0 height=55 name=image4 
+      src="process.files/nav-mkt_off.gif" width=72></A><A 
+      href="http://www.sgi.com/developers/technology/index.html" 
+      onmouseout="if (good == 1) turnOff('image5')" 
+      onmouseover="if (good == 1) turnOn('image5')"><IMG alt=Technology border=0 
+      height=55 name=image5 src="process.files/nav-tech_off.gif" width=73></A><A 
+      href="http://www.sgi.com/developers/oss/index.html" 
+      onmouseout="if (good == 1) turnOff('image6')" 
+      onmouseover="if (good == 1) turnOn('image6')"><IMG alt="Open Source" 
+      border=0 height=55 name=image6 src="process.files/nav-oss_off.gif" 
+      width=75></A><BR><A 
+      href="http://www.sgi.com/developers/library/index.html" 
+      onmouseout="if (good == 1) turnSel('image3')" 
+      onmouseover="if (good == 1) turnOn('image3')"><IMG alt=Library border=0 
+      height=25 src="process.files/nav-title_lib.gif" width=222></A></TD></TR>
+  <TR>
+    <TD vAlign=top width=138><!-- Start Dev Tools Sub Navigation Bar -->
+      <TABLE border=0 cellPadding=0 cellSpacing=0 width=138>
+        <TBODY>
+        <TR>
+          <TD><IMG alt=image height=2 src="process.files/dot_clear.gif" 
+            width=5></TD>
+          <TD><IMG alt=image height=2 src="process.files/dot_clear.gif" 
+            width=20></TD>
+          <TD><IMG alt=image height=2 src="process.files/dot_clear.gif" 
+            width=116></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD colSpan=2><IMG alt="" height=10 
+            src="process.files/bullets_dev2.gif" width=18><FONT 
+            face="Geneva, Arial Narrow, Helvetica" size=2><B>Third Party 
+            Products</B></FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD></TD>
+          <TD><FONT face="ARIAL, HELVETICA" size=2><A 
+            href="http://www.sgi.com/Products/appsdirectory.html">Directory</A> 
+            </FONT><BR>&nbsp;</TD></TR>
+        <TR>
+          <TD></TD>
+          <TD colSpan=2><IMG alt="" height=10 
+            src="process.files/bullets_dev2.gif" width=18><FONT 
+            face="Geneva, Arial Narrow, Helvetica" size=2><B>Members 
+            Only</B></FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD></TD>
+          <TD><FONT face="ARIAL, HELVETICA" size=2><A 
+            href="https://toolbox.sgi.com/toolbox">Developer's</A><BR>&nbsp;&nbsp;<A 
+            href="https://toolbox.sgi.com/toolbox">Toolbox</A><IMG 
+            align=absBottom alt=* height=15 src="process.files/locko.gif" 
+            width=27><BR><A 
+            href="https://www.sgi.com/developers/devnews/index.html">Developer 
+            News</A><IMG align=absBottom alt=* height=15 
+            src="process.files/locks.gif" width=27><BR><A 
+            href="https://www.sgi.com/developers/devedge/index.html">DevEdge&nbsp;Email</A><IMG 
+            align=absBottom alt=* height=15 src="process.files/locko.gif" 
+            width=27><BR><A 
+            href="https://toolbox.sgi.com/toolbox/documents/KnowledgeBase/">KnowledgeBase</A><IMG 
+            align=absBottom alt=* height=15 src="process.files/locko.gif" 
+            width=27><BR><A 
+            href="http://www.sgi.com/developers/library/doc.html">Developer 
+            Consulting</A> </FONT><BR>&nbsp;</TD></TR>
+        <TR>
+          <TD></TD>
+          <TD colSpan=2><IMG alt="" height=10 
+            src="process.files/bullets_dev2.gif" width=18><FONT 
+            face="Geneva, Arial Narrow, Helvetica" size=2><B>Helpful 
+            Resources</B></FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD></TD>
+          <TD><FONT face="ARIAL, HELVETICA" size=2><A 
+            href="http://www.sgi.com/developers/library/resource.html">Useful 
+            Links</A><BR><A href="http://www.sgi.com/fun/">Freeware</A><BR><A 
+            href="http://www.sgi.com/developers/library/resources/vst.html">Video 
+            Server Toolkit</A><BR><A 
+            href="http://www.sgi.com/developers/library/resources/y2k.html">Year 
+            2000</A><BR><A href="http://techpubs.sgi.com/">Technical 
+            Publications</A><BR>&nbsp;&nbsp;<A 
+            href="http://techpubs.sgi.com/">Library</A><BR><A 
+            href="http://www.sgi.com/developers/library/resources/asc.html">Application 
+            Solution</A><BR>&nbsp;&nbsp;<A 
+            href="http://www.sgi.com/developers/library/resources/asc.html">Center</A> 
+            </FONT><BR>&nbsp;</TD></TR>
+        <TR>
+          <TD></TD>
+          <TD colSpan=2><IMG alt="" height=10 
+            src="process.files/bullets_dev2.gif" width=18><FONT 
+            face="Geneva, Arial Narrow, Helvetica" 
+            size=2><B>Localization</B></FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD></TD>
+          <TD><FONT face="ARIAL, HELVETICA" size=2><A 
+            href="http://www.sgi.com/developers/library/local/faq.html">Localization 
+            FAQ</A><BR><A 
+            href="http://www.sgi.com/developers/library/local/rules.html">Programming 
+            Rules</A><BR></FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD colSpan=2><IMG alt=* height=10 
+            src="process.files/nav-bullet3.jpeg" width=13> <FONT color=#207575 
+            face="ARIAL, HELVETICA" size=2><B>Example Code</B><BR></FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD></TD>
+          <TD><FONT face="ARIAL, HELVETICA" size=2><A 
+            href="http://www.sgi.com/developers/library/local/glossary.html">Glossaries</A> 
+            </FONT><BR>&nbsp;</TD></TR>
+        <TR>
+          <TD></TD>
+          <TD colSpan=2><IMG alt="" height=10 
+            src="process.files/bullets_dev2.gif" width=18><FONT 
+            face="Geneva, Arial Narrow, Helvetica" 
+          size=2><B>Archives</B></FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD></TD>
+          <TD><FONT face="ARIAL, HELVETICA" size=2><A 
+            href="https://www.sgi.com/developers/devnews/archives.html">Developer 
+            News</A><IMG align=absBottom alt=* height=15 
+            src="process.files/lock.gif" width=27><BR><A 
+            href="https://www.sgi.com/developers/devedge/archives.html">DevEdge</A><IMG 
+            align=absBottom alt=* height=15 src="process.files/lock.gif" 
+            width=27><BR><A href="http://www.sgi.com/developers/nibs/">What's 
+            New</A><BR><A href="http://www.sgi.com/developers/feature/">Feature 
+            Stories</A> </FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD colSpan=2>&nbsp;<BR><IMG alt=image height=2 
+            src="process.files/dot_clear.gif" width=140> 
+      &nbsp;<BR></TD></TR></TBODY></TABLE></TD>
+    <TD><IMG height=1 src="process.files/dot_clear.gif" width=20></TD>
+    <TD vAlign=top>&nbsp;
+      <P><!-- Start Content --><FONT face="ARIAL NARROW, HELVETICA" 
+      size=5><B>Localization at SGI</B></FONT> <BR><BR><FONT 
+      face="ARIAL, HELVETICA" size=4><B>Localization Software Process</B></FONT>
+      <P>
+      <TABLE border=1 cellSpacing=0>
+        <TBODY>
+        <TR align=middle>
+          <TD><B><FONT face="ARIAL, HELVETICA">US Team</B></FONT></TD>
+          <TD><B><FONT face="ARIAL, HELVETICA">Program Manager</B></FONT></TD>
+          <TD><B><FONT face="ARIAL, HELVETICA">L10N Team</B></FONT></TD>
+          <TD><B><FONT face="ARIAL, HELVETICA">Vendor</B></FONT></TD>
+          <TD><B><FONT face="ARIAL, HELVETICA">Subsidiary</B></FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Generate WorldView(WV) Glossary</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Feedback on Generated glossary</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Input sub's feedback to resource files, then 
+            Re-generate glossary</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>The project in progress</FONT></TD>
+          <TD><FONT size=-1>Project planning: Get US schedule, gather 
+            GlobalWorks(GW) info, and define target MR date for WV.</FONT></TD>
+          <TD><FONT size=-1>Edit L10N Kit Documentation</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Project spec &amp; rough schedule 
+writing</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Select vendors for each task</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Request for cloning WV source tree</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><B><FONT size=-1>US Campus Alpha</FONT></B></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Create L10N Prelim. Kit</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><B><FONT size=-1>FTP L10N Prelim. Kit to vendor (for 
+            quoting)</FONT></B></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Estimate the cost of project based on Prelim. L10N 
+            kit</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Re-generate GW app list for l10n</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Run L10N Readiness script &amp; request for I18N 
+            if necessary</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Test the result of L10N readiness script 
+          run</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>I18N fixes for the bugs reported</FONT></TD>
+          <TD><FONT size=-1>Revise project spec, test plan</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Define vendor training site, hardware 
+          needs</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Send back Project Quote</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Complete wv project budget</FONT></TD>
+          <TD><FONT size=-1>Review Leveraging Tool and Run it</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Vendor Training</FONT></TD>
+          <TD><FONT size=-1>Vendor Training</FONT></TD>
+          <TD><FONT size=-1>Vendor Training</FONT></TD>
+          <TD><FONT size=-1>Vendor Training</FONT></TD></TR>
+        <TR>
+          <TD><B><FONT size=-1>US Apps beta freeze</FONT></B></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Run Leverage tool</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><B><FONT size=-1>Project kick off meeting</FONT></B></TD>
+          <TD><B><FONT size=-1>.</FONT></B></TD>
+          <TD><B><FONT size=-1>Project kick off meeting</FONT></B></TD>
+          <TD><B><FONT size=-1>Project kick off meeting</FONT></B></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Change version number in Spec file, Create 
+            firstL10N kit</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><B><FONT size=-1>Post 1st L10N kit on sgi ftp server to 
+            vendor</FONT></B></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Translation</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Weekly conference call with vendor</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Weekly status report and conference call</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Weekly conference call with sub</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Weekly conference call</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Vendor support</FONT></TD>
+          <TD><FONT size=-1>Review</FONT></TD>
+          <TD><FONT size=-1>Vendor Support</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Testing &amp; Debug</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD>.</TD>
+          <TD>.</TD>
+          <TD>.</TD>
+          <TD><FONT size=-1>Report bugs to Bug Works</FONT></TD>
+          <TD>.</TD></TR>
+        <TR>
+          <TD>.</TD>
+          <TD>.</TD>
+          <TD><FONT size=-1>Review reported bugs from vendor and re-assign to 
+            appropriate engineers</FONT></TD>
+          <TD>.</TD>
+          <TD>.</TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Vendor Alpha Delivery</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>First QA at SGI, report back to vendor</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><B><FONT size=-1>US Core/Apps (all UI) Freeze</FONT></B></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Create final L10N kit containing diffs and update 
+            List of US files and build images</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><B><FONT size=-1>Post Final L10N kit on sgi ftp 
+          server</FONT></B></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Translation</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Review</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Testing &amp; Debug</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Vendor Beta Delivery</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Request for assigning SGI Builder and nightly auto 
+            build</FONT></TD>
+          <TD><FONT size=-1>Second QA &amp; Debug at SGI</FONT></TD>
+          <TD><FONT size=-1>Vendor incorporate SGI feedback</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>More I18N and debug if necessary</FONT></TD>
+          <TD><FONT size=-1>Get Marketing info, Confirm images including 
+            patches</FONT></TD>
+          <TD><FONT size=-1>Send SGI WVBeta build to Sub</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Complete Software Release Request (SRR)</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Review images</FONT></TD></TR>
+        <TR>
+          <TD>.</TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Report bugs to Bug Works</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Report bugs to Bug Works</FONT></TD></TR>
+        <TR>
+          <TD><B><FONT size=-1>US Final Take</FONT></B></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Request Patches if necessary</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><B><FONT size=-1>US Product MR</FONT></B></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Vendor MR candidate Delivery </FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>Release Patches for WV</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>SGI Final QA and Debug</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Review SRR, Patches, Links, Spec file</FONT></TD>
+          <TD><B><FONT size=-1>Send MR candidate images to Sub</FONT></B></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Clean installation of MR candidate 
+images</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><B><FONT size=-1>Validate product quality</FONT></B></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Edit Release Notes</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Request CD cut </FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Contact Release group for confirmation of 
+            WVMR</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>MR Candidate CD testing </FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Final Review of SRR, Verification form, version 
+            number and image links</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Contact Release group for CCB meeting</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Attend CCB meeting and Hand off Master CD and 
+            Verification form - <B>WV MR!</B></FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Postmortem</FONT></TD>
+          <TD><FONT size=-1>Postmortem</FONT></TD>
+          <TD><FONT size=-1>Postmortem</FONT></TD>
+          <TD><FONT size=-1>Postmortem</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Generate WV Glossary</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Feedback on Generated glossary</FONT></TD></TR>
+        <TR>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>Input sub's feedback to RC, then Re-generate 
+            glossary</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD>
+          <TD><FONT size=-1>&nbsp;</FONT></TD></TR></TBODY></TABLE>
+      <P></P></TD></TR></TBODY></TABLE>
+<P>
+<CENTER><!---- Virtual Footer ---->
+<TABLE border=0 cellPadding=0 width=400>
+  <TBODY>
+  <TR>
+    <TD align=right><FONT face="Helvetica, Arial" size=-1><A 
+      href="http://www.sgi.com/company_info/privacy.html" target=TOP>privacy 
+      policy</A></FONT> </TD>
+    <TD align=middle><FONT face="Helvetica, Arial">| </FONT></TD>
+    <TD align=left><FONT face="Helvetica, Arial" size=-1><A 
+      href="mailto:dev_webmaster@sgi.com" target=_top>webmaster</A></FONT> 
+</TD></TR>
+  <TR>
+    <TD align=right><FONT face="Helvetica, Arial" size=-2><A 
+      href="http://www.sgi.com/company_info/copyright.html" 
+      target=_top>Copyright &copy; 2000 Silicon Graphics, Inc.</A> All rights 
+      reserved.</FONT> </TD>
+    <TD align=middle><FONT face="Helvetica, Arial">| </FONT></TD>
+    <TD align=left><FONT face="Helvetica, Arial" size=-2><A 
+      href="http://www.sgi.com/company_info/trademarks/" target=_top>Trademark 
+      Information</A></FONT> </TD></TR></TBODY></TABLE></CENTER></BODY></HTML>

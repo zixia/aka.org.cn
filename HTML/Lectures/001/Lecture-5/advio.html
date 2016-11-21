@@ -1,0 +1,327 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>高级 I/O</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312-80">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        PRE { color: #ffffff; font-family: "fixed" }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="images/velvet.jpg">
+
+<A HREF="dir.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="misc.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=CENTER>5.5&nbsp;&nbsp;高级 I/O<BR><BR>
+</H1>
+
+<UL>
+    <LI><P>Linux 中直接的 I/O 端口读写</LI>
+    <LI><P>记录锁定</LI>
+    <LI><P>非阻塞 I/O</LI>
+    <LI><P>I/O 多工</LI>
+    <LI><P>异步 I/O</LI>
+    <LI><P>内存映射</LI>
+</UL>
+
+<H3>5.5.1&nbsp;&nbsp;Linux 中直接的 I/O 端口读写</H3>
+<UL>
+    <LI>只有 root 进程才能直接访问 I/O 端口</LI>
+    <LI>首先要取得端口的访问权限: ioperm, iopl</LI>
+    <LI>然后才能用 inb 和 outb</LI>
+    <LI>inb 和 outb 以内嵌函数的形式实现, 因此要用 -O 或 -O2 选项编译</LI>
+</UL>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt; /* for libc5 */
+       #include &lt;sys/io.h&gt; /* for glibc */
+       
+       int  ioperm (unsigned  long  from,  unsigned  long num, int turn_on);
+       int  iopl (int level);
+-------------------------------------------------------------------------------
+EXAMPLE:
+       /* get PC speak I/O ports access permission 
+          and implement a beep function */
+
+        #define COUNTER_ADDR    0x61
+
+        int beepCount = 500000;
+
+        BOOL InitIOPerm ()
+        {
+            if (ioperm (COUNTER_ADDR, 1, TRUE)) {
+                fprintf (stderr, "Can not get beep I/O permission!\n");
+                return FALSE;
+            }
+
+            return TRUE;
+        }
+
+        void CleanupIOPerm ()
+        {
+            ioperm (COUNTER_ADDR, 1, FALSE);
+        }
+
+        void GUIAPI Beep (void)
+        {
+            outb (inb (COUNTER_ADDR) | 3, COUNTER_ADDR);
+            usleep (beepCount);
+            outb (inb (COUNTER_ADDR) & 0xFC, COUNTER_ADDR);
+        }
+===============================================================================
+</PRE>
+
+<H3>5.5.2&nbsp;&nbsp;记录锁定</H3>
+<UL>
+    <LI>基本概念</LI>
+    <LI>#自学#</LI>
+</UL>
+
+<H3>5.5.3&nbsp;&nbsp;非阻塞 I/O</H3>
+<UL>
+    <LI>基本概念</LI>
+    <LI>open 时可指定 O_NONBLOCK (O_NDELAY)</LI>
+    <LI>用 fcntl 设置描述符标志而改变为非阻塞</LI>
+</UL>
+
+<H3>5.5.4&nbsp;&nbsp;I/O 多工</H3>
+<UL>
+    <LI>基本概念</LI>
+    <LI>select 和 poll</LI>
+</UL>
+
+<PRE>
+===============================================================================
+       #include &lt;sys/time.h&gt;
+       #include &lt;sys/types.h&gt;
+       #include &lt;unistd.h&gt;
+
+       int  select (int n,  fd_set  *readfds,  fd_set  *writefds,
+                    fd_set *exceptfds, struct timeval *timeout);
+
+       FD_CLR (int fd, fd_set *set);
+       FD_ISSET (int fd, fd_set *set);
+       FD_SET (int fd, fd_set *set);
+       FD_ZERO (fd_set *set);
+
+       #include <sys/poll.h>
+
+       int poll(struct pollfd *ufds, unsigned int nfds, int timeout);
+-------------------------------------------------------------------------------
+               struct pollfd {
+                       int fd;           /* file descriptor */
+                       short events;     /* requested events */
+                       short revents;    /* returned events */
+               };
+-------------------------------------------------------------------------------
+   * select 中的 n 是所等待文件描述符中最大的值加 1.
+-------------------------------------------------------------------------------
+EXAMPLE 1:
+       /* 在 Virtual Console on MiniGUI 中, 我们用 poll 等待主伪终端上的数据 */
+
+        void ReadMasterPty (PCONINFO con)
+        {
+            BYTE buff [BUFSIZ + 1];
+            int nRead;
+            struct pollfd fd = {con->masterPty, POLLIN, 0};
+            int ret;
+
+            ret = poll (&fd, 1, 10);   // about 0.01s
+
+            if (ret == 0) {
+                return;
+            }
+            else if (ret &gt; 0) {
+                if ((nRead = read (con-&gt;masterPty, buff, BUFSIZ)) &gt; 0) {
+                    VtWrite (con, buff, nRead);
+                    TextRefresh (con, true);
+                }
+            }
+        }
+
+       /* 如果没有数据, 我们处理 MiniGUI 的消息, 包括键盘和鼠标事件 */
+
+            ...
+
+            // Enter message loop.
+            do {
+                // It is time to read from master pty, and output.
+                ReadMasterPty (pConInfo);
+
+                if (pConInfo-&gt;terminate)
+                    break;
+
+                while (HavePendingMessage (hMainWnd)) {
+                    if (!GetMessage (&Msg, hMainWnd))
+                        break;
+                    DispatchMessage (&Msg);
+                }
+
+            } while (TRUE);
+
+            ...
+
+       /* 我们也可以用非阻塞 I/O 实现 ReadMasterPty, 但这种方法非常消耗 CPU 资源 */
+
+-------------------------------------------------------------------------------
+EXAMPLE 1:
+       /* SVGALib 用 select 函数实现 vga_waitevent 函数等待键盘和鼠标事件 */
+
+        int vga_waitevent(int which, fd_set * in, fd_set * out, fd_set * except,
+                          struct timeval *timeout)
+        {
+            fd_set infdset;
+            int fd, retval;
+
+            if (!in) {
+                in = &infdset;
+                FD_ZERO(in);
+            }
+            fd = __svgalib_mouse_fd;        /* __svgalib_mouse_fd might change on
+                                           vc switch!! */
+            if ((which & VGA_MOUSEEVENT) && (fd &gt;= 0))
+                FD_SET(fd, in);
+            if (which & VGA_KEYEVENT) {
+                fd = __svgalib_kbd_fd;
+                if (fd &gt;= 0) {                /* we are in raw mode */
+                    FD_SET(fd, in);
+                } else {
+                    FD_SET(__svgalib_tty_fd, in);
+                }
+            }
+            if (select(FD_SETSIZE, in, out, except, timeout) &lt; 0)
+                return -1;
+            retval = 0;
+            fd = __svgalib_mouse_fd;
+            if ((which & VGA_MOUSEEVENT) && (fd &gt;= 0)) {
+                if (FD_ISSET(fd, in)) {
+                    retval |= VGA_MOUSEEVENT;
+                    FD_CLR(fd, in);
+                    mouse_update();
+                }
+            }
+            if (which & VGA_KEYEVENT) {
+                fd = __svgalib_kbd_fd;
+                if (fd &gt;= 0) {                /* we are in raw mode */
+                    if (FD_ISSET(fd, in)) {
+                        FD_CLR(fd, in);
+                        retval |= VGA_KEYEVENT;
+                        keyboard_update();
+                    }
+                } else if (FD_ISSET(__svgalib_tty_fd, in)) {
+                    FD_CLR(__svgalib_tty_fd, in);
+                    retval |= VGA_KEYEVENT;
+                }
+            }
+            return retval;
+        }
+===============================================================================
+</PRE>
+
+
+<H3>5.5.4&nbsp;&nbsp;异步 I/O</H3>
+<UL>
+    <LI>基本概念</LI>
+    <LI>#自学#</LI>
+</UL>
+
+<H3>5.5.5&nbsp;&nbsp;内存映射</H3>
+<UL>
+    <LI>基本概念</LI>
+    <LI>mmap/unmmap</LI>
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+       #include &lt;sys/mman.h&gt;
+
+       #ifdef _POSIX_MAPPED_FILES
+
+       void*  mmap (void *start, size_t length, int prot, int flags, int fd, off_t offset);
+       int munmap (void *start, size_t length);
+
+       #endif
+-------------------------------------------------------------------------------
+    * mmap 的 start 一般设为 0, 由系统决定选择什么地址作为起始的映射地址.
+    * prot 的取值必须和 fd 的打开标志一直.
+    * 写时复制的含义.
+-------------------------------------------------------------------------------
+SAMPLE:
+        /* 打开一个文件, 利用 mmap 将文件反序保存
+           为简单起见, 只处理文件的前 10 个字符 */
+
+        #include &lt;stdio.h&gt;
+        #include &lt;unistd.h&gt;
+        #include &lt;sys/mman.h&gt;
+        #include &lt;sys/types.h&gt;
+        #include &lt;sys/stat.h&gt;
+        #include &lt;fcntl.h&gt;
+
+        int main (int args, char* arg[])
+        {
+            int i;
+            int fd;
+            char* mem;
+            
+            if ((fd = open ("temp", O_RDWR)) &lt; 0)  {
+                perror ("open error");
+                return -1;
+            }
+
+            mem = mmap (0, 10, PROT_READ | PROT_WRITE, MAP_FILE | MAP_SHARED, fd, 0);
+
+            if (mem == MAP_FAILED) {
+                perror ("mmap error:");
+                return 1;
+            }
+
+            for (i = 0; i &lt; 5; i++) {
+                char temp;
+
+                temp = mem [i];
+                mem [i] = mem [9 - i];
+                mem [9 - i] = temp;
+            }
+
+            munmap (mem, 10);
+            close (fd);
+
+            return 0;
+        }
+===============================================================================
+</PRE>
+
+</UL>
+
+<P>
+<BR><BR>
+</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="images/striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="dir.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="misc.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+</BODY>
+</HTML>
+

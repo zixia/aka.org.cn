@@ -1,0 +1,169 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=GB2312">
+    <TITLE>Bonobo Introduction</TITLE>
+</HEAD>
+<BODY>
+<P><A HREF="Gnome-desktop.html">上一页</A>
+<A HREF="Bonobo-exam.html">下一页</A>
+<P><B><FONT SIZE=+3>Bonobo</FONT></B><P>
+<P><B><FONT SIZE=+2>Bonobo简介</FONT></B><P>
+Bonobo是一个组件系统，它是GNOME实现可重用软件组件的基石。组件是指这样一种软件，它们提供了定义完善的接口，被设计来与其它的组件协同工作。在Bonobo体系中，CORBA是将组件们联系在一起的通信层。使用CORBA做底层的另外好处是，组件及使用组件的软件可以用任何语言编写而不影响它们的交互。
+Bonobo的诞生主要出于一下三个方面的原因：<P>
+<UL><LI>为了解决自由软件社会开发大规模软件时遇到的问题；</LI><P>
+<LI>实现软件可重用；</LI><P>
+<LI>实现符合文档(或者“文档为中心的世界”)。</LI><P></UL>
+<P>Bonobo实现了一下功能：<P><UL>
+<LI>生成符合文档；</LI><BR>
+<LI>对象链结；</LI><BR>
+<LI>对象嵌入；</LI><BR>
+<LI>服务激活；</LI><BR>
+<LI>保存功能</LI><BR>
+<LI>菜单合并；</LI><BR>
+<LI>打印。</LI><BR></UL>
+<P>Bonobo的目的是为Unix平台提供一套组件编写和符合文档的标准环境。GNOME只是其中的一个实现。与GTK+下对象命名习惯(如“GtkWindow”)不同，Bonobo对象使用CORBA repository ID的方式命名。如实现了Bonobo GNOME:ClientSite接口的对象可能的一个名字是“IDL:GNOME/ClientSite:1.0”。
+
+<P>Bonobo的组件分两大类：container和containee(又称为embeddable或components)。为了使得二者可以交互，Bonobo为它们定义了完备的接口IDL描述。从而实现实现Bonobo组件的核心就是是实现container/containee的标准接口。(其实container不一定是个component，但为简单起见，我们也这样称呼它。)
+<P>一个包容器必须实现接口：GNOME::ClientSite 和 GNOME::ViewFrame。如果要支持原地激活还要实现GNOME::UIHandler接口。一个组件则至少要实现接口：GNOME::Embeddable 和 GNOME::View接口。
+<P>其工作流程如下：<P><UL>
+<LI>用户选择了菜单中如“insert...”项，打算运行一个组件；</LI><BR>
+<LI>包容器Container通过GOAD找到希望的组件Component；</LI><BR>
+<LI>组件工厂被启动(如果尚未启动的话)，生成一个组件的实例Embeddable；</LI><BR>
+<LI>包容器把这个组件加到自己内部的组件列表中，同时生成一个客户区ClientSite；</LI><BR>
+<LI>在ClientSite和Embeddable之间建立联系；</LI><BR>
+<LI>此时并没有显示出来，如果要显示出来，首先要得到一个ClientSite；</LI><BR>
+<LI>为这个ClientSite生成一个视图区ViewFrame用以画组件的视图；</LI><BR>
+<LI>ViewFrame有两个GTK控件wrapper和socket专门用来显示组件的视图；</LI><BR>
+<LI>将视图区放到包容器中并显示；</LI><BR>
+<LI>为Embeddable生成一个视图View；</LI><BR>
+<LI>ViewFrame给这个视图View一个窗口，这时组件的视图就显示出来了；</LI><BR>
+<LI>通过鼠标器双击视图，包容器要求组件激活自己(进入编辑模式)；</LI><BR>
+<LI>组件告诉包容器自己已经激活，如果不是原地激活，包容器需要将文档中相关的区域变灰；</LI><BR>
+<LI>组件可以请求改变外观大小；</LI><BR>
+<LI>组件可以请求与包容器的菜单合并；</LI><BR>
+<LI>编辑完毕时，符合文档的内容被更新；</LI><BR>
+<LI>符合文档的内容可以被保存或打印。</LI><P>
+<P></UL>
+<P>一个组件Embeddable只有一个ClientSite，每个显示View都需要一个ViewFrame。
+<P>Container和Containee的关系如下图：<P><CENTER>
+<IMG SRC=relations.gif><P>图1：Container和Containee的关系<P></CENTER>
+
+<P>所有的Bonobo接口都是从GNOME::Unknown集成出来的。
+<PRE>
+module GNOME {
+	interface Unknown {
+		void ref ();
+
+		void unref ();
+		
+		Object query_interface (in string repoid);
+	};
+};
+</PRE> 
+<P>好在GNOME已经替我们实现了这个接口，即GnomeObject：
+<P><PRE>
+typedef struct {
+	POA_GNOME_Unknown servant_placeholder;
+	gpointer gnome_object;
+} GnomeObjectServant;
+
+typedef struct _GnomeObjectPrivate GnomeObjectPrivate;
+
+typedef struct {
+	GtkObject base;
+
+	CORBA_Object          corba_objref;
+	gpointer              servant;
+	GnomeObjectPrivate   *priv;
+} GnomeObject;
+
+typedef struct {
+	GtkObjectClass parent_class;
+
+	/*
+	 * signals.  
+	 */
+	void  (*query_interface) (GnomeObject *object, 
+                                  const char *repo_id, 
+                                  CORBA_Object *retval);
+	void  (*system_exception)(GnomeObject *object, 
+                                  CORBA_Object cobject, 
+                                  CORBA_Environment *ev);
+	void  (*object_gone)     (GnomeObject *object, 
+                                  CORBA_Object cobject, 
+                                  CORBA_Environment *ev);
+} GnomeObjectClass;
+
+typedef struct {
+	int   ref_count;
+	GList *objs;
+} GnomeAggregateObject;
+
+struct _GnomeObjectPrivate {
+	GnomeAggregateObject *ao;
+	int destroy_id;
+};
+
+void
+gnome_object_ref (GnomeObject *object)
+{
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_OBJECT (object));
+	g_return_if_fail (object->priv->ao->ref_count != 0);
+
+	object->priv->ao->ref_count++;
+}
+
+void
+gnome_object_unref (GnomeObject *object)
+{
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_OBJECT (object));
+	g_return_if_fail (object->priv->ao->ref_count > 0);
+
+	object->priv->ao->ref_count--;
+
+	if (object->priv->ao->ref_count == 0){
+		GnomeAggregateObject *ao = object->priv->ao;
+		GList *l;
+		
+		for (l = ao->objs; l; l = l->next){
+			GnomeObject *o = l->data;
+			
+			gtk_signal_disconnect (GTK_OBJECT (o), o->priv->destroy_id);
+			gtk_object_destroy (l->data);
+		}
+
+		g_list_free (ao->objs);
+		g_free (ao);
+	}
+}
+
+static void
+impl_GNOME_Unknown_ref (PortableServer_Servant servant, CORBA_Environment *ev)
+{
+	GnomeObject *object;
+
+	object = gnome_object_from_servant (servant);          
+        /* baaad !! we MUST call gnome_object_ref() */
+	object->priv->ao->ref_count++;
+}
+
+static void
+impl_GNOME_Unknown_unref (PortableServer_Servant servant, CORBA_Environment *ev)
+{
+	GnomeObject *object;
+
+	object = gnome_object_from_servant (servant);
+
+	gnome_object_unref (object);
+}
+ 
+</PRE>
+
+<P>所有Bonobo的接口都从GNOME::Unkown继承。类似地，GNOME替我们缺省实现了所有要求的接口，它们都是从GnomeObject继承。而我们甚至不需要懂CORBA和Bonobo就可以编写GNOME的组件程序。
+<P>
+<P><A HREF="Gnome-desktop.html">上一页</A>
+<A HREF="Bonobo-exam.html">下一页</A>
+</BODY>
+</HTML>

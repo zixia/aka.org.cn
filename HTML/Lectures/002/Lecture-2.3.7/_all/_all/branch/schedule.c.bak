@@ -1,0 +1,186 @@
+void schedule(void)
+{
+	struct schedule_data * sched_data;
+	struct task_struct *prev, *next, *p;
+	int this_cpu, c;
+
+	if (tq_scheduler)
+		goto handle_tq_scheduler;
+tq_scheduler_back:
+
+	prev = current;
+	this_cpu = prev->processor;
+
+	if (in_interrupt())
+		goto scheduling_in_interrupt;
+
+	release_kernel_lock(prev, this_cpu);
+
+	/* Do "administrative" work here while we don't hold any locks */
+	if (bh_mask & bh_active)
+		goto handle_bh;
+handle_bh_back:
+
+	/*
+	 * 'sched_data' is protected by the fact that we can run
+	 * only one process per CPU.
+	 */
+	sched_data = & aligned_data[this_cpu].schedule_data;
+
+	spin_lock_irq(&runqueue_lock);
+
+	/* move an exhausted RR process to be last.. */
+	if (prev->policy == SCHED_RR)
+		goto move_rr_last;
+move_rr_back:
+
+	switch (prev->state) {
+		case TASK_INTERRUPTIBLE:
+			if (signal_pending(prev)) {
+				prev->state = TASK_RUNNING;
+				break;
+			}
+		default:
+			del_from_runqueue(prev);
+		case TASK_RUNNING:
+	}
+	prev->need_resched = 0;
+
+repeat_schedule:
+
+	/*
+	 * this is the scheduler proper:
+	 */
+
+	p = init_task.next_run;
+	/* Default process to select.. */
+	next = idle_task(this_cpu);
+	c = -1000;
+	if (prev->state == TASK_RUNNING)
+		goto still_running;
+still_running_back:
+
+	/*
+	 * This is subtle.
+	 * Note how we can enable interrupts here, even
+	 * though interrupts can add processes to the run-
+	 * queue. This is because any new processes will
+	 * be added to the front of the queue, so "p" above
+	 * is a safe starting point.
+	 * run-queue deletion and re-ordering is protected by
+	 * the scheduler lock
+	 */
+/*
+ * Note! there may appear new tasks on the run-queue during this, as
+ * interrupts are enabled. However, they will be put on front of the
+ * list, so our list starting at "p" is essentially fixed.
+ */
+	while (p != &init_task) {
+		if (can_schedule(p)) {
+			int weight = goodness(prev, p, this_cpu);
+			if (weight > c)
+				c = weight, next = p;
+		}
+		p = p->next_run;
+	}
+
+	/* Do we need to re-calculate counters? */
+	if (!c)
+		goto recalculate;
+	/*
+	 * from this point on nothing can prevent us from
+	 * switching to the next task, save this fact in
+	 * sched_data.
+	 */
+	sched_data->curr = next;
+#ifdef __SMP__
+ 	next->has_cpu = 1;
+	next->processor = this_cpu;
+#endif
+	spin_unlock_irq(&runqueue_lock);
+
+	if (prev == next)
+		goto same_process;
+
+#ifdef __SMP__
+ 	/*
+ 	 * maintain the per-process 'average timeslice' value.
+ 	 * (this has to be recalculated even if we reschedule to
+ 	 * the same process) Currently this is only used on SMP,
+	 * and it's approximate, so we do not have to maintain
+	 * it while holding the runqueue spinlock.
+ 	 */
+	{
+		cycles_t t, this_slice;
+
+		t = get_cycles();
+		this_slice = t - sched_data->last_schedule;
+		sched_data->last_schedule = t;
+
+		/*
+		 * Exponentially fading average calculation, with
+		 * some weight so it doesnt get fooled easily by
+		 * smaller irregularities.
+		 */
+		prev->avg_slice = (this_slice*1 + prev->avg_slice*1)/2;
+	}
+
+	/*
+	 * We drop the scheduler lock early (it's a global spinlock),
+	 * thus we have to lock the previous process from getting
+	 * rescheduled during switch_to().
+	 */
+
+#endif /* __SMP__ */
+
+	kstat.context_swtch++;
+	get_mmu_context(next);
+	switch_to(prev, next, prev);
+	__schedule_tail(prev);
+
+same_process:
+  
+	reacquire_kernel_lock(current);
+	return;
+
+recalculate:
+	{
+		struct task_struct *p;
+		spin_unlock_irq(&runqueue_lock);
+		read_lock(&tasklist_lock);
+		for_each_task(p)
+			p->counter = (p->counter >> 1) + p->priority;
+		read_unlock(&tasklist_lock);
+		spin_lock_irq(&runqueue_lock);
+		goto repeat_schedule;
+	}
+
+still_running:
+	c = prev_goodness(prev, prev, this_cpu);
+	next = prev;
+	goto still_running_back;
+
+handle_bh:
+	do_bottom_half();
+	goto handle_bh_back;
+
+handle_tq_scheduler:
+	run_task_queue(&tq_scheduler);
+	goto tq_scheduler_back;
+
+move_rr_last:
+	if (!prev->counter) {
+		prev->counter = prev->priority;
+		move_last_runqueue(prev);
+	}
+	goto move_rr_back;
+
+scheduling_in_interrupt:
+	printk("Scheduling in interrupt\n");
+#ifdef CONFIG_ARCH_S390
+	asm volatile ( ".word 0\n" );
+#else
+	*(int *)0 = 0;
+#endif /* CONFIG_ARCH_S390 */
+	return;
+}

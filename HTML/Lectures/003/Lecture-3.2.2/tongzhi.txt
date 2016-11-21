@@ -1,0 +1,40 @@
+【AKA】讲座 —— Bluetooth蓝牙技术发展与应用
+
+【AKA】讲座 —— Bluetooth蓝牙技术发展与应用
+         暨 IBM developerWorks & AKA 联合系列讲座
+
+主题：Bluetooth蓝牙技术发展与应用
+时间：4 月 8 日 (星期日)下午 2:30 - 4：30
+地点：北京邮电大学图书馆报告厅，北京邮电大学地图: （见下） 
+主讲人：周正教授
+
+内容简介： 
+========= 
+Who Is Bluetooth?
+Bluetooth Applications
+Bluetooth　advantage
+Bluetooth main techniques
+Bluetooth challenges
+
+/*************************************************************/ 
+
+北京邮电大学地图：
+＝＝＝＝＝＝＝＝＝
+乘座　375、902 、392、849、16、387　到学院路下。北京邮电大学就在车
+站的旁边或正对面（因为是单行道）。
+离北京邮电大学远的朋友可考虑地铁，在西直门下换乘375或16路即可。
+要是不熟悉地形，在蓟门桥附近（南）打听北京邮电大学。
+
+本次讲座由：
+＝＝＝＝＝＝＝＝＝
+阿卡信息技术协会(http://www.AKA.org.cn)
+北京邮电大学研究生会
+IBM developerWorks (ibm.com/developerWorks/cn)
+ 
+                                        共同主办
+ 
+特别说明：
+=========
+讲义将在讲座现场分发，并在会后贴到IBM developerWorks中国网站
+(ibm.com/developerWorks/cn)和AKA网站(http://www.aka.org.cn)，
+以便大家参考。

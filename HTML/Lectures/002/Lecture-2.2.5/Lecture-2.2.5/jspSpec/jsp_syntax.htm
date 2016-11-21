@@ -1,0 +1,161 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>HTML注释</title>
+<meta name="Microsoft Theme" content="blank 000, default">
+<meta name="Microsoft Border" content="tlb, default">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/jsp_syntax.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="JSP Tag List"></strong></font><br>
+<a href="jsp_tag.htm"><img src="../_derived/back_cmp_blank000_back.gif" width="100" height="20" border="0" alt="上一页" align="middle"></a> <a href="../index.htm"><img src="../_derived/home_cmp_blank000_home.gif" width="100" height="20" border="0" alt="主页" align="middle"></a> <a href="index.htm"><img src="../_derived/up_cmp_blank000_up.gif" width="100" height="20" border="0" alt="上一层" align="middle"></a> <a href="implicitObject.htm"><img src="../_derived/next_cmp_blank000_next.gif" width="100" height="20" border="0" alt="下一页" align="middle"></a></p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<b>
+<p><font face="SunSerif-Bold">Output Comment</font><font face="SunSerif-Bold"> </font></p>
+<p>&nbsp;&nbsp; <font face="SunSerif-Bold"> </font></b><font face="SunSerif-Bold">生成客户端可以看得见（在HTML源代码中存在）的注释信息</font>。</p>
+<p><b><font face="Comic Sans MS">&lt;!- - <i>comment </i>[ &lt;%= <i>expression </i>%&gt; 
+] --&gt;</font></b></p>
+<b>
+<!--msthemeseparator--><p align="center"><img src="../_themes/blank/blrule.gif" width="600" height="10"></p>
+<p><font face="SunSerif-Bold">Hidden Comment </font></p>
+<p>&nbsp;&nbsp; <font face="SunSerif-Bold"> </font></b><font face="SunSerif-Bold">为JSP脚本添加的注释信息，不会被输出到最终HTML页面中。</font></p>
+<p><b><font face="Comic Sans MS">&lt;%- - <i>comment </i>--%&gt;</font></b></p>
+<!--msthemeseparator--><p align="center"><img src="../_themes/blank/blrule.gif" width="600" height="10"></p>
+<b>
+<p><font face="SunSerif-Bold">Declaration </font></p>
+<p>&nbsp;&nbsp; <font face="SunSerif-Bold"> </font></b><font face="SunSerif-Bold">声明JSP教本中的变量或函数</font>。</p>
+<p><b><font face="Comic Sans MS">&lt;%! <i>declarations </i>%&gt;</font></b></p>
+<!--msthemeseparator--><p align="center"><img src="../_themes/blank/blrule.gif" width="600" height="10"></p>
+<b>
+<p><font face="SunSerif-Bold">Expression</font></p>
+<p>&nbsp;&nbsp; <font face="SunSerif-Bold"> </font></b><font face="SunSerif-Bold">输出表达式的结果。</font></p>
+<p><b><font face="Comic Sans MS">&lt;%= <i>expression </i>%&gt;</font></b></p>
+<b>
+<!--msthemeseparator--><p align="center"><img src="../_themes/blank/blrule.gif" width="600" height="10"></p>
+<p><font face="SunSerif-Bold">Scriptlet</font></p>
+</b>
+<p>&nbsp;&nbsp;&nbsp; 包含了可执行的<font face="Times New Roman">Java</font>程序片断。</p>
+<p><b><font face="Comic Sans MS">&lt;% <i>code fragment </i>%&gt;</font></b></p>
+<b>
+<!--msthemeseparator--><p align="center"><img src="../_themes/blank/blrule.gif" width="600" height="10"></p>
+<p><font face="SunSerif-Bold">Include Directive</font></p>
+</b>
+<p>&nbsp;&nbsp;&nbsp; 引用另外一个文本文件的内容或者另外一个JSP页面的程序。</p>
+<p><b><font face="Comic Sans MS">&lt;%@ include file=&quot; <i>relativeURL </i>&quot;%&gt;</font></b></p>
+<b>
+<!--msthemeseparator--><p align="center"><img src="../_themes/blank/blrule.gif" width="600" height="10"></p>
+<p><font face="SunSerif-Bold">Page Directive</font></p>
+</b>
+<p>&nbsp;&nbsp;&nbsp; 定义一些<font face="Times New Roman">JSP</font>页面的属性值</p>
+<p><font face="Comic Sans MS">&lt;%@ page <br>
+[ language=&quot; <b>java </b>&quot; ] [ extends=&quot; <i>package. class </i>&quot; 
+] [ import= &quot; { <i>package. class </i>| <i>package </i>.* } , ... &quot; ]<br>
+[ session=&quot; <b>true </b>|false&quot; ] [ buffer=&quot; none| <b>8kb </b>| <i>size 
+</i>kb&quot; ] [ autoFlush=&quot; <b>true </b>|false&quot; ]<br>
+[ isThreadSafe=&quot; <b>true </b>|false&quot; ] [ info=&quot; <i>text </i>&quot; 
+] [ errorPage=&quot; <i>relativeURL </i>&quot;]<br>
+[ contentType=&quot; <i>mimeType </i>[ ; charset <i>=characterSet </i>]&quot;|&quot; 
+<b>text/ html ; charset= ISO- 8859- 1 </b>&quot;]<br>
+[ isErrorPage=&quot; true| <b>false </b>&quot;]<br>
+%&gt;</font></p>
+<b>
+<!--msthemeseparator--><p align="center"><img src="../_themes/blank/blrule.gif" width="600" height="10"></p>
+<p><font face="SunSerif-Bold">Taglib Directive </font></p>
+<p>&nbsp;&nbsp; <font face="SunSerif-Bold"> </font></b><font face="SunSerif-Bold">定义JSP页面中额外定制的Tag信息（包括Tag 
+Library和定制的Tag的前缀）</font></p>
+<p><font face="Comic Sans MS"><b>&lt;%@ taglib uri=&quot; <i>URIToTagLibrary </i>&quot; 
+prefix=&quot; <i>tagPrefix </i>&quot;%&gt;</b></font></p>
+<p>&nbsp;&nbsp;&nbsp; <font face="Times New Roman">custom tag:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt; </font><i><font face="Times New Roman">tagPrefix 
+</font></i><font face="Times New Roman">: </font><i><font face="Times New Roman">name 
+attribute </font></i><font face="Times New Roman">=&quot; </font><i><font face="Times New Roman">value 
+</font></i><font face="Times New Roman">&quot;+ ... /&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt; </font><i><font face="Times New Roman">tagPrefix 
+</font></i><font face="Times New Roman">: </font><i><font face="Times New Roman">name 
+attribute </font></i><font face="Times New Roman">=&quot; </font><i><font face="Times New Roman">value 
+</font></i><font face="Times New Roman">&quot;+ ... &gt; </font><i><font face="Times New Roman">other 
+tags </font></i><font face="Times New Roman">&lt;/ </font><i><font face="Times New Roman">tagPrefix 
+</font></i><font face="Times New Roman">: </font><i><font face="Times New Roman">name 
+</font></i><font face="Times New Roman">&gt;</font></p>
+<b>
+<!--msthemeseparator--><p align="center"><img src="../_themes/blank/blrule.gif" width="600" height="10"></p>
+<p><font face="SunSerif-Bold">&lt;jsp:forward&gt; </font></p>
+<p>&nbsp;&nbsp; <font face="SunSerif-Bold"> </font></b><font face="SunSerif-Bold">将页面请求转发给另外一个URL的页面（可以是HTML，JSP或者Servlet）。</font></p>
+<p><font face="Comic Sans MS"><b>&lt;jsp: forward page=&quot;{ <i>relativeURL | </i>&lt;%= 
+<i>expression </i>%&gt; }&quot; /&gt;</b></font></p>
+<b>
+<!--msthemeseparator--><p align="center"><img src="../_themes/blank/blrule.gif" width="600" height="10"></p>
+<p><font face="SunSerif-Bold">&lt;jsp:getProperty&gt; </font></b></p>
+<p>&nbsp;&nbsp; <font face="SunSerif-Bold"><b> </b>取得一个Bean的属性信息。</font></p>
+<p><b><font face="Comic Sans MS">&lt;jsp: getProperty name=&quot; <i>beanInstanceName 
+</i>&quot; property=&quot; <i>propertyName </i>&quot;/&gt;</font></b></p>
+<b>
+<!--msthemeseparator--><p align="center"><img src="../_themes/blank/blrule.gif" width="600" height="10"></p>
+<p><font face="SunSerif-Bold">&lt;jsp:include&gt; </font></p>
+<p>&nbsp;&nbsp; <font face="SunSerif-Bold"> </font></b>讲另外一个文件的内容包含进来，和前面<font face="Times New Roman">&lt;@include...&gt;</font>不同的是，<font face="Times New Roman">&lt;jsp:include</font>并不会执行被包含文件中的内容，只是简单的包含数据。</p>
+<p><b><font face="Comic Sans MS">&nbsp;&lt;jsp: include page=&quot;{ <i>relativeURL 
+| </i>&lt;%= <i>expression </i>%&gt; }&quot; flush=&quot; true&quot; /&gt;</font></b></p>
+<b>
+<!--msthemeseparator--><p align="center"><img src="../_themes/blank/blrule.gif" width="600" height="10"></p>
+<p><font face="SunSerif-Bold">&lt;jsp:plugin&gt; </font></b></p>
+<p>&nbsp;&nbsp; <font face="SunSerif-Bold"><b> </b>将一个Applet或者Java 
+Bean下载到客户端执行。</font></p>
+<p><font face="Comic Sans MS">&lt;jsp: plugin type=&quot; bean| applet&quot; 
+code=&quot; <i>classFileName </i>&quot; codebase=&quot; <i>classFileDirectoryName 
+</i>&quot;<br>
+[ name=&quot; <i>instanceName </i>&quot; ] [ archive=&quot; <i>URIToArchive, ... 
+</i>&quot; ] [ align=&quot; <b>bottom </b>|top| middle| left| right&quot; ]<br>
+[ height=&quot; <i>displayPixels </i>&quot; ] [ width=&quot; <i>displayPixels </i>&quot; 
+] [ hspace=&quot; <i>leftRightPixels </i>&quot; ] [ vspace=&quot; <i>topBottomPixels 
+</i>&quot;]<br>
+[ jreversion=&quot; <i>JREVersionNumber </i>| <b>1.1 </b>&quot; ] [ 
+nspluginurl=&quot; <i>URLToPlugin </i>&quot; ] [ iepluginurl=&quot; <i>URLToPlugin 
+</i>&quot;] &gt;<br>
+[ &lt;jsp: params&gt; [ &lt;jsp: param name=&quot; <i>parameterName </i>&quot; 
+value=&quot; <i>parameterValue </i>&quot; /&gt; ]+ &lt;/ jsp: params&gt; ]<br>
+[ &lt;jsp: fallback&gt; <i>text message for user </i>&lt;/ jsp: fallback&gt; ]<br>
+&lt;/ jsp: plugin&gt;</font></p>
+<b>
+<!--msthemeseparator--><p align="center"><img src="../_themes/blank/blrule.gif" width="600" height="10"></p>
+<p><font face="SunSerif-Bold">&lt;jsp:setProperty&gt; </font></b></p>
+<p>&nbsp;&nbsp; <font face="SunSerif-Bold"><b> </b>给一个Java Bean设置属性。</font></p>
+<p><b><font face="Comic Sans MS">&lt;jsp: setProperty name=&quot; <i>beanInstanceName 
+</i>&quot;<br>
+{ property= &quot;*&quot;| property=&quot; <i>propertyName </i>&quot; [ 
+param=&quot; <i>parameterName </i>&quot;]|<br>
+property=&quot; <i>propertyName </i>&quot; value=&quot; { <i>string </i>| &lt;%= 
+<i>expression </i>%&gt;}&quot;}/&gt;</font></b></p>
+<b>
+<!--msthemeseparator--><p align="center"><img src="../_themes/blank/blrule.gif" width="600" height="10"></p>
+<p><font face="SunSerif-Bold">&lt;jsp:useBean&gt; </font></p>
+<p>&nbsp;&nbsp; <font face="SunSerif-Bold"> </font></b><font face="SunSerif-Bold">以给定的scope那，指定</font><font face="SunSerif-Bold">使用一个Java 
+Bean。</font></p>
+<p><font face="Comic Sans MS">&lt;jsp: useBean id=&quot; <i>beanInstanceName </i>&quot; 
+scope=&quot; <b>page </b>|request| session| application&quot;<br>
+{ class=&quot; <i>package. class </i>&quot; | type=&quot; <i>package. class </i>&quot; 
+| class=&quot; <i>package. class </i>&quot; type=&quot; <i>package. class </i>&quot;|<br>
+beanName=&quot; { <i>package. class | </i>&lt;%= <i>expression </i>%&gt; } 
+&quot; type=&quot; <i>package. class </i>&quot;}<br>
+{/&gt;| &gt; <i>other tags </i>&lt;/ jsp: useBean&gt; }</font></p>
+<b>
+<!--msthemeseparator--><p align="center"><img src="../_themes/blank/blrule.gif" width="600" height="10"></p>
+</b>
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="right">
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table></body>
+
+</html>

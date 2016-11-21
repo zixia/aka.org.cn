@@ -1,0 +1,101 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Session应用</title>
+<meta name="Microsoft Theme" content="blank 000, default">
+<meta name="Microsoft Border" content="tlb, default">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/example.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="Session应用"></strong></font><br>
+<a href="../index.htm"><img src="../_derived/home_cmp_blank000_home.gif" width="100" height="20" border="0" alt="主页" align="middle"></a> <a href="index.htm"><img src="../_derived/up_cmp_blank000_up.gif" width="100" height="20" border="0" alt="上一层" align="middle"></a> <a href="qa.htm"><img src="../_derived/next_cmp_blank000_next.gif" width="100" height="20" border="0" alt="下一页" align="middle"></a></p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<p>下面我们用一个Java Bean来实现用户Session数据。</p>
+<p>cd /usr/local/resin/doc/WEB-INF/classes/net/zixia</p>
+<p>在我们的HelloWorld.java基础上进行修改，以便让用户可以定义自己的greeting语句。</p>
+<h2>JavaBean: HelloWorld.java：</h2>
+<p><font face="Comic Sans MS">package net.zixia;<br>
+import java.io.*;<br>
+import java.util.*;<br>
+<br>
+import javax.servlet.http.*;<br>
+<br>
+public class HelloWorld implements HttpSessionBindingListener{<br>
+&nbsp;&nbsp;&nbsp; private String m_strMsg;<br>
+&nbsp;&nbsp;&nbsp; public HelloWorld(){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; m_strMsg = new String();<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; public void set(String s){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; m_strMsg = s;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; public String greeting(){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return m_strMsg;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; /** </font>每次新建立一个用户<font face="Comic Sans MS">Session</font>，<font face="Comic Sans MS">valueBound</font>都会被调用。<br>
+&nbsp;&nbsp;&nbsp; * System.out.println的信息会被resin记录在/usr/local/resin/log/stdout.log中<br>
+&nbsp;&nbsp;&nbsp; <font face="Comic Sans MS">*/<br>
+&nbsp;&nbsp;&nbsp; public void valueBound( HttpSessionBindingEvent event ){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println( 
+&quot;valueBound&quot; );<br>
+&nbsp;&nbsp;&nbsp; }&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp; </font> /** 每个用户Session过期的时候，valueUnbound都会被调用。<br>
+&nbsp;&nbsp;&nbsp; * System.out.println的信息会被resin记录在/usr/local/resin/log/stdout.log中<br>
+&nbsp;&nbsp;&nbsp; */<font face="Comic Sans MS"><br>
+&nbsp;&nbsp;&nbsp; public void valueUnbound( HttpSessionBindingEvent event ){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println( 
+&quot;valueUnbound&quot; );<br>
+&nbsp;&nbsp;&nbsp; }<br>
+}</font></p>
+<h2>JSP Page: HelloWorld.jsp</h2>
+<p>　</p>
+<p>&lt;jsp:useBean id=&quot;HelloWorld&quot; 
+class=&quot;net.zixia.HelloWorld&quot; scope=session/&gt;<br>
+&lt;html&gt;<br>
+&lt;body&gt;<br>
+&lt;h1&gt;<br>
+&lt;%<br>
+&nbsp;&nbsp;&nbsp; String Msg = request.getParameter(&quot;Msg&quot;);<br>
+&nbsp;&nbsp;&nbsp; if( null==Msg ){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out.println( HelloWorld.greeting() );<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out.println( &quot;Greeted!&quot; );<br>
+&nbsp;&nbsp;&nbsp; }else{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HelloWorld.set( Msg );<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out.println( &quot;Greeting message 
+saved!&quot; );<br>
+&nbsp;&nbsp;&nbsp; }<br>
+%&gt;<br>
+&lt;/h1&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;<br>
+</p>
+<h2>查看结果：</h2>
+<p>浏览http://ur-resin-host:8080/HelloWorld.jsp</p>
+<p>null Greeted!</p>
+<p>因为HelloWorld Bean中的m_strMsg还没有存入具体的值。</p>
+<!--msthemeseparator--><p align="center"><img src="../_themes/blank/blrule.gif" width="600" height="10"></p>
+<p>浏览http://ur-resin-host:8080/HelloWorld.jsp?Msg=SweetHeart</p>
+<p>Greeting message saved!</p>
+<p>现在HelloWorld Bean中的m_strMsg的值为SweetHeart。</p>
+<!--msthemeseparator--><p align="center"><img src="../_themes/blank/blrule.gif" width="600" height="10"></p>
+<p>浏览http://ur-resin-host:8080/HelloWorld.jsp</p>
+<p>SweetHeart Greeted!</p>
+<p>将HelloWorld Bean中的m_strMsg读取出来显示。
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="right">
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table></body>
+
+</html>

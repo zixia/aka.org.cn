@@ -1,0 +1,4 @@
+#!/bin/bash    
+# give the initialize value to STR
+STR="Hello World"     
+echo $STR

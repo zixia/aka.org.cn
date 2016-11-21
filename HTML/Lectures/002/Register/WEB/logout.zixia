@@ -1,0 +1,4 @@
+[*
+undef $udat{AkaID};
+$http_headers_out{'Location'} = "http://register.aka.org.cn/?";
+*]

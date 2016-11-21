@@ -1,0 +1,693 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>FTP Server程序</title>
+<meta name="Microsoft Theme" content="blank 001, default">
+<meta name="Microsoft Border" content="tl, default">
+</head>
+
+<body background="_themes/blank/blbkgnd.gif" bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/new_page_37.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="FTP Server程序"></strong></font><br>
+<a href="index.htm"><img src="_derived/home_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="主页" align="middle"></a> <a href="new_page_26.htm"><img src="_derived/up_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="上一层" align="middle"></a> <a href="new_page_36.htm"><img src="_derived/new_page_36.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="FTP Server头文件" align="middle"></a> <img src="_derived/new_page_37.htm_cmp_blank000_hbtn_p.gif" width="140" height="32" border="0" alt="FTP Server程序" align="middle"></p>
+<p align="center">　</p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">#include &quot;FTPd.h&quot;</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void do_child();</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre>　</pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">/* 输出到客户端 */</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void outs(char *fmt, ...)
+{
+    static char tmp[80];
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    va_list ap;</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    va_start(ap, fmt);
+    sprintf(tmp, &quot;%s\r\n&quot;, fmt);
+    vsprintf(genbuf, tmp, ap);
+    send(connfd, genbuf, strlen(genbuf), 0);
+    va_end(ap);
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre>　</pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">/* 将buf以空格做分隔符分解成两个字符串 */</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void explode(char *buf, char **cmd, char **param)
+{
+    char *p;
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    while ((p = &amp;buf[strlen(buf)-1]) &amp;&amp; (*p == '\r' || *p == '\n')) *p = 0;
+    p = strchr(buf, ' ');
+    *cmd = buf;
+    if (!p) *param = NULL;
+    else {
+        *p = 0;
+        *param = p+1;
+    };
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">int MakePath(char *new_path, char* path, char* filename)
+{
+    return sprintf(new_path, &quot;%s%s/%s&quot;, basedir, path, filename);
+};
+</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Error(char *param) 
+{
+    switch (errno) {
+        case ENOTEMPTY:
+            ERRS(&quot;Directory not empty&quot;);
+            break;
+        case ENOSPC:
+            ERRS(&quot;disk full&quot;);
+            break;          
+        case EEXIST:
+            ERRS(&quot;File exists&quot;);
+            break;
+        case ENAMETOOLONG:
+            ERRS(&quot;path is too long&quot;);
+            break;
+        case ENOENT:
+            ERRS(&quot;No such file or directory&quot;);
+            break;
+        case ENOTDIR:
+            ERRS(&quot;Not a directory&quot;);
+            break;
+        case EISDIR:
+            ERRS(&quot;Is a directory&quot;);
+        default:
+            ERRS(&quot;Permission denied&quot;);
+    };
+}</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">int Check(char *cmd, char *param, int check)
+{
+    if (check &amp; CHECK_LOGIN &amp;&amp; !user_valid) {
+        outs(&quot;530 Please login with USER and PASS&quot;);
+        return 0;
+    };
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if (check &amp; CHECK_NOLOGIN &amp;&amp; user_valid) {
+        outs(&quot;503 You are already logged in!&quot;);
+        return 0;
+    };
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if (check &amp; NEED_PARAM) {
+        if (!param) outs(&quot;501 Invalid number of arguments, check more arguments.&quot;);
+        return (param != NULL);
+    };
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if (check &amp; NO_PARAM) {
+        if (param) outs(&quot;501 Invalid number of arguments.&quot;);
+        return (param == NULL);
+    };</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    return 1;
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void DataConnection(int mode, int transfer_type, char *filename)
+{
+    int datafd;
+    struct sockaddr_in sa;
+    socklen_t len = sizeof(sa);
+    char buf[BUFSIZE], *p;
+    int readlen;
+    FILE *tmp;</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if (data_pid != 0 &amp;&amp; kill(data_pid, 0) == 0) {
+        outs(&quot;425 Try later, data connection in use.&quot;);
+        return;
+    };
+            </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if ((data_pid = fork()) == 0) {
+        if (pasv_mode) {
+            if ((datafd = accept(pasvfd, (struct sockaddr *)&amp;sa, &amp;len)) == -1) {
+                close(pasvfd);
+                exit(-1);
+            };
+            </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">        } else {
+            memset(&amp;sa, 0, len);
+        </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">            sa.sin_family      = AF_INET;
+            sa.sin_addr.s_addr = remote_port.host;
+            sa.sin_port        = remote_port.port;
+            </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">            if ((datafd = socket(AF_INET, SOCK_STREAM, 0)) == -1 || connect(datafd, (struct sockaddr *)&amp;sa, len) == -1) {
+                exit(-1);
+            };
+        };
+        </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">        outs(&quot;150 Opening %s mode data connection for %s.&quot;, (transfer_type == 'i')?&quot;BINARY&quot;:&quot;ASCII&quot;, filename);
+        </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">        if (mode) {
+            /* write */
+            if (transfer_type == 'i') {
+                while ((readlen = fread(buf, 1, BUFSIZE, data_file)) &gt;0 ) {
+                    send(datafd, buf, readlen, 0);
+                };
+            } else {
+                while ((fgets(buf, BUFSIZE, data_file) != NULL)) {
+                    while ((p = &amp;buf[strlen(buf)-1]) &amp;&amp; (*p == '\r' || *p == '\n')) *p = 0;
+                    strcat(buf, &quot;\r\n&quot;);
+                    send(datafd, buf, strlen(buf), 0);
+                };
+            };
+        } else {
+            /* read */
+            if (transfer_type == 'i') {
+                while ((readlen = recv(datafd, buf, BUFSIZE, 0)) &gt;0 ) {
+                    if (fwrite(buf, 1, readlen, data_file) == -1) break;
+                };
+            } else {
+                tmp = fdopen(datafd, &quot;r&quot;);
+                while ((fgets(buf, BUFSIZE, tmp) != NULL)) {
+                    while ((p = &amp;buf[strlen(buf)-1]) &amp;&amp; (*p == '\r' || *p == '\n')) *p = 0;
+                    strcat(buf, &quot;\n&quot;);
+                    if (fwrite(buf, 1, strlen(buf), data_file) == -1) break;
+                };
+            };
+        };          
+            </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">        close(datafd);</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">        exit(0);
+    };
+};
+
+</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Help(char *param)
+{
+    if (!param) {
+        outs(&quot;214 The following commands are recognized (* =&gt;'s unimplemented).&quot;);
+        outs(&quot;214   USER    PASS    ACCT*   CWD     XCWD    CDUP    XCUP    SMNT*   &quot;);
+        outs(&quot;214   QUIT    REIN*   PORT    PASV    TYPE    STRU*   MODE*   RETR    &quot;);
+        outs(&quot;214   STOR    STOU*   APPE    ALLO*   REST    RNFR    RNTO    ABOR    &quot;);
+        outs(&quot;214   DELE    MDTM    RMD     XRMD    MKD     XMKD    PWD     XPWD    &quot;);
+        outs(&quot;214   SIZE    LIST    NLST    SITE    SYST    STAT    HELP    NOOP    &quot;);
+        outs(&quot;214 Direct comments to nolove@263.net&quot;);
+    } else {
+        outs(&quot;214 Sorry, I haven't write the topic help.&quot;);
+    };
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void User(char *param)
+{
+    if (user_valid) {
+        outs(&quot;503 You are already logged in!&quot;);
+        return;
+    };
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if (!param) {
+        outs(&quot;500 \'USER\': command requires a parameter.&quot;);
+        return;
+    };
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    strncpy(username, param, 100);
+    if (strcasecmp(username, &quot;anonymous&quot;) == 0) {
+        anonymous_login = 1;
+        strncpy(username, &quot;ftp&quot;, 100);
+        outs(&quot;331 Anonymous login ok, send your complete e-mail address as password.&quot;);
+    } else outs(&quot;331 Password required for %s&quot;, username);
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    input_user = 1;
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Pass(char *param)
+{
+    struct passwd *pw;
+    struct spwd *spw;
+    char *passwd, salt[13];
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if (!input_user) {
+        outs(&quot;503 Login with USER first.&quot;);
+        return;
+    };
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    /* judge and chdir to its home directory */
+    if (!anonymous_login) {
+        if (system_uid != 0) {
+            outs(&quot;530 Login incorrect.&quot;);
+            input_user = 0;
+            return;
+        };
+                </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">        if ((pw = getpwnam(username)) == NULL) {
+            outs(&quot;530 Login incorrect.&quot;);
+            input_user = 0;
+            return;
+        };
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">        passwd = pw-&gt;pw_passwd;
+        if (passwd == NULL || strcmp(passwd, &quot;x&quot;) == 0) {
+            spw = getspnam(username);
+            if (spw == NULL || (passwd = spw-&gt;sp_pwdp) == NULL) {
+                outs(&quot;530 Login incorrect.&quot;);
+                input_user = 0;
+                return;
+            };
+        };</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">        strncpy(salt, passwd, 12);
+        if (strcmp(passwd, crypt(param, salt)) != 0) {
+            outs(&quot;530 Login incorrect.&quot;);
+            input_user = 0;
+            return;
+        };
+        strcpy(path, &quot;&quot;);
+        setuid(pw-&gt;pw_uid);
+        if (pw-&gt;pw_dir) strncpy(path, pw-&gt;pw_dir, PATH_MAX);
+            else strcpy(path, &quot;/&quot;);</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">        outs(&quot;230 User %s logged in.&quot;, username);
+        chdir(path);
+        getcwd(path, PATH_MAX);
+        user_valid = 1;
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    } else {
+        if ((pw = getpwuid(system_uid)) == NULL) {
+            outs(&quot;530 Login incorrect.&quot;);
+            input_user = 0;
+            return;
+        };</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">        if (pw-&gt;pw_dir) strncpy(basedir, pw-&gt;pw_dir, PATH_MAX); 
+            else strcpy(basedir, &quot;&quot;);
+        </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">        strcpy(path, &quot;/&quot;);</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">        chdir(basedir);
+        getcwd(basedir, PATH_MAX);
+        user_valid = 1;
+        outs(&quot;230 Anonymous access granted, restrictions apply.&quot;);
+    };</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    user_valid = 1;
+    outs(&quot;230 Anonymous access granted, restrictions apply.&quot;);
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Pwd(char *param)
+{
+    outs(&quot;257 \&quot;%s\&quot; is current directory.&quot;, path);
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Cwd(char *param)
+{
+    char tmp[PATH_MAX];
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if (param[0] == '/') MakePath(tmp, &quot;&quot;, param); else MakePath(tmp, path, param);
+    if (chdir(tmp) == -1) {
+        Error(param);
+    } else {
+        if (getcwd(tmp, PATH_MAX) == NULL) ERRS(&quot;Permission denied&quot;);
+        else {
+            if (anonymous_login) {
+                if (strncmp(basedir, tmp, strlen(basedir)) != 0) {
+                    chdir(basedir);
+                    strcpy(path, &quot;/&quot;);
+                } else {
+                    strncpy(path, &amp;tmp[strlen(basedir)], PATH_MAX);
+                    strcat(path, &quot;/&quot;);
+                };
+            } else strcpy(path, tmp);
+            outs(&quot;250 CWD command successful.&quot;);
+        };
+    };
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Cdup(char *param)
+{
+    Cwd(&quot;..&quot;);
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Mkd(char *param)
+{
+    if (mkdir(param, 0755) == -1) {
+        Error(param);
+    } else {
+        outs(&quot;257 \&quot;%s/%s\&quot; - Directory successfully created.&quot;, path, param);
+    };
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Rmd(char *param)
+{
+    if (rmdir(param) == -1) {
+        Error(param);
+    } else {
+        outs(&quot;250 RMD command successful.&quot;);
+    };
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Type(char *param)
+{
+    if (strcasecmp(param, &quot;i&quot;) == 0) {
+        outs(&quot;200 Type set to I&quot;);
+        transfer_type = 'i';
+        return;
+    };
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if (strcasecmp(param, &quot;a&quot;) == 0) {
+        outs(&quot;200 Type set to A&quot;);
+        transfer_type = 'a';
+        return;
+    };
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    outs(&quot;500 \'TYPE %s\' not understood.&quot;, param);
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Size(char *param)
+{
+    struct stat s;
+    if (stat(param, &amp;s) == -1) {
+        Error(param);
+    } else {
+        if (S_ISREG(s.st_mode)) outs(&quot;213 %d&quot;, s.st_size);
+            else outs(&quot;550 %s: not a regular file.&quot;, param);
+    };
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Stat(char *param)
+{
+    FILE *f;
+    static char tmp[PATH_MAX], tmp2[PATH_MAX];
+    static char statbuf[BUFSIZE];
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    outs(&quot;211-status of \&quot;%s\&quot;:&quot;, param);
+    if (strchr(param, ' ') != NULL) sprintf(tmp2, &quot;\&quot;%s\&quot;&quot;, param); 
+        else sprintf(tmp2, &quot;%s&quot;, param);
+    sprintf(tmp, &quot;/bin/ls -l --color=never %s&quot;, tmp2);
+    if ((f = popen(tmp, &quot;r&quot;)) != NULL) {
+        while (fgets(statbuf, BUFSIZE, f) != NULL) {
+            if (statbuf[0] == 't') continue;
+            send(connfd, statbuf, strlen(statbuf), 0);
+        };
+        pclose(f);
+    };
+    outs(&quot;211 End of Status&quot;);
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Dele(char *param)
+{
+    if (unlink(param) == -1) {
+        Error(param);
+    } else {
+        FIXME: outs(&quot;250 DELE command successful.&quot;, param);
+    };
+};
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Quit(char *param)
+{
+    outs(&quot;221 Goodbye&quot;);
+    fclose(file);
+    exit(0);
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Noop(char *param)
+{
+    outs(&quot;200 NOOP command successful&quot;);
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void DoList(char *param, char *cmd)
+{
+    char tmp[PATH_MAX], tmp2[PATH_MAX];
+    char *mode = &quot;r&quot;;
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    MakePath(tmp, path, param);</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if (param) {
+        if (strchr(param, ' ') != NULL) sprintf(tmp2, &quot;\&quot;%s\&quot;&quot;, param); 
+            else sprintf(tmp2, &quot;%s&quot;, param);
+    } else strcpy(tmp2, &quot;&quot;);
+    sprintf(tmp, &quot;/bin/ls %s --color=never %s&quot;, cmd, tmp2);
+    if ((data_file = popen(tmp, mode)) == NULL) {
+        Error(&quot;LIST&quot;);
+        return;
+    };
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    DataConnection(1, 'a', &quot;/bin/ls&quot;);
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void List(char *param)
+{
+    DoList(param, &quot;-l&quot;);
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Nlst(char *param)
+{
+    DoList(param, &quot;-1&quot;);
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void PreConnection(char *param, char open_mode, int data_mode)
+{
+    char tmp[PATH_MAX];
+    char mode[3];
+    struct stat s;
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    MakePath(tmp, path, param);
+    mode[0] = open_mode;
+    if (transfer_type == 'i') mode[1] = 'b'; else mode[1] = 't';
+    mode[2] = 0;
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if (data_mode &amp;&amp; stat(tmp, &amp;s) == -1) 
+    {
+        Error(param);
+        return;
+    };</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if ((data_file = fopen(tmp, mode)) == NULL) {
+        Error(param);
+        return;
+    };
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if (open_mode != 'a') fseek(data_file, file_rest, SEEK_SET);
+    if (data_mode) {
+        sprintf(tmp, &quot;%s (%d bytes)&quot;, param, s.st_size - file_rest);
+    } else {
+        strcpy(tmp, param);
+    };
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    DataConnection(data_mode, transfer_type, tmp);
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Retr(char *param)
+{
+    PreConnection(param, 'r', 1);
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Stor(char *param)
+{
+    PreConnection(param, 'w', 0);
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Appe(char *param)
+{
+    PreConnection(param, 'a', 0);
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Abor(char *param)
+{
+    if (data_pid != 0) {
+        kill(data_pid, SIGTERM);
+    };
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    outs(&quot;226 ABOR command successful.&quot;);
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Mdtm(char *param)
+{
+    struct stat s;
+    struct tm *tms;
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if (stat(param, &amp;s) == -1) {
+        Error(param);
+    } else {
+        tms = localtime((const time_t *)&amp;s.st_mtime);
+        outs(&quot;213 %4d%2d%2d%2d%2d%2d&quot;, tms-&gt;tm_year, tms-&gt;tm_mon, tms-&gt;tm_mday, tms-&gt;tm_hour, tms-&gt;tm_min, tms-&gt;tm_sec);
+    };
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Syst(char *param)
+{
+    outs(&quot;215 UNIX Type: L8&quot;);
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Rest(char *param)
+{
+    int r;
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    r = atoi(param);
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if (r &lt; 0 || (r == 0 &amp;&amp; param[0] != '0')) {
+        outs(&quot;501 REST requires a value greater than or equal to 0.&quot;);
+        return;
+    };
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    file_rest = r;
+    outs(&quot;350 Restarting at %u. Send STORE or RETRIEVE to initiate transfer.&quot;, file_rest);
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Rnfr(char *param)
+{
+    char tmp[PATH_MAX];
+    struct stat s;
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    MakePath(tmp, path, param);
+    if (stat(tmp, &amp;s) == -1) {
+        Error(tmp);
+    } else {
+        outs(&quot;350 File or directory exists, ready for destination name.&quot;);
+        strncpy(rename_file, param, PATH_MAX);
+    };
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Rnto(char *param)
+{
+    char tmp[PATH_MAX];
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if (strcmp(rename_file, &quot;&quot;) == 0) {
+        outs(&quot;503 Bad sequence of commands.&quot;);
+        return;
+    };</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    MakePath(tmp, path, param);
+    if (rename(rename_file, tmp) == -1) {
+        Error(tmp);
+    } else {
+        outs(&quot;250 RNTO command successful.&quot;);
+        strcpy(rename_file, &quot;&quot;);
+    };
+};
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Site(char *param)
+{
+    int i, mode;
+    static char buf[BUFSIZE] = &quot;250 &quot;;
+    FILE *f;
+    char *p1, *p2, *p3, *p4, tmp[PATH_MAX], tmp2[PATH_MAX];
+        </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    explode(param, &amp;p1, &amp;p2);</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if (p1 == NULL || p2 == NULL || strncasecmp(p1, &quot;CHMOD&quot;, 5) != 0) {
+        outs(&quot;501 SITE option not supported.&quot;);
+        return;
+    };
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    explode(p2, &amp;p3, &amp;p4);
+    if (p3 == NULL || p4 == NULL) {
+        outs(&quot;501 SITE option not supported.&quot;);
+        return;
+    };</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    mode = strtol(p3, (char **)NULL, 8);
+    if (chmod(p4, mode) == -1) {
+        outs(&quot;501 SITE option not supported.&quot;);
+    } else {
+        outs(&quot;250 SITE command successful.&quot;);
+    };
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Port(char *param)
+{
+    int i;
+    struct _port tmp;
+    unsigned char r, *ptr = (unsigned char *)&amp;tmp;
+    char *p, *ori = param;
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    for (i=0;i&lt;6;i++) {
+        r = atoi(ori);
+        if (r == 0 &amp;&amp; *ori != '0') {
+            outs(&quot;501 Syntax error in parameters or arguments.&quot;);
+            return;
+        };
+        ptr[i] = r;
+        p = strchr(ori, ',');
+        if (p == NULL) {
+            if (i != 5) {
+                outs(&quot;501 Syntax error in parameters or arguments.&quot;);
+                return;
+            };
+        } else {
+            *p = 0;
+            ori = p+1;
+        };
+    };
+        </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    memcpy(&amp;remote_port, &amp;tmp, sizeof(remote_port));
+    pasv_mode = 0;
+    outs(&quot;200 PORT Command successful.&quot;);
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void Pasv(char *param)
+{
+    int port = port_base;
+    struct sockaddr_in sa;
+    char tmp[30], t2[10];
+    int len, i;
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    len = 1;
+    close(pasvfd);</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if ((pasvfd = socket(AF_INET, SOCK_STREAM, 0)) == -1 || setsockopt(pasvfd, SOL_SOCKET, SO_REUSEADDR, (const char *)&amp;len, sizeof(int)) == -1) 
+    {
+        outs(&quot;550 PASV command failed.&quot;);
+        return;
+    };</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    memset(&amp;sa, 0, sizeof(sa));
+    sa.sin_family      = AF_INET;
+    sa.sin_addr.s_addr = htonl(INADDR_ANY);</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    do {
+        port++;
+        if (port == 65535) {
+            outs(&quot;550 Can\'t bind any port.&quot;);
+            return;
+        };
+        sa.sin_port = htons(port);
+    } while (bind(pasvfd, (struct sockaddr *)&amp;sa, sizeof(sa)) == -1 || listen(pasvfd, 1) == -1);</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    local_port.port = htons(port);
+    memset(tmp, 0, 18);
+    for (i=0;i&lt;6;i++) {
+        sprintf(t2, &quot;%u&quot;, ((unsigned char *)&amp;local_port)[i]);
+        strcat(tmp, t2);
+        if (i!=5) strcat(tmp, &quot;,&quot;);
+    };
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    pasv_mode = 1;
+    outs(&quot;227 Entering Passive Mode (%s)&quot;, tmp);
+};
+</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">struct _cmd_list cmd_list[] = {
+    {&quot;USER&quot;,    User,   CHECK_NOLOGIN | NEED_PARAM  },
+    {&quot;PASS&quot;,    Pass,   CHECK_NOLOGIN   },
+    {&quot;ACCT&quot;},
+    {&quot;CWD&quot;,     Cwd,    CHECK_LOGIN | NEED_PARAM    },
+    {&quot;XCWD&quot;,    Cwd,    CHECK_LOGIN | NEED_PARAM    },
+    {&quot;CDUP&quot;,    Cdup,   CHECK_LOGIN | NO_PARAM      },
+    {&quot;XCUP&quot;,    Cdup,   CHECK_LOGIN | NO_PARAM      },
+    {&quot;SMNT&quot;},
+    {&quot;QUIT&quot;,    Quit,   NO_CHECK    },
+    {&quot;REIN&quot;},
+    {&quot;PORT&quot;,    Port,   CHECK_LOGIN | NEED_PARAM    },
+    {&quot;PASV&quot;,    Pasv,   CHECK_LOGIN | NO_PARAM      },
+    {&quot;TYPE&quot;,    Type,   CHECK_LOGIN | NEED_PARAM    },
+    {&quot;STRU&quot;},
+    {&quot;MODE&quot;},
+    {&quot;RETR&quot;,    Retr,   CHECK_LOGIN | NEED_PARAM    },
+    {&quot;STOR&quot;,    Stor,   CHECK_LOGIN | NEED_PARAM    },
+    {&quot;STOU&quot;},
+    {&quot;APPE&quot;,    Appe,   CHECK_LOGIN | NEED_PARAM    },
+    {&quot;ALLO&quot;},
+    {&quot;REST&quot;,    Rest,   CHECK_LOGIN | NEED_PARAM    },
+    {&quot;RNFR&quot;,    Rnfr,   CHECK_LOGIN | NEED_PARAM    },
+    {&quot;RNTO&quot;,    Rnto,   CHECK_LOGIN | NEED_PARAM    },
+    {&quot;ABOR&quot;,    Abor,   CHECK_LOGIN | NO_PARAM      },
+    {&quot;DELE&quot;,    Dele,   CHECK_LOGIN | NEED_PARAM    },
+    {&quot;MDTM&quot;,    Mdtm,   CHECK_LOGIN | NEED_PARAM    },
+    {&quot;RMD&quot;,     Rmd,    CHECK_LOGIN | NEED_PARAM    },
+    {&quot;XRMD&quot;,    Rmd,    CHECK_LOGIN | NEED_PARAM    },
+    {&quot;MKD&quot;,     Mkd,    CHECK_LOGIN | NEED_PARAM    },
+    {&quot;XMKD&quot;,    Mkd,    CHECK_LOGIN | NEED_PARAM    },
+    {&quot;PWD&quot;,     Pwd,    CHECK_LOGIN | NO_PARAM      },
+    {&quot;XPWD&quot;,    Pwd,    CHECK_LOGIN | NO_PARAM      },
+    {&quot;SIZE&quot;,    Size,   CHECK_LOGIN | NEED_PARAM    },
+    {&quot;LIST&quot;,    List,   CHECK_LOGIN },
+    {&quot;NLST&quot;,    List,   CHECK_LOGIN },
+    {&quot;SITE&quot;,    Site,   CHECK_LOGIN | NEED_PARAM    },
+    {&quot;SYST&quot;,    Syst,   CHECK_LOGIN },
+    {&quot;STAT&quot;,    Stat,   CHECK_LOGIN | NEED_PARAM    },
+    {&quot;HELP&quot;,    Help,   NO_CHECK    },
+    {&quot;NOOP&quot;,    Noop,   NO_CHECK    },
+    {&quot;&quot;}
+};  </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void do_alarm()
+{
+    outs(&quot;421 No Transfer Timeout (%d seconds): closing control connection&quot;, timeout);
+    fclose(file);
+    close(connfd);
+    exit(0);
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void do_child()
+{
+    int pid, ret;
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    while ((pid = waitpid(-1, &amp;ret, WNOHANG|WUNTRACED)) &gt; 0) {
+        if (pid == data_pid) {
+            if (WIFEXITED(ret) &amp;&amp; WEXITSTATUS(ret) == 0) outs(&quot;226 Transfer complete.&quot;);
+            else if (WIFSIGNALED(ret) &amp;&amp; WTERMSIG(ret) == SIGTERM) outs(&quot;425 Transfer aborted.&quot;);
+            else outs(&quot;425 Transfer error.&quot;);
+                </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">            fclose(data_file);
+            if (pasv_mode) close(pasvfd);
+            pasv_mode = 0;
+            transfer = 0;
+            data_pid = 0;
+            file_rest = 0;
+        };
+    };
+};
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">void do_term()
+{
+    outs(&quot;425 Transfer aborted.&quot;);
+    exit(0);
+};</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">int init()
+{
+    int n, i;
+    struct sockaddr_in sa;
+    struct hostent *host;
+    struct in_addr ia;
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    /* register the signal handler */
+    signal(SIGCHLD, do_child);
+    signal(SIGTERM, do_term);
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    /* init network */  
+    memset(&amp;sa, 0, sizeof(sa));
+    sa.sin_family      = AF_INET;
+    sa.sin_addr.s_addr = htonl(INADDR_ANY);
+    sa.sin_port        = htons(ftp_port);
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if (gethostname(hostname, BUFSIZE) == -1) strcpy(hostname, &quot;&quot;);
+        </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    i = 1;
+    if ((listenfd = socket(AF_INET, SOCK_STREAM, 0)) == -1 || setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, (const char *)&amp;i, sizeof(int)) == -1) 
+    {
+        perror(&quot;Pacific FTP:&quot;);
+        return -1;
+    };
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if (bind(listenfd, (struct sockaddr *)&amp;sa, sizeof(sa)) == -1) {
+        fprintf(stderr, &quot;Pacific FTP: Can not bind port %d\n&quot;, ftp_port);
+        return -1;
+    };
+    if (listen(listenfd, max_conn) == -1) {
+        perror(&quot;Pacific FTP:&quot;);
+        return -1;
+    };</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    /* set the program a daemon */
+    if(fork()) exit(0);</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    for (n = 0; n&lt;3; n++) close(n);
+    open(&quot;/dev/null&quot;, O_RDONLY);
+    dup2(0,1);
+    dup2(0,2);
+    if((n=open(&quot;/dev/tty&quot;,O_RDWR)) &gt; 0) {
+        ioctl(n, TIOCNOTTY, 0) ;
+        close(n);
+    }
+    setsid();
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if(fork()) exit(0);</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    /* get the uid */
+    system_uid = getuid();
+}</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">int main(int argc, char **argv)
+{
+    struct sockaddr_in sa;
+    int len, cur;
+    int okay=1, i;
+    char *cmd, *param;</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    /* get the param */
+    for (i=1; i&lt;argc; i++) {
+        if (argv[i][0] != '-' || argv[i][2] != ':') okay = 0;</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">        switch (argv[i][1]) {
+            case 'p':
+                ftp_port = atoi(&amp;argv[i][3]);
+                if (ftp_port == 0) okay = 0;
+                break;
+            case 'm':
+                max_conn = atoi(&amp;argv[i][3]);
+                if (max_conn == 0) okay = 0;
+                break;
+            case 't':
+                timeout = atoi(&amp;argv[i][3]);
+                if (timeout == 0) okay = 0;
+                break;
+            default:
+                okay = 0;
+        };
+        if (!okay) break;
+    };      
+        </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if (!okay) {    
+        printf(&quot;Usage: %s [-p:port] [-m:maxconn] [-t:timeout]\n\tport: default is 21.\n\tmaxconn: the max client num connected.\n&quot;, argv[0]);
+        return -1;
+    };</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    if (init() == -1) return -1;
+    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">    /* main loop */
+    while (1) 
+    {
+        len = sizeof(sa);
+        connfd = accept(listenfd, (struct sockaddr *)&amp;sa, &amp;len);
+        </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">        if (connfd == -1) continue;
+        </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">        if (fork() == 0) 
+        {
+            len = sizeof(sa);
+            getsockname(connfd, (struct sockaddr *)&amp;sa, &amp;len);
+            local_port.host = sa.sin_addr.s_addr;</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">            file = fdopen(connfd, &quot;rt+&quot;);
+            setbuf(file, (char *)0);</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">            getcwd(path, PATH_MAX);
+            outs(&quot;220 PacificFTP ready, hostname: %s&quot;, hostname);
+            signal(SIGALRM, do_alarm);
+            alarm(timeout);</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">            /* child process's main loop */
+            while (fgets(inbuf, BUFSIZE, file) != NULL)
+            {
+                explode(inbuf, &amp;cmd, &amp;param);
+                if (strcmp(cmd, &quot;&quot;) == 0) continue;</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">                /* Make cmd UPPERCASE */
+                for (i=0;i&lt;strlen(cmd);i++) cmd[i]=toupper(cmd[i]);</font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">                cur = 0;
+                okay = 0;
+                while (strcmp(cmd_list[cur].cmd, &quot;&quot;) != 0) 
+                {
+                    if (strcmp(cmd_list[cur].cmd, cmd) == 0) {
+                        if (cmd_list[cur].func == NULL) outs(&quot;502 %s command unimplemented.&quot;, cmd);
+                        else 
+                            if ((cmd_list[cur].check &amp; NO_CHECK) || Check(cmd, param, cmd_list[cur].check))
+                                (*cmd_list[cur].func)(param);
+                        </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">                        okay = 1;
+                        break;
+                    };
+                    cur++;
+                };
+                if (!okay) outs(&quot;500 %s not understood&quot;, cmd);
+            };                                  
+                    </font></pre><!--mstheme--><font face="宋体"><!--mstheme--></font><pre><font size="5">            fclose(file);
+            exit(0);
+        };
+        close(connfd);
+    };
+}</font></pre><!--mstheme--><font face="宋体">　<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+</html>

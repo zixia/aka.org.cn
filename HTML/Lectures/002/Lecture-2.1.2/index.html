@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>第二讲</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
+    <META NAME="CREATED" CONTENT="20000926;17342600">
+    <META >
+    <STYLE>
+    <!--
+        H1 { color: #ffff00; font-family: "timmons", serif }
+        TD P { color: #ffff00 }
+        P { color: #ffff00 }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="velvet.jpg">
+<H1 ALIGN=CENTER> 第二讲 Linux编程入门之 脚本编程 </H1>
+
+<H2>整体思路</H2>
+<P> 本讲是编程系列讲座的第二讲，主要讲述 Linux 平台上的两种最常用的脚本编程语言，即 BASH 和 PERL。由于 Linux 是以 UNIX 设计思想为蓝本逐步演化发展而来的，因此在 
+  Linux 环境中命令行操作和文本处理就明显要多于 Windows 系统，故而脚本语言以其简洁、快速、方便的特点在 Linux 系统中得到广泛应用。BASH 
+  现在几乎是各种 Linux 发行版中 Shell 的事实上的标准，掌握BASH可以帮助用户更为便捷、合理的理解、管理和使用 Linux 系统，即使你不用 
+  BASH 编程，掌握 BASH 对你理解整个系统也是必不可少和大有裨益的；PERL诚然是一种非常适合写 CGI 程序的语言，但是PERL的作用不仅仅如此，掌握PERL如同找到了 
+  Linux 编程的捷径，有许多 Linux 下的好东西就是用 PERL 完成的，比如 Majordom（一个中量级邮件列表程序）。本讲的目的是通过介绍 
+  Linux 上这两种主流脚本语言编程的知识，使大家找到脚本语言的共性，掌握这两种脚本语言的使用，并触类旁通的理解其他脚本语言，迅速引导有一定 Linux 
+  使用经验的同学入门，更好的把握 Linux 系统和使用 Linux。</P>
+<P><BR>
+  本讲首先对 Linux 上的脚本编程做一个简单介绍；然后通过分别讲解 BASH 和 PERL 这两种重要的脚本编程环境，并结合具体实例演示来使大家对 Linux 
+  上的脚本编程有一个感性认识，获得这种编程思想的基本思路。由于时间有限，许多细节问题我们只在讲义中给出解释，而不作细致讲解，希望本次讲座能给大家一个解决问题的思路和总体把握尺度，更多的探索留待大家自己课后去钻研。 
+</P>
+<hr>
+<H2>主要内容</H2>
+<img src="poliball.gif" width=16 height=16 align=ABSMIDDLE> <b>BASH 部分</b> 
+<UL SRC="../images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+  <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE> <a href="bash-intro.html">BASH 
+    的历史和概貌</a></P>
+  <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE> <a href="bash-syntax.html">BASH 
+    的基本语法</a></P>
+  <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE> <a href="bash-spec.html">BASH 
+    中的特殊保留字</a></P>
+  <p><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE> <a href="bash-adv.html">BASH 
+    的其他高级问题</a></p>
+</UL>
+<img src="poliball.gif" width=16 height=16 align=ABSMIDDLE> <b>PERL 部分</b> 
+<UL SRC="../images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+  <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE> <a href="perl-history.html">Perl 
+    的特点、历史和许可证</a></P>
+  <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE> <a href="perl-cgi.html">用 
+    Perl 写 CGI 入门</a></P>
+  <p><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE> <a href="perl-var.html">Perl 
+    的变量</a></p>
+  <p><img src="poliball.gif" width=16 height=16 align=ABSMIDDLE> <a href="perl-syntax.html">Perl 
+    的简单语法（与C语言语法的异同）</a></p>
+  <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE> <a href="perl-reg.html">Perl 
+    中的的正则表达式</a></P>
+  <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE> <a href="perl-app.html">一些 
+    Perl 的实际运用范列</a></P>
+</UL>
+
+<hr>
+<H2>各部分要点</H2>
+<UL SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+  <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE> BASH 的历史和概貌 </P>
+  <UL>
+    <LI>BASH 是什么的缩写</LI>
+    <LI>Linux 的其他 Shell</LI>
+    <LI>BASH 的主要特点</LI>
+    <br>
+  </UL>
+  <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE> BASH 的基本语法</P>
+  <UL>
+    <LI>最简单的例子 —— Hello World!</LI>
+    <LI>关于输入、输出和错误输出</LI>
+    <LI>BASH 中对变量的规定（与C的异同）</LI>
+    <LI>BASH 中的基本流程控制语法</LI>
+    <LI>函数的使用 </LI>
+      <br>
+  </UL>
+  <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE> BASH 中的特殊保留字</P>
+  <UL>
+    <LI>保留变量</LI>
+    <LI>随机数<br>
+      运算符 </LI>
+    <LI>变量的特殊操作<br>
+      <br>
+  </UL>
+  <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE> BASH 的其他高级问题</P>
+  <UL>
+    <LI>BASH 中的返回值处理</LI>
+    <LI>关于用 BASH 设计简单用户界面</LI>
+    <LI>在 BASH 中读取用户输入问题</LI>
+    <LI>一些特殊的惯用法 </LI>
+    <LI>BASH 程序的调试</LI>
+    <LI>关于 BASH2</LI>
+      <br>
+  </UL>
+  <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE> Perl 的特点、历史和许可证</P>
+  <UL>
+    <LI>Perl 的基本特点</LI>
+    <LI>Perl 的历史</LI>
+    <LI>Perl 的使用许可证</LI>
+    <br>
+  </UL>
+  <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE> 用 Perl 写 CGI 
+    入门</P>
+  <UL>
+    <LI>为什么要用 Perl 来写 CGI</LI>
+    <LI>几个简单的 Perl CGI 程序</LI>
+    <LI>CGI 中常用的环境变量</LI>
+    <LI>关于 CGI 的更多内容<br>
+  </LI>
+    </UL>
+  <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE> Perl 的变量</P>
+  <UL>
+    <LI>简单变量</LI>
+    <LI>数组</LI>
+    <LI>关联数组</LI>
+    <LI>各种运算符汇总</LI>
+    <br>
+  </UL>
+  <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE> Perl 的简单语法（与C语言语法的异同）</P>
+  <UL>
+    <LI>基本输入输出</LI>
+    <LI>分支循环控制结构</LI>
+    <LI>函数</LI>
+    <LI>常用系统调用</LI>
+    <LI>文件操作</LI>
+    <LI>进程管理</LI>
+    <br>
+  </UL>
+  <P><img src="poliball.gif" width=16 height=16 align=ABSMIDDLE> Perl 中的的正则表达式</P>
+  <ul>
+    <li>正则表达式的三种形式</li>
+    <li>正则表达式中的常用模式</li>
+    <li>正则表达式的 8 大原则</li>
+    <br>
+  </ul>
+  <p><img src="poliball.gif" width=16 height=16 align=ABSMIDDLE> 一些 Perl 的实际运用范列</p>
+  <ul>
+    <li>Majordomo 邮件列表程序</li>
+    <li>TurningBot 项目</li>
+    <li>简单站内搜索引擎</li>
+      <br>
+  </ul>
+</UL>
+
+<H2>练习</H2>
+<OL>
+  <LI>请用 BASH 编写一个小程序，实现在指定目录下递归搜索有特定后缀名的文件，并更改其后缀。</LI>
+  <LI>用 BASH 编写一个具有类似特洛伊木马功能的小程序。</LI>
+  <LI>分析讲义中自代的站内搜索程序的 Perl 源代码，为其添加你想到的新功能。</LI>
+  <LI>用 Perl 语言编写一个留言本 CGI 程序。</LI>
+  <LI>用 Perl 语言编写一个统计 Apache Log 文件中信息的程序，统计哪些 IP 喜欢访问哪些页面？</LI>
+  <LI>用 Perl 语言编写一个在大段文字中匹配查找所有以 &quot;m&quot; 开头，以 &quot;g&quot; 结尾中间含有 &quot;o&quot; 
+    的单词。 </LI>
+</OL>
+
+<H2>推荐书目</H2>
+<OL>
+  <LI>BASH Programming - Introduction HOW-TO，by Mike G mikkey at dynamo.com.ar</LI>
+  <LI>Advanced Bash-Scripting HOWTO - BASH 脚本编程指南，by Mendel Cooper(thegrendel@theriver.com)<BR>
+    (中译)</LI>
+  <LI>Learning Perl 入门读物，适合入门者使用。<BR>
+    (中译)</LI>
+  <LI>Programming Perl 推崇备至的经典书籍，也就是所谓的Camel Book，适合想深入了解perl的人阅读。<BR>
+    (中译)</LI>
+  <LI><a href="cookbook.zip">Perl Cook Book</a> 正如烹饪书一样，它适合随机阅读，也可在需要时查阅，但是读完它也很有好处。本书介绍了许多有效的“菜谱”，可以节省你的时间，提高程序效率。</LI>
+  <LI>Perl 5 从入门到精通 介绍得还算比较详细，不过翻译的不好。</LI>
+  <LI>&lt;&lt;Perl入门&gt;&gt; 电子工业出版社</LI>
+</OL>
+
+<H2>反馈</H2>
+本讲由<A HREF="mailto:taopin@sina.com">陶品</A>讲解。欢迎任何意见和建议，可发 email: <A HREF="mailto:taopin@sina.com">taopin@sina.com</A> 
+与陶品联系。 
+<P>
+<CENTER>
+    <A HREF="http://www.aka.org.cn/Lectures/index.html">AKA 自由软件系列讲座</A> 
+  </CENTER>
+</P>
+
+</BODY>
+</HTML>
+

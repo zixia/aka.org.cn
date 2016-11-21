@@ -1,0 +1,1500 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Aka 杂志</title>
+</head>
+
+<body bgcolor="#ffffff">
+<div align="center"><center>
+
+<table cellspacing="0" cellpadding="0" width="630" border="0">
+      <tr> 
+        <td bgcolor="#EEEDB7"> 
+          <h1 align="center">极限编程</h1>
+          <div style='layout-grid:15.6pt'> 
+            <h3 class=MsoCaption align=center style='text-align:center'><b><span lang=EN-US>Extreme 
+              Programming<br>
+              </span></b></h3>
+            <p align="center"><b>作者</b> 不详 <b>来源</b> http://www.cutter.com/ </p>
+            <p align="center"><b>审校</b> BigMac[AKA]<b><br>
+              译者</b> march-bird lucian yjf taopin wl jazz韩伟 nullgate Simon[AKA]</p>
+            <div align="center"><a href="index.html"><font size="2"><b>[返回]</b></font></a></div>
+            <p class=MsoIndexHeading>&nbsp; </p>
+            <p class=MsoIndexHeading>As we have explored in several issues of 
+              <b><i>eAD</i></b>, the two most pressing issues in information technology 
+              today are:<br>
+              <span lang=EN-US>　　正如我们在eAD的若干期中探究的那样，当今信息技术中最迫切的两个问题是: </span> 
+            </p>
+            <ul>
+              <li>How do we deliver functionality to business clients quickly?<br>
+                <span lang=EN-US>如何能快速地向商业用户交付功能？</span> <br>
+              <li>How do we keep up with near-continuous change?<br>
+                <span lang=EN-US>如何才能跟上近乎连续的变化?</span> <br>
+              </li>
+            </ul>
+            <p>Change is changing. Not only does the pace of change continue to 
+              accelerate, but, as the September issue of <b><i>eAD</i></b> pointed 
+              out, organizations are having to deal with different types of change 
+              -- disruptive change and punctuated equilibrium. Disruptive technologies, 
+              like personal computers in the early 1980s, impact an industry (in 
+              the case of PCs, several related industries), while a punctuated 
+              equilibrium - a massive intervention into an ecosystem or an economy 
+              -- impacts a very large number of species, or companies. The Internet, 
+              which has become the backbone for e-commerce and e-business, has 
+              disrupted a wide range of industries -- more a punctuated equilibrium 
+              than a disruption.<br>
+              <span lang=EN-US>　　变化本身也在不断地变化中。不仅仅是变化的速度在不断地提高，而且，如eAD的10月中所指出的， 
+              组织正在不得不应付各种类型的变化-- 剧变与不断被打破的平衡。 产生剧变的技术，象在80年代早期的个人计算机，冲击了一个工业(PC机以及若干相关的工业)而不时打断的平衡--一个对生态系统或者对整个经济产生巨大影响的介入--则 
+              影响了无数的物种，或者说，公司。已经成为电子商务支柱的Internet, 就已使大范围的行业产生剧变--更多的是打断的平衡而不仅仅是一次剧变。 
+              </span></p>
+            <p></p>
+            <p>&nbsp; </p>
+            <p>When whole business models are changing, when time-to-market becomes 
+              the mantra of companies, when flexibility and interconnectedness 
+              are demanded from even the most staid organization, it is then that 
+              we must examine every aspect of how business is managed, customers 
+              are delighted, and products are developed.<br>
+              　　当整个商业模式正在发生变化，当"时间意味着市场"正成为公司的咒语，当适应性与互连性正在成为甚至是最呆板的组织的需要的时候，我们将有必要检查以下的每一个方面:商业是如何管理的，客户为什么而感到高兴，以及产品是如何开发的。 
+            </p>
+            <p>The Extreme Programming movement has been a subset of the object-oriented 
+              (OO) programming community for several years, but has recently attracted 
+              more attention, especially with the recent release of Kent Beck's 
+              new book <i>Extreme Programming Explained: Embrace Change</i>. Don't 
+              be put off by the somewhat "in-your- face" moniker of Extreme Programming 
+              (XP to practitioners). Although Beck doesn't claim that practices 
+              such as pair programming and incremental planning originated with 
+              XP, there are some very interesting, and I think important, concepts 
+              articulated by XP. There's a lot of talk today about change, but 
+              XP has some pretty good ideas about how to actually do it. Hence 
+              the subtitle, <i>Embrace Change</i>.<br>
+              　　终极编程(Extreme Programming )运动成为面向对象编程这个团体的一部分已经有数年了， 但是直到最近才引起了越来越多的注意，特别是最近Kent 
+              Beck的《终极编程 释义:拥抱变化》(Extreme Programming Explained: Embrace Change)一书的出版。千万不要因为终极编程(业内人简称为XP)这一称呼而对它产生反感。 
+              尽管Beck没有说象配对编程(pair programming)，增量式计划(incremental planning)之类的来源 
+              于XP,但是仍然有一些非常有趣的，我认为也是很重要的概念可以借用XP来表达。现有有许多关于变化的讨论， 但是XP却有许多如何实际去做的非常好的想法。也就是这个副标题:拥抱变化。 
+            </p>
+            <p>There is a tendency, particularly by rigorous methodologists, to 
+              dismiss anything less ponderous than the Capability Maturity Model 
+              (CMM) or maybe the International Organization for Standardization's 
+              standards, as hacking. The connotation: hacking promotes <i>doing</i> 
+              rather than <i>thinking</i> and therefore results in low quality. 
+              This is an easy way to dismiss practices that conflict with one's 
+              own assumptions about the world.<br>
+              　　有一种趋势，特别在那些严格的方法论者中，希望剔除那些与"能力 成熟度模型"(Capability Maturity Model 
+              CMM)或者是国际标准化组织的标准相比不那么笨重的方法，比如象hacking.注释: hacking推崇行动而不是思考从而导致了较低的质量。 
+              剔除与某人关于这个世界的假设相冲突的实践，这倒不失为一种简单的方法。 </p>
+            <p>Looked at another way, XP may be a <i>potential</i> piece of a 
+              puzzle I've been writing about over the past 18 months. Turbulent 
+              times give rise to new problems that, in turn, give rise to new 
+              practices -- new practices that often fly in the face of conventional 
+              wisdom but survive because they are better adapted to the new reality. 
+              There are at least four practices I would assign to this category:<br>
+              　　从另一个角度来看XP，它倒可能是一个难题的某个潜在的部分，这个一个我在过去18个月中一直都在写的内容。混乱 的时期产生新的问题，而后者又导致了新的实践--新的实践公然违抗 
+              传统的知识，但却得以幸存下来是因为它们能更好地适应这个新的现实世界。至少有四种实践方式我觉得是属于这个范畴的: </p>
+            <ul>
+              <li>XP -- the focus of this issue of <b><i>eAD</i></b><br>
+                XP -- eAD本期的焦点 <br>
+              <li>Lean development -- discussed in the November 1998 issue of 
+                <b><i>eAD</i></b><br>
+                轻量级的开发(Lean development)--已经在eAD 1998 11月中讨论 <br>
+              <li>Crystal Light methods -- mentioned in the November 1999 issue 
+                of <b><i>eAD</i></b> and further discussed in this issue<br>
+                轻量级的Crystal方法(Crystal Light methods)--曾在eAD 1999年11月提到，在本期中将做进一步的讨论 
+                <br>
+              <li>Adaptive software development -- described in the August 1998 
+                issue of <b><i>eAD</i></b> (then called <b><i>Application Development 
+                Strategies</i></b> -- <b><i>ADS</i></b>)<br>
+                自适应软件开发(Adaptive software development)--在eAD1998年8月中描述过(当时叫做应用开发策略Application 
+                Development Strategies -- ADS) <br>
+              </li>
+            </ul>
+            <p>Although there are differences in each of these practices, there 
+              are also similarities: they each describe variations from the conventional 
+              wisdom about how to approach software development. Whereas lean 
+              and adaptive development practices target strategic and project 
+              management, XP brings its differing world view to the realm of the 
+              developer and tester.<br>
+              　　尽管这些实践中存在着差异，但是它们中也有相似的地方:它们都描述了与传统软件开发不同的方法。 虽然轻量级的开发与自适应开发针对的是战略与项目管理的，但是XP却用不同的视角将开发方法带入了程序员与测试员的领域。 
+            </p>
+            <p>Much of XP is derived from good practices that have been around 
+              for a long time. "None of the ideas in XP are new. Most are as old 
+              as programming," Beck offers to readers in the preface to his book. 
+              I might differ with Beck in one respect: although the practices 
+              XP uses aren't new, the conceptual foundation and how they are melded 
+              together greatly enhance these "older" practices. I think there 
+              are four critical ideas to take away from XP (in addition to a number 
+              of other good ideas):<br>
+              　　XP中许多部分其实都来自于业已存在的那些优秀的开发实践。"XP中没有一个想法是全新的。大多数想法产生的时间实际上和编程一样古老"Beck在他书中的前言中这样说道。但是我在某一个方面考虑的也许与Beck有所不同： 
+              尽管XP所用的实践方式不是全新的，但是概念的建立以及它们如何融合在一起极大地增强了 这些"老"的实践。我想(除了许多其它的好思想外，还)可以从XP中提炼出四个关键的思想: 
+            </p>
+            <ul>
+              <li>The cost of change<br>
+                变化的成本 <br>
+              <li>Refactoring<br>
+                重构 <br>
+              <li>Collaboration<br>
+                协作 <br>
+              <li>Simplicity<br>
+                简单化 <br>
+              </li>
+            </ul>
+            <p>But first, I discuss some XP basics: the dozen practices that define 
+              XP.<br>
+              　　但是首先，我们来讨论XP的基础:那十二个用于XP的实践方式。 </p>
+            <h3>XP - The Basics<br>
+              XP－基础</h3>
+            <p>I must admit that one thing I like about XP's principal figures 
+              is their lack of pretension. XP proponents are careful to articulate 
+              where they think XP is appropriate and where it is not. While practitioners 
+              like Beck and Ron Jeffries may envision that XP has wider applicability, 
+              they are generally circumspect about their claims. For example, 
+              both are clear about XP's applicability to small (less than 10 people), 
+              co-located teams (with which they have direct experience); they 
+              don't try to convince people that the practices will work for teams 
+              of 200. <br>
+              　　我必须承认一件事情，就是我喜欢XP的原因应该是它没有其他的那些花哨的东西。支持XP的人们总是会向你指出XP适合的地方以及他的某些局限性。而XP的实践者Beck以及Ron 
+              Jeffties却相信XP会有更广泛的应用前景。他们通常对于自己的要求都是很谨慎的。例如：小的（小于10人），公司局部（他们有直接的经验）两者对于XP的适应性都是很清楚的；他们并没有试图让人们相信XP可以适用于一个200人的团队。 
+            </p>
+            <h4>The Project<br>
+              工程 </h4>
+            <p>The most prominent XP project reported on to date is the Chrysler 
+              Comprehensive Compensation system (the C3 project) that was initiated 
+              in the mid-1990s and converted to an XP project in 1997. Jeffries, 
+              one of the "Three Extremoes" (with Beck and Ward Cunningham), and 
+              I spent several hours talking about the C3 project and other XP 
+              issues at the recent Miller Freeman <i>Software Developer</i> conference 
+              in Washington, DC, USA.<br>
+              　　最为著名的XP项目是克莱斯勒综合补偿系统（称为C3工程），它在上个世纪的90年代中期开始，到1997演变为XP。Jeffries,是"终极编程三人组"之一（另外两个是Beck同Ward 
+              Cunningham） 。我在华盛顿特区同自由软件人谈论了有关C3的以及其他与XP项目有关的东西。 <br>
+              ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ <br>
+              注解： Chrysler Comprehensive Compensation system 克莱斯勒综合补偿系统 <br>
+              ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ </p>
+            <p>Originally, the C3 project was conceived as an OO programming project, 
+              specifically using Smalltalk. Beck, a well-known Smalltalk expert, 
+              was called in to consult on Smalltalk performance optimization, 
+              and the project was transformed into a pilot of OO (XP) practices 
+              after the original project was deemed unreclaimable. Beck brought 
+              in Jeffries to assist on a more full-time basis, and Jeffries worked 
+              with the C3 team until spring 1999. The initial requirements were 
+              to handle the monthly payroll of some 10,000 salaried employees. 
+              The system consists of approximately 2,000 classes and 30,000 methods 
+              and was ready within a reasonable tolerance period of the planned 
+              schedule.<br>
+              　　最初，C3是一个基于OO（面向对象技术）的开发项目，尤其是它采用Smaltalk语言进行开发。（Smaltalk ：Xerox公司开发的一种高级程序设计语言,它支持和鼠标合用的选项屏驱动式应用程序,有助于建立便于使用的计算机程序。）作为著名的Smalltalk专家，Beck被邀请来讨论有关SmalTalk性能优化的问题，并且在原项目被认为不可救要的时候将其变为一个采用面向对象OO（XP）方法的试验性项目。Beck并且带来了Jeffries用于帮助那些基本的东西，Jeffries在C3组一直干到1999年的春天。最开始的需求是要做一个对约10，000个雇员每月薪水发放进行管理的系统。这个系统由大约2，000个类以及30，000个方法构成，并且在计划方面提供有合理的容忍度 
+            </p>
+            <p>As we talked, I asked Jeffries how success on the C3 project translated 
+              into XP use on other Chrysler IT projects. His grin told me all 
+              I needed to know. I've been involved in enough rapid application 
+              development (RAD) projects for large IT organizations over the years 
+              to understand why success does not consistently translate into acceptance. 
+              There are always at least a hundred very good reasons why success 
+              at RAD, or XP, or lean development, or other out-of-the-box approaches 
+              doesn't translate into wider use -- but more on this issue later.<br>
+              　　正向我们所谈到，我问Jeffries他怎样成功的将C3变为XP并应用到其他的克莱斯勒IT项目。他笑着告诉了我。多年来我为许多大型IT组织开发了不少RAD系统（快速原型开发），因此我知道为什么我们无法将成功的经验运用于其它项目中. 
+              对于RAD, XP, 轻量级的开发以及其它一些未得到广泛应用的方法, 它们成功的原因至少有一百条. </p>
+            <h4>Practices<br>
+              实践 </h4>
+            <p>One thing to keep in mind is that XP practices are intended for 
+              use with small, co-located teams. They therefore tend toward minimalism, 
+              at least as far as artifacts other than code and test cases are 
+              concerned. The presentation of XP's practices have both positive 
+              and negative aspects. At one level, they sound like rules -- do 
+              this, don't do that. Beck explains that the practices are more like 
+              guidelines than rules, guidelines that are pliable depending on 
+              the situation. However, some, like the "40-hour week," can come 
+              off as a little preachy. Jeffries makes the point that the practices 
+              also interact, counterbalance, and reinforce each other, such that 
+              picking and choosing which to use and which to discard can be tricky. 
+              <br>
+              　　应记住的一件事情就是我们应倾向于在小型的, 局部的团队中运用XP。除了代码与测试用例外, 尽量减少有些的影响。XP的实践既有正面的表现,也有负面的。在某些方面看来，他们听起来就像一堆规则，要做这个，不要做那个。对此Beck解释道, 
+              与规则相比, XP更像是指导方针，一个灵活的依赖于具体环境的开发方针。但是诸如"每周工作40小时"等看起来可能会感觉续续道道。Jeffries使得实践也会互相作用的，平衡，互相加强。以至于挑选使用的同丢弃的都是棘手的事情。 
+            </p>
+            <p><b>The planning game.</b> XP's planning approach mirrors that of 
+              most iterative RAD approaches to projects. Short, three-week cycles, 
+              frequent updates, splitting business and technical priorities, and 
+              assigning "stories" (a story defines a particular feature requirement 
+              and is displayed in a simple card format) all define XP's approach 
+              to planning. <br>
+              　　<b>计划的制定：</b>XP中关于制定计划的实现方法中可以反映出大多数迭代式RAD项目的特点。短期的，每三周为一个循环，频繁地更新，按优先级划分任务与技术， 
+              分配stories（一个story定义了一个特殊的功能需求并以一种简单的方式记录在卡片上），所有的这些就是构成了XP中的计划。 
+            </p>
+            <p><b>Small releases.</b> "Every release should be as small as possible, 
+              containing the most valuable business requirements," states Beck. 
+              This mirrors two of Tom Gilb's principles of evolutionary delivery 
+              from his book <i>Principles of Software Engineering Management</i>: 
+              "All large projects are capable of being divided into many useful 
+              partial result steps," and "Evolutionary steps should be delivered 
+              on the principle of the juiciest one next."<br>
+              　　<b>小版本：</b>"每个版本应该尽可能的小，而且包含最有商业价值的需求"，Beck如是说。这也反映了Tom Gilb在他的<软件工程管理原则>书中提到的关于渐进式发布的两点："所有的大的项目都可以被分为局部的, 
+              有用的小的步骤"以及"进化的步骤会传递到下一级。" </p>
+            <p>Small releases provide the sense of accomplishment that is often 
+              missing in long projects as well as more frequent (and more relevant) 
+              feedback. However, a development team needs to also consider the 
+              difference between "release" and "releasable." The cost of each 
+              release -- installation, training, conversions -- needs to be factored 
+              into whether or not the product produced at the end of a cycle is 
+              actually released to the end user or is simply declared to be in 
+              a releasable state. <br>
+              　　小型版本的发布意味着具有在大型项目中经常缺少的频繁的反馈的实现.。 然而，一个开发小组当然需要考虑到"发布"同"可发布"的不同。无论是否是最终的版本发布还是一个简单的可发行版本的发布, 
+              都需要付出安装，培训，转化等代价。 </p>
+            <p><b>Metaphor.</b> XP's use of the terms "metaphor" and "story" take 
+              a little wearing in to become comfortable. However, both terms help 
+              make the technology more understandable in human terms, especially 
+              to clients. At one level, metaphor and architecture are synonyms 
+              -- they are both intended to provide a broad view of the project's 
+              goal. But architectures often get bogged down in symbols and connections. 
+              XP uses "metaphor" in an attempt to define an overall coherent theme 
+              to which both developers and business clients can relate. The metaphor 
+              describes the broad sweep of the project, while stories are used 
+              to describe individual features.<br>
+              　　<b>隐喻：</b>在XP中"隐喻"以及"story"的使用可能会让人有一点不舒服。但是，这些术语的使用可以帮助我们以一种更人性化的方式加以理解，尤其是对客户而言。从某种程度上来说，隐喻同体系结构是同意语――他们都着重于从全局描述一个项目。但是体系结构经常会陷于符号与连接的泥潭。而XP使用"隐喻"定义一个从开发者到商业客户都可联系的全面一致的主题。隐喻用于描述项目全面的面貌，而Story用于描述个别具体的特征。 
+            </p>
+            <p><b>Simple design.</b> Simple design has two parts. One, design 
+              for the functionality that has been defined, not for potential future 
+              functionality. Two, create the best design that can deliver that 
+              functionality. In other words, don't guess about the future: create 
+              the best (simple) design you can today. "If you believe that the 
+              future is uncertain, and you believe that you can cheaply change 
+              your mind, then putting in functionality on speculation is crazy," 
+              writes Beck. "Put in what you need when you need it." <br>
+              　　<b>简单的设计：</b>简单的设计包含两个部分。一，为已定义的功能进行设计，而不是为潜在地未来可能的功能进行设计。二，创建最佳的可以实现功能的设计。换句话说，不用管未来会是怎样，只创建一个目前为止可以实现的最好的设计。"如果你相信未来是不确定的，并且你相信你可以很方便的改变你的主意的话，那么对未来功能的考虑是危险的。"Beck写到。"只有在你真正需要的时候才去做" 
+            </p>
+            <p>In the early 1980s, I published an article in <i>Datamation</i> 
+              magazine titled "Synchronizing Data with Reality." The gist of the 
+              article was that data quality is a function of use, not capture 
+              and storage. Furthermore, I said that data that was not systematically 
+              used would rapidly go bad. Data quality is a function of systematic 
+              usage, not anticipatory design. Trying to anticipate what data we 
+              will need in the future only leads us to design for data that we 
+              will probably never use; even the data we did guess correctly on 
+              won't be correct anyway. XP's simple design approach mirrors the 
+              same concepts. As described later in this article, this doesn't 
+              mean that no anticipatory design ever happens; it does mean that 
+              the economics of anticipatory design changes dramatically.<br>
+              　　在二十世纪八十年代，我发表了一篇有关自动化资料管理的文章"实际的同步数据"文章的意思是说数据的质量是使用功能，不是捕捉与存储。此外，我说数据如果不是很系统的使用便会变坏。数据质量是系统使用的功能，不是可预料的设计。无论预期的对还是错，试着设计一个我们从来都不会用到的数据，最终结果很可能我们一次也不会用到它们。XP的简单设计方法反映了相同的观点。如在本文后来所描述的那样，这并不意味着不需要预测，而是说为预测的内容所做的设计一旦发生变化，其导致的代价是十分巨大的。 
+            </p>
+            <p><b>Refactoring.</b> If I had to pick one thing that sets XP apart 
+              from other approaches, it would be refactoring -- the ongoing redesign 
+              of software to improve its responsiveness to change. RAD approaches 
+              have often been associated with little or no design; XP should be 
+              thought of as continuous design. In times of rapid, constant change, 
+              much more attention needs to be focused on refactoring. See the 
+              sections "Refactoring" and "Data Refactoring," below.<br>
+              　　<b>重构：</b>如果我不得不找出一个能够将XP和其他方法区别开来的东西那就是重构――不断的软件再设计以改进它对于变化的反应。RAD方法常常很少甚至根本不与设计相关；XP应当被看作持续设计。当变化既快而且频繁的时候，应投入更多的精力于重构之上。参见下面的"重构"和"数据重构"部分。 
+            </p>
+            <p><b>Testing.</b> XP is full of interesting twists that encourage 
+              one to think -- for example, how about "Test and then code"? I've 
+              worked with software companies and a few IT organizations in which 
+              programmer performance was measured on lines of code delivered and 
+              testing was measured on defects found -- neither side was motivated 
+              to reduce the number of defects prior to testing. XP uses two types 
+              of testing: unit and functional. However, the practice for unit 
+              testing involves developing the test for the feature prior to writing 
+              the code and further states that the tests should be automated. 
+              Once the code is written, it is immediately subjected to the test 
+              suite instant feedback.<br>
+              　　<b>测试：</b>XP充满发人深思的有趣的难题。例如：什么是"先测试后编码"？我曾经同软件公司和一些IT机构一起工作，在那儿是通过代码的行数来对程序员的绩效加以考核，而测试的绩效则是通过发现的缺陷的数量来考核的。这两种方法都不能鼓励减少测试前产生的缺陷的数量。XP使用两种测试：单元测试和功能测试。单元测试要求在写代码之前就开发出相应功能的测试方法，并并测试应当是自动化的。代码一完成，它就被立即用有关测试集加以测试，从而能立即得到反馈。 
+            </p>
+            <p>The most active discussion group on XP remains the Wiki exchange 
+              (XP is a piece of the overall discussion about patterns). One of 
+              the discussions centers around a lifecycle of Listen (requirements) 
+              <img height=12 
+      alt=arrow src="EXTREME PROGRAMMING.files/arrow.gif" width=20 border=0> Test 
+              <img height=12 alt=arrow src="EXTREME PROGRAMMING.files/arrow.gif" 
+      width=20 border=0> Code <img height=12 alt=arrow 
+      src="EXTREME PROGRAMMING.files/arrow.gif" width=20 border=0> Design. Listen 
+              closely to customers while gathering their requirements. Develop 
+              test cases. Code the objects (using pair programming). Design (or 
+              refactor) as more objects are added to the system. This seemingly 
+              convoluted lifecycle begins to make sense only in an environment 
+              in which change dominates.<br>
+              　　最活跃的XP讨论组仍然是Wiki exchange（XP是关于pattern总体讨论的一部分），其中的一个讨论围绕听取（需求）-> 
+              测试 -> 代码 -> 设计的生命周期。贴近客户聆听并收集他们的需求。开发测试用例（test cases）。完成对象编码（使用配对编程）。当更多对象被加入系统时进行设计（或重构）。这个看起来混乱不堪的生命周期仅仅在经常变化的环境下才有意义。 
+            </p>
+            <p><b>Pair programming.</b> One of the few software engineering practices 
+              that enjoys near-universal acceptance (at least in theory) and has 
+              been well measured is software inspections (also referred to as 
+              reviews or walkthroughs). At their best, inspections are collaborative 
+              interactions that speed learning as much as they uncover defects. 
+              One of the lesser-known statistics about inspections is that although 
+              they are very cost effective in uncovering defects, they are even 
+              more effective at preventing defects in the first place through 
+              the team's ongoing learning and incorporation of better programming 
+              practices.<br>
+              　　<b>配对编程：</b>软件（还是直接用Inspection为好？）（也称审查或走查）也是被广为接受（至少在理论上）和有效度量的少数软件工程实践之一。在最好情况下，Inspection这种协同交互的检查能够加速学习，同时发现缺陷。一个较少被知道的关于Inspection的统计数据是尽管它在发现缺陷方面非常有效，但通过团队对于好的开发实践持续的学习和协作，可以更好的在第一时间预防缺陷。 
+            </p>
+            <p>One software company client I worked with cited an internal study 
+              that showed that the amount of time to isolate defects was 15 hours 
+              per defect with testing, 2-3 hours per defect using inspections, 
+              and 15 minutes per defect by finding the defect before it got to 
+              the inspection. The latter figure arises from the ongoing team learning 
+              engendered by regular inspections. Pair programming takes this to 
+              the next step -- rather than the incremental learning using inspections, 
+              why not continuous learning using pair programming?<br>
+              　　一家我工作过的软件公司客户引用一个内部研究结果，表明在测试阶段发现一个缺陷需15小时，在Inspection阶段发现一个缺陷则需2－3小时，而在Inspection之前发现缺陷只需15分钟。后面的数据来自于产生于常规审查的持续的团队学习。配对编程将这个带入下一步――与其用Inspection来递增式学习，为什么不用配对编程来学习呢？ 
+            </p>
+            <p>"Pair programming is a dialog between two people trying to simultaneously 
+              program and understand how to program better," writes Beck. Having 
+              two people sitting in front of the same terminal (one entering code 
+              or test cases, one reviewing and thinking) creates a continuous, 
+              dynamic interchange. Research conducted by Laurie Williams for her 
+              doctoral dissertation at the University of Utah confirm that pair 
+              programming's benefits aren't just wishful thinking (see <a 
+      href="http://www.cutter.com/ead/ead0002.html#res">Resources and References</a>).<br>
+              　　"配对编程是两个人试图同时编程和理解如何更好编程的一种对话"，Beck写道。让两个人同时坐在一台终端前面（一个人敲代码或测试用例，一个人审查和思考）产生一种持续的、动态的交流。Williams在犹他大学进行的博士论文研究证明了配对编程不仅仅是一种美好的想法而且确有实效。（参见资源和参考） 
+            </p>
+            <p><b>Collective ownership.</b> XP defines collective ownership as 
+              the practice that anyone on the project team can change any of the 
+              code at any time. For many programmers, and certainly for many managers, 
+              the prospect of communal code raises concerns, ranging from "I don't 
+              want those bozos changing my code" to "Who do I blame when problems 
+              arise?" Collective ownership provides another level to the collaboration 
+              begun by pair programming.<br>
+              　　<b>代码共享：</b>项目组中的每个人都可以在任何时候修改其他项目成员的代码，这就是XP中所定义的代码共享。。对许多程序员以及经理而言，，共有代码的想法会引起一些疑虑，诸如"我不想让那些笨蛋改我的代码"，"出现问题我应该怪谁？"等等。共享代码从另一个层面提供了对配对编程中协作的支持。 
+            </p>
+            <p>Pair programming encourages two people to work closely together: 
+              each drives the other a little harder to excel. Collective ownership 
+              encourages the entire team to work more closely together: each individual 
+              and each pair strives a little harder to produce high-quality designs, 
+              code, and test cases. Granted, all this forced "togetherness" may 
+              not work for every project team. <br>
+              　　配对编程鼓励两个人紧密协作：每个人促使另一个更加努力以图超越。共同所有鼓励整个团队更加紧密协作：每个个人和每个双人更努力生产高质量设计、代码和测试集。当然，所有这些强迫的"共同"不一定对所有的项目组适用。 
+            </p>
+            <p><b>Continuous integration.</b> Daily builds have become the norm 
+              in many software companies -- mimicking the published material on 
+              the "Microsoft" process (see, for example, Michael A. Cusumano and 
+              Richard Selby's <i>Microsoft Secrets</i>). Whereas many companies 
+              set daily builds as a minimum, XP practitioners set the daily integration 
+              as the maximum - opting for frequent builds every couple of hours. 
+              XP's feedback cycles are quick: develop the test case, code, integrate 
+              (build), and test. <br>
+              　　<b>经常集成：</b>每日构造（build）在许多公司已经成为规范，模仿有关"微软"流程的出版物上的东西。（参见，例如，Michael 
+              A. Cusumano和Richard Selby的Microsoft Secrets）许多公司将每日编链作为最小要求，XP实践者将每日集成作为最大要求，选择每两个小时一次的频繁编链。XP的反馈周期迅速：开发测试集、编码、集成（编链）和测试。 
+            </p>
+            <p>The perils of integration defects have been understood for many 
+              years, but we haven't always had the tools and practices to put 
+              that knowledge to good use. XP not only reminds us of the potential 
+              for serious integration errors, but provides a revised perspective 
+              on practices and tools.<br>
+              　　对于集成缺陷危险的认识已有多年了，但我们并不是总能拥有相应工具和时间将这些知识好好用起来。XP不仅提醒我们有可能有严重的集成错误，而且从实践与工具的角度提供了一种新的认识。 
+            </p>
+            <p><b>40-hour week.</b> Some of XP's 12 practices are principles, 
+              while others, such as the 40-hour practice, sound more like rules. 
+              I agree with XP's sentiments here; I just don't think work hours 
+              define the issue. I would prefer a statement like, "Don't burn out 
+              the troops," rather than a 40-hour rule. There are situations in 
+              which working 40 hours is pure drudgery and others in which the 
+              team has to be pried away from a 60-hour work week. <br>
+              　　<b>每周只干40小时：</b>XP有12条实践的基本原则，但是有时候，比如象每周只干40小时的原则，听起来更象规则。我同意XP中的观点。只是不认为有必要硬性规定工作小时数。相比起来，我更喜欢一句类似于"不要把部队烧光"的话。在一些情况下，工作40小时太劳累，而在另外一些组里，甚至需要一周60个工作时。 
+            </p>
+            <p>Jeffries provided additional thoughts on overtime. "What we say 
+              is that overtime is defined as time in the office when you don't 
+              want to be there. And that you should work no more than one week 
+              of overtime. If you go beyond that, there's something wrong -- and 
+              you're tiring out and probably doing worse than if you were on a 
+              normal schedule. I agree with you on the sentiment about the 60- 
+              hour work week. When we were young and eager, they were probably 
+              okay. It's the dragging weeks to watch for."<br>
+              　　Jeffries提供了关于加班的更多思索："我们说的是加班被定义为我们不想在办公室的时候呆在办公室。而且你不应当加班超过一周。如果你超过了，就有什么东西出了问题――你过于劳累，有可能比你按时下班干的还差。我同意你关于60工作时一周的感受。在我们年轻和满身干劲的时候，这也许没问题。值得注意的是拖沓的一周又一周。" 
+            </p>
+            <p>I don't think the number of hours makes much difference. What defines 
+              the difference is volunteered commitment. Do people want to come 
+              to work? Do they anticipate each day with great relish? People have 
+              to come to work, but they perform great feats by being committed 
+              to the project, and commitment only arises from a sense of purpose. 
+              <br>
+              　　我不认为一周的工作时间会造成大的差别。决定区别的是自愿的贡献。人们愿意来工作吗？他们对每一天都充满干劲吗？人们必须来工作，但是他们通过投入项目来创造巨大成就，而投入仅仅产生于目标感。 
+            </p>
+            <p><b>On-site customer.</b> This practice corresponds to one of the 
+              oldest cries in software development -- user involvement. XP, as 
+              with every other rapid development approach, calls for ongoing, 
+              on-site user involvement with the project team. <br>
+              　　<b>现场客户：</b>这就对应到了最初软件开发时所提出的问题――用户参与。XP，同其他的快速开发一样，要求客户在现场持续地参与到项目组中。 
+            </p>
+            <p><b>Coding standards.</b> XP practices are supportive of each other. 
+              For example, if you do pair programming and let anyone modify the 
+              communal code, then coding standards would seem to be a necessity. 
+              <br>
+              　　<b>编码标准：</b>XP实践相互支持。例如，如果你进行配对编程并让他人修改共有代码，那么编码标准看起来就是必须的。 </p>
+            <h4>Values and Principles<br>
+              价值同规则 </h4>
+            <p>On Saturday, 1 January 2000, the <i>Wall Street Journal</i> (you 
+              know, the "Monday through Friday" newspaper) published a special 
+              58-page millennial edition. The introduction to the Industry &amp; 
+              Economics section, titled "So Long Supply and Demand: There's a 
+              new economy out there -- and it looks nothing like the old one," 
+              was written by Tom Petzinger. "The bottom line: creativity is overtaking 
+              capital as the principal elixir of growth," Petzinger states.<br>
+              　　在2000年一月一日周六时候，华尔街日报（周一到周五出版的）用一个58页的版面发布了一个千僖年纪念版。在篇首的有关工业及金融的介绍里标着Tom 
+              Petzinger.写的："长久的需求与召唤：经济新的增长点――显得同以往不同"。底下的一行 Petzinger 写着："创造性正代替'万金药'的资本在成为首要的因素"。 
+            </p>
+            <p>Petzinger isn't talking about a handful of creative geniuses, but 
+              the creativity of groups -- from teams to departments to companies. 
+              Once we leave the realm of the single creative genius, creativity 
+              becomes a function of the environment and how people interact and 
+              collaborate to produce results. If your company's fundamental principles 
+              point to software development as a statistically repeatable, rigorous, 
+              engineering process, then XP is probably not for you. Although XP 
+              contains certain rigorous practices, its intent is to foster creativity 
+              and communication. <br>
+              　　Petzinger并没有谈论少数天才的创造性，而是谈了以下群体的创造性――从组到部门。一旦我们撇下天才们的个体创造，创造性就是环境的功能，而人们运用并互相协助而达到我们的结果的能力。如果你的公司认为软件开发只是一个统计上的重复试验，刻板的，技术性的过程，那么XP对于您也许并不合适。虽然XP中也有技术实践里的严格，但是XP本身是追求"创造"与"沟通"。 
+            </p>
+            <p>Environments are driven by values and principles. XP (or the other 
+              practices mentioned in this issue) may or may not work in your organization, 
+              but, ultimately, success won't depend on using 40-hour work weeks 
+              or pair programming -- it will depend on whether or not the values 
+              and principles of XP align with those of your organization.<br>
+              　　环境是靠价值同规则共同驱动的系统。XP（或者其他类似的）可能、也可能不适合您的单位，可是，应该澄清的是成功并不是只靠每周40小时的疯狂工作或者配对编程，也不是依靠XP之中应用在您单位中的价值或者是规则。 
+            </p>
+            <p>Beck identifies four values, five fundamental principles, and ten 
+              secondary principles -- but I'll mention five that should provide 
+              enough background.<br>
+              　　Beck指出了四个价值，五个基本规则，以及十个辅助规则--不过我要提到是这五个规则。 </p>
+            <p><b>Communication.</b> So, what's new here? It depends on your perspective. 
+              XP focuses on building a person-to-person, mutual understanding 
+              of the problem environment through minimal formal documentation 
+              and maximum face-to-face interaction. "Problems with projects can 
+              invariably be traced back to somebody not talking to somebody else 
+              about something important," Beck says. XP's practices are designed 
+              to encourage interaction - developer to developer, developer to 
+              customer. <br>
+              　　<b>沟通：</b>是的，沟通，可是，这里似乎没有新的东西在里面？沟通主要是看人们自己的看法，XP构建的基本是人与人，通过最简洁的文档，最直接的面对面沟通获得对任务环境的理解。 
+            </p>
+            <p><b>Simplicity.</b> XP asks of each team member, "What is the simplest 
+              thing that could possibly work?" Make it simple today, and create 
+              an environment in which the cost of change tomorrow is low.<br>
+              　　<b>简洁：</b>XP问每个开发组成员："可能实现的最简洁的方法是什么？"。今天所保持的简洁，可以为降低明天由于变更所带来的费用 
+            </p>
+            <p><b>Feedback.</b> "Optimism is an occupational hazard of programming," 
+              says Beck. "Feedback is the treatment." Whether it's hourly builds 
+              or frequent functionality testing with customers, XP embraces change 
+              by constant feedback. Although every approach to software development 
+              advocates feedback -- even the much-maligned waterfall model -- 
+              the difference is that XP practitioners understand that <i>feedback</i> 
+              is more important than <i>feedforward</i>. Whether it's fixing an 
+              object that failed a test case or refactoring a design that is resisting 
+              a change, high-change environments require a much different understanding 
+              of feedback.<br>
+              　　<b>反馈：</b>Beck说："对于编程而言，乐观主义是一种冒险。"，"而反馈则是相应的解决良药。"无论是用反复的构建或者频繁的用户功能测试，XP都能不断地接收到反馈。虽然每次对软件开发策略进行研讨时，我们都会说及反馈--即使是非常有害的瀑布模型--不同的是XP的实践者认为反馈比起前馈(feedforward)来更为重要。无论是对测试失败的代码进行修改或者是对用户拒收的软件从新返工，开发环境的快速变化要求开发人员对反馈有更好的认识。 
+            </p>
+            <p><b>Courage.</b> Whether it's a CMM practice or an XP practice that 
+              defines your discipline, discipline requires courage. Many define 
+              courage as doing what's right, even when pressured to do something 
+              else. Developers often cite the pressure to ship a buggy product 
+              and the courage to resist. However, the deeper issues can involve 
+              legitimate differences of opinion over what is right. Often, people 
+              don't lack courage -- they lack conviction, which puts us right 
+              back to other values. If a team's values aren't aligned, the team 
+              won't be convinced that some practice is "right," and, without conviction, 
+              courage doesn't seem so important. It's hard to work up the energy 
+              to fight for something you don't believe in.<br>
+              　　<b>勇气：</b>无论您是使用CMM方法或者是XP的方法，方法使用的本身是要求勇气的。许多地方将勇气定义为做某件事情的权利，即使被迫去做其他的事情。开发人员经常借口压力而发出带有许多缺陷的产品，并对此加以坚持。然而，更进一步的应该包括其他的正确的不同的东西进来。通常，人们并不是缺少勇气，而是缺少一种让正确实践获得承认的理由，而且，也不坚信这点，勇气不像看起来那么重要。而如果你对之没有信心，那么是很难尽力工作的。 
+            </p>
+            <p>"Courage isn't just about having the discipline," says Jeffries. 
+              "It is also a resultant value. If you do the practices that are 
+              based on communication, simplicity, and feedback, you are given 
+              courage, the confidence to go ahead in a lightweight manner," as 
+              opposed to being weighted down by the more cumbersome, design-heavy 
+              practices.<br>
+              　　"勇气并不只是方法"，Jeffries说道，它是一种最终的价值。如果你在一种基于"沟通"，"简洁"，"反馈"的模式下工作，你将获得勇气，越往前信赖就越不重要。 
+            </p>
+            <p><b>Quality work.</b> Okay, all of you out there, please raise your 
+              hand if you advocate poor-quality work. Whether you are a proponent 
+              of the Rational Unified Process, CMM, or XP, the real issues are 
+              "How do you define quality?" and "What actions do you think deliver 
+              high quality?" Defining quality as "no defects" provides one perspective 
+              on the question; Jerry Weinberg's definition, "Quality is value 
+              to some person," provides another. I get weary of methodologists 
+              who use the "hacker" label to ward off the intrusion of approaches 
+              like XP and lean development. It seems unproductive to return the 
+              favor. Let's concede that all these approaches are based on the 
+              fundamental principle that individuals want to do a good, high-quality 
+              job; what "quality" means and how to achieve it -- now there's the 
+              gist of the real debate!<br>
+              　　优质的工作：好，如果你们中有赞成劣质工作的话，那么请举手离开这儿吧。不论你是一个Rational Unified Process，CMM，或是XP的赞成者，其本质的观点"你怎样定义质量"与"什么样的活动会赢得高质量"，定义"无缺点"质量是这个问题的一个方向。Jerry 
+              Weinberg的定义是"质量是对多数人有益" </p>
+            <h4>Managing XP<br>
+              管理XP </h4>
+            <p>One area in which XP (at least as articulated in Beck's book) falls 
+              short is management, understandable for a practice oriented toward 
+              both small project teams and programming. As Beck puts it, "Perhaps 
+              the most important job for the coach is the acquisition of toys 
+              and food." (Coaching is one of Beck's components of management strategy.) 
+              <br>
+              　　对于针对小型项目以及编程而言，在XP（至少是Beck的书中）里对管理的欠缺是可以理解的，。就如Beck写的，"对于教练(coach)来说，或许最重要的工作就是获得玩具同食物"（指导是Beck的管理战略中的一个组成部分） 
+            </p>
+            <p>With many programmers, their recommended management strategy seems 
+              to be: get out of the way. The underlying assumption? Getting out 
+              of the way will create a collaborative environment. Steeped in the 
+              tradition of task-based project management, this assumption seems 
+              valid. However, in my experience, creating and maintaining highly 
+              functional collaborative environments challenges management far 
+              beyond making up task lists and checking off their completion.<br>
+              　　同许多的程序员一样，他们推荐的管理策略像是：躲避。下面的假定呢？躲避会建立一个协作的环境，在传统的基于任务的管理里，这个假定是有效的。然而，根据我的经验，创造并维持一个协作的环境会挑战管理远离编制任务列表以及检查。 
+            </p>
+            <table cellspacing=0 cellpadding=6 align=right>
+              <tbody> 
+              <tr> 
+                <td><img height=235 alt="Figure 1" 
+            src="images/i01.gif" width=275 border=0> 
+                  <p><b><font face=Arial,Helvetica,Geneva size=2>Figure 1 -- Historical 
+                    lifecycle change costs.</font></b></p>
+                  <br>
+                  <br>
+                  <img 
+            height=232 alt="Figure 2" 
+            src="images/i02.gif" width=275 border=0> 
+                  <p><b><font face=Arial,Helvetica,Geneva size=2>Figure 2 -- Comtemporary 
+                    lifecycle change costs.</font></b></p>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <h4>The Cost of Change<br>
+              变化的代价 </h4>
+            <p>Early on in Beck's book, he challenges one of the oldest assumptions 
+              in software engineering. From the mid-1970s, structured methods 
+              and then more comprehensive methodologies were sold based on the 
+              "facts" shown in Figure 1. I should know; I developed, taught, sold, 
+              and installed several of these methodologies during the 1980s. <br>
+              　　Beck从他的早期的著作开始，就不断向那些软件工程中的一些"古训"发出挑战。从19世纪70年代中期的结构化方法，以至后来的那些更复杂的方法，他们都基于如图1所示的那个"事实"，在整个80年代，我必须了解、使用、讨论、实施这些方法。 
+            </p>
+            <p>Beck asks us to consider that perhaps the economics of Figure 1, 
+              probably valid in the 1970s and 1980s, now look like Figure 2 - 
+              that is, the cost of maintenance, or ongoing change, flattens out 
+              rather than escalates. Actually, whether Figure 2 shows today's 
+              cost profile or not is irrelevant -- we have to make it true! If 
+              Figure 1 remains true, then we are doomed because of today's pace 
+              of change.<br>
+              　　Beck却给我们提了一个问题，那些在70年代和80年代也许还能起到效果的方法，他们的经费开销状况（如图1）现在已经发生了变化（如图2），也就是说，维护的成本（也可以等价为不断发生的变化）降低了，而不是越来越高。实际上，图2所示的开销情况在当今是否是事实其实并不重要，重要的是我们必须认识到，如果图1的现象还在继续重演的话，我们只有死路一条，因为当今时代变化实在太快了（也就是说维护的成本将是一个天价）。 
+            </p>
+            <p>The vertical axis in Figure 1 usually depicts the cost of finding 
+              defects late in the development cycle. However, this assumes that 
+              all changes are the results of a mistake -- i.e., a defect. Viewed 
+              from this perspective, traditional methods have concentrated on 
+              "defect prevention" in early lifecycle stages. But in today's environment, 
+              we can't prevent what we don't know about -- changes arise from 
+              iteratively gaining knowledge about the application, not from a 
+              defective process. So, although our practices need to be geared 
+              toward preventing some defects, they must also be geared toward 
+              reducing the cost of continuous change. Actually, as Alistair Cockburn 
+              points out, the high cost of removing defects shown by Figure 1 
+              provides an economic justification for practices like pair programming.<br>
+              　　图1中的y轴通常用来表示在开发周期的后期发现错误后需要花费的改错成本。可是，这正验证了一个假设，即后期所有需要做的开动均来自前期的一个错误，比方说一个设计缺陷。从这一点来看，传统方法太依赖于在软件生命周期的早期"不出错"。但是在当今瞬息万变的环境中，我们不能完全预防住那些我们预测不到的东西--即由应用需求不断增长而带来的变化，并且这种变化在早期不可能遇见并加以预防。因此，虽然我们要尽可能在早期做出某些应付变化的预防措施，但是更重要的是我们要减少后期改变所带来的开销。正如 
+              Alistai Cockburn 所指出的，需要高成本的图1所示的那种改正缺陷方法，正好从节省开支的角度给了一些实用的方法（如配对编程）一个好的理由。 
+            </p>
+            <p>In this issue of <b><i>eAD</i></b>, I want to restrict the discussion 
+              to change at the project or application level -- decisions about 
+              operating systems, development language, database, middleware, etc., 
+              are constraints outside the control of the development team. (For 
+              ideas on "architectural" flexibility, see the June and July 1999 
+              issues of <b><i>ADS</i></b>.) Let's simplify even further and assume, 
+              for now, that the business and operational requirements are known. 
+              <br>
+              　　在本期eAD杂志中，我打算把讨论定位于项目或应用软件层次上的变化--对类似操作系统、编程语言、数据库、组件等的讨论不在讨论之列。（关于软件结构的灵活性，可以参考ADS杂志1999年6月的那期）另外，让我们进一步做个简化，即假定软件的用户需求已经确定。 
+            </p>
+            <p>Our design goal is to balance the rapid delivery of functionality 
+              while we also create a design that can be easily modified. Even 
+              within the goal of rapid delivery, there remains another balance: 
+              proceed too hurriedly and bugs creep in; try to anticipate every 
+              eventuality and time flies. However, let's again simplify our problem 
+              and assume we have reached a reasonable balance of design versus 
+              code and test time.<br>
+              　　我们的目标是既能快速不断的发布新功能，同时又要让软件的设计易于更改。即使是在快速发布这个目标下，仍然需要在"快速发布但Bug丛生"和"面面俱到但旷日持久"之间进行取舍。因此，让我再简化一下我们要讨论的问题，我们假定我们已经在设计、编码和测试这三者之间取得了合理的平衡。 
+            </p>
+            <p>With all these simplifications, we are left with one question: 
+              how much anticipatory design work do we do? Current design produces 
+              the functionality we have already specified. Anticipatory design 
+              builds in extra facilities with the anticipation that future requirements 
+              will be faster to implement. Anticipatory design trades current 
+              time for future time, under the assumption that a little time now 
+              will save more time later. But under what conditions is that assumption 
+              true? Might it not be faster to redesign later, when we know exactly 
+              what the changes are, rather than guessing now? <br>
+              　　在上面这些简化的基础上，还留有一个尾巴：我们在设计时对于未知的未来要看多远？现在的设计已经实现了我们现在想到的一些功能。具有预见性的设计可以使未来的需求更快的获得实现，也就是说预见性设计方法在以现在的时间换取未来的时间，如果一点点现在的时间可以换来未来节约大量时间，当然是划算的。但是这种建设怎么才能成为现实呢？也许未来出了问题就整个重新设计一遍也不慢，那又何必现在瞎猜呢？ 
+            </p>
+            <p>This is where refactoring enters the equation. Refactoring, according 
+              to author Martin Fowler, is "the process of changing a software 
+              system in such a way that it does not alter the external behavior 
+              of the code yet improves its internal structure." XP proponents 
+              practice continuous, incremental refactoring as a way to incorporate 
+              change. If changes are continuous, then we'll never get an up-front 
+              design completed. Furthermore, as changes become more unpredictable 
+              -- a great likelihood today -- then much anticipatory design likely 
+              will be wasted. <br>
+              　　这就是我们为什么要提出重构的原因。重构，Martin Fowler说过，是不改变软件对外表现但是重整内务的一种改进。XP方法的支持者在变化的环境中实践了连续的、增量式的重构方法。如果变化是不断演化的的，那就不可能存在什么一步到位的设计方法。说白了，如果变化不可预测--正如当今社会的情况--过多的在设计时考虑以后可能的变化，完全是一种浪费。 
+            </p>
+            <table cellspacing=0 cellpadding=6 align=right>
+              <tbody> 
+              <tr> 
+                <td align=middle><img height=265 alt="Figure 3" 
+            src="images/i03.gif" width=275 border=0> 
+                  <p><b><font face=Arial,Helvetica,Geneva size=2>Figure 3 -- Balancing 
+                    design and refactoring, pre-internet.</font></b></p>
+                  <br>
+                  <br>
+                  <img 
+            height=259 alt="Figure 4" 
+            src="images/i04.gif" width=275 border=0> 
+                  <p><b><font face=Arial,Helvetica,Geneva size=2>Figure 4 -- Balancing 
+                    design and refactoring today.</font></b></p>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <p>I think the diagram in Figure 3 depicts the situation prior to 
+              the rapid-paced change of the Internet era. Since the rate of change 
+              (illustrated by the positioning of the balance point in the figure) 
+              was lower, more anticipatory designing versus refactoring may have 
+              been reasonable. As Figure 4 shows, however, as the rate of change 
+              increases, the viability of anticipatory design loses out to refactoring- 
+              - a situation I think defines many systems today.<br>
+              　　我认为图3给出的是互联网时代到来之前的情况。由于变化的速度慢（图中由天平的支点比较靠左来表示），早期的预测多一些是合理的。但是在图4中，由于变化速度变快乐，设计时预测太多是得不偿失的，这种情况正是现在许多系统所面临的。 
+            </p>
+            <p>In the long run, the only way to test whether a design is flexible 
+              involves making changes and measuring how easy they are to implement. 
+              One of the biggest problems with the traditional up- front-design-then-maintain 
+              strategy has been that software systems exhibit tremendous entropy; 
+              they degrade over time as maintainers rush fixes, patches, and enhancements 
+              into production. The problem is worse today because of the accelerated 
+              pace of change, but current refactoring approaches aren't the first 
+              to address the problem. Back in the "dark ages" (circa 1986), Dave 
+              Higgins wrote <i>Data Structured Software Maintenance</i>, a book 
+              that addressed the high cost of maintenance, due in large part to 
+              the cumulative effects of changes to systems over time. Although 
+              Higgins advocated a particular program-design approach (the Warnier/Orr 
+              Approach), one of his primary themes was to stop the degradation 
+              of systems over time by systematically redesigning programs during 
+              maintenance activities. <br>
+              　　在一个长期项目中，检验一个设计是否具有很好的灵活性是通过变化需求，同时看看原设计能否很容易的实现新变化的需求。这种传统的"先设计，再维护"策略的最大问题在于软件系统存在非常大的熵（极易变化，没有规律）。一个系统随着时间的推移，维护、改错、打补丁、增强功能等工作会使系统的熵越来越大。现在由于外部环境变化加快，情况正越来越糟。不过，现在的重构技术也不是第一个试图解决这个问题的方法。早在所谓的"黑暗时期"（circa 
+              1986），Dave Higgins 就写过一本名为"Data Structured Software Maintenance"的书，该书指出了由于随着时间的推移变化的累计影响不断增大，维护所需要的开销也将越来说庞大，Higgins 
+              提出了一种新的设计方法（the Warnier/Orr Approach）用于阻止系统的熵增大所带来的负面影响，该方法的思想是在维护过程中有系统的对程序进行重新设计。 
+            </p>
+            <p>Higgins's approach to program maintenance was first to develop 
+              a pattern (although the term pattern was not used then) for how 
+              the program "should be" designed, then to create a map from the 
+              "good" pattern to the "spaghetti" code. Programmers would then use 
+              the map to help understand the program and, further, to revise the 
+              program over time to look more like the pattern. Using Higgins's 
+              approach, program maintenance counteracted the natural tendency 
+              of applications to degrade over time. "The objective was not to 
+              rewrite the entire application," said Higgins in a recent conversation, 
+              "but to rewrite those portions for which enhancements had been requested." 
+              <br>
+              　　Higgins 的方法首先为程序改如何设计设定一种模式（虽然那时还没有模式这个提法），然后在细致的代码设计与"好"的模式之间建立一种映射，程序员即根据这种映射关系来理解系统并修改程序，使修改的结果更接近于那个模式。使用 
+              Higgins 这个方法可以通过维护抵消系统谁时间而熵增大的趋势。Higgins 说："该方法的目标并不是重写整个系统，而只是重写那些根据需要必须增强的部分。" 
+            </p>
+            <p>Although this older-style "refactoring" was not widely practiced, 
+              the ideas are the same as they are today -- the need today is just 
+              greater. Two things enable, or drive, increased levels of refactoring: 
+              one is better languages and tools, and the other is rapid change. 
+              <br>
+              　　虽然这种原始的"重构"技术并没有被广泛的实践检验，其思想与现在的重构还是相通的，只不过现在的需求变化更快、更大。不过有两个东西驱动、提高了现代的重构技术：一是更好的程序设计语言和开发工具；二是更快的变化需求。 
+            </p>
+            <p>Another approach to high change arose in the early days of RAD: 
+              the idea of throwaway code. The idea was that things were changing 
+              so rapidly that we could just code applications very quickly, then 
+              throw them away and start over when the time for change arose. This 
+              turned out to be a poor long-term strategy.<br>
+              　　在早期的 RAD（快速原型开发）方法中还有另一种应付变化的办法：代码抛弃思想。这个思想认为环境和需求变化太快，因此我们唯一的办法只能是快速编写新代码，并且也快速的抛弃老代码。我们认为这不是长久之计。 
+            </p>
+            <h3>Refactoring<br>
+              重构 </h3>
+            <p>Refactoring is closely related to factoring, or what is now referred 
+              to as using design patterns. <i>Design Patterns: Elements of Reusable 
+              Object-Oriented Software</i>, by Erich Gamma, Richard Helm, Ralph 
+              Johnson, and John Vlissides, provides the foundational work on design 
+              patterns. <i>Design Patterns</i> serves modern-day OO programmers 
+              much as Larry Constantine and Ed Yourdon's <i>Structural Design</i> 
+              served a previous generation; it provides guidelines for program 
+              structures that are more effective than other program structures. 
+              <br>
+              　　重构(Refactoring)与构造 (factoring)，或者说与设计模式的使用密切相关。Erich Gamma, Richard 
+              Helm, Ralph Johnson, 和 John Vlissides合著的《 Design Patterns: Elements 
+              of Reusable Object-Oriented 》一书为设计模式做出了奠基性的工作。正如Larry Constantine 
+              和Ed Yourdon 所倡导的结构化设计一样，设计模式对当代的面向对象技术程序设计做出了巨大的贡献，为开发人员带来了福音。通过设计模式，程序的结构的比以往更为有效。 
+            </p>
+            <p>If Figure 4 shows the correct balance of designing versus refactoring 
+              for environments experiencing high rates of change, then the quality 
+              of initial design remains extremely important. Design patterns provide 
+              the means for improving the quality of initial designs by offering 
+              models that have proven effective in the past.<br>
+              　　如果图表4 所显示的设计（designing）与重构(refactoring)在面对高速变化环境时的适应能力方面的差别是客观的话，初始设计的质量则显的尤为重要。通过提供过去已被证明是有效的模式，设计模式(Design 
+              patterns)提供了一种提高初始设计质量的方法。 </p>
+            <p>So, you might ask, why a separate refactoring book? Can't we just 
+              use the design patterns in redesign? Yes and no. As all developers 
+              (and their managers) understand, messing with existing code can 
+              be a ticklish proposition. The cliché "if it ain't broke, don't 
+              fix it" lives on in annals of development folklore. However, as 
+              Fowler comments, "The program may not be broken, but it does hurt." 
+              Fear of breaking some part of the code base that's "working" actually 
+              hastens the degradation of that code base. However, Fowler is well 
+              aware of the concern: "Before I do the refactoring, I need to figure 
+              out how to do it safely.... I've written down the safe steps in 
+              the catalog." Fowler's book, <i>Refactoring: Improving the Design 
+              of Existing Code</i>, catalogs not only the before (poor code) and 
+              after (better code based on patterns), but also the steps required 
+              to migrate from one to the other. These migration steps reduce the 
+              chances of introducing defects during the refactoring effort.<br>
+              　　现在，也许你会问，为什么还需要一本独立讲重构的书呢？难道我们不可以只使用设计模式来重新设计吗？可以，也不可以。正如所有的开发人员(包括管理者)都知道，修改原有的程序代码是一件棘手的事。development 
+              folklore年刊上有一句话，"if it ain't broke,don't fix it".然而，正如Fowler所提到的，"程序也许还没有'坏掉'，但却造成了潜在的危害." 
+              害怕对那些还能"工作"的代码重新构造实际上只会加剧代码性能的衰退。同时，Fowler也清楚的认识到："在软件重构之前，需要找到安全的做法……我把这些安全的步骤写进了目录"。Fowler所写的<>,不仅编录了如何对以前的（差的）代码和以后的（基于模式设计的较好）的代码进行重构的方法，而且也包含了代码分割重构的步骤。这些步骤减少了在重构过程中出现差错的机会。 
+            </p>
+            <p>Beck describes his "two-hat" approach to refactoring -- namely 
+              that adding new functionality and refactoring are two different 
+              activities. Refactoring, per se, doesn't change the observable behavior 
+              of the software; it enhances the internal structure. When new functionality 
+              needs to be added, the first step is often to refactor in order 
+              to simplify the addition of new functionality. This new functionality 
+              that is proposed, in fact, should provide the impetus to refactor. 
+              <br>
+              　　Beck用"two-hat"方法来描述重构，也就是说, 添加新的功能与重构是两种不同的行为。在本质上，重构不改变软件可见的外部功能，它只是增强了软件的内部结构。当有新的功能需要添加时，第一步常是对软件进行重构，使添加更简化。事实上，这种添加的新功能为重构提供着推动力。 
+            </p>
+            <p>Refactoring might be thought of as incremental, as opposed to monumental, 
+              redesign. "Without refactoring, the design of the program will decay," 
+              Fowler writes. "Loss of structure has a cumulative effect." Historically, 
+              our approach to maintenance has been "quick and dirty," so even 
+              in those cases where good initial design work was done, it degraded 
+              over time. <br>
+              　　与重量级的再设计相反，重构可以被认为是增量（incremental）式的再设计，"没有重构，程序设计会 腐烂"，Fowler写到," 
+              结构性的缺陷会带来累积效应 "。历史上，我们对软件维护的方法是"quick and dirty"(快速但不彻底的?)，致使一些初始设计工作做的好的项目，随着时间推移，也会"退化"（degrade）. 
+            </p>
+            <table cellspacing=0 cellpadding=6 align=right>
+              <tbody> 
+              <tr> 
+                <td><img height=308 alt="Figure 5" 
+            src="images/i05.gif" width=300 border=0> 
+                  <p><b><font face=Arial,Helvetica,Geneva size=2>Figure 5 -- Software 
+                    entropy over time.</font></b></p>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <p>Figure 5 shows the impact of neglected refactoring -- at some point, 
+              the cost of enhancements becomes prohibitive because the software 
+              is so shaky. At this point, monumental redesign (or replacement) 
+              becomes the only option, and these are usually high- risk, or at 
+              least high-cost, projects. Figure 5 also shows that while in the 
+              1980s software decay might have taken a decade, the rate of change 
+              today hastens the decay. For example, many client- server applications 
+              hurriedly built in the early 1990s are now more costly to maintain 
+              than mainframe legacy applications built in the 1980s.<br>
+              　　图表 5 显示了没有重构时的情况：因为软件是如此的不可靠，升级维护费用变的让人望而却步，于是巨型(monumental)设计(或替换)成了唯一选择，项目的风险，至少是投入上，变的越来越大。图 
+              5也显示，在80年代，软件的生存期大约要10年，而在今天需求的快速变化加剧了软件的腐烂。举个例子，许多90年代初一窝蜂做出来的C/S应用软件在今天比80年代留下来的大型机软件的维护费用还要高的多。 
+            </p>
+            <h3>Data Refactoring: Comments by Ken Orr<br>
+              数据重构: Ken Orr注解 </h3>
+            <p><i>Editor's Note: As I mentioned above, one thing I like about 
+              XP and refactoring proponents is that they are clear about the boundary 
+              conditions for which they consider their ideas applicable. For example, 
+              Fowler has an entire chapter titled "Problems with Refactoring." 
+              Database refactoring tops Fowler's list. Fowler's target, as stated 
+              in the subtitle to his book, is to improve code. So, for data, I 
+              turn to someone who has been thinking about data refactoring for 
+              a long time (although not using that specific term). The following 
+              section on data refactoring was written by Ken Orr.<br>
+              　　编者注： 如上所提，XP和重构思想吸引我的一点是他们能够清楚认识到所要考虑实施问题的边界条件(boundary conditions).例如，Fowler写了一章"Problems 
+              with Refactoring".其中首要的问题就是数据库的重构。正如书的副标题所示，Fowler的目标是为了提高代码质量。为此，我咨询了一些在数据重构（或者用其他的术语）方面有较深研究的人。以下关于数据重构部分由Ken 
+              Orr所写。 </i></p>
+            <p>When Jim asked me to put together something on refactoring, I had 
+              to ask him what that really meant. It seemed to me to come down 
+              to a couple of very simple ideas:<br>
+              　　当Jim 要我讲一讲重构时，我问他重构究竟意味着什么。对我来说，把它归纳为以下简单的几点： </p>
+            <ol>
+              <li>Do what you know how to do.<br>
+                做你会做的 <br>
+              <li>Do it quickly.<br>
+                速战速决 <br>
+              <li>When changes occur, go back and redesign them in.<br>
+                当发生变化时，回过头来重新设计 <br>
+              <li>Go to 1.<br>
+                回到 1 <br>
+              </li>
+            </ol>
+            <p>Over the years, Jim and I have worked together on a variety of 
+              systems methodologies, all of which were consistent with the refactoring 
+              philosophy. Back in the 1970s, we created a methodology built on 
+              data structures. The idea was that if you knew what people wanted, 
+              you could work backward and design a database that would give you 
+              just the data that you needed, and from there you could determine 
+              just what inputs you needed to update the database so that you could 
+              produce the output required.<br>
+              　　在过去几年中，Jim和我一起工作，共同研究各种系统方法学(systems methodologies)，发现所有的方法学与重构思想(refactoring 
+              philosophy)有着一致的地方。70年代，我们建立了一种基于数据结构的方法学。其主要思想是：在知道了人们的需求后，逆向工作，设计一个仅含必需数据的数据库，然后再确定更新数据库必需的输入数据，产生需要的输出数据。 
+            </p>
+            <p>Creating systems by working backward from outputs to database to 
+              inputs proved to be a very effective and efficient means of developing 
+              systems. This methodology was developed at about the same time that 
+              relational databases were coming into vogue, and we could show that 
+              our approach would always create a well-behaved, normalized database. 
+              More than that, however, was the idea that approaching systems this 
+              way created minimal systems. In fact, one of our customers actually 
+              used this methodology to rebuild a system that was already in place. 
+              The customer started with the outputs and worked backward to design 
+              a minimal database with minimal input requirements. <br>
+              　　从输出结果逆向工程到数据库再到输入来建构系统的方法被证明是一种非常有效和有效率的系统开发方法。几乎在关系数据库开始流行的同时，这种方法也发展了起来。使我们能够建立起运作良好，规范化的数据库。除此之外，这种思想也适用于创建最小系统(minimal 
+              systems).事实上，我们的一个客户在重建一个系统时已经使用了这种方法并取得了成功。该客户从输出入手，通过逆向工程设计了一个满足最小输入需求的最小数据库。 
+            </p>
+            <p>The new system had only about one-third the data elements of the 
+              system it was replacing. This was a major breakthrough. These developers 
+              came to understand that creating minimal systems had enormous advantages: 
+              they were much smaller and therefore much faster to implement, and 
+              they were also easier to understand and change, since everything 
+              had a purpose.<br>
+              　　新系统只有老系统三分之一的数据元（data elements ）。这是一个大的突破。开发人员开始逐渐认识到建立最小系统有着巨大的优势：系统更小因而可以更快的实现；功能单一更能适应变化。 
+            </p>
+            <p>Still, building minimal systems goes against the grain of many 
+              analysts and programmers, who pride themselves on thinking ahead 
+              and anticipating future needs, no matter how remote. I think this 
+              attitude stems from the difficulty that programmers have had with 
+              maintenance. Maintaining large systems has been so difficult and 
+              fraught with problems that many analysts and programmers would rather 
+              spend enormous effort at the front end of the systems development 
+              cycle, so they don't have to maintain the system ever again. But 
+              as history shows, this approach of guessing about the future never 
+              works out. No matter how clever we are in thinking ahead, some new, 
+              unanticipated requirement comes up to bite us. (How many people 
+              included Internet-based e-business as one of their top requirements 
+              in systems they were building 10 years ago?)<br>
+              　　然而，创建最小系统并不符合许多分析员和程序员们的想法，不管有多遥远，他们总认为自己可以超前思考并预见到未来的需求。我认为这源于软件难于维护的原因。维护一个大的系统是如此的困难并充斥着问题，以致于许多分析员和程序员宁愿在系统开发的前期花费大量的精力来设计一个"完善"的系统，以求一劳永逸。然而事实证明，预测未来是徒劳的。不论我们有多聪明，思想有多超前，总会有一些不曾预料到的需求出现。（有多少人能够在10年前就将基于internet的电子商务作为未来的需求写入自己的软件） 
+            </p>
+            <p>Ultimately, one of the reasons that maintenance is so difficult 
+              revolves around the problem of changing the database design. In 
+              most developers' eyes, once you design a database and start to program 
+              against it, it is almost impossible to change that database design. 
+              In a way, the database design is something like the foundation of 
+              the system: once you have poured concrete for the foundation, there 
+              is almost no way you can go back and change it. As it turns out, 
+              major changes to databases in large systems happen very infrequently, 
+              only when they are unavoidable. People simply do not think about 
+              redesigning a database as a normal part of systems maintenance, 
+              and, as a consequence, major changes are often unbelievably difficult. 
+              <br>
+              　　最后，维护如此困难的原因之一在于，当改变数据库设计时，其他的问题都会接踵而来。在大多数开发人员看来，一旦设计好数据库并在此基础上开始了编码以后，再去改变数据库的设计几乎是不可能的。在某种程度上，设计数据库就好比建造系统的地基：一旦你把混凝土灌了进去，你就没办法再去改变它。因此，除非不可避免，大型系统中的数据库极少会发生大的改动。人们不能把重新设计数据库仅仅当成系统维护的普通一部分。否则的话，对系统进行大的改动会变的难以想象的困难。 
+            </p>
+            <h4>Enter Data Refactoring<br>
+              进入数据重构 </h4>
+            <p>Jim and I had never been persuaded by the argument that the database 
+              design could never be changed once installed. We had the idea that 
+              if you wanted to have a minimal system, then it was necessary to 
+              take changes or new requirements to the system and repeat the basic 
+              system cycle over again, reintegrating these new requirements with 
+              the original requirements to create a new system. You could say 
+              that what we were doing was data refactoring, although we never 
+              called it that.<br>
+              　　Jim和我永远都不会承认一旦系统开始运行就不能再改变数据库设计的观点.我们认为,如果你想使系统保持最精简的状态,就必须要把所要做的变化或新的功能引入到系统中并重复基本的开发过程,使新的需求和旧的需求融合在一起而成为一个新的系统.你可能会说我们所作的就是数据重构,可我们从来不那么说. 
+            </p>
+            <p>The advantages of this approach turned out to be significant. For 
+              one thing, there was no major difference between development of 
+              a new system and the maintenance or major modification of an existing 
+              one. This meant that training and project management could be simplified 
+              considerably. It also meant that our systems tended not to degrade 
+              over time, since we "built in" changes rather than "adding them 
+              on" to the existing system.<br>
+              　　这么做的好处是显而易见的.首先,开发一个新系统和维护或对旧系统统进行较大改造的区别并不是很大.这就意味着管理一个项目和培训工作将大大减少.同时,也将减少开发时间,这是因为我们对变化的处理方式不同，一个是'built 
+              in'(建立在变化之上),另一个是'adding them on'(添加变化)。 </p>
+            <p>Over a period of years, we built a methodology (Data Structured 
+              Systems Development or Warnier/Orr) and trained thousands of systems 
+              analysts and programmers. The process that we developed was largely 
+              manual, although we thought that if we built a detailed-enough methodology, 
+              it should be possible to automate large pieces of that methodology 
+              in CASE tools.<br>
+              　　在过去的几年里，我们建立了一种方法（结构化系统设计方法或Warnier-Orr法）并且培训了数以千计的系统分析员和编程人员。即便我们在定义了足够详细的各种说明后有可能用CASE工具实现大部分工作，但开发过程仍需要大量的手工工作。 
+            </p>
+            <h4>Automating Data Refactoring<br>
+              自动化的数据重构 </h4>
+            <p>To make the story short, a group of systems developers in South 
+              America finally accomplished the automation of our data refactoring 
+              approach in the late 1980s. A company led by Breogán Gonda and Nicolás 
+              Jodal created a tool called GeneXus<a 
+      href="http://www.cutter.com/ead/ead0002.html#foot1"><sup>1</sup></a> that 
+              accomplished what we had conceived in the 1970s. They created an 
+              approach in which you could enter data structures for input screens; 
+              with those data structures, GeneXus automatically designed a normalized 
+              database and generated the code to navigate, update, and report 
+              against that database.<br>
+              　　为了缩短开发时间，南美的一组系统开发人员在80年代年开发出了数据重构自动化工具。由Breogán Gonda 和 Nicolás 
+              Jodal领导的公司开发了一种名叫GeneXus的工具，这正是我们在70年代所构想要的。他们创建的方法使我们在输入数据结构以后，系统能够自动为你创建规范的数据库并产生浏览、更新和输出数据的代码。 
+            </p>
+            <p>But that was the easy part. They designed their tool in such a 
+              way that when requirements changed or users came up with something 
+              new or different, they could restate their requirements, rerun (recompile), 
+              and GeneXus would redesign the database, convert the previous database 
+              automatically to the new design, and then regenerate just those 
+              programs that were affected by the changes in the database design. 
+              They created a closed-loop refactoring cycle based on data requirements.<br>
+              　　这就使事情简单了，这种工具使得当用户的需求或系统的要求改变后只需要修改原有的定义，重新编译，就能够重新设计数据库以适应新的需求，并产生仅仅受数据库修改影响而需要改变的代码。这就是基于数据的闭环的重构过程。 
+            </p>
+            <p>GeneXus showed us what was really possible using a refactoring 
+              framework. For the first time in my experience, developers were 
+              freed from having to worry about future requirements. It allowed 
+              them to define just what they knew and then rapidly build a system 
+              that did just what they had defined. Then, when (not if) the requirements 
+              changed, they could simply reenter those changes, recompile the 
+              system, and they had a new, completely integrated, minimal system 
+              that incorporated the new requirements.<br>
+              　　GeneXus使我们认识到重构能构给我们带来的真正的东西。就我的经验而言，这使开发人员从对未来需求的担忧中解脱出来，从而能够使开发人员仅仅定义他们所知道的并快速的实现所定义的所有内容。因此，当系统的需求更改以后，他们只须简单的加入那些修改，重新编译，就可以得到一个新的、完全集成的、满足新的需求的最小系统。 
+            </p>
+            <h4>What Does All This Mean?<br>
+              所有的这一切意味着什么？ </h4>
+            <p>Refactoring is becoming something of a buzzword. And like all buzzwords, 
+              there is some good news and some bad news. The good news is that, 
+              when implemented correctly, refactoring makes it possible for us 
+              to build very robust systems very rapidly. The bad news is that 
+              we have to rethink how we go about developing systems. Many of our 
+              most cherished project management and development strategies need 
+              to be rethought. We have to become very conscious of interactive, 
+              incremental design. We have to be much more willing to prototype 
+              our way to success and to use tools that will do complex parts of 
+              the systems development process (database design and code generation) 
+              for us.<br>
+              　　重构正在逐渐变成一个时髦的词语。与所有的时髦的东西一样，既有好的一面，也有坏的一面。好的一面是：如果能够正确的实施，重构使我们有可能快速构建健壮的系统。坏的一方面是：我们不得不重新考虑如何进行开发。原先采用的所有开发和管理策略需要重新考虑。我们必须了解交互式的、增量的开发方法；我们还必须习惯于使我们能够成功的模式化的开发方法和使用工具来完成系统开发工作中那些复杂的工作（数据库设计和代码生成）。 
+            </p>
+            <p>In the 1980s, CASE was a technology that was somehow going to revolutionize 
+              programming. In the 1990s, objects and OO development were going 
+              to do the same. Neither of these technologies lived up to their 
+              early expectations. But today, tools like GeneXus really do many 
+              of the things that the system gurus of the 1980s anticipated. It 
+              is possible, currently, to take a set of requirements, automatically 
+              design a database from those requirements, generate an operational 
+              database from among the number of commercially available relational 
+              databases (Oracle, DB2, Informix, MS SQL Server, and Access), and 
+              generate code (prototype and production) that will navigate, update, 
+              and report against those databases in a variety of different languages 
+              (COBOL, RPG, C, C++, and Java). Moreover, it will do this at very 
+              high speed.<br>
+              　　80年代，CASE使开发产生革命性的变化。90年代，对象和OO方法也使开发产生革命性的变化。这些技术都没有像达到期望的效果。但现在，像GeneXus这样的工具切切实实的做到了80年代人们所期望的东西。确实有可能在给定系统需求后自动进行数据库设计，生成一种实际工作的商用关系型数据库（Oracle, 
+              DB2, Informix, MS SQL Server, and Access），并产生能够浏览、更新和输出数据库中数据的不同语言（COBOL, 
+              RPG, C, C++, and Java）的代码（原型和结果）。 </p>
+            <p>This new approach to systems development allows us to spend much 
+              more time with users, exploring their requirements and giving them 
+              user interface choices that were never possible when we were building 
+              things at arm's length. But not everybody appreciates this new world. 
+              For one thing, it takes a great deal of the mystery out of the process. 
+              For another, it puts much more stress on rapid development.<br>
+              　　新的系统开发方法能够使我们有更多的时间和用户交流，分析用户的需求，让用户选择不同的交互界面，这在只凭自己来完成所有事情的时侯是不可能的。但是并不是所有人都喜欢这一开发方法。一个是因为这将很大程度上拨开开发过程的神秘面纱。另一个是因为这也给快速开发增加了压力。 
+            </p>
+            <p>When people tell you that building simple, minimal systems is out 
+              of date in this Internet age, tell them that the Internet is all 
+              about speed and service. Tell them that refactoring is not just 
+              the <i>best</i> way to build the kind of systems that we need for 
+              the 21st century, it is the <i>only</i> way.<br>
+              　　当人们告诉你在Internet时代已经不可能再建立简单、精简的系统的时侯，那么告诉他们Internet是速度和服务的天下，告诉他们重构不仅仅是在21世纪建立这样系统的最好方法，也是唯一的方法。 
+            </p>
+            <a name=foot1>&nbsp;</a> 
+            <hr noshade size=1>
+            <h3><font face="Arial,Geneva,Helvetica" size="1">NOTES</font></h3>
+            <p><font face="Arial,Geneva,Helvetica" size="1"><sup>1</sup>Gonda 
+              and Jodal created a company called ARTech to market the GeneXus 
+              product. It currently has more than 3,000 customers worldwide and 
+              is marketed in the US by GeneXus, Inc.</font></p>
+            <hr noshade size=1>
+            <br>
+            <h3>Crystal Light Methods: Comments by Alistair Cockburn<br>
+              轻量级的Crystal方法 </h3>
+            <p><i>Editor's note: In the early 1990s, Alistair Cockburn was hired 
+              by the IBM Consulting Group to construct and document a methodology 
+              for OO development. IBM had no preferences as to what the answer 
+              might look like, just that it work. Cockburn's approach to the assignment 
+              was to interview as many project team members as possible, writing 
+              down whatever the teams said was important to their success (or 
+              failure). The results were surprising. The remainder of this section 
+              was written by Cockburn and is based on his "in-process" book on 
+              minimal methodologies.<br>
+              　　编者注：在九十年代早期，Alistair Cockburn IBM顾问组工作时，为OO（面向对象）的开发制订了一套工作方法。IBM认为不管白猫黑猫，抓的到老鼠就是好猫。Cockburn 
+              深入接触许多开发小组，写下了他们认为导致项目成功或者失败的关键之处。结果让人大吃一惊。以下内容是由 Cockburn写的，基于他的含有极少方法论的"实战工作"书 
+              。 </i></p>
+            <p>In the IBM study, team after successful team "apologized" for not 
+              following a formal process, for not using a high-tech CASE tool, 
+              for "merely" sitting close to each other and discussing as they 
+              went. Meanwhile, a number of failing teams puzzled over why they 
+              failed despite using a formal process - maybe they hadn't followed 
+              it well enough? I finally started encountering teams who asserted 
+              that they succeeded exactly because they did not get caught up in 
+              fancy processes and deliverables, but instead sat close together 
+              so they could talk easily and delivered tested software frequently.<br>
+              　　在IBM的研究组里，开发小组要向以前成功的小组"道歉"，因为他们没有遵守一道正式的工序， 因为他们没有用一个高科技的CASE工具，又或者"仅仅"因为他们坐在一起，讨论他们下步 
+              该怎么做。 同时，一些失败的小组觉得非常迷惑，尽管他们使用了正式的工序，他们还是 失败了--也许是遵守这些工序还遵守的不够好？后来我开始碰到一些成功的小组，他们宣称 
+              正是因为没有陷于花里胡哨的过程和可发布性，而是大家坐在一起，从而使得他们可以 更容易的加以讨论并且经常交换测试后的软件，最终才得以成功。 
+            </p>
+            <p>These results have been consistent, from 1991 to 1999, from Hong 
+              Kong to the Americas, Norway, and South Africa, in COBOL, Smalltalk, 
+              Java, Visual Basic, Sapiens, and Synon. The shortest statement of 
+              the results are: <br>
+              　　这些结论从 1991 到 1999，从香港到美国, 挪威, 和南非,在COBOL, Smalltalk, Java, Visual 
+              Basic, Sapiens, 和 Synon都是一贯坚持 , 这些结论的最短描述是： </p>
+            <blockquote> 
+              <p>To the extent you can replace written documentation with face-to-face 
+                interactions, you can reduce reliance on written work products 
+                and improve the likelihood of delivering the system.<br>
+                尽可能在你的范围内，用面对面的沟通来代替写文档，从而可以减少对写好了的工作产品的依赖，并 增大发布系统的可能性 </p>
+              <p>The more frequently you can deliver running, tested slices of 
+                the system, the more you can reduce reliance on written "promissory" 
+                notes and improve the likelihood of delivering the system.<br>
+                越是经常发布正在运行着并且经过测试的系统片段，就越能让你减少对写好的"约定"标记的依赖，越能增大最终发布系统的可能性 </p>
+            </blockquote>
+            <p>People are communicating beings. Even introverted programmers do 
+              better with informal, face-to-face communication than with paper 
+              documents. From a cost and time perspective, writing takes longer 
+              and is less communicative than discussing at the whiteboard. <br>
+              　　应当以人性的方式加以沟通。即使是对内向的程序员来说，采用不拘礼节的面对面的交流，都比采用写在纸上的文档进行沟通效果要好。从成本和时间上来看，写文章总比在白板上讨论耗费更多的时间，而且沟通的效果也更差。 
+            </p>
+            <p>Written, reviewed requirements and design documents are "promises" 
+              for what will be built, serving as timed progress markers. There 
+              are times when creating them is good. However, a more accurate timed 
+              progress marker is running tested code. It is more accurate because 
+              it is not a timed promise, it is a timed accomplishment.<br>
+              　　那些写好的而且评审过的需求和设计文档，只是"承诺"了要做什么，我们可以将其作为项目进度的标志 使用。有很多进度标志在最初设立时是好的。然而，更准确的进度标志应该是运行测试后的代码。因为这不是预先承诺的标志，而是真正完成的标志。 
+            </p>
+            <p>Recently, a bank's IT group decided to take the above results at 
+              face value. They began a small project by <i>simply putting three 
+              people into the same room</i> and more or less leaving them alone. 
+              Surprisingly (to them), the team delivered the system in a fine, 
+              timely manner. The bank management team was a bit bemused. Surely 
+              it can't be this simple?<br>
+              　　最近，一个银行的IT部决定小试一下以上结果。他们启动一个小项目，使用简单的把三个人放在一个房间里的方法，让他们自生自灭。令人惊奇的是，这个小组及时的、优秀的发布了系统。银行的管理层觉得有点困惑。一定不会这么简单的吧？ 
+            </p>
+            <p>It isn't quite so simple. Another result of all those project interviews 
+              was that: different projects have different needs. Terribly obvious, 
+              except (somehow) to methodologists. Sure, if your project only needs 
+              3 to 6 people, just put them into a room together. But if you have 
+              45 or 100 people, that won't work. If you have to pass Food &amp; 
+              Drug Administration process scrutiny, you can't get away with this. 
+              If you are going to shoot me to Mars in a rocket, I'll ask you not 
+              to try it. We must remember factors such as team size and demands 
+              on the project, such as: <br>
+              　　当然不是如此简单。另外一个采访了所有其他项目后得到的结论是：不同项目有不同的需要。这是非常明显的不依赖于方法论的（不知道怎的）。当然，如果你的项目只需要3到6个人，只要让他们在一个房间里就可以了。但如果你有45或者100个人，这就没用了。如果你要通过食物药品管理部门的过程检验，你就不能这样开始。如果你想把我用火箭发射到火星上去，我建议千万不要尝试。我们必须记住团队的大小和项目的需求这类因数： 
+            </p>
+            <ul>
+              <li>As the number of people involved grows, so does the need to 
+                coordinate communications. <br>
+                随着参与人数的增长，协调沟通的需求也更多 <br>
+              <li>As the potential for damage increases, the need for public scrutiny 
+                increases, and the tolerance for personal stylistic variations 
+                decreases.<br>
+                随潜在的破坏性的增长，对于公开检查的要求也在不断增加，而同时对由于个人风格的不同所导致差异的可容忍程度也在降低 <br>
+              <li>Some projects depend on time-to-market and can tolerate defects 
+                (Web browsers being an example); other projects aim for traceability 
+                or legal liability protection. <br>
+                一些项目依赖市场方面所确定的发布时间，而且对于一些缺陷能加以容忍（WEB浏览器就是这样一个例子）；其他的一些 项目致力于条理性和法律责任。 
+                <br>
+              </li>
+            </ul>
+            <p>The result of collecting those factors is shown in Figure 6. The 
+              figure shows three factors that influence the selection of methodology: 
+              communications load (as given by staff size), system criticality, 
+              and project priorities.<br>
+              　　根据收集到的有关因素总结出的结论如图Figure 6所示。它显示了影响选择不同方法论的三个因数：沟通难度（由成员的数量决定），系统关键程序，以及项目的优先级。 
+            </p>
+            <center>
+              <img height=259 alt="Figure 6" 
+      src="images/i06.gif" width=450 border=0> 
+              <p><b><font face=Arial,Helvetica,Geneva size=2>Figure 6 -- The family 
+                of Crystal methods.</font></b></p>
+            </center>
+            <br>
+            <p>Locate the segment of the X axis for the staff size (typically 
+              just the development team). For a distributed development project, 
+              move right one box to account for the loss of face-to-face communications.<br>
+              　　根据成员数量确定在X轴上的部分（通常的只是开发组）。如果是一个分布的开发项目，因为面对面沟通的机会减少，向右移动一格。 </p>
+            <p>On the Y axis, identify the damage effect of the system: loss of 
+              comfort, loss of "discretionary" monies, loss of "essential" monies 
+              (e.g., going bankrupt), or loss of life. <br>
+              　　在Y轴上，确认系统损坏的影响：舒适程度下降，明显的经济损失，根本性的经济损失（比如破产），或者丧命。 </p>
+            <p>The different planes behind the top layer reflect the different 
+              possible project priorities, whether it is time to market at all 
+              costs (such as in the first layer), productivity and tolerance (the 
+              hidden second layer), or legal liability (the hidden third layer). 
+              The box in the grid indicates the class of projects (for example, 
+              C6) with similar communications load and safety needs and can be 
+              used to select a methodology. <br>
+              　　在顶层的不同的飞机（板块panel？）反映了各种项目的不同重点，所耗费的是否是上市时间（就象在第一层），效率和兼容性(隐藏的第二层)，或者法律责任（隐藏的第三层）.网格中的格子决定了在相似沟通难度和安全需求下的项目的类型（例如C6），你可以用来选择方法论。 
+            </p>
+            <p>The grid characterizes projects fairly objectively, useful for 
+              choosing a methodology. I have used it myself to change methodologies 
+              on a project as it shifted in size and complexity. There are, of 
+              course, many other factors, but these three determine methodology 
+              selection quite well.<br>
+              　　这个网格显示了项目的特性，对选择一个方法论很有用。我自己在项目的大小和复杂程度改变的时候，用来改变我的方法论。当然还有其他的因素，但这三个用来决定选择什么方法论是很好的。 
+            </p>
+            <p>Suppose it is time to choose a methodology for the project. To 
+              benefit from the project interviews mentioned earlier, create the 
+              lightest methodology you can even imagine working for the cell in 
+              the grid, one in which person-to-person communication is enhanced 
+              as much as possible, and running tested code is the basic timing 
+              marker. The result is a light, habitable (meaning rather pleasant, 
+              as opposed to oppressive), <i>effective</i> methodology. Assign 
+              this methodology to C6 on the grid. <br>
+              　　假定现在要选择项目的方法论。得益于上面所提到的对有关项目的访谈，你可以把建立一个最轻量级的方法论，想象成按照网格中的格子工作，在这里，尽量提高人和人之间的交流，运行测试后的代码是最基本的进度标志。结果是一个简单的，符合人的习惯的（意味着更让人愉快的，反对压抑人的）高效率的方法论。在网格上指定这个方法论到C6。 
+            </p>
+            <p>Repeating this for all the boxes produces a family of lightweight 
+              methods, related by their reliance on people, communication, and 
+              frequent delivery of running code. I call this family the Crystal 
+              Light family of methodologies. The family is segmented into vertical 
+              stripes by color (not shown in figure): The methodology for 2-6 
+              person projects is Crystal Clear, for 6-20 person projects is Crystal 
+              Yellow, for 20-40 person projects is Crystal Orange, then Red, Magenta, 
+              Blue, etc.<br>
+              　　重复这些所有的格子，产生一个轻量级的方法的家族，根据他们对人们的信心，沟通，和发布运行代码的频率。我叫这个家族为Crystal 
+              Light方法论族。这个家族用颜色（在图上没画）分成不同的竖直的条纹：2-6个人的项目的方法论叫 Crystal Clear ，6-20人的项目的方法论叫 
+              Crystal Yellow , 20-40人的项目的方法论叫 Crystal Orange,然后是 Red，Magenta，Blue，等等。 
+            </p>
+            <p>Shifts in the vertical axis can be thought of as "hardening" of 
+              the methodology. A life-critical 2-6-person project would use "hardened" 
+              Crystal Clear, and so on. What surprises me is that the project 
+              interviews are showing rather little difference in the hardness 
+              requirement, up to life-critical projects. <br>
+              　　垂直方向间的切换在方法学上被称为强化。一个短生命期的2到6个人的项目应该使用强化了的Crystal Clear或其派生方法来管理。使我惊喜的是，在这样的 
+              项目中几乎看不到增加需求和按时完成项目之间的矛盾。 </p>
+            <p>Crystal Clear is documented in a forthcoming book, currently in 
+              draft form on the Web. Crystal Orange is outlined in the methodology 
+              chapter of <i>Surviving Object-Oriented Projects</i> (see Editor's 
+              note below).<br>
+              　　Crystal Clear出自一本即将出版的书，现在网上已经有草稿。在《Surviving Object-Oriented 
+              Projects》一书的方法论一章中描述了Crystal Orange的轮廓。 </p>
+            <p>Having worked with the Crystal Light methods for several years 
+              now, I found a few more surprises.<br>
+              　　在采用Crystal Light方法多年以后，现在我发现了更多的惊喜。 </p>
+            <p>The first surprise is just how little process and control a team 
+              actually needs to thrive (this is <i>thrive</i>, not merely survive). 
+              It seems that most people are interested in being good citizens 
+              and in producing a quality product, and they use their native cognitive 
+              and communications abilities to accomplish this. This matches Jim's 
+              conclusions about adaptive software development (see Resources and 
+              References, page 15). You need one notch less control than you expect, 
+              and less is better when it comes to delivering quickly.<br>
+              　　第一个惊喜是，一个开发队伍成功（不仅仅是幸存）并不需要太多的管理和控制。大部分开发人员都乐于专心工作和写出好的软件，他们会使用自己的理解能力和沟通能力去 
+              完成这一切。这和Jim做出的关于自适应软件开发的结论完全一致(参见"资源和参考"，第15页)。你需要比你预计的要少得多的控制，尤其是当你希望能尽快发布软件时，越 
+              少就越好。 </p>
+            <p>More specifically, when Jim and I traded notes on project management, 
+              we found we had both observed a critical success element of project 
+              management: that team members <i>understand</i> and <i>communicate</i> 
+              their work dependencies. They can do this in lots of simple, low-tech, 
+              low-overhead ways. It is often not necessary to introduce tool-intensive 
+              work products to manage it.<br>
+              　　更特别的是，当我和Jim交换项目管理的心得时，我们意识到我们都观察到了成功的项目管理中的一个关键要素：开发人员能理解有关人员的工作并加以沟通。他们能通过 
+              许多简单、低技术含量并且廉价的方法完成这一切。通常这并不需要引入什么特别的工具来管理。 </p>
+            <p>Oh, but it is necessary to introduce two more things into the project: 
+              <i>trust</i> and <i>communication</i>.<br>
+              　　不过项目中还是需要两个关键要素：信任和沟通。 </p>
+            <p>A project that is short on trust is in trouble in more substantial 
+              ways than just the weight of the methodology. To the extent that 
+              you can enhance trust and communication, you can reap the benefits 
+              of Crystal Clear, XP, and the other lightweight methods.<br>
+              　　在一个项目中，缺乏信任比选择了错误的方法学更要命。从某种程度上讲，只要你能加强信任和沟通，你就一定能受益于Crystal Clear，XP（极限编程 
+              ？）或别的轻量级开发方法。 </p>
+            <p>The second surprise with defining the Crystal Light methods was 
+              XP. I had designed Crystal Clear to be the least bureaucratic methodology 
+              I could imagine. Then XP showed up in the same place on the grid 
+              and made Clear look heavy! What was going on?<br>
+              　　第二个惊喜是当我们定义Cystal Light方法的时候它就和XP一致了。我把Crystal Clear设计成我所能想象的最不官僚的方法学。随后XP在 
+              同一领域出现并展露锋芒，在它面前Clear仿佛成了重量级的开发方法！这是怎么一回事？ </p>
+            <p>It turns out that Beck had found another knob to twist on the methodology 
+              control panel: discipline. To the extent that a team can increase 
+              its internal discipline and consistency of action, it can lighten 
+              its methodology even more. The Crystal Light family is predicated 
+              on allowing developers the maximum individual preference. XP is 
+              predicated on having everyone follow tight, disciplined practices:<br>
+              　　这大概是因为Beck发现了方法学的控制面板上的另一个开关：纪律。在某种程度，如果一个开发小组能增强内部的纪律性并保证行动的一致性，方法学可以变得更加 
+              轻巧。Crystal Light衍生的方法学给予开发者最多的个性化。XP则要求每个人都遵守严格的有纪律的实践： </p>
+            <ul>
+              <li>Everyone follows a tight coding standard.<br>
+                每个人都必须遵守一个严格的编码标准。 <br>
+              <li>The team forms a consensus on what is "better" code, so that 
+                changes converge and don't just bounce around.<br>
+                关于什么是好的代码, 开发小组在此方面应达成共识，这样所有的变化都集中在一起，避免了反复。 <br>
+              <li>Unit tests exist for all functions, and they always pass at 
+                100%.<br>
+                每个函数都必须经过单元测试，并且必须100%通过。 <br>
+              <li>All production code is written by two people working together.<br>
+                所有产品的代码都是由两名开发人员一起工作完成的 <br>
+              <li>Tested function is delivered frequently, in the two- to four- 
+                week range.<br>
+                以每两周到四周为一个周期, 频繁地发布那些经过测试的函数，。 <br>
+              </li>
+            </ul>
+            <p>In other words, Crystal Clear illustrates and XP magnifies the 
+              core principle of light methods: <br>
+              　　换一句话说，Crystal Clear展示了轻量级方法的核心法则，而XP放大了它： </p>
+            <blockquote> 
+              <p>Intermediate work products can be reduced and project delivery 
+                enhanced, to the extent that team communications are improved 
+                and frequency of delivery increased.<br>
+                在一定程度上，如果开发队伍的交流得到了改善，发布的频率得到提高，那么就可以减少中间产品的工作量，从而能更快地完成项目。 </p>
+            </blockquote>
+            <p>XP and Crystal Clear are related to each other in these ways: <br>
+              　　XP和Crystal Clear有如下关联： </p>
+            <ul>
+              <li>XP pursues greater productivity through increased discipline, 
+                but it is harder for a team to follow. <br>
+                XP通过增强纪律性提高生产效率，但是它对于开发者更难于遵守。 <br>
+              <li>Crystal Clear permits greater individuality within the team 
+                and more relaxed work habits in exchange for some loss in productivity. 
+                <br>
+                Crystal Clear给予开发者更多的个性空间，允许比较松散的工作习惯，但是同时损失了一些生产效率。 <br>
+              <li>Crystal Clear may be easier for a team to adopt, but XP produces 
+                better results if the team can follow it.<br>
+                开发队伍可以比较轻松地使用Crystal Clear方法，但是如果能够有效地使用XP，效果会更好。 <br>
+              <li>A team can start with Crystal Clear and move itself to XP. A 
+                team that falls off XP can back up to Crystal Clear.<br>
+                开发队伍可以从Crystal Clear开始，然后转移到XP方法。开发队伍也可以放弃XP，重新使用Crystal Clear。 
+                <br>
+              </li>
+            </ul>
+            <p>Although there are differences in Crystal Clear and XP, the fundamental 
+              values are consistent -- simplicity, communications, and minimal 
+              formality.<br>
+              　　尽管Crystal Clear和Xp之间存在很多差异，但是它们的基本价值观是一致的--简单、交流和尽量减少形式化。 </p>
+            <p><i>Editor's note: For more information on the Crystal Clear methodology, 
+              see Alistair Cockburn's Web site, listed in the References and Resources 
+              section. For more information on Crystal Orange, it is covered in 
+              the book </i>Surviving Object-Oriented Projects<i>, also listed 
+              in the References and Resources section.<br>
+              　　编者按：如果你想深入了解Crystal Clear，请看"相关资源与引用"部分列出的Alistair Cockburn的网站，在。如果你想深入了解 
+              Crystal Orange，你可以参阅《Surviving Object-Oriented Projects》一书，同样有关信息在"相关资源与引用"部分也已列出。 
+              </i></p>
+            <h3>Conclusions: Going to Extremes<br>
+              结论：走向极限 </h3>
+            <p>Orr and Cockburn each describe their approaches and experience 
+              with lighter methodologies. But earlier, in describing Chrysler's 
+              C3 project, I alluded to the difficulty in extending the use of 
+              approaches like XP or even RAD. In every survey we have done of 
+              <b><i>eAD</i></b> subscribers, and every survey conducted of software 
+              organizations in general, respondents rate reducing delivery time 
+              as a critical initiative. But it is not just initial delivery that 
+              is critical. Although Amazon.com may have garnered an advantage 
+              by its early entry in the online bookstore market, it has maintained 
+              leadership by continuous adaptation to market conditions -- which 
+              means continuous changes to software. <br>
+              　　Orr 和 Cockburn 都描述了他们的轻量级方法和经验。但在前面描述Chrysler的 C3 项目时，我间接的提到，扩展使用类似XP或者甚至是RAD的方法都存在着困难。在我们 
+              对eAD的订阅者所做的所有调查以及所有软件组织的行为调查中，一般说来，快速的响应 速度，减少发布时间是一个关键的开始。但这并不是说只有首次发布才是关键的。虽然 
+              Amazon.com 因为更早进入网上书店市场而拥有优势，但它为了维持它的领导地位，必须 持续不断的适应市场条件----这意味着软件的持续更改。 
+            </p>
+            <p>Deliver quickly. Change quickly. Change often. These three driving 
+              forces, in addition to better software tools, compel us to rethink 
+              traditional software engineering practices -- not abandon the practices, 
+              but rethink them. XP, for example, doesn't ask us to abandon good 
+              software engineering practices. It does, however, ask us to consider 
+              closely the absolute minimum set of practices that enable a small, 
+              co-located team to function effectively in today's software delivery 
+              environment. <br>
+              　　快速发布.快速修改.频繁变更.通过这三者的驱动，加上更好的软件工具，迫使我们重新 思考传统的软件工程实践----并不是放弃它们，而是对其重新加以思考。例如，XP 
+              并没有 要我们抛弃好的软件工程实践。相反，它要求我们去深入地思考，在 当今软件发布环境下，小型协作团队能够高效运作所需的最低环境要求有哪些。 
+            </p>
+            <p>Cockburn made the observation that implementation of XP (at least 
+              as Beck and Jeffries define it) requires three key environmental 
+              features: inexpensive inter-face changes, close communications, 
+              and automated regression testing. Rather than asking "How do I reduce 
+              the cost of change?" XP, in effect, postulates a low-change cost 
+              environment and then says, "This is how we will work." For example, 
+              rather than experience the delays of a traditional relational database 
+              environment (and dealing with multiple outside groups), the C3 project 
+              used GemStone, an OO database. <br>
+              　　Cockburn 观察发现，XP（至少按照Beck和Jeffries所定义的那样）的实现至少需要三个 环境特征：界面修改不会带来昂贵的的代价，更密切的交流和自动的回归测试。实际上 
+              XP 不是问"我该如何降低变更带来的成本"，而是要求一个低更改成本的环境，然后说"我们将这样工作"。例如， C3项目使用面向对象数据库GemStone，而不是去使用传统关系数据库（以及 
+              和多个外部组打交道）。 </p>
+            <p>Some might argue that this approach is cheating, but that is the 
+              point. For example, Southwest Airlines created a powerhouse by reducing 
+              costs -- using a single type of aircraft (Boeing 737s). If turbulence 
+              and change are the norm, then perhaps the right question may be: 
+              how do we create an environment in which the cost (and time) of 
+              change is minimized? Southwest got to expand without an inventory 
+              of "legacy" airplanes, so its answer might be different than American 
+              Airline's answer, but the question remains an important one.<br>
+              　　有些人也许会说这种方法是欺骗，确实如此。例如，西南航空公司在创建动力室时，使用 同一种类型的飞机（波音737）来降低成本。如果湍流和改变都是标准的，那么正确 
+              的问题可能就是：我们如何创建一个导致最低变更成本（和时间）的环境？西南航空公司在扩 张时，没有遗留的飞机存货。对于美国航空公司来说，这个问题的答案也许会不同，但是 
+              它仍然是个重要的问题。 </p>
+            <p>There are five key ideas to take away from this discussion of XP 
+              and light methods:<br>
+              　　在这个关于XP和轻量方法的讨论中，我们能得到如下五个主要观点： </p>
+            <ul>
+              <li>For projects that must be managed in high-speed, high-change 
+                environments, we need to reexamine software development practices 
+                and the assumptions behind them.<br>
+                对于那些处于飞速变化环境中的项目而言，我们需要重新检视有关的软件开发实践以及与之对应的有关假定。 <br>
+              <li>Practices such as refactoring, simplicity, and collaboration 
+                (pair programming, metaphor, collective ownership) prompt us to 
+                think in new ways.<br>
+                类似于重构、简单化和合作（配对编程，隐喻，代码共享）等实践促使我们以一种新思路来思考。 <br>
+              <li>We need to rethink both how to reduce the cost of change in 
+                our existing environments and how to create new environments that 
+                minimize the cost of change.<br>
+                我们不仅需要重新思考如何在现有环境中降低变更导致的成本，而且还需要重新考虑如何创造一个新的环境, 从而能够将变更成本降到最低。 
+                <br>
+              <li>In times of high change, the ability to refactor code, data, 
+                and whole applications becomes a critical skill.<br>
+                在频繁变动中，对代码, 数据以及整个应用重构的能力将会成为一项关键的技能。 <br>
+              <li>Matching methods to the project, relying on people first and 
+                documentation later, and minimizing formality are methods geared 
+                to change and speed.<br>
+                将方法应用到项目中去时，先依赖人，再依赖文档，尽量减少形式化的东西，从而有效地将方法与项目相结合 <br>
+              </li>
+            </ul>
+            <h3>Editor's Musings<br>
+              编者的沉思（编后语） </h3>
+            <p>Extreme rules! In the middle of writing this issue, I received 
+              the 20 December issue of <i>BusinessWeek</i> magazine, which contains 
+              the cover story, "Xtreme Retailing," about "brick" stores fighting 
+              back against their "click" cousins. If we can have extreme retailing, 
+              why not Extreme Programming?<br>
+              　　极端的规则。在写这篇文章的过程中，我曾经收到12月20日发行的商业周刊杂志。其中有 一个封面故事，"极端零售"，关于"brick"商店反击它们的堂兄弟"click"。如果我们可以 
+              有极端零售，为什么不极端编程呢。 </p>
+            <p>Refactoring, design patterns, comprehensive unit testing, pair 
+              programming -- these are not the tools of hackers. These are the 
+              tools of developers who are exploring new ways to meet the difficult 
+              goals of rapid product delivery, low defect levels, and flexibility. 
+              Writing about quality, Beck says, "The only possible values are 
+              'excellent' and 'insanely excellent,' depending on whether lives 
+              are at stake or not" and "runs the tests until they pass (100% correct)." 
+              You might accuse XP practitioners of being delusional, but not of 
+              being poor-quality-oriented hackers.<br>
+              　　重构，设计模式，对单元测试的充分理解，配对编程----这些都不是黑客们的工具。它们是开发者 们为了解决产品快速发布，同时又能保持较少的缺陷和灵活性时探索出的新方法。关于质量，Beck说，"只有两种情况下是有价值的：'优秀'或者'极其优秀'，这取决于其对软件产品生存的影响程度"，以及 
+              "执行测试直到它们通过（100％正确）"。你也许可以指责XP的实践者是受到了蒙蔽，但是他们决不是那种不重视质量的黑客。 </p>
+            <p>To traditional methodology proponents, reducing time-to-market 
+              is considered the enemy of quality. However, I've seen some very 
+              slow development efforts produce some very poor-quality software, 
+              just as I've seen speedy efforts produce poor-quality software. 
+              Although there is obviously some relationship between time and quality, 
+              I think it is a much more complicated relationship than we would 
+              like to think. <br>
+              　　对于传统方法的支持者来说，缩短发布时间是质量的敌人。然而，我看过一些开发速度 很慢而且质量非常差的软件，就象我看过的另一些开发速度很快但质量低下的软件一样。虽然在时间 
+              和质量间存在一些明显的联系，但我认为这个联系比我们一般所想象的要的复杂的多。 </p>
+            <p>Traditional methodologies were developed to build software in environments 
+              characterized by low to moderate levels of change and reasonably 
+              predictable desired outcomes. However, the business world is no 
+              longer very predictable, and software requirements change at rates 
+              that swamp traditional methods. "The bureaucracy and inflexibility 
+              of organizations like the Software Engineering Institute and practices 
+              such as CMM are making them less and less relevant to today's software 
+              development issues," remarks Bob Charette, who originated the practices 
+              of lean development for software. <br>
+              　　传统方法可用于开发那些变化程度不大并可预期最终结果的软件.然而，商业世界却是变化莫测的，并且传统开发方法已无法满现在的快速变化软件需求的要求。轻量级软件开发实践的创始人Bob 
+              Charette认为"由于软件工程研究所(SEI)这样组织的官僚化、顽固性，以及诸如CMM的实践，使得他们日益脱离当今的软件开发。 
+            </p>
+            <p>As Beck points out in the introduction to his book, the individual 
+              practices of XP are drawn from well-known, well-tested, traditional 
+              practices. The principles driving the use of these practices, along 
+              with the integrative nature of using a specific minimal set of practices, 
+              make XP a novel solution to modern software development problems.<br>
+              　　就象Beck在他书中所写的简介中指出的一样，XP中的各个独立实践，都是从著名的，经过很好的测试 的，传统实践中抽取出来的。这些原则驱动着实践的使用，与一个特别的实践最小集自然的一 
+              体化在一起，使得XP成为一个解决现代软件开发问题的新方案。 </p>
+            <p>But I must end with a cautionary note. None of these new practices 
+              has much history. Their successes are anecdotal, rather than studied 
+              and measured. Nevertheless, I firmly believe that our turbulent 
+              e-business economy requires us to revisit how we develop and manage 
+              software delivery. While new, these approaches offer alternatives 
+              well worth considering.<br>
+              　　但是我必须以一条警告来做结束语。所有的这些新实践都没有很长的历史，它们的成功就象 逸事一样，没有被加以研究和度量。然而我坚信，我们混乱的电子商务经济需要我们重新审视 
+              如何开发和管理软件发布。这些方法虽然很新，但它们提供了有价值的另一条思路。 </p>
+            <p>In the coming year, we will no doubt see more in print on XP. Beck, 
+              Jeffries, Fowler, and Cunningham are working in various combinations 
+              with others to publish additional books on XP, so additional information 
+              on practices, management philosophy, and project examples will be 
+              available.<br>
+              　　明年，我们毫无疑问地可以看到更多关于XP的出版物，Beck, Jeffries, Fowler和Cunningham 都在相互合作出版更多关于XP的书。因此，你将看到更多的关于实践的信息，管理哲学和项目 
+              实例等。 </p>
+            <p>Finally, a note on how to continue the discussion of XP and other 
+              "extremes": as I announced in the previous issue, we have initiated 
+              an <b><i>eAD</i></b> discussion forum. If you are interested in 
+              joining the group, send us an e-mail at <a 
+      href="mailto:ead@cutter.com">ead@cutter.com</a>, and we will add you to 
+              the discussion group and send logon information.<br>
+              　　最后，一个关于如何继续XP和其他"极端事物"讨论的提示：就象我在前面讨论中宣布的那样， 我们创建了一个eAD论坛。如果你对加入这个小组感兴趣，给我们发email到 
+              ead@cutter.com， 我们将把你加入这个讨论组，并且会把登录信息发送给你。 </p>
+            <br>
+            <br>
+            <table cellpadding=6 width=100% bgcolor=#c0c0c0 border=0 valign="TOP">
+              <tbody> 
+              <tr> 
+                <td><font face="Arial,Helvetica,Geneva" size="2"><a name=res>&nbsp;</a> 
+                  </font>
+                  <h3><font face="Arial,Helvetica,Geneva" size="2">资源与参考</font></h3>
+                  <h3><font face="Arial,Helvetica,Geneva" size="2">Books and Articles</font></h3>
+                  <p><font face="Arial,Helvetica,Geneva" size="2">Beck, Kent. 
+                    <i>Extreme Programming Explained: Embrace Change</i>. Addison-Wesley, 
+                    1999.</font></p>
+                  <p><font face="Arial,Helvetica,Geneva" size="2">Cockburn, Alistair. 
+                    <i>Surviving Object-Oriented Projects</i>. Addison-Wesley, 
+                    1998.</font></p>
+                  <p><font face="Arial,Helvetica,Geneva" size="2">Cusumano, Michael 
+                    A. and Richard Selby. <i>Microsoft Secrets</i>. Free Press, 
+                    1995.</font></p>
+                  <p><font face="Arial,Helvetica,Geneva" size="2">Fowler, Martin. 
+                    <i>Refactoring: Improving the Design of Existing Code</i>. 
+                    Addison-Wesley, 1999.</font></p>
+                  <p><font face="Arial,Helvetica,Geneva" size="2">Gamma, Erich, 
+                    Richard Helm, Ralph Johnson, and John Vlissides. <i>Design 
+                    Patterns: Elements of Reusable Object-Oriented Software</i>. 
+                    Addison-Wesley, 1995.</font></p>
+                  <p><font face="Arial,Helvetica,Geneva" size="2">Gilb, Tom. <i>Principles 
+                    of Software Engineering Management</i>. Addison-Wesley, 1988.</font></p>
+                  <p><font face="Arial,Helvetica,Geneva" size="2">Higgins, David. 
+                    <i>Data Structured Software Maintenance</i>. Dorset House 
+                    Publishing, 1986.</font></p>
+                  <p><font face="Arial,Helvetica,Geneva" size="2">Yourdon, Edward 
+                    and Larry L. Constantine. <i>Structured Design: Fundamentals 
+                    of a Discipline of Computer Program and Systems Design</i>. 
+                    Prentice Hall, 1986. </font></p>
+                  <h3><font face="Arial,Helvetica,Geneva" size="2">General Resources</font></h3>
+                  <p><font face="Arial,Helvetica,Geneva" size="2">Adaptive software 
+                    development. See the article in the August 1998 <b><i>Application 
+                    Development Strategy</i></b> (now <b><i>eAD</i></b>), "Managing 
+                    Complexity."</font></p>
+                  <p><font face="Arial,Helvetica,Geneva" size="2">ARTech. Montevideo, 
+                    Uruguay. Web site: <a 
+            href="http://www.artech.com.uy/">http://www.artech.com.uy/</a>. Developers 
+                    of GeneXus.</font></p>
+                  <p><font face="Arial,Helvetica,Geneva" size="2">Crystal Clear 
+                    method. Web site: <a 
+            href="http://members.aol.com/humansandt/crystal/clear">http://members.aol.com/humansandt/crystal/clear</a>. 
+                    </font></p>
+                  <p><font face="Arial,Helvetica,Geneva" size="2">Alistair Cockburn. 
+                    Web site: <a 
+            href="http://members.aol.com/acockburn">http://members.aol.com/acockburn</a>. 
+                    </font></p>
+                  <p><font face="Arial,Helvetica,Geneva" size="2">Bob Charette. 
+                    Lean Development. ITABHI Corporation, 11609 Stonewall Jackson 
+                    Drive, Spotsylvania, VA 22553, USA. E-mail: <a 
+            href="mailto:charette@erols.com">charette@erols.com</a>.</font></p>
+                  <p><font face="Arial,Helvetica,Geneva" size="2">Ward Cunningham's 
+                    Extreme Programming Roadmap. Web site: <a 
+            href="http://c2.com/cgi/wiki/extremeprogrammingroadmap">http://c2.com/cgi/wiki/ExtremeProgrammingRoadmap</a>. 
+                    </font></p>
+                  <p><font face="Arial,Helvetica,Geneva" size="2"><i>eXtreme Programming 
+                    and Flexible Processes in Software Engineering -- XP2000 Conference</i>. 
+                    21-23 June 2000, Cagliari, Sardinia, Italy. Web site: <a 
+            href="http://numa.sern.enel.ucalgary.ca/extreme">http://numa.sern.enel.ucalgary.ca/extreme</a>. 
+                    </font></p>
+                  <p><font face="Arial,Helvetica,Geneva" size="2">Martin Fowler. 
+                    Web site: <a 
+            href="http://ourworld.compuserve.com/homepages/martin_fowler/">http://ourworld.compuserve.com/homepages/martin_fowler/</a>.</font></p>
+                  <p><font face="Arial,Helvetica,Geneva" size="2">Ron Jeffries. 
+                    E-mail: <a 
+            href="mailto:ronjeffries@acm.org">ronjeffries@acm.org</a>. Web site: 
+                    <a 
+            href="http://www.xprogramming.com/">http://www.xprogramming.com/</a>.</font></p>
+                  <p><font face="Arial,Helvetica,Geneva" size="2">Lean Development. 
+                    See the November 1998 <b><i>ADS</i></b> article "Time is of 
+                    the Essence." </font></p>
+                  <p><font face="Arial,Helvetica,Geneva" size="2">Object Mentor, 
+                    Green Oaks, IL, USA. Web site: <a 
+            href="http://www.objectmentor.com/">www.objectmentor.com/</a>.</font></p>
+                  <p><font face="Arial,Helvetica,Geneva" size="2">Ken Orr, Ken 
+                    Orr Institute, Topeka, KS, USA. Web site: <a 
+            href="http://www.kenorrinst.com/">http://www.kenorrinst.com/</a>.</font></p>
+                  <p><font face="Arial,Helvetica,Geneva" size="2">Laurie Williams. 
+                    Web site: <a 
+            href="http://www.cs.utah.edu/~lwilliam">www.cs.utah.edu/~lwilliam</a>.</font></p>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <p>&nbsp; </p>
+            </div>
+          <div align="center"><a href="index.html"><font size="2"><b>[返回]</b></font></a></div>
+</td>
+  </tr>
+</table>
+</center></div>
+</body>
+</html>

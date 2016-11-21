@@ -1,0 +1,57 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>图形上下文</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>图形上下文</H1> 
+ <P><UL>
+<LI><H2>Graphics Context(GC)：保存着当前关于显示的一些设置
+</H2>
+</UL><UL>
+<LI><H2>减少绘图操作的参数，减少网络流量（存储在server端）
+</H2>
+</UL><UL>
+<H2>typedef struct {int function; unsigned long plane_mask; unsigned long foreground; unsigned long background; int line_width; int line_style; int cap_style; int join_style; int fill_style; int fill_rule; int arc_mode; Pixmap tile; Pixmap stipple; int ts_x_origin; int ts_y_origin; Font font; int subwindow_mode; Bool graphics_exposures; int clip_x_origin; int clip_y_origin; Pixmap clip_mask; int dash_offset; char dashes;} XGCValues;
+</H2>
+</UL><UL>
+<H2>GC XCreateGC(display,d,valuemask,values)
+</H2>
+</UL><UL>
+<H2>XCopyGC(display,src,valuemask,dest)
+</H2>
+</UL><UL>
+<H2>XChangeGC(display,gc,valuemask,values)  
+</H2>
+</UL><UL>
+<H2>XFreeGC(display,gc)
+</H2>
+</UL><UL>
+<H2>XSetState (display,gc,foreground,background,function,planemask)　＝
+</H2>
+</UL><UL>
+<H2>XSetForeground(display,gc,foreground)＋XSetBackground(display,gc,background)＋XSetFunction(display,gc,function)＋XSetPlaneMask(display,gc,planemask) 
+</H2>
+</UL><UL>
+<H2>Status XGetGCValues(display, gc, valuemask, values_return)</H2>
+</UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld012.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld014.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld013.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

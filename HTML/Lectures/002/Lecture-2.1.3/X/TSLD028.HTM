@@ -1,0 +1,53 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>实现自己的控件</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>实现自己的控件</H1> 
+ <P><UL>
+<LI><H2>控件的结构－－面向对象的设计
+</H2>
+<UL>
+<LI>class structure(信号的定义)
+<UL>
+<LI>struct _GtkButtonClass
+<LI>{
+<LI>  GtkContainerClass parent_class;
+<LI>
+<LI>  void (* pressed)  (GtkButton *button);
+<LI>  void (* released) (GtkButton *button);
+<LI>  void (* clicked)  (GtkButton *button);
+<LI>  void (* enter)    (GtkButton *button);
+<LI>  void (* leave)    (GtkButton *button);
+<LI>};
+</UL><LI>object structure
+<UL>
+<LI>struct _GtkButton
+<LI>{
+<LI>  GtkContainer container;
+<LI>
+<LI>  GtkWidget *child;
+<LI>  guint in_button : 1;
+<LI>  guint button_down : 1;
+<LI>};</UL></UL></UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld027.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld029.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld028.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

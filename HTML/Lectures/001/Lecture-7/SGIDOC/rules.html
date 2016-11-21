@@ -1,0 +1,516 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0054)http://www.sgi.com/developers/library/local/rules.html --><HTML><HEAD><TITLE>Developer Central - Programming Rules</TITLE>
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+<META content="Programming Rules" name=description>
+<META content="SGI, Developers, Programming Rules, Library, Local" 
+name=Keywords>
+<SCRIPT language=JavaScript>
+<!-- begin javascript
+
+browser = (((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) >= 3 )) || ((navigator.appName == "Microsoft Internet Explorer") && (parseInt(navigator.appVersion) >= 4 )))
+
+
+var good = 0;
+
+if (browser) {
+        good = 1;
+}
+
+if (good == 1) {
+        //alert("Yippie!!");
+
+if (document.images) {
+  image1on = new Image();
+  image1on.src = "../../images/nav-dev_on.gif";
+  image2on = new Image();
+  image2on.src = "../../images/nav-prog_on.gif";
+  image3on = new Image();
+  image3on.src = "../../images/nav-lib_on.gif";
+  image4on = new Image();
+  image4on.src = "../../images/nav-mkt_on.gif";
+  image5on = new Image();
+  image5on.src = "../../images/nav-tech_on.gif";
+  image6on = new Image();
+  image6on.src = "../../images/nav-oss_on.gif";
+
+  image1off = new Image();
+  image1off.src = "../../images/nav-dev_off.gif";
+  image2off = new Image();
+  image2off.src = "../../images/nav-prog_off.gif";
+  image3off = new Image();
+  image3off.src = "../../images/nav-lib_off.gif";
+  image4off = new Image();
+  image4off.src = "../../images/nav-mkt_off.gif";
+  image5off = new Image();
+  image5off.src = "../../images/nav-tech_off.gif";
+  image6off = new Image();
+  image6off.src = "../../images/nav-oss_off.gif";
+
+  image1sel= new Image();
+  image1sel.src = "../../images/nav-dev_sel.gif";
+  image2sel = new Image();
+  image2sel.src = "../../images/nav-prog_sel.gif";
+  image3sel = new Image();
+  image3sel.src = "../../images/nav-lib_sel.gif";
+  image4sel = new Image();
+  image4sel.src = "../../images/nav-mkt_sel.gif";
+  image5sel = new Image();
+  image5sel.src = "../../images/nav-tech_sel.gif";
+  image6sel = new Image();
+  image6sel.src = "../../images/nav-oss_sel.gif";
+
+}
+}
+
+function turnOn(imageName) {
+  if (document.images) {
+    document[imageName].src = eval(imageName + "on.src");
+  }
+}
+
+function turnOff(imageName) {
+  if (document.images) {
+    document[imageName].src = eval(imageName + "off.src");
+  }
+}
+
+function turnSel(imageName) {
+  if (document.images) {
+    document[imageName].src = eval(imageName + "sel.src");
+  }
+}
+
+// -->
+</SCRIPT>
+<!-- ***********  ---><LINK href="rules.files/developers.css" rel=stylesheet 
+type=text/css>
+<SCRIPT language=JavaScript>
+// create image objects and pre-load images
+
+  window.onerror=null;
+  window.defaultStatus = '';
+
+if (!document.images) {}
+  else {
+
+        nav_prd0 = new Image();
+        nav_prd0.src = "/images/common/nav_prod0.gif";
+        nav_prd1 = new Image();
+        nav_prd1.src = "/images/common/nav_prod1.gif";
+
+        nav_sol0 = new Image();
+        nav_sol0.src = "/images/common/nav_solutions0.gif";
+        nav_sol1 = new Image();
+        nav_sol1.src = "/images/common/nav_solutions1.gif";
+
+        nav_dev0 = new Image();
+        nav_dev0.src = "/images/common/nav_dev0.gif";
+        nav_dev1 = new Image();
+        nav_dev1.src = "/images/common/nav_dev1.gif";
+
+        nav_srv0 = new Image();
+        nav_srv0.src = "/images/common/nav_support0.gif";
+        nav_srv1 = new Image();
+        nav_srv1.src = "/images/common/nav_support1.gif";
+
+        nav_sal0 = new Image();
+        nav_sal0.src = "/images/common/nav_sales0.gif";
+        nav_sal1 = new Image();
+        nav_sal1.src = "/images/common/nav_sales1.gif";
+
+        nav_fun0 = new Image();
+        nav_fun0.src = "/images/common/nav_fun0.gif";
+        nav_fun1 = new Image();
+        nav_fun1.src = "/images/common/nav_fun1.gif";
+
+        nav_hom0 = new Image();
+        nav_hom0.src = "/images/common/nav_home0.gif";
+        nav_hom1 = new Image();
+        nav_hom1.src = "/images/common/nav_home1.gif";
+
+        nav_src0 = new Image();
+        nav_src0.src = "/images/common/nav_search0.gif";
+        nav_src1 = new Image();
+        nav_src1.src = "/images/common/nav_search1.gif";
+
+}
+
+
+</SCRIPT>
+
+<META content="MSHTML 5.00.2920.0" name=GENERATOR></HEAD>
+<BODY aLink=#ff0000 bgColor=#ffffff leftMargin=0 link=#420077 text=#000000 
+topMargin=0 vLink=#666666 MARGINHEIGHT="0" MARGINWIDTH="0"><!-- Match this include to the directory depth -->
+<SCRIPT language=Javascript>
+<!---
+
+  
+  function change(Name,Image,No,Msg) {
+
+   	if (!document.images) {}
+
+     	else {
+     		document [Name].src = eval(Image + No + ".src");
+	}
+  	if (Msg) self.status = eval(Image + "2");
+
+     return true
+
+  }
+
+//-->
+</SCRIPT>
+
+<TABLE border=0 cellPadding=0 cellSpacing=0 width=620>
+  <TBODY>
+  <TR>
+    <TD colSpan=3><A href="http://www.sgi.com/" 
+      onmouseout="change('hom','nav_hom',0)" 
+      onmouseover="change('hom','nav_hom',1)"><IMG alt="[Home] " border=0 
+      height=25 name=hom src="rules.files/nav_home0.gif" width=48></A><A 
+      href="http://www.sgi.com/search/" onmouseout="change('src','nav_src',0)" 
+      onmouseover="change('src','nav_src',1)"><IMG alt="[Search] " border=0 
+      height=25 name=src src="rules.files/nav_search0.gif" width=54></A><A 
+      href="http://www.sgi.com/sales/" onmouseout="change('sal','nav_sal',0)" 
+      onmouseover="change('sal','nav_sal',1)"><IMG alt="[How to Buy] " border=0 
+      height=25 name=sal src="rules.files/nav_sales0.html" width=79></A><A 
+      href="http://www.sgi.com/products/" onmouseout="change('prd','nav_prd',0)" 
+      onmouseover="change('prd','nav_prd',1)"><IMG alt="[Products] " border=0 
+      height=25 name=prd src="rules.files/nav_prod0.gif" width=70></A><A 
+      href="http://www.sgi.com/solutions/" 
+      onmouseout="change('sol','nav_sol',0)" 
+      onmouseover="change('sol','nav_sol',1)"><IMG alt="[Solutions] " border=0 
+      height=25 name=sol src="rules.files/nav_solutions0.gif" width=73></A><A 
+      href="http://www.sgi.com/developers/"><IMG alt="[Developers] " border=0 
+      height=25 name=dev src="rules.files/nav_dev1.html" width=81></A><A 
+      href="http://www.sgi.com/support/" onmouseout="change('srv','nav_srv',0)" 
+      onmouseover="change('srv','nav_srv',1)"><IMG alt="[Services and Support] " 
+      border=0 height=25 name=srv src="rules.files/nav_support0.gif" 
+      width=128></A><A href="http://www.sgi.com/fun/" 
+      onmouseout="change('fun','nav_fun',0)" 
+      onmouseover="change('fun','nav_fun',1)"><IMG alt="[Serious Fun] " border=0 
+      height=25 name=fun src="rules.files/nav_fun0.gif" width=87></A></TD></TR>
+  <TR>
+    <TD colSpan=3><IMG alt="" height=7 src="rules.files/nav_dev_line.gif" 
+      width=620></TD></TR>
+  <TR>
+    <TD vAlign=top><A href="http://www.sgi.com/"><IMG alt=sgi border=0 
+      height=108 src="rules.files/sgilogo.gif" width=130></A></TD>
+    <TD align=right colSpan=2>&nbsp;<BR><A 
+      href="http://www.sgi.com/developers/index.html"><IMG 
+      alt="Developer Central" border=0 height=55 
+      src="rules.files/nav-devcentral.gif" width=203></A> <BR><!-- ***********  ---><A 
+      href="http://www.sgi.com/developers/devtools/index.html" 
+      onmouseout="if (good == 1) turnOff('image1')" 
+      onmouseover="if (good == 1) turnOn('image1')"><IMG alt="Developer Tools" 
+      border=0 height=55 name=image1 src="rules.files/nav-dev_off.html" 
+      width=80></A><A href="http://www.sgi.com/developers/program/index.html" 
+      onmouseout="if (good == 1) turnOff('image2')" 
+      onmouseover="if (good == 1) turnOn('image2')"><IMG 
+      alt="Program &amp; Benefits" border=0 height=55 name=image2 
+      src="rules.files/nav-prog_off.gif" width=75></A><A 
+      href="http://www.sgi.com/developers/library/index.html" 
+      onmouseout="if (good == 1) turnSel('image3')" 
+      onmouseover="if (good == 1) turnOn('image3')"><IMG alt=Library border=0 
+      height=55 name=image3 src="rules.files/nav-lib_sel.gif" width=72></A><A 
+      href="http://www.sgi.com/developers/marketing/index.html" 
+      onmouseout="if (good == 1) turnOff('image4')" 
+      onmouseover="if (good == 1) turnOn('image4')"><IMG 
+      alt="Marketing Resources" border=0 height=55 name=image4 
+      src="rules.files/nav-mkt_off.gif" width=72></A><A 
+      href="http://www.sgi.com/developers/technology/index.html" 
+      onmouseout="if (good == 1) turnOff('image5')" 
+      onmouseover="if (good == 1) turnOn('image5')"><IMG alt=Technology border=0 
+      height=55 name=image5 src="rules.files/nav-tech_off.gif" width=73></A><A 
+      href="http://www.sgi.com/developers/oss/index.html" 
+      onmouseout="if (good == 1) turnOff('image6')" 
+      onmouseover="if (good == 1) turnOn('image6')"><IMG alt="Open Source" 
+      border=0 height=55 name=image6 src="rules.files/nav-oss_off.gif" 
+      width=75></A><BR><A 
+      href="http://www.sgi.com/developers/library/index.html" 
+      onmouseout="if (good == 1) turnSel('image3')" 
+      onmouseover="if (good == 1) turnOn('image3')"><IMG alt=Library border=0 
+      height=25 src="rules.files/nav-title_lib.gif" width=222></A> </TD></TR>
+  <TR>
+    <TD vAlign=top width=138><!-- Start Dev Tools Sub Navigation Bar -->
+      <TABLE border=0 cellPadding=0 cellSpacing=0 width=138>
+        <TBODY>
+        <TR>
+          <TD><IMG alt=image height=2 src="rules.files/dot_clear.gif" 
+          width=5></TD>
+          <TD><IMG alt=image height=2 src="rules.files/dot_clear.gif" 
+          width=20></TD>
+          <TD><IMG alt=image height=2 src="rules.files/dot_clear.gif" 
+            width=116></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD colSpan=2><IMG alt="" height=10 
+            src="rules.files/bullets_dev2.gif" width=18><FONT 
+            face="Geneva, Arial Narrow, Helvetica" size=2><B>Third Party 
+            Products</B></FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD></TD>
+          <TD><FONT face="ARIAL, HELVETICA" size=2><A 
+            href="http://www.sgi.com/Products/appsdirectory.html">Directory</A> 
+            </FONT><BR>&nbsp;</TD></TR>
+        <TR>
+          <TD></TD>
+          <TD colSpan=2><IMG alt="" height=10 
+            src="rules.files/bullets_dev2.gif" width=18><FONT 
+            face="Geneva, Arial Narrow, Helvetica" size=2><B>Members 
+            Only</B></FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD></TD>
+          <TD><FONT face="ARIAL, HELVETICA" size=2><A 
+            href="https://toolbox.sgi.com/toolbox">Developer's</A><BR>&nbsp;&nbsp;<A 
+            href="https://toolbox.sgi.com/toolbox">Toolbox</A><IMG 
+            align=absBottom alt=* height=15 src="rules.files/locko.gif" 
+            width=27><BR><A 
+            href="https://www.sgi.com/developers/devnews/index.html">Developer 
+            News</A><IMG align=absBottom alt=* height=15 
+            src="rules.files/locks.gif" width=27><BR><A 
+            href="https://www.sgi.com/developers/devedge/index.html">DevEdge&nbsp;Email</A><IMG 
+            align=absBottom alt=* height=15 src="rules.files/locko.gif" 
+            width=27><BR><A 
+            href="https://toolbox.sgi.com/toolbox/documents/KnowledgeBase/">KnowledgeBase</A><IMG 
+            align=absBottom alt=* height=15 src="rules.files/locko.gif" 
+            width=27><BR><A 
+            href="http://www.sgi.com/developers/library/doc.html">Developer 
+            Consulting</A> </FONT><BR>&nbsp;</TD></TR>
+        <TR>
+          <TD></TD>
+          <TD colSpan=2><IMG alt="" height=10 
+            src="rules.files/bullets_dev2.gif" width=18><FONT 
+            face="Geneva, Arial Narrow, Helvetica" size=2><B>Helpful 
+            Resources</B></FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD></TD>
+          <TD><FONT face="ARIAL, HELVETICA" size=2><A 
+            href="http://www.sgi.com/developers/library/resource.html">Useful 
+            Links</A><BR><A href="http://www.sgi.com/fun/">Freeware</A><BR><A 
+            href="http://www.sgi.com/developers/library/resources/vst.html">Video 
+            Server Toolkit</A><BR><A 
+            href="http://www.sgi.com/developers/library/resources/y2k.html">Year 
+            2000</A><BR><A href="http://techpubs.sgi.com/">Technical 
+            Publications</A><BR>&nbsp;&nbsp;<A 
+            href="http://techpubs.sgi.com/">Library</A><BR><A 
+            href="http://www.sgi.com/developers/library/resources/asc.html">Application 
+            Solution</A><BR>&nbsp;&nbsp;<A 
+            href="http://www.sgi.com/developers/library/resources/asc.html">Center</A> 
+            </FONT><BR>&nbsp;</TD></TR>
+        <TR>
+          <TD></TD>
+          <TD colSpan=2><IMG alt="" height=10 
+            src="rules.files/bullets_dev2.gif" width=18><FONT 
+            face="Geneva, Arial Narrow, Helvetica" 
+            size=2><B>Localization</B></FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD></TD>
+          <TD><FONT face="ARIAL, HELVETICA" size=2><A 
+            href="http://www.sgi.com/developers/library/local/faq.html">Localization 
+            FAQ</A> </FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD colSpan=2><IMG alt=* height=10 
+            src="rules.files/nav-bullet3.jpeg" width=13> <FONT color=#207575 
+            face="ARIAL, HELVETICA" size=2><B>Programming Rules</B></FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD></TD>
+          <TD><FONT face="ARIAL, HELVETICA" size=2><A 
+            href="http://www.sgi.com/developers/library/local/code.html">Example 
+            Code</A><BR><A 
+            href="http://www.sgi.com/developers/library/local/glossary.html">Glossaries</A> 
+            </FONT><BR>&nbsp;</TD></TR>
+        <TR>
+          <TD></TD>
+          <TD colSpan=2><IMG alt="" height=10 
+            src="rules.files/bullets_dev2.gif" width=18><FONT 
+            face="Geneva, Arial Narrow, Helvetica" 
+          size=2><B>Archives</B></FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD></TD>
+          <TD><FONT face="ARIAL, HELVETICA" size=2><A 
+            href="https://www.sgi.com/developers/devnews/archives.html">Developer 
+            News</A><IMG align=absBottom alt=* height=15 
+            src="rules.files/lock.gif" width=27><BR><A 
+            href="https://www.sgi.com/developers/devedge/archives.html">DevEdge</A><IMG 
+            align=absBottom alt=* height=15 src="rules.files/lock.gif" 
+            width=27><BR><A href="http://www.sgi.com/developers/nibs/">What's 
+            New</A><BR><A href="http://www.sgi.com/developers/feature/">Feature 
+            Stories</A> </FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD colSpan=2>&nbsp;<BR><IMG alt=image height=2 
+            src="rules.files/dot_clear.gif" width=140> 
+      &nbsp;<BR></TD></TR></TBODY></TABLE></TD>
+    <TD><IMG height=1 src="rules.files/dot_clear.gif" width=35></TD>
+    <TD vAlign=top>&nbsp; 
+      <P><!-- Start Content --><FONT face="ARIAL NARROW, HELVETICA" 
+      size=5><B>Programming Rules</B></FONT> 
+      <P><FONT face="ARIAL, HELVETICA" size=4><B>I18N Essentials - Programming 
+      Tips</B></FONT> 
+      <P><FONT face="ARIAL, HELVETICA"><B>Tip 1: Call a function to set language 
+      (locale) at the beginning of each program.</B></FONT> 
+      <P>Call a <CODE>setlocale() </CODE>function for non-Xt/Motif programs. 
+      Because it affects sensitive functions, <CODE>setlocale()</CODE> should 
+      usually be called at the beginning of each program, but it can be called 
+      whenever necessary. </P>
+      <P><FONT size=+0>Call <CODE>XtSetLanguageProc() </CODE>for Xt/Motif 
+      programs. <CODE>XtSetLanguageProc() </CODE>must be called before Xt 
+      initialization, because it does NOT set a locale; it just registers a 
+      default language procedure which calls <CODE>setlocale() </CODE>(and other 
+      functions). Xt only calls the procedure specified for 
+      <CODE>XtSetLanguageProc()</CODE> when it is initialized, so calls after Xt 
+      is set up have no effect. It's probably better just to call 
+      <CODE>XtSetLanguageProc()</CODE> at the beginning of 
+      main().</FONT><BR><FONT size=+0></FONT></P>
+      <P></P><FONT face="ARIAL, HELVETICA"><B>Tip 2: Do not hard-code messages, 
+      labels, font names or most layout values. </FONT></B>
+      <P><UI></P>
+      <UL>
+        <LI><FONT size=+0>Get messages from <U>message catalog files</U> for 
+        non-X based programs. Use <CODE>catgets() </CODE>functions. </FONT>
+        <P></P>
+        <LI><FONT size=+0>Get messages, labels, font names and most layout 
+        values from <U>resource files</U> (or message catalog files) for X based 
+        programs. You can also define your own resources and use them. ViewKit 
+        has resource handling methods. </FONT></UI><FONT 
+        color=#000000></FONT></LI></UL>
+      <P><BR><FONT size=+0></FONT></P><FONT face="ARIAL, HELVETICA"><B>Tip 3: 
+      Use font sets instead of fonts.</B> </FONT>
+      <P><UI></P>
+      <UL>
+        <LI><FONT size=+0>Some Asian languages need several fonts. Fonts should 
+        be handled as font sets. </FONT><BR><FONT size=+0></FONT>
+        <LI><FONT size=+0>If you use Xlib functions, use <CODE>XCreateFontSet() 
+        </CODE>function instead of <CODE>XLoadQueryFont() </CODE>function, for 
+        font set. </FONT><BR><FONT size=+0></FONT>
+        <LI><FONT size=+0>If you use Motif functions and </FONT>need to create 
+        font list in your program, use functions such as XmFontListEntryLoad(), 
+        XmFontListEntryCreate(), XmFontListAppendEntry().</UI><FONT 
+        color=#000000> </FONT></LI></UL>
+      <P><BR><FONT size=+0></FONT></P><FONT face="ARIAL, HELVETICA"><B>Tip 4: Do 
+      not use special characters for widget names on Xt/Motif 
+      programs.</B></FONT> 
+      <P><UI></P>
+      <UL>
+        <LI><FONT size=+0>All widgets should have names because the use of NULL 
+        as a widget name makes it impossible to identify widgets for 
+        localization. Widget names should contain only ASCII alphanumeric 
+        characters and underbar; it is difficult or impossible to localize 
+        widgets whose names contain whitespace, punctuation or special 
+        characters such as '*', '.', ':' and '?' </FONT></LI></UL>
+      <P></P>
+      <UL>
+        <LI><FONT size=+0>One common practice causes particular problems: naming 
+        a widget using its label string often leads to widget names that are 
+        difficult to use, because labels sometimes contain special characters. 
+        </FONT></UI></LI></UL>
+      <P><BR><FONT size=+0></FONT></P><FONT face="ARIAL, HELVETICA"><B>Tip 5: Do 
+      not fix widget arrangements and sizes of label, button, text 
+      widgets.</B></FONT> 
+      <P><UI></P>
+      <UL>
+        <LI><FONT size=+0>Length of messages or labels may change depending on 
+        the language. Do not adjust and fix a layout or sizes of widgets just 
+        for English. </FONT>
+        <P></P>
+        <LI><FONT size=+0>Layout should change automatically based on language 
+        (locale). If it is difficult and time-consuming to determine the sizes 
+        for each widget manually, you need to define the sizes in resource 
+        files. </FONT>
+        <P></P>
+        <LI><FONT size=+0>Because font width varies among languages, the number 
+        of columns of text (fields) for a widget can vary by as much as a factor 
+        of two. Therefore, this size should be adjusted automatically based on 
+        layout, or changed by values in a resource file. Do not hard-code 
+        it.</FONT> 
+        <P></P>
+        <LI><FONT size=+0>Using the Form widget is one relatively easy (and 
+        recommended way) to automatically adjust the layout of primitive 
+        widgets. Define values for ATTACH_* resources explicitly and correctly 
+        or the layout will be broken. </FONT></UI><FONT size=+0></FONT></LI></UL>
+      <P></P><FONT face="ARIAL, HELVETICA"><B>Tip 6: Use multi-byte functions 
+      for Xlib code fragment.</B></FONT> 
+      <P><UI></P>
+      <UL>
+        <LI><FONT size=+0>Use <CODE>XmbDrawString() </CODE>instead of 
+        <CODE>XDrawString() </CODE>for drawing text. (or 
+        <CODE>XwcDrawString()</CODE>) </FONT>
+        <P></P>
+        <LI><FONT size=+0>Use <CODE>XmbLookupString() </CODE>instead of 
+        <CODE>XLookupString() </CODE>for handling X events directly. (or 
+        <CODE>XwcLookupString() </CODE>) </FONT></UI><FONT 
+        color=#000000></FONT></LI></UL>
+      <P><BR><FONT size=+0></FONT></P><FONT face="ARIAL, HELVETICA"><B>Tip 7: 
+      Use multi-byte functions for text processing.</B></FONT> 
+      <P><UI></P>
+      <UL>
+        <LI><FONT size=+0>Do not assume characters are ASCII (1 byte, 7 bit). 
+        Some code sets use 8 bit for characters, while others may use multi byte 
+        (and 8 bit) characters. </FONT>
+        <P></P>
+        <LI><FONT size=+0>Use multi byte or wide character functions for text 
+        processing such as <CODE>mbtowc(), mbstowcs(), iswupper(), and 
+        isideogram()</CODE>. </FONT>
+        <P></P>
+        <LI><FONT size=+0>In some languages, there are no spaces between words. 
+        This may affect algorithms for justification, pagination, word wrapping, 
+        etc. </FONT></UI></LI></UL>
+      <P><BR><FONT size=+0></FONT></P><FONT face="ARIAL, HELVETICA"><B>Tip 8: 
+      Use Selection for Cut &amp; Paste on Xlib base program.</B></FONT> 
+      <P><UI></P>
+      <UL>
+        <LI><FONT size=+0>Use Selection instead of Cut Buffer for Cut &amp; 
+        Paste (inter-client communication). </FONT>
+        <P></P>
+        <LI><FONT size=+0>Use compound texts for inter-client communications. 
+        Conversion to compound text is required. </FONT></UI></LI></UL>
+      <P><BR><FONT size=+0></FONT></P><FONT face="ARIAL, HELVETICA"><B>Tip 9: 
+      Use <CODE>LC_MESSAGES </CODE>for getting message catalogs.</B></FONT> 
+      <P><UI></P>
+      <UL>
+        <LI><FONT size=+0>Be sure to use the <CODE>LC_MESSAGES 
+        </CODE>sub-category when deciding where to get message catalogs, HTML 
+        files, etc. Do NOT use the <CODE>LANG </CODE>environment variable 
+        directly and do not use <CODE>LC_ALL for querying</CODE>. </FONT>
+        <P></P>
+        <LI><FONT size=+0>When calling <CODE>catopen()</CODE>, specify an 
+        <CODE>OFLAG </CODE>of <CODE>NL_CAT_LOCALE </CODE>. The man page for 
+        catopen says that this value must be 0, but the man page is out of date. 
+        The correct value is <CODE>NL_CAT_LOCALE </CODE>. </FONT></UI><FONT 
+        color=#000000></FONT><BR><FONT size=+0></FONT></LI></UL>
+      <P><BR><FONT size=+0></FONT></P><FONT face="ARIAL, HELVETICA"><B>Tip 10: 
+      Use XPG4 message system function instead of 
+      <CODE>gettxt()</CODE></B></FONT> 
+      <P><FONT size=+0>Use the XPG4 message catalog functions (e.g. catopen(), 
+      catgets()). Some older interfaces (such as getttxt) are supported for 
+      compatibility but are deprecated. You may still use the getxt command in 
+      shell scripts.</FONT> </P></TD></TR></TBODY></TABLE>
+<P>
+<CENTER><!---- Virtual Footer ---->
+<TABLE border=0 cellPadding=0 width=400>
+  <TBODY>
+  <TR>
+    <TD align=right><FONT face="Helvetica, Arial" size=-1><A 
+      href="http://www.sgi.com/company_info/privacy.html" target=TOP>privacy 
+      policy</A></FONT> </TD>
+    <TD align=middle><FONT face="Helvetica, Arial">| </FONT></TD>
+    <TD align=left><FONT face="Helvetica, Arial" size=-1><A 
+      href="mailto:dev_webmaster@sgi.com" target=_top>webmaster</A></FONT> 
+</TD></TR>
+  <TR>
+    <TD align=right><FONT face="Helvetica, Arial" size=-2><A 
+      href="http://www.sgi.com/company_info/copyright.html" 
+      target=_top>Copyright &copy; 2000 Silicon Graphics, Inc.</A> All rights 
+      reserved.</FONT> </TD>
+    <TD align=middle><FONT face="Helvetica, Arial">| </FONT></TD>
+    <TD align=left><FONT face="Helvetica, Arial" size=-2><A 
+      href="http://www.sgi.com/company_info/trademarks/" target=_top>Trademark 
+      Information</A></FONT> </TD></TR></TBODY></TABLE></CENTER></BODY></HTML>

@@ -1,0 +1,81 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>Ｘ编程注意事项</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>Ｘ编程注意事项</H1> 
+ <P><UL>
+<LI><H2>捕获用来显示的事件
+</H2>
+</UL><UL>
+<LI><H2>避免多重显示
+</H2>
+<UL>
+case Expose: 
+<BR><BR>　/* deal with event */ 
+<BR>　while XCheckTypedWindowEvent(display,window,Expose,&event) ;
+</UL></UL><UL>
+<LI><H2>如何处理显示事件
+</H2>
+<UL>
+<LI>显示列表，后备存储（xdpyinfo ），区域重画
+</UL></UL><UL>
+<H2>XEvent event; Region region; XRectangle rectangle;
+</H2>
+</UL><UL>
+<H2>switch(event.type){
+</H2>
+</UL><UL>
+<H2>     case Expose:   region = XCreateRegion();
+</H2>
+</UL><UL>
+<H2>         do{
+</H2>
+</UL><UL>
+<H2>           rectangle.x = (short) event.xexpose.x; rectangle.y = (short) event.xexpose.y
+</H2>
+</UL><UL>
+<H2>           rectangle.width = (unsigned short) event.xexpose.width;
+</H2>
+</UL><UL>
+<H2>           rectangle.height = (unsigned short) event.xexpose.height;
+</H2>
+</UL><UL>
+<H2>           XUnionRectWithRegion(&rectangle,region,region);
+</H2>
+</UL><UL>
+<H2>          } while(XCheckTypedEvent(display,Expose, &event);
+</H2>
+</UL><UL>
+<H2>          XSetRegion(display,gc,region);   redraw(window);  XDestroyRegion(region);
+</H2>
+</UL><UL>
+<H2>         break;
+</H2>
+</UL><UL>
+<LI><H2>捕获动态事件（PointerMotionHintMask，XQueryPointer）
+</H2>
+</UL><UL>
+<LI><H2>获取参数（XGetDefault, XrmInitialise, XrmParseCommand）</H2>
+</UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld018.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld020.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld019.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

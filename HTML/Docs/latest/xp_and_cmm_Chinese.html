@@ -1,0 +1,243 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Aka 杂志</title>
+</head>
+
+<body bgcolor="#ffffff">
+<div align="center"><center>
+
+    <table cellspacing="0" cellpadding="0" width="630" border="0">
+      <tr> 
+        <td bgcolor="#EEEDB7"> 
+          <h1 align="center">XP（极限程序设计）与能力成熟度模型</h1>
+          <div style='layout-grid:15.6pt'> 
+            <p align="center"><b>作者</b> Ron Jeffries</p>    
+            <p align="center"><b>审校</b> bakkhos[AKA]<b><br>
+              译者</b> 黄定光 任东英 [AKA]</p>    
+            <div align="center">
+              <p><a href="index.html"><font size="2"><b>[返回]</b></font></a></p>
+              <p>&nbsp;</p>
+            </div>
+            <div class="topofpage"><b></b> </div>
+            <div class="body"> 
+              <table cellspacing="10" cellpadding="0" width="50%" align="right" bgcolor="#FEFDC7" height="151">
+                <tr> 
+                  <td valign="top" height="141">一场关于软件工程的讨论征求大家对于XP（极限程序设计）的想法，建议XP与SEI体系中1级过程大致相当。在以下叙述中，我们来研读一下CMM中的部分描述，以及XP在Chrysler     
+                    C3项目上体现出来的相应方面。 </td>
+                </tr>
+              </table>
+            </div>
+            <p class=MsoIndexHeading>My assessment overall is that XP has some     
+              characteristics in common with the higher SEI levels, up to and     
+              including level 5. However, I would not assert that an XP team is     
+              a level 5 team. It takes a lot more documentation and "proving"     
+              going on in CMM than we recommend for XP. XP is in some ways a "vertical"     
+              slice through the SEI levels 2 through 5.<br>
+              　　我总体的评价是XP与SEI的更高层次有一些共同的特征，直至并包括5级。但是，我不能断言XP团队就是一个5级团队。在CMM中，还需要更多大量的文档和“证明”，来支持我对于XP的上述评价。从某种意义上说，XP是SEI体系中2至5级的一个“垂直”区间。 
+            </p>
+            <p>Comments are welcome via wiki, or <a href="mailto:ronjeffries@acm.org">email</a>.     
+              <br>
+              欢迎通过wiki或电子邮件发表你的观点。 </p>
+            <p>In the following, sections in <em>italics</em> are quotations from     
+              <strong>The Capability Maturity Model</strong>, CMU/SEI, Paulk et     
+              al, Addison-Wesley, 1995, ISBN 0-201-54664-7. <br>    
+              以下，斜体部分源自能力成熟度模型, CMU/SEI, Paulk et al, Addison-Wesley, 1995, ISBN     
+              0-201-54664-7. </p>
+            <p> <big> <strong> <font face="Tekton"> <a href="#Level One">[ 
+              Level 1 ]</a> <a href="#Level Two">[ Level 2 ]</a> 
+              <a href="#Level Three">[ Level 3 ]</a> <a href="#Level Four">[ 
+              Level 4 ]</a> <a href="#Level Five">[ Level 5 ]</a> 
+              </font> </strong> </big> </p>
+            <h2>SEI <a name="Level One">Level One</a> <br>    
+              SEI 一级 </h2>    
+            <p> <em>At the Initial Level, the organization typically does not     
+              provide a stable environment for developing and maintaining software.     
+              Overcommitment is a characteristic of Level 1 organizations, and     
+              such organizations frequently have difficulty making commitments     
+              that the staff can meet with an orderly engineering process, resulting     
+              in a series of crises. During a crisis, projects typically abondon     
+              planned procedures, and refert to coding and testing. Success depends     
+              on having an exceptional manager and a seasoned and effective software     
+              team.</em> <br>
+              <i>在起始层次，<span style="background-color: #FF0000"></span>组织通常没有提供一个软件开发与维护的稳定环境。过量劳动是一级组织的典型特征。这些组织经常很难保障其职员能秩序井然的进行开发，从而导致一系列危机。 
+              在危机中，项目一般会取消有计划性的程序，<strike></strike>转而去编码和测试。其成功依赖于能力非凡的项目经理和富有经验的有效率的开发团队。</i></p>
+            <p> <em>Success in Level 1 organizations depends on the competence     
+              and heroics of the people in the organization and cannot be repeated     
+              unless the same competent individuals are assigned to the next project.     
+              Thus, at Level 1, capability is a characteristic of the individuals,     
+              not of the organization.</em> <br>
+              <i>处于SEI一级的组织的成功依靠有能力的人物，除非将相同的有能力的成员组合分配至下一项目中，否则其成功不具备可重复性。因此，在一级模型中，能力是属于个体的，并非团队的特征。 
+              </i></p>
+            <p>ExtremeProgramming specifically prescribes two levels of scheduling,   
+              which make up the PlanningGame. These levels, called CommitmentSchedule   
+              and IterationPlan, are based on developers' own estimates for the   
+              production of the necessary software. The joint CommitmentSchedule   
+              process results in a comprehensive estimate of what will be produced,   
+              and when. The joint IterationPlan schedules a short interval, and   
+              results of each iteration feed back into the CommitmentSchedule   
+              to refine the schedule. C3 progress is in no way characterized by   
+              a series of crises. <br>
+              XP明确规定了两个层次的日程安排方法，形成其独具特色的计划性策略。这两种层次分别是“承诺日程”，和迭代计划，都是基于开发者对自身在开发软件进程中能力的估计。承诺日程是对于“能做什么，什么时间能完成”的综合预期评估。反复计划则是一种短周期的、根据实际进程的反馈对承诺日程进行校正的方法。C3过程从未遭遇危机。 
+            </p>
+            <p>The C3 team specifically prohibits heroics, and works almost no   
+              overtime. Instead, the team treats a desire for heroics as an indication   
+              that there is something wrong with the process. They dig in and   
+              determine what is going wrong, and fix the process. <br>
+              C3团队明确禁止个人英雄主义，而且几乎从不超时工作。相反地，这个团队视个人英雄的表现欲望是一种开发过程存在问题的迹象。他们深究并确定问题的症结所在，并修正这个过程。 
+            </p>
+            <p>While the C3 team members are quite competent, they are generally   
+              not exceptional. The team's <a href="../Practices/PracPairs.html">PairProgramming</a>   
+              practice brings two good minds to bear on each problem: this is   
+              generally better than bringing one excellent mind to bear. <br>
+              虽然C3团队的成员都很有能力，他们通常都不表现异常。团队的“双人程序设计”的做法使得每一个问题都有两个人来承担：这样比让一个即使优秀的人物单独承担要好得多。 
+            </p>
+            <p>The team manager offers no exceptional support. Rather, he serves   
+              only to track progress, and to interface to management, with all   
+              technical decisions and assignements being done jointly by the team   
+              and by a volunteer process. <br>
+              团队经理从不提供特殊支持。他只是对工作的整体进度进行跟踪，作为一个管理的接口。所有技术方面的决定和任务分配都是由团队集体完成，而且是一个自愿的过程。 
+            </p>
+            <p>A second Extreme Programming project, with a new team, has not   
+              yet been attempted at Chrysler, so we cannot yet speak to how well   
+              the success will be replicated. Our thoughtful opinion, however,   
+              is that it is our process, not us as individuals, that is making   
+              C3 work so well.<br>  
+              Chrysler尚未尝试着以一个新的团队，去开始第二个XP项目，所以我们还不能说他们的成功会怎样再现。但是，在经过深思之后可以得出这样的结论，C3之所以表现如此不俗是因为我们的整体过程，而不是个体行为所致。 
+            </p>
+            <h2>SEI <a name="Level Two">Level Two</a> - Repeatable<br>  
+              SEI 二级 - 具备可重复性 </h2>  
+            <p> <em>At the Repeatable Level, ... projects implement effective   
+              processes that are defined, documented, practiced, trained, measured,   
+              enforced, and improvable.</em> <br>  
+              <i>在可重复的层次， ... 项目实施有效的过程，这种过程是有明确规范的，具备文档的，经过实践的，经过培训的，有评估的，加强的，并且是可改进的。</i>   
+            </p>
+            <p>ExtremeProgramming clearly specifies a number of practices (<a href="../Practices/PracIntro.html">Extreme   
+              Programming Rules</a>). These are well-defined, and are documented.   
+              The team has been trained at the beginning of the project, has a   
+              full-time coach, and trains new members in the team practices. Practices   
+              are generally measured and enforced by the shared responsibility   
+              of the team. <a href="../Practices/PracPairs.html">Pair Programming</a>   
+              and an open process ensure that all developers know what is happening   
+              all over the system. In the rare instances where a developer may   
+              violate one of the team's practices, the offending developer will   
+              be advised, reprimanded, or, in rare cases, allowed to work on some   
+              other project. <br>
+              XP清晰地明确了一系列规范（XP规则）。这些规则是被明确定义的，而且是具备文档的。团队在项目之初是经过训练的，有全职教练对新成员进行团队规范培训。这些实践通常都是可评估的并通过团队共担责任的形式来保证落实。“双人程序设计”和开放的过程能确保所有开发者对整个系统所发生的事情都很清楚。在少数情况下，当一个开发者违反了团队的某项规范，他将被提出忠告，受到训斥，甚至，在极少案例中，会被安排去为其它项目工作。 
+            </p>
+            <p>The practices are improvable, and in fact (see <a href="#Level Five">SeiLevelFive</a>)   
+              are improved as we go along. <br>
+              这些规范是可改进的，而且事实上（见SEI五级）也正在随着我们的前进而不断被改进。 </p>
+            <p> <em>...managers for a project track software costs, schedules,  
+              and functionality; problems in meeting commitments are identified  
+              as they arise.</em> <br> 
+              ...项目经理跟踪软件工程的成本，时间进度和实现的功能；问题在萌芽之时就会立即被发现。 </p>
+            <p>In ExtremeProgramming, we track <a href="../Practices/PracFourVariables.html">FourVariables</a>, 
+              Resources, Scope, Quality, and Time. These variables let us determine 
+              whether we are meeting the schedule, with the desired quality, as 
+              we go along. We report these variables uniformly, from ourselves 
+              all the way to the top of the organization.<br>
+              在XP中，我们跟踪四个变量，即：资源，范围，质量和时间。随着不断向前进，我们依据这些变量来决定当前状态是否赶上计划中的进度，且具备理想的质量。我们以统一的方式来汇报这些变量，从自身直至组织的最高层。 
+            </p>
+            <h2>SEI <a name="Level Three">Level Three</a> - Defined<br>  
+              SEI三级--定义 </h2>
+            <p> <em>At the Defined Level ... a defined software process contains   
+              a coherent, integrated set of well-defined software engineering   
+              and management processes ... characterized as including readiness   
+              criteria, inputs, standards and procedures for completing the work,   
+              verification mechanisms ..., outputs, and completion criteria. Because   
+              the software process is well-defined, management has good insight   
+              into technical progress on the project.</em> <br>
+              <i>在定义层次……一个定义好的软件过程包括一个紧密的、统一的良好定义的软件工程和管理过程的集合……以包含准备就绪的标准，输入，完成</i><i>这项工作的标准和程序，校验机制，……，输出和完成标准为特征。由于软件过程是定义好的，管理这个项目时就能比较深入地理解它的技术过程</i><i>。</i></p>
+            <p>ExtremeProgramming's rules encompass the readiness criteria (e.g. 
+              completion of UserStories, presence of key resources), inputs (UserStories), 
+              standards and procedures (the many "Extreme Programming Rules"), 
+              verification mechanisms (UnitTests and FunctionalTests), outputs 
+              (the software plus anything else defined in the UserStories), and 
+              completion criteria (user-acceptable scores on the FunctionalTests). 
+              <br>
+              极限程序设计的规则包括准备就绪的标准（例如：UserStories的实现，关键资源的提供），输入（UserStories），标准和程序（许多"极限编程规则"），查错机制（单元测试和功能测试），输出（软件的输出和其他UserStories定义的输出），和完成标准（用户可接受的功能测试）。 
+            </p>
+            <p>Using the FourVariables, ExtremeProgramming provides management   
+              with simple and clear insight into actual project performance.<br>
+              使用这4个参数，极限程序设计为实际项目的管理实施提供了简单而清晰的整体信息。 </p>
+            <h2>SEI <a name="Level Four">Level Four</a> - Managed<br>  
+              SEI四级--管理 </h2>
+            <p> <em>At the Managed Level, the organization sets quantitative quality   
+              goals for both software products and processes.</em> <br>  
+              <i>在管理层次，组织为软件产品和过程设置量化的质量目标。</i> </p>
+            <p>ExtremeProgramming requires that quality goals for products be   
+              set via the <a href="../Practices/PracFuncTest.html">FunctionalTests</a>.   
+              We require <a href="../Practices/PracUnitTest.html">UnitTests</a>   
+              to be at 100% all the times, so that's not very interesting as a   
+              statistic. We measure our LoadFactor, which relates elapsed time   
+              to developers' estimates of difficulty. We have not set quantitative   
+              goals for this figure, but we do use changes in LoadFactor as a   
+              cue to look into the process and see where we can improve.<br>
+              极限程序设计要求通过功能测试为产品设置质量目标。我们在任何时候都要求100％的单元测试，所以说，单元测试作为一个统计量不是非常有价值的。我们测量我们的负载系数，这个系数和逝去的时间和开发者对问题难度的估计有关。对这一数字，我们不设置量化目标，但是我们利用负载系数的变化作为一个线索来分析整个过程，看看哪里的质量目标可以提高。 
+            </p>
+            <p>When the schedule is tracking and test scores are good, we have   
+              not found it necessary to track other quantitative values. Some   
+              candidates to consider would be: number of unit tests vs number   
+              of system classes; rate of change of test creation; number of system   
+              classes; class/method/code lines ratios, and so on. <br>
+              当开发日程被跟踪并且测试成绩很好的时候，我们发现没有必要去跟踪其他量化值。我们应当考虑一些候选值：单元测试的个数和系统类的个数之比；测试造成的改变的比率；系统类的个数；类/方法/代码的行数的比值等等。 
+            </p>
+            <p>Looking at XP through CMM eyes, especially if XP were being done 
+              throughout an entire large organization, we would expect that more 
+              measurement might be needed than we require in a single project. 
+              An interesting question in those circumstances is how much to invest 
+              in measurement "in case we need it". The XP advice would be to measure 
+              only things that have low cost, and start measuring when you see 
+              the need. We would advise recording additional (low-cost) measures 
+              but (literally) not looking at them unless and until there is a 
+              perceived use for the figures. Otherwise you're just wasting time 
+              that could be used writing more software - which is, after all, 
+              the point.<br>
+              通过CMM的观点看XP，尤其是如果一个完整的大的组织采用XP，我们认为它需要的度量的指标可能比在单一一个项目中要求的更多。在那些环境下，一个有趣的问题就是应当向度量指标投入多少“以防我们需要它”。XP建议只度量那些低成本的，并且只有在你看到需求的时候才开始度量。我们的建议是记录附加的（低成本的）度量，但是只有发现这些数字有用的时候才考虑它们。否则，你不过是在浪费时间，而这些时间是可以用来写程序的，----这毕竟是重点。 
+            </p>
+            <h2>SEI <a name="Level Five">Level Five</a> - Optimizing<br>  
+              SEI五级--优化 </h2>
+            <p> <em>At the Optimizing Level .. software teams analyze defects   
+              to determine their causes. They evaluate software processes to prevent   
+              known types of defects from recurring and [they] disseminate lessons   
+              learned throughout the organization.</em> <br>
+              <i>在优化层次……软件开发团队分析缺陷以决定它们的原因。他们评估软件过程以避免已知类型缺陷的复发，他们在整个组织中传授学到的经验。</i></p>
+            <p>ExtremeProgramming practice is to meet every defect by implementing   
+              tests that display the defect, then fixing the software so that   
+              the tests run. Other tests are to be built in the same or related   
+              areas, to catch similar or related problems. <br>
+              极限程序设计实践通过执行显示缺陷的测试来发现错误，然后修正这个软件，继续执行测试来发现所有缺陷。其它的测试将在同样的或相关的范围建立起来，以捕捉相似的或相关的问题。 
+            </p>
+            <p>It is fair to say that the C3 team, being human, sometimes falls   
+              a bit short in terms of creating tests for things that are outside   
+              our current scope. This is an area that needs continual attention   
+              from the ExtremeCoach, and it may need shoring up in some other   
+              way as well. <br>
+              <strike></strike>公正的说，C3团体，作为人，有时在给我们目前从事的领域之外的事物创建测试方面存在不足。这是一个需要“极限方法教练”继续关注的问题，它也需要一些其它方面的支持。 
+            </p>
+            <p>ExtremeProgramming teams prefer to implement software to check   
+              for and detect errors, whether in the base software or in process,   
+              rather than to set up involved procedures which leave open the possibility   
+              of human error or laziness. Thus, an XP team will write software   
+              to make sure that changes are not stepped on by subsequent developers,   
+              rather than set up a more involved release procedure.<br>
+              极限程序设计团队不管是对于基本成型的软件还是正在开发的软件，喜欢以执行软件来检查、探测错误，而不是通过建立复杂的可能受人的错误和惰性影响的过程来做这件事。因此，一个XP团队将开发一个保证不需要后来的开发者来更正的软件，而不是建立一个更为复杂的发布程序。 
+            </p>
+            <p> <big> <font face="Tekton"> <strong> <a href="#Level One">[  
+              Level 1 ]</a> <a href="#Level Two">[ Level 2 ]</a>  
+              <a href="#Level Three">[ Level 3 ]</a> <a href="#Level Four">[  
+              Level 4 ]</a> <a href="#Level Five">[ Level 5 ] </a>  
+              </strong> <a href="#XP">[top]</a> </font></big></p>
+            <font size="2"> </font></div>
+          <div align="center"><a href="index.html"><font size="2"><b>[返回]</b></font></a></div>
+        </td>
+      </tr>
+      <tr>
+        <td bgcolor="#EEEDB7">&nbsp;</td>
+      </tr>
+    </table>
+</center></div>
+</body>
+</html>

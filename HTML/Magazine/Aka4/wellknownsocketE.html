@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Introduction to the Internet Protocols</TITLE>
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+<META content="MSHTML 5.00.2014.210" name=GENERATOR></HEAD>
+<BODY TEXT="#000000" BGCOLOR="#eeedb7" LINK="#797E8C" VLINK="#4F4F4F" ALINK="#FF0000">
+
+<center><H4>Well-known sockets and the applications layer</H4></center>
+<P>Copyright (C) 1987, Charles L. Hedrick. Anyone may reproduce this document, 
+in whole or in part, provided that:
+<p> (1) any copy or republication of the entire 
+document must show Rutgers University as the source, and must include this 
+notice; and (2) any other use of this material must reference this manual and 
+Rutgers University, and the fact that the material is copyright by Charles 
+Hedrick and is used by permission. 
+<P>So far, we have described how a stream of data is broken up into datagrams, 
+sent to another computer, and put back together. However something more is 
+needed in order to accomplish anything useful. There has to be a way for you to 
+open a connection to a specified computer, log into it, tell it what file you 
+want, and control the transmission of the file. (If you have a different 
+application in mind, e.g. computer mail, some analogous protocol is needed.) 
+This is done by "application protocols". The application protocols run "on top" 
+of TCP/IP. That is, when they want to send a message, they give the message to 
+TCP. TCP makes sure it gets delivered to the other end. Because TCP and IP take 
+care of all the networking details, the applications protocols can treat a 
+network connection as if it were a simple byte stream, like a terminal or phone 
+line. 
+<P>Before going into more details about applications programs, we have to 
+describe how you find an application. Suppose you want to send a file to a 
+computer whose Internet address is 128.6.4.7. To start the process, you need 
+more than just the Internet address. You have to connect to the FTP server at 
+the other end. In general, network programs are specialized for a specific set 
+of tasks. Most systems have separate programs to handle file transfers, remote 
+terminal logins, mail, etc. When you connect to 128.6.4.7, you have to specify 
+that you want to talk to the FTP server. This is done by having "well-known 
+sockets" for each server. Recall that TCP uses port numbers to keep track of 
+individual conversations. User programs normally use more or less random port 
+numbers. However specific port numbers are assigned to the programs that sit 
+waiting for requests. For example, if you want to send a file, you will start a 
+program called "ftp". It will open a connection using some random number, say 
+1234, for the port number on its end. However it will specify port number 21 for 
+the other end. This is the official port number for the FTP server. Note that 
+there are two different programs involved. You run ftp on your side. This is a 
+program designed to accept commands from your terminal and pass them on to the 
+other end. The program that you talk to on the other machine is the FTP server. 
+It is designed to accept commands from the network connection, rather than an 
+interactive terminal. There is no need for your program to use a well-known 
+socket number for itself. Nobody is trying to find it. However the servers have 
+to have well-known numbers, so that people can open connections to them and 
+start sending them commands. The official port numbers for each program are 
+given in "Assigned Numbers". 
+<P>Note that a connection is actually described by a set of 4 numbers: the 
+Internet address at each end, and the TCP port number at each end. Every 
+datagram has all four of those numbers in it. (The Internet addresses are in the 
+IP header, and the TCP port numbers are in the TCP header.) In order to keep 
+things straight, no two connections can have the same set of numbers. However it 
+is enough for any one number to be different. For example, it is perfectly 
+possible for two different users on a machine to be sending files to the same 
+other machine. This could result in connections with the following parameters: <PRE>                   Internet addresses         TCP ports
+    connection 1  128.6.4.194, 128.6.4.7      1234, 21
+    connection 2  128.6.4.194, 128.6.4.7      1235, 21
+</PRE>
+<P>Since the same machines are involved, the Internet addresses are the same. 
+Since they are both doing file transfers, one end of the connection involves the 
+well-known port number for FTP. The only thing that differs is the port number 
+for the program that the users are running. That's enough of a difference. 
+Generally, at least one end of the connection asks the network software to 
+assign it a port number that is guaranteed to be unique. Normally, it's the 
+user's end, since the server has to use a well-known number. 
+<P>Now that we know how to open connections, let's get back to the applications 
+programs. As mentioned earlier, once TCP has opened a connection, we have 
+something that might as well be a simple wire. All the hard parts are handled by 
+TCP and IP. However we still need some agreement as to what we send over this 
+connection. In effect this is simply an agreement on what set of commands the 
+application will understand, and the format in which they are to be sent. 
+Generally, what is sent is a combination of commands and data. They use context 
+to differentiate. For example, the mail protocol works like this: Your mail 
+program opens a connection to the mail server at the other end. Your program 
+gives it your machine's name, the sender of the message, and the recipients you 
+want it sent to. It then sends a command saying that it is starting the message. 
+At that point, the other end stops treating what it sees as commands, and starts 
+accepting the message. Your end then starts sending the text of the message. At 
+the end of the message, a special mark is sent (a dot in the first column). 
+After that, both ends understand that your program is again sending commands. 
+This is the simplest way to do things, and the one that most applications use. 
+<P>File transfer is somewhat more complex. The file transfer protocol involves 
+two different connections. It starts out just like mail. The user's program 
+sends commands like "log me in as this user", "here is my password", "send me 
+the file with this name". However once the command to send data is sent, a 
+second connection is opened for the data itself. It would certainly be possible 
+to send the data on the same connection, as mail does. However file transfers 
+often take a long time. The designers of the file transfer protocol wanted to 
+allow the user to continue issuing commands while the transfer is going on. For 
+example, the user might make an inquiry, or he might abort the transfer. Thus 
+the designers felt it was best to use a separate connection for the data and 
+leave the original command connection for commands. (It is also possible to open 
+command connections to two different computers, and tell them to send a file 
+from one to the other. In that case, the data couldn't go over the command 
+connection.) 
+<P>Remote terminal connections use another mechanism still. For remote logins, 
+there is just one connection. It normally sends data. When it is necessary to 
+send a command (e.g. to set the terminal type or to change some mode), a special 
+character is used to indicate that the next character is a command. If the user 
+happens to type that special character as data, two of them are sent. 
+<P>We are not going to describe the application protocols in detail in this 
+document. It's better to read the RFC's yourself. However there are a couple of 
+common conventions used by applications that will be described here. First, the 
+common network representation: TCP/IP is intended to be usable on any computer. 
+Unfortunately, not all computers agree on how data is represented. There are 
+differences in character codes (ASCII vs. EBCDIC), in end of line conventions 
+(carriage return, line feed, or a representation using counts), and in whether 
+terminals expect characters to be sent individually or a line at a time. In 
+order to allow computers of different kinds to communicate, each applications 
+protocol defines a standard representation. Note that TCP and IP do not care 
+about the representation. TCP simply sends octets. However the programs at both 
+ends have to agree on how the octets are to be interpreted. The RFC for each 
+application specifies the standard representation for that application. Normally 
+it is "net ASCII". This uses ASCII characters, with end of line denoted by a 
+carriage return followed by a line feed. For remote login, there is also a 
+definition of a "standard terminal", which turns out to be a half-duplex 
+terminal with echoing happening on the local machine. Most applications also 
+make provisions for the two computers to agree on other representations that 
+they may find more convenient. For example, PDP-10's have 36-bit words. There is 
+a way that two PDP-10's can agree to send a 36-bit binary file. Similarly, two 
+systems that prefer full-duplex terminal conversations can agree on that. 
+However each application has a standard representation, which every machine must 
+support. 
+<H3>An example application: SMTP</H3>
+<P>In order to give a bit better idea what is involved in the application 
+protocols, I'm going to show an example of SMTP, which is the mail protocol. 
+(SMTP is "simple mail transfer protocol.) We assume that a computer called 
+TOPAZ.RUTGERS.EDU wants to send the following message. <PRE>  Date: Sat, 27 Jun 87 13:26:31 EDT
+  From: hedrick@topaz.rutgers.edu
+  To: levy@red.rutgers.edu
+  Subject: meeting
+
+  Let's get together Monday at 1pm.
+</PRE>
+<P>First, note that the format of the message itself is described by an Internet 
+standard (RFC 822). The standard specifies the fact that the message must be 
+transmitted as net ASCII (i.e. it must be ASCII, with carriage return/linefeed 
+to delimit lines). It also describes the general structure, as a group of header 
+lines, then a blank line, and then the body of the message. Finally, it 
+describes the syntax of the header lines in detail. Generally they consist of a 
+keyword and then a value. 
+<P>Note that the addressee is indicated as LEVY@RED.RUTGERS.EDU. Initially, 
+addresses were simply "person at machine". However recent standards have made 
+things more flexible. There are now provisions for systems to handle other 
+systems' mail. This can allow automatic forwarding on behalf of computers not 
+connected to the Internet. It can be used to direct mail for a number of systems 
+to one central mail server. Indeed there is no requirement that an actual 
+computer by the name of RED.RUTGERS.EDU even exist. The name servers could be 
+set up so that you mail to department names, and each department's mail is 
+routed automatically to an appropriate computer. It is also possible that the 
+part before the @ is something other than a user name. It is possible for 
+programs to be set up to process mail. There are also provisions to handle 
+mailing lists, and generic names such as "postmaster" or "operator". 
+<P>The way the message is to be sent to another system is described by RFC's 821 
+and 974. The program that is going to be doing the sending asks the name server 
+several queries to determine where to route the message. The first query is to 
+find out which machines handle mail for the name RED.RUTGERS.EDU. In this case, 
+the server replies that RED.RUTGERS.EDU handles its own mail. The program then 
+asks for the address of RED.RUTGERS.EDU, which is 128.6.4.2. Then the mail 
+program opens a TCP connection to port 25 on 128.6.4.2. Port 25 is the 
+well-known socket used for receiving mail. Once this connection is established, 
+the mail program starts sending commands. Here is a typical conversation. Each 
+line is labelled as to whether it is from TOPAZ or RED. Note that TOPAZ 
+initiated the connection: <PRE>    RED    220 RED.RUTGERS.EDU SMTP Service at 29 Jun 87 05:17:18 EDT
+    TOPAZ  HELO topaz.rutgers.edu
+    RED    250 RED.RUTGERS.EDU - Hello, TOPAZ.RUTGERS.EDU
+    TOPAZ  MAIL From:<HEDRICK@TOPAZ.RUTGERS.EDU>
+    RED    250 MAIL accepted
+    TOPAZ  RCPT To:<LEVY@RED.RUTGERS.EDU>
+    RED    250 Recipient accepted
+    TOPAZ  DATA
+    RED    354 Start mail input; end with <CRLF>.<CRLF>
+    TOPAZ  Date: Sat, 27 Jun 87 13:26:31 EDT
+    TOPAZ  From: hedrick@topaz.rutgers.edu
+    TOPAZ  To: levy@red.rutgers.edu
+    TOPAZ  Subject: meeting
+    TOPAZ
+    TOPAZ  Let's get together Monday at 1pm.
+    TOPAZ  .
+    RED    250 OK
+    TOPAZ  QUIT
+    RED    221 RED.RUTGERS.EDU Service closing transmission channel
+<PRE><P>First, note that commands all use normal text.  This is typical of the
+Internet  standards.    Many  of  the  protocols  use  standard  ASCII
+commands.  This makes it easy  to  watch  what  is  going  on  and  to
+diagnose  problems.  For example, the mail program keeps a log of each
+conversation.  If something goes wrong, the log  file  can  simply  be
+mailed  to  the  postmaster.  Since it is normal text, he can see what
+was going on.  It also allows a human to interact  directly  with  the
+mail  server,  for  testing.  (Some newer protocols are complex enough
+that this is not practical.  The commands would have to have a  syntax
+that would require a significant parser.  Thus there is a tendency for
+newer protocols to use binary formats.  Generally they are  structured
+like  C or Pascal record structures.)  Second, note that the responses
+all begin with numbers.  This is also typical of  Internet  protocols.
+The  allowable  responses  are  defined  in the protocol.  The numbers
+allow the user program to respond unambiguously.    The  rest  of  the
+response  is  text,  which is normally for use by any human who may be
+watching or looking at a log.  It has no effect on  the  operation  of
+the  programs.  (However there is one point at which the protocol uses
+part of the text of the response.)   The  commands  themselves  simply
+allow  the  mail  program  on  one  end  to  tell  the mail server the
+information it needs to know in order to deliver the message.  In this
+case,  the  mail  server  could  get the information by looking at the
+message itself.  But for more complex cases, that would not  be  safe.
+Every  session  must  begin  with  a HELO, which gives the name of the
+system that initiated the connection.  Then the sender and  recipients
+are specified.  (There can be more than one RCPT command, if there are
+several recipients.)  Finally the data itself is sent.  Note that  the
+text  of the message is terminated by a line containing just a period.
+(If such a line appears in the message, the period is doubled.)  After
+the  message  is  accepted,  the  sender  can send another message, or
+terminate the session as in the example above.
+
+<P>Generally, there is a pattern to the response numbers.   The  protocol
+defines  the  specific set of responses that can be sent as answers to
+any given command.  However programs that don't want to  analyze  them
+in  detail  can  just  look at the first digit.  In general, responses
+that begin with a 2  indicate  success.    Those  that  begin  with  3
+indicate  that some further action is needed, as shown above.  4 and 5
+indicate errors.  4 is a "temporary" error, such as  a  disk  filling.
+The  message should be saved, and tried again later.  5 is a permanent
+error, such as a  non-existent  recipient.    The  message  should  be
+returned to the sender with an error message.
+
+<P>(For  more  details about the protocols mentioned in this section, see
+RFC's 821/822 for mail, RFC 959 for file transfer, and  RFC's  854/855
+for  remote  logins.  For the well-known port numbers, see the current
+edition of Assigned Numbers, and possibly RFC 814.>
+</PRE></PRE></BODY></HTML>

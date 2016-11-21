@@ -1,0 +1,326 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=x-gbk">
+<title>LinuxProcess</title>
+</head>
+
+<body>
+
+<p>纲要</p>
+
+<p>1、linux进程管理的模块组织框架<br>
+2、相关数据结构。<br>
+3、进程调度原则，调度算法,。<br>
+4、进程的创建和运行管理。<br>
+5、进程间通讯。 &nbsp;&nbsp; &nbsp; &nbsp; <br>
+6、更多的技术<br>
+&nbsp; 进程调度和中断处理交接<br>
+&nbsp; 进程管理涉及的内核机制：bottom-half处理，等待队列<br>
+&nbsp; Linux/SMP的进程管理和调度技术 &nbsp;&nbsp; <br>
+7、概述2.4的新特点<br>
+</p>
+
+<p>==============================================================================================</p>
+
+<h2>1、linux进程管理的模块组织框架</h2>
+
+<h3>&nbsp;&nbsp; 1、1 &nbsp; &nbsp; 进程管理要解决的中心问题 </h3>
+
+<ul>
+  <li>allow processes to create new copies of themselves</li>
+  <li>determine which process will have access to the CPU and effect the transfer between 
+    running processes</li>
+  <li>receive interrupts and route them to the appropriate kernelsubsystem</li>
+  <li>send signals to user processes</li>
+  <li>manage the timer hardware</li>
+  <li>clean up process resources when a processes finishes executing</li>
+  <li>dynamicallyloaded modules&nbsp; </li>
+</ul>
+
+<h3>&nbsp;&nbsp; 1、2 &nbsp;&nbsp; 在整个内核中的功能位置和源码依赖关系<br>
+<br>
+<img src="modules/overview2.gif" alt="function modules" width="590" height="422"></h3>
+
+<p><strong>(1)&nbsp; 进程调度模块的内外界面：</strong></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1、对用户进程提供了一组简单的系统调用接口； 
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 2、对内核的其他模块提供了丰富的接口功能。</p>
+
+<p><img src="modules/sched.gif" alt="sched" width="441" height="202"></p>
+
+<p><strong>&nbsp; (2) 进程调度模块和其他模块的相互依赖关系：</strong></p>
+
+<p>&nbsp;&nbsp;&nbsp; 
+内存管理模块：当一个进程被调度的时候，为它建立内存映射。<br>
+&nbsp;&nbsp;&nbsp; IPC子模块：bottom-half处理使用了其中的信号量队列。<br>
+&nbsp;&nbsp;&nbsp; 文件系统模块：在装载module的时候为进程调度提供实际设备的访问途径。</p>
+
+<p>&nbsp;&nbsp;&nbsp; 
+所有的其他模块都依赖于进程调度模块，因为当要进行硬件访问的时候它们需要CPU挂起用户进程，切换到系统态进行处理。</p>
+
+<p>.<img src="modules/system.gif" alt="source dependence" width="305" height="308"></p>
+
+<p>==============================================================================================</p>
+
+<h2>2、相关数据结构。</h2>
+
+<p>&nbsp; task_struct 是进程管理中最重要的数据结构。详见src/linux/include/linux/sched.h中的定义。</p>
+
+<p><strong>（1）进程状态信息</strong></p>
+
+<p>volatile long state;</p>
+
+<p>它的取值有（@sched.h）以下几种，分别表示相应状态信息：&nbsp; </p>
+
+<blockquote>
+  <blockquote>
+    <p>#define TASK_RUNNING &nbsp;&nbsp; &nbsp; &nbsp; 0&nbsp;&nbsp; <br>
+    #define TASK_INTERRUPTIBLE &nbsp;&nbsp; 1<br>
+    #define TASK_UNINTERRUPTIBLE &nbsp;&nbsp; 2<br>
+    #define TASK_ZOMBIE &nbsp;&nbsp; &nbsp; &nbsp; 4 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+    #define TASK_STOPPED &nbsp;&nbsp; &nbsp; &nbsp; 8 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+    #define TASK_SWAPPING &nbsp;&nbsp; &nbsp; &nbsp; 16&nbsp;&nbsp;&nbsp;&nbsp; </p>
+  </blockquote>
+</blockquote>
+
+<p><strong>（2) 进程切换的依据： </strong></p>
+
+<blockquote>
+  <ul>
+    <li>进程优先级：表示下一次调度前进程可运行的时间长度（用tick计算）。</li>
+    <li>错误处理：如果上一次系统调用失败，切换到相应的错误处理程序。</li>
+  </ul>
+</blockquote>
+
+<p><strong>（3）进程索引结构：</strong></p>
+
+<blockquote>
+  <p>结构之一：双向链： </p>
+  <p>&nbsp;&nbsp;&nbsp; struct task_struct *next_task, *prev_task;<br>
+  &nbsp;&nbsp;&nbsp; struct task_struct *next_run, *prev_run;</p>
+  <p><img src="struct/task.gif" width="357" height="433" alt="task.gif (83988 bytes)"></p>
+  <p>结构之二：树结构：</p>
+  <p>&nbsp;&nbsp;&nbsp; struct task_struct *p_opptr, *p_pptr, *p_cptr, *p_ysptr, *p_osptr;</p>
+  <p><img src="struct/tasktree.GIF" width="552" height="329"
+  alt="tasktree.GIF (69567 bytes)"></p>
+  <p>附：<a href="struct/declaration.c">其他重要的和进程管理相关的数据结构、常量和变量声明。</a></p>
+</blockquote>
+
+<p>&nbsp; 
+==============================================================================================</p>
+
+<h2>3、进程调度原则，调度算法。</h2>
+
+<h3>3.1 原则： &nbsp;&nbsp; </h3>
+
+<p><strong>&nbsp;&nbsp; 调度是实现方式：周期性时间中断。</strong></p>
+
+<p>Linux的时钟中断每隔10ms发生一次。时钟中断处理例程就是进行进程的重新调度。因此至多每隔10ms的周期，进程管理器（函数<a
+href="algorithm/schedule.c">schedule()</a>就会被调用。<br>
+&nbsp;&nbsp; &nbsp; &nbsp; 
+不采用其他方式的原因：如果使用堆栈式的进程管理机制，由前后两个进程协商交接，则一旦当前进程出错或者用不法手段破坏堆栈的数据，系统将无法返回。为了保证安全，必须引入比较复杂的错误处理机制。而周期性时间中断由硬件强制切换，实现起来比较简单。</p>
+
+<p><strong>&nbsp;&nbsp; 调度优先级：</strong><br>
+&nbsp;&nbsp; （1）中断（硬件支持）<br>
+&nbsp;&nbsp; （2）当前的核心态进程<br>
+&nbsp;&nbsp; （3）其他核心态进程<br>
+&nbsp;&nbsp; （4）用户进程（软件管理）<br>
+</p>
+
+<p><strong>&nbsp;&nbsp; 用户进程的优先级分类</strong><br>
+&nbsp;&nbsp; （1）实时进程<br>
+&nbsp;&nbsp; （2）交互进程：视为IO bound进程<br>
+&nbsp;&nbsp; （3）批处理进程：视为CPU bound进程<br>
+</p>
+
+<p><strong>&nbsp;&nbsp; 具体描述：</strong><br>
+&nbsp;&nbsp; &nbsp; &nbsp; <br>
+&nbsp;&nbsp; ※ 
+中断可以抢占核心进程，但必须保证在中断处理结束后返回它。-- 
+一个核心态进程可以禁用它所运行的处理器上的中断，从而保证不会被中断请求信号中断它的运行。<br>
+&nbsp;&nbsp; ※ 核心态进程不可抢占中断处理进程。--中断处理期间，仅仅是在中断处理进程处理完成或其他被允许的中断发生时候才发生任务切换。<br>
+&nbsp;&nbsp; ※ 核心态进程不可抢占其他核心态进程。--除非一个核心态进程自愿睡眠，否则不能切换到别的进程。这保证了核心代码块的对其他进程的整体性，大大的简化了核心保护机制。<br>
+<br>
+&nbsp;&nbsp; 特点：核心态进程是非抢占，用户态进程是抢占的。<br>
+&nbsp;&nbsp; 优点：核心数据的同步和保护机制比较简单。<br>
+&nbsp;&nbsp; 缺点：不能很好的支持响应速度要求高的实时应用。</p>
+
+<h3>3.2 调度依据：</h3>
+
+<p><strong>&nbsp;&nbsp; 系统优先级：&nbsp; &nbsp; <br>
+&nbsp;&nbsp; 动态优先级：</strong>计算<a href="algorithm/goodness.htm">goodness</a>值。<strong><br>
+</strong>&nbsp;&nbsp; &nbsp; &nbsp; 时间片(slice/jiffies/quantum)：<br>
+&nbsp;&nbsp; &nbsp; &nbsp; 
+时间片的选择原则：在响应速度满足要求的的情况下尽量选择较大的时间片，减少系统开销。<br>
+&nbsp;&nbsp; &nbsp; &nbsp; 修改时间片必须直接修改源代码。</p>
+
+<h3>3.3&nbsp; 算法</h3>
+
+<p><strong>(1) 直接启动</strong></p>
+
+<p>&nbsp;&nbsp;&nbsp; 
+发生在当前进程因等待资源而需要进入被阻塞状态时。调度程序执行的步骤如下：<br>
+&nbsp;&nbsp;&nbsp; 1、把当前进程（全局变量current指向的task_struct变量）放到适当的等待队列里；<br>
+&nbsp;&nbsp;&nbsp; 2、把当前进程的state设为TASK_INTERRUPTIBEL或者TASK_UNINTERRUPTIBEL；<br>
+&nbsp;&nbsp;&nbsp; 3、调用schedule()，准备让新的进程掌握CPU;<br>
+&nbsp;&nbsp;&nbsp; 4、检查当前进程所需的资源是否可用，如果是，则把当前进程从等待队列里删除，否则回到第2步。</p>
+
+<p><a href="more/waitqueue.htm">相关内容：等待队列</a><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 这些步骤和<code class="Literal">sleep_on（）</code>，<code
+class="Literal">interruptible_sleep_on（）的操作类似。然而，这里schedule()还在唤醒进程后马上把它从等待队列里删除。 
+调度程序还会被许多执行长周期任务的设备驱动程序所调用。在每一个周期循环里，这些设备驱动程序检测need_resched的值，并且在必要的时候调用schedule()强行放弃CPU。</code></p>
+
+<h4 class="HeadC">（2)被动调用</h4>
+
+<p class="Body">&nbsp;&nbsp;&nbsp; 通过在当前进程的need_resched设为1，就可以实现另一种方式重新调度各个进程。因为每次调入一个用户态进程之前，这个变量的值都会被检查，因此schedule()又会很快被调用。<br>
+&nbsp;&nbsp;&nbsp; 被动调用在以下情况下执行： 
+
+<ul>
+  <li><p class="Body">当当前进程用完了它的CPU时间片，update_process_times()重新进行计算。</p>
+  </li>
+  <li><p class="Body">当一个进程被唤醒，而且它的优先级比当前进程高。<code
+    class="Literal">wake_up_process</code>（）调用reschedule_idle()，设置当前进程的need_resched,使被唤醒的进程尽快掌握CPU。</p>
+  </li>
+  <li><p class="Body">当sched_setschedler()或sched_yield()系统调用被调用的时候。</p>
+  </li>
+</ul>
+
+<h3><a href="algorithm/performance.htm">3.4 对调度算法的评价</a></h3>
+
+<p>&nbsp; 
+==============================================================================================</p>
+
+<h2>4、进程的创建和运行管理。</h2>
+
+<p>&nbsp;&nbsp;&nbsp; Linux中，进程的创建是通过拷贝已存在进程来实现的。<br>
+<br>
+&nbsp;&nbsp;&nbsp; 在Linux内核启动的时候，首先由start_kernel()初始化各个系统数据结构，同时生成了和系统共存亡的后台进程：init。可以参考<a
+href="running/sys-init.htm">内核的初始化过程</a>。<br>
+&nbsp;&nbsp;&nbsp; init进程通过拷贝自身，产生了若干内核子进程。然后这些进程就可以通过系统调用fork()生成它们的子进程，当然这些子进程的原始数据都是他们的父亲的副本。进程的终止是通过系统调用_exit()实现的。</p>
+
+<p>&nbsp; 
+==============================================================================================</p>
+
+<h2>5、进程间通讯。 &nbsp;&nbsp; &nbsp; </h2>
+
+<h3>5、1 模块的组织关系：</h3>
+
+<h3><img src="ipc/ipc-dep.gif" alt="ipc-dep" width="522" height="125"></h3>
+
+<h3>5、2 通讯的手段：</h3>
+
+<ul>
+  <li><strong>Signals：</strong> perhaps the oldest form of Unix IPC, signals are 
+    asynchronous messages sent to a process.</li>
+  <li><strong>Wait queues: </strong>provides a mechanism to put processes to sleep while they 
+    are waiting for an operation to complete. This mechanism is used by the process scheduler 
+    to implement bottom-half handling as described in section 3.3.3.<br>
+    <a href="more/waitqueue.htm">等待队列</a></li>
+  <li><strong>File locks:</strong>&nbsp; provides a mechanism to allow processes to declare 
+    either regions of a file, or the entire file itself, as read-only to all processes except 
+    the one which holds the file lock. </li>
+  <li><strong>Pipes and Named Pipes:</strong>&nbsp; allows connection-oriented, bi-directional 
+    data transfer between two processes either by explicitly setting up the pipe connection, 
+    or communicating through a named pipe residing in the file-system. </li>
+</ul>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="ipc/pips.gif" width="400"
+height="379" alt="pips.gif (27003 bytes)"> 
+
+<ul>
+  <li><strong>System V IPC: </strong></li>
+</ul>
+
+<blockquote>
+  <ul>
+    <li><strong>Semaphores: </strong>an implementation of a classical semaphore model. The model 
+      also allows for the creation of arrays of semaphores. </li>
+    <li><strong>Message queues: </strong>a connectionless data-transfer model. A message is a 
+      sequence of bytes, with an associated type. Messages are written to message queues, and 
+      messages can be obtained by reading from the message queue, possibly restricting which 
+      messages are read in by type. </li>
+    <li><strong>Shared memory: </strong>a mechanism by which several processes have access to 
+      the same region of physical memory.</li>
+  </ul>
+  <p><img src="ipc/V-semap.GIF" width="400" height="347" alt="V-semap.GIF (26817 bytes)"></p>
+  <p><img src="ipc/V-message.gif" width="400" height="309" alt="V-message.gif (19279 bytes)"></p>
+  <p><img src="ipc/V-mem.GIF" width="400" height="300" alt="V-mem.GIF (19168 bytes)"></p>
+  <p>　</p>
+</blockquote>
+
+<h3>&nbsp;&nbsp; 5、3&nbsp; 各种通讯机制间的关系</h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="ipc/ipc.gif" alt="ipc-module"
+width="417" height="324"></p>
+
+<p>&nbsp; 
+==============================================================================================</p>
+
+<h2>6、更多的技术</h2>
+
+<p>&nbsp;&nbsp;&nbsp; <a href="more/entry_S.htm">进程调度和中断处理交接</a><br>
+&nbsp;&nbsp;&nbsp; 进程管理涉及的内核机制：<a href="more/bottomhalf.htm">bottom-half处理</a>，<a
+href="more/waitqueue.htm">等待队列</a><br>
+&nbsp;&nbsp;&nbsp; <a href="SMP_sched.htm">Linux/SMP的进程管理和调度技术 </a>&nbsp;&nbsp; 
+</p>
+
+<h2 align="left">7、概述2.4的新特点</h2>
+
+<p align="left"><strong>◎ 源代码结构的变化<br>
+</strong>&nbsp;&nbsp; 子功能优化;<br>
+&nbsp;&nbsp; 可读性更强(<a href="k24/schedule.c">schedule()</a>);</p>
+
+<p align="left"><strong>◎ task_struct的变化<br>
+</strong>&nbsp;&nbsp; 数据类型的变化;<br>
+&nbsp;&nbsp; 管理变量的增加;</p>
+
+<p align="left"><strong>◎ 通用调度算法的变化：<br>
+</strong>&nbsp;&nbsp; Linux 2.4 introduces a subtle optimization concerning TLB flushing 
+for kernel threads and zombie processes.<br>
+&nbsp; &nbsp; As a result, the active Page Global Directory is set by the schedule(&nbsp; 
+) function rather than by the switch_to macro.</p>
+
+<p align="left"><strong>◎ SMP调度算法的变化：<br>
+</strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
+&nbsp; &nbsp; The Linux 2.4 scheduling algorithm for SMP machines has been improved and 
+simplified.<br>
+&nbsp; &nbsp; Whenever a new process becomes runnable, <br>
+&nbsp; &nbsp; (1)the kernel checks whether the preferred CPU of the process, that is, the 
+CPU on which it was last running, is idle; in this case, the kernel assigns the process to 
+that CPU. <br>
+&nbsp; &nbsp; (2)Otherwise, the kernel assigns the process to another idle CPU, if any. <br>
+&nbsp; &nbsp; (3)If all CPUs are busy,<br>
+&nbsp;&nbsp; &nbsp; (3.1)the kernel checks whether the process has enough priority to 
+preempt the process running on the preferred CPU.<br>
+&nbsp;&nbsp; &nbsp; (3.2)If not,<br>
+&nbsp;&nbsp; &nbsp; the kernel tries to preempt some other CPU only <br>
+&nbsp;&nbsp; &nbsp; (3.2.1)if the new runnable process is real-time or <br>
+&nbsp;&nbsp; &nbsp; (3.2.2)if it has short average time slices compared to the hardware 
+cache rewriting time.<br>
+&nbsp;&nbsp; &nbsp; <br>
+&nbsp;&nbsp; &nbsp; (Roughly, preemption occurs if the new runnable process is interactive 
+and the preferred CPU will not reschedule shortly.)</p>
+
+<p align="left"><strong>◎&nbsp; 对实时进程的更好支持：SVR4</strong></p>
+
+<p align="left"><strong>◎ 理论上无限制的进程数量</strong></p>
+
+<p>&nbsp; 
+==============================================================================================</p>
+
+<p align="left"><strong>附录：</strong></p>
+
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="more/srcfiles.txt">进程调度的相关源文件</a></p>
+
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="more/ProcessInterrupt.htm">一篇更详细的介绍</a></p>
+</body>
+</html>

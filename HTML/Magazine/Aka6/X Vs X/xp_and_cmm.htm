@@ -1,0 +1,174 @@
+<html>
+<head>
+<title> Extreme Programming and the Capability Maturity Model</title>
+</head>
+<STYLE><!--
+.body {}
+.topofpage {font-family: verdana, arial, helvetica, sans-serif;}
+.author {text-align: center;
+	font-size: 1em;
+	font-family: verdana, arial, helvetica, sans-serif;}
+.date {text-align: center;
+	font-size: 0.6em;
+	font-family: verdana, arial, helvetica, sans-serif;}
+-->
+</STYLE>
+<BODY bgcolor="#FFFFFF">
+<DIV class="topofpage"> <b><a href="http://www.xprogramming.com"> XProgramming 
+  </a> &gt; <a href="index.htm"> XP Magazine </a> &gt; XP and the CMM
+  <hr>
+  </b> </DIV>
+<DIV class="body"> 
+  <table cellspacing="10" cellpadding="0" width="30%" align="right" bgcolor="#e0e0e0">
+    <tr> 
+      <td valign="top">A discussion on comp.software-eng asked what people thought 
+        of eXtreme Programming, suggesting that it might be approximately an SEI 
+        Level 1 process. In these pages, we'll look at the descriptions of the 
+        CMM levels and at some corresponding aspects of eXtreme Programming as 
+        practiced on the Chrysler C3 project. </td>
+    </tr>
+  </table>
+  <H1> Extreme Programming <br>
+    and the <br>
+    Capability Maturity Model<br>
+    <DIV class="author">Ron Jeffries</DIV>
+    <div class="date">01/01/2000</div>
+  </H1>
+  <p>My assessment overall is that XP has some characteristics in common with 
+    the higher SEI levels, up to and including level 5. However, I would not assert 
+    that an XP team is a level 5 team. It takes a lot more documentation and "proving" 
+    going on in CMM than we recommend for XP. XP is in some ways a "vertical" 
+    slice through the SEI levels 2 through 5.</p>
+  <p>Comments are welcome via wiki, or <a href="mailto:ronjeffries@acm.org">email</a>. 
+  </p>
+  <p>In the following, sections in <em>italics</em> are quotations from <strong>The 
+    Capability Maturity Model</strong>, CMU/SEI, Paulk et al, Addison-Wesley, 
+    1995, ISBN 0-201-54664-7. </p>
+  <p> <big> <strong> <font face="Tekton"> <a href="xp_and_cmm.htm#Level One">[ 
+    Level 1 ]</a> <a href="xp_and_cmm.htm#Level Two">[ Level 2 ]</a> <a href="xp_and_cmm.htm#Level Three">[ 
+    Level 3 ]</a> <a href="xp_and_cmm.htm#Level Four">[ Level 4 ]</a> <a href="xp_and_cmm.htm#Level Five">[ 
+    Level 5 ]</a> </font> </strong> </big> </p>
+  <H2>SEI <a name="Level One">Level One</a> </H2>
+  <p> <em>At the Initial Level, the organization typically does not provide a 
+    stable environment for developing and maintaining software. Overcommitment 
+    is a characteristic of Level 1 organizations, and such organizations frequently 
+    have difficulty making commitments that the staff can meet with an orderly 
+    engineering process, resulting in a series of crises. During a crisis, projects 
+    typically abondon planned procedures, and refert to coding and testing. Success 
+    depends on having an exceptional manager and a seasoned and effective software 
+    team.</em> </p>
+  <p> <em>Success in Level 1 organizations depends on the competence and heroics 
+    of the people in the organization and cannot be repeated unless the same competent 
+    individuals are assigned to the next project. Thus, at Level 1, capability 
+    is a characteristic of the individuals, not of the organization.</em> </p>
+  <p>ExtremeProgramming specifically prescribes two levels of scheduling, which 
+    make up the PlanningGame. These levels, called CommitmentSchedule and IterationPlan, 
+    are based on developers' own estimates for the production of the necessary 
+    software. The joint CommitmentSchedule process results in a comprehensive 
+    estimate of what will be produced, and when. The joint IterationPlan schedules 
+    a short interval, and results of each iteration feed back into the CommitmentSchedule 
+    to refine the schedule. C3 progress is in no way characterized by a series 
+    of crises. </p>
+  <p>The C3 team specifically prohibits heroics, and works almost no overtime. 
+    Instead, the team treats a desire for heroics as an indication that there 
+    is something wrong with the process. They dig in and determine what is going 
+    wrong, and fix the process. </p>
+  <p>While the C3 team members are quite competent, they are generally not exceptional. 
+    The team's <a href="../Practices/PracPairs.html">PairProgramming</a> practice 
+    brings two good minds to bear on each problem: this is generally better than 
+    bringing one excellent mind to bear. </p>
+  <p>The team manager offers no exceptional support. Rather, he serves only to 
+    track progress, and to interface to management, with all technical decisions 
+    and assignements being done jointly by the team and by a volunteer process. 
+  </p>
+  <p>A second Extreme Programming project, with a new team, has not yet been attempted 
+    at Chrysler, so we cannot yet speak to how well the success will be replicated. 
+    Our thoughtful opinion, however, is that it is our process, not us as individuals, 
+    that is making C3 work so well.</p>
+  <H2>SEI <a name="Level Two">Level Two</a> - Repeatable</H2>
+  <p> <em>At the Repeatable Level, ... projects implement effective processes 
+    that are defined, documented, practiced, trained, measured, enforced, and 
+    improvable.</em> </p>
+  <p>ExtremeProgramming clearly specifies a number of practices (<a href="../Practices/PracIntro.html">Extreme 
+    Programming Rules</a>). These are well-defined, and are documented. The team 
+    has been trained at the beginning of the project, has a full-time coach, and 
+    trains new members in the team practices. Practices are generally measured 
+    and enforced by the shared responsibility of the team. <a href="../Practices/PracPairs.html">Pair 
+    Programming</a> and an open process ensure that all developers know what is 
+    happening all over the system. In the rare instances where a developer may 
+    violate one of the team's practices, the offending developer will be advised, 
+    reprimanded, or, in rare cases, allowed to work on some other project. </p>
+  <p>The practices are improvable, and in fact (see <a href="#Level Five">SeiLevelFive</a>) 
+    are improved as we go along. </p>
+  <p> <em>...managers for a project track software costs, schedules, and functionality; 
+    problems in meeting commitments are identified as they arise.</em> </p>
+  <p>In ExtremeProgramming, we track <a href="../Practices/PracFourVariables.html">FourVariables</a>, 
+    Resources, Scope, Quality, and Time. These variables let us determine whether 
+    we are meeting the schedule, with the desired quality, as we go along. We 
+    report these variables uniformly, from ourselves all the way to the top of 
+    the organization.</p>
+  <H2>SEI <a name="Level Three">Level Three</a> - Defined</H2>
+  <p> <em>At the Defined Level ... a defined software process contains a coherent, 
+    integrated set of well-defined software engineering and management processes 
+    ... characterized as including readiness criteria, inputs, standards and procedures 
+    for completing the work, verification mechanisms ..., outputs, and completion 
+    criteria. Because the software process is well-defined, management has good 
+    insight into technical progress on the project.</em> </p>
+  <p>ExtremeProgramming's rules encompass the readiness criteria (e.g. completion 
+    of UserStories, presence of key resources), inputs (UserStories), standards 
+    and procedures (the many "Extreme Programming Rules"), verification mechanisms 
+    (UnitTests and FunctionalTests), outputs (the software plus anything else 
+    defined in the UserStories), and completion criteria (user-acceptable scores 
+    on the FunctionalTests). </p>
+  <p>Using the FourVariables, ExtremeProgramming provides management with simple 
+    and clear insight into actual project performance.</p>
+  <H2>SEI <a name="Level Four">Level Four</a> - Managed</H2>
+  <p> <em>At the Managed Level, the organization sets quantitative quality goals 
+    for both software products and processes.</em> </p>
+  <p>ExtremeProgramming requires that quality goals for products be set via the 
+    <a href="../Practices/PracFuncTest.html">FunctionalTests</a>. We require <a href="../Practices/PracUnitTest.html">UnitTests</a> 
+    to be at 100% all the times, so that's not very interesting as a statistic. 
+    We measure our LoadFactor, which relates elapsed time to developers' estimates 
+    of difficulty. We have not set quantitative goals for this figure, but we 
+    do use changes in LoadFactor as a cue to look into the process and see where 
+    we can improve. </p>
+  <p>When the schedule is tracking and test scores are good, we have not found 
+    it necessary to track other quantitative values. Some candidates to consider 
+    would be: number of unit tests vs number of system classes; rate of change 
+    of test creation; number of system classes; class/method/code lines ratios, 
+    and so on. </p>
+  <p>Looking at XP through CMM eyes, especially if XP were being done throughout 
+    an entire large organization, we would expect that more measurement might 
+    be needed than we require in a single project. An interesting question in 
+    those circumstances is how much to invest in measurement "in case we need 
+    it". The XP advice would be to measure only things that have low cost, and 
+    start measuring when you see the need. We would advise recording additional 
+    (low-cost) measures but (literally) not looking at them unless and until there 
+    is a perceived use for the figures. Otherwise you're just wasting time that 
+    could be used writing more software - which is, after all, the point.</p>
+  <H2>SEI <a name="Level Five">Level Five</a> - Optimizing</H2>
+  <p> <em>At the Optimizing Level .. software teams analyze defects to determine 
+    their causes. They evaluate software processes to prevent known types of defects 
+    from recurring and [they] disseminate lessons learned throughout the organization.</em> 
+  </p>
+  <p>ExtremeProgramming practice is to meet every defect by implementing tests 
+    that display the defect, then fixing the software so that the tests run. Other 
+    tests are to be built in the same or related areas, to catch similar or related 
+    problems. </p>
+  <p>It is fair to say that the C3 team, being human, sometimes falls a bit short 
+    in terms of creating tests for things that are outside our current scope. 
+    This is an area that needs continual attention from the ExtremeCoach, and 
+    it may need shoring up in some other way as well. </p>
+  <p>ExtremeProgramming teams prefer to implement software to check for and detect 
+    errors, whether in the base software or in process, rather than to set up 
+    involved procedures which leave open the possibility of human error or laziness. 
+    Thus, an XP team will write software to make sure that changes are not stepped 
+    on by subsequent developers, rather than set up a more involved release procedure.</p>
+  <p> <big> <font face="Tekton"> <strong> <a href="xp_and_cmm.htm#Level One">[ 
+    Level 1 ]</a> <a href="xp_and_cmm.htm#Level Two">[ Level 2 ]</a> <a href="xp_and_cmm.htm#Level Three">[ 
+    Level 3 ]</a> <a href="xp_and_cmm.htm#Level Four">[ Level 4 ]</a> <a href="xp_and_cmm.htm#Level Five">[ 
+    Level 5 ] </a> </strong> <a href="xp_and_cmm.htm#XP">[top]</a> </font> </big> 
+  </p>
+</DIV>
+</BODY>
+</html>

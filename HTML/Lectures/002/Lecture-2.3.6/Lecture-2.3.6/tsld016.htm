@@ -1,0 +1,48 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>Process Schedule</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>Process Schedule</H1> 
+ <P><UL>
+<LI><H2>Task_structure
+</H2>
+<UL>
+need_resched, priority
+<BR><LI>nice 
+<LI>counter
+<LI>rt_priority
+<BR>policy
+<LI>SCHED_OTHER: traditional UNIX process
+<LI>SCHED_FIFO: run to finish except 1. Block I/O, 2. Yield 3. preempted
+<LI>SCHED_RR: run to timeslice expiration
+<LI>SCHED_YIELD: OR with above, __get_free_page
+</UL></UL><UL>
+<LI><H2>schedule()
+</H2>
+<UL>
+list
+<BR><BR>goodness: -1000, 0, 1~ 999, 1000~
+<BR>__switch_to: FPU, LDT, thread_structure, TSS, segments, debug registers
+<BR>history of switch_to</UL></UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld015.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld017.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld016.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

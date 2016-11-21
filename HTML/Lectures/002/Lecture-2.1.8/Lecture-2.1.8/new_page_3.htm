@@ -1,0 +1,70 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>socket体系结构及函数简介</title>
+<meta name="Microsoft Theme" content="blank 001, default">
+<meta name="Microsoft Border" content="tl, default">
+</head>
+
+<body background="_themes/blank/blbkgnd.gif" bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/new_page_3.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="体系结构,函数简介"></strong></font><br>
+<a href="index.htm"><img src="_derived/home_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="主页" align="middle"></a> <img src="_derived/new_page_3.htm_cmp_blank000_hbtn_p.gif" width="140" height="32" border="0" alt="体系结构,函数简介" align="middle"> <a href="new_page_7.htm"><img src="_derived/new_page_7.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="简单的C/S模型" align="middle"></a> <a href="new_page_15.htm"><img src="_derived/new_page_15.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="socket的工作模式" align="middle"></a> <a href="new_page_16.htm"><img src="_derived/new_page_16.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="常见的程序片断" align="middle"></a> <a href="new_page_25.htm"><img src="_derived/new_page_25.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="网络应用程序设计" align="middle"></a> <a href="new_page_38.htm"><img src="_derived/new_page_38.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="推荐书目" align="middle"></a> <a href="new_page_41.htm"><img src="_derived/new_page_41.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="习题" align="middle"></a></p>
+<p align="center">　</p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+<a href="new_page_1.htm"><img src="_derived/new_page_1.htm_cmp_blank000_vbtn.gif" width="140" height="32" border="0" alt="协议模型"></a><br><a href="new_page_2.htm"><img src="_derived/new_page_2.htm_cmp_blank000_vbtn.gif" width="140" height="32" border="0" alt="基本概念"></a><br><a href="new_page_4.htm"><img src="_derived/new_page_4.htm_cmp_blank000_vbtn.gif" width="140" height="32" border="0" alt="头文件"></a><br><a href="new_page_5.htm"><img src="_derived/new_page_5.htm_cmp_blank000_vbtn.gif" width="140" height="32" border="0" alt="数据结构"></a><br><a href="new_page_6.htm"><img src="_derived/new_page_6.htm_cmp_blank000_vbtn.gif" width="140" height="32" border="0" alt="函数列表"></a>
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<p:colorscheme
+ colors="#FFFFFF,#000000,#808080,#000000,#00CC99,#3333CC,#CCCCFF,#B2B2B2"/>
+<p:colorscheme
+ colors="#FFFFFF,#000000,#808080,#000000,#00CC99,#3333CC,#CCCCFF,#B2B2B2"/>
+<div v:shape="_x0000_s3074" class="O">
+  <p align="center"><span style="mso-fareast-font-family: 宋体; mso-hansi-font-family: Times New Roman; layout-flow: vertical; color: black; mso-color-index: 3"><font size="6"><span lang="EN-US">TCP/IP</span><span style="font-family: 宋体; mso-fareast-font-family: 宋体; mso-hansi-font-family: Times New Roman; layout-flow: vertical; color: black; mso-color-index: 3">协议族</span></font></span><span style="font-family:宋体;mso-fareast-font-family:宋体;mso-hansi-font-family:&quot;Times New Roman&quot;;
+font-size:183%;layout-flow:vertical;color:black;mso-color-index:3"><br>
+  </span>
+</div>
+<div v:shape="_x0000_s3074">
+  <div class="O" style="mso-line-spacing:&quot;100 20 0&quot;;mso-margin-left-alt:216;
+mso-char-wrap:1;mso-kinsoku-overflow:1">
+    <font size="5"><span style="layout-flow: vertical"><span lang="EN-US" style="mso-fareast-font-family: 宋体; mso-hansi-font-family: Times New Roman; layout-flow: vertical; mso-fareast-language: ZH-CN">TCP</span><span lang="EN-US" style="font-family: 宋体; mso-fareast-font-family: 宋体; mso-hansi-font-family: Times New Roman; layout-flow: vertical; mso-fareast-language: ZH-CN">（</span><span lang="EN-US" style="mso-fareast-font-family: 宋体; mso-hansi-font-family: Times New Roman; layout-flow: vertical; mso-fareast-language: ZH-CN">Transmission 
+    Control Protocol</span><span lang="EN-US" style="font-family: 宋体; mso-fareast-font-family: 宋体; mso-hansi-font-family: Times New Roman; layout-flow: vertical; mso-fareast-language: ZH-CN">）</span></span></font>
+  </div>
+  <div class="O1" style="mso-line-spacing:&quot;100 20 0&quot;;mso-margin-left-alt:468;
+mso-char-wrap:1;mso-kinsoku-overflow:1">
+    <font size="5"><span style="layout-flow: vertical"><span style="mso-special-format: bullet; position: absolute; left: -4.17%; layout-flow: vertical">–</span><span style="font-family: 宋体; mso-fareast-font-family: 宋体; mso-hansi-font-family: Times New Roman; layout-flow: vertical">传输控制协议，基于连接的服务</span></span></font>
+  </div>
+  <div class="O" style="mso-line-spacing:&quot;100 20 0&quot;;mso-margin-left-alt:216;
+mso-char-wrap:1;mso-kinsoku-overflow:1">
+    <font size="5"><span style="layout-flow: vertical"><span style="mso-special-format: bullet; position: absolute; left: -4.39%; layout-flow: vertical">&#8226;</span></span></font>
+    <p><font size="5"><span style="layout-flow: vertical"><span lang="EN-US" style="mso-fareast-font-family: 宋体; mso-hansi-font-family: Times New Roman; layout-flow: vertical; mso-fareast-language: ZH-CN">UDP</span><span lang="EN-US" style="font-family: 宋体; mso-fareast-font-family: 宋体; mso-hansi-font-family: Times New Roman; layout-flow: vertical; mso-fareast-language: ZH-CN">（</span><span lang="EN-US" style="mso-fareast-font-family: 宋体; mso-hansi-font-family: Times New Roman; layout-flow: vertical; mso-fareast-language: ZH-CN">User 
+    Datagram Protocol</span><span lang="EN-US" style="font-family: 宋体; mso-fareast-font-family: 宋体; mso-hansi-font-family: Times New Roman; layout-flow: vertical; mso-fareast-language: ZH-CN">）</span></span></font>
+  </div>
+  <div class="O1" style="mso-line-spacing:&quot;100 20 0&quot;;mso-margin-left-alt:468;
+mso-char-wrap:1;mso-kinsoku-overflow:1">
+    <font size="5"><span style="layout-flow: vertical"><span style="mso-special-format: bullet; position: absolute; left: -4.17%; layout-flow: vertical">–</span><span style="font-family: 宋体; mso-fareast-font-family: 宋体; mso-hansi-font-family: Times New Roman; layout-flow: vertical">用户数据报协议，无连接的服务</span></span></font>
+  </div>
+  <div class="O" style="mso-line-spacing:&quot;100 20 0&quot;;mso-margin-left-alt:216;
+mso-char-wrap:1;mso-kinsoku-overflow:1">
+    <font size="5"><span style="layout-flow: vertical"><span style="mso-special-format: bullet; position: absolute; left: -4.39%; layout-flow: vertical">&#8226;</span></span></font>
+    <p><font size="5"><span style="layout-flow: vertical"><span lang="EN-US" style="mso-fareast-font-family: 宋体; mso-hansi-font-family: Times New Roman; layout-flow: vertical; mso-fareast-language: ZH-CN">IP</span><span lang="EN-US" style="font-family: 宋体; mso-fareast-font-family: 宋体; mso-hansi-font-family: Times New Roman; layout-flow: vertical; mso-fareast-language: ZH-CN">（</span><span lang="EN-US" style="mso-fareast-font-family: 宋体; mso-hansi-font-family: Times New Roman; layout-flow: vertical; mso-fareast-language: ZH-CN">Internet 
+    Protocol</span><span lang="EN-US" style="font-family: 宋体; mso-fareast-font-family: 宋体; mso-hansi-font-family: Times New Roman; layout-flow: vertical; mso-fareast-language: ZH-CN">）</span></span></font>
+  </div>
+  <div class="O1" style="mso-line-spacing:&quot;100 20 0&quot;;mso-margin-left-alt:468;
+mso-char-wrap:1;mso-kinsoku-overflow:1">
+    <font size="5"><span style="layout-flow: vertical"><span style="mso-special-format: bullet; position: absolute; left: -4.17%; layout-flow: vertical">–</span><span lang="EN-US" style="mso-fareast-font-family: 宋体; mso-hansi-font-family: Times New Roman; layout-flow: vertical; mso-fareast-language: ZH-CN">Internet</span><span style="font-family: 宋体; mso-fareast-font-family: 宋体; mso-hansi-font-family: Times New Roman; layout-flow: vertical">协议，信息传递机制</span></span></font>
+  </div>
+  <div class="O" style="mso-line-spacing:&quot;100 50 0&quot;;mso-margin-left-alt:216">
+  </div>
+</div>
+　
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+</html>

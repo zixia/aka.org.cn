@@ -1,0 +1,613 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0039)http://www.controlchaos.com/scrumwp.htm -->
+<HTML>
+<HEAD>
+<TITLE>SCRUM as Presented to OMG at OOPSLA95</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<META content="MSHTML 5.50.4134.600" name=GENERATOR>
+</HEAD>
+<BODY bgColor=#FFFFFF stylesrc="backlog.htm">
+<H1><EM>SCRUM Software Development Process</EM> </H1>
+<H2>Building The Best Possible Software </H2>
+<P><CITE>"The problem for engineers is that change translates into chaos, especially 
+  when a single error can potentially bring down an entire system. But, change 
+  also translates into opportunity. It's as simple as this: if there is time to 
+  put a certain amount of functionality into the product easily, then there is 
+  time to put in more functionality at the price of a certain amount of disruption 
+  and risk. Thus does madness creep into our projects - we will tend to take on 
+  as much risk as we possibly can." </CITE></P>
+<P><CITE>James Bach. October 1995. "American Programmer" </CITE></P>
+<P><EM>Copyright 1995 Advanced Development Methods All Rights Reserved </EM></P>
+<HR>
+<H2>Contents </H2>
+<UL>
+  <LI><A 
+  href="http://www.controlchaos.com/scrumwp.htm#Introduction">Introduction</A> 
+  <LI><A href="http://www.controlchaos.com/scrumwp.htm#Overview">Overview</A> 
+  <LI><A 
+  href="http://www.controlchaos.com/scrumwp.htm#Current_Development_Situation">Current 
+    Development Situation</A> 
+  <LI><A 
+  href="http://www.controlchaos.com/scrumwp.htm#Methodology">Methodology</A> 
+  <LI><A href="http://www.controlchaos.com/scrumwp.htm#Phases">Phases</A> 
+  <LI><A href="http://www.controlchaos.com/scrumwp.htm#Controls">Controls</A> 
+  <LI><A 
+  href="http://www.controlchaos.com/scrumwp.htm#Deliverables">Deliverables</A> 
+  <LI><A href="http://www.controlchaos.com/scrumwp.htm#Project_Team">Project Team</A> 
+  <LI><A 
+  href="http://www.controlchaos.com/scrumwp.htm#Charateristics">Characteristics</A> 
+  <LI><A 
+  href="http://www.controlchaos.com/scrumwp.htm#Advantages">Advantages</A> 
+  <LI><A 
+  href="http://www.controlchaos.com/scrumwp.htm#Estimating">Estimating</A> 
+  <LI><A href="http://www.controlchaos.com/scrumwp.htm#Appendix_1">Appendix 1 
+    - System Development Methodologies : Defined or Empirical</A> </LI>
+</UL>
+<HR>
+<H2><A name=Introduction>Introduction</A> </H2>
+<P>In this paper we introduce a development process, SCRUM, that treats major 
+  portions of systems development as a controlled black box. We relate this to 
+  complexity theory to show why this approach increases flexibility and ability 
+  to deal with complexity, and produces a system that is responsive to both initial 
+  and additionally occurring requirements. </P>
+<P>Numerous approaches to improving the systems development process have been 
+  tried. Each has been touted as providing "significant productivity improvements." 
+  None has. As Grady Booch noted, "We often call this condition the software crisis, 
+  but frankly, a malady that has carried on this long must be called normal." 
+</P>
+<P>Concepts from industrial process control are applied to the field of systems 
+  development in this paper. Industrial process control defines processes as either 
+  "theoretical" (fully defined) or "empirical" (black box). When a black box process 
+  is treated as a fully defined process, unpredictable results occur. A further 
+  treatment of this is provided in Appendix 1. </P>
+<P>A significant number of systems development processes are not completely defined, 
+  but are treated as though they are. Unpredictability without control results. 
+  The SCRUM approach treats these systems development processes as a controlled 
+  black box. </P>
+<P>The SCRUM approach is used at leading edge software companies with significant 
+  success. We believe SCRUM may be appropriate for other software development 
+  organizations to realize the expected benefits from Object Oriented techniques 
+  and tools. </P>
+<HR>
+<H2><A name=Overview>Overview </A></H2>
+<P>Our new approach to systems development is based on both defined and black 
+  box process management. We call the approach the SCRUM methodology, after the 
+  SCRUM in rugby -- a group responsible for picking up the ball and moving it 
+  forward. </P>
+<P>SCRUM is a management, enhancement and maintenance methodology for an existing 
+  system. SCRUM will address new or re-engineered systems development efforts 
+  at a later date. </P>
+<P>Software product releases are planned based on the following variables : </P>
+<UL>
+  <LI>Customer requirements - how the current system needs enhancing. 
+  <LI>Time pressure - what time frame is required to gain a competitive advantage. 
+  <LI>Competition - what is the competition up to, and what is required to best 
+    them. 
+  <LI>Quality - What is the required quality, given the above variables. 
+  <LI>Vision - what changes are required at this stage to fulfill the system vision. 
+  <LI>Resource - what staff and funding are available. </LI>
+</UL>
+<P>These variables form the initial plan for a software enhancement project. However, 
+  these variables also change during the project. A successful development methodology 
+  must take these variables and their evolutionary nature into account. </P>
+<HR>
+<H2><A name=Current_Development_Situation>Current Development Situation</A></H2>
+<P>Systems are developed in a highly complicated environment. The complexity is 
+  both within the development environment and the target environment. For example, 
+  when the air traffic control system development was initiated, three-tier client 
+  server systems and airline deregulation did not have to be considered. Yet, 
+  these environmental and technical changes occurred during the project and had 
+  to be taken into account within the system being built. Environmental variables 
+  include: </P>
+<UL>
+  <LI>Availability of skilled professionals - the newer the technology, tools, 
+    methods, and domain, the smaller the pool of skilled professionals. 
+  <LI>Stability of implementation technology - the newer the technology, the lower 
+    the stability and the greater the need to balance the technology with other 
+    technologies and manual procedures. 
+  <LI>Stability and power of tools - the newer and more powerful the development 
+    tool, the smaller the pool of skilled professionals and the more unstable 
+    the tool functionality. 
+  <LI>Effectiveness of methods - what modeling, testing, version control, and 
+    design methods are going to be used, and how effective, efficient, and proven 
+    are they. 
+  <LI>Domain expertise - are skilled professionals available in the various domains, 
+    including business and technology. 
+  <LI>New features - what entirely new features are going to be added, and to 
+    what degree will these fit with current functionality. 
+  <LI>Methodology - does the overall approach to developing systems and using 
+    the selected methods promote flexibility, or is this a rigid, detailed approach 
+    that restricts flexibility. 
+  <LI>Competition - what will the competition do during the project? What new 
+    functionality will be announced or released. 
+  <LI>Time/Funding - how much time is available initially and as the project progresses? 
+    How much development funding is available. 
+  <LI>Other variables - any other factors that must be responded to during the 
+    project to ensure the success of the resulting, delivered system, such as 
+    reorganizations. </LI>
+</UL>
+<P>The overall complexity is a function of these variables : </P>
+<P><CITE>complexity = f(development environment variables + target environment 
+  variables</CITE><I>)</I> </P>
+<P>where these variables may and do change during the course of the project. </P>
+<P>As the complexity of the project increases, the greater the need for controls, 
+  particularly the ongoing assessment and response to risk. </P>
+<P>Attempts to model this development process have encountered the following problems: 
+</P>
+<UL>
+  <LI>Many of the development processes are uncontrolled. The inputs and outputs 
+    are either unknown or loosely defined, the transformation process lacks necessary 
+    precision, and quality control is not defined. Testing processes are an example. 
+  <LI>An unknown number of development processes that bridge known but uncontrolled 
+    processes are unidentified. Detailed processes to ensure that a logical model 
+    contains adequate content to lead to a successful physical model is one such 
+    process. 
+  <LI>Environmental input (requirements) can only be taken into consideration 
+    at the beginning of the process. Complex change management procedures are 
+    required thereafter. </LI>
+</UL>
+<P>Attempts to impose a micro, or detailed, methodology model on the development 
+  process have not worked because the development process is still not completely 
+  defined. Acting as though the development process is defined and predictable 
+  results in being unprepared for the unpredictable results. </P>
+<P>Although the development process is incompletely defined and dynamic, numerous 
+  organizations have developed detailed development methodologies that include 
+  current development methods (structured, OO, etc.). The Waterfall methodology 
+  was one of the first such defined system development processes. A picture of 
+  the Waterfall methodology is shown in Figure 1. <BR>
+  <IMG height=195 
+alt="Waterfall Methodology Illustration" 
+src="../images/s1m.gif" width=507> <BR>
+  Figure 1 </P>
+<P>Although the waterfall approach mandates the use of undefined processes, its 
+  linear nature has been its largest problem. The process does not define how 
+  to respond to unexpected output from any of the intermediate process. </P>
+<P>Barry Boehm introduced a Spiral methodology to address this problem. Each of 
+  the waterfall phases is ended with a risk assessment and prototyping activity. 
+  The Spiral methodology is shown in Figure 2. </P>
+<P>The Spiral methodology "peels the onion", progressing through "layers" of the 
+  development process. A prototype lets users determine if the project is on track, 
+  should be sent back to prior phases, or should be ended. However, the phases 
+  and phase processes are still linear. Requirements work is still performed in 
+  the requirements phase, design work in the design phase, and so forth, with 
+  each of the phases consisting of linear, explicitly defined processes. </P>
+<P><IMG height=238 alt="Spiral Methodology Illustration" 
+src="../images/s2m.gif" width=432> <BR>
+  Figure 2 </P>
+<P>The Iterative methodology improves on the Spiral methodology. Each iteration 
+  consists of all of the standard Waterfall phases, but each iteration only addresses 
+  one set of parsed functionality. The overall project deliverable has been partitioned 
+  into prioritized subsystems, each with clean interfaces. Using this approach, 
+  one can test the feasibility of a subsystem and technology in the initial iterations. 
+  Further iterations can add resources to the project while ramping up the speed 
+  of delivery. This approach improves cost control, ensures delivery of systems 
+  (albeit subsystems), and improves overall flexibility. However, the Iterative 
+  approach still expects that the underlying development processes are defined 
+  and linear. See Figure 3. </P>
+<P><IMG height=266 alt="Iterative Methodology Illustration" 
+src="../images/s3m.gif" width=500> <BR>
+  Figure 3 </P>
+<P>Given the complex environment and the increased reliance on new "state-of-the-art" 
+  systems, the risk endured by system development projects has increased and the 
+  search for mechanisms to handle this risk has intensified. One can argue that 
+  current methodologies are better than nothing. Each improves on the other. The 
+  Spiral and Iterative approaches implant formal risk control mechanisms for dealing 
+  with unpredictable results. A framework for development is provided. </P>
+<P>However, each rests on the fallacy that the development processes are defined, 
+  predictable processes. But unpredictable results occur throughout the projects. 
+  The rigor implied in the development processes stifles the flexibility needed 
+  to cope with the unpredictable results and respond to a complex environment. 
+</P>
+<P>Despite their widespread presence in the development community, people don't 
+  use the methodologies except as a macro process map, or for their detailed method 
+  descriptions. </P>
+<P>The following graph demonstrates the current development environment, using 
+  any of the Waterfall, Spiral or Iterative processes. As the complexity of the 
+  variables increase even to a moderate level, the probability of a "successful" 
+  project quickly diminishes (a successful project is defined as a system that 
+  is useful when delivered). See Figure 4.</P>
+<P><IMG height=367 alt="Defined Process Risk/Complexity Illustration" 
+src="../images/s4m.gif" width=487> <BR>
+  Figure 4 </P>
+<HR>
+<H2><A name=Methodology>Methodology </A></H2>
+<P>The system development process is complicated and complex. Therefore maximum 
+  flexibility and appropriate control is required. Evolution favors those that 
+  operate with maximum exposure to environmental change and have maximized flexibility. 
+  Evolution deselects those who have insulated themselves from environmental change 
+  and have minimized chaos and complexity in their environment. </P>
+<P>An approach is needed that enables development teams to operate adaptively 
+  within a complex environment using imprecise processes. Complex system development 
+  occurs under chaotic circumstances. Producing orderly systems under chaotic 
+  circumstances requires maximum flexibility. The closer the development team 
+  operates to the edge of chaos, the more competitive and useful the resulting 
+  system will be. </P>
+<P>Methodology may well be the most important factor in determining the probability 
+  of success. Methodologies that encourage and support flexibility have a high 
+  degree of tolerance for changes in other variables. With these methodologies, 
+  the development process is regarded as unpredictable at the onset, and control 
+  mechanisms are put in place to manage the unpredictability. </P>
+<P>If we graph the relationship between environmental complexity and probability 
+  of success with a flexible methodology that incorporates controls and risk management, 
+  the tolerance for change is more durable. See Figure 5. </P>
+<P><IMG height=368 alt="Risk/Complexity Comparison Illustration" 
+src="../images/s5m.gif" width=476> <BR>
+  Figure 5 </P>
+<P>Figures 4 and 5 reflect software development experiences at ADM, Easel, Vmark, 
+  Borland and virtually every other developer of "packaged" software. These organizations 
+  have embraced risk and environmental complexity during development projects. 
+  Increased product impact, successful projects, and productivity gains were experienced. 
+  The best possible software is built. </P>
+<P>Waterfall and Spiral methodologies set the context and deliverable definition 
+  at the start of a project. SCRUM and Iterative methodologies initially plan 
+  the context and broad deliverable definition, and then evolve the deliverable 
+  during the project based on the environment. SCRUM acknowledges that the underlying 
+  development processes are incompletely defined and uses control mechanisms to 
+  improve flexibility. </P>
+<P>The primary difference between the defined (waterfall, spiral and iterative) 
+  and empirical (SCRUM) approach is that The SCRUM approach assumes that the analysis, 
+  design, and development processes in the Sprint phase are unpredictable. A control 
+  mechanism is used to manage the unpredictability and control the risk. Flexibility, 
+  responsiveness, and reliability are the results. See Figure 6. </P>
+<P><IMG height=166 alt="SCRUM Methodology Illustration" 
+src="../images/s6m.gif" width=450> <BR>
+  Figure 6 </P>
+<P>Characteristics of SCRUM methodology are : </P>
+<UL>
+  <LI>The first and last phases (Planning and Closure) consist of defined processes, 
+    where all processes, inputs and outputs are well defined. The knowledge of 
+    how to do these processes is explicit. The flow is linear, with some iterations 
+    in the planning phase. 
+  <LI>The Sprint phase is an empirical process. Many of the processes in the sprint 
+    phase are unidentified or uncontrolled. It is treated as a black box that 
+    requires external controls. Accordingly, controls, including risk management, 
+    are put on each iteration of the Sprint phase to avoid chaos while maximizing 
+    flexibility. 
+  <LI>Sprints are nonlinear and flexible. Where available, explicit process knowledge 
+    is used; otherwise tacit knowledge and trial and error is used to build process 
+    knowledge. Sprints are used to evolve the final product. 
+  <LI>The project is open to the environment until the Closure phase. The deliverable 
+    can be changed at any time during the Planning and Sprint phases of the project. 
+    The project remains open to environmental complexity, including competitive, 
+    time, quality, and financial pressures, throughout these phases. 
+  <LI>The deliverable is determined during the project based on the environment. 
+  </LI>
+</UL>
+<P>Figure 7 compares the primary SCRUM characteristics to those of other methodologies. 
+</P>
+<P><IMG height=351 alt="Methodology Comparison Table" 
+src="../images/s7m.gif" width=475> <BR>
+  Figure 7 </P>
+<HR>
+<H2><A name=Phases>Phases </A></H2>
+<H3>Pregame </H3>
+<P><B>Planning : </B>Definition of a new release based on currently known backlog, 
+  along with an estimate of its schedule and cost. If a new system is being developed, 
+  this phase consists of both conceptualization and analysis. If an existing system 
+  is being enhanced, this phase consists of limited analysis. </P>
+<P><B>Architecture : </B>Design how the backlog items will be implemented. This 
+  phase includes system architecture modification and high level design. </P>
+<H3>Game </H3>
+<P><B>Development Sprints :</B> Development of new release functionality, with 
+  constant respect to the variables of time, requirements, quality, cost, and 
+  competition. Interaction with these variables defines the end of this phase. 
+  There are multiple, iterative development sprints, or cycles, that are used 
+  to evolve the system. </P>
+<H3>Postgame </H3>
+<P><B>Closure : </B>Preparation for release, including final documentation, pre-release 
+  staged testing, and release. <BR>
+</P>
+<P><IMG height=361 alt="SCRUM Methodology Flow Illustration" 
+src="../images/s8m.gif" width=476> <BR>
+  Figure 9 </P>
+<P>Each of the phases has the following steps: </P>
+<P><B>Planning</B> </P>
+<UL>
+  <LI>Development of a comprehensive backlog list. 
+  <LI>Definition of the delivery date and functionality of one or more releases. 
+  <LI>Selection of the release most appropriate for immediate development. 
+  <LI>Mapping of product packets (objects) for backlog items in the selected release. 
+  <LI>Definition of project team(s) for the building of the new release. 
+  <LI>Assessment of risk and appropriate risk controls. 
+  <LI>Review and possible adjustment of backlog items and packets. 
+  <LI>Validation or reselection of development tools and infrastructure. 
+  <LI>Estimation of release cost, including development, collateral material, 
+    marketing, training, and rollout. 
+  <LI>Verification of management approval and funding. </LI>
+</UL>
+<P><B>Architecture/High Level Design</B> </P>
+<UL>
+  <LI>Review assigned backlog items. 
+  <LI>Identify changes necessary to implement backlog items. 
+  <LI>Perform domain analysis to the extent required to build, enhance, or update 
+    the domain models to reflect the new system context and requirements. 
+  <LI>Refine the system architecture to support the new context and requirements. 
+  <LI>Identify any problems or issues in developing or implementing the changes 
+  <LI>Design review meeting, each team presenting approach and changes to implement 
+    each backlog item. Reassign changes as required. </LI>
+</UL>
+<P><B>Development (Sprint)</B> - the Development phase is an iterative cycle of 
+  development work. The management determines that time, competition, quality, 
+  or functionality are met, iterations are completed and the closure phase occurs. 
+  This approach is also known as Concurrent Engineering. Development consists 
+  of the following macro processes : </P>
+<UL>
+  <LI>Meeting with teams to review release plans. 
+  <LI>Distribution, review and adjustment of the standards with which the product 
+    will conform. 
+  <LI>Iterative Sprints, until the product is deemed ready for distribution. </LI>
+</UL>
+<P>A Sprint is a set of development activities conducted over a pre-defined period, 
+  usually one or four weeks. The interval is based on product complexity, risk 
+  assessment, and degree of oversight desired. Sprint speed and intensity are 
+  driven by the selected duration of the Sprint. Risk is assessed continuously 
+  and adequate risk controls and responses put in place. Each Sprint consists 
+  of one or more teams performing the following: </P>
+<UL>
+  <LI>Develop: Defining changes needed for the implementation of backlog requirements 
+    into packets, opening the packets, performing domain analysis, designing, 
+    developing, implementing, testing, and documenting the changes. Development 
+    consists of the micro process of discovery, invention, and implementation. 
+  <LI>Wrap: Closing the packets, creating a executable version of changes and 
+    how they implement backlog requirements. 
+  <LI>Review: All teams meeting to present work and review progress, raising and 
+    resolving issues and problems, adding new backlog items. Risk is reviewed 
+    and appropriate responses defined. 
+  <LI>Adjust: Consolidating the information gathered from the review meeting into 
+    affected packets, including different look and feel and new properties. </LI>
+</UL>
+<P>Each Sprint is followed by a review, whose characteristics are : </P>
+<UL>
+  <LI>The whole team and product management are present and participate. 
+  <LI>The review can include customers, sales, marketing and others. 
+  <LI>Review covers functional, executable systems that encompass the objects 
+    assigned to that team and include the changes made to implement the backlog 
+    items. 
+  <LI>The way backlog items are implemented by changes may be changed based on 
+    the review. 
+  <LI>New backlog items may be introduced and assigned to teams as part of the 
+    review, changing the content and direction of deliverables. 
+  <LI>The time of the next review is determined based on progress and complexity. 
+    The Sprints usually have a duration of 1 to 4 weeks. </LI>
+</UL>
+<P><B>Closure</B> - When the management team feels that the variables of time, 
+  competition, requirements, cost, and quality concur for a new release to occur, 
+  they declare the release "closed" and enter this phase. This phase prepares 
+  the developed product for general release. Integration, system test, user documentation, 
+  training material preparation, and marketing material preparation are among 
+  closure tasks. </P>
+<HR>
+<H2><A name=Controls>Controls </A></H2>
+<P>Operating at the edge of chaos (unpredictability and complexity) requires management 
+  controls to avoid falling into chaos. The SCRUM methodology embodies these general, 
+  loose controls, using OO techniques for the actual construction of deliverables. 
+</P>
+<P>Risk is the primary control. Risk assessment leads to changes in other controls 
+  and responses by the team. </P>
+<P>Controls in the SCRUM methodology are : </P>
+<UL>
+  <LI>Backlog: Product functionality requirements that are not adequately addressed 
+    by the current product release. Bugs, defects, customer requested enhancements, 
+    competitive product functionality, competitive edge functionality, and technology 
+    upgrades are backlog items. 
+  <LI>Release/Enhancement: backlog items that at a point in time represent a viable 
+    release based on the variables of requirements, time, quality, and competition. 
+  <LI>Packets: Product components or objects that must be changed to implement 
+    a backlog item into a new release. 
+  <LI>Changes: Changes that must occur to a packet to implement a backlog item. 
+  <LI>Problems: Technical problems that occur and must be solved to implement 
+    a change. 
+  <LI>Risks: risks that effect the success of the project are continuously assessed 
+    and responses planned. Other controls are affected as a result of risk assessment. 
+  <LI>Solutions: solutions to the problems and risks, often resulting in changes. 
+  <LI>Issues: Overall project and project issues that are not defined in terms 
+    of packets, changes and problems. </LI>
+</UL>
+<P>These controls are used in the various phases of SCRUM. Management uses these 
+  controls to manage backlog. Teams use these controls to manage changes, problems. 
+  Both management and teams jointly manage issues, risks, and solutions. These 
+  controls are reviewed, modified, and reconciled at every Sprint review meeting. 
+</P>
+<HR>
+<H2><A name=Deliverables>Deliverables </A></H2>
+<P>The delivered product is flexible. Its content is determined by environment 
+  variables, including time, competition, cost, or functionality. The deliverable 
+  determinants are market intelligence, customer contact, and the skill of developers. 
+  Frequent adjustments to deliverable content occur during the project in response 
+  to environment. The deliverable can be determined anytime during the project. 
+</P>
+<HR>
+<H2><A name=Project_Team>Project Team </A></H2>
+<P>The team that works on the new release includes full time developers and external 
+  parties who will be affected by the new release, such as marketing, sales, and 
+  customers. In traditional release processes, these latter groups are kept away 
+  from development teams for fear of over-complicating the process and providing 
+  "unnecessary" interference. The SCRUM approach, however, welcomes and facilitates 
+  their controlled involvement at set intervals, as this increases the probability 
+  that release content and timing will be appropriate, useful, and marketable. 
+</P>
+<P>The following teams are formed for each new release: </P>
+<UL>
+  <LI>Management: Led by the Product Manager, it defines initial content and timing 
+    of the release, then manages their evolution as the project progresses and 
+    variables change. Management deals with backlog, risk, and release content. 
+  <LI>Development teams: Development teams are small, with each containing developers, 
+    documenters and quality control staff. One or more teams of between three 
+    and six people each are used. Each is assigned a set of packets (or objects), 
+    including all backlog items related to each packet. The team defines changes 
+    required to implement the backlog item in the packets, and manages all problems 
+    regarding the changes. Teams can be either functionally derived (assigned 
+    those packets that address specific sets of product functionality) or system 
+    derived (assigned unique layers of the system). The members of each team are 
+    selected based on their knowledge and expertise regarding sets of packets, 
+    or domain expertise. </LI>
+</UL>
+<HR>
+<H2><A name=Characteristics>Characteristics </A></H2>
+<P>The SCRUM methodology is a metaphor for the game of Rugby. Rugby evolved from 
+  English football (soccer) under the intense pressure of the game : </P>
+<P><CITE>Rugby student William Webb Ellis, 17, inaugurates a new game whose rules 
+  will be codified in 1839. Playing soccer for the 256-year-old college in East 
+  Warwickshire, Ellis sees that the clock is running out with his team behind 
+  so he scoops up the ball and runs with it in defiance of the rules. The People's 
+  Chronology, Henry Holt and Company, Inc. Copyright © 1992.</CITE> </P>
+<P><CITE>SCRUM projects have the following characteristics :</CITE> </P>
+<UL>
+  <LI>Flexible deliverable - the content of the deliverable is dictated by the 
+    environment. 
+  <LI>Flexible schedule - the deliverable may be required sooner or later than 
+    initially planned. 
+  <LI>Small teams - each team has no more than 6 members. There may be multiple 
+    teams within a project. 
+  <LI>Frequent reviews - team progress is reviewed as frequently as environmental 
+    complexity and risk dictates (usually 1 to 4 week cycles). A functional executable 
+    must be prepared by each team for each review. 
+  <LI>Collaboration - intra and inter-collaboration is expected during the project. 
+  <LI>Object Oriented - each team will address a set of related objects, with 
+    clear interfaces and behavior. </LI>
+</UL>
+<P>The SCRUM methodology shares many characteristics with the sport of Rugby : 
+</P>
+<UL>
+  <LI>The context is set by playing field (environment) and rugby rules (controls). 
+  <LI>The primary cycle is moving the ball forward. 
+  <LI>Rugby evolved from breaking soccer rules - adapting to the environment. 
+  <LI>The game does not end until environment dictates (business need, competition, 
+    functionality, timetable). </LI>
+</UL>
+<HR>
+<H2><A name=Advantages>Advantages </A></H2>
+<P>Additional development methodologies are designed only to respond to the unpredictability 
+  of the external and development environments at the start of an enhancement 
+  cycle. Such newer approaches as the Boehm spiral methodology and its variants 
+  are still limited in their ability to respond to changing requirements once 
+  the project has started. </P>
+<P>The SCRUM methodology, on the other hand, is designed to be quite flexible 
+  throughout. It provides control mechanisms for planning a product release and 
+  then managing variables as the project progresses. This enables organizations 
+  to change the project and deliverables at any point in time, delivering the 
+  most appropriate release. </P>
+<P>The SCRUM methodology frees developers to devise the most ingenious solutions 
+  throughout the project, as learning occurs and the environment changes. </P>
+<P>Small, collaborative teams of developers are able to share tacit knowledge 
+  about development processes. An excellent training environment for all parties 
+  is provided. </P>
+<P>Object Oriented technology provides the basis for the SCRUM methodology. Objects, 
+  or product features, offer a discrete and manageable environment. Procedural 
+  code, with its many and intertwined interfaces, is inappropriate for the SCRUM 
+  methodology. SCRUM may be selectively applied to procedural systems with clean 
+  interfaces and strong data orientation. </P>
+<HR>
+<H2><A name=Estimating>Estimating </A></H2>
+<P>SCRUM projects can be estimated using standard function point estimating. However, 
+  it is advisable to estimate productivity at approximately twice the current 
+  metric. The estimate is only for starting purposes, however, since the overall 
+  timetable and cost are determined dynamically in response to the environmental 
+  factors. </P>
+<P>Our observations have led us to conclude that SCRUM projects have both velocity 
+  and acceleration. In terms of functions delivered, or backlog items completed 
+  : </P>
+<UL>
+  <LI>initial velocity and acceleration are low as infrastructure is built/modified 
+  <LI>as base functionality is put into objects, acceleration increases 
+  <LI>acceleration decreases and velocity remains sustainably high </LI>
+</UL>
+<P>Further development in metrics for empirical processes is required. </P>
+<HR>
+<H2><A name=Appendix_1>Appendix 1 </A></H2>
+<H3>System Development Methodologies : Defined or Empirical </H3>
+<P>System development is the act of creating a logical construct that is implemented 
+  as logic and data on computers. The logical construct consists of inputs, processes, 
+  and outputs, both macro (whole construct) and micro (intermediate steps within 
+  whole construct). The whole is known as an implemented system. </P>
+<P>Many artifacts are created while building the system. Artifacts may be used 
+  to guide thinking, check completeness, and create an audit trail. The artifacts 
+  consist of documents, models, programs, test cases, and other deliverables created 
+  prior to creating the implemented system. When available, a <I>metamodel</I> 
+  defines the semantic content of model artifacts. <I>Notation</I> describes the 
+  graphing and documentation conventions that are used to build the models. </P>
+<P>The approach used to develop a system is known as a <I>method</I>. A <I>method</I> 
+  describes the activities involved in defining, building, and implementing a 
+  system; a <I>method</I> is a framework. Since a <I>method</I> is a logical process 
+  for constructing systems (process), it is known as a <I>metaprocess</I> (a process 
+  for modeling processes). </P>
+<P>A <I>method</I> has micro and macro components. The macro components define 
+  the overall flow and time-sequenced framework for performing work. The micro 
+  components include <I>general design rules, patterns and rules of thumb</I>. 
+  <I>General design rules</I> state properties to achieve or to avoid in the design 
+  or general approaches to take while building a system. <I>Patterns</I> are solutions 
+  that can be applied to a type of development activity; they are solutions waiting 
+  for problems that occur during an activity in a method. <I>Rules of thumb</I> 
+  consist of a general body of hints and tips. </P>
+<P>Applying concepts from industrial process control to the field of systems development, 
+  <I>methods</I> can be categorized as either "theoretical" (fully defined) or 
+  "empirical" (black box). </P>
+<P><EM>Correctly categorizing systems development methods is critical</EM>. The 
+  appropriate structure of a <I>method</I> for building a particular type of system 
+  depends on whether the method is theoretical or empirical. </P>
+<P>Models of <I>theoretical processes</I> are derived from <I>first principles</I>, 
+  using material and energy balances and fundamental laws to determine the model. 
+  For a systems development <I>method</I> to be categorized as theoretical, it 
+  must conform to this definition. </P>
+<P>Models of empirical processes are derived categorizing observed inputs and 
+  outputs, and defining controls that cause them to occur within prescribed bounds. 
+  Empirical process modeling involves constructing a process model strictly from 
+  experimentally obtained input/output data, with no recourse to any laws concerning 
+  the fundamental nature and properties of the system. No <I>a priori</I> knowledge 
+  about the process is necessary (although it can be helpful); a system is treated 
+  like a black box.<BR>
+</P>
+<P>Upon inspection, we assert that the systems development process is empirical: 
+</P>
+<UL>
+  <LI>Applicable first principles are not present 
+  <LI>The process is only beginning to be understood 
+  <LI>The process is complex 
+  <LI>The process is changing </LI>
+</UL>
+<P>Most methodologists agree with this assertion; "...you can't expect a <I>method</I> 
+  to tell you everything to do. Writing software is a creative process, like painting 
+  or writing or architecture... ... (a <I>method</I>) supplies a framework that 
+  tells how to go about it and identifies the places where creativity is needed. 
+  But you still have to supply the creativity...." </P>
+<P>Categorizing the systems development methods as empirical is critical to the 
+  effective management of the systems development process. </P>
+<P>If systems development <I>methods</I> are categorized as <I>empirical</I>, 
+  measurements and controls are required because it is understood that the inner 
+  workings of the <I>method</I> are so loosely defined that they cannot be counted 
+  on to operate predictably. </P>
+<P>In the past, <I>methods</I> have been provided and applied as though they were 
+  theoretical. As a consequence, measurements were not relied upon and controls 
+  dependent upon the measurements weren't used. </P>
+<P>Many of the problems in developing systems have occurred because of this incorrect 
+  categorization. When a black box process is treated as a fully defined process, 
+  unpredictable results occur. Also, the controls are not in place to measure 
+  and respond to the unpredictability. </P>
+<HR>
+<H2>References </H2>
+<OL>
+  <LI>Bach, James. "Process Evolution in a Mad World." Borland International, 
+    Scotts Valley, CA. 
+  <LI>Bach, James. October, 1995. "The Challenge of "Good Enough" Software", American 
+    Programmer. 
+  <LI>Coplien, J. "Borland Software Craftsmanship: A New Look at Process, Quality 
+    and Productivity." Proceedings of the 5th Annual Borland International Conference, 
+    June 5, 1994. Orlando, Florida. 
+  <LI>DeGrace, P. and Hulet Stahl, L. 1990. <CITE><B>Wicked Problems, Righteous 
+    Solutions</B></CITE>. Yourdon Press 
+  <LI>Gleick, J. 1987. <CITE><B>Chaos, Making A New Science.</B></CITE> Penguin 
+    Books. 
+  <LI>Kahn, D. and Sutherland, J. March-April 1994. "Let's start under-promising 
+    and over-delivering on OT." Object Magazine. 
+  <LI>Ogunnaike, B. 1994. <CITE><B>Process Dynamics, Modeling, and Control.</B></CITE> 
+    Oxford University Press. 
+  <LI>James Rumbaugh, October 1995, "What Is a Method". Journal of Object Oriented 
+    Programming. 
+  <LI>Takeuchi, Hirotaka and Nonaka, Ikujiro. January-February 1986. "The New 
+    Product Development Game." <CITE><B>Harvard Business Review</B></CITE>. 
+  <LI>Takeuchi, Hirotaka and Nonaka, Ikujiro. 1995. <CITE><B>The Knowledge Creating 
+    Company: How Japanese Companies Create the Dynamics of Innovation</B></CITE>, 
+    Oxford University Press. </LI>
+</OL>
+</BODY>
+</HTML>

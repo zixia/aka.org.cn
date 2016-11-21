@@ -1,0 +1,89 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>New Page 1</title>
+<meta name="Microsoft Theme" content="blank 000, default">
+<meta name="Microsoft Border" content="tlb, default">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/dl_make.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="下载-安装"></strong></font><br>
+<a href="../index.htm"><img src="../_derived/home_cmp_blank000_home.gif" width="100" height="20" border="0" alt="主页" align="middle"></a> <a href="index.htm"><img src="../_derived/up_cmp_blank000_up.gif" width="100" height="20" border="0" alt="上一层" align="middle"></a> <a href="resin_files.htm"><img src="../_derived/next_cmp_blank000_next.gif" width="100" height="20" border="0" alt="下一页" align="middle"></a></p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<h2>下载：</h2>
+<p>ftp://166.111.136.159/...下面应该有下面所有的软件包，下面的连接都是直接指向国外站点，请注意。</p>
+<ol>
+  <li>下载Resin的安装包：<br>
+    <a href="http://www.caucho.com/download/resin-1.2.b2.tar.gz">resin-1.2.b2.tar.gz</a></li>
+  <li>下载JDK1.2以上版本：<br>
+    <a href="http://www6.software.ibm.com/dl/dklx130/dklx130-p">http://www6.software.ibm.com/dl/dklx130/dklx130-p</a>(IBMJava2-13)<br>
+    IBM的Jikes<br>
+    (C++的Java编译器，开发时需要不停的从新编译Java源代码，使用这个可以明显提高速度)<br>
+    <a href="http://oss.software.ibm.com/developerworks/opensource/jikes/project">http://oss.software.ibm.com/developerworks/opensource/jikes/project</a></li>
+  <li>　</li>
+</ol>
+<h2>安装：（这里假设你是<font color="#FF0000">ROOT</font>）</h2>
+<p><b>安装jdk到/usr/local/目录下</b></p>
+<p>cd /usr/local<br>
+tar zxf IBMJava2-13.tgz<br>
+&nbsp;&nbsp;&nbsp; #这里要把IBMJava2-13.tgz的全路径名加上<br>
+ln -s IBMJava2-13 jdk<br>
+&nbsp;&nbsp;&nbsp; #做软链接，以后使用JDK时只需要指定目录/usr/local/jdk</p>
+<p><b>安装Jikes到/usr/local/目录下</b></p>
+<p>cd /tmp<br>
+tar zxf Jikes1.2.tar.gz<br>
+cd jikes1.2<br>
+./configure<br>
+make &amp;&amp; make install<br>
+&nbsp;&nbsp;&nbsp; #要耐心等待，Jike的编译速度比较慢... ...<br>
+&nbsp;&nbsp;&nbsp; #缺省jikes会安装到/usr/local/bin下面。</p>
+<p><b>安装Resin到/usr/local/目录下：</b></p>
+<p>cd /usr/local<br>
+tar zxf resin-1.2.b2.tar.gz<br>
+&nbsp;&nbsp;&nbsp; #需要加上全路径名<br>
+ln -s resin-1.2.b2 resin<br>
+&nbsp;&nbsp;&nbsp; #做软链接，以后使用resin只需要指定目录/usr/local/resin<br>
+cd resin<br>
+export JAVA_HOME=/usr/local/jdk<br>
+&nbsp;&nbsp;&nbsp; #制定jdk的路径<br>
+./configure<br>
+&nbsp;&nbsp;&nbsp; #我们这里不配置Apache，直接使用Resin自带的Web服务器<br>
+make<br>
+&nbsp;&nbsp;&nbsp; #编译<br>
+make install<br>
+&nbsp;&nbsp;&nbsp; #安装</p>
+<h2><b>测试Resin Server：</b></h2>
+<p>resin编译完毕，就已经可以用了。其实make install只有需要和Apache配合使用的时候才需要做。</p>
+<p>那么下一步，我们来启动resin的webserver。</p>
+<p>cd /usr/local/resin<br>
+bin/httpd.sh start<br>
+&nbsp;&nbsp;&nbsp; #好了，我们的Resin服务器应该已经启动了... 
+嗯，如果正常的话。</p>
+<p>启动一个浏览器，在URL中输入：http://ur-resin-host:8080/看看是否有Resin的首页？</p>
+<p>注：resin缺省启动监听在8080端口上。</p>
+<p>如果正常，那么我们可以进入下一步的配置。</p>
+<h1>注：</h1>
+<p>如果你不打算直接使用resin自带的webserver，那么你可以在configure 
+resin的时候加上参数：--with-apache=DIR the Apache root directory,<br>
+之后当你make &amp;&amp; make 
+install的时候，resin会自动帮助你修改apache/conf/httpd.conf，增加对resin模组的加载。</p>
+　
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="right">
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table></body>
+
+</html>

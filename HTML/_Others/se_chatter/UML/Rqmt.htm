@@ -1,0 +1,35 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>需求，功能</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+</head>
+
+<body>
+
+<h1 align="center">需求，功能</h1>
+
+<p>好的，首先是用户需求，系统功能。</p>
+
+<p>我们的例子其实很简单，它是一个ToDo（待办事宜）表的维护工具，可以为用户创建、删除和管理ToDo信息。ToDo表的信息存贮在文件系统中。<br>
+OK,对于这样一个需求，应该怎样用UML来描述呢？<br>
+首先，我们需要识别系统的用户和相关的外部系统，在UML中，它们被称为Actor（角色）。识别Actor是很重要的，它可以帮助我们界定软件系统的边界，引导我们发掘用户的需求，辅助我们设计用户界面等等，是需求分析阶段的第一步。对于我们这个简单例子，有两个Actor：ToDo 
+User（系统的用户） 和 FileSystem（相关外部系统）。<br>
+接下来，针对每个Actor，我们开始分析系统的Use Case。Use Case是一个UML中非常重要的概念，在使用UML的整个软件开发过程中，Use 
+Case处于一个中心地位。<br>
+那么，到底什么是Use Case呢？在UML的文档中，Use Case的定义是：在不展现一个系统或子系统内部结构的情况下，对系统或子系统的某个连贯的功能单元的定义和描述。有点拗口，对吧？其实Use 
+Case就是对系统功能的描述而已，不过一个Use Case描述的是整个系统功能的一部分，这一部分一定要是在逻辑上相对完整的功能流程。<br>
+（唔？Use Case也没什么特别的嘛！怎么这玩意儿会在开发中处于一个中心地位呢？）在使用UML的开发过程中，需求是用Use 
+Case来表达的，界面是在Use Case的辅助下设计的，很多类是根据Use Case来发现的，测试实例是根据Use 
+Case来生成的，包括整个开发的管理和任务分配，也是依据Use Case来组织的。啊，Use 
+Case，简直太重要了！好了，Use Case就吹到这儿，具体的使用还要在实践中去体会，“运用之妙，存乎一心”也！<br>
+对于每个Actor来说，他都要使用系统的某项功能，所以我们识别和分析Use 
+Case是，要对于每个Actor来逐个进行。对于ToDo User，我们可以轻易的识别出两个Use 
+Case：Add Task 和 Remove Task。ToDo User主动使用这两个Use Case所描述的系统功能，所以在我们的Use 
+Case图上，ToDo User和这两个Use Case的关系是用从ToDo User发出的箭头来表示的。对于FileSystem，我们识别出的也是同样的两个Use 
+Case，不过这次箭头从Use Case指向FileSystem，表示FileSystem是被动的。<br>
+Use Case可以用很多方式来描述，我们可以用自然语言（英语，汉语，随您的便），可以用形式化语言（太酷了吧！），也可以用各种图示。在UML中，通常用两种图来描述Use 
+Case，它们就是顺序图（Sequence Diagram）和协作图（Collaboration Diagram）。</p>
+</body>
+</html>

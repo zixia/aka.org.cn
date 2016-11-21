@@ -1,0 +1,98 @@
+		Installnation and Configuration for D2Close Server
+Last Update: 05-03-2001
+
+Part I: D2Close
+
+	For Linux user:
+
+	firstly,unzip the linux binary into a directory (we recommend to add a 
+sparate user instead of root to run the server for secure reason,e.g d2server)
+here,we suppose it to be /home/d2server, and the unzipped directory struct 
+will be like /home/d2server/var, /home/d2server/etc ...
+
+	secondly,unzip the data package with the file directory into 
+/home/d2server/var/files (or any place you wish,this also can be set in config file)
+
+	then,edit the configuration file /home/d2server/etc/bnetd.conf to 
+suit yourself.there are some comments in that file, and the default setting
+is ok in most case.i just point out some one necessary to change:
+	I).do a global replace with the directory in the config file.
+here,we change /usr/local/d2close/ to /home/d2server/
+	II).change all ip address settings. 
+	1)."realmaddr" is point to the auth server address(handling character,game,
+ladder request, currenctly builtin with d2close,so should be the same as d2close server
+ip address,care,you can not use internal ip address or loopback one,e.g 127.0.0.1, for 
+this address is also for client to use)
+	2)."d2localservaddr" currently builtin with the d2close server too,should also 
+be same ip as d2close server.
+	3)."d2remoteservaddr" should be the GameServer ip address, multi ip address
+can be specified sparating by ','. this address is just for server use now,so can be
+internal one. e.g. 166.111.2.1,192.168.2.1 will sepecify two game servers.
+
+	ok now, try chmod u+x /home/d2server/bnetd_dynamic, and run it.
+on most linux system with glibc >= 2.0 , it should be ok, anyway,if the dynamic
+linked version failed to run,try bnetd_static instead. still not work? recompile
+with source and try again.
+	when starting the server, you should set the argument to point out
+the config file(the default one is set on compiling),as the above example.
+use /home/d2server/bnetd_dynamic -c /home/d2server/etc/bnetd.conf
+or /home/d2server/bnetd_dynamic --cfg=/home/d2server/etc/bnetd.conf, for a complete
+list of arguments, try run using argument -h ( or --help)
+	
+	if all works fine here, the server will automatically run in background
+as a daemon(without -f argument),  and from the log file (/home/d2server/var/logs/bnetd.log)
+you will see the message like "server_process: listening on 0.0.0.0:6112 TCP"
+	
+	For Win32 user:
+	the step is familiar with the linux version, instead of cbnetd.exe is console
+version of server and wbnetd.exe is windows version of it ( no frontend now :( )
+	and by now, the win32 version may have some compatible problem,so better to 
+use the linux version.
+
+Part II: Game Server
+	The Game Server currently only support win32.
+	First of all,unzip the package into any directory you wish,we suppose it to be
+c:\d2server.
+	secondly, copy the file d2data.mpq from Diablo2 game into c:\d2server
+	then, for Nt & 2k user, run c:\d2server\d2svc.exe -i to install it as a
+system service, and start it by "net start d2svc" (also you can control this
+from service control manager). for 9x user, run c:\d2server\d2svc.exe directly.
+run under Nt or 2k as system service is suggested.
+	if the game server start sucessfully, you will found a message from 
+c:\d2server\d2svc.log "Main server started successfully,Server id is ..." and
+also found port 4321 is listening
+
+	all done, lanuch your Diablo2 Client(only support 1.03 now), and point the 
+battle.net server ip to the d2close server, and you can enjoy the great game now.
+	
+	
+Part III: some admin commands. (need admin or announce privilege)
+
+	1. /shutdown [n]
+	shutdown the server after 'n' minutes, if n is zero, cancel the previous
+shutdown. (you will need to write a script if you want the server auto restart)
+	
+	2. /d2server
+	view the game server status, the output format is:
+server Id:ip-----------------Status----Max---Token----Games
+id is needed for other game server maintenance command, status indicate whether
+a game server is running. Max is that server's max game number,
+Token is for game sync, Games is game number currently running on
+that server.
+
+	3. /maxgame [server id] [maxgame]
+	set server [id] maxgame number to maxgame,you can set maxgame to zero
+to tempory disable a game server( no new game will be created on that server,but
+currently running games on that server will continued)
+
+	4. /retest
+	retest status of all game servers.
+
+	5. /add [server ip]
+	dynamic add a game server into game server list.
+	
+	6. /del [server ip]
+	dynamic delete a game server from game server list.	
+
+	most other command reference can be found by using /help
+command.

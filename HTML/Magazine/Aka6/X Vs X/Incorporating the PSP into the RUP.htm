@@ -1,0 +1,556 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0059)http://www.therationaledge.com/content/may_01/t_rup_hs.html -->
+<html>
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<link rel=Edit-Time-Data
+href="./Incorporating%20the%20Personal%20Software%20Process%20into%20the%20Rational%20Unified%20Process.files/editdata.mso">
+<title>The Rational Edge -- April 2001 -- Incorporating the Personal Software 
+Process into the Rational Unified Process</title>
+<link rel=Stylesheet type="text/css" media=all
+href="Incorporating%20the%20Personal%20Software%20Process%20into%20the%20Rational%20Unified%20Process.files\text_styles.css">
+<style><!--
+.Normal
+	{font-size:12.0pt;
+	font-family:"Times New Roman";}
+.title
+	{font-size:12.0pt;
+	font-family:"Times New Roman";}
+.small
+	{font-size:12.0pt;
+	font-family:"Times New Roman";}
+-->
+</style>
+<script language="JavaScript"  src type="text/javascript">
+<!-- 
+function popUp(){}
+function On(){}
+function Off(){}
+
+ //-->
+</script>
+<!-- Insert Article Title Below -->
+<!-- Remember to Fill in title and author correctly or search engine will not work right!!!! -->
+<meta content="Harald Svensson" name=author>
+<meta content="The Rational Edge is a customer e-zine from Rational Software"
+name=description>
+<meta http-equiv=Content-Language content=EN>
+<meta content="Rational Software 2001" name=copyright>
+<!-- Change the Content Line below to "NOFOLLOW, INDEX" -->
+<meta content="NOFOLLOW,INDEX" name=robots>
+<!-- Path to Stylesheet below -->
+</head>
+<body bgcolor=#FFFFFF lang=ZH-CN link="#336699" vlink="#3399cc" alink="#3399cc" leftmargin=0 topmargin=0 marginwidth=0 marginheight=0 class="Normal">
+<!-- ImageReady Slices (features.psd) Do not edit!!!-->
+<table border=0 cellspacing=0 cellpadding=0 width="95%" bgcolor=white>
+  <tr> 
+    <td class="Normal">&nbsp; </td>
+    <td class="Normal"> 
+      <p class=title><b><span lang=EN-US>Incorporating the Personal Software Process 
+        into the Rational Unified Process </span></b><span lang=EN-US></span></p>
+    </td>
+  </tr>
+  <!-- Insert Abstract -->
+  <tr> 
+    <td class="Normal">&nbsp; </td>
+    <td valign=top class="Normal"> 
+      <p> <span
+  lang=EN-US>by <b><a
+  href="http://www.therationaledge.com/bio/svensson.html">Harald Svensson</a></b><br>
+        Ph.D. Student<br>
+        Royal Institute of Technology<br>
+        Stockholm, Sweden </span></p>
+      <p><i><span lang=EN-US>Typically, there are three main factors important 
+        to the success of a software development project: time, cost, and quality 
+        (Figure 1). When we toss these three &quot;darts,&quot; however, we often 
+        miss the bull's-eye, for a number of reasons.</span></i><span lang=EN-US></span></p>
+      <p><i><span lang=EN-US>In Sweden, one notable failure was a software project 
+        at the Swedish Patent and Registration Office, which contracted a large 
+        software development firm to implement a Web solution for companies to 
+        register themselves online with the Patent and Registration Office. The 
+        planned release was to be 1998 at an approximate cost of $15 million. 
+        But the system was actually delivered in September 2000, still incomplete, 
+        at a cost of $25 million.</span></i><span lang=EN-US> </span></p>
+      <table border=0 cellspacing=0 cellpadding=0 align=left width=150>
+        <tr> 
+          <td class="Normal"> 
+            <p><span lang=EN-US><img border=0 width=230 height=175
+    id="_x0000_i1086"
+    src="../images/i24.jpg"
+    hspace=5 vspace=10 alt="Figure 1"></span></p>
+            <h6><span lang=EN-US>Figure 1: Important Factors in Software Development 
+              Projects</span></h6>
+          </td>
+        </tr>
+      </table>
+      <p><i><span lang=EN-US>Why do projects fail? There have been many books 
+        and research articles on the subject, but it is safe to say that failure 
+        stems from both external and internal factors. An external factor, for 
+        example, might be that the product is already &quot;old&quot; and useless 
+        by the time it is developed; that is, it is based on out-of-date technology 
+        that makes the product cumbersome to use. Other possible external factors 
+        include key personnel leaving the project or customers changing the requirements 
+        specifications. These are all factors that you, as a software developer, 
+        cannot control.</span></i><span
+  lang=EN-US> </span></p>
+      <p><i><span lang=EN-US>One factor that you can control, however, is an internal 
+        one: the software development process. A defined and mature process usually 
+        results in good products. Furthermore, using such a process becomes more 
+        and more important as systems continue to grow in complexity and size.</span></i><span lang=EN-US></span></p>
+      <h3><span lang=EN-US>Software Development Processes</span></h3>
+      <p><span lang=EN-US>Today, there are a number of software development processes: 
+        the Capability Maturity Model (CMM), the Rational Unified Process (RUP<sup>®</sup>), 
+        the Personal Software Process (PSP), and the Team Software Process (TSP), 
+        to name a few. Most of these processes focus on just one dimension regarding 
+        support for process improvement. The RUP and CMM, for example, provide 
+        support for software development at an organizational level; the TSP provides 
+        support at a team level; and the PSP provides it at an individual level. 
+        </span></p>
+      <p><span lang=EN-US>Processes like the RUP and the TSP support teams and 
+        organizations to develop software but do not support the software processes 
+        of the individuals in the organizations. The focus and effort of coordinating 
+        work activities at a team level leaves out guidelines for the workers. 
+        As a consequence, it is more or less up to the individual worker to find 
+        ways to monitor, control, and improve his own personal software development 
+        process.</span></p>
+      <h5><span lang=EN-US>The Rational Unified Process (RUP)</span></h5>
+      <p><span lang=EN-US>The RUP defines process elements such as workers, activities, 
+        and artifacts that, when combined properly, will help an organization 
+        conduct a software project efficiently. The process itself, however, does 
+        not provide any magical solutions. It is the workers -- actual human beings 
+        -- who are the driving force of the project. Without human participants, 
+        no process or tool in the world could alone finish a software project. 
+        The end results -- whether the project finished on time and whether the 
+        released system was of high quality -- depend to a great extent on the 
+        quality of participants' individual software processes. </span></p>
+      <p><span lang=EN-US>The RUP provides a knowledge base of information that 
+        helps workers do a better job. It differs from the approach used in the 
+        PSP, however, which provides the software engineer with more explicit 
+        support. Instead, the RUP provides a framework for how, what, when, and 
+        by whom various activities should take place in order to get a satisfying 
+        result. In other words, an organization using RUP will do well if it has 
+        competent and experienced people -- and will certainly do better than 
+        an organization with incompetent and inexperienced employees that attempts 
+        to use the RUP. It is always important for organizations with inexperienced 
+        people to quickly improve their employees' skills in order to save time 
+        and money. The RUP does not provide an answer to this issue of employee 
+        competence.</span></p>
+      <h5><span lang=EN-US>The Personal Software Process (PSP)</span></h5>
+      <p><span lang=EN-US>The PSP, in contrast, does address this employee improvement 
+        issue. The PSP is a framework for software process improvement for the 
+        individual software engineer. Watts Humphrey at the Software Engineering 
+        Institute (SEI) in Pittsburgh, Pennsylvania, developed it in 1995. The 
+        PSP provides metrics, process-steps, and templates that help an engineer 
+        improve her software engineering skills. Research results indicate significant 
+        process improvements among software engineers applying the PSP. Factors 
+        like productivity, number of injected defects, and time and size estimations 
+        tend to improve when the PSP is applied. </span></p>
+      <p><span lang=EN-US>Figure 2 shows the PSP's process maturity levels. PSP0 
+        is the most basic level, enabling the software engineer to establish a 
+        ground floor development process, whereas PSP3 is the most complex, with 
+        a number of metrics and templates available to the software engineer.</span></p>
+      <p align=center style='text-align:center'><span lang=EN-US><img
+  border=0 width=410 height=440 id="_x0000_i1087"
+  src="../images/i25.gif"
+  alt="Figure 2"></span></p>
+      <h6 align=center style='text-align:center'><span lang=EN-US>Figure 2: The 
+        PSP's Process Maturity Levels</span></h6>
+      <h3><span lang=EN-US>How the PSP Can Support the RUP</span></h3>
+      <p><span lang=EN-US>In light of these positive results from applying the 
+        PSP, we might assume that similar process improvement awareness in the 
+        RUP would help workers improve their own processes, thereby enhancing 
+        the results of an organization as a whole. If you study and compare the 
+        PSP with the RUP, it becomes obvious that the PSP has process improvement 
+        concepts that can be applied in the RUP. </span></p>
+      <p><span lang=EN-US>The main advantages of incorporating the PSP into the 
+        RUP are as follows: </span></p>
+      <ul type=disc>
+        <li><b><span lang=EN-US>Task and schedule planning template.</span></b><span lang=EN-US> 
+          The RUP provides limited support to team members on how to manage work 
+          within an iteration. In the RUP, iterations can last for weeks or months. 
+          The project manager (or other lead) assigns tasks and responsibilities 
+          to project participants. It is up to the individual worker, however, 
+          to plan his work during the iteration. The RUP does not provide any 
+          support for this. The PSP, in contrast, provides task and schedule planning 
+          templates to monitor project progress. With these tools, software engineers 
+          can track their progress and know when they are slipping behind schedule. 
+          They can then inform the project manager about this status so that appropriate 
+          corrective actions can be taken. </span></li>
+        <li><b><span lang=EN-US>Checklists based on personal defect data.</span></b><span lang=EN-US> 
+          The workers in the RUP do not perform reviews based on personal defect 
+          data. Rather, they have checklists based on the most typical defect 
+          types collected in the organization. As a consequence, software engineers 
+          could be looking for defect types they never inject. The PSP, on the 
+          other hand, has checklists that are based on personal defect data. So 
+          software engineers will be looking for defect types they usually inject. 
+          </span></li>
+        <li><b><span lang=EN-US>Templates to record ideas for, and help move toward, 
+          process improvement.</span></b><span
+       lang=EN-US> <br>
+          The RUP does not provide templates for writing down ideas for process 
+          improvement, but the PSP <i>does</i> provides templates for software 
+          engineers to record ideas as well as tasks to perform later on in the 
+          project. </span></li>
+        <li><b><span lang=EN-US>Metrics to help improve process.</span></b><span lang=EN-US> 
+          The RUP does not provide predefined metrics that software engineers 
+          can use to monitor and control their software processes. Before each 
+          new project, metrics must be defined and explained to all project participants. 
+          There is no guarantee, however, that the defined metrics offer the kind 
+          of information a software engineer wants or needs in order to monitor 
+          his software development process. In these cases, it is up to the software 
+          engineer to define and apply appropriate metrics. The PSP, in contrast, 
+          has a number of metrics that provide information on improving the personal 
+          software development process. </span></li>
+      </ul>
+      <p><span lang=EN-US>Unfortunately, the PSP material cannot be applied directly 
+        by workers using RUP; it must be modified so that it suits the RUP context. 
+        If every RUP project were conducted in the same manner -- that is, if 
+        all artifacts, activities, workflows, lifecycle models, and so on, never 
+        changed -- then the PSP material would only need to be adapted once. This 
+        is not the case, however. Every project is unique and needs to be conducted 
+        in a particular way in order to be successful. This means that the RUP 
+        material -- activities, artifacts, and workflows -- must be modified and 
+        defined for the particular project at hand. </span></p>
+      <h5><span lang=EN-US>PSP Toolboxes for RUP Personnel</span></h5>
+      <p><span lang=EN-US>To address the opportunity to support the RUP with the 
+        PSP, we defined &quot;PSP Toolboxes&quot; for workers whose tasks are 
+        part of both processes: those who do design, code, and test activities. 
+        The toolboxes contain process scripts, templates, and metrics (see Figure 
+        3) for workers using the RUP to apply, enabling them to analyze and control 
+        their software development processes. </span></p>
+      <p align=center style='text-align:center'><span lang=EN-US><img
+  border=0 width=504 height=266 id="_x0000_i1088"
+  src="../images/i26.gif"
+  alt="Figure 3"></span></p>
+      <h6 align=center style='text-align:center'><span lang=EN-US>Figure 3: A 
+        PSP Toolbox with Process Improvement Elements for Workers Using the RUP</span></h6>
+      <p><span lang=EN-US>We designed unique PSP Toolboxes for each of five workers 
+        defined in the RUP: <i>Implementer, Integrator, Test Designer, Tester, 
+        and Designer</i>. They all work in PSP-related activities and, furthermore, 
+        they were perceived as the main candidates for applying the PSP material. 
+        There are other workers in the RUP who also work with PSP activities, 
+        but to a lesser degree. For example, the <i>Capsule Designer</i> deals 
+        with concurrency issues, and can be viewed as a narrower version of the 
+        <i>Designer</i>. As a consequence, the work was restricted to defining 
+        PSP Toolboxes for the main worker categories mentioned above. It should 
+        be noted, however, that every worker in RUP ought to have a process improvement 
+        framework of his own, specially defined for that individual worker's needs 
+        and work environment. As the saying goes, however, that is another story; 
+        we will not address that issue here.</span></p>
+      <h5><span lang=EN-US>Incorporating the PSP into the RUP</span></h5>
+      <p><span lang=EN-US>So far so good. We have defined PSP Toolboxes for five 
+        chosen workers, and the material in those Toolboxes helps the workers 
+        monitor and control their software development processes. Two things, 
+        however, are still missing. First, a new process -- in this case the PSP 
+        -- should be introduced into an organization in a proper way. Experience 
+        tells us that the general guidelines presented in Table 1 are effective 
+        for process introductions. </span></p>
+      <h6 align=center style='text-align:center'><span lang=EN-US>Table 1: Guidelines 
+        for Introducing a New Process into an Organization</span></h6>
+      <div align=center> 
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr> 
+            <td width="30%" class="Normal"> 
+              <p align=center style='text-align:center'><b><span
+    lang=EN-US>Guideline</span></b></p>
+            </td>
+            <td class="Normal"> 
+              <p align=center style='text-align:center'><b><span
+    lang=EN-US>Comments</span></b></p>
+            </td>
+          </tr>
+          <tr> 
+            <td class="Normal"> 
+              <p><span lang=EN-US>Involve the right people</span></p>
+            </td>
+            <td class="Normal"> 
+              <p><span lang=EN-US>Competent people with decision power and interest 
+                in the new process should be involved. </span></p>
+            </td>
+          </tr>
+          <tr> 
+            <td class="Normal"> 
+              <p><span lang=EN-US>Document new routines</span></p>
+            </td>
+            <td class="Normal"> 
+              <p><span lang=EN-US>Decide who will do what and when. The documents 
+                can be used as references if questions arise. </span></p>
+            </td>
+          </tr>
+          <tr> 
+            <td class="Normal"> 
+              <p><span lang=EN-US>Demand feedback</span></p>
+            </td>
+            <td class="Normal"> 
+              <p><span lang=EN-US>Responsible people should solicit critiques 
+                and suggestions as the new process is introduced. The people applying 
+                the new process should feel that they can affect important decisions 
+                related to the introduction. </span></p>
+            </td>
+          </tr>
+          <tr> 
+            <td class="Normal"> 
+              <p><span lang=EN-US>Conduct post-mortem analyses</span></p>
+            </td>
+            <td class="Normal"> 
+              <p><span lang=EN-US>At each stage of the introduction, stop and 
+                evaluate. Continuously try to improve the adaptation of the new 
+                process. </span></p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p><span lang=EN-US>Second, the material in the PSP Toolboxes needs to be 
+        adapted and adjusted for each individual project. For instance, size metrics 
+        should be defined for software development projects, so that team members 
+        can measure the size of the products and estimate time and effort. It 
+        is impossible to know beforehand, however, whether the worker in question 
+        will apply, for example, Lines Of Code (LOC) or Function Points (FP), 
+        to name just two size metrics. The choice of metric may depend on the 
+        type of application developed or the tool used in the development effort. 
+        In addition, it is also impossible to know beforehand if the worker in 
+        question will count physical or logical lines if LOC is used, or what 
+        kinds of factors and weights he or she will choose if FP is used. As this 
+        small example illustrates, for any project, the people actually using 
+        the PSP Toolboxes should be the ones who adapt the contents in those toolboxes. 
+        </span></p>
+      <p><span lang=EN-US>As Table 2 shows, the RUP does provide a number of guidelines 
+        to consider when adapting the RUP to a new project.</span></p>
+      <h6 align=center style='text-align:center'><span lang=EN-US>Table 2: RUP 
+        Guidelines to Consider When Adapting the RUP for a New Project</span></h6>
+      <div align=center> 
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr> 
+            <td class="Normal"> 
+              <p align=center style='text-align:center'><b><span
+    lang=EN-US>RUP Guideline</span></b></p>
+            </td>
+            <td class="Normal"> 
+              <p align=center style='text-align:center'><b><span
+    lang=EN-US>Comments</span></b></p>
+            </td>
+          </tr>
+          <tr> 
+            <td class="Normal"> 
+              <p><span lang=EN-US>Analyze project and organization </span></p>
+            </td>
+            <td class="Normal"> 
+              <p><span lang=EN-US>Analyze the type of application to be developed, 
+                size of the project, and organizational factors. </span></p>
+            </td>
+          </tr>
+          <tr> 
+            <td class="Normal"> 
+              <p><span lang=EN-US>Define scope of project</span></p>
+            </td>
+            <td class="Normal"> 
+              <p><span lang=EN-US>Define the workflows to be used in the project; 
+                decide which tools will be used. </span></p>
+            </td>
+          </tr>
+          <tr> 
+            <td class="Normal"> 
+              <p><span lang=EN-US>Describe iteration plans</span></p>
+            </td>
+            <td class="Normal"> 
+              <p><span lang=EN-US>Decide activities and their order of application 
+                in the iterations. The process should be defined thoroughly. </span></p>
+            </td>
+          </tr>
+          <tr> 
+            <td class="Normal"> 
+              <p><span lang=EN-US>Update the project's processes</span></p>
+            </td>
+            <td class="Normal"> 
+              <p><span lang=EN-US>Evaluate the RUP after each iteration. </span></p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p><span lang=EN-US>In order to adapt the PSP to fit nicely with the RUP, 
+        it makes sense to consider the factors listed in Table 2 for both processes. 
+        That way, when you prepare for a new project, both the PSP and the RUP 
+        will be reviewed in the same areas and documented in a similar way, thereby 
+        easing the incorporation of the PSP into the RUP.</span></p>
+      <p><span lang=EN-US>For each of the factors listed in Table 2, Table 3 shows 
+        corresponding guidelines for adapting the PSP Toolboxes to the RUP. </span></p>
+      <h6 align=center style='text-align:center'><span lang=EN-US>Table 3: Guidelines 
+        for Adapting PSP Toolboxes to the RUP <br>
+        <i>(PSP guidelines in italics)</i> </span></h6>
+      <div align=center> 
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr> 
+            <td class="Normal"> 
+              <p align=center style='text-align:center'><b><span
+    lang=EN-US>Guideline</span></b></p>
+            </td>
+            <td class="Normal"> 
+              <p align=center style='text-align:center'><b><span
+    lang=EN-US>Comments</span></b></p>
+            </td>
+          </tr>
+          <tr> 
+            <td class="Normal"> 
+              <p><span lang=EN-US>Analyze project and organization </span></p>
+            </td>
+            <td class="Normal"> 
+              <p><span lang=EN-US>Analyze the type of application to be developed.<br>
+                <i>Choose appropriate templates. The templates should match the 
+                needs of the application,</i> size of the project, and organizational 
+                factors.<br>
+                <i>Start implementation with a small group and evaluate. Do not 
+                force the PSP on the organization.</i></span></p>
+            </td>
+          </tr>
+          <tr> 
+            <td class="Normal"> 
+              <p><span lang=EN-US>Define scope of project</span></p>
+            </td>
+            <td class="Normal"> 
+              <p><span lang=EN-US>Define the workflows to be used in the project; 
+                decide which tools will be used.<br>
+                <i>Decide on an appropriate size metric. The PSP uses LOC, and 
+                many metrics are based on that assumption. </i></span></p>
+            </td>
+          </tr>
+          <tr> 
+            <td class="Normal"> 
+              <p><span lang=EN-US>Describe iteration plans</span></p>
+            </td>
+            <td class="Normal"> 
+              <p><span lang=EN-US>Decide activities and their order of application 
+                in the iterations. The process should be defined thoroughly. </span></p>
+            </td>
+          </tr>
+          <tr> 
+            <td class="Normal"> 
+              <p><span lang=EN-US>Update the project's processes</span></p>
+            </td>
+            <td class="Normal"> 
+              <p><span lang=EN-US>Evaluate the RUP after each iteration.<br>
+                <i>Evaluate how well the PSP is incorporated into the RUP; look 
+                at communication among workers, when and where to apply various 
+                PSP elements, and so forth.</i> </span></p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p><span lang=EN-US>The <i>Process Engineer</i> is the worker in RUP responsible 
+        for adapting the RUP to a new project, that is, to define a development 
+        case. The workers in RUP that will apply the PSP-toolboxes should thus 
+        work with the Process Engineer so that the PSP-elements will be adapted 
+        to the development case.</span></p>
+      <h5><span lang=EN-US>Advantages of Using the PSP with the RUP</span></h5>
+      <p><span lang=EN-US>The main advantages of supporting the RUP with the PSP 
+        are presented in Table 4. Maybe the most important advantage that the 
+        PSP provides is the drive for personal excellence. The PSP stresses that 
+        personal commitment and excellence are factors that have a major impact 
+        on process improvement results. Software engineers should always strive 
+        to do the best they can. That way, they will never be disappointed with 
+        respect to their efforts. Employees with this kind of commitment always 
+        outperform those who do not care about their work results, as long as 
+        the paychecks keep coming. The PSP helps people strive for personal excellence. 
+        </span></p>
+      <h6 align=center style='text-align:center'><span lang=EN-US>Table 4: The 
+        Main Advantages of Supporting the RUP with the PSP</span></h6>
+      <div align=center> 
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr> 
+            <td class="Normal"> 
+              <p align=center style='text-align:center'><b><span
+    lang=EN-US>Advantages of supporting the RUP with the PSP</span></b></p>
+            </td>
+            <td class="Normal"> 
+              <p align=center style='text-align:center'><b><span
+    lang=EN-US>Comments </span></b></p>
+            </td>
+          </tr>
+          <tr> 
+            <td class="Normal"> 
+              <p><span lang=EN-US>Reduced number of defects in work products</span></p>
+            </td>
+            <td class="Normal"> 
+              <p><span lang=EN-US>Reviews are based on personal defect data. </span></p>
+            </td>
+          </tr>
+          <tr> 
+            <td class="Normal"> 
+              <p><span lang=EN-US>Quantitative measures for the software development 
+                process</span></p>
+            </td>
+            <td class="Normal"> 
+              <p><span lang=EN-US>Support through templates and metrics provides 
+                better control of the software development process. </span></p>
+            </td>
+          </tr>
+          <tr> 
+            <td class="Normal"> 
+              <p><span lang=EN-US>More accurate and precise estimates</span></p>
+            </td>
+            <td class="Normal"> 
+              <p><span lang=EN-US>Estimates are based on personal process data. 
+                </span></p>
+            </td>
+          </tr>
+          <tr> 
+            <td class="Normal"> 
+              <p><span lang=EN-US>Striving for personal excellence</span></p>
+            </td>
+            <td class="Normal"> 
+              <p><span lang=EN-US>The PSP helps people strive for improvement 
+                in their work routines. </span></p>
+            </td>
+          </tr>
+          <tr> 
+            <td class="Normal"> 
+              <p><span lang=EN-US>Better planning and control in the iterations</span></p>
+            </td>
+            <td class="Normal"> 
+              <p><span lang=EN-US>The PSP provides control and planning for short 
+                time periods, an ideal complement to the RUP's iterations, which 
+                tend to have longer timeframes. </span></p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p><span lang=EN-US>It is important to remember that the software development 
+        process should provide support for all levels of work: for individuals 
+        as well as teams and organizations. The purpose of having defined processes 
+        is to ensure that the work ahead can be performed with a reasonably high 
+        degree of quality. &quot;A chain is only as strong as its weakest link,&quot; 
+        as the saying goes. A project depends on the individuals involved in it, 
+        and these individuals, therefore, should have maximum support for improving 
+        their work routines. This is where the PSP can enhance the RUP.</span></p>
+      <div align=center style='text-align:center'><span lang=EN-US> 
+        <hr size=2 width="100%" align=center>
+        </span></div>
+      <p class=small><a name=1><sup><span lang=EN-US>1</span></sup></a><span
+  lang=EN-US>See: </span></p>
+      <p class=small><span
+  lang=EN-US>Hayes, W. and Over, J.W. &quot;The Personal Software Process (PSP): 
+        An Empirical Study of the Impact of the PSP on Individual Engineers.&quot; 
+        Technical Report, CMU/SEI-97-TR-001, ESC-TR-97-001, Software Engineering 
+        Institute, December 1997. </span></p>
+      <p class=small><span
+  lang=EN-US>Humphrey, W. <i>A Discipline for Software Engineering.</i> Addison-Wesley 
+        Publishing Company. 1997. </span></p>
+      <p class=small><span
+  lang=EN-US>Stavros, K. M. and Avratoglou , Dr C. &quot;Personal Software Process 
+        Implementation in a Production Environment.&quot; EuroSPI98, Gothenburgh, 
+        Sweden, 1998. </span></p>
+      <p> <img width=35 height=35
+  src="Incorporating%20the%20Personal%20Software%20Process%20into%20the%20Rational%20Unified%20Process.files\icon.gif"
+  align=right alt="tre icon" border=0 v:shapes="_x0000_s1031"> <span
+  lang=EN-US></span></p>
+      <div align=center style='text-align:center'><span lang=EN-US> 
+        <hr size=2 width="100%" align=center>
+        </span></div>
+      <p><b><i><span lang=EN-US>For more information on the products or services 
+        discussed in this article, please click <a href="http://www.rational.com/contact/request.jsp" target="_blank">here</a> 
+        and follow the instructions provided. Thank you!</span></i></b><span
+  lang=EN-US> </span></p>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+      
+  <meta http-equiv="content-type" content="text/html; charset=x-gbk">
+  <title>LinuxProcess</title>
+</head>
+<body>
+<br>
+1、linux进程管理的模块组织框架<br>
+2、相关数据结构。<br>
+3、进程调度原则，调度算法,。<br>
+4、进程的创建和运行管理。<br>
+5、进程间通讯。 &nbsp;&nbsp; &nbsp; &nbsp; <br>
+（1～5结合源代码进行分析）<br>
+ &nbsp;&nbsp; <br>
+6、具体分析：一个进程在系统中的生存周期和行为<br>
+<br>
+7、更多的技术<br>
+ &nbsp;&nbsp; 进程管理和其他内核模块的交互关系<br>
+ &nbsp;&nbsp; 进程管理涉及的内核机制（锁，等待队列，定时器&hellip;&hellip;）<br>
+ &nbsp;&nbsp; 和中断处理，module运行的交互<br>
+ &nbsp;&nbsp; Linux/SMP的进程管理和调度技术 &nbsp;&nbsp; <br>
+<br>
+5、概述2.4的新特点<br>
+===========================================================<br>
+<br>
+<br>
+1、linux进程管理的模块组织框架<br>
+<br>
+ &nbsp;&nbsp; 1、1 &nbsp; &nbsp; 进程管理要解决的中心问题
+<ul>
+      
+  <li>allow processes to create new copies of themselves</li>
+      
+  <li>determine which process will have access to the CPU and        effect
+the transfer between running processes</li>
+      
+  <li>receive interrupts and route them to the appropriate        kernelsubsystem</li>
+      
+  <li>send signals to user processes</li>
+      
+  <li>manage the timer hardware</li>
+      
+  <li>clean up process resources when a processes finishes        executing</li>
+      
+  <li>dynamicallyloaded modules&nbsp; </li>
+</ul>
+T<br>
+ &nbsp;&nbsp; 1、2 &nbsp;&nbsp; 在整个内核中的功能位置和源码依赖关系<br>
+<br>
+<p><img src="images/overview2.gif" width="590" height="422" alt="function modules"></p>
+&nbsp; 进程调度模块的界面：<br>
+    
+<blockquote> first, itprovides a limitedsystem call interface that userprocesses
+maycall;<br>
+&nbsp; secondly, it providesa rich interface to the rest of thekernel system.
+&nbsp; </blockquote>
+        
+  <p>&nbsp; 进程调度模块和其他模块的相互依赖关系：<br>
+  </p>
+  <blockquote> The process scheduler requires the memorymanager to setupthe
+memory mapping when a process is scheduled.<br>
+Further, the process scheduler depends on the IPC subsystem forthe semaphore
+queues that are used in bottom-half-handling<br>
+Finally, the process schedulerdepends on the file system to load loadable
+modules from the persistent device.<br>
+    <br>
+&nbsp; All subsystems depend on the processscheduler, since they need to
+suspenduser processes whilehardware operations complete<br>
+    <br>
+.<img src="images/system.gif" width="305" height="308" alt="source dependence"></blockquote>
+    <p></p>
+    <br>
+2、相关数据结构。<br>
+        <br>
+&nbsp; task_struct represents a Linux task.<br>
+                
+    <blockquote>进程状态信息：&nbsp;                     
+      <ul>
+                          
+        <li>running</li>
+                          
+        <li>returning from system call</li>
+                          
+        <li>processing an interrupt routine</li>
+                          
+        <li>processing a system call</li>
+                          
+        <li>ready </li>
+                          
+        <li>waiting</li>
+                    
+      </ul>
+进程调度依据：                    
+      <ul>
+                          
+        <li>processespriority： the number of clock ticks (10msintervals)
+whichthe process can continue executing withoutforced rescheduling.  </li>
+                          
+        <li>the errornumber of the last faulting system call. </li>
+                    
+      </ul>
+                    
+      <p>进程索引结构：</p>
+                    
+      <ul>
+                          
+        <li>双向链： a doublylinked list is maintained, (through two fieldsthat
+pointtotask_struct).</li>
+                          
+        <li>树结构：originalparent, parent, youngest child, younger sibling,and
+finallyolder sibling.</li>
+                    
+      </ul>
+                    
+      <p> </p>
+                    
+      <p>内存管理接口：mm_structda<br>
+          <br>
+          </p>
+                    
+      <div align="Left"><img src="sched.gif" width="441" height="202"><img src="sched.gif" width="441" height="202">
+                    
+      <p align="Center"><a name="_Toc411854286" href="images/sched.gif"></a></p>
+          <img src="images/sched.gif" alt="sched" width="441" height="202"><br>
+          <br>
+          <br>
+          <br>
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br>
+dafs<br>
+          <br>
+dfadfasfaaad<br>
+ &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; <img src="sched.gif" width="441" height="202"><img src="sched.gif" width="441" height="202"><img src="sched.gif" width="441" height="202"><br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          </div>
+          </blockquote>
+                    
+      <p>Process ID information is also kept within the task_struct.Theprocessand
+group id are stored. An array of group id&rsquo;sis provided sothata process
+can be associated with more thanone group. </p>
+                    
+      <p>File specific process data is located in a fs_structsubstructure.
+Thiswill hold a pointer to the inode correspondingto a processors root directory,
+and it&rsquo;s current workingdirectory. </p>
+                    
+      <p>All files opened by a process will be kept track of throughafiles_structsubstructure
+of the task_struct. </p>
+                    
+      <p>Finally, there are fields that hold timing information; forexample,
+theamount of time the process has spent in user mode. </p>
+                    
+      <p>All executing processes have an entry in the process table.Theprocesstable
+is implemented as an array of pointers to taskstructures. Thefirstentry in
+the process table is the specialinit process, which is thefirstprocessexecuted
+by the Linuxsystem. </p>
+                    
+      <p>Finally, a module structure is implemented to represent theloaded
+modules.This structure contains fields that are used toimplement a list of
+modulestructure: a field which points to themodules symbol table, and another
+fieldthat holds the name ofthe module. The module size (in pages), and apointerto
+thestarting memory for the module are also fields within the modulestructure.
+          </p>
+          <br>
+3、进程调度原则，调度算法,。<br>
+          <br>
+原则<br>
+算法<br>
+                    
+      <p>The process scheduler subsystem is primarily responsible fortheloading,execution,
+and proper termination of user processes.The schedulingalgorithmis called
+at two different points duringthe execution of a userprocess.First,there
+are system callsthat call the scheduler directly, suchas sleep().Second,afterevery
+system call, and after every slow system interrupt(describedina moment),
+the schedule algorithm is called. </p>
+          <br>
+          
+      <h4 class="HeadC">Direct invocation</h4>
+          
+      <p class="Body">Thescheduler is invoked directly when the <code class="Literal">
+current</code>&nbsp; process must be blocked right away because the resource
+it needs is notavailable. In this case, the kernel routine that wants toblock
+it proceedsas follows:</p>
+          
+      <ol>
+             
+        <li class="ListNumber">Inserts <code class="Literal">current</code>
+ in the proper wait queue</li>
+            
+        <li class="ListNumber">Changes the state of <code class="Literal">
+current</code> either to <code class="Literal">TASK_INTERRUPTIBLE</code>or
+to <code class="Literal">TASK_UNINTERRUPTI</code>BLE</li>
+            
+        <li class="ListNumber">Invokes <code class="Literal">schedule(&nbsp;
+)</code></li>
+            
+        <li class="ListNumber">Checks if the resource is available; ifnot,
+goes to step 2</li>
+            
+        <li class="ListNumber">Once the resource is available, removes  
+           <code class="Literal">current</code>&nbsp; from the wait queue</li>
+          
+      </ol>
+          <br>
+% waitqueue<br>
+          
+      <p class="Body">Youmay have noticed that these steps are similarto
+those performed by the <code class="Literal">sleep_on(&nbsp; )</code>and
+      <code class="Literal">interruptible_sleep_on(&nbsp; )</code>&nbsp;
+functionsdescribed in the section "Wait Queues" . However,the functions we
+discusshere immediately remove the process from the waitqueue as soon as
+it is wokenup.</p>
+          
+      <p class="Body">% device driver</p>
+          
+      <p class="Body">Thescheduler is also directly invoked by many device
+drivers that execute longiterative tasks. At each iteration cycle, the driver
+checks the value ofthe <code class="Literal">need_resched</code> field and,
+if necessary, invokes &nbsp; <code class="Literal">schedule(&nbsp; )</code>
+ to voluntarily relinquish the CPU.</p>
+          
+      <h4 class="HeadC">Lazy invocation</h4>
+          
+      <p class="Body">Thescheduler can also be invoked in a lazy wayby setting
+the <code class="Literal">need_resched</code> field of <code class="Literal">
+current</code> to 1. Sincea check on the value of this field is always made
+before resuming the executionof a User Mode process, <code class="Literal">
+schedule(&nbsp; )</code> will definitelybe invoked at some close future time.</p>
+          
+      <p class="Body">Lazyinvocation of the scheduler is performed inthe
+following cases:</p>
+          
+      <ul>
+            
+        <li class="ListBullet">When <code class="Literal">current</code>
+has used up its quantum of CPUtime; this is done by the <code class="Literal">
+update_process_times(&nbsp; )</code>&nbsp; function.</li>
+ &nbsp;&nbsp; &nbsp; &nbsp;             
+        <li class="ListBullet">When a process is woken up and its priority
+is higher than that of the currentprocess; this task is performed by the
+             <code class="Literal">reschedule_idle(&nbsp; )</code> function,
+which is invoked by the <code class="Literal">wake_up_process(&nbsp; )</code>
+ function &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </li>
+            
+        <p><code class="Code">if (goodness(current, p) &gt; goodness(current,
+current)) </code><code class="Code"> &nbsp; &nbsp; current-&gt;need_resched
+= 1; </code></p>
+            
+        <li class="ListBullet">When a <code class="Literal">sched_setscheduler(&nbsp;
+)</code> or <code class="Literal">sched_ yield(&nbsp; )</code> system call
+is issued</li>
+          
+      </ul>
+          
+      <p class="Body"><br>
+          </p>
+          <br>
+4、进程的创建和运行管理。<br>
+5、进程间通讯。 &nbsp;&nbsp; &nbsp; &nbsp; <br>
+      <br>
+ &nbsp; &nbsp; &nbsp; &nbsp; 5、1 模块的组织关系：<br>
+      <br>
+ &nbsp;&nbsp; &nbsp; &nbsp; 模块间的调用<br>
+      <br>
+      <img src="images/ipc-dep.gif" alt="ipc-dep" width="522" height="125"><br>
+      <br>
+ &nbsp;&nbsp; &nbsp; &nbsp; 5、2 通讯的手段：<br>
+      <ul>
+        <li>Signals &ndash; perhaps the oldest form of Unix IPC,        signals
+are asynchronous messages sent to a process.</li>
+        <li>Wait queues &ndash; provides a mechanism to put processes   
+    to sleep while they are waiting for an operation to        complete.
+This mechanism is used by the process scheduler        to implement bottom-half
+handling as described in section        3.3.3.</li>
+        <li>File locks &ndash; provides a mechanism to allow processes  
+     to declare either regions of a file, or the entire file        itself,
+as read-only to all processes except the one        which holds the file
+lock. </li>
+        <li>Pipes and Named Pipes &ndash; allows connection-oriented,   
+    bi-directional data transfer between two processes either        by explicitly
+setting up the pipe connection, or        communicating through a named pipe
+residing in the        file-system. </li>
+        <li>System V IPC</li>
+      </ul>
+      <blockquote>
+        <ul>
+          <li>Semaphores &ndash; an implementation of a classical       
+    semaphore model. The model also allows for the            creation of
+arrays of semaphores. </li>
+          <li>Message queues &ndash; a connectionless data-transfer     
+      model. A message is a sequence of bytes, with an            associated
+type. Messages are written to message            queues, and messages can
+be obtained by reading from            the message queue, possibly restricting
+which            messages are read in by type. </li>
+          <li>Shared memory &ndash; a mechanism by which several        
+   processes have access to the same region of physical            memory.</li>
+        </ul>
+        </blockquote>
+ &nbsp;&nbsp; 各种通讯机制间的关系<br>
+        <img src="images/ipc.gif" alt="ipc-module" width="417" height="324"><br>
+        <br>
+        <br>
+        <br>
+        <br>
+（1～5结合源代码进行分析）<br>
+ &nbsp;&nbsp; <br>
+6、具体分析：一个进程在系统中的生存周期和行为<br>
+                    
+        <p>Processes can only create other processes by copying theexisting
+process.At boot time, the Linux system has only onerunning process: init.
+This processthen spawns others, which canalso spawn off copies of themselves,
+throughthe fork() systemcall. The fork() call generates a new child process
+thatis acopy of its parent. Upon termination, a user process (implicitlyor
+explicitly)calls the _exit() system call. </p>
+                    
+        <p>Several routines are provided to handle loadable modules. Acreate_module()
+system call will allocate enough memory to load amodule. The call will initialize
+the module structure, describedbelow, with the name, size, starting address,
+and initial statusfor the allocated module. The init_module() system call
+loads themodule from disk and activates it. Finally, delete_module()unloads
+a running module. </p>
+                    
+        <p>Timer management can be done through the setitimer() andgetitimer()
+routines.The former sets a timer while the lattergets a timer&rsquo;s value.
+          </p>
+                    
+        <p>Among the most important signal functions is signal(). Thisroutine
+allowsa user process to associate a function handlerwith a particular signal.
+          </p>
+          <br>
+          <br>
+7、更多的技术<br>
+ &nbsp;&nbsp; 进程管理和其他内核模块的交互关系<br>
+ &nbsp;&nbsp; 进程管理涉及的内核机制（锁，等待队列，定时器&hellip;&hellip;）<br>
+ &nbsp;&nbsp; 和中断处理，module运行的交互<br>
+ &nbsp;&nbsp; Linux/SMP的进程管理和调度技术 &nbsp;&nbsp; <br>
+          <br>
+                    
+        <p>Signals can be considered an IPC mechanism, thus are discussedin
+the inter-processcommunication section. </p>
+                    
+        <p>Interrupts allow hardware to communicate with the operatingsystem.
+Linuxdistinguishes between slow and fast interrupts. Aslow interrupt is a
+typicalinterrupt. Other interrupts are legalwhile they are being processed,
+andonce processing has completedon a slow interrupt, Linux conducts business
+as usual, such ascalling the scheduling algorithm. A timer interrupt is exemplary
+of a slow interrupt. A fast interrupt is one that is used formuch less complex
+tasks, such as processing keyboard input. Otherinterrupts are disabled as
+they are being processed, unlessexplicitly enabled by the fast interrupthandler.
+          </p>
+                    
+        <p>The Linux OS uses a timer interrupt to fire off once every10ms.
+Thus,according to our scheduler description given above,task rescheduling
+shouldoccur at lease once every 10ms. </p>
+          <br>
+          <br>
+5、概述2.4的新特点<br>
+===========================================================<br>
+          <br>
+                    
+        </body>
+        </html>

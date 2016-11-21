@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>进程关系</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312-80">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        PRE { color: #ffffff; font-family: "fixed" }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="images/velvet.jpg">
+
+<A HREF="thread.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="daemon.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=CENTER>5.10&nbsp;&nbsp;进程关系<BR><BR>
+</H1>
+
+<UL>
+    <LI><P>基本概念</LI>
+    <LI><P>终端和网络登录过程</LI>
+    <LI><P>进程组</LI>
+    <LI><P>会话</LI>
+    <LI><P>控制终端</LI>
+    <LI><P>Shell 中的命令执行</LI>
+    <LI><P>作业控制</LI>
+</UL>
+
+<H3>5.10.1&nbsp;&nbsp;基本概念</H3>
+<UL>
+    <LI>进程的派生关系</LI>
+    <LI>进程树, pstree</LI>
+</UL>
+
+<H3>5.10.2&nbsp;&nbsp;终端和网络登录过程</H3>
+<UL>
+    <LI>终端登录过程</LI>
+    <LI>网络登录过程</LI>
+</UL>
+
+<P ALIGN=CENTER><IMG SRC="images/login.gif" ALT="Login process via terminal"><BR>
+图 5-8  终端上的登录过程</P>
+
+<H3>5.10.3&nbsp;&nbsp;进程组</H3>
+<UL>
+    <LI>Shell 上的一条命令行形成一个进程组</LI>
+    <LI>每个进程属于一个进程组</LI>
+    <LI>每个进程组有一个领头进程</LI>
+    <LI>进程组的生命周期到组中最后一个进程终止, 或加入其他进程组为止</LI>
+    <LI>getpgrp: 获得进程组 id, 即领头进程的 pid</LI>
+    <LI>setpgid: 加入进程组和建立新的进程组</LI>
+    <LI>前台进程组和后台进程组</LI>
+</UL>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+
+        int setpgid (pid_t pid, pid_t pgid);
+        pid_t getpgid (pid_t pid);
+        int setpgrp (void);
+        pid_t getpgrp (void);
+-------------------------------------------------------------------------------
+    * 进程只能将自身和其子进程设置为进程组 id. 
+    * 某个子进程调用 exec 函数之后, 就不能再将该子进程的 id 作为进程组 id.
+===============================================================================
+</PRE>
+
+<H3>5.10.4&nbsp;&nbsp;会话</H3>
+<UL>
+    <LI>一次登录形成一个会话</LI>
+    <LI>一个会话可包含多个进程组, 但只能有一个前台进程组.</LI>
+    <LI>setsid 可建立一个新的会话</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+
+       pid_t setsid(void);
+-------------------------------------------------------------------------------
+    * 如果调用进程不是进程组的领头进程, 该函数才能建立新的会话.
+    * 调用 setsid 之后, 进程成为新会话的领头进程.
+    * 进程成为新进程组的领头进程.
+    * 进程失去控制终端
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>5.10.5&nbsp;&nbsp;控制终端</H3>
+<UL>
+    <LI>会话的领头进程打开一个终端之后, 该终端就成为该会话的控制终端 (SVR4/Linux)</LI>
+    <LI>与控制终端建立连接的会话领头进程称为控制进程</LI>
+    <LI>一个会话只能有一个控制终端</LI>
+    <LI>产生在控制终端上的输入和信号将发送给会话的前台进程组中的所有进程</LI>
+    <LI>终端上的连接断开时 (比如网络断开或 Modem 断开), 挂起信号将发送到控制进程</LI>
+</UL>
+
+<P ALIGN=CENTER><IMG SRC="images/session.gif" ALT="Process relationship"><BR>
+图 5-9  进程关系</P>
+
+<H3>5.10.6&nbsp;&nbsp;Shell 中的命令执行</H3>
+<UL>
+    <LI>#自学#</LI>
+</UL>
+
+<H3>5.10.7&nbsp;&nbsp;作业控制</H3>
+<UL>
+    <LI>#自学#</LI>
+</UL>
+
+<P>
+<BR><BR>
+</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="images/striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="thread.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="daemon.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+</BODY>
+</HTML>
+

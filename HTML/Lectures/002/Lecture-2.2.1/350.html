@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>用户管理</title>
+</head>
+
+<body>
+<h1 align=center>3.5 用户管理</h1>
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;添加新用户后，如果对新用户的种种设置不满意，则可以通过 usermod 命令进行修改。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;usermod 命令的一般格式为：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;usermod -选项 相关内容 用户名
+<p>&nbsp;&nbsp;&nbsp;&nbsp;请参看下表：
+<TABLE BORDER CELLSPACING=1 CELLPADDING=7 WIDTH=547>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">命令</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">说明</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">usermod –s newshell path username</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">改变用户登录时使用的</FONT><FONT SIZE=3> shell</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。该</FONT><FONT SIZE=3> shell </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>应该是列入</FONT><FONT SIZE=3> /etc/shells </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>中的</FONT><FONT SIZE=3> shell</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。如果指定的</FONT><FONT SIZE=3> shell </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>或者程序名没有列入</FONT><FONT SIZE=3> /etc/shells</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，该用户将不能登录。注意，普通用户也能使用该命令。</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">usermod –d new home dic username</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">改变用户的主目录</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">usermod –u UID username</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">修改用户的</FONT><FONT SIZE=3> UID</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">usermod –g GID username</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">修改用户的默认组</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">usermod –e MM/DD/YY</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">修改用户帐号的有效期</FONT></TD>
+</TR>
+</TABLE>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;除了 usermod 命令以外，还有一些修改用户信息的命令，比如修改口令的 passwd，修改个人信息的 chfn 等。
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;对于组的修改要相对简单一些，类似的使用 groupmod 命令，比如：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;groupmod -n new-group current-group：改变组名；
+<p>&nbsp;&nbsp;&nbsp;&nbsp;groupmod -g new-GID groupname：改变 GID。
+<p align=right><a href=300.html>回家</a></p>
+</body>
+</html>

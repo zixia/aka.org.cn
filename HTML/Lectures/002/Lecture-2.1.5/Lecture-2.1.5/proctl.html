@@ -1,0 +1,262 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>½ø³Ì¿ØÖÆ</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+    <META NAME="COPYRIGHT" CONTENT="ÎºÓÀÃ÷">
+    <META NAME="AUTHOR" CONTENT="ÎºÓÀÃ÷">
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        PRE { color: #ffffff; font-family: "fixed" }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="velvet.jpg">
+
+<A HREF="proc.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="thread.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=CENTER>5.8&nbsp;&nbsp;½ø³Ì¿ØÖÆ<BR><BR>
+</H1>
+
+<UL>
+    <LI><P>»ù±¾¸ÅÄî</LI>
+    <LI><P>fork ºÍ vfork</LI>
+    <LI><P>exit</LI>
+    <LI><P>wait º¯Êı</LI>
+    <LI><P>¾ºÌ¬</LI>
+    <LI><P>exec º¯ÊıÒÔ¼°½Å±¾½âÊÍÆ÷</LI>
+    <LI><P>system º¯Êı</LI>
+    <LI><P>½ø³Ì¼ÇÕÊ</LI>
+    <LI><P>ÓÃ»§ºÍ×é±êÊ¶·û</LI>
+    <LI><P>½ø³ÌÊ±¼ä</LI>
+</UL>
+
+<H3>5.8.1&nbsp;&nbsp;»ù±¾¸ÅÄî</H3>
+<UL>
+    <LI>½ø³Ì</LI>
+    <LI>ÅÉÉúºÍÖ´ĞĞ</LI>
+    <LI>½ø³Ì±êÊ¶·û</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+
+       pid_t getpid (void);
+       pid_t getppid (void);
+===============================================================================
+</PRE>
+
+    <LI>ÓÃ»§ºÍ×é±êÊ¶·û</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+       #include &lt;sys/types.h&gt;
+
+       uid_t getuid (void);
+       uid_t geteuid (void);
+       uid_t getgid (void);
+       uid_t getegid (void);
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>5.8.2&nbsp;&nbsp;fork ºÍ vfork</H3>
+<UL>
+    <LI>fork: ÅÉÉú×Ó½ø³Ì</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+       #include &lt;sys/types.h&gt;
+
+       pid_t fork (void);
+-------------------------------------------------------------------------------
+EXAMPLE:
+       /* ÅÉÉú×Ó½ø³Ì */
+
+        #include &lt;sys/types.h&gt;
+        #include &lt;unistd.h&gt;
+
+        void err_sys (const char* info)
+        {
+            perror (info);
+            exit (1);
+        }
+
+        int main (void)
+        {
+            pid_t pid;
+
+            if ( (pid = fork ()) &lt; 0)
+                 err_sys ("fork error");
+            else if (pid &gt; 0) {
+                 // this is parent.
+            }
+            else {
+                // this is child.
+            }
+
+            exit (0);
+        }
+-------------------------------------------------------------------------------
+   * fork Ö®ºó, ×Ó½ø³ÌºÍ¸¸½ø³Ì¹²Ïí´ò¿ªµÄÎÄ¼ş. ÕâÊÇÊµÏÖ¹ÜµÀµÈ IPC »úÖÆµÄ»ù´¡.
+   * Linux ÀûÓÃ°´Ğè·ÖÒ³ (paging on demand) ºÍĞ´Ê±¸´ÖÆ (copy-on-write) ·½Ê½ÅÉÉú×Ó½ø³Ì.
+===============================================================================
+</PRE>
+
+    <LI>vfork: ÓÃÓÚÅÉÉúºóÁ¢¼´ exec µÄÇé¿ö</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+       #include &lt;sys/types.h&gt;
+
+       pid_t vfork (void);
+-------------------------------------------------------------------------------
+   * ²»¸´ÖÆ¸¸½ø³ÌµÄÈ«²¿µØÖ·¿Õ¼ä.
+   * vfork ±£Ö¤×Ó½ø³ÌÊ×ÏÈÔËĞĞ, Ö±µ½µ÷ÓÃ exec »ò exit Ö®ºó, ¸¸½ø³Ì²ÅÄÜµÃµ½ÔËĞĞ»ú»á.
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>5.8.3&nbsp;&nbsp;exit</H3>
+<UL>
+    <LI>exit µ÷ÓÃÓÉ atexit ×¢²áµÄÇå³ıº¯Êı, ²¢¹Ø±ÕËùÓĞµÄ±ê×¼ I/O Á÷</LI>
+    <LI>exit µ÷ÓÃ _exit ´¦ÀíÓë UNIX Ïà¹ØµÄÄÚÈİ, ±ÈÈçÎÄ¼şÃèÊö·û, ×÷Òµ¿ØÖÆµÈ</LI>
+    <LI>½ø³ÌµÄÍË³ö×´Ì¬·Ç³£ÖØÒª. Ò»°ãÒÔ 0 Öµ±íÊ¾Õı³£ÍË³ö</LI>
+<PRE>
+===============================================================================
+       #include &lt;stdlib.h&gt;
+
+       void exit (int status);
+
+       #include &lt;unistd.h&gt;
+
+       void _exit (int status);
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>5.8.4&nbsp;&nbsp;wait º¯Êı</H3>
+<UL>
+    <LI>½ø³ÌµÄÍË³ö×´Ì¬±ØĞëÓÃ wait º¯ÊıÓÉ¸¸½ø³Ì»ñÈ¡, ·ñÔòĞÎ³É</LI>
+    <LI>½©Ê¬½ø³Ì</LI>
+    <LI>wait/waitpid</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;sys/types.h&gt;
+       #include &lt;sys/wait.h&gt;
+
+       pid_t wait (int *status)
+       pid_t waitpid (pid_t pid, int *status, int options);
+-------------------------------------------------------------------------------
+    * wait µÈ´ıÄ³¸ö×Ó½ø³ÌÍË³ö.
+    * waitpid ¿ÉµÈ´ıÖ¸¶¨µÄ×Ó½ø³ÌÍË³ö, ¿ÉÖ¸¶¨ WNOHANG Ñ¡Ïî¶ø²»×èÈûµ÷ÓÃ½ø³ÌµÄÖ´ĞĞ.
+-------------------------------------------------------------------------------
+ÓÃÀ´°ïÖúÅĞ¶ÏÍË³ö×´Ì¬µÄºê:
+
+       WIFEXITED (status) 
+               is non-zero if the child exited normally.
+
+       WEXITSTATUS (status)
+               evaluates to the least significant eight  bits  of
+               the  return  code  of  the child which terminated,
+               which may have been set as the argument to a  call
+               to  exit()  or as the argument for a return state-
+               ment in the main program.  This macro can only  be
+               evaluated if WIFEXITED returned non-zero.
+
+       WIFSIGNALED (status)
+               returns  true  if the child process exited because
+               of a signal which was not caught.
+
+       WTERMSIG (status)
+               returns the number of the signal that  caused  the
+               child process to terminate. This macro can only be
+               evaluated if WIFSIGNALED returned non-zero.
+
+       WIFSTOPPED (status)
+               returns true if the child process which caused the
+               return is currently stopped; this is only possible
+               if the call was done using WUNTRACED.
+
+       WSTOPSIG (status)
+               returns the number of the signal which caused  the
+               child  to  stop.  This macro can only be evaluated
+               if WIFSTOPPED returned non-zero.
+===============================================================================
+</PRE>
+
+<LI>wait3/wait4</LI>
+
+<PRE>
+===============================================================================
+       #define _USE_BSD
+
+       #include &lt;sys/types.h&gt;
+       #include &lt;sys/resource.h&gt;
+       #include &lt;sys/wait.h&gt;
+
+       pid_t wait3 (int *status, int options, struct rusage *rusage)
+       pid_t wait4 (pid_t pid, int *status, int options, struct rusage *rusage)
+------------------------------------------------------------------------------
+    * wait3 ºÍ wait4 ·Ö±ğÊÇ wait ºÍ waitpid µÄÀ©Õ¹µ÷ÓÃ, ËüÃÇ¿ÉÒÔ·µ»Ø×Ó½ø³ÌµÄ
+      ×ÊÔ´Ê¹ÓÃÇé¿ö.
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>5.8.5&nbsp;&nbsp;¾ºÌ¬</H3>
+<UL>
+    <LI>Race Condition µÄ¸ÅÄî</LI>
+</UL>
+
+<H3>5.8.6&nbsp;&nbsp;exec º¯ÊıÒÔ¼°½Å±¾½âÊÍÆ÷</H3>
+<UL>
+    <LI>exec º¯Êı×é</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+
+       extern char **environ;
+
+       int execl ( const char *path, const char *arg, ...);
+       int execlp ( const char *file, const char *arg, ...);
+       int execle ( const char *path, const char *arg, ..., char * const envp[]);
+       int execv ( const char *path, char *const argv[]);
+       int execvp ( const char *file, char *const argv[]);
+
+       int  execve  (const  char  *filename, char *const argv [], char *const envp[]);
+------------------------------------------------------------------------------
+    * ÒÔ¿É±ä²ÎÊıĞÎÊ½´«µİÃüÁîĞĞÊ±, ×îºóÒ»¸ö²ÎÊıÓ¦¸ÃÎª NULL Ö¸Õë.
+    * execve ÊÇÊµ¼ÊµÄÏµÍ³µ÷ÓÃ, ¶øÆäËûµÄº¯ÊıÒÔ¿âº¯ÊıÊµÏÖ, ×îÖÕÒªµ÷ÓÃ execve.
+===============================================================================
+</PRE>
+
+    <LI>½Å±¾½âÊÍÆ÷</LI>
+</UL>
+
+<H3>5.8.7&nbsp;&nbsp;system º¯Êı</H3>
+<UL>
+    <LI>#×ÔÑ§#</LI>
+</UL>
+
+<H3>5.8.8&nbsp;&nbsp;½

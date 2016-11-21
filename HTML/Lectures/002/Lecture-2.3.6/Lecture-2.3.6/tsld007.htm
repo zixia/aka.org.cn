@@ -1,0 +1,48 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>Locks in Linux Kernel</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>Locks in Linux Kernel</H1> 
+ <P><UL>
+<LI><H2>Spinlock
+</H2>
+<UL>
+non-recursive, real lock, only in SMP, no use in Uniprocessor; 
+<BR><BR>rwlock_t
+<BR>	source/include/asm-i386/spinlock.h
+</UL></UL><UL>
+<LI><H2>semaphore
+</H2>
+<UL>
+Mutex
+<BR><BR>real resources, non-recursive
+<BR>rw_semaphore
+<BR>wakeup lost; thunder herd; starvation
+<BR>	include/asm-i386/semaphore.h
+</UL></UL><UL>
+<LI><H2>memory barrier
+</H2>
+<UL>
+include/asm-i386/system.h<BR></UL></UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld006.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld008.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld007.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

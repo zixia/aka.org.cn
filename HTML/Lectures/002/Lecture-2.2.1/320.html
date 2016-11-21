@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>理解 /etc/passwd 文件</title>
+</head>
+
+<body>
+<h1 align=center>3.2 理解 /etc/passwd 文件</h1>
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;/etc/passwd 文件是系统的主要文件之一。该文件中包含了所有用户登录名清单；为所有用户指定了主目录；在登录时使用的 shell 程序名称等。该文件还保存了用户口令；给每个用户提供系统识别号。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;/etc/passwd 文件是一个纯文本文件，每行采用了相同的格式：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;name:password:uid:gid:comment:home:shell
+<p>&nbsp;&nbsp;&nbsp;&nbsp;它们的含义如下：
+<TABLE BORDER CELLSPACING=1 CELLPADDING=7 WIDTH=547>
+<TR><TD WIDTH="17%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">域</FONT></TD>
+<TD WIDTH="83%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">说明</FONT></TD>
+</TR>
+<TR><TD WIDTH="17%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">name</FONT></TD>
+<TD WIDTH="83%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">用户登录名</FONT></TD>
+</TR>
+<TR><TD WIDTH="17%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">password</FONT></TD>
+<TD WIDTH="83%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">用户口令。此域中的口令是加密的。当用户登录系统时，系统对输入的口令采取相同的算法，与此域中的内容进行比较。如果此域为空，表明该用户登录时不需要口令。</FONT></TD>
+</TR>
+<TR><TD WIDTH="17%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">uid</FONT></TD>
+<TD WIDTH="83%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">指定用户的</FONT><FONT SIZE=3> UID</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。用户登录进系统后，系统通过该值，而不是用户名来识别用户。</FONT></TD>
+</TR>
+<TR><TD WIDTH="17%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">gid</FONT></TD>
+<TD WIDTH="83%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">GID</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。如果系统要对相同的一群人赋予相同的权利，则使用该值。</FONT></TD>
+</TR>
+<TR><TD WIDTH="17%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">comment</FONT></TD>
+<TD WIDTH="83%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">用来保存用户的真实姓名和个人细节。</FONT></TD>
+</TR>
+<TR><TD WIDTH="17%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">home</FONT></TD>
+<TD WIDTH="83%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">指定用户的主目录的绝对路径。</FONT></TD>
+</TR>
+<TR><TD WIDTH="17%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">shell</FONT></TD>
+<TD WIDTH="83%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">如果用户登录成功，则要执行的命令的绝对路径放在这一区域中。它可以是任何命令。</FONT></TD>
+</TR>
+</TABLE>
+
+<p align=right><a href=300.html>回家</a></p>
+</body>
+</html>

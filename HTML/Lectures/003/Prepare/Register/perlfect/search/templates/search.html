@@ -1,0 +1,48 @@
+<HTML>
+<HEAD>
+  <!-- the following meta tag is important to avoid cross site scripting attacks: -->
+  <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <TITLE>Your search for '<!--cgi: query_str-->'</TITLE>
+</HEAD>
+  <BODY bgcolor="white" text="black" link="blue" alink="red" vlink="purple">
+
+    <H2>Your search for <FONT color="#999999"><B><!--cgi: query_str--></B></FONT> resulted
+    in <!--cgi: results_num--> matches:</H2> 
+    <BR>
+
+    <DL>
+      <!--loop: results-->
+      <DT><!--item: rank-->. <A href="<!--item: url-->"><!--item: title--></A><BR>
+	<FONT size="-1"><!--item: description--></FONT><BR>
+	<FONT size="-1" color="#999999"><B>URL:</B> <!--item: visibleurl--> &nbsp; <B>Score:</B> <!--item: score--> &nbsp; <B>Size:</B> <!--item: size--> kB</FONT><BR>
+	<BR>
+      </DT>	
+      <!--end: results-->
+    </DL>
+
+    <BR>
+    <CENTER>
+      <!--cgi: previous--> [ <!--cgi: navbar--> ] <!--cgi: next-->
+      <BR><BR>
+      <FORM action="<!--cgi: search_url-->" method="GET">
+        <INPUT type="hidden" name="lang" value="<!--cgi: lang-->">
+	Search again: 
+	<SELECT name="mode">
+		<OPTION value="all"<!--cgi: match_all-->>Match ALL words
+		<OPTION value="any"<!--cgi: match_any-->>Match ANY word
+	</SELECT>
+	<INPUT type="text" name="q" value="<!--cgi: query_str-->">
+	<INPUT type="submit" value="Search">
+      </FORM>
+    </CENTER>
+
+    <BR>
+    <TABLE border="0" cellpadding="2" cellspacing="0" bgcolor="#eeeeee" width="100%">
+      <TR>
+	<TD><FONT size="-1">Page <!--cgi: current_page--> of <!--cgi: total_pages--></FONT></TD>
+	<TD align="right"><FONT size="-1"><A href="http://perlfect.com/freescripts/search/">Perlfect Search 3.20 (c) Perlfect Solutions 1998-2000</A></FONT></TD>
+      </TR>
+    </TABLE>
+
+</BODY>
+</HTML>

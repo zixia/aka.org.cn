@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Introduction to the Internet Protocols</TITLE>
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#eeedb7" LINK="#797E8C" VLINK="#4F4F4F" ALINK="#FF0000">
+
+<center><H4>Getting more information</H4></center>
+<p>注释：RFC:REQUEST FOR COMMENTS
+ <p>是一种对互联网协议的约定。最早是由JON
+POSTEL等人完成完成的。比如对协议所处理的数据结构，数据流的格式，端口的分配，
+错误处理，等等。你可以在<a href="http://www.internic.net">www.internic.net</a>
+初步了解一下这个文档。在<a
+href="ftp://ds.internic.net/rfc">ftp://ds.internic.net</a>找到文档全文。
+<pre>
+
+</pre>
+ <P>Copyright (C) 1987,
+Charles L. Hedrick. Anyone may reproduce this document,  in whole or in part,
+provided that: (1) any copy or republication of the entire  document must
+show Rutgers University as the source, and must include this  notice; and (2)
+any other use of this material must reference this manual and  Rutgers
+University, and the fact that the material is copyright by Charles  Hedrick
+and is used by permission.  <P>This directory contains documents describing
+the major protocols. There are  literally hundreds of documents, so we have
+chosen the ones that seem most  important. Internet standards are called
+RFC's. RFC stands for Request for  Comment. A proposed standard is initially
+issued as a proposal, and given an RFC  number. When it is finally accepted,
+it is added to Official Internet Protocols,  but it is still referred to by
+the RFC number. We have also included two IEN's.  (IEN's used to be a separate
+classification for more informal documents. This  classification no longer
+exists -- RFC's are now used for all official Internet  documents, and a
+mailing list is used for more informal reports.) The convention  is that
+whenever an RFC is revised, the revised version gets a new number. This  is
+fine for most purposes, but it causes problems with two documents: Assigned 
+Numbers and Official Internet Protocols. These documents are being revised all
+ the time, so the RFC number keeps changing. You will have to look in 
+rfc-index.txt to find the number of the latest edition. Anyone who is
+seriously  interested in TCP/IP should read the RFC describing IP (791). RFC
+1009 is also  useful. It is a specification for gateways to be used by
+NSFnet. As such, it  contains an overview of a lot of the TCP/IP technology.
+You should probably also  read the description of at least one of the
+application protocols, just to get a  feel for the way things work. Mail is
+probably a good one (821/822). TCP (793)  is of course a very basic
+specification. However the spec is fairly complex, so  you should only read
+this when you have the time and patience to think about it  carefully.
+Fortunately, the author of the major RFC's (Jon Postel) is a very  good
+writer. The TCP RFC is far easier to read than you would expect, given the 
+complexity of what it is describing. You can look at the other RFC's as you 
+become curious about their subject matter.  <P>Here is a list of the
+documents you are more likely to want: <PRE>     rfc-index list of all RFC's
+      rfc1012   somewhat fuller list of all RFC's       rfc1011   Official
+Protocols.  It's useful to scan  this  to  see                what tasks
+protocols have been built for.  This defines                which  RFC's  are
+ actual  standards,  as  opposed   to                requests for comments.
+
+     rfc1010   Assigned  Numbers.  If you are working with TCP/IP, you
+               will probably want a hardcopy of this as  a  reference.
+               It's  not  very  exciting  to  read.   It lists all the
+               offically defined well-known ports and  lots  of  other
+               things.
+
+     rfc1009   NSFnet  gateway  specifications.  A good overview of IP
+               routing and gateway technology.
+
+     rfc1001/2 netBIOS: networking for PC's
+
+     rfc973    update on domains
+
+     rfc959    FTP (file transfer)
+
+     rfc950    subnets
+
+     rfc937    POP2: protocol for reading mail on PC's
+
+     rfc894    how IP is to be put on Ethernet, see also rfc825
+
+     rfc882/3  domains (the database used to go  from  host  names  to
+               Internet  address  and back -- also used to handle UUCP
+               these days).  See also rfc973
+
+     rfc854/5  telnet - protocol for remote logins
+
+     rfc826    ARP - protocol for finding out Ethernet addresses
+
+     rfc821/2  mail
+
+     rfc814    names and ports - general  concepts  behind  well-known
+               ports
+
+     rfc793    TCP
+
+     rfc792    ICMP
+
+     rfc791    IP
+
+     rfc768    UDP
+
+     rip.doc   details of the most commonly-used routing protocol
+
+     ien-116   old  name  server  (still  needed  by  several kinds of
+               system)
+
+     ien-48    the  Catenet  model,   general   description   of   the
+               philosophy behind TCP/IP 
+</PRE>
+<P>The following documents are somewhat more specialized. <PRE>     rfc813    window and acknowledgement strategies in TCP
+
+     rfc815    datagram reassembly techniques
+
+     rfc816    fault isolation and resolution techniques
+
+     rfc817    modularity and efficiency in implementation
+
+     rfc879    the maximum segment size option in TCP
+
+     rfc896    congestion control
+
+     rfc827,888,904,975,985
+               EGP and related issues 
+</PRE>
+<P>To those of you who may be reading this document remotely instead of at 
+Rutgers: The most important RFC's have been collected into a three-volume set, 
+the DDN Protocol Handbook. It is available from the DDN Network Information 
+Center, SRI International, 333 Ravenswood Avenue, Menlo Park, California 94025 
+(telephone: 800-235-3155). You should be able to get them via anonymous FTP from 
+sri-nic.arpa. File names are: <PRE>  RFC's:
+    rfc:rfc-index.txt
+    rfc:rfcxxx.txt
+  IEN's:
+    ien:ien-index.txt
+    ien:ien-xxx.txt
+</PRE>
+<P>rip.doc is available by anonymous FTP from topaz.rutgers.edu, as 
+/pub/tcp-ip-docs/rip.doc. 
+<P>Sites with access to UUCP but not FTP may be able to retreive them via UUCP 
+from UUCP host rutgers. The file names would be <PRE>  RFC's:
+    /topaz/pub/pub/tcp-ip-docs/rfc-index.txt
+    /topaz/pub/pub/tcp-ip-docs/rfcxxx.txt
+  IEN's:
+    /topaz/pub/pub/tcp-ip-docs/ien-index.txt
+    /topaz/pub/pub/tcp-ip-docs/ien-xxx.txt
+  /topaz/pub/pub/tcp-ip-docs/rip.doc
+</PRE>
+<P>Note that SRI-NIC has the entire set of RFC's and IEN's, but rutgers and 
+topaz have only those specifically mentioned above.  
+</BODY></HTML>

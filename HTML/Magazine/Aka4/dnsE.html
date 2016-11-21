@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Introduction to the Internet Protocols</TITLE>
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+<META content="MSHTML 5.00.2014.210" name=GENERATOR></HEAD>
+<BODY TEXT="#000000" BGCOLOR="#eeedb7" LINK="#797E8C" VLINK="#4F4F4F" ALINK="#FF0000">
+
+<center><H4>Keeping track of names and information: the domain system</H4></center>
+<P>Copyright (C) 1987, Charles L. Hedrick. Anyone may reproduce this document, 
+in whole or in part, provided that: (1) any copy or republication of the entire 
+document must show Rutgers University as the source, and must include this 
+notice; and (2) any other use of this material must reference this manual and 
+Rutgers University, and the fact that the material is copyright by Charles 
+Hedrick and is used by permission. 
+<P>As we indicated earlier, the network software generally needs a 32-bit 
+Internet address in order to open a connection or send a datagram. However users 
+prefer to deal with computer names rather than numbers. Thus there is a database 
+that allows the software to look up a name and find the corresponding number. 
+When the Internet was small, this was easy. Each system would have a file that 
+listed all of the other systems, giving both their name and number. There are 
+now too many computers for this approach to be practical. Thus these files have 
+been replaced by a set of name servers that keep track of host names and the 
+corresponding Internet addresses. (In fact these servers are somewhat more 
+general than that. This is just one kind of information stored in the domain 
+system.) Note that a set of interlocking servers are used, rather than a single 
+central one. There are now so many different institutions connected to the 
+Internet that it would be impractical for them to notify a central authority 
+whenever they installed or moved a computer. Thus naming authority is delegated 
+to individual institutions. The name servers form a tree, corresponding to 
+institutional structure. The names themselves follow a similar structure. A 
+typical example is the name BORAX.LCS.MIT.EDU. This is a computer at the 
+Laboratory for Computer Science (LCS) at MIT. In order to find its Internet 
+address, you might potentially have to consult 4 different servers. First, you 
+would ask a central server (called the root) where the EDU server is. EDU is a 
+server that keeps track of educational institutions. The root server would give 
+you the names and Internet addresses of several servers for EDU. (There are 
+several servers at each level, to allow for the possibly that one might be 
+down.) You would then ask EDU where the server for MIT is. Again, it would give 
+you names and Internet addresses of several servers for MIT. Generally, not all 
+of those servers would be at MIT, to allow for the possibility of a general 
+power failure at MIT. Then you would ask MIT where the server for LCS is, and 
+finally you would ask one of the LCS servers about BORAX. The final result would 
+be the Internet address for BORAX.LCS.MIT.EDU. Each of these levels is referred 
+to as a "domain". The entire name, BORAX.LCS.MIT.EDU, is called a "domain name". 
+(So are the names of the higher-level domains, such as LCS.MIT.EDU, MIT.EDU, and 
+EDU.) 
+<P>Fortunately, you don't really have to go through all of this most of the 
+time. First of all, the root name servers also happen to be the name servers for 
+the top-level domains such as EDU. Thus a single query to a root server will get 
+you to MIT. Second, software generally remembers answers that it got before. So 
+once we look up a name at LCS.MIT.EDU, our software remembers where to find 
+servers for LCS.MIT.EDU, MIT.EDU, and EDU. It also remembers the translation of 
+BORAX.LCS.MIT.EDU. Each of these pieces of information has a "time to live" 
+associated with it. Typically this is a few days. After that, the information 
+expires and has to be looked up again. This allows institutions to change 
+things. 
+<P>The domain system is not limited to finding out Internet addresses. Each 
+domain name is a node in a database. The node can have records that define a 
+number of different properties. Examples are Internet address, computer type, 
+and a list of services provided by a computer. A program can ask for a specific 
+piece of information, or all information about a given name. It is possible for 
+a node in the database to be marked as an "alias" (or nickname) for another 
+node. It is also possible to use the domain system to store information about 
+users, mailing lists, or other objects. 
+<P>There is an Internet standard defining the operation of these databases, as 
+well as the protocols used to make queries of them. Every network utility has to 
+be able to make such queries, since this is now the official way to evaluate 
+host names. Generally utilities will talk to a server on their own system. This 
+server will take care of contacting the other servers for them. This keeps down 
+the amount of code that has to be in each application program. 
+<P>The domain system is particularly important for handling computer mail. There 
+are entry types to define what computer handles mail for a given name, to 
+specify where an individual is to receive mail, and to define mailing lists. 
+<P>(See RFC's 882, 883, and 973 for specifications of the domain system. RFC 974 
+defines the use of the domain system in sending mail.) 
+</BODY></HTML>

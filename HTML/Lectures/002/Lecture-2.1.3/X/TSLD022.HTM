@@ -1,0 +1,54 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>窗口程序之间通信</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>窗口程序之间通信</H1> 
+ <P><UL>
+<LI><H2>选择（selection）
+</H2>
+<UL>
+<LI> 属性（property），原子（atom）
+<LI>ButtonPress
+<UL>
+<LI>event.xbutton.button == Button1
+<UL>
+<LI>声明为一个选择的拥有者，SelectionClear通知原主人
+</UL><LI>event.xbutton.button == Button2
+<UL>
+<LI>选择自己的目标原子属性
+<LI>XConvertSelection通知拥有者（XSelectionRequestEvent ）
+</UL><LI>SelectionRequest
+<UL>
+<LI>XChangeProperty生成被请求的选择的数据
+<LI>XSendEvent发送给请求者
+</UL><LI>SelectionNotify,例子６
+<UL>
+<LI>XGetWindowProperty获得数据并显示出来
+</UL></UL></UL></UL><UL>
+<LI><H2>缓冲（buffer）
+</H2>
+<UL>
+<LI>XStoreBytes
+<LI>XFetchBytes</UL></UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld021.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld023.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld022.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

@@ -1,0 +1,797 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>Perl 的简单语法</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+    <META NAME="AUTHOR" CONTENT="Yongming Wei">
+    <META NAME="CREATED" CONTENT="20000329;17342600">
+    <META >
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="velvet.jpg">
+
+<A HREF="perl-var.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="perl-reg.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=LEFT>8&nbsp;&nbsp;&nbsp;&nbsp;Perl 的简单语法（与 C 语言的异同）</H1>
+<UL>
+  <LI>
+    <P>基本输入输出
+  </LI>
+  <LI>
+    <P>分支循环控制结构
+  </LI>
+  <LI>
+    <P>函数
+  </LI>
+  <LI>
+    <P>常用系统调用
+  </LI>
+  <LI>
+    <P>文件操作
+  </LI>
+  <LI>
+    <P>进程管理
+  </LI>
+</UL>
+
+<H3>7.1&nbsp;&nbsp;&nbsp;&nbsp;基本输入输出</H3>
+<P>在 BASH 脚本程序中，我们用 read var 来实现从键盘的输入，用 echo $var 来实现输出。那么在 Perl 中将有一点变化。Perl 
+  中将标准输入用关键词 &lt;STDIN&gt; 表示；标准输出用 &lt;STDOUT&gt; 表示，标准错误输出用 &lt;STDERR&gt; 表示。故而从标准输入读取数据可以写成：</P>
+<P>$var=&lt;STDIN&gt;; # 读取一行输入，并存入变量 $var 中。<br>
+  @var=&lt;STDIN&gt;; # 读取多行输入，并存入数组 @var 中。</P>
+<P>在 Perl 语言中，变量 $_ 是许多操作符的缺省变量。因此如果需要读入许多行并对每行分别处理一般这样写：</P>
+<P><font color="#FFFFFF"><b>　　　while($_=<stdin>){ <br>
+  　　　　chop($_); # chop 调用用于去掉 $_ 变量中的最后一个字符（换行符）。<br>
+  　　　　# 处理$_(每一行)<br>
+  　　　} </b></font></P>
+<P>或者可以简写为：</P>
+<P><b><font color="#FFFFFF">　　　while(<stdin>){ <br>
+  　　　　chop; # 等同于chop($_) <br>
+  　　　　# 处理$_(每一行) <br>
+  　　　}</font></b></P>
+<P>如果 &lt;&gt; 括号之间没有任何字符，则表示从命令行所指示的文件中读取数据，看下面这个<a href="read.pl">例子</a>（read.pl）：</P>
+<P><b><font color="#FFFFFF">　　　#!/usr/bin/perl; <br>
+  <br>
+  　　　while(<>){ <br>
+  　　　　print $_; <br>
+  　　　}</font></b></P>
+<P>如果在命令行输入 $ perl read.pl read.pl 。这个程序将在屏幕上打印出文件 read.pl 的每一行。</P>
+<P>在前面的例子中我们已经看见，Perl 语言中向标准输出输出数据可以用 print 语句。我们在 print 语句中可以输出多个变量，变量之间用 &quot;,&quot; 
+  分隔开来。如下面的例子：</P>
+<P> <b><font color="#FFFFFF">　　　print 3,45*2,&quot;hello&quot;,2+2;</font></b></P>
+<P>上面的输出语句将给出 &quot;390hello4&quot; 的输出结果。</P>
+<P>除了 print 语句以外，Perl 中还提供了一个 printf 语句用于标准输出，不过 printf 更接近于 C 语言的 printf 函数，可以进行格式化的输出，如：</P>
+<P>　　　<font color="#FFFFFF"><b>printf "%10s% 8d%8.2f\n",$a,$b,$c;<br>
+  </b></font>　　　<font color="#FFFFFF"><b>printf("%10s% 8d%8.2f\n",$a,$b,$c); # 
+  加上括号的 C 语言写法也是可以的。</b></font></P>
+<p></p>
+<P>另外 print 和 printf 在输出数组变量的时候也是不同的，如<a href="print_f">下例</a>：</P>
+<P><font color="#FFFFFF"><b>@a = (1 , 2, 3); <br>
+  printf @a; <br>
+  print "\n"; <br>
+  print @a; <br>
+  print "\n";</b></font></P>
+<P>输出的结果是：</P>
+<P><b><font color="#FFFFFF">1<br>
+  123</font></b></P>
+<P>如果在 @a 两边加上 &quot;&quot; ，则输出就都是 123了。</P>
+<P>&nbsp;</P>
+<H3>7.2&nbsp;&nbsp;&nbsp;&nbsp;分支循环控制结构</H3>
+<h4>if 语法</h4>
+<P>Perl 语言的 if...then...else... 语句结构和 C 语言非常相似，该结构一共有三种变种，分别如下：</P>
+<P>if 语法 1：</P>
+<P><b><i><font color="#FFFFFF">if(判别运算式)<br>
+  { <br>
+  　　表达式为真时的语句块; <br>
+  }</font></i></b></P>
+<P>或写成：<font color="#FFFFFF"><b><i>表达式为真时的语句 if (判别运算式);</i></b></font></P>
+<P>实例为：<font color="#FFFFFF">print "您的分数及格了!\n" if ($score&gt;=60);</font></P>
+<P>if 语法 2：</P>
+<P><font color="#FFFFFF"><b><i>if(判别运算式一){ <br>
+  　　判别式一为真时的语句块;<br>
+  }else{ <br>
+  　　判别式一为假时的语句块;<br>
+  }</i></b></font></P>
+<p>if 语法 3：</p>
+<p><font color="#FFFFFF"><b><i>if (判别运算式一)<br>
+  { <br>
+  　　判别式一为真时的语句块;<br>
+  }elsif(判别运算式二){ <br>
+  　　判别式二为真时的语句块;<br>
+  }elsif(判别运算式三){ <br>
+  　　判别式三为真时的语句块;<br>
+  }else{ <br>
+  　　所有判别式为假时的语句块;<br>
+  }</i></b></font></p>
+<h4><strong>unless 语法</strong></h4>
+<p>unless的含义就是说“如果判别式不为真，就执行...”。</p>
+<p>unless 语法 1：</p>
+<p><b><i><font color="#FFFFFF">unless(判别运算式) { <br>
+  　　判别式为假时语句块;<br>
+  }</font></i></b></p>
+<p>或写为：<font color="#FFFFFF"><i><b>判别式为假时语句 unless (判别运算式);</b></i></font></p>
+<p></p>
+      <p>unless 语法 2：</p>
+<p><font color="#FFFFFF"><b><i>unless(判别运算式)<br>
+  {<br>
+  　　判别式为假时语句块;<br>
+  }else{ <br>
+  　　判别式为真时语句块;<br>
+  }</i></b></font></p>
+<h4><strong>进阶技巧：&quot;&amp;&amp;&quot;、&quot;||&quot; 及 &quot;? :&quot; </strong></h4>
+<p>这些符号看上去像标点符号，或是表达式的一部分。和 C 语言中一样，他们在 Perl 语言中也可作为控制结构，而且更简洁，只是可读性差了很多。 </p>
+<p>比如说：<br>
+  <br>
+  　<font color="#FFFFFF"><i><b>if (判别表达式)　{为真时语句块};</b></i></font></p>
+<p>也可以写为：<br>
+  <br>
+  　<i><b><font color="#FFFFFF">判别表达式 &amp;&amp; 为真时的语句块</font></b></i> <br>
+</p>
+<p>同样道理，<font color="#FFFFFF"><i><b>unless(this){that} </b></i></font>可替换为 <i><b><font color="#FFFFFF">this||that</font></b></i>。<br>
+  <br>
+  ? : 则可以这样使用：</p>
+<p><b><i><font color="#FFFFFF">exp1?exp2:exp3</font></i></b></p>
+<p>这个式子表示：如果 exp1 为真则求 exp2 的值，否则求 exp3 的值。</p>
+<h4>while 循环语法</h4>
+<p>Perl 语言中 while, do...while, for, until, foreach 均可以用于实现循环结构，循环中还可以用 last，next，redo 
+  等操作符进行控制。下面我们先介绍 while 语法。</p>
+<p><b><i><font color="#FFFFFF">while(判别运算式) { <br>
+  　　程序叙述区块;<br>
+  }</font></i></b></p>
+<p>上个语法在Perl中也可以写成: <font color="#FFFFFF"><i><b>程序叙述区块 while(判别运算式);</b></i></font></p>
+<h4>do...while 循环语法</h4>
+<p><font color="#FFFFFF"><b><i>do<br>
+  { <br>
+  　　程序叙述区块;<br>
+  }while(判别运算式);</i></b></font></p>
+<p></p>
+      
+<p>在 while 和 do while 循环最大的区别是在 do while 循环中，循环体至少会被执行一次。</p>
+<h4>until 循环语法</h4>
+<p><b><i><font color="#FFFFFF">until(判别运算式)<br>
+  { <br>
+  　　 程序叙述区块;<br>
+  }</font></i></b></p>
+<p>上个语法在Perl中也可以写成: <font color="#FFFFFF"><i><b>程序叙述区块 until (判别运算式);</b></i></font></p>
+<h4>do...until 循环语法</h4>
+<p><b><i><font color="#FFFFFF">do{ <br>
+  　　 程序叙述区块; <br>
+  }until (判别运算式);</font></i></b></p>
+<h4>for 循环语法</h4>
+<p><b><i><font color="#FFFFFF">for (初始化运算式;判别运算式;循环过程运算式)<br>
+  { <br>
+  　　程序叙述区块;<br>
+  }</font></i></b></p>
+<p>或者</p>
+<p><font color="#FFFFFF"><b><i>for $variable(@array)<br>
+  { <br>
+  　　程序叙述区块;<br>
+  }</i></b></font></p>
+<p></p>
+      
+<p>第二个语法中如果把 $variable 变量省略的话,就会将数组 @array 的元素一个一个指定给 $_ 这个变量，这是比较精简的写法。其中第一个语法更接近于 
+  C 语言的语法。</p>
+<h4>foreach 循环语法</h4>
+<p><b><i><font color="#FFFFFF">foreach $variable(@array)<br>
+  { <br>
+  　　程序叙述区块;<br>
+  }</font></i></b></p>
+<p>如果把$variable变量省略的话,就会将数组@array的元素一一指定给$_这个内定的输出变量.</p>
+<h4>last 退出循环语法</h4>
+<p><strong>范例</strong>:</p>
+<p><font color="#FFFFFF"><b><i>for($i=1;$i&lt;=10;$i++)<br>
+  { <br>
+  　　last if ($i==5); # 如果 $i 等于5的话就退出 for 循环<br>
+  　　print"$i\n";<br>
+  }</i></b></font></p>
+<h4>next 继续循环语法</h4>
+<p><strong>范例</strong>:</p>
+<p><b><i><font color="#FFFFFF">for($i&lt;=10;$i++)<br>
+  { <br>
+  　　# 如果是 2 的倍数的话,就到循环的下一个陈述<br>
+  　　next if($i%2)==0)<br>
+  　　　　print"$i是一个奇数!\n";<br>
+  }</font></i></b></p>
+<p>&nbsp;</p>
+<p>
+<p></p>
+      <p></p>
+      <H3>7.3&nbsp;&nbsp;&nbsp;&nbsp;函数</H3>
+<P>Perl 语言中有两种函数，一种是 Perl 自带的一些实用系统函数，如文件打开函数 open 等；另一种是用户自定义的函数，用户通过自己定义函数可以使得程序的结构化更加清晰。</P>
+<p align=left>用户函数又称子程序(Subroutine)，在 Perl 中用下面的结构来定义用户函数：<br>
+  <br>
+  <font color="#FFFFFF"><i><b>　　sub 子程序名{<br>
+  　　　　　语句块;<br>
+  　　}<br>
+  </b></i></font><br>
+  这里的子程序名与变量的取名规则类似。<br>
+  <br>
+  与 BASH 程序不同，Perl 中的用户函数的定义可以位于程序的任何位置，比如说放在文件的未尾，而并不需要放在调用该函数的代码之前。如果两个子程序使用了相同的程序名，位置靠后的子程序将覆盖前面子程序。<br>
+  <br>
+  需要注意的是用户函数中的变量默认为全局变量，并不是像 C 语言中那样是局部变量，Perl 函数中的变量可以被其他程序段共享。如果希望定义局部变量，可以用下面两种方法来实现：
+<p align=left><b><font color="#FFFFFF">local($a);<br>
+  my $a;<br>
+  </font></b><br>
+  另外用户函数的调用：通过在子程序前加“&amp;”符号才可以，函数可在任一表达式内被调用。函数调用可以嵌套，即子程序中可以再调用另外的子程序，即可以程序员可以用 
+  Perl 写出具有递归特性的代码。<br>
+  <br>
+  调用用户函数产生的结果称为返回值(return value)。返回值是每次函数被执行时，最后一个被执行到的表达式的计算结果。如：
+<p align=left> <font color="#FFFFFF"><b>sub add_a_b{<br>
+  　　　　　　$a+$b;<br>
+  }<br>
+  </b></font><br>
+  函数最后一条表达式为 $a+$b，故返回值为 $a+$b 的计算结果。以下是调用情况：<br>
+  <br>
+  <font color="#FFFFFF"><b>$a = 5;<br>
+  $b = 6;<br>
+  $c = &amp;add_a_b; # $c 的值为 11<br>
+  $d = 5 * &amp;add_a_b; # $d 的值为 5*11，即 55<br>
+  </b></font><br>
+  还有一个问题是，在 Perl 程序中如何向函数中传递参数呢？这是可以实现的，调用函数时，可以将参数依次放在函数名后面的 &quot;()&quot; 中，而在函数体中，系统默认数组 
+  @_ 中就按同样顺序存放着所有的参数。我们可以访问 @_ 变量，从而确定参数的个数及其数值。<br>
+  <br>
+  仍以加法函数为例：<br>
+  <br>
+  <font color="#FFFFFF"><b>sub add_a_b{<br>
+  　　$_[0]+$_[1];<br>
+  }<br>
+  <br>
+  $c=&amp;add_a_b(5,6); #$c的值为11<br>
+  $d=5*&amp;add_a_b(2,3); #d的值为5*5即25<br>
+  </b></font><br>
+  更为奇特的是，这种方式可以实现变参数传递，即参数个数不确定的传递。C 语言也可以实现这种传递，如我们熟悉的 printf 函数，只是他们的实现机制不太一样，C 
+  更深奥一些，此处就不多解释了。 <br>
+  <br>
+  <font color="#FFFFFF"><b>sub add_all{<br>
+  　　$sum=0; #将sum初始化<br>
+  foreach $_(@_) { #遍历参数列表<br>
+  　　$sum+=$_; #累加每个元素<br>
+  }<br>
+  　　$sum; #返回sum即总和的值<br>
+  }<br>
+  <br>
+  $a=&amp;add_all(3,4,5); #$a的值为3+4+5即12<br>
+  $d=2*&amp;add_all(1,2,3,4,5); #d的值为2*15即30</b></font><br>
+  <br>
+  <br>
+  <br>
+<H3>7.4&nbsp;&nbsp;&nbsp;&nbsp;常用系统调用</H3>
+<P>下面将介绍一些 Perl 自身提供的一些标准系统函数，这些函数包括： print 、printf 、chop 、split 、keys 、values 
+  、reverse 、sort 、length 、substr 、index 、push 、pop 、unshift 、shift 、join 、grep 
+  、hex 、rand 、localtime 、die 、open 、close 、pack 、read 、exit。下面就来分别介绍他们。 
+<P>&nbsp;
+<hr width=70% align="left">
+<p><strong>指令</strong>：print<br>
+  <strong>语法</strong>：print Filehandle LIST<br>
+  <strong>说明</strong>：这个 Filehandle 可以看作在 I(INPUT)/O(OUTPUT) 之间的一个桥梁，可以利用 FILEHANDLE 
+  来做出数据读入写出的动作。STDIN 是代表从哪里输入数据，例如从电脑的键盘输入；STDOUT是代表从哪里输出数据，例如从电脑的屏幕输出；STDERR 
+  是代表从哪里输出错误的数据，例如从电脑的屏幕输出。而在PERL语言中有三个标准FILEHANDLE： <br>
+  1. STDIN(标准输入)：是代表 STDIN 的 FILEHANDLE <br>
+  2. STDOUT(标准输出)：是代表 STDOUT 的 FILEHANDLE <br>
+  3. STDERR(标准错误输出)：是代表 STDERR 的 FILEHANDLE <br>
+  如果要使用其他 FILEHANDLE 的时候，就要先用 OPEN 这个函数来打开一个 FILEHANDLE，我们可以用 PRINT 这个函数将 LIST 
+  中的数据输出给 FILEHANDLE。</p>
+<p> &nbsp;&nbsp;<strong>语法</strong>： print LIST <br>
+  <strong>说明</strong>： 如果省略 Filehandle 的话，就会把 Filehandle 默认为 STDOUT。也就是会将 LIST 
+  的数据内容显示在终端屏幕上。</p>
+<p> <strong>语法</strong>： print<br>
+  <strong>说明</strong>： 同时省略 Filehandle 和 LIST 的话，就会以 STDOUT 为 Filehandle，并会输出 
+  $_ 这个系统内部变量的数据内容。如果 $_ 变量是一个空字符串的话，就会显示出一个空字符串。<br>
+</p>
+<hr width=70% align="left">
+<p><strong>指令</strong>： printf<br>
+  <strong>语法</strong>： printf Filehandle LIST<br>
+  <strong>说明</strong>： 在 Perl 语言中也提代 C 语言中 printf 的语法，用法和 C 语言中的用法一模一样。如果把 Filehandle 
+  省略的话，也一样会把 STDOUT 当成是默认的 Filehandle。<br>
+  <strong>示例</strong>：</p>
+<p><b><font color="#FFFFFF">printf("chomod %d %s\n","711""cgi"); 会将chmod 711 cgi加上换行显示于屏幕上。 
+  </font></b></p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：chop 语法：chop($url)<br>
+  <strong>说明</strong>：把最后一个字符删除。<br>
+  <strong>示例</strong>：<br>
+  <b><font color="#FFFFFF"> $url="www.aka.org.cn/; chop($url); </font></b><br>
+  这时$url="www.aka.org.cn" 还可以简写成 chop($url="www.aka.org.cn/"); chop 函数一般用于去掉从键盘读入数据中的最后一个换行符。</p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：split<br>
+  <strong>语法</strong>：split(/pattern/,$text,limit) 其中/pattern/是文字处理的模式，而limit是代表要分割的个数，一般可以省略。<br>
+  <strong>说明</strong>：用一个指定的文字处理模式来分割 $text 字符串。<br>
+  <strong>示例</strong>：<br>
+  <font color="#FFFFFF"><b>$text="Michael,Gevin,Mike"; @name=split(/,/,$text); 
+  # 这时 @name=("Michael","Gevin","Mike"); </b></font><br>
+  <font color="#FFFFFF"><b>@name=split(/,/,$text,2); # 这时 @name=("Michael","Gevin");</b></font><br>
+  在传送CGI应用程序数据的时候会先将数据编码，其中会将FORM中第个数据字段 的数据内容用&amp;这个符号隔开，所以在解码的时候就要以 &quot;&amp;&quot; 
+  这个符号为分割的字符，将每个数据字段分割出。而数据字段的名称和这个数据字段的值是用=这个符号来隔开，如果想取得数据字段的名称和所对应的值的话，就用要 &quot;=&quot; 
+  这个符号来分割数据字段，</p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：keys<br>
+  <strong>语法</strong>：keys(%array)<br>
+  <strong>说明</strong>：取出关联数组 %ARRAY 中全部的 key。<br>
+  <strong>示例</strong>：<br>
+  <b><font color="#FFFFFF"> %NAME=(1,"mike",2,"michael"); @readkey=keys(%NAMES); 
+  # 这时 @readkey=(1,2); </font> </b></p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：values<br>
+  <strong>语法</strong>：values(%array)<br>
+  <strong>说明</strong>：取出关联数组 %ARRAY 中全部的 value。<br>
+  <strong>示例</strong>：<br>
+  <b><font color="#FFFFFF"> %NAMES=(1,"mike",2,"michael"); @readval=values(%NAMES); 
+  #这时 @readval=("mike","michael"); </font> </b> </p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：reverse<br>
+  <strong>语法</strong>：reverse(@array)<br>
+  <strong>说明</strong>：将数组 @array 中的元素由后到前重新排列。<br>
+  <strong>示例</strong>：<br>
+  <b><font color="#FFFFFF"> @back=("A","B","C","D","E"); @back=reverse(@back); 
+  # 这时 @back=("E","D","C","B","A"); </font> </b> </p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：sort<br>
+  <strong>语法</strong>：sort(@array)<br>
+  <strong>说明</strong>：将数组中的元素由小到大排序，如果要由大到小排序的话，要加上reverse这个函数。<br>
+  <strong>示例</strong>：<br>
+  <font color="#FFFFFF"><b>@abc=("d","b","c","a"); @abc=sort(@abc); # 这时 @abc=("a","b","c","d");<br>
+  @abc=(reverse sort@abc); # 这时@abc=("d","c","b","a"); 这个语法也可以写成 @abc=(reverse 
+  sort(@abc));<br>
+  @number=(5,2,10); @number=sort(@number); <br>
+  # 上面示例用sort函数来排序数值的时，会出差错，因此要用下面到下面这一句。 <br>
+  @number=(sort{$a&lt;=&gt;$b}@number); # 这时 @number=(2,5,10); </b></font></p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：length<br>
+  <strong>语法</strong>：length($string)<br>
+  <strong>说明</strong>：求出字符串$string的字节(bytes)值。<br>
+  <strong>示例</strong>：<br>
+  <b><font color="#FFFFFF"> $string="Perl5"; $size=length($string); # 这时 $size=5; 
+  </font></b></p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：substr<br>
+  <strong>语法</strong>：substr($string,offset,length) offset代表起始字符的位置,length代表引用的字符串长度，如果省略length则代表从起始值到字符串的最后一个字符长度。而offset如果是负值的话，就会从字符串右边开始指定字符。<br>
+  <strong>示例</strong>：<br>
+  <font color="#FFFFFF"><b>$s=substr("perl5",2,2); # 这时 $s="rl";<br>
+  $s=substr("perl5",2); # 这时 $s="rl5";<br>
+  $s=substr("perl5",-2,2); # 这时 $s="er"; </b></font></p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：index<br>
+  <strong>语法</strong>：index($string,$substring,position) $substring是要寻找的字符；position代表从哪一个位置开始寻找，假如省略position就从头开始找起。<br>
+  <strong>说明</strong>：返回所要找寻的字符在一字符串$string中的位置，如果在字符串中找不到字符的话，则会返回-1这个 值。<br>
+  <strong>示例</strong>：<br>
+  <font color="#FFFFFF"><b>$s=index("perl5","p"); # 这时 $s=0<br>
+  $s=index("perl5","l",2); # 这时 $s=3<br>
+  $s=index("perl5","perl"); # 这时 $s=-1 </b></font></p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：push<br>
+  <strong>语法</strong>：push(@array,$string)<br>
+  <strong>说明</strong>：在数组@array的最后附加新的元素 ($string)到数组@array中。<br>
+  <strong>示例</strong>：<br>
+  <b><font color="#FFFFFF"> @array=("one","two"); push(@array,"three"); # 这时 @array=("one","two","three") 
+  </font> </b> </p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：pop<br>
+  <strong>语法</strong>：pop(@array)<br>
+  <strong>说明</strong>：将数组(@array)的最后一个元素删除，并将删除的元素返回。<br>
+  <strong>示例</strong>：<br>
+  <font color="#FFFFFF"><b>@array=("one","two"); $rm=pop(@array); # 这时 @array=("one");而$rm="two"; 
+  </b></font></p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：unshift<br>
+  <strong>语法</strong>：unshift(@array,$string) <br>
+  <strong> 说明：</strong>在数组@array的第一个元素前附加新的元素$string到数组@array中。 <strong><br>
+  示例</strong>：<br>
+  <font color="#FFFFFF"><b>@array=("one","two"); unshift(@array,"three"); # 这时 
+  @array=("three","one","two") </b></font> </p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：shift<br>
+  <strong>语法</strong>：shift(@array)<br>
+  <strong>说明</strong>：将数组@array的第一个元素删除，并将删除的元素返回。<br>
+  <strong>示例</strong>：<br>
+  <b><font color="#FFFFFF"> @array=("one","two"); @rm=shift(@array); # 这时 @array=("two");而$rm="one"; 
+  </font></b></p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：join<br>
+  <strong>语法</strong>：join($string,@array)<br>
+  <strong>说明</strong>：在一数组@array的元素之间加上一指定的字符$string,并将结果返回。<br>
+  <strong>示例</strong>：<br>
+  <font color="#FFFFFF"><b>@array=("one","two","three");<br>
+  $total=join("：",@array); 这时 $total="one：two：three"; </b></font></p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：grep<br>
+  <strong>语法</strong>：grep(/pattern/,@array)<br>
+  <strong>说明</strong>：将合文字处理模式(regular expression)的数组元素找出来。<br>
+  <strong>示例</strong>：<br>
+  <font color="#FFFFFF"><b>@array=("one","on","in");<br>
+  $count=grep(/on/,@array); # 这时 $count=2<br>
+  @result=grep(/on/,@array); # 这时 @result=("one","on"); </b></font></p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：hex<br>
+  <strong>语法</strong>：hex($string)<br>
+  <strong>说明</strong>：将十六进制的数值转成十进制。<br>
+  <strong>示例</strong>：<br>
+  <b><font color="#FFFFFF"> $decimal=hex("ff"); 这时 $decimal=255; </font></b></p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：rand<br>
+  <strong>语法</strong>：rand($interger)<br>
+  <strong>说明</strong>：常和函数srand搭配来取得一随机数，如果没有先宣告stand函数的话，则取出的常数值是一个固定值。这个语法会返回一个介于 
+  0 和$interger之间的数值，如果$interger省略的话，则会返回一个介于 0 和 1 的数值。<br>
+  <strong>示例</strong>：<br>
+  <font color="#FFFFFF"><b>srand; # 要先调用一次srand函数，才能产生随机数的效果<br>
+  $int=rand(10); # $int的值会大于 0 而且小于 10 ，如果希望产生的乱数是整数的话，就要再加上int 这个函数，如下<br>
+  $int=int(rand(10)); # $int的值是一个整数，且值在 0 和 9 之间 </b></font></p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：localtime<br>
+  <strong>语法</strong>：localtime(time)<br>
+  <strong>说明</strong>：可返回九个有关时间的元素，在写CGI应用程序的时候常会用到系统的时间，所以在此会详细介绍这个函数的用法。<br>
+  <strong>示例</strong>： <br>
+  <font color="#FFFFFF"><b>($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime(time); 
+  </b></font><br>
+  其中： $sec 代表秒数 [0,59]、$min 代表分数 [0,59]、$hour 代表小时数 [0,23]、$mday 代表是在这个月的第几天 [1,31]、$mon 
+  代表月数 [0,11] 因此要将 $mon 加 1 之后，才能符合实际情况、$year 从 1990 年算起的年数、$wday 从星期六算起，代表是在这周中的第几天 
+  [0-6]、$yday 从一月一日算起，代表是在这年中的第几天 [0,366]、$isdst 只是一个 flag 知道这些变量之后，就可以在 CGI 应用程序中拿来应用了。<br>
+  此外，也可以用下面这一行指令在 UNIX 系统下取得系统的时间。为了避免错误发生，最好用绝对路径的方法来取得系统时间，如果绝对路径不清楚的话可以用 "which 
+  data" 这个指令来得知。$data='/usr/bin/data'; 而在 Perl 5 版本中，也可以用下面这一行指令来取得系统时间。 $data=localtime(time); 
+</p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：die<br>
+  <strong>语法</strong>：die LIST<br>
+  <strong>说明</strong>：会把LIST字符串显示出来，并退出程序。常常和 $! 这个代表错误信息变量一起使用。<br>
+  <strong>示例</strong>：<br>
+  <b><font color="#FFFFFF"> open(FILE,"$filename")||die "不能打开文件$!\n; # 如果打开文件失败的话，就会显示出错误的信息，之后再退出程序。</font></b> 
+</p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：open<br>
+  <strong>语法1</strong>：open(filehandle,"$filename") 其中 $filename 是一个指定打开的文件名。<br>
+  <strong>说明</strong>：这是一个很常用的函数，可用于文件的打开(read only)。<br>
+  <strong>示例</strong>：<br>
+  <font color="#FFFFFF"><b>$filename="usr/abc.txt";<br>
+  open(FILE,"$filename")||die"不能打开文件$filename\n; #将&amp;ltfile&gt;数据指定给纯变量$line(一行一行地)<br>
+  while($line=&lt;FILE&gt;)<br>
+  {<br>
+  print"$line";<br>
+  }<br>
+  close(file); 就会把abc.txt这个文件的内容显示出来。</b></font></p>
+<p><strong>语法2</strong>：open(filehandle,"&lt;$filename")<br>
+  <strong>说明</strong>：这个语法也可以打开一个存在的文件(read only)。<br>
+  <strong>示例</strong>：<br>
+  <font color="#FFFFFF"><b>$filesname="usr/abc.txt";<br>
+  open(file,"&lt;$filename")||die"不能打开文件$filename\n";<br>
+  @array=&amp;ltfile&gt; # 将 &lt;FILE&gt; 全部的数据内容都指定给数组 @array <br>
+  close(file);<br>
+  print "@array"; # 也会把abc.TXT这个文件的内容显示出来。</b></font></p>
+<p><strong>语法3</strong>：open(filehandle,"&gt;$filename")<br>
+  <strong>说明</strong>：建立一个新的文件(write only)；如果已经存在这个文件了，就会把旧文件名覆盖掉。并可用print filehandle的方式将数据存入打开的文件中。<br>
+  <strong>示例</strong>：<br>
+  <font color="#FFFFFF"><b>$filename="/usr/abc.txt";<br>
+  open(file,"&gt;$filename")||die"不能打开文件$filename\n;<br>
+  print file "this is a new line1\n; # \n是换行字符<br>
+  print file "this is a new line2\n;<br>
+  close(file); # 会将数据存在一个新文件中。</b></font></p>
+<p><strong>语法4</strong>：open(filehandle,"&gt;&gt;$filename")<br>
+  <strong>说明</strong>：数据用附加的方式定入一文件(write only)，如果指定的文件名不存在的话就会建立一个新的文件。<br>
+  <strong>示例</strong>：<br>
+  <font color="#FFFFFF"><b>$filename="/path/abc.txt";<br>
+  open(file,"&gt;&gt;$filename")||die"不能打开文件$filename\n";<br>
+  print file "this is a new line1\n";<br>
+  print file "this is a new line2\n";<br>
+  close(file); # 会打数据附加(append)到一个文件(abc.txt)中。</b></font></p>
+<p><strong>语法5</strong>：open(filehandle,"|unix command")<br>
+  <strong>说明</strong>：就会把在filehandle的数据输入给unix的指令来作处理。<br>
+  <strong>示例</strong>：<br>
+  <font color="#FFFFFF"><b>$mailprog="/usr/ucb/mail"; # unix系统上的寄信程序(一定要加绝对路径)<br>
+  $who="mqingyi@126.com";<br>
+  $open(file,"|$mailprog$who")||die"打开失败\n";<br>
+  print file "I love you!\n";<br>
+  print file "I want to see you.\n";<br>
+  close(file);<br>
+  </b></font>该段代码通过 unix 系统的 mail 程序，将 FILE 这个 FILEHANDLE 的数据内容寄给 $who 这个变量所指定的收信人。 
+</p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：close<br>
+  <strong>用法</strong>：close(filehandle)<br>
+  <strong>说明</strong>：用 open 这个函数来打开一个 filehandle 之后，一定要用 close 批这个函数把所打开的 filehandle 
+  关闭。<br>
+  <strong>示例</strong>：<br>
+  <font color="#FFFFFF"><b>open(filehandle,"$filename");<br>
+  close(filehandle);</b></font></p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：pack<br>
+  <strong>语法</strong>：pack("指定的格式",list)<br>
+  <strong>说明</strong>：pack这个函数会将一个 list 变成所指定的二进制数据格式。在CGI程序分割解码过程中，会用到 pack 这个函数。<br>
+  <strong>示例</strong>：<br>
+  <b><font color="#FFFFFF"> $string=pack("c",65); #这时 $string="a"; 将65这个ascii码转换成一个unsigned字符，其中c就是指定指转换成 
+  unsigned 字符的意思。 </font> </b> </p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：read<br>
+  <strong>语法</strong>：read(filehandle,$string,length) 其中 length 是代表读入字符串的长度(bytes)。<br>
+  <strong>说明</strong>：用 read 这个函数把 filehandle 中的数据依指定的字符串长度读入之后指派给 $string 这个变量。在cgi程序分割解码过程中，如果 
+  FORM 的传送方式是设定为POST的话，就会将传送的数据设定为标准输入，所以会将数据内容指定给 STDIN 这个标准输入的 filehandle ，而CGI环境变量 
+  $env{'content_length'} 就是代表使用者送出数据内容的长度，因此我们要用 read 这个函数来取得使用者送出的数据内容。<br>
+  <strong>示例</strong>：<br>
+  <b><font color="#FFFFFF"> read(stdin,$buffer,$env{'content_length'}); # 就会将 
+  stdin 这个标准输入 filehandle 中的数据依指定的字符串长度读入，再指派给 $buffer 这个变量。</font></b> </p>
+<hr width=70% align="left">
+<p><strong>指令</strong>：exit<br>
+  <strong>语法</strong>：exit<br>
+  <strong>说明</strong>：退出执行的程序。<br>
+  <strong>示例</strong>：<br>
+  <b><font color="#FFFFFF"> print"i love cgi\n"; exit; # 表示显示完 "i love cgi" 以后，将退出这个程序。</font></b></p>
+<hr width=70% align="left">
+<p align=right>
+<P>&nbsp;
+<H3>7.5&nbsp;&nbsp;&nbsp;&nbsp;文件操作</H3>
+<P> 　　大多数 Perl 程序都不是孤立的，它们与环境相互作用。很多的程序也需要通过文件操作实现数据的存贮和交换。文件句柄(file handle)是 
+  Perl 程序中为程序和外部世界提供 I/O 连接的名称。建议在 Perl 程序中文件句柄全部使用大写字母，以示与变量等字符串的区别。特别地，可以将 STDIN/STDOUT/STDERR 
+  也认为是 Perl 的文件句柄，分别代表 标准输入/标准输出/标准错误输出。<br>
+  <br>
+  <h4>打开及关闭文件</h4>
+<P>
+  &nbsp;&nbsp;&nbsp; 　　Perl的文件操作与C语言极为相似。如：<br>
+  <br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <font color="#FFFFFF"><i><b>open(FILENAME,"abc.txt");</b></i></font><br>
+  <br>
+  &nbsp;&nbsp;&nbsp; 　　该调用为读文件打开，若为写文件而打开，需在文件名前加上大于号：<br>
+  <br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <font color="#FFFFFF"><i><b>open(FILENAME,"&gt;abc.txt");</b></i></font><br>
+  <br>
+  &nbsp;&nbsp;&nbsp; 　　若要追加至文件尾，可在文件名前加上两个大于号：<br>
+  <br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <font color="#FFFFFF"><b><i>open(FILENAME,"&gt;&gt;abc.txt");</i></b></font><br>
+  <br>
+  &nbsp;&nbsp;&nbsp; 　　以上三种open()格式在成功时返回真，失败时返回假。但程序中通常没有提示，出错时往往会被人们忽略。 通常当需要给出出错提示时，可加入die()函数。例如：<br>
+  <br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <font color="#FFFFFF"><i><b>open(OUTFILE,"&gt;/tmp/outfile")|| 
+  die "出错，不能建立/tmp/outfile\n";</b></i></font><br>
+  <br>
+  &nbsp;&nbsp;&nbsp; 　　当 open 操作失败时，就会执行 die 给出出错提示。<br>
+  <br>
+  &nbsp;&nbsp;&nbsp; 　　对文件句柄的操作完成后，可以用 close 操作符关闭文件。如：<br>
+  <br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <font color="#FFFFFF"><i><b>close(OUTFILE);</b></i></font><br>
+  <br>
+  
+<h4>文件测试</h4>
+<P> &nbsp;&nbsp;&nbsp; 　　Perl的文件操作也可以先测试文件是否存在，是否可读写等，这样操作起来会更安全。如：<br>
+  <br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <font color="#FFFFFF"><b>$x="abc.txt";<br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if(-e $x) { #abc.txt是否存在？<br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; 　　# 存在操作<br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; } else {<br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; 　　printf "文件不存在。\n";<br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; }<br>
+  </b></font><br>
+  &nbsp;&nbsp;&nbsp; -e 操作符用于测试文件或目录是否存在。<br>
+  <br>
+  &nbsp;&nbsp;&nbsp; 　　以下为所有文件测试操作符的清单：<br>
+  <br>
+</P>
+<center>
+  <table border=0 cellpadding=0 height=160 width="85%">
+    <tbody> 
+    <tr> 
+      <td height=16 style="BORDER-TOP: rgb(255,255,0) 2px ridge" valign=top 
+          width="18%"><strong>文件测试</strong></td>
+      <td height=16 style="BORDER-TOP: rgb(255,255,0) 2px ridge" valign=top 
+          width="82%"><strong>测试操作符提供的信息</strong></td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-r</td>
+      <td height=16 valign=top width="82%">文件或目录可读</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-w</td>
+      <td height=16 valign=top width="82%">文件或目录可写</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-x</td>
+      <td height=16 valign=top width="82%">文件或目录执行</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-o</td>
+      <td height=16 valign=top width="82%">文件或目录归用户所有</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-R</td>
+      <td height=16 valign=top width="82%">文件或目录对真正用户可读</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-W</td>
+      <td height=16 valign=top width="82%">文件或目录对真正用户可写</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-X</td>
+      <td height=16 valign=top width="82%">文件或目录对真正用户执行</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-O</td>
+      <td height=16 valign=top width="82%">文件或目录归真正用户所有</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-e</td>
+      <td height=16 valign=top width="82%">文件或目录存在</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-z</td>
+      <td height=16 valign=top width="82%">文件存在且大小为0</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-s</td>
+      <td height=16 valign=top width="82%">文件或目录存在且不为0(返回字节数)</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-f</td>
+      <td height=16 valign=top width="82%">文件为普通文件</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-d</td>
+      <td height=16 valign=top width="82%">文件为目录</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-l</td>
+      <td height=16 valign=top width="82%">文件为符号链接</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-p</td>
+      <td height=16 valign=top width="82%">文件为命名管道(FIFO)</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-S</td>
+      <td height=16 valign=top width="82%">文件为一个套口(socket)</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-b</td>
+      <td height=16 valign=top width="82%">文件为块特殊文件</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-c</td>
+      <td height=16 valign=top width="82%">文件为字符特殊文件</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-t</td>
+      <td height=16 valign=top width="82%">打开tty控制台的文件句柄</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-u</td>
+      <td height=16 valign=top width="82%">文件或目录是设置用户ID号</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-g</td>
+      <td height=16 valign=top width="82%">文件或目录是设置用户组ID号</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-k</td>
+      <td height=16 valign=top width="82%">文件或目录的sticky位置位</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-T</td>
+      <td height=16 valign=top width="82%">文件是文本文件</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-B</td>
+      <td height=16 valign=top width="82%">文件是二进制文件</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-M</td>
+      <td height=16 valign=top width="82%">以天为单位的存在时间</td>
+    </tr>
+    <tr> 
+    </tr>
+      <td height=16 valign=top width="18%">-A</td>
+      <td height=16 valign=top width="82%">以天为单位访问时间</td>
+    </tr>
+    <tr> 
+      <td height=16 valign=top width="18%">-C</td>
+      <td height=16 valign=top width="82%">以天为单位同代码更改时间</td>
+    </tr>
+    <tr> 
+      <td colspan=2 height=2 style="BORDER-TOP: rgb(255,255,0) 2px ridge" 
+          valign=top width="100%">&nbsp; </td>
+    </tr>
+    </tbody>
+  </table>
+</center>
+<h4>删除文件</h4>
+<P> &nbsp;&nbsp;&nbsp; 　　Perl的 unlink() 操作符可实现删除文件。如：<br>
+<br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <font color="#FFFFFF"><b>unlink("abc.txt"); 
+  # 删除abc.txt</b></font><br>
+  <br>
+</P>
+<h4>文件重命名</h4>
+<P>
+&nbsp;&nbsp;&nbsp; 　　Perl的rename()操作符可实现文件重命名。如：<br>
+<br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <font color="#FFFFFF"><b>rename("abc","aka") 
+  || die "出错,不能更名"; </b></font><br>
+<br>
+  &nbsp;&nbsp;&nbsp; 　　此时将文件 abc 更名为 aka，成功返回真，否则给出出错提示。 <br>
+<br>
+</P>
+<h4>目录操作</h4>
+<P> &nbsp;&nbsp;&nbsp; 　　Perl中处理目录非常类似于对文件的处理。<br>
+  <br>
+  &nbsp;&nbsp;&nbsp; 　　打开目录句柄：<br>
+  <br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <font color="#FFFFFF"><b>opendir(ETC,"/etc")||die 
+  "出错,不能打开目录";</b></font><br>
+  <br>
+  &nbsp;&nbsp;&nbsp; 　　关闭目录句柄：<br>
+  <br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <font color="#FFFFFF"><b>closedir(ETC);</b></font><br>
+  <br>
+  &nbsp;&nbsp;&nbsp; 　　创建目录：<br>
+  <br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <font color="#FFFFFF"><b>mkdir("aka",0777)||die 
+  "不能创建 aka 目录";</b></font><br>
+  <br>
+  &nbsp;&nbsp;&nbsp; 　　0777 为文件权限描速数。<br>
+  <br>
+  &nbsp;&nbsp;&nbsp; 　　删除目录：<br>
+  <br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <font color="#FFFFFF"><b>rmdir("aka") 
+  || die "不能删除 aka 目录"。</b></font></P>
+<P>&nbsp; </P>
+
+<H3>7.6 进程管理</H3>
+<P>　　当你向系统 Shell 发送一个命令行时，Shell 创建一个进程来执行这个命令。这个新进程成为 Shell 的子进程，它的执行不依赖于 Shell 
+  但又与 Shell 相互协调。 同样，Perl程序也能启动新进程。<br>
+  <br>
+  <h4>使用system()和exec()</h4>
+<P> &nbsp;&nbsp;&nbsp; 　　生成新进程的最简单的方法就是用 system 操作符。如：<br>
+  <br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <font color="#FFFFFF"><b>system("date");</b></font><br>
+  <br>
+  &nbsp;&nbsp;&nbsp; 　　若要将输出送至now_day文件，则可以：<br>
+  <br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <font color="#FFFFFF"><b>system("date&gt;now_day") 
+  || die "不能建立now_day文件";</b></font><br>
+  <br>
+  <h4>使用单引号</h4>
+  
+<P> &nbsp;&nbsp;&nbsp; 　　产生进程的另一方法是将 Shell 命令置于两个单引号之间。如：<br>
+  <br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <b><font color="#FFFFFF">$nowday="现在时间：".'date'</font></b><br>
+  <br>
+  &nbsp;&nbsp;&nbsp; $nowday 的值为“现在时间：”和date命令的结果的连接。即："现在时间：Fri Feb 18 23:49:23 
+  PDT 1998"<br>
+  <br>
+  <H4>综合范例</h4>
+  
+<P> &nbsp;&nbsp;&nbsp; 　　举一个综合例子，要求从date的输入中分析，周未时打印"周未了，轻松一下"，否则打印"努力工作"。简洁的写法为：<br>
+  <br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <font color="#FFFFFF"><b>if('date'=~/^S/){<br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 　　printf "周未了，轻松一下\n";<br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; } else {<br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 　　printf "努力工作\n"<br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; }</b></font><br>
+  <br>
+  &nbsp;&nbsp;&nbsp; 　　date 的输出格式第一个字节为星期，英语中恰好只有周未为 "S" 打头，因此使用了常规表达式判断第一个字符是否为S，即可达到要求。 
+</P>
+<P>&nbsp;</P>
+<P><BR>
+  <BR>
+</P>
+<P ALIGN=CENTER>
+<IMG SRC="striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="perl-var.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="perl-reg.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+</BODY>
+</HTML>
+

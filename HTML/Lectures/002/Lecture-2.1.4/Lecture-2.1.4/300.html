@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>用户管理</title>
+</head>
+<body>
+<h1 align=center>三、代码优化</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Linux 是一个多用户系统，因此对用户的管理是系统管理的基本组成部分。安装 Linux 的用户很可能就是该系统的管理员，也就是权限最高的 root。通过对用户的管理，分清了用户之间的责、权、利，保证了系统安全。
+<p>对软件的评价：代码的稳定性、友好性、代码的易读性、统一的风格、技巧。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;1。尽量少的使用全局变量
+<p>&nbsp;&nbsp;&nbsp;&nbsp;2。局部变量一定要初始化，特别是指针变量
+<p>&nbsp;&nbsp;&nbsp;&nbsp;3。成员函数功能单一，不要过分追求技巧，函数体不要过长。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{i = i + j;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{int k = i;
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j = i - j;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i=j;
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i = i = j;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j=k;
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+<p>&nbsp;&nbsp;&nbsp;&nbsp;4。最好有头文件
+<p>&nbsp;&nbsp;&nbsp;&nbsp;5。关于变量名的长短问题
+<p>&nbsp;&nbsp;&nbsp;&nbsp;6。设计函数时考虑到通用性
+<p>&nbsp;&nbsp;&nbsp;&nbsp;7。申请内存时，一定先要释放。注意 if 问题。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;8。对浮点数比较大小时注意不要使用 ==
+<p>&nbsp;&nbsp;&nbsp;&nbsp;9。最好不要用 goto 语句
+<p>&nbsp;&nbsp;&nbsp;&nbsp;10。所有成员函数要单出口单入口
+<p>&nbsp;&nbsp;&nbsp;&nbsp;11。函数中，要先检验参数的合法性
+<p>&nbsp;&nbsp;&nbsp;&nbsp;12。最好所有的函数都有返回值，表明错误的原因。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;13。注释问题
+<p>&nbsp;&nbsp;&nbsp;&nbsp;14。类型转化一律用显示转换。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;15。定义宏说，参数使用括号，结果也应该括起来
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#define SUB(a,b)	((a)-(b))
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3*SUB(3,4-5);
+<p>&nbsp;&nbsp;&nbsp;&nbsp;16。变量长度一定要用 sizeof 来求
+<p>&nbsp;&nbsp;&nbsp;&nbsp;17。malloc 后千万别忘 free 及使指针等于 NULL。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;18。字符串拷贝时尽量少使用 sprintf，而使用 memcpy，最后别忘加上'\0'
+<p>&nbsp;&nbsp;&nbsp;&nbsp;19。慎重选择编译时的优化选项。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;20。小组开发时，注意代码风格的统一。<p align=right><a href=0.html>回家</a></p>
+</body>
+</html>

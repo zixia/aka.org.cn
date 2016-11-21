@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>线程</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312-80">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        PRE { color: #ffffff; font-family: "fixed" }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="images/velvet.jpg">
+
+<A HREF="proctl.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="procrelate.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=CENTER>5.9&nbsp;&nbsp;线程<BR><BR>
+</H1>
+
+<UL>
+    <LI><P>基本概念</LI>
+    <LI><P>线程的创建和销毁</LI>
+    <LI><P>线程同步机制</LI>
+    <LI><P>实例分析: MiniGUI 中的消息传递</LI>
+    <LI><P>其他</LI>
+</UL>
+
+<H3>5.9.1&nbsp;&nbsp;基本概念</H3>
+<UL>
+    <LI>线程是程序中代码的不同执行路线</LI>
+    <LI>Linux 中的核心线程实际是共享地址空间的两个进程</LI>
+    <LI>LinuxThread 实现了 Linux 上的 POSIX 兼容核心线程.</LI>
+</UL>
+
+<H3>5.9.2&nbsp;&nbsp;线程的创建和销毁</H3>
+<UL>
+    <LI>pthread_create/pthread_exit</LI>
+
+<PRE>
+===============================================================================
+        #include &lt;pthread.h&gt;
+
+        int  pthread_create (pthread_t  *  thread, pthread_attr_t *
+                            attr, void * (*start_routine)(void *), void * arg);
+        void pthread_exit (void *retval);
+===============================================================================
+</PRE>
+
+    <LI></LI>
+</UL>
+
+<H3>5.9.3&nbsp;&nbsp;线程同步机制</H3>
+<UL>
+    <LI>pthread_join: 类似 wait</LI>
+
+<PRE>
+===============================================================================
+        #include &lt;pthread.h&gt;
+
+       int pthread_join (pthread_t th, void **thread_return);
+===============================================================================
+</PRE>
+
+    <LI>互斥锁</LI>
+    <LI>信号量</LI>
+    <LI>条件变量</LI>
+
+<PRE>
+===============================================================================
+条件变量:
+    * 可广播, 可设置超时.
+    * 需要有一个互斥量协作.
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>5.9.4&nbsp;&nbsp;实例分析: MiniGUI 中的消息传递</H3>
+<UL>
+    <LI>两种消息传递方式: SendMessage, PostMessage</LI>
+
+<PRE>
+===============================================================================
+MiniGUI 的消息结构:
+
+        typedef struct _MSG
+        {
+            HWND             hwnd;
+            int              message;
+            WPARAM           wParam;
+            LPARAM           lParam;
+            struct timeval   time;
+            POINT            pt;
+            void*            pAdd;
+        }MSG;
+        typedef MSG* PMSG;
+
+        typedef struct _QMSG
+        {
+            MSG                 Msg;
+            struct _QMSG*       next;
+            BOOL                fromheap;
+        }QMSG;
+        typedef QMSG* PQMSG;
+
+        typedef struct _SYNCMSG
+        {
+            MSG              Msg;
+            int              retval;
+            sem_t            sem_handle;
+            struct _SYNCMSG* pNext;
+        }SYNCMSG;
+        typedef SYNCMSG* PSYNCMSG;
+
+        typedef struct _MSGQUEUE
+        {
+            DWORD dwState;              // message queue states
+
+            pthread_mutex_t lock;       // lock
+            sem_t wait;                 // wait semaphores
+
+            PQMSG  pFirstNotifyMsg;     // head of the notify message queue
+            PQMSG  pLastNotifyMsg;      // tail of the notify message queue
+
+            PSYNCMSG pFirstSyncMsg;     // head of the sync message queue
+            PSYNCMSG pLastSyncMsg;      // tail of the sync message queue
+
+            MSG* msg;                   // post message buffer
+            int len;                    // buffer len
+            int readpos, writepos;      // positions for reading and writing
+
+            /*
+             * One thread can only support eight timers.
+             * And number of all timers in a MiniGUI applicatoin is 16.
+             */
+            HWND TimerOwner[8];         // Timer owner
+            int  TimerID[8];            // timer identifiers.
+            BYTE TimerMask;             // used timer slots mask
+        }MSGQUEUE;
+-------------------------------------------------------------------------------
+    * lock 用来实现消息队列的互斥访问
+    * wait 用来实现 GetMessage 等待消息, 有消息 (PostMessage, SendMessage) 时执行 UP 操作
+    * 不同进程间的同步消息 (SendMessage) 在 pFirstSyncMsg 上排队, 服务器线程处理之后, 利用
+      信号量 (sem_handle) 通知客户线程
+    * 如果利用条件量处理同步消息, 可实现 SendMessageTime 等接口.
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>5.9.5&nbsp;&nbsp;其他</H3>
+<UL>
+    <LI>线程的取消点: 能够让其他线程请求自己终止执行</LI>
+    <LI>线程局部存储</LI>
+    <LI>一次执行函数</LI>
+    <LI>线程的信号处理</LI>
+</UL>
+
+<PRE>
+===============================================================================
+EXAMPLE:
+        /* 为每个线程建立局部存储 */
+
+        static pthread_key_t con_key;
+
+        /* Once-only initialisation of the key */
+        static pthread_once_t con_key_once = PTHREAD_ONCE_INIT;
+
+        /* Allocate the key */
+        static void con_key_alloc()
+        {
+            pthread_key_create (&con_key, NULL);
+        }
+
+        /* Set thread-specific date */
+        void set_coninfo (void* data)
+        {
+            pthread_once (&con_key_once, con_key_alloc);
+            pthread_setspecific (con_key, data);
+        }
+===============================================================================
+</PRE>
+
+<P>
+<BR><BR>
+</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="images/striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="proctl.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="procrelate.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+</BODY>
+</HTML>
+

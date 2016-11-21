@@ -1,0 +1,81 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>创建／销毁窗口</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>创建／销毁窗口</H1> 
+ <P><UL>
+<LI><H2>在程序画或写屏幕之前，必须创建窗口
+</H2>
+</UL><UL>
+<LI><H2>所有的窗口构成一个树形结构，根是RootWindow，它盖住整个显示器
+</H2>
+</UL><UL>
+<LI><H2>所有子窗口的内容都被包含在父窗口中
+</H2>
+</UL><UL>
+<LI><H2>窗口显示出来的条件：它被映射，它所有的祖先被映射，收到一个expose事件
+</H2>
+</UL><UL>
+<LI><H2>生成一个窗口仅仅是创建一些内存对象
+</H2>
+</UL><UL>
+<H2>Window XCreateWindow　(display,parent,x,y,width,height,border_width,depth,class,visual,valuemask,attributes)
+</H2>
+</UL><UL>
+<H2>     Display *display            /* The value returned by XOpenDisplay     */
+</H2>
+</UL><UL>
+<H2>    Window parent;                /* parent window i.d. probably RootWindow */
+</H2>
+</UL><UL>
+<H2>    int x, y;               　　      /* specify top LH corner of border */
+</H2>
+</UL><UL>
+<H2>    unsigned int width, height;   /* specify internal dimensions */
+</H2>
+</UL><UL>
+<H2>    unsigned int borderwidth;     /* border width */
+</H2>
+</UL><UL>
+<H2>    int depth;
+</H2>
+</UL><UL>
+<H2>    unsigned int class;           /*InputOutput,InputOnly,CopyFromParent, InputOnly windows are transparent*/
+</H2>
+</UL><UL>
+<H2>    Visual *visual;                   /*CopyFromParent, etc */
+</H2>
+</UL><UL>
+<H2>    unsigned long valuemask;      /* selects attribute fields */
+</H2>
+</UL><UL>
+<H2>    XSetWindowAttributes *attributes; /* contains the attributes */
+</H2>
+</UL><UL>
+<H2>XDestroyWindow(display,w)  /* destroy the window with the given i.d. */|
+</H2>
+</UL><UL>
+<H2>Status XGetWindowAttributes(display,w,window_attributes)　/* RETURN completed structure*/</H2>
+</UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld009.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld011.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld010.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

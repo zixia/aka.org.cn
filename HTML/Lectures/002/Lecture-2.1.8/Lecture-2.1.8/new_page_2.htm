@@ -1,0 +1,71 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>一些Socket的基本概念</title>
+<meta name="Microsoft Theme" content="blank 001, default">
+<meta name="Microsoft Border" content="tl, default">
+</head>
+
+<body background="_themes/blank/blbkgnd.gif" bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/new_page_2.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="基本概念"></strong></font><br>
+<a href="index.htm"><img src="_derived/home_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="主页" align="middle"></a> <a href="new_page_3.htm"><img src="_derived/up_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="上一层" align="middle"></a> <a href="new_page_1.htm"><img src="_derived/new_page_1.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="协议模型" align="middle"></a> <img src="_derived/new_page_2.htm_cmp_blank000_hbtn_p.gif" width="140" height="32" border="0" alt="基本概念" align="middle"> <a href="new_page_4.htm"><img src="_derived/new_page_4.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="头文件" align="middle"></a> <a href="new_page_5.htm"><img src="_derived/new_page_5.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="数据结构" align="middle"></a> <a href="new_page_6.htm"><img src="_derived/new_page_6.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="函数列表" align="middle"></a></p>
+<p align="center">　</p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<font size="+2">
+<h1 align="center">一些Socket的基本概念</h1>
+</font>
+<p><font size="5"><b>流（Stream）</b></font></p>
+<font size="+2">
+<p>&nbsp;&nbsp;&nbsp; </font><font size="4">具有连续性、有序性的特点。</font></p>
+<font size="+2">
+<p>　</p>
+<p><b>连接（Connection）</b></p>
+<p>　</p>
+<p><b>阻塞(Block)、非阻塞(Non-block)</b></p>
+<p></p>
+<p><b>同步(Synchronous)、异步(asynchronous)</b></p>
+<p>&nbsp;&nbsp;&nbsp; </font><font size="4"><a href="new_page_15.htm">详见socket模式</a></font></p>
+<font size="+2">
+<p>　</p>
+<p><b>IP地址</b></p>
+<blockquote>
+  <p>IP地址是Internet中唯一的地址标识</p>
+  <blockquote>
+    <p>IP地址是一个32位长（将要扩充到128位）<br>
+    每个Internet包必须带有IP地址</p>
+    <p>使用点分十进制表示法：<br>
+    将IP地址的4个字节的数字用十进制表示并用点隔开,如：202.112.58.200(0xCA703AC8)</p>
+  </blockquote>
+</blockquote>
+<p></p>
+<p><b>子网掩码（Subnet Mask）</b></p>
+<blockquote>
+  <p>也用点分十进制表示 例如：255.255.0.0</p>
+  <p>用于指明子网（局域网）的范围，Mask与IP地址进行与操作即可得出子网范围。</p>
+  <p>例如：IP地址166.111.160.1与166.111.161.45，子网掩码：255.255.254.0，因此这两个IP地址处于同一个子网内。</p>
+</blockquote>
+<p><b>字节顺序：</b></p>
+<p>&nbsp;&nbsp; 存在两种字节顺序：NBO与HBO</p>
+<blockquote>
+  <p>网络字节顺序NBO（Network Byte Order）：<br>
+  按从高到低的顺序存储，在网络上使用统一的网络字节顺序，可以避免兼容性问题。</p>
+  <p>主机字节顺序（HBO，Host Byte Order）：<br>
+  不同的机器HBO不相同，与CPU设计有关<br>
+  </p>
+  <p>例如：Motorola 68k系列，HBO与NBO相同，Intel x86系列，HBO与NBO相反</p>
+</blockquote>
+</font>　
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+</html>

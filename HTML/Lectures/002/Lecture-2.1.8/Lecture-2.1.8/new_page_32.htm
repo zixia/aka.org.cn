@@ -1,0 +1,65 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>网络仿真设备</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta name="Microsoft Theme" content="blank 001, default">
+<meta name="Microsoft Border" content="tl, default">
+</head>
+
+<body background="_themes/blank/blbkgnd.gif" bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/new_page_32.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="网络仿真设备"></strong></font><br>
+<a href="index.htm"><img src="_derived/home_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="主页" align="middle"></a> <a href="new_page_25.htm"><img src="_derived/up_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="上一层" align="middle"></a> <a href="new_page_39.htm"><img src="_derived/new_page_39.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="设计的要点" align="middle"></a> <a href="new_page_40.htm"><img src="_derived/new_page_40.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="程序结构" align="middle"></a> <a href="new_page_26.htm"><img src="_derived/new_page_26.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="简单的FTP Server" align="middle"></a> <a href="new_page_27.htm"><img src="_derived/new_page_27.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="单线程轮询程序" align="middle"></a> <img src="_derived/new_page_32.htm_cmp_blank000_hbtn_p.gif" width="140" height="32" border="0" alt="网络仿真设备" align="middle"></p>
+<p align="center">　</p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<p><font size="5">Network Block Device,&nbsp; nbd.c in Linux kernel source.</font></p>
+<p><font size="5">Written by Pavel Machek, <a href="mailto:pavel@ucw.cz">pavel@ucw.cz</a></font></p>
+<p><font size="5">完整程序的路径：/usr/src/linux/driver/block/nbd.c</font></p>
+<p><font size="6">程序段节选：</font></p>
+<!--mstheme--></font><pre><font size="5">/*
+ *  Send or receive packet.
+ */
+static int nbd_xmit(int send, int sockfd, char *buf, int size)
+{
+        int result;
+        struct msghdr msg;
+        struct iovec iov;
+        unsigned long flags;
+        sigset_t oldset;</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">        do {
+                iov.iov_base = buf;
+                iov.iov_len = size;
+                msg.msg_name = NULL;
+                msg.msg_namelen = 0;
+                msg.msg_iov = &amp;iov;
+                msg.msg_iovlen = 1;
+                msg.msg_control = NULL;
+                msg.msg_controllen = 0;
+                msg.msg_namelen = 0;
+                msg.msg_flags = 0;</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">                if (send)
+                        result = sendmsg(sockfd, &amp;msg, 0);
+                else
+                        result = recvmsg(sockfd, &amp;msg, 0);</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">                </font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre>                           <font size="5">if (result &lt;= 0) break;
+                size -= result;
+                buf += result;
+        } while (size &gt; 0);</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">        return result;
+}</font></pre><!--mstheme--><font face="宋体">
+　
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+</html>

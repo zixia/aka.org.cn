@@ -1,0 +1,336 @@
+<HTML
+><HEAD
+><TITLE
+>Good documentation practice</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.56"><LINK
+REL="HOME"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Good distribution-making practice"
+HREF="x210.html"><LINK
+REL="NEXT"
+TITLE="Good communication practice"
+HREF="x355.html"></HEAD
+><BODY
+CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+></TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x210.html"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x355.html"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN306"
+>7. Good documentation practice</A
+></H1
+><P
+>The most important good documentation practice is to actually
+write some!  Too many programmers omit this.  But here are two good
+reasons to do it:</P
+><P
+></P
+><OL
+TYPE="1"
+><LI
+><P
+><I
+CLASS="EMPHASIS"
+>Your documentation can be your design document.</I
+>
+The best time to write it is before you type a single line of code,
+while you're thinking out what you want to do.  You'll find that the
+process of describing the way you want your program to work in natural
+language focuses your mind on the high-level questions about  what it should
+do and how it should work.  This may save you a lot of effort later.</P
+></LI
+><LI
+><P
+><I
+CLASS="EMPHASIS"
+>Your documentation is an advertisement for the 
+quality of your code.</I
+>
+Many people take poor, scanty, or illiterate documentation for a program as
+a sign that the programmer is sloppy or careless of potential users' needs.
+Good documentation, on the other hand, conveys a message of intelligence
+and professionalism. If your program has to compete with other programs,
+better make sure your documentation is at least as good as theirs lest
+potential users write you off without a second look.</P
+></LI
+></OL
+><P
+>This HOWTO wouldn't be the place for a course on technical writing
+even if that were practical.  So we'll focus here on the formats and tools
+available for composing and rendering documentation.</P
+><P
+>Though Unix and the open-source community have a long tradition of
+hosting powerful document-formatting tools, the plethora of different
+formats has meant that documentation has tended to be fragmented and
+difficult for users to browse or index in a coherent way.
+We'll summarize the uses, strengths, and weaknesses of the common 
+documentation formats. Then we'll make some recommendations for good
+practice.</P
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN318"
+>7.1. Good practice in the present</A
+></H2
+><P
+>Here are the documentation markup formats now in widespread use among
+open-source developers.  When we speak of "presentation" markup, we mean
+markup that controls the document's appearance explicitly (such as a font
+change).  When we speak of "structural" markup, we mean markup that
+describes the logical structure of the document (like a section break or
+emphasis tag.)  And when we speak of "indexing", we mean the process 
+of extracting from a collection of documents a searchable collection
+of topic pointers that users can employ to reliably find material
+of interest across the entire collection.</P
+><P
+></P
+><DIV
+CLASS="VARIABLELIST"
+><DL
+><DT
+>man pages</DT
+><DD
+><P
+>The most most common format, inherited from Unix, a primitive form of
+presentation markup.  The <B
+CLASS="COMMAND"
+>man(1)</B
+> command provides a
+pager and stone-age search facility.  No support for images or hyperlinks
+or indexing. Renders to Postscript for printing fairly well.  Doesn't
+render to HTML at all well (essentially as flat text).  Tools are
+preinstalled on all Linux systems.</P
+><P
+>Man page format is not bad for command summaries or short reference
+documents intended to jog the memory of an experienced user.  It starts to
+creak under the strain for programs with complex interfaces and many
+options, and collapses entirely if you need to maintain a set of documents
+with rich cross-references (the markup has no support for
+hyperlinks).</P
+></DD
+><DT
+>HTML</DT
+><DD
+><P
+>Increasingly common since the Web exploded in 1993-1994. Markup is
+partly structural, mostly presentation. Browseable through any web browser.
+Good support for images and hyperlinks.  Limited built-in facilities for
+indexing, but good indexing and search-engine technologies exist and are
+widely deployed.  Renders to Postscript for printing pretty well.  HTML
+tools are now universally available.</P
+><P
+>HTML is very flexible and suitable for many kinds of documentation.
+Actually, it's <I
+CLASS="EMPHASIS"
+>too</I
+> flexible; it shares with man page
+format the problem that it's hard to index automatically because a lot of the 
+markup describes presentation rather than document structure.</P
+></DD
+><DT
+>Texinfo</DT
+><DD
+><P
+>Texinfo is the documentation format used by the Free Software
+Foundation. It's a set of macros on top of the powerful TeX formatting
+engine. Mostly structural, partly presentation.  Browseable through Emacs
+or a standalone <B
+CLASS="COMMAND"
+>info</B
+> program.  Good support for
+hyperlinks, none for images.  Good indexing for both print and on-line
+forms; when you install a Texinfo document, a pointer to it is
+automatically added to a browsable "dir" document listing all the Texinfo
+documents on your system.  Renders to excellent Postscript and useable
+HTML.  Texinfo tools are preinstalled on most Linux systems, and available
+at the <A
+HREF="http://www.gnu.org/"
+TARGET="_top"
+>Free Software Foundation</A
+>
+website.</P
+><P
+>Texinfo is a good design, quite usable for typesetting books as well
+as small on-line documents, but like HTML it's a sort of amphibian -- the
+markup is part structural, part presentation, and the presentation part
+creates problems for rendering. </P
+></DD
+><DT
+>DocBook</DT
+><DD
+><P
+>DocBook is a large, elaborate markup format based on SGML (more
+recent versions on XML).  Unlike the other formats described here it is
+entirely structural with no presentation markup.  Excellent support for
+images and hyperlinks.  Good support for indexing.  Renders well to HTML,
+acceptably to Postscript for printing (quality is improving as the tools
+evolve).  Tools and documentation are available at the <A
+HREF="http://www.docbook.org/"
+TARGET="_top"
+>DocBook website</A
+>.</P
+><P
+>DocBook is excellent for large, complex documents; it was designed
+specifically to support technical manuals and rendering them in multiple
+output formats.  Its drawbacks are complexity, a not entirely mature
+(though rapidly improving) toolset, and introductory-level documentation
+that is scanty and (too often) highly obfuscated.</P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN347"
+>7.2. Good practice for the future</A
+></H2
+><P
+>In July of 2000 representatives from several important open-source
+project groups (including GNOME, KDE, the Free Software Foundation, the
+Linux Documentation Project, and the Open Source Initiative) held a summit
+conference in Monterey, California. The goal was to try and settle on
+common practices and common documentation interchange formats, so that a
+much richer and more unified body of documentation can evolve.</P
+><P
+>Concretely, the goal everyone has in view is to support a kind of
+documentation package which, when installed on a system, is immediately
+integrated into a rich system-wide index of documents in such a way that
+they can all be browsed through a uniform interface and searched as a
+unit. From the steps GNOME and KDE have already taken in this direction, 
+it was already understood that this would require a structural rather 
+than presentation markup standard.</P
+><P
+>The meeting endorsed a trend which has been clear for a while; key
+open-source projects are moving or have already moved to DocBook as a
+master format for their documentation.</P
+><P
+>The participants also settled on using the `Dublin core' metadata
+format (an international standard developed by librarians concerned with
+the indexing of digital material) to support document indexing; details of
+that are still being worked out, and will probably result in some additions
+to the DocBook markup to support embedding Dublin Core metadata in 
+DocBook documents.</P
+><P
+>The direction is clear; more use of Docbook, with auxiliary standards
+that support automatically indexing Docbook documents based on their index
+tags and Dublin core metadata.  There are pieces still missing from this
+picture, but they will be filled in.  The older presentation-based markups'
+days are numbered.  (This HOWTO was moved to DocBook in August
+2000.)</P
+><P
+>Thus, people starting new open-source projects will be ahead of the
+curve, and probably saving themselves a nasty conversion process later, if
+they go with DocBook as a master format from the beginning.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x210.html"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x355.html"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Good distribution-making practice</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Good communication practice</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

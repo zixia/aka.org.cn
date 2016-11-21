@@ -1,0 +1,33 @@
+<html>
+<head><title>GIRL应用程序服务函数</title></head>
+<body>
+<h1 align=center>GIRL应用程序服务函数</h1>
+<hr>
+<p>GIRL应用程序服务函数指的是如下函数:<ul>
+<li>void girl_init(int *argc,char ***argv);
+<p>函数girl_init用于启动GIRL系统。其中argc、argv给出命令行参数。GIRL将删除被GIRL处理的所有
+参数。
+<li>void girl_exit(gint errorcode);
+<p>函数girl_exit用于退出GIRL应用程序。（本进程）
+<li>void girl_run(girl_idle_func idle);
+<p>函数girl_run启动GIRL应用程序的主事件循环，并且给出空闲处理函数。如果idle为NULL，则没有
+空闲处理函数。空闲处理函数的定义如下：
+<p>typedef void (*girl_idel_func)(long millisecond);
+<p>其中参数millisecond用于给出应用程序启动到调用空闲函数的毫秒数。
+<li><a name="check_version"></a>void girl_check_version(gint major_req,gint minor_req, gint micro_req);
+<p>检查当前GIRL的版本号是否满足要求。参数major_req用于给出最小的主版本号；参数minor_req用于
+给出最小的次版本号；参数micro_req用于给出最小的末版本号。如果当前GIRL的版本号不能满足最小
+要求，那么将输出出错信息并且退出。（该出错信息输出到标准错误输出并创建一个简单对话框以在
+X Window系统中给出错误信息（这个对话框只能用Xlib直接实现）。）
+<li>gint girl_major_version、gint girl_minor_version、gint girl_micro_version
+<p>宏girl_major_version、gint girl_minor_version、gint girl_micro_version分别用于获得当前
+GIRL系统的主版本号、次版本号、末版本号。
+</ul>
+<hr>
+<table align=center width=100% border=2><tr>
+<td><center><a href="index.html">返回首页</a></center>
+<td><center><a href="module.html">下一页：GIRL对模块的支持</a></center>
+<td><center><a href="malito:blazing@263.net">与我联系</a></center>
+</tr></table>
+</body>
+</html>

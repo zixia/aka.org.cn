@@ -1,0 +1,68 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+
+<head>
+<meta http-equiv="Content-type" Content="text/html; charset=GB2312">
+<meta name="description" content="Various resources related to the title paper">
+<title>开拓智域</title>
+<link rev="made" href="mailto:esr@snark.thyrsus.com">
+</head>
+
+<body>
+
+<p><a href="/">AKA主页</a>\<a href="../index.html">相关文章</a>\<b>魔法大锅炉</b></p>
+
+<hr>
+
+<h1 align="center">魔法大锅炉</h1>
+
+<p> 本文分析了开放源代码现象不断发展的经济基础。给出了九种开放源代码开发的可发展模型，其中两种是不盈利的，七种是盈利的。发展了一种定性的理论，说明什么时候封闭代码在经济上是合理的。考察了当市场上发明的几种新颖的开放源代码开发的盈利方法学最后做出了结论，试着对将来做了一些预测。 
+</p>
+
+<p>这里是 <a href="magic-cauldron.html">中文版</a>.(<font color="#3333FF">进入之前请先看看下面的译者前言</font>) 
+</p>
+<p>** 在&quot;free&quot;的变革中,有损失的不是程序员而是那些没看清形势而将赌注押在封闭源码策略上的投资者。</p>
+<p>** 我们可以预料到在未来，随着自由软件所带来的强大竞争力，某个软件的最终命运将不是走向灭亡就是成为开放构件系统的一部分。虽然这对于那些打算永远从封闭软件中赚取利润的软件企业来说的确是个坏消息，但是软件产业作为一个整体仍然是一种产业，那时新的高层应用软件将不断开放，私有化的智力资源垄断某个软件将只有一个有限的生命周期，最终将纷纷转化为自由软件。</p>
+
+<p>为了更好的理解本文，推荐你仔细阅读<a href="../c&amp;b.html">《大教堂和市集》</a>和<a href="../homesteading/index.html">《开拓智域》</a>这两篇文章</p>
+
+<h4><font color="#3333FF">译者前言:</font></h4>
+<font color="#3333FF"> 
+<p>《魔法大锅炉》(The Magic Cauldron)一文是国际自由软件知名人士Eric Raymond在1999年夏天发表的一篇重要著作。xiaobo曾经把Richard 
+  Stallman比喻为自由软件王国的教皇、Linus则为掌管大权的国王、而Raymond则被比喻为一个兢兢业业的宰相。这个比喻很有意思，也挺形象。Eric 
+  Raymond总是在努力的推动着自由软件的发展，他的文章如：<a href="../hacker-history.html">《黑客文化简史》</a>、<a href="../hacker-howto.html">《如何成为一名黑客》</a>、<a href="../c&amp;b.html">《大教堂和市集》</a>、<a href="../homesteading/index.html">《开拓智域》</a>等总是具有震撼的力量，所以当iasc第一次向我介绍了这篇新作时，我就感觉到应该把这篇文章翻译成中文，以让更多的国内计算机爱好者来领略其中的力量。在我粗览了全文后，翻译的决心更大了，但是面对内容如此丰富、内涵如此深邃、引用非常广泛的巨著，我又有些畏缩了。幸而得到了iasc, 
+  merlin等朋友的热情鼓励与合作，同时又先后获得了wclee, liyuhang, sto, ly_hust, kiwi, lilly, wl_wan等网友的支持与帮助，才得以让这篇中文译稿面市，欣慰的同时也对上面所有参加翻译的朋友表示最诚挚的谢意。</p>
+<p>本文分析了开放源代码现象不断发展的经济基础。首先推翻了一些流行的关于程序开发资金和软件价格结构的神话。给出了一个关于开放源代码协作稳定性的搏弈论分析。给出了九种开放源代码开发的可发展模型，其中两种是不盈利的，七种是盈利的。接着发展了一种定性的理论，说明什么时候封闭代码在经济上是合理的。然后考察了当前市场上发明的几种新颖的开放源代码开发的盈利方法学，包括赞助系统和任务市场的引入。最后做出了结论，试着对将来做了一些预测。</p>
+<p>全文共分18章，其中merlin和iasc参与翻译了序言和目录，merlin参与翻译了1, 2, 9, 10章，iasc参与翻译了1, 3, 4, 5章，wclee参与翻译了第2章，liyuhang参与翻译了第6章，sto参与翻译了第7章，ly_hust参与翻译了第8章，wl_wan参与翻译了11, 
+  12章，rover参与翻译了13, 14, 15, 16, 17章，同时在翻译过程中kiwi和lilly等热心网友都积极参与翻译工作，AKA的老朋友，现在在美国读书的waterbird也给了我许多意见和指导，<a href="mailto:seal@freecoder.dhs.org">Seal.Wang</a>也给出了积极的修改建议，在此一并表示感谢。</p>
+<p>由于我们造诣尚浅，翻译过程中肯定会出现许多不确切甚至是错误的地方，我们热诚欢迎所有网友给我们提出意见和建议，您可以直接发信到SMTH上AKA的信箱，你的建议将被用于更新和修正这篇译文，我们在此先向你表示深深的谢意。</p>
+<p>注：本文的原文可以从下面的地址获得：<br>
+  <a href="%3Cfont%20color%3D%22%233333FF%22%3Ehttp://www.tuxedo.org/%7Eesr/writings/magic-cauldron/magic-cauldron.html%3C/font%3E">http://www.tuxedo.org/~esr/writings/magic-cauldron/magic-cauldron.html</a></p>
+<p><font color="#3333FF">映射永远欢迎, 同时对于翻译中的任何意见和建议也同样欢迎，请来信告诉我。</font><br>
+  <font color="#3333FF"><a href="mailto:taopin@263.net">taopin@263.net</a></font> 
+</p>
+</font> 
+<hr>
+
+<table CELLPADDING="0" WIDTH="100%">
+  <tr> 
+    <td WIDTH="30%" height="44">Go to <a href="http://www.tuxedo.org/~esr">Eric's 
+      Home Page</a></td>
+    <td ALIGN="CENTER" WIDTH="60%" colspan="2" height="44">$ Date: 1999/6 $&nbsp;</td>
+  </tr>
+</table>
+
+<address>
+  Eric S. Raymond <a href="mailto:esr@thyrsus.com">&lt;esr@snark.thyrsus.com&gt;</a> 
+</address>
+
+<hr>
+
+<table border="0" width="100%">
+  <tr>
+    <td width="50%">中国信息技术论坛－阿卡</td>
+    <td width="50%"><p align="right"><font face="楷体_GB2312">自由、协作、创造－为了明天</font></td>
+  </tr>
+</table>
+</body>
+</html>

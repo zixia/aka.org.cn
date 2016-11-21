@@ -1,0 +1,394 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0040)http://166.111.215.235:8080/lecture.html -->
+<HTML><HEAD><TITLE>FTP/MAIL/SSH服务的配置</TITLE>
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+<META content="MSHTML 5.00.2614.3500" name=GENERATOR></HEAD>
+<BODY><A name=top></A>
+<H2>主要内容:</H2>
+<H3>FTP/MAIL/SSH等服务等配置</H3>
+<UL>
+  <LI>FTP服务: <A 
+  href="index.html#wu-ftpd">wu-ftpd</A> 
+  <LI>MAIL服务: <A 
+  href="index.html#sendmail">sendmail</A> 
+  <LI>SSH服务: <A 
+  href="index.html#openssh">openssh</A> </LI>
+</UL>
+<HR SIZE=1>
+<A name=wu-ftpd></A>
+<H3>wu-ftpd的基本配置</H3>wu-ftpd的主要配置文件<BR>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD>/etc/ftpaccess</TD>
+    <TD>ftpd configuration file</TD></TR>
+  <TR>
+    <TD>/etc/ftpconversions</TD>
+    <TD>ftpd conversions database</TD></TR>
+  <TR>
+    <TD>/etc/ftphosts</TD>
+    <TD>ftpd individual user host access file</TD></TR>
+  <TR>
+    <TD>/etc/ftpusers</TD>
+    <TD>list of users disallowed any ftp access</TD></TR></TBODY></TABLE><BR>
+<HR SIZE=1>
+
+<P>
+<H4>/etc/ftpusers - 禁止ftp用户登陆的列表</H4>缺省情况下, 主要包括系统用户和特权用户.<BR>root, bin, daemon, 
+adm, lp,<BR>sync, shutdown, halt, mail, news,<BR>uucp, operator, games, 
+nobody<BR>可以将希望禁止ftp登陆的用户加入到这个文件中<BR><BR><B>注意: 
+登陆运行程序如果不包括在/etc/shells中这个用户也无法通过ftpd登录</B> 
+<P></P>
+<HR SIZE=1>
+
+<P>
+<H4>/etc/ftphosts 用户与地址访问表</H4><PRE>指令:
+ allow &lt;username&gt; &lt;addrglob&gt; [&lt;addrglob&gt; ...]
+ deny &lt;username&gt; &lt;addrglob&gt; [&lt;addrglob&gt; ...]
+
+&lt;addrglob&gt;是格式可以是: address/cidr 或 address:netmask
+比如192.168.8.0/24和192.168.8.0:255.255.255.0
+</PRE>
+<P></P>
+<HR SIZE=1>
+
+<P>
+<H4>/etc/ftpconversions 文件转换配置文件</H4>配置指令共分8节, 
+用:隔开<BR>%1:%2:%3:%4:%5:%6:%7:%8<BR>
+<OL>
+  <LI>Strip Prefix 
+  <LI>Strip Postfix 
+  <LI>Addon Prefix 
+  <LI>Addon Postfix 
+  <LI>External Command 
+  <LI>Types 
+  <LI>Options 
+  <LI>Description </LI></OL>当get命令中的文件名, 与实际文件名符合匹配的时候, 执行相应的操作.<BR><PRE>例子:
+ :.Z: : :/bin/compress -d -c %s:T_REG|T_ASCII:O_UNCOMPRESS:UNCOMPRESS
+</PRE>ftp当前目录下有个文件名为test.Z, 用户ftp登陆后使用 <PRE>  get test
+</PRE>真正下载得到的文件为compress -d -c test.Z的结果. 
+<P></P>
+<HR SIZE=1>
+
+<P>
+<H4>/etc/ftpaccess wu-ftpd的主要配置文件</H4>详悉的配置命令, 可以从man 
+ftpaccess中得到<BR><BR>具体的一个列子 <PRE>class   all   real,guest,anonymous  *
+
+email root@localhost
+
+loginfails 5
+
+readme  README*    login
+readme  README*    cwd=*
+
+message /welcome.msg            login
+message .message                cwd=*
+
+compress        yes             all
+tar             yes             all
+chmod		no		guest,anonymous
+delete		no		guest,anonymous
+overwrite	no		guest,anonymous
+rename		no		guest,anonymous
+
+log transfers anonymous,real inbound,outbound
+
+shutdown /etc/shutmsg
+
+passwd-check rfc822 warn
+</PRE>
+<P></P>
+<HR SIZE=1>
+
+<P>
+<H4>class - 定义一个组</H4><PRE>  class &lt;class&gt; &lt;typelist&gt; &lt;addrglob&gt; [&lt;addrglob&gt; ...]
+</PRE>
+<UL>&lt;typelist&gt;为类型列表 
+  <LI>real - 正式的用户, 拥有机器上的帐户 
+  <LI>guest - guest用户, 对应于guest, guestgroup的配置 
+  <LI>anonymous - ftp, anonymous用户 </LI></UL>
+<P></P>
+<HR SIZE=1>
+
+<P><B>email</B>: 定义ftp管理员的email地址<BR><B>loginfails</B> 5: 5次错误登录之后, 记录错误信息, 
+关闭连接<BR><BR></P>
+<HR SIZE=1>
+
+<P>
+<H4>指定登陆logo文件(message)与README文件</H4><PRE>readme README* login
+readme README* cwd=*
+
+message /welcome.msg login
+message .message     cwd=*
+
+readme &lt;path&gt; {&lt;when&gt; &lt;class&gt;}
+message &lt;path&gt; {&lt;when&gt; &lt;class&gt;}
+</PRE><BR>在这些文件中, 可以使用特殊的符号来替代一些ftp服务器的信息 <PRE>				
+       %T      local time (form Thu Nov 15 17:12:42 1990)
+       %F      free space in partition of CWD (kbytes)
+               [not supported on all systems]
+       %C      current working directory
+       %E      the maintainer's email address as defined in ftpaccess
+       %R      remote host name
+       %L      local host name
+       %u      username as determined via RFC931 authentication
+       %U      username given at login time
+       %M      maximum allowed number of users in this class
+       %N      current number of users in this class
+       %B      absolute limit on disk blocks allocated
+       %b      preferred limit on disk blocks
+       %Q      current block count
+       %I      maximum number of allocated inodes (+1)
+       %i      preferred inode limit
+       %q      current number of allocated inodes
+       %H      time limit for excessive disk use
+       %h      time limit for excessive files
+
+</PRE>
+<P></P>
+<HR SIZE=1>
+
+<P><PRE>chmod		no		guest,anonymous
+delete		no		guest,anonymous
+overwrite	no		guest,anonymous
+rename		no		guest,anonymous
+</PRE>设置操作权限<BR><B>chmod</B> &lt;yes|no&gt; &lt;typelist&gt;<BR><B>delete</B> 
+&lt;yes|no&gt; &lt;typelist&gt;<BR><B>overwrite</B> &lt;yes|no&gt; 
+&lt;typelist&gt;<BR><B>rename</B> &lt;yes|no&gt; 
+&lt;typelist&gt;<BR><B>umask</B> &lt;yes|no&gt; 
+&lt;typelist&gt;<BR>typelist可以是real, guest, anonymous或者class名<BR>compress, 
+tar同上<BR>
+<P></P>
+<HR SIZE=1>
+
+<P><PRE><B>shutdown</B> /etc/shutmsg
+</PRE>设置shutdown文件. 
+如果ftpd检测到/etc/shutmsg则在打印该文件后关闭连接.<BR>可以使用ftpshut命令生成这个文件来关闭ftp<BR><BR><PRE><B>passwd-check</B> rfc822 warn
+</PRE>
+<UL>确定anonymous用户登陆时口令监查的方式 
+  <LI>none no password checking performed. 
+  <LI>trivial password must contain an '@'. 
+  <LI>rfc822 password must be an rfc822 compliant address.<BR>
+  <LI>warn warn the user, but allow them to log in. 
+  <LI>enforce warn the user, and then log them out. </LI></UL>
+<P></P><A href="http://166.111.215.235:8080/lecture.html#top">回到页首</A> 
+<HR SIZE=1>
+<A name=sendmail></A>
+<P>
+<H3>sendmail的基本配置</H3>
+<OL>使用sendmail.mc来生成sendmail.cf 
+  <LI>确定安装了sendmail-cf 
+  <LI>定制sendmail.mc 
+  <LI>使用m4生成sendmail.cf </LI></OL>
+<P></P>
+<HR SIZE=1>
+
+<P>缺省的sendmail.mc文件(redhat对应文件在/etc/sendmail.mc) <PRE>divert(-1)
+dnl This is the macro config file used to generate the /etc/sendmail.cf
+dnl file. If you modify thei file you will have to regenerate the
+dnl /etc/sendmail.cf by running this macro config through the m4
+dnl preprocessor:
+dnl
+dnl        m4 /etc/sendmail.mc &gt; /etc/sendmail.cf
+dnl
+dnl You will need to have the sendmail-cf package installed for this to
+dnl work.
+include(`/usr/lib/sendmail-cf/m4/cf.m4')
+define(`confDEF_USER_ID',``8:12'')
+OSTYPE(`linux')
+undefine(`UUCP_RELAY')
+undefine(`BITNET_RELAY')
+define(`confAUTO_REBUILD')
+define(`confTO_CONNECT', `1m')
+define(`confTRY_NULL_MX_LIST',true)
+define(`confDONT_PROBE_INTERFACES',true)
+define(`PROCMAIL_MAILER_PATH',`/usr/bin/procmail')
+FEATURE(`smrsh',`/usr/sbin/smrsh')
+FEATURE(`mailertable',`hash -o /etc/mail/mailertable')
+FEATURE(`virtusertable',`hash -o /etc/mail/virtusertable')
+FEATURE(redirect)
+FEATURE(always_add_domain)
+FEATURE(use_cw_file)
+FEATURE(local_procmail)
+MAILER(procmail)
+MAILER(smtp)
+FEATURE(`access_db')
+FEATURE(`blacklist_recipients')
+dnl We strongly recommend to comment this one out if you want to protect
+dnl yourself from spam. However, the laptop and users on computers that do
+dnl not hav 24x7 DNS do need this.
+FEATURE(`accept_unresolvable_domains')
+FEATURE(`relay_local_from')
+dnl FEATURE(`relay_based_on_MX')
+</PRE>dnl后面直到行末, 都会被m4忽略, 相当于m4文件中的注释 
+<P></P>
+<HR SIZE=1>
+
+<P>include(`/usr/lib/sendmail-cf/m4/cf.m4')<BR>指定sendmail-cf的安装路径<BR></P>
+<P>define(`confAUTO_REBUILD')<BR>confAUTO_REBUILD - 
+自动刷新aliases数据库.<BR><BR>define(`confTO_CONNECT', `1m')<BR>confTO_CONNECT - 
+Timeout.connect, 
+连接超时为1分钟<BR><BR>define(`confTRY_NULL_MX_LIST',true)<BR>confTRY_NULL_MX_LIST - 
+和邮件陆游算法有关系<BR><BR>define(`confDONT_PROBE_INTERFACES',true)<BR>confDONT_PROBE_INTERFACES 
+- 
+不绑定interface<BR><BR>define(`PROCMAIL_MAILER_PATH',`/usr/bin/procmail')<BR>PROCMAIL_MAILER_PATH 
+- 设置procmail的路径<BR></P>
+<P>FEATURE(`smrsh',`/usr/sbin/smrsh')<BR>指定smrsh的路径<BR><BR>FEATURE(`mailertable',`hash 
+-o 
+/etc/mail/mailertable')<BR>指定使用mailertable数据库<BR><BR>FEATURE(`virtusertable',`hash 
+-o 
+/etc/mail/virtusertable')<BR>指定使用virtusertable数据库<BR><BR>FEATURE(redirect)<BR>允许redirect功能<BR><BR>FEATURE(always_add_domain)<BR>always_add_domain将foo@domain作为本地邮件<BR><BR>FEATURE(use_cw_file)<BR>use_cw_file指定使用sendmail.cw<BR>sendmail.cw保存所有的本地机器名<BR><BR>FEATURE(local_procmail)<BR>使用procmail作为本地邮递器<BR></P>
+<P>FEATURE(`access_db')<BR>使用access数据库<BR><BR>FEATURE(`blacklist_recipients')<BR>同时适用于发送者与接收者<BR><BR>FEATURE(`accept_unresolvable_domains')<BR>接收那些无法解析域名的邮件<BR><BR>FEATURE(`relay_local_from')<BR>转发user@localdomain发来的邮件<BR></P>
+<HR SIZE=1>
+
+<P>
+<H4>sendmail中实用的选项</H4>查看sendmail.cf, O开头的行, 都是选项. 设置这些选项的另一个办法, 
+是在sendmail起动的时候, 
+使用-Oname=var来设置.<BR><BR><B>QueueDirectory</B>=/var/spool/mqueue<BR>设置队列目录. 
+这个的实际用法, 是将缺省队列中选中的mail复制到一个临时目录, 然后<BR>chown root.mail tmp<BR>chmod 755 
+tmp<BR>这样tmp就可以作为临时队列了.<BR>可以指定特别的sendmail配置来处理这个队列中的mail, 
+比如说立刻将这些信弹出队列<BR>sendmail -OQueueDirectory=tmp -OTimeout.queuereturn=0 
+-q<BR><BR><B>Timeout.*</B><BR>这些选项都是用来设置各种超时时间的.<BR>如果希望mail发送失败, 立刻弹回, 
+而不是在队列中等待重发, 可以使用<BR>sendmail -OTimeout.queuereturn=0 ...<BR>如果是拨号用户, 
+不希望收到队列滞留的警告mail, 可以修改sendmail.cf<BR>#O Timeout.queuewarn=4h<BR>O 
+Timeout.queuewarn=5d<BR>这样就将警告时间由四小时变成五天了.<BR><BR>具体可以设置的超时有<BR>Timeout.initial=5m<BR>Timeout.connect=5m<BR>Timeout.iconnect=5m<BR>Timeout.helo=5m<BR>Timeout.mail=10m<BR>Timeout.rcpt=1h<BR>Timeout.datainit=5m<BR>Timeout.datablock=1h<BR>Timeout.datafinal=1h<BR>Timeout.rset=5m<BR>Timeout.quit=2m<BR>Timeout.misc=2m<BR>Timeout.command=1h<BR>Timeout.ident=30s<BR>Timeout.fileopen=60s<BR>Timeout.queuereturn=5d<BR>Timeout.queuereturn.normal=5d<BR>Timeout.queuereturn.urgent=2d<BR>Timeout.queuereturn.non-urgent=7d<BR>Timeout.queuewarn=4h<BR>Timeout.queuewarn.normal=4h<BR>Timeout.queuewarn.urgent=1h<BR>Timeout.queuewarn.non-urgent=12h<BR>Timeout.hoststatus=30m<BR><BR>SmtpGreetingMessage=$j 
+Sendmail $v/$Z; $b<BR>设置sendmail SMTP daemon连接建立时的提示信息<BR>为了隐藏系统信息, 
+可以做相应的修改.<BR><BR>MaxMessageSize=1000000<BR>设置sendmail接收邮件的最大尺寸, 
+如果希望接收更大的邮件或限制邮件大小减轻服务复杂, 可以修改这个选项<BR><BR>
+<P></P>
+<HR SIZE=1>
+
+<P>
+<H4>sendmail相关数据库的功能与维护</H4><B>/etc/aliases</B>是系统邮件别名文件, 
+需要使用<BR>newaliases<BR>命令, 更新一下数据库. 如果sendmail设置了AutoRebuild的功能, 
+建议从新起动一次Sendmail.<BR><BR>对于一般的数据库文件, 如access, mailertable等等, 可以使用命令<BR>makemap 
+hash dbname.db &gt; dbname<BR>来构造数据库. 当这些数据库被修改以后, 
+也需要使用相通的命令进行同步更新<BR><BR><B>access</B>提供简单的访问控制功能<BR>可以简单的将不想接收的邮件的邮件地址, 写在这个文件中. 
+<BR>Example:<BR>foo@bar.com 
+REJECT<BR>这样所有发送给foo@bar.com的mail都将被拒收的.<BR>access文件还有更多用法, 
+可以在sendmail-doc中的README.cf中找到.<BR><B>mailertable</B>是邮件路由数据文件<BR>比如 <PRE>.               esmtp:[mail.tsinghua.edu.cn]
+foo.com         esmtp:[mail1.foo.com]
+.foo.com        esmtp:[mail2.foo.com]
+bar.org         esmtp:other.mail.com
+</PRE>可以看出来, mailertable中的每条邮件路由为两列. 前面一列<BR>以hostname或domainname作为key, 
+后面一列为使用的投递器与<BR>目标主机. 从这个mailertable文件中可以看出来, 缺省情况下,<BR>所有mail都使用esmtp协议, 
+发送给mail.tsinghua.edu.cn, <BR>对于发送给too@foo.com的mail, 
+则直接发送给mail1.foo.com.<BR>请主意几点, foo.com与.foo.com是不同的, 
+.foo.com是匹配所有<BR>xxx.foo.com这样的机器名的. 而这样的机器名是无法使用foo.com<BR>来匹配的. 
+sendmail是选择最大的匹配来确定邮件路由的. <BR>[mail.tsinghua.edu.cn]与mail.tsinghua.edu.cn是不相同的, 
+<BR>[mail.tsinghua.edu.cn]使用与[IP]的地址一样的处理方法, <BR>这样可以减少DNS查询, 提高邮件发送速度. 
+<BR><BR><B>virtusertable</B>提供最简单的邮件虚拟主机的功能<BR><PRE>Example:
+  info@foo.com foo-info
+  info@bar.com bar-info
+  @baz.org kite@any.where
+</PRE>这样发给info@foo.com的邮件, 都将被传发给foo-info用户, 相同的 info@bar.com的邮件将会转发给bar-info用户, 
+所由发给@baz.org 的用户, 
+将转发给kite@any.where.<BR>virtusertable中还可以使用%1来表示原邮件中user的部分.<BR>@foo.com 
+%1@elsewahere.com<BR><BR>以上数据库的用法, 都可以在sendmail-doc中README.cf找到详悉介绍.<BR>
+<P></P><A href="http://166.111.215.235:8080/lecture.html#top">返回页首</A> 
+<HR SIZE=1>
+<A name=openssh></a>
+<P>
+<H3>openssh</H3>ssh是Secure Shell的简称. 相当于一个在安全管道中的telnet, 所有数据都是加密传输的, 
+可以很好的防范网络窃听. <BR><BR><B>openssh</B>是Open BSD的一个部分, 是完全free的ssh实现, 同时支持ssh1, 
+ssh2, 已经被移植到各种Unix平台上. <BR><BR>openssh依赖于openssl, 因此安装openssh前, 
+必须先要安装openssl.<BR>
+<P></P>
+<HR SIZE=1>
+
+<H3>openssh的简单使用</H3><B>Server端的起动</B><BR>单独运行, 
+直接运行<BR>sshd<BR><BR>使用inetd起动<BR>在/etc/inetd.conf中添加一行<BR><PRE>ssh stream  tcp nowait  root    /usr/sbin/tcpd ssh -i
+</PRE>然后重新起动inetd就可以了.<BR><BR><B>Client端</B><BR>ssh -l user host<BR>or<BR>ssh 
+user@host<BR>
+<P></P>
+<HR SIZE=1>
+
+<P>sshd的配置文件( /etc/ssh/sshd_config) <BR><PRE># This is ssh server systemwide configuration file.
+
+Port 22
+#Protocol 2,1
+ListenAddress 0.0.0.0
+#ListenAddress ::
+HostKey /etc/ssh/ssh_host_key
+ServerKeyBits 768
+LoginGraceTime 600
+KeyRegenerationInterval 3600
+PermitRootLogin yes
+#
+# Don't read ~/.rhosts and ~/.shosts files
+IgnoreRhosts yes
+# Uncomment if you don't trust ~/.ssh/known_hosts for RhostsRSAAuthentication
+#IgnoreUserKnownHosts yes
+StrictModes yes
+X11Forwarding no
+X11DisplayOffset 10
+PrintMotd yes
+KeepAlive yes
+
+# Logging
+SyslogFacility AUTH
+LogLevel INFO
+#obsoletes QuietMode and FascistLogging
+
+RhostsAuthentication no
+#
+# For this to work you will also need host keys in /etc/ssh_known_hosts
+RhostsRSAAuthentication no
+#
+RSAAuthentication yes
+
+# To disable tunneled clear text passwords, change to no here!
+PasswordAuthentication yes
+PermitEmptyPasswords no
+# Uncomment to disable s/key passwords 
+#SkeyAuthentication no
+
+# To change Kerberos options
+#KerberosAuthentication no
+#KerberosOrLocalPasswd yes
+#AFSTokenPassing no
+#KerberosTicketCleanup no
+
+# Kerberos TGT Passing does only work with the AFS kaserver
+#KerberosTgtPassing yes
+
+CheckMail no
+UseLogin no
+
+#Subsystem	sftp	/usr/local/sbin/sftpd
+</PRE>
+<P></P>
+<HR SIZE=1>
+
+<P><PRE>scp 的使用方法
+  scp [-pqrvC46] [-P port] [-c cipher] [-i identity_file]
+      [[user@]host1:]file1 [...] [[user@]host2:]file2
+</PRE>使用ssh-keygen生成key<BR><BR>ssh-keygen [ -f key_file ] 生成RSA key, 
+用于ssh1协议<BR>ssh-keygen -d [ -f key_file ] 生成DSA key, 用于ssh2协议<BR><BR>注意: 作为Host 
+Key使用的key, passphrase必须为空<BR><BR>
+<P></P>
+<HR SIZE=1>
+
+<P>
+<H3>使用key做验证</H3>缺省情况下, ssh仍然使用传统的口令验证. 可以通过简单的配置, 实现通过密匙的验证.<BR>过程:<BR>
+<OL>
+  <LI>用ssh-keygen生成用户密匙, 存放在~/.ssh/下, 文件名为 identity. 
+  <LI>将~/.ssh/identity.pub复制到远程机器用户帐户上, 并添加到~/.ssh/authorized_keys中. 
+  <LI>必须确定远程机器上~/.ssh/authorized_keys属性为400. 
+</LI></OL>这样就可以通过key来验证用户了.<BR>可以通过一个命令来完成以上操作<BR><PRE>ssh-keygen -f ~/.ssh/identity; cat ~/.ssh/identity.pub | \
+ssh user@remote "mkdir ~/.ssh; &gt; ~/.ssh/authorized_keys ; \
+chmod 400 ~/.ssh/authorized_keys"
+</PRE>
+<P></P>
+<HR SIZE=1>
+
+<P>
+<H4>rsync与ssh配合使用</H4>rsync是个非常好的网络文件传输程序, 很适合大量文件的复制.<BR><BR>rsync可以与rsh, 
+ssh配合使用, server/client都需要安装ssh/rsync<BR><BR>rsync -e /usr/bin/ssh 
+......<BR>或者定义环境变量<BR>export RSYNC_RSH=/usr/bin/ssh 
+(bash)<BR>就可以直接让rsync去使用ssh了.<BR><BR>
+<H4>cvs中使用ssh</H4>cvs可以使用rsh, ssh作为传输管道. <BR>export 
+CVS_RSH=/usr/bin/ssh<BR>export CVSROOT=:ext:user@host:/path<BR>
+<P></P>
+<HR SIZE=1>
+<A href="http://166.111.215.235:8080/lecture.html#top">返回页首</A> </BODY></HTML>

@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>进程及进程环境</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        PRE { color: #ffffff; font-family: "fixed" }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="velvet.jpg">
+
+<A HREF="misc.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="proctl.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=CENTER>5.7&nbsp;&nbsp;进程及进程环境<BR><BR>
+</H1>
+
+<UL>
+    <LI><P>基本概念</LI>
+    <LI><P>main 函数</LI>
+    <LI><P>命令行参数及 popt 库</LI>
+    <LI><P>环境变量</LI>
+    <LI><P>C 程序的内存布局</LI>
+    <LI><P>共享库</LI>
+    <LI><P>内存分配</LI>
+    <LI><P>程序的长跳转</LI>
+    <LI><P>进程的资源限制</LI>
+</UL>
+
+<H3>5.7.1&nbsp;&nbsp;基本概念</H3>
+<UL>
+    <LI>程序是保存在磁盘上的可执行代码和数据的映像.</LI>
+    <LI>进程是正在运行的程序. 一个程序可以同时有多个进程实例, 它们互相没有关系.</LI>
+</UL>
+
+<H3>5.7.2&nbsp;&nbsp;main 函数</H3>
+<UL>
+    <LI>main 函数 C/C++ 程序的入口函数, 但并不是进程真正开始执行的地方.</LI>
+    <LI>main 函数的参数包括命令行参数个数以及参数数组.</LI>
+
+<PRE>
+===============================================================================
+        int main (int argc, char *argv[]);
+===============================================================================
+</PRE>
+
+    <LI>进程的终止有两种类型, 一种是正常终止, 一种是非正常终止.</LI>
+    <LI>正常终止包括: 从 main 函数返回, 调用 exit 或 _exit.</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;stdlib.h&gt;
+
+       void exit (int status);
+
+       #include &lt;unistd.h&gt;
+
+       void _exit (int status);
+===============================================================================
+</PRE>
+
+    <LI>非正常终止包括: 调用 abort, 由信号终止.</LI>
+    <LI>exit 和 _exit 的区别在于, exit 要完成一些清除工作, 而 _exit 立即返回内核.</LI>
+    <LI>exit 要完成的清除工作包括标准 I/O 库的缓冲区刷新, 调用已注册的 atexit 函数等.</LI>
+    <LI>通过 atexit 最多可注册 32 个由 exit 函数调用的进程终止清除函数.</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;stdlib.h&gt;
+
+       int atexit (void (*function) (void));
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>5.7.3&nbsp;&nbsp;命令行参数及 popt 库</H3>
+<UL>
+    <LI>main 函数的 argc 是命令行参数个数, 其中包括程序名称.</LI>
+    <LI>argv [argc] 包含 NULL 指针.</LI>
+    <LI>popt 库是一个用来分析 GNU 风格命令行参数的函数库.</LI>
+    <LI>GNU 风格的命令行, 典型的有 rpm 命令的命令行.</LI>
+
+<PRE>
+===============================================================================
+GNU 风格的命令行参数特点:
+
+    * 长参数名, 比如, --binary, 但对应有短参数, 比如, -b
+===============================================================================
+</PRE>
+
+
+<PRE>
+===============================================================================
+       #include &lt;popt.h&gt;
+
+       poptContext poptGetContext (char * name, int argc, char ** argv,
+                                  struct poptOption * options, int flags);
+       void poptFreeContext (poptContext con);
+       void poptResetContext (poptContext con);
+       int poptGetNextOpt (poptContext con);
+       char * poptGetOptArg (poptContext con);
+       char * poptGetArg (poptContext con);
+
+       ......
+-------------------------------------------------------------------------------
+EXAMPLE:
+        /* This example comes from popt(3) man page. */
+        #include &lt;popt.h&gt;
+        #include &lt;stdio.h&gt;
+
+        void usage (poptContext optCon, int exitcode, char *error, char *addl)
+        {
+           poptPrintUsage (optCon, stderr, 0);
+           
+           if (error) fprintf (stderr, "%s: %s", error, addl);
+           
+           exit (exitcode);
+        }
+
+        int main (int argc, char *argv[]) {
+          char    c;            /* used for argument parsing */
+          int     i = 0;        /* used for tracking options */
+          char    *portname;
+          int     speed = 0;    /* used in argument parsing to set speed */
+          int     raw = 0;      /* raw mode? */
+          int     j;
+          char    buf[BUFSIZ+1];
+          poptContext optCon;   /* context for parsing command-line options */
+
+          struct poptOption optionsTable[] = {
+                          { "bps", 'b', POPT_ARG_INT, &speed, 0,
+                            "signaling rate in bits-per-second", "BPS" },
+                          { "crnl", 'c', 0, 0, 'c',
+                            "expand cr characters to cr/lf sequences" },
+                          { "hwflow", 'h', 0, 0, 'h',
+                            "use hardware (RTS/CTS) flow control" },
+                          { "noflow", 'n', 0, 0, 'n',
+                            "use no flow control" },
+                          { "raw", 'r', 0, &raw, 0,
+                            "don't perform any character conversions" },
+                          { "swflow", 's', 0, 0, 's',
+                            "use software (XON/XOF) flow control" } ,
+                          POPT_AUTOHELP
+                          { NULL, 0, 0, NULL, 0 }
+          };
+
+          optCon = poptGetContext(NULL, argc, argv, optionsTable, 0);
+          poptSetOtherOptionHelp(optCon, "[OPTIONS]* &lt;port&gt;");
+
+          if (argc &lt; 2) {
+                poptPrintUsage(optCon, stderr, 0);
+                exit(1);
+          }
+
+          /* Now do options processing, get portname */
+          while ((c = poptGetNextOpt(optCon)) &gt;= 0) {
+             switch (c) {
+                case 'c':
+                   buf[i++] = 'c';
+                   break;
+                case 'h':
+                   buf[i++] = 'h';
+                   break;
+                case 's':
+                   buf[i++] = 's';
+                   break;
+                case 'n':
+                   buf[i++] = 'n';
+                   break;
+             }
+          }
+          portname = poptGetArg (optCon);
+          if((portname == NULL) || !(poptPeekArg (optCon) == NULL))
+             usage (optCon, 1, "Specify a single port", ".e.g., /dev/cua0");
+
+          if (c &lt; -1) {
+             /* an error occurred during option processing */
+             fprintf(stderr, "%s: %s\n",
+                     poptBadOption (optCon, POPT_BADOPTION_NOALIAS),
+                     poptStrerror (c));
+             return 1;
+          }
+
+          /* Print out options, portname chosen */
+          printf ("Options  chosen: ");
+          for (j = 0; j &lt; i ; j++)
+             printf ("-%c ", buf[j]);
+          if (raw) printf("-r ");
+          if (speed) printf("-b %d ", speed);
+          printf ("\nPortname chosen: %s\n", portname);
+
+          poptFreeContext (optCon);
+          exit (0);
+        }
+---------------------------------------
+$ ./popt --usage
+Usage: popt [-chnrs?] [-b BPS] [--usage] [OPTIONS]* &lt;port&gt;
+
+$ ./popt -c -b 9600 /dev/cua0
+Options  chosen: -c -b 9600
+Portname chosen: /dev/cua0
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>5.7.4&nbsp;&nbsp;环境变量</H3>
+<UL>
+    <LI>环境变量以字符串数组的形式给出.</LI>
+    <LI>该字符串数组的头指针定义为: extern char **environ.</LI>
+    <LI>getenv/setenv, setenv/unsetenv</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;stdlib.h&gt;
+
+       char *getenv (const char *name);
+       int putenv (const char *string);
+
+       int setenv (const char *name, const char *value, int overwrite);
+       void unsetenv (const char *name);
+==============================================================

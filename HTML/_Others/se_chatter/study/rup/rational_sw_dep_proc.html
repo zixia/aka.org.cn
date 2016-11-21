@@ -1,0 +1,596 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>  Home / Products / Rational Unified Process / Product Information / Whitepapers  </TITLE>
+</HEAD>
+<BODY>
+<center><table width=630 border=0><tr><td>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+</FONT><P ALIGN="JUSTIFY">  </P>
+<B><FONT FACE="黑体" LANG="ZH-CN" SIZE=5><P ALIGN="JUSTIFY">Rational 软件开发过程</P>
+</B></FONT><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">原作</FONT>Philippe Kruchten </P>
+<P ALIGN="JUSTIFY">Rational Software Corp. </P>
+<P ALIGN="JUSTIFY">Vancouver, B.C., Canada </P>
+<P ALIGN="JUSTIFY">pbk@rational.com</P>
+<P ALIGN="JUSTIFY"></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">翻译</FONT> waterbird[AKA]</P>
+<B><FONT FACE="黑体" LANG="ZH-CN" SIZE=4><P ALIGN="JUSTIFY">目录</P>
+</B></FONT><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">　</P>
+</FONT><B><P ALIGN="JUSTIFY">1  Rational <FONT FACE="宋体" LANG="ZH-CN">的方式</FONT>(The Rational Way) </P>
+<P ALIGN="JUSTIFY">2  <FONT FACE="宋体" LANG="ZH-CN">软件生命周期概貌</FONT>(The Overall Software Lifecycle)</P><DIR>
+<DIR>
+
+</B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">两个视角（</FONT>Two Perspectives<FONT FACE="宋体" LANG="ZH-CN">）</FONT> </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">周期和阶段（</FONT>Cycles and Phases<FONT FACE="宋体" LANG="ZH-CN">）</FONT> </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">迭代（</FONT>Iterations <FONT FACE="宋体" LANG="ZH-CN">）</P>
+<P ALIGN="JUSTIFY">区别（</FONT>Discriminates <FONT FACE="宋体" LANG="ZH-CN">）</P>
+<P ALIGN="JUSTIFY">工作量和时间安排（</FONT>Effort and Schedule<FONT FACE="宋体" LANG="ZH-CN">）</P></DIR>
+</DIR>
+
+</FONT><B><P ALIGN="JUSTIFY">3  Rational <FONT FACE="宋体" LANG="ZH-CN">过程的各个阶段（</FONT>The Phases of the Rational Process<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B><P ALIGN="JUSTIFY">起始阶段（</FONT>Inception Phase <FONT FACE="宋体" LANG="ZH-CN">）</P>
+<P ALIGN="JUSTIFY">细化阶段（</FONT>Elaboration Phase <FONT FACE="宋体" LANG="ZH-CN">）</P>
+<P ALIGN="JUSTIFY">构造阶段（</FONT>Construction Phase <FONT FACE="宋体" LANG="ZH-CN">）</P>
+<P ALIGN="JUSTIFY">发放阶段（</FONT>Transition Phase <FONT FACE="宋体" LANG="ZH-CN">）</P>
+<P ALIGN="JUSTIFY">演变周期（</FONT>Evolution Cycles<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</FONT><B><P ALIGN="JUSTIFY">4  Rational <FONT FACE="宋体" LANG="ZH-CN">过程的各种活动（</FONT>Activities in the Rational Process <FONT FACE="宋体" LANG="ZH-CN">）</P>
+</FONT><P ALIGN="JUSTIFY">5  <FONT FACE="宋体" LANG="ZH-CN">生命周期的产出（</FONT>Lifecycle Artifacts<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B><P ALIGN="JUSTIFY">管理类产出（</FONT>Management Artifacts <FONT FACE="宋体" LANG="ZH-CN">）</P>
+<P ALIGN="JUSTIFY">技术类产出（</FONT>Technical Artifacts <FONT FACE="宋体" LANG="ZH-CN">）</P>
+<P ALIGN="JUSTIFY">需求（</FONT>Requirements<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</FONT><B><P ALIGN="JUSTIFY">6  <FONT FACE="宋体" LANG="ZH-CN">示例（</FONT>Examples of Rational Processes<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B><P ALIGN="JUSTIFY">用于大型合同软件开发的</FONT>Rational<FONT FACE="宋体" LANG="ZH-CN">过程</P>
+<P ALIGN="JUSTIFY">（</FONT>Rational Process for Large Contractual Software Development <FONT FACE="宋体" LANG="ZH-CN">）</P>
+<P ALIGN="JUSTIFY">用于小型商业软件开发的</FONT>Rational<FONT FACE="宋体" LANG="ZH-CN">过程</P>
+<P ALIGN="JUSTIFY">（</FONT>Rational Process for a Small Commercial Software Product<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</FONT><B><P ALIGN="JUSTIFY">7  <FONT FACE="宋体" LANG="ZH-CN">结束语（</FONT>Conclusion <FONT FACE="宋体" LANG="ZH-CN">）</P>
+</FONT><P ALIGN="JUSTIFY">8  <FONT FACE="宋体" LANG="ZH-CN">附录（</FONT>Annexes <FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B><P ALIGN="JUSTIFY">参考文献（</FONT>References <FONT FACE="宋体" LANG="ZH-CN">）</P>
+<P ALIGN="JUSTIFY">相关读物（</FONT>Further Readings <FONT FACE="宋体" LANG="ZH-CN">）</P>
+<P ALIGN="JUSTIFY">词汇表（</FONT>Glossary <FONT FACE="宋体" LANG="ZH-CN">）</P>
+<P ALIGN="JUSTIFY">简称（</FONT>Acronyms <FONT FACE="宋体" LANG="ZH-CN">）</P>
+<P ALIGN="JUSTIFY">阶段图（</FONT>Phase Map <FONT FACE="宋体" LANG="ZH-CN">）</P>
+<P ALIGN="JUSTIFY">作者介绍</FONT>(About the Author )</P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT SIZE=4><P ALIGN="JUSTIFY">1. Rational </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>的方式（</FONT><FONT SIZE=4>The Rational Way</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>）</P>
+</B></FONT><P ALIGN="JUSTIFY">Rational <FONT FACE="宋体" LANG="ZH-CN">的方式具有以下特点</FONT>: </P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL TYPE="SQUARE">
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>迭代的、渐增的</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>面向对象的</LI></P>
+<P ALIGN="JUSTIFY"><LI>可管理的、可控制的</LI></P>
+<P ALIGN="JUSTIFY"><LI>高度自动化的</FONT> </LI></P></UL>
+
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">它是可裁剪的，适用于各种规模、各个应用领域的软件产品和软件项目的开发。它紧紧围绕以下三个中心：</P>
+</FONT><P ALIGN="JUSTIFY"> </P>
+
+<UL TYPE="SQUARE">
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>人员</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>过程</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>工具和方法</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">本文描述</FONT>Rational <FONT FACE="宋体" LANG="ZH-CN">软件开发过程的理论和结构。</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT SIZE=4><P ALIGN="JUSTIFY">2. </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>软件生命周期概貌</FONT><FONT FACE="宋体" LANG="ZH-CN">（</FONT><FONT SIZE=4>The Overall Software Lifecycle</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>）</P>
+</B></FONT><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+</FONT><B><P ALIGN="JUSTIFY">2.1 <FONT FACE="宋体" LANG="ZH-CN">两种视角（</FONT>Two Perspectives <FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B><P ALIGN="JUSTIFY"></P>
+</FONT><P ALIGN="JUSTIFY">Rational <FONT FACE="宋体" LANG="ZH-CN">软件开发过程可以从两种不同又相关的视角加以观察：</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><P ALIGN="JUSTIFY">&lt;1&gt; <FONT FACE="宋体" LANG="ZH-CN">从管理的角度来看</FONT>(A management perspective)</B>, <FONT FACE="宋体" LANG="ZH-CN">涉及财政、整体战略、商务和人的方面</FONT> </P>
+<B><P ALIGN="JUSTIFY">&lt;2&gt; <FONT FACE="宋体" LANG="ZH-CN">从技术的角度来看</FONT>(A technical perspective)</B>, <FONT FACE="宋体" LANG="ZH-CN">涉及质量、工程和设计实现的方面</FONT>  </P>
+<P ALIGN="JUSTIFY"></P>
+<B><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"><IMG SRC="Image5.gif" WIDTH=348 HEIGHT=160></B></FONT> </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">2.2 <FONT FACE="宋体" LANG="ZH-CN">周期和阶段（</FONT>Cycles and Phases<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">从管理的角度，即从商务和经济的角度来看，对应项目的进展，软件的生命周期包含四个主要阶段</FONT>: </P>
+<P ALIGN="JUSTIFY"></P>
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">起始阶段（</FONT>Inception<FONT FACE="宋体" LANG="ZH-CN">）</B></FONT>-- <FONT FACE="宋体" LANG="ZH-CN">有一个好的</FONT>idea, <FONT FACE="宋体" LANG="ZH-CN">详细构想出最终产品的蓝图和它的商业案例，确定项目的范围（</FONT>scope of the project<FONT FACE="宋体" LANG="ZH-CN">）</FONT>[1]<FONT FACE="宋体" LANG="ZH-CN">。</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">细化阶段（</FONT>Elaboration<FONT FACE="宋体" LANG="ZH-CN">）</B></FONT>--<FONT FACE="宋体" LANG="ZH-CN">计划基本的活动和所需资源，详细确定软件特性，设计软件结构</FONT> [2]<FONT FACE="宋体" LANG="ZH-CN">。</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">构造阶段（</FONT>Construction<FONT FACE="宋体" LANG="ZH-CN">）</B></FONT>-- <FONT FACE="宋体" LANG="ZH-CN">构造产品，</FONT> <FONT FACE="宋体" LANG="ZH-CN">演化产品的蓝图、结构和计划，直到一个可以交付用户的产品完成。</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">交付阶段（</FONT>Transition<FONT FACE="宋体" LANG="ZH-CN">）</B></FONT>-- <FONT FACE="宋体" LANG="ZH-CN">将产品移交用户使用，包括：拷贝、分发、培训、支持、维护，直到用户满意。</FONT> </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><IMG SRC="Image6.gif" WIDTH=430 HEIGHT=155></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">走完这</FONT>4<FONT FACE="宋体" LANG="ZH-CN">个阶段被称为完成了一个开发周期（</FONT>a development cycle<FONT FACE="宋体" LANG="ZH-CN">）</FONT>,  <FONT FACE="宋体" LANG="ZH-CN">它产生一代产品（</FONT>a software generation<FONT FACE="宋体" LANG="ZH-CN">）。</FONT> <FONT FACE="宋体" LANG="ZH-CN">除非产品的生命结束，</FONT> <FONT FACE="宋体" LANG="ZH-CN">一个现存产品可以通过重复下一个相同的起始、细化、构造和交付四阶段演进为下一代产品。</FONT> <FONT FACE="宋体" LANG="ZH-CN">这个时期我们称之为演化</FONT>(evolution)<FONT FACE="宋体" LANG="ZH-CN">。最后伴随着产品经过几个周期的演化，新一代产品也不断被制造出来。</P>
+<P ALIGN="JUSTIFY">例如，演化周期可能因为用户建议增强功能、用户环境的改变、技术的变化和对竞争的反应而被启动。</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image7.gif" WIDTH=384 HEIGHT=138></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY">实际中，周期之间会有轻微重叠：起始阶段和细化阶段可能回在上一个周期的交付阶段未结束就开始了。</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><P ALIGN="JUSTIFY">2.3 Iterations</P>
+</B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image8.gif" WIDTH=409 HEIGHT=202>从技术的角度来看，软件开发可以视为一连串的迭代过程，通过这些迭代被开发的软件得以渐增地演化。</FONT> <FONT FACE="宋体" LANG="ZH-CN">每次迭代都以一个可执行的产品的发布而结束，</FONT> <FONT FACE="宋体" LANG="ZH-CN">该产品可能是完整版本的一个子集，但从工程的或用户的角度来看是有用的。</FONT> <FONT FACE="宋体" LANG="ZH-CN">每次发布都伴随一些支持性产出，如：计划，发布介绍，用户文档等。</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY">一次迭代</FONT>(iteration)<FONT FACE="宋体" LANG="ZH-CN">包括以下活动：</FONT> <FONT FACE="宋体" LANG="ZH-CN">计划、分析、设计、实施、测试。</FONT> <FONT FACE="宋体" LANG="ZH-CN">根据迭代在开发周期中所处位置的不同，这些活动分别占不同的比例。</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">管理的角度和技术角度之间是协调的，</FONT> <FONT FACE="宋体" LANG="ZH-CN">而且各个阶段（</FONT>phases<FONT FACE="宋体" LANG="ZH-CN">）的结束还和各次迭代（</FONT>iterations<FONT FACE="宋体" LANG="ZH-CN">）的结束保持同步。</FONT> <FONT FACE="宋体" LANG="ZH-CN">换句话说，每个阶段可以分为一次或多次迭代过程。</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image9.gif" WIDTH=396 HEIGHT=245></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">　</P>
+</FONT><P ALIGN="JUSTIFY">(<FONT FACE="宋体" LANG="ZH-CN">注意：本图中每阶段的迭代数目仅为示意</FONT>) </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">但是，这两个角度</FONT>--<FONT FACE="宋体" LANG="ZH-CN">管理的和技术的</FONT>--<FONT FACE="宋体" LANG="ZH-CN">不仅仅只是保持同步，它们还具有一些完全相同的里程碑，它们共同贡献出一些随时间演化的产品和产出。</FONT> <FONT FACE="宋体" LANG="ZH-CN">一些产出更多地在技术方面控制之下，另一些产出更多地在管理方面的控制之下。见第五节。</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">得到这些产出以及这些产品、产出是否满足测试评估标准，构成了这些里程碑的主要内容。它们不仅仅是日历牌上的日期，更加看的见，摸的着。</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">象周期一样，迭代之间也会有轻微重叠。即第</FONT>N<FONT FACE="宋体" LANG="ZH-CN">次迭代的计划和架构在第</FONT>N-1<FONT FACE="宋体" LANG="ZH-CN">次迭代还未结束时就开始了。有时候，迭代也会平行进行：一个工作于系统某一部分的小组，可能在某个迭代内没有可发布的产出。</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image10.gif" WIDTH=455 HEIGHT=341></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">　</P>
+</FONT><B><P ALIGN="JUSTIFY">2.4  <FONT FACE="宋体" LANG="ZH-CN">区别（</FONT>Discriminants <FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">对于不同的项目而言，每个阶段的侧重点，入口和出口准则，一个开发周期的各个产出，以及各次迭代的数目和长度都会不同。这主要取决于项目的四个主要特征</FONT>-----<FONT FACE="宋体" LANG="ZH-CN">项目的过程区别（</FONT>process discriminants <FONT FACE="宋体" LANG="ZH-CN">）</FONT>------<FONT FACE="宋体" LANG="ZH-CN">起了决定作用。按照影响程度排列，它们是：</FONT> </P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL TYPE="SQUARE">
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>商务情景（</FONT>The business context: <FONT FACE="宋体" LANG="ZH-CN">）</LI></P></UL>
+
+</B><P ALIGN="JUSTIFY">合同型项目，开发者基于某个合同规定为特定的客户开发软件</P>
+<P ALIGN="JUSTIFY">商业产品，开发者开发软件以推向市场</P>
+<P ALIGN="JUSTIFY">内部项目，</FONT> <FONT FACE="宋体" LANG="ZH-CN">开发者和客户在同一个单位</FONT> </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+
+<UL TYPE="SQUARE">
+<B><P ALIGN="JUSTIFY"><LI>项目的规模</FONT>(The size):</B> <FONT FACE="宋体" LANG="ZH-CN">按照软件测度计算，如代码行数，功能点或消耗的人月，或成本</LI></P>
+<B><P ALIGN="JUSTIFY"><LI>新颖程度（</FONT>The degree of novelty<FONT FACE="宋体" LANG="ZH-CN">）</B></FONT>-- <FONT FACE="宋体" LANG="ZH-CN">对于软件开发组织，这个软件有多新，或是特殊地，这个软件是不是第二次或更后面的周期。这个区别包括了组织和过程的成熟度，它的技术水平，管理水平，及其他工具和资源等等。</LI></P>
+<B><P ALIGN="JUSTIFY"><LI>应用的类型（</FONT>The type of application<FONT FACE="宋体" LANG="ZH-CN">）</B></FONT>,  <FONT FACE="宋体" LANG="ZH-CN">应用的领域</FONT>--MIS, <FONT FACE="宋体" LANG="ZH-CN">控制系统</FONT>, <FONT FACE="宋体" LANG="ZH-CN">嵌入式实时系统</FONT>, <FONT FACE="宋体" LANG="ZH-CN">软件开发环境工具等等</FONT>,  <FONT FACE="宋体" LANG="ZH-CN">尤其时具体的应用领域会给开发提出特殊的约束条件：安全性、性能、国际化、内存限制等。</LI></P></UL>
+
+<B><P ALIGN="JUSTIFY"></P>
+</B><P ALIGN="JUSTIFY">本文首先描述适用所有类型软件开发的通用过程，然后针对某些具体应用领域提供几个例子。</FONT>.[3]</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">2.5 <FONT FACE="宋体" LANG="ZH-CN">工作量和时间安排（</FONT>Effort and Schedule <FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">各阶段在工作量和时间安排上是不同的。尽管由于不同项目类型之间相差会很大，一个典型的中等规模项目的最初开发周期可以预计为下面的比率：</FONT> </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=7 WIDTH=568>
+<TR><TD WIDTH="20%" VALIGN="TOP">　</TD>
+<TD WIDTH="20%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">起始阶段</FONT></TD>
+<TD WIDTH="20%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">细化阶段</FONT></TD>
+<TD WIDTH="20%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">构造阶段</FONT></TD>
+<TD WIDTH="20%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">交付阶段</FONT></TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP">
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">工作量</B></FONT></TD>
+<TD WIDTH="20%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">5%                  </TD>
+<TD WIDTH="20%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">20%</TD>
+<TD WIDTH="20%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">65%</TD>
+<TD WIDTH="20%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">10%</TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP">
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">时间安排</B></FONT></TD>
+<TD WIDTH="20%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">10%</TD>
+<TD WIDTH="20%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">30%</TD>
+<TD WIDTH="20%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">50%</TD>
+<TD WIDTH="20%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">10% </TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">        </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><IMG SRC="Image11.gif" WIDTH=373 HEIGHT=84>如下图所示：</FONT>      </P>
+<P ALIGN="JUSTIFY">                 </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">但是对于一个演化周期，起始阶段和细化阶段可能大大缩减。使用某些工具和方法，也可以使比起始阶段和细化阶段加一起小的多。</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT SIZE=4><P ALIGN="JUSTIFY">3. Rational </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>过程的各个阶段（</FONT><FONT SIZE=4>The Phases of the Rational Process</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>）</P>
+</B></FONT><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+</FONT><B><P ALIGN="JUSTIFY">3.1 <FONT FACE="宋体" LANG="ZH-CN">起始阶段（</FONT>Inception Phase <FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">这个阶段产生一个潜在产品的最初蓝图，并把它转变为一个实际的项目。本阶段的目的是建立一个新产品或一次产品更新的商业案例（</FONT>business case<FONT FACE="宋体" LANG="ZH-CN">），定义项目的范围。</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">对于一个新产品的开发，本阶段的主要产出是得到一“做还是不做”的决定以进入下一阶段，和投入一定的时间和金钱详细分析做什么、是否能做、以及如何去做。</FONT> </P>
+<P ALIGN="JUSTIFY"></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">对于一个现存产品的演化，这会是一个简短的阶段，</FONT> <FONT FACE="宋体" LANG="ZH-CN">主要看用户或客户的要求、问题报告、或是新的技术动态。</P>
+<P ALIGN="JUSTIFY">对于一个基于合同的开发，</FONT> <FONT FACE="宋体" LANG="ZH-CN">是否继续做的决定取决于在特定领域的经验、以及组织在此领域的竞争力和市场情况。这里起始阶段可以归结为一个参加投标的决定，或投标活动本身。</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">决定可能是基于一个现存的研究原型，其结构对最终软件可能合适，也可能不合适。</FONT> </P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">（入口准则）</FONT>Entry criteria: </P>
+</B></I><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">需求的描述，通常采用以下形式：</P>
+</FONT><P ALIGN="JUSTIFY"> </P>
+
+<UL TYPE="SQUARE">
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一份最初的蓝图</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一个遗留系统</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一份建议请求（</FONT>An RFP --request for proposal) </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>先前一代的产品和一系列增强说明</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一些财富</FONT>(<FONT FACE="宋体" LANG="ZH-CN">软件</FONT>, <FONT FACE="宋体" LANG="ZH-CN">诀窍</FONT>, <FONT FACE="宋体" LANG="ZH-CN">钱</FONT>) </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一个概念原型</LI></P></UL>
+
+</FONT><P ALIGN="JUSTIFY"> </P>
+<B><I><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">（出口准则）</FONT>Exit criteria: </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+
+<UL TYPE="SQUARE">
+</B></I><P ALIGN="JUSTIFY"><LI>一个初始的商业案例</FONT>(business case)<FONT FACE="宋体" LANG="ZH-CN">至少包含以下内容</FONT>: </LI></P></UL>
+
+
+<UL>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>对产品蓝图的明确表达</FONT> ----<FONT FACE="宋体" LANG="ZH-CN">关键需求</FONT>---- <FONT FACE="宋体" LANG="ZH-CN">表述为功能、范围、性能、技术等。</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>成功的标志</FONT> (<FONT FACE="宋体" LANG="ZH-CN">如收入的数目</FONT>) </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>最初的风险估计</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>完成细化阶段所需的资源估算</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">在初试阶段结束时，我们也可能有：</P>
+</FONT><P ALIGN="JUSTIFY"> </P>
+
+<UL TYPE="SQUARE">
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一个最初的问题域分析模型</FONT>(<FONT FACE="宋体" LANG="ZH-CN">完成</FONT>~10%-20%), <FONT FACE="宋体" LANG="ZH-CN">识别出关键的</FONT>use cases, <FONT FACE="宋体" LANG="ZH-CN">足以进行进一步的构造工作</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+
+<UL TYPE="SQUARE">
+<P ALIGN="JUSTIFY"><LI>一个最初的结构原型，可能是一个可抛弃的原型</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">　</P>
+</FONT><B><P ALIGN="JUSTIFY">3.2 <FONT FACE="宋体" LANG="ZH-CN">细化阶段</FONT>(Elaboration Phase)</P>
+</B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">本阶段的主要目的是更彻底地分析问题域，定义结构并使之稳定，确定项目的最大风险。这样在本阶段结束时，我们可以得到一个关于下</FONT>2<FONT FACE="宋体" LANG="ZH-CN">个阶段工作的详细计划：</FONT> </P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL TYPE="SQUARE">
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一个基于分析模型的基线产品蓝图</FONT>(A baseline product vision) <FONT FACE="宋体" LANG="ZH-CN">（即最初的需求集合）</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>对至少第一次构造迭代的评价准则</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一个基线软件构架</FONT>(A baseline software architecture )</LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>开发和发布产品的基本资源，尤其是人员和工具</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一个进度计划表</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一个解决开发风险的方案，足以对构造阶段的成本、进度和质量作出“精确”的评估</FONT> </LI></P></UL>
+
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">在这个阶段，一个可执行的结构原型（</FONT>an executable architectural prototype<FONT FACE="宋体" LANG="ZH-CN">）被构造完成；它至少实现了初始阶段识别出的主要的“</FONT>use cases<FONT FACE="宋体" LANG="ZH-CN">”</FONT> <FONT FACE="宋体" LANG="ZH-CN">，解决了项目的最大技术风险；根据范围、规模、风险和项目新颖程度的不同，它的完成要化一次或多次迭代。</P>
+<P ALIGN="JUSTIFY">这最好是一个演化的原型，可以产生合格的代码，并将成为整体结构的基线，但是也不排除开发出一个或几个试探性的、可抛弃的原型，以降低开发的风险：对需求、可行性、人机界面、演示程序等的进一步细化。</FONT> <FONT FACE="宋体" LANG="ZH-CN">它将成为结构的基线（</FONT>the architectural baseline<FONT FACE="宋体" LANG="ZH-CN">）。</P>
+<P ALIGN="JUSTIFY">在本阶段的结束时，仍然会有一个“做还是不做”的决定，</FONT> <FONT FACE="宋体" LANG="ZH-CN">以确定是否要真正投资构造这个产品（或参与合同项目的竞标）。</FONT> <FONT FACE="宋体" LANG="ZH-CN">此时产生的计划一定要足够详细，风险也得以充分降低，可以对开发工作的完成进行一定准确度的成本和进度估算。</P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">（入口准则）</FONT>Entry criteria: </P>
+</B></I><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">　</P>
+
+<UL TYPE="SQUARE">
+<P ALIGN="JUSTIFY"><LI>前一阶段出口准则所描述的产品和产出</LI></P>
+<P ALIGN="JUSTIFY"><LI>被项目管理者和投资者认可的计划，和细化阶段所需的资源</LI></P></UL>
+
+<B><I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">出口准则）</FONT>Exit criteria: </P>
+</B></I><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+
+<UL TYPE="SQUARE">
+<P ALIGN="JUSTIFY"><LI>一份详细的软件开发计划</FONT> </LI></P></UL>
+
+
+<UL>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>更新的风险评估</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一个管理计划</LI></P>
+<P ALIGN="JUSTIFY"><LI>一个人员配置计划</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一个显示迭代内容和次数的阶段计划</LI></P>
+<P ALIGN="JUSTIFY"><LI>一个迭代计划，详细计划下次迭代</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>开发环境和所需的工具</LI></P>
+<P ALIGN="JUSTIFY"><LI>一份测试计划</FONT> </LI></P></UL>
+
+
+<UL TYPE="SQUARE">
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一个基线蓝图，标明最后产品的一整套评估准则</LI></P>
+<P ALIGN="JUSTIFY"><LI>用于评估构造阶段最初的迭代结果的客观、可测量的演化准则</LI></P></UL>
+
+
+<UL TYPE="SQUARE">
+<P ALIGN="JUSTIFY"><LI>一个问题域的分析模型（</FONT>80%<FONT FACE="宋体" LANG="ZH-CN">完成），相应的结构可以称之为是“完整的”</LI></P>
+<P ALIGN="JUSTIFY"><LI>一个软件体系结构描述（说明约束和限制）</LI></P>
+<P ALIGN="JUSTIFY"><LI>一可执行的结构基线</FONT>(An executable architecture baseline )</LI></P></UL>
+
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+</FONT><B><P ALIGN="JUSTIFY">3.3 <FONT FACE="宋体" LANG="ZH-CN">构造阶段（</FONT>Construction Phase <FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">本阶段可以划分为数次迭代</FONT>---<FONT FACE="宋体" LANG="ZH-CN">不停充实结构基线，一步步地向最终产品渐增逼近。在每次迭代过程中，上个阶段（细化阶段）的产出得到扩充和修正，</FONT> <FONT FACE="宋体" LANG="ZH-CN">但它们最终将随系统向着正确和完整的方向的演进而稳定下来。</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">在这个阶段，除了软件本身，也生成一些新的产出</FONT>---<FONT FACE="宋体" LANG="ZH-CN">文档，既有内部使用的，也有面向最终用户的</FONT>.<FONT FACE="宋体" LANG="ZH-CN">。</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">对每次迭代，我们有：</P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">入口准则（</FONT>Entry criteria: <FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+
+<UL TYPE="SQUARE">
+<P ALIGN="JUSTIFY"><LI>上次迭代的产品和产出。</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+</FONT><P ALIGN="JUSTIFY">   <FONT FACE="宋体" LANG="ZH-CN">迭代计划必须阐明迭代的目标：</FONT> </P>
+
+<UL>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>将要开发的新增功能，覆盖了哪些</FONT>  use cases <FONT FACE="宋体" LANG="ZH-CN">或</FONT> scenarios </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>迭代过程中减少风险</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>迭代过程中修改缺陷</FONT> </LI></P></UL>
+
+<B><I><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">出口准则（</FONT>Exit criteria: <FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">更新了的产品和产出，再加上</FONT>: </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">　</P>
+
+<UL TYPE="SQUARE">
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一个发布描述文档，描述迭代的结果</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>测试用例和根据产品推导的结果</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一个详细描述下一次迭代的迭代计划</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>对下一次迭代的客观评测标准</FONT> </LI></P></UL>
+
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">到构造阶段的后期，必须完成以下产出，和本阶段最后一个迭代特有的产出：</P>
+</FONT><P ALIGN="JUSTIFY"> </P>
+
+<UL TYPE="SQUARE">
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一个发布计划，指定必需的事项：</FONT> </LI></P></UL>
+
+
+<UL>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>打包</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>定价</FONT> </LI></P>
+<P ALIGN="JUSTIFY"><LI>Roll out </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>支持</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>培训</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>发布战略</FONT>  (<FONT FACE="宋体" LANG="ZH-CN">或一个现存系统的更新计划</FONT>) </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>产品</FONT> (<FONT FACE="宋体" LANG="ZH-CN">软盘和手册</FONT>) </LI></P></UL>
+
+
+<UL TYPE="SQUARE">
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>用户使用文档</FONT> </LI></P></UL>
+
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+</FONT><B><P ALIGN="JUSTIFY">3.4 <FONT FACE="宋体" LANG="ZH-CN">交付阶段（</FONT>Transition Phase <FONT FACE="宋体" LANG="ZH-CN">）</P>
+<P ALIGN="JUSTIFY"></P>
+</B><P ALIGN="JUSTIFY">交付阶段是把产品交到最终用户手中的阶段。</FONT> <FONT FACE="宋体" LANG="ZH-CN">它涉及市场、打包、安装、配置、支持用户和修改错误</FONT>. </P>
+<P ALIGN="JUSTIFY"></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">从技术角度来看，伴随本阶段迭代的是一次或多次发布：</FONT>`beta' <FONT FACE="宋体" LANG="ZH-CN">版发布</FONT>, <FONT FACE="宋体" LANG="ZH-CN">正式版发布，修改</FONT>bug , <FONT FACE="宋体" LANG="ZH-CN">或增强版发布。</FONT> </P>
+<P ALIGN="JUSTIFY"></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">当用户对产品满意，本阶段即告结束。</FONT> <FONT FACE="宋体" LANG="ZH-CN">例如，合同开发时正式接受，</FONT> <FONT FACE="宋体" LANG="ZH-CN">或者产品有关的所有活动都已结束。</FONT> <FONT FACE="宋体" LANG="ZH-CN">此时，某些积累的财富可以稍加整理，以为下一个周期或其他项目重用。</FONT> </P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">入口准则（</FONT>Entry criteria: <FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">　</P>
+
+<UL TYPE="SQUARE">
+<P ALIGN="JUSTIFY"><LI>上一次迭代的产品和产出，</FONT> <FONT FACE="宋体" LANG="ZH-CN">特殊地</FONT>,  <FONT FACE="宋体" LANG="ZH-CN">一个可以交到用户手中的产品</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">出口准则（</FONT><I>Exit criteria:<FONT FACE="宋体" LANG="ZH-CN">）</FONT> </P>
+</B></I><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+
+<UL TYPE="SQUARE">
+<P ALIGN="JUSTIFY"><LI>前阶段某些文档的更新，以及对比最初的成功标准对项目的性能进行“事后的”分析</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一个简短的清单，列出本次开发周期给组织带来的成果</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><P ALIGN="JUSTIFY">3.5 <FONT FACE="宋体" LANG="ZH-CN">演化周期</FONT>(Evolution Cycles )</P>
+<P ALIGN="JUSTIFY"></P>
+</B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">对于较大的演化，我们迭代实施整个过程，仍从初试阶段开始一个新的周期。因为我们已经有了一个产品了，所以比起一个初次开发的产品，初试阶段可能大大缩短。细化阶段也可能缩小范围，更加关注于计划方面，而非分析或结构的演化。需要指出：周期与周期之间也会互相重叠。</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">较小的演化可以通过延长交付阶段或增加一两次迭代来完成。</FONT> </P>
+<P ALIGN="JUSTIFY"></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">交付阶段可以以一个终结过程而结束，即产品不再演化了，但是为了终结它，一定要有一些特定的动作。</FONT> </P>
+<B><FONT SIZE=4><P ALIGN="JUSTIFY">4. Rational</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>过程中的活动</FONT><FONT SIZE=4>(Activities in the Rational Process )</P>
+</B></FONT><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+</FONT><P ALIGN="JUSTIFY">Rational <FONT FACE="宋体" LANG="ZH-CN">过程中各个阶段的名称</FONT>(<FONT FACE="宋体" LANG="ZH-CN">如起始、细化、构造、交付</FONT>)<FONT FACE="宋体" LANG="ZH-CN">同在这阶段里进行的开发活动的术语名称</FONT>---<FONT FACE="宋体" LANG="ZH-CN">如分析、设计、测试等</FONT>---<FONT FACE="宋体" LANG="ZH-CN">相差甚远。</FONT> <FONT FACE="宋体" LANG="ZH-CN">因此我们容易理解某种活动的进行并不局限于某个特定阶段，也同它的作者、标准及问题域的术语保持独立。</FONT> <FONT FACE="宋体" LANG="ZH-CN">这些活动的确不停发生，但它们在每个阶段和每次迭代中的程度不同。下图表明了活动重点随时间的演化。</FONT> </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY">图中活动重点的变化也说明尽管每次迭代在形式上都是“相似”的，但它们的性质和内容却是随时间改变的。</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image12.gif" WIDTH=368 HEIGHT=245></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">这也表明，一种活动的结束并不总意味着另一种活动的开始，即并不是分析完成了才开始设计，而是这些活动相关的“产品”在随着开发者对问题或需求的理解的加深也不断得到更新。</FONT> </P>
+<P ALIGN="JUSTIFY"></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">最后，在一个迭代过程中，计划、测试和综合（</FONT>Integration<FONT FACE="宋体" LANG="ZH-CN">）这些活动不是集中堆积在开发活动的开始和结束阶段，而是有机地分布在整个开发周期的各个阶段、各次迭代之中。</FONT> <FONT FACE="宋体" LANG="ZH-CN">它们并不表现为开发过程的某个独立的阶段或步骤。</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">尽管具体的项目有具体的区别，对于一个中等规模、初次开发的典型项目，其开发周期中各种活动的比例如下：</FONT> </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">计划和管理</FONT>(Planning and management)                       15% </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">分析</FONT>/<FONT FACE="宋体" LANG="ZH-CN">需求</FONT>(Analysis/requirements)                            10% </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">设计</FONT>/<FONT FACE="宋体" LANG="ZH-CN">综合</FONT>(Design/integration )                               15% </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">实施</FONT>/<FONT FACE="宋体" LANG="ZH-CN">功能测试</FONT>(Implementation/functional tests)                 30% </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">测试</FONT>/<FONT FACE="宋体" LANG="ZH-CN">评估</FONT>/<FONT FACE="宋体" LANG="ZH-CN">验收测试</FONT>(Measurement/assessment/acceptance test)    15% </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">工具</FONT>/<FONT FACE="宋体" LANG="ZH-CN">环境</FONT>/<FONT FACE="宋体" LANG="ZH-CN">变更管理</FONT>(Tools/environment/change management)     10% </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">维护</FONT>Maintenance (fixes during development)                   5% </P>
+</B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT SIZE=4><P ALIGN="JUSTIFY">5. </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>生命周期产出品（</FONT><FONT SIZE=4>Lifecycle Artifacts </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>）</P>
+</B></FONT><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">开发过程不是文档驱动的：在所有时间，它的产出中必须包括软件产品自身。文档应该十分精简，数目不能太多，应只保留那些确实从管理或技术的角度有真正价值的文档。</FONT> Rational <FONT FACE="宋体" LANG="ZH-CN">建议保留以下各类文档：</P>
+</FONT><P ALIGN="JUSTIFY"> </P>
+<B><P ALIGN="JUSTIFY">5.1 <FONT FACE="宋体" LANG="ZH-CN">管理</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>产出品（</FONT>Management Artifacts <FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">管理产出品不是产品，而是用来驱动或监视项目进展、估计项目风险、调整项目资源，使客户或投资者对项目保持一定的“可见性”</FONT> <FONT FACE="宋体" LANG="ZH-CN">的。</P>
+<P ALIGN="JUSTIFY"></P>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI>一份组织政策文档（</FONT>An Organizational Policy document<FONT FACE="宋体" LANG="ZH-CN">），是组织开发过程的明文描述。</FONT> <FONT FACE="宋体" LANG="ZH-CN">它包括一个此类项目的开发范例。</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><LI>一份项目蓝图（</FONT>A Vision document<FONT FACE="宋体" LANG="ZH-CN">）</FONT>, <FONT FACE="宋体" LANG="ZH-CN">描述系统一级的需求，质量要求以及其它优先级较高的指标</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><LI>一份商务描述文档（</FONT>A Business Case document<FONT FACE="宋体" LANG="ZH-CN">）</FONT>, <FONT FACE="宋体" LANG="ZH-CN">描述商业情况，合同，以及项目的投资与回报等等。</LI></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY"><LI>一份开发计划文档（</FONT>A Development Plan document<FONT FACE="宋体" LANG="ZH-CN">）</FONT>, <FONT FACE="宋体" LANG="ZH-CN">包括总体的迭代计划和当前及近期迭代的详细规划。</LI></P>
+</FONT><P ALIGN="JUSTIFY"> </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一份评估标准文档（</FONT>An Evaluation Criteria document<FONT FACE="宋体" LANG="ZH-CN">）</FONT>, <FONT FACE="宋体" LANG="ZH-CN">包括需求、验收标准及其它特定的技术目标，它们由一个个阶段演化的主要“里程碑”组成。包含迭代的目标和接收水平。</LI></P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><P ALIGN="JUSTIFY"> </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>每次发布的描述文档。（</FONT>Release Description<FONT FACE="宋体" LANG="ZH-CN">）</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><LI>交付文档（</FONT>Deployment document<FONT FACE="宋体" LANG="ZH-CN">）</FONT>,  <FONT FACE="宋体" LANG="ZH-CN">包含对交付、培训、安装、销售、制造和交割相关的有用信息。</LI></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><LI>状态评估文档（</FONT>Status Assessment documents<FONT FACE="宋体" LANG="ZH-CN">）</FONT>: <FONT FACE="宋体" LANG="ZH-CN">项目状态的阶段性“快照”，</FONT>  <FONT FACE="宋体" LANG="ZH-CN">对进展、人力、开销、结果、关键风险、活动等进行度量。</LI></P></OL>
+
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><P ALIGN="JUSTIFY">5.2 <FONT FACE="宋体" LANG="ZH-CN">技术产出品（</FONT>Technical Artifacts <FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">它们或者是交付的产品，可执行的软件及手册，或者是一些用于制造产品的蓝图、软件模型、源代码和其他有助于理解和演化产品的工程信息。</FONT> </P>
+<P ALIGN="JUSTIFY"></P>
+<OL>
+
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>用户手册（</FONT>User's Manual<FONT FACE="宋体" LANG="ZH-CN">）</FONT>, <FONT FACE="宋体" LANG="ZH-CN">生成于生命周期早期。</LI></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><LI>软件文档（</FONT>Software documentation<FONT FACE="宋体" LANG="ZH-CN">）</FONT>,  <FONT FACE="宋体" LANG="ZH-CN">最好是注释充分、得到合适工具支持、易读的源代码及其相关的各种模型（</FONT>uses cases, class diagrams, process diagrams, etc.<FONT FACE="宋体" LANG="ZH-CN">）。</LI></P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><P ALIGN="JUSTIFY"> </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一个软件结构文档（</FONT>A Software Architecture document<FONT FACE="宋体" LANG="ZH-CN">）</FONT>, <FONT FACE="宋体" LANG="ZH-CN">描述软件的整体结构，及它的主要组成元素的分解说明：</FONT> <FONT FACE="宋体" LANG="ZH-CN">类的分组、类、过程、子系统、关键接口的定义以及关键设计决定的准则依据。</FONT> </LI></P></OL>
+
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">本文第</FONT>3<FONT FACE="宋体" LANG="ZH-CN">部分中列举的输入和输出准则可以映射到这</FONT>11<FONT FACE="宋体" LANG="ZH-CN">类文档之中。</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">上面介绍的这套文档可以依照具体项目的类型进行扩充和删减，一些文档可以合并。</FONT> <FONT FACE="宋体" LANG="ZH-CN">文档并非一定是纸的形式</FONT>---<FONT FACE="宋体" LANG="ZH-CN">也可以是电子表格、文本文件、数据库记录、源代码的注释、超文本文档等等</FONT>---<FONT FACE="宋体" LANG="ZH-CN">但相应的信息资源必须被清楚地识别，易于访问，也要有一定的历史记录。</FONT> </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">5.3 <FONT FACE="宋体" LANG="ZH-CN">需求（</FONT>Requirements <FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B><P ALIGN="JUSTIFY"></P>
+</FONT><P ALIGN="JUSTIFY">Rational <FONT FACE="宋体" LANG="ZH-CN">软件开发过程也不是需求驱动的。</FONT> <FONT FACE="宋体" LANG="ZH-CN">在产品演化的周期中，需求表现为不同的形式：</FONT> </P>
+<P ALIGN="JUSTIFY"></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">商业案例给出了主要约束，多是些可用的资源。</FONT> </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">项目蓝图从用户角度仅描述了系统的关键需求，它在开发过程中将缓慢演化。</FONT> </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">更详细的需求在第二阶段（细化阶段）得以阐明，表示为</FONT>use cases <FONT FACE="宋体" LANG="ZH-CN">和</FONT>scenarios, <FONT FACE="宋体" LANG="ZH-CN">并在第三阶段（构造阶段）随着对产品和用户需求了解的加深进一步完善。这些更详细的需求记录在评估标准的文档中，它们驱动了构造阶段和交付阶段迭代内容的定义，</FONT> <FONT FACE="宋体" LANG="ZH-CN">并为迭代计划引用。</FONT> </P>
+<P ALIGN="JUSTIFY"></P>
+<B><FONT SIZE=4><P ALIGN="JUSTIFY">6. Rational</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>过程示例</FONT><FONT SIZE=4>(Examples of Rational Processes )</P>
+</B></FONT><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">按照</FONT>2.4<FONT FACE="宋体" LANG="ZH-CN">节中所述的区别，</FONT>Rational <FONT FACE="宋体" LANG="ZH-CN">过程采用不同的形式。<IMG SRC="Image13.gif" WIDTH=481 HEIGHT=283></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY">例子：一个开发过程的‘分类’</FONT>(a 'taxonomy' of development processes )</P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+</FONT><B><P ALIGN="JUSTIFY">6.1 <FONT FACE="宋体" LANG="ZH-CN">大型合同软件开发的</FONT>Rational<FONT FACE="宋体" LANG="ZH-CN">过程（</FONT>Rational Process for Large Contractual Software Development <FONT FACE="宋体" LANG="ZH-CN">）</P>
+<I><P ALIGN="JUSTIFY"></P>
+</B></I><P ALIGN="JUSTIFY">对这个软件开发项目，</FONT>Rational <FONT FACE="宋体" LANG="ZH-CN">过程分为</FONT>3<FONT FACE="宋体" LANG="ZH-CN">个阶段</FONT>, <FONT FACE="宋体" LANG="ZH-CN">对应</FONT>3<FONT FACE="宋体" LANG="ZH-CN">个不同类型的合同。</FONT> </P>
+<P ALIGN="JUSTIFY"></P>
+<OL>
+
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一个研究</FONT>&amp;<FONT FACE="宋体" LANG="ZH-CN">设计阶段</FONT>, <FONT FACE="宋体" LANG="ZH-CN">包含了生命周期的初始和细化阶段</FONT>, <FONT FACE="宋体" LANG="ZH-CN">考虑分散风险，对应一个成本</FONT>/<FONT FACE="宋体" LANG="ZH-CN">开发费用合同（</FONT> a cost plus award fee contract ). </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一个生产阶段，包含了生命周期的构造和交付阶段</FONT>, <FONT FACE="宋体" LANG="ZH-CN">对应一个固定的价格合同（</FONT>a firm, fixed price contract ).</LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><LI>一个维护阶段，对应生命周期的演化阶段，对应一个维护合同（</FONT> a level of effort contract ).</LI></P></OL>
+
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><IMG SRC="Image14.gif" WIDTH=477 HEIGHT=313></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY">　</P>
+<P ALIGN="JUSTIFY">因为用户需要更高的可视性以评估项目，还因为项目涉及大量人和组织，开发过程应更加正规化，要比小型、内部的项目更加重视书面文档产品。第</FONT>5<FONT FACE="宋体" LANG="ZH-CN">部分介绍的</FONT>11<FONT FACE="宋体" LANG="ZH-CN">类文档都以某种形式或名称存在。</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><P ALIGN="JUSTIFY">6.2 <FONT FACE="宋体" LANG="ZH-CN">小型商业软件的</FONT>Rational<FONT FACE="宋体" LANG="ZH-CN">过程（</FONT>Rational Process for a Small Commercial Software Product <FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">在按规模分类的过程家族的另一端，是小型的商业软件。它的流动性更强一些，只有少量的正规性，</FONT> <FONT FACE="宋体" LANG="ZH-CN">表现为一些主要的里程碑和一套较少数目的文档。</P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL TYPE="SQUARE">
+<P ALIGN="JUSTIFY"><LI>一个产品蓝图</FONT>A product vision </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>一份开发计划，显示资源和进度表</LI></P>
+<P ALIGN="JUSTIFY"><LI>发布描述文档，在每次迭代的开始指明本次迭代的目标，在迭代结束时</FONT> <FONT FACE="宋体" LANG="ZH-CN">更新为发布说明（</FONT>release notes<FONT FACE="宋体" LANG="ZH-CN">）</FONT> </LI></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"><LI>必要的用户手册</LI></P>
+<P ALIGN="JUSTIFY"><LI>软件结构，软件设计，开发过程可以以代码本身或软件开发环境作为文档。</LI></P></UL>
+
+</FONT><P ALIGN="JUSTIFY"> </P>
+<P ALIGN="JUSTIFY"></P>
+<B><FONT SIZE=4><P ALIGN="JUSTIFY">7.  </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>总结（</FONT><FONT SIZE=4>Conclusion </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>）</P>
+</B></FONT><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+</FONT><P ALIGN="JUSTIFY">Rational <FONT FACE="宋体" LANG="ZH-CN">过程强调尽早处理风险问题，快速开发出一个系统的初始版本，定义出系统的结构。它并不假设你在项目的初试阶段有一个固定不变的需求，而是允许随着项目的演化不断细化需求。它认可并支持需求的变化。</FONT> <FONT FACE="宋体" LANG="ZH-CN">过程不过分倚重文档或“仪式”，</FONT> <FONT FACE="宋体" LANG="ZH-CN">它自身就解决了与软件开发相关的那些繁杂任务的自动化。重点主要放在软件产品本身，和产品的质量上，即最终用户对它的满意程度，以及它要满足的投资</FONT>/<FONT FACE="宋体" LANG="ZH-CN">回报目标上。</FONT> </P>
+<P ALIGN="JUSTIFY"></P>
+<FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">一个从本文描述的</FONT>Rational<FONT FACE="宋体" LANG="ZH-CN">过程所派生的软件开发过程完全能够符合</FONT>ISO 9000<FONT FACE="宋体" LANG="ZH-CN">标准的要求。</FONT> </P>
+<P ALIGN="JUSTIFY"></P>
+<B><FONT FACE="宋体" LANG="ZH-CN" SIZE=4><P ALIGN="JUSTIFY">参考文献（</FONT><FONT SIZE=4>References </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>）</P>
+</B></FONT><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+</FONT><P ALIGN="JUSTIFY">[1] The American Heritage Dictionary defines inception as "the beginning of something, such as an undertaking, a commencement." </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">[2] The American Heritage Dictionary defines elaboration as the process "to develop thoroughly, to express at greater length or greater detail." </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">[3] In OO terms, the process described here is the abstract superclass. Its concrete subclasses constitute an inheritance lattice organized along the discriminants. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><FONT FACE="宋体" LANG="ZH-CN" SIZE=4><P ALIGN="JUSTIFY">相关读物（</FONT><FONT SIZE=4>Further Readings </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>）</P>
+</B></FONT><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+</FONT><P ALIGN="JUSTIFY">B. W. Boehm, "A Spiral Model of Software Development and Enhancement," IEEE Comp., 21 (5), May 1988, pp. 61-72.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">G. Booch, Object Solutions: Managing the Object-Oriented Project, Addison-Wesley , Redwood City, California, 1996. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">M. T. Devlin, and W. E. Royce, Improving Software Economics in the Aerospace and Defense Industry, Technical paper TP-46, Rational Software Corp., Santa Clara, CA, 1995. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">T. Gilb, Principles of Software Engineering Management, Addison-Wesley, Wokingham, UK, 1988. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">W. Humphrey, Managing the Software Process, Addison-Wesley, Reading MA, 1989. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">P. Kruchten, "Un processus de dévelopment de logiciel itératif et centré sur l'architecture," Proceedings of the 4th International Conference on Software Engineering, Toulouse, France, December 1991, EC2. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">D. L. Parnas, &amp; P. C. Clements, "A Rational Design Process: How and Why to Fake It," IEEE Trans. on Soft. Eng., SE-12 (2), February 1986, pp. 251-257. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><FONT FACE="宋体" LANG="ZH-CN" SIZE=4><P ALIGN="JUSTIFY">词汇（</FONT><FONT SIZE=4>Glossary</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>）</FONT><FONT SIZE=4> </P>
+</B></FONT><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">产出品（</FONT>Artifact<FONT FACE="宋体" LANG="ZH-CN">）</B></FONT> Any document or software other than the software product itself.  </P>
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">基线（</FONT>Baseline</B> <FONT FACE="宋体" LANG="ZH-CN">）</FONT> A release that is subject to change management and configuration control. </P>
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">构造（</FONT>Construction<FONT FACE="宋体" LANG="ZH-CN">）</B></FONT> The 3rd phase of the process, where the software is brought from an executable architectural baseline to the point where it is ready to make the transition to its user's community. </P>
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">周期（</FONT>Cycle<FONT FACE="宋体" LANG="ZH-CN">）</B></FONT> One complete pass through the 4 phases: inception, elaboration, construction, and transition. The span of time between the beginning of the inception phase and the end of the transition phase. </P>
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">细化（</FONT>Elaboration</B> <FONT FACE="宋体" LANG="ZH-CN">）</FONT>The 2nd phase of the process where the product vision and its architecture are defined. </P>
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">演化（</FONT>Evolution<FONT FACE="宋体" LANG="ZH-CN">）</B></FONT> The life of the software after its initial development cycle; any subsequent cycle, where the product evolve. </P>
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">代（</FONT>Generation<FONT FACE="宋体" LANG="ZH-CN">）</B></FONT> The result of one software development cycle. </P>
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">高可信度</FONT>(High fidelity)</B> Sufficient accuracy (in a cost estimate, quality estimate, or schedule estimate) that a development contractor would commit to a firm, fixed price achievement. </P>
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">初试（</FONT>Inception<FONT FACE="宋体" LANG="ZH-CN">）</B></FONT> The first phase of the process, where the seed--idea, RFP, previous generation--is brought up to the point of being (at least internally) founded to enter into the elaboration phase. </P>
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">迭代（</FONT>Iteration<FONT FACE="宋体" LANG="ZH-CN">）</B></FONT> A distinct sequence of activities with a baselined plan and an evaluation criteria. </P>
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">里程碑（</FONT>Milestone<FONT FACE="宋体" LANG="ZH-CN">）</B></FONT> An event held to formally initiate and/or conclude an iteration. </P>
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">阶段（</FONT>Phase</B> <FONT FACE="宋体" LANG="ZH-CN">）</FONT>The span of time between 2 major milestones of the process where a well defined set of objectives are met, artifacts are completed, and decisions are made to move or not into the next phase. </P>
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">产品（</FONT>Product<FONT FACE="宋体" LANG="ZH-CN">）</B></FONT> The software that is the result of the development, and some of the associated artifacts (documentation, release medium, training). </P>
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">原型（</FONT>Prototype<FONT FACE="宋体" LANG="ZH-CN">）</B></FONT> A release which is not necessarily subjected to change management and configuration control. </P>
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">发布（</FONT>Release<FONT FACE="宋体" LANG="ZH-CN">）</B></FONT> A subset of the end-product which is the object of evaluation at a major milestone (see: prototype, baseline). </P>
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">风险（</FONT>Risk<FONT FACE="宋体" LANG="ZH-CN">）</B></FONT> An ongoing or upcoming concern which has a significant probability of adversely affecting the success of major milestones. </P>
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">交付（</FONT>Transition</B> <FONT FACE="宋体" LANG="ZH-CN">）</FONT>The 4th phase of the process where the software is turned into the hands of the user's community. </P>
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">蓝图</FONT>(Vision</B> )The user's view of the product to be developed. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">　</P>
+<B><FONT FACE="宋体" LANG="ZH-CN" SIZE=4><P ALIGN="JUSTIFY">简称（</FONT><FONT SIZE=4>Acronyms</B></FONT> <FONT FACE="宋体" LANG="ZH-CN">）</P>
+</FONT><B><P ALIGN="JUSTIFY">CPAF</B> Cost Plus Award Fee </P>
+<B><P ALIGN="JUSTIFY">FFP</B> Firm Fixed Price </P>
+<B><P ALIGN="JUSTIFY">LOE</B> Level Of Effort </P>
+<B><P ALIGN="JUSTIFY">OOT</B> Object-Oriented Technology </P>
+<B><P ALIGN="JUSTIFY">RFP</B> Request for Proposal </P>
+<B><P ALIGN="JUSTIFY">ROI</B> Return On Investment </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">　</P>
+<B><FONT FACE="宋体" LANG="ZH-CN" SIZE=4><P ALIGN="JUSTIFY">阶段图（</FONT><FONT SIZE=4>Phase Map </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>）</P>
+</B></FONT><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY"></P>
+</FONT><B><P ALIGN="JUSTIFY">Rational Process </B>            <B> Booch's Object Solutions </P>
+</B><P ALIGN="JUSTIFY">  Inception                       Conceptualization </P>
+<P ALIGN="JUSTIFY">  Elaboration                     Analysis/Design </P>
+<P ALIGN="JUSTIFY">  Construction                       Evolution </P>
+<P ALIGN="JUSTIFY">  Transition                    Evolution cycles Maintenance </P>
+<P ALIGN="JUSTIFY"></P>
+<B><FONT FACE="宋体" LANG="ZH-CN"><P ALIGN="JUSTIFY">作者介绍：</P>
+</B></FONT><P ALIGN="JUSTIFY">--------------------------------------------------------------------------------</P>
+<P ALIGN="JUSTIFY"> Philippe Kruchten is a senior technical consultant with Rational Software Corporation since 1987. He belongs to the corporate architecture group, and consults on software architecture with major aerospace and telecommunications around the world. He has been the lead software architect for the Canadian Automated Air Traffic Systems. </P>
+<P ALIGN="JUSTIFY">He has an engineering diploma from the Ecole Centrale de Lyon (France) and a doctorate degree in computer science from the French Institute of Telecommunications. He currently lives in Vancouver (Canada) with his wife Sylvie and his four children. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">His office address is:</P>
+<P ALIGN="JUSTIFY">Rational Vancouver</P>
+<P ALIGN="JUSTIFY">240-10711 Cambie Rd.</P>
+<P ALIGN="JUSTIFY">Richmond, B.C. V6X 3G5</P>
+<P ALIGN="JUSTIFY">Canada</P>
+</td></tr></table></center></BODY>
+
+</HTML>

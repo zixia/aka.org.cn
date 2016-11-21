@@ -1,0 +1,82 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>如何处理用户登录及权限设置</title>
+<meta name="Microsoft Theme" content="blank 001, default">
+<meta name="Microsoft Border" content="tl, default">
+</head>
+
+<body background="_themes/blank/blbkgnd.gif" bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/new_page_24.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="用户登录及权限设置"></strong></font><br>
+<a href="index.htm"><img src="_derived/home_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="主页" align="middle"></a> <a href="new_page_16.htm"><img src="_derived/up_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="上一层" align="middle"></a> <a href="new_page_17.htm"><img src="_derived/new_page_17.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="获得本机IP" align="middle"></a> <a href="new_page_18.htm"><img src="_derived/new_page_18.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="对方连接本机的哪个IP？" align="middle"></a> <a href="new_page_19.htm"><img src="_derived/new_page_19.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="如何使用DNS" align="middle"></a> <a href="new_page_20.htm"><img src="_derived/new_page_20.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="文件流方式" align="middle"></a> <a href="new_page_21.htm"><img src="_derived/new_page_21.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="读取一行语句" align="middle"></a> <a href="new_page_30.htm"><img src="_derived/new_page_30.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="不定长参数" align="middle"></a> <a href="new_page_22.htm"><img src="_derived/new_page_22.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="以Daemon方式运行" align="middle"></a> <a href="new_page_23.htm"><img src="_derived/new_page_23.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="端口重用" align="middle"></a> <img src="_derived/new_page_24.htm_cmp_blank000_hbtn_p.gif" width="140" height="32" border="0" alt="用户登录及权限设置" align="middle"></p>
+<p align="center">　</p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<p><font size="6">如何处理用户登录及权限设置？</font></p>
+<p><font size="5">struct passwd *pw; // used for /etc/passwd</font></p>
+<p><font size="5">struct spwd *spw; // used for /etc/shadow</font></p>
+<p><font size="5">char *username = &quot;Pacific&quot;; //用户名</font></p>
+<p><font size="5">char *input_passwd = &quot;123456&quot;; // 输入的密码</font></p>
+<p><font size="5">char *passwd;</font></p>
+<p><font size="5">char tmp[13];</font></p>
+<p><font size="5">&nbsp;</font></p>
+<p><font size="5">if (getuid() != 0) { /* 只有root有权作此操作 */</font></p>
+<blockquote>
+  <p><font size="5">printf(&quot;Login incorrect.\n&quot;);</font></p>
+  <p><font size="5">return;</font></p>
+</blockquote>
+<p><font size="5">};</font></p>
+<p><font size="5">/* 取得/etc/passwd中间对应于本用户的数据结构 */</font></p>
+<p><font size="5">if ((pw = getpwnam(username)) == NULL) {</font></p>
+<blockquote>
+  <p><font size="5">printf(&quot;Login incorrect.\n&quot;);</font></p>
+  <p><font size="5">return;</font></p>
+</blockquote>
+<p><font size="5">};</font></p>
+<p><font size="5">/* 取得/etc/shadow中被隐藏的密码 */</font></p>
+<p><font size="5">spw = getspnam(username);</font></p>
+<p><font size="5">if (spw == NULL || (passwd = spw-&gt;sp_pwdp) == NULL) {</font></p>
+<blockquote>
+  <p><font size="5">printf(&quot;Login incorrect.\n&quot;);</font></p>
+  <p><font size="5">return;</font></p>
+</blockquote>
+<p><font size="5">};</font></p>
+<p><font size="5">&nbsp;</font></p>
+<p><font size="5">/* 取得passwd的前12个字节作为种子 */</font></p>
+<p><font size="5">strncpy(tmp, passwd, 12);</font></p>
+<p><font size="5">/* 判断输入的密码加密后是否与原密码相同 */</font></p>
+<p><font size="5">if (strcmp(passwd, crypt(input_passwd, tmp)) != 0) {</font></p>
+<blockquote>
+  <p><font size="5">/* 密码错误 */</font></p>
+  <p><font size="5">printf(&quot;Login incorrect.\n&quot;);</font></p>
+  <p><font size="5">return;</font></p>
+</blockquote>
+<p><font size="5">};</font></p>
+<p><font size="5">/* 密码正确，改变程序权限 */</font></p>
+<p><font size="5">setuid(pw-&gt;pw_uid);</font></p>
+<p><font size="5">&nbsp;</font></p>
+<p><font size="5">/* 获得并进入用户根目录 */</font></p>
+<p><font size="5">if (pw-&gt;pw_dir) strncpy(path, pw-&gt;pw_dir, PATH_MAX);</font></p>
+<blockquote>
+  <p><font size="5">else strcpy(path, &quot;/&quot;);</font></p>
+</blockquote>
+<p><font size="5">chdir(path);</font></p>
+<p><font size="5">&nbsp;</font></p>
+<blockquote>
+  <font size="+1">
+  <p>　</p>
+  </blockquote>
+</font>　
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+</html>

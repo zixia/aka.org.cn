@@ -1,0 +1,458 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Whitepapers -  The Rational Approach </title>     
+<meta keyword="ClearCase Attache,ClearCase MultiSite,ClearCase">
+</head>
+<body basefont="Verdana, Arial, Helvetica" marginheight="0" text="#000000" bgcolor="#ffffff" topmargin="0" marginwidth="0" link="#000099" leftmargin="0" vlink="#6666cc">
+<!-- <body basefont="Verdana, Arial, Helvetica" marginheight="0" text="#000000" bgcolor="#ffffff" topmargin="0" marginwidth="0" link="#000099" size="2" leftmargin="0" vlink="#6666cc"> -->
+<center><table width=630 border=0><tr><td>
+<br><p>
+
+<font size="-1"> 
+
+<p><font size="3"><strong>The Rational Approach</strong></font></p>
+
+<hr noshade="">
+
+<p><p><font size="3"><strong>Table of Contents</strong></font></p></p>
+
+<ol>
+<li><a href="#Introduction">Introduction</a>
+<li><a href="#Ratapproach">The Rational Approach</a>
+<li><a href="#ManandPlan">Management and Planning</a>
+        <ul>
+        <li>Task Planning
+        <li>Walkthroughs
+        </ul>
+<li><a href="#Staffing">Staffing</a>
+        <ul>
+        <li>Allocation of Resources
+        <li>Roles in the Development Team
+        </ul>
+<li><a href="#RelManage">Release Management</a>
+        <ul>
+        <li>Integration
+        <li>Configuration Management and Version Control
+        <li>Testing
+        </ul>
+<li><a href="#QAandM">Quality Assurance and Metrics</a>
+        <ul>
+        <li>Software Quality
+        <li>Object-Oriented Metrics
+        </ul>
+<li><a href="#Document">Documentation</a>
+        <ul>
+        <li>Legacy of Development
+        <li>Contents of Documentation
+        </ul>
+<li><a href="#Tools">Tools</a>
+        <ul>
+        <li>Tools for Application Development
+        <li>Organizational Implications
+        </ul>
+<li><a href="#SpecTopics">Special Topics</a>
+        <ul>
+        <li>Domain-Specific Issues
+        <li>Technology Transfer
+        </ul>
+<li><a href="#Benefits">Benefits of Object-Oriented Development</a>
+<li><a href="#Risks">Risks of Object-Oriented Development</a>
+<li><a href="#Starting">Getting Started</a>
+</ol>
+
+<p><br>
+
+<p><font size="3"><strong><a name="Introduction">Introduction</a></strong></font></p>
+
+<p>Organizations today depend on software to gain an advantage in a highly competitive marketplace. Software development, however, remains a very labor-intensive business; to a large extent, it is still best characterized as a cottage industry. It relies mainly on the informal paper-and-pencil approach during the development phases. Moreover, designing is not an exact science--different designers can produce different models of the same problem.</p>
+
+<p>We can reasonably conclude that no matter how sophisticated the development method and no matter how well-founded its theoretical basis, we cannot ignore the practical aspects of designing systems for the real world. Consequently, we must consider sound management practices with regard to staffing, release management, and quality assurance. To the technologist, these issues are intensely dull; to the professional software engineer, they are realities that must be faced to build complex software systems successfully.</p>
+
+<p>The mission of Rational Software Corporation is to ensure the success of customers who depend on the development and evolution of software-intensive products and systems. Rational has helped numerous organizations reengineer their software process, thereby improving their software quality, increasing their profitability, and putting them ahead of their competition. This white paper describes how you can apply the same techniques and proven technologies to your development organization, and it examines the impact of the object model on management practices. Rational can show you how you can apply object-oriented technology to give you a measurable business advantage and to help you maintain your competitive edge.</p>
+
+<p><font size="3"><strong><a name="Ratapproach">The Rational Approach</a></strong></font></p>
+
+<p>The Rational approach to software-process reengineering has three components:</p>
+<ul type="square">
+<li>A modern, risk-reducing software process</li>
+<li>A suite of training, consulting, and support services to help you apply the new process successfully</li>
+<li>A family of tools that automate your software process, thus reducing errors and improving productivity</li>
+</ul>
+
+<p>Establishing a modern software-development process is at the heart of any software-reengineering effort. Rational's software process is based on:</p>
+<ul type="square">
+<li>Iterative development to reduce risk by exposing it early</li>
+<li>The importance of software architecture</li>
+<li>Large-scale--even enterprisewide--software reuse</li>
+<li>The use of object-oriented methods in day-to-day analysis, design, implementation, and maintenance</li>
+</ul>
+
+<p>The impact of iterative development on the software-development process is particularly intriguing. Software-development organizations today face a major technology shift from waterfall-style development and structured methods to iterative development and object-oriented methods. In waterfall-style development, the analysis, design, coding, unit-testing, software-integration, and delivery phases occur sequentially; software is delivered at the very end of the process. Iterative development is much more economical and predictable than waterfall-style development. Why?</p>
+
+<p>In iterative development, you specify the objectives for a software system and then build and deliver a series of partial, but increasingly complete, implementations. These implementations, or iterations, are working deliverables produced en route to the completion of your project. Using iterative development, you integrate your software early and often, at each iteration instead of at the end of the project. Frequent integration dramatically reduces risk by exposing it early in the project lifecycle.</p>
+
+<p>Each iteration allows you to get meaningful feedback from users and customers, who can witness the execution of a given iteration. Users and customers can actively participate in the refinement of the software from the beginning in the acceptance process. Each iteration exposes problems and risks in system functionality, performance, user interface, and so on. The remaining elements of highest risk become the focus of the next iteration; you can add or reallocate resources based on real user feedback at each stage.</p>
+
+<p>You can use early feedback from your users or customers to increase the quality of your software and its fitness for use. Responding early to user feedback is practical and cost effective. Because you have a working system over much of the project lifecycle, you have the option of shipping a high-quality system to your customers even before full functionality is completed. In every way, iterative development brings you enormous advantages over traditional techniques.</p>
+
+<p>Effective iterative development requires a well-designed software architecture, the basic structure and foundation of your software, so that you can add new features to your software without disturbing the existing capabilities. A well-designed architecture is adaptable to software changes mandated by customer feedback or changing business conditions. It also allows you to identify and to package reusable software components, with all of the economic and quality gains that result from large-scale reuse.</p>
+
+<p><font size="3"><strong><a name="ManandPlan">Management and Planning</a></strong></font></p>
+
+<p>With an iterative and incremental lifecycle, strong project 
+leadership that actively manages and directs a project's activities 
+is essential. Too many projects go astray because of a lack of focus 
+and leadership.</p>
+
+<p>The software-development manager must manage technical as well as nontechnical risks. Technical risks in object-oriented systems include problems such as the selection of an inheritance lattice that offers the best compromise between usability and flexibility or the choice of mechanisms that yield acceptable performance while simplifying the system's architecture. Nontechnical risks encompass issues such as supervising the timely delivery of software from a third-party vendor or managing the relationship between the customer and the development team to discover the system's real requirements during analysis.</p>
+
+<p>The Rational approach addresses the development process at two different levels: a macrodevelopment process addresses organizational and managerial issues, and a microdevelopment process covers the everyday activities of the software engineer.</p>
+
+<p>The macrodevelopment process reveals opportunities to identify problems early in the lifecycle and to respond meaningfully to the risks before they jeopardize the success of the project.</p>
+
+<p>The microdevelopment process of object-oriented development is inherently unstable and requires active management to force closure. Fortunately, the process is designed to lead to closure by providing a number of tangible products that management can study to ascertain the health of the project, as well as controls that allow management to redirect resources as necessary.</p>
+
+<p>Many of the basic practices of software-development management, such as task planning and walkthroughs, are unaffected by object-oriented technology. The difference in managing an object-oriented project, however, is that the tasks that are scheduled and the products that are reviewed are subtly different from those for waterfall-style systems.</p>
+
+<p><strong>Task Planning</strong></p>
+
+<p>In any project, it is reasonable to have weekly team meetings to discuss work completed and activities for the coming week. Some minimal frequency of meetings is necessary to foster communication among team members; too many meetings destroy productivity and can be a sign that the project has lost its way. Object-oriented software development requires that individual developers have unstructured blocks of time in which they can think, innovate, develop, and meet informally with other team members to discuss detailed technical issues. The management team must plan for this unstructured time.</p>
+
+<p>Meetings provide a simple yet effective vehicle for fine-tuning schedules in the microdevelopment process and for gaining insight into potential risks. These meetings can result in small adjustments to work assignments to ensure steady progress; no project can afford for any of its developers to wait while other team members stabilize their parts of the architecture. This is particularly true for object-oriented systems, in which class and mechanism design pervades the architecture. Development can reach a standstill if certain key classes are in flux.</p>
+
+<p>On a broader scale, task planning involves scheduling the deliverables of the macrodevelopment process. Between evolutionary releases, the management team must assess the imminent risks to the project, focus development resources as necessary to attack those risks, and then manage the next iteration of the microdevelopment process that will yield a stable system satisfying the required scenarios scheduled for that release. Task planning at this level most often fails because of overly optimistic schedules. Development that was viewed as a simple matter of programming expands to days of work; schedules are thrown out when developers working on one part of the system expect certain protocols from other parts of the system, which are then delivered incomplete or incorrect. Furthermore, schedules can be mortally wounded by the appearance of performance problems or compiler bugs, both of which must be worked around, often by corrupting certain tactical design decisions.</p>
+
+<p>The key to avoiding overly optimistic planning is the calibration of the development team and its tools. Typically, task planning goes as follows. First, the management team directs the energies of a developer to a specific part of the system, the design of a set of classes for interfacing to a relational database, for example. The developer then considers the scope of the effort and returns with an estimate of time to complete it. Management then relies on this estimate to schedule other developers' activities. These estimates are not always reliable, however, because they usually represent best-case conditions. One developer might quote a week of effort for a particular task, whereas another developer might quote one month for the same task. When the work is carried out, it might take both developers three weeks.</p>
+
+<p>Therefore, to develop schedules in which the team can have confidence, the management team must devise multiplicative factors for each developer's estimates. This is not an indication of management mistrusting developers, but an acknowledgment of the reality that most developers are focused on technical issues, not planning issues. Management must help developers learn effective planning, a skill that is acquired only through experience.</p>
+
+<p>The process of object-oriented development explicitly helps to develop these calibration factors. Its iterative and incremental lifecycle requires that many intermediate milestones be established early in the project--milestones that management can use to gather data on each developer's track record for setting and meeting schedules. As evolutionary development proceeds, management will gain a better understanding of the real productivity of each of its developers over time, and individual developers can gain experience in estimating their own work more accurately.</p>
+
+<p>The same lesson applies to tools. With emphasis on early delivery of architectural releases, object-oriented development encourages the use of tools early and leads to the identification of their limitations before it is too late to change.</p>
+
+<p><strong>Walkthroughs</strong></p>
+
+<p>Walkthroughs are another well-established practice that every development team should employ. As with task planning, the software-review process is largely unaffected by object-oriented technology. What is reviewed relative to non-object-oriented systems, however, is different.</p>
+
+<p>Management must take steps to strike a balance between too many and too few walkthroughs. In all but the most human-critical systems, it is simply not economical to review every line of code. Therefore, management must direct the scarce resources of its team to review those aspects of the system that represent strategic development issues. For object-oriented systems, this approach suggests conducting formal reviews on scenarios as well as on the system's architecture, with many informal reviews focused on smaller tactical issues.</p>
+
+<p>Scenarios are a primary product of the analysis phase of object-oriented development and serve to capture the desired behavior of the system in terms of its function points. Formal reviews of scenarios are led by the team's analysts together with domain experts or other end users and are witnessed by other developers. These reviews are best conducted throughout the analysis phase, rather than in one massive review at the end of analysis, when it is already too late to do anything useful to redirect the analysis effort. Experience shows that even nonprogrammers can understand scenarios presented through scripts or through the formalisms of object diagrams. Ultimately, the reviews help to establish a common vocabulary among a system's developers and its users. Letting other members of the development team witness these reviews exposes them to the real requirements of the system early in the development process.</p>
+
+<p>Architectural reviews should focus on the overall structure of the system, including its class structure and mechanisms. As with scenario reviews, architectural reviews should be conducted throughout the project and led by the project's architect or other designers. Early reviews focus on sweeping architectural issues, whereas later reviews can focus on a particular class category or specific pervasive mechanisms. The main purpose of these reviews is to validate designs early in the lifecycle. In addition, they help to communicate the vision of the architecture. A secondary purpose of these reviews is to increase the visibility of the architecture in order to create opportunities for discovering patterns of classes or collaborations of objects, which then can be exploited over time to simplify the architecture.</p>
+
+<p>Informal reviews should be carried out weekly and generally involve the peer review of particular clusters of classes or lower-level mechanisms. The primary purpose of these reviews is to validate these tactical decisions; the secondary purpose is to provide a vehicle for more senior developers to instruct the junior members of the team.</p>
+
+<p><font size="3"><strong><a name="Staffing">Staffing</a></strong></font></p>
+
+<p><strong>Allocation of Resources</strong></p>
+
+<p>One of the more delightful aspects of managing object-oriented projects is that, in the steady state, a reduction in the amount of resources and a shift in the timing of their deployment is needed relative to more traditional methods. The operative phrase here is "in the steady state." Generally, the first object-oriented project undertaken by an organization requires slightly more resources than for non-object-oriented methods, primarily because of the learning curve inherent in adopting any new technology. The essential resource benefits of the object model do not appear until the second or third project, when the development team is more adept at class design and the harvesting of common abstractions and mechanisms and when the management team is more comfortable with driving the iterative and incremental development process.<p>
+
+<p>For analysis, resource requirements typically do not change much when object-oriented methods are used. Because the object-oriented process places an emphasis on architectural design, however, we tend to accelerate the deployment of architects and other designers much earlier in the development process, sometimes even engaging them during later phases of analysis to begin architectural exploration. During evolution, fewer resources typically are required, mainly because the ongoing work tends to leverage common abstractions and mechanisms invented earlier during architectural design or previous evolutionary releases. Testing can also require fewer resources, because adding new functionality to a class or mechanism is achieved mainly by modifying a structure that is known to behave correctly in the first place. Therefore, testing tends to begin earlier in the lifecycle and manifests itself as a cumulative rather than a monolithic activity. Integration usually requires vastly fewer resources compared to traditional methods, mainly because integration happens incrementally throughout the development lifecycle, rather than in one big-bang event. Thus, in the steady state, the net of all the human resources required for object-oriented development is typically less than that required for traditional approaches. Furthermore, when we consider the cost of ownership of object-oriented software, the total lifecycle costs are often less, because the resulting product tends to be of far better quality and much more resilient to change.</p>
+
+<p><strong>Roles in the Development Team</strong></p>
+
+<p>It is important to remember that software development is ultimately a human endeavor. Developers are not interchangeable parts, and the successful deployment of any complex system requires the unique and varied skills of a focused team of people. Experience suggests that the object-oriented development process requires a subtly different partitioning of skills compared to traditional methods. The following three roles are central to an object-oriented project:</p>
+
+<ul type="square">
+<li>Project architect</li>
+<li>Subsystem lead</li>
+<li>Application engineer</li>
+</ul>
+
+<p>The project architect is the visionary, responsible for evolving and maintaining the system's architecture. For small- to medium-sized systems, architectural design is typically the responsibility of one or two particularly insightful individuals. For larger projects, this responsibility can be shared by a larger team. The project architect is not necessarily the most senior developer, but rather the one best qualified to make strategic decisions, usually as a result of his or her extensive experience in building similar kinds of systems. Because of this experience, such developers know intuitively the common architectural patterns that are relevant to a given domain and the performance issues that apply to particular architectural variants. Architects are not necessarily the best programmers either, although they should have adequate programming skills. Just as a building architect should be skilled in aspects of construction, a software architect must be a reasonably competent programmer. Project architects should also be well-versed in the notation and process of object-oriented development, because they must ultimately express their architectural vision in terms of clusters of classes and collaborations of objects.</p>
+
+<p>It is generally bad practice to hire an outside architect who proclaims some architectural vision and then disappears, leaving others to suffer the consequences of his decisions. It is far better to engage an architect actively during the analysis process and then retain that architect throughout most, if not all, of the system's evolution. In this way, the architect becomes more familiar with the needs of the system and over time, can take responsibility for his or her architectural decisions. In addition, by keeping responsibility for architectural integrity in the hands of one person or a small team of developers, the chances of developing a smaller and more resilient architecture are increased.</p>
+
+<p>The lead engineers for a set of subsystems are the chief abstractionists of the project. A subsystem lead is responsible for the design of an entire class category or subsystem. In conjunction with the project architect, each lead must devise, defend, and negotiate the interface of a specific class category or subsystem and then direct its implementation. A subsystem lead is, therefore, the ultimate owner of a cluster of classes and its associated mechanisms and is also responsible for its testing and release during the evolution of the system.</p>
+
+<p>Subsystem leads must be well-versed in the notation and process of object-oriented development. They are usually faster, better programmers than the project architect, but lack the architect's broad experience. Usually, subsystem leads constitute about a third to a half of the development team.</p>
+
+<p>Application engineers are the less-senior developers on a project and carry out one of two responsibilities. Some application engineers are responsible for the implementation of a category or a subsystem under the supervision of its subsystem lead. This activity can involve some class design, but generally it involves implementing and then unit testing the classes and mechanisms created by other designers on the team. Other application engineers are responsible for taking the classes designed by the architect and the subsystem leads and assembling them to carry out the function points of the system. These engineers are responsible, in effect, for writing small programs in the domain-specific language defined by the classes and mechanisms of the architecture.</p>
+
+<p>Application engineers are familiar with, but not necessarily experts in, the notation and process of object-oriented development; application engineers are, however, very good programmers who understand the idioms and idiosyncrasies of programming languages. On the average, half or more of the development team consists of application engineers.</p>
+
+<p>This breakdown of skills addresses the staffing problem faced by most software-development organizations, which usually have only a handful of really good designers and many more less-experienced ones. The social benefit of this approach to staffing is that it offers a career path to the more junior people on the team. Specifically, junior developers work under the guidance of senior developers in a mentor/apprentice relationship. As junior developers gain experience using well-designed classes, they learn to design their own quality classes. Consequently, not every developer needs to be an expert abstractionist but can develop those skills over time.</p>
+
+<p>In larger projects, a number of other distinct development roles, as described in the following list, may be required to carry out the work of the project. Most of these roles, such as the toolsmith, do not depend on the use of object-oriented technology, although some of them are especially relevant to the object model, such as the reuse engineer.</p>
+
+<ul type="square">
+<li><strong>Project manager.</strong> Responsible for the active management of the project's deliverables, tasks, resources, and schedules</li>
+<li><strong>Analyst.</strong> Responsible for evolving and interpreting the end users' requirements; must be an expert in the problem domain but must not be isolated from the rest of the development team</li>
+<li><strong>Reuse engineer.</strong> Responsible for managing the project's repository of components and designs; through participation in reviews and other activities, actively seeks opportunities for commonality and causes them to be exploited; acquires, produces, and adapts components for general use in the project or in the entire organization</li>
+<li><strong>Quality-assurance engineer.</strong> Responsible for measuring the products of the development process; generally directs system-level testing of all prototypes and production releases</li>
+<li><strong>Integration manager.</strong> Responsible for assembling compatible versions of released categories and subsystems to form a deliverable release; responsible for maintaining the configurations of released products</li>
+<li><strong>Technical writer.</strong> Responsible for producing end-user documentation of the product and its architecture</li>
+<li><strong>Toolsmith.</strong> Responsible for creating and adapting software tools that facilitate the production of the project's deliverables, especially the generated code</li>
+<li><strong>System administrator.</strong> Responsible for managing the physical computing resources used by the project</li>
+</ul>
+
+<p>Of course, not every project requires all of these roles. For small projects, many of these responsibilities can be shared by the same person; for larger projects, each role can represent an entire organization.</p>
+
+<p>Experience indicates that with object-oriented development, teams are smaller when compared with traditional methods of development. Indeed, a team of roughly 30-40 developers, for example, can produce several hundred thousand lines of production-quality code in a single year. We agree with Boehm, however, who observes that the best results occur with fewer and better people. Unfortunately, trying to staff a project with fewer people than traditional experience suggests can encounter resistance. Such an approach infringes on the attempts of some managers to build empires, because more people represent more power. Furthermore, if a project fails, there are more subordinates upon whom to heap the blame. Just because a project applies the most sophisticated design method or the latest tool does not mean that a manager should let a project run on autopilot or abdicate responsibility for hiring designers who can think.</p>
+
+<p><font size="3"><strong><a name="RelManage">Release Management</a></strong></font></p>
+
+<p><strong>Integration</strong></p>
+
+<p>Industrial-strength projects require the development of families of programs. At any given time in the development process, there will be multiple prototypes and production releases as well as development and test scaffolding. Most often, each developer will have his or her own executable view of the system under development.</p>
+
+<p>The nature of the interactive and incremental process of object-oriented development means that rarely, if ever, should a single "big bang" integration event occur. Instead, there will be many smaller integration events, each marking the creation of another prototype or architectural release. Each release is usually incremental, having evolved from an earlier stable release. In incremental development, software is built deliberately to satisfy fewer requirements initially but is constructed so as to facilitate the incorporation of new requirements, thus achieving higher adaptability. From the perspective of the ultimate user of the system, the macrodevelopment process generates a stream of executable releases, each with increasing functionality, and eventually evolves into the final production system. From the perspective of those inside the organization, many more releases are constructed, and only some are frozen and baselined to stabilize important system interfaces. This strategy tends to reduce development risk, because it accelerates the discovery of architectural and performance problems early in the development process.</p>
+
+<p>For larger projects, an organization may produce an internal release of the system every few weeks and release a running version to its customers for review every few months, according to the needs of the project. In the steady state, a release consists of a set of compatible subsystems along with their associated documentation. Building a release is possible whenever the major subsystems of a project are stable enough and work together well enough to provide a new level of functionality.</p>
+
+<p><strong>Configuration Management and Version Control</strong></p>
+
+<p>Consider the stream of releases from the perspective of an individual developer, who is responsible, perhaps, for implementing a particular subsystem. He or she must have a working version of that subsystem--a version under development. To proceed with further development, at least the interfaces of all imported subsystems must be available. As this working version becomes stable, it is released to an integration team, responsible for collecting a set of compatible subsystems for the entire system. Eventually, this collection of subsystems is frozen, baselined, and made part of an internal release. This internal release becomes the current operational release visible to all active developers who need to further refine their particular parts of its implementation. In the meantime, the individual developer can work on a newer version of his or her subsystem. In this way, development can proceed in parallel, with stability possible because of well-defined and well-guarded subsystem interfaces.</p>
+
+<p>Implicit in this model is the idea that a cluster of classes, not the individual class, is the unit of version control. Experience suggests that managing versions of classes is at a level of too fine granularity, because no class tends to stand alone. Rather, it is better to have related groups of classes as the limits of version control. Practically speaking, this means that subsystems are the units of version control, because groups of classes--forming class categories in the logical view of the system--map to subsystems in the physical view of the system.</p>
+
+<p>At any point in the evolution of a system, multiple versions of a particular subsystem can exist; for example: a version for the current release under development, one for the current internal release, and one for the latest customer release. This situation intensifies the need for powerful tools for configuration management and version control.</p>
+
+<p>The concepts of configuration management apply not only to source code, but also to all the other products of object-oriented development, such as requirements, class diagrams, object diagrams, module diagrams, process diagrams, documentation files, test scripts and test cases, and so on.</p>
+
+<p><strong>Testing</strong></p>
+
+<p>The principle of continuous integration applies also to testing, which should be a continuous activity during the development process. In the context of object-oriented architectures, testing must encompass at least three dimensions:</p>
+
+<ul type="square">
+<li><strong>Unit testing.</strong> Involves testing individual classes and mechanisms and is the responsibility of the application engineer who implemented the structure.</li>
+<li><strong>Subsystem testing.</strong> Involves testing a complete category or subsystem and is the responsibility of the subsystem lead; subsystem tests can be used as regression tests for each newly released version of the subsystem.</li>
+<li><strong>System testing.</strong> Involves testing the system as a whole and is the responsibility of the quality-assurance team; system tests are also typically used as regression tests by the integration team when it is assembling new releases.</li>
+</ul>
+
+<p>Testing should primarily focus on the system's external behavior and secondarily push the limits of the system to determine how it fails under particular conditions.</p>
+
+<p><font size="3"><strong><a name="QAandM">Quality Assurance and Metrics</a></strong></font></p>
+
+<p><strong>Software Quality</strong></p>
+
+<p>Software quality can be defined as the fitness for use of the total software product. Software quality doesn't just happen; it must be engineered into the system. Indeed, the use of object-oriented technology does not automatically lead to quality software; it is possible to write very bad software using object-oriented programming languages.</p>
+
+<p>For this reason, great emphasis is placed on software architecture in the process of object-oriented development. A simple, adaptable architecture is central to any quality software; its quality is made complete by carrying out simple and consistent tactical design decisions.</p>
+
+<p>Software quality assurance involves systematic activities providing evidence of the fitness for use of the total software product. Quality assurance seeks to give quantifiable measures of "goodness" for the quality of a software system. Many traditional measures are directly applicable to object-oriented systems.</p>
+
+<p>As described earlier, walkthroughs and other kinds of inspections are important even in object-oriented systems and provide insights into software quality. Perhaps the most important quantifiable measure of goodness is the defect-discovery rate. During the evolution of the system, software defects are tracked according to their severity and location. The defect-discovery rate is a measure of how quickly errors are being discovered, plotted against time. As experts observe, the number of errors is less important than the slope of the plotted line. A project that is under control will have a bell-shaped curve, with the defect-discovery rate peaking at about the midpoint of the test period and then falling off toward zero. A project that is out of control will have a curve that falls off very slowly or not at all.</p>
+
+<p>The macrodevelopment process of object-oriented development works so well in part because it permits the early and continuous collection of data about the defect-discovery rate. For each incremental release, you can perform a system test and plot the defect-discovery rate against time. Even though early releases have less functionality, you still expect to see a bell-shaped curve for every release in a healthy project.</p>
+
+<p><dfn>Defect density</dfn> is another relevant measure of quality. Measuring defects per thousand source lines of code (KSLOC) is the traditional approach, and it is still generally applicable to object-oriented systems. In healthy projects, defect density tends to reach a stable value after approximately 10,000 lines of code have been inspected and will remain almost unchanged no matter how large the volume of code becomes.</p>
+
+<p>In object-oriented systems, it is also useful to measure defect density in terms of the numbers of defects per class category or per class. With this measure, the 80/20 rule seems to apply: 80% of the software defects will be found in 20% of the system's classes.</p>
+
+<p>In addition to the more formal approaches to gathering defect information through system testing, instituting projectwide or companywide bug hunts during which anyone can exercise a release over a specified period of time is also useful. Prizes can be awarded to the person who finds the most defects and to the person who finds the most obscure defect.</p>
+
+<p><strong>Object-Oriented Metrics</strong></p>
+
+<p>Perhaps the most dreadful way for a manager to measure progress is to measure the lines of code produced. The number of line feeds in a fragment of source code has absolutely no correlation to its completeness or complexity. Contributing to the shortcomings of this outdated approach is the ease of playing games with the numbers, resulting in productivity figures that can differ from one another by as much as two orders of magnitude. For example, what exactly is a line of code? Do you count physical lines or semicolons? What about counting multiple statements that appear on one line or statements that cross line boundaries? Similarly, how do you measure the labor involved? Are all personnel counted or just the programmers? Is the workday measured as an eight-hour day or is the time a programmer spends working after hours also counted?</p>
+
+<p>Traditional complexity measures, better suited to early-generation programming languages, have minimal correlation with completeness and complexity in object-oriented systems and are there-fore largely useless when applied to the system as a whole. For example, the McCabe Cyclomatic metric, when applied to an object-oriented system as a whole, does not give a very meaningful measure of complexity, because it is blind to the system's class structure and mechanisms. We have, however, found it useful to generate a cyclomatic metric per class. This measure gives some indication of the relative complexity of individual classes and then can be used to direct inspections to the most complex classes, which are most likely to contain the greatest number of defects.</p>
+
+<p>Progress can be measured by counting the classes in the logical design, or the modules in the physical design, that are completed and working. It can also be measured by the stability of key interfaces--that is, how often they change. At first, the interfaces of all key abstractions change daily, if not hourly. Over time, the most important interfaces stabilize first, the next most important interfaces stabilize second, and so on. Towards the end of the development lifecycle, only a few insignificant interfaces need to be changed, because most of the emphasis is on getting the already-designed classes and modules to work together. Occasionally, a few changes are needed in a critical interface, but such changes are usually upwardly compatible. Even so, they are made only after careful thought about their impact. These changes then can be incrementally introduced into the production system as part of the usual release cycle.</p>
+
+<p>Chidamber and Kemerer suggest several metrics that are directly applicable to object-oriented systems:</p>
+
+<ul type="square">
+<li>Weighted methods per class
+<li>Depth of inheritance tree
+<li>Number of children
+<li>Coupling between objects
+<li>Response for a class
+<li>Cohesion in methods
+</ul>
+
+<p>The metric <dfn>weighted methods per class</dfn> gives a relative measure of the complexity of an individual class; if all methods are considered equally complex, this becomes a measure of the number of methods per class. In general, a class with significantly more methods than its peers is more complex, tends to be more application specific, and often hosts a greater number of defects.</p>
+
+<p>The metrics <dfn>depth of inheritance tree and number of children</dfn> are measures of the shape and size of the class structure. Well-structured object-oriented systems tend to be built as forests of classes, rather than as one very large inheritance lattice. As a rule of thumb, we tend to build lattices that are balanced and that are generally no deeper than seven classes and no wider than seven classes.</p>
+
+<p><dfn>Coupling between objects</dfn> is a measure of objects' connectedness to other objects and thus is a measure of class encumbrance. As with traditional measures of coupling, we seek to design loosely coupled objects, which have a greater potential for reuse.</p>
+
+<p><dfn>Response for a class</dfn> is a measure of the methods that its instances can call; <dfn>cohesion in methods</dfn> is a measure of the unity of the class abstraction. In general, a class that can invoke significantly more methods than its peers is more complex. A class with low cohesion among its methods suggests an accidental or inappropriate abstraction. Such a class should usually be reabstracted into more than one class or its responsibilities delegated to other existing classes.</p>
+
+<p><font size="3"><strong><a name="Document">Documentation</a></strong></font></p>
+
+<p><strong>Legacy of Development</strong></p>
+
+<p>The development of a software system involves much more than writing raw source code. Certain products of development offer ways to give the management team and users insight into the progress of the project. A legacy of analysis and design decisions is left behind for the eventual maintainers of the system. The products of object-oriented development include sets of class diagrams, object diagrams, module diagrams, and process diagrams. Collectively, these diagrams offer traceability back to the system's requirements. Process diagrams denote programs, which are the root modules found in module diagrams. Each module represents the implementation of some combination of classes and objects, which are in turn found in class diagrams and object diagrams, respectively. Finally, object diagrams denote scenarios specified by the requirements, and class diagrams represent key abstractions that form the vocabulary of the problem domain.</p>
+
+<p><strong>Contents of Documentation</strong></p>
+
+<p>The documentation of a system's architecture and implementation is important, but the production of documents should never drive the development process: documentation is an essential, albeit secondary, product of the development process. It is also important to remember that documents are living artifacts that should be allowed to evolve together with the iterative and incremental evolution of the project's releases. Together with the generated code, delivered documents serve as the basis of most formal and informal reviews.</p>
+
+<p>What must be documented? Obviously, end-user documentation must be produced that instructs the user on the operation and installation of each release. In addition, analysis documentation must be produced to capture the semantics of the system's function points as viewed through scenarios. Moreover, architectural and implementation documentation must be generated to communicate the vision and details of the architecture to the development team and to preserve information about all relevant strategic decisions so that the system can be adapted and evolved readily over time.</p>
+
+<p>In general, the essential documentation of a system's architecture and implementation should include the following:</p>
+
+<ul type="square">
+<li>Documentation of the high-level system architecture</li>
+<li>Documentation of the key abstractions and mechanisms in the architecture</li>
+<li>Documentation of scenarios that illustrate the as-built behavior of key aspects of the system</li>
+</ul>
+
+<p>The worst possible documentation to create for an object-oriented system is a stand-alone description of the semantics of each method on a class-by-class basis. This approach generates a great deal of useless documentation that no one reads or trusts and fails to document the more important architectural issues that transcend individual classes--namely, the collaborations between classes and objects. It is far better to document these higher-level structures, which can be expressed in diagrams of the notation but have no direct linguistic expression in the programming language, and then refer developers to the interfaces of certain important classes for tactical details.</p>
+
+<p><font size="3"><strong><a name="Tools">Tools</a></strong></font></p>
+
+<p>With early-generation languages, a development team could work with a minimal tool set; an editor, a compiler, a linker, and a loader were often all that were needed (and often all that existed). If the team was particularly fortunate, it might even have a source-level debugger. Complex systems change the picture entirely. Trying to build a large software system with a minimal tool set is equivalent to building a multistory building with stone hand tools.</p>
+
+<p>Object-oriented development practices change the picture as well. Traditional software-development tools embody knowledge about only source code, but because object-oriented analysis and design highlight key abstractions and mechanisms, tools must be able to focus on richer semantics. In addition, the rapid development of releases defined by the macrodevelopment process of object-oriented development requires tools that offer rapid turnaround, especially forthe edit/compile/execute/debug cycle.</p>
+
+<p>Tools must scale well. A tool that works for one developer writing a small stand-alone application will not necessarily scale to production releases of more complex applications. Indeed, for every tool, a threshold exists beyond which the tool's capacity is exceeded, causing its benefits to be greatly outweighed by its liabilities and clumsiness.</p>
+
+<p><strong>Tools for Application Development</strong></p>
+
+<p>We have identified several key characteristics of tools applicable to object-oriented development.</p>
+
+<p>The essential component of a toolset for object-oriented development is a graphics-based system supporting the object-oriented notation for analysis and design. Such a tool can be used during analysis to capture the semantics of scenarios as well as early in the development process to capture strategic and tactical design decisions, to maintain control over the design products, and to coordinate the design activities of a team of developers. Indeed, the tool can be used throughout the lifecycle as the design evolves into a production implementation. These tools are also useful during system maintenance. Specifically, you can reverse engineer many of the interesting aspects of an object-oriented system and produce at least the class structure and module architecture of the system as built. This feature is quite important. With traditional CASE tools, developers can generate marvelous pictures, only to find that these pictures are out of date once the implementation proceeds, because programmers modify the implementation without updating the design. Reverse engineering makes it less likely that design documentation will ever get out of step with the implementation.</p>
+
+<p>Another tool important for object-oriented development is a browser that knows about the class structure and module architecture of a system. Class hierarchies can become so complex that it is difficult even to find all of the abstractions that are part of the design or that are candidates for reuse. While examining a program fragment, a developer may want to see the definition of the class of some object. Upon finding this class, he or she might want to visit some of its superclasses. While viewing a particular superclass, the developer might want to browse through all uses of that class before installing a change to its interface. This kind of browsing is extremely clumsy if you have to worry about files, which are an artifact of the physical, not the logical, design decisions.</p>
+
+<p>Next you must have tools for configuration management and version control, especially for larger projects. As mentioned earlier, the category or subsystem is the best unit of configuration management.</p>
+
+<p>Finally, you must have a class librarian. Many object-oriented languages have predefined class libraries or commercially available class libraries. As a project matures, this library grows as domain-specific reusable software components are added over time. A library can grow to enormous proportions in a short time, making it difficult for a developer to find a class or module that meets his or her needs. A library can become so large because a class often has multiple implementations, each of which has different time and space semantics. If the perceived cost (usually inflated) of finding a certain component is higher then the perceived cost (usually underestimated) of creating that component from scratch, then all hope of reuse is lost.</p>
+
+<p>Therefore, at least some minimal librarian tool must be used to allow developers to locate classes and modules according to different criteria and to add useful classes and modules to the library as they are developed.</p>
+
+<p><strong>Organizational Implications</strong></p>
+
+<p>The need for powerful tools creates a demand for two specific roles in the development organization: a reuse engineer and a toolsmith. Among other things, the reuse engineer is responsible for maintaining the class library for a project. Without active effort, the library can become a vast wasteland of junk classes that no developer would ever want to search. Also, the reuse engineer can proactively encourage reuse by scavenging the products of current design efforts. The toolsmith is responsible for creating domain-specific tools and tailoring existing ones for the needs of a project. For example, a project might need common test scaffolding to test certain aspects of a user interface, or it might need a customized class browser. A toolsmith is in the best position to craft these tools, usually from components already in the class library. Such tools can also be used for later developmental efforts.<p>A manager already faced with scarce human resources may lament that powerful tools, as well as designated reuse engineers and toolsmiths, are an unaffordable luxury. In many projects, however, these activities occur anyway, usually in an ad hoc fashion. Explicit investments in tools and people can make these ad hoc activities more focused and efficient, and add real value to the overall development effort.</p>
+
+<p><font size="3"><strong><a name="SpecTopics">Special Topics</a></strong></font></p>
+
+<p><strong>Domain-Specific Issues</strong></p>
+
+<p>Certain application domains warrant special architectural consideration. The design of an effective user interface is still much more of an art than a science. For this domain, prototyping is absolutely essential. Feedback must be gathered early and often from end users to evaluate the gestures, error behavior, and other paradigms of user interaction. The generation of scenarios is highly effective in driving the analysis of the user interface.</p>
+
+<p>Some applications involve a major database component; other applications require integration with databases whose schemas cannot be changed, usually because large amounts of data already populate the database (the problem of legacy data). For such domains, the principle of separation of concerns is directly applicable: it is best to encapsulate the access to all such databases inside the confines of well-defined class interfaces. This principle is particularly important when mixing object-oriented decomposition with relational-database technology. In the presence of an object-oriented database, the interface between the database and the rest of the application can be much more seamless, although object-oriented databases are more effective for object persistence and less effective for massive data stores.</p>
+
+<p>Consider also real-time systems. <dfn>Real-time</dfn> means different things in different contexts. It can denote subsecond response in user-centered systems and submicrosecond response in data acquisition and control applications. Even for hard real-time systems, not every component of the system must (or can) be optimized. Indeed, for most complex systems, the greater question is whether the system can be completed, not whether it will perform within its performance requirements. For this reason, beware of premature optimization. If you focus on producing simple architectures, the evolutionary generation of releases will illuminate the performance bottlenecks of the system early enough to take corrective action.</p>
+
+<p>The term <dfn>legacy systems</dfn> refers to applications for which there is a large capital investment in software that cannot be abandoned economically or safely. These systems, however, can have intolerable maintenance costs, which require their replacement over time. Fortunately, coping with legacy systems is much like coping with databases: you encapsulate access to the facilities of the legacy system in the context of well-defined class interfaces and, over time, migrate the coverage of the object-oriented architecture to replace certain functionality currently provided by the legacy system. Of course, an architectural vision of the final system is essential so that the incremental replacement of the legacy system will not result in an inconsistent patchwork of software.</p>
+
+<p><strong>Technology Transfer</strong></p>
+
+<p>Learning object-oriented programming can be more difficult than learning another programming language, often because a different style of programming is involved rather than a different syntax in the same framework. Indeed, you must learn a new way of thinking about programming.</p>
+
+<p>How do you develop this object-oriented mind-set? We recommend the following:</p>
+
+<ul type="square">
+<li> Provide formal training to both developers and managers in the elements of the object model.</li>
+<li> Use object-oriented development in a low-risk project first and allow the team members to make mistakes. Use these team members to seed other projects and to act as mentors for the object-oriented approach.</li>
+<li> Expose the developers and managers to examples of well-structured object-oriented systems.</li>
+</ul>
+
+Good candidate projects include software-development tools or domain-specific class libraries, which can then be used as resources in later projects.</p>
+
+<p>In our experience, it takes just a few weeks for a professional developer to master the syntax and semantics of a new programming language. It can take several more weeks for the same developer to begin to appreciate the importance and power of classes and objects. Finally, it can take as many as six months of experience for that developer to mature into a competent class designer. In any discipline, it takes time to master the art. <p>Learning by example is an efficient and effective approach. Once an organization has accumulated a critical mass of applications written in an object-oriented style, introducing new developers and managers to object-oriented development is easier. Developers start as application engineers, using well-structured, already-existing abstractions. Over time, developers who have studied and used these components under the supervision of a more experienced person gain sufficient experience to develop a meaningful conceptual framework of the object model and become effective class designers.</p>
+
+<p><font size="3"><strong><a name="Benefits">Benefits of Object-Oriented Development</a></strong></font></p>
+
+<p>Adopters of object-oriented technology usually embrace object-oriented practices for one of two reasons:</p>
+
+<ul type="square">
+<li>They seek a competitive advantage, such as reduced time to market, greater product flexibility, or schedule predictability.</li>
+<li>They have problems that are so complex that they have no other solution.</li>
+</ul>
+
+</p>Use of the object model leads to constructing systems that embody the five attributes of well-structured complex systems. The object model forms the conceptual framework for the notation and process of object-oriented development, and thus these benefits apply to the method itself. Using the object model:</p>
+
+<ul type="square">
+<li>Exploits the expressive power of all object-oriented programming languages</li>
+<li>Encourages the reuse of software components</li>
+<li>Leads to systems that are more resilient to change</li>
+<li>Reduces development risk</li>
+<li>Appeals to the working of human cognition</li>
+</ul>
+
+<p>Several case studies reinforce these findings; in particular, they point out that the object-oriented approach can reduce development time and the size of the resulting source code.</p>
+
+<p><font size="3"><strong><a name="Risks">Risks of Object-Oriented Development</a></strong></font></p>
+
+<p>Two areas of risk in object-oriented development must be considered: performance and start-up costs.</p>
+
+<p>Relative to procedural languages, performance cost is incurred for sending a message from one object to another in an object-oriented programming language. For method invocations that cannot be resolved statically, an implementation must do a dynamic lookup to find the method defined for the class of the receiving object. Studies indicate that in the worst case, a method invocation can take from 1.75 to 2.5 times as long as a simple subprogram call. Experience indicates, however, that dynamic lookup is needed in only about 20 percent of most method invocations. With a strongly typed language, a compiler often can determine which invocations can be statically resolved and then can generate code for a subprogram call rather than a method lookup.</p>
+
+<p>Another source of performance cost comes from the way in which object-oriented programming languages are used in conjunction with object-oriented development. Object-oriented development leads to the creation of systems whose components are built in layers of abstraction. One implication of this layering is that individual methods are usually very small, because they build on lower-level methods. Another implication of this layering is that sometimes methods must be written to gain protected access to the otherwise encapsulated fields of an object. This plethora of methods means that you can end up with a glut of method invocations. Invoking a method at a high level of abstraction usually results in a cascade of method invocations; high-level methods invoke lower-level ones and so on. For applications with limited resources of time, a large number of method invocations may be unacceptable. This layering, though, is essential for the comprehension of a system; it may be impossible ever to get a complex system working without a layered design. You can design for functionality first and then work with the running system to determine where the timing bottlenecks exist. These bottlenecks often can be removed by declaring the appropriate methods as inline (thus trading space for time), flattening the class hierarchy, or breaking the encapsulation of a class's attributes.</p>
+
+<p>A related performance risk derives from the encumbrance of classes: a class deep in an inheritance lattice can have many superclasses, whose code must be included when linking in the most specific class. For small object-oriented applications, this can mean that deep class hierarchies should be avoided in practice, because they require an excessive amount of object code. The problem can be mitigated somewhat by using a mature compiler and linker that can eliminate all dead code.</p>
+
+<p>Another source of performance bottlenecks derives from the paging behavior of running applications. Most compilers allocate object code in segments, with the code for each compilation unit, often a single file, placed in one or more segments. This model assumes a high locality of reference: subprograms in one segment call subprograms in the same segment. However, in object-oriented systems, such locality of reference rarely occurs. For large systems, classes usually are declared in separate files, and because the methods of one class often build on those of other classes, a single method invocation can involve code from many different segments. This situation violates the assumptions that most computers make about the run-time behavior of programs, particularly for computers with pipelined CPUs and paging memory systems. On the positive side, this is why you separate logical and physical design decisions. If a running system thrashes during execution because of excessive segment swapping, then fixing the problem is largely a matter of changing the physical allocation of classes to modules. This design decision in the physical model of the system has no effect on the logical design.</p>
+
+<p>One remaining performance risk with object-oriented systems comes from the dynamic allocation and destruction of objects. Allocating an object on a heap is a dynamic action, as opposed to statically allocating an object either globally or on a stack frame. Heap allocation usually costs more computing resources. For many kinds of systems, this property does not cause any real problems, but for time-critical applications, you cannot afford the cycles needed to complete a heap allocation. Some simple solutions for this problem exist: either preallocate objects during elaboration of the program instead of during any time-critical algorithms, or replace the system's default memory allocator with one tuned to the behavior of the specific system.</p>
+
+<p>Interestingly, some properties of object-oriented systems often overshadow all of these sources of performance cost. The execution time of a C++ program is often faster than that of its functionally equivalent C program. This difference is attributed to the use of virtual functions, which eliminate the need for some kinds of explicit type-checking and control structures. Indeed, in our experience, the code sizes of object-oriented systems are usually smaller than those of their functionally equivalent non-object-oriented implementations.</p>
+
+<p>For some projects, the start-up costs associated with object-oriented development can be a very real barrier to adopting the technology. Using any new technology requires the capitalization of software-development tools. Also, if a development organization is using a particular object-oriented programming language for the first time, it usually has no established base of domain-specific software to reuse. In short, it must start from scratch or at least figure out how to connect object-oriented applications with existing non-object-oriented ones. Finally, a first attempt at using object-oriented development almost surely fails without the appropriate training. An object-oriented programming language is not just another programming language that can be learned in a three-day course or by reading a book. It takes time to develop the proper mind-set for object-oriented design, and this new way of thinking must be embraced by both developers and managers alike.</p>
+
+<p><font size="3"><strong><a name="Starting">Getting Started</a></strong></font></p>
+
+<p>The successful development and deployment of a complex software system involves much more than just generating code.</p>
+
+<ul type="square">
+<li>In the steady state, object-oriented projects typically require a reduction in resources during development; the roles required of these resources are subtly different than for non-object-oriented systems.</li>
+<li>In object-oriented analysis and design, there is never a single big-bang integration event; the unit of configuration management for releases should be the category or subsystem, not the individual file or class.</li>
+<li>Reuse must be institutionalized to be successful.</li>
+<li>Defect-discovery rate and defect density are useful measures of the quality of an object-oriented system. Other useful measures include various class-oriented metrics.</li>
+<li>Documentation should never drive the development process.</li>
+<li>Object-oriented development requires subtly different tools than non-object-oriented development.
+<li>The transition by an organization to the use of the object model requires a change in mind-set; learning an object-oriented programming language is more than just learning another programming language.</li>
+<li>There are many benefits to object-oriented technology as well as some risks; experience indicates that the benefits far outweigh the risks.</li>
+</ul>
+
+<p>Rational can help you manage and plan your software development with our wide range of professional services, including packaged consulting programs, time-and-materials consulting, outsourcing of tool integration, and the creation of a standard software-engineering environment tailored to your organization. Our software experts have years of experience making modern software technology work in industries as diverse as telecommunications, banking and finance, retailing, aerospace, defense, and software development.</p>
+
+<p>Our packaged consulting products include these programs:</p> 
+
+<ul type="square">
+<li>Assessment</li>
+<li>Prototyping</li>
+<li>Project Implementation</li>
+<li>Enterprisewide Reengineering and Reuse</li>
+</ul>
+
+<p>The <dfn>Assessment Program</dfn> is aimed at identifying areas for improvements in your current software-development process, software designs, or approach to software reuse. We provide recommendations for improvements and migration plans and estimates of the tangible benefits to your business that would result.</p>
+
+<p>Our <dfn>Prototyping Program</dfn> is aimed at validating your development process and software architecture. We provide a process definition and a prototyping team that produces a proof of concept of both your software architecture and the processes, methods, and tools that allow you to build your software more effectively than before.</p>
+
+<p>In the <dfn>Project Implementation Program,</dfn> Rational ensures that your first project using object-oriented technology and iterative development is a success. We help you establish your core software-architecture team, define your high-level software processes, and identify the resources required for the project. We provide the necessary training and guidance. We also work with you to define metrics for success and to conduct management and technical reviews against those metrics.</p>
+
+<p>Our most advanced packaged consulting product is the <dfn>Enterprisewide Reengineering and Reuse Program.</dfn> Our team analyzes your plans for software-process reengineering and the role of software in reaching your targets for revenue growth, profitability, and market share. We help you reengineer your software-development and business processes to accommodate large-scale, enterprisewide reuse. We help you devise and implement application-specific class libraries that serve as building blocks for your enterprisewide software architecture. And we provide training, guidance, and review as necessary to ensure your long-term success and a measurable return on your investment.</p>
+
+<p>We approach the delivery of each of our professional services as a partnership with our customers. Working with your personnel at all levels--from the chief information officer and other members of executive management to your software developers--we focus on the articulation of tangible benefits to your business, a full understanding of the costs of software-process reengineering, and how to make the project successful. Rational has developed an excellent reputation delivering high-value professional-service products to facilitate the success of customers.</p>
+
+<p>You can build your own center of expertise with Rational's highly acclaimed set of training products. Training is available for every audience, from managers requiring a high-level understanding of the technology to software engineers who must understand the "nuts and bolts" of object-oriented analysis, design, and programming. We offer seminars, on-site workshops, video-based training, and courses custom-designed to meet your requirements.</p>
+
+<p>Standard courses include "Executive Overview of Object Technology," "Introduction to Object-Oriented Methodology," "Object-Oriented Analysis," "Object-Oriented Design for C++," "Object-Oriented Analysis and Design," "Rational Software-Engineering Process," and "Object-Oriented Project Management." Because each of our instructors is a practicing software-engineering professional, your instructor can also provide ongoing guidance to ensure that your organization understands, embraces, and profits from your training investment.</p>
+
+<p>Our unmatched training, consulting, tools, and support services are delivered by the software-engineering industry's most capable field organization, consisting of more than 100 experienced software-engineering professionals. This field team is backed up by experts from our corporate headquarters. No other company in our industry has a team of this breadth and quality.</p>
+
+<p>We have thousands of copies of our various products installed in 19 countries. Rational has become a global leader in the software-engineering business, with more than twelve years of experience in helping customers apply iterative-development processes and object-oriented methods to their most important software projects. We have helped customers in some of the world's most demanding markets reengineer their software processes for success. These markets include air-traffic control, banking and finance, client/server applications, command-and-control systems, commercial aircraft avionics, embedded-weapons systems, industrial process control, management-information systems, rail transportation, space exploration, and telecommunications. We have also built, delivered, maintained, and enhanced the several million lines of code that constitute the Rational family of software products, using our own products and the process and methods we recommend to our customers.</p>
+
+<p>Our customers are among the largest commercial and government organizations--including many Fortune 100 companies--in North America, Europe, and the Pacific rim. They have used our products and services to improve their productivity, reduce their risk, and improve software quality on projects ranging from less than 20,000 lines to millions of lines of code. Our customers agree that Rational adds measurable value to any software project. As one example, CelsiusTech Systems doubled development productivity, enjoyed significant reuse (nearly 70%), cut system-integration resource requirements more than 50%, saved more than $20 million on the first program using the new process, and built a successful line of business by investing in object-oriented software engineering and Rational's products and services. CelsiusTech's success was featured in the International Data Corporation (IDC) white paper <cite>Object Technology: A Key Software Technology for the '90s,</cite> published in 1992.</p>
+
+<p>Rational offers you compelling economic benefits and a proven return on investment. We can help you achieve the commercial success and profit possible through software reuse on an enterprisewide basis. Rational is dedicated to a partnership for your success and has the products, services, and people to make this possible.</p>
+
+</font>
+
+<br><p>
+
+
+</td>
+</tr>
+</table>
+
+  <!-- footer cell -->
+  
+
+
+
+
+
+
+
+</td></tr></table></center>
+</body>
+</html>

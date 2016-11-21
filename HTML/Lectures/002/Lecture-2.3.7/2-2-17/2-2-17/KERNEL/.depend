@@ -1,0 +1,211 @@
+acct.o: \
+   /usr/src/linux-2.2.17/include/linux/errno.h \
+   /usr/src/linux-2.2.17/include/linux/kernel.h \
+   $(wildcard /usr/src/linux-2.2.17/include/config/bsd/process/acct.h) \
+   /usr/src/linux-2.2.17/include/linux/mm.h \
+   /usr/src/linux-2.2.17/include/linux/acct.h \
+   /usr/src/linux-2.2.17/include/linux/smp_lock.h \
+   /usr/src/linux-2.2.17/include/linux/file.h \
+   /usr/src/linux-2.2.17/include/asm/uaccess.h
+capability.o: \
+   /usr/src/linux-2.2.17/include/linux/mm.h \
+   /usr/src/linux-2.2.17/include/asm/uaccess.h
+dma.o: \
+   /usr/src/linux-2.2.17/include/linux/kernel.h \
+   /usr/src/linux-2.2.17/include/linux/errno.h \
+   /usr/src/linux-2.2.17/include/asm/dma.h \
+   /usr/src/linux-2.2.17/include/asm/system.h \
+   /usr/src/linux-2.2.17/include/asm/spinlock.h
+exec_domain.o: \
+   /usr/src/linux-2.2.17/include/linux/mm.h \
+   /usr/src/linux-2.2.17/include/linux/smp_lock.h \
+   /usr/src/linux-2.2.17/include/linux/module.h
+exit.o: \
+   /usr/src/linux-2.2.17/include/linux/malloc.h \
+   /usr/src/linux-2.2.17/include/linux/interrupt.h \
+   /usr/src/linux-2.2.17/include/linux/smp_lock.h \
+   /usr/src/linux-2.2.17/include/linux/module.h \
+   /usr/src/linux-2.2.17/include/linux/vmalloc.h \
+   $(wildcard /usr/src/linux-2.2.17/include/config/bsd/process/acct.h) \
+   /usr/src/linux-2.2.17/include/linux/acct.h \
+   /usr/src/linux-2.2.17/include/asm/uaccess.h \
+   /usr/src/linux-2.2.17/include/asm/pgtable.h \
+   /usr/src/linux-2.2.17/include/asm/mmu_context.h \
+   $(wildcard /usr/src/linux-2.2.17/include/config/smp.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/aio.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/ap1000.h)
+fork.o: \
+   /usr/src/linux-2.2.17/include/linux/malloc.h \
+   /usr/src/linux-2.2.17/include/linux/init.h \
+   /usr/src/linux-2.2.17/include/linux/unistd.h \
+   /usr/src/linux-2.2.17/include/linux/smp_lock.h \
+   /usr/src/linux-2.2.17/include/linux/module.h \
+   /usr/src/linux-2.2.17/include/linux/vmalloc.h \
+   /usr/src/linux-2.2.17/include/asm/pgtable.h \
+   /usr/src/linux-2.2.17/include/asm/mmu_context.h \
+   /usr/src/linux-2.2.17/include/asm/uaccess.h \
+   $(wildcard /usr/src/linux-2.2.17/include/config/smp.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/aio.h)
+info.o: \
+   /usr/src/linux-2.2.17/include/linux/mm.h \
+   /usr/src/linux-2.2.17/include/linux/unistd.h \
+   /usr/src/linux-2.2.17/include/linux/swap.h \
+   /usr/src/linux-2.2.17/include/linux/smp_lock.h \
+   /usr/src/linux-2.2.17/include/asm/uaccess.h
+itimer.o: \
+   /usr/src/linux-2.2.17/include/linux/mm.h \
+   /usr/src/linux-2.2.17/include/linux/smp_lock.h \
+   /usr/src/linux-2.2.17/include/linux/interrupt.h \
+   /usr/src/linux-2.2.17/include/asm/uaccess.h
+kmod.o: \
+   /usr/src/linux-2.2.17/include/linux/sched.h \
+   /usr/src/linux-2.2.17/include/linux/unistd.h \
+   /usr/src/linux-2.2.17/include/linux/smp_lock.h \
+   /usr/src/linux-2.2.17/include/asm/uaccess.h
+ksyms.o: \
+   /usr/src/linux-2.2.17/include/linux/malloc.h \
+   /usr/src/linux-2.2.17/include/linux/module.h \
+   /usr/src/linux-2.2.17/include/linux/blkdev.h \
+   /usr/src/linux-2.2.17/include/linux/cdrom.h \
+   /usr/src/linux-2.2.17/include/linux/kernel_stat.h \
+   /usr/src/linux-2.2.17/include/linux/vmalloc.h \
+   /usr/src/linux-2.2.17/include/linux/sys.h \
+   /usr/src/linux-2.2.17/include/linux/utsname.h \
+   /usr/src/linux-2.2.17/include/linux/interrupt.h \
+   /usr/src/linux-2.2.17/include/linux/ioport.h \
+   /usr/src/linux-2.2.17/include/linux/serial.h \
+   /usr/src/linux-2.2.17/include/linux/locks.h \
+   /usr/src/linux-2.2.17/include/linux/delay.h \
+   /usr/src/linux-2.2.17/include/linux/minix_fs.h \
+   /usr/src/linux-2.2.17/include/linux/ext2_fs.h \
+   /usr/src/linux-2.2.17/include/linux/random.h \
+   /usr/src/linux-2.2.17/include/linux/reboot.h \
+   /usr/src/linux-2.2.17/include/linux/pagemap.h \
+   /usr/src/linux-2.2.17/include/linux/sysctl.h \
+   /usr/src/linux-2.2.17/include/linux/hdreg.h \
+   /usr/src/linux-2.2.17/include/linux/skbuff.h \
+   /usr/src/linux-2.2.17/include/linux/genhd.h \
+   /usr/src/linux-2.2.17/include/linux/swap.h \
+   /usr/src/linux-2.2.17/include/linux/ctype.h \
+   /usr/src/linux-2.2.17/include/linux/file.h \
+   /usr/src/linux-2.2.17/include/linux/console.h \
+   /usr/src/linux-2.2.17/include/linux/kernel.h \
+   /usr/src/linux-2.2.17/include/linux/poll.h \
+   /usr/src/linux-2.2.17/include/linux/mm.h \
+   /usr/src/linux-2.2.17/include/linux/capability.h \
+   /usr/src/linux-2.2.17/include/linux/iobuf.h \
+   $(wildcard /usr/src/linux-2.2.17/include/config/proc/fs.h) \
+   /usr/src/linux-2.2.17/include/linux/proc_fs.h \
+   $(wildcard /usr/src/linux-2.2.17/include/config/kmod.h) \
+   /usr/src/linux-2.2.17/include/linux/kmod.h \
+   $(wildcard /usr/src/linux-2.2.17/include/config/nfsd.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/nfsd/module.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/lockd.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/lockd/module.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/modversions.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/modules.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/reiserfs/fs.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/reiserfs/fs/module.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/smp.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/arch/s390.h)
+module.o: \
+   /usr/src/linux-2.2.17/include/linux/mm.h \
+   /usr/src/linux-2.2.17/include/linux/module.h \
+   /usr/src/linux-2.2.17/include/asm/uaccess.h \
+   /usr/src/linux-2.2.17/include/linux/vmalloc.h \
+   /usr/src/linux-2.2.17/include/linux/smp_lock.h \
+   /usr/src/linux-2.2.17/include/asm/pgtable.h \
+   /usr/src/linux-2.2.17/include/linux/init.h \
+   $(wildcard /usr/src/linux-2.2.17/include/config/modules.h)
+panic.o: \
+   /usr/src/linux-2.2.17/include/linux/sched.h \
+   /usr/src/linux-2.2.17/include/linux/delay.h \
+   /usr/src/linux-2.2.17/include/linux/reboot.h \
+   /usr/src/linux-2.2.17/include/linux/notifier.h \
+   /usr/src/linux-2.2.17/include/linux/init.h \
+   /usr/src/linux-2.2.17/include/linux/sysrq.h \
+   /usr/src/linux-2.2.17/include/linux/interrupt.h \
+   $(wildcard /usr/src/linux-2.2.17/include/config/arch/s390.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/smp.h)
+printk.o: \
+   /usr/src/linux-2.2.17/include/linux/mm.h \
+   /usr/src/linux-2.2.17/include/linux/tty_driver.h \
+   /usr/src/linux-2.2.17/include/linux/smp_lock.h \
+   /usr/src/linux-2.2.17/include/linux/console.h \
+   /usr/src/linux-2.2.17/include/linux/init.h \
+   /usr/src/linux-2.2.17/include/asm/uaccess.h
+resource.o: \
+   /usr/src/linux-2.2.17/include/linux/sched.h \
+   /usr/src/linux-2.2.17/include/linux/errno.h \
+   /usr/src/linux-2.2.17/include/linux/ioport.h \
+   /usr/src/linux-2.2.17/include/linux/init.h
+sched.o: \
+   /usr/src/linux-2.2.17/include/linux/mm.h \
+   /usr/src/linux-2.2.17/include/linux/kernel_stat.h \
+   /usr/src/linux-2.2.17/include/linux/fdreg.h \
+   /usr/src/linux-2.2.17/include/linux/delay.h \
+   /usr/src/linux-2.2.17/include/linux/interrupt.h \
+   /usr/src/linux-2.2.17/include/linux/smp_lock.h \
+   /usr/src/linux-2.2.17/include/linux/init.h \
+   /usr/src/linux-2.2.17/include/asm/io.h \
+   /usr/src/linux-2.2.17/include/asm/uaccess.h \
+   /usr/src/linux-2.2.17/include/asm/pgtable.h \
+   /usr/src/linux-2.2.17/include/asm/mmu_context.h \
+   /usr/src/linux-2.2.17/include/asm/semaphore-helper.h \
+   /usr/src/linux-2.2.17/include/linux/timex.h \
+   $(wildcard /usr/src/linux-2.2.17/include/config/smp.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/arch/s390.h)
+signal.o: \
+   /usr/src/linux-2.2.17/include/linux/slab.h \
+   /usr/src/linux-2.2.17/include/linux/module.h \
+   /usr/src/linux-2.2.17/include/linux/unistd.h \
+   /usr/src/linux-2.2.17/include/linux/smp_lock.h \
+   /usr/src/linux-2.2.17/include/linux/init.h \
+   /usr/src/linux-2.2.17/include/linux/sched.h \
+   /usr/src/linux-2.2.17/include/asm/uaccess.h \
+   $(wildcard /usr/src/linux-2.2.17/include/config/smp.h)
+softirq.o: \
+   /usr/src/linux-2.2.17/include/linux/mm.h \
+   /usr/src/linux-2.2.17/include/linux/kernel_stat.h \
+   /usr/src/linux-2.2.17/include/linux/interrupt.h \
+   /usr/src/linux-2.2.17/include/linux/smp_lock.h \
+   /usr/src/linux-2.2.17/include/asm/io.h
+sys.o: \
+   /usr/src/linux-2.2.17/include/linux/mm.h \
+   /usr/src/linux-2.2.17/include/linux/utsname.h \
+   /usr/src/linux-2.2.17/include/linux/mman.h \
+   /usr/src/linux-2.2.17/include/linux/smp_lock.h \
+   /usr/src/linux-2.2.17/include/linux/notifier.h \
+   /usr/src/linux-2.2.17/include/linux/reboot.h \
+   /usr/src/linux-2.2.17/include/linux/prctl.h \
+   /usr/src/linux-2.2.17/include/asm/uaccess.h \
+   /usr/src/linux-2.2.17/include/asm/io.h
+sysctl.o: \
+   /usr/src/linux-2.2.17/include/linux/malloc.h \
+   /usr/src/linux-2.2.17/include/linux/sysctl.h \
+   /usr/src/linux-2.2.17/include/linux/swapctl.h \
+   /usr/src/linux-2.2.17/include/linux/proc_fs.h \
+   /usr/src/linux-2.2.17/include/linux/ctype.h \
+   /usr/src/linux-2.2.17/include/linux/utsname.h \
+   /usr/src/linux-2.2.17/include/linux/capability.h \
+   /usr/src/linux-2.2.17/include/linux/smp_lock.h \
+   /usr/src/linux-2.2.17/include/linux/init.h \
+   /usr/src/linux-2.2.17/include/linux/sysrq.h \
+   /usr/src/linux-2.2.17/include/asm/uaccess.h \
+   $(wildcard /usr/src/linux-2.2.17/include/config/root/nfs.h) \
+   /usr/src/linux-2.2.17/include/linux/nfs_fs.h \
+   $(wildcard /usr/src/linux-2.2.17/include/config/sysctl.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/kmod.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/chr/dev/sg.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/sysvipc.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/bsd/process/acct.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/net.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/proc/fs.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/blk/dev/initrd.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/binfmt/java.h) \
+   $(wildcard /usr/src/linux-2.2.17/include/config/magic/sysrq.h)
+time.o: \
+   /usr/src/linux-2.2.17/include/linux/mm.h \
+   /usr/src/linux-2.2.17/include/linux/timex.h \
+   /usr/src/linux-2.2.17/include/linux/smp_lock.h \
+   /usr/src/linux-2.2.17/include/asm/uaccess.h

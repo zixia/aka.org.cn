@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Introduction to the Internet Protocols</TITLE>
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#eeedb7" LINK="#797E8C" VLINK="#4F4F4F" ALINK="#FF0000">
+<center>
+<H4>What is TCP/IP?</H4></center>
+<P>Copyright (C) 1987, Charles L. Hedrick. Anyone may reproduce this document, 
+in whole or in part, provided that: (1) any copy or republication of the entire 
+document must show Rutgers University as the source, and must include this 
+notice; and (2) any other use of this material must reference this manual and 
+Rutgers University, and the fact that the material is copyright by Charles 
+Hedrick and is used by permission. 
+<P>TCP/IP is a set of protocols developed to allow cooperating computers to 
+share resources across a network. It was developed by a community of researchers 
+centered around the ARPAnet. Certainly the ARPAnet is the best-known TCP/IP 
+network. However as of June, 87, at least 130 different vendors had products 
+that support TCP/IP, and thousands of networks of all kinds use it. 
+<P>First some basic definitions. The most accurate name for the set of protocols 
+we are describing is the "Internet protocol suite". TCP and IP are two of the 
+protocols in this suite. (They will be described below.) Because TCP and IP are 
+the best known of the protocols, it has become common to use the term TCP/IP or 
+IP/TCP to refer to the whole family. It is probably not worth fighting this 
+habit. However this can lead to some oddities. For example, I find myself 
+talking about NFS as being based on TCP/IP, even though it doesn't use TCP at 
+all. (It does use IP. But it uses an alternative protocol, UDP, instead of TCP. 
+All of this alphabet soup will be unscrambled in the following pages.) 
+<P>The Internet is a collection of networks, including the Arpanet, NSFnet, 
+regional networks such as NYsernet, local networks at a number of University and 
+research institutions, and a number of military networks. The term "Internet" 
+applies to this entire set of networks. The subset of them that is managed by 
+the Department of Defense is referred to as the "DDN" (Defense Data Network). 
+This includes some research-oriented networks, such as the Arpanet, as well as 
+more strictly military ones. (Because much of the funding for Internet protocol 
+developments is done via the DDN organization, the terms Internet and DDN can 
+sometimes seem equivalent.) All of these networks are connected to each other. 
+Users can send messages from any of them to any other, except where there are 
+security or other policy restrictions on access. Officially speaking, the 
+Internet protocol documents are simply standards adopted by the Internet 
+community for its own use. More recently, the Department of Defense issued a 
+MILSPEC definition of TCP/IP. This was intended to be a more formal definition, 
+appropriate for use in purchasing specifications. However most of the TCP/IP 
+community continues to use the Internet standards. The MILSPEC version is 
+intended to be consistent with it. 
+<P>Whatever it is called, TCP/IP is a family of protocols. A few provide 
+"low-level" functions needed for many applications. These include IP, TCP, and 
+UDP. (These will be described in a bit more detail later.) Others are protocols 
+for doing specific tasks, e.g. transferring files between computers, sending 
+mail, or finding out who is logged in on another computer. Initially TCP/IP was 
+used mostly between minicomputers or mainframes. These machines had their own 
+disks, and generally were self-contained. Thus the most important "traditional" 
+TCP/IP services are: 
+<UL>
+  <LI>file transfer. The file transfer protocol (FTP) allows a user on any 
+  computer to get files from another computer, or to send files to another 
+  computer. Security is handled by requiring the user to specify a user name and 
+  password for the other computer. Provisions are made for handling file 
+  transfer between machines with different character set, end of line 
+  conventions, etc. This is not quite the same thing as more recent "network 
+  file system" or "netbios" protocols, which will be described below. Rather, 
+  FTP is a utility that you run any time you want to access a file on another 
+  system. You use it to copy the file to your own system. You then work with the 
+  local copy. (See RFC 959 for specifications for FTP.) 
+  <LI>remote login. The network terminal protocol (TELNET) allows a user to log 
+  in on any other computer on the network. You start a remote session by 
+  specifying a computer to connect to. From that time until you finish the 
+  session, anything you type is sent to the other computer. Note that you are 
+  really still talking to your own computer. But the telnet program effectively 
+  makes your computer invisible while it is running. Every character you type is 
+  sent directly to the other system. Generally, the connection to the remote 
+  computer behaves much like a dialup connection. That is, the remote system 
+  will ask you to log in and give a password, in whatever manner it would 
+  normally ask a user who had just dialed it up. When you log off of the other 
+  computer, the telnet program exits, and you will find yourself talking to your 
+  own computer. Microcomputer implementations of telnet generally include a 
+  terminal emulator for some common type of terminal. (See RFC's 854 and 855 for 
+  specifications for telnet. By the way, the telnet protocol should not be 
+  confused with Telenet, a vendor of commercial network services.) 
+  <LI>computer mail. This allows you to send messages to users on other 
+  computers. Originally, people tended to use only one or two specific 
+  computers. They would maintain "mail files" on those machines. The computer 
+  mail system is simply a way for you to add a message to another user's mail 
+  file. There are some problems with this in an environment where microcomputers 
+  are used. The most serious is that a micro is not well suited to receive 
+  computer mail. When you send mail, the mail software expects to be able to 
+  open a connection to the addressee's computer, in order to send the mail. If 
+  this is a microcomputer, it may be turned off, or it may be running an 
+  application other than the mail system. For this reason, mail is normally 
+  handled by a larger system, where it is practical to have a mail server 
+  running all the time. Microcomputer mail software then becomes a user 
+  interface that retrieves mail from the mail server. (See RFC 821 and 822 for 
+  specifications for computer mail. See RFC 937 for a protocol designed for 
+  microcomputers to use in reading mail from a mail server.) </LI></UL>
+<P>These services should be present in any implementation of TCP/IP, except that 
+micro-oriented implementations may not support computer mail. These traditional 
+applications still play a very important role in TCP/IP-based networks. However 
+more recently, the way in which networks are used has been changing. The older 
+model of a number of large, self-sufficient computers is beginning to change. 
+Now many installations have several kinds of computers, including 
+microcomputers, workstations, minicomputers, and mainframes. These computers are 
+likely to be configured to perform specialized tasks. Although people are still 
+likely to work with one specific computer, that computer will call on other 
+systems on the net for specialized services. This has led to the "server/client" 
+model of network services. A server is a system that provides a specific service 
+for the rest of the network. A client is another system that uses that service. 
+(Note that the server and client need not be on different computers. They could 
+be different programs running on the same computer.) Here are the kinds of 
+servers typically present in a modern computer setup. Note that these computer 
+services can all be provided within the framework of TCP/IP. 
+<UL>
+  <LI>network file systems. This allows a system to access files on another 
+  computer in a somewhat more closely integrated fashion than FTP. A network 
+  file system provides the illusion that disks or other devices from one system 
+  are directly connected to other systems. There is no need to use a special 
+  network utility to access a file on another system. Your computer simply 
+  thinks it has some extra disk drives. These extra "virtual" drives refer to 
+  the other system's disks. This capability is useful for several different 
+  purposes. It lets you put large disks on a few computers, but still give 
+  others access to the disk space. Aside from the obvious economic benefits, 
+  this allows people working on several computers to share common files. It 
+  makes system maintenance and backup easier, because you don't have to worry 
+  about updating and backing up copies on lots of different machines. A number 
+  of vendors now offer high-performance diskless computers. These computers have 
+  no disk drives at all. They are entirely dependent upon disks attached to 
+  common "file servers". (See RFC's 1001 and 1002 for a description of 
+  PC-oriented NetBIOS over TCP. In the workstation and minicomputer area, Sun's 
+  Network File System is more likely to be used. Protocol specifications for it 
+  are available from Sun Microsystems.) 
+  <LI>remote printing. This allows you to access printers on other computers as 
+  if they were directly attached to yours. (The most commonly used protocol is 
+  the remote lineprinter protocol from Berkeley Unix. Unfortunately, there is no 
+  protocol document for this. However the C code is easily obtained from 
+  Berkeley, so implementations are common.) 
+  <LI>remote execution. This allows you to request that a particular program be 
+  run on a different computer. This is useful when you can do most of your work 
+  on a small computer, but a few tasks require the resources of a larger system. 
+  There are a number of different kinds of remote execution. Some operate on a 
+  command by command basis. That is, you request that a specific command or set 
+  of commands should run on some specific computer. (More sophisticated versions 
+  will choose a system that happens to be free.) However there are also "remote 
+  procedure call" systems that allow a program to call a subroutine that will 
+  run on another computer. (There are many protocols of this sort. Berkeley Unix 
+  contains two servers to execute commands remotely: rsh and rexec. The man 
+  pages describe the protocols that they use. The user-contributed software with 
+  Berkeley 4.3 contains a "distributed shell" that will distribute tasks among a 
+  set of systems, depending upon load. Remote procedure call mechanisms have 
+  been a topic for research for a number of years, so many organizations have 
+  implementations of such facilities. The most widespread commercially-supported 
+  remote procedure call protocols seem to be Xerox's Courier and Sun's RPC. 
+  Protocol documents are available from Xerox and Sun. There is a public 
+  implementation of Courier over TCP as part of the user-contributed software 
+  with Berkeley 4.3. An implementation of RPC was posted to Usenet by Sun, and 
+  also appears as part of the user-contributed software with Berkeley 4.3.) 
+  <LI>name servers. In large installations, there are a number of different 
+  collections of names that have to be managed. This includes users and their 
+  passwords, names and network addresses for computers, and accounts. It becomes 
+  very tedious to keep this data up to date on all of the computers. Thus the 
+  databases are kept on a small number of systems. Other systems access the data 
+  over the network. (RFC 822 and 823 describe the name server protocol used to 
+  keep track of host names and Internet addresses on the Internet. This is now a 
+  required part of any TCP/IP implementation. IEN 116 describes an older name 
+  server protocol that is used by a few terminal servers and other products to 
+  look up host names. Sun's Yellow Pages system is designed as a general 
+  mechanism to handle user names, file sharing groups, and other databases 
+  commonly used by Unix systems. It is widely available commercially. Its 
+  protocol definition is available from Sun.) 
+  <LI>terminal servers. Many installations no longer connect terminals directly 
+  to computers. Instead they connect them to terminal servers. A terminal server 
+  is simply a small computer that only knows how to run telnet (or some other 
+  protocol to do remote login). If your terminal is connected to one of these, 
+  you simply type the name of a computer, and you are connected to it. Generally 
+  it is possible to have active connections to more than one computer at the 
+  same time. The terminal server will have provisions to switch between 
+  connections rapidly, and to notify you when output is waiting for another 
+  connection. (Terminal servers use the telnet protocol, already mentioned. 
+  However any real terminal server will also have to support name service and a 
+  number of other protocols.) 
+  <LI>network-oriented window systems. Until recently, high- performance 
+  graphics programs had to execute on a computer that had a bit-mapped graphics 
+  screen directly attached to it. Network window systems allow a program to use 
+  a display on a different computer. Full-scale network window systems provide 
+  an interface that lets you distribute jobs to the systems that are best suited 
+  to handle them, but still give you a single graphically-based user interface. 
+  (The most widely-implemented window system is X. A protocol description is 
+  available from MIT's Project Athena. A reference implementation is publically 
+  available from MIT. A number of vendors are also supporting NeWS, a window 
+  system defined by Sun. Both of these systems are designed to use TCP/IP.) 
+</LI></UL>
+<P>Note that some of the protocols described above were designed by Berkeley, 
+Sun, or other organizations. Thus they are not officially part of the Internet 
+protocol suite. However they are implemented using TCP/IP, just as normal TCP/IP 
+application protocols are. Since the protocol definitions are not considered 
+proprietary, and since commercially-support implementations are widely 
+available, it is reasonable to think of these protocols as being effectively 
+part of the Internet suite. Note that the list above is simply a sample of the 
+sort of services available through TCP/IP. However it does contain the majority 
+of the "major" applications. The other commonly-used protocols tend to be 
+specialized facilities for getting information of various kinds, such as who is 
+logged in, the time of day, etc. However if you need a facility that is not 
+listed here, we encourage you to look through the current edition of Internet 
+Protocols (currently RFC 1011), which lists all of the available protocols, and 
+also to look at some of the major TCP/IP implementations to see what various 
+vendors have added. 
+</BODY></HTML>

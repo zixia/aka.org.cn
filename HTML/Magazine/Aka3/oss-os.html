@@ -1,0 +1,203 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>AKA杂志第三期：为什么现代操作系统都应该开放源码</title>
+</head>
+
+<body>
+<div align="center"><center>
+
+<table border="0" width="630">
+  <tr>
+    <td></td>
+    <td bgcolor="#EEEDB7"><p align="center">　</p>
+    <p align="center"><big><big><strong>Why Modern OSes Must Be Open Source<br>
+    为什么现代操作系统都应该开放源码</strong></big></big></p>
+    <p align="center"><font size="2">作者：</font><small>John Martellaro</small></p>
+    <p align="center"><font size="2">翻译: xiaobo[AKA]</font></p>
+    <h1 align="center"><a href="cover2.html"><font size="2">[返回]</font></a></h1>
+    <hr>
+    <p>December 7, 1998<br>
+    <br>
+    Most people can't think, most of the remainder won't think, the small fraction who do 
+    think mostly can't do it very well. The extremely tiny fraction who think regularly, 
+    accurately, creatively, and without self-delusion- in the long run these are the only 
+    people who count...<br>
+    <br>
+    大多数人没有思考能力，剩下的大多数不愿意思考，而少数真正思考的人却往往无法胜任。余下那些进行着有规律、切实、有创造性而不自欺的思考的人，最后，他们是数得出的几个......<br>
+    <br>
+    -- Lazarus Long Time Enough for Love <br>
+    <br>
+    &quot;...if it's a hobby for me, and a job for you, why are you doing such a shoddy job of 
+    it?&quot; <br>
+    “……如果这是我的兴趣，你的工作，为什么你的工作做的如此糟糕呢？”<br>
+    <br>
+    -- Linus Torvalds <br>
+    </p>
+    <hr>
+    <p>&nbsp;&nbsp;&nbsp; 你知道事情总是这样。软件必须在25号交付给“上帝”。什么，你问为什么？因为1号是假期，而文档已经打印好了，项目经理也买好了26号去“处女岛”的机票，并且，公司管理层已经批准了这个时间表，而大大小小的头目们都说了：只能如此。阿门。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 于是你只好尽你所能，把任务排出优先次序，尽量抄你的近路。软件会好吗？耶，用户们是不会太仔细看文档的。你真聪明。见鬼，用户根本就不会看那些文档。<br>
+    <br>
+    &nbsp;&nbsp; 于是，就它就这样被搞出来了。<br>
+    <br>
+    <strong><big>更舒适的幻想</big></strong><br>
+    <br>
+    我已经在这个行业呆了足够长的时间知道项目经理总是生活在幻想岛上的。以前我写过关于舒适的幻想，而软件开发是幻想占主导地位的那么一个领域。我想第一个把所有这些东西放在一起的是“神秘的人月”，Frederick 
+    P. Brooks, Jr. 写于1975年，漂亮的篇章表述了我们这些程序员已经知道的关于这个行业的东西。 
+    <br>
+    <br>
+    软件的项目经理们都是无可救药的乐天派。他们假设每个程序员能够每周工作60个小时直到产品出来为止。假期是没有的。病痛不会让程序员请假。挫折，打击，管理层的命令都不会来干扰。就这样，计划订得象婴儿扑了粉的白屁股又紧又干净。 
+    <br>
+    <br>
+    软件的项目经理们，到了1998年，仍然掉到这样的陷井中，以为增加程序员就可以减少开发时间。 
+    <br>
+    <br>
+    软件的项目经理们从来都不知道为什么小组的大量成员——甚至整个队伍——会一起离开。（苹果的Claris 
+    OpenDoc小组确实发生了这样的事情） <br>
+    <br>
+    软件的项目经理们总自以为是的相信他们可以预估项目的花费——而在这个星球上还没有人在实践中成功地预估了花费，尽管有人努力要制定一些规格。卡耐基.梅隆大学的开发成熟度模型CMM说你必须这样。但你做不到。为什么？因为我们是在例行公事的抓住那些我们没有做过的事情。我们无法看到终点。 
+    <br>
+    <br>
+    软件的项目经理假设小组中的每个程序员每天能写同样多的调试过的代码。 
+    <br>
+    <br>
+    软件的项目经理假设每个程序员都有本事把要求的文档写好而不偷工减料。 
+    <br>
+    <br>
+    软件的项目经理相信那些便宜的年轻程序员对于编程和系统安全都和有二十年经验的老程序员那样清楚。 
+    <br>
+    <br>
+    尽管在软件工程方面有上述这些常见的问题，那些软件公司，特别是写操作系统的，还在那儿宣称他们可以准时发布那些有关键任务的操作系统，并且不会有太大的BUG。事实上，曾经有一断时间我们确实可以做到那样。DOS就是那么一个操作系统，只要一个机灵的家伙再加上几个支持人员就足够完成了（在周末）。1984年发布的早期MacOS就只是由7个家伙写的。<br>
+    <br>
+    再没有别的了。<br>
+    <br>
+    <br>
+    <strong><big><big>Internet操作系统</big></big></strong><br>
+    <br>
+    在这儿我将说明没有哪个操作系统是在Internet出现之后针对它自然的设计和创建的。当然也可能回头把一个操作系统加些功能再规整规整让它看起来象一个Internet操作系统（就象Sherlock），但那也真的只是add-on而已。在我看来，Unix是让自己和Internet协调最成功的操作系统，因为它一开始就是一个真正多用户、面向网络的OS。对于BeOS和OS/2，我知道的并不多也不好多说什么——除了知道它们也许不是主要考虑在Internet上的永久存在而设计的。（但我仍然对它们保持高度关注。）考虑一下Windows 
+    NT，Nicholas Petreley在InfoWorld上已经写了很多Windows NT设计上的缺陷，这给它在作为一个Internet 
+    OS时打上了黑色标记——单用户方式，在同一目录下一锅粥似的DLL文件，缺乏与X-windw对等的功能，缺乏shell语言编程能力，为了使MS 
+    Office获得速度上的优势而让它以超级用户的方式运行。（后来，微软进行所谓追赶并在最近增加了一些工具，象Korn 
+    Shell。但即使Korn先生本人也并不关心这种实现。）<br>
+    <br>
+    现在在每个主要的个人电脑操作系统上发生的事情就是：打上一个又一个补丁，以追上不断增长的Internet的需要。就Windows 
+    2000来说，它准备增加2000万行代码以追赶Unix。<br>
+    <br>
+    那么这些Internet需求是什么呢？ <br>
+    <br>
+    <strong>个人安全。</strong>那些要在Internet上——不管是以ADSL、ISDN还是Cable 
+    Modems连上来——每周7天，每天24小时（24 x 7）跑的系统都不得不保护它们自己和它们属主的数据。90年代是充斥着黑客故事，否认攻击，以及Internet安全大混乱的年代。这方面的设计假设是可以解决的。 
+    <br>
+    <br>
+    <strong>身份鉴别。</strong>在Internet上要进行哄骗或者要装作是某个人，那太容易了。IPv6（下一代TCP/IP协议）的改变和我们那些操作系统的改变都必须能识别一个用户。这是所有隐私、信任以及商业的基础。 
+    <br>
+    <br>
+    <strong>稳定性</strong>是一个操作系统能满足24x7要求的标记。作为一个严格的Internet 
+    OS，那些每6个月就要重起一次的操作系统是不应该在考虑之列的。 <br>
+    <br>
+    <big><big><strong>真正的危机</strong></big></big><br>
+    <br>
+    那么，我们都有些什么呢？我们有着这么一代操作系统，它们正忙于增加各种功能，对于那些需要能跑关键任务的商业工具的购买者来说，这些功能看起来是有诱惑力的。我们的这些操作系统是不会从底层开始设计，以使它们能监控系统的安全并保护属主的数据的；并且我们有着太多这样的软件开发经理，他们都住在啦啦岛上，自以为是的相信他们能设计并创建有着3500万行源代码的PC操作系统，还能够满足大多数苛刻的质量标准，可靠性标准以及安全标准——仅靠着内部检查和Beta测试。<br>
+    <br>
+    <br>
+    让我给你讲几个现实中的例子。<br>
+    <br>
+    <br>
+    1、我正在和一个Java程序员交流。她在获取ARGV数组参数上遇到了麻烦并且时间很急。实际上要取得多个参数很容易，只是要取得ARGV[0]并且判断一下是否为空，这会导致一个异常。最后她找到这样一个办法：通过截获异常处理来检测ARGV[0]=null，而在不久之后才她终于知道怎样检测一个空的数组。这个例子说明那些没有经验的程序员在匆匆忙忙的情况下会写出什么样的代码：它们看起来能工作——就象嚼口香糖一样嚼到一块儿。但这种代码最终是要出问题的。<br>
+    <br>
+    <br>
+    2、我知道总会有许多潜伏的代码。即使是我写的程序。你会把注意力放在最重要的任务以及与那些需求文档相关的最显眼的代码段上。但总会有一些隐藏的分支我们没有很好的跟踪。我们写这些代码或者只是为了形式上的缘故，但它们确实象定时炸弹一样呆在那儿。<br>
+    <br>
+    <br>
+    3、代码的复杂性。没有人知道怎样预知一套复杂的代码中实际的执行路径。我们考虑一下可能的方案。我们可以致力于分支预测算法。但对于任何一个足够复杂的代码系统（只要源代码超过100,000行），我们永远不可能定义出所有可能发生的交互路径。因此，Beta测试只是一种掩盖。我们投入许多人来做这个工作，然后就合掌祷告，希望出现幸运的小概率事件，让我们查出所有隐藏的代码。这真是异想天开。<br>
+    <br>
+    <br>
+    4、 
+    现在，系统安全和加密技术已经高度发达。人们这上面研究了许多年寻找能提供好的安全性的合适方法。当你把你的代码隐藏在私有的外衣下的时候，事实上你也掩盖了系统中存在的每一个漏洞。好的安全和加密技术是依靠数学理论来获得的。隐藏代码并不能增加安全性，它只是把代码执行上的愚蠢隐藏起来罢了。在这方面，微软总是学不会。<br>
+    <br>
+    <br>
+    5、我们花了许多年时间致力于开发能替我们写代码的第四代系统。它们都已经被扔到历史的垃圾筒里。没有人希望，也没有人相信或者想过他能够修改或维护这样的代码。为我们写代码的系统依然没有智力，也仅仅只用来给我们建立非常有限的数据库查询系统。在经过二十年这样努力之后，我们所知道的也就是没有什么东西可以取代老练的人类程序员的智慧。但这些人类是容易出错的。结果呢？我们写的代码就会有Bug。我们写得越多，Bug也就越多。可以进行对象重用的OO系统确实给我们很大帮助。但问题的根本并没有得到解决。<br>
+    <br>
+    <br>
+    6、程序员们，不管是多么专业，总禁不住要放一些未经许可的代码进去。有时候会是没什么害处的“复活节彩蛋”，给他们带来管理层似乎不想给的荣誉。在其它时候，会是由于疏忽或者为了编程的方便而产生的“后门”，这会给用户以某种特权。举个例子，如果你写的安全代码甚至把你也给关在系统外面，你被卡住了。于是，你就给自己留了通道，一个后门。你把这说成只是为了测试上的方便。但是你需要有极高度的自律行为才会把这些代码在产品发布之前删掉。有时在这些代码被删掉前，程序员可能已经换了岗位或者离开了。你是在凌晨2点，伴着比萨饼和威士忌写的这些代码，而这会儿，项目经理在家中酣睡正浓呢。这是编程中非常有人类特点的部分。猜想一下接下来会怎样？操作系统发布之后，一些骇客发现了泄漏秘密的特征，于是便会侵入不知内情的购买了这个系统的用户——相信了市场部的广告宣传的客户——的安全系统中。<br>
+    <br>
+    <br>
+    <big><big><strong>解决方案</strong></big></big><br>
+    <br>
+    每天，你都会面临着这些影响所带来的后果。二十几年来，我们没能改变人们编程的方式。我们的系统会崩溃，会向骇客泄漏重要的私人信息。各公司的经理们担心，如果他们不去雇佣IBM的安全专家，他们的薪水表就回被任何人偷看，靠这个IBM赚了大把的钞票。那些流行的操作系统变得越来越大，磨炼着我们的硬件和我们的耐性。<br>
+    <br>
+    <br>
+    <strong>解决这个问题的唯一途径是追随Linus Torvalds和Linux的领导</strong>。Linus从这样的信念出发：一群人，通过Internet合作，没有时间上的强迫，可以做出一个优秀的操作系统。他是对的。沿着这条道路，他证明只有开放源代码，在所有人的检查下，可以开发出没有恶作剧，没有后门，然而质量高超，安全性和稳定性很强的操作系统。在苹果只有少数人感谢他的成功。<br>
+    <br>
+    <br>
+    苹果是那么一家公司，确实没有一年年的时间来交付一个企业级的操作系统。是的，从Next（它确实交付这么一个系统）来的经验已经实施。但现在，苹果在已经很优秀、很稳定的Mach内核和BSD 
+    Unix核心上增加了几百万行GUI代码。GUI将会是用户和MacOS X交互的首要手段，而它确实没有从三十几年的可靠性测试中受益。都是些新代码。那儿存在着危险。<br>
+    <br>
+    <br>
+    接下来，那些出于对Windows的妒嫉，决定苹果应从MacOS上收费的管理者们离开了苹果。从那一天起，当写一个复杂的操作系统，保持所有的秘密和私有权利，并且为了利润进行销售，看起来可能的时候起，他们就成为了古代的恐龙。现在那些日子都已经过去了。现代的Internet操作系统只是必须要开放，进行公共评价，否则由于我上面论述过的原因，它们将在自身的重量下崩溃。<br>
+    <br>
+    <br>
+    最后，苹果是一家硬件公司。他们收入的95%是来自于销售硬件。这说明了什么？<br>
+    <br>
+    <br>
+    为一个Internet操作系统从现代的客户那儿收大量钞票，而这个操作系统却辜负人们对它在安全性、稳定性方面的期望和信任，是注定要失败的。<br>
+    <br>
+    <br>
+    我们一直很想知道MacOS X Server和MacOS X 
+    桌面将会卖多少钱。运气好点，也许它们是免费的。运气好点，苹果也许会这样创造他们的计算机：Merced,McKinley,G4 
+    and G5 processors,Firewire,DVD,AGP graphics,gigabit Ethernet,ultraDMA drivers，而他们开放源码的OS就在这上面跑。我们会买机器，而苹果会赚许多钱。<br>
+    <br>
+    <br>
+    或者你可以把你的声誉和你的业务押在Windows 2000上。这个保密的操作系统。这个软件工程幻想的操作系统。你的以及他们的。<br>
+    <br>
+    <br>
+    </p>
+    <hr>
+    <p><br>
+    <br>
+    <br>
+    上个礼拜我估计了一下iMac的制造费用。一个在这方面有经验的读者给我寄了一份他的估计费用。它们比我我所在的估计稍微低一些。 
+    <br>
+    <br>
+    15 inch CRT - $69 <br>
+    Bondi Blue Case &amp; metal supports- $80 <br>
+    233 MHz G3 + L2 Cache - $65 <br>
+    Rage Pro video - $40 <br>
+    Motherboard &amp; infrared port- $70 <br>
+    Power Supply - $30 <br>
+    4 GB Drive - $100 <br>
+    32 MB RAM - $25 <br>
+    24x CD ROM drive - $40 <br>
+    6 MB SGRAM - video - $20 <br>
+    56K Flex modem - $20 <br>
+    100BaseT Ethernet - $20 <br>
+    Misc USB connectors &amp; parts $30 <br>
+    <br>
+    总共609美元。我想Bondi Blue Case和Rage Pro video可能可以更低一些。同时，这样的价格同苹果传统的利润是不一致的。也许广告宣传的价格不包括GPM。不管怎样，这些数字非常有趣，特别是比较我们大量购买这些部件中的一种的价格。<br>
+    <br>
+    <br>
+    --------------------------------------------------------------------------------<br>
+    <br>
+    <br>
+    John Martellaro is a Senior Staff Software Engineer for Lockheed Martin Astronautics. He 
+    lives at 9,100 feet ASL in Colorado with a Ph.D. wife and two cats. The elevation may 
+    explain his occasional delusional writing. When he isn't in front of his G3 Mac, he's on 
+    his Volkl skis.<br>
+    <br>
+    Be sure to check out his new column, &quot;The Warp Core&quot;, at Applelinks. <br>
+    <br>
+    <br>
+    The &quot;Event Horizon&quot; archives can now be found at www.martellaro.com/event. <br>
+    <br>
+    </p>
+    <hr>
+    <p><font size="2">校对: waterbird [AKA]</font></p>
+    <p align="center"><a href="cover2.html"><strong><font size="2">[返回]</font></strong></a></p>
+    <p align="center">　</td>
+  </tr>
+</table>
+</center></div>
+</body>
+</html>

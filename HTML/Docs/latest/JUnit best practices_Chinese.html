@@ -1,0 +1,1245 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Aka 杂志</title>
+</head>
+
+<body bgcolor="#ffffff">
+<div align="center"><center>
+
+<table cellspacing="0" cellpadding="0" width="630" border="0">
+      <tr> 
+        <td bgcolor="#EEEDB7"> 
+          <h1 align="center">JUnit best practices </h1>
+          <div style='layout-grid:15.6pt'>
+<h1 align=center>JUnit 最佳实践</h1>
+            <h3 align=center>Techniques for building resilient, relocatable, multithreaded 
+              JUnit tests</h3>
+            <h3 align=center>一项灵活的、可重定位的多线程JUnit测试技术 </h3>
+            <blockquote> 
+              <p align="center"><b>作者</b> <strong><a href="mailto:andrew.schneider@javaworld.com">Andy 
+                Schneider</a></strong></p>
+              <p align="center"><b>译者</b> 雷云飞 javawebstart Barret gstian [AKA]<br>
+                <b>校对</b> gstian [AKA]</p>
+              <div align="center"><a href="../return/index.html"><font size="2"><b>[返回]</b></font></a></div>
+              <p> 
+              <p><strong>Summary<br>
+                摘要 </strong><br>
+                Extreme Programming's rise in popularity among the Java community 
+                has prompted more development teams to use JUnit: a simple test 
+                framework for building and executing unit tests. Like any toolkit, 
+                JUnit can be used effectively and ineffectively. In this article, 
+                Andy Schneider discusses good and bad ways to use JUnit and provides 
+                practical recommendations for its use by development teams. In 
+                addition, he explains simple mechanisms to support: <br>
+                Java社区里面流行的编程热的不断升温使越来越多的开发团队使用 JUnit进行测试。JUnit 
+                是一种构造和进行单元测试的简便的测试框架。就象所有的工具包一样，JUnit 可以被高效的使用，也可以被低效的使用。在这篇文章种，Andy 
+                Schneider讨论了JUnit 的高效和低效的使用方法，并且为开发团队提供了实用的JUnit使用建议。另外，他提供了几种简单的机制来解释两种方法的差别:
+              </p>
+              <p> 
+              <ul>
+                <li>Automatic construction of composite tests <br>
+                  组合测试的自动构件
+                <li>Multithreaded test cases <br>
+                  多线程测试用例 </li>
+              </ul>
+         <p>This article assumes some familiarity with JUnit. <em>(4,000 
+                words)</em> <br>
+           阅读本篇文章，需要您对JUnit略知一二。 </p>
+            </blockquote>
+            <p><img height=2 alt="" src="../return/JUnit%20best%20practices.files/blue.gif" width="100%" 
+border=0> 
+            <p> <!-- begin body text --> JUnit is a typical toolkit: if used with 
+              care and with recognition of its idiosyncrasies, JUnit will help 
+              to develop good, robust tests. Used blindly, it may produce a pile 
+              of spaghetti instead of a test suite. This article presents some 
+              guidelines that can help you avoid the pasta nightmare. The guidelines 
+              sometimes contradict themselves and each other -- this is deliberate. 
+              In my experience, there are rarely hard and fast rules in development, 
+              and guidelines that claim to be are misleading. <br>
+             JUnit是一个有特色的工具包：熟知它的特性的情况下并细心的使用，它在你开发优良的健壮的测试上市有帮助的。如果被盲目的使用，它可能就像一堆意大利面条，而不是测试集。本文给出了一些可以帮助你避免这些生面团恶梦的指导方针。这些指导方针有时看起来会相互矛盾————这是故意的。以我的经验，在开发中很少有硬性而方便的规则。任何声称是这种规则的指导方针都是误导。 
+            <p>We'll also closely examine two useful additions to the developer's 
+              toolkit: <br>
+              我们同时还将深入检查开发者的工具包里的两个有用的附加物： 
+            <p> 
+            <ul>
+              <li>A mechanism for automatically creating test suites from classfiles 
+                in part of a filesystem <br>
+				一种可以从部分文件系统里面自动创建测试集的机制
+              <li>A new <code>TestCase</code> that better supports tests in multiple 
+                threads <br>
+                一种更好支持多线程的新测试用例。 </li>
+            </ul>
+            <p>When faced with unit testing, many teams end up producing some 
+              kind of testing framework. JUnit, available as open source, eliminates 
+              this onerous task by providing a ready-made framework for unit testing. 
+              JUnit, best used as an integral part of a development testing regime, 
+              provides a mechanism that developers can use to consistently write 
+              and execute tests. So, what are the JUnit best practices? <br>
+            当面对单元测试时，许多团队都会自己去完成某种测试框架。JUnit做为一种开放软件，通过为单元测试提供一种现成的测试框架，来消除这种繁重的任务。JUnit作为一个开发测试体制整体中的一部分给开发者提供了一种可以一致地编写和执行测试的机制。既然如此，那么，什么是JUnit的最佳实践？ 
+            <p><font size=+1><strong>Do not use the test-case constructor to set 
+              up a test case </strong></font><br>
+              <font size=+1><strong>不要使用测试用例构造器来创建一个测试用例</strong></font><br>
+              <br>
+              Setting up a test case in the constructor is not a good idea. Consider: 
+              <br>
+              使用构造器来建立一个测试用例并不是个好主意，例如： 
+            <p><code>public class SomeTest extends TestCase <br>
+              &nbsp;&nbsp;&nbsp;public SomeTest (String testName) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super (testName); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Perform test set-up <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              } <br>
+              </code> 
+            <p>Imagine that while performing the setup, the setup code throws 
+              an <code>IllegalStateException</code>. In response, JUnit would 
+              throw an <code>AssertionFailedError</code>, indicating that the 
+              test case could not be instantiated. Here is an example of the resulting 
+              stack trace: <br>
+              想象一下当执行安装时，代码抛出一个IllegalStateException异常。做为回应，JUnit也会抛出一个AssertionFailedError异常来指示测试用例无法实例化。下面是一个堆栈跟踪结果示例： 
+            <p><code>junit.framework.AssertionFailedError: Cannot instantiate 
+              test case: test1 at <br>
+              junit.framework.Assert.fail(Assert.java:143) at <br>
+              junit.framework.TestSuite$1.runTest(TestSuite.java:178) at <br>
+              junit.framework.TestCase.runBare(TestCase.java:129) at <br>
+              junit.framework.TestResult$1.protect(TestResult.java:100) at <br>
+              junit.framework.TestResult.runProtected(TestResult.java:117) at 
+              <br>
+              junit.framework.TestResult.run(TestResult.java:103) at <br>
+              junit.framework.TestCase.run(TestCase.java:120) at <br>
+              junit.framework.TestSuite.run(TestSuite.java, Compiled Code) at 
+              <br>
+              junit.ui.TestRunner$12.run(TestRunner.java:429) <br>
+              </code> 
+            <p>This stack trace proves rather uninformative; it only indicates 
+              that the test case could not be instantiated. It doesn't detail 
+              the original error's location or place of origin. This lack of information 
+              makes it hard to deduce the exception's underlying cause. <br>
+              这个堆栈跟踪没有提供多少有价值的信息。它只是表明测试用例不能被实例化。它并没有初始化时产生错误的错误位置和错误来源的详细信息。信息的缺乏使得推断该异常出现的原因变得困难。 
+            <p>Instead of setting up the data in the constructor, perform test 
+              setup by overriding <code>setUp()</code>. Any exception thrown within 
+              <code>setUp()</code> is reported correctly. Compare this stack trace 
+              with the previous example: <br>
+              放弃在构造器中创建数据,通过重载setUp()来执行测试创建，。任何在setUp()中产生的异常都会被准确的报告。与前一个例子对照,比较下面的堆栈跟踪： 
+            <p><code>java.lang.IllegalStateException: Oops at bp.DTC.setUp(DTC.java:34) 
+              at <br>
+              junit.framework.TestCase.runBare(TestCase.java:127) at <br>
+              junit.framework.TestResult$1.protect(TestResult.java:100) at <br>
+              junit.framework.TestResult.runProtected(TestResult.java:117) at 
+              <br>
+              junit.framework.TestResult.run(TestResult.java:103) <br>
+              ... <br>
+              </code> 
+            <p>This stack trace is much more informative; it shows which exception 
+              was thrown (<code>IllegalStateException</code>) and from where. 
+              That makes it far easier to explain the test setup's failure. <br>
+              这个堆栈跟踪含有更多的信息量。它表明了异常类型（IllegalStateException）， 以及产生位置。这使得可以更容易解释为何测试建立失败。 
+            <p><font size=+1><strong>Don't assume the order in which tests within 
+              a test case run </strong></font><br>
+              <font size=+1><strong>不要推测一个测试用例运行中各测试的执行顺序</strong></font><br>
+              <br>
+              You should not assume that tests will be called in any particular 
+              order. Consider the following code segment: <br>
+              你不应该认为各测试用例会按照任何特定顺序被调用。考虑下面的代码片断： 
+            <p><code>public class SomeTestCase extends TestCase { <br>
+              &nbsp;&nbsp;&nbsp;public SomeTestCase (String testName) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super (testName); <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;public void testDoThisFirst () { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;... <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;public void testDoThisSecond () { <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              } <br>
+              </code> 
+            <p>In this example, it is not certain that JUnit will run these tests 
+              in any specific order when using reflection. Running the tests on 
+              different platforms and Java VMs may therefore yield different results, 
+              unless your tests are designed to run in any order. Avoiding temporal 
+              coupling will make the test case more robust, since changes in the 
+              order will not affect other tests. If the tests are coupled, the 
+              errors that result from a minor update may prove difficult to find. 
+              <br>
+              在这个例子中，当使用映射时，JUnit将按照何种顺序执行这些测试并不能确定。在不同的平台及Java VM上，可能产生不同的结果，除非你的测试被事先设计为按某种顺序执行。由于执行顺序的改变不会影响其它测试，避免这种短暂的耦合使得你的测试用例更加健壮。如果测试耦合在一起，由于一个小变动引起的错误也许会难于发现。 
+            <p>In situations where ordering tests makes sense -- when it is more 
+              efficient for tests to operate on some shared data that establish 
+              a fresh state as each test runs -- use a static <code>suite()</code> 
+              method like this one to ensure the ordering: <br>
+              在某些情况下，测试的顺序还是有意义的————例如，测试们可以使用一些共享数据时来提高效率。这些共享数据对于每个测试运行时都会建立一个新的状态。————可以使用一个静态的 
+              suite() 方法来保证执行顺序，如下： 
+            <p><code>public static Test suite() { <br>
+              &nbsp;&nbsp;&nbsp;suite.addTest(new SomeTestCase ("testDoThisFirst";)); 
+              <br>
+              &nbsp;&nbsp;&nbsp;suite.addTest(new SomeTestCase ("testDoThisSecond";)); 
+              <br>
+              &nbsp;&nbsp;&nbsp;return suite; <br>
+              } <br>
+              </code> 
+            <p>There is no guarantee in the JUnit API documentation as to the 
+              order your tests will be called in, because JUnit employs a <code>Vector</code> 
+              to store tests. However, you can expect the above tests to be executed 
+              in the order they were added to the test suite. <br>
+              在JUnit API 文档中并没有保证你的测试被调用的顺序，因为JUnit使用V一个区段来存放测试。 然而，你可以保证上面的测试按照它们被加入测试集的顺序被执行。 
+            <p><font size=+1><strong>Avoid writing test cases with side effects 
+              </strong></font><br>
+              <font size=+1><strong>避免写带有副作用的测试用例 </strong></font><br>
+              Test cases that have side effects exhibit two problems: <br>
+              带有副作用的测试用例会出现下面两个问题： 
+            <p> 
+            <ul>
+              <li>They can affect data that other test cases rely upon <br>
+                它们会影响其他测试用例所依赖的数据 
+              <li>You cannot repeat tests without manual intervention <br>
+                你不能在没有手工干预的情况下重复测试 </li>
+            </ul>
+            <p>In the first situation, the individual test case may operate correctly. 
+              However, if incorporated into a <code>TestSuite</code> that runs 
+              every test case on the system, it may cause other test cases to 
+              fail. That failure mode can be difficult to diagnose, and the error 
+              may be located far from the test failure. <br>
+              在第一种情况下，独立的测试用例也许可以正确的执行，然而，当它们被置入一个执行 该系统中所有测试的测试集时，可能导致其他测试用例失败。但这种失败的做法很难 
+              诊断出来，错误也许离失败的地方很远。 
+            <p>In the second situation, a test case may have updated some system 
+              state so that it cannot run again without manual intervention, which 
+              may consist of deleting test data from the database (for example). 
+              Think carefully before introducing manual intervention. First, the 
+              manual intervention will need to be documented. Second, the tests 
+              could no longer be run in an unattended mode, removing your ability 
+              to run tests overnight or as part of some automated periodic test 
+              run. <br>
+              在第二种情况下，一个测试用例可能运行后更改了系统状态，以至于它不能在没有手工干预 的情况下被再次执行。例如，这有可能是从数据库中删除了测试数据造成的。在手工 
+              干预之前，仔细的考虑下面两点:首先，手工干预应该被记录在文档当中，其次，这种测试不 能在无人监控的情况下被执行，应该去掉它们通宵执行测试或者作为自动运行的周期性测试的一部分的能力.
+            <p><font size=+1><strong>Call a superclass's setUp() and tearDown() 
+              methods when subclassing</strong></font><font size=+1><strong><br>
+              子类化的时候，调用父类的 setUp() 方法和 tearDown() 方法</strong></font><br>
+              When you consider: <br>
+              考虑如下情况： 
+            <p><code>public class SomeTestCase extends AnotherTestCase { <br>
+              &nbsp;&nbsp;&nbsp;// A connection to a database <br>
+              &nbsp;&nbsp;&nbsp;private Database theDatabase; <br>
+              &nbsp;&nbsp;&nbsp;public SomeTestCase (String testName) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super (testName); <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;public void testFeatureX () { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;... <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;public void setUp () { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Clear out the database <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;theDatabase.clear (); <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              } <br>
+              </code> 
+            <p>Can you spot the deliberate mistake? <code>setUp()</code> should 
+              call <code>super.setUp()</code> to ensure that the environment defined 
+              in <code>AnotherTestCase</code> initializes. Of course, there are 
+              exceptions: if you design the base class to work with arbitrary 
+              test data, there won't be a problem. <br>
+              你能发现隐藏其中的那个需要深思的错误吗？setUp()方法应该调用父类的setUp()方法以保证能够初始化在父类AnotherTestCase 中定义的测试环境。当然，这也并不是绝对的--如果父类设计成可以通用的基类的话，那么，以上就不是一个问题。 
+            <p><!-- break --> 
+            <p><font size=+1><strong>Do not load data from hard-coded locations 
+              on a filesystem </strong></font><br>
+              <font size=+1><strong>不要从文件系统里那些代码已固定的位置加载数据 </strong></font><br>
+              Tests often need to load data from some location in the filesystem. 
+              Consider the following: <br>
+              测试经常要从文件系统中读入数据，如下： 
+            <p><code>public void setUp () { <br>
+              &nbsp;&nbsp;&nbsp;FileInputStream inp ("C:\\TestData\\dataSet1.dat"); 
+              <br>
+              &nbsp;&nbsp;&nbsp;... <br>
+              } <br>
+              </code> 
+            <p>The code above relies on the data set being in the <code>C:\TestData</code> 
+              path. That assumption is incorrect in two situations: <br>
+              上面这段代码依赖于C:\TestDate中的数据。在下面２种情况下，上面的假设会出现如下问题： 
+            <p> 
+            <ul>
+              <li>A tester does not have room to store the test data on <code>C:</code> 
+                and stores it on another disk <br>
+                可能在C盘没有足够的空间存储测试数据，而把它存在其它的磁盘上 
+              <li>The tests run on another platform, such as Unix<br>
+                测试案例可能运行在另外的平台上，比如Unix </li>
+            </ul>
+            <p>One solution might be: <br>
+              以下是一种解决方案： 
+            <p><code>public void setUp () { <br>
+              &nbsp;&nbsp;&nbsp;FileInputStream inp ("dataSet1.dat"); <br>
+              &nbsp;&nbsp;&nbsp;... <br>
+              } <br>
+              </code> 
+            <p>However, that solution depends on the test running from the same 
+              directory as the test data. If several different test cases assume 
+              this, it is difficult to integrate them into one test suite without 
+              continually changing the current directory. <br>
+              但是，上面的解决方案是把测试数据放在运行测试案例的目录中，如果把这样的几个测试案例集成起来作为测试集来运行的话，只有测试集在运行过程中不断的改变当前目录才行。 
+            <p>To solve the problem, access the dataset using either <code>Class.getResource()</code> 
+              or <code>Class.getResourceAsStream()</code>. Using them, however, 
+              means that resources load from a location relative to the class's 
+              origin. <br>
+              要解决这个问题，可以使用Class.getResource()或者Class.getResourceAsStream()这种访问资源的形式来访问数据，它们都是从类的相对路径来访问资源的。 
+            <p>Test data should, if possible, be stored with the source code in 
+              a configuration management (CM) system. However, if you're using 
+              the aforementioned resource mechanism, you'll need to write a script 
+              that moves all the test data from the CM system into the classpath 
+              of the system under test. A less ungainly approach is to store the 
+              test data in the source tree along with the source files. With this 
+              approach, you need a location-independent mechanism to locate the 
+              test data within the source tree. One such mechanism is a class. 
+              If a class can be mapped to a specific source directory, you could 
+              write code like this: <br>
+              如果可能的话，测试数据应该和源程序一起存放到配置管理系统中。如果使用前面提到的访问资源的形式，就要自己写脚本来把所有的测试数据从配置管理系统中取出来加入要测试案例的classpath中。还有一种方法是把测试数据和源程序存放在一起，使用和位置无关的方法来查找测试数据。以类为例，如果类能够被映射到一个特定的目录，相应的代码可以如下： 
+            <p><code>InputStream inp = SourceResourceLoader.getResourceAsStream 
+              (this.getClass (), "dataSet1.dat"); <br>
+              </code> 
+            <p>Now you must only determine how to map from a class to the directory 
+              that contains the relevant source file. You can identify the root 
+              of the source tree (assuming it has a single root) by a system property. 
+              The class's package name can then identify the directory where the 
+              source file lies. The resource loads from that directory. For Unix 
+              and NT, the mapping is straightforward: replace every instance of 
+              '.' with <code>File.separatorChar</code>. <br>
+              现在要考虑的是怎么把一个类映射到包含相应源文件的目录。可以通过系统属性来设置源文件根目录。类的包名可以标志源文件的存放位置。在Unix和NT上，这种映射是直接的：把'.'替换成为File.separatorChar就可以了。 
+            <p><font size=+1><strong>Keep tests in the same location as the source 
+              code </strong></font><br>
+              <font size=+1><strong>把测试案例和源文件放在一起</strong></font><br>
+              If the test source is kept in the same location as the tested classes, 
+              both test and class will compile during a build. This forces you 
+              to keep the tests and classes synchronized during development. Indeed, 
+              unit tests not considered part of the normal build quickly become 
+              dated and useless. <br>
+              如果测试案例和要测试的代码放在一起，那么可以同时对这两者编译。这样可以保证在开发过程中测试和代码保持同步。实际上，不在正常的版本中的单元测试马上会变的过时、无用。 
+            <p><font size=+1><strong>Name tests properly<br>
+             正确命名测试案例 </strong></font><br>
+              Name the test case <code>TestClassUnderTest</code>. For example, 
+              the test case for the class <code>MessageLog</code> should be <code>TestMessageLog</code>. 
+              That makes it simple to work out what class a test case tests. Test 
+              methods' names within the test case should describe what they test: 
+              <br>
+             给测试案例起名TestClassUnderTest。例如，类MessageLog的测试案例的名字应该是TestMessageLog。这样可以很容易的看出是对哪个类进行测试。同时，测试案例的方法应该清楚的表明要测什么： 
+            <p> 
+            <ul>
+              <li><code>testLoggingEmptyMessage()</code> 
+              <li><code>testLoggingNullMessage()</code> 
+              <li><code>testLoggingWarningMessage()</code> 
+              <li><code>testLoggingErrorMessage()</code> </li>
+            </ul>
+            <p>Proper naming helps code readers understand each test's purpose. 
+              <br>
+              正确的命名可以帮助别人理解每个测试的目的。 
+            <p><font size=+1><strong>Ensure that tests are time-independent<br>
+              保证测试是和时间无关的 </strong></font><br>
+              Where possible, avoid using data that may expire; such data should 
+              be either manually or programmatically refreshed. It is often simpler 
+              to instrument the class under test, with a mechanism for changing 
+              its notion of today. The test can then operate in a time-independent 
+              manner without having to refresh the data. <br>
+              只要可能，避免使用可能过期的数据;这样的数据要么手工，要么由程序来刷新。在测试下建立一个类经常需要更简化些，要用一种可以与现在的思想保持同步的机制.这样，测试案例就可以和时间无关，不需要刷新数据。 
+            <p><font size=+1><strong>Consider locale when writing tests<br>
+              写测试时考虑地址的影响 </strong></font><br>
+              Consider a test that uses dates. One approach to creating dates 
+              would be: <br>
+              考虑使用日期的一个测试案例。一种创建日期的方法： 
+            <p><code>Date date = DateFormat.getInstance ().parse ("dd/mm/yyyy"); 
+              <br>
+              </code> 
+            <p>Unfortunately, that code doesn't work on a machine with a different 
+              locale. Therefore, it would be far better to write: <br>
+              不幸的是，这段代码在不同的机器上不能正常的运行。因此，可以换用下面较好的方式： 
+            <p><code>Calendar cal = Calendar.getInstance (); <br>
+              Cal.set (yyyy, mm-1, dd); <br>
+              Date date = Calendar.getTime (); <br>
+              </code> 
+            <p>The second approach is far more resilient to locale changes. <br>
+              第二中方法可以更灵活的适应地址的改变。 
+            <p><font size=+1><strong>Utilize JUnit's assert/fail methods and exception 
+              handling for clean test code<br>
+              利用JUnit's的assert/fail方法和异常机制创建干净的代码 </strong></font><br>
+              Many JUnit novices make the mistake of generating elaborate try 
+              and catch blocks to catch unexpected exceptions and flag a test 
+              failure. Here is a trivial example of this: <br>
+              许多初学者可能会精心设计一些异常捕捉来捕捉异常，并标志测试出现错误。如下： 
+            <p><code>public void exampleTest () { <br>
+              &nbsp;&nbsp;&nbsp;try { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// do some test <br>
+              &nbsp;&nbsp;&nbsp;} catch (SomeApplicationException e) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fail ("Caught SomeApplicationException 
+              exception"); <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              } <br>
+              </code> 
+            <p>JUnit automatically catches exceptions. It considers uncaught exceptions 
+              to be errors, which means the above example has redundant code in 
+              it. <br>
+              JUnit可以自动的捕捉异常，把没有截获的异常看作错误，所以，上面的代码有冗余代码。 
+            <p>Here's a far simpler way to achieve the same result: <br>
+              以下以一种更简洁的方式实现上面的例子： 
+            <p><code>public void exampleTest () throws SomeApplicationException 
+              { <br>
+              &nbsp;&nbsp;&nbsp;// do some test <br>
+              } <br>
+              </code> 
+            <p>In this example, the redundant code has been removed, making the 
+              test easier to read and maintain (since there is less code). <br>
+              在此，除去了冗余的代码，使得测试易读易维护(因为代码很少)。 
+            <p>Use the wide variety of assert methods to express your intention 
+              in a simpler fashion. Instead of writing: <br>
+              使用广泛的多样性的有效方法来表达你的意图。不应该： 
+            <p><code>assert (creds == 3); <br>
+              </code> 
+            <p>Write: <br>
+              而是： 
+            <p><code>assertEquals ("The number of credentials should be 3", 3, 
+              creds); <br>
+              </code> 
+            <p>The above example is much more useful to a code reader. And if 
+              the assertion fails, it provides the tester with more information. 
+              JUnit also supports floating point comparisons: <br>
+              上面的代码让人很容易的读懂，并且即使上面的维护失败，可以提供给测试者更多的信息。JUnit同样支持浮点数的比较： 
+            <p><code>assertEquals ("some message", result, expected, delta); <br>
+              </code> 
+            <p>When you compare floating point numbers, this useful function saves 
+              you from repeatedly writing code to compute the difference between 
+              the result and the expected value. <br>
+              当比较浮点类型的数据时，可以不必再写同样功能的代码。 
+            <p>Use <code>assertSame()</code> to test for two references that point 
+              to the same object. Use <code>assertEquals()</code> to test for 
+              two objects that are equal. <br>
+              要测试两个引用是否指向同一个对象，使用assertSame()方法；要测试两个对象是否相等，使用assertEquals()方法 
+            <p><font size=+1><strong>Document tests in javadoc<br>
+              javadoc下的文档测试 </strong></font><br>
+              Test plans documented in a word processor tend to be error-prone 
+              and tedious to create. Also, word-processor-based documentation 
+              must be kept synchronized with the unit tests, adding another layer 
+              of complexity to the process. If possible, a better solution would 
+              be to include the test plans in the tests' <code>javadoc</code>, 
+              ensuring that all test plan data reside in one place. <br>
+              在一个字处理器里创建需要归档的测试计划易于出现错误且单调乏味。另外，基于字处理器的文件必须与单元测试保持同步，这给处理过程增加了额外一层的复杂性。如果可能，更好的解决方法是将测试计划包括在测试的javadoc，确保所有的测试计划数据保存在一个地方。 
+            <p><font size=+1><strong>Avoid visual inspection<br>
+              避免目视检查 </strong></font><br>
+              Testing servlets, user interfaces, and other systems that produce 
+              complex output is often left to visual inspection. Visual inspection 
+              -- a human inspecting output data for errors -- requires patience, 
+              the ability to process large quantities of information, and great 
+              attention to detail: attributes not often found in the average human 
+              being. Below are some basic techniques that will help reduce the 
+              visual inspection component of your test cycle. <br>
+              测试servlets，用户界面，和其他产生复杂输出的系统通常采用目视检查。目视检查——一个人为了发现错误检查输出的数据——需要耐心，处理大量信息的能力，以及对细节的洞察力：这些通常不会是一般人身上所具备的。以下是一些基本的技术可以用来帮助减少你的测试周期中目视检查。 
+            <p><strong>Swing<br>
+              Swing </strong><br>
+              When testing a Swing-based UI, you can write tests to ensure that: 
+              <br>
+              当测试一个基于Swing的用户界面时，你可以写一些测试以保证： 
+            <p> 
+            <ul>
+              <li>All the components reside in the correct panels <br>
+                所有的构件都在适当的面板里 
+              <li>You've configured the layout managers correctly <br>
+                确保正确配置了版式管理器 
+              <li>Text widgets have the correct fonts <br>
+                Text widgets(文字集)里有正确的字体 </li>
+            </ul>
+            <p>A more thorough treatment of this can be found in the worked example 
+              of testing a GUI, referenced in the <a 
+href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resources">Resources</a> 
+              section.<br>
+              这方面更详细的处理方式可以在一个测试某GUI的成功例子中找到，参考<a href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resources">资料</a>章节。 
+            <p><strong>XML<br>
+              XML </strong><br>
+              When testing classes that process XML, it pays to write a routine 
+              that compares two XML DOMs for equality. You can then programmatically 
+              define the correct DOM in advance and compare it with the actual 
+              output from your processing methods. <br>
+              当测试处理XML的类时，写一个程序比较两个XML DOM是否相等。这样你可以预先精确地定义正确的DOM并且与使用你的处理方法得出的实际结果相比较。 
+            <p><strong>Servlets<br>
+              Servlets </strong><br>
+              With servlets, a couple of approaches can work. You can write a 
+              dummy servlet framework and preconfigure it during a test. The framework 
+              must contain derivations of classes found in the normal servlet 
+              environment. These derivations should allow you to preconfigure 
+              their responses to method calls from the servlet. <br>
+              在servlets方面，有一大堆的方法管用。你可以在测试中写一个哑servlet框架并且预先配置它。框架必须包括在正常servlet环境中的类的出处。这些出处允许你预先配置它们对来自servlet的方法调用的反应。 
+            <p>For example: <br>
+              例如： 
+            <p> 
+            <ul>
+              <li><code>HttpServletRequest</code> can be subclassed to allow the 
+                test class to specify the header, method, path info, and other 
+                data <br>
+                HttpServletRequest可以定义成子集以允许测试类指定其消息头，方法，路径信息，和其他数据 
+              <li><code>HttpServletResponse</code> can be subclassed to return 
+                an output stream that stores the servlets' responses in a string 
+                for later checking <br>
+                HttpServletResponse可以定义成子集返回一个将servlet响应保存在一个字符串的输出流以备稍后的检查。 </li>
+            </ul>
+            <p>A simpler solution is to use <code>HttpUnit</code> to test your 
+              servlets. <code>HttpUnit</code> provides a DOM view of a request's 
+              results, which makes it relatively simple to compare actual data 
+              with expected results. <br>
+              一个比较简单的解决方法是使用HttpUnit来测试你的servlet。 HttpUnit 提供了一个关于请求结果的DOM的视点，这使比较实际数据和期望得到的结果相对简单。 
+            <p>You can avoid visual inspection in many ways. However, sometimes 
+              it is more cost-effective to use visual inspection or a more specialized 
+              testing tool. For example, testing a UI's dynamic behavior within 
+              JUnit is complicated, but possible. It may be a better idea to purchase 
+              one of the many UI record/playback testing tools available, or to 
+              perform some visual inspection as part of testing. However, that 
+              doesn't mean the general rule -- don't visually inspect -- should 
+              be ignored. <br>
+              你可以用很多方法避免目视检查。但是，有时使用目视检查或一种更专用的测试工具会更加节省成本。例如，测试在JUnit的一个用户界面的动态行为是复杂的，但却有可能。购买可利用的众多用户界面记录/回放的测试工具中的一种，或者进行一些目视检查作为测试的一部分将是一个更好的主意。但是，那并不意味着一般的规则——不要进行目视检查——应该被忽略。 
+            <p><!-- break --> 
+            <p><font size=+1><strong>Keep tests small and fast<br>
+              保持测试小而快速 </strong></font><br>
+              Executing every test for the entire system shouldn't take hours. 
+              Indeed, developers will more consistently run tests that execute 
+              quickly. Without regularly running the full set of tests, it will 
+              be difficult to validate the entire system when changes are made. 
+              Errors will start to creep back in, and the benefits of unit testing 
+              will be lost. This means stress tests and load tests for single 
+              classes or small frameworks of classes shouldn't be run as part 
+              of the unit test suite; they should be executed separately. <br>
+              执行每一项全面的系统测试不该花几个小时。是的，开发者应该更加一贯的进行那些执行快速的测试。没有有规律地进行全套测试，当作出改变时，将很难证实整个系统的有效性。错误将会蹑手蹑脚进来，单元测试的好处也会丧失。这意味着针对单一类和小框架类的重点测试和负载测试不该作为单元测试集合的一部分；它们应该分开进行。 
+            <p><font size=+1><strong>Use the reflection-driven JUnit API<br>
+              使用映射驱动的JUnit API </strong></font><br>
+              Allowing <code>TestSuite</code> to populate itself with test cases 
+              using reflection reduces maintenance time. Reflection ensures that 
+              you don't need to update the <code>suite()</code> implementation 
+              whenever a new test is added. <br>
+              允许TestSuite使用映射在测试环境下繁殖自己可以减少维护时间。当新的测试被加进来时，映射确保你不需要更新suite()。 
+            <p><font size=+1><strong>Build a test case for the entire system<br>
+              为整个系统建立一个测试环境 </strong></font><br>
+              It is important to build a test case for the entire system. If one 
+              test case exercises the whole system, then developers can test the 
+              impact their changes will have on every class in the system. This 
+              increases the chance of errors resulting from unanticipated side 
+              effects being caught earlier. Without a universal test case, developers 
+              tend to test only the class they have modified. Also, running all 
+              the tests for the system becomes a painstaking manual process.<br>
+              为整个系统建立一个测试环境是重要的。如果一个测试环境对于整个系统行之有效，那么开发者可以测试他们的改正会对系统中的每个类有什么影响。这增加了由于先前发现的不曾预料到的一面的影响而引起的犯错误的几率。没有一个通用的测试环境的话，开发者将只能测试他们修改过的类。此外，运行系统的每一项测试将成为一个艰苦的手工过程。 
+            <p>If we built a test case for the entire system, it would consist 
+              of all the other test cases, already defined. The test case would 
+              define the <code>suite()</code> method, which would add all test 
+              cases defined in the system to a <code>TestSuite</code>. This test 
+              suite would then be returned from the <code>suite()</code> method. 
+              If you had many test cases, building such a test suite would be 
+              time-consuming. In addition, you would have to update the universal 
+              test case when new test cases were added or existing test cases 
+              were renamed or deleted. Instead of manually building and maintaining 
+              the test suite, build a test case that automatically builds a <code>TestSuite</code> 
+              from all of your system's test cases. Here is an outline of the 
+              requirements for such a test case:<br>
+              如果我们为整个系统建立一个测试环境，这需包括所有已经定义的其它测试环境。测试环境需定义suite() 方法，这会使所有系统定义的测试环境加到TestSuite。 
+             这个测试组合会由suite()方法返回。如果你有许多测试环境，建立这样一个测试组合将耗费大量时间。 另外，当新的测试环境被加入或者现有的测试环境被改名或删除时，你必须更新全局测试环境。取代手动建立和维护测试组合， 
+         建立一个能自动建立和维护来自你系统的全部测试环境的测试组合。这里有一个对于创建一个测试环境需求的大概描述： 
+            <p> 
+            <ul>
+              <li>It should not be self-loading; that would cause recursion. As 
+                such, we need to mark test cases as not loadable.<br>
+                不应该自我调用；那会引起递归。同样的，我们需要标注测试环境不可载入。 
+              <li>It should not load classes derived from <code>TestCase</code>s 
+                that are meant to be subclasses, and not directly executed.<br>
+                不该载入那些衍生自TestCase的类，这意味着定义为子集，且不直接执行。 
+              <li>It should distinguish between unit tests and other tests, like 
+                load or stress tests. That will let different tests run at different 
+                times.<br>
+                单元测试和其他测试像负载或重点测试一样应该有所区别。不同的测试运行不同的次数。 
+              <li>It should recurse down a directory structure, looking for test 
+                cases to add to the test suite.<br>
+                在一个目录结构下递归，以寻找加入测试组合的测试环境。 </li>
+            </ul>
+            <p>We can use the Java type system to determine what sort of test 
+              a test case represents. We can have test cases extend classes like 
+              <code>UnitTest</code>, <code>StressTest</code>, <code>LoadTest</code>, 
+              and so on. However, this would make test case classes difficult 
+              to reuse between test types, because the test type decision is made 
+              near the root of the inheritance hierarchy; it should be made at 
+              each leaf instead. As an alternative, we can distinguish tests using 
+              a field: <code>public static final String TEST_ALL_TEST_TYPE</code>. 
+              Test cases will be loaded if they have this field declared with 
+              a value matching a string that the automatic test case has been 
+              configured with. To build this, we'll implement three classes:<br>
+              我们可以使用一个Java类型的系统来判断一个测试环境代表什么样的测试。我们可以有测试环境 扩展类如UnitTest，StressTest，LoadTest等等。 
+              但是，这会使测试环境类在测试类型中难以再利用，因为测试类型的决定是在靠近继承层次的根部作出的；它本该在每个叶下作出。 作为一个可选方案，我们可以使用一个域将测试区分开来：public 
+              static final String TEST_ALL_TEST_TYPE。如果这个域声明的值符合测试环境所自动配置的字符串，那么测试环境将被读入。建立这个，我们需要实现三个类。 
+            <p> 
+            <ul>
+              <li><strong><code>ClassFinder</code></strong> recursively searches 
+                a directory tree for classfiles. Each classfile is loaded and 
+                the class's full class name is extracted. That class name is added 
+                to a list for later loading. 
+              <li><strong><code>ClassFinder</code></strong> 在一个目录树递归搜索类文件。每个类文件被读入，类的全称被展开。这个类名称被加到一个列表里以备稍后读入。 
+              <li><strong><code>TestCaseLoader</code></strong> loads each class 
+                in the list found by <code>ClassFinder</code> and determines if 
+                it is a test case. If it is, it is added to a list. 
+              <li><strong><code>TestCaseLoader</code></strong> 读入由ClassFinder找到的列表中的每个类并判断它是否为一个测试环境。如果是，被加入一个列表。 
+              <li><strong><code>TestAll</code></strong> is a subclass of <code>TestCase</code> 
+                with an implementation of <code>suite()</code> that will load 
+                in a set of test cases by <code>TestCaseLoader</code>. </li>
+              <li><strong><code>TestAll</code></strong> 是TestCase的子集，具有一个suite()的实现，可以读入一批由TestCaseLoader生成的的测试用例。 
+              </li>
+            </ul>
+            <p>Let's look at each class in turn.<br>
+              让我们按顺序看一个每个类。 
+            <p><strong>ClassFinder<br>
+              ClassFinder </strong><br>
+              <code>ClassFinder</code> locates the classes within the system to 
+              be tested. It is constructed with the directory that holds the system's 
+              classes. <code>ClassFinder</code> then finds all the classes in 
+              the directory tree and stores them for later use. The first part 
+              of <code>ClassFinder</code>'s implementation is below:<br>
+              ClassFinder定位要测试的系统里的每个类。它使用一个保存系统所有类的目录结构。ClassFinder然后在目录树里找到所有类，并保存它们以备稍后使用。第一部分的ClassFinder实现如下： 
+            <p><code>public class ClassFinder { <br>
+              &nbsp;&nbsp;&nbsp;// The cumulative list of classes found. <br>
+              &nbsp;&nbsp;&nbsp;final private Vector classNameList = new Vector 
+              (); <br>
+              &nbsp;&nbsp;&nbsp;/** <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;* Find all classes stored in classfiles 
+              in classPathRoot <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;* Inner classes are not supported. <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;*/ <br>
+              &nbsp;&nbsp;&nbsp;public ClassFinder(final File classPathRoot) throws 
+              IOException { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;findAndStoreTestClasses (classPathRoot); 
+              <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              <br>
+              &nbsp;&nbsp;&nbsp;/** <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;* Recursive method that adds all class names 
+              related to classfiles it finds in <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;* the currentDirectory (and below). <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;*/ <br>
+              &nbsp;&nbsp;&nbsp;private void findAndStoreTestClasses (final File 
+              currentDirectory) throws IOException { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String files[] = currentDirectory.list(); 
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(int i = 0;i &lt; files.length;i++) 
+              { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;File file 
+              = new File(currentDirectory, files[i]); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String fileBase 
+              = file.getName (); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int idx = 
+              fileBase.indexOf(".class"); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;final int 
+              CLASS_EXTENSION_LENGTH = 6; <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(idx != 
+              -1 &amp;&amp; (fileBase.length() - idx) == CLASS_EXTENSION_LENGTH) 
+              { <br>
+              </code> 
+            <p>In the code above, we iterate over all the files in a directory. 
+              If a filename has a ".class" extension, we determine the fully qualified 
+              class name of the class stored in the classfile, as seen here: <br>
+              在上面的代码中，我们重申了一个目录里的所有文件。如果一个文件有.class的扩展名，我们就测定存在类文件里的类的有效类名称，就如你所见： 
+            <p><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JcfClassInputStream 
+              inputStream = new JcfClassInputStream(new FileInputStream (file)); 
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JcfClassFile 
+              classFile = new JcfClassFile (inputStream); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println 
+              ("Processing: " + classFile.getFullName ().replace ('/','.')); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;classNameList.add 
+              (classFile.getFullName ().replace ('/','.')); <br>
+              </code> 
+            <p>This code uses the JCF package to load the classfile and determine 
+              the name of the class stored within it. The JCF package is a set 
+              of utility classes for loading and examining classfiles. (See <a 
+href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resources">Resources</a> 
+              for more information.) The JCF package allows us to find each class's 
+              full class name. We could infer the class name from the directory 
+              name, but that doesn't work well for build systems that don't store 
+              classes according to this structure. Nor does it work for inner 
+              classes. <br>
+              这些代码使用JCF包来读入类文件以及测定保存在里面的类的名称。JCF包是一套读入和检测类文件的工具类。(参阅<a href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resources">资源</a>以获得进一步的信息。)JCF包允许我们寻找每个类的全称。我们能从目录名推断出类的名称，但对于那些不是以这种结构保存类的系统就行不通了。而且深层的类也不能用这种方法。 
+            <p>Lastly, we check to see if the file is actually a directory. (See 
+              the code snippet below.) If it is, we recurse into it. This allows 
+              us to discover all the classes in a directory tree:<br>
+              最后，我们查看一下文件是否确实是一个目录。(请看下面的代码片断。)如果是，我们再递归进入。这允许我们发现所有在一个目录树里的类： 
+            <p><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else 
+              if(file.isDirectory()) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;findAndStoreTestClasses 
+              (file); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              <br>
+              /** <br>
+              &nbsp;* Return an iterator over the collection of classnames (Strings) 
+              <br>
+              &nbsp;*/ <br>
+              public Iterator getClasses () { <br>
+              &nbsp;&nbsp;&nbsp;return classNameList.iterator (); <br>
+              } <br>
+              } <br>
+              </code> 
+            <p><strong>TestCaseLoader<br>
+              TestCaseLoader </strong><br>
+              <code>TestCaseLoader</code> finds the test cases among the class 
+              names from <code>ClassFinder</code>. This code snippet shows the 
+              top-level method for adding a class that represents a <code>TestCase</code> 
+              to the list of test cases: <br>
+              TestCaseLoader在ClassFinder中得到的类名字寻找测试环境。这个代码片断展示了增加一个对于所有测试环境列表体现TestCase的类的顶级方法： 
+            <p><code>public class TestCaseLoader { <br>
+              &nbsp;&nbsp;&nbsp;final private Vector classList = new Vector (); 
+              <br>
+              &nbsp;&nbsp;&nbsp;final private String requiredType; <br>
+              <br>
+              &nbsp;&nbsp;&nbsp;/** <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;* Adds testCaseClass to the list of classdes 
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;* if the class is a test case we wish to 
+              load. Calls <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;* shouldLoadTestCase () to determine that. 
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;*/ <br>
+              &nbsp;&nbsp;&nbsp;private void addClassIfTestCase (final Class testCaseClass) 
+              { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (shouldAddTestCase (testCaseClass)) 
+              { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;classList.add 
+              (testCaseClass); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              <br>
+              &nbsp;&nbsp;&nbsp;/** <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;* Determine if we should load this test 
+              case. Calls isATestCaseOfTheCorrectType <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;* to determine if the test case should be 
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;* added to the class list. <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;*/ <br>
+              &nbsp;&nbsp;&nbsp;private boolean shouldAddTestCase (final Class 
+              testCaseClass) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return isATestCaseOfTheCorrectType 
+              (testCaseClass); <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              </code> 
+            <p>You'll find the meat of the class in the <code>isATestCaseOfTheCorrectType()</code> 
+              method, listed below. For each class being considered, it:<br>
+              你会在下面找到在isATestCaseOfTheCorrectType()方法中isATestCaseOfTheCorrectType()中类的内容。对于每个在考虑范围内的类：它将
+            <p> 
+            <ul>
+              <li>Determines whether it is derived from <code>TestCase</code>. 
+                If not, it is not a test case.<br>
+                判断是否从TestCase衍生而来。如果不是，它就不是测试用例。 
+              <li>Determines whether the field <code>public final static TEST_ALL_TEST_TYPE</code> 
+                has a value matching that specified in the member field <code>requiredType</code>.<br>
+                判断public final static TEST_ALL_TEST_TYPE的域是否有一个符合在requiredType成员域中指定的值。 
+              </li>
+            </ul>
+            <p>Here's the code:<br>
+              以下是代码： 
+            <p><code>&nbsp;&nbsp;&nbsp;private boolean isATestCaseOfTheCorrectType 
+              (final Class testCaseClass) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean isOfTheCorrectType = 
+              false; <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (TestCase.class.isAssignableFrom(testCaseClass)) 
+              { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Field 
+              testAllIgnoreThisField = testCaseClass.getDeclaredField("TEST_ALL_TEST_TYPE"); 
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;final 
+              int EXPECTED_MODIFIERS = Modifier.STATIC | Modifier.PUBLIC | Modifier.FINAL; 
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 
+              (((testAllIgnoreThisField.getModifiers() &amp; EXPECTED_MODIFIERS) 
+              != EXPECTED_MODIFIERS) || <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(testAllIgnoreThisField.getType() 
+              != String.class)) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw 
+              new IllegalArgumentException ("TEST_ALL_TEST_TYPE should be static 
+              private final String"); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String 
+              testType = (String)testAllIgnoreThisField.get(testCaseClass); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isOfTheCorrectType 
+              = requiredType.equals (testType); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch (NoSuchFieldException 
+              e) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch (IllegalAccessException 
+              e) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw 
+              new IllegalArgumentException ("The field " + testCaseClass.getName 
+              () + ".TEST_ALL_TEST_TYPE is not accessible."); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return isOfTheCorrectType; <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              </code> 
+            <p>Next, the <code>loadTestCases()</code> method examines each class 
+              name. It loads the class (if it can be loaded); if the class is 
+              a test case and of the required type, the method adds the class 
+              to its list of test cases:<br>
+              下一步，loadTestCases()方法检查每个类的名字。它读入类（如果可以读入的话）；如果类是测试环境并且符合所需类型，方法将加类到它的测试环境列表： 
+            <p><code>&nbsp;&nbsp;&nbsp;public void loadTestCases (final Iterator 
+              classNamesIterator) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while (classNamesIterator.hasNext 
+              ()) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String className 
+              = (String)classNamesIterator.next (); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class 
+              candidateClass = Class.forName (className); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addClassIfTestCase 
+              (candidateClass); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch (ClassNotFoundException 
+              e) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.err.println 
+              ("Cannot load class: " + className); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              <br>
+              &nbsp;&nbsp;&nbsp;/** <br>
+              &nbsp;&nbsp;&nbsp;* Construct this instance. Load all the test cases 
+              possible that derive <br>
+              &nbsp;&nbsp;&nbsp;* from baseClass and cannot be ignored. <br>
+              &nbsp;&nbsp;&nbsp;* @param classNamesIterator An iterator over a 
+              collection of fully qualified class names <br>
+              &nbsp;&nbsp;&nbsp;*/ <br>
+              &nbsp;&nbsp;public TestCaseLoader(final String requiredType) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (requiredType == null) throw 
+              new IllegalArgumentException ("requiredType is null"); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.requiredType = requiredType; 
+              <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              <br>
+              &nbsp;&nbsp;&nbsp;/** <br>
+              &nbsp;&nbsp;&nbsp;* Obtain an iterator over the collection of test 
+              case classes loaded by loadTestCases <br>
+              &nbsp;&nbsp;&nbsp;*/ <br>
+              &nbsp;&nbsp;&nbsp;public Iterator getClasses () { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return classList.iterator (); 
+              <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              </code> 
+            <p><strong>TestAll </strong><br>
+              <code>TestCall</code> pulls everything together. It uses the aforementioned 
+              classes to build a list of test cases defined in the system. It 
+              adds those test cases to a <code>TestSuite</code> and returns the 
+              <code>TestSuite</code> as part of its implementation of the <code>suite()</code> 
+              method. The result: a test case that automatically extracts every 
+              defined test case in the system, ready for execution by JUnit.<br>
+              TestCall将所有的东西放在一起.它用以前提到过的类在系统里建立一个定义好的测试实例列表.然后添加这些测试实例到测试集里,并作为测试集方法的一部分返回到suite()函数.结果就是生成一个准备在JUnit例执行的实例,而这个实例可以自动释放存储在系统里的预先定义好的测试实例. 
+            <p><code>public class TestAll extends TestCase { <br>
+              </code> 
+            <p>The <code>addAllTests()</code> method iterates over the classes 
+              loaded by the <code>TestCaseLoader</code> and adds them to the test 
+              suite:<br>
+              函数addAllTests()重申由TestCaseLoader所加载的类,并把他们添加到测试集里: 
+            <p><code>&nbsp;&nbsp;&nbsp;private static int addAllTests(final TestSuite 
+              suite, final Iterator classIterator) <br>
+              &nbsp;&nbsp;&nbsp;throws java.io.IOException { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int testClassCount = 0; <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while (classIterator.hasNext 
+              ()) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class testCaseClass 
+              = (Class)classIterator.next (); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;suite.addTest 
+              (new TestSuite (testCaseClass)); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println 
+              ("Loaded test case: " + testCaseClass.getName ()); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testClassCount++; 
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return testClassCount; <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              </code> 
+            <p>With <code>suite()</code>, the test cases are added to the <code>TestSuite</code>, 
+              then returned to JUnit for execution. It obtains, from the system 
+              property <code>"class_root"</code>, the directory where the classes 
+              are stored. It obtains, from the system property <code>"test_type"</code>, 
+              the type of test cases to load. It uses the <code>ClassFinder</code> 
+              to find all the classes, and the <code>TestCaseLoader</code> to 
+              load all the appropriate test cases. It then adds these to a new 
+              <code>TestSuite</code>:<br>
+              用函数suite(),测试的情况可以被添加到测试集里面,然后返回到JUnit执行.它包含了从系统属性"class_root" 里面那些类所存贮的地方.它也包含了从系统属性"test_type"里面那些可以被加载的测试类的类型.它使用ClassF- 
+              inder来寻找所有的类,并用TestCaseLoader来加载所有的测试实例,并将这些实例添加到一个新的测试集里面: 
+            <p><code>&nbsp;&nbsp;&nbsp;public static Test suite() <br>
+              &nbsp;&nbsp;&nbsp;throws Throwable { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String classRootString 
+              = System.getProperty("class_root"); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (classRootString 
+              == null) throw new IllegalArgumentException ("System property class_root 
+              must be set."); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String testType 
+              = System.getProperty("test_type"); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (testType 
+              == null) throw new IllegalArgumentException ("System property test_type 
+              must be set."); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;File classRoot 
+              = new File(classRootString); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ClassFinder 
+              classFinder = new ClassFinder (classRoot); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TestCaseLoader 
+              testCaseLoader = new TestCaseLoader (testType); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testCaseLoader.loadTestCases 
+              (classFinder.getClasses ()); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TestSuite 
+              suite = new TestSuite(); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int numberOfTests 
+              = addAllTests (suite, testCaseLoader.getClasses ()); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Number 
+              of test classes found: " + numberOfTests); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return suite; 
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch (Throwable t) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// This ensures 
+              we have extra information. Otherwise we get a "Could not invoke 
+              the suite method." message. <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.printStackTrace 
+              (); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw t; <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              <br>
+              &nbsp;&nbsp;/** <br>
+              &nbsp;&nbsp;&nbsp;* Basic constructor - called by the test runners. 
+              <br>
+              &nbsp;&nbsp;&nbsp;*/ <br>
+              <br>
+              &nbsp;&nbsp;&nbsp;public TestAll(String s) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super(s); <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              } <br>
+              </code> 
+            <p>To test an entire system using these classes, execute the following 
+              command (in a Windows command shell):<br>
+              为了用这些类来测试一个完整的系统,请执行下面的命令(在Windows环境下): 
+            <p><code>java -cp C:\project\classes;C:\junit3.2\junit.jar:C:\jcf\jcfutils.zip 
+              -Dclass_root=C:\project\classes -Dtest_type=UNIT junit.ui.TestRunner 
+              bp.TestAll <br>
+              </code> 
+            <p>This command loads and runs all test cases of type <code>UNIT</code> 
+              that have classes stored under <code>C:\project\classes</code>.<br>
+              这个命令加载运行了所有的UNIT测试类,这些测试类在C:\project\classes里已被分别存储. 
+            <p><font size=+1><strong>Test thread safety<br>
+              安全的线程测试 </strong></font><br>
+              You'll want to guarantee the status of supposedly thread-safe classes 
+              by testing them. Such tests prove difficult using Junit 3.2's existing 
+              set of facilities. You can use <code>junit.extensions.ActiveTest</code> 
+              to run a test case in a different thread. However, <code>TestSuite</code> 
+              assumes that a test case is complete when it returns from <code>run()</code>; 
+              with <code>junit.extensions.ActiveTest</code>, it is not. We could 
+              work hard to define a properly working <code>ActiveTestSuite</code>; 
+              instead, let's look at a simpler solution: <code>MultiThreadedTestCase</code>. 
+              First, I'll show how <code>MultiThreadedTestCase</code> assists 
+              with multithreaded testing. Then I'll show how <code>MultiThreadedTestCase</code> 
+              is implemented.<br>
+              通过测试,你想确保这些被测试的线程处于安全状态.但是用Junit 3.2's提供的现成的工具完成这些测试是困难的.你可以使用junit.extensions.ActiveTest在不同的线程中运行一个测试实例,但是测试集只能确保在run()函数里一个测试实例是可以正常完成的,而用junit.extensions.ActiveTest不可以.我们可以尽力定义一个精确的工作集ActiveTestSuite(动态测试集)来替换它,让我们看一个简单的解决方法: 
+              MultiThreadedTestCase(多线程测试集).首先我将展示如何用多线程测试来辅助多线程测试实例.然后将展示多线程实例是怎么样运行的. 
+            <p>To use <code>MultiThreadedTestCase</code>, we implement the standard 
+              elements of a <code>TestCase</code>, but we derive from <code>MultiThreadedTestCase</code>. 
+              The standard elements are the class declaration, the constructor, 
+              and since we're using <code>TestAll</code>, the definition of the 
+              test type:<br>
+              为使用MultiThreadedTestCase,我们使用一个标准元素TestCase,但我们从MultiThreadedTestCase里创建. 
+              这个标准的元素是一个类的说明,是创建者,既然我们使用TestAll,下面是测试类的定义: 
+            <p><code>public class MTTest extends MultiThreadedTestCase { <br>
+              &nbsp;&nbsp;&nbsp;/** <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;* Basic constructor - called by the test 
+              runners. <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;*/ <br>
+              &nbsp;&nbsp;&nbsp;public MTTest(String s) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super (s); <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              <br>
+              &nbsp;&nbsp;&nbsp;public static final String TEST_ALL_TEST_TYPE 
+              = "UNIT"; <br>
+              </code> 
+            <p>A multithreaded test case needs to spawn a number of threads that 
+              perform some operation. We need to start those threads, wait until 
+              they've executed, and then return the results to JUnit -- all done 
+              in the code below. The code is trivial; in practice, this code would 
+              spawn multiple threads that performed different operations on the 
+              class under test. After each operation the class invariants and 
+              post-conditions would be tested to ensure that the class was behaving 
+              properly.<br>
+              一个多线程的测试实例需要产生许多的线程.我们必须执行这些线程,并等待他们完成将结果返回到JUnit--这一切在下面的例子中可以完成.这些代码是微不足道的.实际上,这些代码在下面测试的类中能够产生许多的执行不同动作的线程.在每一个动作后,这些类的变量和后续的条件将会被测试以确保这个类是被正常的执行的. 
+            <p><code>&nbsp;&nbsp;&nbsp;public void testMTExample () <br>
+              &nbsp;&nbsp;&nbsp;{ <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Create 100 threads containing 
+              the test case. <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TestCaseRunnable tct [] = new 
+              TestCaseRunnable [100]; <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; tct.length; 
+              i++) <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tct[i] = new 
+              TestCaseRunnable () { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public 
+              void runTestCase () { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assert 
+              (true); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}; <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Run the 100 threads, wait 
+              for them to complete and return the results to JUnit. <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;runTestCaseRunnables (tct); 
+              <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              } <br>
+              </code> 
+            <p>Now that I've shown how to use <code>MultiThreadedTestCase</code>, 
+              I'll examine the implementation. First, we declare the class and 
+              add an array where the running threads will be stored:<br>
+              既然我已经演示了怎么使用多线程测试实例,接下来我将检查一下执行情况.首先,我们定义一个类,并在已运行线程里添加一个数组: 
+            <p><code>public class MultiThreadedTestCase extends TestCase { <br>
+              &nbsp;&nbsp;&nbsp;/** <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;* The threads that are executing. <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;*/ <br>
+              &nbsp;&nbsp;&nbsp;private Thread threads[] = null; <br>
+              </code> 
+            <p><code>testResult</code>, seen below, holds the <code>testResult</code> 
+              that declares that the test case's <code>run()</code> will be passed. 
+              We override <code>run()</code> so we can store the <code>testResult</code> 
+              for later population by the test threads:<br>
+              从下面我们可以看到,testResult类所显示的run()函数的测试结果是能够顺利通过的.为了方便观察我们可以屏蔽run()函数保存测试线程testResult中的结果 
+            <p><code>&nbsp;&nbsp;&nbsp;/** <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;* The tests TestResult. <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;*/ <br>
+              &nbsp;&nbsp;&nbsp;private TestResult testResult = null; <br>
+              &nbsp;&nbsp;&nbsp;/** <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;* Simple constructor. <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;*/ <br>
+              &nbsp;&nbsp;&nbsp;public MultiThreadedTestCase(final String s) { 
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super(s); <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;/** <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;* Override run so we can save the test result. 
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;*/ <br>
+              &nbsp;&nbsp;&nbsp;public void run(final TestResult result) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testResult = result; <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super.run(result); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testResult = null; <br>
+              </code> 
+            <p><code>runTestCaseRunnables()</code> runs each <code>TestCaseRunnable</code> 
+              in a seperate thread. All the threads are created and then started 
+              at the same time. The method waits until every thread has finished 
+              and then returns:<br>
+              在分离的线程里运行runTestCaseRunnables()都会运行一次TestCaseRunnable.所有的这些线程都是都是同时被创建和运行的.而runTestCaseRunnable()则要等每一个线程运行完并返回: 
+            <p><code>&nbsp;&nbsp;&nbsp;protected void runTestCaseRunnables (final 
+              TestCaseRunnable[] runnables) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(runnables == null) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new 
+              IllegalArgumentException("runnables is null"); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;threads = new Thread[runnables.length]; 
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(int i = 0;i &lt; threads.length;i++) 
+              { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;threads[i] 
+              = new Thread(runnables[i]); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(int i = 0;i &lt; threads.length;i++) 
+              { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;threads[i].start(); 
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(int i 
+              = 0;i &lt; threads.length;i++) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;threads[i].join(); 
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;catch(InterruptedException ignore) 
+              { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Thread 
+              join interrupted."); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;threads = null; <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              </code> 
+            <p>Exceptions caught in the test threads must be propagated into the 
+              <code>testResult</code> instance we saved from the <code>run()</code> 
+              method. <code>handleException()</code>, below, does just that:<br>
+              在测试线程里面溢出情况的捕捉必须能够被传送到我们从run()函数testResult实例里面.下面是溢出情况处理的代码: 
+            <p><code>&nbsp;&nbsp;&nbsp;/** <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;* Handle an exception. Since multiple threads 
+              won't have their <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;* exceptions caught the threads must manually 
+              catch them and call <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;* handleException(). <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;* @param t Exception to handle.*/ <br>
+              <br>
+              &nbsp;&nbsp;&nbsp;private void handleException(final Throwable t) 
+              { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;synchronized(testResult) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(t instanceof 
+              AssertionFailedError) { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testResult.addFailure(this, 
+              (AssertionFailedError)t); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testResult.addError(this, 
+              t); <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              </code> 
+            <p>Finally, we define the class that each test thread extends. The 
+              purpose of this class is to provide an environment (<code>runTestCase()</code>) 
+              where thrown exceptions will be caught and passed to JUnit. The 
+              implementation of this class is:<br>
+              最后,我们可以为每一个测试的线程定义一个扩展的类.这个类可以用来提供一种环境 (runTestCase())以捕捉线程中的溢出情况并返回到JUnit.这个类的例子如下: 
+            <p><code>&nbsp;&nbsp;&nbsp;/** <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;* A test case thread. Override runTestCase 
+              () and define <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;* behaviour of test in there.*/ <br>
+              &nbsp;&nbsp;&nbsp;protected abstract class TestCaseRunnable implements 
+              Runnable { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/** <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Override this to define 
+              the test*/ <br>
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public abstract void runTestCase() 
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throws 
+              Throwable; <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/** <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Run the test in an environment 
+              where <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* we can handle the exceptions 
+              generated by the test method.*/ <br>
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public void run() { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;runTestCase(); 
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;catch(Throwable 
+              t) /* Any other exception we handle and then we interrupt the other 
+              threads.*/ { <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handleException(t); 
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interruptThreads(); 
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+              &nbsp;&nbsp;&nbsp;} <br>
+              } <br>
+              </code> 
+            <p>The implementation above helps to develop multithreaded test cases. 
+              It handles exceptions thrown in the multiple testing threads and 
+              passes them back to JUnit. JUnit only sees a test case that behaves 
+              like a single-threaded test. The unit test developer can extend 
+              that test case to develop multithreaded tests, without spending 
+              much time developing thread-handling code.<br>
+              以上的implementation能可以用来解决多线程测试中的一些问题.它可以处理在多线程测试中的例外溢出情况,并且可以通过他们返回到JUnit.在不耗费更过的时间改善多线程代码的同时, 
+              单元测试的开发者可以增加测试的条件来进一步改善多线程的测试. 
+            <p><font size=+1><strong>Conclusion<br>
+              结论: </strong></font><br>
+              Using JUnit to develop robust tests takes some practice (as does 
+              writing tests). This article contains a number of techniques for 
+              improving your tests' usefulness. Those techniques range from avoiding 
+              basic mistakes (such as not using <code>setUp()</code>) to more 
+              design-level issues (avoiding intertest coupling). I've covered 
+              some basic ideas to help you use JUnit to test parts of your UI 
+              or Web application. I've also shown how to build an automated test 
+              suite that removes the overhead of maintaining hand-coded test suites 
+              and a mechanism for reducing the effort of developing multithreaded 
+              JUnit test cases.<br>
+              运用JUnit来进行强壮的测试需要做多个方面的练习(比如写一些测试程序).这篇文章为你提高测试的有用性提供了许多技巧.这些技巧的范围包括避免一些基本的错误(比如不会使用 
+              setup()这样的代码)直到更到层次的一些设计问题(如避免intertest coupling) .在这里我已提供了许多基本的思想来帮助你用JUnit测试UI或者网页应用程序.而且我也已经说明怎么构建一个可以自动的清除那些留在手写代码中测试语句的测试集和可以自动减化在运用多线程的JUnit测试时的机制. 
+            <p>JUnit is an excellent framework for unit-testing Java applications. 
+              One final thought: If you just started using JUnit to produce unit 
+              tests, stick at it. For the first few weeks, you may not see any 
+              real reward for your labors. In fact, you may feel that the whole 
+              process slows you down. However, after a few weeks, you'll begin 
+              to enhance existing code. Then you'll run your tests, pick up new 
+              bugs, and fix them. You'll be far more confident in your code base 
+              and you will see the value of unit testing.<br>
+              JUnit 是一个用在Java 单元测试应用的优秀的平台.它的终极目标就是要实现这样的一种理念: 如果你使用JUnit 来进行单元测试,你就会喜欢它,并会坚持下去.在刚开始的几个星期里,你也许不能明白你已为你的劳动做了多少真正有意思的贡献.甚至会感觉到在进度上反而慢了下来.但是,在过几个星期,你就会完善已完成的编码工作.然后进行调试,找出程序中的新的漏洞,并修补他们.渐渐的你会对你的编码功底越来越自信,而且会进一步认识到进行单元测试的价值! 
+              <img height=8 
+src="../return/JUnit%20best%20practices.files/dingbat.gif" width=8> <!-- end body text --> 
+            <p><a name=bio></a> 
+            <table cellspacing=3 cellpadding=0 width="100%" border=0>
+              <tbody> 
+              <tr> 
+                <td valign=center></td>
+                <td bgcolor=#000000><img height=1 
+      src="../return/JUnit%20best%20practices.files/dot_clear.gif" width=2 align=bottom 
+      border=0></td>
+                <td valign=top><strong><font face=Arial,Helvetica,Sans-serif size=-1>About 
+                  the author </font></strong><br>
+                  <a 
+      href="mailto:andy.schneider@javaworld.com">Andy Schneider</a> is a technical 
+                  architect for <a href="http://www.bjss.co.uk/">BJSS</a>. He 
+                  has been using object technology since 1988 to build both large- 
+                  and small-scale systems. Schneider has been using xUnit in projects 
+                  for over 18 months. His interests include distributed architectures 
+                  and development processes.<br>
+                  作者简介: <br>
+                  Andy schneider :是一个BJSS的技术架构人员,他自从1988年以来一直在用面向对象的技术架构大型的和小型的系统,Schneider 
+                  从18个月前就把xUnit用在了工程方面.他的研究方向主要在分布式系统及其系统的发展方面 </td>
+              </tr>
+              </tbody>
+            </table>
+            <!-- stopindex --> 
+            <p>
+            <p align=center><a 
+href="http://www.javaworld.com/javaworld/common/jw-copyright.html">(c) Copyright 
+              2000 ITworld.com, Inc., an IDG Communications company</a> </p>
+            <p><a name=resources><strong>Resources</strong></a> 
+            <ul>
+              <li>The complete source code for this article can be downloaded 
+                at: <br>
+                <a 
+  href="http://www.javaworld.com/jw-12-2000/junit/jw-1221-junit.zip">http://www.javaworld.com/jw-12-2000/junit/jw-1221-junit.zip</a> 
+              <li>For more great articles on Java tools, visit the <strong>Development 
+                Tools</strong> section of <em>JavaWorld'</em>s Topical Index: 
+                <br>
+                <a 
+  href="http://www.javaworld.com/javaworld/topicalindex/jw-ti-tools.html">http://www.javaworld.com/javaworld/topicalindex/jw-ti-tools.html</a> 
+              <li>For a freewheeling discussion of programming theory, visit <em>JavaWorld'</em>s 
+                <strong>Programming Theory &amp; Practice</strong> discussion, 
+                moderated by the intrepid Allen Holub: <br>
+                <a 
+  href="http://forums.itworld.com/webx?14@@.ee6b806">http://forums.itworld.com/webx?14@@.ee6b806</a> 
+              <li>The free <strong>Java Tutor</strong> newsletter gives weekly 
+                hands-on guidance and tips for Java programmers: <br>
+                <a 
+  href="http://www.itworld.com/cgi-bin/subcontent12.cgi">http://www.itworld.com/cgi-bin/subcontent12.cgi</a> 
+              <li>The JUnit Website: <br>
+                <a 
+  href="http://www.junit.org/">http://www.junit.org/</a> 
+              <li>A directory of xUnit implementations for different technologies: 
+                <br>
+                <a 
+  href="http://www.xprogramming.com/software.htm">http://www.xprogramming.com/software.htm</a> 
+              <li>Unit-test-related discussion of Wiki: <br>
+                <a 
+  href="http://c2.com/cgi-bin/wiki?UnitTests">http://c2.com/cgi-bin/wiki?UnitTests</a> 
+              <li>Extreme Programming roadmap on Wiki: <br>
+                <a 
+  href="http://c2.com/cgi-bin/wiki?ExtremeProgrammingRoadmap">http://c2.com/cgi-bin/wiki?ExtremeProgrammingRoadmap</a> 
+              <li>A worked example of testing a GUI with JUnit: <br>
+                <a 
+  href="http://users.vnet.net/wwake/xp/xp0001/index.shtml">http://users.vnet.net/wwake/xp/xp0001/index.shtml</a> 
+              </li>
+            </ul>
+            Feedback: <a name=jweditors 
+href="http://www.javaworld.com/javaworld/cgi-bin/jw-mailto.cgi?jweditors@javaworld.com+/javaworld/jw-12-2000/jw-1221-junit.html+jweditors">http://www.javaworld.com/javaworld/cgi-bin/jw-mailto.cgi?jweditors@javaworld.com+/javaworld/jw-12-2000/jw-1221-junit.html+jweditors</a><br>
+            Technical difficulties: <a name=webmaster 
+href="http://www.javaworld.com/javaworld/cgi-bin/jw-mailto.cgi?webmaster@javaworld.com+/javaworld/jw-12-2000/jw-1221-junit.html+webmaster">http://www.javaworld.com/javaworld/cgi-bin/jw-mailto.cgi?webmaster@javaworld.com+/javaworld/jw-12-2000/jw-1221-junit.html+webmaster</a><br>
+            URL: http://www.javaworld.com/jw-12-2000/jw-1221-junit.html <br>
+            Last modified: Tuesday, May 01, 2001 <!--Begin-Survey--> 
+            <layer 
+height="1" width="1" visibility="hidden" 
+onLoad="moveToAbsolute(layer16.pageX,layer16.pageY);clip.height=1;clip.width=1; visibility='show';" 
+src="http://ad.doubleclick.net/adl/idg.us.jwsurvey/jwsurvey121900;sz=1x1;tile=16;ord=23100543?"></layer>
+            <!--End-Survey--> <!--Big AD--> 
+            <p class=MsoIndexHeading>&nbsp;</p>
+          </div>
+          <div align="center"><a href="../return/index.html"><font size="2"><b>[返回]</b></font></a></div>
+</td>
+  </tr>
+</table>
+</center></div>
+</body>
+</html>

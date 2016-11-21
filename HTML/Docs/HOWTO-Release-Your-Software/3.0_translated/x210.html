@@ -1,0 +1,403 @@
+<HTML
+><HEAD
+><TITLE
+>Good distribution-making practice</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.56"><LINK
+REL="HOME"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Good development practice"
+HREF="x184.html"><LINK
+REL="NEXT"
+TITLE="Good documentation practice"
+HREF="x306.html"></HEAD
+><BODY
+CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+></TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x184.html"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x306.html"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+>
+  <H1
+CLASS="SECT1"
+><A
+NAME="AEN210"
+>6. 制作项目发布包的好经验</A
+></H1
+>
+  <P
+>这一章节主要介绍你发布的项目应该具有什么样的形式，以方便其他人下载、检索和解压。</P
+>
+  <DIV
+CLASS="SECT2"
+>
+    <H2
+CLASS="SECT2"
+><A
+NAME="AEN213"
+>6.1. 确保tar包解压时会建一个独立的新目录</A
+></H2
+>
+    <P
+>新手常犯的低级错误是制作了一个解压后把文件和目录直接解压在当前工作目录的tar包，这样做潜在地危险是会把原来已有的同名文件覆盖掉。千万记住，不要这么干。</P
+>
+    <P
+>正确的方法是，你的项目的所有档案都是存放在项目所在目录下的标准目录结构中，这样tar包就可以解压在一个特定的目录下而不是当前目录。</P
+>
+    <P
+>这里有一个Makefile文件的技巧示例展示了如何完成打包工作，这里假定你的项目所在目录名称为“foobar”，而SRC变量中是一个包含所有需要发布的文件列表：</P
+>
+    <TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>foobar-$(VERS).tar.gz:
+	@ls $(SRC) | sed s:^:foobar-$(VERS)/: &#62;MANIFEST
+	@(cd ..; ln -s foobar foobar-$(VERS))
+	(cd ..; tar -czvf foobar/foobar-$(VERS).tar.gz `cat foobar/MANIFEST`)
+	@(cd ..; rm foobar-$(VERS))</PRE
+></TD
+></TR
+></TABLE
+></DIV
+><DIV
+CLASS="SECT2"
+>
+    <H2
+CLASS="SECT2"
+><A
+NAME="AEN221"
+>6.2. 制作一个README文件</A
+></H2
+>
+    <P
+>应该有一个名为README或者READ.ME的文件来说明整个源码的结构信息。古老的传统告诉我们，勇猛的探索者在解开你的压缩文件包后的第一件事情就是找出README文件来阅读。</P
+>
+    <P
+>README文件中最好应该包括如下信息：</P
+>
+    <P
+></P
+><OL TYPE="1">
+<LI><P>整个项目的简介</P></LI>
+<LI><P>项目的WWW站点所在的URL（如果有的话）</P></LI>
+<LI><P>指出开发者编译整个项目所在的系统环境，并指出项目可能潜在地移植性问题</P></LI>
+<LI><P>重要文件和子目录的结构信息</P></LI>
+<LI><P>编译/安装步骤说明，或者指明这些信息所在的文件名（通常是<TT CLASS="FILENAME">INSTALL</TT>文件）</P></LI>
+<LI><P>项目主持人和参与者的名单列表，或者指出这些信息所在的文件（通常是<TT CLASS="FILENAME">CREDITS</TT>文件）</P></LI>
+<LI><P>最近关于本项目的一些进展情况和新闻，或者指出包含此信息的文件（通常是<TT CLASS="FILENAME">NEWS</TT>文件）</P></LI>
+</OL>
+</DIV><DIV
+CLASS="SECT2"
+>
+    <H2
+CLASS="SECT2"
+><A
+NAME="AEN245"
+>6.3. 遵照标准文件命名规则</A
+></H2
+>
+    <P
+>“勇猛的探索者”要想阅读README文件，他们就必须首先浏览解压后项目档案所在的根目录下的文件名。这些文件名本身就在向读者传达许多信息。如果你遵照标准的命名规则就可以给那些探索者有价值得线索以便他们更好的理解你的意图。</P
+>
+    <P
+>这里列出了一些标准文件名称和他们的涵义。当然并不是所有项目发布时都必须包含所有这些文件。</P
+>
+    <P
+></P
+>
+    <DIV
+CLASS="VARIABLELIST"
+> 
+      <DL
+> 
+        <DT
+>README 或 READ.ME</DT
+>
+        <DD
+> 
+          <P
+>整个项目的结构信息说明，第一个需要阅读的文件</P
+>
+        </DD
+>
+        <DT
+>INSTALL</DT
+>
+        <DD
+> 
+          <P
+> 配置、编译和安装该项目的说明信息</P
+>
+        </DD
+>
+        <DT
+>CREDITS</DT
+>
+        <DD
+> 
+          <P
+> 本项目所有贡献者的列表</P
+>
+        </DD
+>
+        <DT
+>NEWS</DT
+>
+        <DD
+> 
+          <P
+> 本项目最近的一些新闻和进展</P
+>
+        </DD
+>
+        <DT
+>HISTORY</DT
+>
+        <DD
+> 
+          <P
+> 本项目的历史发展演变记录</P
+>
+        </DD
+>
+        <DT
+>COPYING</DT
+>
+        <DD
+> 
+          <P
+> 指出本项目采用的许可证条款（通常采用GNU）</P
+>
+        </DD
+>
+        <DT
+>LICENSE</DT
+>
+        <DD
+> 
+          <P
+> 本项目的许可证条款文件</P
+>
+        </DD
+>
+        <DT
+>MANIFEST</DT
+>
+        <DD
+> 
+          <P
+> 本项目的所有文件列表</P
+>
+        </DD
+>
+        <DT
+>FAQ</DT
+>
+        <DD
+> 
+          <P
+> 关于本项目的纯文本格式的常见问题解答</P
+>
+        </DD
+>
+        <DT
+>TAGS</DT
+>
+        <DD
+> 
+          <P
+> 为Emacs或vi准备的标记文件</P
+>
+        </DD
+>
+      </DL
+>
+    </DIV
+>
+    <P
+>我们可以看出来，全部大写的文件名一般表示该文件是给人阅读的文档，而不是项目的一个组成部分。</P
+>
+    <P
+>编撰一个FAQ文件可以帮你很多忙。如果某个问题经常被其他人问起，就把这个问题列入FAQ文件；然后指导用户在向你发文或提交出错报告前首先阅读FAQ文件。一份好的FAQ文件可以给项目维护者减轻好几个数量级的负担。</P
+>
+    <P
+>另外在每次发布时都保留一个HISTORY文件和NEWS文件，并列明时间信息非常有好处。在所有其他文件中，这两个文件可以让你在遇到一些专利侵权法律问题时有所准备（虽然这种情况至今还没有发生过，不过最好还是有备无患）。</P
+>
+  </DIV
+><DIV
+CLASS="SECT2"
+>
+    <H2
+CLASS="SECT2"
+><A
+NAME="AEN293"
+>6.4. 为项目升级做好准备</A
+></H2
+>
+    <P
+>只要你打算为你的项目发布新版本，项目就必定处在不断的变化之中。有些变化是不能向前兼容的。因此你必须认真思考安装程序设计上的问题，就是说让同一项目的不同版本的代码安装后可以共存在一个系统中。这个问题对库项目的发布尤为重要，因为你不能指望所有基于这个库的应用程序都会紧跟你的API接口规范的后尘。</P
+>
+    <P
+>Emacs、Python和Qt项目有一套对付这个问题的好办法，就是让目录名中包含版本号。这里有Qt库安装后的目录结构的例子（${ver}是代表版本号的变量）：</P
+>
+    <TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>/usr/lib/qt
+/usr/lib/qt-${ver}
+/usr/lib/qt-${ver}/bin          # Where you find moc
+/usr/lib/qt-${ver}/lib          # Where you find .so
+/usr/lib/qt-${ver}/include      # Where you find header files</PRE
+></TD
+></TR
+></TABLE
+>
+    <P
+>这样组织目录结构可以让多个不同版本的档案共存。客户的程序可以根据需要选用具有特定版本号的库，因此为了不让这些接口影响客户程序，还是需要付出一些小小代价（制定版本号）的。</P
+>
+  </DIV
+><DIV
+CLASS="SECT2"
+>
+    <H2
+CLASS="SECT2"
+><A
+NAME="AEN299"
+>6.5. 提供RPM包</A
+></H2
+>
+    <P
+>安装可执行文件包（二进制包）的事实标准就是使用RedHat包管理器将可执行文件打包成 rpm 包。许多流行的Linux发行版都是这么做的，同时也有许多发行版虽然主要不是rpm包格式但是也支持rpm包（除了Debian和Slackware以外，而且Debian还支持rpm的安装）。</P
+>
+    <P
+>因此一个好的项目除了有tar包的源代码以外，最好也提供直接可安装的rpm包的下载。</P
+>
+    <P
+>如果你能把你的源代码tar包和Makefile文件中用于生成rpm包的相关信息写入rpm的spec文件中就再好不过了。spec文件是有着".spec"后缀的文件，这就是带 
+      -t 选项的 rpm 命令如何在 tar 包中寻找它的方法。</P
+>
+    <P
+>还有一个要点是，你可以用一个脚本程序自动的从Makefile或version.h文件中找出版本号，并用这个版本号来生成你的spec文件。</P
+>
+    <P
+>注：如果你还打算提供源码的rpm包，最好用BuildRoot工具来将程序编译到/tmp或者/var/tmp目录中。如果不这么做，在安装过程中执行 make 
+      install 命令时就会直接将那些源程序直接安装到最终的目录位置下。这样就会导致即使在发生文件覆盖冲突，或者你本意并不想装那个包的时候，安装动作依然被执行。因此安装完成后，文件是被装到了系统中，但是系统的RPM数据库却并没有记录这些信息。这种愚蠢的SRPM安装动作是非常危险的，理应避免。</P
+>
+  </DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x184.html"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x306.html"
+>Next</A
+></TD
+></TR
+><TR
+>
+      <TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>好的开发习惯</TD
+>
+      <TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+>
+      <TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>好的文档编写惯例</TD
+>
+    </TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html> <head>
+<META http-equiv="Content-Type" content="text/html;charset=IS0-8859-1">
+<META name="GENERATOR" content="Hand-made HTML by TeleDynamics">
+<META name="Author" content="Gary Lawrence Murphy">
+<META name="Keywords" content="Linux, kernel, document, wiki, kernelbook">
+<META name="Description" content="Linux Kernel WikiWiki: A collaborative writing environment to document the architecture, algorithms and interfaces of the Linux 2.4 kernel.  Participation in the WikiWiki is open to all.">
+<META HTTP-EQUIV="Window-target" CONTENT="_top">
+<LINK REL="NEXT" TITLE="News" HREF="news">
+<LINK REV="made" HREF="mailto:info@teledyn.com">
+<LINK REL="home" HREF="http://kernelbook.sourceforge.net/">
+<LINK REL="toc" HREF="/index.html">
+<LINK href="/kernelbook.css" rel="stylesheet" type="text/css">
+<TITLE>The KernelBook Wiki: ProcessScheduler</TITLE>
+</HEAD>
+<BODY CLASS="WIKI">
+
+	<table width="100%">
+		<TR>
+		  <TD>
+			<A href="http://sourceforge.net"> 
+			  <IMG alignabs="middle" src="http://sourceforge.net/sflogo.php?group_id=4387&amp;type=1"
+				   width="88" height="31" border="0" alt="The SourceForge"></A>
+		  </TD>
+		  <TD align="left">
+			<strong>KernelWiki:</strong>
+  <span class="linkline">&nbsp;
+  <a href="/wiki/">home</a> --
+  <a href="/wiki/?KernelWiki">top</a> --
+  <a href="/">kernelbook</a> --
+  <a href="/wiki/?HowToUseWiki">wiki help</a> --
+  <a href="/#kdocs">kerneldocs</a>&nbsp;
+  </span>
+		  </TD>
+		  	<td align="CENTER">
+			<p align="CENTER">
+			<a href="http://babel.altavista.com/translate.dyn?lin=en&translate_me=yes">
+			<font face="helvetica,arial" size="-2">
+			translations<br>
+			  <img src=http://babel.altavista.com/gifs/bfish.gif border=0 
+			  	alt="Automatic translation into most European Languages"
+										 width="28" height="20"><br>
+										 by babelfish</font></a>
+										 </p>
+
+										 	</td>
+		</tr>
+	</TABLE>
+  
+
+
+<h1 CLASS="WIKI"><a href="http://kernelbook.sourceforge.net:80/wiki/?full=ProcessScheduler">ProcessScheduler</a></h1>
+<p class="WIKI">Path: <a href="http://kernelbook.sourceforge.net:80/wiki/?FrontPage">FrontPage</a> / <a href="http://kernelbook.sourceforge.net:80/wiki/?KernelWiki">KernelWiki</a> / <a href="http://kernelbook.sourceforge.net:80/wiki/?KernelSubsystems">KernelSubsystems</a>
+</p>
+<p class="WIKI">
+The sheduler is a management system for the availabelprocessor computing power. While processes are representedby their memory environment and their register state,lets say the current instruction pointer is the registerof prime meaning, on the other hand the sheduler is in dutyto really bind a single process to a single CPU.
+</p>
+<p class="WIKI">
+Since sheduling is a task that is mainly performed in the scale of time its best implemented by an interrupt. Otherpossibilities, like cooperative attempts, were done in past but even for embedded systems (like dish washers) are nowadays of rather poor interest. This is due to the conecpts limited reliability combined with partly unpredictable behaviour in error case and growing efforts at increasing system complexity.
+</p>
+<p class="WIKI">
+Generally the time based sheduler is the most common approach.An interrupt periodically inititates the sheduler code andthis code will decide based on several parameters which execution thread will have the right to continue. The sheduler itself has to ensure that the whole task state of the old process gets saved and the the whole task state of the new process gets loaded. Leaving the sheduler in a way so that the new task will get control and the pending sheduler interrupt gets reset are the final dutys of the sheduler.
+</p>
+<p class="WIKI">
+Now meeting a state of the art Linux kernel (i.e. 2.2.16)we have a central constant define called HZ. This define represents the number of task switches the sheduler should do per second. This value can range, depending on interrupt source and system, from a few 10 to some 10.000 switches. (Here i will point out to Alessandro Rubini's book "Linux Device Drivers". see <a href="http://kernelbook.sourceforge.net:80/wiki/?KernelProgrammingResources">KernelProgrammingResources</a>) Values lower than one are generally not possible due to the current way of coding and handling the HZ constant.
+</p>
+<p class="WIKI">
+The responsiveness with a few switches per second is low due to the seldom assignment of computation time of the running tasks. Assume 30 running tasks have to wait 3 seconds each unless getting sheduled again, but then having the system for its own for a pretty long time. On the other side when the number of sheduling cycles is hevyly increased, then the sheduler might use a good deal of availabel computation power, decreasing overall performance and slowing the box down while granting a rather constant amount per second to all running tasks.
+</p>
+<p class="WIKI">
+The medium HZ values (from about 100 to 1000, meaning 10 ms to1 ms sheduling cycle) will serve both targets, good responsiveness and small overhead. On video and audio grabber devices (seen for the Matrox Meteor) its sometimesheared to be said that normal kernel settings are noresponsive enough to serve these power users duties.Therefor the HZ constant is tuned a bit upwards.Note that there is no entry in the menuconfig programfor tuning but you have to modify the kernel yourselves.
+</p>
+<p class="WIKI">
+A major concept for doing good sheduling is the classificationof processes into states. This means only a few tasks are reallyable to get a CPU for running, and therefore the sheduler must not have to dig all other just not ready tasks. There are avariety of state trees that make sense, and the most commonstates classify as "created", "running", "dormant", "waiting","crashed" and "terminated". (Refer to the Linux shell command "ps" for a bit insight on task states and alikes.)
+</p>
+<p class="WIKI">
+Sheduling further depends on things like kernel space anduser space execution, locks, mutexes, single and multithreading.Its applicable in this terms to implement shemes to suspendsheduling for critical phases, like kernel execution orhardware access. Implementing such is of course criticaland can target systems responsiveness a lot. Neverthelessits sometimes of sense doing waypoint controlled shedulingthat does not depend on a sheduler timing. The simple caseis when a task terminates, and therfore a NO-task is runningunless the sheduler is called to assing this time to anotherprocess. Yielding a task is a similar case, just its remainingtime slice is released and the sheduler is in duty. Automatic Yielding after return from kernel API calls can be nice or not.A straight forward program does not need to yield since thesheduler already serves for sufficient task switches. Therforeyielding is rather thought for situations where a real waitsituation is likely, i.e. in the case of data transfers.(see sched.h for more info on the "Definitions for POSIX 1003.1b-1993 (aka POSIX.4) scheduling interface.")
+</p>
+<p class="WIKI">
+It was already mentioned that each process has its state.The sheduler of course has to reserve space in memory forstoring and restoring this state. This structures in theLinux kernel are rather developing and are therefore notrecommended to be accessed from outside without some risk.Process creation or destruction is not a task of the shedulerbut of some other services. Its important that the task infostays consistent because the sheduler has the quality of aninterrupt routine, like several others in the system.
+</p>
+<p class="WIKI">
+Interrupt routines arent really tasks or threads and therforedont qualify for sheduling since they have to finish before they give back control. Of course an interrupt execution threadis generated by hardware rather than by software and terminatesitself, so it will only get some predefined system context butnot establish itself as some named task. To clarify, someinterrupt routines are able to create follow up processesthat finish their processing work but the routine itselfis not a process and therefore does not get sheduled.
+</p>
+<p class="WIKI">
+The so called idle task always gets computation time whenno other task wants to run. On x86 this is a simple haltor power save instruction, that cooles down the processorand does nothing further. Some programs, like the DES/RC5-64code cracker from <a href='http://www.distributed.net'>http://www.distributed.net</a>, make use of this state and superseed idle task by one that is doing unimportantbut cpu using computations.
+</p>
+<p class="WIKI">
+Excuse me if i have intermixed the terms process, task, threadand all the other terms. Linux does not make too muchdifference in these areas unlike other operating systems.Concering some of these systems its nice to remark that some have i.e. a 32 leveled priority sheme, allowing sheduler to weight time slice assignment to important tasks in somedynamic exclusive or non exclusive manner. Some reason forthat classification is rather memory based. When two executionpaths run in same memory space and are able to make use ofsame date than they are called threads. The single memory space is called a process. And finally a task might be asingle application (possibly consisting of several processes)that is visible as a unity, like a GUI application in a GUI.
+</p>
+<p class="WIKI">
+This Text was added by: AlexS (AlexS@freepage.de) <a href="http://kernelbook.sourceforge.net:80/wiki/?AlexSde">AlexSde</a>
+</p>
+<p class="WIKI">
+see also <a href='http://www.moses.uklinux.net/patches/lki.html'>http://www.moses.uklinux.net/patches/lki.html</a>"Linux Kernel Internals" from Tigran Aivazian (last updated 2000-Oct-13) chapter 1 - Process and Interrupt Managment.
+</p>
+<p class="WIKI">
+</p><br clear="ALL"><hr>
+<a href="http://kernelbook.sourceforge.net:80/wiki/?edit=ProcessScheduler">EditText</a>: Update this page
+ (last edited November 20, 2000)
+<br>
+<a href='http://kernelbook.sourceforge.net:80/wiki/?FindPage&value=ProcessScheduler'>FindPage</a>: Search all pages
+
+</DIV>
+<hr>
+<TABLE>
+  <TR>
+	<TD><a href="http://www.opencontent.org/"> <img
+			src="http://www.opencontent.org/takeone.gif"
+			border=0 alt="Take One!"></a>
+	</TD>
+	<TD><font face="helvetica,verdana,arial" size="-2" color="#afafaf">
+
+		<SPAN CLASS="COPYRIGHT">Copyright &copy;Y2K 
+		<SPAN CLASS="HOLDER">TeleDynamics Communications Inc. 
+		(www.teledyn.com)</SPAN><br>
+		This
+		material may be distributed only subject to the terms and
+		conditions set forth in the Open Publishing License, v1.0 or
+		later (the latest version is presently available at
+		http://www.opencontent.org/openpub/).</SPAN>
+		</FONT>
+	</TD>
+  </TR>
+</TABLE>
+</BODY></HTML>
+

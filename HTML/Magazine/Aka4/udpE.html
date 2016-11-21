@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Introduction to the Internet Protocols</TITLE>
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+<META content="MSHTML 5.00.2014.210" name=GENERATOR></HEAD>
+<BODY TEXT="#000000" BGCOLOR="#eeedb7" LINK="#797E8C" VLINK="#4F4F4F" ALINK="#FF0000">
+<center>
+<H4>Protocols other than TCP: UDP and ICMP</H4>
+</center>
+<P>Copyright (C) 1987, Charles L. Hedrick. Anyone may reproduce this document, 
+in whole or in part, provided that:
+<p> (1) any copy or republication of the entire 
+document must show Rutgers University as the source, and must include this 
+notice; and (2) any other use of this material must reference this manual and 
+Rutgers University, and the fact that the material is copyright by Charles 
+Hedrick and is used by permission. 
+<P>So far, we have described only connections that use TCP. Recall that TCP is 
+responsible for breaking up messages into datagrams, and reassembling them 
+properly. However in many applications, we have messages that will always fit in 
+a single datagram. An example is name lookup. When a user attempts to make a 
+connection to another system, he will generally specify the system by name, 
+rather than Internet address. His system has to translate that name to an 
+address before it can do anything. Generally, only a few systems have the 
+database used to translate names to addresses. So the user's system will want to 
+send a query to one of the systems that has the database. This query is going to 
+be very short. It will certainly fit in one datagram. So will the answer. Thus 
+it seems silly to use TCP. Of course TCP does more than just break things up 
+into datagrams. It also makes sure that the data arrives, resending datagrams 
+where necessary. But for a question that fits in a single datagram, we don't 
+need all the complexity of TCP to do this. If we don't get an answer after a few 
+seconds, we can just ask again. For applications like this, there are 
+alternatives to TCP. 
+<P>The most common alternative is UDP ("user datagram protocol"). UDP is 
+designed for applications where you don't need to put sequences of datagrams 
+together. It fits into the system much like TCP. There is a UDP header. The 
+network software puts the UDP header on the front of your data, just as it would 
+put a TCP header on the front of your data. Then UDP sends the data to IP, which 
+adds the IP header, putting UDP's protocol number in the protocol field instead 
+of TCP's protocol number. However UDP doesn't do as much as TCP does. It doesn't 
+split data into multiple datagrams. It doesn't keep track of what it has sent so 
+it can resend if necessary. About all that UDP provides is port numbers, so that 
+several programs can use UDP at once. UDP port numbers are used just like TCP 
+port numbers. There are well-known port numbers for servers that use UDP. Note 
+that the UDP header is shorter than a TCP header. It still has source and 
+destination port numbers, and a checksum, but that's about it. No sequence 
+number, since it is not needed. UDP is used by the protocols that handle name 
+lookups (see IEN 116, RFC 882, and RFC 883), and a number of similar protocols. 
+<P>Another alternative protocol is ICMP ("Internet control message protocol"). 
+ICMP is used for error messages, and other messages intended for the TCP/IP 
+software itself, rather than any particular user program. For example, if you 
+attempt to connect to a host, your system may get back an ICMP message saying 
+"host unreachable". ICMP can also be used to find out some information about the 
+network. See RFC 792 for details of ICMP. ICMP is similar to UDP, in that it 
+handles messages that fit in one datagram. However it is even simpler than UDP. 
+It doesn't even have port numbers in its header. Since all ICMP messages are 
+interpreted by the network software itself, no port numbers are needed to say 
+where a ICMP message is supposed to go. 
+</BODY></HTML>

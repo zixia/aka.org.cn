@@ -1,0 +1,203 @@
+
+<html>
+
+<head>
+
+<title>Whitepapers -  A Question of Balance, by Grady Booch </title>     
+
+<meta keyword="Architecture and Design,Rational Rose">
+
+</head>
+
+
+
+
+<body basefont="Verdana, Arial, Helvetica" marginheight="0" text="#000000" bgcolor="#ffffff" topmargin="0" marginwidth="0" link="#000099" leftmargin="0" vlink="#6666cc">
+<table width="568" cellpadding="0" border="0" cellspacing="0">
+  <tr valign="top" align="left"> 
+    <td width="15"></td>
+    <!-- main content cell --> 
+    <td width="553" height="500" valign="top"> 
+      <p>&nbsp; 
+      <p> 
+      <p> <br>
+      <p> 
+      <font size="-1"> 
+      <center>
+        <font face="arial, helvetica" size="+1"> A Question of Balance </font><br>
+        <i> by Grady Booch </i> 
+      </center>
+      <br>
+      <p>A project's success is dependent on a myriad of factors. Let me begin 
+        by making two simple and related observations. First, for an endeavor 
+        as complex as crafting a large piece of software, the failure of any one 
+        aspect of a project can cause it to blow up in your face. In his most 
+        recent book, Capers Jones enumerates a number of such software risks, 
+        any one of which, if left untreated, can lead to disaster (Jones 1994). 
+        Second, the reverse of my first observation is not necessarily true: No 
+        one factor of a project can ever drag it to successful closure. Furthermore, 
+        the obsessive focus of a project on any one particular success factor 
+        is a clear sign of organizational immaturity, and as such is equally a 
+        good predictor of failure.</p>
+      <p>In my experience, there are at least four general areas of success factors 
+        that each project much consider:</p>
+      <ul>
+        <li>Languages 
+        <li>Tools 
+        <li>Methods 
+        <li>Processes 
+      </ul>
+      <p>Maximizing the likelihood of success is a question of balance: Management 
+        must consider each of these aspects of a project in almost equal proportions.</p>
+      <p><b>Languages</b></p>
+      <p>The selection of which programming language to use in a given project 
+        is typically a binary issue, meaning that it is either a moot point or 
+        it is a hotly contested and almost religious one. In the first case, it 
+        may be a dead issue because some corporate or governmental mandate requires 
+        that it be a certain way. It may also be a dead issue because of the millstone 
+        of legacy code or legacy practices. (&quot;If COBOL was good enough for 
+        my grandfather, then it's good enough for me!&quot;) In either case, such 
+        unenlightened choices have some subtle and negative consequences. In particular, 
+        if a mandate is made for anything other than legitimate business reasons, 
+        then there can be no meaningful return on investment, and there will often 
+        be rebellion among the troops, who feel they are stuck with a dead language. 
+        Similarly, there may be good reasons for sticking with a legacy language, 
+        but there are rarely any good reasons for ignoring the evolution of that 
+        language. (Are you still using the same COBOL compilers from the 1960s?)</p>
+      <p>In the second case, underdeveloped organizations are often the battleground 
+        for extended language wars. &quot;Should we use C++? What about Visual 
+        Basic? Or Smalltalk?&quot; I'm not saying that such discussions are wrong, 
+        in general, but they are detrimental when they divide an organization 
+        along language lines and the team spends endless person-days arguing over 
+        the relative merits of one language versus the other. This is why I call 
+        such organizations underdeveloped: They become paralyzed, unable to move 
+        forward until all the data is in (which it rarely is). My advice in such 
+        situations is to just try something. Build something real with any one 
+        new language, and see how it fits your culture. Don't expect perfection, 
+        for no single language can meet all possible needs. The trick is to chose 
+        one that fits reasonably well for the scale of problem you are solving, 
+        and to chose one that gives you a good return on investment.</p>
+      <p>Where does scale fit into this discussion? I've seen more than a couple 
+        of projects fail because they tried to use something like Visual Basic 
+        to engineer a whole enterprise. I've seen projects that automate some 
+        office process by using any of a number of application builders, then 
+        try to scale that experience up to the department or division or corporate 
+        level, only to fail in rather visible ways. At some level of complexity, 
+        raw, naked programming languages such as C++ and Smalltalk make a great 
+        deal of sense. By all means, use languages and frameworks that help you 
+        avoid writing new software, but don't stretch those languages beyond what 
+        they can meaningfully handle, without your developers having to resort 
+        to unnatural acts of programming.</p>
+      <p>So, as a matter of balance when it comes to language, my advice is simply 
+        to put a stake in the ground with regard to a selection, validate that 
+        selection in a pilot project, and if the results are good enough, then 
+        move forward, with few regrets.</p>
+      <p><b>Tools</b></p>
+      <p>The selection of tools for a project deserves equal treatment to the 
+        selection of language. Despite the latest advances in hardware, most of 
+        the development organizations I encounter are still woefully underdeveloped 
+        when it comes to the tools with which they arm their developers. A compiler, 
+        editor, and debugger are just not enough.</p>
+      <ul>
+        <li>Analysis and design tools are necessary to allow the team to discuss 
+          the problem and its implementation architecture at an appropriately 
+          abstract level. 
+        <li>For projects of any meaningful scale, issues of configuration management 
+          kick in very quickly, this is something for which simple tools, rather 
+          than programmer convention, should be employed to handle the details. 
+        <li>Testing is typically under tooled. The most mature organizations I 
+          encounter have some form of automated regression testing that relieves 
+          the burden upon the individual developer, and furthermore serves as 
+          a stabilizing influence as a project unfolds. 
+        <li>Other tools such as browsers, intelligent debuggers, and metrics tools 
+          all have a role to play as a project grows. 
+      </ul>
+      <p>My advice is that given a tedious, repetitive development activity, I'd 
+        much rather buy or create a tool that does it for me, rather then spend 
+        precious developer hours having to do it by hand. Developers are a far 
+        more precious commodity than tools. Unfortunately, I do find some organizations 
+        have an easier time procuring new developers rather than necessary tools.</p>
+      <p>The dark side of tools is that underdeveloped organizations tend to find 
+        sort of a moral anchor in the form of some really cool tool. Perhaps finding 
+        some of their development efforts floundering, like a drowning man, they 
+        will grasp at whatever tool happens to float, only to find that faith 
+        in any one technical tool will indeed drag them down. Trying to apply 
+        a technical solution to a nontechnical problem always has a way of turning 
+        on you. The lesson here is to never let your project get intoxicated with 
+        any in-vogue commercial tool or trend. Be realistic about what your tools 
+        can and can't do for you.</p>
+      <p>Tools, then, are also a matter of balance: Consider what aspects of your 
+        entire development process can be automated, and by all means select some 
+        tools that fit. Don't seek perfection but seek simple tools that do some 
+        simple things very well.</p>
+      <p><b>Methods</b></p>
+      <p>Underdeveloped organizations are also commonly the battleground for method 
+        wars. Studying which object-oriented method to employ is a good thing, 
+        but I've stepped into numerous companies where entire teams had spent 
+        literally months of time on this, independent of any software project. 
+        Such a situation represents a clear imbalance, because it attempts to 
+        force a technical decision in the absence of any real context within the 
+        organization.</p>
+      <p>With regard to methods, the real enemy is chaos, for most projects follow 
+        no identifiable method. In practice, that translates into developers rushing 
+        into coding with little regard for any overall design or understanding 
+        of what needs to be built. Mitigating those elements is ultimately the 
+        purpose of any object-oriented method, be it Booch, OMT, Objectory, Shlaer-Mellor, 
+        or any of a number of other mature methods. Again, it's a matter of balance. 
+        At least pick some method, any method, and fit it into your culture. Don't 
+        allow your method to be dominated by the act of coding, but don't let 
+        it overshadow implementation either. Ultimately, the production of real, 
+        concrete software is what every project is about.</p>
+      <p><b>Process</b></p>
+      <p>When I speak of process, I mean it in a larger sense then just the technical 
+        process of crafting a software solution. This means a deliberate consideration 
+        of processes for testing, configuration management, change management, 
+        and reviews. Too many organizations fall into either one end or the other 
+        of a spectrum. At one end, they have no formal processes, but instead 
+        rely upon hiring lots of good people and letting them do what they do. 
+        This may make sense for a start-up project, but it is never a sustainable 
+        or repeatable practice. At the other end of the spectrum, the organization 
+        is dominated by a process czar, who dictates exactly what the software 
+        development process is to be. There are two fundamental problems with 
+        this. First, by the very nature of this position, a process czar is often 
+        isolated from the daily blocking-and-tackling of coding, and so is ignorant 
+        of all the pragmatic engineering decisions that color any real process. 
+        Second, no real project follows any one process. There will always be 
+        multiple processes going on at all times, and a reasonably complex project 
+        can be defined in a single-threaded process. This is why the Booch method 
+        defines both a macro and a micro process: The macro process focuses on 
+        activities on a time scale of weeks, months, or years, and the micro process 
+        focuses on activities on a time scale of days or weeks.</p>
+      <p>The lesson here is also one of balance: Be deliberate when considering 
+        the maturity of your organization's process. At the very least, do have 
+        and enforce some recognizable processes, but at same time, don't be foolishly 
+        rigid in their deployment.</p>
+      <p>There's a funny paradox that arises given this attitude. By way of foundation, 
+        let me state that I'm a believer in the work at the Software Engineering 
+        Institute regarding process maturity. I view it as is a sign of maturity 
+        in our industry that we are beginning to model and quantify the way people 
+        build software. ISO 9000, as it applies to software, plays a similar role, 
+        in that it forces development organizations to actively consider how they 
+        do business. Now, here is the paradox: Successful projects tend to rate 
+        high on the SEI CMM; however, a high rating on the CMM does not necessarily 
+        infer success. The implications are simple. Process maturity should never 
+        be a goal in and of itself, but should be viewed as one visible sign of 
+        a healthy organization.</p>
+      <br>
+      <b>For a comprehensive summary of articles written by Grady Booch over the 
+      past few years, check out the <i><a href="http://www.cup.org/sgs/0137396163.html">Best 
+      of Booch</a></i> book offered by SIGS books.</b></font>
+      <p><font size="-1"> <br>
+        <br>
+        </font> <br>
+      <p> 
+    </td>
+  </tr>
+</table>
+
+
+
+  </body>
+
+</html>
+

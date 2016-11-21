@@ -1,0 +1,38 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>Linux Design Principle</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>Linux Design Principle</H1> 
+ <P><UL>
+<LI><H2>Managing the development of Linux and making design decisions about Linux dictate the same approach.
+</H2>
+<UL>
+<LI>Portability
+<BR>Compile time constant rather than using a variable
+<BR>The generalizations you're looking for when surveying systems are frequently the same as the optimizations you'd like to make to improve the kernel's performance. 
+<BR>If you had not been thinking about portability as a design goal, but had just been thinking about optimization of the kernel on a particular architecture, you would frequently reach the same conclusion.
+<LI>Modularity
+<BR>Virtual FS, MM, Scheduler 
+<BR>Module: kernel modules to keep hardware specifics in the modules. This is a good middle ground between putting all the hardware specifics in the core kernel, which makes for a fast but unportable kernel, and putting all the hardware specifics in user space, which results in a system that is either slow, unstable, or both.</UL></UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld022.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld024.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld023.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

@@ -1,0 +1,52 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>Deadlock</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>Deadlock</H1> 
+ <P><UL>
+<LI><H2>Deadly embrace
+</H2>
+<UL>
+hash table: each entry in the table is a spinlock, and a chain of hashed objects
+<BR><BR>1) your code ever tries to move the object to the same chain
+<BR>2) same softirq on another CPU is trying to move another object in the reverse direction
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+</UL></UL><UL>
+<LI><H2>Deadlock Avoidance
+</H2>
+<UL>
+split-phase locking
+<BR><BR>encapsulated lock
+</UL></UL></P>
+<P><UL>
+CPU 1                 	CPU 2
+</UL><UL>
+Grab lock A -&#062 OK	Grab lock B -&#062 OK
+</UL><UL>
+Grab lock B -&#062 spin	Grab lock A -&#062 spin</UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld010.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld012.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld011.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

@@ -1,0 +1,145 @@
+
+<html>
+<head>
+<title>Whitepapers -  Using Rose and ClearCase in a Team Environment </title>     
+<meta keyword="ClearCase,Rational Rose">
+</head>
+
+
+<body basefont="Verdana, Arial, Helvetica" marginheight="0" text="#000000" bgcolor="#ffffff" topmargin="0" marginwidth="0" link="#000099" leftmargin="0" vlink="#6666cc">
+<!-- <body basefont="Verdana, Arial, Helvetica" marginheight="0" text="#000000" bgcolor="#ffffff" topmargin="0" marginwidth="0" link="#000099" size="2" leftmargin="0" vlink="#6666cc"> -->
+<center><table width=630 border=0><tr><td>
+
+
+    
+<br><p>
+
+
+
+<p><br>
+
+<font size="3"><strong>Using Rose and ClearCase in a Team Environment</strong></font>
+
+<hr noshade="">
+
+<font size="-1">
+
+<p><font size="3"><strong>Introduction</strong></font></p>
+
+<p>Both Rational Rose and ClearCase are development tools designed to be used in a team environment. This paper will first briefly introduce how each product supports team development. If you are familiar with this, you can skip these sections. We will then present how the products can be used together. Finally we will present a small example of a set up for using Rose and ClearCase together.</p>
+
+<p><font size="3"><strong>Rose and team development</strong></font></p>
+
+<p>Rational Rose is a visual modeling tool to design and visualize object oriented and component-based application. This paper will not present the modeling and code generation aspects of Rose; we will focus of how Rose is used in a team environment.</p>
+
+<p><font size="3"><strong>Models and controlled units</strong></font></p>
+
+<p>When a Rose model first is created it is stored in a model file with the extension .mdl. Rose uses a straightforward ascii format called petal for these model files. As the model grows, and also to allow several people to work on the same model, the model can be broken up into one or more <i>controlled units</i>. (This is analogous to how for example a C++ program is broken up to be stored across multiple files.) These controlled units are created to define work units which individual developers can work on and forms the configuration items you can put under version control. Controlled units can be created out of <i>packages</i> in a model. To create a new controlled unit, simply select a package in a diagram and do File:Units:Control.... You can also do Browse:Units (F7) which will show the potential controlled units you can create. When you create a controlled unit, you will be asked for a file name to use to store this new controlled unit <sup><a href="#01">1</a></sup>. Note that packages in the Logical and the Use Case views are stored with extension .cat, packages in the component view are stored with extension .sub. In addition, you can also make the deployment diagrams with it's processors and nodes a controlled unit (.prc), as well as the model code generation property sets (.prp)</p>
+
+<p>When you have created a controlled unit, the .mdl file will no longer store the contents of that package, it will now be stored in the new controlled unit. The model file will now reference this controlled unit (similar, but not the same, as a C++ #include). Next time you open the .mdl file, Rose will ask you if you also want to load the attached controlled units <sup><a href="#02">2</a></sup>.</p>
+
+<p><font size="3"><strong>Path maps</strong></font></p>
+
+<p>To ensure portability of rose models Rose uses a mechanism called <i>path maps</i>. Path maps are used to reference controlled units using a virtual path instead of a physical path. A typical path might be $MYPATH = g:foobar. To edit or create new virtual path maps, select File:Edit path maps.</p>
+
+<p>When a model is saved, the virtual path entries are used to transform the full pathnames of controlled units to symbolic "virtual" pathnames before storing each pathname in the model file. To the fullest extent possible it replaces the actual path name with a virtual path symbol. For example, if I have an entry in my virtual path</p>
+
+<p>
+$MYPATH=c:foobarcontrolledunits 
+<br>
+and I save a package file as c:foobarcontrolledunitspkga.cat 
+<br>
+its path gets stored in the model file as: 
+<br>
+$MYPATHpkga.cat 
+<br>
+When another user opens the model file in Rose and has a different virtual path map setting for $MYPATH, his setting is substituted. This lets different users access their models via different paths.
+</p>
+
+<p>The virtual path map mechanism also lets you define paths relative to the model file using a special syntax:</p>
+<p>
+$MYPATH = &controlledunits
+<br>
+indicates that controlled units are found in a subdirectory of the model file's directory, named "controlledunits".
+</p>
+
+<p><font size="3"><strong>ClearCase and team development</strong></font></p>
+
+<p>ClearCase uses a common VOB (Versioned Object Base) where all development artifacts are stored. ClearCase's most basic mechanism for team development is to have different users on a project use different <i>views</i>on the VOB. These are work areas that transparently provide dynamic, private access to the development directory structure and files. A user views this VOB through specific views he can set up. The views have rules that determine which particular version of the files a user will see. On Windows NT, each view is usually accessed through a specific drive letter. A developer working on a specific project or release does work in a view that is specific to that release.</p>
+
+<p><font size="3"><strong>Using Rose and ClearCase for team developmen</strong></font></p>
+
+<p>A team working on a Rose model using ClearCase works within their individual views to access the controlled units assigned to each of them. Additionally, a single developer simultaneously working on more than one release would use different views (different drive letters on Windows NT) to edit different versions of the same controlled units. To flexibly access your Rose models with different ClearCase views (and thus different drive letters on Windows NT), use only relative pathnames in the virtual path map. By  <i>only</i> using relative names in your path maps, you will ensure that a model will reference its controlled unit correctly independent of the ClearCase view in which you work <sup><a href="#03">3</a></sup>.</p>
+
+<p><strong>NOTE:</strong> If you have set up your team environment using absolute path maps, you will need to modify these to all be relative path maps and save your model files using the new relative path maps.</p>
+
+<p><font size="3"><strong>An example</strong></font></p>
+
+<p>You have created a model Foo.mdl with two packages Pack1 and Pack2. You want to introduce this model into ClearCase and use an organizational directory hierarchy to manage the model and controlled units as follows: Model to contain Foo.mdl and ModelUnits to contain controlled units. This can be implemented in ClearCase by following the steps below:</p>
+
+<ol>
+	<li>Create and mount a ClearCase Versioned Object Base (for example, ProjectRose).</li>
+	<p>
+	<li>Create a ClearCase View to provide access to the Versioned Object Base and map to an appropriate Windows NT drive (for example, the R: drive).
+	<p>
+	<li>Create the Version Object Base directory structure by creating two directory versioned elements 'Model' and 'ModelUnits' in the Versioned Object Base, R:ProjectRose.
+	<p>
+	<li>Move Foo.mdl into the model directory: R:ProjectRoseModel. Open Foo.mdl and create a virtual path map definition to support relative access of the controlled units from the model file: $CURDIR=&. This will be used as your reference point when you store the model file.
+	<p>
+	<li>Create controlled units for packages Pack1 and Pack2 with menu pick Browse:Units. For each package, select the package and the Control button, save the controlled units as files in the ModelUnits directory (for example, for Pack1 save the controlled unit file as R:ProjectRoseModelUnitsPack1.cat; and Pack2 as R:ProjectRoseModelUnitsPack2.cat ).
+	<p>
+	<li>Save and exit Foo.mdl. Now your model file will reference the controlled unit as $CURDIRUnitsPack1 <sup><a href="#04">4</a></sup>.</li>
+	<p>
+	<li>Currently the Rose files are stored as host system files and have not yet been specified as ClearCase versioned elements (from a ClearCase perspective they are view private). So next create ClearCase version elements from the Rose files: Foo.mdl, Pack1.cat, and Pack2.cat.</li>
+	<p>
+	<li>During the creation of the ClearCase Version Object Base, its structure, and the introduction of the Rose files as versioned elements there exist files that are currently checked-out from a ClearCase perspective. From the context of R:ProjectRose check in the following versioned elements: . ( the current directory) ; Model and ModelUnits (the directory versioned elements); and ModelFoo.mdl, ModelUnitsPack1.cat, ModelUnitsPack2.cat ( the Rose files ).</li>
+</ol>
+
+<p><br>
+
+<p>At this point Foo.mdl will maintain a relative reference to the controlled units that implement packages Pack1 and Pack2. This will support the creation of additional ClearCase views that may get mapped to alternative Windows NT drives without invalidating the virtual path map definitions.</p>
+
+<p><strong><a name="01">1.</a></strong> If you want to be able to see what packages are also controlled units in your diagrams, you can set this setting in your rose.ini file: <code>AdornPetalUnits=Yes</code>. This will show a small U on each package in a diagram that is also a controlled unit.</p>
+
+<p><strong><a name="02">2.</a></strong> If you do not want to be prompted for every controlled unit, but automatically load them all, go into Tools:Options, the General tab, and check off <i>Confirm Load of Units</i>.</p>
+
+<p><strong><a name="03">3.</a></strong> Rose 4.0 did also store the file name of the model file itself. Rose 98 does not do that.</p>
+
+<p><strong><a name="04">4.</a></strong>You can verify this by open the foo.mdl file in Word and see the file reference.</p>
+
+</font>
+
+<p><br></td>
+</tr>
+</table>
+
+  <!-- footer cell -->
+  
+
+
+
+
+<table width="568" cellpadding="0" border="0" cellspacing="0">
+
+
+
+  <tr>
+
+
+
+    <td width="568" bgcolor="#ffffff">&nbsp;</td>
+
+   
+
+  </tr>
+
+  
+
+</table>
+
+
+
+
+</td></td></table></center>
+</body>
+</html>

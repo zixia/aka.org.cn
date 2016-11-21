@@ -1,0 +1,207 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=GB2312">
+    <TITLE>X properties</TITLE>
+</HEAD>
+<BODY>
+<A HREF="X-arch.html">上一页</A>
+<A HREF="X-prog.html">下一页</A>
+<P><B><FONT SIZE=+3>X Window特征</FONT></B>
+<P><UL>
+综合前面所述，我们知道X的设计理念是：<p>
+<li>计算分布</li><br>
+<li>设备分离</li><br>
+<li>协议独立</li><br>
+<P>这样设计带来的好处是：<P>
+<li>不论是本地还是网络上的计算，对用户和开发者其look-and-feel来说都是一样的；</li><br>
+<LI>X Window System不是操作系统的一部分，而仅仅是一个应用，易于开发、维护、移植；</li><br>
+<li>X Server是高度可移植的，支持各种语言和操作系统；</LI><BR>
+<LI>X Client也是高度可移植的；</LI><BR>
+<LI>X支持任何面向字节流的网络协议，不论是本地还是远程的；</LI><BR>
+<LI>应用的计算是分布的，性能不受约束。</LI><BR>
+<LI>X Application的设计是高度灵活的，只需实现核心功能。</LI><BR>
+<LI>X Window System从设计开始时就融入了面向对象的设计理念，大的窗口由小的窗口组成(Widget)。符合软件设计的准则，大大方便了X应用的开发。</LI><BR>
+</UL>
+<P><B><FONT SIZE=+2>举例说明</FONT></B>
+<UL>
+<P><li><B><FONT SIZE=+1>Windows Manager</FONT></B><P>
+X Window System的一个基本的设计哲学是它的功能由一组部件合作完成，而不是一切工作集中在一个应用中完成(事实上，UNIX也是如此)。最好的例子便是window manager。
+<p>Window Manager实际上是一个特殊的X Client，它的任务是控制窗口的外观，并提供用户与窗口交互的途径。实际上，屏幕上显示的任何东西都是一个窗口，window manager就是管理它们的。
+<p>不同的Window manager为窗口提供了不同的外观和行为，而每个wm本身的外观和行为又是可以自定义的(即themes风格)。所有的桌面系统(desktop environment)都是基于wm的思路开发的。
+<p>Window manager也仅仅是一个X Client，所以没有wm，X系统完全可以运行，但你无法移动它，也无法改变它的大小。
+<p>常见的wm有：FVWM，FVWM95，TWM/VTWM，MWM，CTWM，OLWM/OLVWM，wm2/wmx，AfterStep，AmiWM，Enlightenment，WindowMaker，SCWM，IceWM，Sawfish，Blackbox，等等。
+<P>下面是关于Window Manager的简单比较：<P><Center>
+<TABLE BORDER="1" CELLPADDING="2"><TR ALIGN="CENTER"><TH WIDTH="75"><FONT
+SIZE="-1">Window<BR>Manager</FONT></TH>
+<TH WIDTH="75"><FONT SIZE="-1">Virtual<BR>Desktops</FONT></TH>
+<TH WIDTH="75"><FONT SIZE="-1">Workspaces<BR>or Screens</FONT></TH>
+<TH WIDTH="75"><FONT SIZE="-1">XPM<BR>Support</FONT></TH>
+<TH WIDTH="75"><FONT SIZE="-1">Pinnable<BR>Menus</FONT></TH>
+<TH WIDTH="75"><FONT SIZE="-1">Session<BR>Management</FONT></TH>
+</TR>
+<TR ALIGN="CENTER"><TD>TWM</TD>
+<TD>-</TD>
+<TD>-</TD>
+<TD>-</TD>
+<TD>-</TD>
+<TD>-</TD>
+</TR>
+<TR ALIGN="CENTER"><TD>VTWM</TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD>-</TD>
+<TD>-</TD>
+<TD>-</TD>
+<TD>-</TD>
+</TR>
+<TR ALIGN="CENTER"><TD>FVWM</TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD>-</TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+</TR>
+<TR ALIGN="CENTER"><TD>FVWM-95</TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD>-</TD>
+<TD>-</TD>
+</TR>
+<TR ALIGN="CENTER"><TD>AfterStep</TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD>-</TD>
+</TR>
+<TR ALIGN="CENTER"><TD>CDE (dtwm)</TD>
+<TD>-</TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD>-</TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+</TR>
+<TR ALIGN="CENTER"><TD>AmiWM</TD>
+<TD>-</TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD>-</TD>
+<TD>-</TD>
+<TD>-</TD>
+</TR>
+<TR ALIGN="CENTER"><TD>OLWM</TD>
+<TD>-</TD>
+<TD>-</TD>
+<TD>-</TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD>-</TD>
+</TR>
+<TR ALIGN="CENTER"><TD>OLVWM</TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD>-</TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD>-</TD>
+</TR>
+<TR ALIGN="CENTER"><TD>GWM</TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD>-</TD>
+<TD>-</TD>
+</TR>
+<TR ALIGN="CENTER"><TD>MWM<SUP><FONT SIZE="-1">1</FONT></SUP></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD>-</TD>
+</TR>
+<TR ALIGN="CENTER"><TD>CTWM</TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD>-</TD>
+</TR>
+<TR ALIGN="CENTER"><TD>Enlightenment</TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD>-</TD>
+</TR>
+<TR ALIGN="CENTER"><TD>WM2</TD>
+<TD>-</TD>
+<TD>-</TD>
+<TD>-</TD>
+<TD>-</TD>
+<TD>-</TD>
+</TR>
+<TR ALIGN="CENTER"><TD>Window Maker</TD>
+<TD>-</TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD>-</TD>
+</TR>
+<TR ALIGN="CENTER"><TD>KDE</TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD>-</TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+</TR>
+<TR ALIGN="CENTER"><TD>ICEWM</TD>
+<TD>-</TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD>-</TD>
+<TD>-</TD>
+</TR>
+<TR ALIGN="CENTER"><TD>SCWM</TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+<TD><IMG ALT="*" WIDTH="6" HEIGHT="6" SRC="dot.gif"></TD>
+</TR>
+</TABLE></Center>
+<P><li><B><FONT SIZE=+1>X Font Server(XFS)</FONT></B><P>
+在X11R4及以前版本，每个X Server都需要存储至少一套字型。X Server只能从自己的字库中取得字型。如图所示：
+<CENTER>
+<P><IMG SRC="fontserver1.gif">
+<P>图1：X11R4及以前版本对字库的使用</CENTER>
+<P>X11R5增加了一项“字库服务器(font server)”功能，它的基本概念是将字库分布存储在网络上的机器上，每个X Server都可以通过网络取得所需要的字型。不必象X11R4及以前版本的X Window System，现在X Server可以没有自己的字库。如图所示：
+<CENTER>
+<P><IMG SRC="fontserver2.gif">
+<P>图2：X font server支持下的字库使用</CENTER>
+<P>X font Server的结构非常灵活，一个X Server可以同时读取多处的字库，一个X font server也可以同时为多个X Server服务。如图所示：
+<CENTER>
+<P><IMG SRC="fontserver3.gif">
+<P>图3：X font server灵活的体系结构</CENTER>
+<P>X font server还可以是层次体系的，即一个X Server可以透过一个font server访问其它的font server。如图所示：
+<CENTER><P><IMG SRC="fontserver4.gif">
+<P>图4：X font server的层次体系</CENTER>
+<P>使用font server的好处有很多，例如：<UL>
+<LI>资源分布，具有容错性；</LI><BR>
+<LI>在一个网络上，一套字库只需存储一份；</LI><BR>
+<LI>字型的计算在XFS上完成，大大节省了X Server的计算能力，特别是防止了X Server在字型计算时被挂起。</LI><BR></UL>
+<P><li><B><FONT SIZE=+1>Broadway</FONT></B><P>
+作为一个网络图形协议和分布式视窗系统，X是第一个成功的分布式计算技术。但随着Internet的发展，分布式技术越来越倾向于Web。虽然X的设计目的是进入每个人的桌面，但由于对Internet应用的忽略，使得它一直停留在Workstation等UNIX主机的桌面。尽管基于PC的 Server也有大量的涌现，但X的本质是面向应用而非信息共享的，在个人机的桌面，浏览器逐渐称为不可否认的标准。为了使得X能够进入浏览器，而不仅仅是X Server，X Consortium引入了Broadway的概念，从而将X Window的技术扩展到了Internet和WWW。<P>
+Broadway技术：在对现有的UNIX/X应用不做任何修改的情况下，一个采用了Broadway技术的浏览器在相关X Server的配合下，可以在Internet和WWW上远程执行UNIX/X应用。UNIX/X应用可以嵌入WEB页面，以与任何WEB资源一样的方式被访问。
+<P>1995年，引入Broadway概念。 X11R6.3 codename "Broadway"。
+<P><B>Broadway是如何工作的</B><P><UL>
+<CENTER>
+<P><IMG SRC="Broadway.gif">
+<P>图5：Broadway的结构示意</CENTER>
+<P>
+<UL><LI>Boadway Plugin: 负责Bowser与X Server的联系；</LI><BR>
+<LI>X Server:负责与X Client的联系；</li><BR>
+<LI>Browser: X Windows Manager;</li><BR>
+</UL>
+</UL>
+</UL>
+<A HREF="X-arch.html">上一页</A>
+<A HREF="X-prog.html">下一页</A>
+</body>
+</html>

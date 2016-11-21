@@ -1,0 +1,13 @@
+#!/bin/bash
+
+square()
+{
+   let "res = $1 * $1"
+   return $res
+}
+
+square $1
+result=$?
+echo $result
+
+exit 0

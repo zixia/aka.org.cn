@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>Linux 控制台上的图形编程简介</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312-80">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        PRE { color: #ffffff; font-family: "fixed" }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="images/velvet.jpg">
+
+<A HREF="ptty.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=CENTER>6.8&nbsp;&nbsp;Linux 控制台上的图形编程简介<BR><BR>
+</H1>
+
+<UL>
+    <LI>SVGALib</LI>
+    <LI>FrameBuffer</LI>
+    <LI>GGI</LI>
+    <LI>MiniGUI 和 Microwindows</LI>
+</UL>
+
+<H3>6.8.1&nbsp;&nbsp;SVGALib</H3>
+<UL>
+    <LI>SVGLib 是 Linux 控制台上的早期图形支持库</LI>
+    <LI>支持许多早期的 PCI 加速图形芯片</LI>
+    <LI>SVGLib 的发展已基本停滞</LI>
+    <LI>主要缺点</LI>
+<PRE>
+===============================================================================
+    * 使用复杂
+    * 与线程库 (LinuxThreads) 不兼容
+    * 颜色处理不好
+    * 与 Linux FrameBuffer 之间可能有些冲突
+===============================================================================
+</PRE>
+</UL>
+
+<H3>6.8.2&nbsp;&nbsp;FrameBuffer</H3>
+<UL>
+    <LI>FrameBuffer 是 Linux 内核的控制台图形功能</LI>
+    <LI>在 i386 体系上主要的设备驱动通过 VESA BIOS 完成, 效率较低</LI>
+    <LI>主要优点是内核支持, 兼容性好</LI>
+    <LI>主要的缺点是只提供机制, 不提供策略, 也就是说, 没有高级的图形接口, 比如画线, 圆等.</LI>
+</UL>
+
+<H3>6.8.3&nbsp;&nbsp;GGI</H3>
+<UL>
+    <LI>GGI, 即 General Graphics Interface, 是新一代的图形支持库</LI>
+    <LI>GGI 的主要功能特性有</LI>
+<PRE>
+===============================================================================
+    * 可在 FrameBuffer, SVGALib, X 等设备上运行, 在这些设备上是二进制兼容的
+    * 在所有平台上提供了一致的输入设备接口, 比如鼠标和键盘
+    * 与 LinuxThreads 线程库兼容, 接口线程安全
+    * 提供异步绘制模式, 可提高屏幕刷新速度
+    * 提供良好的颜色处理接口
+    * 接口简单易用
+    * 采用共享库机制, 实现低层支持库的动态装载
+===============================================================================
+</PRE>
+
+    <LI>GGI 的主要不足在于安装和配置较为复杂</LI>
+</UL>
+
+<H3>6.8.4&nbsp;&nbsp;MiniGUI 和 Microwindows</H3>
+<UL>
+    <LI>它们都是面向嵌入式系统的图形界面支持库</LI>
+    <LI>MiniGUI 建立于 SVGALib 之上</LI>
+    <LI>Microwindows 则具有自己的图形抽象层, 可运行于 FrameBuffer, SVGALib 或 X 上</LI>
+    <LI>MiniGUI 已经建立了完备的窗口机制</LI>
+    <LI>Microwindows 尚未建立完备的窗口机制</LI>
+    <LI>MiniGUI 的未来发展目标</LI>
+<PRE>
+===============================================================================
+    * 在 GGI 或 Microwindows 图形引擎的基础上建立自己的图形抽象层, 更好地提供颜色管理
+    * 提供可配置的功能组件, 包括字体支持, 控件类型等
+    * 开发应用程序, 比如 miniBrowser
+===============================================================================
+</PRE>
+
+</UL>
+
+<P>
+<BR><BR>
+</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="images/striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="ptty.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+</BODY>
+</HTML>
+

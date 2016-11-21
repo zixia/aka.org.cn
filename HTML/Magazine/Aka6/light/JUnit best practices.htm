@@ -1,0 +1,858 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0066)http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html -->
+<HTML><HEAD><TITLE>JUnit best practices - JavaWorld December 2000</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META 
+content="&#10;Extreme Programming's rise in popularity among the Java community has prompted more development teams to use JUnit: a simple test framework for building and executing unit tests. Like any toolkit, JUnit can be used effectively and ineffectively. In this article, Andy Schneider discusses good and bad ways to use JUnit and provides practical recommendations for its use by development teams. In addition, he explains simple mechanisms to support:&#13;&#10;&#10;&#13;&#10;Automatic construction of composite tests&#13;&#10;Multithreaded test cases&#13;&#10;&#13;&#10;&#10;This article assumes some familiarity with JUnit. (4,000 words)&#10;" 
+name=description>
+<META content=2001-05-01 name=date>
+<META content="JavaWorld, Java, Unit testing, xUnit, JUnit, Extreme Programming" 
+name=keywords>
+<META content="Andy Schneider" name=author>
+<META content=2000-12-21 name=publicationDate>
+<META content="MSHTML 5.50.4134.600" name=GENERATOR></HEAD>
+<BODY text=#000000 vLink=#551a8b aLink=#ff0000 link=#0000ff bgColor=#ffffff 
+topMargin=0 MARGINHEIGHT="0">
+<P>
+<P><!-- stopindex -->
+<!--Begin-Survey-->
+<NOLAYER><IFRAME 
+border=0 marginWidth=0 marginHeight=0 
+src="JUnit best practices.files/jwsurvey121900;sz=1x1;tile=16;ord=23100543.htm" 
+frameBorder=no width=1 scrolling=no 
+height=1> <A HREF="http://ad.doubleclick.net/jump/idg.us.jwsurvey/jwsurvey121900;abr=!ie;sz=1x1;tile=16;ord=23100543?"><IMG SRC="http://ad.doubleclick.net/ad/idg.us.jwsurvey/jwsurvey121900;abr=!ie;sz=1x1;tile=16;ord=23100543?" border=0 height="1" width="1"></A> 
+</IFRAME></NOLAYER>
+<ILAYER 
+id=layer16 height="1" width="1" visibility="hidden"></ILAYER><!--End-Survey--><!-- startindex --><FONT 
+face=Arial,Helvetica,Sans-serif color=#336699 size=+1><STRONG>Application 
+Testing</STRONG> </FONT>
+<H1 align=center>JUnit best practices </H1>
+<H3 align=center>Techniques for building resilient, relocatable, multithreaded 
+JUnit tests </H3>
+<BLOCKQUOTE><STRONG>Summary</STRONG><BR>Extreme Programming's rise in 
+  popularity among the Java community has prompted more development teams to use 
+  JUnit: a simple test framework for building and executing unit tests. Like any 
+  toolkit, JUnit can be used effectively and ineffectively. In this article, 
+  Andy Schneider discusses good and bad ways to use JUnit and provides practical 
+  recommendations for its use by development teams. In addition, he explains 
+  simple mechanisms to support: 
+  <P>
+  <UL>
+    <LI>Automatic construction of composite tests 
+    <LI>Multithreaded test cases </LI></UL>
+  <P>This article assumes some familiarity with JUnit. <EM>(4,000 words)</EM> 
+  </P></BLOCKQUOTE><STRONG>By <A href="mailto:andrew.schneider@javaworld.com">Andy 
+Schneider</A></STRONG> 
+<P><IMG height=2 alt="" src="JUnit best practices.files/blue.gif" width="100%" 
+border=0> 
+<P> 
+  <!-- begin body text -->
+  JUnit is a typical toolkit: if used with care and with recognition of its idiosyncrasies, 
+  JUnit will help to develop good, robust tests. Used blindly, it may produce 
+  a pile of spaghetti instead of a test suite. This article presents some guidelines 
+  that can help you avoid the pasta nightmare. The guidelines sometimes contradict 
+  themselves and each other -- this is deliberate. In my experience, there are 
+  rarely hard and fast rules in development, and guidelines that claim to be are 
+  misleading. 
+<P>We'll also closely examine two useful additions to the developer's toolkit: 
+<P>
+<UL>
+  <LI>A mechanism for automatically creating test suites from classfiles in part 
+  of a filesystem 
+  <LI>A new <CODE>TestCase</CODE> that better supports tests in multiple threads 
+  </LI></UL>
+<P>When faced with unit testing, many teams end up producing some kind of 
+testing framework. JUnit, available as open source, eliminates this onerous task 
+by providing a ready-made framework for unit testing. JUnit, best used as an 
+integral part of a development testing regime, provides a mechanism that 
+developers can use to consistently write and execute tests. So, what are the 
+JUnit best practices? 
+<P><FONT size=+1><STRONG>Do not use the test-case constructor to set up a test 
+case </STRONG></FONT><BR>Setting up a test case in the constructor is not a good 
+idea. Consider: 
+<P><CODE>public class SomeTest extends TestCase <BR>&nbsp;&nbsp;&nbsp;public 
+SomeTest (String testName) { <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super 
+(testName); <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Perform test set-up 
+<BR>&nbsp;&nbsp;&nbsp;} <BR>} <BR></CODE>
+<P>Imagine that while performing the setup, the setup code throws an 
+<CODE>IllegalStateException</CODE>. In response, JUnit would throw an 
+<CODE>AssertionFailedError</CODE>, indicating that the test case could not be 
+instantiated. Here is an example of the resulting stack trace: 
+<P><CODE>junit.framework.AssertionFailedError: Cannot instantiate test case: 
+test1 at <BR>junit.framework.Assert.fail(Assert.java:143) at 
+<BR>junit.framework.TestSuite$1.runTest(TestSuite.java:178) at 
+<BR>junit.framework.TestCase.runBare(TestCase.java:129) at 
+<BR>junit.framework.TestResult$1.protect(TestResult.java:100) at 
+<BR>junit.framework.TestResult.runProtected(TestResult.java:117) at 
+<BR>junit.framework.TestResult.run(TestResult.java:103) at 
+<BR>junit.framework.TestCase.run(TestCase.java:120) at 
+<BR>junit.framework.TestSuite.run(TestSuite.java, Compiled Code) at 
+<BR>junit.ui.TestRunner$12.run(TestRunner.java:429) <BR></CODE>
+<P>This stack trace proves rather uninformative; it only indicates that the test 
+case could not be instantiated. It doesn't detail the original error's location 
+or place of origin. This lack of information makes it hard to deduce the 
+exception's underlying cause. 
+<P>Instead of setting up the data in the constructor, perform test setup by 
+overriding <CODE>setUp()</CODE>. Any exception thrown within 
+<CODE>setUp()</CODE> is reported correctly. Compare this stack trace with the 
+previous example: 
+<P><CODE>java.lang.IllegalStateException: Oops at bp.DTC.setUp(DTC.java:34) at 
+<BR>junit.framework.TestCase.runBare(TestCase.java:127) at 
+<BR>junit.framework.TestResult$1.protect(TestResult.java:100) at 
+<BR>junit.framework.TestResult.runProtected(TestResult.java:117) at 
+<BR>junit.framework.TestResult.run(TestResult.java:103) <BR>... <BR></CODE>
+<P>This stack trace is much more informative; it shows which exception was 
+thrown (<CODE>IllegalStateException</CODE>) and from where. That makes it far 
+easier to explain the test setup's failure. 
+<P><FONT size=+1><STRONG>Don't assume the order in which tests within a test 
+case run </STRONG></FONT><BR>You should not assume that tests will be called in 
+any particular order. Consider the following code segment: 
+<P><CODE>public class SomeTestCase extends TestCase { 
+<BR>&nbsp;&nbsp;&nbsp;public SomeTestCase (String testName) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super (testName); 
+<BR>&nbsp;&nbsp;&nbsp;} <BR>&nbsp;&nbsp;&nbsp;public void testDoThisFirst () { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;... <BR>&nbsp;&nbsp;&nbsp;} 
+<BR>&nbsp;&nbsp;&nbsp;public void testDoThisSecond () { <BR>&nbsp;&nbsp;&nbsp;} 
+<BR>} <BR></CODE>
+<P>In this example, it is not certain that JUnit will run these tests in any 
+specific order when using reflection. Running the tests on different platforms 
+and Java VMs may therefore yield different results, unless your tests are 
+designed to run in any order. Avoiding temporal coupling will make the test case 
+more robust, since changes in the order will not affect other tests. If the 
+tests are coupled, the errors that result from a minor update may prove 
+difficult to find. 
+<P>In situations where ordering tests makes sense -- when it is more efficient 
+for tests to operate on some shared data that establish a fresh state as each 
+test runs -- use a static <CODE>suite()</CODE> method like this one to ensure 
+the ordering: 
+<P><CODE>public static Test suite() { <BR>&nbsp;&nbsp;&nbsp;suite.addTest(new 
+SomeTestCase ("testDoThisFirst";)); <BR>&nbsp;&nbsp;&nbsp;suite.addTest(new 
+SomeTestCase ("testDoThisSecond";)); <BR>&nbsp;&nbsp;&nbsp;return suite; <BR>} 
+<BR></CODE>
+<P>There is no guarantee in the JUnit API documentation as to the order your 
+tests will be called in, because JUnit employs a <CODE>Vector</CODE> to store 
+tests. However, you can expect the above tests to be executed in the order they 
+were added to the test suite. 
+<P><FONT size=+1><STRONG>Avoid writing test cases with side effects 
+</STRONG></FONT><BR>Test cases that have side effects exhibit two problems: 
+<P>
+<UL>
+  <LI>They can affect data that other test cases rely upon 
+  <LI>You cannot repeat tests without manual intervention </LI></UL>
+<P>In the first situation, the individual test case may operate correctly. 
+However, if incorporated into a <CODE>TestSuite</CODE> that runs every test case 
+on the system, it may cause other test cases to fail. That failure mode can be 
+difficult to diagnose, and the error may be located far from the test failure. 
+<P>In the second situation, a test case may have updated some system state so 
+that it cannot run again without manual intervention, which may consist of 
+deleting test data from the database (for example). Think carefully before 
+introducing manual intervention. First, the manual intervention will need to be 
+documented. Second, the tests could no longer be run in an unattended mode, 
+removing your ability to run tests overnight or as part of some automated 
+periodic test run. 
+<P><FONT size=+1><STRONG>Call a superclass's setUp() and tearDown() methods when 
+subclassing </STRONG></FONT><BR>When you consider: 
+<P><CODE>public class SomeTestCase extends AnotherTestCase { 
+<BR>&nbsp;&nbsp;&nbsp;// A connection to a database 
+<BR>&nbsp;&nbsp;&nbsp;private Database theDatabase; <BR>&nbsp;&nbsp;&nbsp;public 
+SomeTestCase (String testName) { <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super 
+(testName); <BR>&nbsp;&nbsp;&nbsp;} <BR>&nbsp;&nbsp;&nbsp;public void 
+testFeatureX () { <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;... 
+<BR>&nbsp;&nbsp;&nbsp;} <BR>&nbsp;&nbsp;&nbsp;public void setUp () { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Clear out the database 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;theDatabase.clear (); 
+<BR>&nbsp;&nbsp;&nbsp;} <BR>} <BR></CODE>
+<P>Can you spot the deliberate mistake? <CODE>setUp()</CODE> should call 
+<CODE>super.setUp()</CODE> to ensure that the environment defined in 
+<CODE>AnotherTestCase</CODE> initializes. Of course, there are exceptions: if 
+you design the base class to work with arbitrary test data, there won't be a 
+problem. 
+<P><!-- break -->
+<P><FONT size=+1><STRONG>Do not load data from hard-coded locations on a 
+filesystem </STRONG></FONT><BR>Tests often need to load data from some location 
+in the filesystem. Consider the following: 
+<P><CODE>public void setUp () { <BR>&nbsp;&nbsp;&nbsp;FileInputStream inp 
+("C:\\TestData\\dataSet1.dat"); <BR>&nbsp;&nbsp;&nbsp;... <BR>} <BR></CODE>
+<P>The code above relies on the data set being in the <CODE>C:\TestData</CODE> 
+path. That assumption is incorrect in two situations: 
+<P>
+<UL>
+  <LI>A tester does not have room to store the test data on <CODE>C:</CODE> and 
+  stores it on another disk 
+  <LI>The tests run on another platform, such as Unix</LI></UL>
+<P>One solution might be: 
+<P><CODE>public void setUp () { <BR>&nbsp;&nbsp;&nbsp;FileInputStream inp 
+("dataSet1.dat"); <BR>&nbsp;&nbsp;&nbsp;... <BR>} <BR></CODE>
+<P>However, that solution depends on the test running from the same directory as 
+the test data. If several different test cases assume this, it is difficult to 
+integrate them into one test suite without continually changing the current 
+directory. 
+<P>To solve the problem, access the dataset using either 
+<CODE>Class.getResource()</CODE> or <CODE>Class.getResourceAsStream()</CODE>. 
+Using them, however, means that resources load from a location relative to the 
+class's origin. 
+<P>Test data should, if possible, be stored with the source code in a 
+configuration management (CM) system. However, if you're using the 
+aforementioned resource mechanism, you'll need to write a script that moves all 
+the test data from the CM system into the classpath of the system under test. A 
+less ungainly approach is to store the test data in the source tree along with 
+the source files. With this approach, you need a location-independent mechanism 
+to locate the test data within the source tree. One such mechanism is a class. 
+If a class can be mapped to a specific source directory, you could write code 
+like this: 
+<P><CODE>InputStream inp = SourceResourceLoader.getResourceAsStream 
+(this.getClass (), "dataSet1.dat"); <BR></CODE>
+<P>Now you must only determine how to map from a class to the directory that 
+contains the relevant source file. You can identify the root of the source tree 
+(assuming it has a single root) by a system property. The class's package name 
+can then identify the directory where the source file lies. The resource loads 
+from that directory. For Unix and NT, the mapping is straightforward: replace 
+every instance of '.' with <CODE>File.separatorChar</CODE>. 
+<P><FONT size=+1><STRONG>Keep tests in the same location as the source code 
+</STRONG></FONT><BR>If the test source is kept in the same location as the 
+tested classes, both test and class will compile during a build. This forces you 
+to keep the tests and classes synchronized during development. Indeed, unit 
+tests not considered part of the normal build quickly become dated and useless. 
+<P><FONT size=+1><STRONG>Name tests properly </STRONG></FONT><BR>Name the test 
+case <CODE>TestClassUnderTest</CODE>. For example, the test case for the class 
+<CODE>MessageLog</CODE> should be <CODE>TestMessageLog</CODE>. That makes it 
+simple to work out what class a test case tests. Test methods' names within the 
+test case should describe what they test: 
+<P>
+<UL>
+  <LI><CODE>testLoggingEmptyMessage()</CODE> 
+  <LI><CODE>testLoggingNullMessage()</CODE> 
+  <LI><CODE>testLoggingWarningMessage()</CODE> 
+  <LI><CODE>testLoggingErrorMessage()</CODE> </LI></UL>
+<P>Proper naming helps code readers understand each test's purpose. 
+<P><FONT size=+1><STRONG>Ensure that tests are time-independent 
+</STRONG></FONT><BR>Where possible, avoid using data that may expire; such data 
+should be either manually or programmatically refreshed. It is often simpler to 
+instrument the class under test, with a mechanism for changing its notion of 
+today. The test can then operate in a time-independent manner without having to 
+refresh the data. 
+<P><FONT size=+1><STRONG>Consider locale when writing tests 
+</STRONG></FONT><BR>Consider a test that uses dates. One approach to creating 
+dates would be: 
+<P><CODE>Date date = DateFormat.getInstance ().parse ("dd/mm/yyyy"); <BR></CODE>
+<P>Unfortunately, that code doesn't work on a machine with a different locale. 
+Therefore, it would be far better to write: 
+<P><CODE>Calendar cal = Calendar.getInstance (); <BR>Cal.set (yyyy, mm-1, dd); 
+<BR>Date date = Calendar.getTime (); <BR></CODE>
+<P>The second approach is far more resilient to locale changes. 
+<P><FONT size=+1><STRONG>Utilize JUnit's assert/fail methods and exception 
+handling for clean test code </STRONG></FONT><BR>Many JUnit novices make the 
+mistake of generating elaborate try and catch blocks to catch unexpected 
+exceptions and flag a test failure. Here is a trivial example of this: 
+<P><CODE>public void exampleTest () { <BR>&nbsp;&nbsp;&nbsp;try { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// do some test <BR>&nbsp;&nbsp;&nbsp;} 
+catch (SomeApplicationException e) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fail ("Caught SomeApplicationException 
+exception"); <BR>&nbsp;&nbsp;&nbsp;} <BR>} <BR></CODE>
+<P>JUnit automatically catches exceptions. It considers uncaught exceptions to 
+be errors, which means the above example has redundant code in it. 
+<P>Here's a far simpler way to achieve the same result: 
+<P><CODE>public void exampleTest () throws SomeApplicationException { 
+<BR>&nbsp;&nbsp;&nbsp;// do some test <BR>} <BR></CODE>
+<P>In this example, the redundant code has been removed, making the test easier 
+to read and maintain (since there is less code). 
+<P>Use the wide variety of assert methods to express your intention in a simpler 
+fashion. Instead of writing: 
+<P><CODE>assert (creds == 3); <BR></CODE>
+<P>Write: 
+<P><CODE>assertEquals ("The number of credentials should be 3", 3, creds); 
+<BR></CODE>
+<P>The above example is much more useful to a code reader. And if the assertion 
+fails, it provides the tester with more information. JUnit also supports 
+floating point comparisons: 
+<P><CODE>assertEquals ("some message", result, expected, delta); <BR></CODE>
+<P>When you compare floating point numbers, this useful function saves you from 
+repeatedly writing code to compute the difference between the result and the 
+expected value. 
+<P>Use <CODE>assertSame()</CODE> to test for two references that point to the 
+same object. Use <CODE>assertEquals()</CODE> to test for two objects that are 
+equal. 
+<P><FONT size=+1><STRONG>Document tests in javadoc </STRONG></FONT><BR>Test 
+plans documented in a word processor tend to be error-prone and tedious to 
+create. Also, word-processor-based documentation must be kept synchronized with 
+the unit tests, adding another layer of complexity to the process. If possible, 
+a better solution would be to include the test plans in the tests' 
+<CODE>javadoc</CODE>, ensuring that all test plan data reside in one place. 
+<P><FONT size=+1><STRONG>Avoid visual inspection </STRONG></FONT><BR>Testing 
+servlets, user interfaces, and other systems that produce complex output is 
+often left to visual inspection. Visual inspection -- a human inspecting output 
+data for errors -- requires patience, the ability to process large quantities of 
+information, and great attention to detail: attributes not often found in the 
+average human being. Below are some basic techniques that will help reduce the 
+visual inspection component of your test cycle. 
+<P><STRONG>Swing </STRONG><BR>When testing a Swing-based UI, you can write tests 
+to ensure that: 
+<P>
+<UL>
+  <LI>All the components reside in the correct panels 
+  <LI>You've configured the layout managers correctly 
+  <LI>Text widgets have the correct fonts </LI></UL>
+<P>A more thorough treatment of this can be found in the worked example of 
+testing a GUI, referenced in the <A 
+href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resources">Resources</A> 
+section. 
+<P><STRONG>XML </STRONG><BR>When testing classes that process XML, it pays to 
+write a routine that compares two XML DOMs for equality. You can then 
+programmatically define the correct DOM in advance and compare it with the 
+actual output from your processing methods. 
+<P><STRONG>Servlets </STRONG><BR>With servlets, a couple of approaches can work. 
+You can write a dummy servlet framework and preconfigure it during a test. The 
+framework must contain derivations of classes found in the normal servlet 
+environment. These derivations should allow you to preconfigure their responses 
+to method calls from the servlet. 
+<P>For example: 
+<P>
+<UL>
+  <LI><CODE>HttpServletRequest</CODE> can be subclassed to allow the test class 
+  to specify the header, method, path info, and other data 
+  <LI><CODE>HttpServletResponse</CODE> can be subclassed to return an output 
+  stream that stores the servlets' responses in a string for later checking 
+</LI></UL>
+<P>A simpler solution is to use <CODE>HttpUnit</CODE> to test your servlets. 
+<CODE>HttpUnit</CODE> provides a DOM view of a request's results, which makes it 
+relatively simple to compare actual data with expected results. 
+<P>You can avoid visual inspection in many ways. However, sometimes it is more 
+cost-effective to use visual inspection or a more specialized testing tool. For 
+example, testing a UI's dynamic behavior within JUnit is complicated, but 
+possible. It may be a better idea to purchase one of the many UI record/playback 
+testing tools available, or to perform some visual inspection as part of 
+testing. However, that doesn't mean the general rule -- don't visually inspect 
+-- should be ignored. 
+<P><!-- break -->
+<P><FONT size=+1><STRONG>Keep tests small and fast </STRONG></FONT><BR>Executing 
+every test for the entire system shouldn't take hours. Indeed, developers will 
+more consistently run tests that execute quickly. Without regularly running the 
+full set of tests, it will be difficult to validate the entire system when 
+changes are made. Errors will start to creep back in, and the benefits of unit 
+testing will be lost. This means stress tests and load tests for single classes 
+or small frameworks of classes shouldn't be run as part of the unit test suite; 
+they should be executed separately. 
+<P><FONT size=+1><STRONG>Use the reflection-driven JUnit API 
+</STRONG></FONT><BR>Allowing <CODE>TestSuite</CODE> to populate itself with test 
+cases using reflection reduces maintenance time. Reflection ensures that you 
+don't need to update the <CODE>suite()</CODE> implementation whenever a new test 
+is added. 
+<P><FONT size=+1><STRONG>Build a test case for the entire system 
+</STRONG></FONT><BR>It is important to build a test case for the entire system. 
+If one test case exercises the whole system, then developers can test the impact 
+their changes will have on every class in the system. This increases the chance 
+of errors resulting from unanticipated side effects being caught earlier. 
+Without a universal test case, developers tend to test only the class they have 
+modified. Also, running all the tests for the system becomes a painstaking 
+manual process. 
+<P>If we built a test case for the entire system, it would consist of all the 
+other test cases, already defined. The test case would define the 
+<CODE>suite()</CODE> method, which would add all test cases defined in the 
+system to a <CODE>TestSuite</CODE>. This test suite would then be returned from 
+the <CODE>suite()</CODE> method. If you had many test cases, building such a 
+test suite would be time-consuming. In addition, you would have to update the 
+universal test case when new test cases were added or existing test cases were 
+renamed or deleted. Instead of manually building and maintaining the test suite, 
+build a test case that automatically builds a <CODE>TestSuite</CODE> from all of 
+your system's test cases. Here is an outline of the requirements for such a test 
+case: 
+<P>
+<UL>
+  <LI>It should not be self-loading; that would cause recursion. As such, we 
+  need to mark test cases as not loadable. 
+  <LI>It should not load classes derived from <CODE>TestCase</CODE>s that are 
+  meant to be subclasses, and not directly executed. 
+  <LI>It should distinguish between unit tests and other tests, like load or 
+  stress tests. That will let different tests run at different times. 
+  <LI>It should recurse down a directory structure, looking for test cases to 
+  add to the test suite. </LI></UL>
+<P>We can use the Java type system to determine what sort of test a test case 
+represents. We can have test cases extend classes like <CODE>UnitTest</CODE>, 
+<CODE>StressTest</CODE>, <CODE>LoadTest</CODE>, and so on. However, this would 
+make test case classes difficult to reuse between test types, because the test 
+type decision is made near the root of the inheritance hierarchy; it should be 
+made at each leaf instead. As an alternative, we can distinguish tests using a 
+field: <CODE>public static final String TEST_ALL_TEST_TYPE</CODE>. Test cases 
+will be loaded if they have this field declared with a value matching a string 
+that the automatic test case has been configured with. To build this, we'll 
+implement three classes: 
+<P>
+<UL>
+  <LI><STRONG><CODE>ClassFinder</CODE></STRONG> recursively searches a directory 
+  tree for classfiles. Each classfile is loaded and the class's full class name 
+  is extracted. That class name is added to a list for later loading. 
+  <LI><STRONG><CODE>TestCaseLoader</CODE></STRONG> loads each class in the list 
+  found by <CODE>ClassFinder</CODE> and determines if it is a test case. If it 
+  is, it is added to a list. 
+  <LI><STRONG><CODE>TestAll</CODE></STRONG> is a subclass of 
+  <CODE>TestCase</CODE> with an implementation of <CODE>suite()</CODE> that will 
+  load in a set of test cases by <CODE>TestCaseLoader</CODE>. </LI></UL>
+<P>Let's look at each class in turn. 
+<P><STRONG>ClassFinder </STRONG><BR><CODE>ClassFinder</CODE> locates the classes 
+within the system to be tested. It is constructed with the directory that holds 
+the system's classes. <CODE>ClassFinder</CODE> then finds all the classes in the 
+directory tree and stores them for later use. The first part of 
+<CODE>ClassFinder</CODE>'s implementation is below: 
+<P><CODE>public class ClassFinder { <BR>&nbsp;&nbsp;&nbsp;// The cumulative list 
+of classes found. <BR>&nbsp;&nbsp;&nbsp;final private Vector classNameList = new 
+Vector (); <BR>&nbsp;&nbsp;&nbsp;/** <BR>
+  &nbsp;&nbsp;&nbsp;&nbsp;* Find all classes stored in classfiles in classPathRoot 
+  <BR>
+  &nbsp;&nbsp;&nbsp;&nbsp;* Inner classes are not supported. 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;*/ <BR>&nbsp;&nbsp;&nbsp;public ClassFinder(final 
+File classPathRoot) throws IOException { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;findAndStoreTestClasses (classPathRoot); 
+<BR>&nbsp;&nbsp;&nbsp;} <BR><BR>&nbsp;&nbsp;&nbsp;/** 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;* Recursive method that adds all class names related 
+to classfiles it finds in <BR>
+  &nbsp;&nbsp;&nbsp;&nbsp;* the currentDirectory (and below). <BR>
+  &nbsp;&nbsp;&nbsp;&nbsp;*/ 
+<BR>&nbsp;&nbsp;&nbsp;private void findAndStoreTestClasses (final File 
+currentDirectory) throws IOException { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String files[] = 
+currentDirectory.list(); <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(int i = 0;i 
+&lt; files.length;i++) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;File file = new 
+File(currentDirectory, files[i]); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String fileBase = 
+file.getName (); <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int 
+idx = fileBase.indexOf(".class"); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;final int 
+CLASS_EXTENSION_LENGTH = 6; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(idx != -1 
+&amp;&amp; (fileBase.length() - idx) == CLASS_EXTENSION_LENGTH) { <BR></CODE>
+<P>In the code above, we iterate over all the files in a directory. If a 
+filename has a ".class" extension, we determine the fully qualified class name 
+of the class stored in the classfile, as seen here: 
+<P><CODE>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JcfClassInputStream 
+inputStream = new JcfClassInputStream(new FileInputStream (file)); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JcfClassFile 
+classFile = new JcfClassFile (inputStream); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println 
+("Processing: " + classFile.getFullName ().replace ('/','.')); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;classNameList.add 
+(classFile.getFullName ().replace ('/','.')); <BR></CODE>
+<P>This code uses the JCF package to load the classfile and determine the name 
+of the class stored within it. The JCF package is a set of utility classes for 
+loading and examining classfiles. (See <A 
+href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resources">Resources</A> 
+for more information.) The JCF package allows us to find each class's full class 
+name. We could infer the class name from the directory name, but that doesn't 
+work well for build systems that don't store classes according to this 
+structure. Nor does it work for inner classes. 
+<P>Lastly, we check to see if the file is actually a directory. (See the code 
+snippet below.) If it is, we recurse into it. This allows us to discover all the 
+classes in a directory tree: 
+<P><CODE>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else 
+if(file.isDirectory()) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;findAndStoreTestClasses 
+(file); <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <BR>&nbsp;&nbsp;&nbsp;} <BR><BR>/** 
+<BR>&nbsp;* Return an iterator over the collection of classnames (Strings) 
+<BR>&nbsp;*/ <BR>public Iterator getClasses () { <BR>&nbsp;&nbsp;&nbsp;return 
+classNameList.iterator (); <BR>} <BR>} <BR></CODE>
+<P><STRONG>TestCaseLoader </STRONG><BR><CODE>TestCaseLoader</CODE> finds the 
+test cases among the class names from <CODE>ClassFinder</CODE>. This code 
+snippet shows the top-level method for adding a class that represents a 
+<CODE>TestCase</CODE> to the list of test cases: 
+<P><CODE>public class TestCaseLoader { <BR>&nbsp;&nbsp;&nbsp;final private 
+Vector classList = new Vector (); <BR>&nbsp;&nbsp;&nbsp;final private String 
+requiredType; <BR><BR>&nbsp;&nbsp;&nbsp;/** <BR>&nbsp;&nbsp;&nbsp;&nbsp;* Adds 
+testCaseClass to the list of classdes <BR>&nbsp;&nbsp;&nbsp;&nbsp;* if the class 
+is a test case we wish to load. Calls <BR>&nbsp;&nbsp;&nbsp;&nbsp;* 
+shouldLoadTestCase () to determine that. <BR>&nbsp;&nbsp;&nbsp;&nbsp;*/ 
+<BR>&nbsp;&nbsp;&nbsp;private void addClassIfTestCase (final Class 
+testCaseClass) { <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (shouldAddTestCase 
+(testCaseClass)) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;classList.add 
+(testCaseClass); <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+<BR>&nbsp;&nbsp;&nbsp;} <BR><BR>&nbsp;&nbsp;&nbsp;/** 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;* Determine if we should load this test case. Calls 
+isATestCaseOfTheCorrectType <BR>&nbsp;&nbsp;&nbsp;&nbsp;* to determine if the 
+test case should be <BR>&nbsp;&nbsp;&nbsp;&nbsp;* added to the class list. 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;*/ <BR>&nbsp;&nbsp;&nbsp;private boolean 
+shouldAddTestCase (final Class testCaseClass) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return isATestCaseOfTheCorrectType 
+(testCaseClass); <BR>&nbsp;&nbsp;&nbsp;} <BR></CODE>
+<P>You'll find the meat of the class in the 
+<CODE>isATestCaseOfTheCorrectType()</CODE> method, listed below. For each class 
+being considered, it: 
+<P>
+<UL>
+  <LI>Determines whether it is derived from <CODE>TestCase</CODE>. If not, it is 
+  not a test case. 
+  <LI>Determines whether the field <CODE>public final static 
+  TEST_ALL_TEST_TYPE</CODE> has a value matching that specified in the member 
+  field <CODE>requiredType</CODE>. </LI></UL>
+<P>Here's the code: 
+<P><CODE>&nbsp;&nbsp;&nbsp;private boolean isATestCaseOfTheCorrectType (final 
+Class testCaseClass) { <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean 
+isOfTheCorrectType = false; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 
+(TestCase.class.isAssignableFrom(testCaseClass)) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Field 
+testAllIgnoreThisField = testCaseClass.getDeclaredField("TEST_ALL_TEST_TYPE"); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;final 
+int EXPECTED_MODIFIERS = Modifier.STATIC | Modifier.PUBLIC | Modifier.FINAL; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 
+(((testAllIgnoreThisField.getModifiers() &amp; EXPECTED_MODIFIERS) != 
+EXPECTED_MODIFIERS) || 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(testAllIgnoreThisField.getType() 
+!= String.class)) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw 
+new IllegalArgumentException ("TEST_ALL_TEST_TYPE should be static private final 
+String"); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String 
+testType = (String)testAllIgnoreThisField.get(testCaseClass); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isOfTheCorrectType 
+= requiredType.equals (testType); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch 
+(NoSuchFieldException e) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch 
+(IllegalAccessException e) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw 
+new IllegalArgumentException ("The field " + testCaseClass.getName () + 
+".TEST_ALL_TEST_TYPE is not accessible."); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return isOfTheCorrectType; 
+<BR>&nbsp;&nbsp;&nbsp;} <BR></CODE>
+<P>Next, the <CODE>loadTestCases()</CODE> method examines each class name. It 
+loads the class (if it can be loaded); if the class is a test case and of the 
+required type, the method adds the class to its list of test cases: 
+<P><CODE>&nbsp;&nbsp;&nbsp;public void loadTestCases (final Iterator 
+classNamesIterator) { <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while 
+(classNamesIterator.hasNext ()) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String className = 
+(String)classNamesIterator.next (); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class 
+candidateClass = Class.forName (className); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addClassIfTestCase 
+(candidateClass); <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+catch (ClassNotFoundException e) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.err.println 
+("Cannot load class: " + className); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <BR>&nbsp;&nbsp;&nbsp;} 
+<BR><BR>&nbsp;&nbsp;&nbsp;/** <BR>&nbsp;&nbsp;&nbsp;* Construct this instance. 
+Load all the test cases possible that derive <BR>&nbsp;&nbsp;&nbsp;* from 
+baseClass and cannot be ignored. <BR>&nbsp;&nbsp;&nbsp;* @param 
+classNamesIterator An iterator over a collection of fully qualified class names 
+<BR>&nbsp;&nbsp;&nbsp;*/ <BR>&nbsp;&nbsp;public TestCaseLoader(final String 
+requiredType) { <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (requiredType == 
+null) throw new IllegalArgumentException ("requiredType is null"); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.requiredType = requiredType; 
+<BR>&nbsp;&nbsp;&nbsp;} <BR><BR>&nbsp;&nbsp;&nbsp;/** <BR>&nbsp;&nbsp;&nbsp;* 
+Obtain an iterator over the collection of test case classes loaded by 
+loadTestCases <BR>&nbsp;&nbsp;&nbsp;*/ <BR>&nbsp;&nbsp;&nbsp;public Iterator 
+getClasses () { <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+classList.iterator (); <BR>&nbsp;&nbsp;&nbsp;} <BR></CODE>
+<P><STRONG>TestAll </STRONG><BR><CODE>TestCall</CODE> pulls everything together. 
+It uses the aforementioned classes to build a list of test cases defined in the 
+system. It adds those test cases to a <CODE>TestSuite</CODE> and returns the 
+<CODE>TestSuite</CODE> as part of its implementation of the <CODE>suite()</CODE> 
+method. The result: a test case that automatically extracts every defined test 
+case in the system, ready for execution by JUnit. 
+<P><CODE>public class TestAll extends TestCase { <BR></CODE>
+<P>The <CODE>addAllTests()</CODE> method iterates over the classes loaded by the 
+<CODE>TestCaseLoader</CODE> and adds them to the test suite: 
+<P><CODE>&nbsp;&nbsp;&nbsp;private static int addAllTests(final TestSuite suite, 
+final Iterator classIterator) <BR>&nbsp;&nbsp;&nbsp;throws java.io.IOException { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int testClassCount = 0; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while (classIterator.hasNext ()) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class testCaseClass = 
+(Class)classIterator.next (); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;suite.addTest (new 
+TestSuite (testCaseClass)); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println 
+("Loaded test case: " + testCaseClass.getName ()); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testClassCount++; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return testClassCount; 
+<BR>&nbsp;&nbsp;&nbsp;} <BR></CODE>
+<P>With <CODE>suite()</CODE>, the test cases are added to the 
+<CODE>TestSuite</CODE>, then returned to JUnit for execution. It obtains, from 
+the system property <CODE>"class_root"</CODE>, the directory where the classes 
+are stored. It obtains, from the system property <CODE>"test_type"</CODE>, the 
+type of test cases to load. It uses the <CODE>ClassFinder</CODE> to find all the 
+classes, and the <CODE>TestCaseLoader</CODE> to load all the appropriate test 
+cases. It then adds these to a new <CODE>TestSuite</CODE>: 
+<P><CODE>&nbsp;&nbsp;&nbsp;public static Test suite() 
+<BR>&nbsp;&nbsp;&nbsp;throws Throwable { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String classRootString 
+= System.getProperty("class_root"); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (classRootString == 
+null) throw new IllegalArgumentException ("System property class_root must be 
+set."); <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String 
+testType = System.getProperty("test_type"); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (testType == null) 
+throw new IllegalArgumentException ("System property test_type must be set."); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;File classRoot = new 
+File(classRootString); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ClassFinder 
+classFinder = new ClassFinder (classRoot); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TestCaseLoader 
+testCaseLoader = new TestCaseLoader (testType); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testCaseLoader.loadTestCases 
+(classFinder.getClasses ()); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TestSuite suite = new 
+TestSuite(); <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int 
+numberOfTests = addAllTests (suite, testCaseLoader.getClasses ()); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Number 
+of test classes found: " + numberOfTests); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return suite; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch (Throwable t) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// This ensures we 
+have extra information. Otherwise we get a "Could not invoke the suite method." 
+message. 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.printStackTrace (); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw t; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <BR>&nbsp;&nbsp;&nbsp;} 
+<BR><BR>&nbsp;&nbsp;/** <BR>&nbsp;&nbsp;&nbsp;* Basic constructor - called by 
+the test runners. <BR>&nbsp;&nbsp;&nbsp;*/ <BR><BR>&nbsp;&nbsp;&nbsp;public 
+TestAll(String s) { <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super(s); 
+<BR>&nbsp;&nbsp;&nbsp;} <BR>} <BR></CODE>
+<P>To test an entire system using these classes, execute the following command 
+(in a Windows command shell): 
+<P><CODE>java -cp C:\project\classes;C:\junit3.2\junit.jar:C:\jcf\jcfutils.zip 
+-Dclass_root=C:\project\classes -Dtest_type=UNIT junit.ui.TestRunner bp.TestAll 
+<BR></CODE>
+<P>This command loads and runs all test cases of type <CODE>UNIT</CODE> that 
+have classes stored under <CODE>C:\project\classes</CODE>. 
+<P><FONT size=+1><STRONG>Test thread safety </STRONG></FONT><BR>You'll want to 
+guarantee the status of supposedly thread-safe classes by testing them. Such 
+tests prove difficult using Junit 3.2's existing set of facilities. You can use 
+<CODE>junit.extensions.ActiveTest</CODE> to run a test case in a different 
+thread. However, <CODE>TestSuite</CODE> assumes that a test case is complete 
+when it returns from <CODE>run()</CODE>; with 
+<CODE>junit.extensions.ActiveTest</CODE>, it is not. We could work hard to 
+define a properly working <CODE>ActiveTestSuite</CODE>; instead, let's look at a 
+simpler solution: <CODE>MultiThreadedTestCase</CODE>. First, I'll show how 
+<CODE>MultiThreadedTestCase</CODE> assists with multithreaded testing. Then I'll 
+show how <CODE>MultiThreadedTestCase</CODE> is implemented. 
+<P>To use <CODE>MultiThreadedTestCase</CODE>, we implement the standard elements 
+of a <CODE>TestCase</CODE>, but we derive from 
+<CODE>MultiThreadedTestCase</CODE>. The standard elements are the class 
+declaration, the constructor, and since we're using <CODE>TestAll</CODE>, the 
+definition of the test type: 
+<P><CODE>public class MTTest extends MultiThreadedTestCase { 
+<BR>&nbsp;&nbsp;&nbsp;/** <BR>&nbsp;&nbsp;&nbsp;&nbsp;* Basic constructor - 
+called by the test runners. <BR>&nbsp;&nbsp;&nbsp;&nbsp;*/ 
+<BR>&nbsp;&nbsp;&nbsp;public MTTest(String s) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super (s); <BR>&nbsp;&nbsp;&nbsp;} 
+<BR><BR>&nbsp;&nbsp;&nbsp;public static final String TEST_ALL_TEST_TYPE = 
+"UNIT"; <BR></CODE>
+<P>A multithreaded test case needs to spawn a number of threads that perform 
+some operation. We need to start those threads, wait until they've executed, and 
+then return the results to JUnit -- all done in the code below. The code is 
+trivial; in practice, this code would spawn multiple threads that performed 
+different operations on the class under test. After each operation the class 
+invariants and post-conditions would be tested to ensure that the class was 
+behaving properly. 
+<P><CODE>&nbsp;&nbsp;&nbsp;public void testMTExample () <BR>&nbsp;&nbsp;&nbsp;{ 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Create 100 threads containing the 
+test case. <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TestCaseRunnable tct [] = new 
+TestCaseRunnable [100]; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; 
+i &lt; tct.length; i++) <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tct[i] = new 
+TestCaseRunnable () { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public 
+void runTestCase () { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assert 
+(true); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Run the 100 threads, wait for them to 
+complete and return the results to JUnit. 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;runTestCaseRunnables (tct); 
+<BR>&nbsp;&nbsp;&nbsp;} <BR>} <BR></CODE>
+<P>Now that I've shown how to use <CODE>MultiThreadedTestCase</CODE>, I'll 
+examine the implementation. First, we declare the class and add an array where 
+the running threads will be stored: 
+<P><CODE>public class MultiThreadedTestCase extends TestCase { 
+<BR>&nbsp;&nbsp;&nbsp;/** <BR>&nbsp;&nbsp;&nbsp;&nbsp;* The threads that are 
+executing. <BR>&nbsp;&nbsp;&nbsp;&nbsp;*/ <BR>&nbsp;&nbsp;&nbsp;private Thread 
+threads[] = null; <BR></CODE>
+<P><CODE>testResult</CODE>, seen below, holds the <CODE>testResult</CODE> that 
+declares that the test case's <CODE>run()</CODE> will be passed. We override 
+<CODE>run()</CODE> so we can store the <CODE>testResult</CODE> for later 
+population by the test threads: 
+<P><CODE>&nbsp;&nbsp;&nbsp;/** <BR>&nbsp;&nbsp;&nbsp;&nbsp;* The tests 
+TestResult. <BR>&nbsp;&nbsp;&nbsp;&nbsp;*/ <BR>&nbsp;&nbsp;&nbsp;private 
+TestResult testResult = null; <BR>&nbsp;&nbsp;&nbsp;/** 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;* Simple constructor. <BR>&nbsp;&nbsp;&nbsp;&nbsp;*/ 
+<BR>&nbsp;&nbsp;&nbsp;public MultiThreadedTestCase(final String s) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super(s); <BR>&nbsp;&nbsp;&nbsp;} 
+<BR>&nbsp;&nbsp;&nbsp;/** <BR>&nbsp;&nbsp;&nbsp;&nbsp;* Override run so we can 
+save the test result. <BR>&nbsp;&nbsp;&nbsp;&nbsp;*/ 
+<BR>&nbsp;&nbsp;&nbsp;public void run(final TestResult result) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testResult = result; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super.run(result); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testResult = null; <BR></CODE>
+<P><CODE>runTestCaseRunnables()</CODE> runs each <CODE>TestCaseRunnable</CODE> 
+in a seperate thread. All the threads are created and then started at the same 
+time. The method waits until every thread has finished and then returns: 
+<P><CODE>&nbsp;&nbsp;&nbsp;protected void runTestCaseRunnables (final 
+TestCaseRunnable[] runnables) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(runnables == null) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new 
+IllegalArgumentException("runnables is null"); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;threads = new Thread[runnables.length]; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(int i = 0;i &lt; threads.length;i++) 
+{ <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;threads[i] = new 
+Thread(runnables[i]); <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(int i = 0;i &lt; threads.length;i++) 
+{ <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;threads[i].start(); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(int i = 0;i &lt; 
+threads.length;i++) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;threads[i].join(); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;catch(InterruptedException ignore) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Thread 
+join interrupted."); <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;threads = null; <BR>&nbsp;&nbsp;&nbsp;} 
+<BR></CODE>
+<P>Exceptions caught in the test threads must be propagated into the 
+<CODE>testResult</CODE> instance we saved from the <CODE>run()</CODE> method. 
+<CODE>handleException()</CODE>, below, does just that: 
+<P><CODE>&nbsp;&nbsp;&nbsp;/** <BR>&nbsp;&nbsp;&nbsp;&nbsp;* Handle an 
+exception. Since multiple threads won't have their <BR>&nbsp;&nbsp;&nbsp;&nbsp;* 
+exceptions caught the threads must manually catch them and call 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;* handleException(). <BR>&nbsp;&nbsp;&nbsp;&nbsp;* 
+@param t Exception to handle.*/ <BR><BR>&nbsp;&nbsp;&nbsp;private void 
+handleException(final Throwable t) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;synchronized(testResult) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(t instanceof 
+AssertionFailedError) { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testResult.addFailure(this, 
+(AssertionFailedError)t); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testResult.addError(this, 
+t); <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <BR>&nbsp;&nbsp;&nbsp;} <BR></CODE>
+<P>Finally, we define the class that each test thread extends. The purpose of 
+this class is to provide an environment (<CODE>runTestCase()</CODE>) where 
+thrown exceptions will be caught and passed to JUnit. The implementation of this 
+class is: 
+<P><CODE>&nbsp;&nbsp;&nbsp;/** <BR>&nbsp;&nbsp;&nbsp;&nbsp;* A test case thread. 
+Override runTestCase () and define <BR>&nbsp;&nbsp;&nbsp;&nbsp;* behaviour of 
+test in there.*/ <BR>&nbsp;&nbsp;&nbsp;protected abstract class TestCaseRunnable 
+implements Runnable { <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/** 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Override this to define the 
+test*/ <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public abstract void 
+runTestCase() 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throws 
+Throwable; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/** 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Run the test in an environment 
+where <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* we can handle the 
+exceptions generated by the test method.*/ 
+<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public void run() { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;runTestCase(); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;catch(Throwable t) /* 
+Any other exception we handle and then we interrupt the other threads.*/ { 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handleException(t); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interruptThreads(); 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <BR>&nbsp;&nbsp;&nbsp;} <BR>} 
+<BR></CODE>
+<P>The implementation above helps to develop multithreaded test cases. It 
+handles exceptions thrown in the multiple testing threads and passes them back 
+to JUnit. JUnit only sees a test case that behaves like a single-threaded test. 
+The unit test developer can extend that test case to develop multithreaded 
+tests, without spending much time developing thread-handling code. 
+<P><FONT size=+1><STRONG>Conclusion </STRONG></FONT><BR>Using JUnit to develop 
+robust tests takes some practice (as does writing tests). This article contains 
+a number of techniques for improving your tests' usefulness. Those techniques 
+range from avoiding basic mistakes (such as not using <CODE>setUp()</CODE>) to 
+more design-level issues (avoiding intertest coupling). I've covered some basic 
+ideas to help you use JUnit to test parts of your UI or Web application. I've 
+also shown how to build an automated test suite that removes the overhead of 
+maintaining hand-coded test suites and a mechanism for reducing the effort of 
+developing multithreaded JUnit test cases. 
+<P>JUnit is an excellent framework for unit-testing Java applications. One final 
+thought: If you just started using JUnit to produce unit tests, stick at it. For 
+the first few weeks, you may not see any real reward for your labors. In fact, 
+you may feel that the whole process slows you down. However, after a few weeks, 
+you'll begin to enhance existing code. Then you'll run your tests, pick up new 
+bugs, and fix them. You'll be far more confident in your code base and you will 
+see the value of unit testing. <IMG height=8 
+src="JUnit best practices.files/dingbat.gif" width=8> <!-- end body text -->
+<P><A name=bio></a>
+<TABLE cellSpacing=3 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=center></TD>
+    <TD bgColor=#000000><IMG height=1 
+      src="JUnit best practices.files/dot_clear.gif" width=2 align=bottom 
+      border=0></TD>
+    <TD vAlign=top><STRONG><FONT face=Arial,Helvetica,Sans-serif size=-1>About 
+      the author </FONT></STRONG><BR><A 
+      href="mailto:andy.schneider@javaworld.com">Andy Schneider</A> is a 
+      technical architect for <A href="http://www.bjss.co.uk/">BJSS</A>. He has 
+      been using object technology since 1988 to build both large- and 
+      small-scale systems. Schneider has been using xUnit in projects for over 
+      18 months. His interests include distributed architectures and development 
+      processes. </TD></TR></TBODY></TABLE><!-- stopindex -->
+<P>
+<DIV align=center><FONT face=Arial,Helvetica,Sans-serif><A 
+href="http://www.javaworld.com/javaworld/home.html">Home</A> | <A 
+href="http://www.javaworld.com/javaworld/cgi-bin/jw-mailToFriend.cgi?head=JUnit%20best%20practices&amp;author=Andy%20Schneider&amp;summary=%0AExtreme%20Programming%27s%20rise%20in%20popularity%20among%20the%20Java%20community%20has%20prompted%20more%20development%20teams%20to%20use%20JUnit%3A%20a%20simple%20test%20framework%20for%20building%20and%20executing%20unit%20tests.%20Like%20any%20toolkit%2C%20JUnit%20can%20be%20used%20effectively%20and%20ineffectively.%20In%20this%20article%2C%20Andy%20Schneider%20discusses%20good%20and%20bad%20ways%20to%20use%20JUnit%20and%20provides%20practical%20recommendations%20for%20its%20use%20by%20development%20teams.%20In%20addition%2C%20he%20explains%20simple%20mechanisms%20to%20support%3A%0D%0A%3CP%3E%0A%3Cul%3E%0D%0A%3Cli%3EAutomatic%20construction%20of%20composite%20tests%3C%2Fli%3E%0D%0A%3Cli%3EMultithreaded%20test%20cases%3C%2Fli%3E%0D%0A%3C%2Ful%3E%0D%0A%3CP%3E%0AThis%20article%20assumes%20some%20familiarity%20with%20JUnit.%20%3Cem%3E%284%2C000%20words%29%3C%2Fem%3E%0A">Mail&nbsp;this&nbsp;Story</A> | <A 
+href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resources">Resources&nbsp;and&nbsp;Related&nbsp;Links</A> 
+</FONT></DIV>
+<P>
+<TABLE cellSpacing=0 cellPadding=5 width="100%" bgColor=#336699 border=0>
+  <TBODY>
+  <TR>
+    </TR></TBODY></TABLE>
+<P align=center><A 
+href="http://www.javaworld.com/javaworld/common/jw-copyright.html">(c) Copyright 
+2000 ITworld.com, Inc., an IDG Communications company</A> </P>
+<P><A name=resources><STRONG>Resources</STRONG></A> 
+<UL>
+  <LI>The complete source code for this article can be downloaded at: <BR><A 
+  href="http://www.javaworld.com/jw-12-2000/junit/jw-1221-junit.zip">http://www.javaworld.com/jw-12-2000/junit/jw-1221-junit.zip</A>
+  <LI>For more great articles on Java tools, visit the <STRONG>Development 
+  Tools</STRONG> section of <EM>JavaWorld'</EM>s Topical Index: <BR><A 
+  href="http://www.javaworld.com/javaworld/topicalindex/jw-ti-tools.html">http://www.javaworld.com/javaworld/topicalindex/jw-ti-tools.html</A>
+  <LI>For a freewheeling discussion of programming theory, visit 
+  <EM>JavaWorld'</EM>s <STRONG>Programming Theory &amp; Practice</STRONG> 
+  discussion, moderated by the intrepid Allen Holub: <BR><A 
+  href="http://forums.itworld.com/webx?14@@.ee6b806">http://forums.itworld.com/webx?14@@.ee6b806</A>
+  <LI>The free <STRONG>Java Tutor</STRONG> newsletter gives weekly hands-on 
+  guidance and tips for Java programmers: <BR><A 
+  href="http://www.itworld.com/cgi-bin/subcontent12.cgi">http://www.itworld.com/cgi-bin/subcontent12.cgi</A>
+  <LI>The JUnit Website: <BR><A 
+  href="http://www.junit.org/">http://www.junit.org/</A>
+  <LI>A directory of xUnit implementations for different technologies: <BR><A 
+  href="http://www.xprogramming.com/software.htm">http://www.xprogramming.com/software.htm</A>
+  <LI>Unit-test-related discussion of Wiki: <BR><A 
+  href="http://c2.com/cgi-bin/wiki?UnitTests">http://c2.com/cgi-bin/wiki?UnitTests</A>
+  <LI>Extreme Programming roadmap on Wiki: <BR><A 
+  href="http://c2.com/cgi-bin/wiki?ExtremeProgrammingRoadmap">http://c2.com/cgi-bin/wiki?ExtremeProgrammingRoadmap</A>
+  <LI>A worked example of testing a GUI with JUnit: <BR><A 
+  href="http://users.vnet.net/wwake/xp/xp0001/index.shtml">http://users.vnet.net/wwake/xp/xp0001/index.shtml</A> 
+  </LI></UL>Feedback: <A name=jweditors 
+href="http://www.javaworld.com/javaworld/cgi-bin/jw-mailto.cgi?jweditors@javaworld.com+/javaworld/jw-12-2000/jw-1221-junit.html+jweditors">http://www.javaworld.com/javaworld/cgi-bin/jw-mailto.cgi?jweditors@javaworld.com+/javaworld/jw-12-2000/jw-1221-junit.html+jweditors</A><BR>Technical 
+difficulties: <A name=webmaster 
+href="http://www.javaworld.com/javaworld/cgi-bin/jw-mailto.cgi?webmaster@javaworld.com+/javaworld/jw-12-2000/jw-1221-junit.html+webmaster">http://www.javaworld.com/javaworld/cgi-bin/jw-mailto.cgi?webmaster@javaworld.com+/javaworld/jw-12-2000/jw-1221-junit.html+webmaster</A><BR>URL: 
+http://www.javaworld.com/jw-12-2000/jw-1221-junit.html <BR>
+Last modified: Tuesday, May 01, 2001 
+<!--Begin-Survey-->
+<LAYER 
+height="1" width="1" visibility="hidden" 
+onLoad="moveToAbsolute(layer16.pageX,layer16.pageY);clip.height=1;clip.width=1; visibility='show';" 
+SRC="http://ad.doubleclick.net/adl/idg.us.jwsurvey/jwsurvey121900;sz=1x1;tile=16;ord=23100543?"></LAYER>
+<!--End-Survey-->
+<!--Big AD-->
+</BODY></HTML>

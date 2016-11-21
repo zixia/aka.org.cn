@@ -1,0 +1,3042 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=GB2312">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./php-mysql.files/filelist.xml">
+<link rel=Edit-Time-Data href="./php-mysql.files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>PHP,MySQL原理及应用</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>廖阳</o:Author>
+  <o:LastAuthor>廖阳</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>660</o:TotalTime>
+  <o:Created>2000-10-05T08:04:00Z</o:Created>
+  <o:LastSaved>2000-10-05T08:04:00Z</o:LastSaved>
+  <o:Pages>13</o:Pages>
+  <o:Words>1646</o:Words>
+  <o:Characters>9386</o:Characters>
+  <o:Company>ChinaRen.Inc</o:Company>
+  <o:Lines>78</o:Lines>
+  <o:Paragraphs>18</o:Paragraphs>
+  <o:CharactersWithSpaces>11526</o:CharactersWithSpaces>
+  <o:Version>9.2812</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:PunctuationKerning/>
+  <w:DrawingGridVerticalSpacing>7.8 磅</w:DrawingGridVerticalSpacing>
+  <w:DisplayHorizontalDrawingGridEvery>0</w:DisplayHorizontalDrawingGridEvery>
+  <w:DisplayVerticalDrawingGridEvery>2</w:DisplayVerticalDrawingGridEvery>
+  <w:Compatibility>
+   <w:SpaceForUL/>
+   <w:BalanceSingleByteDoubleByteWidth/>
+   <w:DoNotLeaveBackslashAlone/>
+   <w:ULTrailSpace/>
+   <w:DoNotExpandShiftReturn/>
+   <w:AdjustLineHeightInTable/>
+   <w:UseFELayout/>
+  </w:Compatibility>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:宋体;
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-alt:SimSun;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 135135232 16 0 262145 0;}
+@font-face
+	{font-family:黑体;
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-alt:SimHei;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:1 135135232 16 0 262144 0;}
+@font-face
+	{font-family:"\@宋体";
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 135135232 16 0 262145 0;}
+@font-face
+	{font-family:"\@黑体";
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:1 135135232 16 0 262144 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	mso-pagination:none;
+	font-size:10.5pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:宋体;
+	mso-font-kerning:1.0pt;}
+p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:none;
+	font-size:10.5pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:宋体;
+	mso-font-kerning:1.0pt;}
+p.MsoBodyTextIndent, li.MsoBodyTextIndent, div.MsoBodyTextIndent
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:42.0pt;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	text-indent:21.0pt;
+	mso-pagination:none;
+	border:none;
+	mso-border-alt:solid windowtext .5pt;
+	padding:0cm;
+	mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt;
+	font-size:10.5pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:宋体;
+	mso-font-kerning:1.0pt;}
+pre
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:黑体;
+	mso-hansi-font-family:"Courier New";
+	mso-bidi-font-family:"Courier New";
+	color:black;}
+ /* Page Definitions */
+@page
+	{mso-page-border-surround-header:no;
+	mso-page-border-surround-footer:no;}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:42.55pt;
+	mso-footer-margin:49.6pt;
+	mso-paper-source:0;
+	layout-grid:15.6pt;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+@list l0
+	{mso-list-id:851454402;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1462925992 1331339816 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
+@list l0:level1
+	{mso-level-start-at:3;
+	mso-level-number-format:roman-upper;
+	mso-level-tab-stop:105.0pt;
+	mso-level-number-position:left;
+	margin-left:105.0pt;
+	text-indent:-42.0pt;}
+@list l1
+	{mso-list-id:1012411873;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-88211260 330879736 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
+@list l1:level1
+	{mso-level-start-at:11;
+	mso-level-tab-stop:60.0pt;
+	mso-level-number-position:left;
+	margin-left:60.0pt;
+	text-indent:-18.0pt;}
+@list l1:level2
+	{mso-level-number-format:alpha-lower;
+	mso-level-text:"%2\)";
+	mso-level-tab-stop:84.0pt;
+	mso-level-number-position:left;
+	margin-left:84.0pt;
+	text-indent:-21.0pt;}
+@list l1:level3
+	{mso-level-number-format:roman-lower;
+	mso-level-tab-stop:105.0pt;
+	mso-level-number-position:right;
+	margin-left:105.0pt;
+	text-indent:-21.0pt;}
+@list l1:level4
+	{mso-level-tab-stop:126.0pt;
+	mso-level-number-position:left;
+	margin-left:126.0pt;
+	text-indent:-21.0pt;}
+@list l1:level5
+	{mso-level-number-format:alpha-lower;
+	mso-level-text:"%5\)";
+	mso-level-tab-stop:147.0pt;
+	mso-level-number-position:left;
+	margin-left:147.0pt;
+	text-indent:-21.0pt;}
+@list l2
+	{mso-list-id:1477382430;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1595001304 297188390 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
+@list l2:level1
+	{mso-level-text:%1，;
+	mso-level-tab-stop:78.0pt;
+	mso-level-number-position:left;
+	margin-left:78.0pt;
+	text-indent:-36.0pt;}
+@list l3
+	{mso-list-id:1802529800;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1563226558 64619230 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
+@list l3:level1
+	{mso-level-start-at:9;
+	mso-level-tab-stop:63.0pt;
+	mso-level-number-position:left;
+	margin-left:63.0pt;
+	text-indent:-63.0pt;}
+@list l3:level2
+	{mso-level-number-format:alpha-lower;
+	mso-level-text:"%2\)";
+	mso-level-tab-stop:42.0pt;
+	mso-level-number-position:left;
+	margin-left:42.0pt;
+	text-indent:-21.0pt;}
+ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="2050"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=ZH-CN style='tab-interval:21.0pt;text-justify-trim:punctuation'>
+
+<div class=Section1 style='layout-grid:15.6pt'>
+
+<p class=MsoNormal><span lang=EN-US>PHP,MySQL</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>原理及应用</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:21.0pt'><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>随着</span><span
+lang=EN-US>.COM</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>大潮在全世界范围内的兴起，</span><span lang=EN-US>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>和</span><span lang=EN-US>MySQL</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>作为灵活高效的网站建设工具，得到了广泛的应用。</span><span
+lang=EN-US>PHP+MySQL+Apache+Linux</span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>作为免费的网站技术解决方案，被大家所接受。</span></p>
+
+<p class=MsoNormal style='text-indent:21.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:21.0pt'><span lang=EN-US>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>是一种服务器端运行的嵌入</span><span lang=EN-US>HTML</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>的脚本语言，它的语法以</span><span lang=EN-US>Perl</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>为基础，融入了</span><span lang=EN-US>C</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>语言、</span><span lang=EN-US>ASP</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>脚本、</span><span
+lang=EN-US>shell</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>脚本和</span><span lang=EN-US>JavaScript</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>脚本的长处。</span></p>
+
+<p class=MsoNormal style='text-indent:21.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:21.0pt'><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>首先，</span><span
+lang=EN-US>PHP</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>能做什么？</span></p>
+
+<p class=MsoNormal style='margin-left:62.8pt;text-indent:-20.8pt'><span
+lang=EN-US>1,<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>最多的应用领域、也是</span><span lang=EN-US>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>的设计目标——动态网页编程</span></p>
+
+<p class=MsoNormal style='margin-left:62.8pt'><span lang=EN-US>(</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>优势：数据库、安全、函数适用、速度快、连接</span><span lang=EN-US>JAVA</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>、</span><span lang=EN-US>COM</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>；劣势：没有公共进程、没有数据库统一接口、不适合大团队开发、不适合开发大型程序；</span><span
+lang=EN-US>)</span></p>
+
+<p class=MsoNormal style='text-indent:21.0pt'><span lang=EN-US><span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>2,<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>作为和</span><span lang=EN-US>Shell</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>、</span><span lang=EN-US>Perl</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>一样的脚本语言</span></p>
+
+<p class=MsoNormal style='text-indent:21.0pt'><span lang=EN-US><span
+style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>(</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>优势：比</span><span lang=EN-US>Shell</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>功能强、比</span><span lang=EN-US>Perl</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>简单，实用函数很多、内建数据库调用</span><span lang=EN-US>)</span></p>
+
+<p class=MsoNormal style='text-indent:21.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:21.0pt'><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>先看一个最简单的例子</span><span
+lang=EN-US>(example1.php)</span></p>
+
+<div style='border:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt'>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>1.<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>&lt;HTML&gt;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>2.<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>&lt;BODY&gt;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>3.<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>&lt;?php<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>4.<span
+style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$FirstName=”Yang”;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>5.<span
+style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$LastName=”Liao”;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>6.<span
+style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$Name
+= $FirstName . “-” . $LastName;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>7.<span
+style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>echo
+“NAME:”.$Name;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>8.<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>?&gt;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>9.<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>&lt;/BODY&gt;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>10.<span
+style='mso-tab-count:1'>&nbsp;&nbsp; </span>&lt;/HTML&gt;<o:p></o:p></span></i></p>
+
+</div>
+
+<p class=MsoNormal style='text-indent:21.0pt'><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>上面的例子中，将姓和名连接起来成为名字，并且显示出来。</span></p>
+
+<p class=MsoNormal style='text-indent:21.0pt'><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>在上面的例子中，第</span><span
+lang=EN-US>1</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>、</span><span lang=EN-US>2</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>、</span><span lang=EN-US>9</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>、</span><span
+lang=EN-US>10</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>行是</span><span lang=EN-US>HTML</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>的标记，</span><span lang=EN-US>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>并不对其进行处理而直接发送给用户浏览器。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>程序中</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>第</span><span lang=EN-US>1</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>行的</span><span
+lang=EN-US>&lt;HTML&gt;</span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>和最后一行的</span><span
+lang=EN-US>&lt;/HTML&gt;</span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>两个</span><span
+lang=EN-US>HTML</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>标记表示本文档是</span><span lang=EN-US>HTML</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>文档，浏览器将按</span><span lang=EN-US>HTML</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>语法解析本文档。虽然目前的浏览器不论文档中有否</span><span lang=EN-US>&lt;HTML&gt;</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>标记都会将其按照</span><span lang=EN-US>HTML</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>语法进行分析，但是为了遵照</span><span lang=EN-US>HTML</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>标准，还是应该加上这两个标记。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>第</span><span lang=EN-US>2</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>行和第</span><span
+lang=EN-US>9</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>行的</span><span lang=EN-US>&lt;BODY&gt;</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>和</span><span lang=EN-US>&lt;/BODY&gt;</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>两个</span><span lang=EN-US>HTML</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>标记表示这两个标记中间的部分是正文区。虽然没有这两个标记浏览器也可以正常显示页面，但是在</span><span
+lang=EN-US>&lt;BODY&gt;</span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>中可以嵌入</span><span
+lang=EN-US>JavaScript</span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>脚本，因此还是加上为好。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>第</span><span lang=EN-US>3</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>行的</span><span
+lang=EN-US>&lt;?PHP</span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>表示脚本分的开始。</span><span
+lang=EN-US>PHP</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>解释器一旦发现“</span><span lang=EN-US>&lt;?</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>”、“</span><span lang=EN-US>&lt;?php</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>”或</span> <span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>“</span><span
+lang=EN-US>&lt;script language=&quot;php&quot;&gt;</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>”标记，就将其后的内容作为</span><span lang=EN-US>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>脚本进行解析，直到遇到“</span><span lang=EN-US>?&gt;</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>”</span><span lang=EN-US>(</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>前二者</span><span
+lang=EN-US>)</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>或“</span><span lang=EN-US>&lt;/script&gt;</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>”</span><span lang=EN-US>(</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>后者</span><span
+lang=EN-US>)</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>结束。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:2.0gd;text-indent:21.0pt'><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>第</span><span lang=EN-US>4</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>行的“</span><span
+lang=EN-US>$FirstName=”Yang”;</span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>”是</span><span
+lang=EN-US>PHP</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>中的复值语句。</span></p>
+
+<p class=MsoNormal style='margin-left:104.8pt;text-indent:-41.8pt'><span
+lang=EN-US>I.<span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>“</span><span lang=EN-US>$FirstName</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>”是变量名称，</span><span lang=EN-US>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>的变量和</span><span lang=EN-US>Perl</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>一样，以“</span><span lang=EN-US>$</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>”作为开始标记，并且在使用新变量以前不用任何声明即可直接使用。</span></p>
+
+<p class=MsoNormal style='margin-left:4.0gd;text-indent:21.0pt'><span
+lang=EN-US>II.<span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>“</span><span lang=EN-US>=</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>”是复值运算符，这在各种语言种基本是一样的。</span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-42.0pt;mso-list:
+l0 level1 lfo1;tab-stops:list 105.0pt'><![if !supportLists]><span lang=EN-US>III.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>“</span><span lang=EN-US>”Yang”</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>”是变量的内容，因为是字符串所以用引号括起来。</span><span lang=EN-US>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>中的变量类型是隐含的，并且可以在各种类型之间灵活转换。这一点下面将重点说明。</span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-42.0pt;mso-list:
+l0 level1 lfo1;tab-stops:list 105.0pt'><![if !supportLists]><span lang=EN-US>IV.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>“；”是语句的分隔符号，表示前一个语句的结束；但是如果有其他明显的分隔标记</span><span
+lang=EN-US>,</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>例如“</span><span lang=EN-US>?&gt;</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>”或者“</span><span lang=EN-US>}</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>”就可以省略掉分号。</span></p>
+
+<p class=MsoNormal style='margin-left:63.0pt'><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>执行本语句后，变量</span><span
+lang=EN-US>$FirstName</span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>的值就是</span><span
+lang=EN-US>Yang </span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>，其内部类型是字符串。</span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>第</span><span lang=EN-US>5</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>行的“</span><span
+lang=EN-US>$LastName=”Liao”;</span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>”和上一句一样，是复值语句。</span></p>
+
+<p class=MsoNormal style='margin-left:83.8pt;text-indent:-41.8pt'><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>第</span><span lang=EN-US>6</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>行的“</span><span
+lang=EN-US>$Name = $FirstName . “-” . $LastName;</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>”是复值语句，其中的</span><span
+lang=EN-US><span style="mso-spacerun: yes">&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>“</span><span lang=EN-US>$FirstName . “-” . $LastName</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>”表示将</span><span lang=EN-US>$FirstName</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>和</span><span lang=EN-US>LastName</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>连接起来，其中用</span><span lang=EN-US>”-”</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>分隔。“</span><span lang=EN-US>.</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>”是连接操作符，将前后的变量或常量都转换成字符串，然后将其连接起来。本语句执行后，变量</span><span
+lang=EN-US>Name</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>的值是</span><span lang=EN-US>”Yang-Liao”</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>。</span></p>
+
+<p class=MsoNormal style='margin-left:84.0pt;text-indent:21.0pt'><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>请注意，连接字符串不要使用“</span><span lang=EN-US>+</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>”操作符，“</span><span lang=EN-US>+</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>”表示数字的相加，也就是将前后的边量或常量转换成数字，然后将数量值进行相加。</span><span
+lang=EN-US>$FirstName+”-“+$LastName</span><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>的值是</span><span
+lang=EN-US>0</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>。</span></p>
+
+<p class=MsoNormal style='margin-left:42.0pt'><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>第</span><span
+lang=EN-US>7</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>行的“</span><span lang=EN-US>echo
+“NAME:”.$Name;</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>”是显示语句，将变量</span><span lang=EN-US>Name</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>的值连接到“</span><span lang=EN-US>NAME:</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>”</span> </p>
+
+<p class=MsoNormal style='margin-left:63.0pt;text-indent:21.0pt'><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>后面输出到浏览器。</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>因此本程序的执行结果是</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<div style='border:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt'>
+
+<p class=MsoNormal style='border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span lang=EN-US>NAME:Yang-Liao</span></p>
+
+<p class=MsoNormal style='border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>作为一种</span><span lang=EN-US>HTML</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>脚本语言，与用户的互动交流是很重要的。</span><span lang=EN-US>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>可以很简单的接收用户发来的数据并对其进行处理。</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>再看一个例子</span><span lang=EN-US>(example2.php)</span></p>
+
+<div style='border:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt'>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>1.<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>&lt;HTML&gt;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>2.<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>&lt;BODY&gt;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>3.<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>&lt;?php<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>4.<span
+style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>if($add)<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>5.<span
+style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>6.<span
+style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$FirstName=”Yang”;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>7.<span
+style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$LastName=”Liao”;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>8.<span
+style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$Name
+= $FirstName . “-” . $LastName;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>9.<span
+style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>echo
+“NAME:”.$Name;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>10.<span
+style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>11.<span
+style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>else<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>12.<span
+style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>?&gt;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>13.<span
+style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>&lt;FORM<span
+style="mso-spacerun: yes">&nbsp; </span>METHOD=POST&gt;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>14.<span
+style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>FirstName
+: &lt;INPUT<span style="mso-spacerun: yes">&nbsp; </span>TYPE=TEXT<span
+style="mso-spacerun: yes">&nbsp; </span>NAME=FirstName&gt;&lt;BR&gt;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>15.<span
+style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>LastName
+: &lt;INPUT<span style="mso-spacerun: yes">&nbsp; </span>TYPE=TEXT<span
+style="mso-spacerun: yes">&nbsp; </span>NAME=LastName&gt;&lt;BR&gt;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>16.<span
+style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>&lt;INPUT<span
+style="mso-spacerun: yes">&nbsp; </span>TYPE=HIDDEN<span style="mso-spacerun:
+yes">&nbsp; </span>NAME=add<span style="mso-spacerun: yes">&nbsp;
+</span>VALUE=1&gt;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>17.<span
+style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>&lt;INPUT<span
+style="mso-spacerun: yes">&nbsp; </span>TYPE=SUBMIT<span style="mso-spacerun:
+yes">&nbsp; </span>VALUE=’POST’&gt;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>18.<span
+style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>&lt;/FORM&gt;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>19.<span
+style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>&lt;?}?&gt;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US>20.<span
+style='mso-tab-count:1'>&nbsp;&nbsp; </span>&lt;/BODY&gt;<o:p></o:p></span></i></p>
+
+</div>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:21.0pt'><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>这段程序和上一段相比，增加了表单部分，允许用户填写自己的姓和名，用户点击</span><span
+lang=EN-US>&lt;POST&gt;</span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>按钮提交表单后，在服务器端将用户的姓和名连接起来并且显示给用户。</span></p>
+
+<p class=MsoNormal style='text-indent:21.0pt'><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>和一般的</span><span
+lang=EN-US>CGI</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>程序不同，本程序的表单页面和处理工作在同一程序中完成。有许多</span><span
+lang=EN-US>PHP</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>程序采取这个结构，以简化页面体系，并便于错误页面的显示。</span><span
+lang=EN-US>(</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>举例子</span><span lang=EN-US>)</span></p>
+
+<p class=MsoNormal style='text-indent:21.0pt'><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>本程序的</span><span
+lang=EN-US>13-18</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>行就是提交的表单。在第一次进入页面的时候，</span><span
+lang=EN-US>$add</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>变量没有复值，因此在第</span><span lang=EN-US>4</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>行的判断语句跳过处理部分而直接进入了表单部分。在标单里面：</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>第</span><span lang=EN-US>13</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>行“</span><span
+lang=EN-US>&lt;FROM<span style="mso-spacerun: yes">&nbsp;
+</span>METHOD=POST&gt;</span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>”标记表示表单的开始，并且说明在提交表单的时候采用</span><span
+lang=EN-US>POST</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>方法。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>第</span><span lang=EN-US>14</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>行的“</span><span
+lang=EN-US>&lt;INPUT<i><span style="mso-spacerun: yes">&nbsp; </span></i>TYPE=TEXT<span
+style="mso-spacerun: yes">&nbsp; </span>NAME=FirstName &gt;</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>”标记将显示一个文本框，允许用户填写任意长的文字，并将这些文字作为变量</span><span lang=EN-US>$FirstName</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>的值发送给</span><span lang=EN-US>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>程序。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>第</span><span lang=EN-US>15</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>行的“</span><span
+lang=EN-US>&lt;INPUT<i><span style="mso-spacerun: yes">&nbsp; </span></i>TYPE=TEXT<span
+style="mso-spacerun: yes">&nbsp; </span>NAME=LastName &gt;</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>”标记和第</span><span lang=EN-US>14</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>行的标记作用是相同的，只是这里输入的文字将作为变量</span><span lang=EN-US>$LastName</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>的值发送给</span><span lang=EN-US>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>程序。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>第</span><span lang=EN-US>16</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>行的“</span><i><span
+lang=EN-US>&lt;</span></i><span lang=EN-US>INPUT<span style="mso-spacerun:
+yes">&nbsp; </span>TYPE=HIDDEN<span style="mso-spacerun: yes">&nbsp;
+</span>NAME=add<span style="mso-spacerun: yes">&nbsp; </span>VALUE=1<i>&gt;</i></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>”标记是隐含变量标记</span><span lang=EN-US>(</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>正如其名字，“</span><span lang=EN-US>TYPE=HIDDEN</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>”表示这个变量将隐含</span><span lang=EN-US>)</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>，也就是说页面上将不会显示这个变量的文本框，用户自然也不能编辑其内容，只能按照其预设定的值</span><span
+lang=EN-US>(VALUE=1)</span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>将变量</span><span
+lang=EN-US>$add</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>发送给</span><span lang=EN-US>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>程序。也就是说</span><span lang=EN-US>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>程序将接收到</span><span lang=EN-US>$add=1</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>。这个变量的作用是表示当前不是第一次进入页面，而是数据处理过程。这个变量</span><span lang=EN-US>$add</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>在第</span><span lang=EN-US>4</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>行的判断语句中期作用，使得程序进入处理工作，而不是再次显示出表单。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>这个程序运行的流程是这样的</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><!--[if gte vml 1]><v:group id="_x0000_s1049" style='position:absolute;
+ left:0;text-align:left;margin-left:81pt;margin-top:0;width:351pt;height:343.2pt;
+ z-index:1' coordorigin="3420,1752" coordsize="7020,6864">
+ <v:group id="_x0000_s1048" style='position:absolute;left:3420;top:1752;
+  width:3600;height:4368' coordorigin="3420,11202" coordsize="3600,4368">
+  <v:rect id="_x0000_s1026" style='position:absolute;left:4140;top:11202;
+   width:2160;height:780'>
+   <v:textbox>
+    <![if !mso]>
+    <table cellpadding=0 cellspacing=0 width="100%">
+     <tr>
+      <td><![endif]>
+      <div>
+      <p class=MsoNormal align=center style='text-align:center'><span
+      style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+      "Times New Roman"'>用户第一次进入本</span><span lang=EN-US>PHP</span><span
+      style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+      "Times New Roman"'>程序</span></p>
+      </div>
+      <![if !mso]></td>
+     </tr>
+    </table>
+    <![endif]></v:textbox>
+  </v:rect><v:line id="_x0000_s1028" style='position:absolute' from="5220,11982"
+   to="5220,12606">
+   <v:stroke endarrow="block"/>
+  </v:line><v:rect id="_x0000_s1029" style='position:absolute;left:3600;top:12606;
+   width:3240;height:780'>
+   <v:textbox>
+    <![if !mso]>
+    <table cellpadding=0 cellspacing=0 width="100%">
+     <tr>
+      <td><![endif]>
+      <div>
+      <p class=MsoNormal align=center style='text-align:center'><span
+      style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+      "Times New Roman"'>第</span><span lang=EN-US>4</span><span
+      style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+      "Times New Roman"'>行中因为</span><span lang=EN-US>$add</span><span
+      style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+      "Times New Roman"'>没有值，所以转入</span><span lang=EN-US>13-18</span><span
+      style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+      "Times New Roman"'>行的表单。</span></p>
+      </div>
+      <![if !mso]></td>
+     </tr>
+    </table>
+    <![endif]></v:textbox>
+  </v:rect><v:line id="_x0000_s1030" style='position:absolute' from="5220,13386"
+   to="5220,14010">
+   <v:stroke endarrow="block"/>
+  </v:line><v:rect id="_x0000_s1031" style='position:absolute;left:3960;top:14010;
+   width:2520;height:468'>
+   <v:textbox>
+    <![if !mso]>
+    <table cellpadding=0 cellspacing=0 width="100%">
+     <tr>
+      <td><![endif]>
+      <div>
+      <p class=MsoNormal align=center style='text-align:center'><span
+      style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+      "Times New Roman"'>浏览器中显示表单</span></p>
+      </div>
+      <![if !mso]></td>
+     </tr>
+    </table>
+    <![endif]></v:textbox>
+  </v:rect><v:line id="_x0000_s1034" style='position:absolute' from="5220,14478"
+   to="5220,15102">
+   <v:stroke endarrow="block"/>
+  </v:line><v:rect id="_x0000_s1035" style='position:absolute;left:3420;top:15102;
+   width:3600;height:468'>
+   <v:textbox>
+    <![if !mso]>
+    <table cellpadding=0 cellspacing=0 width="100%">
+     <tr>
+      <td><![endif]>
+      <div>
+      <p class=MsoNormal align=center style='text-align:center'><span
+      style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+      "Times New Roman"'>用户填写姓名并点击</span><span lang=EN-US>&lt;POST&gt;</span><span
+      style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+      "Times New Roman"'>按钮</span></p>
+      </div>
+      <![if !mso]></td>
+     </tr>
+    </table>
+    <![endif]></v:textbox>
+  </v:rect></v:group><v:line id="_x0000_s1038" style='position:absolute'
+  from="5220,6120" to="5220,6744">
+  <v:stroke endarrow="block"/>
+ </v:line><v:rect id="_x0000_s1039" style='position:absolute;left:3960;top:6744;
+  width:2520;height:468'>
+  <v:textbox>
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal align=center style='text-align:center'><span
+     style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+     "Times New Roman"'>再次从头进入本程序</span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:rect id="_x0000_s1040" style='position:absolute;left:3600;top:7836;
+  width:3240;height:780'>
+  <v:textbox>
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal align=center style='text-align:center'><span
+     style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+     "Times New Roman"'>第</span><span lang=EN-US>4</span><span
+     style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+     "Times New Roman"'>行中因为</span><span lang=EN-US>$add=1</span><span
+     style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+     "Times New Roman"'>，所以转入</span><span lang=EN-US>6-9</span><span
+     style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+     "Times New Roman"'>行的处理程序。</span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:line id="_x0000_s1041" style='position:absolute' from="5220,7212"
+  to="5220,7836">
+  <v:stroke endarrow="block"/>
+ </v:line><v:line id="_x0000_s1046" style='position:absolute' from="6840,8148"
+  to="7560,8148">
+  <v:stroke endarrow="block"/>
+ </v:line><v:rect id="_x0000_s1047" style='position:absolute;left:7560;top:7836;
+  width:2880;height:780'>
+  <v:textbox>
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoBodyText><span style='font-family:宋体;mso-ascii-font-family:
+     "Times New Roman";mso-hansi-font-family:"Times New Roman"'>处理程序将姓名连接起来并显示出来</span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect></v:group><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+
+<table cellpadding=0 cellspacing=0 align=left>
+ <tr>
+  <td width=108 height=0></td>
+ </tr>
+ <tr>
+  <td></td>
+  <td><img width=471 height=461 src="./php-mysql.files/image001.gif" v:shapes="_x0000_s1049 _x0000_s1048 _x0000_s1026 _x0000_s1028 _x0000_s1029 _x0000_s1030 _x0000_s1031 _x0000_s1034 _x0000_s1035 _x0000_s1038 _x0000_s1039 _x0000_s1040 _x0000_s1041 _x0000_s1046 _x0000_s1047"></td>
+ </tr>
+</table>
+
+</span><![endif]><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:251.25pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:251.25pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<br style='mso-ignore:vglayout' clear=ALL>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>特别需要注意的是，应该把</span><span lang=EN-US>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>程序和</span><span lang=EN-US>HTML</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>标记完全分开考虑。</span><span lang=EN-US>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>只是产生字符流传给浏览器，它不会对</span><span lang=EN-US>HTML</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>标记做任何的理睬。</span><span lang=EN-US><span style='mso-tab-count:
+1'>&nbsp;&nbsp;&nbsp; </span></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>的语法</span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>看过了</span><span lang=EN-US>2</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>个简单的例子以后，深刻的认识一下</span><span
+lang=EN-US>PHP</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>的语法吧。</span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>1,</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>变量类型</span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>的变量类型对外是透明的，在作不同的操作时会自动将类型转换成操作所需要的类型。</span><span
+lang=EN-US>PHP</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>的基本内部类型有以下几种</span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>1,</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>数组</span></p>
+
+<p class=MsoNormal style='margin-left:63.0pt'><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>数组的概念相当于</span><span
+lang=EN-US>Perl</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>中的数组和散列的概念，数组的下标既可以是整数，也可以是字符串。</span></p>
+
+<p class=MsoNormal style='margin-left:63.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:63.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:63.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:63.0pt'><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>例如：</span></p>
+
+<div style='border:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt'><pre
+style='tab-stops:45.8pt 70.5pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+border:none;mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:
+1.0pt 4.0pt 1.0pt 4.0pt'><span lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$User[0] = &quot;DBPZ&quot;;</span></pre><pre
+style='tab-stops:45.8pt 70.5pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+border:none;mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:
+1.0pt 4.0pt 1.0pt 4.0pt'><span lang=EN-US><span style="mso-spacerun: yes">&nbsp; </span><span
+style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$User[1] = &quot;zixia&quot;; </span></pre><pre
+style='tab-stops:45.8pt 70.5pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+border:none;mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:
+1.0pt 4.0pt 1.0pt 4.0pt'><span lang=EN-US><span style="mso-spacerun: yes">&nbsp;&nbsp;</span><span
+style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$Points[&quot;DBPZ&quot;] = 86;</span><span
+lang=EN-US style='font-family:"Times New Roman";mso-bidi-font-family:"Courier New"'><o:p></o:p></span></pre></div>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></p>
+
+<p class=MsoNormal style='margin-left:42.0pt;text-indent:21.0pt'><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>想要知道一个数组内纪录的条数，可以用</span><span lang=EN-US>sizeof</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>函数</span></p>
+
+<div style='border:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt'>
+
+<p class=MsoNormal style='border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span lang=EN-US><span
+style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$a[0]=1;</span></p>
+
+<p class=MsoNormal style='border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span lang=EN-US><span
+style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$a[1]=1;</span></p>
+
+<p class=MsoNormal style='border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span lang=EN-US><span
+style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>echo
+sizeof($a);</span></p>
+
+<p class=MsoNormal style='border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US><span
+style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></i><i><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>显示结果：</span><span lang=EN-US>2<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span lang=EN-US><span
+style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$b[20]=1;</span></p>
+
+<p class=MsoNormal style='border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span lang=EN-US><span
+style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$b[21]=1;</span></p>
+
+<p class=MsoNormal style='border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span lang=EN-US><span
+style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>echo
+sizeof($b);</span></p>
+
+<p class=MsoNormal style='border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span lang=EN-US><span
+style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></i><i><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>显示结果：</span><span lang=EN-US>2</span></i></p>
+
+</div>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>数组也可以有多维。例如：</span></p>
+
+<div style='border:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt'>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$matrix[2][3]=14;</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$matrix[1][2]=33;</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$matrixs[“M1”][1][2]=23;</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$matrixs[“M1”][1][3]=33;</span></p>
+
+</div>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>甚至可以直接在表单里面输入数组</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<div style='border:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt'>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US>&lt;FORM&gt;</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>&lt;INPUT
+NAME=”M[1]” TYPE=TEXT&gt;</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>&lt;INPUT
+NAME=”M[2]” TYPE=TEXT&gt;</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>&lt;INPUT
+NAME=”N[ABC]” TYPE=TEXT&gt;</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US>&lt;/FORM&gt;</span></p>
+
+</div>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US>2,</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>整型</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>整型是各种语言中最常见的类型，</span><span lang=EN-US>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>中的整形不能超过</span><span lang=EN-US>32Bit</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>。（在下面的例子里面，虽然</span><span lang=EN-US>$c</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>超过了</span><span lang=EN-US>32Bit</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>整型</span><span lang=EN-US>,</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>而且与整型很像，但是它的内部类型是浮点型）</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<div style='border:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt'>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span lang=EN-US>$a =
+12345678901234;</span></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span lang=EN-US>$b =
+12345678901234;</span></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span lang=EN-US>$c = $a +
+$b;</span></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span lang=EN-US>echo $c;<span
+style='mso-tab-count:1'>&nbsp; </span></span></p>
+
+<p class=MsoNormal style='text-indent:63.0pt;mso-char-indent-count:6.0;
+mso-char-indent-size:10.5pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>显示</span><span
+lang=EN-US> 24691357802468<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span lang=EN-US>echo
+(float)$c; </span></p>
+
+<p class=MsoNormal style='text-indent:63.0pt;mso-char-indent-count:6.0;
+mso-char-indent-size:10.5pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>显示</span><span
+lang=EN-US> 24691357802468</span></i><i><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>，说明</span><span
+lang=EN-US>$c</span></i><i><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>是浮点</span><span
+lang=EN-US><o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='text-indent:21.0pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span lang=EN-US>echo
+(int)$c;</span></p>
+
+<p class=MsoNormal style='text-indent:63.0pt;mso-char-indent-count:6.0;
+mso-char-indent-size:10.5pt;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>显示</span><span
+lang=EN-US> –2147483648</span></i><i><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>，说明</span><span
+lang=EN-US>$c</span></i><i><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>不是整形</span><span
+lang=EN-US><o:p></o:p></span></i></p>
+
+</div>
+
+<p class=MsoNormal><i><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></i></p>
+
+<p class=MsoNormal><i><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></i></p>
+
+<p class=MsoNormal><i><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></i></p>
+
+<p class=MsoNormal><i><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></i></p>
+
+<p class=MsoNormal><i><span lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></i><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>3,</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>浮点数</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>浮点数的取值范围和</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>C</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>语言的</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>double</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>双精浮点相同。如果浮点数不到</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>10E16</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>，而且没有小数部分，则显示时会按整型的样子显示出来。这时要注意，它的内部类型是浮点而不是整型。</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>4,</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>对象</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt'><span
+lang=EN-US>PHP</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>中可以定义类，并且可以生成类的实例，但是由于</span><span
+lang=EN-US>PHP</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>本身是一种脚本语言，有许多地方很不严格，不便用来描述对象、为对象建模，因此</span><span
+lang=EN-US>PHP</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>不是一种好的</span><span lang=EN-US>OO</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>语言。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt'><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>尽管如此，</span><span lang=EN-US>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>的对象还是有广泛的使用。许多从网上下载的</span><span lang=EN-US>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>程序包就是写成类的样式。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<div style='border:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt'>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>class Student<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><span
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>var
+$Point = 0;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><span
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>function addPoint($p)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><span
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><span
+style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>$this-&gt;Point += $p;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><span
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><span
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>function showPoint()<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><span
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><span
+style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>echo &quot;Point = &quot;.$this-&gt;Point;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><span
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>$dbpz = new Student;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>$dbpz-&gt;addPoint(80);<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>$dbpz-&gt;addPoint(20);<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>$dbpz-&gt;showPoint();<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:42.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i
+style='mso-bidi-font-style:normal'><span lang=EN-US style='color:black'><span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></i><i
+style='mso-bidi-font-style:normal'><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";color:black'>显示结果</span><span
+lang=EN-US style='color:black'> Points = 100<o:p></o:p></span></i></p>
+
+</div>
+
+<p class=MsoNormal><span lang=EN-US style='color:black;mso-bidi-font-style:
+italic'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:21.0pt'><span lang=EN-US
+style='color:black;mso-bidi-font-style:italic'>5</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+color:black;mso-bidi-font-style:italic'>，字符串</span><span lang=EN-US
+style='color:black;mso-bidi-font-style:italic'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>中的字符串与</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>C</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>的</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>char *</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>不同，它比较像</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>Perl</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>的字符串。</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>的字符串是由一块内存区的首指针和内存区长度共同表示的；而不是象</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>C</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>语言一样只提供内存区的首指针，遇到</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>’\0’</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>符号就认为是字符串的结束位置。</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>这样做的好处是：</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:42.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>1,</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>不用担心</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>Buffer Overflow</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>问题。众所周知，用</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>C</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>语言编写</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>Web</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>程序容易造成</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>BufferOverflow</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>问题，许多黑客攻入服务器也是依靠的</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>BufferOverflow</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>漏洞。如果字符串的长度能确定，就不会出现字符串失控的情况，也就不会出现</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>BufferOverflow</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>漏洞。</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:42.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>2,</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>可以打通字符串和内存块的界限。在</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>的字符串变量中可以有任意字符，</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>’\0’,’\n’,’\r’</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>等都不受限制。这样可以直接把一个文件的内容读到一个字符串中，然后对这个字符串进行裁剪、连接等操作。不用考虑文件中是否有</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>’\0’</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>等符号。</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:4.0gd;text-indent:21.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:4.0gd;text-indent:21.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>的字符串处理函数很完善，这也很便于作为一种文件分析工具使用</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>(</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>举例子：</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>Apache Log)</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>。</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><o:p></o:p></span></p>
+
+<div style='border:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt'>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='font-size:6.5pt;mso-bidi-font-size:12.0pt;color:black;
+mso-bidi-font-style:italic'>10.9.62.66 - - [07/Sep/2000:02:50:58 +0800]
+&quot;GET /wutao/jsp/News_Search.jsp HTTP/1.1&quot; 404 293<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='font-size:6.5pt;mso-bidi-font-size:12.0pt;color:black;
+mso-bidi-font-style:italic'>10.9.62.66 - - [07/Sep/2000:02:50:59 +0800]
+&quot;GET /wutao/jsp/News_Search.jsp HTTP/1.1&quot; 404 293<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='font-size:6.5pt;mso-bidi-font-size:12.0pt;color:black;
+mso-bidi-font-style:italic'>10.9.62.66 - - [07/Sep/2000:03:04:15 +0800]
+&quot;GET /wutao/jsp/entity.jsp?ENTITYID=173615625&amp;mod=subdetail
+HTTP/1.1&quot; 404 293<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='font-size:6.5pt;mso-bidi-font-size:12.0pt;color:black;
+mso-bidi-font-style:italic'>10.9.62.66 - - [07/Sep/2000:03:04:16 +0800]
+&quot;GET /wutao/jsp/entity.jsp?ENTITYID=173615625&amp;mod=subdetail
+HTTP/1.1&quot; 404 293<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='font-size:6.5pt;mso-bidi-font-size:12.0pt;color:black;
+mso-bidi-font-style:italic'>10.9.62.66 - - [07/Sep/2000:03:04:16 +0800]
+&quot;GET /wutao/jsp/entity.jsp?ENTITYID=173615625&amp;mod=subdetail
+HTTP/1.1&quot; 404 293<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='font-size:6.5pt;mso-bidi-font-size:12.0pt;color:black;
+mso-bidi-font-style:italic'>10.9.62.66 - - [07/Sep/2000:03:08:43 +0800]
+&quot;GET /wutao/jsp/entity.jsp?ENTITYID=173615625&amp;mod=subdetail
+HTTP/1.1&quot; 200 7957<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='font-size:6.5pt;mso-bidi-font-size:12.0pt;color:black;
+mso-bidi-font-style:italic'>10.9.62.66 - - [07/Sep/2000:03:09:43 +0800]
+&quot;GET /wutao/jsp/entity.jsp?ENTITYID=173615625&amp;mod=subdetail
+HTTP/1.1&quot; 200 8013<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='font-size:6.5pt;mso-bidi-font-size:12.0pt;color:black;
+mso-bidi-font-style:italic'>10.9.62.66 - - [07/Sep/2000:03:09:51 +0800]
+&quot;POST /wutao/jsp/News_Search.jsp HTTP/1.1&quot; 200 1897<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='font-size:6.5pt;mso-bidi-font-size:12.0pt;color:black;
+mso-bidi-font-style:italic'>10.9.62.66 - - [07/Sep/2000:03:14:27 +0800]
+&quot;POST /wutao/jsp/News_Search.jsp HTTP/1.1&quot; 200 5319<o:p></o:p></span></p>
+
+</div>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>6,</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>句柄</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:42.0pt;text-indent:21.0pt'><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>在</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>PHP3.0.9</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>版本以前，句柄就是整形，而在其后句柄成为了一种特殊的类型。例如</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>MySQL</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>的连接、</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>Oracle</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>连接、</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'>GD</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>库产生的一副图片都是用句柄的方式表达的。</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>类型之间的转换</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>PHP</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black;mso-bidi-font-style:italic'>程序可以自动将变量类型转换为运算需要的类型。</span><span
+lang=EN-US style='color:black;mso-bidi-font-style:italic'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<div style='border:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt'>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$a[0]=123;</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$a[1]=234;</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>echo
+$a;</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span
+lang=EN-US><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></i><i><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>这里显示</span><span lang=EN-US> Array<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></i><span
+lang=EN-US>$b=”123abc”;</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>echo
+$b+1;</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><i><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>这里显示</span><span lang=EN-US>124<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>echo
+$b.”123”;</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><i><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>这里显示</span><span lang=EN-US>123abc123<o:p></o:p></span></i></p>
+
+</div>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>也可以强行把变量转换类型</span><span lang=EN-US
+style='color:black'><o:p></o:p></span></p>
+
+<div style='border:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt'>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$c=123456789012345;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$d=(int)$c;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>echo
+$d;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span
+lang=EN-US style='color:black'><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></i><i><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>这里显示</span><span lang=EN-US style='color:black'>-2147483648<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>$b=”123abc”;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><span
+lang=EN-US style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>echo
+(int)$b;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span
+lang=EN-US style='color:black'><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></i><i><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>这里显示</span><span lang=EN-US style='color:black'>123<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt'><i><span
+lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></i></p>
+
+</div>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>注意：在接受用户表单的时候，一定要把整形进行强制转换或</span><span
+lang=EN-US style='color:black'>+=0<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>什么是</span><span lang=EN-US style='color:black'>SQL</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>，什么是</span><span lang=EN-US style='color:black'>MySQL<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:42.0pt'><span lang=EN-US
+style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>计算机的一个重要的功能就是管理维护海量的数据，并且在其中进行查询、统计等操作。对于大多数的数据库应用，可以提取出简单的模型，以便商业数据库产品的开发。</span><span
+lang=EN-US style='color:black'>SQL</span><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+color:black'>语言就是针对关系型数据库模型开发的。</span><span lang=EN-US style='color:black'>SQL</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>数据库有许多商业化的产品，微软、</span><span lang=EN-US
+style='color:black'>Oracle</span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";color:black'>、</span><span
+lang=EN-US style='color:black'>Sybase</span><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+color:black'>、</span><span lang=EN-US style='color:black'>Infomix</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>等等众多的厂商都有</span><span lang=EN-US
+style='color:black'>SQL</span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";color:black'>数据库产品。</span><span
+lang=EN-US style='color:black'>MySQL</span><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+color:black'>严格的说没有完全实现的</span><span lang=EN-US style='color:black'>SQL</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>第一版的要求，例如没有嵌套查询、没有视图等等概念，因此无法实现关系型数据库模型。因此准确的讲，与其说</span><span
+lang=EN-US style='color:black'>MySQL</span><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+color:black'>是一种</span><span lang=EN-US style='color:black'>SQL</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>数据库软件，不如说它是一种借用了一部分</span><span lang=EN-US
+style='color:black'>SQL</span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";color:black'>语法的数据存储器。但是由于它简单灵活、速度较快，而且完全免费，因此很适合网站数据库的简单应用。</span><span
+lang=EN-US style='color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:42.0pt'><span lang=EN-US
+style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:42.0pt'><span lang=EN-US
+style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>怎样在</span><span lang=EN-US style='color:black'>Linux</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>上安装</span><span lang=EN-US style='color:black'>MySQL<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:42.0pt'><span lang=EN-US
+style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>MySQL</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>可以由</span><span lang=EN-US style='color:black'>rpm</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>包直接安装，也可以下载原码自己编译。</span><span lang=EN-US
+style='color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:42.0pt'><span lang=EN-US
+style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>RPM:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:84.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black'>rpm –i MySQL-3.2x.xx-i386.rpm<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:84.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black'>rpm –i MySQL-3.2x.xx-dev-i386.rpm<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:84.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black'>rpm –i MySQL-3.2x.xx-admin-i386.rpm<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:84.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black'>rpm –i MySQL-3.2x.xx-client-i386.rpm<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:63.0pt;text-indent:21.0pt'><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>原码：</span><span lang=EN-US style='color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:63.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>tar
+xzfv mysql-3.2x.xx.tar.gz<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:63.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>cd
+mysql-3.2x.xx<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:63.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>./configure<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:63.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>make<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:63.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>make
+install<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:63.0pt;text-indent:21.0pt'><span
+lang=EN-US style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>mysql_install_db<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>怎样启动</span><span lang=EN-US style='color:black'>MySQL<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>safe_mysqld
+&amp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>怎样关闭</span><span lang=EN-US style='color:black'>MySQL<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>mysqladmin
+shutdown –uroot<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>怎样进入</span><span lang=EN-US style='color:black'>MySQL</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>字符界面客户端</span><span lang=EN-US style='color:
+black'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>mysql
+–hHOSTNAME<span style="mso-spacerun: yes">&nbsp; </span>–uUSERNAME<span
+style="mso-spacerun: yes">&nbsp; </span>–pPASSWORD [DBASE]<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>是否还有其他管理方式？</span><span lang=EN-US
+style='color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt'><span lang=EN-US
+style='color:black'>MySQL</span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";color:black'>有图形客户端，也有第三方编写的</span><span
+lang=EN-US style='color:black'>PHP</span><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+color:black'>客户端，但是为了系统安全，建议通过</span><span lang=EN-US style='color:black'>SSH</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>登上主机后在本地使用字符客户端。</span><span lang=EN-US
+style='color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:42.0pt'><span lang=EN-US
+style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>MySQL</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>数据库的数据存放的主体是表</span><span lang=EN-US
+style='color:black'>(Table)</span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";color:black'>。</span><span
+lang=EN-US style='color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:42.0pt'><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+color:black'>这就是一个表的例子</span><span lang=EN-US style='color:black'>:Users<o:p></o:p></span></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='margin-left:42.0pt;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0cm 5.4pt 0cm 5.4pt'>
+ <tr>
+  <td width=97 valign=top style='width:72.45pt;border:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><b><span lang=EN-US style='color:black'>AutoID<o:p></o:p></span></b></p>
+  </td>
+  <td width=101 valign=top style='width:76.1pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><b><span lang=EN-US style='color:black'>Name<o:p></o:p></span></b></p>
+  </td>
+  <td width=103 valign=top style='width:77.15pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><b><span lang=EN-US style='color:black'>UserID<o:p></o:p></span></b></p>
+  </td>
+  <td width=105 valign=top style='width:78.95pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><b><span lang=EN-US style='color:black'>LoginTime<o:p></o:p></span></b></p>
+  </td>
+  <td width=105 valign=top style='width:78.95pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><b><span lang=EN-US style='color:black'>Password<o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=97 valign=top style='width:72.45pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='color:black'>1<o:p></o:p></span></p>
+  </td>
+  <td width=101 valign=top style='width:76.1pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+  mso-hansi-font-family:"Times New Roman";color:black'>李明</span><span
+  lang=EN-US style='color:black'><o:p></o:p></span></p>
+  </td>
+  <td width=103 valign=top style='width:77.15pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='color:black'>Lee<o:p></o:p></span></p>
+  </td>
+  <td width=105 valign=top style='width:78.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='color:black'>970423294<o:p></o:p></span></p>
+  </td>
+  <td width=105 valign=top style='width:78.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='color:black'>123lee<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=97 valign=top style='width:72.45pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='color:black'>2<o:p></o:p></span></p>
+  </td>
+  <td width=101 valign=top style='width:76.1pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+  mso-hansi-font-family:"Times New Roman";color:black'>赵鹏</span><span
+  lang=EN-US style='color:black'><o:p></o:p></span></p>
+  </td>
+  <td width=103 valign=top style='width:77.15pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='color:black'>Zp<o:p></o:p></span></p>
+  </td>
+  <td width=105 valign=top style='width:78.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='color:black'>970421321<o:p></o:p></span></p>
+  </td>
+  <td width=105 valign=top style='width:78.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='color:black'>F117<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=97 valign=top style='width:72.45pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='color:black'>3<o:p></o:p></span></p>
+  </td>
+  <td width=101 valign=top style='width:76.1pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+  mso-hansi-font-family:"Times New Roman";color:black'>张军</span><span
+  lang=EN-US style='color:black'><o:p></o:p></span></p>
+  </td>
+  <td width=103 valign=top style='width:77.15pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='color:black'>Zhang<o:p></o:p></span></p>
+  </td>
+  <td width=105 valign=top style='width:78.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='color:black'>970123121<o:p></o:p></span></p>
+  </td>
+  <td width=105 valign=top style='width:78.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='color:black'>781120<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-left:42.0pt'><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+color:black'>这张表中有</span><span lang=EN-US style='color:black'>5</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>个字段：</span><b><span lang=EN-US style='color:
+black'>AutoID</span></b><b><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";color:black'>、</span><span
+lang=EN-US style='color:black'>Name</span></b><b><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+color:black'>、</span><span lang=EN-US style='color:black'>UserID</span></b><b><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>、</span><span lang=EN-US style='color:black'>LoginTime</span></b><b><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>、</span><span lang=EN-US style='color:black'>Password</span></b><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>，它们的类型分别是</span><span lang=EN-US
+style='color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:42.0pt'><span lang=EN-US
+style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b>AutoID</b><span
+style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Int<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:42.0pt'><span lang=EN-US
+style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b>Name</b><span
+style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Varchar(20)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:231.0pt'><i><span lang=EN-US
+style='color:black'>(Varchar</span></i><i><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+color:black'>是一种可变长的字符串类型，括号里面指定字符串的最大长度</span><span lang=EN-US
+style='color:black'>)<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='margin-left:42.0pt'><span lang=EN-US
+style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b>UserID</b><span
+style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Varchar(16)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:42.0pt'><span lang=EN-US
+style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b>LoginTime</b><span
+style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Int<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:231.0pt'><i><span lang=EN-US
+style='color:black'>(MySQL</span></i><i><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";color:black'>有</span><span
+lang=EN-US style='color:black'>DATETIME</span></i><i><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+color:black'>类型，但是用整数形可以简单的进行各种计算，也可以在</span><span lang=EN-US style='color:
+black'>PHP</span></i><i><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman";color:black'>中方便的变成所需样式的字符串</span><span
+lang=EN-US style='color:black'>)<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='margin-left:42.0pt'><span lang=EN-US
+style='color:black'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b>Password</b><span
+style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Varchar(8)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:231.0pt'><i><span lang=EN-US
+style='color:black'>(</span></i><i><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";color:black'>这里做例子的时候将密码明码写入数据库，实际应用中</span></i><b
+style='mso-bidi-font-weight:normal'><i><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";color:red'>一定要将其用</span><span
+lang=EN-US style='color:red'>MD5</span></i></b><b style='mso-bidi-font-weight:
+normal'><i><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman";color:red'>散列后存储</span></i></b><i><span
+lang=EN-US style='color:black'>)<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>为了检索速度快，应该对这个表的</span><b><span lang=EN-US
+style='color:black'>AutoID</span></b><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";color:black'>和</span><b><span
+lang=EN-US style='color:black'>UserID</span></b><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+color:black'>列建立索引。</span><span lang=EN-US style='color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>为了维护方便，应该令</span><b><span lang=EN-US
+style='color:black'>AutoID</span></b><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";color:black'>列自动增加</span><span
+lang=EN-US style='color:black'>(</span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";color:black'>也就是每插入一条数据的时候，自动从表中找出</span><span
+lang=EN-US style='color:black'>AutoID</span><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+color:black'>最大值，将其加</span><span lang=EN-US style='color:black'>1</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>后写入新行</span><span lang=EN-US style='color:black'>)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>因此完整的建表语句是：</span><span lang=EN-US
+style='color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>create
+table Users<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>(<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>AutoID<span
+style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>INT<span
+style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>PRIMARY<span
+style="mso-spacerun: yes">&nbsp; </span>KEY<span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+lang=EN-US>AUTO_INCREMENT,</span></p>
+
+<p class=MsoNormal style='margin-left:231.0pt'><i><span lang=EN-US>//PRIMARY
+KEY</span></i><i><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>表示主键，</span><span lang=EN-US>AUTO_INCREMENT</span></i><i><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>表示本列自动增加。</span><span lang=EN-US><o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Name<span
+style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>VARCHAR(20)<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>NOT NULL<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>,</span></p>
+
+<p class=MsoNormal style='margin-left:231.0pt'><i><span lang=EN-US>//NOT NULL</span></i><i><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>表示本列在插入</span><span lang=EN-US>/</span></i><i><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>修改操作时不能为空。而且在</span><span lang=EN-US>MySQL</span></i><i><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>中如果没有指定</span><span lang=EN-US>NOT NULL</span></i><i><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>关键词则不能为此列创建索引。</span><span lang=EN-US><o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>UserID<span
+style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>VARCHAR(16)<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>NOT NULL<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>,</span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>LoginTime<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>INT<span
+style='mso-tab-count:7'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>,</span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Password<span
+style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>VARCHAR(8)<span
+style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>NOT
+NULL<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>,</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+lang=EN-US>UNIQUE<span style='color:black'> <span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Users_UserID(UserID)<span
+style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-left:231.0pt'><i><span lang=EN-US
+style='color:black'>//UN IQUE</span></i><i><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+color:black'>表示唯一性索引，不唯一的索引可用关键字</span><span lang=EN-US style='color:black'>INDEX</span></i><i><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>表示</span><span lang=EN-US style='color:black'><o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+color:black'>为了方便组织数据和管理权限，</span><span lang=EN-US style='color:black'>MySQL</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>规定表必须建在数据库中</span><span lang=EN-US
+style='color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><!--[if gte vml 1]><v:group id="_x0000_s1072" style='position:absolute;
+ left:0;text-align:left;margin-left:99pt;margin-top:0;width:207pt;height:273pt;
+ z-index:2' coordorigin="2880,7992" coordsize="4140,5460">
+ <v:rect id="_x0000_s1071" style='position:absolute;left:5400;top:7992;width:1620;
+  height:5460' fillcolor="#ff9">
+  <v:fill opacity=".5"/>
+  <v:stroke dashstyle="longDash"/>
+  <v:textbox>
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US>Table</span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:rect id="_x0000_s1070" style='position:absolute;left:2880;top:7992;
+  width:1620;height:5460' fillcolor="#cfc">
+  <v:fill opacity=".5"/>
+  <v:stroke dashstyle="longDash"/>
+  <v:textbox>
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal><span lang=EN-US>Database</span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:rect id="_x0000_s1050" style='position:absolute;left:3060;top:8148;
+  width:1260;height:468'>
+  <v:textbox>
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal><span lang=EN-US>UserInfo</span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:rect id="_x0000_s1051" style='position:absolute;left:3060;top:9552;
+  width:1260;height:468'>
+  <v:textbox>
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal><span lang=EN-US>BBS</span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:rect id="_x0000_s1052" style='position:absolute;left:3060;top:10956;
+  width:1260;height:468'>
+  <v:textbox>
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal><span lang=EN-US>MailList</span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:line id="_x0000_s1053" style='position:absolute' from="4320,8304"
+  to="5580,8304"/>
+ <v:rect id="_x0000_s1054" style='position:absolute;left:5580;top:8148;width:1260;
+  height:468'>
+  <v:textbox>
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal><span lang=EN-US>Users</span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:line id="_x0000_s1055" style='position:absolute' from="4860,8304"
+  to="4860,8928"/>
+ <v:rect id="_x0000_s1056" style='position:absolute;left:5580;top:8772;width:1260;
+  height:468'>
+  <v:textbox>
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal><span lang=EN-US>Points</span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:line id="_x0000_s1057" style='position:absolute' from="4860,8928"
+  to="5580,8928"/>
+ <v:line id="_x0000_s1058" style='position:absolute' from="4320,9708" to="5580,9708"/>
+ <v:rect id="_x0000_s1059" style='position:absolute;left:5580;top:9552;width:1260;
+  height:468'>
+  <v:textbox>
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal><span lang=EN-US>Posts</span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:line id="_x0000_s1060" style='position:absolute' from="4860,9708"
+  to="4860,10332"/>
+ <v:rect id="_x0000_s1061" style='position:absolute;left:5580;top:10176;
+  width:1260;height:468'>
+  <v:textbox>
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal><span lang=EN-US>Boards</span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:line id="_x0000_s1062" style='position:absolute' from="4860,10332"
+  to="5580,10332"/>
+ <v:line id="_x0000_s1063" style='position:absolute' from="4320,11112" to="5580,11112"/>
+ <v:rect id="_x0000_s1064" style='position:absolute;left:5580;top:10956;
+  width:1260;height:468'>
+  <v:textbox>
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal><span lang=EN-US>Lists</span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:line id="_x0000_s1065" style='position:absolute' from="4860,11112"
+  to="4860,12360"/>
+ <v:rect id="_x0000_s1066" style='position:absolute;left:5580;top:11580;
+  width:1260;height:468'>
+  <v:textbox>
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal><span lang=EN-US>Mails</span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:line id="_x0000_s1067" style='position:absolute' from="4860,11736"
+  to="5580,11736"/>
+ <v:line id="_x0000_s1068" style='position:absolute' from="4860,12360" to="5580,12360"/>
+ <v:rect id="_x0000_s1069" style='position:absolute;left:5580;top:12204;
+  width:1260;height:468'>
+  <v:textbox>
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal><span lang=EN-US>Logs</span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect></v:group><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+
+<table cellpadding=0 cellspacing=0 align=left>
+ <tr>
+  <td width=132 height=0></td>
+ </tr>
+ <tr>
+  <td></td>
+  <td><img width=279 height=367 src="./php-mysql.files/image002.gif" v:shapes="_x0000_s1072 _x0000_s1071 _x0000_s1070 _x0000_s1050 _x0000_s1051 _x0000_s1052 _x0000_s1053 _x0000_s1054 _x0000_s1055 _x0000_s1056 _x0000_s1057 _x0000_s1058 _x0000_s1059 _x0000_s1060 _x0000_s1061 _x0000_s1062 _x0000_s1063 _x0000_s1064 _x0000_s1065 _x0000_s1066 _x0000_s1067 _x0000_s1068 _x0000_s1069"></td>
+ </tr>
+</table>
+
+</span><![endif]><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<br style='mso-ignore:vglayout' clear=ALL>
+
+<p class=MsoNormal style='text-indent:21.0pt'><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+color:black'>创建表格的基本语法是：</span><span lang=EN-US style='color:black'><o:p></o:p></span></p>
+
+<pre style='margin-left:45.8pt'><i><span lang=EN-US>CREATE TABLE<span style="mso-spacerun: yes">&nbsp; </span>tbl_name (create_definition,...) [select_statement]<o:p></o:p></span></i></pre>
+
+<p class=MsoNormal><i><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+color:black'>创建数据库的方法是：</span><span lang=EN-US style='color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>create
+<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>DATABASE_NAME;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+color:black'>指定或更换当前数据库的方法是：</span><span lang=EN-US style='color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>use<span
+style="mso-spacerun: yes">&nbsp; </span>DATABASE_NAME<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:black'><span style='mso-tab-count:
+1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+color:black'>注意：如果进入</span><span lang=EN-US style='color:black'>MySQL</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";color:black'>客户端时没有指定所用数据库，则除非使用</span><span lang=EN-US
+style='color:black'>use</span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";color:black'>命令指定数据库名称，否则无法创建表</span><span
+lang=EN-US style='color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>查询语句</span><span lang=EN-US> SELECT</span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>查询是</span><span lang=EN-US>MySQL</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>中应用最多的语句。它的作用是根据用需求，找出符合要求的数据行，并且按照需要进行排序、分组等操作，将结果传递给用户。</span><span
+lang=EN-US> </span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>SELECT
+</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>语句的基本语法是</span></p>
+
+<pre><i><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>SELECT <span
+style='mso-tab-count:1'>&nbsp; </span>[DISTINCT | DISTINCTROW | ALL]<o:p></o:p></span></i></pre><pre><i><span
+lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>select_expression,...<o:p></o:p></span></i></pre><pre><i><span
+lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>[INTO OUTFILE 'file_name' export_options]<o:p></o:p></span></i></pre><pre><i><span
+lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>[FROM table_references<o:p></o:p></span></i></pre><pre><i><span
+lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>[WHERE where_definition]<o:p></o:p></span></i></pre><pre><i><span
+lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>[GROUP BY col_name,...]<o:p></o:p></span></i></pre><pre><i><span
+lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>[HAVING where_definition]<o:p></o:p></span></i></pre><pre><i><span
+lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>[ORDER BY {unsigned_integer | col_name} [ASC | DESC] ,...]<o:p></o:p></span></i></pre><pre><i><span
+lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>[LIMIT [offset,] rows]<o:p></o:p></span></i></pre><pre><span
+lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span> </span></pre>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>DELETE</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>语句的基本语法是</span></p>
+
+<pre><i><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>DELETE [LOW_PRIORITY] FROM tbl_name<o:p></o:p></span></i></pre><pre><i><span
+lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>[WHERE where_definition] [LIMIT rows]<o:p></o:p></span></i></pre><pre><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></pre>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>UPDATE</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>语句的基本语法是</span><span lang=EN-US> </span></p>
+
+<pre><i><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>UPDATE [LOW_PRIORITY] tbl_name SET col_name1=expr1,col_name2=expr2,...<o:p></o:p></span></i></pre><pre><i><span
+lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span> [WHERE where_definition]<o:p></o:p></span></i></pre>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>INSERT</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>语句的基本语法是</span></p>
+
+<pre><i><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>INSERT [LOW_PRIORITY | DELAYED] [IGNORE]<o:p></o:p></span></i></pre><pre><i><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>[INTO] tbl_name [(col_name,...)]<o:p></o:p></span></i></pre><pre><i><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>VALUES (expression,...),(...),...<o:p></o:p></span></i></pre><pre><i><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>or<span style="mso-spacerun: yes">&nbsp; </span>INSERT [LOW_PRIORITY | DELAYED] [IGNORE]<o:p></o:p></span></i></pre><pre><i><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>[INTO] tbl_name [(col_name,...)]<o:p></o:p></span></i></pre><pre><i><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>SELECT ...<o:p></o:p></span></i></pre><pre><i><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>or<span style="mso-spacerun: yes">&nbsp; </span>INSERT [LOW_PRIORITY | DELAYED] [IGNORE]<o:p></o:p></span></i></pre><pre><i><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>[INTO] tbl_name<o:p></o:p></span></i></pre>
+
+<p class=MsoNormal style='margin-left:42.0pt;text-indent:21.0pt'><i><span
+lang=EN-US><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>SET
+col_name=expression, col_name=expression, ...<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Web</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>数据库需要注意的几个问题</span><span lang=EN-US> </span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>1,</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>安全性：</span><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>绝对不要让访问者有接触</span><span lang=EN-US>SQL</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>语句的机会</span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>2,</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>效率：</span><span lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>对查询数据一定要建索引，查询时必须从头查询才能用到索引。</span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>除非绝对必要、而且检索对象数量较小，否则不要提供全文检索。</span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>用</span><span lang=EN-US>top</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>命令察看进程占用</span><span
+lang=EN-US>CPU</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>情况，如果经常发现有一个或几个</span><span
+lang=EN-US>mysql</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>进程总的</span><span lang=EN-US>CPU</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>占用超过</span><span lang=EN-US>50%</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>，就一定要优化数据库。</span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US>3,</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>备份：</span><span lang=EN-US><span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>重要数据必须定期备份。如果采用</span><span lang=EN-US>mysqldump</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>进行备份，速度可能比较慢；如果采用直接备份数据文件，则一定要先停止数据库服务然后备份文件。</span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US>PHP + MySQL</span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US>PHP</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>中有一套调用</span><span lang=EN-US>MySQL</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>数据库的</span><span lang=EN-US>API</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>。</span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_affected_rows
+— Get number of affected rows in previous MySQL operation<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_close —
+close MySQL connection<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_connect —
+Open a connection to a MySQL Server<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_create_db —
+Create a MySQL database<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_data_seek —
+Move internal result pointer<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_db_query —
+Send an MySQL query to MySQL<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_errno —
+Returns the number of the error message from previous MySQL operation<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_error —
+Returns the text of the error message from previous MySQL operation<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_fetch_array
+— Fetch a result row as an associative array <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_fetch_field
+— Get column information from a result and return as an object <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_fetch_lengths
+— Get the length of each output in a result <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_fetch_object
+— Fetch a result row as an object<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_fetch_row —
+Get a result row as an enumerated array<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_field_name —
+Get the name of the specified field in a result <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_field_seek —
+Set result pointer to a specified field offset <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_field_table
+— Get name of the table the specified field is in <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_field_type —
+Get the type of the specified field in a result <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_field_flags
+— Get the flags associated with the specified field in a result <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_field_len —
+Returns the length of the specified field <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_free_result
+— Free result memory<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_insert_id —
+Get the id generated from the previous INSERT operation <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_num_rows —
+Get number of rows in result<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_pconnect —
+Open a persistent connection to a MySQL Server <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_query — Send
+an SQL query to MySQL<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_result — Get
+result data<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'>mysql_select_db —
+Select a MySQL database<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:12.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>比较常见的</span><span lang=EN-US>PHP+MySQL</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>程序的基本结构是：</span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><!--[if gte vml 1]><v:rect
+ id="_x0000_s1073" style='position:absolute;left:0;text-align:left;
+ margin-left:0;margin-top:0;width:423pt;height:288.6pt;z-index:3'>
+ <v:textbox style='mso-next-textbox:#_x0000_s1073'/>
+</v:rect><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+
+<table cellpadding=0 cellspacing=0 align=left>
+ <tr>
+  <td width=0 height=0></td>
+ </tr>
+ <tr>
+  <td></td>
+  <td width=567 height=388 align=left valign=top bgcolor=white
+  style='border:.75pt solid black;vertical-align:top;background:white'><![endif]><![if !mso]><span
+  style='position:absolute;z-index:3'>
+  <table cellpadding=0 cellspacing=0 width="100%">
+   <tr>
+    <td><![endif]>
+    <div v:shape="_x0000_s1073" style='padding:3.6pt 7.2pt 3.6pt 7.2pt'
+    class=shape>
+    <p class=MsoNormal><span lang=EN-US>1.<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>&lt;HTML&gt;</span></p>
+    <p class=MsoNormal><span lang=EN-US>2.<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>&lt;BODY&gt;</span></p>
+    <p class=MsoNormal><span lang=EN-US>3.<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>&lt;TABLE
+    BORDER=1&gt;</span></p>
+    <p class=MsoNormal><span lang=EN-US>4.<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>&lt;TR&gt;&lt;TD&gt;</span><span
+    style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+    "Times New Roman"'>编号</span><span lang=EN-US>&lt;/TD&gt;&lt;TD&gt;</span><span
+    style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+    "Times New Roman"'>登录名</span><span lang=EN-US>&lt;/TD&gt;&lt;TD&gt;</span><span
+    style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+    "Times New Roman"'>真实姓名</span><span lang=EN-US>&lt;/TD&gt;&lt;/TR&gt;</span></p>
+    <p class=MsoNormal><span lang=EN-US>5.<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>&lt;?php</span></p>
+    <p class=MsoNormal><span lang=EN-US>6.<span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp; </span><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>include(“db.php”);</span></p>
+    <p class=MsoNormal><span lang=EN-US>7.<span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp; </span><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>$mysql
+    = mysql_connect($DBHOST,$DBUSER,$DBPASSWD);</span></p>
+    <p class=MsoNormal style='margin-left:42.0pt;text-indent:-42.0pt'><span
+    lang=EN-US>8.<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span><span
+    style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>$res =
+    mysql_db_query(‘user’,”SELECT AUTOID,USERID,NAME FROM Users WHERE LOGINTIME
+    &gt; 970000000”,$mysql);</span></p>
+    <p class=MsoNormal style='margin-left:63.0pt;text-indent:-63.0pt;
+    mso-list:l3 level1 lfo4;tab-stops:list 63.0pt'><![if !supportLists]><span
+    lang=EN-US>9.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span></span><![endif]><span lang=EN-US>while($row =
+    mysql_fetch_row($res)){</span></p>
+    <p class=MsoNormal style='margin-left:63.0pt;text-indent:-63.0pt;
+    mso-list:l3 level1 lfo4;tab-stops:list 63.0pt'><![if !supportLists]><span
+    lang=EN-US>10.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span></span><![endif]><span lang=EN-US><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;</span>echo<span style="mso-spacerun:
+    yes">&nbsp;&nbsp;
+    </span>“&lt;TR&gt;&lt;TD&gt;$row[0]&lt;/TD&gt;&lt;TD&gt;$row[1]&lt;/TD&gt;&lt;TD&gt;$row[2]&lt;/TD&gt;&lt;/TR&gt;”;</span></p>
+    <p class=MsoNormal style='margin-left:63.0pt;text-indent:-63.0pt;
+    mso-list:l3 level1 lfo4;tab-stops:list 63.0pt'><![if !supportLists]><span
+    lang=EN-US>11.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span></span><![endif]><span lang=EN-US>}</span></p>
+    <p class=MsoNormal><span lang=EN-US>12.<span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>$mysql_close($mysql);</span></p>
+    <p class=MsoNormal><span lang=EN-US>13.<span style='mso-tab-count:1'>&nbsp;&nbsp; </span>?&gt;</span></p>
+    <p class=MsoNormal><span lang=EN-US>14.<span style='mso-tab-count:1'>&nbsp;&nbsp; </span>&lt;/TABLE&gt;</span></p>
+    <p class=MsoNormal><span lang=EN-US>15.<span style='mso-tab-count:1'>&nbsp;&nbsp; </span>&lt;/BODY&gt;</span></p>
+    <p class=MsoNormal><span lang=EN-US>16.<span style='mso-tab-count:1'>&nbsp;&nbsp; </span>&lt;/HTML&gt;</span></p>
+    </div>
+    <![if !mso]></td>
+   </tr>
+  </table>
+  </span><![endif]><![if !mso & !vml]>&nbsp;<![endif]><![if !vml]></td>
+ </tr>
+</table>
+
+</span><![endif]><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<br style='mso-ignore:vglayout' clear=ALL>
+
+<p class=MsoNormal style='margin-left:105.0pt;text-indent:-63.0pt'><span
+lang=EN-US>(</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>具体分析每一行的作用</span><span lang=EN-US>)</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&lt;</span><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>用一些</span><span
+lang=EN-US>PHP</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>程序进行例子分析，大家可以拷贝程序作为参考</span><span
+lang=EN-US>&gt;</span></p>
+
+</div>
+
+</body>
+
+</html>

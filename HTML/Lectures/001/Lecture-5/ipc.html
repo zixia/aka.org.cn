@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>进程间通讯</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312-80">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        PRE { color: #ffffff; font-family: "fixed" }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="images/velvet.jpg">
+
+<A HREF="daemon.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=CENTER>5.12&nbsp;&nbsp;进程间通讯<BR><BR>
+</H1>
+
+<UL>
+    <LI><P>基本概念</LI>
+    <LI><P>管道</LI>
+    <LI><P>FIFO</LI>
+    <LI><P>System V 的 IPC 机制</LI>
+    <LI><P>共享内存</LI>
+    <LI><P>信号量</LI>
+</UL>
+
+<H3>5.12.1&nbsp;&nbsp;基本概念</H3>
+<UL>
+    <LI>为什么需要 IPC</LI>
+    <LI>原子操作, 死锁和竞态</LI>
+    <LI>同步</LI>
+</UL>
+
+<H3>5.12.2&nbsp;&nbsp;管道</H3>
+<UL>
+    <LI>最常见的 IPC 机制</LI>
+    <LI>通过 pipe 系统调用</LI>
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+
+       int pipe(int filedes[2]);
+------------------------------------------------------------------------------
+#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+
+#define MAXLINE 256
+
+void err_sys (const char* info)
+{
+	perror (info);
+	exit (1);
+}
+
+int mian (void)
+{
+    int n, fd [2];
+    pid_t pid;
+    char line [MAXLINE];
+
+    if (pipe (fd) &lt; 0)
+         err_sys ("pipe error");
+       
+    if ( (pid = fork ()) &lt; 0)
+         err_sys ("fork error");
+    else if (pid &gt; 0) { // parent
+         close (fd [0]);
+         write (fd [1], "hello world\n", 12);
+    }
+    else {					// child
+         close (fd [1]);
+         n = read (fd[0], line, MAXLINE);
+         write (STDOUT_FILENO, line, n);
+    }
+
+    exit (0);
+}
+
+===============================================================================
+</PRE>
+
+    <LI>数据要经过内核传递, 效率较低</LI>
+    <LI>只能在关系进程之间进行, 比如父子进程之间</LI>
+    <LI>管道是单工的</LI>
+</UL>
+
+<H3>5.12.3&nbsp;&nbsp;FIFO</H3>
+<UL>
+    <LI>FIFO 又称作命名管道</LI>
+    <LI>FIFO 是存在于文件系统的对象, 用 "mknode &lt;name&gt; p", 或 mkfifo (1, 3) 命令或函数建立</LI>
+    <LI>通过 FIFO 的通讯可发生在任何两个进程之间, 只要对 FIFO 有适当的访问权限</LI>
+    <LI>对 FIFO 的读写操作与普通文件类似</LI>
+    <LI>用 FIFO 实现的 C/S 结构</LI>
+</UL>
+
+<H3>5.12.4&nbsp;&nbsp;System V 的 IPC 机制</H3>
+<UL>
+    <LI>消息传递</LI>
+    <LI>共享内存: 效率最高的 IPC 机制, 但没有同步机制</LI>
+    <LI>信号量: 实际是一种同步机制, 通常与共享内存一起使用</LI>
+    <LI>标识符和键</LI>
+	
+<PRE>
+===============================================================================
+    * 标识符用来标识 IPC 对象.
+	* 利用 msgget, semget, shmget 等函数建立 IPC 对象时, 必须指定键. 指定建为
+	  IPC_PRIVATE 时, 可建立新的 IPC 对象.
+	* 作为服务器的进程建立新的 IPC 对象之后, 可将返回的标识符写入一个预先约定
+	  的文件, 从而可让客户获得标识符; 或者, 在关系进程之间, 可通过命令行参数
+	  传递标识符.
+	* 两个进程可约定同一个键, 比如通过共同的头文件, 服务器负责事先建立新 IPC 对象,
+	  客户只许通过键获得标识符.
+	* 两个进程可通过 ftok 函数生成键. 该函数利用一个文件名和项目 ID 工作. 
+===============================================================================
+    <LI>ipcs 可用来管理系统中的 IPC 对象</LI>
+</PRE>
+
+</UL>
+
+<H3>5.12.5&nbsp;&nbsp;共享内存</H3>
+<UL>
+    <LI>#自学#</LI>
+</UL>
+
+<H3>5.12.6&nbsp;&nbsp;信号量</H3>
+<UL>
+    <LI>#自学#</LI>
+</UL>
+
+<P>
+<BR><BR>
+</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="images/striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="daemon.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+</BODY>
+</HTML>
+

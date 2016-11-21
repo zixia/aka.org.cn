@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>标准 I/O 库</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        PRE { color: #ffffff; font-family: "fixed" }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="velvet.jpg">
+
+<A HREF="fileio.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="dir.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=CENTER>5.3&nbsp;&nbsp;标准 I/O 库<BR><BR>
+</H1>
+
+<UL>
+    <LI><P>基本概念</LI>
+    <LI><P>缓冲机制</LI>
+    <LI><P>熟悉的标准 I/O 函数</LI>
+    <LI><P>陌生的标准 I/O 函数</LI>
+</UL>
+
+<H3>5.3.1&nbsp;&nbsp;基本概念</H3>
+<UL>
+    <LI>ANSI C 和标准 I/O 库</LI>
+    <LI>流和 FILE 对象</LI>
+    <LI>标准 FILE 对象: stdin, stdout, stderror</LI>
+    <LI>缓冲和非缓冲 I/O</LI>
+</UL>
+
+<H3>5.3.2&nbsp;&nbsp;缓冲机制</H3>
+<UL>
+    <LI>缓冲的目的</LI>
+    <LI>缓冲类型 1: 完全缓冲</LI>
+    <LI>缓冲类型 2: 行缓冲</LI>
+    <LI>缓冲类型 3: 无缓冲</LI>
+    <LI>UNIX 的默认缓冲: 标准错误无缓冲, 其他流如果是终端设备则为行缓冲, 否则为完全缓冲. </LI>
+    <LI>在打开流, 且执行任何读写操作之前, 可以用 setbuf, setvbuf 等函数改变流的缓冲类型. </LI>
+<PRE>
+===============================================================================
+        #include &lt;stdio.h&gt;
+
+        void setbuf(FILE *stream, char *buf);
+        void setbuffer(FILE *stream, char *buf, size_tsize);
+        void setlinebuf(FILE *stream);
+
+        int setvbuf(FILE *stream, char *buf, int mode , size_t size);
+===============================================================================
+</PRE>
+    <LI>setbuf: 关闭或打开缓冲, buf 大小必须为 BUFSIZE (stdio.h)</LI>
+    <LI>setvbuf: 明确指定缓冲类型, 以及缓冲区大小. type 可取 _IONBF, _IOLBF, _IOFBF 之一</LI>
+    <LI>前三个函数仅仅是 setvbuff 的别名而已.</LI>
+    <LI>刷新缓冲: fflush. stream 为 NULL 时刷新所有流</LI>
+<PRE>
+===============================================================================
+        #include &lt;stdio.h&gt;
+
+        int fflush(FILE *stream);
+===============================================================================
+</PRE>
+</UL>
+
+<H3>5.3.3&nbsp;&nbsp;熟悉的标准 I/O 函数</H3>
+<UL>
+    <LI>流的打开和关闭: fopen/fclose</LI>
+    <LI>用 fopen 打开的文件的访问许可为: S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH</LI>
+    <LI>单字符输入: getc/fgetc/getchar</LI>
+    <LI>getc 一般实现为宏</LI>
+    <LI>流的错误处理: ferror/feof/clearerr</LI>
+    <LI>clearerr 清除错误标志和EOF标志</LI>
+    <LI>返还字符: ungetc</LI>
+    <LI>单字符输出: putc/fputc/putchar</LI>
+    <LI>行输入: gets/fgets</LI>
+    <LI>行输出: puts/fputs</LI>
+    <LI>二进制读写: fwrite/fread</LI>
+    <LI>二进制读写时的结构体对齐问题</LI>
+    <LI>流的定位: ftell/fseek/rewind, SEEK_CUR, SEEK_SET, SEEK_END</LI>
+    <LI>rewind 等同于 fseek(stream, 0L, SEEK_SET), 但要清除错误标志.</LI>
+    <LI>流的定位: fgetpos/fsetpos</LI>
+    <LI>格式化输出: printf/fprintf/sprintf</LI>
+    <LI>格式化输入: scanf/fscanf/sscanf</LI>
+</UL>
+
+<H3>5.3.4&nbsp;&nbsp;陌生的标准 I/O 函数</H3>
+<UL>
+    <LI>freopen/fdopen</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;stdio.h&gt;
+
+       FILE *fopen (const char *path, const char *mode);
+       FILE *fdopen (int fildes, const char *mode);
+       FILE *freopen  (const  char *path, const char *mode, FILE *stream);
+===============================================================================
+</PRE>
+
+    <LI>fileno</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;stdio.h&gt;
+
+       int fileno( FILE *stream);
+===============================================================================
+</PRE>
+
+    <LI>tmpnam/tmpfile/tempnam</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;stdio.h&gt;
+
+       char *tmpnam(char *s);
+       FILE *tmpfile (void);
+       char *tempnam(const char *dir, const char *pfx);
+===============================================================================
+</PRE>
+
+    <LI>格式化输出的另一种形式: vprintf/vfprintf/vsprintf</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;stdio.h&gt;
+       #include &lt;stdarg.h&gt;
+
+       int vprintf(const char *format, va_list ap);
+       int vfprintf(FILE  *stream,  const  char *format, va_list ap);
+       int vsprintf(char *str, const char *format, va_list ap);
+       int vsnprintf(char *str, size_t size, const char  *format, va_list ap);
+-------------------------------------------------------------------------------
+SAMPLE:    myMessageBox 函数
+
+int myMessageBox (HWND hwnd, DWORD dwStyle, char* title, char* text, ...)
+{
+    char * buf = NULL;
+    int size = 0;
+    int i = 0;
+    va_list args;
+    int rc;
+
+    va_start (args, text);
+
+    do {
+        size += 1000;
+        if (buf) free (buf);
+        buf = malloc (size);
+        i = vsnprintf (buf, size, text, args);
+    } while (i == size);
+
+    va_end(args);
+
+    rc = MessageBox (hwnd, buf, title, dwStyle);
+
+    if (buf)
+        free (buf);
+
+    return rc;
+}
+===============================================================================
+</PRE>
+
+    <LI>可变参数函数的参数处理: va_start/va_end</LI>
+
+<PRE>
+===============================================================================
+        #include &lt;stdarg.h&gt;
+
+        void va_start( va_list ap, last);
+        type va_arg( va_list ap, type);
+        void va_end( va_list ap);
+-------------------------------------------------------------------------------
+SAMPLE:        varg.c
+
+        #include &lt;stdio.h&gt;
+        #include &lt;stdarg.h&gt;
+
+        void foo(char *fmt, ...)
+        {
+           va_list ap;
+           int d;
+           char c, *s;
+
+           va_start(ap, fmt);
+           while (*fmt)
+                switch(*fmt++) {
+                case 's':           /* string */
+                     s = va_arg(ap, char *);
+                     printf("string %s\n", s);
+                     break;
+                case 'd':           /* int */
+                     d = va_arg(ap, int);
+                     printf("int %d\n", d);
+                     break;
+                case 'c':           /* char */
+                     c = va_arg(ap, char);
+                     printf("char %c\n", c);
+                     break;
+                }
+           va_end(ap);
+        }
+
+        int main (void)
+        {
+            foo ("ssdcds", "Hello", "world.", 50, 'a', 2000, "END");
+            return 0;
+        }
+===============================================================================
+</PRE>
+</UL>
+
+<P>
+<BR><BR>
+</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="fileio.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="dir.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+</BODY>
+</HTML>
+

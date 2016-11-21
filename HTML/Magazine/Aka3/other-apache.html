@@ -1,0 +1,159 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>AKA杂志第三期：APACHE--自由软件的战士</title>
+</head>
+
+<body>
+<div align="center"><center>
+
+<table border="0" width="630">
+  <tr>
+    <td></td>
+    <td bgcolor="#EEEDB7"><p align="center">　</p>
+    <p align="center"><big><big><strong>APACHE——自由软件的战士</strong></big></big></p>
+    <p align="center"><font size="2">作者：</font><small>ANDREW LEONARD</small></p>
+    <p align="center"><font size="2">翻译: </font><small>optojy</small><font size="2">[AKA]</font></p>
+    <h1 align="center"><a href="cover2.html"><font size="2">[返回]</font></a></h1>
+    <hr>
+    <p><br>
+    <em>&nbsp;&nbsp;&nbsp; 网络上最流行的Web服务器既不是微软，也不是网景公司的产品。她也更不是其它老牌公司的作品，这到底是怎么回事？</em><br>
+    <br>
+    <img src="apache_pb.gif" width="259" height="32" alt="apache_pb.gif (2326 bytes)"><br>
+    </p>
+    <hr>
+    <p>&nbsp;&nbsp;&nbsp; 一片红羽毛斜倚在“Powered by Apache”旁：在Web主页上，这样的标志随处可见。这正是因为——Apache的Web服务器软件将普通计算机变成了WWW的站点，所以Web管理员都将她作为最青睐的选择。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 这个事实是非同寻常的。Apache服务器并不是商业产品——她是软件开发者利用工作之余的时间，按照松散合作方式共同开发的“自由软件”。而且在微软和网景公司将Web服务器作为未来利润增长的基石，并着重发展的情况下，Apache已经占有了优势——在几乎一半的公共访问Web服务器上，都安装有Apache。这不仅因为她的价格便宜，Apache拥护者还认为她是比其商业对手更棒的产品——更快、更可靠、更容易升级。<br>
+    <br>
+    &nbsp;&nbsp; 市场份额并不是判断Apache的唯一准绳。她的成功要归功于整个“自由软件运动”乌托邦式的理想，并且验证了Internet合作的、分布式解决问题的方法的持久热情。不要介意乱哄哄的市集方式推动着对所有软件问题的包装精美的解决方法。网络为之提供了一个较好的途径，这是Apache的竞争对手无法触及的。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; “我们认为Apache的伙计们实在是太酷了”，一位不愿透露姓名的微软员工这样说道，“我想他们真正体会到Internet的灵魂。”<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 可笑的是，尽管Apache在非商业运动中有突出的地位，但也应该将她的诞生部分归功于那些首先在染指网络的资本家们。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 回朔到1994年底，Brian Behlendorf，一位刚从UC-Berkeley计算机科学系毕业的年轻程序员，被赋予了为Hotwired建立Web站点的重任，而Wired杂志是第一次发行在线出版物。其中HotWired的最初要求是一个要求口令的注册系统——这在当时是非常有争议的想法。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 在那些日子里，大多数Web管理员都依赖于Illinois大学国家超级计算机应用中心（也是具有突破性的Web浏览器Masaic的诞生地）开发的Web服务程序。但是NCSA的Web服务器在HotWired需要的规模上不能处理口令授权。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 幸运的是，NCSA服务器是处于公共领域之中的，就是说那里的源代码对所有的使用者都是开放的。于是，Behlendorf练习了他的黑客本领：他写了一些新的代码，作为NCSA的Web服务器解决问题的“补丁”。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 他并不是唯一一位在那个冬天里翻寻NCSA源代码的聪明的程序员。由于Web的问题，其它一些Web管理员也认为有必要自己动手解决问题。当原始代码的编程者Illinois大学学生Rob 
+    McCool被硅谷的一家名叫网景的小公司挖走时（一起还有Marc Andreessen和Lynx的作者Eric 
+    Bina），它象是一堆灰尘一样被搁置下来。同时Web业务不断增长，不断产生了新的问题需要Web服务器面对。补丁迅速混乱增加，毫无协调。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; Behlendorf是Internet上合作开发软件的狂热者。于是他开始和其它程序员联系，并建议他们加入重写NCSA代码的队伍中来。最初这些开发者戏称他们的拼接方案为“补丁服务器”。但是到了1995年2月，他们完成了整个NCSA程序的重写工作，并正式将他们的合作命名为“Apache小组”。从此，网络合作成为了Apache的格言。<br>
+    <br>
+    “我们所做的每一件事都是通过分布方式进行的，”Behlendorf谈到，“没有任何一家公司、一个人或一些人可以控制她的开发。”<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 目前根据Netcraft（一家英国网络咨询服务公司）调查，49.7%的Internet公共访问Web服务器运行了Apache，而且数目仍在增长。（大多数是在Unix系统下运行，目前也有用于Windows 
+    NT的新版本。）Apache允许在单机上容纳数以千记的不同虚拟Web域能力，使得它在ISP市场占有相当的份额。Yahoo使用了Apache，Internet电影数据库和Hotwired自身也在使用Apache，尽管Behlendorf目前是Web 
+    production studio Organic Online的首席技术官员，不在是Hotwired的员工。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; Apache的成功是自由软件热心者的荣誉，并不断证明Internet不可能被各种商业软件巨人如微软彻底地占领。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; “Apache是我们最成功的作品之一，”自由软件倡导者Eric 
+    Raymond——《黑客字典》的作者谈到，“所有的人都是这样想的，Apache人们将自己视为自由软件文化的典范，并证实了这一点。”<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 
+    但什么又是自由软件的“文化”呢？自由软件团体大而分散，但不是那种充满缩写字和只爱GNU、Linux、FreeBSD、Perl的计算机迷。自由软件“文化”由于不同的信仰而存在差异，而且经常周期性的发生技术大战，使得那些门外汉们觉得极端无聊。尽管他们之间存有差异，自由软件开发者依然相信，他们的运动不只是Internet的过去，而且是它的将来。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; “Linux、Apache、Perl、W3C以及在IETF为Internet标准努力的人们都相互认同，自由软件团体间通常所做的要多于他们各自所做的项目，”Raymond说，“我不是Apache的开发者，但是我从不认为他们的成功不是我们的，而不只是他们的。同样，当Linux或GCC在其他方面获奖时，他们也有同样的感受。”<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp; 
+    首先要了解自由软件的是，自由软件并不一定要是免费的。MIT的传奇黑客Richard 
+    Stallman，他是自由软件基金会和GNU（GNU不是Unix）项目的最初创始人，谈到“自由软件的自由不在于她的价钱——而是自由地修改、发布软件及软件的改进版本。”<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 
+    这些“自由”根本上是指访问和修改源代码的权利。一些软件公司守卫他们的源代码，就如同一些公牛守护着 
+    皇冠上的珠宝一样。源代码被视为个人财产的核心，在它的上面构建了软件工业。如，微软的IE浏览器可以给用户免费使用，但是它不是“自由软件”——它的源代码是保密的。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 
+    源代码的可用性对自由软件来说，是最大的卖点（实际上，Behlendorf宁愿用“源代码可用软件”而不是“自由软件”的字眼）。即如果出错，你不必等待微软或网景的技术支持答复。如果你发现了‘BUG’或是想添加新的功能，你可以当即卷起衣袖，开始代码的修改工作。而且经常是，其它人已经遇到了这一问题，并将补丁贴到了网络上。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; Yahoo的共同创始人Filo说，“访问和修改代码的确很妙，当你想完全操纵它时，这会带来很多的方便。”<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 然而，有不同的总体控制。Stallman的GNU软件受到了一种许可证体系的保护，它要求任何一个发布GNU软件的修改版本时也发布其修改的源代码。这就保证了软件的新版本也能保持开放。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; Apache的Web服务器则是在不同的、约束相对松散的许可证体系下，允许将来的用户做他们想做的（只要他们含有Apache小组的版权标志）。而且据报道，有几家公司已经靠Apache的商业版开始赢利了，著名软件公司C2Net、Oakland、 
+    Calif等出售的是加入公众密匙的Apache服务器。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; Behlendorf在谈到Apache许可证时，认为“过于自由”了以致它对于将来的用户没有什么约束。他相信，这可以帮助Apache的传播。但是这种行径是对Stallman来说是该诅咒的。如果源代码的可用性并不是永久保护的，他认为软件最终将在商业压力下堕落。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; Stallman认为自由软件的权利是“不能被剥夺”的。对他而言，这是一个道德问题——他并不关心自由软件是否更好，和被用户所接受。<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    “我并不从物质利益来看待这些事情，”他说，“成立自由软件组织的基本理由是，我们可以继续使用计算机而不会做错事，不必要做拒绝与他人分享的承诺。即使是大多数计算机用户不加入这个团体，我也要成为其中的一员。这与某一哲学或其它思想能否得到整个世界的承认无关。这件事情重要但也很普通。<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    许多自由软件的作者都声称他们的产品要比微软和网景公司封闭模式开发的产品质量更好。一些自由软件开发者，他们宣称要紧密地关注在第一线努力的Web管理员的实际需要。如Behlendorf提到的，“Apache上做的每一件事，都因为有人需要。”<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    “Apache对每个人来说‘足够好了’”，Linus Torvalds——自由软件Linux操作系统的协调者和主要作者谈到，“通常考虑复杂性、有效性和价格时，她是最好的。而且由于她是自由软件，有很多人为之努力，并维护至今——这些人都不会受到市场决策太多的影响，他们只是关心事实和各自从Web服务器上所需要的。<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp; 
+    “在软件业的这段日子里，你会得到太多复杂的东西了”，Behlendorf说，“由于我们所做的大多取决于软件，所以将你的任务建立在一些你又无法触及的东西上，是非常危险的。”<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 
+    但最重要的是可以利用网络上所有用户和专家们的智慧结晶。<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    “当你和不同的背景的人们一起关注、开发、改善系统，并有固定反馈时，她工作得非常好，是高质量的作品，”Yahoo的Filo说。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 
+    自由，并不意味着道德高高在上，只不过停留在实用的高度而已。而且在这两种环境下，最好是综合这两个特质。Apache开发者通过自己Web站点上副题为“为什么Apache是自由的”的内容，简洁地表达了他们的基本理由。<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    “我们相信在线出版物工具应该人手具备，软件公司应该靠提供附加费用服务来赢利，如特殊模块和支持等。我们意识到公司在‘占有’市场内，有一定经济优势”——在软件业里，这意味着严格控制了特殊的阀门，以致其它人必需交纳费用。这通常靠“占有”某些协议，以其它公司的代价来达到本公司的商业行为。在某种程度WWW的协议还没有被某一公司‘占有’，所以Web为那些大、小公司提供了活动的场所。”<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 
+    自由软件的批判者乐于看到大多数软件用户缺乏利用自由软件优势的技术能力。某种程度上说，他们是有道理的。即使是自由软件的提倡者也承认，只有计算机迷们才可能真正欣赏到Apache，或是Linux、Perl的乐趣。多数人在出问题的时候，并不想修改他们自己的软件——他们总是想一开始就没有问题，并认为当他们给微软和网景公司写文件分区检测表时，就能够解决问题。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 
+    “通常我们发现‘自由’，或者我们更乐意叫做‘协作开发’的软件模型，适合于技术工具——操作系统、编译器、网络工具、Web服务器等；而商业模型则适于终端用户工具，如牙科诊所的布告系统、办公套件等”，Redhat的主席Bob 
+    Young这样说到，Redhat是出售和技术支持Linux操作系统的公司。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 
+    访问源代码“在市场环境中有非常巨大的竞争优势”，网景Web服务产品和网景企业服务器的负责经理John 
+    Dawes说，“但这肯定不是主流。越来越多的人们想上网——但我的妈妈肯定不知如何去使用源代码。大多数用户不想参与使用软件的维护。”<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 而且即使是负责团体Web服务器的程序员相信，Apache和Linux提供了最好的解决方案，但是在行政人员中仍然有广泛的偏见，他们不相信“自由软件”可以承担“重要任务”。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 微软IIS产品经理Jonathan Perera说到，“你不可能看到很多排在幸福杂志前1000名的公司用户采用Apache作为Web服务器。”<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    “企业中的人在对待自由软件上有一定的困难，”Filo说，“当出现问题时，往往很难找出对此负责的人。”<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp; 在谈到Apache的市场份额时，Dawes和Perera一笑了之，好象Apache与商业根本不相关似的。微软和网景公司的座右铭都是强调“intranet”，而对internet不予重视。公共访问的Web服务器不是赚钱的所在，真正的利润位于组织内部网“放火墙”背后。网景公司谈到，尽管微软是最重要的竞争者，并将Web服务器软件捆绑在其Windows 
+    NT操作系统上，Apache依然占有优势。 <br>
+    &nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp; 但是Intranet和Internet的区别并不象微软和网景所认为的那样显著，对于某些自由软件的倡导者来说，Apache的成功是将来占领公司市场的滩头阵地。<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    “自由软件团体要多于它的项目总数，”Eric Raymond说，“当Apache进入商业市场时，她也为Linux、GCC、free 
+    BSD等操作系统开辟了道路，即使是每一个Web主页都是对分散和透明的开放标准的支持和对微软一统天下的回击。”<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    &quot;自由软件运动还不构成对微软在桌面软件领域的威胁,&quot;Raymond说道,&quot;但Internet是我们的'杀手锏'。&quot;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 肯定的是,Internet使得今天在软件合作开发取得的成果成为可能.对于某些观察家来说,这是人类的伟大成就之一.<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    “最具革命性的软件，包括Internet、WWW、和使用最广泛的Web服务器（Apache）及交互站点使用语言（Perl），都是由分散的自由软件团体所开发的，”计算机出版商O'Reilly 
+    &amp; Associates的创始人，Tim O'Reilly在今年夏天关于Perl编程语言的会议上这样说道，“这使独立开发者通过自由网络合作分散地进行软件开发，成为了人类重要发明之一的最高形式。”<br>
+    <br>
+    &nbsp;&nbsp; 
+    如黑客们所说，这并不是微不足道的。众所周知，政府基金帮助了Internet发展。但是在其发展的早期，志愿者们奉献了他们的时间、精力和创造性工作，使网络得以改善。这些可称之为互惠经济(gift 
+    economy)的社会思潮——当你为公共利益做了贡献，并确信能够从其它的义务奉献中获得利益——正是新闻组、Web和其它不计其数的应用软件才使Internet成为今天的模样。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 在1997年还没有太多地听说互惠经济——事实上，这一观念经常被曲解为一些古怪、暧昧的社会主义者的骗子行径，今天的市场完全可以忽略它。为网景通信公司写入Mosaic的编程小组变通，Internet支柱的私营化和微软加入这一恶兆的到来，都构成了许多长时间观察者所认为的网络新纪元——更少的友谊、理想和趣味。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 
+    但是猜猜看实际情况是怎样？关于互惠经济消亡的谣传被夸大了——Apache作为网络间的实惠，就证明了这一点。也许是她不象微软和网景公司那样有效地使自己成为世界主流。作为Apache开发者之一的Robert 
+    Thau提到，“志愿者并不需要做广告。”网络从死水一潭变成流行文化就象黄热病一样，自由软件运动将逐渐扫除障碍、积聚力量、吸收会员和利用网络优势开发更好的软件，以满足所有人的利益。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; 
+    谁又想到她呢？“从根据他们的能力，到根据他们的需求。”是真的，一个革新的想法。<br>
+    <br>
+    </p>
+    <hr>
+    <p><font size="2">校对: waterbird [AKA]</font></p>
+    <p align="center"><a href="cover2.html"><strong><font size="2">[返回]</font></strong></a></p>
+    <p align="center">　</td>
+  </tr>
+</table>
+</center></div>
+</body>
+</html>

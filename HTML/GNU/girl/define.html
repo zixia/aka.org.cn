@@ -1,0 +1,72 @@
+<html>
+<head><title>对GIRL对象的定义</title></head>
+<body>
+<h1 align=center>对GIRL对象的定义</h1>
+<hr>
+<p>GIRL区分对象的说明与定义。在本节给出对象的定义形式。
+<p>所有对对象的定义（包括类型定义和信号定义）均不能出现在import命令中。
+<h2>1。<a href="yacc.html#integer" name="integer">定义整数对象</a></h2>
+<p>在GIRL中，可以直接按照十进制、十六进制、八进制的方式给出整数。（区分十进制、
+十六进制和八进制的方式和C/C++语言完全相同）。此外，整数标识符也可以作为整数值。
+<p>GIRL整数定义形式：
+<p><i>整数标识符</i>=integer(<i>整数</i>)
+<h2>2。<a href="yacc.html#float" name="float">定义浮点数对象</a></h2>
+<p>在GIRL中直接给出浮点数。浮点数必须含有小数点或指数标识‘e’或‘E’。此外，
+浮点数标识符也可以作为浮点值。
+<p>GIRL浮点数定义形式：
+<p><i>浮点数标识符</i>=float(<i>浮点数</i>)
+<h2>3。<a href="yacc.html#string" name="string">定义字符串对象</a></h2>
+<p>在GIRL中，可以按照常见的方式给出字符串。字符串以双引号起始和结尾。其中的
+控制字符的表示方式与C/C++语言完全相同。字符串标识符也可以作为字符串值。
+<p>GIRL字符串定义形式：
+<p><i>字符串标识符</i>=string(<i>字符串</i>)
+<h2>4。<a href="yacc.html#color" name="color">定义颜色对象</a></h2>
+<p>在GIRL中，可以按照如下方式给出颜色值：<ul>
+<li>color("<i>颜色名</i>")：表示预命名颜色对象。如果颜色名非法，将用白色代替，
+并在标准输出给出错误提示；
+<li>color(<i>红色</i>,<i>绿色</i>,<i>蓝色</i>)：表示RGB颜色。其中红色、绿色、
+蓝色都是0~65535的整数，分别给出颜色的RGB值。由于使用的是共享颜色，系统将自动
+选取最相近的颜色。
+</ul>
+<p>此外，颜色标识符也可以作为颜色值。
+<p>GIRL颜色定义形式：
+<p><i>颜色标识符</i>=<i>颜色值</i>：创建给定颜色值表示的颜色对象。
+<h2>5。<a href="yacc.html#cursor" name="cursor">定义光标对象</a></h2>
+<p>在GIRL中可以按照如下形式给出光标值：
+<p>cursor("<i>预定义光标名</i>|<i>光标文件名</i>")：系统将首先判断是否是预
+定义光标名。如果是预定义光标名，则表示使用预定义光标。否则作为光标文件名处理。
+关于预定义光标名称，参见附录。关于光标文件的格式，参见附录。
+<p>此外，字体标识符也可以作为字体的值。
+<p>GIRL光标定义形式：
+<p><i>光标标识符</i>=<i>光标值</i>：创建给定光标值表示的光标对象。
+<h2>6。<a href="yacc.html#font" name="font">定义字体对象</a></h2>
+<p>在GIRL中可以按如下形式给出字体值：
+<p>font("<i>字体名</i>")：表示给定字体名的字体。
+<p>此外，字体标识符也可以作为字体的值。
+<p>GIRL字体定义形式：
+<p><i>字体标识符</i>=<i>字体值</i>：创建给定字体值表示的字体对象。
+<h2>7。<a href="yacc.html#pixmap" name="pixmap">定义位图对象</a></h2>
+<p>在GIRL中可以按照如下形式给出位图的值：<ul>
+<li>bmp("<i>位图文件名</i>")：表示BMP格式的位图；
+<li>jpeg("<i>位图文件名</i>")：表示JPEG格式的位图；
+<li>png("<i>位图文件名</i>")：表示PNG格式的位图；
+<li>ppm("<i>位图文件名</i>")：表示PPM格式的位图；
+<li>ps("<i>位图文件名</i>")：表示PS格式的位图；
+<li>tiff("<i>位图文件名</i>")：表示TIFF格式的位图；
+<li>xpm("<i>位图文件名</i>")：表示XPM格式的位图。
+</ul>
+<p>此外，位图标识符也可以作为位图的值。
+<p>GIRL位图定义形式：
+<p><i>位图标识符</i>=<i>位图值</i>：创建给定位图值表示的位图对象。
+
+<h2>8。定义构件对象</h2>
+请参见“<a href="widget.html">关于GIRL构件</a>”
+<hr>
+<table align=center width=100% border=2><tr>
+<td><center><a href="index.html">返回首页</a></center>
+<td><center><a href="declare.html">上一页：对GIRL对象的说明</a></center>
+<td><center><a href="access.html">下一页：在C/C++中访问GIRL对象</a></center>
+<td><center><a href="malito:blazing@263.net">与我联系</a></center>
+</tr></table>
+</body>
+</html>

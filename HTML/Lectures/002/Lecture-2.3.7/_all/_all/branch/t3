@@ -1,0 +1,110 @@
+struct task_struct {
+/* these are hardcoded - don't touch */
+	volatile long state;	/* -1 unrunnable, 0 runnable, >0 stopped */
+	unsigned long flags;	/* per process flags, defined below */
+	int sigpending;
+	mm_segment_t addr_limit;	/* thread address space:
+					 	0-0xBFFFFFFF for user-thead
+						0-0xFFFFFFFF for kernel-thread
+					 */
+	struct exec_domain *exec_domain;
+	long need_resched;
+
+/* various fields */
+	long counter;
+	long priority;
+	cycles_t avg_slice;
+/* SMP and runqueue state */
+	int has_cpu;
+	int processor;
+	int last_processor;
+	int lock_depth;		/* Lock depth. We can context switch in and out of holding a syscall kernel lock... */	
+	struct task_struct *next_task, *prev_task;
+	struct task_struct *next_run,  *prev_run;
+
+/* task state */
+	struct linux_binfmt *binfmt;
+	int exit_code, exit_signal;
+	int pdeath_signal;  /*  The signal sent when the parent dies  */
+	/* ??? */
+	unsigned long personality;
+	int dumpable:1;
+	int did_exec:1;
+	pid_t pid;
+	pid_t pgrp;
+	pid_t tty_old_pgrp;
+	pid_t session;
+	/* boolean value for session group leader */
+	int leader;
+	/* 
+	 * pointers to (original) parent process, youngest child, younger sibling,
+	 * older sibling, respectively.  (p->father can be replaced with 
+	 * p->p_pptr->pid)
+	 */
+	struct task_struct *p_opptr, *p_pptr, *p_cptr, *p_ysptr, *p_osptr;
+
+	/* PID hash table linkage. */
+	struct task_struct *pidhash_next;
+	struct task_struct **pidhash_pprev;
+
+	/* Pointer to task[] array linkage. */
+	struct task_struct **tarray_ptr;
+
+	struct wait_queue *wait_chldexit;	/* for wait4() */
+	struct semaphore *vfork_sem;		/* for vfork() */
+	unsigned long policy, rt_priority;
+	unsigned long it_real_value, it_prof_value, it_virt_value;
+	unsigned long it_real_incr, it_prof_incr, it_virt_incr;
+	struct timer_list real_timer;
+	struct tms times;
+	unsigned long start_time;
+	long per_cpu_utime[NR_CPUS], per_cpu_stime[NR_CPUS];
+/* mm fault and swap info: this can arguably be seen as either mm-specific or thread-specific */
+	unsigned long min_flt, maj_flt, nswap, cmin_flt, cmaj_flt, cnswap;
+	int swappable:1;
+/* process credentials */
+	uid_t uid,euid,suid,fsuid;
+	gid_t gid,egid,sgid,fsgid;
+	int ngroups;
+	gid_t	groups[NGROUPS];
+        kernel_cap_t   cap_effective, cap_inheritable, cap_permitted;
+	struct user_struct *user;
+/* limits */
+	struct rlimit rlim[RLIM_NLIMITS];
+	unsigned short used_math;
+	char comm[16];
+/* file system info */
+	int link_count;
+	struct tty_struct *tty; /* NULL if no tty */
+/* ipc stuff */
+	struct sem_undo *semundo;
+	struct sem_queue *semsleeping;
+/* tss for this task */
+	struct thread_struct tss;
+/* filesystem information */
+	struct fs_struct *fs;
+/* open file information */
+	struct files_struct *files;
+/* memory management info */
+	struct mm_struct *mm;
+
+/* signal handlers */
+	spinlock_t sigmask_lock;	/* Protects signal and blocked */
+	struct signal_struct *sig;
+	sigset_t signal, blocked;
+	struct signal_queue *sigqueue, **sigqueue_tail;
+	unsigned long sas_ss_sp;
+	size_t sas_ss_size;
+	
+/* Thread group tracking */
+   	u32 parent_exec_id;
+   	u32 self_exec_id;
+
+/* oom handling */
+	int oom_kill_try;
+
+#if defined(CONFIG_AIO)
+	void *kaio_info;
+#endif
+
+};

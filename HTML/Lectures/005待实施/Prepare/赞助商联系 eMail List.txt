@@ -1,0 +1,118 @@
+红旗Linux     edu@redflag-linux.com
+              partner@redflag-linux.com
+RedHat        (E)mailto:mlim@redhat.com
+TurboLinux    dillion.chen@turbolinux.com.cn
+              jasminel@turbolinux.com.cn 
+              jobs@turbolinux.com.cn
+              北京市建国门外大街一号国贸西楼516室 公关部收 100004  电话：65054020
+XTeamLinux    info@xteamlinux.com.cn
+              北京市海淀区上地五街5号高立二千大厦三层 Xteam（中国）软件技术有限公司 100088  电话：62976011
+Oracle        monica.li@oracle.com
+              becky.chen@oracle.com
+              hotline_cn@oracle.com 
+              北京建国门外大街1号国贸大厦2座2208室 公关部收 100004 电话：65386688转333
+Intel         solution-services-questions@intel.com
+              yiqun.ma@intel.com
+HP            北京市朝阳区东三环南路2号北京2380信箱中国惠普大厦中国惠普有限公司 公关部收 100004  电话: 65643888 
+              安捷伦科技有限公司 北京市朝阳区东三环南路2号 中国惠普大厦8层 100022 电话: 1065645500 
+              webfeedback@csgdev.business.agilent.com
+Sun            customeraccess_pr@sun.com
+               melly.yue@sun.com 
+               北京南礼士路66号建威大厦16层 100045  电话：68035588 
+百度           pr@baidu.com
+               webmaster@baidu.com
+浪潮           webmaster@yahome.com.cn
+               guangd@langchao.com.cn
+               webmaster@mail.chaoyue.com
+               gzg@genersoft.com
+               huhaigen@genersoft.com
+               LDM@genersoft.com
+               浪潮服务器事业部营销总部 北京上地信息中路7街2号一层 100085  电话: 82895418
+Sumsung        webmaster@isamsung.com.cn
+               北京市朝阳区东环南路2号 招商局大厦23层 三星电子公关部收 100022  电话：65668100
+曙光           nbd@dawning.com.cn
+               apple_smart@shuguang.net.cn
+               peng@shuguang.net.cn
+VIA
+北大方正        apabi@founder.com.cn
+               master@founderbn.com
+               ecfounder_mail@ecfounder.com
+               ITtraining@founder.com.cn
+               webmaster@founder.com.cn
+               webmaster@infofounder.com.cn
+清华同方       webmaster.thtf.com.cn
+中芯           webmaster@smics.com
+清华紫光       tutv@public2.east.net.cn
+               unisnet@thunis.com
+               marketing@thunisoft.com
+               HP-UNIS@THUNIS.COM
+               scannerdept@thunis.com
+               lucky@thunis.com
+               QQyang@thunis.com
+               waxli@thunis.com
+               unisnews@thunis.com
+               北京清华大学紫光大楼208室紫光网络公关部收 100084  电话：62701188 
+北大青鸟       Hanson_tao@cs.pku.edu.cn
+               webmaster@jbu.com.cn
+               wangsong@jbbis.com.cn
+               wxq@jbtraining.com.cn
+               zy@jbtraining.com.cn
+               tujunjian@jbtraining.com.cn
+               tianchun@tele-cyber.com.cn
+               hr@jbbis.com.cn
+               webmaster@jb-aptech.com.cn
+华胜            wcr@teamsun.com.cn
+东大阿尔派      liuzhuoxun@neusoft.com
+                tianfx@neusoft.com
+中软            css@css.com.cn
+                cyber@cybersoft.com.cn
+                zming_l@sina.com
+                bw@cybersoft.com.cn
+                jw2531@yeah.net
+                北京市海淀区学院南路55号基础软件事业部 100081  电话：62177728
+Motorola        a16723@email.mot.com
+                a11334@email.mot.com
+                北京市朝阳区东三环南路二号 摩托罗拉（中国）电子有限公司 100022  电话：65642288
+Ericsson        中国北京市朝阳区光华路7号汉威大厦9层 爱立信（中国）有限公司 企业咨询及品牌推广部 100004  电话：65615566
+CA              support china@cai.com
+                中国北京市朝阳区光华路1号 北京嘉里中心11层 冠群电脑（中国）有限公司  100020   电话：65611136 
+Yahoo           jobs-cn-engineer@yahoo-inc.com
+Cisco           china-academy-master@cisco.com
+                Chinese-tac@cisco.com
+                miliu@cisco.com
+                北京市东城区东长安街一号 东方广场东方经贸城东 Cisco公司 公关部收 电话:65267777 
+Siemens         haixia.yu@pek1.siemens.com.cn
+                xiaoping.sun@pek1.siemens.com.cn
+                haiping.zhou@pek1.siemens.com.cn
+                北京市朝阳区望京中环南路7号 西门子（中国）有限公司 公关部 收  电话：64721888
+Nortel          euroinfo@europem01.nt.com
+                ebusines@americasm01.nt.com
+                nortelr@americasm01.nt.com
+                nortel.response@nt.com
+LG              中国.北京朝阳区酒仙桥北路5号京物大厦5层 LG电子（中国）IT产品营销总部  100015  电话：64317493-96
+ACER            bjsro@acer.com.cn
+                service@acer.com.cn
+                webmaster@acercm.com.cn
+                service@acercm.com.cn
+                resume@acercm.com.cn
+Nokia研究中心   rdchina@nokia.com
+CTC             webmaster@ctc.org.cn
+                mail@ctc.org.cn 
+网大            webmaster@service.netbig.com
+SAP             q.tao@sap.com
+                北京市朝阳区光华路1号嘉里中心南楼12层  SAP 北京 公关部 收  100020  电话：65618868
+UTStarcom       info@utstar.com.cn
+                webmaster@utstar.com.cn
+用友            cyg@ufsoft.com.cn
+                webmaster@ufsoft.com.cn
+华硕            info@asus.com.cn
+                tsd@asus.com.cn
+金山            fangw@kingsoft.net
+                guohui@kingsoft.net
+                quli@bj.kingsoft.net
+                juli@kingsoft.net
+                dinglili@kingsoft.net
+                jinpeng@kingsoft.net
+                luyinghai@kingsoft.net
+                marketing@kingsoft.net
+

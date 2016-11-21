@@ -1,0 +1,35 @@
+
+   Post message:   linuxProgramming@egroups.com 
+   Subscribe:      linuxProgramming-subscribe@egroups.com  
+   Unsubscribe:    linuxProgramming-unsubscribe@egroups.com  
+
+
+   Post message:   lisoleg@egroups.com
+   Subscribe:      lisoleg-subscribe@egroups.com
+   Unsubscribe:    lisoleg-unsubscribe@egroups.com
+
+设立Linux讲座技术支持邮件列表
+
+设立与AKA Linux系列讲座相配合的技术支持邮件列表的设想由来已久，因为
+我们早已认识到仅仅有讲座这种单向传授的模式，对于Linux的学习和推广是
+远远不够的。我们希望通过邮件列表这种交互式更强的学习方式给广大Linux
+爱好者提供更多更好的帮助，希望每个人都能从中获得更大的提高，结交更多
+的朋友。
+
+AKA与LisoLeg（国内著名的Linux源码学习小组：http://www.lisoleg.org）
+共同建立本次系列讲座的技术支持邮件列表，使用方法如下：
+   在列表中发表文章:   lisoleg@egroups.com
+   订阅邮件列表:       lisoleg-subscribe@egroups.com
+   退订邮件列表:       lisoleg-unsubscribe@egroups.com
+以上订阅和退订都只需要向上述两个邮件地址发送一封任意标题、任意内容的
+电子邮件即可。LisoLeg邮件列表技术性强，当前订阅人数已达500人左右，相信
+该邮件列表可以较好的满足大家学习的要求。
+
+我们建立该技术支持邮件列表的本意是希望能够帮助Linux爱好者解决一些在编
+程和内核研究过程中遇到的一些问题，因此该邮件列表不欢迎其他方面的提问，
+包括Linux的安装、使用、服务器配置以及其他各种非编程和内核研究方面的问
+题；其次我们希望大家在提问时应该提供尽可能多的出错信息，并给出一些自己
+对该问题的分析，尽可能营造出一种研讨交流的环境，而不仅仅是单纯的提问与
+解答；最后我们必须声明，邮件列表是一个自由的群体，AKA组织以及LisoLeg小
+组不担保给所有问题都给出回答（当然我们会尽力帮助大家），自由的气氛需要
+大家共同营造。

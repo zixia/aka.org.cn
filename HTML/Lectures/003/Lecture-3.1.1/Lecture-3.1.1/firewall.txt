@@ -1,0 +1,724 @@
+					防火墙技术分析讲义
+					yawl@docshow.net
+					
+一 基本概念
+
+1.1 防火墙分类：
+	包过滤
+	代理（应用层网关）
+
+1.2 代理:
+
+	两个连接（browser与proxy之间,proxy与web server之间）。
+	工作在应用层。
+
+	直接发往服务器的包：
+	GET / HTTP/1.1
+	Accept:	*/*
+	Accept-Language: zh-cn
+	Accept-Encoding: gzip, deflate
+	User-Agent: Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)
+	Host: www.lisoleg.net
+	Connection: Keep-Alive
+		
+	往代理发出的包：							
+	GET http://www.lisoleg.net/ HTTP/1.1
+	Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/vnd.ms-powerpoint, application/msword, */*
+	Accept-Language: zh-cn
+	Accept-Encoding: gzip, deflate
+	If-Modified-Since: Thu, 14 Dec 2000 07:24:52 GMT
+	If-None-Match: "8026-185-3a3875c4"
+	User-Agent: Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)
+	Host: www.lisoleg.net
+	Proxy-Connection: Keep-Alive
+	
+	增强：
+	cache
+			
+1.3 包过滤
+	单IP包检测
+	缺陷：无状态
+
+1.4 增强1－状态检测（Stateful Inspection），又称动态包过滤(dynamic packet filtering)
+	1.4.1 规则表和动态状态表
+	
+	1.4.2 ftp的例子：
+	A 4847->B 21 PORT 192,168,7,60,18,241
+	B 21->A 4847 PORT command successful.
+	
+	B 20->A 4849 syn
+	> A classic example is transferring files using FTP. The firewall remembers the details of the 
+	> incoming request to get a file from an FTP server. The firewall then tracks the back-channel 
+	> request (the FTP Port command) by the server for transferring information back to the client. 
+	> As long as the information agrees (same IP addresses, no changes in port numbers, and no 
+	> non-FTP requests), the firewall allows the traffic. After the transfer is complete, the 
+	> firewall closes the ports involved.
+	
+	1.4.3 两种实现方法：
+	1.4.3.1 checkpoint FW1，netfilter
+	1.4.3.2 动态添加规则（ipchains patch）
+	> I believe it does exactly what I want: Installing a temporary
+       	> "backward"-rule to let packets in as a response to an
+       	> outgoing request.
+	
+
+1.5 增强2－地址转换:
+	1.5.1 静态NAT
+	1.5.2 动态NAT
+	1.5.3 地址伪装
+
+
+1.6 增强3-VPN:
+	位置的优越性
+
+二 Linux下防火墙的实现之一（2.2内核）：
+
+2.1 截获位置：
+	网络层
+	
+	          ----------------------------------------------------------------
+	          |            ACCEPT/                              lo interface |
+	          v           REDIRECT                  _______                  |
+	  --> C --> S --> ______ --> D --> ~~~~~~~~ -->|forward|----> _______ -->
+	      h     a    |input |    e    {Routing }   |Chain  |     |output |ACCEPT
+	      e     n    |Chain |    m    {Decision}   |_______| --->|Chain  |
+	      c     i    |______|    a     ~~~~~~~~        |     | ->|_______|
+	      k     t       |        s       |             |     | |     |
+	      s     y       |        q       |             v     | |     |
+	      u     |       v        e       v            DENY/  | |     v
+	      m     |     DENY/      r   Local Process   REJECT  | |   DENY/
+	      |     v    REJECT      a       |                   | |  REJECT
+	      |   DENY               d       --------------------- |
+	      v                      e -----------------------------
+	     DENY
+
+
+2.2 提炼出的代码：
+
+输入检测：
+	/*
+	 * 	Main IP Receive routine.
+	 */
+	int ip_rcv(struct sk_buff *skb, struct device *dev, struct packet_type *pt)
+	{
+	#ifdef	CONFIG_FIREWALL
+		int fwres;
+		u16 rport;
+	#endif /* CONFIG_FIREWALL */
+	
+	......
+	
+	#ifdef CONFIG_FIREWALL
+		/*
+		 *	See if the firewall wants to dispose of the packet. 
+		 *
+		 * We can't do ICMP reply or local delivery before routing,
+		 * so we delay those decisions until after route. --RR
+		 */
+		fwres = call_in_firewall(PF_INET, dev, iph, &rport, &skb);
+		if (fwres < FW_ACCEPT && fwres != FW_REJECT)
+			goto drop;
+		iph = skb->nh.iph;
+	#endif /* CONFIG_FIREWALL */
+	
+	......
+	
+	#ifdef CONFIG_FIREWALL
+		if (fwres == FW_REJECT) {
+			icmp_send(skb, ICMP_DEST_UNREACH, ICMP_PORT_UNREACH, 0);
+			goto drop;
+		}
+	#endif /* CONFIG_FIREWALL */
+	
+		return skb->dst->input(skb); //根据路由查找的结果决定是转发(ip_forward)还是发往上层(ip_local_deliver)
+	drop:
+	        kfree_skb(skb);	//如果规则匹配的结果是FW_REJECT，FW_BLOCK，丢弃此包
+	        return(0);
+	
+	}
+
+转发检测：
+	int ip_forward(struct sk_buff *skb)
+	{
+	...
+	#ifdef CONFIG_FIREWALL
+			fw_res=call_fw_firewall(PF_INET, dev2, iph, NULL, &skb);
+			switch (fw_res) {
+			case FW_ACCEPT:
+			case FW_MASQUERADE:
+				break;
+			case FW_REJECT:
+				icmp_send(skb, ICMP_DEST_UNREACH, ICMP_HOST_UNREACH, 0);
+				/* fall thru */
+			default:
+				kfree_skb(skb);
+				return -1;
+			}
+	#endif
+	...
+	}
+
+输出检测：（不同的上层协议走不同的流程，因此检测点较多）
+	UDP/RAW/ICMP报文:ip_build_xmit
+	TCP报文:ip_queue_xmit
+	转发的包：ip_forward
+	其他：ip_build_and_send_pkt
+
+
+实际的匹配：
+	/*
+	 *	Returns one of the generic firewall policies, like FW_ACCEPT.
+	 *
+	 *	The testing is either false for normal firewall mode or true for
+	 *	user checking mode (counters are not updated, TOS & mark not done).
+	 */
+	static int 
+	ip_fw_check(struct iphdr *ip, 		//IP头位置
+		    const char *rif,		//出口网卡的名字
+		    __u16 *redirport,		//端口转发时用到
+		    struct ip_chain *chain,	//规则链的名字
+		    struct sk_buff *skb,	//要检测的数据包
+		    unsigned int slot,		
+		    int testing)		//见函数本身的注释
+
+调用举例：
+	call_in_firewall实际调用ipfw_input_check，而ipfw_input_check中有：
+	int ipfw_input_check(struct firewall_ops *this, int pf, struct device *dev, 
+			     void *phdr, void *arg, struct sk_buff **pskb)
+	{
+		return ip_fw_check(phdr, dev->name,
+				   arg, IP_FW_INPUT_CHAIN, *pskb, SLOT_NUMBER(), 0);
+	}
+
+实际流程：
+
+	ip_fw_check
+	{
+		从传入的skb参数中提取源地址src,目的地址dst，源端口src_port,目的端口dst_port，
+		TCP发起连接标志tcpsyn，分片包位移offset，IP包TOS消息oldtos；
+		
+		......  
+		
+		f = chain->chain;	//取出规则链的的一条规则,规则链由chain参数传入
+		count = 0;		
+		do {
+			for (; f; f = f->next) {	//遍历规则链中的规则，直到匹配（ip_rule_match返回1）
+				count++;
+				if (ip_rule_match(f,rif,ip,
+						  tcpsyn,src_port,dst_port,offset)) {
+					if (!testing
+					    && !ip_fw_domatch(f, ip, rif, chain->label,//作些标记，一般返回1
+							      skb, slot, 
+							      src_port, dst_port,
+							      count, tcpsyn)) {
+						ret = FW_BLOCK;
+						goto out;
+					}
+					break;
+				}
+			}
+			if(f) { //找到匹配规则
+	
+				......
+	
+			}else { //这次遍历根本没找到
+				是从别的地方跳转过来的，则转回去，然后继续遍历；
+				否则应用这条链的缺省规则; 
+			}	
+			
+		} while (ret == FW_SKIP+2);	 
+	out:
+	
+		......
+		
+		return ret;
+	}
+
+
+碎片：
+	根据第一个片的消息进行过滤，其他分片则允许通过。如果规则是丢弃的话，虽然后面的分片都可到达主机，
+	但由于第一片被滤掉了，无法重组成功，因此从效果上也相当于整个IP包被丢弃。
+
+	存在的漏洞等.
+
+
+
+2.3 规则：
+
+	from 192.168.7.0/24 to 192.168.6.32/32 tcp 80 BLOCK
+
+
+
+规则的数据结构表示:
+
+
+	规则链
+	struct ip_chain
+	{
+		ip_chainlabel label;	    /* Defines the label for each block */
+	 	struct ip_chain *next;	    /* Pointer to next block */
+		struct ip_fwkernel *chain;  /* Pointer to first rule in block */
+		__u32 refcount; 	    /* Number of refernces to block */
+		int policy;		    /* Default rule for chain.  Only *
+					     * used in built in chains */
+		struct ip_reent reent[0];   /* Actually several of these */
+	};
+	
+	规则
+	struct ip_fwkernel
+	{
+		struct ip_fw ipfw;
+		struct ip_fwkernel *next;	/* where to go next if current
+						 * rule doesn't match */
+		struct ip_chain *branch;	/* which branch to jump to if
+						 * current rule matches */
+		int simplebranch;		/* Use this if branch == NULL */
+		struct ip_counters counters[0]; /* Actually several of these */
+	};
+	 
+	待匹配的数据包消息
+	struct ip_fw 
+	{
+		struct in_addr fw_src, fw_dst;		/* Source and destination IP addr */
+		struct in_addr fw_smsk, fw_dmsk;	/* Mask for src and dest IP addr */
+		__u32 fw_mark;                          /* ID to stamp on packet */
+		__u16 fw_proto;                         /* Protocol, 0 = ANY */
+		__u16 fw_flg;			        /* Flags word */
+	        __u16 fw_invflg;                        /* Inverse flags */
+		__u16 fw_spts[2];                       /* Source port range. */
+	        __u16 fw_dpts[2];                       /* Destination port range. */
+		__u16 fw_redirpt;                       /* Port to redirect to. */ 
+		__u16 fw_outputsize;                    /* Max amount to output to
+							   NETLINK */
+		char           fw_vianame[IFNAMSIZ];	/* name of interface "via" */
+		__u8           fw_tosand, fw_tosxor;	/* Revised packet priority */
+	}; 
+
+
+
+
+2.4 地址转换
+	ip_fw_demasquerade 
+	ip_fw_masquerade 
+
+
+三 Linux下防火墙的实现之二（2.4内核）：
+3.1
+	A Packet Traversing the Netfilter System:  
+	 
+	 --->PRE------>[ROUTE]--->FWD---------->POST------>
+	       Conntrack    |       Filter   ^    NAT (Src)
+	       Mangle       |                |    Conntrack
+	       NAT (Dst)    |             [ROUTE]
+	       (QDisc)      v                |
+	                    IN Filter       OUT Conntrack
+	                    |  Conntrack     ^  Mangle
+	                    |                |  NAT (Dst)
+	                    v                |  Filter
+
+
+3.2 例子
+	
+## Insert connection-tracking modules (not needed if built into kernel).
+# insmod ip_conntrack
+# insmod ip_conntrack_ftp
+
+## Create chain which blocks new connections, except if coming from inside.
+# iptables -N block
+# iptables -A block -m state --state ESTABLISHED,RELATED -j ACCEPT
+# iptables -A block -m state --state NEW -i ! ppp0 -j ACCEPT
+# iptables -A block -j DROP
+
+## Jump to that chain from INPUT and FORWARD chains.
+# iptables -A INPUT -j block
+# iptables -A FORWARD -j block
+
+3.3 规则的描述
+	一条规则分为三部分：
+	struct ipt_entry	//主要用来匹配IP头
+	struct ip_match	//额外的匹配（tcp头，mac地址等）
+	struct ip_target	//除缺省的动作外（如ACCEPT，DROP），可以增加新的（如REJECT）。
+
+3.4 代码提炼
+
+ip_input.c:
+	/*
+	 * 	Main IP Receive routine.
+	 */ 
+	int ip_rcv(struct sk_buff *skb, struct net_device *dev, struct packet_type *pt)
+	{
+	...
+	return NF_HOOK(PF_INET, NF_IP_PRE_ROUTING, skb, dev, NULL,
+			       ip_rcv_finish);
+	...
+	}
+
+netfilter.h:
+	#ifdef CONFIG_NETFILTER
+	#define NF_HOOK(pf, hook, skb, indev, outdev, okfn)			\
+	(list_empty(&nf_hooks[(pf)][(hook)])					\
+	 ? (okfn)(skb)								\
+	 : nf_hook_slow((pf), (hook), (skb), (indev), (outdev), (okfn)))
+	#else /* !CONFIG_NETFILTER */
+	#define NF_HOOK(pf, hook, skb, indev, outdev, okfn) (okfn)(skb)
+	#endif /*CONFIG_NETFILTER*/
+
+大的框架："HOOK表"：
+	struct list_head nf_hooks[NPROTO][NF_MAX_HOOKS];	//netfilter.c
+	通过nf_register_hook和nf_unregister_hook完成添加删除工作，nf_iterate负责执行hook上的函数。
+ 	
+ 	增加用户自定义的HOOK，参见【8】，【10】：
+ 
+重要流程（建议结合netfilter hacking howto 4.1.3来看）：
+/* Returns one of the generic firewall policies, like NF_ACCEPT. */
+unsigned int
+ipt_do_table(struct sk_buff **pskb,
+	     unsigned int hook,
+	     const struct net_device *in,
+	     const struct net_device *out,
+	     struct ipt_table *table,
+	     void *userdata)
+{
+	struct ipt_entry *e;
+	struct ipt_entry_target *t;
+	unsigned int verdict = NF_DROP;
+	
+	table_base = (void *)table->private->entries
+		+ TABLE_OFFSET(table->private,
+			       cpu_number_map(smp_processor_id()));
+	e = get_entry(table_base, table->private->hook_entry[hook]);
+	
+	...
+	ip_packet_match(ip, indev, outdev, &e->ip, offset);
+	
+	...
+	IPT_MATCH_ITERATE(e, do_match, *pskb, in, out, offset, protohdr, datalen, &hotdrop)
+	
+	...
+	t = ipt_get_target(e);
+	
+	...
+	verdict = t->u.kernel.target->target(pskb, hook, in, out, t->data, userdata);//非标准的target走这一步
+	
+	...
+	return verdict;
+}	      	
+ 
+要加强对这段话的理解(netfilter hacking howto 4.1节) ：
+>iptables does not register with any netfilter hooks: it relies on
+>other modules to do that and feed it the packets as appropriate; a
+>module must register the netfilter hooks and ip_tables separately, and
+>provide the mechanism to call ip_tables when the hook is reached.
+
+四 Linux下防火墙的实现之三（checkpoint FW1）
+
+让我们看看checkpoint的在linux上的防火墙是如何实现的，最终我们会发现，竟然和lkm使用的手段差不多：）
+
+fw1通过dev_add_pack的办法加载输入过滤函数，但是在net_bh()中，传往网络层的skbuff是克隆的,即
+skb2=skb_clone(skb, GFP_ATOMIC);
+if(skb2)				
+	pt_prev->func(skb2, skb->dev, pt_prev);	
+而fw1是怎么解决这个问题的呢？见下面的代码：	
+
+输入一：
+	
+	; 哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪?
+			align 4
+	
+	; 圹圹圹圹圹圹圹?S U B	R O U T	I N E 圹圹圹圹圹圹圹圹圹圹圹圹圹圹圹圹圹圹圹?
+	
+	; Attributes: bp-based frame
+	
+			public fwinstallin
+	fwinstallin	proc near		; CODE XREF: fwinstall+E9p
+						; fwinstall+149p
+	
+	var_18		= byte ptr -18h
+	arg_0		= dword	ptr  8
+	
+			push	ebp
+			mov	ebp, esp
+			sub	esp, 10h
+			push	esi
+			push	ebx
+			mov	esi, ds:dev_base
+			cmp	[ebp+arg_0], 0
+			jz	short loc_0_802CBD0
+			add	esp, 0FFFFFFF4h
+			push	offset fw_ip_packet_type
+			call	dev_add_pack
+			mov	ebx, fw_ip_packet_type+10h	;如果考虑字节对齐问题的话fw_ip_packet_type+10h这时应该是ip_packet_type
+			mov	dword ptr ds:fw_type_list, ebx
+			jmp	short loc_0_802CB9C
+	; 哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪?
+			align 4
+	
+	loc_0_802CB90:				; CODE XREF: fwinstallin+41j
+			add	esp, 0FFFFFFF4h
+			push	ebx
+			call	dev_remove_pack		;fw1把ip_packet_type歇载掉了，然后自己在自己的处理函数(fw_filterin)中调ip_recv
+			mov	ebx, [ebx+10h]
+	
+	loc_0_802CB9C:				; CODE XREF: fwinstallin+2Dj
+			add	esp, 10h
+			test	ebx, ebx
+			jnz	short loc_0_802CB90
+			test	esi, esi
+			jz	short loc_0_802CC14
+	
+	loc_0_802CBA7:				; CODE XREF: fwinstallin+68j
+			test	byte ptr fwdebug, 81h
+			jz	short loc_0_802CBC3
+			add	esp, 0FFFFFFF8h
+			mov	eax, [esi]
+			push	eax
+			push	offset aFwinstallinS ; "fwinstallin: %s\n"
+			call	fwkdebug_printf
+			add	esp, 10h
+	
+	loc_0_802CBC3:				; CODE XREF: fwinstallin+4Ej
+			mov	esi, [esi+28h]
+			test	esi, esi
+			jnz	short loc_0_802CBA7
+			jmp	short loc_0_802CC14
+	; 哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪?
+			align 8
+	
+	loc_0_802CBD0:				; CODE XREF: fwinstallin+12j
+			cmp	dword ptr ds:fw_type_list, 0
+			jz	short loc_0_802CC14
+			add	esp, 0FFFFFFF4h
+			push	offset fw_ip_packet_type
+			call	dev_remove_pack
+			add	esp, 10h
+			cmp	dword ptr ds:fw_type_list, 0
+			jz	short loc_0_802CC14
+	
+	loc_0_802CBF2:				; CODE XREF: fwinstallin+B2j
+			add	esp, 0FFFFFFF4h
+			mov	eax, dword ptr ds:fw_type_list
+			push	eax
+			call	dev_add_pack
+			mov	eax, dword ptr ds:fw_type_list
+			add	esp, 10h
+			mov	eax, [eax+10h]
+			mov	dword ptr ds:fw_type_list, eax
+			test	eax, eax
+			jnz	short loc_0_802CBF2
+	
+	loc_0_802CC14:				; CODE XREF: fwinstallin+45j
+						; fwinstallin+6Aj ...
+			lea	esp, [ebp+var_18]
+			xor	eax, eax
+			pop	ebx
+			pop	esi
+			mov	esp, ebp
+			pop	ebp
+			retn
+	fwinstallin	endp	
+	
+输入二：
+	public fw_ip_packet_type
+	fw_ip_packet_type dd 8,	0, offset fw_filterin, 2 dup(0)	; DATA XREF: fwinstallin+17o
+
+
+输出的挂载和lkm的手法一样，更改dev->hard_start_xmit。dev结构在2.2版本的发展过程中变了一次，
+为了兼容fw1对这点也做了处理。
+	
+	
+输出一：
+	; 哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪?
+			align 4
+	
+	; 圹圹圹圹圹圹圹?S U B	R O U T	I N E 圹圹圹圹圹圹圹圹圹圹圹圹圹圹圹圹圹圹圹?
+	
+	; Attributes: bp-based frame
+	
+			public fwinstallout
+	fwinstallout	proc near		; CODE XREF: fwinstall+FBp
+						; fwinstall+153p
+	
+	var_18		= byte ptr -18h
+	arg_0		= dword	ptr  8
+	
+			push	ebp
+			mov	ebp, esp
+			sub	esp, 0Ch
+			push	edi
+			push	esi
+			push	ebx
+			mov	edi, [ebp+arg_0]
+			xor	esi, esi
+			mov	ebx, ds:dev_base
+			jmp	short loc_0_802D0A8
+	; 哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪?
+	
+	loc_0_802D096:				; CODE XREF: fwinstallout+50j
+			add	esp, 0FFFFFFFCh
+			push	edi
+			push	esi
+			push	ebx
+			call	installout_on_device
+			add	esp, 10h
+			mov	ebx, [ebx+28h]
+			inc	esi
+	
+	loc_0_802D0A8:				; CODE XREF: fwinstallout+14j
+			test	ebx, ebx
+			jz	short loc_0_802D0F8
+			test	byte ptr fwdebug, 81h
+			jz	short loc_0_802D0CD
+			xor	eax, eax
+			mov	ax, [ebx+50h]
+			push	eax
+			mov	eax, [ebx]
+			push	eax
+			push	esi
+			push	offset aFwinstalloutIn ; "fwinstallout:	interface %d: name=%s, fl"...
+			call	fwkdebug_printf
+			add	esp, 10h
+	
+	loc_0_802D0CD:				; CODE XREF: fwinstallout+33j
+			cmp	esi, 3Fh
+			jle	short loc_0_802D096
+			add	esp, 0FFFFFFF8h
+			push	40h
+			push	offset aFw1CanOnlyHand ; "FW-1:	Can only handle	%d interfaces\n"
+			call	fwkdebug_printf
+			add	esp, 10h
+			test	edi, edi
+			jz	short loc_0_802D0F8
+			add	esp, 0FFFFFFF4h
+			push	offset aFw1NotAllInter ; "FW-1:	Not all	interfaces installed\n"
+			call	fwkdebug_printf
+			add	esp, 10h
+	
+	loc_0_802D0F8:				; CODE XREF: fwinstallout+2Aj
+						; fwinstallout+66j
+			mov	fw_nif,	esi
+			test	byte ptr fwdebug, 81h
+			jz	short loc_0_802D124
+			add	esp, 0FFFFFFFCh
+			mov	eax, offset aUn	; "un"
+			test	edi, edi
+			jz	short loc_0_802D118
+			mov	eax, offset unk_0_80687E4
+	
+	loc_0_802D118:				; CODE XREF: fwinstallout+91j
+			push	eax
+			push	esi
+			push	offset aFw1DInterfaces ; "FW-1:	%d interfaces %sinstalled\n"
+			call	fwkdebug_printf
+	
+	loc_0_802D124:				; CODE XREF: fwinstallout+85j
+			lea	esp, [ebp+var_18]
+			xor	eax, eax
+			pop	ebx
+			pop	esi
+			pop	edi
+			mov	esp, ebp
+			pop	ebp
+			retn
+	fwinstallout	endp	
+	
+输出二：	
+	
+	
+	
+	; 哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪?
+			align 10h
+	
+	; 圹圹圹圹圹圹圹?S U B	R O U T	I N E 圹圹圹圹圹圹圹圹圹圹圹圹圹圹圹圹圹圹圹?
+	
+	; Attributes: bp-based frame
+	
+			public installout_on_device
+	installout_on_device proc near		; CODE XREF: fwinstallout+1Cp
+	
+	var_18		= byte ptr -18h
+	var_4		= dword	ptr -4
+	arg_0		= dword	ptr  8
+	arg_4		= dword	ptr  0Ch
+	arg_8		= dword	ptr  10h
+	
+			push	ebp
+			mov	ebp, esp
+			sub	esp, 0Ch
+			push	edi
+			push	esi
+			push	ebx
+			mov	edi, [ebp+arg_0]
+			mov	esi, [ebp+arg_4]
+			mov	ebx, [ebp+arg_8]
+			add	esp, 0FFFFFFF4h
+			push	edi
+			call	xmit_func_addr
+			mov	[ebp+var_4], eax
+			add	esp, 10h
+			test	ebx, ebx
+			jz	short loc_0_802CFD4
+			mov	ebx, esi
+			shl	ebx, 4
+			cmp	(oftab+4)[ebx],	0
+			jz	short loc_0_802CF90
+			add	esp, 0FFFFFFF4h
+			push	offset aFw1OutputFilte ; "FW-1:	Output filter already installed\n"
+			call	fwkdebug_printf
+			mov	eax, 6Ah
+			jmp	loc_0_802D074	
+			
+输出三：			
+			
+	; 哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪哪?
+			align 8
+	
+	; 圹圹圹圹圹圹圹?S U B	R O U T	I N E 圹圹圹圹圹圹圹圹圹圹圹圹圹圹圹圹圹圹圹?
+	
+	; Attributes: bp-based frame
+	
+			public xmit_func_addr
+	xmit_func_addr	proc near		; CODE XREF: installout_on_device+16p
+	
+	arg_0		= dword	ptr  8
+	
+			push	ebp
+			mov	ebp, esp
+			mov	edx, [ebp+arg_0]
+			lea	eax, [edx+0ACh]
+			cmp	kver, 0Dh
+			jle	short loc_0_802CB5B
+			lea	eax, [edx+0B0h]
+	
+	loc_0_802CB5B:				; CODE XREF: xmit_func_addr+13j
+			mov	esp, ebp
+			pop	ebp
+			retn
+	xmit_func_addr	endp			
+
+FW1与linux的一些比较，可以参看参考文献【11】
+
+
+五 参考文献
+	【1】了解Check Point FW-1状态表
+		http://magazine.nsfocus.com/detail.asp?id=538
+	【2】A Stateful Inspection of FireWall-1
+		http://www.dataprotect.com/bh2000/
+	【3】Linux IPCHAINS-HOWTO
+		http://www.linuxdoc.org	
+	【4】防火墙新生代：Stateful－inspection	
+		http://www.liuxuan.com/safe/anquan/html/firewall/04.htm
+	【5】netfilter站点上的文档	
+		http://netfilter.kernelnotes.org	
+	【6】Application Gateways and Stateful Inspection:A Brief Note Comparing and Contrasting	
+		http://www.avolio.com/apgw+spf.html	
+	【7】Internet Firewalls:Frequently Asked Questions	
+		http://www.interhack.net/pubs/fwfaq
+	【8】Writing a Module for netfilter 	
+		http://www.linux-mag.com/2000-06/gear_01.html
+	【9】ipchains的源代码分析 
+		http://www.lisoleg.net/lisoleg/network/ipchains.zip
+	【10】内核防火墙netfilter入门
+		http://magazine.nsfocus.com/detail.asp?id=637
+	【11】Check Point Firewall-1 on Linux, Part Two
+		http://www.securityfocus.com/frames/?focus=linux&content=/focus/linux/articles/checkpoint2.html		
+	

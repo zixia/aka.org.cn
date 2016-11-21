@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=GB2312">
+    <TITLE>CORBA Introduction</TITLE>
+</HEAD>
+<BODY>
+<P><A HREF="GTK-prog.html">上一页</A>
+<A HREF="Corba-prog.html">下一页</A>
+<P><B><FONT SIZE=+3>GNOME CORBA简介</FONT></B><P>
+<P><B><FONT SIZE=+2>What's CORBA?</FONT></B><P>
+CORBA(Common Object Request Broker Architecture)是一组标准，用来定义“分布式对象系统”，由OMG(Object Menagement Group)作为发起和标准制定单位。OMG由700多家公司和单位组成，几乎包括了所有有影响的公司。CORBA的目的是定义一套协议，符合这个协议的对象可以互相交互，不论它们是用什么样的语言写的，不论它们运行于什么样的机器和操作系统。
+<P>
+例如一个用C实现的对象Apple有一个方法eat，运行在NT机器host1上，我从一台Linux机器host2上，用Ada写了一个程序Boy，这个程序可以调用对象Apple的方法eat，并获得执行结果，而无须关心它是在本地还是在host1上。
+<P>
+为了达到这个目标，CORBA制定了一套对象间通信的协议。通信介质被称为ORB(Object Request Broker)，它负责在对象之间传递消息。如果对象在同一台机器上，ORB可以采用一些IPC技术来优化消息的传递，如果在不同的机器上，则使用IIOP或GIOP协议(可以建立在任何网络通信协议之上)。IIOP(Internet Inter-ORB Protocol)就是基于IP协议，为方便Internet上的CORBA应用而设计的。
+<P>
+ORB是CORBA应用的基础，不同的公司可以开发出不同的ORB。但由于大家使用相同的通信协议，因此基于不同ORB实现的应用之间可以无缝通信。如下图：
+<P><CENTER><IMG SRC="orb.gif"><P>图1：ORB通信</CENTER><P>
+注意，这里的stub类似与DCOM中的proxy，而这里的skeleton则类似与DCOM中的stub。
+<P>CORBA为了真正做到分布式的对象系统，仅有一个ORB是远远不够的。CORBA还必须定义大量的对象和伪对象才能满足分布式的对象系统下程序员的要求。其中主要包括两大类：
+<UL><P><LI>Corba Services：naming services(帮助client找到它需要的对象)；security services(对象的认证，通信安全等)；license serivices(控制用户对软件的使用)等等。目前一共有16个services，但一般的CORB系统仅实现了其中的一到两个；</LI><P>
+<P><LI>Corba facilities：这是建立在CORBA Services之上的大量的对象实现，主要用于特定的工业部门，如电信，医药，法律等等。</LI><P></UL>
+<P><B>CORBA与其它分布式技术的区别和比较</B>
+<P>RMI，DCOM，RPC，socket，Q3 etc。
+<P><B><FONT SIZE=+2>IDL简介</FONT></B><P>
+<P>为了能让不同语言(机器环境，操作系统)下的对象对象之间可以对话，需要一套共同语言。IDL就是专门为此而制定的。IDL(Interface Definition Language)看起来非常类似与C++(或Java)的头文件定义。它与DCOM下的IDL并不是一回事，但可以想象，它们非常接近。
+<P>IDL定义了一个对象支持的方法和属性，一个对象的实现只要符合这个定义，可以完全自由开发，例如，你可以用任何你喜欢的语言。给出一个对象的IDL文件，其它对象就完全掌握了这个对象的行为，可以按照自己的意图随意操纵。
+<P>另外IDL不仅仅是让人看的，IDL编译器可以编译它，替程序员自动生成sub和skeleton，使得程序员从这项难堪的工作中解脱出来。
+<P><B>IDL的例子</B><P>
+<P>IDL作为一种语言，为了实现强移植性，因而也是强类型的。
+<PRE>
+module FruitsBasket {       				//module类似于namespace
+	exception no_more_fruits {			//exception for catching
+		string reason;
+	};
+
+	interface Apple {    				 //interface定义了一个接口，类似于class
+		attribute string color;                 //attribute定义变量
+		const float weight = 2.3;               //const定义常量
+		const string type = "sample type";
+		void eat_me (inout boolean eat_yes_or_not ) raises ( no_more_fruits );  //raise exception
+		oneway boolean eaten ();				//oneway是异步执行
+		boolean who_ate ( out string who_surname, out string who_name ); //out
+	};
+	interface Orange {
+		attribute float size;
+	};
+	interface RedApple : Apple {			//inheritance 
+		//something specific to red apple
+	}
+};
+</PRE>
+<P>IDL支持多重继承，但不支持重载和同一个方法不同的签名。
+
+<P><A HREF="GTK-prog.html">上一页</A>
+<A HREF="Corba-prog.html">下一页</A><P>
+</BODY>
+</HTML>

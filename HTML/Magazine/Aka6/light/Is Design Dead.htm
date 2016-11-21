@@ -1,0 +1,509 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0052)http://www.martinfowler.com/articles/designDead.html -->
+<HTML><HEAD><TITLE>Is Design Dead?</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META content="MSHTML 5.50.4134.600" name=GENERATOR></HEAD>
+<BODY>
+<HR>
+
+<H1 align=center>Is Design Dead?</H1>
+<HR>
+
+<P align=center><A href="http://www.martinfowler.com/"><B><BIG>Martin 
+Fowler</BIG></B></A> <BR>Chief Scientist , <A 
+href="http://www.thoughtworks.com/">ThoughtWorks</A> </P><A 
+href="http://www.esm.co.jp/eXtremeProgramming/IsDesignDead.html"><IMG 
+alt="Japanese Transalation" src="Is Design Dead.files/jp-tran.gif" border=0></A> 
+
+<P><I>For many that come briefly into contact with Extreme Programming, it seems 
+that XP calls for the death of software design. Not just is much design activity 
+ridiculed as "Big Up Front Design", but such design techniques as the UML, 
+flexible frameworks, and even patterns are de-emphasized or downright ignored. 
+In fact XP involves a lot of design, but does it in a different way than 
+established software processes. XP has rejuvenated the notion of evolutionary 
+design with practices that allow evolution to become a viable design strategy. 
+It also provides new challenges and skills as designers need to learn how to do 
+a simple design, how to use refactoring to keep a design clean, and how to use 
+patterns in an evolutionary style. </I></P>
+<P>(This paper was written for my keynote at <A 
+href="http://www.martinfowler.com/articles/xp2000.html">XP 2000</A> conference 
+and will be published as part of the proceedings.) </P>
+<UL>
+  <LI><A href="http://www.martinfowler.com/articles/designDead.html#N57">Planned 
+  and Evolutionary Design</A> 
+  <LI><A href="http://www.martinfowler.com/articles/designDead.html#N96">The 
+  Enabling Practices of XP</A> 
+  <LI><A href="http://www.martinfowler.com/articles/designDead.html#N127">The 
+  Value of Simplicity</A> 
+  <LI><A href="http://www.martinfowler.com/articles/designDead.html#N157">What 
+  on Earth is Simplicity Anyway</A> 
+  <LI><A href="http://www.martinfowler.com/articles/designDead.html#N217">Does 
+  Refactoring Violate YAGNI?</A> 
+  <LI><A 
+  href="http://www.martinfowler.com/articles/designDead.html#N235">Patterns and 
+  XP</A> 
+  <LI><A href="http://www.martinfowler.com/articles/designDead.html#N276">UML 
+  and XP</A> 
+  <LI><A href="http://www.martinfowler.com/articles/designDead.html#N344">On 
+  Metaphor</A> 
+  <LI><A href="http://www.martinfowler.com/articles/designDead.html#N364">So is 
+  Design Dead?</A> 
+  <LI><A 
+  href="http://www.martinfowler.com/articles/designDead.html#N388">Acknowledgements</A> 
+  </LI></UL>
+<P><A href="http://www.extremeprogramming.org/">Extreme Programming </A>(XP) 
+challenges many of the common assumptions about software development. Of these 
+one of the most controversial is its rejection of significant effort in up-front 
+design, in favor of a more evolutionary approach. To its detractors this is a 
+return to "code and fix" development - usually derided as hacking. To its fans 
+it is often seen as a rejection of design techniques (such as the UML), 
+principles and patterns. Don't worry about design, if you listen to your code a 
+good design will appear.</P>
+<P>I find myself at the center of this argument. Much of my career has involved 
+graphical design languages - the Unified Modeling Language (UML) and its 
+forerunners - and in patterns. Indeed I've written books on both the UML and 
+patterns. Does my embrace of XP mean I recant all of what I've written on these 
+subjects, cleansing my mind of all such counter-revolutionary notions?</P>
+<P>Well I'm not going to expect that I can leave you dangling on the hook of 
+dramatic tension. The short answer is no. The long answer is the rest of 
+paper.</P><A name=N57></A>
+<H2>Planned and Evolutionary Design</H2>
+<P>For this paper I'm going to describe two styles how design is done in 
+software development. Perhaps the most common is evolutionary design. 
+Essentially evolutionary design means that the design of the system grows as the 
+system is implemented. Design is part of the programming processes and as the 
+program evolves the design changes.</P>
+<P>In its common usage, evolutionary design is a disaster. The design ends up 
+being the aggregation of a bunch of ad-hoc tactical decisions, each of which 
+makes the code harder to alter. In many ways you might argue this is no design, 
+certainly it usually leads to a poor design. As Kent puts it, design is there to 
+enable you to keep changing the software easily in the long term. As design 
+deteriorates, so does you ability to make changes effectively. You have the 
+state of software entropy, over time the design gets worse and worse. Not only 
+does this make the software harder to change, it also makes bugs both easier to 
+breed and harder to find and safely kill. This is the "code and fix" nightmare, 
+where the bugs become exponentially more expensive to fix as the project goes 
+on.</P>
+<P>Planned Design is a counter to this, and contains a notion born from other 
+branches of engineering. If you want to build a doghouse, you can just get some 
+wood together and get a rough shape. However if you want to build a skyscraper, 
+you can't work that way - it'll just collapse before you even get half way up. 
+So you begin with engineering drawings, done in an engineering office like the 
+one my wife works at in downtown Boston. As she does the design she figures out 
+all the issues, partly by mathematical analysis, but mostly by using building 
+codes. Building codes are rules about how you design structures based on 
+experience of what works (and some underlying math). Once the design is done, 
+then her engineering company can hand the design off to another company that 
+builds it.</P>
+<P>Planned design in software should work the same way. Designers think out the 
+big issues in advance. They don't need to write code because they aren't 
+building the software, they are designing it. So they can use a design technique 
+like the UML that gets away from some of the details of programming and allows 
+the designers to work at a more abstract level. Once the design is done they can 
+hand it off to a separate group (or even a separate company) to build. Since the 
+designers are thinking on a larger scale, they can avoid the series of tactical 
+decisions that lead to software entropy. The programmers can follow the 
+direction of the design and, providing they follow the design, have a well built 
+system</P>
+<P>Now the planned design approach has been around since the 70s, and lots of 
+people have used it. It is better in many ways than code and fix evolutionary 
+design. But it has some faults. The first fault is that it's impossible to think 
+through all the issues that you need to deal with when you are programming. So 
+it's inevitable that when programming you will find things that question the 
+design. However if the designers are done, moved onto another project, what 
+happens? The programmers start coding around the design and entropy sets in. 
+Even if the designer isn't gone, it takes time to sort out the design issues, 
+change the drawings, and then alter the code. There's usually a quicker fix and 
+time pressure. Hence entropy (again).</P>
+<P>Furthermore there's often a cultural problem. Designers are made designers 
+due to skill and experience, but they are so busy working on designs they don't 
+get much time to code any more. However the tools and materials of software 
+development change at a rapid rate. When you no longer code not just can you 
+miss out on changes that occur with this technological flux, you also lose the 
+respect of those who do code. </P>
+<P>This tension between builders and designers happens in building too, but it's 
+more intense in software. It's intense because there is a key difference. In 
+building there is a clearer division in skills between those who design and 
+those who build, but in software that's less the case. Any programmer working in 
+high design environments needs to be very skilled. Skilled enough to question 
+the designer's designs, especially when the designer is less knowledgeable about 
+the day to day realities of the development platform.</P>
+<P>Now these issues could be fixed. Maybe we can deal with the human tension. 
+Maybe we can get designers skillful enough to deal with most issues and have a 
+process disciplined enough to change the drawings. There's still another 
+problem: changing requirements. Changing requirements are the number one big 
+issue that causes headaches in software projects that I run into. </P>
+<P>One way to deal with changing requirements is to build flexibility into the 
+design so that you can easily change it as the requirements change. However this 
+requires insight into what kind of changes you expect. A design can be planned 
+to deal with areas of volatility, but while that will help for foreseen 
+requirements changes, it won't help (and can hurt) for unforeseen changes. So 
+you have to understand the requirements well enough to separate the volatile 
+areas, and my observation is that this is very hard.</P>
+<P>Now some of these requirements problems are due to not understanding 
+requirements clearly enough. So a lot of people focus on requirements 
+engineering processes to get better requirements in the hope that this will 
+prevent the need to change the design later on. But even this direction is one 
+that may not lead to a cure. Many unforeseen requirements changes occur due to 
+changes in the business. Those can't be prevented, however careful your 
+requirements engineering process.</P>
+<P>So all this makes planned design sound impossible. Certainly they are big 
+challenges. But I'm not inclined to claim that planned design is worse that 
+evolutionary design as it is most commonly practiced in a "code and fix" manner. 
+Indeed I prefer planned design to "code and fix". However I'm aware of the 
+problems of planned design and am seeking a new direction.</P><A name=N96></A>
+<H2>The Enabling Practices of XP</H2>
+<P>XP is controversial for many reasons, but one of the key red flags in XP is 
+that it advocates evolutionary design rather than planned design. As we know, 
+evolutionary design can't possibly work due to ad hoc design decisions and 
+software entropy.</P>
+<P>At the core of understanding this argument is the software change curve. The 
+change curve says that as the project runs, it becomes exponentially more 
+expensive to make changes. The change curve is usually expressed in terms of 
+phases "a change made in analysis for $1 would cost thousands to fix in 
+production". This is ironic as most projects still work in an ad-hoc process 
+that doesn't have an analysis phase, but the exponentiations is still there. The 
+exponential change curve means that evolutionary design cannot possibly work. It 
+also conveys why planned design must be done carefully because any mistakes in 
+planned design face the same exponentiation.</P>
+<P>The fundamental assumption underlying XP is that is possible to flatten the 
+change curve enough to make evolutionary design work. This flattening is both 
+enabled by XP and exploited by XP. This is part of the coupling of the XP 
+practices: specifically you can't do those parts of XP that exploit the 
+flattened curve without doing those things that enable the flattening. This is a 
+common source of the controversy over XP. Many people criticize the exploitation 
+without understanding the enabling. Often the criticisms stem from critics' own 
+experience where they didn't do the enabling practices that allow the exploiting 
+practices to work. As a result they got burned and when they see XP they 
+remember the fire. </P>
+<P>There are many parts to the enabling practices. At the core are the practices 
+of Testing, and Continuous Integration. Without the safety provided by testing 
+the rest of XP would be impossible. Continuous Integration is necessary to keep 
+the team in sync, so that you can make a change and not be worried about 
+integrating it with other people. Together these practices can have a big effect 
+on the change curve. I was reminded of this again here at ThoughtWorks. 
+Introducing testing and continuous integration had a marked improvement on the 
+development effort. Certainly enough to seriously question the XP assertion that 
+you need all the practices to get a big improvement.</P>
+<P>Refactoring has a similar effect. People who refactor their code in the 
+disciplined manner suggested by XP find a significant difference in their 
+effectiveness compared to doing looser, more ad-hoc restructuring. That was 
+certainly my experience once Kent had taught me to refactor properly. After all, 
+only such a strong change would have motivated me to write a whole book about 
+it.</P>
+<P>Jim Highsmith, in his excellent <A 
+href="http://www.cutter.com/ead/ead0002.html">summary of XP</A>, uses the 
+analogy of a set of scales. In one tray is planned design, the other is 
+refactoring. In more traditional approaches planned design dominates because the 
+assumption is that you can't change your mind later. As the cost of change 
+lowers then you can do more of your design later as refactoring. Planned design 
+does not go away completely, but there is now a balance of two design approaches 
+to work with. For me it feels like that before refactoring I was doing all my 
+design one-handed.</P>
+<P>These enabling practices of continuous integration, testing, and refactoring, 
+provide a new environment that makes evolutionary design plausible. However one 
+thing we haven't yet figured out is where the balance point is. I'm sure that, 
+despite the outside impression, XP isn't just test, code, and refactor. There is 
+room for designing before coding. Some of this is before there is any coding, 
+most of it occurs in the iterations before coding for a particular task. But 
+there is a new balance between up-front design and refactoring. </P><A 
+name=N127></A>
+<H2>The Value of Simplicity</H2>
+<P>Two of the greatest rallying cries in XP are the slogans "Do the Simplest 
+Thing that Could Possibly Work" and "You Aren't Going to Need It" (known as 
+YAGNI). Both are manifestations of the XP practice of Simple Design.</P>
+<P>The way YAGNI is usually described, it says that you shouldn't add any code 
+today which will only be used by feature that is needed tomorrow. On the face of 
+it this sounds simple. The issue comes with such things as frameworks, resuable 
+components, and flexible design. Such things are complicated to build. You pay 
+an extra up-front cost to build them, in the expectation that you will gain back 
+that cost later. This idea of building flexibility up-front is seen as a key 
+part of effective software design.</P>
+<P>However XP's advice is that you not build flexible components and frameworks 
+for the first case that needs that functionality. Let these structures grow as 
+they are needed. If I want a Money class today that handles addition but not 
+multiplication then I build only addition into the Money class. Even if I'm sure 
+I'll need multiplication in the next iteration, and understand how to do it 
+easily, and think it'll be really quick to do, I'll still leave it till that 
+next iteration.</P>
+<P>One reason for this is economic. If I have to do any work that's only used 
+for a feature that's needed tomorrow, that means I lose effort from features 
+that need to be done for this iteration. The release plan says what needs to be 
+worked on now, working on other things in the future is contrary to the 
+developers agreement with the customer. There is a risk that this iteration's 
+stories might not get done. Even if this iteration's stories are not at risk 
+it's up to the customer to decide what extra work should be done - and that 
+might still not involve multiplication.</P>
+<P>This economic disincentive is compounded by the chance that we may not get it 
+right. However certain we may be about how this function works, we can still get 
+it wrong - especially since we don't have detailed requirements yet. Working on 
+the wrong solution early is even more wasteful than working on the right 
+solution early. And the XPerts generally belive that we are much more likely to 
+be wrong than right (and I agree with that sentiment.)</P>
+<P>The second reason for simple design is that it is contrary to the principle 
+of traveling light. A complex design is more difficult to understand than a 
+simple design. Therefore any modification of the system is made harder by added 
+complexity. This adds a cost during the period between when the more complicated 
+design was added and when it was needed.</P>
+<P>Now this advice strikes a lot of people as nonsense, and they are right to 
+think that. Right providing that you imagine the usual development world where 
+the enabling practices of XP aren't in place. However when the balance between 
+planned and evolutionary design alters, then YAGNI becomes good practice (and 
+only then).</P>
+<P>So to summarize. You don't want to spend effort adding new capability that 
+won't be needed until a future iteration. And even if the cost is zero, you 
+still don't want to it because it increases the cost of modification even if it 
+costs nothing to put in. However you can only sensibly behave this way when you 
+are using XP, or a similar technique that lowers the cost of change.</P><A 
+name=N157></A>
+<H2>What on Earth is Simplicity Anyway</H2>
+<P>So we want our code to be as simple as possible. That doesn't sound like 
+that's too hard to argue for, after all who wants to be complicated? But of 
+course this begs the question "what is simple?" </P>
+<P>In <A 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0201616416">XPE</A> 
+Kent gives four criteria for a simple system. In order (most important 
+first):</P>
+<UL>
+  <LI>Runs all the Tests 
+  <LI>Reveals all the intention 
+  <LI>No duplication 
+  <LI>Fewest number of classes or methods</LI></UL>
+<P>Running all the tests is a pretty simple criterion. No duplication is also 
+pretty straightforward, although a lot of developers need guidance on how to 
+achieve it. The tricky one has to do with revealing the intention. What exactly 
+does that mean?</P>
+<P>The basic value here is clarity of code. XP places a high value on code that 
+is easily read. In XP "clever code" is a term of abuse. But some people's 
+intention revealing code is another's cleverness.</P>
+<P>In his XP 2000 paper, Josh Kerievsky points out a good example of this. He 
+looks at possibly the most public XP code of all - <A 
+href="http://www.xprogramming.com/software.htm">JUnit</A>. JUnit uses decorators 
+to add optional functionality to test cases, such things as concurrency 
+synchronization and batch set up code. By separating out this code into 
+decorators it allows the general code to be clearer than it otherwise would 
+be.</P>
+<P>But you have to ask yourself if the resulting code is really simple. For me 
+it is, but then I'm familiar with the Decorator pattern. But for many that 
+aren't it's quite complicated. Similarly JUnit uses pluggable methods which I've 
+noticed most people initially find anything but clear. So might we conclude that 
+JUnit's design is simpler for experienced designers but more complicated for 
+less experienced people?</P>
+<P>I think that the focus on eliminating duplication, both with XP's "Once and 
+Only Once" and the <A 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=020161622X">Pragmatic 
+Programmer's</A> DRY (Don't Repeat Yourself) is one of those obvious and 
+wonderfully powerful pieces of good advice. Just following that alone can take 
+you a long way. But it isn't everything, and simplicity is still a complicated 
+thing to find.</P>
+<P>Recently I was involved in doing something that may well be over-designed. It 
+got refactored and some of the flexibility was removed. But as one of the 
+developers said "it's easier to refactor over-design than it is to refactor no 
+design." It's best to be a little simpler than you need to be, but it isn't a 
+disaster to be a little more complex.</P>
+<P>The best advice I heard on all this came from Uncle Bob (Robert Martin). His 
+advice was not to get too hung up about what the simplest design is. After all 
+you can, should, and will refactor it later. In the end the willingness to 
+refactor is much more important than knowing what the simplest thing is right 
+away.</P><A name=N217></A>
+<H2>Does Refactoring Violate YAGNI?</H2>
+<P>This topic came up on the XP mailing list recently, and it's worth bringing 
+out as we look at the role of design in XP.</P>
+<P>Basically the question starts with the point that refactoring takes time but 
+does not add function. Since the point of YAGNI is that you are supposed to 
+design for the present not for the future, is this a violation?</P>
+<P>The point of YAGNI is that you don't add complexity that isn't needed for the 
+current stories. This is part of the practice of simple design. Refactoring is 
+needed to keep the design as simple as you can, so you should refactor whenever 
+you realize you can make things simpler.</P>
+<P>Simple design both exploits XP practices and is also an enabling practice. 
+Only if you have testing, continuous integration, and refactoring can you 
+practice simple design effectively. But at the same time keeping the design 
+simple is essential to keeping the change curve flat. Any unneeded complexity 
+makes a system harder to change in all directions except the one you anticipate 
+with the complex flexibility you put in. However people aren't good at 
+anticipating, so it's best to strive for simplicity. However people won't get 
+the simplest thing first time, so you need to refactor in order get closer to 
+the goal.</P><A name=N235></A>
+<H2>Patterns and XP</H2>
+<P>The JUnit example leads me inevitably into bringing up patterns. The 
+relationship between patterns and XP is interesting, and it's a common question. 
+Joshua Kerievsky argues that patterns are under-emphasized in XP and he makes 
+the argument eloquently , so I don't want to repeat that. But it's worth bearing 
+in mind that for many people patterns seem in conflict to XP.</P>
+<P>The essence of this argument is that patterns are often over-used. The world 
+is full of the legendary programmer, fresh off his first reading of <A 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0201633612">GOF 
+</A>who includes sixteen patterns in 32 lines of code. I remember one evening, 
+fueled by a very nice single malt, running through with Kent a paper to be 
+called "Not Design Patterns: 23 cheap tricks" We were thinking of such things as 
+use an if statement rather than a strategy. The joke had a point, patterns are 
+often overused, but that doesn't make them a bad idea. The question is how you 
+use them.</P>
+<P>One theory of this is that the forces of simple design will lead you into the 
+patterns. Many refactorings do this explicitly, but even without them by 
+following the rules of simple design you will come up with the patterns even if 
+you don't know them already. This may be true, but is it really the best way of 
+doing it? Surely it's better if you know roughly where you're going and have a 
+book that can help you through the issues instead of having to invent it all 
+yourself. I certainly still reach for GOF whenever I feel a pattern coming on. 
+For me effective design argues that we need to know the price of a pattern is 
+worth paying - that's its own skill. Similarly, as Joshua suggests, we need to 
+be more familiar about how to ease into a pattern gradually. In this regard XP 
+treats the way we use patterns differently to the way some people use them, but 
+certainly doesn't remove their value.</P>
+<P>But reading some of the mailing lists I get the distinct sense that many 
+people see XP as discouraging patterns, despite the irony that most of the 
+proponents of XP were leaders of the patterns movement too. Is this because they 
+have seen beyond patterns, or because patterns are so embedded in their thinking 
+that they no longer realize it? I don't know the answers for others, but for me 
+patterns are still vitally important. XP may be a process for development, but 
+patterns are a backbone of design knowledge, knowledge that is valuable whatever 
+your process may be. Different processes may use patterns in different ways. XP 
+emphasizes both not using a pattern until it's needed and evolving your way into 
+a pattern via a simple implementation. But patterns are still a key piece of 
+knowledge to acquire.</P>
+<P>My advice to XPers using patterns would be</P>
+<UL>
+  <LI>Invest time in learning about patterns 
+  <LI>Concentrate on when to apply the pattern (not too early) 
+  <LI>Concentrate on how to implement the pattern in its simplest form first, 
+  then add complexity later. 
+  <LI>If you put a pattern in, and later realize that it isn't pulling its 
+  weight - don't be afraid to take it out again.</LI></UL>
+<P>I think XP should emphasize learning about patterns more. I'm not sure how I 
+would fit that into XP's practices, but I'm sure Kent can come up with a 
+way.</P><A name=N276></A>
+<H2>UML and XP</H2>
+<P>Of all the questions I get about my involvement with XP one of the biggest 
+revolves around my association with the UML. Aren't the two incompatible?</P>
+<P>There are a number of points of incompatibility. Certainly XP de-emphasizes 
+diagrams to a great extent. Although the official position is along the lines of 
+"use them if they are useful", there is a strong subtext of "real XPers don't do 
+diagrams". This is reinforced by the fact that people like Kent aren't at all 
+comfortable with diagrams, indeed I've never seen Kent voluntarily draw a 
+software diagram in any fixed notation</P>
+<P>I think the issue comes from two separate causes. One is the fact that some 
+people find software diagrams helpful and some people don't. The danger is that 
+those who do think that those who don't should do and vice-versa. Instead we 
+should just accept that some people will use diagrams and some won't.</P>
+<P>The other issue is that software diagrams tend to get associated with a 
+heavyweight process. Such processes spend a lot of time drawing diagrams that 
+don't help and can actually cause harm. So I think that people should be advised 
+how to use diagrams well and avoid the traps, rather than the "only if you must 
+(wimp)" message that usually comes out of the XPerts.</P>
+<P>So here's my advice for using diagrams well.</P>
+<P>First keep in mind what you're drawing the diagrams for. The primary value is 
+communication. Effective communication means selecting important things and 
+neglecting the less important. This selectivity is the key to using the UML 
+well. Don't draw every class - only the important ones. For each class, don't 
+show every attribute and operation - only the important ones. Don't draw 
+sequence diagrams for all use cases and scenarios - only... you get the picture. 
+A common problem with the common use of diagrams is that people try to make them 
+comprehensive. The code is the best source of comprehensive information, as the 
+code is the easiest thing to keep in sync with the code. For diagrams 
+comprehensiveness is the enemy of comprehensibility.</P>
+<P>A common use of diagrams is to explore a design before you start coding it. 
+Often you get the impression that such activity is illegal in XP, but that's not 
+true. Many people say that when you have a sticky task it's worth getting 
+together to have a quick design session first. However when you do such 
+sessions: 
+<UL>
+  <LI>keep them short 
+  <LI>don't try to address all the details (just the important ones) 
+  <LI>treat the resulting design as a sketch, not as a final design </LI></UL>
+<P></P>
+<P>The last point is worth expanding. When you do some up-front design, you'll 
+inevitably find that some aspects of the design are wrong, and you only discover 
+this when coding. That's not a problem providing that you then change the 
+design. The trouble comes when people think the design is done, and then don't 
+take the knowledge they gained through the coding and run it back into the 
+design. </P>
+<P>Changing the design doesn't necessarily mean changing the diagrams. It's 
+perfectly reasonable to draw diagrams that help you understand the design and 
+then throw the diagrams away. Drawing them helped, and that is enough to make 
+them worthwhile. They don't have to become permanent artifacts. The best UML 
+diagrams are not artifacts.</P>
+<P>A lot of XPers use CRC cards. That's not in conflict with UML. I use a mix of 
+CRC and UML all the time, using whichever technique is most useful for the job 
+at hand.</P>
+<P>Another use of UML diagrams is on-going documentation. In its usual form this 
+is a model residing on a case tool. The idea is that keeping this documentation 
+helps people work on the system. In practice it often doesn't help at all. 
+<UL>
+  <LI>it takes too long to keep the diagrams up to date, so they fall out of 
+  sync with the code 
+  <LI>they are hidden in a CASE tool or a thick binder, so nobody looks at 
+  them</LI></UL>
+<P></P>
+<P>So the advice for on-going documentation runs from these observed problems: 
+<UL>
+  <LI>Only use diagrams that you can keep up to date without noticeable pain 
+  <LI>Put the diagrams where everyone can easily see them. I like to post them 
+  on a wall. Encourage people to edit the wall copy with a pen for simple 
+  changes. 
+  <LI>Pay attention to whether people are using them, if not throw them 
+  away.</LI></UL>
+<P></P>
+<P>The last aspect of using UML is for documentation in a handover situation, 
+such as when one group hands over to another. Here the XP point is that 
+producing documentation is a story like any other, and thus its business value 
+is determined by the customer. Again the UML is useful here, providing the 
+diagrams are selective to help communication. Remember that the code is the 
+repository of detailed information, the diagrams act to summarize and highlight 
+important issues. </P><A name=N344></A>
+<H2>On Metaphor</H2>
+<P>Okay I might as well say it publicly - I still haven't got the hang of this 
+metaphor thing. I saw it work, and work well on the C3 project, but it doesn't 
+mean I have any idea how to do it, let alone how to explain how to do it. </P>
+<P>The XP practice of Metaphor is built on Ward Cunninghams's approach of a 
+system of names. The point is that you come up with a well known set of names 
+that acts as a vocabulary to talk about the domain. This system of names plays 
+into the way you name the classes and methods in the system</P>
+<P>I've build a system of names by building a conceptual model of the domain. 
+I've done this with the domain experts using UML or its predecessors. I've found 
+you have to be careful doing this. You need to keep to a minimal simple set of 
+notation, and you have to guard against letting any technical issues creeping 
+into the model. But if you do this I've found that you can use this to build a 
+vocabulary of the domain that the domain experts can understand and use to 
+communicate with developers. The model doesn't match the class designs 
+perfectly, but it's enough to give a common vocabulary to the whole domain.</P>
+<P>Now I don't see any reason why this vocabulary can't be a metaphorical one, 
+such as the C3 metaphor that turned payroll into a factory assembly line. But I 
+also don't see why basing your system of names on the vocabulary of the domain 
+is such a bad idea either. Nor am I inclined to abandon a technique that works 
+well for me in getting the system of names.</P>
+<P>Often people criticize XP on the basis that you do need at least some outline 
+design of a system. XPers often respond with the answer "that's the metaphor". 
+But I still don't think I've seen metaphor explained in a convincing manner. 
+This is a real gap in XP, and one that the XPers need to sort out. </P><A 
+name=N364></A>
+<H2>So is Design Dead?</H2>
+<P>Not by any means, but the nature of design has changed. XP design looks for 
+the following skills 
+<UL>
+  <LI>A constant desire to keep code as clear and simple as possible 
+  <LI>Refactoring skills so you can confidently make improvements whenever you 
+  see the need. 
+  <LI>A good knowledge of patterns: not just the solutions but also appreciating 
+  when to use them and how to evolve into them. 
+  <LI>Knowing how to communicate the design to the people who need to understand 
+  it, using code, diagrams and above all: conversation.</LI></UL>
+<P></P>
+<P>That's a fearsome selection of skills, but then being a good designer has 
+always been tough. XP doesn't really make it any easier, at least not for me. 
+But I think XP does give us a new way to think about effective design because it 
+has made evolutionary design a plausible strategy again. And I'm a big fan of 
+evolution - otherwise who knows what I might be?</P><A name=N388></A>
+<H2>Acknowledgements</H2>
+<P>Over the last couple of years I've picked up and stolen many good ideas from 
+many good people. Most of these are lost in the dimness of my memory. But I do 
+remember pinching good ideas from Joshua Kerievski. I also remember many helpful 
+comments from Fred George and Ron Jeffries. I also cannot forget how many good 
+ideas keep coming from Ward and Kent.</P>
+<P>I'm always grateful for those that ask questions and spot typos. So my thanks 
+to Craig Jones for letting me know where I was missing a. </P>
+<HR>
+
+<P>&copy; <SMALL>Copyright <A href="http://www.martinfowler.com/">Martin Fowler</A>, 
+all rights reserved</SMALL> </P></BODY></HTML>

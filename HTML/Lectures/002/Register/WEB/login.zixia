@@ -1,0 +1,58 @@
+[*
+my( $error ) = ();
+$error = 0;
+if( $ENV{REQUEST_METHOD} eq "POST" ){
+	use DBI;
+	my( $dbh, $sth );
+	$dbh = DBI->connect( "DBI:mysql:database=aka;host=localhost", 'aka', 'flying/aka' ) or die "connect!" ;
+	$sth = $dbh->prepare( q{
+		SELECT UserID, Password FROM StudentList_TB
+			WHERE UserID=? AND Password=?
+		}) or die "prepare";
+	$sth->execute( $fdat{UserID}, $fdat{Password} ) or die "execute";
+	if( $sth->fetchrow_array ){
+		#%udat = ();
+		$udat{AkaID} = $fdat{UserID};
+		#%fdat = ();
+#print "<h1>udat{AkaID}: $udat{AkaID}, fdat{UserID}: $fdat{UserID}</h1>";
+        	$http_headers_out{'Location'} = "edit.zixia?action=edit&rr=" . rand(100);
+	}else{
+		undef $udat{AkaID};
+		$error = 1;
+	}
+}else{
+        $error = 0;
+}
+*]
+[- Execute('head') -] 
+[+ $Zixia::t->index() +]
+<br>
+[- Execute('index') -]
+<br>
+[+ $Zixia::t->misc() +]
+<p>
+[+ $Zixia::t->content() +]
+<br>
+<h2>Aka讲座报名（2000年秋季学期）<br><font color=red>[+ $error?"对不起，登陆失败":undef +]</font></h2>
+<form method="post" action="login.zixia?[+ rand(100) +]">
+  <p> <br>
+  </p>
+  <table width="75%" border="0" cellspacing="0" cellpadding="0">
+    <tr> 
+      <td>ID：</td>
+      <td> 
+        <input type="text" name="UserID" maxlength="16">
+        </td>
+    </tr>
+    <tr> 
+      <td>密码：</td>
+      <td> 
+        <input type="password" name="Password" maxlength="16">
+        </td>
+    </tr>
+  </table>
+  <br>
+  <input type="submit" value="修改登记课程">
+</form>
+<br>
+[- Execute('end') -]

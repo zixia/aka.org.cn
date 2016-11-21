@@ -1,0 +1,1905 @@
+<!-- BBS2HTML[877079778] Areicle by wcf@CCCA.NCTU.edu.tw  -->
+<HTML><HEAD><TITLE>¡ó Perl-CGI  ³£ÎÊÎÊÌâ¼¯</TITLE></HEAD>
+<BODY background="(null)" bgcolor=#000000 text=#ddffdd vlink=#ffff00 link=#ffff11>
+<center><H1>¡ó Perl-CGI  ³£ÎÊÎÊÌâ¼¯</H1>
+<table><tr><td><pre><hr>·¢ĞÅÈË: hsiao@uconnvm.uconn.edu, ĞÅÇø: programming
+±ê  Ìâ: Perl-CGI  ³£ÎÊÎÊÌâ¼¯ -- part1
+·¢ĞÅÕ¾: 2 Tigers (Fri Jun 20 16:02:02 1997)
+×ªĞÅÕ¾: cis_nctu!news.cis.nctu!UUserv.Net.tw!aidebbs!news.yzit!news.ncu!ctu-pe
+À´  Ô´: times.oneway.net
+
+±¾ Perl-CGI ³£ÎÊÎÊÌâ¼¯´¿ÎÄ×Ö°æÒÔ²»¶¨ÆÚ·½Ê½ÔÚ tw.bbs.comp.www ¼°
+tw.bbs.comp.language
+Á½¸öĞÂÎÅÌÖÂÛÈº×éÉÏµÇÔØ¡£±¾ÎÄµÄ³¬ÎÄ¼ş°æ¼°½ñááµÚÒ»ÊÖ
+ĞÂ°æ×ÊÁÏ¿É×ÔÁ½Ö»ÀÏ»¢¹¤×÷ÊÒÈ¡µÃ£¬Î»Ö·Îª£º
+&lt<A HREF="http://www.opim.uconn.edu/~2T/perl/perl-cgi-faq-chi/&gt">http://www.opim.uconn.edu/~2T/perl/perl-cgi-faq-chi/&gt</A>¡£±¾´¿ÎÄ×Ö°æÖĞ
+ÄÚÈİÈôÓĞºÍ³¬ÎÄ¼ş°æ²»Ò»ÖÂÖ®´¦£¬Ò»ÇĞ¾ùÒÔááÕßÎª×¼¡£±¾ FAQ TANet µÄ mirror
+£¨Õâ¸öÓ³Éäµã¿ÉÄÜ»¹ÒªµÈ¼¸Ìì²Å»á×¼±¸ºÃ£©Î»ì¶£º
+<A HREF="ftp://www.math.ncu.edu.tw/pub/staff/chenym/FAQ/Perl/">ftp://www.math.ncu.edu.tw/pub/staff/chenym/FAQ/Perl/</A> (anonymous FTP)
+ºÍ
+<A HREF="http://www.math.ncu.edu.tw/~chenym/FAQ/Perl/">http://www.math.ncu.edu.tw/~chenym/FAQ/Perl/</A>¡£Ì¨ÍåÉÌÒµÍøÂ·µÄ mirror
+ÔòÔÚ
+<A HREF="http://www.oneway.net/FAQ/perl/">http://www.oneway.net/FAQ/perl/</A>¡£
+
+ÒëÕß±àĞ´±¾ FAQ£¨³£ÎÊÎÊÌâ¼¯£©Ö®¶¯»ú£¨ºÍÆäËûĞÂÎÅÈº×é FAQ
+µÄÄ¿µÄ²¢ÎŞ¶şÖÂ£©£¬
+ÄËÓĞ¼øì¶ÏàÍ¬µÄÎÊÌâÔÚÌÖÂÛÈºÖĞÒ»ÔÙ³öÏÖ£¬Í½Ôö´ó¼ÒÈËÁ¦¡¢Æµ¿í£¬¼°Ê±¼äÉÏµÄÀË·Ñ£¬
+Òò´ËÏ£Íû½å´Ë FAQ
+£¬¶ÔĞí¶à·´¸²³öÏÖµÄÎÊÌâÌá³öÕıÈ·µÄ½â´ğ£¬²¢¼õÉÙ´íÎó×ÊÑ¶µÄ
+Á÷´«¡£ËùÒÔÒëÕßÔÚ´ËºôÓõÌÖÂÛÈºÖĞµÄĞÂÏÊÈËÔÚÑ¯ÎÊÓĞ¹Ø Perl-CGI
+Ò»ÀàÎÊÌâÖ®Ç°£¬
+ÎñÇë×ñÊØÍøÂ·Àñ½Ú (netiquette)£¬ÏÈ×Ô±¾ FAQ ÖĞÕÒÑ°½â´ğ¡£´ËÍâ±¾ FAQ
+ÒàÊÊºÏ
+×÷Îª¸öÈË½øĞŞ Perl-CGI ³ÌÊ½Éè¼ÆµÄ²ÄÁÏ¡£
+
+Îª·½±ã´¿ÎÄ×Ö°æ¶ÁÕßÆğ¼û£¬ËùÓĞ³¬ÎÄ¼ş°æÖĞËùº¬µÄ http ¼° ftp
+Á¬½Úµã¾ù¸½¼Óì¶
+ÊÊµ±´¦À¨ºÅÖĞ£¬µ«Î¨¶À Q1.5
+ÖĞµÄÊéÄ¿±íÀıÍâ£¨Òò±àÅÅ²»Ò×£©¡£Èô¶Ô±¾ÖĞÎÄ°æ³£ÎÊ
+ÎÊÌâ¼¯ÓĞÈÎºÎÎÊÌâ¼°Òâ¼û£¬Çë email ÒëÕß¡£
+
+Ô­ÎÄ°æ¡¢ÖĞÒë°æ°æÈ¨ÊÂÒË£¬Ïê¼ûµÚ 5 ²¿·İÎÄµ×£¨¸´ÖÆ¡¢×ªÔØÕßÎñ±Ø×ñÊØ£©¡£
+
+--Ïô°ÙÁä
+Pai-ling Hsiao &lthsiao@uconnvm.uconn.edu&gt
+
+-------- 8&lt ------- Cut Here ------- 8&lt --------
+
+
+ÖĞÎÄ°æ Perl CGI ³ÌÊ½Ğ´×÷³£ÎÊÎÊÌâ¼¯ (Perl CGI Programming FAQ)
+=============================================================
+
+°æ±¾£º 1.0
+
+Ô­ÎÄ×÷Õß£º
+      Shishir Gundavaram &ltshishir@ora.com&gt
+      Tom Christiansen &lttchrist@perl.com&gt
+
+ÖĞÒë¡¢²¹³ä£º
+      Ïô°ÙÁä &lthsiao@uconnvm.uconn.edu&gt
+
+°æÈ¨ÊÂÒË£º£¨¸´ÖÆ¡¢×ªÔØÕßÎñ±Ø×ñÊØ£©
+
+      This document, and all its parts, are Copyright (c) 1996,
+      Shishir Gundavaram and Tom Christiansen. All rights
+      reservered. Permisson to distribute this collection, in part
+      or full, via electronic means (emailed, posted or archived)
+      or printed copy are granted providing that no charges are
+      involved, reasonable attempt is made to use the most current
+      version, and all credits and copyright notices are retained.
+      Requests for other distribution rights, including
+      incorporation in commercial products, such as books,
+      magazine articles, or CD-ROMs should be made to either of
+      the authors.
+
+      ±¾ÎÄ¼şÖø×÷È¨Êôì¶ Shishir Gundavaram ¼° Tom Christiansen Ëù
+      ÓĞ£¬Copyright (C) 1996¡£ÔÚ²»Éæ¼°ÊÕ·ÑÓªÀû¡¢¾¡¿ÉÄÜµØÊ¹ÓÃ×îĞÂ
+      °æ£¬¼°ËùÓĞÖø×÷È¨¸æÊ¾±£³ÖÍêÕûµÄÇé¿öÏÂ£¬×÷ÕßÔÊĞíÈÎºÎÈËÍ¸¹ıµç
+      ×ÓĞÎÊ½£¨µç×ÓÓÊ¼ş¡¢ÌÖÂÛÈº²¼¸æ£¬»ò´æ·Å£©£¬»òÓ¡±í·½Ê½¶Ô±¾ÎÄ¼ş
+      ×÷ÍêÕû»ò²¿·İ·¢ĞĞ¡£ÈçÓû½«±¾ÎÄ¼ş×÷ÆäËû·½Ê½·¢ĞĞ£¬°üÀ¨½«±¾ÎÄ¼ş
+      ¸½¼Óì¶ÉÌÒµ²úÆ·£¬ÖîÈçÊé¼®¡¢ÔÓÖ¾ÎÄÕÂ£¬»ò¹âµúµÈÖ®ÖĞ£¬±ØĞëÊÂÏÈ¶Ô
+      ¶şÎ»×÷ÕßÆäÖĞÒ»ÈËÌá³öÇëÇó£¬ÒÔáçµÃĞí¿ÉÊÚÈ¨¡£
+
+      ±¾ÖĞÒë°æ¼°ÒëÕß²¹³ä²¿·İÖø×÷È¨ÊôÏô°ÙÁä¼°Á½Ö»ÀÏ»¢¹¤×÷ÊÒËùÓĞ£¬
+      Copyright (C) 1997¡£±¾ÖĞÒë°æ×ñÊØ²¢Ê¹ÓÃÓëÉÏÊöÔ­ÎÄ°æÏàÍ¬µÄÊ¹ÓÃ
+      Ìõ¿î·¢ĞĞ¡£
+
+---------------------------------------------------------------------------
+
+ÎÄÌåËµÃ÷£º
+
+1.
+ÒëÕßÒÑ¾ÍÔ­ÎÄÖĞÓïÑÉ²»Ïê¡¢×ÊÑ¶¹ıÊ±£¬»ò¿É×÷¶îÍâ²¹³äÖ®´¦¸½¼Ó×¢½â¡£ÕâĞ©×¢½â
+ ¾ùÒÔĞÇºÅ (*) ì¶ÊÊµ±´¦£¨Í¨³£Îª¾äÎ²£©±êÊ¾¡£Êµ¼ÊµÄËµÃ÷ÎÄ×ÖÔò´ó¶à½ôÁÚĞÇºÅ
+ ËùÔÚµÄ¶ÎÂä£¬×Ô³ÉÒ»¶Î¡£ËùÓĞ×¢½âÎÄ×Ö¾ùÒÔ¡¸¡¾ÒëÕß¡¿¡¹ÆğÍ·¡£
+2. ¡õÀıÖĞµÄ Perl ³ÌÊ½ÂëÒÑÓÉÒëÕßÊÊ¶È¼ÓÒÔ·­Òë¡¢È¥³ı¶àâÅµÄÀ¨»¡£¬²¢ÒÀ
+ perlstyle manpages ÖĞËù½¨ÒéµÄĞ´×÷¸ñÊ½¼°Ï°¹ßÉÔ×÷ĞŞÕû¡£
+
+---------------------------------------------------------------------------
+
+Ä¿Â¼£º
+
+1.0 £­ÈëÃÅ¼ò½é
+
+Q1.1:  ÎªÊ²÷áÎÒµÄ HTML page/form ĞèÒªÓÃ script£¿
+Q1.2:  CGI ¸÷´ú±íÊ²÷á£¿
+Q1.3:  µ½µ×Ê²÷á½Ğ script£¿ÎÒÄÜÄÃËüÀ´ÄÜ×öÊ²÷á£¿
+Q1.4:  Ê²÷áÊÇ Perl£¿ÎªÊ²÷áÓĞÄÇ÷á¶àÈËÓÃËüÀ´×ö CGI£¿
+Q1.5:  ÓĞÃ»ÓĞ½Ì CGI »ò Perl µÄÊé»òÊÇÏßÉÏ×ÊÁÏ£¿
+Q1.6:  ÊÇ²»ÊÇÓĞÕâ·½ÃæµÄÓÊµİÂÛÌ³ (mailing lists) »òĞÂÎÅÌÖÂÛÈº×é£¿
+Q1.7:  ÍøÂ·ÉÏÊÇ²»ÊÇÓĞ×¨ÃÅÊÕ²ØÓÊµİÂÛÌ³»òĞÂÎÅÌÖÂÛÈº×éµÄ posts µÄÕ¾£¿
+
+2.0 - Modules £¨Ä£×é£©
+
+Q2.1:  ÎÒÊÇ²»ÊÇ¸ÃÓÃ Perl CGI modules À´Ğ´ CGI scripts
+£¿×Ô¼º×ö²»ÊÇ±È½ÏÈİ
+    Ò×Âğ£¿
+Q2.2:  ÈçºÎÖªµÀÄ³¸ö module ¸ÃÔõ÷á¸öÓÃ·¨£¿
+Q2.3:  ÓĞÄÄĞ© Perl4 µÄ CGI »ò WWWµÄ libraries £¿
+Q2.4:  ÓĞÄÄĞ©¸ø Perl5 Ê¹ÓÃµÄ CGI modules£¿ÎÒ¸ÃÓÃÄÄ¸ö£¿ÎªÊ²÷á£¿
+Q2.5:  ÎªÊ²÷áÕâ÷á¶à perl CGI libraries ¶¼ÊÇ object-oriented
+£¨Îï¼şµ¼Ïò£©
+    µÄ£¿ÎÒ¶ÔÓÃÎï¼şµ¼ÏòÀ´Ğ´³ÌÊ½Ò»ÇÏ²»Í¨¡£ÄÑµÀ¾ÍÃ»ÓĞ¼òµ¥Ò»µã£¬¸ø²»»áÎï
+    ¼şµ¼ÏòµÄÈËÊ¹ÓÃµÄ libraries Âğ£¿Îï¼şµ¼ÏòÓĞ¶àÄÑ£¿
+
+3.0 - CGI Óë WWW Server
+
+Q3.1:  ÎÒµÄ Perl CGI ³ÌÊ½Òª·ÅÔÚÄÄÀïÖ´ĞĞ£¿cgi-bin
+Õâ¸öÄ¿Â¼ÊÇ×öÉõ÷áÓÃµÄ£¿
+Q3.2:  Ê²÷áÊÇµµ°¸Ê¹ÓÃÈ¨ÏŞ£¿ÔõÑù¸Ä£¿
+Q3.3:  Perl Ó¦¸Ã°²×°ÔÚÄÄÀï²Å¿ÉÒÔÖ´ĞĞËü£¿
+Q3.4:  ÎÒÎªÊ²÷áÒ»Ö±µÃµ½ ``Server: Error 500'' µÄÑ¶Ï¢£¿
+Q3.5:  ÎÒÊÔÖø´ò¿ªÒ»¸öµµ°¸£¬Ïë°Ñ×ÊÁÏ´¢´æÔÚÀïÍ·£¬µ«ÊÇ open() µÄÖ¸ÁîÊ§°Ü
+    ÁË¡£µ½µ×ÊÇÔõ÷á¸ãµÄ£¿
+
+4.0 £­³ÌÊ½Éè¼ÆÒÉÄÑÔÓÖ¢
+
+Q4.1:  ÎÒÏëÈÃ user ÌîµÄ form ×ÊÁÏ×Ô¶¯¼Ä¸øÎÒ£¬¸ÃÔõ÷á×ö£¿ÓĞÃ»ÓĞ¡õÀı£¿
+Q4.2:  ¸Õ²ÅÕâ¸öÓÃ form ËÍĞÅµÄ script ¿´ÆğÀ´ÓĞµãÄÑ¡£ÎªÊ²÷á²»Ç¬´àÓÃ
+    ``mailto: URL''£¬ÕâÑù user ÌîÈëµÄ×ÊÁÏ¾Í¿ÉÒÔ¼Ä¸øÎÒÁË£¿
+Q4.3:  ÎÒÒªÈçºÎÔÚ UNIX ÒÔÍâµÄÆ½Ì¨ÉÏ×ö Perl-CGI£¬Æ©Èç Mac¡¢MS-DOS¡¢
+    Windows ¼° NT£¿ÎÒµÄ Perl CGI ³ÌÊ½ÄÜ²»ÄÜÔÚÕâĞ©Æ½Ì¨Ö®¼ä»¥ÏàÒÆÖ²ÄØ£¿
+    ÄÜ²»ÄÜºÜÖ±½Ó£¬Ã»ÓĞÂé·³£¿ÎÒÔÚ UNIX Ö÷»úÉÏÓĞÕÊºÅ£¬µ«ÊÇ¶¼ÊÇÏÈÔÚ
+    Windows/Mac ÉÏ×ö¡£ÎÒÒªÈçºÎÔÚÎÒ×Ô¼ºµÄ»úÆ÷ÉÏ²âÊÔĞ´ºÃµÄ CGI scripts
+    £¿
+Q4.4:  ÔÚ Perl CGI ³ÌÊ½ÖĞ£¬STDERR £¨±ê×¼´íÎóÑ¶Ï¢)¡¢STDIN
+(±ê×¼ÊäÈë£©£¬ºÍ
+    STDOUT £¨±ê×¼Êä³ö£©¸÷ÊÇÁ¬µ½ºÎ´¦£¿
+Q4.5:  ÈçºÎĞ´¼ÆÊıÆ÷£¿
+Q4.6:  ÒªÈçºÎÓÃÒ»¸ö Perl µÄÈ¡´úÖ¸Áî½«ËùÓĞ HTML ±êÇ©´ÓÒ»·İÎÄ¼şÖĞÉ¾³ı£¿
+Q4.7:  ÒªÈçºÎÖªµÀÊÇË­£¯ÄÄÌ¨»úÆ÷£¯ÄÄ¸öä¯ÀÀÆ÷Ö´ĞĞÁËÎÒµÄ³ÌÊ½£¿
+Q4.8:  ÈË¼Ò¿´µÃµ½ÎÒµÄ Perl CGI
+³ÌÊ½Âğ£¿Èç¹ûÊÇÕâÑùµÄ»°£¬ÄÇ²»¾ÍÈÃËûÃÇÖªµÀ
+    ÎÒµÄ³ÌÊ½ÊÇÔõ÷áÔË×÷µÄÁË¡£ÕâÊÇ¸ö°²È«Â©¶´Âğ£¿ÎÒÒªÔõ÷á°ÑËüÒş²ØÆğÀ´£¿
+Q4.9:  ÎÒĞèÒª½«Õû¸ö Perl library ¶¼¸´ÖÆµ½ÎÒµÄ htdocs Ä¿Â¼µ×ÏÂÂğ£¿
+Q4.10:
+ÎÒÎªÊ²÷á²»¸Ã½ĞÊ¹ÓÃÕßÊäÈëËûÃÇµÄÃÜÂë»òÉí·İÖ¤×ÖºÅ»òĞÅÓÃ¿¨ºÅÂë£¿ÓĞÒ»
+    ¸ö TYPE=&quotpassword&quot ²»ÊÇ¾ÍÊÇÄÃÀ´×öÕâ¸öµÄÂğ£¿
+Q4.11: ÎÒÒªÈçºÎ²úÉú×¨ÃÅÌæ Netscape
+Éè¼ÆµÄÍøÒ³£¬ÒÔ±ğì¶ÊÀÉÏÆäËûµÄä¯ÀÀÆ÷£¿
+Q4.12: ÎªÊ²÷áÎÒµÄ system() Ëù²úÉúµÄ×ÊÁÏÊä³öË³Ğò²»¶Ô£¿
+Q4.13: ÎÒÌıËµ Netscape »áÖ§Ô® Java¡£ÕâÊÇ²»ÊÇËµÎÒÏÖÔÚµÃÆú Perl£¬¸ÄJava
+    ÁË£¿ÊÇ²»ÊÇ¸ÃÕâ÷á×ö£¿
+Q4.14: ÎÒÒªÈçºÎ¶ÁÈ¡»·¾³±äÊı£¿ÎªÊ²÷áËüÃÇÓĞÊ±ºò»á²»Ò»Ñù£¿
+Q4.15: ÎªÊ²÷áÎÒÊä³öµÄ×ÊÁÏ±»½ÁÂÒÁË£¨Èç ``b &lt a'' »á±»ÆÆ»µµô£©£¿
+Q4.16: ÎªÊ²÷áÎÒµÄPerl CGI ³ÌÊ½¿ÉÒÔÓÉÖ¸ÁîÁĞ£¬È´ÎŞ·¨´Óä¯ÀÀÆ÷È¥Ö´ĞĞ£¿
+Q4.17: ÎªÊ²÷áÎÒµÄ Perl CGI ³ÌÊ½ÄÜÅÜ£¬µ«ÊÇ²»»á°Ñ×ÊÁÏĞ´µ½µµ°¸ÖĞ£¿
+Q4.18: ÒªÈçºÎ×öÒ»¸ö»áÎ¬Ïµ×´Ì¬£¬»òÔÊĞí¡¾Í¬Ò»Ê¹ÓÃÕß¡¿¶à´ÎÁ¬ÏßµÄ form£¿
+Q4.19: Èç¹û²»´Óä¯ÀÀÆ÷È¥Ö´ĞĞÎÒµÄ CGI ³ÌÊ½£¬ÒªÈçºÎÌæËü³ı´í£¿
+Q4.20: Èç¹û²»¿¿&ltFORM&gt±êÇ©£¬ÒªÈçºÎ½Ğ³ö Perl CGI ³ÌÊ½£¿
+Q4.21: ÒªÈçºÎ±ÜÃâÅÔÈË²»ÏÈÌîÀ¸Î»¾ÍÖ´ĞĞÎÒµÄ form£¿ËûÃÇÎªÊ²÷áÒ»Ö±²»¶ÏÕâ÷á
+    ×ö£¿
+Q4.22: ÄÇĞ© server »ØÓ¦Âë (server response codes)
+ÊÇ¸ÉÊ²÷áÓÃµÄ£¿ÓĞÊ²÷áÒâ
+    Òå£¿
+Q4.23: ÎªÊ²÷á print &quotLocation: <A HREF="http://host/page.html\n&quot">http://host/page.html\n&quot</A> ²»
+work£¿ÓÖÎªÊ²
+    ÷áËüÖ» work Ò»´Î£¬µ«ËæááµÄ×ªÏò¾Í¶¼Åª´íÁËÄØ£¿
+Q4.24: ÒªÈçºÎÈÃ server ÔÚÃ¿¸ö HTML
+ÍøÒ³µÄµ×²¿¶¼×Ô¶¯¼ÓÉÏÒ»¸ö£º¡¸×î½ü¸üĞÂ
+    ÈÕÆÚ£º ...¡¹µÄ¸æÊ¾£¿»òÕß£¬ÊÇ²»ÊÇÖ»ÓĞ SSI µÄÍøÒ³²ÅÄÜÕâ÷á×ö£¿CGI ³Ì
+    Ê½µÄÈÕÆÚÒªÈçºÎÈ¡µÃ£¿
+Q4.25: Ê²÷áÑùµÄ³¡ºÏÏÂÒÔ Perl Ğ´ CGI ³ÌÊ½»áÏÔµÃÌ«Ğ¡Ìâ´ó×÷£¬ÒòÎªÓÃ shell
+    ¾Í¿ÉÒÔ×öµ½£¿¶øÊ²÷áÑùµÄ³¡ºÏ¶Ô Perl À´ËµÓÖ¹ıì¶À§ÄÑ£¿ÓÃ C++ ×öÕâÀàµÄ
+    ÊÂ²»ÊÇºÃµÃ¶àÂğ£¿ÄÇÓÃ C ÄØ£¿
+
+5.0 £­°²È«
+
+Q5.1:  ÒÔ Perl Ğ´³ÉµÄ CGI ³ÌÊ½ÊÇ²»ÊÇ²»ÈçÒÔ shell »ò C Ğ´µÄÀ´µÃ°²È«£¿
+Q5.2:  ÎÒ¸ÃÌØ±ğÁôÒâÄÄĞ©°²È«ÊÂÏî£¿
+Q5.3:  ÎªÊ²÷á´ó¼Ò¶¼Ëµ <A HREF="http://bigidiot.abuse-me.com/perl.exe?foo.pl">http://bigidiot.abuse-me.com/perl.exe?foo.pl</A>
+ÕâÑù
+    ºÜÎ£ÏÕ£¿»áÓĞ¶àÔã£¿
+Q5.4:  ÒªÈçºÎÔÚ³ÌÊ½ÖĞ°²È«µØÊ¹ÓÃÄæÏòÆ²ºÅ£¨backticks£¬&quot`&quot£©£¿Õâ÷á×ö£º
+    @ans = `grep'$user_field' some.file`; ÊÇ²»ÊÇÕæµÄ²»°²È«£¿
+Q5.5:  /$user_variable/ Õâ¸ö¾ä·¨ÊÇ²»ÊÇ Perl 5 ÖĞµÄÒ»¸ö°²È«Â©¶´£¿
+
+
+---------------------------------------------------------------------------
+
+1.0 £­ÈëÃÅ¼ò½é
+
+---------------------------------------------------------------------------
+
+Q1.1: ÎªÊ²÷áÎÒµÄ HTML page/form ĞèÒªÓÃ script£¿
+
+ÒòÎªÓĞµÄÊ±ºòÄúĞèÒªÔÚ HTML
+ÎÄ¼şÖĞÊ¹ÓÃ¶¯Ì¬×ÊÁÏ£¨·Ç¹Ì¶¨²»±äµÄ×ÊÁÏ£©¡£Õâ°üÀ¨ÁË
+ÈÕÆÚºÍÊ±¼äÕâÀàµÄ¼òµ¥×ÊÁÏ£¬»òÊÇÒ»¸öÏÔÊ¾¡¸ÄúÊÇµÚ xxx
+Î»·Ã¿Í¡¹µÄ¼ÆÊıÆ÷¡£µ«Ëü
+Ò²¿ÉÄÜ°üÀ¨¸ù¾İÊ¹ÓÃÕßÊäÈë¶øµÃ³öµÄ´ó±ıÍ¼£¯ÌõÍ³Í¼¡¢×ÊÁÏ¿âËÑÑ°²úÉúµÄ½á¹û£¬»ò¶¯
+»­µÈÕâÀàµÄ¶«Î÷¡£Òª×ö³öÏñÕâÑùµÄ¶«Î÷£¬ÄúÎ¨Ò»µÄ·½·¨ÊÇÊ¹ÓÃ CGI scripts
+£¨¾¡¹ÜÄú
+Ò²¿ÉÒÔÓ¦ÓÃ¿Í»§¶Ë³ÌÊ½£¬Èç Java ºÍ JavaScript
+À´´ïµ½Õâ¸öÄ¿µÄ£¬²»¹ıÄÇÓÖÊÇÍêÈ«
+²»Í¬µÄÒ»»ØÊÂ£¡£©¡£
+
+---------------------------------------------------------------------------
+
+Q1.2: CGI ¸÷´ú±íÊ²÷á£¿
+
+ÒÔÏÂÊÇÎÒµÄ±à¼­* Andy Oram (&lt<A HREF="http://jasper.ora.com/andyo&gt">http://jasper.ora.com/andyo&gt</A>) ºÍ Linda Mui
+(&lt<A HREF="http://pcnt1.ora.com&gt">http://pcnt1.ora.com&gt</A>) £¨ËûÃÇºÜ°ô£¡£©ËùĞ´µÄÒ»¶Î·Ç³£ºÃµÄÃèÊö£º
+
+     ¡¾ÒëÕß¡¿ÕâÊÇÔ­ÎÄµÄµÚÒ»×÷Õß Shishir G. Ö¸ËûËùĞ´µÄ CGI Programming
+     on the World Wide Web (&lt<A HREF="http://www.ora.com/info/cgi/&gt">http://www.ora.com/info/cgi/&gt</A>) Ò»ÊéµÄ±à
+     ¼­¡£
+
+     Common          ÏòÄúÈ·±£ CGI ¿ÉÒÔÊ¹ÓÃ¶àÖÖ³ÌÊ½ÓïÑÔ²¢ºÍ¶àÖÖ
+                     ²»Í¬µÄÏµÍ³»¥¶¯¡£ËüÈÃÄú×ÔÓÉÑ¡Ôñ´ïµ½Ä¿µÄµÄ·½
+                     ·¨£¬²»°ÑÄú°óËÀÔÚµ¥¶ÀÒ»ÖÖ×÷·¨Ö®ÏÂ*¡£
+     Gateway         ÌáÊ¾Äú CGI µÄÁ¦Á¿²»ÔÚì¶Ëü±¾ÉíËù×öµÄÊÂ£¬¶ø
+                     ÔÚì¶ËüÌá¹©ÁËÁ¬½áÆäËûÏµÍ³µÄÇ±Á¦£¬ÀıÈç×ÊÁÏ¿â
+                     ºÍÍ¼ĞÎÖÆÔìÆ÷¡£
+     Interface       Ö»ÊÇ±íÊ¾ CGI ¶ÔÈçºÎÉÆÓÃÆäÌØĞÔÌá¹©ÁËÃ÷È·µÄ
+                     ½ç¶¨£­»»¾ä»°Ëµ£¬Äú¿ÉÒÔÉè¼Æ³ÌÊ½À´ÊÊµ±ÀûÓÃÕâ
+                     ¸ö½éÃæ¡£
+
+          ¡¾ÒëÕß¡¿ËÆºõÓĞÓ°Éä Java Ö®Òâ¡£
+
+---------------------------------------------------------------------------
+
+Q1.3: µ½µ×Ê²÷á½Ğ script£¿ÎÒÄÜÄÃËüÀ´ÄÜ×öÊ²÷á£¿
+
+¼òµ¥µÄËµ£¬script
+¾ÍÊÇ³ÌÊ½£¡ºÃ°É¡¢ºÃ°É£¬Ó¦¸ÃËµ¶şÕßÓĞÓïÒâÉÏµÄ²î±ğ¡£Èç¹ûÄúÕæ
+µÄÏëÖªµÀ£¬ÄÇ÷áÈ¥ÂòÒ»±¾µçÄÔ³ÌÊ½Éè¼ÆµÄÊéÀ´¿´£¨»òĞí¸ÃËµ script Éè¼Æ :-)
+£©¡£
+
+Äú¿ÉÒÔ½åÖøĞ´ CGI ³ÌÊ½/script
+±äºÜ¶àÄ§Êõ¡£Äú¿ÉÒÔ¼´Ê±ÖÆ×÷Í¼ĞÎ¡¢Á¬½á×ÊÁÏ¿â´«
+»Ø¡¾²éÑ¯¡¿½á¹û£¬»¹¿ÉÒÔÁ¬µ½ Internet ÉÏÆäËûµÄ servers È¥¡£
+
+---------------------------------------------------------------------------
+
+Q1.4: Ê²÷áÊÇ Perl£¿ÎªÊ²÷áÓĞÄÇ÷á¶àÈËÓÃËüÀ´×ö CGI£¿
+
+´ğ°¸¾ÍÔÚ perl manpage ÖĞµÄÇ°ÈıĞĞĞğÊö£º
+
+     Perl ÊÇÒ»½âÒëÊ½µÄÓïÑÔ£¬×¨Îª¸ßĞ§ÂÊ¼ìÊÓÎÄ×Öµµ°¸¡¢´ÓÖĞ³éÈ¡×ÊÁÏ£¬¾İ
+     ÒÔÓ¡ÖÆ±¨±í¶øÉè¼Æ¡£
+
+¾ø´ó¶àÊı CGI
+Ó¦ÓÃ³ÌÊ½µÄÈÎÎñ¶¼Éæ¼°¶Ô×ÊÁÏ×÷Ä³ÖÖ³Ì¶ÈµÄ´¦Àí£¬¼°Á¬½áÍâÔÚ³ÌÊ½¡£
+Perl Ç¡ºÃÌá¹©ÁËºÃÓÃµÄ¹¤¾ß£¬ÈÃÈËÇáËÉÓä¿ìµØ´ï³ÉÕâĞ©ÈÎÎñ¡£
+
+---------------------------------------------------------------------------
+
+Q1.5: ÓĞÃ»ÓĞ½Ì CGI »ò Perl µÄÊé»òÊÇÏßÉÏ×ÊÁÏ£¿
+
+   * NCSA µÄ CGI ÎÄ¼ş (&lt<A HREF="http://hoohoo.ncsa.uiuc.edu/cgi&gt">http://hoohoo.ncsa.uiuc.edu/cgi&gt</A>)
+   * Forms ÈëÃÅÖ¸Òı
+     (&lt<A HREF="http://robot0.ge.uiuc.edu/~carlosp/cs317/ft.4-5.html&gt">http://robot0.ge.uiuc.edu/~carlosp/cs317/ft.4-5.html&gt</A>)
+   * Ğí¶à CGI ×ÊÔ´½áµã
+
+(&lt<A HREF="http://www.cs.oberlin.edu/students/thirdstream/paxtond/cgi_stuff.html&gt">http://www.cs.oberlin.edu/students/thirdstream/paxtond/cgi_stuff.html&gt</A>)
+   * Ô­Ê¼µÄ CGI FAQ (&lt<A HREF="http://www.best.com/~hedlund/cgi-faq&gt">http://www.best.com/~hedlund/cgi-faq&gt</A>)
+   * Perl FAQ (&lt<A HREF="http://mox.perl.com/perl/faq/index.html&gt">http://mox.perl.com/perl/faq/index.html&gt</A>)
+   * ÓÉ Lincoln Stein ËùÖø£¬Ò»·İºÜÍêÕûµÄWWW ¼° CGI ²Ù×÷°²È« FAQ
+     (&lt<A HREF="http://www-genome.wi.mit.edu/WWW/faqs/www-security-faq.html&gt">http://www-genome.wi.mit.edu/WWW/faqs/www-security-faq.html&gt</A>)
+   * Paul Phillips ËùÖø£¬CGI °²È« FAQ
+     (&lt<A HREF="http://www.cerf.net/~paulp/cgi-security/safe-cgi.txt&gt">http://www.cerf.net/~paulp/cgi-security/safe-cgi.txt&gt</A>)
+   * WWW FAQ (&lt<A HREF="http://boutell.com/faq/&gt">http://boutell.com/faq/&gt</A>)
+
+          ¡¾ÒëÕß¡¿´Ë·İ FAQ µÄÖĞÒë°æ¿ÉÔÚ
+          <A HREF="http://www.acer.net/document/cwwwfaq/">http://www.acer.net/document/cwwwfaq/</A>
+          (&lt<A HREF="http://www.acer.net/document/cwwwfaq/&gt">http://www.acer.net/document/cwwwfaq/&gt</A>) ´¦È¡µÃ¡£
+
+ÒÔÏÂÊÇÓÉ Cye H. Waldman (&lt<A HREF="http://wwwiz.com/books/cgi-perl.html&gt">http://wwwiz.com/books/cgi-perl.html&gt</A>)
+ËùÕûÀíµÄ
+CGI ºÍ Perl Êé¼®Ò»ÀÀ±í*£º
+
+     ¡¾ÒëÕß¡¿´Ë±íÓÉÒëÕß¸üĞÂ£¬Í¬Ê±¼ÓÈëÁËÔ­ÎÄ×÷Õß Tom C. µÄ Perl ÊéÆÀ
+     (&lt<A HREF="http://www.perl.com/perl/critiques/&gt">http://www.perl.com/perl/critiques/&gt</A>)ÒÔ¹©¶ÁÕß²Î¿¼¡£Çë×¢Òâ£ºCGI
+     ¸÷ÊéµÄµÈ¼¶ÆÀ¶¨ÄËµ¥¾ÍÆä Perl ²¿·İµÄË®×¼¼°ÕıÈ·ĞÔ¶øÑÔ¡£·ûºÅËµÃ÷£º
+     £¨Tom C. ÓÃÂæÍÕ¶ø·ÇĞÇĞÇ£©
+
+          Îå¿ÅĞÇ£¨£ª£ª£ª£ª
+          £ª£©               ==&gt ºÜ°ôµÄÊé (terrific books)
+          ËÄ¿ÅĞÇ£¨£ª£ª£ª
+          £ª£©               ==&gt ²»´íµÄÊé (fine books)
+          Èı¿ÅĞÇ£¨£ª£ª£ª£©   ==&gt ÏñÑùµÄÊé (decent books)
+          Á½¿ÅĞÇ£¨£ª£ª£©     ==&gt ÂíÂí»¢»¢¡¢ÃãÇ¿¹ıµÃÈ¥µÄÊé (so-so
+books)
+          Ò»¿ÅĞÇ£¨£ª£©       ==&gt ²î¾¢µÄÊé (poor books)
+          Áã¿ÅĞÇ£¨0£ª£©      ==&gt ´óÀÃÊé (terrible books)
+                  NA         ==&gt ²»ÊÊÓÃ¡¢ÎŞÊéÆÀ (Not
+Applicable/Available)
+                  v4         ==&gt ÄÚÈİ½ÏÀÏ¾É£¬½öº¬¸Ç Perl4
+
+-----------------------------------------------------------------------------
++---------------------------------------------------------------------------+
+      ×÷Õß                ÊéÃû            ÆÀ¼Û       ³ö°æÕß      Ëù¸½
+ÊÛ¼Û
+                                                                 ÈíÌå
+(ÃÀ½ğ)
++---------------------------------------------------------------------------+
+                Effective Perl
+                Programming: 60 Methods
+ Joseph Hall    and Rules for Scripting  NA     Addison-Wesley     
+$30
+                Better Programs
+                £¨Ô¤¶¨³ö°æÈÕÆÚ£º1997Äê1
+                ÔÂ£©
++---------------------------------------------------------------------------+
+                Perl Developer's Toolkit
+ Jon Orwant     £¨Ô¤¶¨³ö°æÈÕÆÚ£º1997Äê1  NA     Advice Press       
+$??
+                ÔÂ£©
++---------------------------------------------------------------------------+
+                Cgi Programming For
+ ??             Dummies                  NA     IDG Books          
+$25
+                £¨Ô¤¶¨³ö°æÈÕÆÚ£º1997Äê1
+                ÔÂ£©
++---------------------------------------------------------------------------+
+                Mastering Regular
+                Expressions: Powerful
+ Jeffrey Friedl Techniques for Perl and  NA     O'Reilly           
+$30
+                Other Tools
+                £¨Ô¤¶¨³ö°æÈÕÆÚ£º1997Äê1
+                ÔÂ£©
++---------------------------------------------------------------------------+
+                CGI Developer's Resource
+ J.M. Ivler     £¨Ô¤¶¨³ö°æÈÕÆÚ£º1997Äê3  NA     Prentice Hall     ¹â
+$45
+                ÔÂ£©µú
++---------------------------------------------------------------------------+
+                Perl 5 Windows NT
+ Various        Programming
+ authors        £¨Ô¤¶¨³ö°æÈÕÆÚ£º1997Äê1  NA     New Riders         
+$45
+                ÔÂ£©
++---------------------------------------------------------------------------+
+                Teach Yourself CGI
+ Eric Herrmann  Programming with Perl 5  NA     Sams.net          ¹â
+$40
+                in a Week, 2nd Ed.                                µú
++---------------------------------------------------------------------------+
+                CGI: Internet
+ Mark Felton    Programming C++ &amp C      NA     Prentice Hall      
+$??
+                £¨Ô¤¶¨³ö°æÈÕÆÚ£º1997Äê3
+                ÔÂ£©
++---------------------------------------------------------------------------+
+                CGI Bible
+ Ed Tittle      £¨Ô¤¶¨³ö°æÈÕÆÚ£º1996Äê11 NA     IDG Books          
+$??
+                ÔÂ£©
++---------------------------------------------------------------------------+
+ Craig Patchett The CGI Cookbook: Perl
+ &amp              and JavaScript           NA     Wiley             ¹â
+$40
+ Matt Wright    £¨Ô¤¶¨³ö°æÈÕÆÚ£º1996Äê11                          µú
+                ÔÂ£©
++---------------------------------------------------------------------------+
+                Drag-n-Drop CGI
+ Baron Weil     £¨Ô¤¶¨³ö°æÈÕÆÚ£º1997Äê1  NA     Addison-Wesley     
+$??
+                ÔÂ£©
++---------------------------------------------------------------------------+
+ Stephen Lines  How To Program CGI with  NA     Ziff-Davis        ¹â
+$40
+                Perl 5.0                                          µú
++---------------------------------------------------------------------------+
+                CGI Programming for
+ Bob Denny et   Windows                                           ´Å
+ al.            £¨Ô¤¶¨³ö°æÈÕÆÚ£º1997Äê3  NA     O'Reilly          Æ¬
+$30
+                ÔÂ£©
++---------------------------------------------------------------------------+
+ Selena Sol &amp
+ Gunther        Instant Web Scripts with NA     MIS:Press/M&ampT     ¹â
+$40
+ Birznieks      CGI/Perl                        Books             µú
++---------------------------------------------------------------------------+
+                Perl For Dummies
+ ??             £¨Ô¤¶¨³ö°æÈÕÆÚ£º1996Äê10 NA     IDG Books          
+$25
+                ÔÂ£©
++---------------------------------------------------------------------------+
+ Steven E.      CGI Web Scripting With
+ Brenner &amp      Perl                     NA     MIS:Press/M&ampT     ¹â
+$40
+ Edwin Aoki     £¨³ö°æÈ¡Ïû£©                    Books             µú
++---------------------------------------------------------------------------+
+ ??             Perl &amp CGI Programming   NA     Sams.net           
+$45
+                Starter Kit
++---------------------------------------------------------------------------+
+ Mohammed J.    CGI Primer Plus for                               ¹â
+ Kabir          Windows                  NA     Waite             µú
+$45
++---------------------------------------------------------------------------+
+                Foundations of WWW
+ Ed Tittel et   Programming with HTML                             ¹â
+ al.            and CGI, 2nd Ed.         NA     IDG Books         µú
+$??
+                £¨Ô¤¶¨³ö°æÈÕÆÚ£º1996Äê10
+                ÔÂ£©
++---------------------------------------------------------------------------+
+ Jerry Muelver  Creating Cool Web Pages  £ª£ª   IDG Books         ¹â
+$30
+                With Perl                                         µú
++---------------------------------------------------------------------------+
+                HTML &amp CGI Unleashed,
+ John December  Professional Reference   NA     Sams.net          ¹â
+$50
+                Edition                                           µú
++---------------------------------------------------------------------------+
+                Cross-Platform Perl
+                (See also the author's
+ Eric Johnson   book site.)              £ª£ª   MIS:Press/M&ampT     ¹â
+$35
+                £¨Ô¤¶¨³ö°æÈÕÆÚ£º1996Äê9  £ª£ª   Books             µú
+                ÔÂ£©
++---------------------------------------------------------------------------+
+ Daniel Berlin  CGI Programming
+ et al.         Unleashed                NA     Sams.net           
+$55
++---------------------------------------------------------------------------+
+                Web Client Programming
+ Clinton Wong   in Perl                  NA     O'Reilly           
+$30
+                £¨Ô¤¶¨³ö°æÈÕÆÚ£º1997Äê3
+                ÔÂ£©
++---------------------------------------------------------------------------+
+                Perl 5
+ Robert Seymour £¨Ô¤¶¨³ö°æÈÕÆÚ£º1996Äê10 NA     Springer-Verlag    
+$40
+                ÔÂ£©
++---------------------------------------------------------------------------+
+ M¡õhe¡õ ¡õ Foghl¡õ        Perl 5 Quick Reference   £ª     Que                
+$20
++---------------------------------------------------------------------------+
+ Robert Niles &amp                                                   ¹â
+ Jeffry Dwight  CGI by Example           NA     Que               µú
+$35
++---------------------------------------------------------------------------+
+                PC Magazine Programming
+ Jonathan Hagey Perl 5.0 CGI Web Pages   0£ª    Ziff-Davis        ¹â
+$35
+                for Microsoft Windows NT                          µú
++---------------------------------------------------------------------------+
+                Web Programming with
+ ??             Perl                     NA     Sams.net          ¹â
+$40
+                £¨Ô¤¶¨³ö°æÈÕÆÚ£º1996Äê8                           µú
+                ÔÂ£©
++---------------------------------------------------------------------------+
+                Perl 5 Developer's Guide
+ ??             £¨Ô¤¶¨³ö°æÈÕÆÚ£º1996Äê12 NA     Sams              ¹â
+$60
+                ÔÂ£©µú
++---------------------------------------------------------------------------+
+ David Medinets Perl 5 by Example        £ª£ª   Que               ¹â
+$35
+                                         +1/2                     µú
++---------------------------------------------------------------------------+
+ Stephen Asbury                                                   ¹â
+ et al.         CGI How-To               NA     Waite             µú
+$40
++---------------------------------------------------------------------------+
+                Visual Basic Internet
+ Carl Franklin  Programming              NA     Wiley             ¹â
+$40
+                £¨Ô¤¶¨³ö°æÈÕÆÚ£º1996Äê5                           µú
+                ÔÂ£©
++---------------------------------------------------------------------------+
+ InfoMagic      Mother of Perl           NA     SSC               ¹â
+$35
+                £¨Ò»Ì×Á½ÕÅ¹âµú£©µú
++---------------------------------------------------------------------------+
+ Larry Wall et  Programming Perl, 2nd    £ª£ª
+ al.            Ed.                      £ª£ª   O'Reilly           
+$40
+                                         £ª
++---------------------------------------------------------------------------+
+                CGI Developer's Guide
+ Eugene Kim     £¨Ô¤¶¨³ö°æÈÕÆÚ£º1996Äê5  £ª£ª   Sams.net          ¹â
+$50
+                ÔÂ£©µú
++---------------------------------------------------------------------------+
+ Robert         CGI Manual of Style
+ McDaniel       £¨¿É×ÔÏßÉÏÈ¡µÃ£©         NA     Ziff-Davis         
+$25
++---------------------------------------------------------------------------+
+ ??             Perl 5 for Dummies       NA     IDG Books         ¹â
+$??
+                £¨Ô¤¶¨³ö°æÈÕÆÚ£º1996Äê£©µú
++---------------------------------------------------------------------------+
+                Developing Internet
+ Ginsburg &amp     Applications with Perl
+ Tall           £¨Ô¤¶¨³ö°æÈÕÆÚ£º1996Äê3  NA     Sams.net           
+$??
+                ÔÂ£©
++---------------------------------------------------------------------------+
+ Kamran Husain  Perl 5 Unleashed         £ª     Sams              ¹â
+$50
+                                                                  µú
++---------------------------------------------------------------------------+
+                Teach Yourself Perl 5,
+ Norton         2nd Edition              NA     Sams              ¹â
+$??
+                £¨Ô¤¶¨³ö°æÈÕÆÚ£º1996Äê6                           µú
+                ÔÂ£©
++---------------------------------------------------------------------------+
+ Michael Erwin  Special Edition Using
+ et al.         CGI                      NA     Que                
+$60
++---------------------------------------------------------------------------+
+ Thomas Boutell CGI Programming in C and £ª£ª   Addison-Wesley    ¹â
+$35
+                Perl                     £ª£ªµú
++---------------------------------------------------------------------------+
+                Perl 5 Desktop Reference
+ Johan Vromans  £¨¿É×Ô CPAN ÏÂÔØÔ­Ê¼Âë×Ô NA     O'Reilly           
+$7
+                ĞĞÓ¡ÖÆ£©
++---------------------------------------------------------------------------+
+ Christian      The Webmaster's
+ Neuss &amp        Handbook: Perl Power for NA     Int'l Thomson     ¹â
+$30
+ Johan Vromans  Your Web Server                                   µú
++---------------------------------------------------------------------------+
+ William E.                                                       ¹â
+ Weinman        The CGI Book             NA     New Riders        µú
+$45
++---------------------------------------------------------------------------+
+                World Wide Web Database
+ Brian Jepson   Programming for Windows  NA     Wiley             ¹â
+$40
+                NT                                                µú
++---------------------------------------------------------------------------+
+ Steven E.                               £ª£ª
+ Brenner &amp      Introduction to CGI/     £ª     MIS:Press/M&ampT      
+$20
+ Edwin Aoki     Perl                     (v4)   Books
++---------------------------------------------------------------------------+
+ Ed Tittel &amp    Perl 5 Programming
+ Sebastion      Secrets                  NA     IDG Books         ¹â
+$45
+ Hassinger      £¨Ô¤¶¨³ö°æÈÕÆÚ£º1996Äê3                           µú
+                ÔÂ£©
++---------------------------------------------------------------------------+
+ David Harlan   Special Edition Using
+ et al.         Perl 5 for Web           £ª£ª   Que                
+$50
+                Programming
++---------------------------------------------------------------------------+
+ Shishir        CGI Programming on the                            ¹â
+ Gundavaram     World Wide Web           £ª£ª   O'Reilly          µú
+$30
++---------------------------------------------------------------------------+
+                The Official 60 Minute   £ª£ª
+ Robert Farrel  Guide to CGI Programming £ª     IDG Books          
+$20
+                with Perl                (v4)
++---------------------------------------------------------------------------+
+ Ed Tittel &amp
+ Sebastion      Web Programming Secrets  NA     IDG Books         ¹â
+$45
+ Hassinger      with HTML, CGI &amp Perl                             µú
++---------------------------------------------------------------------------+
+ John Deep &amp
+ Peter          Developing CGI           £ª£ª   Wiley              
+$30
+ Holfelder      Applications with Perl   (v4)
++---------------------------------------------------------------------------+
+ Jon Orwant     Perl 5 Interactive       £ª£ª   Waite             ¹â
+$50
+                Course                   £ªµú
++---------------------------------------------------------------------------+
+ Aidan
+ Humphreys et   Perl 5 How-To            £ª£ª   Waite             ¹â
+$45
+ al.                                     £ªµú
++---------------------------------------------------------------------------+
+                Teach Yourself CGI       £ª£ª
+ Eric Herrmann  Programming with Perl in £ª     Sams.net          ¹â
+$40
+                a Week                   (v4)                     µú
++---------------------------------------------------------------------------+
+                Perl
+ Walnut Creek   £¨ÊÕÂ¼¸÷Àà×ÊÔ´¡¢µµ°¸¿â¡¢ NA     Walnut Creek      ¹â
+$40
+                ÈëÃÅÖ¸µ¼¡¢ÊµÀı¡¢source                            µú
+                code µÈ£©
++---------------------------------------------------------------------------+
+                Software Engineering
+ Carl Dichter &amp with Perl                                         ´Å
+ Mark Pease     £¨½ø½×¼¶£¬ÄÚÈİÕë¶ÔÈíÌå×¨£ª     Prentice Hall     Æ¬
+$30
+                ÒµÈËÊËÉè¼Æ£»·ÇÈëÃÅÖ¸Òı£©
++---------------------------------------------------------------------------+
+                                         £ª£ª
+ Ellie Quigley  Perl by Example          £ª     Prentice Hall      
+$27
+                                         (v4)
++---------------------------------------------------------------------------+
+ John December
+ &amp              HTML &amp CGI Unleashed     NA     Sams.net          ¹â
+$50
+ Mark Ginsburg                                                    µú
++---------------------------------------------------------------------------+
+ David Till     Teach Yourself Perl in   £ª£ª   Sams               
+$30
+                21 Days                  (v4)
++---------------------------------------------------------------------------+
+ Larry Wall &amp
+ Randal L.      Programming Perl         NA     O'Reilly           
+$30
+ Schwartz
++---------------------------------------------------------------------------+
+ Randal L.                               £ª£ª
+ Schwartz       Learning Perl            £ª£ª   O'Reilly           
+$25
+                                         (v4)
++---------------------------------------------------------------------------+
+ Ed Tittel et   Foundations of WWW                                ¹â
+ al.            Programming with HTML    NA     IDG Books         µú
+$40
+                and CGI
++---------------------------------------------------------------------------+
+                How To Set Up and
+                Maintain a World Wide
+ Lincoln Stein  Web Site, 2nd Edition    £ª£ª   Addison-Wesley    ¹â
+$55
+                £¨Ô¤¶¨³ö°æÈÕÆÚ£º1997Äê1  £ª£ªµú
+                ÔÂ£©
++---------------------------------------------------------------------------+
+-----------------------------------------------------------------------------
+
+     ¡¾ÒëÕß¡¿ÖĞÎÄµÄ CGI ºÍ Perl µÄÊéÄ¿ÔòÉĞ´ıºÃĞÄµÄ¶ÁÕßÌá¹©¡£
+
+---------------------------------------------------------------------------
+
+Q1.6: ÊÇ²»ÊÇÓĞÕâ·½ÃæµÄÓÊµİÂÛÌ³ (mailing lists) »òĞÂÎÅÌÖÂÛÈº×é£¿
+
+Ã¿ÌìÓĞÎŞÊıµÄ CGI ¸ßÊÖÔÚ¡¸¼àÊÓ¡¹ÖøÕâ¸öºÜÓĞÓÃµÄĞÂÎÅÌÖÂÛÈº×é£º
+comp.infosystems.www.authoring.cgi*¡£
+
+     ¡¾ÒëÕß¡¿ÖĞÎÄµÄÌÖÂÛÈºÖĞ×îÊÊºÏ×öÕâ·½ÃæµÄÌÖÂÛµÄ´ó¸ÅÒªËãÊÇ
+     tw.bbs.comp.www ÁË¡£»¹ÓĞ£¬Çë²»Òª½« CGI ÎÊÌâ post µ½
+     comp.lang.perl.misc ÉÏÍ·È¥£¬±ğËµÒëÕßÃ»ÏÈ¾¯¸æÄúà¸ ;-) ¡£
+
+µ«ÊÇ£¬³ı·ÇÄúÏÈ°Ñ FAQ ¶Á¹ıÒ»±é£¬·ñÔòÄú²»Ó¦¸Ãµ½Õâ¸ö°æ×ÓÉÏÈ¥Ëæ±ã post
+ÎÊÌâ
+£¨»òÆäËûÈÎºÎ°æ×Ó£»Í¬ÑùµÄµÀÀí£©¡£
+
+ÍøÂ·ÉÏÓĞ¸÷Ê½¸÷ÑùÌÖÂÛ Perl¡¢CGI£¬¼° Web µÄÓÊµİÂÛÌ³
+(&lt<A HREF="http://perl.com/perl/info/mailing-lists.html&gt">http://perl.com/perl/info/mailing-lists.html&gt</A>)£¬µ«ÒÔµ×ÏÂÕâÁ½¸ö×îÊÜ»¶Ó­£º
+
+cgi-perl-request@webstorm.com ¡¾Hypermail µµ°¸¿â¡¿
+(&lt<A HREF="http://www.webstorm.com/local/cgi-perl&gt">http://www.webstorm.com/local/cgi-perl&gt</A>)
+
+     Õâ¸öÂÛÌ³ÊÇ¸ø·¢Õ¹ Perl5 CGI
+Ä£×é¡¢»ò¶Ô´ËÓĞĞËÈ¤µÄÈËÓÃµÄ¡£Ëü²¢²»Ìá¹©ÈÎ
+     ºÎ CGI Ö§Ô®*¡£
+
+          ¡¾ÒëÕß¡¿´Ë mailing list ÒÑ¾­ÊıÔÂÃ»ÓĞ posts £¬ÊÙÖÕÕıÇŞÁË¡£Õâ
+          ¿ÉÄÜÊÇÓÉì¶ÌÖÂÛµÄÖ÷Ìâ£­CGI::* Ä£×éÌ×¼ş£¨Ïê¼ûÒÔÏÂµÚ¶şÆª
+          ¡¸Modules £¨Ä£×é£©¡¹µÄËµÃ÷£©ÒÑ¾­ÓĞºÃÒ»¶ÎÊ±¼äÃ»ÓĞ¸üĞÂÁË¡£Ä£
+          ×éµÄÎ¬»¤ÈË Lincoln Stein ½üÒ»Äê¶àÀ´ËÆºõ¶¼½«ÖØĞÄ·ÅÔÚËûµÄ
+          CGI.pm ÉÏ£¬¶ø CGI.pm Ò²È¡´úÁË CGI::* Õâ¸öÌ×¼şµÄµØÎ»¡£¶ÁÕßÈç
+          ¶Ô CGI::* »ò CGI.pm ÓĞÎÊÌâµÄ»°¿ÉĞ´µ½ comp.lang.perl.modules
+          ÉÏÍ·È¥¡£
+
+libwww-perlrequest@ics.uci.edu ¡¾Hypermail µµ°¸¿â¡¿
+(&lt<A HREF="http://www.ics.uci.edu/WebSoft/libwww-perl/archive&gt">http://www.ics.uci.edu/WebSoft/libwww-perl/archive&gt</A>)
+
+     libwww-perl Õâ¸ö library Ì×¼şÎª Web
+¿Í»§¼°ËÅ·ş³ÌÊ½Éè¼ÆÌá¹©ÁËÒ»Ì×¼ò±ãµÄ
+     ½éÃæ*¡£
+
+          ¡¾ÒëÕß¡¿´Ë mailing list ²»ÊÊºÏ×ö CGI µÄÌÖÂÛ¡£libwww-perl ÊÇ
+          Ò»ÏîÒÔ Perl Îª·¢Õ¹¹¤¾ß¡¢ÀàËÆ W3C/CERN µÄ libwww
+          (&lt<A HREF="http://www.w3.org/pub/WWW/Library/&gt">http://www.w3.org/pub/WWW/Library/&gt</A>) µÄ¼Æ»­£¨ááÕßÓÃµÄÊÇ C
+          £©¡£
+
+Äú¿ÉÒÔÔÚ£º
+     <A HREF="http://www.ics.uci.edu/pub/websoft/libwww-perl">http://www.ics.uci.edu/pub/websoft/libwww-perl</A>
+     (&lt<A HREF="http://www.ics.uci.edu/pub/websoft/libwww-perl&gt">http://www.ics.uci.edu/pub/websoft/libwww-perl&gt</A>)È¡µÃ¾ÉµÄ
+(Perl4)
+     libwww-perl µÄÏà¹Ø×ÊÁÏ¡£
+
+×îĞÂµÄ Perl5 libwww Ì×¼ş¿ÉÔÚ£º
+     <A HREF="http://www.sn.no/~libwww-perl/">http://www.sn.no/~libwww-perl/</A> (&lt<A HREF="http://www.sn.no/libwww-perl/&gt">http://www.sn.no/libwww-perl/&gt</A>)
+´¦È¡
+     µÃ¡£
+
+CPAN: Perl Ä£×éÍ¬Ê±Ò²¿ÉÒÔÔÚ¶àÖØ¸´ÖÆ¡¢·ÖÉ¢Ê½µÄ CPAN
+(&lt<A HREF="http://www.perl.com/CPAN/README.html&gt">http://www.perl.com/CPAN/README.html&gt</A>)
+ÏµÍ³È¡µÃ¡£Õâ»á×Ô¶¯ÌæÄúÑ¡ÔñÒ»¸ö¡¸
+¿¿½üÄúµÄÕ¾
+(&lt<A HREF="http://www.perl.com/perl/news/cpan-mux.html&gt">http://www.perl.com/perl/news/cpan-mux.html&gt</A>)¡¹¡£Æ©ÈçËµ£¬Äú¿É
+ÒÔ×¥ LWP Ä£×éµÄ source (&lt<A HREF="http://perl.com/cgi-bin/cpan_mod?module=LWP&gt">http://perl.com/cgi-bin/cpan_mod?module=LWP&gt</A>)
+»òÖ»
+×¥ËüµÄ readme
+(&lt<A HREF="http://perl.com/cgi-bin/cpan_mod?module=LWP&ampreadme=1&gt">http://perl.com/cgi-bin/cpan_mod?module=LWP&ampreadme=1&gt</A>)¡£
+
+---------------------------------------------------------------------------
+
+Q1.7: ÍøÂ·ÉÏÊÇ²»ÊÇÓĞ×¨ÃÅÊÕ²ØÓÊµİÂÛÌ³»òĞÂÎÅÌÖÂÛÈº×éµÄ posts µÄÕ¾£¿
+
+ÊÇµÄ£¬Äú¿ÉÒÔÊÔÊÔ The Usenet Newstand
+(&lt<A HREF="http://CriticalMass.com/Concord/&gt">http://CriticalMass.com/Concord/&gt</A>)¡£
+ËùÓĞcomp.infosystems.www.* ÌÖÂÛÈº×éµÄÎÄÕÂ¶¼ÊÕ¼¯ÔÚÄÇ¶ù*¡£Í¬Ê±£¬cgi-perl
+¼°
+libwww ÕâÁ½¸öÓÊµİÂÛÌ³ËûÃÇÒ²ÓĞÊÕ¼¯¡£
+
+     ¡¾ÒëÕß¡¿ÄúÍ¬Ê±¿ÉÒÔÊÔÊÔ DejaNews (&lt<A HREF="http://www.dejanews.com/&gt">http://www.dejanews.com/&gt</A>) ¡¢
+     AltaVista (&lt<A HREF="http://www.altavista.digital.com/&gt">http://www.altavista.digital.com/&gt</A>) £¬ºÍ HotBot
+     (&lt<A HREF="http://www.hotbot.com/&gt">http://www.hotbot.com/&gt</A>) Õâ¼¸¸öËÑÑ°ÒıÇæ£¯×ÊÁÏ¿â¡£ DejaNews
+     (&lt<A HREF="http://www.dejanews.com/&gt">http://www.dejanews.com/&gt</A>) ÉõÖÁÁ¬ tw.bbs.* ¶¼ÊÕ¼¯£¨ÆäËûÁ½¸ö»ò
+     ĞíÒ²ÓĞ£¬µ«ÒëÕßÃ»ÊÔ¹ı£©¡£
+
+---------------------------------------------------------------------------
+
+·¢ĞÅÈË: hsiao@uconnvm.uconn.edu, ĞÅÇø: programming
+±ê  Ìâ: Perl-CGI ³£ÎÊÎÊÌâ¼¯ -- part2
+·¢ĞÅÕ¾: 2 Tigers (Fri Jun 20 16:02:09 1997)
+×ªĞÅÕ¾: cis_nctu!news.cis.nctu!ctu-peer!news.nctu!serv.hinet.net!netnews.hinet
+À´  Ô´: times.oneway.net
+
+±¾ Perl-CGI ³£ÎÊÎÊÌâ¼¯´¿ÎÄ×Ö°æÒÔ²»¶¨ÆÚ·½Ê½ÔÚ tw.bbs.comp.www ¼°
+tw.bbs.comp.language
+Á½¸öĞÂÎÅÌÖÂÛÈº×éÉÏµÇÔØ¡£±¾ÎÄµÄ³¬ÎÄ¼ş°æ¼°½ñááµÚÒ»ÊÖ
+ĞÂ°æ×ÊÁÏ¿É×ÔÁ½Ö»ÀÏ»¢¹¤×÷ÊÒÈ¡µÃ£¬Î»Ö·Îª£º
+&lt<A HREF="http://www.opim.uconn.edu/~2T/perl/perl-cgi-faq-chi/&gt">http://www.opim.uconn.edu/~2T/perl/perl-cgi-faq-chi/&gt</A>¡£±¾´¿ÎÄ×Ö°æÖĞ
+ÄÚÈİÈôÓĞºÍ³¬ÎÄ¼ş°æ²»Ò»ÖÂÖ®´¦£¬Ò»ÇĞ¾ùÒÔááÕßÎª×¼¡£±¾ FAQ TANet µÄ mirror
+£¨Õâ¸öÓ³Éäµã¿ÉÄÜ»¹ÒªµÈ¼¸Ìì²Å»á×¼±¸ºÃ£©Î»ì¶£º
+<A HREF="ftp://www.math.ncu.edu.tw/pub/staff/chenym/FAQ/Perl/">ftp://www.math.ncu.edu.tw/pub/staff/chenym/FAQ/Perl/</A> (anonymous FTP)
+ºÍ
+<A HREF="http://www.math.ncu.edu.tw/~chenym/FAQ/Perl/">http://www.math.ncu.edu.tw/~chenym/FAQ/Perl/</A>¡£Ì¨ÍåÉÌÒµÍøÂ·µÄ mirror
+ÔòÔÚ
+<A HREF="http://www.oneway.net/FAQ/perl/">http://www.oneway.net/FAQ/perl/</A>¡£
+
+ÒëÕß±àĞ´±¾ FAQ£¨³£ÎÊÎÊÌâ¼¯£©Ö®¶¯»ú£¨ºÍÆäËûĞÂÎÅÈº×é FAQ
+µÄÄ¿µÄ²¢ÎŞ¶şÖÂ£©£¬
+ÄËÓĞ¼øì¶ÏàÍ¬µÄÎÊÌâÔÚÌÖÂÛÈºÖĞÒ»ÔÙ³öÏÖ£¬Í½Ôö´ó¼ÒÈËÁ¦¡¢Æµ¿í£¬¼°Ê±¼äÉÏµÄÀË·Ñ£¬
+Òò´ËÏ£Íû½å´Ë FAQ
+£¬¶ÔĞí¶à·´¸²³öÏÖµÄÎÊÌâÌá³öÕıÈ·µÄ½â´ğ£¬²¢¼õÉÙ´íÎó×ÊÑ¶µÄ
+Á÷´«¡£ËùÒÔÒëÕßÔÚ´ËºôÓõÌÖÂÛÈºÖĞµÄĞÂÏÊÈËÔÚÑ¯ÎÊÓĞ¹Ø Perl-CGI
+Ò»ÀàÎÊÌâÖ®Ç°£¬
+ÎñÇë×ñÊØÍøÂ·Àñ½Ú (netiquette)£¬ÏÈ×Ô±¾ FAQ ÖĞÕÒÑ°½â´ğ¡£´ËÍâ±¾ FAQ
+ÒàÊÊºÏ
+×÷Îª¸öÈË½øĞŞ Perl-CGI ³ÌÊ½Éè¼ÆµÄ²ÄÁÏ¡£
+
+Îª·½±ã´¿ÎÄ×Ö°æ¶ÁÕßÆğ¼û£¬ËùÓĞ³¬ÎÄ¼ş°æÖĞËùº¬µÄ http ¼° ftp
+Á¬½Úµã¾ù¸½¼Óì¶
+ÊÊµ±´¦À¨ºÅÖĞ£¬µ«Î¨¶À Q1.5
+ÖĞµÄÊéÄ¿±íÀıÍâ£¨Òò±àÅÅ²»Ò×£©¡£Èô¶Ô±¾ÖĞÎÄ°æ³£ÎÊ
+ÎÊÌâ¼¯ÓĞÈÎºÎÎÊÌâ¼°Òâ¼û£¬Çë email ÒëÕß¡£
+
+Ô­ÎÄ°æ¡¢ÖĞÒë°æ°æÈ¨ÊÂÒË£¬Ïê¼ûµÚ 5 ²¿·İÎÄµ×£¨¸´ÖÆ¡¢×ªÔØÕßÎñ±Ø×ñÊØ£©¡£
+
+--Ïô°ÙÁä
+Pai-ling Hsiao &lthsiao@uconnvm.uconn.edu&gt
+
+-------- 8&lt ------- Cut Here ------- 8&lt --------
+
+2.0 - Modules £¨Ä£×é£©
+
+---------------------------------------------------------------------------
+
+Q2.1: ÎÒÊÇ²»ÊÇ¸ÃÓÃ Perl CGI modules* À´Ğ´ CGI scripts
+£¿×Ô¼º×ö²»ÊÇ±È½ÏÈİÒ×
+Âğ£¿
+
+     ¡¾ÒëÕß¡¿ CGI modules ÔÚ´ËÖ¸ CGI.pm ¼°ÆäËû CGI::* µÄÄ£×é£»Ïê¼û
+     Q2.4 ¡£
+
+ÕâÍêÈ«È¡¾öì¶ÄúÒª×öµÄÊÇÊ²÷á¡£CGI modules ½ÏÊÊºÏÖØÁ¿¼¶µÄ CGI scripts
+¡£Èç¹û
+ÊÇ¼òµ¥µÄ scripts µÄ»°£¬×Ô¼º×ö»òÕßÊÇÓÃ CGI Lite
+Õâ¸öÄ£×é»á¼ò±ãĞí¶à¡£Èç¹ûÄú
+ÕæµÄÔ¸Òâ£¬ÄúÉõÖÁ¿ÉÒÔÓÃ¾ÉµÄ Perl4 cgi-lib.pl Õâ¸ö library*¡£
+
+     ¡¾Òë×¢¡¿×÷Õß Tom C. Ö®ËùÒÔÕâ÷áËµÊÇÒòÎªËû»ù±¾ÉÏ²»ÔŞ³ÉÊ¹ÓÃ
+     cgi-lib.pl £¬ÓĞĞËÈ¤µÄ¶ÁÕß¿ÉÒÔ¿´ËûĞ´µÄ Why I am not fond of
+     cgi-lib.pl (&lt<A HREF="http://www.perl.com/perl/info/www/!cgi-lib.html&gt">http://www.perl.com/perl/info/www/!cgi-lib.html&gt</A>)
+     £¨ÎªÊ²÷áÎÒ²»ĞÀÉÍ cgi-lib.pl £©¡£
+
+---------------------------------------------------------------------------
+
+Q2.2: ÈçºÎÖªµÀÄ³¸ö module ¸ÃÔõ÷á¸öÓÃ·¨£¿
+
+´ó¶àÊı modules µÄÊ¹ÓÃËµÃ÷ÊÇÖ±½ÓÇ¶ÔÚ³ÌÊ½ÀïµÄ*¡£Èç¹ûÊÇÕâÑùµÄ»°£¬Äú¿ÉÒÔÓÃ
+pod2man Õâ¸ö script À´ÔÄ¶ÁÊ¹ÓÃÖ¸ÄÏ£º
+
+     % pod2text name_of_module.pm
+     % pod2man name_of_module.pm | nroff -man | more
+
+     ¡¾Òë×¢¡¿Èç¹ûÄúÔÚ *.pm µµÖĞ¿´µ½ ``=head1''¡¢``=cut'' ÕâÀàµÄ¶«Î÷±ã
+     ÊÇÏÔÊ¾Ê¹ÓÃËµÃ÷ÓĞ¸½ÔÚÀïÍ·¡£ÕâÊÇ Larry Wall Éè¼ÆµÄ POD (Plain Old
+     Document) ¸ñÊ½¡£Ïê¼û perlpod manpages¡£
+
+---------------------------------------------------------------------------
+
+Q2.3: ÓĞÄÄĞ© Perl4 µÄ CGI »ò WWWµÄ libraries £¿
+
+×î¹ãÎªÊ¹ÓÃµÄ Perl4 CGI library ÊÇ Steve Brenner µÄ cgi-lib.pl
+(&lt<A HREF="http://www.bio.cam.ac.uk/web/form.html&gt">http://www.bio.cam.ac.uk/web/form.html&gt</A>)¡£
+
+---------------------------------------------------------------------------
+
+Q2.4: ÓĞÄÄĞ©¸ø Perl5 Ê¹ÓÃµÄ CGI modules£¿ÎÒ¸ÃÓÃÄÄ¸ö£¿ÎªÊ²÷á£¿
+
+CGI.pm
+(&lt<A HREF="http://www-genome.wi.mit.edu/ftp/pub/software/WWW/CGI.pm.tar.gz&gt">http://www-genome.wi.mit.edu/ftp/pub/software/WWW/CGI.pm.tar.gz&gt</A>)*
+     Õâ¸öºÜ°ôµÄ module ÔÚ¹¦ÄÜÉÏºÍ²¿·Ö CGI::* modules
+ÏàÖØµş¡£Èç¹ûÄú²»ÏëºÍ¶à
+     ÖØ modules
+´ò½»µÀµÄ»°£¬Äú¿ÉÒÔÖ»ÓÃÕâÒ»¸ö¡£ÎÒÃÇµÈÒ»ÏÂÔÚááÍ·»á¸øÄú¿´Ò»¸ö
+     ÓÃ CGI.pm À´Ìæ CGI scripts ³ı´íµÄÊµÀı¡£
+
+     ´ËÍâ£¬Lincoln £¨Lincoln Stein£»CGI.pm µÄ×÷Õß£©»¹Ğ´ÁËÒ»±¾ÌÖÂÛ Web
+ºÍ
+     CGI ·Ç³£ºÃµÄÊé£¬½Ğ How To Set Up and Maintain a World Wide Web
+Site
+     (&lt<A HREF="http://www.aw.com/cp/Stein2e.html&gt">http://www.aw.com/cp/Stein2e.html&gt</A>)¡£
+
+          ¡¾ÒëÕß¡¿½¨Òé¶ÁÕß¶àÊ¹ÓÃ CGI.pm ¡£CGI::* ÒÑ¾­ÓĞºÜ³¤Ò»¶ÎÊ±¼äÃ»
+          ÓĞ¸üĞÂÁË£¬¶ø CGI.pm Ôò²»¶ÏµÄÓĞ¸ÄÁ¼µÄĞÂ°æÍÆ³ö£¬²¢ÒÑ¼ÓÈë¶Ô
+          FastCGI (&lt<A HREF="http://www.fastcgi.com/&gt">http://www.fastcgi.com/&gt</A>) µÄÖ§Ô®£¬Òò´Ë¶Ô FastCGI
+          µÄÊ¹ÓÃÕßÒ²Ïàµ±·½±ã¡£´ËÍâ£¬mod_perl
+          (&lt<A HREF="http://www.osf.org/~dougm/apache/&gt">http://www.osf.org/~dougm/apache/&gt</A>) £¨Apache
+          (&lt<A HREF="http://www.apache.org/&gt">http://www.apache.org/&gt</A>) µÄ perl module£©ÖĞËù¸½µÄ CGI::XA
+          £¬Ò²ÊÇÓÉ CGI.pm ¸Ä½ø¶øÀ´µÄ¡£ CGI.pm ÈÃÊ¹ÓÃÕßÃâ³ı×Ô¼º×öµÍ½××Ê
+          ÁÏ´¦Àí£¨ÈçÓ¡ HTTP ±êÍ·¡¢Ìæ form, cookies ×ÊÁÏ½âÂëµÈ£©µÄÂé
+          ·³¡£
+
+CGI::* Ä£×éÌ×¼ş
+(&lt<A HREF="http://www-genome.wi.mit.edu/ftp/pub/software/WWW/CGIperl/&gt">http://www-genome.wi.mit.edu/ftp/pub/software/WWW/CGIperl/&gt</A>)
+     ÕâĞ©Ä£×éÔ­ÏÈ´ó¶àÊÇÓÉ Tim Bunce ËùĞ´£¬ÏÖÔÚÔòÓÉ Lincoln Stein
+À´¸ºÔğÎ¬
+     »¤¡£ËüÃÇµÄ¹¦ÄÜ°üÀ¨ÁË°ïÄú²úÉú¼°´¦Àí form £¬Ìæ CGI
+³ÌÊ½³ı´í£¬ÒÔ¼°ÔÚ²»Í¬
+     µÄ forms Ö®¼äÎ¬ÏµÒ»¸ö×´Ì¬Öµ¡£
+
+CGI Lite
+(&lt<A HREF="http://dongpo.math.ncu.edu.tw/perl/CPAN/authors/id/SHGUN/CGI_Lite-1.62.pm.gz&gt">http://dongpo.math.ncu.edu.tw/perl/CPAN/authors/id/SHGUN/CGI_Lite-1.62.pm.gz&gt</A>)
+     Õâ¸öÇáÁ¿¼¶µÄ module ÊÇ CGI::* modules
+Ö®ÍâµÄÁíÒ»¸öÑ¡Ôñ¡£Ëü¿ÉËãÊÇÔÚÀÏ¾É
+     µÄ cgi-lib.pl (&lt<A HREF="http://www.bio.cam.ac.uk/web/form.html&gt">http://www.bio.cam.ac.uk/web/form.html&gt</A>)
+Ö®ÉÏ¸ÄÁ¼¡¢¼Ó
+     ÁÏááµÄ²úÎï¡£
+
+ÒÔÉÏÈıÕß¾ùÓĞÄÜÁ¦´¦Àí multipart form ×ÊÁÏ£¨¼´ÉÏ´«£©¡£
+
+---------------------------------------------------------------------------
+
+Q2.5: ÎªÊ²÷áÕâ÷á¶à perl CGI libraries ¶¼ÊÇ object-oriented
+£¨Îï¼şµ¼Ïò£©µÄ£¿
+ÎÒ¶ÔÓÃÎï¼şµ¼ÏòÀ´Ğ´³ÌÊ½Ò»ÇÏ²»Í¨¡£ÄÑµÀ¾ÍÃ»ÓĞ¼òµ¥Ò»µã£¬¸ø²»»áÎï¼şµ¼ÏòµÄÈËÊ¹ÓÃ
+µÄ libraries Âğ£¿Îï¼şµ¼ÏòÓĞ¶àÄÑ£¿
+
+ÆäÊµÊ¹ÓÃÎï¼şµ¼ÏòµÄ modules ²¢²»ÄÑ¡£ÏÈÈ¥¿´¿´ Tom Christiansen µÄ Easy
+Intro
+to Using Perl Objects
+(&lt<A HREF="http://perl.com/perl/everything_to_know/easy_objects.html&gt">http://perl.com/perl/everything_to_know/easy_objects.html&gt</A>)
+£¨¼òµ¥½éÉÜÈç
+ºÎÊ¹ÓÃ Perl Îï¼ş£©°É¡£
+
+Ç°Í·Ìáµ½µÄ CGI modules ÓÃÆğÀ´ÕæµÄÊÇºÜÈİÒ×£¡ÕâÀïÓĞÒ»¸öÓÃ CGI Lite Ó¡³ö
+form
+×ÊÁÏµÄÊµÀı*£º
+
+     ¡¾ÒëÕß¡¿CGI.pm µÄÊ¹ÓÃËµÃ÷
+     (&lt<A HREF="http://www-genome.wi.mit.edu/ftp/pub/software/WWW/&gt">http://www-genome.wi.mit.edu/ftp/pub/software/WWW/&gt</A>)ÖĞÓĞ¸ü¶à¡õ
+     Àı¿É¹©²Î¿¼¡£
+
+     #!/usr/local/bin/perl -w
+     use CGI_Lite;
+     $cgi = new CGI_Lite;
+     %data = $cgi-&gtparse_form_data;
+     print &quotContent-type: text/plain&quot, &quot\n\n&quot;
+     foreach $key (keys %data) {
+         print $key, &quot = &quot, $data{$key}, &quot\n&quot;
+     }
+     exit 0;
+
+Òª×¢ÒâµÄÊÇ£¬¼´Ê¹Äú»úÆ÷ÉÏµÄ Perl
+²»ÊÇÄú×°µÄ£¨Äú²»ÊÇÏµÍ³¹ÜÀíÕß£©£¬»òÊÇÄúÈ¨ÏŞ
+²»¹»ÎŞ·¨½«ÕâĞ© modules ºÍÆäËûµÄ Perl library
+µµ°¸°²×°ÔÚÍ¬Ò»¸öµØ·½£¬Äú»¹ÊÇ
+¿ÉÒÔÊ¹ÓÃÕâĞ© modules µÄ --
+Ö»Òª½«ËüÃÇ°ÚÔÚÒ»¸ö×Ô¼º·½±ãµÄµØ·½£¬È»ááÔÚÄúµÄ
+script ¿ªÊ¼´¦¼ÓÉÏ*£º
+
+     BEGIN {
+         unshift @INC, &quot/your/dir/favorite/place&quot;
+     }
+
+     ¡¾ÒëÕß¡¿½¨Òé¸ÄÓÃ½ÏĞÂµÄ·½Ê½£º
+
+     use lib qw(/your/dir/favorite/place);
+
+ºÃ¡£ÒÔÏÂÊÇÒ»¸öÓÃµ½ CGI::* modules µÄÀı×Ó£º
+
+     #!/usr/local/bin/perl -w
+     use CGI::Form;
+     $cgi_form = new CGI::Form;
+     print &lt&lt'End_of_Header';
+         &ltHTML&gt
+         &ltHEAD&gt&ltTITLE&gt¿´ÖøÎÒ×ö£¡&lt/TITLE&gt&lt/HEAD&gt
+         &ltBODY&gt
+         &ltH1&gt¿´ÖøÎÒ×ö£¡&lt/H1&gt
+     End_of_Header
+     print $form-&gtstartform;
+     ## ²úÉúÒ»¸öµ¥ĞĞÊäÈëÀ¸Î» (text field)
+     print 'ĞÕÃû£º ';
+     print $form-&gttextfield('name'), &quot&ltBR&gt\n&quot;
+     ## ²úÉúÒ»×éµ¥Ñ¡°´Å¦ (radio buttons)
+     print '&ltP&gtÄú×¡ÄÄ¶ù£º &ltBR&gt';
+     print $form-&gtradio_group(-name      =&gt 'where',
+                              -values    =&gt ['±±ÃÀÖŞ',
+                                             'ÄÏÃÀÖŞ',
+                                             'Å·ÖŞ',
+                                             '°ÄÖŞ',
+                                             'ÑÇÖŞ',
+                                             'ÄÏ¼«ÖŞ'],
+                              -default   =&gt '±±ÃÀÖŞ',
+                              -linebreak =&gt 'true');
+     ## ²úÉúÒ»¸ö¶àĞĞÊäÈëÀ¸Î» (textarea)
+     print 'Òâ¼û£º ';
+     print $form-&gttextarea('comments', undef, 5, 40);
+     print &quot&ltP&gt&quot;
+     print $form-&gtreset;
+     print $form-&gtdefaults;
+     print $form-&gtsubmit('ËÍ³ö£¡', 'Submit');
+     print $form-&gtendform;
+     print &quot&lt/BODY&gt&lt/HTML&gt&quot;
+
+reset¡¢defaults£¬¼°submitÈıÖÖ·½·¨( methods )
+»á²úÉú²»Í¬µÄÀàĞÍµÄ°´Å¥¡£reset
+Õâ¸ö°´Å¥ÈÃÄú°ÑÄ¿Ç° form
+À¸Î»ÖĞËùÌîµÄ×ÊÁÏÏ´µô£¬²¢ÏÔÊ¾Êôì¶ÉÏÒ»¸ö×´Ì¬£¨»ò»Ø
+ºÏ£©µÄ×ÊÁÏ¡£ defaults Õâ¸ö°´Å¥ÔòÊÇ½«form À¸Î»×ÊÁÏ³¹µ×Ï´È¥¡£»¹ÓĞ submit
+Õâ
+¸ö·½·¨²úÉúÒ»¸öËÍ³öÅ¥ÒÔ±ãÈÃÈË½«×ÊÁÏËÍÖÁ server ´¦¡£
+
+Äú¿´£¬²»ÊÇºÜÈİÒ×Âğ£¿
+
+
+·¢ĞÅÈË: hsiao@uconnvm.uconn.edu, ĞÅÇø: programming
+±ê  Ìâ: Perl-CGI ³£ÎÊÎÊÌâ¼¯ -- part3
+·¢ĞÅÕ¾: 2 Tigers (Fri Jun 20 16:02:11 1997)
+×ªĞÅÕ¾: cis_nctu!news.cis.nctu!news.csie.nctu!aidebbs!news.yzit!news.ncu!news.
+À´  Ô´: times.oneway.net
+
+±¾ Perl-CGI ³£ÎÊÎÊÌâ¼¯´¿ÎÄ×Ö°æÒÔ²»¶¨ÆÚ·½Ê½ÔÚ tw.bbs.comp.www ¼°
+tw.bbs.comp.language
+Á½¸öĞÂÎÅÌÖÂÛÈº×éÉÏµÇÔØ¡£±¾ÎÄµÄ³¬ÎÄ¼ş°æ¼°½ñááµÚÒ»ÊÖ
+ĞÂ°æ×ÊÁÏ¿É×ÔÁ½Ö»ÀÏ»¢¹¤×÷ÊÒÈ¡µÃ£¬Î»Ö·Îª£º
+&lt<A HREF="http://www.opim.uconn.edu/~2T/perl/perl-cgi-faq-chi/&gt">http://www.opim.uconn.edu/~2T/perl/perl-cgi-faq-chi/&gt</A>¡£±¾´¿ÎÄ×Ö°æÖĞ
+ÄÚÈİÈôÓĞºÍ³¬ÎÄ¼ş°æ²»Ò»ÖÂÖ®´¦£¬Ò»ÇĞ¾ùÒÔááÕßÎª×¼¡£±¾ FAQ TANet µÄ mirror
+£¨Õâ¸öÓ³Éäµã¿ÉÄÜ»¹ÒªµÈ¼¸Ìì²Å»á×¼±¸ºÃ£©Î»ì¶£º
+<A HREF="ftp://www.math.ncu.edu.tw/pub/staff/chenym/FAQ/Perl/">ftp://www.math.ncu.edu.tw/pub/staff/chenym/FAQ/Perl/</A> (anonymous FTP)
+ºÍ
+<A HREF="http://www.math.ncu.edu.tw/~chenym/FAQ/Perl/">http://www.math.ncu.edu.tw/~chenym/FAQ/Perl/</A>¡£Ì¨ÍåÉÌÒµÍøÂ·µÄ mirror
+ÔòÔÚ
+<A HREF="http://www.oneway.net/FAQ/perl/">http://www.oneway.net/FAQ/perl/</A>¡£
+
+ÒëÕß±àĞ´±¾ FAQ£¨³£ÎÊÎÊÌâ¼¯£©Ö®¶¯»ú£¨ºÍÆäËûĞÂÎÅÈº×é FAQ
+µÄÄ¿µÄ²¢ÎŞ¶şÖÂ£©£¬
+ÄËÓĞ¼øì¶ÏàÍ¬µÄÎÊÌâÔÚÌÖÂÛÈºÖĞÒ»ÔÙ³öÏÖ£¬Í½Ôö´ó¼ÒÈËÁ¦¡¢Æµ¿í£¬¼°Ê±¼äÉÏµÄÀË·Ñ£¬
+Òò´ËÏ£Íû½å´Ë FAQ
+£¬¶ÔĞí¶à·´¸²³öÏÖµÄÎÊÌâÌá³öÕıÈ·µÄ½â´ğ£¬²¢¼õÉÙ´íÎó×ÊÑ¶µÄ
+Á÷´«¡£ËùÒÔÒëÕßÔÚ´ËºôÓõÌÖÂÛÈºÖĞµÄĞÂÏÊÈËÔÚÑ¯ÎÊÓĞ¹Ø Perl-CGI
+Ò»ÀàÎÊÌâÖ®Ç°£¬
+ÎñÇë×ñÊØÍøÂ·Àñ½Ú (netiquette)£¬ÏÈ×Ô±¾ FAQ ÖĞÕÒÑ°½â´ğ¡£´ËÍâ±¾ FAQ
+ÒàÊÊºÏ
+×÷Îª¸öÈË½øĞŞ Perl-CGI ³ÌÊ½Éè¼ÆµÄ²ÄÁÏ¡£
+
+Îª·½±ã´¿ÎÄ×Ö°æ¶ÁÕßÆğ¼û£¬ËùÓĞ³¬ÎÄ¼ş°æÖĞËùº¬µÄ http ¼° ftp
+Á¬½Úµã¾ù¸½¼Óì¶
+ÊÊµ±´¦À¨ºÅÖĞ£¬µ«Î¨¶À Q1.5
+ÖĞµÄÊéÄ¿±íÀıÍâ£¨Òò±àÅÅ²»Ò×£©¡£Èô¶Ô±¾ÖĞÎÄ°æ³£ÎÊ
+ÎÊÌâ¼¯ÓĞÈÎºÎÎÊÌâ¼°Òâ¼û£¬Çë email ÒëÕß¡£
+
+Ô­ÎÄ°æ¡¢ÖĞÒë°æ°æÈ¨ÊÂÒË£¬Ïê¼ûµÚ 5 ²¿·İÎÄµ×£¨¸´ÖÆ¡¢×ªÔØÕßÎñ±Ø×ñÊØ£©¡£
+
+--Ïô°ÙÁä
+Pai-ling Hsiao &lthsiao@uconnvm.uconn.edu&gt
+
+-------- 8&lt ------- Cut Here ------- 8&lt --------
+
+3.0 - CGI Óë WWW Server
+
+---------------------------------------------------------------------------
+
+Q3.1: ÎÒµÄ Perl CGI ³ÌÊ½Òª·ÅÔÚÄÄÀïÖ´ĞĞ£¿cgi-bin Õâ¸öÄ¿Â¼ÊÇ×öÉõ÷áÓÃµÄ£¿
+
+server Í¨³£ÊÇÉè¶¨³ÉÈ¥Ö´ĞĞ·ÅÔÚ ``cgi-bin'' Ä¿Â¼µ×ÏÂµÄ CGI ³ÌÊ½¡£²»¹ı£¬
+server ¹ÜÀíÕßÍ¬Ê±Ò²¿ÉÒÔÔÚÉè¶¨µµÖĞÉè¶¨ aliases£¬ÈÃËùÓĞº¬Ä³Ğ©¸±µµÃû£¨Èç
+..cgi
+¡¢.pl£©µÄ scripts ¶¼ÄÜÖ´ĞĞ*¡£
+
+     ¡¾ÒëÕß¡¿Éè¶¨ CGI aliases ºÍ¸±µµÃû¹ÌÈ»ºÜ·½±ã£¬µ« server ¹ÜÀíÕßĞë×¢
+     Òâµ½Ïà¹ØµÄ°²È«ÎÊÌâ¡£
+
+---------------------------------------------------------------------------
+
+Q3.2: Ê²÷áÊÇµµ°¸Ê¹ÓÃÈ¨ÏŞ£¿ÔõÑù¸Ä£¿
+
+µµ°¸È¨ÏŞÊÇ¸ù¾İÊ¹ÓÃÕßÊ¶±ğ´úºÅ£¨ÓÖ³Æ
+uid£©£¬ÒÔ¼°ËûÃÇËùÊôµÄÍÅÌåÀ´¾ö¶¨ÊÇ·ñ¸³Óë
+Ê¹ÓÃÕß¶Á¡¢Ğ´£¬ºÍÖ´ĞĞÄ³µµ°¸µÄÈ¨Àû¡£Äú¿ÉÊ¹ÓÃ chmod
+Õâ¸öÖ¸ÁîÈ¥ĞŞ¸Äµµ°¸µÄÊ¹ÓÃ
+È¨ÏŞ¡£ÀıÈç£º
+
+     % ls -ls form.cgi
+       1 -rwx------  1 shishir       974 Oct 31 22:15 form.cgi*
+
+´ËÒ»µµ°¸µÄÈ¨ÏŞÎª
+0700£¨°Ë½øÖÆ£©£¬ÒâÎ¶ÖøÃ»ÓĞÈË£¨µµ°¸ËùÓĞÈË³ıÍâ£©ÄÜ¹»¶ÁÈ¡¡¢
+Ğ´½ø£¬»òÖ´ĞĞÕâ¸öµµ°¸¡£ÎÒÃÇ¿ÉÒÔÓÃ chmod Õâ¸öÖ¸ÁîÈ¥ĞŞ¸ÄËüµÄÈ¨ÏŞ£º
+
+     % chmod 755 form.cgi
+     % ls -ls form.cgi
+       1 -rwxr-xr-x  1 shishir       974 Oct 31 22:15 form.cgi*
+
+ÕâÑùÒ»À´£¬È¨ÏŞ¾Í±äÁË¡£ÏÖÔÚºÍ ``shishir''
+ÔÚÍ¬Ò»¸öÍÅÌåµÄÊ¹ÓÃÕß£¬»¹ÓĞÆäËûÈÎ
+ºÎµÄÊ¹ÓÃÕß¶¼ÓĞÈ¨ÀûÈ¥¶ÁÈ¡ºÍÖ´ĞĞÕâ¸öµµ°¸ÁË¡£
+
+ÈçÓûÖª chmod Ö¸Áî¸÷°Ë½øÖÆÊıÂëËù´ú±íµÄº¬Òâ£¬Çë²ÎÔÄ chmod
+manpagesµÄËµÃ÷¡£
+
+---------------------------------------------------------------------------
+
+Q3.3: Perl Ó¦¸Ã°²×°ÔÚÄÄÀï²Å¿ÉÒÔÖ´ĞĞËü£¿
+
+Perl ¿ÉÒÔ°²×°ÔÚÏµÍ³ÉÏÈÎºÎÒ»¸ö½ÇÂä£¡ÄúÎ¨Ò»Òª×¢ÒâµÄÊÇ server
+²»ÄÜÔÚchroot µÄ
+»·¾³ÏÂÅÜ£¬·ñÔòËü±ãÎŞ·¨ÅÜ perl
+½âÒëÆ÷¡£»»ÑÔÖ®£¬ÏµÍ³¹ÜÀíÕß¿ÉÒÔ°Ñ¸ùÄ¿Â¼¸Ä±ä£¬
+ÈÃ ``/'' Ö¸µ½ÁíÒ»¸öÄ¿Â¼£¬¶ø²»ÊÇÊµ¼ÊÕæÕıµÄ¸ùÄ¿Â¼(``/'')¡£
+
+---------------------------------------------------------------------------
+
+Q3.4: ÎÒÎªÊ²÷áÒ»Ö±µÃµ½ ``Server: Error 500'' µÄÑ¶Ï¢£¿
+
+ÒÔÏÂ¼¸ÖÖÇéĞÎ»á´¥·¢Õâ¸ö´íÎóÑ¶Ï¢£º
+
+   * Èç¹û script ¿ªÍ·µÄµØ·½Ã»ÓĞ ``#!/usr/local/bin/perl'' Õâ¸öÖ¸µ½
+Perl ½â
+     ÒëÆ÷µÄ±êÍ·£¬»òÕßÊÇÖ¸µ½½âÒëÆ÷£¨»ò library µµ£©µÄÂ·¾¶´íÎó¡£
+   * Èç¹û script Êä³öµÄµÚÒ»ĞĞÊÇÒ»¸ö²»ÕıÈ·µÄ±êÍ·£¨¼´ ``Content-Type:
+     text/html'' £©£¬»òÕßÊÇ¸Ã±êÍ·ááÃæÃ»ÓĞ¸úÖøÒ»¸ö¿ÕĞĞ¡£
+   * Èç¹ûÄúµÄ script ÓĞ¾ä·¨ÉÏµÄ´íÎó¡£ÄúµÄ scripts
+¶¼Ó¦ÔÚÖ¸ÁîÁĞÏÈÅÜÅÜ¿´²Å
+     ÊÇ¡£
+
+---------------------------------------------------------------------------
+
+Q3.5: ÎÒÊÔÖø´ò¿ªÒ»¸öµµ°¸£¬Ïë°Ñ×ÊÁÏ´¢´æÔÚÀïÍ·£¬µ«ÊÇ open()
+µÄÖ¸ÁîÊ§°ÜÁË¡£µ½
+µ×ÊÇÔõ÷á¸ãµÄ£¿
+
+Ò»°ãËµÀ´£¬HTTP server ÊÇÒÔ
+``nobody''¡¢``www''£¬»òÆäËûÕâÀàÈ¨ÏŞµÍµÄÊ¹ÓÃÕßµÄ
+Éí·İÀ´ÅÜµÄ¡£ÒòÎªÕâ¸öÔµ¹Ê£¬Äú´òËãÔÚÆäÖĞÖÆÔìĞÂµµ°¸µÄÄ¿Â¼£¬¶Ô server
+ÅÜµÄÊ¹ÓÃ
+Õß ID ±ØĞëÒªÊÇ¿ÉĞ´(writable)²ÅĞĞ¡£
+
+ÎªÁËÈ·¶¨Æğ¼û£¬ÄúÃ¿´Î¶¼Ó¦¸ÃÏÈ¼ì²é open Õâ¸öÖ¸ÁîËÍ»ØµÄ½áÊø×´Ì¬(return
+status
+)£¬¿´¿´ open ÓĞÃ»ÓĞ³É¹¦¡£
+
+     open(FILE, &quot/abc/data.txt&quot)
+         || error(&quotCould not open file /abc/data.txt&quot);
+             .
+             .
+             .
+     sub error {
+         my($message) = @_;
+
+         print &lt&ltEnd_of_Error;
+     Content-type: text/html
+     Status: 500 CGI Error
+     &ltHTML&gt
+     &ltHEAD&gt&ltTITLE&gtCGI Error&lt/TITLE&gt&lt/HEAD&gt
+     &ltBODY&gt
+     &ltH1&gtOops! Error&lt/H1&gt
+     &ltHR&gt
+     $message
+     &ltHR&gt
+     &lt/BODY&gt
+     &lt/HTML&gt
+     End_of_Error
+     }
+
+
+·¢ĞÅÈË: hsiao@uconnvm.uconn.edu, ĞÅÇø: programming
+±ê  Ìâ: Perl-CGI ³£ÎÊÎÊÌâ¼¯ -- part4
+·¢ĞÅÕ¾: 2 Tigers (Fri Jun 20 16:02:22 1997)
+×ªĞÅÕ¾: cis_nctu!news.cis.nctu!UUserv.Net.tw!aidebbs!spring!serv.hinet.net!net
+À´  Ô´: times.oneway.net
+
+±¾ Perl-CGI ³£ÎÊÎÊÌâ¼¯´¿ÎÄ×Ö°æÒÔ²»¶¨ÆÚ·½Ê½ÔÚ tw.bbs.comp.www ¼°
+tw.bbs.comp.language
+Á½¸öĞÂÎÅÌÖÂÛÈº×éÉÏµÇÔØ¡£±¾ÎÄµÄ³¬ÎÄ¼ş°æ¼°½ñááµÚÒ»ÊÖ
+ĞÂ°æ×ÊÁÏ¿É×ÔÁ½Ö»ÀÏ»¢¹¤×÷ÊÒÈ¡µÃ£¬Î»Ö·Îª£º
+&lt<A HREF="http://www.opim.uconn.edu/~2T/perl/perl-cgi-faq-chi/&gt">http://www.opim.uconn.edu/~2T/perl/perl-cgi-faq-chi/&gt</A>¡£±¾´¿ÎÄ×Ö°æÖĞ
+ÄÚÈİÈôÓĞºÍ³¬ÎÄ¼ş°æ²»Ò»ÖÂÖ®´¦£¬Ò»ÇĞ¾ùÒÔááÕßÎª×¼¡£±¾ FAQ TANet µÄ mirror
+£¨Õâ¸öÓ³Éäµã¿ÉÄÜ»¹ÒªµÈ¼¸Ìì²Å»á×¼±¸ºÃ£©Î»ì¶£º
+<A HREF="ftp://www.math.ncu.edu.tw/pub/staff/chenym/FAQ/Perl/">ftp://www.math.ncu.edu.tw/pub/staff/chenym/FAQ/Perl/</A> (anonymous FTP)
+ºÍ
+<A HREF="http://www.math.ncu.edu.tw/~chenym/FAQ/Perl/">http://www.math.ncu.edu.tw/~chenym/FAQ/Perl/</A>¡£Ì¨ÍåÉÌÒµÍøÂ·µÄ mirror
+ÔòÔÚ
+<A HREF="http://www.oneway.net/FAQ/perl/">http://www.oneway.net/FAQ/perl/</A>¡£
+
+ÒëÕß±àĞ´±¾ FAQ£¨³£ÎÊÎÊÌâ¼¯£©Ö®¶¯»ú£¨ºÍÆäËûĞÂÎÅÈº×é FAQ
+µÄÄ¿µÄ²¢ÎŞ¶şÖÂ£©£¬
+ÄËÓĞ¼øì¶ÏàÍ¬µÄÎÊÌâÔÚÌÖÂÛÈºÖĞÒ»ÔÙ³öÏÖ£¬Í½Ôö´ó¼ÒÈËÁ¦¡¢Æµ¿í£¬¼°Ê±¼äÉÏµÄÀË·Ñ£¬
+Òò´ËÏ£Íû½å´Ë FAQ
+£¬¶ÔĞí¶à·´¸²³öÏÖµÄÎÊÌâÌá³öÕıÈ·µÄ½â´ğ£¬²¢¼õÉÙ´íÎó×ÊÑ¶µÄ
+Á÷´«¡£ËùÒÔÒëÕßÔÚ´ËºôÓõÌÖÂÛÈºÖĞµÄĞÂÏÊÈËÔÚÑ¯ÎÊÓĞ¹Ø Perl-CGI
+Ò»ÀàÎÊÌâÖ®Ç°£¬
+ÎñÇë×ñÊØÍøÂ·Àñ½Ú (netiquette)£¬ÏÈ×Ô±¾ FAQ ÖĞÕÒÑ°½â´ğ¡£´ËÍâ±¾ FAQ
+ÒàÊÊºÏ
+×÷Îª¸öÈË½øĞŞ Perl-CGI ³ÌÊ½Éè¼ÆµÄ²ÄÁÏ¡£
+
+Îª·½±ã´¿ÎÄ×Ö°æ¶ÁÕßÆğ¼û£¬ËùÓĞ³¬ÎÄ¼ş°æÖĞËùº¬µÄ http ¼° ftp
+Á¬½Úµã¾ù¸½¼Óì¶
+ÊÊµ±´¦À¨ºÅÖĞ£¬µ«Î¨¶À Q1.5
+ÖĞµÄÊéÄ¿±íÀıÍâ£¨Òò±àÅÅ²»Ò×£©¡£Èô¶Ô±¾ÖĞÎÄ°æ³£ÎÊ
+ÎÊÌâ¼¯ÓĞÈÎºÎÎÊÌâ¼°Òâ¼û£¬Çë email ÒëÕß¡£
+
+Ô­ÎÄ°æ¡¢ÖĞÒë°æ°æÈ¨ÊÂÒË£¬Ïê¼ûµÚ 5 ²¿·İÎÄµ×£¨¸´ÖÆ¡¢×ªÔØÕßÎñ±Ø×ñÊØ£©¡£
+
+--Ïô°ÙÁä
+Pai-ling Hsiao &lthsiao@uconnvm.uconn.edu&gt
+
+-------- 8&lt ------- Cut Here ------- 8&lt --------
+
+4.0 £­³ÌÊ½Éè¼ÆÒÉÄÑÔÓÖ¢
+
+---------------------------------------------------------------------------
+
+Q4.1: ÎÒÏëÈÃ user ÌîµÄ form ×ÊÁÏ×Ô¶¯¼Ä¸øÎÒ£¬¸ÃÔõ÷á×ö£¿ÓĞÃ»ÓĞ¡õÀı£¿
+
+ÆäÊµ×öÕâ¸öºÜÈİÒ×¡£ÄúµÄ CGI script ±ØĞëÄÜ×öµ½ÕâÁ½¼şÊÂ£º
+
+  1. ½« form ÖĞµÄ×ÊÁÏÕûÀí³öÀ´¡£±ğÍüÁË£¬ËùÓĞµÄ form ×ÊÁÏ¶¼»á±»
+URL-±àÂëÆğÀ´
+     £¨ÏÈ²»¿¼ÂÇ Netscape 2.0 ¡¾¼° 2.0 ÒÔÉÏËùÖ§Ô®¡¿µÄ multipart
+MIME×ÊÁÏ£©¡£
+  2. ¿ªÒ»¸ö¹ÜÂ· (pipe) µ½ mail £¨»ò sendmail £©£¬È»áá°Ñ form
+×ÊÁÏĞ´¹ıÈ¥¡£
+
+     ÎÒÃÇ¾Í¼ÙÉèÄúÓÃµÄÊÇ CGI::* Ä£×é¡£Äú¿ÉÓÃÒÔÏÂµÄ·½·¨È¥½Ğ sendmail£º
+
+          $cgi_form = new CGI::Form;
+          $from     = $cgi_form-&gtparam('from');
+          $name     = $cgi_form-&gtparam('name');
+          $to       = $cgi_form-&gtparam('to');
+          $subject  = $cgi_form-&gtparam('subject');
+          $message  = $cgi_form-&gtparam('message');
+          open SENDMAIL, &quot| /usr/bin/sendmail -t -n&quot;
+          print SENDMAIL &lt&ltEnd_of_Mail;
+          From: $from &lt$name&gt
+          To: $to
+          Reply-To: $from
+          Subject: $subject
+          $message
+          End_of_Mail
+
+     ÓĞÒ»¸ö¸Ã×¢ÒâµÄµØ·½ÊÇ ``Reply-To:'' µÄĞÅÍ·¡£ÓÉì¶ server ÊÇÒÔ
+``nobody''
+
+Õâ¸öÊ¹ÓÃÕßµÄÉí·İÀ´ÅÜ£¬ĞÅÍ·µÄµØ·½¿ÉÄÜ»á±»¸ã»µ£¨ÓÈÆäÊÇµ±ÓĞÈËÏë»ØÕâ·âĞÅ
+     µÄÊ±áá£©¡£¼ÓÉÏ ``Reply-To'' µÄĞÅÍ·Õâ¸öÎÊÌâ±ã½â¾öÁË¡£
+
+     ÍøÂ·ÉÏÓĞĞí¶àµÄ mail ÇşµÀ (gateway)* ÊÇÒÔµ×ÏÂÕâÖÖ·½·¨À´ËÍ mail£º
+
+          ¡¾ÒëÕß¡¿gateway ÔÚ´ËÖ¸ËÍ email µÄ CGI ³ÌÊ½
+
+          open MAIL, &quot| mail -s 'Subject' $to&quot;
+                                            ^
+                                            |
+                                            +--
+¿ÉÄÜ»á³öÎÊÌâµÄÂ©¶´£¡£¡£¡
+
+     Èç¹ûÄúÃ»ÓĞÏÈ¼ì²é¿´ $to Õâ¸ö±äÊıÓĞÃ»ÓĞÄÚº¬ shell µÄÌØÊâ·ûºÅ
+     (metacharacters)£¬ÄúÊÇÔÚ×ÔÌÖ¿à³Ô£¡Æ©Èç£¬Èç¹ûÄÄ¸ö¶ñÁÓµÄ user
+ÊäÈëÁËÒÔÏÂ
+     µÄ×ÊÁÏ£º
+
+          ; rm -fr / ;
+
+     ÄÇ÷áÄúµÄÂé·³¿É´óÁË*¡£
+
+          ¡¾ÒëÕß¡¿ÕâÀïÍ·µÄ ``;'' ±ãÊÇÒ»¸öÎ£ÏÕµÄ shell metacharacter¡£
+          ÁíÒ»¸öÎ£ÏÕµÄ·ûºÅÊÇ ``&amp''¡£
+
+          ÔÚÕâ¸ö¼ÙÏëµÄÇé¿öÖĞ£¬ÓĞ¶àÉÙ¸öµµ°¸»á±»Ô¶·½µÄ user ¸øÉ±µô£¬»¹µÃ
+          ÊÓ server ÅÜµÄÊ¹ÓÃÕßµÄÈ¨ÏŞ¶ø¶¨£¨Õâ¾ÍÊÇÎªÊ²÷á server ÒªÒÔµÍÈ¨
+          ÏŞÊ¹ÓÃÕßÉí·İÅÜµÄÔ­Òò£©¡£ÖÁÉÙÄÇĞ©ÓÉ CGI ³ÌÊ½ÖÆÔì³öÀ´£¬µ«ÓÖÃ»
+          ÓĞ±¸·İµÄµµ°¸£¬ÊÇÕæµÄÒª¸úËüÃÇÓÀ±ğÁË¡£
+
+               ; mail joe@crackerland.org &lt/etc/passwd
+
+          ÄÇÄúµÄ CGI script ¾ÍÌæÄú°Ñ /etc/passwd ¸ø¹°ÊÖËÍÉÏÁË¡£Õâ¶ÔÒ»
+          ¸ö¡¸Î´¼Ó¹¤¡¹µÄ Linux¡¢SunOS 4.1£¬»¹ÓĞÆäËûÈÎºÎÃ»°²×°
+          shadow-password µÄ UNIX ÏµÍ³À´Ëµ£¬ÊµÔÚ²»Ì«ºÃÍæ¡£Èç¹û server
+          ´íÎóµØÅÜÁË root£¬ÄÇ÷á¾ÍËã×°ÁË shadow-password Ò²Ã»ÓĞÓÃ£¬ÒòÎª
+          Ô¶·½µÄ cracker ÉõÖÁ¿ÉÒÔÈÃÕâ¸ö CGI µÄ email script ¸øËûËÍ
+          /etc/shadow £¨ÊÓÏµÍ³¶ø¶¨£¬²»Ò»¶¨ÔÚ /etc µ×ÏÂ»ò½ĞÕâ¸öÃû×Ö£©¡£
+
+
+----------------------------------------------------------------------
+
+     Q4.2: ¸Õ²ÅÕâ¸öÓÃ form ËÍĞÅµÄ script ¿´ÆğÀ´ÓĞµãÄÑ¡£ÎªÊ²÷á²»Ç¬´àÓÃ
+     ``mailto: URL''£¬ÕâÑù user ÌîÈëµÄ×ÊÁÏ¾Í¿ÉÒÔ¼Ä¸øÎÒÁË£¿
+
+     ºÜ²»ĞÒµØ£¬mailto:
+µÄÖ¸Áî²¢²»ÊÇËùÓĞµÄä¯ÀÀÆ÷¶¼Ö§Ô®¡£Èç¹ûÄúÔÚµµ°¸ÖĞÓÃÁËËü
+     µÄ»°£¬»áÏŞÖÆÁËÄÇĞ©Ê¹ÓÃÃ»ÓĞÖ§Ô® mailto: µÄä¯ÀÀÆ÷µÄÈË£¬ÈÃËûÃÇÎŞ·¨ËÍ
+     mail ¸øÄú*¡£
+
+          ¡¾ÒëÕß¡¿¾¡¹ÜÈç´Ë£¬Äú»òĞí²»»áÔÚºõÄÇÕ¼¼«ÉÙÊı±ÈÀıµÄÊ¹ÓÃÕß
+          £¨Netscape ¡¢ IE£¬ºÍ lynx µÈä¯ÀÀÆ÷¶¼Ö§Ô® mailto: £©¡£
+
+
+----------------------------------------------------------------------
+
+     Q4.3: ÎÒÒªÈçºÎÔÚ UNIX ÒÔÍâµÄÆ½Ì¨ÉÏ×ö Perl-CGI£¬Æ©Èç Mac¡¢MS-DOS¡¢
+     Windows ¼° NT£¿ÎÒµÄ Perl CGI
+³ÌÊ½ÄÜ²»ÄÜÔÚÕâĞ©Æ½Ì¨Ö®¼ä»¥ÏàÒÆÖ²ÄØ£¿ÄÜ²»
+     ÄÜºÜÖ±½Ó£¬Ã»ÓĞÂé·³£¿ÎÒÔÚ UNIX Ö÷»úÉÏÓĞÕÊºÅ£¬µ«ÊÇ¶¼ÊÇÏÈÔÚ
+Windows/Mac
+     ÉÏ×ö¡£ÎÒÒªÈçºÎÔÚÎÒ×Ô¼ºµÄ»úÆ÷ÉÏ²âÊÔĞ´ºÃµÄ CGI scripts*£¿
+
+     Perl ÒÑ¾­±»ÒÆÖ²µ½ÉÏÊöËùÓĞµÄÆ½Ì¨ÉÏÁË¡£Òò´Ë£¬ÄúµÄ Perl CGI
+³ÌÊ½ÕÕÀíÓ¦²»
+     ÄÑÒÆÖ²¡£µ«Èç¹ûÄúÊ¹ÓÃµ½Ò»Ğ© UNIX
+ÉÏµÄ³ÌÊ½£¬ÄÇ÷áÄúµÄ³ÌÊ½¿ÉÄÜ»á²»ºÃÒÆ
+
+Ö²¡£Èç¹ûÄúÖ»ÊÇ×ö×ÊÁÏ´¦Àí£¬»ò¿ªÆô¡¢¶Á½øµµ°¸µÈµÄ»°£¬ÄÇ÷áÒÆÖ²Ó¦¸Ã²»»áÓĞ
+     ÎÊÌâ¡£
+
+          ¡¾ÒëÕß¡¿Ô­ FAQ ²¢Î´»Ø´ğ×îááÕâ¸öÎÊÌâ¡£ÒªÔÚ Windows/OS2/Mac µÈ
+          ·Ç UNIX Æ½Ì¨ÉÏ²âÊ½ÄúµÄ scripts £¬Äú¿ÉÒÔÊ¹ÓÃ CGI.pm £¨Ö§Ô®ÒÔ
+          ÉÏËùÓĞÆ½Ì¨£©£¬ÅäºÏ Q4.19 ÖĞÌáÊ¾µÄ³ı´í¼¼ÇÉ£¬»òÔÚ×Ô¼ºµÄ»úÆ÷ÉÏ
+          °²×° HTTP server ÈíÌå¡£Èç´Ë¾Í²»ÓÃĞÁ¿àµÄÁ¬ÉÏÖ÷»úÈ¥²âÊ½ÁË¡£
+
+
+----------------------------------------------------------------------
+
+     Q4.4: ÔÚ Perl CGI ³ÌÊ½ÖĞ£¬STDERR £¨±ê×¼´íÎóÑ¶Ï¢)¡¢STDIN
+(±ê×¼ÊäÈë£©£¬
+     ºÍ STDOUT £¨±ê×¼Êä³ö£©¸÷ÊÇÁ¬µ½ºÎ´¦£¿
+
+     ÔÚ CGI »·¾³ÏÂ£¬STDERR »áÖ¸Ïò server µÄ´íÎóÑ¶Ï¢µµ (error
+log)¡£Äú¿ÉÒÔ
+     ÉÆ¼ÓÀûÓÃÕâ¸öÌØĞÔ£¬°Ñ³ı´íµÄÑ¶Ï¢Ğ´µ½
+STDERR£¬È»ááÄú±ã¿É½å²é¿´´íÎóÑ¶Ï¢µµ
+     À´°ïÄú³ı´í¡£
+
+     STDIN ºÍ STDOUT Ôò¶¼ºÍä¯ÀÀÆ÷ÏàÁ¬¡£Êµ¼ÊÉÏ£¬STDIN Á¬µÄÊÇ server¡£
+server
+     »áÏÈ½â¶Á client £¨»òä¯ÀÀÆ÷£©ËÍ³öµÄÇëÇóºÍ×ÊÁÏ£¬ÔÙ½«ÆäËÍ¸ø script¡£
+
+     ÄúÒ²¿ÉÒÔÓÃ½« STDERR ¡¸¸´ÖÆ¡¹µ½ STDOUT
+µÄ·½·¨À´×¥´íÎóÑ¶Ï¢¡£ÕâÓ¦¸ÃÔÚ
+     script ¿¿Ç°Í·µÄµØ·½×ö£¨µ«Ó¦ÔÚÄúÊä³öºÏÊÊµÄ HTTP ±êÍ·Ö®áá£©£º
+
+          open STDERR, &quot&gt&ampSTDOUT&quot;
+
+     Õâ»á½«ËùÓĞµÄ´íÎóÑ¶Ï¢¶¼×ªËÍµ½ STDOUT £¨¼´ä¯ÀÀÆ÷£©È¥¡£
+
+
+----------------------------------------------------------------------
+
+     Q4.5: ÈçºÎĞ´¼ÆÊıÆ÷£¿
+
+     ¼ÆÊıÆ÷Ò»ÀàµÄ³ÌÊ½Ïàµ±Á÷ĞĞ¡£ÆäÊµ¼ÆÊıÆ÷µÄÔ­ÀíºÜ¼òµ¥£¬²»¹ıÊÇ£º
+        o ÓÃÒ»¸öµµ°¸È¥´¢´æ×ÊÁÏ¡£
+        o Ã¿µ±ÓĞÈË¹âÁÙÍøÕ¾£¬Ôö´óµµ°¸ÖĞËù¼ÆµÄÊı×Ö¡£
+
+     ÒÔÏÂÊÇÒ»¸ö¼òµ¥µÄ¼ÆÊıÆ÷µÄÊµÀı£º
+
+          #!/usr/local/bin/perl -w
+          $counter = &quot/home/shishir/counter.dat&quot;
+          print &quotContent-type: text/plain&quot, &quot\n\n&quot;
+          open(FILE, $counter) || die &quotCannot read from the counter
+file.\n&quot;
+          flock FILE, 2;
+          $visitors = &ltFILE&gt;
+          flock FILE, 8;
+          close FILE;
+          open(FILE, &quot&gt$counter&quot) || die &quotCannot write to counter
+file.\n&quot;
+          flock FILE, 2;
+          print FILE $visitors;
+          flock FILE, 8;
+          close FILE;
+
+     ÏÖÔÚÄú¿ÉÒÔÔÚ HTML µµ°¸ÖĞÓÃ SSI (Server Side Include; ËÅ·ş¶Ë²åÈë)*
+µÄ·½
+     Ê½À´ÏÔÊ¾¸Ã¼ÆÊıÆ÷£º
+
+          ¡¾ÒëÕß¡¿SSI ÊÇ server ËùÌá¹©µÄÒ»Ïî¹¦ÄÜ£¬¿É½«¶¯Ì¬×ÊÁÏ£¬ÀıÈçÈÕ
+          ÆÚºÍÊ±¼ä£¬»ò¼ÆÊıÆ÷ÏÔÊ¾µÈ£¬ÔÚ¿Í»§ÇëÇóÒ»ÍøÒ³Ê±¼´Ê±¼ÓÈë¸ÃÎÄ¼ş
+          ÖĞ¡£Ö§Ô® SSI µÄ servers °üÀ¨ÁË NCSA
+          (&lt<A HREF="http://hoohoo.ncsa.uiuc.edu&gt">http://hoohoo.ncsa.uiuc.edu&gt</A>)¡¢Apache
+          (&lt<A HREF="http://www.apache.org/&gt">http://www.apache.org/&gt</A>)£¬ºÍNetscape Enterprise Server
+
+(&lt<A HREF="http://home.netscape.com/comprod/server_central/product/enterprise/&gt">http://home.netscape.com/comprod/server_central/product/enterprise/&gt</A>)
+          µÈ¡£ SSI ¹ÌÈ»ÊÇÒ»Ïî±ãÀûµÄÉè¼Æ£¬µ«Èç¹ı·İÀÄÓÃ£¬²»µ«»á¼õµÍ
+          server ĞÔÄÜ£¬¸ü¿ÉÄÜÕĞÀ´°²È«ÉÏµÄÎ£»ú¡£
+
+          ÄúÊÇµÚ
+          &lt!--#exec cgi=&quot/cgi-bin/counter.pl--&gt
+          Î»¹âÁÙ±¾Õ¾µÄ¿ÍÈË¡£
+
+
+----------------------------------------------------------------------
+
+     Q4.6: ÒªÈçºÎÓÃÒ»¸ö Perl µÄÈ¡´úÖ¸Áî½«ËùÓĞ HTML
+±êÇ©´ÓÒ»·İÎÄ¼şÖĞÉ¾³ı£¿
+
+     ÒÔÏÂÕâ¸ö¼òµ¥µÄ regular expression ¿ÉÓÃÀ´È¥³ı HTML ±êÇ©*£º
+
+          ¡¾ÒëÕß¡¿
+            1. ÒªÈÃÕâ¸ö regular expression ¿çĞĞÖ´ĞĞ£¬Äú±ØĞëÏÈ½«ÄúµÄ
+               script ÓÉÔ¤ÉèµÄ°´ĞĞÖ´ĞĞÄ£Ê½ (line mode) ¸ÄÎª°´¶ÎÖ´ĞĞÄ£
+               Ê½ (paragraph mode)¡£Äú¿ÉÒÔÔÚÖ¸ÁîÁĞÒÔ£º
+
+               perl -00 -we '...'
+
+               µÄ·½Ê½£»»òÊÇÔÚ script ÖĞÒÔ£º
+
+               #!/usr/bin/perl -00
+
+               »ò
+
+               $/ = &quot&quot;
+
+               µÄ·½Ê½À´Éè¶¨°´¶ÎÖ´ĞĞÄ£Ê½¡£
+            2. ³ı·ÇÄúĞèÒª¶ÔÓûÉ¾³ıµÄ HTML ±êÇ©ÖĞµÄÄÚÈİ×ö½øÒ»²½µÄ´¦Àí»ò
+               ÀûÓÃ£¬·ñÔò±¾ÀıÖĞ×îÍâÎ§µÄÒ»¶ÔÀ¨»¡¿ÉÈ¥µô¡£
+
+          $line =~ s/&lt(([^ &gt]|\n)*)&gt//g;
+
+     ÏêÏ¸µÄÏà¹Ø×ÊÁÏ£¬Çë¿´ Tom [Christiansen] µÄ striphtml ³ÌÊ½
+
+(&lt<A HREF="ftp://perl.com/perl/scripts/striphtml&gt">ftp://perl.com/perl/scripts/striphtml&gt</A>)£¬Õâ¸ö³ÌÊ½Í¬Ê±Ò²ÊÕÂ¼ÔÚËûµÄ
+     tour of perl5 regexps
+(&lt<A HREF="http://perl.com/perl/all_about/regexps.html&gt">http://perl.com/perl/all_about/regexps.html&gt</A>)
+     ½²ÒåÖĞ¡£
+
+
+----------------------------------------------------------------------
+
+     Q4.7: ÒªÈçºÎÖªµÀÊÇË­£¯ÄÄÌ¨»úÆ÷£¯ÄÄ¸öä¯ÀÀÆ÷Ö´ĞĞÁËÎÒµÄ³ÌÊ½£¿
+
+     Äú¿ÉÒÔ´Ó HTTP_USER_AGENT Õâ¸ö»·¾³±äÊıµÃÖªÊ¹ÓÃÕßËùÓÃµÄä¯ÀÀÆ÷¡£
+
+     ¡¾Õª×Ô WWW FAQ¡¿
+
+     ÄúµÄ CGI script
+¿ÉÒÔÀûÓÃÎå¸öÖØÒªµÄ»·¾³±äÊıÀ´°ïÃ¦±æÊ¶Ê¹ÓÃÕßµÄÉí·İ¡£
+
+        * HTTP_FROM
+Õâ¸ö»·¾³±äÊıÀíÂÛÉÏÓ¦ÉèÎªÊ¹ÓÃÕßµÄemailµØÖ·¡£µ«ÊÇĞí¶àä¯ÀÀ
+
+Æ÷ÍêÈ«²»¼ÓÒÔÉè¶¨¡¾¼´²»Ö§Ô®¡¿£¬¶ø´ó²¿·İÖ§Ô®Õâ¸ö±äÊıµÄä¯ÀÀÆ÷ÓÖÈÃÊ¹
+          ÓÃÕß×ÔÓÉÉè¶¨Õâ¸öÖµ¡£Òò´Ë£¬½¨Òé¶ÁÕß¶¥¶àÄÃËüÀ´×öÎª email form
+ÖĞ»Ø
+          ĞÅµØÖ·µÄÔ¤ÉèÖµ¡£
+
+        * REMOTE_USER Õâ¸ö±äÊıÎ¨ÓĞµ± script
+ÔÚ°²È«ÈÏÖ¤µÄ±£»¤ÏÂÖ´ĞĞÊ±²Å»á±»
+          Éè¶¨¡£´Ó AUTH_TYPE
+Õâ¸ö±äÊı¿ÉÒÔÖªµÀËùÓÃµÄÈÏÖ¤·½·¨ÊÇÊôì¶ÄÄÒ»¸öÀà
+          ĞÍ¡£REMOTE_USER
+Ôò»áº¬ÓĞÕı½ÓÊÜÈÏÖ¤µÄÊ¹ÓÃÕßµÄÃû×Ö¡£Òª×¢ÒâµÄÊÇ£¬
+          REMOTE_USER
+Ö»ÓĞÔÚÊ¹ÓÃ°²È«ÈÏÖ¤µÄÊ±ºò²Å»á±»Éè¶¨£¬¶øÇÒ²»ÊÇËùÓĞµÄ
+          servers ¶¼Ö§Ô®¡£ÔÚ NCSA server
+µ×ÏÂ£¬Èç¹ûÈÏÖ¤ËùÊ¹ÓÃµÄ´«Êä·½Ê½Ã»
+          ÓĞÁĞÈë access.conf µµÖĞ(Ò²¾ÍÊÇËµ£¬Ó¦Ê¹ÓÃ &ltLimit GET
+POST&gt£¬¶ø²»ÊÇ
+          ½ö½öÓÃÔ¤ÉèµÄ &ltLimit GET&gt)£¬ÈÏÖ¤¿ÉÄÜ»á³öÈËÒâÍâµØÊ§°Ü¡£
+
+        * REMOTE_IDENT Èç¹û server ÄÜÁ¬½ÓÉÏ¿Í»§¶ËµÄ IDENT
+server£¬Ëü»á½«Õâ
+          ¸ö±äÊıÉè³ÉÔ¶·½Ê¹ÓÃÕßµÄÉí·İ¡£µ«ÓÉì¶ÏòIDENT server
+²éÑ¯µÄ¶¯×÷Ì«»¨
+          Ê±¼ä£¬´ó²¿·İµÄ servers
+¶¼°ÑÕâÏî¹¦ÄÜ¹Øµô¡£¸üºÎ¿ö£¬¿Í»§¶ËµÄ»úÆ÷ÊÇ
+          ·ñ»á»ØÓ¦²éÑ¯£¬ÓÖÊÇ·ñ»á³ÏÊµÒÔ¶Ô£¬¶¼ÊÇÎŞ·¨È·¶¨µÄ¡£
+
+        * REMOTE_HOST
+        *
+Õâ¸ö±äÊıµÄÉè¶¨Öµ²¢²»°üÀ¨Ô¶¶ËÊ¹ÓÃÕßµÄÕæÊµÉí·İ£¬µ«ÊÇ»áÌá¹©Ê¹ÓÃÕßÕı
+          ÓÃÀ´Á¬ÏßµÄ»úÆ÷Ãû³Æ£¬Ö»Òª server
+ÄÜÕÒµÃ³öÀ´¡£ÓÉì¶ÎÒÃÇÎŞ·¨È·ÇĞµÃÖª
+
+Ê¹ÓÃÕßµÄÕæÊµÉí·İ¡¾Çë¿´Ç°Ò»¸ö»·¾³±äÊıµÄËµÃ÷¡¿£¬ÓĞµÄÊ±ºòÊ¹ÓÃ¿ÉÈ·ÈÏ
+          µÄÎ»Ö·À´Ìæ´ú£¬²»Ê§ÎªÒ»¸ö¿ÉĞĞµÄ±äÍ¨·½·¨¡£ÔÚ server
+²é²»µ½Ô¶¶ËµÄ»ú
+          Æ÷Ãû³Æ£¬»òÕßÊÇÎªÔö¼Ó server
+µÄ´¦ÀíËÙ¶È¶ø½«Õâ¸ö²éÑ¯¹¦ÄÜ¹ØµôµÄÇé¿ö
+          ÏÂ£¬Õâ¸ö±äÊıÊÇ¿ÕµÄ£»Çë¿´µ×ÏÂ REMOTE_ADDRESS
+Ò»ÏîµÄËµÃ÷¡£»¹ÓĞ£¬±ğ
+          ÍüÁËÄú¿ÉÄÜ»á·¢ÏÖËùÓĞÊ¹ÓÃÍ¬Ò»¸ö proxy £¨´úÀíÈË£© server
+µÄÊ¹ÓÃÕßµÄ
+          »úÆ÷Ãû¶¼±ä³ÉÁËÄÇÌ¨ proxy server µÄÃû×Ö¡£
+
+        * REMOTE_ADDR
+Õâ¸ö±äÊıµÄÉè¶¨Öµ²¢²»°üÀ¨Ô¶¶ËÊ¹ÓÃÕßµÄÕæÊµÉí·İ£¬µ«ÊÇ»á
+          Ìá¹©Ê¹ÓÃÕßÕıÓÃÀ´Á¬ÏßµÄ»úÆ÷µÄ×ÊÁÏ¡£REMOTE_ADDR »á°üº¬¿Í»§¶ËµÄ
+IP
+
+Î»Ö·£¬ÒÔÓÃµã¸ô¿ªµÄÊ®½øÎ»Êı×ÖµÄĞÎÊ½À´±íÊ¾¡£ÓÉì¶ÎÒÃÇÎŞ·¨È·ÇĞµÃÖªÊ¹
+          ÓÃÕßµÄÕæÊµÉí·İ
+[Çë¿´Ç°Ò»¸ö»·¾³±äÊıµÄËµÃ÷]£¬ÓĞµÄÊ±ºòÊ¹ÓÃ¿ÉÈ·ÈÏµÄ
+          Î»Ö·À´Ìæ´ú£¬²»Ê§ÎªÒ»¸ö¿ÉĞĞµÄ±äÍ¨·½·¨¡£ºÍÇ°Ò»Ïî REMOTE_HOST
+²»Í¬
+
+µÄÊÇ£¬Õâ¸ö±äÊıÒ»¶¨»á±»Éè¶¨¡£»¹ÓĞ£¬±ğÍüÁËÄú¿ÉÄÜ»á·¢ÏÖËùÓĞÊ¹ÓÃÍ¬Ò»
+          ¸ö proxy £¨´úÀíÈË£© server µÄÊ¹ÓÃÕßµÄ»úÆ÷Î»Ö·¶¼±ä³ÉÁËÄÇÌ¨
+proxy
+          server µÄÎ»Ö·¡£
+
+     ¡¾ÕªÂ¼×Ô WWW FAQ ²¿·İÍê¡¿
+
+
+----------------------------------------------------------------------
+
+     Q4.8: ÈË¼Ò¿´µÃµ½ÎÒµÄ Perl CGI
+³ÌÊ½Âğ£¿Èç¹ûÊÇÕâÑùµÄ»°£¬ÄÇ²»¾ÍÈÃËûÃÇÖªµÀ
+     ÎÒµÄ³ÌÊ½ÊÇÔõ÷áÔË×÷µÄÁË¡£ÕâÊÇ¸ö°²È«Â©¶´Âğ£¿ÎÒÒªÔõ÷á°ÑËüÒş²ØÆğÀ´£¿
+
+     Èç¹ûÄú½«ÄúµÄ server Éè³É¶ÔËùÓĞÔÚÒ»¸öÌØ¶¨Ä¿Â¼£¨Èç
+cgi-bin£©ÏÂµÄµµ°¸£¬»ò
+     ÕßÊÇ¾ßÓĞÄ³Ğ©¸±µµÃû£¨Èç ``.pl''¡¢``.tcl''¡¢``.sh''£©µÄµµ°¸Ò»ÂÉ¶¼ÒÔ
+CGI
+     ³ÌÊ½¿´´ı£¬ÄÇ÷á server Ö»»áÖ´ĞĞÕâĞ©³ÌÊ½¡£ÖÁì¶Ê¹ÓÃÕßÊÇÎŞ·¨¿´µ½
+script
+     ±¾ÉíµÄÄÚÈİµÄ¡£
+
+     µ«ÊÇÈç¹ûÄúÔÊĞíÈËÃÇ¿´ÄúµÄ script (Æ©Èç°ÑËü·Åµ½ HTML
+ÎÄ¼şµÄ¸ùÄ¿Â¼ÏÂ)£¬
+
+ÄÇ÷áÖ»ÒªÊÇÕâ¸ö³ÌÊ½Ã»ÓĞ°²È«ÉÏµÄÂ©¶´£¬Õâ²¢²»ÄÜËãÊÇ°²È«ÎÊÌâ¡£Èç¹ûÕâ¸ö³Ì
+
+Ê½ÕæµÄÓĞ°²È«ÉÏµÄÆÆÕÀ¶øÄúÓÖÔÊĞíÊ¹ÓÃÕß¿´Õâ¸ö³ÌÊ½£¬ÄÇ÷áËûÃÇ±ãÓĞ»ú¿É³Ë£¬
+     ½ø¶øÀûÓÃÕâ¸öÈõµã¡£
+
+          ¡¾ÒëÕß¡¿ÉÏÃæÕâ¶ÎÔ­ÎÄ×÷ÕßÊÇ¾ÍÔ¶·½µÄ¿Í»§¶ËµÄÊ¹ÓÃÕß¶øÑÔ¡£ºÍÕâ¸ö
+          Ö÷ÌâÏà¹ØµÄÒ» ¸ö³£ÎÊÎÊÌâÊÇ£º
+
+          Q: ÎÒµÄ Perl CGI scripts
+±ØĞë½«È¨ÏŞÉèÎªÈ«ÊÀ½ç¿É¶Á¡£¿ÉÊÇÕâÑùÒ»
+          À´£¬ºÍÎÒÍ¬
+»úÆ÷ÓĞÕÊ»§µÄÈË£¬Ö»ÒªÖªµÀÎÒµÄ³ÌÊ½Ãû³Æ£¬¾Í¿ÉÒÔä¯ÀÀÎÒ
+          µÄ Perl ³ÌÊ½µÄÄÚÈİ£»ÓÈ Æäµ±ÆäÖĞÇ£Éæµ½ÃÜÂëµÄÎÊÌâÊ±¡£
+
+          A: ÖÁÉÙÓĞÁ½¸ö½â¾ö·½·¨£¬Ò»¸ö¼òµ¥£¬Ò»¸ö¸´ÔÓ£º
+
+          ¼òµ¥µÄ·½·¨ÊÇ£¬ÇëÄúµÄÏµÍ³¹ÜÀíÕß£¨Èç¹û²»ÊÇÄú×Ô¼ºµÄ»°£©£¬½«ÄúµÄ
+          CGI scripts ¼°ÃÜÂëµµ£¨Èç¹ûÄúÑ¡Ôñ½«ÃÜÂë´æ·ÅÔÚÁíÒ»¸öµµ°¸ÖĞµÄ
+          »°£©µÄËùÓĞÕßÉè³É Web server ÅÜµÄÊ¹ÓÃÕß£¨×î³£¼ûµÄÊÇÊ¹ÓÃÕß
+          nobody £»Ê¹ÓÃÈº nogroup »ò nobody£©£¬ È»áá½« CGI scripts
+µÄÊ¹
+          ÓÃÈ¨ÏŞÉè¶¨³É 550 (-r-xr-x---)£¬ÃÜÂëµµµÄÈ¨ÏŞÉè³É 440
+          (-r--r-----)¡£Èç´ËÒ»À´£¬Ò»·½ÃæÄúµÄ³ÌÊ½µÃÒÔÖ´ĞĞ£¬¶øÇÒÆäËûÍ¬»ú
+          Æ÷ÉÏµÄ Ê¹ÓÃÕßÒ²Ã»ÓĞ°ì·¨Íµ¿´µ½ÄúµÄ³ÌÊ½ºÍÃÜÂë¡£
+
+          ±È½Ï¸´ÔÓµÄ½â¾ö·½·¨ÊÇÏÈÌô¸öÄÑÆÆµÄÃÜÂë½«Õû¸ö³ÌÊ½¼ÓÃÜÆğÀ´£¬È»áá
+          ÔÙÊ¹ÓÃ Filter::decrypt Õâ¸öÄ£×éÔÚÁÙÖ´ĞĞÇ°½«Æä½â¿ª£¬ÔÚ´Ë²»¶à
+          Ëµ¡£ÓĞĞËÈ¤µÄ¶ÁÕßÇë¿´ Filter::decrypt µÄÊ¹ÓÃËµÃ÷£»´ËÍâĞÂµÄ
+          perl FAQ µÚÈı²¿·ÖÖĞÕâÒ»¶Î£º``How can I hide the source for
+my
+          Perl program?'' £¬´ó¼ÒÒ²¿É²Î¿¼¡£
+
+
+----------------------------------------------------------------------
+
+     Q4.9: ÎÒĞèÒª½«Õû¸ö Perl library ¶¼¸´ÖÆµ½ÎÒµÄ htdocs Ä¿Â¼µ×ÏÂÂğ£¿
+
+     ²»ĞèÒª¡£ÄúµÄ CGI scripts ¿ÉÒÔÊ¹ÓÃ server
+ºÍÎÄ¼ş¸ùÄ¿Â¼Ö®ÍâµÄÈÎºÎµµ°¸£¬
+     ³ı·Ç server ÊÇÔÚÒ»¸ö chroot µÄ»·¾³ÏÂÖ´ĞĞ¡£
+
+
+----------------------------------------------------------------------
+
+     Q4.10:
+ÎÒÎªÊ²÷á²»¸Ã½ĞÊ¹ÓÃÕßÊäÈëËûÃÇµÄÃÜÂë»òÉí·İÖ¤×ÖºÅ»òĞÅÓÃ¿¨ºÅÂë£¿ÓĞ
+     Ò»¸ö TYPE=&quotpassword&quot ²»ÊÇ¾ÍÊÇÄÃÀ´×öÕâ¸öµÄÂğ£¿
+
+     No! form µÄ½éÃæÖĞÓĞÒ»¸ö ``password''
+µÄÀ¸Î»£¬µ«ÊÇÄú²»Ó¦¸ÃÄÃËüÀ´´¦ÀíÈÎ
+     ºÎ»úÃÜĞÔµÄ×ÊÁÏ¡£²»¸ÃÕâ÷á×öµÄÔ­ÒòÊÇÒòÎªËùÓĞµÄ form ×ÊÁÏ(°üÀ¨
+     ``password'' À¸) ¶¼ÊÇÒÔ´¿ÎÄ×ÖĞÎÊ½£¬¶ø·ÇÒÔ¼ÓÃÜĞÎÊ½ÓÉä¯ÀÀÆ÷ËÍÖÁ
+server¡£
+
+     Èç¹ûÄúÏëÒª°²È«µØ´«ËÍ×ÊÁÏ£¬ÄÇ÷áÄúĞèÒªÊ¹ÓÃ¾ßÓĞ°²È«¹¦ÄÜµÄ
+server£¬ÀıÈç
+     Netscape µÄ Commerce Server
+
+(&lt<A HREF="http://home.netscape.com/comprod/products/iapps/platform.html&gt">http://home.netscape.com/comprod/products/iapps/platform.html&gt</A>)*¡£
+
+          ¡¾ÒëÕß¡¿Apache SSL £¬ÀıÈç Stronghold °æ
+          (&lt<A HREF="http://stronghold.c2.net&gt">http://stronghold.c2.net&gt</A>)£¬Í¬Ñù¾ßÓĞÕâ¸ö¹¦ÄÜ¡£
+
+
+----------------------------------------------------------------------
+
+     Q4.11: ÎÒÒªÈçºÎ²úÉú×¨ÃÅÌæ Netscape
+Éè¼ÆµÄÍøÒ³£¬ÒÔ±ğì¶ÊÀÉÏÆäËûµÄä¯ÀÀ
+     Æ÷£¿
+
+     Äú¿ÉÒÔÍ¸¹ı HTTP_USER_AGENT Õâ¸ö»·¾³±äÊıÔÚÄúµÄ CGI script
+ÖĞµÃÖªÊÇ·ñ
+     Netscape ÕıÔÚÖ´ĞĞÄúµÄ script¡£ÒÔÏÂÎªÒ»Àı£º
+
+          $browser = $ENV{'HTTP_USER_AGENT'};
+          if ($browser =~ /Mozilla/) {
+              #
+              # Netscape
+              #
+          } else {
+              #
+              # Non Netscape
+              #
+          }
+
+
+----------------------------------------------------------------------
+
+     Q4.12: ÎªÊ²÷áÎÒµÄ system() Ëù²úÉúµÄ×ÊÁÏÊä³öË³Ğò²»¶Ô£¿
+
+
+ÕâÊÇÓÉì¶±ê×¼Êä³öµÄ²úÉú·½Ê½Í¨³£ÊÇÏÈÀÛ»ıÏàµ±µÄ×ÊÁÏÔÙÊä³ö(buffered)¡£Òª
+     ÈÃÊä³öµÄ×ÊÁÏÒÔÕıÈ·µÄË³ĞòÏÔÊ¾£¬Äú±ØĞë½åÓÉ $| Õâ¸ö±äÊıµÄÉè¶¨½«
+buffering
+     µÄÌØĞÔ¹Øµô¡£
+
+
+----------------------------------------------------------------------
+
+     Q4.13: ÎÒÌıËµ Netscape »áÖ§Ô® Java*¡£ÕâÊÇ²»ÊÇËµÎÒÏÖÔÚµÃÆú
+Perl£¬¸Ä
+     Java ÁË£¿ÊÇ²»ÊÇ¸ÃÕâ÷á×ö£¿
+
+          ¡¾ÒëÕß¡¿Ô­ FAQ ÒÑÓĞÏàµ±Ò»¶ÎÊ±¼äÎ´¸üĞÂ¡£Õâ¾ä»°ÏÖÔÚÓ¦¸Ã¸Ä×÷
+          ¡¸Netscape ºÍ IE Á½´óä¯ÀÀÆ÷¶¼ÒÑÖ§Ô® Java¡¹¡£
+
+     ²»¡¢²»¡¢²»¡£Java ºÍ CGI µÄ¸ÅÄîÍêÈ«²»Í¬¡£CGI ÊÇÔÚ server
+¶ËÖ´ĞĞ£¬¶ø
+     JavaÔòÊÇÔÚ client ¶ËÖ´ĞĞ¡£ÓĞĞ©¶«Î÷£¨Èç¶¯»­£©¿É½åÓÉÊ¹ÓÃ Java
+¶øµÃµ½½ÏºÃ
+     µÄĞ§¹û¡£µ«Äú¿É¼ÌĞøÊ¹ÓÃ perl À´·¢Õ¹ server ¶ËµÄÓ¦ÓÃ³ÌÊ½¡£
+
+     Èç¹ûÄúĞèÒªÓĞ¹Ø Java ½øÒ»²½µÄ×ÊÁÏ£¬µ×ÏÂÁĞÁË¼¸¸öÎÄ¼şÄú¿ÉÒÔÈ¥¿´¿´*£º
+
+        * ÉıÑô¹«Ë¾µÄ Java ÎÄ¼ş (&lt<A HREF="http://java.sun.com&gt">http://java.sun.com&gt</A>)
+        * Tom C.ËùĞ´µÄ Java uber Alles£¨Java µÄÖÖÖÖ£©
+        * Java, the Illusion£¨Java »ÃÏñ£©
+
+          ¡¾ÒëÕß¡¿ááÃæÕâÁ½ÆªÎÄÕÂ¶Ô Java ¼°Õâ¸öÈÈ³±×÷ÁËºÜÑÏÀ÷µÄÅúÅĞ¡£±¾
+          FAQ ×÷Õß Tom C. µÄ Java uber Alles ÖĞµÄÂÛµãÖ÷ÒªÖøÖØì¶¼¼Êõ²ã
+          Ãæ¡£Tom ¶Ô Java µÄÌ¬¶È»òĞí´ú±íÁË²»ÉÙ Perl ÕóÓªÈËÊËµÄĞÄÉù¡£
+
+
+----------------------------------------------------------------------
+
+     Q4.14: ÎÒÒªÈçºÎ¶ÁÈ¡»·¾³±äÊı£¿ÎªÊ²÷áËüÃÇÓĞÊ±ºò»á²»Ò»Ñù£¿
+
+     Äú¿ÉÒÔÍ¸¹ı %ENV Õâ¸ö¹ØÁ¬ÕóÁĞÀ´¶ÁÈ¡»·¾³±äÊı¡£ÒÔÏÂÕâ¸ö¼òµ¥µÄ script
+»á°Ñ
+     ËùÓĞµÄ»·¾³±äÊıÓ¡³öÀ´£¨ÅÅºÃË³Ğò£©£º
+
+          #!/usr/local/bin/perl -w
+          print &quotContent-type: text/plain&quot, &quot\n\n&quot;
+
+          foreach $key (sort keys %ENV) {
+              print $key, &quot = &quot, $ENV{$key}, &quot\n&quot;
+          }
+          exit 0;
+
+
+ºÜ²»ĞÒµÄ£¬ÓĞĞ©»·¾³±äÊı»á±»Ä³Ğ©ä¯ÀÀÆ÷ºöÂÔµô¡£Æ©Èç£¬ÓĞĞ©ä¯ÀÀÆ÷¾Í²»Éè¶¨
+     HTTP_REFERER¡£
+
+----------------------------------------------------------------------
+
+     Q4.15: ÎªÊ²÷áÎÒÊä³öµÄ×ÊÁÏ±»½ÁÂÒÁË£¨Èç ``b &lt a'' »á±»ÆÆ»µµô£©£¿
+
+     Èç¹ûÄúËÍµÄ MIME ÀàĞÍÊÇ HTML µÄ»°£¬Äú±ØĞë¡¸ÌøÍÑ¡¹ (escape)
+Ä³Ğ©·ûºÅ£¬
+     Èç ``&lt''¡¢``&ampanp;''£¬¼° ``&gt''£¬·ñÔòä¯ÀÀÆ÷»áÒÔÎªËüÊÇ HTML
+¡¾±êÇ©¡¿¡£
+
+     Äú±ØĞëÊ¹ÓÃÒÔÏÂ¸ñÊ½À´ÌøÍÑÌØÊâ×ÖÔª£º
+
+          &amp#ASCII ´úÂë;
+
+     Äú¿ÉÒÔÔÚÖ¸ÁîÁĞÖ´ĞĞÕâ¸ö¼òµ¥µÄ script£¬±ã¿ÉµÃµ½·Ç×ÖÄ¸Êı×ÖĞÔ×ÖÔª
+(non
+     alpha-numeric characters) Ëù¶ÔÓ¦µÄ ASCII Âë£º
+
+          #!/usr/local/bin/perl -w
+          print 'ÇëÊäÈë×Ö´®£º ';
+          chop($string = &ltSTDIN&gt);
+          $string =~ s/([^\w\s])/sprintf(&quot&amp#%d;&quot, ord($1))/ge;
+          print 'ÌøÍÑ¹ıµÄ×Ö´®ÊÇ£º ', &quot$string\n&quot;
+          exit 0;
+
+
+----------------------------------------------------------------------
+
+     Q4.16: ÎªÊ²÷áÎÒµÄPerl CGI
+³ÌÊ½¿ÉÒÔÓÉÖ¸ÁîÁĞ£¬È´ÎŞ·¨´Óä¯ÀÀÆ÷È¥Ö´ĞĞ£¿
+
+     ×î¿ÉÄÜµÄÔ­ÒòÊÇÈ¨ÏŞµÄÎÊÌâ¡£±ğÍüÁË£¬ÄúµÄ server ¿ÉÄÜÊÇÒÔ
+``nobody''¡¢
+
+``www''£¬»òÆäËûÈ¨ÏŞºÜµÍµÄÕÊ»§Éí·İÀ´Ö´ĞĞµÄ¡£Òò´Ë£¬³ı·ÇËüÓĞ×ã¹»µÄÈ¨ÏŞ£¬
+     ·ñÔòÊÇÎŞ·¨Ö´ĞĞÄúµÄ script µÄ¡£
+
+----------------------------------------------------------------------
+
+     Q4.17: ÎªÊ²÷áÎÒµÄ Perl CGI ³ÌÊ½ÄÜÅÜ£¬µ«ÊÇ²»»á°Ñ×ÊÁÏĞ´µ½µµ°¸ÖĞ£¿
+
+     ÕâÓÖÊÇÈ¨ÏŞÔÚ×÷¹Ö£¡server
+³ı·ÇÓĞ×ã¹»µÄÈ¨ÏŞ·ñÔòÊÇÎŞ·¨½«×ÊÁÏĞ´½øÄ³Ä¿Â¼ÏÂ
+     µÄÄ³µµ°¸ÀïÈ¥µÄ¡£
+
+     ÄúÓ¦¸ÃÑø³ÉÏ°¹ß¼ì²é open Ö¸Áîµİ»ØµÄ´íÎó×´Ì¬ (error status)£º
+
+          print &quotContent-type: text/plain\n\n&quot;
+          .
+          .
+          .
+          open(FILE, &quot&gt/some/dir/some.file&quot) ||
+              print 'ÎŞ·¨Ğ´½øµµ°¸£º ', &quot$!\n&quot;
+          .
+          .
+          .
+
+
+----------------------------------------------------------------------
+
+     Q4.18: ÒªÈçºÎ×öÒ»¸ö»áÎ¬Ïµ×´Ì¬£¬»òÔÊĞí¡¾Í¬Ò»Ê¹ÓÃÕß¡¿¶à´ÎÁ¬ÏßµÄ
+form£¿
+
+     Äú¿ÉÒÔÓÃ CGI::MiniSvr Õâ¸ö module
+À´Î¬³Ö¡¾¼Ç×¡¡¿¼¸´Î²»Í¬µÄÁ¬ÏßÖ®¼äµÄ×´
+     Ì¬×ÊÁÏ¡£
+
+     »òÕß£¬Äú¿ÉÒÔÖÆ×öÒ»ÏµÁĞµÄ¶¯Ì¬ÎÄ¼ş£¬ÔÚ±Ë´ËÖ®¼äÏà»¥´«µİÒ»¸öÆÚ¼ä´úÂë
+     (session ID)£¬´Ë´úÂë¿ÉÒÔÒÔÑ¯ÎÊ
+(query)¡¢¶îÍâÂ·¾¶£¬»òÒş²ØÊ½À¸Î»µÈĞÎÊ½´æ
+     ÔÚ*¡£
+
+          ¡¾ÒëÕß¡¿CGI.pm »áÌæÄú°ÑÕâ²¿·İ£¨Î¬³Ö×´Ì¬)×öºÃ (ÓÃÉÏÊöµÄÔ­Àí
+          £©£¬¹ÊÊ¹ÓÃ CGI.pm ¿É×Ô¶¯ÏíÊÜÕâÏî¹¦ÄÜ£¬²»ĞèÒª×Ô¼ºÈ¥×ö¡£ÕâÓÖ¶à
+          ÁËÒ»¸ö¸ÃÊ¹ÓÃ CGI.pm µÄÀíÓÉ¡£
+
+
+----------------------------------------------------------------------
+
+     Q4.19: Èç¹û²»´Óä¯ÀÀÆ÷È¥Ö´ĞĞÎÒµÄ CGI ³ÌÊ½£¬ÒªÈçºÎÌæËü³ı´í£¿
+
+     CGI ³ÌÊ½²»ÈİÒ×³ı´í¡£Äú¿ÉÒÔ½åÖøÊÖ¶¯Éè¶¨»·¾³±äÊıÀ´Ä£Äâ server£º
+
+          setenv HTTP_USER_AGENT &quotMozilla/2.0b6&quot       (csh)
+
+          »ò
+
+          export HTTP_USER_AGENT = &quotMozilla/2.0b6&quot     (ksh, bash)
+
+     ÒªÄ£Äâ POST ÇëÇó£¬Äú¿ÉÒÔ°Ñ×ÊÁÏÏÈ·Å½øÒ»¸öµµ°¸Àï£¬È»áá°ÑËü pipe
+µ½ÄúµÄ³Ì
+     Ê½È¥£º
+
+          cat data.file | some_program.pl
+
+     »òÕßÄú¿ÉÒÔÓÃ CGI.pm À´°ïÄú³ı´í¡£¼ÙÉèÄúÓĞÒ»¸öÏñÏÂÃæÕâÑùµÄ
+script£¬Ëü»á
+     °ÑËùÓĞÄú´«¸øËüµÄË÷Òı£¯Éè¶¨Öµ¶ÔÓ¦×ÊÁÏ (key/value pairs)
+¶¼ÁĞÓ¡³öÀ´¡£
+
+          #!/usr/local/bin/perl -w
+          use CGI;
+          $cgi = new CGI;
+          print $cgi-&gtheader;
+          print $cgi-&gtstart_html(&quotSimple CGI.pm Program&quot);
+          print &quot&ltH1&gtSimple CGI.pm Program&lt/H1&gt\n&quot;
+          print &quot&ltHR &gt&quot;
+          print 'ÒÔÏÂËùÁĞµÄÊÇÄú´«ËÍµÄÉè¶¨Öµ£º';
+          print $cgi-&gtdump;
+          exit 0;
+
+     Õâ¸ö script ²»»áÔÚºõÄúÊÇÍ¸¹ı GET¡¢POST£¬»ò ISINDEX
+ÇëÇó£¬»òÕßÊÇÓÉÖ¸Áî
+
+ÁĞ¡¢±ê×¼ÊäÈë£¬»òÎÄ×Öµµ½«×ÊÁÏ´«ËÍ¸øËü¡£ÎªÁË·½±ã³ı´í£¬ÎÒÃÇ¾ÍÖ±½Ó´ÓÖ¸Áî
+     ÁĞ´«Ò»Ğ©×ÊÁÏ¸øËü°É£º
+
+          % simple.cgi first=shishir last=gundavaram document='CGI\
+FAQ'
+
+          »ò
+
+          % simple.cgi &quotfirst=shishir&amplast=gundavaram&ampdocument='CGI\
+FAQ'&quot
+
+     ÔÚµÚ¶ş¸öÀı×ÓÖĞ£¬Õû¸ö×Ö´®ÖÜÎ§±ØĞë¼ÓÒıºÅ(&quot)£¬·ñÔò shell ¿´µ½ ``&amp''
+Õâ¸ö
+     ·ûºÅ»áÎó½â¡£ºÃ£¬½ÓÏÂÀ´ÊÇ´Ó±ê×¼ÊäÈëÀ´³ı´íµÄ·½·¨£º
+
+          % simple.cgi
+          (waiting for standard input)
+          first=shishir
+          last=gundavaram
+          document=CGI\ FAQ
+          ^D
+
+     µ±È»£¬ÄúÒ²¿ÉÒÔÏÈÓÃÒ»¸öµµ°¸À´´¢´æ×ÊÁÏ£¬È»ááÔÙ×öÊäÈë×ªÏò£¬ÏñÕâÑù£º
+
+          % simple.cgi &lt form.data
+
+     ÄúÒ²¿ÉÒÔÓÃ CGI Lint
+£¨¼´½«³ö°æ£©¡£ËüÄÜ´ïµ½ÏàÍ¬µÄ¹¦Ğ§¡£ÁíÍâ£¬ËüÒ²ÄÜ°ïÃ¦
+     ¼ì²éÓĞÎŞ°²È«ÎÊÌâ£¬²»µ±Ê¹ÓÃ open()£¬ÒÔ¼°²»ÕıÈ·µÄ HTTP ±êÍ·µÈ¡£
+
+
+----------------------------------------------------------------------
+
+     Q4.20: Èç¹û²»¿¿&ltFORM&gt±êÇ©£¬ÒªÈçºÎ½Ğ³ö Perl CGI ³ÌÊ½£¿
+
+     Äú¿ÉÒÔÖ±½ÓÈ¥´ò¿ª¸Ã CGI ³ÌÊ½µÄ URL£º
+
+          <A HREF="http://some.machine/cgi-bin/your_program.pl">http://some.machine/cgi-bin/your_program.pl</A>
+
+     ÄúÒ²¿ÉÒÔÔÚÎÄ¼şÖĞÊ¹ÓÃÁ¬½áµÄ·½Ê½£¬ÀıÈç£º
+
+     &ltA HREF=&quot<A HREF="http://some.machine/cgi-bin/your_program.pl&quot&gt">http://some.machine/cgi-bin/your_program.pl&quot&gt</A>
+     ÒªÊÔÊÔÎÒµÄCGI³ÌÊ½ÇëÔÚÕâÀïµãÒ»ÏÂ&lt/A&gt
+
+
+----------------------------------------------------------------------
+
+     Q4.21: ÒªÈçºÎ±ÜÃâÅÔÈË²»ÏÈÌîÀ¸Î»¾ÍÖ´ĞĞÎÒµÄ
+form£¿ËûÃÇÎªÊ²÷áÒ»Ö±²»¶ÏÕâ÷á
+     ×ö£¿
+
+     ÕâĞ©ÈËÀ¸Î»ÍêÈ«¿Õ°×¾ÍÈ¥Ö´ĞĞ form ÊÇÒòÎªËûÃÇ°ÑÕâ¸ö form µÄ URL
+´¢´æÆğÀ´
+     ¡¾´¢´æµ½ÊéÇ©ÀïÃæ¡¿µÄ¹ØÏµ¡£µ±ËûÃÇÏÂ´Î½Ğ³öÕâ¸ö form
+µÄÊ±ºò£¬Õâ¸öÇëÇó¾Í»á
+     ±ä³ÉÊÇÒ»¸ö¿ÕµÄ GET £¨¶ø·Ç POST »òÌîÓĞ×ÊÁÏµÄ GET£©¡£
+
+
+Äú¿ÉÒÔÏÈ¼ì²éËùÓĞÀ¸Î»ÖĞµÄ×ÊÁÏ£¬Èç¹ûÆäÖĞÓĞÀ¸Î»Áô°×µÄ»°£¬Äú¿ÉÒÔËÍ»ØÒ»¸ö
+     ``No Content'' µÄ×´Ì¬ÊôĞÔ*¡£ÒÔÏÂÊÇÒ»Àı(¼ÙÉè¹ØÁ¬ÕóÁĞ %form
+ÖĞº¬ÓĞÄú
+     form µÄ×ÊÁÏ)£º
+
+          ¡¾ÒëÕß¡¿×´Ì¬Âë 204 µÄÊôĞÔÒÑÓÉ HTTP 0.9
+          (&lt<A HREF="http://www.w3.org/pub/WWW/Protocols/HTTP/HTTP2.html&gt">http://www.w3.org/pub/WWW/Protocols/HTTP/HTTP2.html&gt</A>) µÄ
+          ``No Response'' ±äÎª HTTP 1.0
+          (&lt<A HREF="ftp://ds.internic.net/rfc/rfc1945.txt&gt">ftp://ds.internic.net/rfc/rfc1945.txt&gt</A>) ºÍ HTTP 1.1
+          (&lt<A HREF="ftp://ds.internic.net/rfc/rfc2068.txt&gt">ftp://ds.internic.net/rfc/rfc2068.txt&gt</A>) ÖĞµÄ ``No
+          Content'' ÁË¡£
+
+          $error = 0;
+          foreach $value (values %form) {
+               $value =~ s/\s//g;
+               $error = 1 unless  $value;
+          }
+          if ($error) {
+              print &quotContent-type: text/plain\n&quot;
+              print &quotStatus: 204 No Content\n\n&quot;
+              print '³ı·ÇÄúµÄä¯ÀÀÆ÷²»Ö§Ô®×´Ì¬Âë 204
+£¬·ñÔòÄú²»¸Ã¿´µ½Õâ²¿·İ',
+                    &quot\n&quot;
+          } else {
+              #
+              # Process Data Here
+              #
+          }
+
+
+----------------------------------------------------------------------
+
+     Q4.22: ÄÇĞ©server »ØÓ¦Âë (server response codes)
+
+(&lt<A HREF="http://www.w3.org/hypertext/WWW/Protocols/HTTP/HTRESP.html&gt">http://www.w3.org/hypertext/WWW/Protocols/HTTP/HTRESP.html&gt</A>)ÊÇ¸ÉÊ²÷á
+     ÓÃµÄ£¿ÓĞÊ²÷áÒâÒå£¿
+
+     CGI ³ÌÊ½¿ÉÒÔ´«ËÍ server È»áá server
+»á°ÑËü×ªËÍ¸øä¯ÀÀÆ÷¡£ÀıÈç£º¼ÙÉèÄú
+     ÏëËÍ``No Content''
+£¨ÒâË¼ÊÇ¸æËßä¯ÀÀÆ÷²»ÒªÔÙÖØĞÂÏÂÔØ¸ÃÍøÒ³£©£¬ÄÇ÷áÄúµÃ
+     ËÍÒ»¸ö 204 µÄ»ØÓ¦Âë£¨¼ûÉÏÀı£©¡£
+
+
+----------------------------------------------------------------------
+
+     Q4.23: ÎªÊ²÷á print &quotLocation: <A HREF="http://host/page.html\n&quot">http://host/page.html\n&quot</A> ²»
+work£¿ÓÖÎª
+     Ê²÷áËüÖ» work Ò»´Î£¬µ«ËæááµÄ×ªÏò¾Í¶¼Åª´íÁËÄØ£¿
+
+     CGI ³ÌÊ½Ö»ÄÜËÍÒ»¸ö Location ±êÍ·¡£»¹ÓĞ£¬Èç¹ûÄúÒª server
+×ö×ªÏòµÄ¶¯×÷
+     Äú¾Í²»¸ÃËÍ MIME Àà±ğ¡£Æ©Èç£¬ÒÔÏÂµÄÀı×ÓÊÇ´íÎóµÄÊ¾¡õ£¬¾¡¹ÜÔÚÓĞĞ©
+servers
+     ÉÏĞĞµÄÍ¨£º
+
+          #!/usr/local/bin/perl -w
+          .
+          .
+          .
+          print &quotContent-type: text/plain\n&quot
+          print &quotLocation: <A HREF="http://some.machine/some.doc\n\n&quot&quot;">http://some.machine/some.doc\n\n&quot&quot;</A>
+
+
+----------------------------------------------------------------------
+
+     Q4.24: ÒªÈçºÎÈÃ server ÔÚÃ¿¸ö HTML
+ÍøÒ³µÄµ×²¿¶¼×Ô¶¯¼ÓÉÏÒ»¸ö£º¡¸×î½ü¸ü
+     ĞÂÈÕÆÚ£º ...¡¹µÄ¸æÊ¾£¿»òÕß£¬ÊÇ²»ÊÇÖ»ÓĞ SSI µÄÍøÒ³²ÅÄÜÕâ÷á×ö£¿CGI
+³ÌÊ½
+     µÄÈÕÆÚÒªÈçºÎÈ¡µÃ£¿
+
+     Èç¹ûÄúÊÇÍ¸¹ı CGI
+ÒÔ¶¯Ì¬·½Ê½À´²úÉúÄúµÄÎÄ¼ş£¬ÄÇ÷áÒª²åÈëÒ»¸öÊ±¼ä±ê¼Ç·Ç³£
+     ¼òµ¥¡£ÒÔÏÂÊÇÒ»Àı£¨½öÊÊÓÃì¶ Perl 5£©£º
+
+          $last_updated = localtime;
+          print '×î½ü¸üĞÂÈÕÆÚ£º ',&quot$last_updated\n&quot;
+
+     »òÕßÊÇ£º
+
+          require &quotctime.pl&quot;
+          $last_updated = &ampctime(time);
+          print '×î½ü¸üĞÂÈÕÆÚ£º ', &quot$last_updated\n&quot;
+
+     ÉõÖÁÏñÕâÑù£º
+
+          chop($date = `/usr/local/bin/date`);
+          print '×î½ü¸üĞÂÈÕÆÚ£º ', &quot$last_updated\n&quot;
+
+     Äú¿ÉÒÔÓÃ SSI À´´ïµ½Õâ¸öĞ§¹û£¬ÏñÕâÑù£º
+
+          &lt--#echo var=&quotLAST_MODIFIED&quot--&gt
+
+
+----------------------------------------------------------------------
+
+     Q4.25: Ê²÷áÑùµÄ³¡ºÏÏÂÒÔ Perl Ğ´ CGI ³ÌÊ½»áÏÔµÃÌ«Ğ¡Ìâ´ó×÷£¬ÒòÎªÓÃ
+shell
+     ¾Í¿ÉÒÔ×öµ½£¿¶øÊ²÷áÑùµÄ³¡ºÏ¶Ô Perl À´ËµÓÖ¹ıì¶À§ÄÑ£¿ÓÃ C++
+×öÕâÀàµÄÊÂ²»
+     ÊÇºÃµÃ¶àÂğ£¿ÄÇÓÃ C ÄØ£¿
+
+
+Ã¿Ò»¸öÓïÑÔ¶¼ÓĞÆä³¤´¦ºÍ¶Ì´¦¡£ÏàĞÅÕâ¾ä»°ÄúÌı¹ıºÜ¶à´ÎÁË¡£ËùÒÔÒ»ÇĞÈ«¿´ÄúÒª
+     ×öµÄÊÇÊ²÷á¶ø¶¨¡£Èç¹ûÄúÔ¤ÆÚÕı×¼±¸Ğ´µÄ CGI
+³ÌÊ½Ã¿¸öÖÓÍ·»áÓĞ¼¸Ç§¼¸ÍòÈË´Î
+     Á¬È¥Ê¹ÓÃ£¬ÄÇ÷áÄúÓ¦¸ÃÑ¡ÓÃ C »ò
+C++À´Ğ´¡£Èç¹ûÄúÇó¿ìµÄ»°£¨Ö¸·¢Õ¹Ëù»¨·ÑµÄ
+     Ê±¼ä¶øÑÔ£©£¬ÄÇ÷á Perl ÊÇÕıÈ·µÄÑ¡Ôñ£¡
+
+     Ò»°ãËµÀ´£¬ÄúÓ¦±ÜÃâÓÃ shell À´×öÈÎºÎĞÎÊ½µÄ CGI ³ÌÊ½Éè¼Æ£¬ÒòÎª
+shell ÔÚ
+     ÏÈÌìÉÏÈİÒ×²úÉú°²È«ÎÊÌâ¡£
+
+
+----------------------------------------------------------------------
+
+
+</pre></td></tr></table></center></BODY></HTML>

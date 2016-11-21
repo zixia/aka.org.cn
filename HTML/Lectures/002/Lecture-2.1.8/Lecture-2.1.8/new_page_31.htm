@@ -1,0 +1,224 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>网络连接函数</title>
+<meta name="Microsoft Theme" content="blank 001, default">
+<meta name="Microsoft Border" content="tl, default">
+</head>
+
+<body background="_themes/blank/blbkgnd.gif" bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/new_page_31.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="网络连接函数"></strong></font><br>
+<a href="index.htm"><img src="_derived/home_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="主页" align="middle"></a> <a href="new_page_6.htm"><img src="_derived/up_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="上一层" align="middle"></a> <a href="new_page_28.htm"><img src="_derived/new_page_28.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="转换函数" align="middle"></a> <img src="_derived/new_page_31.htm_cmp_blank000_hbtn_p.gif" width="140" height="32" border="0" alt="网络连接函数" align="middle"> <a href="new_page_29.htm"><img src="_derived/new_page_29.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="获取/设置参数" align="middle"></a></p>
+<p align="center">　</p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<p><font size="6">初始化sock连接符：</font></p>
+<font size="+2">
+<p>int socket(int domain, int type, int protocol);</p>
+<blockquote>
+  <p>函数返回socket描述符，返回-1表示出错</p>
+  <p>domain参数只能取AF_INET, protocol参数一般取0</p>
+  <p>应用示例：</p>
+  <blockquote>
+    <p>TCP方式：sockfd = socket(AF_INET,SOCK_STREAM,0);</p>
+    <p>UDP方式：sockfd =socket(AF_INET, SOCK_DGRAM,0);</p>
+  </blockquote>
+</blockquote>
+<p>&nbsp;</p>
+<p></font></p>
+<p><font size="6">绑定端口：</font></p>
+<font size="+2">
+<p>int bind(int sockfd, struct sockaddr *sa, int addrlen);</p>
+<blockquote>
+  <p>函数返回-1表示出错，最常见的错误是该端口已经被其他程序绑定。</p>
+  <p><font color="#FF0000">需要注意的一点：在Linux系统中，1024以下的端口只有拥有root权限的程序才能绑定。</font></p>
+  <p>&nbsp;</p>
+</blockquote>
+<p></font></p>
+<p><font size="6">连接网络（用于TCP方式）：</font></p>
+<font size="+2">
+<p>int connect(int sockfd, struct sockaddr *servaddr, int addrlen);</p>
+<blockquote>
+  <p>函数返回-1表示出错，可能是连接超时或无法访问。返回0表示连接成功，可以通过sockfd传输数据了。</p>
+</blockquote>
+<p>&nbsp;</p>
+<p></font></p>
+<p><font size="6">监听端口（用于TCP方式）：</font></p>
+<font size="+2">
+<p>int listen(int sockfd, int queue_length);</p>
+<blockquote>
+  <p>需要在此前调用bind()函数将sockfd绑定到一个端口上，否则由系统指定一个随机的端口。</p>
+  <p>接收队列：一个新的Client的连接请求先被放在接收队列中，直到Server程序调用accept函数接受连接请求。</p>
+  <p>第二个参数queue_length，指的就是接收队列的长度 
+  也就是在Server程序调用accept函数之前最大允许的连接请求数，多余的连接请求将被拒绝。</p>
+</blockquote>
+<p>&nbsp;</p>
+<p></font></p>
+<p><font size="6">响应连接请求（用于TCP方式）：</font></p>
+<font size="+2">
+<p>int accept(int sockfd,struct sockaddr *addr,int *addrlen);</p>
+<blockquote>
+  <p>accept()函数将响应连接请求，建立连接并产生一个新的socket描述符来描述该连接，该连接用来与特定的Client交换信息。</p>
+  <p>函数返回新的连接的socket描述符，错误返回-1</p>
+  <p>addr将在函数调用后被填入连接对方的地址信息，如对方的IP、端口等。</p>
+  <p>addrlen作为参数表示addr内存区的大小，在函数返回后将被填入返回的addr结构的大小。</p>
+  <p>accept缺省是阻塞函数，阻塞直到有连接请求</p>
+  <p>应用示例：</p>
+  <blockquote>
+    <p>struct sockaddr_in their_addr; /* 用于存储连接对方的地址信息*/<br>
+    int sin_size = sizeof(struct sockaddr_in);</p>
+    <p>… …（依次调用socket(), bind(), listen()等函数）</p>
+    <p>new_fd = accept(sockfd, &amp;their_addr, &amp;sin_size);<br>
+    printf(”对方地址: %s\n&quot;, inet_ntoa(their_addr.sin_addr));</p>
+    <p>… …</p>
+  </blockquote>
+</blockquote>
+<p>&nbsp;</p>
+<p></font></p>
+<p><font size="6">关闭socket连接：</font></p>
+<font size="+2">
+<blockquote>
+  <p>int close(int sockfd);</p>
+  <blockquote>
+    <p>关闭连接将中断对该socket的读写操作。</p>
+    <p>关闭用于listen()的socket描述符将禁止其他Client的连接请求。</p>
+    <p>&nbsp;</p>
+  </blockquote>
+</blockquote>
+<p></font></p>
+<p><font size="6">部分关闭socket连接：</font></p>
+<font size="+2">
+<blockquote>
+  <p>int shutdown(int sockfd, int how);</p>
+  <blockquote>
+    <p>Shutdown()函数可以单方面的中断连接，即禁止某个方向的信息传递。</p>
+    <p>参数how：</p>
+    <p>0 - 禁止接收信息<br>
+    1 - 禁止发送信息<br>
+    2 - 接收和发送都被禁止，与close()函数效果相同</p>
+    <p>&nbsp;</p>
+  </blockquote>
+</blockquote>
+<p></font></p>
+<p><font size="6"><a name="select"></a>socket轮询选择：</font></p>
+<font size="+2">
+<blockquote>
+  <p>int select(int numfds, fd_set *readfds, fd_set *writefds, fd_set 
+  *exceptfds, struct timeval *timeout);</p>
+  <p></font><font size="5">应用于多路同步I/O模式（将在同步工作模式中详细讲解）</font></p>
+<p><font size="5"><fs_set是表示socket集合的数据类型，具有以下运算宏：</p>
+</font>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="top" width="42"><img src="_themes/blank/blbull1.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="宋体"><font size="5">FD_ZERO(*set) 清空socket集合</font><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/blank/blbull1.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="宋体"><font size="5">FD_SET(s, *set) 将s加入socket集合</font><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/blank/blbull1.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="宋体"><font size="5">FD_CLR(s, *set) 从socket集合去掉s</font><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/blank/blbull1.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="宋体"><font size="5">FD_ISSET(s, *set) 判断s是否在socket集合中</font><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="宋体">
+</blockquote>
+<p><font size="5">&nbsp;&nbsp;&nbsp; 常数FD_SETSIZE：集合元素的最多个数</font></p>
+<font size="+2">
+<p>　</p>
+<p><font size="6">等待选择机制：</font></p>
+</font>
+<blockquote>
+  <p><font size="5">int poll(struct pollfd *ufds, unsigned int nfds, int 
+  timeout);</font></p>
+  <p><font size="5">是select机制的一个变种，应用于多路同步I/O模式（将在同步工作模式中详细讲解）</font></p>
+  <p><font size="5">ufds是pollfd结构的数组，数组元素个数为nfds。</font></p>
+  <!--mstheme--></font><pre><font size="5">     struct pollfd {
+           int fd;           /* file descriptor */
+           short events;     /* requested events */
+           short revents;    /* returned events */
+       };</font></pre><!--mstheme--><font face="宋体">
+  <p><font size="5">　</font></p>
+</blockquote>
+<p><font size="5">&nbsp;</font></p>
+<font size="+2">
+<p><font size="6">接收/发送消息：</font></p>
+<p><font size="5"><b>TCP方式：</b></font></p>
+<blockquote>
+  <font size="+2">
+  <p>int send(int s, const void *buf, int len, int flags);</p>
+  <p>int recv(int s, void *buf, int len, int flags);</p>
+  <blockquote>
+    <p>函数返回实际发送/接收的字节数，返回-1表示出错，需要关闭此连接。</p>
+    <p>函数缺省是阻塞函数，直到发送/接收完毕或出错</p>
+    <p><font color="#FF0000">注意：如果send函数返回值与参数len不相等，则剩余的未发送信息需要再次发送</font></p>
+    <p>&nbsp;</p>
+  </blockquote>
+  </blockquote>
+  <p><b>UDP方式：</b></p>
+</font>
+<blockquote>
+  <font size="+2">
+  <p>int sendto(int s, const void *buf, int len, int flags, const struct 
+  sockaddr *to, int tolen);</p>
+  <p>int recvfrom(int s,void *buf, int len, int flags, struct sockaddr *from, 
+  int *fromlen);</p>
+  <blockquote>
+    <p>与TCP方式的区别：</p>
+    <blockquote>
+      <p>需要指定发送/接收数据的对方（第五个参数to/from）</p>
+    </blockquote>
+    <p>函数返回实际发送/接收的字节数，返回-1表示出错。</p>
+    <p>函数缺省是阻塞函数，直到发送/接收完毕或出错</p>
+    <p><font color="#FF0000">注意：如果send函数返回值与参数len不相等，则剩余的未发送信息需要再次发送</font></p>
+    <p>&nbsp;</p>
+  </blockquote>
+  </blockquote>
+  <p><b>基于消息的方式：</b></p>
+</font>
+<blockquote>
+  <font size="+2">
+  <p>int sendmsg(int s, const struct msghdr *msg, int flags);</p>
+  <p>int recvmsg(int s, struct msghdr *msg, int flags);</p>
+  <blockquote>
+    <p>发送/接收一个消息，消息使用如下数据结构：</p>
+    <p></font></font>struct msghdr {</p>
+  <blockquote>
+    <p>void * msg_name; /* optional address */</p>
+    <p>socklen_t msg_namelen; /* size of address */</p>
+    <p>struct iovec * msg_iov; /* scatter/gather array */</p>
+    <p>size_t msg_iovlen; /* # elements in msg_iov */</p>
+    <p>void * msg_control; /* ancillary data, see below */</p>
+    <p>socklen_t msg_controllen; /* ancillary data buffer len */</p>
+    <p>int msg_flags; /* flags on received message */</p>
+  </blockquote>
+  <p>};</p>
+  <font size="+2">
+  <p>这种方式可以使用面向连接和无连接两种方式，灵活性较大，但不太常用，将在后面的程序示例（网络仿真设备）中解释工作流程。</p>
+  </blockquote>
+</blockquote>
+<p>&nbsp;</p>
+<p><b>标志位：</b></p>
+<blockquote>
+  <p>上面这六个发送/接收函数均有一个参数flags，用来指明数据发送/接收的标志，常用的标志主要有：</p>
+  <blockquote>
+    <p>MSG_PEEK 
+    对数据接收函数有效，表示读出网络数据后不清除已读的数据</p>
+    <p>MSG_WAITALL 对数据接收函数有效，表示一直执行直到buf读满、socket出错或者程序收到信号。</p>
+    <p>MSG_DONTWAIT 
+    对数据发送函数有效，表示不阻塞等待数据发送完后返回，而是直接返回。（只对非阻塞socket有效）</p>
+    <p>MSG_NOSIGNAL 
+    对发送接收函数有效，表示在对方关闭连接后出错但不发送SIGPIPE信号给程序。</p>
+    <p>MSG_OOB 对发送接收都有效，表示读/写带外数据(out-of-band 
+    data)</p>
+    <p>　</p>
+    <p align="center"><img src="images/3.gif" align="middle" width="402" height="138"></p>
+  </blockquote>
+</blockquote>
+<p align="center">带外数据实例图</p>
+　</font>
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+</html>

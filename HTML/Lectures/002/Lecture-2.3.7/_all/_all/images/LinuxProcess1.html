@@ -1,0 +1,392 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+      
+  <meta http-equiv="content-type" content="text/html; charset=x-gbk">
+  <title>LinuxProcess</title>
+</head>
+<body>
+<br>
+1、linux进程管理的模块组织框架<br>
+2、相关数据结构。<br>
+3、进程调度原则，调度算法,。<br>
+4、进程的创建和运行管理。<br>
+5、进程间通讯。 &nbsp;&nbsp; &nbsp; &nbsp; <br>
+（1～5结合源代码进行分析）<br>
+ &nbsp;&nbsp; <br>
+6、具体分析：一个进程在系统中的生存周期和行为<br>
+<br>
+7、更多的技术<br>
+ &nbsp;&nbsp; 进程管理和其他内核模块的交互关系<br>
+ &nbsp;&nbsp; 进程管理涉及的内核机制（锁，等待队列，定时器&hellip;&hellip;）<br>
+ &nbsp;&nbsp; 和中断处理，module运行的交互<br>
+ &nbsp;&nbsp; Linux/SMP的进程管理和调度技术 &nbsp;&nbsp; <br>
+<br>
+5、概述2.4的新特点<br>
+===========================================================<br>
+<br>
+<br>
+1、linux进程管理的模块组织框架<br>
+<br>
+ &nbsp;&nbsp; 1、1 &nbsp; &nbsp; 进程管理要解决的中心问题
+<ul>
+      
+  <li>allow processes to create new copies of themselves</li>
+      
+  <li>determine which process will have access to the CPU and        effect
+the transfer between running processes</li>
+      
+  <li>receive interrupts and route them to the appropriate        kernelsubsystem</li>
+      
+  <li>send signals to user processes</li>
+      
+  <li>manage the timer hardware</li>
+      
+  <li>clean up process resources when a processes finishes        executing</li>
+      
+  <li>dynamicallyloaded modules&nbsp; </li>
+</ul>
+T<br>
+ &nbsp;&nbsp; 1、2 &nbsp;&nbsp; 在整个内核中的功能位置和源码依赖关系<br>
+<br>
+<p><img src="file:///D|/kernel/_all/images/overview2.gif" width="590" height="422" alt="function modules"></p>
+&nbsp; 进程调度模块的界面：<br>
+    
+<blockquote> first, itprovides a limitedsystem call interface that userprocesses
+maycall;<br>
+&nbsp; secondly, it providesa rich interface to the rest of thekernel system.
+&nbsp; </blockquote>
+        
+  <p>&nbsp; 进程调度模块和其他模块的相互依赖关系：<br>
+  </p>
+  <blockquote> The process scheduler requires the memorymanager to setupthe
+memory mapping when a process is scheduled.<br>
+Further, the process scheduler depends on the IPC subsystem forthe semaphore
+queues that are used in bottom-half-handling<br>
+Finally, the process schedulerdepends on the file system to load loadable
+modules from the persistent device.<br>
+    <br>
+&nbsp; All subsystems depend on the processscheduler, since they need to
+suspenduser processes whilehardware operations complete<br>
+    <br>
+.<img src="file:///D|/kernel/_all/images/system.gif" width="305" height="308" alt="source dependence"></blockquote>
+    <p> </p>
+    <br>
+2、相关数据结构。<br>
+        <br>
+&nbsp; task_struct represents a Linux task.<br>
+                
+    <blockquote>进程状态信息：&nbsp;                     
+      <ul>
+                          
+        <li>running</li>
+                          
+        <li>returning from system call</li>
+                          
+        <li>processing an interrupt routine</li>
+                          
+        <li>processing a system call</li>
+                          
+        <li>ready </li>
+                          
+        <li>waiting</li>
+                    
+      </ul>
+@sched.h<br>
+#define TASK_RUNNING &nbsp;&nbsp; &nbsp; &nbsp; 0<br>
+#define TASK_INTERRUPTIBLE &nbsp;&nbsp; 1<br>
+#define TASK_UNINTERRUPTIBLE &nbsp;&nbsp; 2<br>
+#define TASK_ZOMBIE &nbsp;&nbsp; &nbsp; &nbsp; 4<br>
+#define TASK_STOPPED &nbsp;&nbsp; &nbsp; &nbsp; 8<br>
+#define TASK_SWAPPING &nbsp;&nbsp; &nbsp; &nbsp; 16<br>
+      <br>
+      <br>
+进程调度依据：                    
+      <ul>
+                          
+        <li>processespriority： the number of clock ticks (10msintervals)
+whichthe process can continue executing withoutforced rescheduling.  </li>
+                          
+      </ul>
+      <ul>
+        <li>the errornumber of the last faulting system&nbsp; call</li>
+      </ul>
+      <ul>
+                    
+      </ul>
+                    
+      <p>进程索引结构：</p>
+                    
+      <ul>
+ &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; 
+        <li>双向链： a doublylinked list is maintained, (through two fieldsthat
+pointtotask_struct).</li>
+ &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; 
+        <li>树结构：originalparent, parent, youngest child, younger sibling,and
+finallyolder sibling.</li>
+      </ul>
+      <div align="Left"> 
+      <p align="Center"><a name="_Toc411854286" href="file:///D|/kernel/_all/images/sched.gif"></a></p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img src="file:///D|/kernel/_all/images/sched.gif" alt="sched" width="441" height="202"><br>
+      </div>
+      </blockquote>
+      <br>
+3、进程调度原则，调度算法,。<br>
+          <br>
+3.1 原则： &nbsp;&nbsp; <br>
+ &nbsp;&nbsp; 调度是实现方式：周期性时间中断。<br>
+ &nbsp;&nbsp; &nbsp; &nbsp; 不采用其他方式的原因&hellip;&hellip;<br>
+      <br>
+ &nbsp;&nbsp; 调度优先级：<br>
+ &nbsp;&nbsp; （1）中断（硬件支持）<br>
+ &nbsp;&nbsp; （2）当前的核心态进程<br>
+ &nbsp;&nbsp; （3）其他核心态进程<br>
+ &nbsp;&nbsp; （4）用户进程（软件管理）<br>
+ &nbsp;&nbsp; <br>
+ &nbsp;&nbsp; 用户进程的优先级分类<br>
+ &nbsp;&nbsp; （1）实时进程<br>
+ &nbsp;&nbsp; （2）交互进程：视为IO bound进程<br>
+ &nbsp;&nbsp; （3）批处理进程：视为CPU bound进程<br>
+      <br>
+ &nbsp;&nbsp; 具体描述：<br>
+ &nbsp;&nbsp; &nbsp; &nbsp; <br>
+ &nbsp;&nbsp; ※ 中断可以抢占核心进程，但必须保证在中断处理结束后返回它。-- 一个核心态进程可以禁用它所运行的处理器上的中断，从而保证不会被中断请求信号中断它的运行。<br>
+l &nbsp;&nbsp; ※ 核心态进程不可抢占中断处理进程。--中断处理期间，仅仅是在中断处理进程处理完成或其他被允许的中断发生时候才发生任务切换。<br>
+ &nbsp;&nbsp; ※ 核心态进程不可抢占其他核心态进程。--除非一个核心态进程自愿睡眠，否则不能切换到别的进程。这保证了核心代码块的对其他进程的整体性，大大的简化了核心保护机制。<br>
+      <br>
+ &nbsp;&nbsp; 特点：核心态进程是非抢占，用户态进程是抢占的。<br>
+ &nbsp;&nbsp; 优点：核心数据的同步和保护机制比较简单。<br>
+ &nbsp;&nbsp; 缺点：不能很好的支持响应速度要求高的实时应用。<br>
+ &nbsp;&nbsp; <br>
+3.2 调度依据：<br>
+ &nbsp;&nbsp; 系统优先级： &nbsp;&nbsp; &nbsp; &nbsp; <br>
+ &nbsp;&nbsp; 动态优先级：<br>
+ &nbsp;&nbsp; &nbsp; &nbsp; 时间片(slice/jiffies/quantum)：<br>
+ &nbsp;&nbsp; &nbsp; &nbsp; 时间片的选择原则：在响应速度满足要求的的情况下尽量选择较大的时间片，减少系统开销。<br>
+ &nbsp;&nbsp; &nbsp; &nbsp; 修改时间片必须直接修改源代码。<br>
+      <br>
+3.3&nbsp; 算法 <br>
+          
+      <h4 class="HeadC">Direct invocation</h4>
+          
+      <p class="Body">Thescheduler is invoked directly when the <code class="Literal">
+current</code>&nbsp; process must be blocked right away because the resource
+it needs is notavailable. In this case, the kernel routine that wants toblock
+it proceedsas follows:</p>
+          
+      <ol>
+             
+        <li class="ListNumber">Inserts <code class="Literal">current</code>
+ in the proper wait queue</li>
+            
+        <li class="ListNumber">Changes the state of <code class="Literal">
+current</code> either to <code class="Literal">TASK_INTERRUPTIBLE</code>or
+to <code class="Literal">TASK_UNINTERRUPTI</code>BLE</li>
+            
+        <li class="ListNumber">Invokes <code class="Literal">schedule(&nbsp;
+)</code></li>
+            
+        <li class="ListNumber">Checks if the resource is available; ifnot,
+goes to step 2</li>
+            
+        <li class="ListNumber">Once the resource is available, removes  
+           <code class="Literal">current</code>&nbsp; from the wait queue</li>
+          
+      </ol>
+          <br>
+% waitqueue<br>
+          
+      <p class="Body">Youmay have noticed that these steps are similarto
+those performed by the <code class="Literal">sleep_on(&nbsp; )</code>and
+      <code class="Literal">interruptible_sleep_on(&nbsp; )</code>&nbsp;
+functionsdescribed in the section "Wait Queues" . However,the functions we
+discusshere immediately remove the process from the waitqueue as soon as
+it is wokenup.</p>
+          
+      <p class="Body">% device driver</p>
+          
+      <p class="Body">Thescheduler is also directly invoked by many device
+drivers that execute longiterative tasks. At each iteration cycle, the driver
+checks the value ofthe <code class="Literal">need_resched</code> field and,
+if necessary, invokes &nbsp; <code class="Literal">schedule(&nbsp; )</code>
+ to voluntarily relinquish the CPU.</p>
+          
+      <h4 class="HeadC">Lazy invocation</h4>
+          
+      <p class="Body">Thescheduler can also be invoked in a lazy wayby setting
+the <code class="Literal">need_resched</code> field of <code class="Literal">
+current</code> to 1. Sincea check on the value of this field is always made
+before resuming the executionof a User Mode process, <code class="Literal">
+schedule(&nbsp; )</code> will definitelybe invoked at some close future time.</p>
+          
+      <p class="Body">Lazyinvocation of the scheduler is performed inthe
+following cases:</p>
+          
+      <ul>
+            
+        <li class="ListBullet">When <code class="Literal">current</code>
+has used up its quantum of CPUtime; this is done by the <code class="Literal">
+update_process_times(&nbsp; )</code>&nbsp; function.</li>
+ &nbsp;&nbsp; &nbsp; &nbsp;             
+        <li class="ListBullet">When a process is woken up and its priority
+is higher than that of the currentprocess; this task is performed by the
+             <code class="Literal">reschedule_idle(&nbsp; )</code> function,
+which is invoked by the <code class="Literal">wake_up_process(&nbsp; )</code>
+ function &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </li>
+            
+        <p><code class="Code">if (goodness(current, p) &gt; goodness(current,
+current)) </code><code class="Code"> &nbsp; &nbsp; current-&gt;need_resched
+= 1; </code></p>
+            
+        <li class="ListBullet">When a <code class="Literal">sched_setscheduler(&nbsp;
+)</code> or <code class="Literal">sched_ yield(&nbsp; )</code> system call
+is issued</li>
+          
+      </ul>
+          
+      <p class="Body"><br>
+          </p>
+          <br>
+4、进程的创建和运行管理。<br>
+      <br>
+      <p>Processes can only create other processes by copying theexisting
+process.At boot time, the Linux system has only onerunning process: init.
+This processthen spawns others, which canalso spawn off copies of themselves,
+throughthe fork() systemcall. The fork() call generates a new child process
+thatis acopy of its parent. Upon termination, a user process (implicitlyor
+explicitly)calls the _exit() system call. </p>
+      <p>Several routines are provided to handle loadable modules. Acreate_module()
+system call will allocate enough memory to load amodule. The call will initialize
+the module structure, describedbelow, with the name, size, starting address,
+and initial statusfor the allocated module. The init_module() system call
+loads themodule from disk and activates it. Finally, delete_module()unloads
+a running module. </p>
+      <br>
+5、进程间通讯。 &nbsp;&nbsp; &nbsp; &nbsp; <br>
+      <br>
+ &nbsp; &nbsp; &nbsp; &nbsp; 5、1 模块的组织关系：<br>
+      <br>
+ &nbsp;&nbsp; &nbsp; &nbsp; 模块间的调用<br>
+      <br>
+      <img src="file:///D|/kernel/_all/images/ipc-dep.gif" alt="ipc-dep" width="522" height="125"><br>
+      <br>
+ &nbsp;&nbsp; &nbsp; &nbsp; 5、2 通讯的手段：<br>
+      <ul>
+        <li>Signals &ndash; perhaps the oldest form of Unix IPC,        signals
+are asynchronous messages sent to a process.</li>
+        <li>Wait queues &ndash; provides a mechanism to put processes   
+    to sleep while they are waiting for an operation to        complete.
+This mechanism is used by the process scheduler        to implement bottom-half
+handling as described in section        3.3.3.</li>
+        <li>File locks &ndash; provides a mechanism to allow processes  
+     to declare either regions of a file, or the entire file        itself,
+as read-only to all processes except the one        which holds the file
+lock. </li>
+        <li>Pipes and Named Pipes &ndash; allows connection-oriented,   
+    bi-directional data transfer between two processes either        by explicitly
+setting up the pipe connection, or        communicating through a named pipe
+residing in the        file-system. </li>
+        <li>System V IPC</li>
+      </ul>
+      <blockquote>
+        <ul>
+          <li>Semaphores &ndash; an implementation of a classical       
+    semaphore model. The model also allows for the            creation of
+arrays of semaphores. </li>
+          <li>Message queues &ndash; a connectionless data-transfer     
+      model. A message is a sequence of bytes, with an            associated
+type. Messages are written to message            queues, and messages can
+be obtained by reading from            the message queue, possibly restricting
+which            messages are read in by type. </li>
+          <li>Shared memory &ndash; a mechanism by which several        
+   processes have access to the same region of physical            memory.</li>
+        </ul>
+        </blockquote>
+ &nbsp;&nbsp; 5、3&nbsp; 各种通讯机制间的关系<br>
+        <img src="file:///D|/kernel/_all/images/ipc.gif" alt="ipc-module" width="417" height="324"><br>
+        <br>
+ &nbsp;&nbsp; <br>
+6、具体分析：一个进程在系统中的生存周期和行为<br>
+                    
+        <p>Timer management can be done through the setitimer() andgetitimer()
+routines.The former sets a timer while the lattergets a timer&rsquo;s value.
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+                    
+        <p>Among the most important signal functions is signal(). Thisroutine
+allowsa user process to associate a function handlerwith a particular signal.<br>
+          </p>
+7、更多的技术<br>
+ &nbsp;&nbsp; 进程管理和其他内核模块的交互关系<br>
+ &nbsp;&nbsp; 进程管理涉及的内核机制（锁，等待队列，定时器&hellip;）<br>
+ &nbsp;&nbsp; 和中断处理，module运行的交互<br>
+ &nbsp;&nbsp; Linux/SMP的进程管理和调度技术 &nbsp;&nbsp; <br>
+          <br>
+                    
+        <p>Signals can be considered an IPC mechanism,&nbsp; </p>
+                    
+        <p>Interrupts allow hardware to communicate with the operatingsystem.
+Linuxdistinguishes between slow and fast interrupts. Aslow interrupt is a
+typicalinterrupt. Other interrupts are legalwhile they are being processed,
+andonce processing has completedon a slow interrupt, Linux conducts business
+as usual, such ascalling the scheduling algorithm. A timer interrupt is exemplary
+of a slow interrupt. A fast interrupt is one that is used formuch less complex
+tasks, such as processing keyboard input. Otherinterrupts are disabled as
+they are being processed, unlessexplicitly enabled by the fast interrupthandler.
+          </p>
+                    
+        <p>The Linux OS uses a timer interrupt to fire off once every10ms.
+Thus,according to our scheduler description given above,task rescheduling
+shouldoccur at lease once every 10ms. </p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
+5、概述2.4的新特点<br>
+        <br>
+◎ 源代码结构的变化<br>
+ &nbsp;&nbsp; 子功能优化&hellip;&hellip;<br>
+ &nbsp;&nbsp; 可读性更强&hellip;&hellip;<br>
+        <br>
+◎ task_struct的变化<br>
+ &nbsp;&nbsp; 数据类型的变化&hellip;&hellip;<br>
+ &nbsp;&nbsp; 管理变量的增加&hellip;&hellip;<br>
+        <br>
+◎ 通用调度算法的变化：<br>
+ &nbsp;&nbsp; Linux 2.4 introduces a subtle optimization concerning TLB flushing
+for kernel threads and zombie processes.<br>
+ &nbsp; &nbsp; As a result, the active Page Global Directory is set by the
+schedule(&nbsp; ) function rather than by the switch_to macro.<br>
+ &nbsp; &nbsp; <br>
+◎ SMP调度算法的变化：<br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; <br>
+ &nbsp; &nbsp; The Linux 2.4 scheduling algorithm for SMP machines has been
+improved and simplified.<br>
+ &nbsp; &nbsp; Whenever a new process becomes runnable, <br>
+ &nbsp; &nbsp; (1)the kernel checks whether the preferred CPU of the process,
+that is, the CPU on which it was last running, is idle; in this case, the
+kernel assigns the process to that CPU. <br>
+ &nbsp; &nbsp; (2)Otherwise, the kernel assigns the process to another idle
+CPU, if any. <br>
+ &nbsp; &nbsp; (3)If all CPUs are busy,<br>
+ &nbsp;&nbsp; &nbsp; (3.1)the kernel checks whether the process has enough
+priority to preempt the process running on the preferred CPU.<br>
+ &nbsp;&nbsp; &nbsp; (3.2)If not,<br>
+ &nbsp;&nbsp; &nbsp; the kernel tries to preempt some other CPU only <br>
+ &nbsp;&nbsp; &nbsp; (3.2.1)if the new runnable process is real-time or <br>
+ &nbsp;&nbsp; &nbsp; (3.2.2)if it has short average time slices compared
+to the hardware cache rewriting time.<br>
+ &nbsp;&nbsp; &nbsp; <br>
+ &nbsp;&nbsp; &nbsp; (Roughly, preemption occurs if the new runnable process
+is interactive and the preferred CPU will not reschedule shortly.)<br>
+        <br>
+◎&nbsp; 对实时进程的更好支持：SVR4<br>
+        <br>
+◎ 理论上无限制的进程数量<br>
+ &nbsp; &nbsp; <br>
+        <br>
+                    
+        </body>
+        </html>

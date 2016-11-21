@@ -1,0 +1,679 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0059)http://www.therationaledge.com/content/apr_01/f_xp2_gp.html --><HTML>
+<HEAD>
+<TITLE>The Rational Edge -- April 2001 -- RUP and XP Part II: Valuing Differences</TITLE>
+<!-- Insert Article Title Below -->
+<!-- Remember to Fill in title and author correctly or search engine will not work right!!!! -->
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<META content="Garry Pollice" name=author>
+<META content="The Rational Edge is a customer e-zine from Rational Software" 
+name=description>
+<META http-equiv=Content-Language content=EN>
+<META content="Rational Software 2001" name=copyright>
+<!-- Change the Content Line below to "NOFOLLOW, INDEX" -->
+<META content=NOFOLLOW,INDEX name=robots>
+<!-- Path to Stylesheet below -->
+<LINK 
+href="RUP and XP.files/text_styles.css" 
+type=text/css rel=stylesheet>
+<META content="MSHTML 5.50.4134.600" name=GENERATOR>
+</HEAD>
+<BODY vLink=#3399cc aLink=#3399cc link=#336699 bgColor=#FFFFFF leftMargin=0 
+topMargin=0 marginwidth="0" marginheight="0">
+<table cellspacing=0 cellpadding=10 width="95%" bgcolor=white border=0>
+  <tbody> 
+  <tr> 
+    <td valign=center align=right height=33>&nbsp;</td>
+    <td valign=center align=left> 
+      <p class=title><b>RUP and XP, Part I: Finding Common Ground</b></p>
+    </td>
+  </tr>
+  <!-- Insert Abstract -->
+  <tr> 
+    <td>&nbsp;</td>
+    <td valign=top> 
+      <p>by <b><a 
+            href="http://www.therationaledge.com/bio/pollice.html">Gary Pollice</a></b><br>
+        Evangelist, The Rational Unified Process<br>
+        Rational Software </p>
+      <p><i>eXtreme Programming (XP) is hot! Attend any software development conference 
+        today and XP presentations are standing room only. Why? I have observed 
+        that XP speaks to the programmer in almost every technical manager and 
+        practicing software developer. We all remember simpler times when we sat 
+        at the keyboard and coded. Some of us were even happy testing and fixing 
+        the code because we wanted it to be perfect. Our code was our legacy to 
+        future generations of programmers. And we all had heroes, legends who 
+        cranked out more code with fewer errors than we thought humanly possible.</i></p>
+      <p><i>XP hints that we may yet return to the "good old days."</i></p>
+      <p><i>Why don't tears of nostalgia well up in our eyes when we think of 
+        the Rational Unified Process (RUP)? Because RUP<sup>®</sup> contains the 
+        dreaded "process" word, and most of us have had bad experiences with process. 
+        We recall that it was too heavy and too restrictive. Something that wasted 
+        our valuable time; something that kept us from coding. But the process 
+        itself was not the real culprit: our bad experiences stemmed from the 
+        way the process was implemented and used.</i></p>
+      <p><i>In this two-part series, we will look at how to make the implementation 
+        and use of RUP a good experience. We will see how it can be used effectively 
+        for a small project, and specifically how to incorporate XP practices 
+        into the broader scope of a RUP-based project. This month's installment 
+        will examine the areas where the two come together. Next month we will 
+        look at how RUP differs from XP, when and why you need to consider the 
+        differences, and what benefits accrue with the added strengths of RUP.</i></p>
+      <p><i>If you're not familiar with the two processes, then start with my 
+        overviews of <a 
+            href="http://www.therationaledge.com/content/mar_01/f_xp_gp.html#xp">XP</a> 
+        and <a 
+            href="http://www.therationaledge.com/content/mar_01/f_xp_gp.html#rup">RUP</a>. 
+        </i></p>
+      <table bordercolor=#000066 cellspacing=0 cellpadding=5 width=300 
+            align=right border=1 hspace="5">
+        <tbody> 
+        <tr> 
+          <td><a name=xp></a> 
+            <h5>Overview: eXtreme Programming</h5>
+            <p>eXtreme Programming (XP) is a software development discipline developed 
+              by Kent Beck in 1996. It is based on four values: communication, 
+              simplicity, feedback, and courage. It stresses continual <b>communication</b> 
+              between the customer and development team members by having an on-site 
+              customer throughout the development lifecycle. The on-site customer 
+              decides what will be built and in what order. The development team 
+              keeps things <b>simple</b> by continually refactoring code and producing 
+              a minimal set of non-code artifacts. Many short releases and continual 
+              unit testing are the <b>feedback</b> mechanisms. <b>Courage</b> 
+              means doing the right thing, even when it is not the most popular 
+              thing to do. It means being honest about what you can and cannot 
+              do.</p>
+            <p>Twelve XP practices support the four values. They are:</p>
+            <ul type=disc>
+              <li><font face="Verdana, Helvetica, Arial"><i>The planning game</i>. 
+                Determine the features in the next release through a combination 
+                of prioritized stories and technical estimates. </font> 
+              <li><font face="Verdana, Helvetica, Arial"><i>Small releases</i>. 
+                Release the software often to the customer in small incremental 
+                versions. </font> 
+              <li><font face="Verdana, Helvetica, Arial"><i>Metaphor</i>. The 
+                metaphor is a simple shared story or description of how the system 
+                works. </font> 
+              <li><font face="Verdana, Helvetica, Arial"><i>Simple design</i>. 
+                Keep the design simple by keeping the code simple. Continually 
+                look for complexity in the code and remove it at once. </font> 
+              <li><font face="Verdana, Helvetica, Arial"><i>Testing</i>. The customer 
+                writes tests to test the stories. Programmers write tests to test 
+                anything that can break in the code. These tests are written before 
+                the code is written. </font> 
+              <li><font face="Verdana, Helvetica, Arial"><i>Refactoring.</i> This 
+                is a simplifying technique to remove duplication and complexity 
+                from code. </font> 
+              <li><font face="Verdana, Helvetica, Arial"><i>Pair programming.</i> 
+                Teams of two programmers at a single computer develop all the 
+                code. One writes the code, or drives, while the other reviews 
+                the code for correctness and understandability. </font> 
+              <li><font face="Verdana, Helvetica, Arial"><i>Collective ownership.</i> 
+                Everyone owns all of the code. This means that everyone has the 
+                ability to change any code at any time. </font> 
+              <li><font face="Verdana, Helvetica, Arial"><i>Continuous integration.</i> 
+                Build and integrate the system several times a day whenever any 
+                implementation task is completed. </font> 
+              <li><font face="Verdana, Helvetica, Arial"><i>Forty-hour week.</i> 
+                Programmers cannot work at peak efficiency if they are tired. 
+                Overtime is never allowed during two consecutive weeks. </font> 
+              <li><font face="Verdana, Helvetica, Arial"><i>On-site customer.</i> 
+                A real customer works in the development environment full-time 
+                to help define the system, write tests, and answer questions. 
+                </font> 
+              <li><font face="Verdana, Helvetica, Arial"><i>Coding standards.</i> 
+                The programmers adopt a consistent coding standard.</font></li>
+            </ul>
+            <p>For more information on XP, see:</p>
+            <blockquote> 
+              <p>Kent Beck, <i>Extreme Programming Explained</i>. Addison-Wesley, 
+                2000. </p>
+              <p>Ron Jeffries, et al., <i>Extreme Programming Installed</i>. Addison-Wesley, 
+                2001.</p>
+              <p>Kent Beck and Martin Fowler, <i>Planning Extreme Programming</i>. 
+                Addison-Wesley, 2001.</p>
+            </blockquote>
+            <p>You can also find information on XP at:</p>
+            <p><a 
+                  href="http://c2.com/cgi/wiki?ExtremeProgramming">http://c2.com/cgi/wiki?ExtremeProgramming</a><br>
+              <a 
+                  href="http://www.extremeprogramming.org/">http://www.extremeprogramming.org/</a><br>
+              <a 
+                  href="http://www.xprogramming.com/">http://www.xprogramming.com/</a></p>
+          </td>
+        </tr>
+        </tbody> 
+      </table>
+      <p>How do you decide on the right process for a software development project? 
+        If you are considering using XP as your process, the first question you 
+        need to ask and answer is: Can I actually use XP for this project? This 
+        may not be as easy as it sounds. There are lively debates on what makes 
+        a project an eXtreme project (see <a 
+            href="http://c2.com/cgi/wiki?AreYouDoingXp">http://c2.com/cgi/wiki?AreYouDoingXp</a> 
+        for one view). If you don't refactor your code continuously and write 
+        tests before you code, for example, then are you doing XP? In truth, many, 
+        if not most, so-called XP projects do not follow XP in an orthodox way. 
+        Most use some XP techniques; few use them all. </p>
+      <p>If you're thinking of using XP straight up, here are some more specific 
+        questions you should ask yourself: </p>
+      <ul type=disc>
+        <li><font face="Verdana, Helvetica, Arial">Is the project team small (ten 
+          people or less)? </font> 
+        <li><font face="Verdana, Helvetica, Arial">Is the team co-located, and 
+          willing and able to do pair programming? </font> 
+        <li><font face="Verdana, Helvetica, Arial">Do we have a commitment for 
+          an on-site customer?</font></li>
+      </ul>
+      <p>If you answered "no" to any of these questions, then you may not be a 
+        candidate for a full-fledged XP project. You may, however, be able to 
+        use the RUP and incorporate selected XP techniques into it. </p>
+      <p>Unlike XP, which focuses narrowly on small, co-located teams with on-site 
+        customers, RUP is broader and more flexible. It addresses many styles 
+        of software development projects and urges users to adapt its elements 
+        to suit their specific projects. It is not hard to imagine an adaptation 
+        of RUP that matches XP very closely. In fact, this is exactly the claim 
+        that Robert Martin makes for his dX Process.<a 
+            href="http://www.therationaledge.com/content/mar_01/f_xp_gp.html#1"><b><sup>1</sup></b></a> 
+      </p>
+      <h3>XP Practices and the RUP</h3>
+      <p>The focus of XP is code: writing the code, keeping it simple, and getting 
+        it correct. This is a good thing, as far as it goes. If you build software, 
+        ultimately it comes down to delivering executable software to your customers.</p>
+      <p>Let's look at nine specific XP practices to see how they complement or 
+        overlap with the RUP. For each practice, we will briefly discuss benefits 
+        as well as limitations and hidden assumptions. See the <a 
+            href="http://www.therationaledge.com/content/mar_01/f_xp_gp.html#xp">XP 
+        overview</a> for a brief description of each specific practice.</p>
+      <h5>Everything Starts with Planning</h5>
+      <p>When it comes to planning, RUP and XP agree: plans change, and you cannot, 
+        practically speaking, plan a complete project in detail. The best approach 
+        is to anticipate changes and ensure that you control the associated risks. 
+        According to XP, you should prioritize the "stories" you want your system 
+        to fulfill, and get technical estimates for the effort required to implement 
+        them. Is prioritizing stories any different from prioritizing use cases? 
+        Not really, if you equate stories with use cases. Some of the example 
+        stories from XP literature are not really use cases, so it may not make 
+        sense to equate the two. A story describes a unit of work, and XP assumes 
+        that the story's context is obvious. A use case provides a complete set 
+        of operations that provide value to a system user. I believe stories and 
+        use cases complement each other, and that a use case can be realized through 
+        multiple stories. A use case speaks to all stakeholders, whereas stories 
+        speak in more detail to developers. You can produce use-case realizations 
+        (according to the RUP) by filling in a complete, more detailed context 
+        for the stories.</p>
+      <p>Alistair Cockburn says that stories are promises for conversations between 
+        the on-site customer and the programmer. These conversations are of great 
+        value, and the RUP specifically asks you to consider capturing their results 
+        in use cases and other requirements artifacts. XP <i>implies</i> that 
+        you should capture the results but provides little guidance on how to 
+        do it. In XP, the final resting place for requirements or design decisions 
+        is the code. Unfortunately, code is not an effective communication medium 
+        for all stakeholders.</p>
+      <p>Getting technical estimates from the developer who will implement a feature 
+        is good practice. RUP does not go into detail about how to obtain these 
+        estimates, but if you have confidence in the developer, then adopt the 
+        practice as part of your planning process. In fact, go beyond this practice: 
+        When you get into the details of project deliverables, do estimates for 
+        documentation, training, support, and manufacturing. </p>
+      <h5>Simple Design: No Arguments</h5>
+      <p>Every technical discipline preaches simplicity. XP tells us to build 
+        the simplest system that meets current requirements, recasting this principle 
+        as <i>You Aren't Going to Need It</i>. What this means is that you should 
+        implement things when you actually need them, not when you realize that 
+        you might need them in the future. The RUP says almost the same thing 
+        using different words and at different levels: Manage your requirements, 
+        continually prioritize, and assess progress. Well-defined, prioritized 
+        requirements simplify the developer's decision making about what to do. 
+        The RUP also encourages the use of components and the Unified Modeling 
+        Language to help manage design complexity.</p>
+      <p>It is easy to misinterpret the XP advice and mistakenly assume that you 
+        do not have to pay attention to infrastructure and architecture. But simple 
+        design does not mean that you can ignore required infrastructure or architecture. 
+        There is a sharp difference between RUP and XP in this area, which we 
+        will discuss next month under the XP practice of "metaphor."</p>
+      <h5>Testing: The Last Word?</h5>
+      <table bordercolor=#000066 cellspacing=0 cellpadding=5 width=300 
+            align=left border=1 hspace="5">
+        <tbody> 
+        <tr> 
+          <td><a name=rup></a> 
+            <h5>Overview: The Rational Unified Process</h5>
+            <p>The Rational Unified Process (RUP) provides a disciplined approach 
+              to software development. It is a <i>process product</i>, developed 
+              and maintained by Rational Software. It comes with several out-of-the-box 
+              roadmaps for different types of software projects. The RUP also 
+              provides information to help use other Rational tools for software 
+              development, but it does not require the Rational tools for effective 
+              application to an organization; integrations with other vendors' 
+              offerings are possible.</p>
+            <p>The RUP provides guidance for all aspects of a software project. 
+              It does not require you to perform any specific activity or produce 
+              any specific artifact. It does provide information and guidelines 
+              for you to decide what is applicable to your organization. It also 
+              provides guidelines that help you tailor the process if none of 
+              the out-of-the-box roadmaps suits your project or organization.</p>
+            <p>The RUP emphasizes the adoption of certain <i>best practices</i> 
+              of modern software development, as a way to reduce the <i>risk</i> 
+              inherent in the development of new software. These best practices 
+              are:</p>
+            <ul type=disc>
+              <li><font face="Verdana, Helvetica, Arial">Develop iteratively </font> 
+              <li><font face="Verdana, Helvetica, Arial">Manage requirements </font> 
+              <li><font face="Verdana, Helvetica, Arial">Use component-based architectures 
+                </font> 
+              <li><font face="Verdana, Helvetica, Arial">Model visually </font> 
+              <li><font face="Verdana, Helvetica, Arial">Continuously verify quality 
+                </font> 
+              <li><font face="Verdana, Helvetica, Arial">Control change</font></li>
+            </ul>
+            <p>The Rational Unified Process weaves these best practices into the 
+              definitions of </p>
+            <ul type=disc>
+              <li><font face="Verdana, Helvetica, Arial"><i>Roles</i> - sets of 
+                activities performed and artifacts owned </font> 
+              <li><font face="Verdana, Helvetica, Arial"><i>Disciplines</i> - 
+                focus areas of software engineering effort such as <i>Requirements, 
+                Analysis and Design, Implementation</i>, and <i>Test</i> </font> 
+              <li><font face="Verdana, Helvetica, Arial"><i>Activities</i> - definitions 
+                of the way artifacts are produced and evaluated </font> 
+              <li><font face="Verdana, Helvetica, Arial"><i>Artifacts</i> - the 
+                work products used, produced or modified in the performance of 
+                activities</font></li>
+            </ul>
+            <p>The RUP is an iterative process that identifies four phases of 
+              any software development project. Over time, the project goes through 
+              Inception, Elaboration, Construction, and Transition phases. Each 
+              phase contains one or more iterations in which you produce an executable, 
+              but possibly incomplete, system (except possibly in the Inception 
+              phase). During every iteration, you perform activities from several 
+              disciplines in varying levels of detail.</p>
+            <p>You'll find a good <a 
+                  href="http://www.therationaledge.com/content/jan_01/f_rup_pk.html">overview 
+              of the RUP</a> by Philippe Kruchten in the January issue of <i>The 
+              Rational Edge</i>. You can also find further information and an 
+              evaluation of the RUP on the Rational Software Web site: <a 
+                  href="http://www.rational.com/">http://www.rational.com/</a>.</p>
+          </td>
+        </tr>
+        </tbody> 
+      </table>
+      <p>Test first, then code! This is wisdom from XP, and it is good. The other 
+        testing pearl from XP is that the customer provides the acceptance test. 
+        Programmers write unit tests to ensure that the code does what they think 
+        it does. Customers write acceptance tests to ensure that the system does 
+        what it is supposed to do. RUP has a general framework for testing and 
+        provides guidance on how to write effective tests. In addition to unit 
+        and customer written tests, others may be required: for example, load 
+        tests for Web sites. Combine RUP and XP, and you get an excellent quality 
+        focus for your team. </p>
+      <p>In XP, the development team uses the test results to decide whether the 
+        system is ready for the customer. If the system passes all acceptance 
+        tests, then the software is ready. RUP suggests other acceptance criteria 
+        in addition to testing. Depending upon the project, you might consider 
+        including customer training, on-site installation, documentation, and 
+        several other items in your product acceptance criteria. Simply because 
+        a system passes the tests does not ensure that a programmer (or programming 
+        pair) has not inserted a trap door or some other time bomb in your software. 
+        Sometimes, depending upon the type of system, you need more rigorous code 
+        inspections by independent auditors.</p>
+      <h5>Refactoring: A Little Goes a Long Way</h5>
+      <p>Refactoring is the act of rewriting code to improve it. It is also a 
+        technique for keeping the design simple. RUP does not address code refactoring, 
+        but that does not mean you should not consider it. Be aware, however, 
+        that refactoring may create a risk for your team. What's simple to one 
+        programmer may be complex to another. If you do too much refactoring, 
+        then the team may thrash around and lose valuable time developing the 
+        code.</p>
+      <h5>Pair Programming: Are Two Heads Better Than One?</h5>
+      <p>There is evidence that pair programming is an effective way to improve 
+        programmer productivity. Programmers remain focused, and because they 
+        get immediate feedback, quality improves. Pair programming is one way 
+        to avoid code reviews, but it places some constraints on a project team:</p>
+      <ul type=disc>
+        <li><font face="Verdana, Helvetica, Arial">The team must be in one location. 
+          </font> 
+        <li><font face="Verdana, Helvetica, Arial">Paired team members must have 
+          compatible personalities plus well-matched programming skills. </font></li>
+      </ul>
+      <h5>Continuous Integration: Do One Build or More Per Day</h5>
+      <p>Every programmer on an XP project must be able to change code and ensure 
+        that it works, not just for unit tests but also for acceptance tests. 
+        This requires frequent builds: one or more a day. This practice is an 
+        excellent one. In order for it to really work, however, you need powerful 
+        configuration management tools and an effective process for using them. 
+        The RUP provides general guidelines for continuous integration as well 
+        as specific information on using Rational ClearCase. In fact, at Rational, 
+        we perform daily integrations on the complete Rational Suite product family.</p>
+      <h5>Forty Hour Work Week: No Sleeping Under the Desk</h5>
+      <p>What a great idea! Is it practical for your organization? Studies indicate 
+        that most people experience rapidly diminishing returns when they invest 
+        more than forty hours in their work -- especially when it is habitual. 
+        An XP project forbids two consecutive weeks of overtime.</p>
+      <h5>On-site Customer: A Must-Have? </h5>
+      <p>Originally, XP said, "A real customer must sit with the team, available 
+        to answer questions, resolve disputes, and set small-scale priorities." 
+        This has been further refined to, "An XP project is steered by a dedicated 
+        individual who is empowered to determine requirements, set priorities, 
+        and answer questions as the programmers have them." </p>
+      <p>The RUP is more flexible. Although it has always maintained that the 
+        customer, in fact all stakeholders, must be adequately represented in 
+        steering a project, the RUP also acknowledges that it is not always possible 
+        or desirable to have a real customer co-located with the development team. 
+        Instead, RUP defines several roles that are responsible for determining 
+        the project goals, scope, and so on, and says that a customer (on-site 
+        or not) or some other appropriate person in the organization can perform 
+        the activities mapped to these roles. It's not important whether the person 
+        is an actual customer, or whether he or she is actually on site. What 
+        <i>is</i> important is that the person be available to clarify issues, 
+        and capable and responsible enough to produce the information necessary 
+        for the team to progress as quickly as possible -- including feedback 
+        in a form the team can understand.</p>
+      <h5>Coding Standards: Have Them and Use Them</h5>
+      <p>No one is going to argue against having coding standards. But what is 
+        <i>really</i> important? To use them! It doesn't matter what the standards 
+        <i>are</i> as long as everyone uses them. The RUP provides three coding 
+        standard examples to get you started: Ada, C++, and Java. As a complement 
+        to these coding standards, the RUP also encourages that you define architectural 
+        mechanisms, which standardize not only the language of the code, but also 
+        its structure and usage (error handling and transaction locking are examples 
+        of common mechanisms).</p>
+      <h3>Summary</h3>
+      <p>As you can see, there is significant agreement between RUP and XP on 
+        nine of the twelve XP practices. Typically, RUP provides complementary 
+        guidance for doing more to address specific risks. </p>
+      <p>As you evaluate both processes <i>vis à vis</i> your next project, 
+        it's important to keep in mind this primary rule: </p>
+      <p><i>Ask yourself, "If we don't perform a specific activity, produce an 
+        artifact, or adopt a practice, will anything bad happen?" <br>
+        If the answer is "no," then don't do it!</i></p>
+      <p>Next month we will look at the three remaining XP practices and discuss 
+        additional pitfalls associated with XP practices. And finally, we'll examine 
+        what important areas XP does <i>not</i> address.</p>
+      <hr>
+      <p class=small><a name=1><b><sup>1</sup></b></a> See <a 
+            href="http://www.objectmentor.com/publications/RUPvsXP.pdf">http://www.objectmentor.com/publications/RUPvsXP.pdf</a>, 
+        a chapter from Martin's forthcoming <i>Object Oriented Analysis and Design 
+        with Applications, Third Edition</i>, from Addison Wesley.</p>
+      <hr>
+      <p><i><b>For more information on the products or services discussed in this 
+        article, please click <a target=_blank 
+            href="http://www.rational.com/contact/request.jsp">here</a> and follow 
+        the instructions provided. Thank you!</b></i> </p>
+    </td>
+  </tr>
+  </tbody> 
+</table>
+<table cellspacing=0 cellpadding=10 width="95%" bgcolor=white border=0>
+  <tbody> 
+  <tr> 
+    <td valign=center align=right height=33>&nbsp;</td>
+    <td valign=center align=left> 
+      <p class=title><b>RUP and XP<br>
+        Part II: Valuing Differences </b></p>
+    </td>
+  </tr>
+  <!-- Insert Abstract -->
+  <tr> 
+    <td>&nbsp;</td>
+    <td valign=top> 
+      <p>by <b><a 
+            href="http://www.therationaledge.com/bio/pollice.html">Gary Pollice</a></b><br>
+        Evangelist, The Rational Unified Process<br>
+        Rational Software </p>
+      <p><i>In the last issue of</i> <a 
+            href="http://www.therationaledge.com/content/mar_01/f_xp_gp.html">The 
+        Rational Edge</a>, <i>we looked at the common ground between the Rational 
+        Unified Process (RUP<sup>®</sup>) and eXtreme Programming (XP). They certainly 
+        have a lot in common. This month, in Part Two of our comparison, we look 
+        at the last three XP practices and at some areas of RUP not covered by 
+        XP. </i></p>
+      <p><i>There are three XP practices we deferred discussing until this issue. 
+        They are:</i></p>
+      <font type="Verdana, Helvetica, Sans-Serif"> 
+      <ul>
+        <li><i>Small releases</i> 
+        <li><i>Collective code ownership</i> 
+        <li><i>Metaphor</i> </li>
+      </ul>
+      </font> 
+      <p><i>We will discuss each of these. But first, I'd like to point out that 
+        the set of XP practices we are talking about is the original twelve practices 
+        set forth by Kent Beck in his book</i> Extreme Programming Explained: 
+        Embrace Change, <i>published by Addison-Wesley in 1999. As of March 15, 
+        2001, there were several additional supporting practices listed on the 
+        Extreme Programming Roadmap page: <a 
+            href="http://c2.com/cgi/wiki?ExtremeProgrammingRoadmap">http://c2.com/cgi/wiki?ExtremeProgrammingRoadmap</a>. 
+        This indicates the dynamic and somewhat experimental nature of XP, which 
+        is not necessarily a bad thing. Any process needs to be dynamic and keep 
+        up-to-date with proven best practices. At the end of this article we will 
+        also look at some ways RUP and XP can work together to provide a good 
+        experience for software development project members.</i></p>
+      <h3>Small Releases: How Small and Released to Whom?</h3>
+      <p>What is a release? Depending upon how you answer this question, RUP and 
+        XP can seem quite similar in their concepts of a release. RUP defines 
+        a release as: "...a stable, executable version of product, together with 
+        any artifacts necessary to use this release, such as release notes or 
+        installation instructions."<a 
+            href="http://www.therationaledge.com/content/apr_01/f_xp2_gp.html#1"><b><sup>1</sup></b></a> 
+        Furthermore, according to RUP, releases are either internal or external. 
+        By this definition, a "release" creates a forcing function that ensures 
+        a shippable product, rather than a system that is only 80 percent complete. 
+        XP defines a release as "...a pile of stories that together make business 
+        sense."<a 
+            href="http://www.therationaledge.com/content/apr_01/f_xp2_gp.html#2"><b><sup>2</sup></b></a> 
+        In much of the discussion about small releases on some XP Web pages, the 
+        practice of small releases seems to coincide with the practice of continuous 
+        integration.<a 
+            href="http://www.therationaledge.com/content/apr_01/f_xp2_gp.html#3"><b><sup>3</sup></b></a> 
+        If you interpret the stories to mean the code as well as any artifacts 
+        necessary to use the release, and you accept the release as either internal 
+        or external, then the RUP and the XP concepts of a release are almost 
+        identical.</p>
+      <p>RUP invites you to consider more than just code. A release, especially 
+        an external one to the customer, may prove useless unless accompanied 
+        by release notes, documentation, and training. XP addresses code and assumes 
+        the rest will appear. Since code is the primary artifact of XP, the others 
+        need to be derived from it. This implies certain skills that may not be 
+        obvious. For example, technical writers might need to be able to read 
+        the code to understand how the system works in order to produce the documentation.</p>
+      <p>I have talked with several people who assume the frequent releases in 
+        XP are all to be delivered to an external customer. In fact, XP is not 
+        clear about this. In <i>Extreme Programming Installed,</i> the authors 
+        urge you to get the code into the customer's hands as frequently as possible.<a 
+            href="http://www.therationaledge.com/content/apr_01/f_xp2_gp.html#4"><b><sup>4</sup></b></a> 
+        The fact is, in many organizations customers cannot accept frequent software 
+        updates. You need to weigh the benefits of frequent delivery against the 
+        impact on the customer's ability to be productive. When you are unable 
+        to deliver a system to the customer, you should consider other ways of 
+        getting feedback, such as usability testing. On a RUP-based project, you 
+        typically deliver to the customer in the last construction iteration as 
+        well as in the transition phase iterations.</p>
+      <h3>Collective Code Ownership: Yours, Mine, and Ours</h3>
+      <p>XP promotes "collective code ownership," which means that when you encounter 
+        code that needs to be changed, you change it. Everyone has permission 
+        to make changes to any part of the code. Not only do you have permission 
+        to make the changes -- you have the responsibility to make them. </p>
+      <p>There is an obvious benefit with this practice. When you find code that 
+        needs to be changed, you can change it and get on with your work without 
+        having to wait for someone else to change it. In order for this practice 
+        to work, however, you need to also practice "continuous integration" and 
+        maintain an extensive set of tests. If you change any code, then you need 
+        to run the tests and not check in your code changes until all tests pass.</p>
+      <p>But will collective ownership work everywhere? Probably not. Large systems 
+        contain too much content for a single person to understand it all at a 
+        detailed level. Some small systems often include code that is complex 
+        due to its domain or the function it performs. If a specialist is required, 
+        then collective ownership may not be appropriate. When a system is developed 
+        in a distributed environment, it is not possible for everyone to modify 
+        the code. In these cases, XP offers a supporting practice called "code 
+        stewardship."<a 
+            href="http://www.therationaledge.com/content/apr_01/f_xp2_gp.html#5"><b><sup>5</sup></b></a> 
+        With code stewardship, one person, the steward, has responsibility for 
+        the code, with input from other team members. There are no guidelines 
+        when to apply code stewardship instead of collective code ownership.</p>
+      <p>Collective code ownership provides a way for a team to change code rapidly 
+        when it needs changing. Are there any potential drawbacks to this? If 
+        you consider all the ways code is changed, then there are some things 
+        you may want to control less democratically, in a centralized way -- for 
+        example, when code is modified because it lacks some functionality. If 
+        a programmer is implementing a story (or a use case, or a scenario), and 
+        requires behavior from a class, collective code ownership allows the class 
+        to be modified on the spot. As long as the system is small enough for 
+        a programmer to understand all of the code, this should work fine. But 
+        as the system gets larger, it is possible that the same functionality 
+        might be added to code that exists somewhere else. This redundancy might 
+        be caught at some point and the code refactored, but it is certainly possible 
+        for it to go unnoticed and for the functionality to begin diverging.</p>
+      <p>You may want to start a project using collective code ownership to allow 
+        your team to move quickly. As long as you have good code management tools 
+        and effective testing, then it will work for you -- up to a point. As 
+        a project leader or manager, however, you need to be on the lookout for 
+        the point when the code base becomes too large or too specialized in places. 
+        When this happens, you may want to structure your system into an appropriate 
+        set of components and subsystems and ensure that specific team members 
+        are responsible for them. RUP provides guidance and other help on how 
+        to structure your system.</p>
+      <h3>System Metaphor: It's Like Architecture</h3>
+      <p>A metaphor is a figure of speech that allows us to make comparisons. 
+        It is one way that we learn: "A motorcycle is like a bicycle, but it has 
+        a motor attached." XP uses a system metaphor instead of RUP's formal architecture. 
+        This system metaphor is "...a simple shared story of how the system works. 
+        This story typically involves a handful of classes and patterns that shape 
+        the core flow of the system being built."<a 
+            href="http://www.therationaledge.com/content/apr_01/f_xp2_gp.html#6"><b><sup>6</sup></b></a>&gt; 
+        Based on comparisons with familiar things, patterns help us understand 
+        new and unfamiliar things. </p>
+      <p>And indeed, the XP system metaphor may be a suitable replacement for 
+        architecture in some cases, but usually only in small systems. For many, 
+        if not most, software systems, you need more than a simple shared story. 
+        How much more you need depends upon many factors. </p>
+      <p>By contrast, RUP is an architecture-centric process.<a 
+            href="http://www.therationaledge.com/content/apr_01/f_xp2_gp.html#7"><b><sup>7</sup></b></a> 
+        Architecture is more than a metaphor, although it may include several 
+        metaphors. Architecture is concerned with structure, behavior, context, 
+        usage, functionality, performance, resilience, reuse, comprehensibility, 
+        constraints, trade-offs, and aesthetics. It is usually not possible to 
+        capture all of this in a simple shared story. Architecture does not provide 
+        a complete representation of the whole system. It concentrates on what 
+        is architecturally significant and important in reducing risks. </p>
+      <p>RUP provides a wealth of guidance on constructing and managing architecture. 
+        It helps the practitioner construct different views of the architecture 
+        for different purposes. <a 
+            href="http://www.therationaledge.com/content/apr_01/f_xp2_gp.html#8"><b><sup>8</sup></b></a> 
+        The different views are needed because there are different aspects that 
+        need to be highlighted and different people who need to view the architecture. 
+      </p>
+      <p>A RUP-based project will address architecture early. Often an executable 
+        architecture is produced during the Elaboration Phase. This provides an 
+        opportunity to evaluate solutions to critical technical risks, and the 
+        architecture is built upon during subsequent construction iterations.</p>
+      <p>An executable <i>architecture</i> is a partial implementation of the 
+        system, built to demonstrate selected system functions and properties, 
+        in particular those satisfying non-functional requirements. It is built 
+        during the <i>elaboration phase</i> to mitigate risks related to performance, 
+        throughput, capacity, reliability and other "ilities", so that the complete 
+        functional capability of the system may be added in the <i>construction 
+        phase</i> on a solid foundation, without fear of breakage. It is the intention 
+        of the Rational Unified Process that the executable architecture be built 
+        as an evolutionary prototype, with the intention of retaining what is 
+        found to work (and satisfies requirements), and making it part of the 
+        deliverable system.<a 
+            href="http://www.therationaledge.com/content/apr_01/f_xp2_gp.html#7"><b><sup>7</sup></b></a> 
+      </p>
+      <h3>What's Not Covered by XP That Is in RUP?</h3>
+      <p>Your project may be able to use XP for developing the code. If not, then 
+        you may need to add some additional process, but just enough to reduce 
+        your risks and ensure that you are able to deliver the right product to 
+        your customers on time. </p>
+      <p>However, when you look at a development project as a complete set of 
+        deliverables, code, documentation, training, and support, there are many 
+        things RUP addresses that are not considered in XP. Again, you need to 
+        determine whether they are needed for your specific project. The following 
+        list provides things you may need to consider. The list is not exhaustive. 
+        You can find additional information about these items in the Rational 
+        Unified Process.</p>
+      <font type="Verdana, Helvetica, Sans-Serif"> 
+      <ul>
+        <li><b>Business modeling.</b> The whole subject of business modeling is 
+          absent from XP. Systems are deployed into an organization. Knowledge 
+          of the organization can be important when identifying the requirements 
+          and for understanding how well a solution might be accepted. 
+        <li><b>Project inception.</b> XP assumes the project has been justified 
+          and does not address how that justification takes place. In many organizations, 
+          a business case must be made before a project begins in earnest. RUP 
+          helps a team make its business case by developing stakeholders' needs 
+          and a vision. 
+        <li><b>Deployment.</b> The whole area of system deployment is missing 
+          from XP. Any system needs supporting materials, minimally online documentation. 
+          Most need more. Commercial software products require packaging, distribution, 
+          user manuals, training materials, and a support organization. The RUP 
+          Deployment discipline provides guidance for practitioners on how to 
+          create appropriate materials and then use them.</li>
+      </ul>
+      </font> 
+      <h3>Mix and Match for Best Results </h3>
+      <p>Process diversity is important.<a 
+            href="http://www.therationaledge.com/content/apr_01/f_xp2_gp.html#9"><b><sup>9</sup></b></a> 
+        One size does not fit all projects. The process you use for your project 
+        should be appropriate for it. Consider what your project needs and adopt 
+        the right approach. Consider all aspects and risks. Use as much as you 
+        need, but neither too little nor too much.</p>
+      <p>RUP and XP provide two different approaches to software development projects. 
+        They complement each other in several ways. XP concentrates on code and 
+        techniques for a small team to create that code. It stresses face-to-face 
+        communication and places minimal effort on non-code artifacts. RUP is 
+        a process framework that you configure for different types of projects. 
+        It invites you to consider risks and risk mitigation techniques. RUP is 
+        often misinterpreted as being <i>heavy</i> because, as a framework, it 
+        provides process information for many types of projects. In fact, a configured 
+        instance of RUP may be very light, depending upon the risks that need 
+        to be addressed. It may incorporate some of the excellent techniques of 
+        XP and other processes if they are appropriate for the project at hand. 
+      </p>
+      <p>If my project is only about creating code, I may use just XP. However, 
+        almost all of the projects I work on require initial business decisions 
+        and planning, complete documentation, support, and deployment to customers. 
+        For this reason, I would more likely start with RUP and use the appropriate 
+        XP practices that will help my team move ahead quickly and mitigate real 
+        risks the project faces. </p>
+      <p>As a software engineer, I try to have a well-stocked toolbox of techniques, 
+        processes, and tools that help me succeed. I'm glad to have both RUP and 
+        XP as part of my collection. More techniques in my toolbox means that 
+        I can provide better value to my project and my organization. In addition, 
+        as a project manager or process engineer, I can create an instance of 
+        a process for a project that addresses the organization's need for controls 
+        while providing individual project members with an environment that can 
+        be fun and satisfying. </p>
+      <br clear=all>
+      <hr>
+      <p class=small><a name=1><b><sup>1</sup></b></a> Rational Unified Process 
+        Glossary. 
+      <p class=small><a name=2><b><sup>2</sup></b></a> Kent Beck, <i>Extreme Programming 
+        Explained: Embrace Change</i>. Reading, MA: Addison-Wesley 1999, p.178. 
+      <p class=small><a name=3><b><sup>3</sup></b></a> <a 
+            href="http://c2.com/cgi/wiki?FrequentReleases">http://c2.com/cgi/wiki?FrequentReleases</a>. 
+      <p class=small><a name=4><b><sup>4</sup></b></a> Ron Jeffries et al, <i>Extreme 
+        Programming Installed</i>. Reading, MA: Addison-Wesley, 2000, p.50. 
+      <p class=small><a name=5><b><sup>5</sup></b></a> <a 
+            href="http://c2.com/cgi/wiki?CodeStewardship">http://c2.com/cgi/wiki?CodeStewardship</a>. 
+      <p class=small><a name=6><b><sup>6</sup></b></a> <a 
+            href="http://c2.com/cgi/wiki?SystemMetaphor">http://c2.com/cgi/wiki?SystemMetaphor</a>. 
+      <p class=small><a name=7><b><sup>7</sup></b></a> This is described in Philippe 
+        Kruchten, "The 4+1 View of Architecture." <i>IEEE Software</i>, November, 
+        1995. 
+      <p class=small><a name=8><b><sup>8</sup></b></a> This definition is taken 
+        from the Rational Unified Process glossary. 
+      <p class=small><a name=9><b><sup>9</sup></b></a> For more information on 
+        process diversity, see Mikael Lindvall and Iona Rus, "Process Diversity 
+        in Software Development." <i>IEEE Software</i>, July/August 2000. </p>
+      <hr>
+      <p><i><b>For more information on the products or services discussed in this 
+        article, please click <a target=_blank 
+            href="http://www.rational.com/contact/request.jsp">here</a> and follow 
+        the instructions provided. Thank you!</b></i> </p>
+    </td>
+  </tr>
+  </tbody> 
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>文件系统层次结构</title>
+</head>
+
+<body>
+<h1 align=center>2.2 制作 configure 脚本 </h1>
+<p>autoconf 是用来生成自动配置软件源代码脚本（configure）的工具。configure 脚本独立于 autoconf 运行，而且在运行的过程中，不需要用户的干预，通常不需要附带参数。它是用来检验软件必须的参数的。autoconf 从一个列举编译软件时所需要各种参数的模板文件中创建 configure。autoconf 需要 GNU m4 来生成该脚本。
+<p>由 autoconf 生成的脚本一般起名为 configure。当运行时，configure 创建了多个文件，并对这些文件中的配置参数赋予适当的值。由 configure 创建生成的文件有：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;1。一个或多个 Makefile，在软件源代码的每个目录中都生成一个 Makefile。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;2。还可选的生成 C 头文件——configurable，包含了各种 #define 声明。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;3。一个名为 config.status 的脚本，当运行时，重新生成上面的文件。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;4。一个名为 config.cache 的脚本，保存运行检测的结果。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;5。一个名为 config.log 的文件，保存有编译器生成的信息，用于调试 configure。
+
+<p>为了让 autoconf 生成 configure 脚本，需要以 configure.in 为参数调用 autoconf。如果要检测自己的各种参数，以作为对 autoconf 的补充，则需要写 aclocal.m4 和 acsite.m4 的文件。如果要使用 C 头文件，需要写 acconfig.h，并且将 autoconf 生成的 config.h.in 同软件一起发行。
+
+<p>your source files --&gt [autoscan*] --&gt [configure.scan] --&gt configure.in
+<p>
+<p>configure.in --.   .------> autoconf* -----> configure
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+---+
+<p>[aclocal.m4] --+&nbsp;&nbsp;&nbsp;`---.
+<p>[acsite.m4] ---'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+--&gt [autoheader*] -&gt [config.h.in]
+<p>[acconfig.h] ----.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+-----'
+<p>[config.h.top] --+
+<p>[config.h.bot] --'
+<br>
+<p>Makefile.in -------------------------------&gt Makefile.in
+
+<p>Files used in configuring a software package: 
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.-------------&gt config.cache
+<p>configure* ------------+-------------&gt config.log
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+<p>[config.h.in] -.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.-&gt [config.h] -.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+--&gt config.status* -+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+--&gt make*
+<p>Makefile.in ---'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`-&gt Makefile ---'
+<br>
+<p>编辑 configure.in 文件：
+<p>configure.in 文件中包含了对 autoconf 宏的调用，这些宏是用来检测软件所必须的各项参数的。为了能够得到 configure.in 文件，需要使用 autoscan。configure.in 文件中，在进行各项检测前，必须在最开始调用 AC_INIT，在最后调用 AC_OUTPUT。另外有些宏由于检测的关系是和在文件中的位置相关的。最好每一个宏占用一行。
+<br>
+<p>使用 autoscan 创建 configure.in 文件
+<p>可以将目录做为参数调用 autoscan，如果不使用参数的化，则认为是当前目录。autoscan 将检查指定目录中的源文件，并创建 configure.scan 文件。在将 configure.scan 改名为 configure.in 文件前，需要手工改动它以进行调整。
+<br>
+<p>使用 autoconf 创建 configure 脚本
+<p>不带任何参数的运行 autoconf。autoconf 将使用 m4 宏处理器和 autoconf 宏，来处理处理 configure.in 中的宏。
+<br>
+<p>configure.in 中的宏：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AC_INIT（在源代码中唯一的一个文件）：configure 将检查该文件是否存在，并检查包含它的目录是否存在。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AC_OUTPUT（文件）：指定创建的输出文件。在 configure.in 文件中调用一次。文件名间用空格分开。比如：AC_OUTPUT(Makefile:templates/top.mk lib/Makefile:templates/lib.mk)
+
+<p>在 configure.in 中，有一些被 autoconf 宏预先定义的变量，重要的有如下几个：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;bindir：安装可执行文件的目录。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;includedir：C 头文件目录。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;infodir：info 页安装目录。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;mandir：安装手册页的目录。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;sbindir：为管理员运行该该程序提供的安装路径。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;srcdir：为 Makefile 提供的源代码路径。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;top_srcdir：源代码的最上层目录。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;LIBS：给连接程序的 -l 选项
+<p>&nbsp;&nbsp;&nbsp;&nbsp;LDFLAGS：给连接程序的 stripping（-s）和其他一些选项。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;DEFS：给 C 编译器的 -D 选项。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CFLAGS：给 C 编译器的 debug 和优化选项。当调用了 AC_PROG_CC 才有效。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CPPFLAGS：头文件搜索路径（-I)和给 C 预处理器和编译器的其他选项。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CXXFLAGS：给 C++ 编译器的 debug 和优化选项。当调用了 AC_PROG_CXX 才有效。
+
+<p>如果在同一个目录下编译多个程序的话，使用 AC_CONFIG_SUBDIRS 宏，它的语法是：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AC_CONFIG_SUBDIRS(DIR....)：
+
+<p>其他重要的宏：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AC_PROG_CC：选择 C 编译器。如果在环境中不设置 CC 的话，则检测 gcc。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;AC_PROG_CXX：选择 C++ 编译器。
+<br>
+<br>
+<p>参考文献：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href=Autoconf.htm>Autoconf.htm</a>
+<p align=right><a href=200.html>回家</a></p>
+</body>
+</html>

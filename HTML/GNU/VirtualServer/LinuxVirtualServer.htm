@@ -1,0 +1,48 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage Express 2.0">
+<title>What is virtual server?</title>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h1>What is virtual server?</h1>
+
+<p>Virtual server is a scalable <font face="Times New Roman">and
+highly available </font>server built on a cluster of real
+servers. The architecture of the cluster is transparent to end
+users, and the users see only a single virtual server. Please
+consider the following figure,</p>
+
+<p align="center"><img src="VirtualServer.gif" width="664"
+height="605"></p>
+
+<p>The real servers may be interconnected by high-speed LAN or by
+geographically dispersed WAN. The front-end of the real servers
+is a load balancer, which schedules requests to the different
+servers and make parallel services of the cluster to appear as a
+virtual service on a single IP address. Scalability is achieved
+by transparently adding or removing a node in the cluster. High
+availability is provided by detecting node or daemon failures and
+reconfiguring the system appropriately.</p>
+
+<h2>Goals</h2>
+
+<p>The basic goal of the Linux Virtual Server Project is to:</p>
+
+<blockquote>
+    <p><em>Produce a high-performance and highly available server
+    for Linux based on clustering, which provides a good
+    scalability, reliability and serviceability.</em></p>
+</blockquote>
+
+<hr>
+
+<p>Last updated: 1998/12/5</p>
+
+<p>Created on: 1998/5/28</p>
+</body>
+</html>

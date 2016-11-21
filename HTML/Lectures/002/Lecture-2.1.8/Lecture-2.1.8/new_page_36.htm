@@ -1,0 +1,123 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>New Page 36</title>
+<meta name="Microsoft Theme" content="blank 001, default">
+<meta name="Microsoft Border" content="tl, default">
+</head>
+
+<body background="_themes/blank/blbkgnd.gif" bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/new_page_36.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="FTP Server头文件"></strong></font><br>
+<a href="index.htm"><img src="_derived/home_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="主页" align="middle"></a> <a href="new_page_26.htm"><img src="_derived/up_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="上一层" align="middle"></a> <img src="_derived/new_page_36.htm_cmp_blank000_hbtn_p.gif" width="140" height="32" border="0" alt="FTP Server头文件" align="middle"> <a href="new_page_37.htm"><img src="_derived/new_page_37.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="FTP Server程序" align="middle"></a></p>
+<p align="center">　</p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<!--mstheme--></font><pre><font size="5">
+/*      Writen by Pacific, 2000/11/23   
+
+Support command:
+        214 The following commands are recognized (* =&gt;'s unimplemented).
+        214     USER    PASS    ACCT*   CWD     XCWD    CDUP    XCUP    SMNT*   
+        214     QUIT    REIN*   PORT    PASV    TYPE    STRU*   MODE*   RETR    
+        214     STOR    STOU*   APPE    ALLO*   REST    RNFR    RNTO    ABOR   
+        214     DELE    MDTM    RMD     XRMD    MKD     XMKD    PWD     XPWD    
+        214     SIZE    LIST    NLST    SITE    SYST    STAT    HELP    NOOP    
+        214 Direct comments to nolove@263.net
+
+*/
+
+
+#ifndef __FTPD_H__
+#define __FTPD_H__
+
+
+#define _XOPEN_SOURCE
+#include &lt;shadow.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;crypt.h&gt;
+#include &lt;pwd.h&gt;
+#include &lt;time.h&gt;
+#include &lt;sys/wait.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;sys/ioctl.h&gt;
+#include &lt;utime.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;malloc.h&gt;
+#include &lt;sys/file.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;stdarg.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">#define BUFSIZE         (1024)
+#define ERRS(x)         outs(&quot;550 %s: &quot; x, param)
+</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">//buffer and string 
+char inbuf[BUFSIZE];
+char genbuf[BUFSIZE];
+char hostname[BUFSIZE];
+char path[PATH_MAX];
+char rename_file[PATH_MAX];
+char username[100];
+char basedir[PATH_MAX];</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">//system arguments
+unsigned int ftp_port = 21;
+unsigned int max_conn = 65535;
+unsigned int timeout = 300;
+unsigned int file_rest = 0;
+unsigned int timeout = 300;
+unsigned int file_rest = 0;
+char transfer_type='i';
+int system_uid;</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">//boolean
+int user_valid = 0;
+int input_user = 0;
+int anonymous_login = 0;
+int pasv_mode = 0;
+int transfer = 0;</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">int listenfd;
+int connfd;
+int pasvfd;
+FILE *file;
+int data_pid = 0;
+FILE *data_file;</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">#define NO_CHECK                1
+#define NEED_PARAM              2
+#define NO_PARAM                4
+#define CHECK_LOGIN             8
+#define CHECK_NOLOGIN   16
+#define NO_TRANSFER             32</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">struct _cmd_list {
+        char *cmd;
+        void (*func)(char *param);
+        int check;
+};</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">struct _port {
+        uint32_t host;
+        uint16_t port;
+} remote_port, local_port;</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">int port_base = 3072;</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">#endif  //__FTPD_H__</font></pre><!--mstheme--><font face="宋体">
+<font size="5">　</font>
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+</html>

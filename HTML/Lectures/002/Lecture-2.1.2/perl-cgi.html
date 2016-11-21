@@ -1,0 +1,275 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>用 Perl 写 CGI 程序</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+    <META NAME="AUTHOR" CONTENT="Yongming Wei">
+    <META NAME="CREATED" CONTENT="20000329;17342600">
+    <META >
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="velvet.jpg">
+
+<A HREF="perl-history.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="perl-var.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=LEFT>6&nbsp;&nbsp;&nbsp;&nbsp;用 Perl 写 CGI 程序</H1>
+
+<UL>
+  <LI> 
+    <P>为什么要用 Perl 来写 CGI 
+  </LI>
+  <LI> 
+    <P>几个简单的 Perl CGI 程序 
+  </LI>
+  <LI> 
+    <P>CGI 中常用的环境变量 
+  </LI>
+  <LI> 
+    <P>关于 CGI 的更多内容 
+  </LI>
+</UL>
+
+<H3>6.1&nbsp;&nbsp;&nbsp;&nbsp;为什么要用 Perl 来写 CGI</H3>
+<P>为什么要用Perl来写CGI 应用程序呢？</P>
+<p> 因为 Perl 有很强的字符串处理能力，尤其是利用关联性数组来作 CGI 应用程序剖析输入数据串,可以说是一个功能强大的语言。由于 Internet 
+  上有大量的字符数据需要处理，因而在国外很多处理数据库的软件可以用 Perl 来沟通。现在 Perl 5.0 版本中增加了如下特色：<br>
+  　　面向对象的用法、<br>
+  　　增加对字符串的处理能力、<br>
+  　　可以把整个文件当成一个字符串来处理、<br>
+  　　不受任何数据的大小限制而只受存储器的大小限制、<br>
+  　　能够处理 DBM 数据库格式的数据，也能够处理二进制的数据 等等,<br>
+  更重要的是 Perl 还可以在 UNIX、WindowsNT、Windows95、Dos、Linux、FreeBSD、OS2、Macitosh 等众多操作系统中使用。</p>
+<p>另外 Perl 很容易学习和入门，虽然要精通需要一定的时间。它的语法和 C 语言很接近，对于原本熟悉 C 语言的人来说，Perl 是很容易上手的。只要几个小时的学习就可以很轻易地用 
+  Perl 语言写一个简单的 CGI 应用程序；至于那些没有 C 语言基础的人，也只要多花一点时间来熟悉，也是可以很快地掌握 Perl 语言。</p>
+<p>Perl 作为编写 CGI 的语言虽然很好，但是对于复杂的网络应用就不是很有效了，这主要来源于 Apache 与 Perl 的配合。每一个 Perl 
+  的 CGI 程序在被 Apache 调用执行的时候都必须开一个单独的进程来完成。而 Linux/UNIX 操作系统下，进程是一个非常消耗系统资源的实体，作为访问量巨大的网络服务器，如果只用 
+  Perl 来完成 CGI 所需的功能将会使服务器不堪重负。所幸的是现在有一个 Apache 的专用模块，Emb-Perl，其语法与 Perl 几乎相同，但是他由于采用少量后台进程来循环供 
+  Apache 使用，因此大大提高了运行效率。关于 Emb-Perl方面的知识在我们本次系列讲座的应用部分有专门的介绍，这里就不多谈了。</p>
+<p>虽然 Perl 不是专门用来编写 CGI 的，而且 Perl 的功能远远超过编写 CGI 程序，但是 Perl 依然不失为一个优秀的 CGI 程序语言。而且许多人一开始接触 
+  Perl 也是从 CGI 开始的，下面我们就来举几个小例子，来快速了解和体会 Perl 的 CGI 程序。</p>
+<p><BR>
+</p>
+<H3>6.2&nbsp;&nbsp;&nbsp;&nbsp;几个简单的 Perl CGI 程序</H3>
+<P>由于我们还没有讲解详细的 Perl 语法，所以下面讲解的例子可能会有一些不太明白的地方，不过没有关系，我们快速看几个 Perl 写的 CGI 程序的例子，获得一定的感性认识，等到这一讲结束后，相信同学们就可以弄清楚这些程序的含义了，而且也可以自己试着写几个 
+  CGI 程序了。</P>
+<P>用 Perl 来写 CGI，要求服务器必须已经配置好 Apache 和 Perl，关于这些服务器配置方面的问题同学们可以去听我们系列讲座应用部分的一些相关讲座，这里我们假定服务器已经配置妥当。</P>
+<P>第一个例子是大家最常看到的计数器。我们用 vi 编辑如下这个<a href="counter.pl">程序</a>（和 BASH 一样，除了 #! 所在的第一行以外，所有以 
+  # 开始到行尾的部分都是注释）：</P>
+<P><b><font color="#FFFFFF">#!/usr/bin/perl <br>
+  <br>
+  # 输出 HTML 说明信息，让浏览器知道这是一个 HTML 格式的文档。<br>
+  print "Content-type: text/html\n\n"; <br>
+  # 打开文件 count.txt 供读取，count.txt 文件中存储了一个整数。<br>
+  open(CNT,"count.txt"); <br>
+  <br>
+  # 读取 count.txt 文件中的整数，存放到变量 $count 中。CNT 相当于 C 语言中的文件句柄。<br>
+  $count=<cnt>&lt;CNT&gt;; <br>
+  # 如果该程序被执行，说明调用该程序的页面又被访问了一次，变量 $count 加 1。<br>
+  $count ++; <br>
+  <br>
+  # 把加 1 后的结果，和访问者的 IP 地址输出给浏览器。<br>
+  print "你是第 $count 位访问者，来自 $ENV{'REMOTE_ADDR'} &lt;br&gt;"; <br>
+  <br>
+  # 关闭 count.txt 文件<br>
+  close(CNT); <br>
+  <br>
+  # 再打开另一个文件 count.old 用于永久保存加 1 后的计数值。（因为 $count 在程序执行结束后就没有了）<br>
+  open(OLD ,">count.old"); <br>
+  # 将变量 $count，即加 1 后的结果写回 count.old 文件中。<br>
+  print OLD $count; <br>
+  # 关闭 count.old 文件<br>
+  close(OLD); <br>
+  <br>
+  # 执行 Shell 命令，将 count.old 文件复制成 count.txt 文件，此时这两个文件中都包含了最新的计数值。<br>
+  `cp count.old count.txt`;<br>
+  <br>
+  # 退出该程序<br>
+  </font></b><font color="#FFFFFF"><b>exit;</b></font></P>
+<P>在需要计数的页面中插入下面这行：</P>
+<P><b><font color="#FFFFFF">&lt;!--#exec cgi=&quot;/cgi-bin/counter.pl&quot;--&gt;</font></b></P>
+<P>并将页面的文件名从 xxx.html 改为 xxx.shtml。这样下次再访问这个页面的时候，就可以在相应位置看到有个整数每访问一次就会自动加一。</P>
+<P>下面再来看一个稍微复杂一点的例子。</P>
+<P><b><font color="#FFFFFF">#!/bin/usr/perl <br>
+  <br>
+  # 输出 HTML 语句头<br>
+  print "Content-type: text/html\n\n"; <br>
+  print "&lt;TITLE&gt; Quiz &lt;/TITLE&gt;"; <br>
+  print "&lt;H1&gt; 在线测验 &lt;/H1&gt;&quot;;<br>
+  <br>
+  # 调用 parse 函数<br>
+  &parse; <br>
+  <br>
+  # %ANSWER 是一个关联阵列 (以本表单为例 , 第一题答案是 A , 第二题答案是 C)一共有五题。<br>
+  %ANSWER=("1","A","2","C","3","C","4","C","5","B"); <br>
+  # 为 正确题数/错误题数 均赋初值为零。<br>
+  $right=0; <br>
+  $wrong=0; <br>
+  <br>
+  # 用 keys 这个函数将 FORM 的每个 KEY 取出存成一个阵列,再用 sort 这个函数来排序 (由小排到大) 。<br>
+  foreach $Num (sort keys %FORM) { <br>
+  <br>
+  　# $FORM{$Num}所存放的是表单里 value 的值 <br>
+  　print "第 $Num 题你所答的答案是：$FORM{$Num}　"; <br>
+  <br>
+  　# $ANSWER{$Num}所存放的是%ANSWER这个关联阵列由 $Num 所对应出来 A,C,C,C,B <br>
+  　print "标准答案：$ANSWER{$Num} &lt;br&gt;"; <br>
+  <br>
+  　# 计算答对和答错的题数。<br>
+  　if ($FORM{$Num} eq $ANSWER{$Num}) { <br>
+  　　$right++; <br>
+  　} else { <br>
+  　　$wrong++; <br>
+  　} <br>
+  } <br>
+  <br>
+  print "&lt;p&gt;您总共答对：$right 题；答错：$wrong 题&lt;/p&gt;"; <br>
+  <br>
+  sub parse{ <br>
+  　read(STDIN, $buffer, $ENV{'CONTENT_LENGTH'}); <br>
+  　@pairs = split(/&/, $buffer); <br>
+  <br>
+  　foreach $pair (@pairs){ <br>
+  　　($name, $value) = split(/=/, $pair); <br>
+  　　$value =~ tr/+/ /; <br>
+  　　$value =~ s/%([a-fA-F0-9][a-fA-F0-9])/pack("C", hex($1))/eg; <br>
+  　　$FORM{$name} = $value; <br>
+  　} <br>
+  } </font></b></P>
+<P>这个例子在浏览器中的显示和执行结果是<a href="exam.html">这样的</a>。</P>
+<P><BR>
+</P>
+
+<H3>6.3&nbsp;&nbsp;&nbsp;&nbsp;CGI 中常用的环境变量</H3>
+<P> 我们注意到在上面的例子中用到了 <font color="#FFFFFF">$ENV{'CONTENT_LENGTH'} 和 $ENV{'REMOTE_ADDR'} 
+  </font>这样的变量，这些变量被称为 WWW 服务的环境变量，就像我们在前面了解的 BASH 所用到的 Shell 环境变量 ${HOME} 等一样。WWW 
+  服务中提供的变量还有很多，下面我们列出一些。<br>
+</P>
+<table border=1 cellpadding=0>
+  <tbody> 
+  <tr> 
+    <td>
+      <pre><b>环境变量&nbsp;&nbsp;<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i></b></pre>
+    </td>
+    <td>
+      <pre><b>意义</b></pre>
+    </td>
+  </tr>
+  <tr> 
+    <td>SERVER_NAME</td>
+    <td>CGI脚本运行时的主机名和IP地址.</td>
+  </tr>
+  <tr> 
+    <td>SERVER_SOFTWARE</td>
+    <td>你的服务器的类型如： CERN/3.0 或 NCSA/1.3.</td>
+  </tr>
+  <tr> 
+    <td>GATEWAY_INTERFACE</td>
+    <td>运行的CGI版本. 对于UNIX服务器, 这是CGI/1.1.</td>
+  </tr>
+  <tr> 
+    <td>SERVER_PROTOCOL</td>
+    <td>服务器运行的HTTP协议. 这里当是HTTP/1.0.</td>
+  </tr>
+  <tr> 
+    <td>SERVER_PORT</td>
+    <td>服务器运行的TCP口，通常Web服务器是80.</td>
+  </tr>
+  <tr> 
+    <td>REQUEST_METHOD</td>
+    <td>POST 或 GET, 取决于你的表单是怎样递交的.</td>
+  </tr>
+  <tr> 
+    <td>HTTP_ACCEPT&nbsp;</td>
+    <td>浏览器能直接接收的Content-types, 可以有HTTP Accept header定义.</td>
+  </tr>
+  <tr> 
+    <td>HTTP_USER_AGENT</td>
+    <td>递交表单的浏览器的名称、版本 和其他平台性的附加信息。</td>
+  </tr>
+  <tr> 
+    <td>HTTP_REFERER</td>
+    <td>递交表单的文本的 URL，不是所有的浏览器都发出这个信息，不要依赖它</td>
+  </tr>
+  <tr> 
+    <td>PATH_INFO</td>
+    <td>附加的路径信息, 由浏览器通过GET方法发出.</td>
+  </tr>
+  <tr> 
+    <td>PATH_TRANSLATED</td>
+    <td>在PATH_INFO中系统规定的路径信息.</td>
+  </tr>
+  <tr> 
+    <td>SCRIPT_NAME</td>
+    <td>指向这个CGI脚本的路径, 是在URL中显示的(如, /cgi-bin/thescript).</td>
+  </tr>
+  <tr> 
+    <td>QUERY_STRING</td>
+    <td>脚本参数或者表单输入项(如果是用GET递交). QUERY_STRING 包含URL中问号后面的参数.</td>
+  </tr>
+  <tr> 
+    <td>REMOTE_HOST</td>
+    <td>递交脚本的主机名，这个值不能被设置.</td>
+  </tr>
+  <tr> 
+    <td>REMOTE_ADDR</td>
+    <td>递交脚本的主机IP地址.</td>
+  </tr>
+  <tr> 
+    <td>REMOTE_USER</td>
+    <td>递交脚本的用户名. 如果服务器的authentication被激活，这个值可以设置。</td>
+  </tr>
+  <tr> 
+    <td>REMOTE_IDENT</td>
+    <td>如果Web服务器是在ident (一种确认用户连接你的协议)运行, 递交表单的系统也在运行ident, 这个变量就含有ident返回值.</td>
+  </tr>
+  <tr> 
+    <td>CONTENT_TYPE</td>
+    <td>如果表单是用POST递交, 这个值将是 application/x-www-form-urlencoded. 在上载文件的表单中, content-type 
+      是个 multipart/form-data.</td>
+  </tr>
+  <tr> 
+    <td>CONTENT_LENGTH</td>
+    <td>对于用POST递交的表单, 标准输入口的字节数.</td>
+  </tr>
+  </tbody>
+</table>
+<P>&nbsp;</P>
+<H3>6.4&nbsp;&nbsp;&nbsp;&nbsp;关于 CGI 的更多内容</H3>
+<P> 好了，我们已经看出来，用 Perl 写 CGI 并不困难，不过要想精通 Perl 的编程还的确不容易，而且 CGI 程序极易引发网络服务器的安全问题，这里有一篇<a href="cgi_sec.html">关于 
+  CGI 安全性的文章</a>，有兴趣的同叙可以看看。
+<P>下面我们就进入 Perl 语言的正式学习。 
+<p></P>
+
+<H3>&nbsp;</H3>
+<P><BR>
+  <BR>
+</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="perl-history.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="perl-var.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+</BODY>
+</HTML>
+

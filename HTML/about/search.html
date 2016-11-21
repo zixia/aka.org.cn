@@ -1,0 +1,98 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage Express 2.0">
+
+<title>Google</title>
+<BASE HREF="http://www.google.com/">
+
+<script>
+<!--
+function setlang() {
+  document.f.q.focus();
+
+  cookies = document.cookie;
+  pos = cookies.indexOf("PREF=");
+  if (pos == -1) return; // no cookie
+
+  start = pos + 5; // start of cookie value
+  end = cookies.indexOf(";", start);
+  if (end == -1) end = cookies.length;
+  pref = unescape(cookies.substring(start, end));
+  pos = pref.indexOf("LR=");
+  if (pos == -1) return; // no LR
+
+  start = pos + 3;
+  end = pref.indexOf(":", start);
+  if (end == -1) end = pref.length;
+  lang = pref.substring(start, end);
+  mcl = (lang.indexOf("|") != -1);
+  if (!mcl) {
+    mcl = 1;
+    pos = pref.indexOf("LD=");
+    if (pos != -1) {
+      start = pos + 3;
+      end = pref.indexOf(":", start);
+      if (end == -1) end = pref.length;
+      if ( lang.substring(5, lang.length) == pref.substring(start, end) )
+        mcl = 0;
+    }
+  }
+
+  n = 0;
+  if (mcl) {
+    n = document.f.meta.length-1;
+  } else {
+    for ( n = document.f.meta.length-1; n >= 1; n-- ) {
+       if ( lang == document.f.meta.options[n].value.substring(3, 3+lang.length) ) break;
+    }
+  }
+  document.f.meta.options[n].selected = true;
+}
+// -->
+</script>
+</head>
+
+<BODY bgcolor="#FFFFFF" text="#000000" link="#000099" vlink="#003366" alink="#000099" onLoad="setlang()">
+<CENTER>
+  <form action="/search" method="get" name="f">
+    <table border="0" cellpadding="0" cellspacing="0">
+	<tr>
+	<td colspan=2>欢迎使用本搜索引擎搜索<a href=http://aka.org.cn>aka.org.cn</a>．请输入关键字串：</td>
+        </tr>
+        <tr align=center valign="baseline">
+            <td>
+               <input type="text" size="50" name="q" framewidth="4"> 
+<input type=hidden name=domains value="aka.org.cn">
+<input type=hidden name=sitesearch value="aka.org.cn">
+            </td>
+            <td align=left>
+            <select name="meta">
+                <option selected value="lr=&amp;hl=zh-CN">所有语言</option>
+                <option value="lr=lang_zh-CN&amp;hl=zh-CN">中文（简体）</option>
+                <option value="lr=lang_zh-TW&amp;hl=zh-TW">中文（繁体）</option>
+                <option value="lr=lang_en&amp;hl=en">英文</option>
+                <option value>自定义</option>
+            </select> </td>
+        </tr>
+        <tr>
+            <td align="center" valign="top"><NOBR> 
+              <input type="submit" name="btnG" value="搜索"> 
+              </NOBR><br>
+            </td>
+            <td align="center" valign="top"><font size=-1><a href="lang_options.html">语言选项</a></font>
+            </td>
+        </tr>
+　　　　<tr>
+	<td colspan=2>请注意，我们采用了google搜索引擎提供的服务；<br>如果您不能访问国外网站，您将无法使用本搜索．</td>
+	</tr>
+    </table>
+    </form>
+    </center>
+
+</body>
+</html>
+
+
+
+
+<html></html>

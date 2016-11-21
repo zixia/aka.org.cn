@@ -1,0 +1,45 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>Task, Process, Thread</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>Task, Process, Thread</H1> 
+ <P><UL>
+<LI><H2>Idle task
+</H2>
+<UL>
+idle threads; same  init_task, pid=0, private init_tss
+<BR></UL></UL><UL>
+<LI><H2>kernel threads
+</H2>
+<UL>
+kernel_thread, created in kernel mode, running in ring 0
+<BR><BR>p-&#062mm = NULL; sometimes p-&#062active_mm = prev-&#062active_mm = prev-&#062mm
+</UL></UL><UL>
+<LI><H2>user task
+</H2>
+<UL>
+clone, fork, do_fork(), do_exit()(lock the kernel to schedule)
+<BR><BR>return_from_fork
+</UL></UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld012.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld014.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld013.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

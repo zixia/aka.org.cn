@@ -1,0 +1,70 @@
+.mstheme
+{
+	nav-banner-image: url(blbnr.gif);
+	separator-image: url(blrule.gif);
+	list-image-1: url(blbull1.gif);
+	list-image-2: url(blbull2.gif);
+	list-image-3: url(blbull3.gif);
+	navbutton-horiz-pushed: url(blphbp.gif);
+	navbutton-horiz-normal: url(blphb.gif);
+	navbutton-vert-pushed: url(blpvbp.gif);
+	navbutton-vert-normal: url(blpvb.gif);
+	navbutton-home-normal: url(blhome.gif);
+	navbutton-up-normal: url(blup.gif);
+	navbutton-prev-normal: url(blprev.gif);
+	navbutton-next-normal: url(blnext.gif);
+}
+.mstheme-bannertxt
+{
+	font-family: Arial, Arial, Helvetica;
+	font-size: 6;
+	color: rgb(0,0,0);
+}
+.mstheme-horiz-navtxt
+{
+	font-family: Arial, Arial, Helvetica;
+	font-size: 2;
+	color: rgb(0,0,0);
+}
+.mstheme-vert-navtxt
+{
+	font-family: Arial, Arial, Helvetica;
+	font-size: 2;
+	color: rgb(0,0,0);
+}
+.mstheme-navtxthome
+{
+	font-family: Arial, Arial, Helvetica;
+	font-size: 1;
+	color: rgb(0,0,0);
+}
+.mstheme-navtxtup
+{
+	font-family: Arial, Arial, Helvetica;
+	font-size: 1;
+	color: rgb(0,0,0);
+}
+.mstheme-navtxtprev
+{
+	font-family: Arial, Arial, Helvetica;
+	font-size: 1;
+	color: rgb(0,0,0);
+}
+.mstheme-navtxtnext
+{
+	font-family: Arial, Arial, Helvetica;
+	font-size: 1;
+	color: rgb(0,0,0);
+}
+UL
+{
+	list-style-image:url(blbull1.gif);
+}
+UL UL
+{
+	list-style-image:url(blbull2.gif);
+}
+UL UL UL
+{
+	list-style-image:url(blbull3.gif);
+}

@@ -1,0 +1,1361 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>New Page 1</title>
+<meta name="Microsoft Theme" content="blank 000, default">
+<meta name="Microsoft Border" content="tlb, default">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/specification.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="Java规格说明"></strong></font><br>
+<a href="native_mode.htm"><img src="../_derived/back_cmp_blank000_back.gif" width="100" height="20" border="0" alt="上一页" align="middle"></a> <a href="../index.htm"><img src="../_derived/home_cmp_blank000_home.gif" width="100" height="20" border="0" alt="主页" align="middle"></a> <a href="index.htm"><img src="../_derived/up_cmp_blank000_up.gif" width="100" height="20" border="0" alt="上一层" align="middle"></a> <a href="qa.htm"><img src="../_derived/next_cmp_blank000_next.gif" width="100" height="20" border="0" alt="下一页" align="middle"></a></p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<h1 align="center">Java语言规格说明</h1>
+<p align="right">(译自Java language specification, 略加详述)</p>
+<p>1.程序结构<br>
+Java语言的源程序代码由一个或多个编译单元(compilation unit)组<br>
+成，每个编译单元只能包含下列内容(空格和注释除外)：<br>
+* 一个程序包语句(package statement )<br>
+* 引入语句(import statements)<br>
+* 类的声明(class declarations)<br>
+* 界面声明(interface declarations)<br>
+每个Java的编译单元可包含多个类或界面，但是每个编译单元却至<br>
+多有一个类或者界面是公共的。<br>
+Java 的源程序代码被编译之后，便产生了Java字节代码(bytecode)。<br>
+Java的字节代码由一些不依赖于机器的指令组成，这些指令能被Java的<br>
+运行系统(runtime system)有效地解释。Java的运行系统工作起来如同一<br>
+台虚拟机。<br>
+在当前的Java实现中，每个编译单元就是一个以.java为后缀的文件。<br>
+每个编译单元有若干个类，编译后，每个类生成一个.class文件。.class<br>
+文件是Java虚机器码。<br>
+<br>
+2. 词法问题<br>
+在编译的过程中，Java源程序代码中的字符被划分为一系列的标记<br>
+(token)。Java编译器可以识别五种标记: 
+标识符、关键字、字面量、运<br>
+算符以及特殊分隔符。注释以及诸如空格、制表符、换行符等字符 
+，都<br>
+不属于标识之列，但他们却常被用来分隔标记。<br>
+Java程序的编写采用泛代码Unicode字符集，若采用其它的字符集，<br>
+则需在编译前转换成Unicode。<br>
+<br>
+2.1 注释<br>
+Java语言提供了3种形式的注释：<br>
+//text从//到本行结束的所有字符均作为注释而被编译器忽略。<br>
+/* text */ 从/*到*/ 间的所有字符会被编译器忽略。<br>
+/** text */<br>
+当这类注释出现在任何声明之前时将会作特殊处理，它们不能再用<br>
+在代码的任何地方。这类注释意味着被括起来的正文部分，应该作为声<br>
+明项目的描述，而被包含在自动产生的文档中。<br>
+<br>
+2.2标识符<br>
+标识符的首字符必须是一个字母，下划线(&quot;_&quot;)或美元符号(&quot;$&quot;)。 
+后<br>
+面的字符也可是数字0-9。 Java使用泛代码字符集，为了便于识别好一<br>
+合法标识符，下面列出它的“字母”：<br>
+* 大写字母“A”～“Z”<br>
+* 小写字母“a”～“z”<br>
+* 泛代码（Unicode）中所有字符编码在十六进制数00C0之前的字<br>
+符。标识符中，首字母后的字符可以是任意的。当然，Unicode区段中<br>
+那些被保留作特殊字符的除外。<br>
+由此，“garton”及“MjΦlner”都是合法标识符，但是，包括<br>
+诸如“π”的字符串却不是合法的。<br>
+为了取得更多的有关泛代码标准的信息，请参阅“The Unicode<br>
+Standard”，“World Wide Character Encoding version 1.0，volumes 1 ＆<br>
+2”，Unicode公司的FTP地址是unicode.org。<br>
+<br>
+2.3 关键字<br>
+ 
+下面的标识符被保留用作关键字，他们不能作任何其它的用途。<br>
+abstract default goto* null synchronized<br>
+boolean do ifpackage this<br>
+break double implements privatethreadsafe<br>
+byteelse import protectedthrow<br>
+byvalve *extendsinstanceofpublic transient<br>
+casefalse intreturn true<br>
+catch final interface shorttry<br>
+charfinally long staticvoid<br>
+classfloatnativesuperwhile<br>
+const *fornew switch<br>
+continue<br>
+其中，加*标记后是被保留但当前却未使用的。<br>
+<br>
+2.4 字面量<br>
+字面量(literal)是某些类型值的基本表述，这些类型包括整型，浮点<br>
+型，布尔量，字符及字符串。<br>
+<br>
+2.4.1 整型字面量<br>
+整数可有三种表示形式： 
+十进制，八进制和十六进制。一个十进制<br>
+整型字面量由一系列的数字组成，但它的第一个数字不能是0(有时十进<br>
+制数字也可象下面讲的那样加后缀)。整数也可表达成八进制或十六进制<br>
+形式。以0开头的整型字面量，意味着它是一个十六进制的。十六进制<br>
+整数可以包括数字0-9以及字母a-f及A-F。八进制整数中则只能是出现<br>
+数字0-7。在超过32位所能表示的范围之前，整型字面量的类型即为int，<br>
+否则为long型。一个整型字面量可通过加后缀L或l而强迫成long型。<br>
+下面的均为合法的整型字面量。<br>
+2 2L 0777<br>
+<br>
+2.4.2 浮点字面量<br>
+一个浮点字面量可包括以下部分: 
+一个十进制整数，一个小数点“.”，<br>
+小数部分(另外一个十进制整数)，指数部分，一个类型后缀。指数部分<br>
+是一个e或E后跟一个整数。浮点字面量至少包含有一个数字，外加或<br>
+者一个小数点或者一个e(或E)，下面举一些浮点字面量的例子：<br>
+3.14153.1E12.1e12 2E12<br>
+就象在后面描述的那样，Java语言有两种浮点类型： float 及<br>
+double，用户可按以下写法区分：<br>
+2.0d或2.0Ddouble 型<br>
+2.0f或2.0F或2.0 float型<br>
+<br>
+2.4.3 布尔字面量<br>
+ 布尔(boolean)字面量有两个值： true及false。<br>
+<br>
+2.4.4 字符字面量<br>
+字符字面量是一个由单引号括起的字符(或者是由一组字符来表述<br>
+一个字符)。字符属于char类型，并且均从泛代码字符集中得来。而下面<br>
+列出的转义序列则用来描述一些非图形字符，它们以反斜杠“\”开始以<br>
+作转义用。<br>
+<br>
+续行符头 &lt;newline&gt; \<br>
+换行 NL(LF) \n<br>
+垂直制表符 HT \t<br>
+退格 BS \b<br>
+回车 CR \r<br>
+走纸换页 FF \f<br>
+反斜杠 \ \\<br>
+单引号 '\'<br>
+双引号 &quot;\&quot;<br>
+八进制数0ddd\ddd<br>
+十六进制数0xdd\xdd<br>
+泛代码字符0xdddd \udddd<br>
+<br>
+2.4.5 串字面量<br>
+串字面量是双引号引起的零个或多个字符的序列。每个串字面量被<br>
+看作是一个串对象，而并非是一个字符的数组，例如“abc”创建了一<br>
+个新的串类的实例。下面的都是合法的串字面量：<br>
+&quot; &quot; \\空串<br>
+&quot;\&quot; &quot; \\只包含一个双引号的串<br>
+&quot;This is a string&quot;<br>
+&quot;This is a \<br>
+ two-line string&quot;<br>
+<br>
+2.5运算符及特殊分隔符<br>
+ 下面这些字符在Java源程序中作运算符或分隔符用：<br>
+ +—!% ^ &amp; * ｜ ～ /&gt; &lt;<br>
+ ( ){}[]; ?:，· =<br>
+ 另外，下面这些复合字符被用作运算符：<br>
+ ++-- ==&lt;= &gt;=!=&lt;&lt;&gt;&gt;<br>
+ &gt;&gt;&gt;+= -= *=/= &amp;=/=<br>
+ ^=%=&lt;&lt;=&gt;&gt;=&gt;&gt;&gt;=‖ &amp;&amp;<br>
+ 后面还要在运算符一节中作详细介绍。<br>
+<br>
+3. 类型<br>
+任何一个变量或表达式都有一个类型，类型决定变量可能的取值范<br>
+围，决定对这些值允许的操作，以及这些操作的意义是什么。Java语言<br>
+中提供了内置定义类型，程序员也可以利用类及界面(interface)机制构造<br>
+新类型。<br>
+Java语言有两种类型： 
+简单类型和复合类型。简单类型指那些不能<br>
+再分割的原子类型。如：整型、浮点型、布尔型、字符型均为简单类型。<br>
+复合类型建立在简单类型的基础上。Java语言有三种复合类型：数组、<br>
+类及界面。在本节中，我们主要讨论简单类型及数组。<br>
+<br>
+3.1 数值类型<br>
+3.1.1 整数类型<br>
+整数与C及C++中相似，但有两点区别： 其一，所有的整数类型<br>
+均是独立于机器的；其二，对某些传统的定义作出改变，以反映自C问<br>
+世以来所带来的变化，四种整数类型分别具有8位、16位、32位及64<br>
+位的宽度，并且均是有符号的(signed)。如下所示：<br>
+<br>
+宽度<br>
+类型名<br>
+8<br>
+byte<br>
+16<br>
+short<br>
+32<br>
+int<br>
+64<br>
+long<br>
+<br>
+一个变量的类型不会直接影响它的存储的分配，类型仅仅决定变量<br>
+的算术性质以及合法的取值范围。如果把一个超出合法范围的值赋给一<br>
+变量，那么这个值将是对合法值域取模后的值。<br>
+<br>
+3.1.2 浮点类型<br>
+关键字float表示单精度(32位)，而double则表示双精度(64位)，两<br>
+个float型数运算的结果仍是float型，若有其中之一为double型，则结<br>
+果为double型。浮点运算及数据格式按IEEE754中的定义，细节问题请<br>
+参阅 “附录A： 浮点”中有关浮点实现的细节。<br>
+<br>
+3.1.3 字符类型<br>
+Java全部使用泛代码字符集，因此char类型数据被定义成一个16<br>
+位的无符号整数。<br>
+<br>
+3.2 布尔类型<br>
+当一个变量的取值或为ture或为false，或者是当一个方法的返回值为ture或false时，它?<br>
+嵌际遣级嘈偷摹Ａ硗猓叵翟怂愕慕峁嗍遣?<br>
+尔型的。<br>
+布尔值不是数值型，因此不能用强制类型转换把它们转化成数值。<br>
+<br>
+3.3 数组<br>
+数组在Java语言中属第一类对象。由它们代替了指针运算，所有的<br>
+对象(包括数组)都可通过标识来引用。即使被当作数运算，标识的值也<br>
+不应被破坏。通过new运算符可创建一个数组。<br>
+char s[]=new char[30];<br>
+数组第一元素的下标为0，在声明中指定维数是不允许的。每次都<br>
+必须显式地用new分配数组：<br>
+int i [] =new int [3];<br>
+Java语言不支持多维数组，但是，程序员却可以创建数组的数组。<br>
+int i [ ][ ]=new int [3][4];<br>
+至少有一维要明确给定，而其它维则可在以后再确定。例如：<br>
+int i[] []=new int [3] [ ]<br>
+是一个合法的声明。<br>
+除了在变量名及方法名后跟方括号这种C风格的声明之外，Java语<br>
+言允许方括号跟在数组类型之后，下面两行是等价的：<br>
+int iarray[ ];<br>
+int [ ] iarray;<br>
+同样地，方法声明也一样：<br>
+byte f(int n)[ ];<br>
+byte [ ] f(int n);<br>
+运行时检查下标保证它们是合法的：<br>
+int a[ ]=new int [10];<br>
+a[5]=1;<br>
+a[1]=a[0]+a[2];<br>
+a[-1]=4; // 运行时引发一个ArrayIndexOutOfBoundsException(数组下<br>
+标越界)异常<br>
+a[10]=2; //运行时引发一个ArrayIndexOutOfBoundsException(数组下<br>
+标越界)异常<br>
+<br>
+数组的大小必须使用整数表达式：<br>
+int n;<br>
+float arr[ ]=new float[n+1]<br>
+数组的长度可通过.length 查找：<br>
+int a[] []=new int [10][3];<br>
+println (a.length) //打印出10<br>
+println (a[0].length)//打印出3。<br>
+<br>
+3.3.1数组细节<br>
+我们所定义的数组都是Object类的一个子类的实例，在类的层次结<br>
+构中有一个被称为Array的子类，它有一个实例变量“length”。对每<br>
+一个基本类型，都有一个相应的Array的子类。同理，每一个类也都有<br>
+一个相应的Array子类存在。例如： new Thread[n]创建一个Thread[ 
+]<br>
+的实例。如果类A是类B的超类，那么，A[]是B[]的超类，见下图：<br>
+<br>
+Object<br>
+<br>
+ ArrayA<br>
+<br>
+int[]float[]A[]B<br>
+<br>
+ B[]<br>
+<br>
+因此，可以把数组赋给一个Object变量。<br>
+Objecto;<br>
+int a[]=new int [10];<br>
+o=a;<br>
+并且可通过强制类型转换把object变量赋给一数组变量。<br>
+a=(int [])o;<br>
+Array类本身不能显式地产生子类。<br>
+<br>
+4. 类<br>
+类(class)是传统面向对象编程模型的象征。它们支持数据抽象以及实<br>
+现对数据的约束，在Java中，每一个新的类创建一个新类型。<br>
+要想得到一个新的类，程序员必须首先找到一个已有的类，新类即<br>
+在这个已有类的基础上构造，我们称之为派生(derived)。派生出的类亦称<br>
+为原来类的子类，而这个类我们称为超类(super class)。<br>
+类的派生具有传递性： 如果B是A的子类，C是B的子类，则C<br>
+是A的子类。<br>
+一个类的直接超类以及指示这个类如何实现的界面(interface)，在类<br>
+的声明中，由关键字extends及implements标出。如下示(黑体表示关键字)：：<br>
+[doc_ comment][modifer]class ClassName<br>
+extendsSuperclassname<br>
+implementsinterface {，interface } ] {<br>
+class body<br>
+}<br>
+举例：<br>
+/** 2 dimension point */<br>
+public class Points {<br>
+ float x，y;<br>
+ ......<br>
+}<br>
+/** printable point */<br>
+ class PinttablePoint extends Points implements Printable {<br>
+......<br>
+public void Print ( ) {<br>
+}<br>
+}<br>
+所有的类均从一个根类 Object中派生出来。除Object之外的任何类<br>
+都有一个直接超类。如果一个类在声明时未指明其直接超类，那么缺省<br>
+即为Object。如下述：<br>
+class Point {<br>
+float x，y<br>
+}<br>
+与下面写法等价<br>
+class Point extends Object {<br>
+ floatx，y；<br>
+}<br>
+Java语言仅支持单继承，通过一个被称作“界面”的机制，来支持<br>
+某些在其它语言中用多继承实现的机制(详见“界面”一节)。Java之所<br>
+以没有采用C++的多继承机制，是为了避免多继承带来的诸多不便，例<br>
+如：可能产生的二义性，编译器更加复杂，程序难以优化等问题。<br>
+<br>
+4.1 类类型之间的强制转换<br>
+Java语言支持在两个类型之间的强制转换，因为每个类即是一个新<br>
+的类型。Java支持类类型之间的强制转换，如果B是A的子类，那么B<br>
+的一个实例亦可作为A的实例来使用，虽然不需要显式的转换，但显式<br>
+转换亦是合法的，这被称作拓宽(widening)。如果A的一个实例，想当作<br>
+B的实例使用，程序员就应写一个类型转换叫作削窄（narrowing）的强<br>
+制。从一个类到其子类的强制转<br>
+换在运行时要作例行的检查以确保这个对象就是其子类的一个实例<br>
+(或其子类之一)。兄弟类之间的强制类型转换是一个编译错误，类的强制转换的语法如下?<br>
+?<br>
+(classname) ref<br>
+其中，(classname)是要转换的目的类，而ref是被转换的对象。<br>
+强制转换仅仅影响到对象的引用，而不会影响对象本身。然而，对实例<br>
+变量的访问却受到对象<br>
+引用的类型的影响。一个对象从一个类型到另一类型的强制转换后，<br>
+可以使同一变量名对不同的实例变量访问。<br>
+class ClassA{<br>
+ Stringname = &quot;ClassA&quot;<br>
+}<br>
+class ClassBextendsClassA { //ClassB是ClassA的子类<br>
+ String name=&quot;ClassB&quot;;<br>
+}<br>
+class AccessTest {<br>
+void test( ) {<br>
+ClassBb=new ClassB( );<br>
+println (b.name);//打印： ClassB<br>
+ClassAa<br>
+a=(ClassA)b;<br>
+println (a.name); //打印： ClassA<br>
+}<br>
+}<br>
+<br>
+4.2 方法<br>
+方法(method)是可施于对象或类上的操作，它们既可在类中，也可在<br>
+界面中声明。但是他们却只能在类中实现(Java中所有用户定义的操作均<br>
+用方法来实现)。<br>
+类中的方法声明按以下方式：<br>
+[Doc_ comment][Access 
+Specifiers]ReturnTypemethodName(parameterList)<br>
+{<br>
+method body(本地的native及抽象的方法没有体部分)<br>
+}<br>
+<br>
+除构造函数可以无返回类型外，其余的方法都有一个返回类型。如<br>
+果一个不是构造函数的方法不返回任何值，那么它必须有一个void的返<br>
+回类型。<br>
+参数表由逗号分隔的成对的类型及参数名组成，如果方法无参数，<br>
+则参数表为空。方法内部定义的变量(局部变量)不能隐藏同一方法的其<br>
+它变量或参数。例如： 如果一个方法带以名为i的参数实现，且方法内<br>
+又定义一个名为i的局部变量，则会产生编译错误，例如：<br>
+class Rectangle {<br>
+ void vertex (int i，int j){<br>
+ for (int i=0; i&lt;=100; i++){ //出错<br>
+ …<br>
+ }<br>
+ }<br>
+}<br>
+方法体内循环语句中声明的i是一个编译错误。<br>
+<br>
+Java语言允许多态方法命名，即用一个名字声明方法，这个名字已<br>
+在这个类或其超类中使用过，从而实现方法的覆盖(overriding)及重载<br>
+(overloadding)。所谓覆盖是对继承来的方法提供另一种不同的实现。而<br>
+重载是指声明一个方法，它与另外一个方法有相同的名字，但参数表不同。<br>
+注： 
+返回类型不能用来区别方法，即在一个类的范围内，具有相同<br>
+的名字，相同的参数表(包括个数、位置及类型)的方法，必须返回相同<br>
+的类型。若这样的两个方法有不同的返回类型，将会产生一个编译错误。<br>
+<br>
+<br>
+4.2.1 实例变量<br>
+实例变量(instance variables)是指那些在类内声明，但在方法的作用<br>
+域之外尚未被static标记的变( 参照 “静态方法，变量及初始化”段)。<br>
+而在一个方法的作用域之内声明的变量是局部变量。实例变量可以有修<br>
+饰符(见修饰符)。<br>
+实例变量可以是任何的类型，并且可以有初始值。如果一个实例变<br>
+量无初始值，它将被初始化成0。布尔型变量被初始化成flase，对象被<br>
+初始化成null。下面是一个实例变量j具有初始化值的例子：<br>
+class A{<br>
+int j =23;<br>
+ ……<br>
+}<br>
+<br>
+4.2.2this 和super变量<br>
+在一个非静态方法的作用域内，this这个名字代表了当前对象。例<br>
+如： 
+一个对象可能需要把自己作为参数传给另一个对象的方法：<br>
+class MyClass {<br>
+ void Method (OtherClass obj) {<br>
+ …<br>
+ obj.Method (this)<br>
+…<br>
+ }<br>
+}<br>
+ 
+不论何时，一个方法引用它自己的实例变量及方法时，在每个引用<br>
+的前面都隐含着“this”。<br>
+如：<br>
+class Foo {<br>
+int a，b，c;<br>
+......<br>
+void myPrint ( ) {<br>
+print (a+ &quot;\n&quot;); 
+//a==&quot;this.a&quot;<br>
+}<br>
+......<br>
+ }<br>
+ super变量类似于this变量。this变量实际上是对当前对象的引用，<br>
+它的类型就是包含当前正在处理的方法的类。而super变量则是对其超类<br>
+类型对象的引用。<br>
+<br>
+<br>
+4.2.3 设置局部变量<br>
+方法都要经过严格的检查，以确保所有的局部变量(在方法内声明的<br>
+变量)在被引用之前已设初，被初始化之前就使用局部变量是一个编译错<br>
+误。<br>
+<br>
+4.3 覆盖方法<br>
+要想覆盖(overiding)一个方法，必须在声明这个方法的类的子类中声<br>
+明一个与它具有相同名字，相同返回类型，以及相同参数表的方法。当<br>
+子类的实例调用这个方法时，被调用的是新定义的方法而不是最初的那<br>
+个。被覆盖了的方法可通过super变量来调用，如下：<br>
+setThermostat(…)//指覆盖的方法<br>
+super. setThermostat(…)//指被覆盖的方法<br>
+<br>
+4.4 重载的认定<br>
+重载(overload)的方法与已有的某个方法同名，但是变元的个数及/<br>
+或类型不同，重载的认定是要决定调用的是哪一个方法，在认定重载的<br>
+方法时，不考虑返回类型。方法可以在同一类的内部重载，类内部方法<br>
+声明的顺序并不重要。<br>
+可同时改变变元个数和类型来实现方法的重载。 
+编译器认定相匹配<br>
+的方法时以最低的类型转换开销为准。只有具有相同名字及相同变元个<br>
+数的方法才会优先考虑。所有变元都必须转换，是匹配方法时的最大开<br>
+销。有两种变元类型是必需考虑的：对象类型和基本类型。<br>
+对象类型间转换的开销的大小指类树上实在参数的类与原型参数的<br>
+类之间连线的个数。只考虑拓宽型转换(对象类型转换的详细信息，请参<br>
+阅“类之间的强制类型转换”)。对于类型完全匹配的变元，无须进行转<br>
+换，它们的开销为零。<br>
+<br>
+基本类型的转换开销按下表计算，开销为零是严格匹配。<br>
+to<br>
+ byte short charint long float 
+double<br>
+byte 0 12 3 
+467<br>
+short10 0101 
+245<br>
+fromchar 11100124 5<br>
+int12 11 110 
+154<br>
+long 1211 1110 0 65<br>
+float 1514 131211 01<br>
+double 16 15141312 100<br>
+<br>
+注：开销 &gt;=10 易引起数据丢失。<br>
+<br>
+一经认定某一匹配方法是哪种转换开销，编译器则选用转换开销最<br>
+小的匹配。如果有多于一个方法，其最小开销相同，则匹配有二义性，<br>
+要出编译时的错误。<br>
+例如：<br>
+classA{<br>
+ intmethod (Object o, Thread t);<br>
+ intmethod(Thread t,Object o);<br>
+ voidg(Object o,Thread t){<br>
+method(o,t); //调用第一个方法<br>
+method(t,o); //调用第二个方法<br>
+method(t,t); //有二义性，编译出错<br>
+ ｝<br>
+｝<br>
+<br>
+4.5构造函数<br>
+构造函数(constructor)是提供初始化的专用方法。它和类的名字相同，<br>
+但没有任何返回类型。构造函数在对象创建时被自动地调用，它不能被<br>
+对象显式调用。如果你想在包(package)之外调用构造函数，就将构造函<br>
+数设为“public”(参见“访问指明符“一节)。<br>
+构造函数也可以用不同个数和类型的参数重载，就象其它的方法被<br>
+重载一样。<br>
+class Foo{<br>
+intx;<br>
+floaty;<br>
+Foo() {<br>
+ x=0;<br>
+ y=0.0;<br>
+}<br>
+Foo (int a ) {<br>
+ x=a;<br>
+ y=0.0;<br>
+}<br>
+Foo (float a ) {<br>
+x=0;<br>
+y=a;<br>
+}<br>
+ Foo (int a，float b ) {<br>
+ x=a;<br>
+ y=b;<br>
+ }<br>
+ static void myFoo( ) {<br>
+Foo obj1=new Foo( );//调用Foo( );<br>
+Foo obj2=new Foo(4 ); //调用Foo( int a );<br>
+Foo obj3=new Foo(4.0 );//调用Foo( float a );<br>
+Foo obj4=new Foo(4,4.0 );//调用Foo(int a ， float 
+b );<br>
+ }<br>
+}<br>
+超类的实例变量由调用超类的或当前类的构造函数初始化。如果在<br>
+代码中没有指定由谁初始化，则调用的是超类中的无参数的构造函数。<br>
+如果一个构造函数调用了这个类或其直接超类的另一个构造函数，这个<br>
+调用必须是构造函数体的第一条语句，在调用构造函数之前实例变量不<br>
+引用。<br>
+<br>
+调用直接超类的构造函数如下：<br>
+classMyClass extends OtherClass{<br>
+MyClass (someParamenters ) {<br>
+ /* 调用父类构造函数 */<br>
+super(otherParameters);<br>
+}…<br>
+}…<br>
+调用当前类的构造函数如下示：<br>
+class MyClass extends OtherClass{<br>
+MyClass (someParameters) {<br>
+ …<br>
+}<br>
+MyClass(otherParameters) {<br>
+ /*调用当前类的构造函数，该函数有指定的参数表*/<br>
+ this (someParameters);<br>
+ …<br>
+ }<br>
+ …<br>
+ }<br>
+下面的Foo和FooSub类的方法中使用构造函数的例子：<br>
+ class Foo extends Bar {<br>
+int a;<br>
+Foo(int a) {<br>
+//隐含调用Bar( )<br>
+this.a=a;<br>
+}<br>
+Foo( ) {<br>
+this (42);//调用Foo(42)，代替Bar( )<br>
+}<br>
+}<br>
+class FooSub extends Foo {<br>
+ int b;<br>
+ FooSub (int b) {<br>
+super(13);//调用Foo(13); 
+去掉此行将调用Foo( )<br>
+this.b=b;<br>
+ }<br>
+ }<br>
+<br>
+4.6 用new运算符创建对象<br>
+类是用来定义对象的状态和行为的模板，对象是类的实例。类的所<br>
+有实例都分配在可作无用单元回收的堆中。声明一个对象引用并不会为<br>
+该对象分配存储，程序员必须显式地为对象分配存储，但不必显式删除<br>
+存储，无用单元回收器会自动回收无用的内存。<br>
+分配对象存储用new运算符。除了分配存储之外，new还初始化实<br>
+例变量，调用实例的构造函数。构造函数是初始化对象的一种方法(见“构<br>
+造函数”)，下面的例子是分配并初始化ClassA的一个实例：<br>
+a = new ClassA( );<br>
+以下构造函数是带有参数的例子：<br>
+b = new ClassA(3,2);<br>
+分配的第三种形式允许以串表达式形式提供类名字，字符串在运行<br>
+时刻求值，new返回一个Object类型的对象，再转换成所希望的类型。<br>
+b = new (&quot;class&quot;+&quot;A&quot;);<br>
+这种情况下，调用构造函数时无需参数。<br>
+<br>
+4.6.1 无用单元收集<br>
+无用单元收集器(Garbage Collector)使存储管理的许多方面变得简<br>
+单、安全。程序不需要显式释放内存，它是自动处理的。无用单元收集<br>
+器不会释放正在被引用的内存，只释放那些不再被引用的空间。这就防<br>
+止了悬挂指针和存储漏洞(leak)。它也使设计人员从系统的存储管理中解<br>
+脱出来。<br>
+<br>
+4.6.2终止<br>
+Java的构造函数完成一个对象初始化工作，Java的终止<br>
+(finalization)方法则完成和析构函数类似的功能，但与C++不同之处，是<br>
+它可显式调用。虽然Java的无用单元的回收功能可以自动地释放对象所<br>
+占有的资源，但是对象占有的某些资源，例如： 
+文件描述符、套接字<br>
+(socket)，无用单元回收是无法处理的。所以程序员必须用终止函数来处<br>
+理。诸如：关闭打开的文件，终止网络连接等程序善后工作。<br>
+下面的例子是取自Java FileOutpntStream类中的终止函数。这个终止<br>
+函数是一个实例的方法，没有参数，也无返回值，名字必须取finalize()。<br>
+这里我们应注意它和C++析构函数的区别：<br>
+/**<br>
+* closes the stream when garbage is collected<br>
+* checks the file descriptor first to make sure it<br>
+* is not already closed.<br>
+*/<br>
+protected void finalize( ) throws IOException {<br>
+if (fd!=null) close();<br>
+}<br>
+下面是关于终止函数的几点注意事项：<br>
+* 
+如果一个对象含有终止函数，那么这个方法，在系统收集该对象所占<br>
+内存之前被调用。<br>
+* Java解释器可能在没有完成无用单元收集的情况下退出，那么某些终<br>
+止函数不可能被调用。在这种情况下，未释放的资源通常由操作系统来<br>
+处理。<br>
+* Java的无用单元的收集发生的时刻是不确定的，因此，Java无法保证<br>
+在何时调用终止函数、终止函数的调用次序、以及由哪一个线程执行终<br>
+止函数。<br>
+* 
+在终止函数被调用时，对象会不立刻被回收。因为终止函数要使用对<br>
+象的this指针做某些处理，意味着对象又被引用了。只有在finalize()执<br>
+行之后，无用单元收集程序才有可能处理该对象。<br>
+* 
+上面例子中，终止函数可以引发一个异常。但是如果在终止函数中发<br>
+生了其它异常，将被系统忽。<br>
+<br>
+4.6.3 null引用<br>
+关键字null是一个预定义的常量，表示“无实例”。null可以用在<br>
+实例能够出现的任何地方，可以被转换成任何类类型。<br>
+<br>
+4.7 静态方法，变量和初始化<br>
+变量和方法都可以声明为静态（static）的，这样它们只能用于类本<br>
+身，而不是类的实例。此外，类定义中的一块代码也可以声明为静态的。<br>
+这样的程序块叫做静态初始化段。<br>
+静态变量可以有初值，就象实例变量一样，（参见的“初始化顺序”）。<br>
+静态变量只在类中出现一次，而不论这个类有多少个实例。静态变量和<br>
+方法都是通过类名字来访问的。为方便起见，也可以用类实例来访问。<br>
+class Ahem {<br>
+int i;//实例变量<br>
+static int j; //静态变量<br>
+static int arr[ ] = newint[12];<br>
+static {//静态初始成员，初始化数组<br>
+ for (int i =0; i 〈arr. length; i++) {<br>
+arr[i] =i;<br>
+ }<br>
+ }<br>
+ void seti(int i) { //实例方法<br>
+ this.i =i;<br>
+ }<br>
+ static void setj (int j) {//静态方法<br>
+Ahem.j=j;<br>
+ }<br>
+static void clearThroat( ) {<br>
+ Ahem a = new Ahem ();<br>
+ Ahem.j=2;//有效： 
+通过类访问静态变量<br>
+ a.j =3;//有效： 
+通过实例访问静态变量<br>
+ Ahem.setj(2); //有效： 
+通过类访问静态方法<br>
+ a.setj(3);//有效： 
+通过实例访问静态方法<br>
+ a.i=4;//有效： 
+通过实例访问实例变量<br>
+ Ahem.i=5; //错误： 
+通过类访问实例变量<br>
+ a.seti(a);//有效： 
+通过实例访问实例方法<br>
+ Ahem.seti(5);//错误： 
+通过类访问实例方法<br>
+ }<br>
+ }<br>
+<br>
+7.1 声明的顺序<br>
+类和它的方法以及实例变量声明的次序并不重要，但是初始化时循<br>
+环依赖是存在的。有关初始化时循环依赖的信息参见“初始化顺序”一<br>
+节。方法可以自由向前引用其它的方法和实例变量。以下例子是合法的：<br>
+class A{<br>
+ voida () {<br>
+ f.set(42);<br>
+ }<br>
+ Bf;<br>
+}<br>
+class B {<br>
+ void set (long n) {<br>
+ this .n=n;<br>
+ }<br>
+ long n;<br>
+}<br>
+<br>
+4.7.2 初始化顺序<br>
+加载一个类时，它的静态初始化代码被执行。静态初始化代码段与<br>
+静态变量初始化同时进行 
+。它们按词法顺序执行。例如，一个类C声<br>
+明如下：<br>
+class C {<br>
+ static int a=1;<br>
+ static {<br>
+ a++;<br>
+ b=7;<br>
+ }<br>
+ static int b=2;<br>
+}<br>
+当C被加载时，按以下顺序执行：<br>
+* a置为1。<br>
+* 静态初始化段执行，a置为2，b置为7。<br>
+* b置为2。<br>
+如果静态初始化代码引用了其它的未加载的类，这个类将被加载，<br>
+它的静态初始化代码将先执行。在静态初始化期间引用未加载的类，该<br>
+类先加载并初始化。在初始化序列中，若引用到在它之前的一个未初始<br>
+化的类时，就会发生循环。这将导致一个NoClassDefFoundException错<br>
+误。<br>
+例如，当类A加载时，它的静态初始化代码被执行。但A的静态初<br>
+始化代码引用了另一个未加载的类B。这样B将被加载，它的静态初始<br>
+化代码要在A之前执行。A的静态初始化，随后执行。但如果B中的静<br>
+态初始化代码引用A，就导致了循环引用。<br>
+若实例或静态变量初始化时，存在前向依赖，则出编译时刻错误。<br>
+例如：<br>
+int i = j+2;<br>
+int j = 4;<br>
+将产生编译时刻错误。<br>
+实例变量初始化时可以有对静态变量的前向依赖。例如以下代码段：<br>
+int i = j+2; //实例变量<br>
+static int j = 4;//静态变量<br>
+i前向依赖于j，i将被初始化为6，j为4。因为j是静态变量，它<br>
+的初始化先于实例变量。<br>
+静态的方法不能引用实例变量; 
+只能引用静态变量和方法。<br>
+<br>
+4.8 访问指定符<br>
+访问指定符(access specifier)就是程序员控制对方法和变量访问的修<br>
+饰符。用于控制访问的关键字是public，private，和protected。public<br>
+方法可以被任何人访问。private方法只能在类定义时在类的内部访问。<br>
+因为private方法在类之外是不可见的，它们是final（定止）的，并且不<br>
+能被覆盖(参见第2.4.10.3节“定止类，方法，变量”)。此外不能将一个<br>
+非私有方发覆盖成私有方法，protected访问指定符使方法和变量只许其<br>
+子类访问，其它类都不行。<br>
+public可用于类，方法和变量。标以public 
+的类、方法和变量，可<br>
+为任何地方的任何其他类、方法访问。覆盖不能改变public访问权限。<br>
+没有被指定public或private的类，方法和变量，只能在声明它们的<br>
+包(package)中访问(参见第2.6节 “包”)。<br>
+<br>
+4.9 变量作用域规则<br>
+在一个包内，当一个类被定义成另一个类的子类时，超类中所作的<br>
+声明对子类均可见。当方法定义中引用变量时，将用到下面的作用域规<br>
+则：<br>
+1. 
+首先搜索当前块，然后是所有外套的块，直到包容该块的当前方<br>
+法，这被认为是局部作用域。在局部作用域后，还继续在类的作用域中<br>
+搜索。<br>
+2. 搜索当前类中的变量。<br>
+3. 
+如果没有找到变量，则搜索所有的超类中的变量，首先从直接超<br>
+类开始，直到Object类。如果没有找到变量，搜索引入的类和包名。如<br>
+果还没有找到，就成为编译时刻错误。<br>
+在一个类中多个变量出现相同的名字，也是编译错误。<br>
+<br>
+4.10修饰符<br>
+Java有以下关键字用作修饰符(Modifier)。<br>
+<br>
+4.10.1 线程安全变量<br>
+标记了Threadsafe（线程安全）的实例或静态变量是指当一个线程<br>
+使用它时不能被其它线程更改，即变量不能被异步改变。将变量标记为<br>
+Threadsafe的目的是允许编译器进行优化，来屏蔽异步更改的发生。使用<br>
+Threadsafe的优化措施是将寄存器中的实例变量放入高速缓存。<br>
+<br>
+4.10.2瞬态变量<br>
+transient（瞬态）标志被解释器用于持久性对象。当一个类的实例以<br>
+持久对象写出时，若变量标记为transient，则作特殊处理。<br>
+<br>
+4.10.3 定止类，方法和变量<br>
+final（定止）关键字是一个修饰符，标记一个类不能有子类，一个<br>
+方法不能被覆盖，或者一个变量为一个常值。由定止类派生子类，覆盖<br>
+定止方法，更改定止变量的值，都将产生编译错误。final变量的作用与<br>
+字面量相同。<br>
+使用final使编译器能够作很多优化。其中的一个优化是方法体的内<br>
+联扩展(inline expansion)，这个方法体必须是小的final函数。小到什么程<br>
+度依赖于编译器的实现。<br>
+final声明的例子如下：<br>
+class Foo {<br>
+final int value =3;//定止变量<br>
+final int foo (int a，int b) { //定止方法<br>
+}<br>
+}<br>
+<br>
+4.10.4 本地方法<br>
+标有native（本地）的方法是由平台相关的语言(如C语言)实现的，<br>
+不是Java的本身方法，没有方法体，声明以分号结束。构造函数不能为<br>
+native。虽然本地方法是由平台相关的语言实现的，但它们的使用与不是<br>
+native的方法一样，例如：可以覆盖。本地方法声明的例子如下：<br>
+native long timeofDay();<br>
+<br>
+4.10.5 抽象方法<br>
+抽象方法(abstract method)为超类或界面提供了一种手段，它实际上<br>
+是必须由子类实现的一组协议。标记为abstract的方法必须在其子类中定<br>
+义。抽象方法没有方法体， 而声明由分号结束。<br>
+使用abstract关键字的规则如下：<br>
+* 构造函数，不能为abstract。<br>
+* 静态方法不能为abstract。<br>
+* private 方法不能为abstract。<br>
+* abstract方法必须在声明它的类的子类中定义。<br>
+* 不能覆盖超类中的abstract方法。<br>
+* 包含abstract方法的类和继承abstract方法的类被认为是抽象类。<br>
+* 初始化抽象类或直接调用abstract方法，将导致编译时刻错误。<br>
+<br>
+4.10.6 方法和块的同步<br>
+synchronized（同步）关键字是一个修饰符，标记一个方法或代码块<br>
+需要取得锁(lock)。为了保证当一代码访问某一资源时，另一要求访问该<br>
+资源的代码将不能执行，锁是必要的。每个对象都有一个锁与之联系， 
+每<br>
+个类也同样有一个锁。同步方法是可再入的。<br>
+每当调用一个被同步的方法时，它将等待直到它得到当前实例（如<br>
+果是静态方法则为类）的锁，然后执行代码，释放锁。<br>
+同步块的行为与同步方法相似。区别在于它所用的锁是块内由<br>
+synchronized关键字所在语句指定的对象或类的锁，而不是当前类的锁。<br>
+同步块的声明如下：<br>
+/* 本方法前文代码*/<br>
+synchronized (&lt;object or className&gt;){//同步模块<br>
+ /*同步访问代码*/<br>
+}<br>
+/*本方法其余代码*/<br>
+声明同步方法的例子如下：<br>
+class Point {<br>
+float x，y;<br>
+synchronized void scale (float f ) {<br>
+x*=f;<br>
+y*=f;<br>
+}<br>
+}<br>
+同步模块的例子如下：<br>
+class Rectangle {<br>
+ Point topLeft;<br>
+ …<br>
+ void print ( ) {<br>
+synchronied(topLeft){<br>
+println (“topLeft.x=”+ topLeft.x);<br>
+println (“topLeft.y=”+ topLeft.y);<br>
+}<br>
+…<br>
+ }<br>
+}<br>
+<br>
+5. 界面<br>
+界面(interface)定义了一组方法，而没有实现其体。界面只提供方法<br>
+协议的封装，而不限制实现必须在什么继承树上。当一个类实现界面时，<br>
+一般必须实现界面描述的所有方法的体。(如果实现界面的类是抽象类，<br>
+它可以把实现界面方法的任务交给它的子类。)<br>
+界面解决了因多继承运行时过大开销这类问题。 
+但由于界面采用动<br>
+态方法束定，使用它们的时候在性能上会受到一点影响。<br>
+界面允许几个类同时享有一个程序设计界面，而彼此不完全知道对<br>
+方具体的实现。下面的例子是一个界面的声明（即用了interface 
+关键字），<br>
+并由一个类实现。<br>
+public interface Storing {<br>
+ void freezeDry (Stream s);<br>
+ void reconstitute (Stream s);<br>
+}<br>
+public class Image implement Storing，Painting {<br>
+…<br>
+void freezeDry (Stream s) {<br>
+//排序前按JPEG 压缩图象<br>
+}<br>
+void reconstitute (Stream s ) {<br>
+// 读入前按JPEG 解压缩图象<br>
+ …<br>
+}<br>
+}<br>
+象类一样，界面也分私有（缺省）和公有。作用域与类相同。界面<br>
+内的方法通常是public，变量是public，static 和final的。<br>
+<br>
+5.1界面作为类型<br>
+按声明的语法，界面名（interfaceName）和变量名（ variableName）<br>
+声明的是实现该界面名的某个类的实例变量或参数。当界面作为类型时，<br>
+其行为和类作为类型完全一样。它使程序员可指定实现给定界面的对象，<br>
+而不必知道该对象的具体类型或继承关系。使用界面可以不必关心共享<br>
+公共抽象超类的其它类，或如何在Object中增加方法。<br>
+下面是说明界面名、方法名语法的例子。<br>
+class StorageManager ｛<br>
+Stream stream;<br>
+…<br>
+//Storing 是界面名<br>
+void pickle (Storing obj){<br>
+obj. freezeDry (stream);<br>
+}<br>
+}<br>
+<br>
+5.2 界面中的方法<br>
+界面中的方法定义如下：<br>
+returnType methodName (parameterList);<br>
+此声明没有修饰符(modifier)。界面中所有的方法都是公有的(public）<br>
+和抽象的（abstract）故无其他修饰符，参见“抽象方法”一节。<br>
+<br>
+5.3 界面中的变量<br>
+界面中的变量是final，public或static的，无修饰符，变量必须初<br>
+始化。<br>
+<br>
+5.4 组合界面<br>
+利用extends关键字。可以把多个界面组合为一个界面，如：<br>
+interfaceDoesItAllextends String，Painting {<br>
+ void doessomethingElse ( );<br>
+}<br>
+<br>
+6. 包<br>
+包(Package)由一组类(class)和界面(interface)组成。它是管理大型名<br>
+字空间，避免冲突的工具。每一个类和界面的名字都包含在某个包中。<br>
+按照一般的习惯，它的名字是由“.”号分隔的单词构成，第一个单词通<br>
+常是开发这个包的组织的名称。<br>
+<br>
+6.1 定义一个编译单元的包<br>
+编译单元的包由package语句定义。如果使用package语句，编译单<br>
+元的第一行必须无空格，也无注释。其格式如下：<br>
+packagepackageName;<br>
+若编译单元无package语句，则该单元被置于一个缺省的无名的包<br>
+中。<br>
+<br>
+6.2 使用其它包中的类和界面<br>
+在Java语言提供一个包可以使用另一个包中类和界面的定义和实现<br>
+的机制。用import关键词来标明来自其它包中的类。一个编译单元可以<br>
+自动把指定的类和界面输入到它自己的包中。<br>
+在一个包中的代码可以有两种方式来定义来自其它包中的类和界<br>
+面：<br>
+* 在每个引用的类和界面前面给出它们所在的包的名字;<br>
+//前缀包名法<br>
+ acme. project. FooBar obj=new acme. project. FooBar( );<br>
+* 使用import语句，引入一个类或一个界面，或包含它们的包。引<br>
+入的类和界面的名字在当前的名字空间可用。引入一个包时，则该包所<br>
+有的公有类和界面均可用。其形式如下：<br>
+// 从 acme.project 引入所有类<br>
+importacme.project.*;<br>
+这个语句表示acme.project中所有的公有类被引入当前包。<br>
+以下语句从acme. project包中进入一个类Employec_List。<br>
+//从 acme. project而引入 Employee_List<br>
+importacme.project.Employee_list;<br>
+Employee_List obj = new Employee_List( );<br>
+在使用一个外部类或界面时，必须要声明该类或界面所在的包，否<br>
+则会产生编译错误。<br>
+<br>
+7. 表达式<br>
+Java语言的表达式和C语言非常类似。<br>
+<br>
+7.1 运算符<br>
+ 运算符(operator)优先级从高到底排列如下：<br>
+. [ ] ()<br>
+++ --! ～instanceof<br>
+* /%<br>
++-<br>
+&lt;&lt;&gt;&gt;&gt;&gt;&gt;<br>
+&lt;&gt;&lt;= &gt;\<br>
+==! =<br>
+&amp;<br>
+^<br>
+&amp;&amp;<br>
+||<br>
+? :<br>
+=op =<br>
+,<br>
+<br>
+7.1.1整数上的运算符<br>
+在整数运算时，如果操作数是long类型，则运算结果是long类型，<br>
+否则为int类型，绝不会是byte，short或char型。这样，如果变量i被<br>
+声明为short或byte，i+1会是int。如果结果超过该类型的取值范围，<br>
+则按该类型的最大值取模。单目整数运算符是：<br>
+<br>
+ 运算符 操作<br>
+- 单目非<br>
+～位补码<br>
+++加1<br>
+-- 减1<br>
+<br>
+++运算符用于表示直接加1操作。增量操作也可以用加运算符和赋<br>
+值操作间接完成。++ lvalue（左值）表示lvalue+=1,++lvalue 
+也表示<br>
+lvalue =lvalue +1 (只要lvalue没有副作用)。--运算符用于表示减1操作。<br>
+++和--运算符既可以作为前缀运算符，也可以做为后缀运算符。双目整<br>
+数运算符是：<br>
+<br>
+运算符操作**<br>
+ + 加<br>
+ - 减<br>
+ * 乘<br>
+ / 除<br>
+%取模<br>
+&amp;位与<br>
+｜ 位或<br>
+^位异或<br>
+&lt;&lt; 左移<br>
+&gt;&gt;右移(带符号)<br>
+&gt;&gt;&gt; 添零右移<br>
+<br>
+**integer op integer=&gt;integer<br>
+<br>
+整数除法按零舍入。除法和取模遵守以下等式：<br>
+( a/b ) * b + ( a%b ) == a<br>
+整数算术运算的异常是由于除零或按零取模造成的。它将引发一个<br>
+ArithmeticException算术异常。下溢产生零，上溢导致越界。例如： 
+加1<br>
+超过整数最大值，取模后，变成最小值。<br>
+一个op=赋值运算符，和上表中的各双目整数运算符联用，构成一<br>
+个表达式。<br>
+整数关系运算符&lt;， &gt;，&lt;=，&gt;=，==和!=产生boolean类型的数据。<br>
+<br>
+7.1.2布尔运算符<br>
+布尔(boolean)变量或表达式的组合运算可以产生新的boolean值。单<br>
+目运算符!是布尔非。双目运算符＆，｜和^是逻辑AND，OR和XOR<br>
+运算符，它们强制两个操作数求布尔值。为避免右侧操作数冗余求值，<br>
+用户可以使用短路求值运算符＆＆和｜｜。用户可以使用==和!=，赋值<br>
+运算符也可以用 &amp;=、|=、^=。三元条件操作符? : 和C语言中的一样。<br>
+<br>
+7.1.3浮点运算符<br>
+浮点运算符可以使用常规运算符的组合： 如单目的运算符++、--，<br>
+双目的运算符+、-、* 和/，以及赋值运算符+=，-=，*=，和/=。此外，<br>
+还有取模运算： %和%=也可以作用于浮点数，例如：<br>
+a%b<br>
+和a-((int) (a/b)*b)的语义相同。这表示a%b的结果是除完后剩下的<br>
+浮点数部分。只有单精度操作数的浮点表达式按照单精度运算求值，产<br>
+生单精度结果。如果浮点表达式中含有一个或一个以上的双精度操作数，<br>
+则按双精度运算，结果是双精度浮点数。<br>
+Java现在尚无浮点算术运算的异常处理。按照IEEE754浮点规格说<br>
+明，两个特殊的值 Inf和Na N是可替换使用的，上溢产生Inf，下溢产<br>
+生0，除零产生Inf。<br>
+可以使用关系运算符，产生boolean值： &gt;，&lt; , &gt;=，&lt;=，==，!=。<br>
+按NaN的性质，浮点值不是完全有序的，所以在浮点数比较时要小心。<br>
+例如： 如果a&lt;b非真，则并不意味着a&gt;=b; 再例如，a!=b，并不表示<br>
+a&gt;b | a&lt;b。实际上，可能就没有大小之分。<br>
+浮点算术运算和数据格式定义按IEEE754的“浮点算术运算标准”。<br>
+参见附录中的关于Java浮点运算实现的细节。<br>
+<br>
+7.1.4 数组运算符<br>
+ 数组运算符形式如下：<br>
+ &lt;expression&gt; [ &lt;expression&gt;]<br>
+ 可给出数组中某个元素的值。合法的取值范围是从0到数组的长度减<br>
+1。取值范围的检查只在运行时刻实施。<br>
+<br>
+7.1.5 串运算符<br>
+串以String对象实现（见“串字面量”节）。运算符&quot;+&quot;完成并串操<br>
+作，如果必要则自动把操作数转换为String型。如果操作数是一个对象，<br>
+它可定义一个方法toString ( ) 返回该对象的String方式，例如<br>
+float a = 1.0<br>
+print (“The value of a is”+ a +“\n”);<br>
++运算符用到串上的例子<br>
+String s=“a=”+ a;<br>
++=运算符也可以用于String。注意，左边(下例中的s1)仅求值一次。<br>
+s1+=a; //s1=s1+a<br>
+//若a非String型，自动转换为String型。<br>
+<br>
+7.1.6 对象运算符<br>
+双目运算符istanceof 
+测试某个对象是否是指定类或其子类的实例。<br>
+例如：<br>
+if (thermostat instanceofMeasuringDevice) {<br>
+MeasuringDevice dev=(MeasuringDevice) thermostat;<br>
+…<br>
+}<br>
+是判定thermostat是否是MeasuringDevice的实例或是其子类的实例。<br>
+<br>
+7.2 强制和转换<br>
+Java语言和解释器限制使用强制和转换，以防止出错导致系统崩溃。<br>
+整数和浮点数之间可以来回强制转换，但整数不能强制成数组或对象。<br>
+Object不能被强制为基本类型。一个实例可以被强制成超类的实例，但<br>
+强制成子类的实例会导致运行时刻的检查。如果一个被强制成子类实例<br>
+的对象不是该子类的实例(或该子类的子类对象)，解释器会产生<br>
+ClassCastException。<br>
+<br>
+8. 语句<br>
+8.1 声明<br>
+声明可以出现在所有语句可能出现的地方。声明的作用域结束于封<br>
+闭该块的结尾处。此外，可以在for语句的头部作变量声明，例如：<br>
+for (int i=0; i&lt;10; i++) {<br>
+ …<br>
+}<br>
+但以这种方式声明的变量，仅在for语句循环体内有效。例如，下面<br>
+的一段代码和上述代码等<br>
+价。<br>
+{<br>
+int i=0;<br>
+for (; i&lt;10; i++){<br>
+ …<br>
+}<br>
+}<br>
+<br>
+8.2 表达式<br>
+表达式是语句：<br>
+a=3；<br>
+print (23);<br>
+foo.bar( );<br>
+<br>
+8.3 控制流<br>
+ 下面是对控制流的总结：<br>
+if (boolean)statement<br>
+else statement<br>
+switch(e1){<br>
+case e2: statement<br>
+default: statement<br>
+}<br>
+break [label]<br>
+continue [label]<br>
+return e1;<br>
+for ([e1]; [e2]; [e3]) statement<br>
+while (boolean) statement<br>
+do statement while (boolean);<br>
+label: statement<br>
+Java支持有标号的循环和有标号的断开，例如：<br>
+outer： // 是标号<br>
+for (int i=0; i&lt;10; i++) {<br>
+for (int j=0; &lt;10; j++){<br>
+ if (…){<br>
+ break outer;<br>
+ }<br>
+ if (…){<br>
+ }<br>
+}<br>
+}<br>
+在循环和断开中使用标号要遵守以下准则：<br>
+* 任何语句可以有一个标号。<br>
+* 如果一个break语句有一个标号，这个标号必须在一个封闭语句<br>
+的前端。<br>
+* 如果一个continue语句有一个标号，则它必须是一个封闭循环的<br>
+标号。<br>
+<br>
+8.4 异常<br>
+当在Java程序中发生一个错误时，例如：一个变元的值非法，代码<br>
+会发现这个错误，并引发一个异常(exception)。在缺省的情况下，异常会<br>
+输出一个错误消息，然后中止线程的执行。但是，程序自己可以定义异<br>
+常处理段(exception handler)来截获(catch)异常，并从错误中恢复。<br>
+有一些异常是由Java解释器在运行时刻引发的。实际上，任何类都<br>
+可以定义属于自己的异常，<br>
+并使用throw语句引发它们。<br>
+一个throw（引发）语句是由throw关键字和一个对象构成。按常规，<br>
+该对象应该是Exception类的实例或其子类的实例。throw语句会引起执<br>
+行转向相应的异常处理段。当一个throw语句执行时，它下面的所有代<br>
+码不再执行了，它所在的方法也不再返回值。下面的例子将演示如何创<br>
+建一个Exception的子类，然后引发一个异常。<br>
+class MyException extends Exception {<br>
+}<br>
+class MyClass {<br>
+void oops() {<br>
+if ( /* 不出现错误 */){<br>
+ …<br>
+} else { /* 出错 */<br>
+throw new MyException( );<br>
+}<br>
+}<br>
+}<br>
+为了定义一个异常处理段，程序必须用try语句把可能产生异常的代<br>
+码成组。在try语句后面跟上一个或多个catch(截获）语句，每个异常对<br>
+应一个catch语句。每个catch语句中包含着异常处理<br>
+段。例如：<br>
+try {<br>
+p.a=10;<br>
+} catch ( NullPointerException e) {<br>
+ println(“p was null”);<br>
+} catch ( Exception e) {<br>
+ println (“other errors occured”);<br>
+} catch ( Object obj){<br>
+println(“Who threw that object?”);<br>
+}<br>
+catch语句和一个方法定义类似，只不过该方法只有一个参数，且无<br>
+返回类型。参数可以是一个类或一个界面。当一个异常发生时，嵌套的<br>
+try/catch语句会寻找出与该异常类相匹配的参数。如果一个参数和指定<br>
+异常匹配则：<br>
+* 该参数和指定的异常是同一个类，或<br>
+* 该参数是指定异常的子类，或<br>
+* 如果参数是一个界面，指定异常类实现了这个界面。<br>
+第一个参数和异常匹配的try/catch语句，则与其匹配的catch语句执<br>
+行。在catch语句执行完后，程序的执行被恢复。但已不可能恢复到异常<br>
+发生处再次执行。例如：<br>
+print ( &quot;now&quot;);<br>
+try {<br>
+print (&quot;is&quot;);<br>
+throw new MyException( );<br>
+print (&quot;a&quot;);<br>
+} catch (MyException e){<br>
+print (&quot;the &quot;);<br>
+}<br>
+print (&quot;time\n&quot;);<br>
+打印为“now is the time”。正如这个例子所示，异常应该主要用于<br>
+错误处理，若用于其它方面会使代码晦涩难懂。<br>
+异常处理段是可以嵌套的，允许异常处理可以发生在多个地方。嵌<br>
+套异常处理通常用于当第一个处理程序无法完全从错误中恢复过来的时<br>
+候，而不得不执行一些清除代码。为了把异常处理控制传递给更高层的<br>
+处理段，可以再一次对截获对象实施throw操作。注要再次实施throw异<br>
+常的方法，<br>
+throw语句执行完后，会终止执行。<br>
+try {<br>
+ f. open ( );<br>
+}catch(Exception e){<br>
+ f. close( );<br>
+ throwe;<br>
+ }<br>
+<br>
+8.4.1 定局语句<br>
+finally（定局）语句是用于保证无论在异常是否发生的情况下，某<br>
+些代码被执行。下例说明finally语句的用法：<br>
+try {<br>
+//做某些动作；<br>
+｝ finally {<br>
+ //此后清除；<br>
+ }<br>
+和以下代码类似<br>
+try {<br>
+//做某些动作<br>
+ } catch (Object e) {<br>
+ //此后清除；<br>
+ throw e;<br>
+ }<br>
+//此后清除；<br>
+即使try块中包含return，break，continue，throw语句，finally<br>
+语句也会被执行。例如： 下面的代码“finally”总是被输出，而“after<br>
+try”仅在a!=10时被输出。<br>
+ try {<br>
+ if (a==10) {<br>
+return ;<br>
+ }<br>
+ }finally {<br>
+print (&quot;finally\n&quot;);<br>
+｝<br>
+ print (&quot;after try \n&quot;);<br>
+<br>
+8.4.2运行时刻异常<br>
+本节列出的清单是Java解释器引发的各种异常。当运行时刻发现各<br>
+种错误，由解释器引发异常。<br>
+<br>
+ArithmeticException<br>
+如果程序试图除0，或用0取模，会产生ArithmeticException（算<br>
+术异常），其它算术操作不会产生异常。有关Java如何处理其它算术错<br>
+误的信息，见“整数运算符”和“浮点运算符”两节。<br>
+例如： 下面的代码将会引发ArithmeticException异常：<br>
+class Arith {<br>
+ public static void main (String args [ ] ) {<br>
+ int j = 0;<br>
+ j = j/j;<br>
+ }<br>
+ }<br>
+<br>
+NullPointerException<br>
+当程序试图访问一个空对象中的变量或方法，或一个空数组中的元<br>
+素时则引发NullPointerException（空指针异常）。例如，访问长度为0<br>
+的数组a[0]。有以下类声明，运行时会引发NullPointerException异常：<br>
+class Null {<br>
+ public static void main(String args [ ]) {<br>
+Stringo = null;<br>
+int a [ ] = null;<br>
+o.length( );<br>
+a[0] = 0;<br>
+ }<br>
+ }<br>
+ 有趣的是，如果我们引发一个空对象，也会产一<br>
+NullPointerException异常。<br>
+<br>
+IncompatibleClassChangeException<br>
+当一个类的定义被改变，而引用该类的其它类没有被重新编译时，<br>
+会产生这一异常。有四种类更改会导致运行时刻引发<br>
+IncompatibleClassChangException异常。<br>
+* 一个类中的变量声明由static变成非static，而其它访问该类这一<br>
+变量的类没有被重新编译。<br>
+* 一个类中的变量声明由非static变成static，而其它访问该类这一<br>
+变量的类没有被重新编译。<br>
+* 
+类中声明的某个域被删除，而其它访问该域的类没有被重新编译。<br>
+* 
+类中声明的某个方法被删除，而其它访问该方法的类没有被重新<br>
+编译。<br>
+<br>
+ClassCastException<br>
+ 如果试图把对象o强制成Class C，而o既不是Class C的实例，也<br>
+不是Class C子类的实例，这时便会产生ClassCastException。<br>
+class ClassCast {<br>
+public static void main (String args [ ] ) {<br>
+ Object o = new Object( );<br>
+ String s =(string) o;<br>
+ s.length( );<br>
+}<br>
+}<br>
+<br>
+NagativeArraySizeException<br>
+如果一个数组的长度是负数，则会引发NagativeArraySizeException<br>
+（数组负下标）异常。例如下面类定义的代码在运行时引发这一异常：<br>
+class NegArray {<br>
+ public static void main(String args [ ]) {<br>
+ int a [ ] = new int [-1];<br>
+ a[0] = 0;<br>
+ }<br>
+}<br>
+<br>
+OutOfMemoryException<br>
+当系统无法再向应用程序提供内存时，会引发<br>
+OutOfMemoryException（内存溢出）异常。这种异常只能出现在创建新<br>
+对象的时候，即new被调用的时候。例如，下面一段代码在运行时刻会<br>
+引发OutOfMemoryException异常：<br>
+class Link {<br>
+ int a [ ] = new int [1000000];<br>
+ Link l;<br>
+}<br>
+Class OutOfMem {<br>
+ public static void main(String args [ ]) {<br>
+ Link root = new link( );<br>
+ Link cur = root;<br>
+ while (true) {<br>
+cur.l = new Link( );<br>
+cur = cur.l;<br>
+ }<br>
+ }<br>
+ }<br>
+<br>
+NoClassDefFoundException<br>
+如果一个类被引用，但在运行时刻，系统没有找到被引用的类，这<br>
+时会引发NoClassDefFoundException（未找到类定义）异常。例如，<br>
+NoClass类的声明如下：<br>
+ class NoClass {<br>
+ public static void main(String args [ ]) {<br>
+C c = newC ( );<br>
+ }<br>
+ }<br>
+ 当NoClass运行时，如果解释器找不到C类，则会产生<br>
+NoClassDefFoundException。<br>
+注意，在NoClass被编译时C类一定要存在。<br>
+<br>
+IncompatibleType Exception<br>
+ 如果试图为一界面作实例，则会引发IncompatibleTypeException（类<br>
+型不兼容）异常。例如，<br>
+下面的代码会引发一个IncompatibleTypeException。<br>
+ Interface I {<br>
+ }<br>
+ class IncompType {<br>
+ public static void main(String args [ ]) {<br>
+I r = (I) new (&quot;I&quot;);<br>
+ }<br>
+ }<br>
+<br>
+ArrayIndexOutOfBoundsException<br>
+试图访问数组中的一个非法元素时，会引发<br>
+ArrayIndexOutOfBoundsException（数组索引越界）异常。例如：<br>
+Class ArrayOut {<br>
+ public static void main(String args [ ]) {<br>
+ int a [ ]=new int[0];<br>
+ a[0]=0;<br>
+ }<br>
+ }<br>
+<br>
+UnsatisfiedLinkException<br>
+如果一个方法被声明为本机，但该方法在运行时刻却不能连接到一<br>
+个例程体上去时，会产生UnsatisfiedLinkException（无法连接）异常。<br>
+例如：<br>
+Class NoLink {<br>
+ static native void foo( );<br>
+public static void main(String args [ ]) {<br>
+ foo( );<br>
+}<br>
+ }<br>
+<br>
+InternalException<br>
+InternalException（内部）异常是不能被引发的。只有在运行失败作<br>
+一致性检查时，才会引发这个异常。</p>
+<p align="right">Copy/Pasted from SMTH&gt;&gt;Java&gt;&gt;精华区
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="right">
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table></body>
+
+</html>

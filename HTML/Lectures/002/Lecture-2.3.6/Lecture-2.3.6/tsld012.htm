@@ -1,0 +1,49 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>Linux Process</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>Linux Process</H1> 
+ <P><UL>
+<LI><H2>Max_threads = mempages / (THREAD_SIZE/PAGE_SIZE) / 2 
+</H2>
+<UL>
+kernel/fork.c:fork_init()
+<BR><BR>sysctl: KERN_MAX_THREADS
+<BR>proc/sys/kernel/threads-max 
+</UL></UL><UL>
+<LI><H2>Links of processes
+</H2>
+<UL>
+task_struct: UNIX proc structure + u area;
+<BR><BR>struct task_struct *next_task, *prev_task;
+<BR>struct task_struct *pidhash_next, **pidhash_pprev;
+<BR>fork(), exit() and ptrace(), must take tasklist_lock for WRITE. the writers must also disable interrupts on the local CPU
+<LI>volatile long state; /* -1 unrunnable, 0 runnable, &#0620 stopped */ 
+<BR>#define TASK_RUNNING 0 
+<BR>#define TASK_INTERRUPTIBLE 1 
+<BR>#define TASK_UNINTERRUPTIBLE 2 
+<BR>#define TASK_ZOMBIE 4 
+<BR>#define TASK_STOPPED 8 
+<BR>#define TASK_EXCLUSIVE 32</UL></UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld011.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld013.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld012.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

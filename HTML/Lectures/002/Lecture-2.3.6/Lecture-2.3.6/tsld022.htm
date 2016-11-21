@@ -1,0 +1,43 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>Microkernel</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>Microkernel</H1> 
+ <P><UL>
+<LI><H2>A microkernel architecture is basically a way of abstracting the details of process control, memory allocation, and resource allocation so that a port to another chipset would require minimal changes.
+</H2>
+</UL><UL>
+<LI><H2>Linus thoughts about microkernel
+</H2>
+<UL>
+(a) were experimental 
+<BR><BR>(b) were obviously more complex than monolithic Kernels, and 
+<BR>(c) executed notably slower than monolithic kernels.
+</UL></UL><UL>
+<LI><H2>Linux design principle
+</H2>
+<UL>
+If you want code to be portable, you shouldn't necessarily create an abstraction layer to achieve portability. Instead you should just program intelligently. Essentially, trying to make microkernels portable is a waste of time. It's like building an exceptionally fast car and putting square tires on it. The idea of abstracting away the one thing that must be blindingly fast--the kernel--is inherently counter-productive.
+<BR><BR>So in this sane architecture you know you need to have a few machine-specific parts in the kernel, but most of the code is based on the general mechanisms by which something like the TLB works.</UL></UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld021.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld023.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld022.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

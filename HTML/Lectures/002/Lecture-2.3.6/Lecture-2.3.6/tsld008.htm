@@ -1,0 +1,53 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>Software Interrupt Locking Scenario</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>Software Interrupt Locking Scenario</H1> 
+ <P><UL>
+<LI><H2>Locking Between User Context and BHs
+</H2>
+<UL>
+user context can be interrupted by a BH,  CR could be entered from another CPU
+<BR><BR>spin_lock_bh(), spin_unlock_bh()      /*include/linux/spinlock.h*/
+</UL></UL><UL>
+<LI><H2>Locking Between User Context and Tasklets/Soft IRQs( same )
+</H2>
+</UL><UL>
+<LI><H2>Locking Between Bottom Halves
+</H2>
+<UL>
+same BH: not reentrant globally
+<BR><BR>Different BHs: if BH as tasklet, lock it
+</UL></UL><UL>
+<LI><H2>Locking Between Tasklets
+</H2>
+<UL>
+same tasklet: not reentrant globally
+<BR><BR>Different Tasklets: spin_lock(), spin_unlock(), no need for spin_lock_bh()
+</UL></UL><UL>
+<LI><H2>Locking Between Softirqs
+</H2>
+<UL>
+softirq_active(cpu); spin_lock(), spin_unlock() <BR></UL></UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld007.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld009.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld008.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

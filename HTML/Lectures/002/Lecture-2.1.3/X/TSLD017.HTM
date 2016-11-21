@@ -1,0 +1,58 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>键盘编码</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>键盘编码</H1> 
+ <P><UL>
+<LI><H2>每个键都对应一个键码keycode[7..255]．每个键码对应一组键符keysym．每个keysym对应一个字符串．
+</H2>
+</UL><UL>
+<LI><H2>键码到键符的映射可以在一个server范围内改变．键符到字符串的映射则可以在每个client范围改变
+</H2>
+</UL><UL>
+<LI><H2>xmodmap -pk 
+</H2>
+</UL><UL>
+<H2>KeySym XGetKeyBoardMapping(display,first_keycode,count,keysyms_per_keycode);
+</H2>
+</UL><UL>
+<H2>XChangeKeyBoardMapping(display,first_code,keysyms_per_code,keysyms,num_codes); 
+</H2>
+</UL><UL>
+<H2>XRebindKeySym(display,keysym,list,mod_count,string,num_bytes) 
+</H2>
+</UL><UL>
+<H2>int XLookupString(event,buffer,num_bytes,keysym,status);
+</H2>
+</UL><UL>
+<H2>GetModifierMapping(display,modifier_keys) 
+</H2>
+</UL><UL>
+<H2>SetModifierMapping(display,modifier_keys) 
+</H2>
+</UL><UL>
+<LI><H2>例子４
+</H2>
+</UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld016.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld018.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld017.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

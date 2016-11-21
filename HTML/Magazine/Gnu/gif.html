@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link REV="made" HREF="mailto:webmasters@www.gnu.org">
+<title>为什么没有GIFs - GNU计划 - 自由软件基金(FSF)</title>
+</head>
+
+<body BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#1F00FF" ALINK="#FF0000" VLINK="#9900DD">
+
+<h3>为何在GNU的web页面上没有GIF文件</h3>
+<a HREF="/graphics/philosophical-gnu-sm.jpg">
+
+<p></a><a HREF="philosophical-gnu-sm.jpg"><img SRC="philosophical-gnu-sm.jpg"
+ALT=" [image of a Philosophical Gnu] " width="160" height="200">(jpeg 7k)</a> <a
+HREF="philosophical-gnu.jpg">(jpeg 141k)</a> <a HREF="gif.html">因专利权问题而没有gif图</a> 
+</p>
+
+<p>在GNU的Web站点上没有GIF文件，这是因为制作GIF文件所用到的LZW压缩算法是Unisys和IBM的专利，而这些专利不许自由软件制作正确的GIF文件，也不许运用到<strong>压缩</strong>程序中，这就是GNU从不使用它及其格式的原因。</p>
+
+<p>Unisys和IBM的专利的法律效力是从1983年开始的，直至2003年结束。这就意味着直至2003年才能发布制作GIF文件的自由软件，否则将有可能被上诉。我们不知道有什么理由可以想象得出一旦这样，拥有专利的人又怎会输掉这些诉讼。</p>
+
+<p>如果我们发布这么一个程序，Unisys和IBM也许认为去上诉一个类似于FSF的慈善实体并不是一个明智之举(处于公共关系的原因)；但是，他们会上诉那些程序的使用者，包括那些重新分发GNU软件的人。因而我们认为如果造成这种局面对我们来讲那是一种不负责任的行为。</p>
+
+<p>许多人认为Unisys已经允许分发能够制作GIF文件格式的自由软件。很不幸，Unisys并没有这么说。以下则是Unisys关于这个问题的实际所言：</p>
+
+<blockquote>
+  <strong><p>如果LZW压缩算法是仅仅为GIF所提供的，则非商业性的、非盈利性的基于GIF的应用和GIF自由软件毋需得到许可证(License)或支付许可证费用(License 
+  fees)。然而，如果自由软件是被合并到、卖到一个商业性的或用于盈利的产品（ 
+  1995年及以后介绍的，或者1995以前介绍的产品的增强部分）或者通过它来分发，则许可证是必须的。</strong></p>
+</blockquote>
+
+<p>很不幸，这段条款没有允许<a href="free-sw.html">自由软件</a>，只是允许<a
+href="categories.html#semi-freeSoftware">准自由软件</a>可以用到一个自由操作系统中，如GNU。它还不允许任何LZW压缩算法用于其他目的，这就是为何要开发<a
+href="http://www.gnu.org/software/gzip/gzip.html">GNU zip</a>作为<strong>压缩</strong>程序替代的原因。</p>
+
+<p><a href="selling.html">自由软件的商业性的再分发</a>是非常重要的，我们希望GNU的系统作为一个整体被通过商业性的途径重新分发。这就意味着GNU中不能含有任何GIF文件生成的程序，当然这样也就不在Unisys的条款限制范围之内了。</p>
+
+<p><a href="fsf.html">自由软件基金（FSF）</a>是一个非商业性、非盈利的的组织，故严格的讲我们的<a
+href="http://www.gnu.org/order/order.html">CD-ROM</a>的销售所得并不是“利润”。也许这意味着我们可以将一个GIF的程序包含在我们的CD-ROM中并且声称我们所做的在Unisys的许可范围内，可也许不可以。但是我们知道其余的GNU的分发商们不能含有GIF的程序，这么做又有何非常作用呢？</p>
+
+<p>在Unisys发布其声明不久，当考虑到如果Unisys早些允许可以制作自由GIF文件生成软件，整个网上社会变得会更安定的时候我们曾经写信给Unisys的法律处索要关于这些的澄清声明，但是杳无回音。</p>
+
+<p>即使Unisys真的给予自由软件制作GIF文件的权利，我们还将不得不处理IBM的专利问题，因为Unisys和IBM的专利均包含着LZW压缩算法这一相同的发明（这可以反映出美国专利和商标办公室的一部分错误，她以无能和错误的判决闻名）。</p>
+
+<p>对于GIF文件的解码则是另外一回事，Unisys和IBM的专利不适用于那些不进行压缩而只将LZW格式进行解压缩的程序。因而我们能够并支持在GNU的软件中GIF文件的显示。</p>
+
+<p>有这么一种情况，我们还可以一直在我们的web页面中包含GIF文件，只要我们想这样做的话。其他许多人会很乐意给我们制作这些GIF文件，我们也就不会因为在我们的服务器上有GIF文件而遭到指控。</p>
+
+<p>但是我们认为如果我们不能分发软件，使得人们能够正确地生成GIF文件的话，那么，我们就不应该让其他的人为了我们来运行这些软件。除此之外，如果我们不能在GNU中提供生成GIF文件的软件，我们就建议其他的途径。当然，我们自己也应该使用我们自己建议的途径。</p>
+
+<p>一个深入的问题是LZW专利——以及所有的软件专利——是对程序员自由的普遍的冒犯，所有的程序员都需要联合起来，一起去反抗软件专利。</p>
+
+<p>因而即使我们找到一个使得自由软件社区能够生成GIF文件的解决方案，总的来说对于问题自身这也不能称为真正解决。真正的解决是我们切换到另外一种文件格式上，我们要永远放弃GIF文件。</p>
+
+<p>因而，我们不使用GIF文件，并且希望你们也不要使用它。 </p>
+
+<p>制作一些使用起来象GIF文件的非压缩的图片是可能的，因为它们可以与解码GIF文件格式的程序一起工作。这些工作是可以在不触犯专利的情况下完成的，这些伪GIF文件在某些场合也非常有用。 
+</p>
+
+<p>我们决定在我们的站点上不使用非压缩的伪GIF文件，这是因为这并不是对我们问题的满意解决。它们虽然能被正常使用但是太大了，我们的站点所需要的是非专利的压缩格式而并不是巨大的伪GIF文件。 
+</p>
+
+<p>PNG格式是一种非专利的压缩格式。我们希望它将被广泛支持，那时我们将使用它。我们在这个服务器上有图片的<a
+href="http://www.gnu.org/graphics/graphics.html">PNG版本</a>。 </p>
+
+<p>有关GIF格式专利问题的更多信息请看<a
+HREF="http://lpf.ai.mit.edu/Patents/Gif/Gif.html">the League for Programming Freedom GIF 
+page</a>。通过这个页面你们会发现更多的有关软件专利问题方面的信息。</p>
+
+<hr>
+
+<h4><a href="philosophy.html">阅读其它文章</a></h4>
+
+<hr>
+
+<p>返回<a href="http://www.gnu.org/home.html">GNU主页</a>。 </p>
+
+<p>关于FSF和GNU的询问或问题：<i><a href="mailto:gnu@gnu.org">gnu@gnu.org</a></i>。与FSF的<a
+href="http://www.gnu.org/home.html#ContactInfo">其它联系方法</a>。 </p>
+
+<p>关于这些Web页的评论或意见请发给：<i><a
+href="mailto:webmasters@www.gnu.org">webmasters@www.gnu.org</a></i>，其它问题请发给：<i><a
+href="mailto:gnu@gnu.org">gnu@gnu.org</a></i>。 </p>
+
+<p>自由软件基金(Free Software Foundation, Inc.)版权所有 Copyright (C) 1997, 1998 
+,<br>
+59 Temple Place - Suite 330, Boston, MA 02111, USA </p>
+
+<p>在保留这个申明的前提下，你可以通过任何媒体不加更改的复制与散发本文全文。 
+</p>
+
+<p>更新：17 Dec 1998 tower</p>
+
+<hr>
+
+<p>翻译：Jan 1999 billow[AKA] <br>
+校对：29 Jan 1999 waterbird[AKA] </p>
+</body>
+</html>

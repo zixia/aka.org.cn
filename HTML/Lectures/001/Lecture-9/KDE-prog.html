@@ -1,0 +1,183 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=GB2312">
+    <TITLE>KDE programming Introduction</TITLE>
+</HEAD>
+<BODY>
+<P><A HREF="KDE.html">上一页</A>
+下一页
+<P><B><FONT SIZE=+3>KDE编程简介</FONT></B><P>
+
+<P><B><FONT SIZE=+2>Qt的例子</FONT></B><P>
+
+<PRE>
+#include <qapplication.h>
+#include <qpushbutton.h>
+
+int main( int argc, char **argv )
+{
+    QApplication a( argc, argv );
+
+    QPushButton *hello=new QPushButton( "Hello world!", 0 );
+    hello->resize( 100, 30 );
+ 
+    QObject::connect( hello, SIGNAL(clicked()), &a, SLOT(quit()) );
+ 
+    a.setMainWidget( hello );
+    hello->show();
+ 
+    return a.exec();
+} 
+</PRE>
+
+<P><B><FONT SIZE=+2>KDE的例子</FONT></B><P>
+<PRE>
+#include <kapp.h>
+#include <kfiledialog.h>
+#include <kmenubar.h>
+#include <klocale.h>
+#include <kmessagebox.h>
+#include <qtextview.h>
+#include <ktmainwindow.h>
+ 
+int main( int argc, char **argv )
+{
+    KApplication a( argc, argv, "example");
+ 
+    MainWindow *window=new MainWindow( "Example" );
+    window->resize( 400, 300 );
+ 
+    a.setMainWidget( window );
+    window->show();
+ 
+    return a.exec();
+} 
+
+class MainWindow : public KTMainWindow
+{
+   Q_OBJECT
+  public:
+ 
+    MainWindow ( char * name );
+ 
+  public slots:
+    void fileOpen();
+    void fileSave();
+};
+ 
+MainWindow::MainWindow ( char * name ) : KTMainWindow ( name )
+{
+    QPopupMenu *filemenu = new QPopupMenu;
+    filemenu->insertItem( i18n( "&Open" ), this, SLOT(fileOpen()) );
+    filemenu->insertItem( i18n( "&Save" ), this, SLOT(fileSave()) );
+    filemenu->insertItem( i18n( "&Quit" ), kapp, SLOT(quit()) );
+    QString about =
+            i18n("This is an Example.\n"
+                 "(c) 1999-2000 by Somebody.\n");
+ 
+    QPopupMenu *helpmenu = helpMenu( about );
+    KMenuBar *menu = new KMenuBar( this );
+    menu->insertItem( i18n( "&File" ), filemenu );
+    menu->insertSeparator();
+    menu->insertItem( i18n( "&Help" ), helpmenu );
+    setMenu( menu );
+ 
+    QTextView *hello=new QTextView(
+       i18n("Hello World !"), "", this );
+    setView( hello );
+ 
+} 
+ 
+void MainWindow::fileOpen()
+{
+    QString tmpFile;
+    
+    KURL filename = KFileDialog::getOpenURL( QString::null, "*", this );
+    if( KIO::NetAccess::download( filename.url(), tmpFile ) )
+    {
+     /* Do whatever you want with a _local_ file stored as tmpFile */
+      
+      KIO::NetAccess::removeTempFile( tmpFile );
+    }
+
+}
+ 
+void MainWindow::fileSave()
+{
+   KURL filename=KFileDialog::getSaveURL( QString::null, "*", this );
+}
+
+</PRE>
+<P><B><FONT SIZE=+2>DCOP的例子</FONT></B><P>
+<P><B>DCOP requestor</B><P>
+<PRE>
+    DCOPClient *client = kapp->dcopClient();
+    client->attach();
+    ByteArray params;
+    QDataStream stream(params, IO_WriteOnly);
+    stream << location->text();
+    if (!client->send("Servant-*", "bookmarkList", "add(QString)", params))
+       kDebugError( "Error with DCOP");
+</PRE>
+<P><B>DCOP Servant</B><P>
+<PRE>
+   DCOPClient *client=kapp->dcopClient();
+   client->attach();
+   client->registerAs("Servant");
+   void MainList::add( QString s )
+	{
+   		insertItem ( new QListViewItem ( this , s ) );
+	}; 
+</PRE>
+<P><B>Interface定义</B><P>
+<PRE>
+#include <dcopobject.h>
+#include <qstring.h>
+ 
+class Iface : virtual public DCOPObject
+{
+    K_DCOP
+public:
+ 
+k_dcop:
+    virtual void add( QString s ) = 0;
+ 
+};
+
+</PRE>
+<P><B>头文件定义</B><P>
+<PRE>
+class MainList : public QListView, virtual public Iface
+{
+ Q_OBJECT
+ 
+public:
+ 
+ MainList();
+ 
+ void add ( QString s );
+ 
+};
+ 
+</PRE>
+<P><B>Scripting</B><P>
+<PRE>
+#!/usr/bin/python
+ 
+from xmlrpclib import *
+import os
+ 
+rc = open(os.environ['HOME'] + '/.kxmlrpcd', 'r')
+config = string.split(rc.read(), ',')
+port = config[0]
+auth = config[1]
+ 
+server = Server("http://localhost:" + port +"/p6")
+ 
+server.bookmarkList.add(auth, "http://www.kde.org")  
+
+</PRE>
+<P><A HREF="KDE.html">上一页</A>
+下一页
+</BODY>
+</HTML>

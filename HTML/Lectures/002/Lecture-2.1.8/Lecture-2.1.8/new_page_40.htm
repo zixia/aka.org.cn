@@ -1,0 +1,66 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>程序结构</title>
+<meta name="Microsoft Theme" content="blank 001, default">
+<meta name="Microsoft Border" content="tl, default">
+</head>
+
+<body background="_themes/blank/blbkgnd.gif" bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/new_page_40.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="程序结构"></strong></font><br>
+<a href="index.htm"><img src="_derived/home_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="主页" align="middle"></a> <a href="new_page_25.htm"><img src="_derived/up_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="上一层" align="middle"></a> <a href="new_page_39.htm"><img src="_derived/new_page_39.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="设计的要点" align="middle"></a> <img src="_derived/new_page_40.htm_cmp_blank000_hbtn_p.gif" width="140" height="32" border="0" alt="程序结构" align="middle"> <a href="new_page_26.htm"><img src="_derived/new_page_26.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="简单的FTP Server" align="middle"></a> <a href="new_page_27.htm"><img src="_derived/new_page_27.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="单线程轮询程序" align="middle"></a> <a href="new_page_32.htm"><img src="_derived/new_page_32.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="网络仿真设备" align="middle"></a></p>
+<p align="center">　</p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<p:colorscheme
+ colors="#FFFFFF,#000000,#808080,#000000,#00CC99,#3333CC,#CCCCFF,#B2B2B2"/>
+<p><font size="6">多进程：</font></p>
+<blockquote>
+  <p><font size="5">在主进程调用accept()函数生成一个新的连接后，调用fork()产生一个子进程对这个新连接进行操作 
+  </font></p>
+  <p><font size="5">在主进程结束前需要向所有子进程发中断信号并等待所有子进程执行完毕。 
+  </font></p>
+  <p><font size="5">这种程序结构最简单，例子可以参照前面<a href="new_page_10.htm">TCP 
+  Server的结构和代码</a>。 </font></p>
+  <p><font size="5">主要应用于各连接操作相互独立的Server，可以保证各连接相互间的数据安全性, 
+  如telnetd、FTPd等。</font></p>
+</blockquote>
+<p>　</p>
+<p><font size="6">多线程：</font></p>
+<blockquote>
+  <p><font size="5">基本与多进程结构类似，但是在获得新连接时生成一个线程来对这个连接进行处理。 
+  </font></p>
+  <p><font size="5">主要的优点： </font></p>
+  <!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <!--msthemelist--><tr><td valign="top" width="42"><img src="_themes/blank/blbull1.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="宋体"><font size="5">线程调度速度快，占用资源少 </font><!--mstheme--></font><!--msthemelist--></td></tr>
+    <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/blank/blbull1.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="宋体"><font size="5">线程可共享进程空间中的数据 </font><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--></table><!--mstheme--><font face="宋体">
+  <p><font size="5">主要应用于各个连接之间关系较紧密的Server，例如：BBS 
+  Server </font></p>
+  <p><font size="5">Server的响应速度和I/O吞吐量均较好，是最常用的程序结构。但是在Linux环境下，由于系统用进程来模拟线程，因此程序性能并不比多进程结构强。</font></p>
+</blockquote>
+<p>　</p>
+<p><font size="6">单线程：</font></p>
+<blockquote>
+  <p><font size="5">通过select实现非阻塞的同步I/O模式 </font></p>
+  <p><font size="5">可以通过调用select函数得出需要读数据并处理的socket集合（也就是Client的集合），然后依次对每个socket读数据，处理并向socket写结果 
+  </font></p>
+  <p><font size="5">select得到的socket列表中有一个特殊的socket就是listen函数使用的socket，这个socket需要单独处理，调用accept生成新的socket连接并将这个新socket加入已有的socket集合。 
+  </font></p>
+  <p><font size="5">该结构对算法效率要求较高，一般来说响应速度慢，但I/O处理速度最快。适用于连接数少、数据吞吐量大的Server</font></p>
+</blockquote>
+　
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+</html>

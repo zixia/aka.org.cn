@@ -1,0 +1,49 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>KDE±à³Ì: Scripting</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>KDE±à³Ì: Scripting</H1> 
+ <P><UL>
+<LI><H2>Kxmlrpcd: XmlRpc-to-DCOPÍø¹Ø
+</H2>
+<UL>
+#!/usr/bin/python
+<BR><BR> 
+<BR>from xmlrpclib import *
+<BR>import os
+<BR> 
+<BR>rc = open(os.environ['HOME'] + '/.kxmlrpcd', 'r')
+<BR>config = string.split(rc.read(), ',')
+<BR>port = config[0]
+<BR>auth = config[1]
+<BR> 
+<BR>server = Server("http://localhost:" + port +"/p6")
+<BR> 
+<BR>server.bookmarkList.add(auth, "http://www.kde.org")  
+<BR>
+</UL></UL><UL>
+<LI><H2>
+</H2>
+</UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld042.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld044.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld043.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

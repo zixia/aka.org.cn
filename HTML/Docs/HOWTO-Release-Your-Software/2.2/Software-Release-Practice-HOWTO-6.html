@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="SGML-Tools 1.0.9">
+ <TITLE>Software Release Practice HOWTO: Good distribution-making practice</TITLE>
+ <LINK HREF="Software-Release-Practice-HOWTO-7.html" REL=next>
+ <LINK HREF="Software-Release-Practice-HOWTO-5.html" REL=previous>
+ <LINK HREF="Software-Release-Practice-HOWTO.html#toc6" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="Software-Release-Practice-HOWTO-7.html">Next</A>
+<A HREF="Software-Release-Practice-HOWTO-5.html">Previous</A>
+<A HREF="Software-Release-Practice-HOWTO.html#toc6">Contents</A>
+<HR>
+<H2><A NAME="s6">6. Good distribution-making practice</A></H2>
+
+<P>These guidelines describe how your distribution should look when someone
+downloads, retrieves and unpacks it.
+<P>
+<H2><A NAME="ss6.1">6.1 Make sure tarballs always unpack into a single new directory</A>
+</H2>
+
+<P>The single most annoying mistake newbie developers make is to build
+tarballs that unpack the files and directories in the distribution into
+the current directory, potentially stepping on files already located there.
+<EM>Never do this!</EM>
+<P>Instead, make sure your archive files all have a common directory part
+named after the project, so they will unpack into a single top-level 
+directory directly <EM>beneath</EM> the current one.
+<P>Here's a makefile trick that, assuming your distribution directory is
+named `foobar' and SRC contains a list of your distribution files,
+accomplishes this.  It requires GNU tar 1.13
+<P>
+<PRE>
+VERS=1.0
+foobar-$(VERS).tar.gz:
+        tar --name-prefix='foobar-$(VERS)/' -czf foobar-$(VERS).tar.gz $(SRC)
+</PRE>
+<P>If you have an older tar program, do something like this:
+<P>
+<PRE>
+foobar-$(VERS).tar.gz:
+        @ls $(SRC) | sed s:^:foobar-$(VERS)/: >MANIFEST
+        @(cd ..; ln -s foobar foobar-$(VERS))
+        (cd ..; tar -czvf foobar/foobar-$(VERS).tar.gz `cat foobar/MANIFEST`)
+        @(cd ..; rm foobar-$(VERS))
+</PRE>
+<P>
+<H2><A NAME="ss6.2">6.2 Have a README</A>
+</H2>
+
+<P>Have a file called README or READ.ME that is a roadmap of your source
+distribution.  By ancient convention, this is the first file intrepid
+explorers will read after unpacking the source.
+<P>Good things to have in the README include:
+<P>
+<UL>
+<LI>A brief description of the project.</LI>
+<LI>A pointer to the project website (if it has one)</LI>
+<LI>Notes on the developer's build environment and potential portability
+problems.</LI>
+<LI>A roadmap describing important files and subdirectories. </LI>
+<LI>Either build/installation instructions or a pointer to a file
+containing same (usually INSTALL).</LI>
+<LI>Either a maintainers/credits list or a pointer to a file containing
+same (usually CREDITS). </LI>
+<LI>Either recent project news or a pointer to a file containing same
+(usually NEWS). </LI>
+</UL>
+<P>
+<H2><A NAME="ss6.3">6.3 Respect and follow standard file naming practices</A>
+</H2>
+
+<P>Before even looking at the README, your intrepid explorer will have scanned
+the filenames in the top-level directory of your unpacked distribution.
+Those names can themselves convey information.  By adhering to certain
+standard naming practices, you can give the explorer valuable clues
+about what to look in next.
+<P>Here are some standard top-level file names and what they mean.  Not
+every distribution needs all of these.
+<P>
+<DL>
+<DT><B>README or READ.ME</B><DD><P>the roadmap file, to be read first
+<P>
+<DT><B>INSTALL</B><DD><P>configuration, build, and installation instructions
+<P>
+<DT><B>CREDITS</B><DD><P>list of project contributers
+<P>
+<DT><B>NEWS</B><DD><P>recent project news
+<P>
+<DT><B>HISTORY</B><DD><P>project history
+<P>
+<DT><B>COPYING</B><DD><P>project license terms (GNU convention)
+<P>
+<DT><B>LICENSE</B><DD><P>project license terms
+<P>
+<DT><B>MANIFEST</B><DD><P>list of files in the distribution
+<P>
+<DT><B>FAQ</B><DD><P>plain-text Frequently-Asked-Questions document for the project 
+<P>
+<DT><B>TAGS</B><DD><P>generated tag file for use by Emacs or vi
+</DL>
+<P>Note the overall convention that filenames with all-caps names are
+human-readable metainformation about the package, rather than build
+components.
+<P>Having a FAQ can save you a lot of grief.  When a question about the
+project comes up often, put it in the FAQ; then direct users to read the
+FAQ before sending questions or bug reports.  A well-nurtured FAQ can
+decrease the support burden on the project maintainers by an order of
+magnitude or more.
+<P>Having a HISTORY or NEWS file with timestamps in it for each release
+is valuable.  Among other things, it may help establish prior art if
+you are ever hit with a patent-infringement lawsuit (this hasn't
+happened to anyone yet, but best to be prepared).
+<P>
+<H2><A NAME="ss6.4">6.4 Provide RPMs</A>
+</H2>
+
+<P>The de-facto standard format for installable binary packages is that used
+by the Red Hat Package manager, RPM.  It's featured in the most popular
+Linux distribution, and supported by effectively all other Linux
+distributions (except Debian and Slackware; and Debian can install from
+RPMs).
+<P>Accordingly, it's a good idea for your project site to provide installable 
+RPMs as well as source tarballs.
+<P>It's also a good idea for you to include in your source tarball the RPM
+spec file, with a production that makes RPMs from it in your Makefile.
+The spec file should have the extension `.spec'; that's how the rpm -t
+option finds it in a tarball.
+<P>For extra style points, generate your spec file with a shellscript that
+automatically plugs in the correct version number by analyzing the Makefile
+or a version.h.
+<P>
+<HR>
+<A HREF="Software-Release-Practice-HOWTO-7.html">Next</A>
+<A HREF="Software-Release-Practice-HOWTO-5.html">Previous</A>
+<A HREF="Software-Release-Practice-HOWTO.html#toc6">Contents</A>
+</BODY>
+</HTML>

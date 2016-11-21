@@ -1,0 +1,1852 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=GB2312">
+    <TITLE>Bonobo Program Examination</TITLE>
+</HEAD>
+<BODY>
+<P><A HREF="Bonobo.html">上一页</A>
+<A HREF="Gnome-DB.html">下一页</A>
+<P><B><FONT SIZE=+3>Container/Embeddable举例</FONT></B><P>
+<P><B><FONT SIZE=+2>Makefile</FONT></B><P>
+<PRE>
+CC = gcc
+CFLAGS = -Wall -g
+GNOMEPATH = /opt/gnome
+ORBIT_INCLUDE_DIR = -I${GNOMEPATH}/share/idl
+
+
+all: container component
+
+idl: bonobo.h
+
+bonobo.h:
+	orbit-idl ${ORBIT_INCLUDE_DIR} bonobo.idl
+
+container: container.o bonobo-skels.o \
+	bonobo-common.o bonobo-stubs.o
+	${CC} ${CFLAGS} `gnome-config --libs gnorba gnomeui bonobo` \
+	container.o bonobo-skels.o bonobo-common.o bonobo-stubs.o \
+	-o container
+container.o: container.c bonobo.h
+	${CC} ${CFLAGS} `gnome-config --cflags gnorba bonobo` \
+	-c container.c -o container.o
+
+component: component.o bonobo-skels.o \
+	bonobo-common.o bonobo-stubs.o 
+	${CC} ${CFLAGS} `gnome-config --libs gnorba gnomeui` \
+	component.o bonobo-skels.o bonobo-common.o bonobo-stubs.o \
+	-o component
+component.o: component.c bonobo.h
+	${CC} ${CFLAGS} `gnome-config --cflags gnorba` \
+	-c component.c -o component.o
+
+bonobo-skels.o: bonobo-skels.c bonobo.h
+	${CC} ${CFLAGS} `orbit-config --cflags server` \
+	`gnome-config --cflags gnorba` \
+	-c bonobo-skels.c -o bonobo-skels.o 
+bonobo-common.o: bonobo.h bonobo-common.c
+	${CC} ${CFLAGS} `orbit-config --cflags server` \
+	`gnome-config --cflags gnorba` \
+	-c bonobo-common.c -o bonobo-common.o 
+bonobo-stubs.o: bonobo.h bonobo-stubs.c 
+	${CC} ${CFLAGS} `orbit-config --cflags client` \
+	`gnome-config --cflags gnorba` \
+	-c bonobo-stubs.c -o bonobo-stubs.o 
+
+
+clean: 
+	rm bonobo-stubs.c bonobo.h bonobo-skels.c \
+	bonobo-common.c *~ *.o container component \
+	test 2>/dev/null
+        
+</PRE> 
+<P><B><FONT SIZE=+2>bonobo.idl</FONT></B><P>
+<PRE>
+#include <gnome-unknown.idl>
+#include <gnome-factory.idl>
+
+module GNOME {
+  interface Persist : Unknown {
+    enum Status {
+      SAVE_OK,
+      SAVE_CANCEL,
+      SAVE_FAILED
+    };
+  };
+};
+
+
+module GNOME {
+  interface ParseDisplayName : Unknown {
+    exception SyntaxError {};
+  };
+
+  interface Container : ParseDisplayName {
+    typedef sequence<Unknown> ObjectList;
+    ObjectList enum_objects ();
+    exception NotFound {};
+    Unknown get_object (in string item_name, 
+                        in boolean only_if_exists)
+            raises (SyntaxError, NotFound);
+  };
+
+  interface ClientSite : GNOME::Unknown {
+    Container get_container ();
+    void show_window (in boolean shown);
+  };
+
+  interface ViewFrame : GNOME::Unknown {
+    ClientSite get_client_site ();
+    void view_activated (in boolean state);
+    void deactivate_and_undo ();
+    void request_resize (in short new_width, 
+                         in short new_height);
+    void activate_uri (in string uri, 
+                       in boolean relative);
+  };
+};
+
+module GNOME {
+  interface View : GNOME::Unknown {
+    typedef unsigned long windowid;
+    void size_allocate (in short width, 
+                        in short height);
+    void size_query (out short desired_width, 
+                     out short desired_height);
+    void set_window (in windowid id);
+    void activate (in boolean activated);
+    void reactivate_and_undo ();
+    void do_verb (in string verb_name);
+    void set_zoom_factor (in double zoom);
+  };
+
+  interface Embeddable : GNOME::Unknown {
+    void set_client_site (in ClientSite client_site);
+    ClientSite get_client_site ();
+
+    void set_host_name (in string name, 
+                        in string appname);
+    void set_uri (in string uri);
+
+    exception UserCancelledSave {};
+    enum CloseMode {
+      SAVE_IF_DIRTY,
+      NO_SAVE,
+      PROMPT_SAVE
+    };
+    void close (in CloseMode mode)
+         raises (UserCancelledSave);
+
+    struct GnomeVerb {
+      string name;
+      string label;
+      string hint;
+    };
+    typedef sequence<GnomeVerb> verb_list;
+    verb_list get_verb_list ();
+
+    exception MultiViewNotSupported {};
+    View new_view (in ViewFrame frame) 
+         raises (MultiViewNotSupported);
+  };
+
+  interface EmbeddableFactory : GNOME::GenericFactory {
+  };
+};
+
+<PRE>        
+<P><B><FONT SIZE=+2>container.c</FONT></B><P> 
+</PRE>
+
+#include <gnome.h>
+#include <libgnorba/gnorba.h>
+#include <ORBitservices/CosNaming.h>
+#include <gdk/gdkx.h>
+#include <bonobo/gnome-wrapper.h>
+
+#include "bonobo.h"
+
+/*** App-specific servant structures ***/
+
+typedef struct
+{
+   POA_GNOME_ParseDisplayName servant;
+   PortableServer_POA poa;
+
+}
+impl_POA_GNOME_ParseDisplayName;
+
+typedef struct _impl_POA_GNOME_Container impl_POA_GNOME_Container;
+typedef struct _impl_POA_GNOME_ClientSite impl_POA_GNOME_ClientSite;
+typedef struct _impl_POA_GNOME_ViewFrame impl_POA_GNOME_ViewFrame;
+
+struct _impl_POA_GNOME_Container
+{
+  POA_GNOME_Container servant;
+  PortableServer_POA poa;
+  GSList *client_site_list;
+  impl_POA_GNOME_ClientSite *active;
+  GtkWidget *box;
+  gint refcount;
+};
+
+
+struct _impl_POA_GNOME_ClientSite
+{
+  POA_GNOME_ClientSite servant;
+  PortableServer_POA poa;
+  impl_POA_GNOME_Container *container_servant;
+  impl_POA_GNOME_ViewFrame *active;
+  GSList *view_frame_list;
+
+  GNOME_Embeddable embeddable;
+  CORBA_boolean show;
+};
+
+
+struct _impl_POA_GNOME_ViewFrame
+{
+   POA_GNOME_ViewFrame servant;
+   PortableServer_POA poa;
+   impl_POA_GNOME_ClientSite *client_site_servant;
+   GNOME_View view;
+   GtkWidget *socket;
+   GtkWidget *wrapper;
+   gint activate;
+   GtkRequisition request;
+   GtkAllocation allocation;
+
+};
+
+
+/*** Implementation stub prototypes ***/
+
+void add_component (GtkWidget *menu_item, 
+		    impl_POA_GNOME_Container *container);
+
+void app_quit (void);
+
+static void
+impl_GNOME_ParseDisplayName__destroy(impl_POA_GNOME_ParseDisplayName *
+				     servant, CORBA_Environment * ev);
+
+static void
+impl_GNOME_ParseDisplayName_ref(impl_POA_GNOME_ParseDisplayName * servant,
+				CORBA_Environment * ev);
+static void
+impl_GNOME_ParseDisplayName_unref(impl_POA_GNOME_ParseDisplayName * servant,
+				  CORBA_Environment * ev);
+static CORBA_Object
+impl_GNOME_ParseDisplayName_query_interface(impl_POA_GNOME_ParseDisplayName *
+					    servant, CORBA_char * repoid,
+					    CORBA_Environment * ev);
+
+static void impl_GNOME_Container__destroy(impl_POA_GNOME_Container * servant,
+					  CORBA_Environment * ev);
+
+static GNOME_Container_ObjectList
+   *impl_GNOME_Container_enum_objects(impl_POA_GNOME_Container * servant,
+				      CORBA_Environment * ev);
+
+static GNOME_Unknown
+impl_GNOME_Container_get_object(impl_POA_GNOME_Container * servant,
+				CORBA_char * item_name,
+				CORBA_boolean only_if_exists,
+				CORBA_Environment * ev);
+
+static void
+impl_GNOME_Container_ref(impl_POA_GNOME_Container * servant,
+			 CORBA_Environment * ev);
+static void
+impl_GNOME_Container_unref(impl_POA_GNOME_Container * servant,
+			   CORBA_Environment * ev);
+static CORBA_Object
+impl_GNOME_Container_query_interface(impl_POA_GNOME_Container * servant,
+				     CORBA_char * repoid,
+
+				     CORBA_Environment * ev);
+
+/* this signature was modified because 
+   the reference_to_servant function is
+   not yet implemented by ORBit */
+static impl_POA_GNOME_ClientSite *
+impl_GNOME_ClientSite__create(PortableServer_POA poa, 
+			      GNOME_Embeddable embeddable, 
+			      impl_POA_GNOME_Container *container_servant,
+			      CORBA_Environment * ev);
+
+
+
+static void impl_GNOME_ClientSite__destroy(impl_POA_GNOME_ClientSite *
+					   servant, CORBA_Environment * ev);
+static GNOME_Container
+impl_GNOME_ClientSite_get_container(impl_POA_GNOME_ClientSite * servant,
+				    CORBA_Environment * ev);
+
+static void
+impl_GNOME_ClientSite_show_window(impl_POA_GNOME_ClientSite * servant,
+				  CORBA_boolean shown,
+
+				  CORBA_Environment * ev);
+
+static void
+impl_GNOME_ClientSite_ref(impl_POA_GNOME_ClientSite * servant,
+			  CORBA_Environment * ev);
+static void
+impl_GNOME_ClientSite_unref(impl_POA_GNOME_ClientSite * servant,
+			    CORBA_Environment * ev);
+static CORBA_Object
+impl_GNOME_ClientSite_query_interface(impl_POA_GNOME_ClientSite * servant,
+				      CORBA_char * repoid,
+				      CORBA_Environment * ev);
+/* this signature was modified because 
+   the reference_to_servant function is
+   not yet implemented by ORBit */
+static impl_POA_GNOME_ViewFrame *
+impl_GNOME_ViewFrame__create(PortableServer_POA poa, 
+			     impl_POA_GNOME_ClientSite *client_site_servant, 
+			     CORBA_Environment * ev);
+
+static void impl_GNOME_ViewFrame__destroy(impl_POA_GNOME_ViewFrame * servant,
+					  CORBA_Environment * ev);
+static GNOME_ClientSite
+impl_GNOME_ViewFrame_get_client_site(impl_POA_GNOME_ViewFrame * servant,
+				     CORBA_Environment * ev);
+
+static void
+impl_GNOME_ViewFrame_view_activated(impl_POA_GNOME_ViewFrame * servant,
+				    CORBA_boolean state,
+
+				    CORBA_Environment * ev);
+
+static void
+impl_GNOME_ViewFrame_deactivate_and_undo(impl_POA_GNOME_ViewFrame * servant,
+					 CORBA_Environment * ev);
+
+static void
+impl_GNOME_ViewFrame_request_resize(impl_POA_GNOME_ViewFrame * servant,
+				    CORBA_short new_width,
+				    CORBA_short new_height,
+				    CORBA_Environment * ev);
+
+static void
+impl_GNOME_ViewFrame_activate_uri(impl_POA_GNOME_ViewFrame * servant,
+				  CORBA_char * uri,
+				  CORBA_boolean relative,
+
+				  CORBA_Environment * ev);
+
+static void
+impl_GNOME_ViewFrame_ref(impl_POA_GNOME_ViewFrame * servant,
+			 CORBA_Environment * ev);
+static void
+impl_GNOME_ViewFrame_unref(impl_POA_GNOME_ViewFrame * servant,
+			   CORBA_Environment * ev);
+static CORBA_Object
+impl_GNOME_ViewFrame_query_interface(impl_POA_GNOME_ViewFrame * servant,
+				     CORBA_char * repoid,
+
+				     CORBA_Environment * ev);
+
+/*** epv structures ***/
+
+static PortableServer_ServantBase__epv impl_GNOME_ParseDisplayName_base_epv = {
+   NULL,			/* _private data */
+   NULL,			/* finalize routine */
+   NULL,			/* default_POA routine */
+};
+static POA_GNOME_ParseDisplayName__epv impl_GNOME_ParseDisplayName_epv = {
+   NULL,			/* _private */
+
+};
+static POA_GNOME_Unknown__epv impl_GNOME_ParseDisplayName_GNOME_Unknown_epv = {
+   NULL,			/* _private */
+   (gpointer) & impl_GNOME_ParseDisplayName_ref,
+   (gpointer) & impl_GNOME_ParseDisplayName_unref,
+   (gpointer) & impl_GNOME_ParseDisplayName_query_interface,
+};
+static PortableServer_ServantBase__epv impl_GNOME_Container_base_epv = {
+   NULL,			/* _private data */
+   NULL,			/* finalize routine */
+   NULL,			/* default_POA routine */
+};
+static POA_GNOME_Container__epv impl_GNOME_Container_epv = {
+   NULL,			/* _private */
+
+   (gpointer) & impl_GNOME_Container_enum_objects,
+
+   (gpointer) & impl_GNOME_Container_get_object,
+
+};
+static POA_GNOME_Unknown__epv impl_GNOME_Container_GNOME_Unknown_epv = {
+   NULL,			/* _private */
+   (gpointer) & impl_GNOME_Container_ref,
+   (gpointer) & impl_GNOME_Container_unref,
+   (gpointer) & impl_GNOME_Container_query_interface,
+};
+static POA_GNOME_ParseDisplayName__epv
+   impl_GNOME_Container_GNOME_ParseDisplayName_epv = {
+   NULL,			/* _private */
+};
+static PortableServer_ServantBase__epv impl_GNOME_ClientSite_base_epv = {
+   NULL,			/* _private data */
+   NULL,			/* finalize routine */
+   NULL,			/* default_POA routine */
+};
+static POA_GNOME_ClientSite__epv impl_GNOME_ClientSite_epv = {
+   NULL,			/* _private */
+   (gpointer) & impl_GNOME_ClientSite_get_container,
+
+   (gpointer) & impl_GNOME_ClientSite_show_window,
+
+};
+static POA_GNOME_Unknown__epv impl_GNOME_ClientSite_GNOME_Unknown_epv = {
+   NULL,			/* _private */
+   (gpointer) & impl_GNOME_ClientSite_ref,
+   (gpointer) & impl_GNOME_ClientSite_unref,
+   (gpointer) & impl_GNOME_ClientSite_query_interface,
+};
+static PortableServer_ServantBase__epv impl_GNOME_ViewFrame_base_epv = {
+   NULL,			/* _private data */
+   NULL,			/* finalize routine */
+   NULL,			/* default_POA routine */
+};
+static POA_GNOME_ViewFrame__epv impl_GNOME_ViewFrame_epv = {
+   NULL,			/* _private */
+   (gpointer) & impl_GNOME_ViewFrame_get_client_site,
+
+   (gpointer) & impl_GNOME_ViewFrame_view_activated,
+
+   (gpointer) & impl_GNOME_ViewFrame_deactivate_and_undo,
+
+   (gpointer) & impl_GNOME_ViewFrame_request_resize,
+
+   (gpointer) & impl_GNOME_ViewFrame_activate_uri,
+
+};
+static POA_GNOME_Unknown__epv impl_GNOME_ViewFrame_GNOME_Unknown_epv = {
+   NULL,			/* _private */
+   (gpointer) & impl_GNOME_ViewFrame_ref,
+   (gpointer) & impl_GNOME_ViewFrame_unref,
+   (gpointer) & impl_GNOME_ViewFrame_query_interface,
+};
+
+/*** vepv structures ***/
+
+static POA_GNOME_ParseDisplayName__vepv impl_GNOME_ParseDisplayName_vepv = {
+   &impl_GNOME_ParseDisplayName_base_epv,
+   &impl_GNOME_ParseDisplayName_GNOME_Unknown_epv,
+   &impl_GNOME_ParseDisplayName_epv,
+};
+static POA_GNOME_Container__vepv impl_GNOME_Container_vepv = {
+   &impl_GNOME_Container_base_epv,
+   &impl_GNOME_Container_GNOME_Unknown_epv,
+   &impl_GNOME_Container_GNOME_ParseDisplayName_epv,
+   &impl_GNOME_Container_epv,
+};
+static POA_GNOME_ClientSite__vepv impl_GNOME_ClientSite_vepv = {
+   &impl_GNOME_ClientSite_base_epv,
+   &impl_GNOME_ClientSite_GNOME_Unknown_epv,
+   &impl_GNOME_ClientSite_epv,
+};
+static POA_GNOME_ViewFrame__vepv impl_GNOME_ViewFrame_vepv = {
+   &impl_GNOME_ViewFrame_base_epv,
+   &impl_GNOME_ViewFrame_GNOME_Unknown_epv,
+   &impl_GNOME_ViewFrame_epv,
+};
+
+/*** Stub implementations ***/
+void add_component_view (GtkWidget *menu_item, 
+			 impl_POA_GNOME_Container *container_servant)
+{
+  CORBA_Environment ev;
+  PortableServer_Servant poa = container_servant->poa;
+
+  CORBA_Object view;
+
+  GSList *last;
+
+  CORBA_Object client_site;
+  impl_POA_GNOME_ClientSite *client_site_servant;
+  CORBA_Object view_frame;
+  impl_POA_GNOME_ViewFrame *view_frame_servant;
+
+
+  last = g_slist_last (container_servant->client_site_list);
+  client_site_servant =   (impl_POA_GNOME_ClientSite *) last->data;
+  client_site = PortableServer_POA_servant_to_reference (poa, 
+							 client_site_servant, 
+							 &ev);
+  view_frame_servant = (impl_POA_GNOME_ViewFrame *) 
+    impl_GNOME_ViewFrame__create (poa, client_site_servant, &ev);
+  view_frame = PortableServer_POA_servant_to_reference (poa, 
+							view_frame_servant, 
+							&ev);
+  client_site_servant->view_frame_list = 
+    g_slist_append (client_site_servant->view_frame_list, 
+		    view_frame_servant);
+  gtk_box_pack_start (GTK_BOX(container_servant->box), 
+		      view_frame_servant->wrapper,
+		      FALSE, 0, 0);
+  gtk_widget_show_all (container_servant->box);
+
+  view = GNOME_Embeddable_new_view (client_site_servant->embeddable, 
+							view_frame, 
+							&ev);
+  view_frame_servant->view = CORBA_Object_duplicate (view, &ev);
+  GNOME_View_set_window (view, 
+			 GDK_WINDOW_XWINDOW(view_frame_servant->socket->window), 
+			 &ev);
+}
+
+void add_component (GtkWidget *menu_item, 
+		    impl_POA_GNOME_Container *container_servant)
+{
+  CORBA_Environment ev;
+  GoadServerList *list;
+  PortableServer_Servant poa = container_servant->poa;
+
+  CORBA_Object embeddable;
+  CORBA_Object view;
+
+  CORBA_Object client_site;
+  impl_POA_GNOME_ClientSite *client_site_servant;
+  CORBA_Object view_frame;
+  impl_POA_GNOME_ViewFrame *view_frame_servant;
+
+
+  /* Now, create the Component: call its factory */
+  list = goad_server_list_get ();
+  embeddable = goad_server_activate_with_id (list, 
+					    "Component", 
+					    GOAD_ACTIVATE_NEW_ONLY, 
+					    NULL);
+  goad_server_list_free (list);
+
+  /* create the ClientSite for our new component and 
+     give it the embeddable ref */
+  client_site_servant = impl_GNOME_ClientSite__create (poa, 
+						       embeddable,
+						       container_servant,
+						       &ev);
+  client_site = PortableServer_POA_servant_to_reference (poa, 
+							 client_site_servant,
+							 &ev);
+  /* keep the client site ref in some safe place 
+     for the container... */
+  container_servant->client_site_list = 
+    g_slist_append (container_servant->client_site_list, 
+		    client_site_servant);
+
+
+  /* now, just give the newly created component 
+     a ref to its ClientSite */
+  GNOME_Embeddable_set_client_site (embeddable,
+				    client_site, 
+				    &ev);
+  GNOME_Embeddable_set_host_name (embeddable,
+				  "my_component", 
+				  "my_component", 
+				  &ev);
+
+  /* now, create a new ViewFrame for the 
+     future View of the component*/
+  view_frame_servant = (impl_POA_GNOME_ViewFrame *) 
+    impl_GNOME_ViewFrame__create (poa, client_site_servant, &ev);
+  view_frame = PortableServer_POA_servant_to_reference (poa, 
+							view_frame_servant, 
+							&ev);
+  client_site_servant->view_frame_list = 
+    g_slist_append (client_site_servant->view_frame_list, 
+		    view_frame_servant);
+  gtk_box_pack_start (GTK_BOX(container_servant->box), 
+		      view_frame_servant->wrapper,
+		      FALSE, 0, 0);
+  /* realize the socket ... so that it has a GdkWindow 
+     otherwise, the GdkWindow not existing will make the 
+     prgm crash  when calling set_window...
+     A hard to find bug...
+  */
+  gtk_widget_show_all (container_servant->box);
+
+  /* now, create the View for this ViewFrame */
+  view = GNOME_Embeddable_new_view (embeddable, view_frame, &ev);
+  view_frame_servant->view = CORBA_Object_duplicate (view, &ev);
+
+
+  /* Now, give the View its window */
+  GNOME_View_set_window (view, 
+			 GDK_WINDOW_XWINDOW(view_frame_servant->socket->window), 
+			 &ev);
+
+  /* pfew !! now, the view should be displayed ...*/
+};
+
+void 
+deactivate_view (impl_POA_GNOME_ViewFrame *servant)
+{
+  CORBA_Environment ev;
+
+  CORBA_exception_init (&ev);
+  GNOME_View_activate (servant->view,
+		       0, 
+		       &ev);
+  CORBA_exception_free (&ev);
+}
+void 
+activate_view (impl_POA_GNOME_ViewFrame *servant)
+{
+  CORBA_Environment ev;
+
+  CORBA_exception_init (&ev);
+  GNOME_View_activate (servant->view,
+		       1, 
+		       &ev);
+  servant->client_site_servant->active = servant;
+  servant->client_site_servant->container_servant->active = 
+    servant->client_site_servant;
+  CORBA_exception_free (&ev);
+}
+
+void 
+view_frame_cb (GtkWidget *widget, 
+	       GdkEvent *event, 
+	       gpointer data)
+{
+  impl_POA_GNOME_ViewFrame *servant = 
+    (impl_POA_GNOME_ViewFrame*) data;
+  impl_POA_GNOME_ClientSite *active_client_site = 
+    servant->client_site_servant->container_servant->active;
+  
+  if (event->type == GDK_2BUTTON_PRESS 
+      && active_client_site == NULL)
+    activate_view (servant);
+  /* here, no other view in the container was activated */
+  else if (event->type == GDK_2BUTTON_PRESS 
+	   && active_client_site != NULL) {
+    /* here, another view is active. */
+    deactivate_view (active_client_site->active);
+    activate_view (servant);
+  }
+}
+
+
+void 
+size_request_cb (GtkWidget *widget, gpointer data)
+{
+}
+
+void 
+size_allocation_cb (GtkWidget *widget, gpointer data)
+{
+}
+
+
+
+void app_quit (void)
+{
+  gtk_main_quit ();
+}
+
+
+static GNOME_ParseDisplayName
+impl_GNOME_ParseDisplayName__create(PortableServer_POA poa,
+				    CORBA_Environment * ev)
+{
+   GNOME_ParseDisplayName retval;
+   impl_POA_GNOME_ParseDisplayName *newservant;
+   PortableServer_ObjectId *objid;
+
+   newservant = g_new0(impl_POA_GNOME_ParseDisplayName, 1);
+   newservant->servant.vepv = &impl_GNOME_ParseDisplayName_vepv;
+   newservant->poa = poa;
+   POA_GNOME_ParseDisplayName__init((PortableServer_Servant) newservant, ev);
+   objid = PortableServer_POA_activate_object(poa, newservant, ev);
+   CORBA_free(objid);
+   retval = PortableServer_POA_servant_to_reference(poa, newservant, ev);
+
+   return retval;
+}
+
+static void
+impl_GNOME_ParseDisplayName__destroy(impl_POA_GNOME_ParseDisplayName *
+				     servant, CORBA_Environment * ev)
+{
+   PortableServer_ObjectId *objid;
+
+   objid = PortableServer_POA_servant_to_id(servant->poa, servant, ev);
+   PortableServer_POA_deactivate_object(servant->poa, objid, ev);
+   CORBA_free(objid);
+
+   POA_GNOME_ParseDisplayName__fini((PortableServer_Servant) servant, ev);
+   g_free(servant);
+}
+
+static void
+impl_GNOME_ParseDisplayName_ref(impl_POA_GNOME_ParseDisplayName * servant,
+				CORBA_Environment * ev)
+{
+}
+
+static void
+impl_GNOME_ParseDisplayName_unref(impl_POA_GNOME_ParseDisplayName * servant,
+				  CORBA_Environment * ev)
+{
+}
+
+static CORBA_Object
+impl_GNOME_ParseDisplayName_query_interface(impl_POA_GNOME_ParseDisplayName *
+					    servant, CORBA_char * repoid,
+					    CORBA_Environment * ev)
+{
+   CORBA_Object retval;
+
+   return retval;
+}
+
+
+static GNOME_Container
+impl_GNOME_Container__create(PortableServer_POA poa, 
+			     CORBA_Environment * ev)
+{
+   GNOME_Container retval;
+   impl_POA_GNOME_Container *newservant = 
+     g_new0(impl_POA_GNOME_Container, 1);
+   PortableServer_ObjectId *objid;
+   GtkWidget *app;
+   GnomeUIInfo menu_file[] = {
+     GNOMEUIINFO_MENU_NEW_ITEM("New Component", 
+			       "Add a new component",
+			       add_component, 
+			       newservant),
+     GNOMEUIINFO_MENU_NEW_ITEM("New Component View", 
+			       "Add a new View to a component",
+			       add_component_view, 
+			       newservant),
+
+     GNOMEUIINFO_SEPARATOR,
+     GNOMEUIINFO_MENU_EXIT_ITEM(app_quit, NULL),
+     GNOMEUIINFO_END
+   };
+   GnomeUIInfo menu_help[] = {
+     GNOMEUIINFO_END
+   };
+   GnomeUIInfo main_menu[] = {
+     GNOMEUIINFO_SUBTREE("Files", menu_file),
+     GNOMEUIINFO_SUBTREE("Help", menu_help),
+     GNOMEUIINFO_END
+   };
+
+
+   newservant->servant.vepv = &impl_GNOME_Container_vepv;
+   newservant->poa = poa;
+   newservant->client_site_list = NULL;
+
+   app = gnome_app_new ("container 1.0", "Container");
+   gnome_app_create_menus (GNOME_APP(app), main_menu);
+   gtk_window_set_default_size (GTK_WINDOW(app), 200, 200);
+   newservant->box = gtk_vbox_new (TRUE, TRUE);
+   gnome_app_set_contents (GNOME_APP(app), newservant->box);
+   gtk_widget_show_all (app);
+
+   POA_GNOME_Container__init((PortableServer_Servant) newservant, ev);
+   objid = PortableServer_POA_activate_object(poa, newservant, ev);
+   CORBA_free(objid);
+   retval = PortableServer_POA_servant_to_reference(poa, newservant, ev);
+
+   return retval;
+}
+
+static void
+impl_GNOME_Container__destroy(impl_POA_GNOME_Container * servant,
+			      CORBA_Environment * ev)
+{
+   PortableServer_ObjectId *objid;
+
+   objid = PortableServer_POA_servant_to_id(servant->poa, servant, ev);
+   PortableServer_POA_deactivate_object(servant->poa, objid, ev);
+   CORBA_free(objid);
+
+   POA_GNOME_Container__fini((PortableServer_Servant) servant, ev);
+   g_free(servant);
+}
+
+static GNOME_Container_ObjectList *
+impl_GNOME_Container_enum_objects(impl_POA_GNOME_Container * servant,
+				  CORBA_Environment * ev)
+{
+   GNOME_Container_ObjectList *retval;
+
+   return retval;
+}
+
+static GNOME_Unknown
+impl_GNOME_Container_get_object(impl_POA_GNOME_Container * servant,
+				CORBA_char * item_name,
+				CORBA_boolean only_if_exists,
+				CORBA_Environment * ev)
+{
+   GNOME_Unknown retval;
+
+   return retval;
+}
+
+static void
+impl_GNOME_Container_ref(impl_POA_GNOME_Container * servant,
+			 CORBA_Environment * ev)
+{
+  servant->refcount++;
+
+}
+
+static void
+impl_GNOME_Container_unref(impl_POA_GNOME_Container * servant,
+			   CORBA_Environment * ev)
+{
+  if ((--servant->refcount) == 0)
+    impl_GNOME_Container__destroy (servant, ev);
+
+}
+
+static CORBA_Object
+impl_GNOME_Container_query_interface(impl_POA_GNOME_Container * servant,
+				     CORBA_char * repoid,
+				     CORBA_Environment * ev)
+{
+   CORBA_Object retval = CORBA_OBJECT_NIL;
+
+   if (strcmp (repoid, "IDL:GNOME/Container:1.0"))
+     retval = PortableServer_POA_servant_to_reference (servant->poa, 
+						       servant, 
+						       ev);
+
+   return retval;
+}
+
+
+
+static impl_POA_GNOME_ClientSite *
+impl_GNOME_ClientSite__create(PortableServer_POA poa, 
+			      GNOME_Embeddable embeddable, 
+			      impl_POA_GNOME_Container *container_servant,
+			      CORBA_Environment * ev)
+{
+   impl_POA_GNOME_ClientSite *retval;
+   impl_POA_GNOME_ClientSite *newservant;
+   PortableServer_ObjectId *objid;
+
+   newservant = g_new0(impl_POA_GNOME_ClientSite, 1);
+   newservant->servant.vepv = &impl_GNOME_ClientSite_vepv;
+   newservant->poa = poa;
+   newservant->embeddable = embeddable;
+   newservant->container_servant = container_servant;
+
+   POA_GNOME_ClientSite__init((PortableServer_Servant) newservant, ev);
+   objid = PortableServer_POA_activate_object(poa, newservant, ev);
+   CORBA_free(objid);
+   retval = newservant;
+
+   return retval;
+}
+
+static void
+impl_GNOME_ClientSite__destroy(impl_POA_GNOME_ClientSite * servant,
+			       CORBA_Environment * ev)
+{
+   PortableServer_ObjectId *objid;
+
+   objid = PortableServer_POA_servant_to_id(servant->poa, servant, ev);
+   PortableServer_POA_deactivate_object(servant->poa, objid, ev);
+   CORBA_free(objid);
+
+   POA_GNOME_ClientSite__fini((PortableServer_Servant) servant, ev);
+   g_free(servant);
+}
+
+static GNOME_Container
+impl_GNOME_ClientSite_get_container(impl_POA_GNOME_ClientSite * servant,
+				    CORBA_Environment * ev)
+{
+   GNOME_Container retval;
+
+   return retval;
+}
+
+static void
+impl_GNOME_ClientSite_show_window(impl_POA_GNOME_ClientSite * servant,
+				  CORBA_boolean shown, 
+				  CORBA_Environment * ev)
+{
+  /* store whether the component will be 
+     edited in-place or out-place */
+  servant->show = shown;
+
+}
+
+static void
+impl_GNOME_ClientSite_ref(impl_POA_GNOME_ClientSite * servant,
+			  CORBA_Environment * ev)
+{
+}
+
+static void
+impl_GNOME_ClientSite_unref(impl_POA_GNOME_ClientSite * servant,
+			    CORBA_Environment * ev)
+{
+}
+
+static CORBA_Object
+impl_GNOME_ClientSite_query_interface(impl_POA_GNOME_ClientSite * servant,
+				      CORBA_char * repoid,
+				      CORBA_Environment * ev)
+{
+   CORBA_Object retval;
+
+   return retval;
+}
+
+static impl_POA_GNOME_ViewFrame *
+impl_GNOME_ViewFrame__create(PortableServer_POA poa, 
+			     impl_POA_GNOME_ClientSite *client_site_servant, 
+			     CORBA_Environment * ev)
+{
+   impl_POA_GNOME_ViewFrame *retval ;
+   impl_POA_GNOME_ViewFrame *newservant;
+   PortableServer_ObjectId *objid;
+
+   newservant = g_new0(impl_POA_GNOME_ViewFrame, 1);
+   newservant->servant.vepv = &impl_GNOME_ViewFrame_vepv;
+   newservant->poa = poa;
+   newservant->client_site_servant = client_site_servant;
+
+   /* create the GtkSocket for the embeddable view */
+   newservant->socket = gtk_socket_new ();
+   newservant->wrapper = gnome_wrapper_new ();
+   gnome_wrapper_set_covered (GNOME_WRAPPER(newservant->wrapper),
+			      1);
+   gtk_container_add (GTK_CONTAINER(newservant->wrapper), 
+		      newservant->socket);
+   gtk_signal_connect (GTK_OBJECT (newservant->wrapper),
+		       "button_press_event", 
+		       GTK_SIGNAL_FUNC (view_frame_cb),
+		       newservant);
+
+
+   POA_GNOME_ViewFrame__init((PortableServer_Servant) newservant, ev);
+   objid = PortableServer_POA_activate_object(poa, newservant, ev);
+   CORBA_free(objid);
+   retval = newservant;
+
+   return retval;
+}
+
+static void
+impl_GNOME_ViewFrame__destroy(impl_POA_GNOME_ViewFrame * servant,
+			      CORBA_Environment * ev)
+{
+   PortableServer_ObjectId *objid;
+
+   objid = PortableServer_POA_servant_to_id(servant->poa, servant, ev);
+   PortableServer_POA_deactivate_object(servant->poa, objid, ev);
+   CORBA_free(objid);
+
+   POA_GNOME_ViewFrame__fini((PortableServer_Servant) servant, ev);
+   g_free(servant);
+}
+
+static GNOME_ClientSite
+impl_GNOME_ViewFrame_get_client_site(impl_POA_GNOME_ViewFrame * servant,
+				     CORBA_Environment * ev)
+{
+   GNOME_ClientSite retval;
+
+   return retval;
+}
+
+static void
+impl_GNOME_ViewFrame_view_activated(impl_POA_GNOME_ViewFrame * servant,
+				    CORBA_boolean state,
+				    CORBA_Environment * ev)
+{
+  servant->activate = state;
+  if (state == 1)
+  gnome_wrapper_set_covered (GNOME_WRAPPER(servant->wrapper), 
+			     0);
+  else if (state == 0    )
+    gnome_wrapper_set_covered (GNOME_WRAPPER(servant->wrapper), 
+			       1);
+
+}
+
+static void
+impl_GNOME_ViewFrame_deactivate_and_undo(impl_POA_GNOME_ViewFrame * servant,
+					 CORBA_Environment * ev)
+{
+}
+
+static void
+impl_GNOME_ViewFrame_request_resize(impl_POA_GNOME_ViewFrame * servant,
+				    CORBA_short new_width,
+				    CORBA_short new_height,
+				    CORBA_Environment * ev)
+{
+  servant->request.width = new_width;
+  servant->request.height = new_height;
+}
+
+static void
+impl_GNOME_ViewFrame_activate_uri(impl_POA_GNOME_ViewFrame * servant,
+				  CORBA_char * uri,
+				  CORBA_boolean relative,
+				  CORBA_Environment * ev)
+{
+}
+
+static void
+impl_GNOME_ViewFrame_ref(impl_POA_GNOME_ViewFrame * servant,
+			 CORBA_Environment * ev)
+{
+}
+
+static void
+impl_GNOME_ViewFrame_unref(impl_POA_GNOME_ViewFrame * servant,
+			   CORBA_Environment * ev)
+{
+}
+
+static CORBA_Object
+impl_GNOME_ViewFrame_query_interface(impl_POA_GNOME_ViewFrame * servant,
+				     CORBA_char * repoid,
+				     CORBA_Environment * ev)
+{
+   CORBA_Object retval;
+
+   return retval;
+}
+
+int main (int argc, char **argv)
+{
+  CORBA_Environment ev;
+  CORBA_ORB orb;
+  CORBA_Object root_poa;
+  PortableServer_POAManager root_poa_manager;
+
+  CORBA_Object obj;
+
+  CORBA_exception_init (&ev);
+  orb = gnome_CORBA_init ("a \"simple\" container", 
+			  "1.0", 
+			  &argc, 
+			  argv, 
+			  GNORBA_INIT_SERVER_FUNC, 
+			  &ev);
+
+  root_poa = CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
+
+  root_poa_manager = PortableServer_POA__get_the_POAManager (
+                     (PortableServer_POA) root_poa, &ev);
+  PortableServer_POAManager_activate (root_poa_manager, &ev);
+
+  /* this function will create all the other 
+   * needed interfaces
+   */
+  obj = impl_GNOME_Container__create ((PortableServer_POA)
+				      root_poa, 
+				      &ev);
+
+
+  CORBA_exception_free (&ev);
+  gtk_main();
+  return 0;
+}
+<PRE>        
+ 
+<P><B><FONT SIZE=+2>component.c</FONT></B><P> 
+</PRE>
+#include <gnome.h>
+#include <libgnorba/gnorba.h>
+#include <ORBitservices/CosNaming.h>
+
+
+#include "bonobo.h"
+
+/*** App-specific servant structures ***/
+
+typedef struct
+{
+   POA_GNOME_Persist servant;
+   PortableServer_POA poa;
+
+}
+impl_POA_GNOME_Persist;
+
+typedef struct
+{
+  POA_GNOME_Embeddable servant;
+  PortableServer_POA poa;
+  
+  GNOME_ClientSite client_site;
+  gchar data[11];
+  GSList *view_servant_list;
+  gchar *host_name;
+  gchar *uri;
+}
+impl_POA_GNOME_Embeddable;
+
+typedef struct
+{
+  POA_GNOME_View servant;
+  PortableServer_POA poa;
+
+  impl_POA_GNOME_Embeddable *embeddable_servant;
+  GNOME_ViewFrame frame;
+  GtkWidget *widget;
+  GtkWidget *plug;
+
+}
+impl_POA_GNOME_View;
+
+
+
+typedef struct
+{
+   POA_GNOME_EmbeddableFactory servant;
+   PortableServer_POA poa;
+}
+impl_POA_GNOME_EmbeddableFactory;
+
+/*** Implementation stub prototypes ***/
+
+
+static void impl_GNOME_View__destroy(impl_POA_GNOME_View * servant,
+				     CORBA_Environment * ev);
+
+static void
+impl_GNOME_View_size_allocate(impl_POA_GNOME_View * servant,
+			      CORBA_short width,
+			      CORBA_short height, CORBA_Environment * ev);
+
+static void
+impl_GNOME_View_size_query(impl_POA_GNOME_View * servant,
+			   CORBA_short * desired_width,
+			   CORBA_short * desired_height,
+
+			   CORBA_Environment * ev);
+
+static void
+impl_GNOME_View_set_window(impl_POA_GNOME_View * servant,
+			   GNOME_View_windowid id, 
+			   CORBA_Environment * ev);
+
+static void
+impl_GNOME_View_activate(impl_POA_GNOME_View * servant,
+			 CORBA_boolean activated, 
+			 CORBA_Environment * ev);
+
+static void
+impl_GNOME_View_reactivate_and_undo(impl_POA_GNOME_View * servant,
+				    CORBA_Environment * ev);
+
+static void
+impl_GNOME_View_do_verb(impl_POA_GNOME_View * servant,
+			CORBA_char * verb_name, 
+			CORBA_Environment * ev);
+
+static void
+impl_GNOME_View_set_zoom_factor(impl_POA_GNOME_View * servant,
+				CORBA_double zoom, 
+				CORBA_Environment * ev);
+
+static void
+impl_GNOME_View_ref(impl_POA_GNOME_View * servant, 
+		    CORBA_Environment * ev);
+static void
+impl_GNOME_View_unref(impl_POA_GNOME_View * servant, 
+		      CORBA_Environment * ev);
+static CORBA_Object
+impl_GNOME_View_query_interface(impl_POA_GNOME_View * servant,
+				CORBA_char * repoid, 
+				CORBA_Environment * ev);
+
+static void impl_GNOME_Embeddable__destroy(impl_POA_GNOME_Embeddable *
+					   servant, 
+					   CORBA_Environment * ev);
+static void impl_GNOME_Embeddable_set_client_site(impl_POA_GNOME_Embeddable *
+						  servant,
+						  GNOME_ClientSite
+						  client_site,
+						  CORBA_Environment * ev);
+
+static GNOME_ClientSite
+impl_GNOME_Embeddable_get_client_site(impl_POA_GNOME_Embeddable * servant,
+				      CORBA_Environment * ev);
+
+static void
+impl_GNOME_Embeddable_set_host_name(impl_POA_GNOME_Embeddable * servant,
+				    CORBA_char * name,
+				    CORBA_char * appname,
+				    CORBA_Environment * ev);
+
+static void
+impl_GNOME_Embeddable_set_uri(impl_POA_GNOME_Embeddable * servant,
+			      CORBA_char * uri, 
+			      CORBA_Environment * ev);
+
+static void
+impl_GNOME_Embeddable_close(impl_POA_GNOME_Embeddable * servant,
+			    GNOME_Embeddable_CloseMode mode,
+			    CORBA_Environment * ev);
+
+static GNOME_Embeddable_verb_list
+   *impl_GNOME_Embeddable_get_verb_list(impl_POA_GNOME_Embeddable * servant,
+					CORBA_Environment * ev);
+
+static GNOME_View
+impl_GNOME_Embeddable_new_view(impl_POA_GNOME_Embeddable * servant,
+			       GNOME_ViewFrame frame, 
+			       CORBA_Environment * ev);
+
+static void
+impl_GNOME_Embeddable_ref(impl_POA_GNOME_Embeddable * servant,
+			  CORBA_Environment * ev);
+static void
+impl_GNOME_Embeddable_unref(impl_POA_GNOME_Embeddable * servant,
+			    CORBA_Environment * ev);
+static CORBA_Object
+impl_GNOME_Embeddable_query_interface(impl_POA_GNOME_Embeddable * servant,
+				      CORBA_char * repoid,
+				      CORBA_Environment * ev);
+
+static void
+impl_GNOME_EmbeddableFactory__destroy(impl_POA_GNOME_EmbeddableFactory *
+				      servant, 
+				      CORBA_Environment * ev);
+static CORBA_boolean
+impl_GNOME_EmbeddableFactory_supports(impl_POA_GNOME_EmbeddableFactory *
+				      servant, 
+				      CORBA_char * obj_goad_id,
+				      CORBA_Environment * ev);
+static CORBA_Object
+impl_GNOME_EmbeddableFactory_create_object(impl_POA_GNOME_EmbeddableFactory *
+					   servant, 
+					   CORBA_char * goad_id,
+					   GNOME_stringlist * params,
+					   CORBA_Environment * ev);
+
+/*** epv structures ***/
+
+static PortableServer_ServantBase__epv impl_GNOME_View_base_epv = {
+   NULL,			/* _private data */
+   NULL,			/* finalize routine */
+   NULL,			/* default_POA routine */
+};
+static POA_GNOME_View__epv impl_GNOME_View_epv = {
+   NULL,			/* _private */
+
+   (gpointer) & impl_GNOME_View_size_allocate,
+
+   (gpointer) & impl_GNOME_View_size_query,
+
+   (gpointer) & impl_GNOME_View_set_window,
+
+   (gpointer) & impl_GNOME_View_activate,
+
+   (gpointer) & impl_GNOME_View_reactivate_and_undo,
+
+   (gpointer) & impl_GNOME_View_do_verb,
+
+   (gpointer) & impl_GNOME_View_set_zoom_factor,
+
+};
+static POA_GNOME_Unknown__epv impl_GNOME_View_GNOME_Unknown_epv = {
+   NULL,			/* _private */
+   (gpointer) & impl_GNOME_View_ref,
+   (gpointer) & impl_GNOME_View_unref,
+   (gpointer) & impl_GNOME_View_query_interface,
+};
+static PortableServer_ServantBase__epv impl_GNOME_Embeddable_base_epv = {
+   NULL,			/* _private data */
+   NULL,			/* finalize routine */
+   NULL,			/* default_POA routine */
+};
+static POA_GNOME_Embeddable__epv impl_GNOME_Embeddable_epv = {
+   NULL,			/* _private */
+   (gpointer) & impl_GNOME_Embeddable_set_client_site,
+
+   (gpointer) & impl_GNOME_Embeddable_get_client_site,
+
+   (gpointer) & impl_GNOME_Embeddable_set_host_name,
+
+   (gpointer) & impl_GNOME_Embeddable_set_uri,
+
+   (gpointer) & impl_GNOME_Embeddable_close,
+
+   (gpointer) & impl_GNOME_Embeddable_get_verb_list,
+
+   (gpointer) & impl_GNOME_Embeddable_new_view,
+
+};
+static POA_GNOME_Unknown__epv impl_GNOME_Embeddable_GNOME_Unknown_epv = {
+   NULL,			/* _private */
+   (gpointer) & impl_GNOME_Embeddable_ref,
+   (gpointer) & impl_GNOME_Embeddable_unref,
+   (gpointer) & impl_GNOME_Embeddable_query_interface,
+};
+static PortableServer_ServantBase__epv impl_GNOME_EmbeddableFactory_base_epv = {
+   NULL,			/* _private data */
+   NULL,			/* finalize routine */
+   NULL,			/* default_POA routine */
+};
+static POA_GNOME_EmbeddableFactory__epv impl_GNOME_EmbeddableFactory_epv = {
+   NULL,			/* _private */
+};
+static POA_GNOME_GenericFactory__epv
+   impl_GNOME_EmbeddableFactory_GNOME_GenericFactory_epv = {
+   NULL,			/* _private */
+   (gpointer) & impl_GNOME_EmbeddableFactory_supports,
+   (gpointer) & impl_GNOME_EmbeddableFactory_create_object,
+};
+
+/*** vepv structures ***/
+
+static POA_GNOME_View__vepv impl_GNOME_View_vepv = {
+   &impl_GNOME_View_base_epv,
+   &impl_GNOME_View_GNOME_Unknown_epv,
+   &impl_GNOME_View_epv,
+};
+static POA_GNOME_Embeddable__vepv impl_GNOME_Embeddable_vepv = {
+   &impl_GNOME_Embeddable_base_epv,
+   &impl_GNOME_Embeddable_GNOME_Unknown_epv,
+   &impl_GNOME_Embeddable_epv,
+};
+static POA_GNOME_EmbeddableFactory__vepv impl_GNOME_EmbeddableFactory_vepv = {
+   &impl_GNOME_EmbeddableFactory_base_epv,
+   &impl_GNOME_EmbeddableFactory_GNOME_GenericFactory_epv,
+   &impl_GNOME_EmbeddableFactory_epv,
+};
+
+/*** Stub implementations ***/
+
+
+
+static impl_POA_GNOME_View *
+impl_GNOME_View__create(PortableServer_POA poa, 
+			GNOME_ViewFrame frame, 
+			impl_POA_GNOME_Embeddable *embeddable_servant,
+			CORBA_Environment * ev)
+{
+
+   impl_POA_GNOME_View *newservant;
+   PortableServer_ObjectId *objid;
+   
+   newservant = g_new0(impl_POA_GNOME_View, 1);
+   newservant->servant.vepv = &impl_GNOME_View_vepv;
+   newservant->poa = poa;
+   newservant->frame = CORBA_Object_duplicate (frame, ev);
+   /* this is what will be displayed in the component view ! */
+   newservant->embeddable_servant = embeddable_servant;
+   newservant->widget = gtk_button_new_with_label (embeddable_servant->data);
+
+   POA_GNOME_View__init((PortableServer_Servant) newservant, ev);
+   objid = PortableServer_POA_activate_object(poa, newservant, ev);
+   CORBA_free(objid);
+
+
+   return newservant;
+}
+
+static void
+impl_GNOME_View__destroy(impl_POA_GNOME_View * servant,
+			 CORBA_Environment * ev)
+{
+   PortableServer_ObjectId *objid;
+
+   objid = PortableServer_POA_servant_to_id(servant->poa, servant, ev);
+   PortableServer_POA_deactivate_object(servant->poa, objid, ev);
+   CORBA_free(objid);
+
+   POA_GNOME_View__fini((PortableServer_Servant) servant, ev);
+   g_free(servant);
+}
+
+static void
+impl_GNOME_View_size_allocate(impl_POA_GNOME_View * servant,
+			      CORBA_short width,
+			      CORBA_short height, 
+			      CORBA_Environment * ev)
+{
+}
+
+static void
+impl_GNOME_View_size_query(impl_POA_GNOME_View * servant,
+			   CORBA_short * desired_width,
+			   CORBA_short * desired_height,
+			   CORBA_Environment * ev)
+{
+}
+
+static void
+impl_GNOME_View_set_window(impl_POA_GNOME_View * servant,
+			   GNOME_View_windowid id, 
+			   CORBA_Environment * ev)
+{
+  servant->plug = gtk_plug_new (id);
+  gtk_container_add (GTK_CONTAINER(servant->plug), 
+		     servant->widget);
+  gtk_widget_show_all (servant->plug);
+}
+
+
+void cancel_cb (GtkWidget *widget, 
+		gpointer data)
+{
+  CORBA_Environment ev;
+  GtkWidget *window = data;
+  impl_POA_GNOME_View *view_servant = (impl_POA_GNOME_View *)
+    gtk_object_get_data (GTK_OBJECT (window),
+			 "view_servant");
+
+  CORBA_exception_init (&ev);
+  gtk_widget_destroy (window);
+
+  GNOME_ViewFrame_view_activated (view_servant->frame,
+				  0,
+				  &ev);  
+  CORBA_exception_free (&ev);
+}
+
+void apply_cb (GtkWidget *button, 
+	       gpointer data)
+{
+  GSList *list;
+  impl_POA_GNOME_View * servant;
+  GtkWidget *label;
+  GtkWidget *entry = (GtkWidget *) data;
+  GtkWidget *window = gtk_object_get_data (GTK_OBJECT(button),
+					   "window");
+  impl_POA_GNOME_View *view_servant = (impl_POA_GNOME_View *)
+    gtk_object_get_data (GTK_OBJECT (window),
+			 "view_servant");
+  strcpy (view_servant->embeddable_servant->data, 
+	  gtk_entry_get_text (GTK_ENTRY (entry)));
+
+  list = view_servant->embeddable_servant->view_servant_list;
+  while (list != g_slist_last (view_servant->embeddable_servant->view_servant_list)) {
+    servant = (impl_POA_GNOME_View *)list->data;
+    label = GTK_BIN(servant->widget)->child;
+
+    gtk_label_set_text (GTK_LABEL(label),
+			view_servant->embeddable_servant->data);
+    list = list->next;
+  } 
+  servant = (impl_POA_GNOME_View *)list->data;
+  label = GTK_BIN(servant->widget)->child;
+  gtk_label_set_text (GTK_LABEL(label),
+		      view_servant->embeddable_servant->data);
+
+
+}
+
+void ok_cb (GtkWidget *button, 
+	    gpointer data)
+{
+  GtkWidget *entry = (GtkWidget *) data;
+  apply_cb (button, entry);
+  cancel_cb (button, 
+	     gtk_object_get_data (GTK_OBJECT (button), 
+				  "window"));
+}
+
+
+static void
+impl_GNOME_View_activate(impl_POA_GNOME_View * servant,
+			 CORBA_boolean activated, 
+			 CORBA_Environment * ev)
+{
+  static GtkWidget *window = NULL;
+  GtkWidget *vbox;
+  GtkWidget *hbox;
+  GtkWidget *button;
+  GtkWidget *entry;
+
+  if (activated == 1) {
+
+    /* activate view */
+    /* sample code to create the external editing 
+       window of the view */
+    window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    gtk_object_set_data (GTK_OBJECT (window),
+			 "view_servant",
+			 servant); 
+    gtk_signal_connect (GTK_OBJECT (window), 
+			"destroy",
+			GTK_SIGNAL_FUNC (cancel_cb), 
+			window);
+           
+    gtk_signal_connect (GTK_OBJECT (window),
+			"delete_event", 
+			GTK_SIGNAL_FUNC (cancel_cb), 
+			window);
+
+    vbox = gtk_vbox_new (TRUE, TRUE);
+    hbox = gtk_hbox_new (TRUE, TRUE);
+    
+    entry = gtk_entry_new_with_max_length (10);
+    gtk_entry_set_text (GTK_ENTRY (entry), 
+			servant->embeddable_servant->data);
+    gtk_box_pack_start (GTK_BOX (vbox), 
+			entry,
+			TRUE, 
+			0,
+			0);
+    
+    gtk_box_pack_start (GTK_BOX (vbox), 
+			gtk_hseparator_new(), 
+			TRUE,
+			0,
+			0);
+
+    gtk_box_pack_end (GTK_BOX(vbox), hbox,
+		      TRUE, 
+		      0, 
+		      0);
+    button = gtk_button_new_with_label ("Cancel");
+    gtk_box_pack_end (GTK_BOX(hbox), 
+		      button,
+		      TRUE,
+		      0,
+		      0);
+    gtk_signal_connect (GTK_OBJECT(button), 
+			"clicked",
+			GTK_SIGNAL_FUNC(cancel_cb),
+			window);
+    button = gtk_button_new_with_label ("Apply");
+    gtk_object_set_data (GTK_OBJECT (button), 
+			 "window",
+			 window);
+    gtk_box_pack_end (GTK_BOX(hbox), 
+		      button,
+		      TRUE,
+		      0,
+		      0);
+    gtk_signal_connect (GTK_OBJECT(button), 
+			"clicked",
+			GTK_SIGNAL_FUNC(apply_cb),
+			entry);  
+    button = gtk_button_new_with_label ("Ok");
+    gtk_object_set_data (GTK_OBJECT (button), 
+			 "window",
+			 window);
+    gtk_box_pack_end (GTK_BOX(hbox), 
+		      button,
+		      TRUE,
+		      0,
+		      0);
+    gtk_signal_connect (GTK_OBJECT(button), 
+			"clicked",
+			GTK_SIGNAL_FUNC(ok_cb),
+			entry);
+
+    gtk_container_add (GTK_CONTAINER(window), 
+		       vbox);
+    gtk_widget_show_all (GTK_WIDGET(window));
+
+  } else if (activated == 0 && window != NULL) {
+    gtk_widget_destroy (window);
+  }
+  /* tell the container the view was activated or not*/
+  GNOME_ViewFrame_view_activated (servant->frame, 
+				  activated, 
+				  ev);
+}
+
+static void
+impl_GNOME_View_reactivate_and_undo(impl_POA_GNOME_View * servant,
+				    CORBA_Environment * ev)
+{
+  /* i am lazy: i don't want to implement this... */
+}
+
+static void
+impl_GNOME_View_do_verb(impl_POA_GNOME_View * servant,
+			CORBA_char * verb_name, 
+			CORBA_Environment * ev)
+{
+  /* i am lazy: i don't want to implement this... */
+}
+
+static void
+impl_GNOME_View_set_zoom_factor(impl_POA_GNOME_View * servant,
+				CORBA_double zoom, 
+				CORBA_Environment * ev)
+{
+  /* i am lazy: i don't want to implement this... */
+}
+
+static void
+impl_GNOME_View_ref(impl_POA_GNOME_View * servant, 
+		    CORBA_Environment * ev)
+{
+}
+
+static void
+impl_GNOME_View_unref(impl_POA_GNOME_View * servant, 
+		      CORBA_Environment * ev)
+{
+}
+
+static CORBA_Object
+impl_GNOME_View_query_interface(impl_POA_GNOME_View * servant,
+				CORBA_char * repoid, 
+				CORBA_Environment * ev)
+{
+   CORBA_Object retval;
+
+   return retval;
+}
+
+static GNOME_Embeddable
+impl_GNOME_Embeddable__create(PortableServer_POA poa, 
+			      CORBA_Environment * ev)
+{
+   GNOME_Embeddable retval;
+   impl_POA_GNOME_Embeddable *newservant;
+   PortableServer_ObjectId *objid;
+
+   newservant = g_new0(impl_POA_GNOME_Embeddable, 1);
+   newservant->servant.vepv = &impl_GNOME_Embeddable_vepv;
+   newservant->poa = poa;
+   strcpy (newservant->data, "Ok ?!");;
+
+   POA_GNOME_Embeddable__init((PortableServer_Servant) newservant, ev);
+   objid = PortableServer_POA_activate_object(poa, newservant, ev);
+   CORBA_free(objid);
+   retval = PortableServer_POA_servant_to_reference(poa, newservant, ev);
+
+   return retval;
+}
+
+static void
+impl_GNOME_Embeddable__destroy(impl_POA_GNOME_Embeddable * servant,
+			       CORBA_Environment * ev)
+{
+   PortableServer_ObjectId *objid;
+
+   objid = PortableServer_POA_servant_to_id(servant->poa, servant, ev);
+   PortableServer_POA_deactivate_object(servant->poa, objid, ev);
+   CORBA_free(objid);
+
+   POA_GNOME_Embeddable__fini((PortableServer_Servant) servant, ev);
+   g_free(servant);
+}
+
+static void
+impl_GNOME_Embeddable_set_client_site(impl_POA_GNOME_Embeddable * servant,
+				      GNOME_ClientSite client_site,
+				      CORBA_Environment * ev)
+{
+  servant->client_site = CORBA_Object_duplicate (client_site, ev);
+  /* tell the container that the embeddable will 
+     be activated in an external window */
+  GNOME_ClientSite_show_window (client_site, 1, ev);
+}
+
+static GNOME_ClientSite
+impl_GNOME_Embeddable_get_client_site(impl_POA_GNOME_Embeddable * servant,
+				      CORBA_Environment * ev)
+{
+   GNOME_ClientSite retval;
+
+   return retval;
+}
+
+static void
+impl_GNOME_Embeddable_set_host_name(impl_POA_GNOME_Embeddable * servant,
+				    CORBA_char * name,
+				    CORBA_char * appname,
+				    CORBA_Environment * ev)
+{
+  servant->host_name = g_strdup (name);
+
+}
+
+static void
+impl_GNOME_Embeddable_set_uri(impl_POA_GNOME_Embeddable * servant,
+			      CORBA_char * uri, 
+			      CORBA_Environment * ev)
+{
+  servant->uri = g_strdup (uri);
+
+}
+
+static void
+impl_GNOME_Embeddable_close(impl_POA_GNOME_Embeddable * servant,
+			    GNOME_Embeddable_CloseMode mode,
+			    CORBA_Environment * ev)
+{
+  /* there, i must close the external editing application... */
+}
+
+static GNOME_Embeddable_verb_list *
+impl_GNOME_Embeddable_get_verb_list(impl_POA_GNOME_Embeddable * servant,
+				    CORBA_Environment * ev)
+{
+   GNOME_Embeddable_verb_list *retval;
+   /* our embeddable will not support 
+      any non-standard action 
+      ie: it won't export any verb
+      thus, return an empty verb_list
+   */
+   
+   return retval;
+}
+
+static GNOME_View
+impl_GNOME_Embeddable_new_view(impl_POA_GNOME_Embeddable * servant,
+			       GNOME_ViewFrame frame, 
+			       CORBA_Environment * ev)
+{
+   GNOME_View view;
+   impl_POA_GNOME_View *view_servant;
+   view_servant = impl_GNOME_View__create (servant->poa, 
+					   frame,
+					   servant,
+					   ev);   
+   servant->view_servant_list = g_slist_append (servant->view_servant_list, 
+						view_servant);
+
+   view = PortableServer_POA_servant_to_reference(servant->poa, view_servant, ev);
+
+   return view;
+}
+
+static void
+impl_GNOME_Embeddable_ref(impl_POA_GNOME_Embeddable * servant,
+			  CORBA_Environment * ev)
+{
+}
+
+static void
+impl_GNOME_Embeddable_unref(impl_POA_GNOME_Embeddable * servant,
+			    CORBA_Environment * ev)
+{
+}
+
+static CORBA_Object
+impl_GNOME_Embeddable_query_interface(impl_POA_GNOME_Embeddable * servant,
+				      CORBA_char * repoid,
+				      CORBA_Environment * ev)
+{
+   CORBA_Object retval;
+
+   return retval;
+}
+
+static GNOME_EmbeddableFactory
+impl_GNOME_EmbeddableFactory__create(PortableServer_POA poa,
+				     CORBA_Environment * ev)
+{
+   GNOME_EmbeddableFactory retval;
+   impl_POA_GNOME_EmbeddableFactory *newservant;
+   PortableServer_ObjectId *objid;
+
+   newservant = g_new0(impl_POA_GNOME_EmbeddableFactory, 1);
+   newservant->servant.vepv = &impl_GNOME_EmbeddableFactory_vepv;
+   newservant->poa = poa;
+   POA_GNOME_EmbeddableFactory__init((PortableServer_Servant) newservant, ev);
+   objid = PortableServer_POA_activate_object(poa, newservant, ev);
+   CORBA_free(objid);
+   retval = PortableServer_POA_servant_to_reference(poa, newservant, ev);
+
+   return retval;
+}
+
+static void
+impl_GNOME_EmbeddableFactory__destroy(impl_POA_GNOME_EmbeddableFactory *
+				      servant, 
+				      CORBA_Environment * ev)
+{
+   PortableServer_ObjectId *objid;
+
+   objid = PortableServer_POA_servant_to_id(servant->poa, servant, ev);
+   PortableServer_POA_deactivate_object(servant->poa, objid, ev);
+   CORBA_free(objid);
+
+   POA_GNOME_EmbeddableFactory__fini((PortableServer_Servant) servant, ev);
+   g_free(servant);
+}
+
+static CORBA_boolean
+impl_GNOME_EmbeddableFactory_supports(impl_POA_GNOME_EmbeddableFactory *
+				      servant, CORBA_char * obj_goad_id,
+				      CORBA_Environment * ev)
+{
+   CORBA_boolean retval;
+
+   return retval;
+}
+
+static CORBA_Object
+impl_GNOME_EmbeddableFactory_create_object(impl_POA_GNOME_EmbeddableFactory *
+					   servant, CORBA_char * goad_id,
+					   GNOME_stringlist * params,
+					   CORBA_Environment * ev)
+{
+   CORBA_Object retval = CORBA_OBJECT_NIL;
+
+   retval = impl_GNOME_Embeddable__create (servant->poa, ev);
+   /* Use GNOME's default name server */
+   goad_server_register (CORBA_OBJECT_NIL, retval, goad_id, "server", ev);
+   
+   return retval;
+}
+
+
+int main (int argc, char **argv)
+{
+  CORBA_Environment ev;
+  CORBA_ORB orb;
+  CORBA_Object root_poa;
+  PortableServer_POAManager root_poa_manager;
+  CosNaming_NamingContext name_server;
+  CORBA_Object obj;
+
+  CORBA_exception_init (&ev);
+  orb = gnome_CORBA_init ("a \"simple\" container", 
+			  "1.0", 
+			  &argc, 
+			  argv, 
+			  GNORBA_INIT_SERVER_FUNC, 
+			  &ev);
+
+  root_poa = CORBA_ORB_resolve_initial_references (orb, 
+						   "RootPOA", 
+						   &ev);
+
+  root_poa_manager = PortableServer_POA__get_the_POAManager (
+		     (PortableServer_POA) root_poa, &ev);
+  PortableServer_POAManager_activate (root_poa_manager, &ev);
+
+  /* this function will create all the other 
+   * needed interfaces
+   */
+  obj = impl_GNOME_EmbeddableFactory__create ((PortableServer_POA)
+					      root_poa, 
+					      &ev);
+  /* register against the name service */
+  name_server = gnome_name_service_get ();
+  goad_server_register (name_server, obj, 
+			goad_server_activation_id(), 
+			"server", 
+			&ev);
+  /* finished !! */
+  CORBA_exception_free (&ev);
+  gtk_main ();
+  return 0;
+}
+
+</PRE>
+<P><A HREF="Bonobo.html">上一页</A>
+<A HREF="Gnome-DB.html">下一页</A>
+</BODY>
+</HTML>

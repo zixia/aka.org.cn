@@ -1,0 +1,49 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>TLB Coherence</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>TLB Coherence</H1> 
+ <P><UL>
+<LI><H2>TLB flush
+</H2>
+</UL><UL>
+<LI><H2>Case of UP
+</H2>
+<UL>
+<LI>change of protect previledge
+<LI>swapout 
+<LI>context switch
+<LI>exec  
+</UL></UL><UL>
+<LI><H2>Case of SMP
+</H2>
+<UL>
+<LI>进程调用sbrk，brk或者释放一片内存区缩减自己的地址空间。
+<LI>释放页面时对页面的清除。
+<LI>内核将系统虚地址重新映射到另一个物理页面。
+<LI>进程写一个共享的COW页面。
+<BR>include/asm-i386/pgtable.h
+<BR>source/include/asm-i386/pgalloc.h
+<BR>source/arch/i386/kernel/smp.c</UL></UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld004.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld006.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld005.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

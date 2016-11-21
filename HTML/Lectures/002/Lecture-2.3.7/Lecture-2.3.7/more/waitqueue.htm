@@ -1,0 +1,183 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>等待队列</title>
+ </head>
+
+<body>
+
+<h3
+style="margin-left:0cm;text-indent:26.85pt;mso-char-indent-count:1.95;
+mso-char-indent-size:13.75pt"><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">等待队列</span></h3>
+
+<p class="MsoNormalIndent"
+style="text-indent:20.45pt;mso-char-indent-count:1.95;
+mso-char-indent-size:10.45pt"><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">我们曾简要的提到进程（也就是正在运行的程序）可以转入休眠状态以等待某个特定事件，当该事件发生时这些进程能够被再次唤醒。内核实现这一功能的技术要点是把等待队列（</span><span
+lang="EN-US">wait queue</span><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">）和每一个事件联系起来。需要等待事件的进程在转入休眠状态后插入到队列中。当事件发生之后，内核遍历相应队列，唤醒休眠的任务让它投入运行状态。任务负责将自己从等待队列中清除。</span></p>
+
+<p class="MsoNormalIndent"
+style="text-indent:20.45pt;mso-char-indent-count:1.95;
+mso-char-indent-size:10.45pt"><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">等待队列的功能强大得令人吃惊，它们被广泛应用于整个内核中。更重要的是，实现等待队列的代码量并不大。</span></p>
+
+<h4
+style="margin-left:0cm;text-indent:23.05pt;mso-char-indent-count:1.95;
+mso-char-indent-size:11.8pt"><span
+style="font-family:黑体;mso-ascii-font-family:
+Arial">◎</span> <span lang="EN-US">wait_queue</span><span
+style="font-family:
+黑体;mso-ascii-font-family:Arial">结构</span><span lang="EN-US">: 
+</span><span style="font-family:黑体;mso-ascii-font-family:Arial">单链</span></h4>
+
+<p class="MsoNormal"
+style="text-indent:20.45pt;mso-char-indent-count:1.95;
+mso-char-indent-size:10.45pt"><span
+lang="EN-US">@ include/linux/wait.h </span></p>
+
+<p class="MsoNormal"
+style="text-indent:20.45pt;mso-char-indent-count:1.95;
+mso-char-indent-size:10.45pt"><span
+lang="EN-US">struct wait_queue {</span></p>
+
+<p class="MsoNormal"
+style="text-indent:20.45pt;mso-char-indent-count:1.95;
+mso-char-indent-size:10.45pt"><span
+lang="EN-US">&nbsp;&nbsp;&nbsp; struct task_struct * task;</span></p>
+
+<p class="MsoNormal"
+style="text-indent:20.45pt;mso-char-indent-count:1.95;
+mso-char-indent-size:10.45pt"><span
+lang="EN-US">&nbsp;&nbsp;&nbsp; struct wait_queue * next;</span></p>
+
+<blockquote>
+  <p class="MsoNormal"
+  style="text-indent:20.45pt;mso-char-indent-count:1.95;
+mso-char-indent-size:10.45pt"><span
+  lang="EN-US"><span style="mso-tab-count:1"> </span>};</span></p>
+</blockquote>
+
+<p class="MsoNormal"
+style="text-indent:20.45pt;mso-char-indent-count:1.95;
+mso-char-indent-size:10.45pt"><span
+lang="EN-US"><span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">进程（也就是正在运行的程序）可以转入休眠状态以等待某个特定事件，当该事件发生时这些进程能够被再次唤醒。内核实现这一功能的技术要点是把等待队列（</span><span
+lang="EN-US">wait queue</span><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">）和每一个事件联系起来。需要等待事件的进程在转入休眠状态后插入到队列中。当事件发生之后，内核遍历相应队列，唤醒休眠的任务让它投入运行状态。任务负责将自己从等待队列中清除。</span></p>
+
+<p class="MsoNormal"
+style="text-indent:20.45pt;mso-char-indent-count:1.95;
+mso-char-indent-size:10.45pt"><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">等待队列的功能强大得令人吃惊，它们被广泛应用于整个内核中。更重要的是，实现等待队列的代码量并不大。</span><span
+lang="EN-US"><span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></p>
+
+<h4
+style="margin-left:0cm;text-indent:23.05pt;mso-char-indent-count:1.95;
+mso-char-indent-size:11.8pt"><span
+style="font-family:黑体;mso-ascii-font-family:
+Arial">◎</span> <span lang="EN-US">wait_event 
+@sched.h</span></h4>
+
+<p class="MsoNormalIndent"
+style="text-indent:20.45pt;mso-char-indent-count:1.95;
+mso-char-indent-size:10.45pt"><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">通过使用这个宏，内核代码能够使当前执行的进程在等待队列</span><b
+style="mso-bidi-font-weight:normal"><span lang="EN-US">wq</span></b><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">中等待直至给定</span><b
+style="mso-bidi-font-weight:normal"><span lang="EN-US">condition</span></b><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">（可能是任何的表达式）得到满足。</span></p>
+
+<p class="MsoNormalIndent"
+style="text-indent:20.45pt;mso-char-indent-count:1.95;
+mso-char-indent-size:10.45pt"><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">如果条件已经为真，当前进程显然也就无需等待了。</span></p>
+
+<p class="MsoNormalIndent"
+style="text-indent:20.45pt;mso-char-indent-count:1.95;
+mso-char-indent-size:10.45pt"><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">否则，进程必须等待给定条件转变为真。这可以通过调用</span><b
+style="mso-bidi-font-weight:normal"><span lang="EN-US">__wait_event</span></b><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">来实现（</span><span
+lang="EN-US">16824</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">行），我们将在下一节介绍它。由于</span> 
+<b style="mso-bidi-font-weight:normal"><span lang="EN-US">__wait_event</span></b><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">已经同</span><b
+style="mso-bidi-font-weight:normal"><span lang="EN-US">wait_event</span></b><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">分离，已知条件为假的部分内核代码可以直接调用</span><b
+style="mso-bidi-font-weight:
+normal"><span lang="EN-US">__wait_queue</span></b><span
+style="font-family:宋体;
+mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">，而不用通过宏来进行冗余的（特别是在这些情况下）测试，实际上也没有代码会真正这样处理。更为重要的是，如果条件已经为真，</span><b
+style="mso-bidi-font-weight:normal"><span lang="EN-US">wait_event</span></b><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">会跳过将进程插入等待队列的代码。</span></p>
+
+<h4
+style="margin-left:0cm;text-indent:23.05pt;mso-char-indent-count:1.95;
+mso-char-indent-size:11.8pt"><span
+style="font-family:黑体;mso-ascii-font-family:
+Arial">◎</span> <span lang="EN-US">__wait_event@sched.c</span></h4>
+
+<p class="MsoNormalIndent"
+style="text-indent:20.15pt;mso-char-indent-count:1.95;
+mso-char-indent-size:10.3pt"><b
+style="mso-bidi-font-weight:normal"><span lang="EN-US">__wait_event</span></b><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">使当前进程在等待队列</span><b
+style="mso-bidi-font-weight:normal"><span lang="EN-US">wq</span></b><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">中等待直至</span><b
+style="mso-bidi-font-weight:normal"><span lang="EN-US">condition</span></b><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">为真。</span></p>
+
+<h4
+style="margin-left:0cm;text-indent:23.05pt;mso-char-indent-count:1.95;
+mso-char-indent-size:11.8pt"><span
+style="font-family:黑体;mso-ascii-font-family:
+Arial">◎</span> <span lang="EN-US">__wake_up@sched.c</span></h4>
+
+<p class="MsoNormalIndent"
+style="text-indent:20.45pt;mso-char-indent-count:1.95;
+mso-char-indent-size:10.45pt"><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">该函数用来唤醒等待队列中正在休眠的进程。它由</span><b
+style="mso-bidi-font-weight:normal"><span lang="EN-US">wake_up</span></b><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">和</span><b
+style="mso-bidi-font-weight:normal"><span lang="EN-US">wake_up_interruptible</span></b><span
+style="font-family:宋体;
+mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">调用（请分别参看</span><span
+lang="EN-US">16612</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">行和</span><span
+lang="EN-US">16614</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">行）。这些宏提供</span><b
+style="mso-bidi-font-weight:normal"><span lang="EN-US">mode</span></b><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">参数，只有状态满足</span><b
+style="mso-bidi-font-weight:normal"><span lang="EN-US">mode</span></b><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">所包含的状态之一的进程才可能被唤醒。</span></p>
+</body>
+</html>

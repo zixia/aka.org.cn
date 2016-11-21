@@ -1,0 +1,302 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>  Home / Products / Rational Unified Process / Product Information / Whitepapers  </TITLE>
+</HEAD>
+<BODY>
+<center><table width=630 border=0><tr><td>
+<FONT FACE="宋体" LANG="ZH-CN">
+<P>　</P>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=5><P>开发过程的静态结构（</FONT><FONT SIZE=5>Static Structure of the Process</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=5>）</P>
+</B></FONT><FONT FACE="宋体" LANG="ZH-CN">
+</FONT><B><P>from     <FONT SIZE=5>"Rational Unified Process:</P>
+<P ALIGN="JUSTIFY">Best Practices for Software Development Teams"</P>
+</B></FONT><FONT FACE="宋体" LANG="ZH-CN">
+</FONT><B><FONT SIZE=5><P>Table of Contents</P>
+</B></FONT><FONT FACE="宋体" LANG="ZH-CN">
+</FONT><B><I><FONT FACE="宋体" LANG="ZH-CN" SIZE=4><P>开发过程的静态结构（</FONT><FONT SIZE=4>Static Structure of the Process</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>）</P>
+</B></I></FONT><P>   </P>
+<P>    <FONT FACE="宋体" LANG="ZH-CN">活动，产出品，角色（</FONT>Activities, Artifacts, and Workers<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</FONT><P>    <FONT FACE="宋体" LANG="ZH-CN">工作流（</FONT>Workflows<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</FONT><B><I><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>
+<P>核心工作流（</FONT><FONT SIZE=4>Core Workflows</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>）</P>
+</B></I></FONT><P>   </P>
+<P>   <FONT FACE="宋体" LANG="ZH-CN">商业模型（</FONT>Business Modeling<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</FONT><P>   <FONT FACE="宋体" LANG="ZH-CN">需求（</FONT>Requirements<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</FONT><P>   <FONT FACE="宋体" LANG="ZH-CN">分析和设计（</FONT>Analysis and Design<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</FONT><P>   <FONT FACE="宋体" LANG="ZH-CN">实施（</FONT>Implementation<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</FONT><P>   <FONT FACE="宋体" LANG="ZH-CN">测试（</FONT>Test<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</FONT><P>   <FONT FACE="宋体" LANG="ZH-CN">发布（</FONT>Deployment<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</FONT><P>   <FONT FACE="宋体" LANG="ZH-CN">项目管理（</FONT>Project Management<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</FONT><P>   <FONT FACE="宋体" LANG="ZH-CN">配置和变更管理（</FONT>Configuration and Change Management<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</FONT><P>   <FONT FACE="宋体" LANG="ZH-CN">环境（</FONT>Environment<FONT FACE="宋体" LANG="ZH-CN">）</P>
+
+<P>　</P>
+
+<UL>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=4><LI>开发过程的静态结构（</FONT><FONT SIZE=4>Static Structure of the Process</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>）</LI></UL>
+
+</FONT><FONT FACE="宋体" LANG="ZH-CN">
+</B><P>一个过程描述了“某人”在“某时”“怎样”“干了某事”。（</FONT> who is doing what, how, and when. <FONT FACE="宋体" LANG="ZH-CN">）</FONT>  Rational Unified Process <FONT FACE="宋体" LANG="ZH-CN">可以用</FONT>4<FONT FACE="宋体" LANG="ZH-CN">个基本的建模元素来表达：</FONT> </P>
+
+
+<UL>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>角色（</FONT>Workers, the "who" <FONT FACE="宋体" LANG="ZH-CN">）</LI>
+<LI>活动（</FONT>Activities, the "how" <FONT FACE="宋体" LANG="ZH-CN">）</LI>
+<LI>产出品（</FONT>Artifacts, the "what" <FONT FACE="宋体" LANG="ZH-CN">）</LI>
+<LI>工作流（</FONT>Workflows, the "when" <FONT FACE="宋体" LANG="ZH-CN">）</LI></UL>
+
+
+<P>活动，产出品，角色（</FONT>Activities, Artifacts, and Workers<FONT FACE="宋体" LANG="ZH-CN">）</P>
+
+<P><IMG SRC="Image4.gif" WIDTH=240 HEIGHT=123></P>
+
+<B><U><P>角色，活动和产出品（</FONT>Workers, activities, and artifacts.<FONT FACE="宋体" LANG="ZH-CN">）</P>
+
+</U><P>&#9;</P>
+<P>角色（</FONT>Worker<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B>
+<P>一个角色定义了一个个人，或者一个一起工作的小组的行为和职责。你可以把角色看成是一顶“帽子”，项目开发过程中某个人把它戴在头上。这一区别非常重要，因为人们总是很自然地把角色想象为是某个具体的个人或小组本身，但是在</FONT>Unified Process <FONT FACE="宋体" LANG="ZH-CN">中，角色则定义了个人如何去执行任务。</FONT> <FONT FACE="宋体" LANG="ZH-CN">我们分配给某个角色的职责既包括一些他要执行的确定的活动（</FONT>activities<FONT FACE="宋体" LANG="ZH-CN">），也包括一些他要完成的产出品（</FONT>artifacts<FONT FACE="宋体" LANG="ZH-CN">）。</P>
+
+<P><IMG SRC="Image4.gif" WIDTH=377 HEIGHT=184></P>
+
+<B><U><P>人员和角色（</FONT>People and workers.<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B></U>
+<P>　</P>
+<B><P>活动（</FONT>Activity<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B>
+<P>某个特定角色的一个活动指的是负担这个角色的个人被要求执行的一个工作单位。（</FONT>An activity of a specific worker is a unit of work that an individual in that role may be asked to perform.<FONT FACE="宋体" LANG="ZH-CN">）</FONT> <FONT FACE="宋体" LANG="ZH-CN">活动（</FONT> activity<FONT FACE="宋体" LANG="ZH-CN">）有一个清晰的目的，通常是创造或更新一些产出品（</FONT>artifacts<FONT FACE="宋体" LANG="ZH-CN">）</FONT>, <FONT FACE="宋体" LANG="ZH-CN">如一个模型，一个类，或一个计划。每个活动都被分配给一个特定的角色。</FONT> <FONT FACE="宋体" LANG="ZH-CN">一个活动通常占用几个小时或几天的时间，由一个角色来执行，牵涉到一个或少数几个产出品。</FONT> <FONT FACE="宋体" LANG="ZH-CN">一个活动应该可以被用来做计划和进程的组成元素。如果它太小了，就会被忽略；反之如果它太大了，进程就可能会不得不被表示为它（活动）的一个部分。</FONT> </P>
+
+<FONT FACE="宋体" LANG="ZH-CN"><P>活动示例</FONT>: </P>
+
+
+<UL>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>计划一个迭代，对应角色：项目负责人（</FONT>Project Manager <FONT FACE="宋体" LANG="ZH-CN">）</LI>
+<LI>找出</FONT>use cases <FONT FACE="宋体" LANG="ZH-CN">和</FONT> actors, <FONT FACE="宋体" LANG="ZH-CN">对应角色</FONT>: <FONT FACE="宋体" LANG="ZH-CN">系统分析员（</FONT>System Analyst <FONT FACE="宋体" LANG="ZH-CN">）</LI>
+<LI>审核设计</FONT>, <FONT FACE="宋体" LANG="ZH-CN">对应角色</FONT>:  <FONT FACE="宋体" LANG="ZH-CN">设计审查员（</FONT>Design Reviewer <FONT FACE="宋体" LANG="ZH-CN">）</LI>
+<LI>运行性能测试</FONT>, <FONT FACE="宋体" LANG="ZH-CN">对应角色</FONT>: <FONT FACE="宋体" LANG="ZH-CN">性能测试员（</FONT>Performance Tester <FONT FACE="宋体" LANG="ZH-CN">）</LI></UL>
+
+
+<B><P>　</P>
+<P>　</P>
+<P>　</P>
+<P>产出品（</FONT>Artifact<FONT FACE="宋体" LANG="ZH-CN">）</P>
+
+</B><P>一个产出品指的是被生成、修改或被某个过程使用的一段信息。</FONT>(An artifact is a piece of information that is produced, modified, or used by a process).  <FONT FACE="宋体" LANG="ZH-CN">产出品是项目的实际产品，是项目在向最终产品前进过程中生成的东西。</FONT> <FONT FACE="宋体" LANG="ZH-CN">角色在执行某个活动时，总是把一些产出品作为活动的输入，而活动的输出通常也是一些产出品。用面向对象设计的术语来说，如果把活动当成是对象</FONT>(<FONT FACE="宋体" LANG="ZH-CN">角色</FONT>)<FONT FACE="宋体" LANG="ZH-CN">的操作，产出品就是这些活动的参数。</P>
+
+<P>产出品有多种形式：</FONT> </P>
+
+
+<UL>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>一个模型</FONT>, <FONT FACE="宋体" LANG="ZH-CN">如</FONT> Use-Case Model <FONT FACE="宋体" LANG="ZH-CN">或</FONT> the Design Model </LI>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>一个模型元素</FONT>, <FONT FACE="宋体" LANG="ZH-CN">即某个模型中的一个元素，如一个类，一个</FONT>use case <FONT FACE="宋体" LANG="ZH-CN">或一个子系统</FONT> </LI>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>一个文档</FONT>, <FONT FACE="宋体" LANG="ZH-CN">如商业案例（</FONT> Business Case<FONT FACE="宋体" LANG="ZH-CN">）或</FONT> <FONT FACE="宋体" LANG="ZH-CN">软件结构文档</FONT> </LI>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>源代码</LI>
+<LI>可执行程序</FONT> </LI></UL>
+
+<FONT FACE="宋体" LANG="ZH-CN">
+<P><IMG SRC="Image4.gif" WIDTH=434 HEIGHT=251><B>工作流（</FONT>Workflows<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B>
+<P>　</P>
+</FONT><B><U><P>Example of workflow.</P>
+</B></U><FONT FACE="宋体" LANG="ZH-CN">
+<P>　</P>
+<P>简单地列举出所有的角色（</FONT> workers<FONT FACE="宋体" LANG="ZH-CN">）</FONT>,<FONT FACE="宋体" LANG="ZH-CN">活动（</FONT> activities<FONT FACE="宋体" LANG="ZH-CN">）和产出品</FONT>(artifacts)<FONT FACE="宋体" LANG="ZH-CN">并不构成一个过程。我们一种方法，它能够描述有意义的、能产生有价值结果的活动的序列，并表明角色之间的交互关系。</P>
+
+<P>一个工作流（</FONT>workflow<FONT FACE="宋体" LANG="ZH-CN">）指的是一个活动序列，它能够产生具有可观测价值的结果。</P>
+
+<P>按</FONT>UML <FONT FACE="宋体" LANG="ZH-CN">的术语</FONT> ,  <FONT FACE="宋体" LANG="ZH-CN">一个工作流可以被表述为一个序列图（</FONT> sequence diagram<FONT FACE="宋体" LANG="ZH-CN">）</FONT>, <FONT FACE="宋体" LANG="ZH-CN">一个协同图（</FONT> collaboration diagram<FONT FACE="宋体" LANG="ZH-CN">）</FONT>, <FONT FACE="宋体" LANG="ZH-CN">或者一个活动图（</FONT> an activity diagram. <FONT FACE="宋体" LANG="ZH-CN">）</FONT> <FONT FACE="宋体" LANG="ZH-CN">本文中我们用活动图的形式来描述。</P>
+
+<P>要想表示出活动之间的所有依赖关系，总是不可能的或不实际的。通常两个活动之间的关系总比图中显示的更加紧密，尤其是当它们涉及同一个角色或同一个人时。人不是机器，工作流也不能简单地单凭字面理解为为人编制的程序，需要人精确、机械地执行。下一部分我们将讨论在一个开发过程中最最基本的工作流，核心工作流（</FONT> Workflows.<FONT FACE="宋体" LANG="ZH-CN">）</P>
+
+
+<UL>
+</FONT><B><FONT FACE="宋体" LANG="ZH-CN" SIZE=4><LI>核心工作流（</FONT><FONT SIZE=4>Core Workflows</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=4>）</LI></UL>
+
+</B></FONT><FONT FACE="宋体" LANG="ZH-CN">
+<P><IMG SRC="Image4.gif" WIDTH=505 HEIGHT=312>在</FONT>Rational Unified Process<FONT FACE="宋体" LANG="ZH-CN">中，有九个核心过程工作流</FONT>, <FONT FACE="宋体" LANG="ZH-CN">表示了所有角色和活动的逻辑分组情况。</P>
+
+<P>　</P>
+<B><U><P>九个核心过程工作流（</FONT>The nine core process workflows.<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B></U>
+<P>　</P>
+<P>核心过程工作流可以被分为六个核心“工程”工作流</FONT>: </P>
+
+<OL>
+
+<OL>
+
+<FONT FACE="宋体" LANG="ZH-CN"><LI>商业建模</FONT>(Business modeling workflow )</LI>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>需求（</FONT>Requirements workflow <FONT FACE="宋体" LANG="ZH-CN">）</LI>
+<LI>分析</FONT>&amp;<FONT FACE="宋体" LANG="ZH-CN">设计（</FONT>Analysis &amp; Design workflow <FONT FACE="宋体" LANG="ZH-CN">）</LI>
+<LI>实施</FONT>(Implementation workflow )</LI>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>测试（</FONT>Test workflow <FONT FACE="宋体" LANG="ZH-CN">）</LI>
+<LI>交付（</FONT>Deployment workflow <FONT FACE="宋体" LANG="ZH-CN">）</LI></OL>
+</OL>
+
+
+<P>和三个“支持”</FONT> <FONT FACE="宋体" LANG="ZH-CN">工作流</FONT>: </P>
+
+<OL>
+
+<OL>
+
+<FONT FACE="宋体" LANG="ZH-CN"><LI>项目管理（</FONT>Project Management workflow <FONT FACE="宋体" LANG="ZH-CN">）</LI>
+<LI>配置和变更管理（</FONT>Configuration and Change Management workflow <FONT FACE="宋体" LANG="ZH-CN">）</LI>
+<LI>环境（</FONT>Environment workflow <FONT FACE="宋体" LANG="ZH-CN">）</LI></OL>
+</OL>
+
+
+<P>尽管六个核心“工程”工作流的名字会使人想起传统瀑布式过程中的几个阶段，我们应该注意迭代过程中的阶段是不同的，在整个生命周期中，这些工作流被一遍又一遍地执行。一个项目的实际完整的工作流包括了所有九个核心工作流，在不同的迭代中不断重复，只是每次的重点和强度都有所不同。</P>
+
+<B><P>商业建模（</FONT>Business Modeling<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B>
+<P>很多商业工程项目的一个主要问题，就是软件工程人员和商业工程人员不能进行合适的交流。这导致商业工程的结果不适合拿来做软件开发输入条件，相反来也一样。为解决这一问题，</FONT>Rational Unified Process <FONT FACE="宋体" LANG="ZH-CN">为所有人员提供了一种共同的语言和过程，同时显示了如何在商业和软件模型之间创建和维护直接的可追踪性。</P>
+
+<P>在商业模型里我们用商业</FONT>use cases<FONT FACE="宋体" LANG="ZH-CN">来对商业过程建模。这保证了组织中所有需要支持商业过程的人员能够达成共识。</FONT> <FONT FACE="宋体" LANG="ZH-CN">分析商业</FONT> use cases <FONT FACE="宋体" LANG="ZH-CN">可以从商业角度理解如何支持商业过程。这形成一个商业对象模型。（</FONT> business object-model<FONT FACE="宋体" LANG="ZH-CN">）</P>
+
+<P>很多项目会选择不做商业模型。</P>
+
+<B><P>需求（</FONT>Requirements<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B>
+<P>需求工作流的目的是描述系统应该做什么，并让开发者可客户就此达成一致共识。为达此目的，我们对需要的功能和约束加以阐明，组织，形成文档；</FONT> <FONT FACE="宋体" LANG="ZH-CN">追踪并记录所做的决定。</P>
+
+<P>创建出一个蓝图文档（</FONT>A Vision document<FONT FACE="宋体" LANG="ZH-CN">）</FONT>,  <FONT FACE="宋体" LANG="ZH-CN">阐明相关人员的需求。识别出</FONT>Actors<FONT FACE="宋体" LANG="ZH-CN">来，代表用户以及和被开发系统交互的其它系统。</FONT> <FONT FACE="宋体" LANG="ZH-CN">因为</FONT>use cases <FONT FACE="宋体" LANG="ZH-CN">是根据用户的</FONT> <FONT FACE="宋体" LANG="ZH-CN">需求做出的，系统同用户就更紧密了。下图是一个选课系统的</FONT>use-case <FONT FACE="宋体" LANG="ZH-CN">模型：</P>
+</FONT><P> </P>
+<FONT FACE="宋体" LANG="ZH-CN"><P><IMG SRC="Image4.gif" WIDTH=337 HEIGHT=170></P>
+
+</FONT><B><U><P>An example of a use-case model with actors and use cases.</P>
+</B></U><FONT FACE="宋体" LANG="ZH-CN">
+<P>　</P>
+<P>每个</FONT>use case<FONT FACE="宋体" LANG="ZH-CN">都被详细描述。</FONT>use-case <FONT FACE="宋体" LANG="ZH-CN">描述了系统怎样逐步同</FONT>actors<FONT FACE="宋体" LANG="ZH-CN">进行交互以及系统做了些什么。非功能的需求被描述在补充说明中。（</FONT>Supplementary Specifications<FONT FACE="宋体" LANG="ZH-CN">）</P>
+
+</FONT><P>use cases <FONT FACE="宋体" LANG="ZH-CN">所起的作用相当于贯穿系统开发周期的一个统一的进程。</FONT> <FONT FACE="宋体" LANG="ZH-CN">在需求捕获阶段、分析设计阶段和测试阶段，都使用相同的</FONT>use-case <FONT FACE="宋体" LANG="ZH-CN">模型。</P>
+
+<B><P>分析和设计（</FONT>Analysis and Design<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B>
+<P>分析和设计工作流的目的是表明系统在实施阶段是如何被实现的。你想要建造一个如下的系统：</FONT> </P>
+
+
+<UL>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>在一个特定实施环境中，执行</FONT>use cases<FONT FACE="宋体" LANG="ZH-CN">中描述的任务和功能</LI>
+<LI>满足它的所有需求</FONT> </LI></UL>
+
+
+<UL>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>结构稳定，易于修改和扩充</FONT> </LI></UL>
+
+<FONT FACE="宋体" LANG="ZH-CN">
+<P>分析和设计的结果通常是一个设计模型或者再加一个分析模型。设计模型是原代码的一个抽象模型；即，设计模型是代码如何编写的蓝图。设计模型包括一些按具有定义良好的接口的设计包和设计子系统划分的类，它们代表将要被实现的构件。</P>
+<P>它也包括对这些设计类的对象如何互相协作执行某个</FONT>use case<FONT FACE="宋体" LANG="ZH-CN">的描述。下图是一个设计模型示例的一部分：</P>
+
+<P>　</P>
+<P>　</P>
+<P>　</P>
+<P><IMG SRC="Image4.gif" WIDTH=414 HEIGHT=179></P>
+</FONT><B><P>Part of a design model with communicating design classes and package group design classes.</P>
+</B><FONT FACE="宋体" LANG="ZH-CN">
+<P>　</P>
+<P>设计活动以结构的设计为核心。</FONT> <FONT FACE="宋体" LANG="ZH-CN">结构的产生和验证是早期设计迭代的中心。结构由一系列结构视图（</FONT>architectural views<FONT FACE="宋体" LANG="ZH-CN">）来表示。这些视图体现了主要的结构设计决定。结构视图是整个设计的抽象和简化，在视图中细节被隐藏起来以使重要特性得以显现。结构不仅对开发一个好的设计模型是一个重要工具，同时也对系统开发期间提高其他模型的质量大有帮助。</P>
+
+<B><P>实施（</FONT>Implementation<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B>
+<P>实施的目的是</FONT>: </P>
+
+
+<UL>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>定义代码的组织，表示为以层次组织的实施子系统</LI>
+<LI>实现类和对象，表示为各个构件（源文件、二进制文件、可执行文件等）</FONT> </LI>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>对开发的构件进行单元测试</FONT>. </LI>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>对个人或团队的结果进行集成，形成一个可执行系统</FONT>. </LI></UL>
+
+<FONT FACE="宋体" LANG="ZH-CN">
+<P>整个系统是通过构件的实现而实现的。</FONT>Rational Unified Process <FONT FACE="宋体" LANG="ZH-CN">描述了如何重用现存的构件，或实现定义良好的新构件</FONT>, <FONT FACE="宋体" LANG="ZH-CN">使整个系统更加易于管理，并提高重用的可能性。</FONT> <FONT FACE="宋体" LANG="ZH-CN">构件以实施子系统（</FONT>Implementation Subsystems<FONT FACE="宋体" LANG="ZH-CN">）的形式来组织。一个子系统就是一个目录，加上一些结构信息和管理信息。例如，一个子系统可以是文件系统中的一个目录，或者是</FONT>Rational/Apex for C++<FONT FACE="宋体" LANG="ZH-CN">中的子系统（</FONT>subsystem<FONT FACE="宋体" LANG="ZH-CN">），或是</FONT>Java<FONT FACE="宋体" LANG="ZH-CN">中的包（</FONT>packages<FONT FACE="宋体" LANG="ZH-CN">）。</P>
+
+<B><P>测试（</FONT>Test<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B>
+<P>测试的目的是：</FONT> </P>
+
+
+<UL>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>验证对象之间的交互</FONT>. </LI>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>验证软件中所有构件的适当集成</FONT>. </LI>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>验证所有被正确实现的需求</LI>
+<LI>识别并确保缺陷在软件交付用户前得到处理</FONT>. </LI></UL>
+
+<FONT FACE="宋体" LANG="ZH-CN">
+</FONT><P>Rational Unified Process <FONT FACE="宋体" LANG="ZH-CN">建议使用一种迭代的测试方法，这意味着测试活动贯穿整个项目周期。这样能使你尽早发现错误，并因此大大降低了排错的成本。</FONT> <FONT FACE="宋体" LANG="ZH-CN">测试的执行是沿着三个质量维度进行的：可靠性，功能，应用性能和系统性能。对每个质量维度，</FONT>Rational Unified Process<FONT FACE="宋体" LANG="ZH-CN">描述了你怎样走过测试生命周期的计划，设计，实现和评估阶段。它还描述了在什么时间、如何进行自动测试的策略。对迭代来说，测试自动化尤为重要，能允许在每次迭代结束时进行回归测试。</P>
+
+<B><P>发布（</FONT>Deployment<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B>
+<P>发布工作流的目的是成功地生成可发布的产品，并把它交付给最终用户。它包括许多活动：</FONT> </P>
+
+
+<UL>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>生成软件以外的发布产品</FONT> </LI>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>软件打包</FONT> </LI>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>分发软件</FONT> </LI>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>安装软件</FONT> </LI>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>为用户提供帮助</FONT> </LI></UL>
+
+<FONT FACE="宋体" LANG="ZH-CN">
+<P>很多情况下，还包括以下活动：</FONT> </P>
+
+
+<UL>
+<LI>beta<FONT FACE="宋体" LANG="ZH-CN">测试的计划和进行</FONT> </LI>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>现存软件或数据的移植</FONT> </LI>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>正式验收</FONT> </LI></UL>
+
+<FONT FACE="宋体" LANG="ZH-CN">
+<P>尽管多数发布活动是在交付阶段进行的，但许多活动也需要在构造活动结束时就早做准备。</P>
+<P>在</FONT>Rational Unified Process<FONT FACE="宋体" LANG="ZH-CN">中，发布和环境工作流包含较少的细节。</P>
+
+<P>　</P>
+<P>　</P>
+<P>　</P>
+<P>　</P>
+<B><P>项目管理（</FONT>Project Management<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B>
+<P>软件项目管理是一门艺术，在计算目标，管理风险，满足约束之间平衡，最终成功地发布一个满足客户和最终用户需求的软件产品。很少软件项目能称得上是完全成功，这可以归结于任务的难度。</P>
+
+<P>这个工作流主要注重于一个迭代开发过程的特定方面。我们本节的目的就是通过提供以下东西使任务更简单：</FONT> </P>
+
+
+<UL>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>一个管理软件项目的框架</FONT> </LI>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>进行计划，分工，执行和监控项目的实际准则</FONT> </LI>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>一个管理风险的框架</FONT> </LI></UL>
+
+<FONT FACE="宋体" LANG="ZH-CN">
+<P>这不是一个包治百病的灵单妙方，但它提供了一个管理项目的方法，能够显著改善发布成功软件的困境。</P>
+
+<B><P>配置和变更管理（</FONT>Configuration and Change Management<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B>
+<P>在这个工作流中我们描述如何去控制在一个项目团体中由许多人生成的产出品。</FONT>I<FONT FACE="宋体" LANG="ZH-CN">控制有助于避免混乱，确保生产的产品不会因为以下问题而出差错：</FONT> </P>
+
+
+<UL>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>同步更新（</FONT>Simultaneous Update<FONT FACE="宋体" LANG="ZH-CN">）</FONT>--<FONT FACE="宋体" LANG="ZH-CN">当两个或多个角色分别对同一个产出品工作时，最后一个修改者将可能毁掉前者的工作</FONT> </LI>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>通知未达（</FONT>Limited Notification<FONT FACE="宋体" LANG="ZH-CN">）</FONT>--<FONT FACE="宋体" LANG="ZH-CN">多人协作时，某个问题已经被某人解决了，其他人还不知道此事</FONT>. </LI>
+<FONT FACE="宋体" LANG="ZH-CN"><LI>多个版本（</FONT>Multiple Versions<FONT FACE="宋体" LANG="ZH-CN">）</FONT>--<FONT FACE="宋体" LANG="ZH-CN">许多大程序都是以多次演进发布的方式开发的。一个版本正在被用户使用，另一个版本正在接受测试，另一个则还处在开发阶段。如果在任一个版本中发现问题，对问题的解决就要在所有版本中都实现</FONT>.  <FONT FACE="宋体" LANG="ZH-CN">除非变动能得到仔细的控制和监控，否则就会导致价格昂贵的不必要的返工。</FONT> </LI></UL>
+
+<FONT FACE="宋体" LANG="ZH-CN">
+<P>这个工作流为管理演化软件系统的多个变量提供指导原则，跟踪在某次编译中所使用的版本情况，按照用户定义的版本规格进行编译和版本发布，加强与具体情况相关的开发政策。</P>
+
+<P>我们描述你怎样管理并行开发，分布式开发，以及如何使编译过程自动化。这对一个需要频繁编译的渐进开发项目来说尤为重要，如果没有自动化的工具，有些事情根本无法作到。</FONT> <FONT FACE="宋体" LANG="ZH-CN">我们还描述你如何对所有文档的修改原因、时间和修改者保持监控。</P>
+
+<P>这个工作流也涵盖了变更需求管理，即如何去报告缺陷，如何在他们的生命周期中管理他们，以及如何使用这些缺陷数据去跟踪整个开发的进程。</FONT>.</P>
+
+<B><FONT FACE="宋体" LANG="ZH-CN"><P>环境（</FONT>Environment<FONT FACE="宋体" LANG="ZH-CN">）</P>
+</B>
+<P>环境工作流的目的是为了给软件开发组织提供合适的软件开发环境</FONT>---<FONT FACE="宋体" LANG="ZH-CN">包括过程和工具两方面。</P>
+
+<P>本工作流着重于在项目范围内对过程进行配置的活动。它也着重于开发支持一个项目所需的指导原则，提供一个描述你如何在一个组织中实现过程的逐步指导手册。</P>
+
+<P>环境工作流也包含一个开发工具箱，提供给你必须的准则、模板和工具。</P>
+
+<P>环境工作流的某些方面在本过程中未被涉及，如选择，调试工具和维护开发环境等。</FONT>.</P>
+</td></tr></table></center>
+</BODY>
+</HTML>

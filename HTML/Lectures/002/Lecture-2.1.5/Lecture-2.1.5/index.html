@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>第五讲</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
+    <STYLE>
+    <!--
+        H1 { color: #ffff00; font-family: "timmons", serif }
+        TD P { color: #ffff00 }
+        P { color: #ffff00 }
+        PRE { color: #ffffff; font-family: "fixed" }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="velvet.jpg">
+
+<H1 ALIGN=CENTER>
+第五讲  文件系统, I/O, 进程及进程间通讯
+</H1>
+
+<H2>整体思路</H2>
+<P>
+本次讲座内容以 APUE 相关内容为蓝本, 重点突出 UNIX 相关特色或者在其他操作系统中编程时很少涉及的内容, 同时重点讲解 Linux 相关主题. 从而能够让听众就 UNIX/Linux 上的文件系统及文件 I/O 有一个较为深入的了解. <BR>
+讲座以概念解释为主, 重点讲述陌生的系统调用或函数.
+</P>
+
+<H2>主要内容</H2>
+<UL SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+        <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+        <A HREF="fs.html">文件系统构造</A></P>
+        <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+        <A HREF="fileio.html">文件 I/O</A></P>
+        <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+        <A HREF="stdio.html">标准 I/O 库</A></P>
+        <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+        <A HREF="dir.html">文件和目录</A></P>
+        <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+        <A HREF="advio.html">高级 I/O</A></P>
+        <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+        <A HREF="misc.html">其他文件系统或 I/O 相关主题</A></P>
+</UL>
+
+<H2>各部分要点</H2>
+<UL SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+    <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+    5.1  文件系统构造</P>
+    <UL>
+        <LI>基本概念</LI>
+        <LI>索引节点</LI>
+        <LI>目录和目录项</LI>
+        <LI>文件的定位</LI>
+        <LI>链接</LI>
+		<LI>文件系统相关系统调用所面临的问题</LI>
+    </UL>
+    <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+    5.2  文件 I/O</P>
+    <UL>
+        <LI>基本概念</LI>
+        <LI>相关系统调用</LI>
+        <LI>Open 以及文件的打开标志</LI>
+        <LI>原子操作</LI>
+        <LI>文件共享</LI>
+        <LI>dup 和 dup2</LI>
+        <LI>fcntl 和 ioctl</LI>
+		<LI>容易混淆的概念</LI>
+    </UL>
+    <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+    5.3  标准 I/O 库</P>
+    <UL>
+        <LI>基本概念</LI>
+        <LI>缓冲机制</LI>
+        <LI>熟悉的标准 I/O 函数</LI>
+        <LI>陌生的标准 I/O 函数</LI>
+    </UL>
+    <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+    5.4  文件和目录</P>
+    <UL>
+        <LI>目录项属性</LI>
+        <LI>目录读取</LI>
+        <LI>文件的访问许可</LI>
+        <LI>目录及目录项操作</LI>
+        <LI>其他</LI>
+    </UL>
+    <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+    5.5  高级 I/O</P>
+    <UL>
+        <LI>Linux 中直接的 I/O 端口读写</LI>
+        <LI>记录锁定</LI>
+        <LI>I/O 多工</LI>
+        <LI>异步 I/O</LI>
+        <LI>内存映射</LI>
+    </UL>
+    <P><IMG SRC="poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
+    5.6  其他文件系统和 I/O 相关主题</P>
+    <UL>
+        <LI>系统数据文件</LI>
+        <LI>登录记帐</LI>
+        <LI>系统标识</LI>
+        <LI>时间和日期</LI>
+    </UL>
+</UL>
+
+<H2>思考题及作业</H2>
+<OL>
+    <LI>dup 可复制文件描述符, 我们能不能通过两次打开同一个文件而复制文件描述符? 试描述这两种操作的区别.</LI>
+    <LI>用追加模式打开文件之后, 能否使用 lseek 读取其他位置的数据, 能否用 lseek 替换其他数据? 试编写程序验证之.</LI>
+    <LI>为 MiniGUI 编写一个 "打开文件" 对话框, 界面和编程接口可参考 Win32 的 "打开文件" 对话框. </LI>
+</OL>
+
+<H2>参考书目</H2>
+<OL>
+    <LI>W. Richard Stevens, <I>Advanced Programming in the UNIX Environment</I></LI>
+    <LI>John Goerzen, <I>The Linux Programming Bible</I></LI>
+    <LI>Phil Cornes, <I>The Linux A - Z</I></LI>
+    <LI>Naba Barkakati, <I>The Linux Secrets</I></LI>
+    <LI>魏永明等, 《Linux 实用教程》</LI>
+    <LI>魏永明等, 《学用 Linux 与 Windows NT》</LI>
+</OL>
+
+<H2>进一步读物</H2>
+<UL>
+    <LI>W. Richard Stevens, <I>Advanced Programming in the UNIX Environment</I>, From Chpater 3 to Chapter 6.</LI>
+</UL>
+
+<H2>反馈</H2>
+本讲由<A HREF="mailto:ymwei@minigui.org">魏永明</A>讲解。欢迎任何意见和建议，可发 email: <A HREF="mailto:ymwei@minigui.org">ymwei@minigui.org</A> 与魏永明联系。
+
+<P><P>
+
+</BODY>
+</HTML>
+

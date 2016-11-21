@@ -1,0 +1,567 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0052)http://www.sgi.com/developers/library/local/faq.html -->
+<HTML><HEAD><TITLE>Developer Central - Localization at SGI</TITLE>
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+<META content="SGI, Developers, Library, Local " name=Keywords>
+<META content="Definition of Terms " name=description>
+<SCRIPT language=JavaScript>
+<!-- begin javascript
+
+browser = (((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) >= 3 )) || ((navigator.appName == "Microsoft Internet Explorer") && (parseInt(navigator.appVersion) >= 4 )))
+
+
+var good = 0;
+
+if (browser) {
+        good = 1;
+}
+
+if (good == 1) {
+        //alert("Yippie!!");
+
+if (document.images) {
+  image1on = new Image();
+  image1on.src = "../../images/nav-dev_on.gif";
+  image2on = new Image();
+  image2on.src = "../../images/nav-prog_on.gif";
+  image3on = new Image();
+  image3on.src = "../../images/nav-lib_on.gif";
+  image4on = new Image();
+  image4on.src = "../../images/nav-mkt_on.gif";
+  image5on = new Image();
+  image5on.src = "../../images/nav-tech_on.gif";
+  image6on = new Image();
+  image6on.src = "../../images/nav-oss_on.gif";
+
+  image1off = new Image();
+  image1off.src = "../../images/nav-dev_off.gif";
+  image2off = new Image();
+  image2off.src = "../../images/nav-prog_off.gif";
+  image3off = new Image();
+  image3off.src = "../../images/nav-lib_off.gif";
+  image4off = new Image();
+  image4off.src = "../../images/nav-mkt_off.gif";
+  image5off = new Image();
+  image5off.src = "../../images/nav-tech_off.gif";
+  image6off = new Image();
+  image6off.src = "../../images/nav-oss_off.gif";
+
+  image1sel= new Image();
+  image1sel.src = "../../images/nav-dev_sel.gif";
+  image2sel = new Image();
+  image2sel.src = "../../images/nav-prog_sel.gif";
+  image3sel = new Image();
+  image3sel.src = "../../images/nav-lib_sel.gif";
+  image4sel = new Image();
+  image4sel.src = "../../images/nav-mkt_sel.gif";
+  image5sel = new Image();
+  image5sel.src = "../../images/nav-tech_sel.gif";
+  image6sel = new Image();
+  image6sel.src = "../../images/nav-oss_sel.gif";
+
+}
+}
+
+function turnOn(imageName) {
+  if (document.images) {
+    document[imageName].src = eval(imageName + "on.src");
+  }
+}
+
+function turnOff(imageName) {
+  if (document.images) {
+    document[imageName].src = eval(imageName + "off.src");
+  }
+}
+
+function turnSel(imageName) {
+  if (document.images) {
+    document[imageName].src = eval(imageName + "sel.src");
+  }
+}
+
+// -->
+</SCRIPT>
+<!-- ***********  ---><LINK href="faq.files/developers.css" rel=stylesheet 
+type=text/css>
+<SCRIPT language=JavaScript>
+// create image objects and pre-load images
+
+  window.onerror=null;
+  window.defaultStatus = '';
+
+if (!document.images) {}
+  else {
+
+        nav_prd0 = new Image();
+        nav_prd0.src = "/images/common/nav_prod0.gif";
+        nav_prd1 = new Image();
+        nav_prd1.src = "/images/common/nav_prod1.gif";
+
+        nav_sol0 = new Image();
+        nav_sol0.src = "/images/common/nav_solutions0.gif";
+        nav_sol1 = new Image();
+        nav_sol1.src = "/images/common/nav_solutions1.gif";
+
+        nav_dev0 = new Image();
+        nav_dev0.src = "/images/common/nav_dev0.gif";
+        nav_dev1 = new Image();
+        nav_dev1.src = "/images/common/nav_dev1.gif";
+
+        nav_srv0 = new Image();
+        nav_srv0.src = "/images/common/nav_support0.gif";
+        nav_srv1 = new Image();
+        nav_srv1.src = "/images/common/nav_support1.gif";
+
+        nav_sal0 = new Image();
+        nav_sal0.src = "/images/common/nav_sales0.gif";
+        nav_sal1 = new Image();
+        nav_sal1.src = "/images/common/nav_sales1.gif";
+
+        nav_fun0 = new Image();
+        nav_fun0.src = "/images/common/nav_fun0.gif";
+        nav_fun1 = new Image();
+        nav_fun1.src = "/images/common/nav_fun1.gif";
+
+        nav_hom0 = new Image();
+        nav_hom0.src = "/images/common/nav_home0.gif";
+        nav_hom1 = new Image();
+        nav_hom1.src = "/images/common/nav_home1.gif";
+
+        nav_src0 = new Image();
+        nav_src0.src = "/images/common/nav_search0.gif";
+        nav_src1 = new Image();
+        nav_src1.src = "/images/common/nav_search1.gif";
+
+}
+
+
+</SCRIPT>
+
+<META content="MSHTML 5.00.2920.0" name=GENERATOR></HEAD>
+<BODY aLink=#ff0000 bgColor=#ffffff leftMargin=0 link=#420077 text=#000000 
+topMargin=0 vLink=#666666 MARGINWIDTH="0" MARGINHEIGHT="0"><!-- Match this include to the directory depth -->
+<SCRIPT language=Javascript>
+<!---
+
+  
+  function change(Name,Image,No,Msg) {
+
+   	if (!document.images) {}
+
+     	else {
+     		document [Name].src = eval(Image + No + ".src");
+	}
+  	if (Msg) self.status = eval(Image + "2");
+
+     return true
+
+  }
+
+//-->
+</SCRIPT>
+
+<TABLE border=0 cellPadding=0 cellSpacing=0 width=620>
+  <TBODY>
+  <TR>
+    <TD colSpan=3><A href="http://www.sgi.com/" 
+      onmouseout="change('hom','nav_hom',0)" 
+      onmouseover="change('hom','nav_hom',1)"><IMG alt="[Home] " border=0 
+      height=25 name=hom src="faq.files/nav_home0.gif" width=48></A><A 
+      href="http://www.sgi.com/search/" onmouseout="change('src','nav_src',0)" 
+      onmouseover="change('src','nav_src',1)"><IMG alt="[Search] " border=0 
+      height=25 name=src src="faq.files/nav_search0.gif" width=54></A><A 
+      href="http://www.sgi.com/sales/" onmouseout="change('sal','nav_sal',0)" 
+      onmouseover="change('sal','nav_sal',1)"><IMG alt="[How to Buy] " border=0 
+      height=25 name=sal src="faq.files/nav_sales0.gif" width=79></A><A 
+      href="http://www.sgi.com/products/" onmouseout="change('prd','nav_prd',0)" 
+      onmouseover="change('prd','nav_prd',1)"><IMG alt="[Products] " border=0 
+      height=25 name=prd src="faq.files/nav_prod0.gif" width=70></A><A 
+      href="http://www.sgi.com/solutions/" 
+      onmouseout="change('sol','nav_sol',0)" 
+      onmouseover="change('sol','nav_sol',1)"><IMG alt="[Solutions] " border=0 
+      height=25 name=sol src="faq.files/nav_solutions0.gif" width=73></A><A 
+      href="http://www.sgi.com/developers/"><IMG alt="[Developers] " border=0 
+      height=25 name=dev src="faq.files/nav_dev1.gif" width=81></A><A 
+      href="http://www.sgi.com/support/" onmouseout="change('srv','nav_srv',0)" 
+      onmouseover="change('srv','nav_srv',1)"><IMG alt="[Services and Support] " 
+      border=0 height=25 name=srv src="faq.files/nav_support0.gif" 
+      width=128></A><A href="http://www.sgi.com/fun/" 
+      onmouseout="change('fun','nav_fun',0)" 
+      onmouseover="change('fun','nav_fun',1)"><IMG alt="[Serious Fun] " border=0 
+      height=25 name=fun src="faq.files/nav_fun0.gif" width=87></A></TD></TR>
+  <TR>
+    <TD colSpan=3><IMG alt="" height=7 src="faq.files/nav_dev_line.gif" 
+      width=620></TD></TR>
+  <TR>
+    <TD vAlign=top><A href="http://www.sgi.com/"><IMG alt=sgi border=0 
+      height=108 src="faq.files/sgilogo.gif" width=130></A></TD>
+    <TD align=right colSpan=2>&nbsp;<BR><A 
+      href="http://www.sgi.com/developers/index.html"><IMG 
+      alt="Developer Central" border=0 height=55 
+      src="faq.files/nav-devcentral.gif" width=203></A> <BR><!-- ***********  ---><A 
+      href="http://www.sgi.com/developers/devtools/index.html" 
+      onmouseout="if (good == 1) turnOff('image1')" 
+      onmouseover="if (good == 1) turnOn('image1')"><IMG alt="Developer Tools" 
+      border=0 height=55 name=image1 src="faq.files/nav-dev_off.gif" 
+      width=80></A><A href="http://www.sgi.com/developers/program/index.html" 
+      onmouseout="if (good == 1) turnOff('image2')" 
+      onmouseover="if (good == 1) turnOn('image2')"><IMG 
+      alt="Program &amp; Benefits" border=0 height=55 name=image2 
+      src="faq.files/nav-prog_off.gif" width=75></A><A 
+      href="http://www.sgi.com/developers/library/index.html" 
+      onmouseout="if (good == 1) turnSel('image3')" 
+      onmouseover="if (good == 1) turnOn('image3')"><IMG alt=Library border=0 
+      height=55 name=image3 src="faq.files/nav-lib_sel.gif" width=72></A><A 
+      href="http://www.sgi.com/developers/marketing/index.html" 
+      onmouseout="if (good == 1) turnOff('image4')" 
+      onmouseover="if (good == 1) turnOn('image4')"><IMG 
+      alt="Marketing Resources" border=0 height=55 name=image4 
+      src="faq.files/nav-mkt_off.gif" width=72></A><A 
+      href="http://www.sgi.com/developers/technology/index.html" 
+      onmouseout="if (good == 1) turnOff('image5')" 
+      onmouseover="if (good == 1) turnOn('image5')"><IMG alt=Technology border=0 
+      height=55 name=image5 src="faq.files/nav-tech_off.gif" width=73></A><A 
+      href="http://www.sgi.com/developers/oss/index.html" 
+      onmouseout="if (good == 1) turnOff('image6')" 
+      onmouseover="if (good == 1) turnOn('image6')"><IMG alt="Open Source" 
+      border=0 height=55 name=image6 src="faq.files/nav-oss_off.gif" 
+      width=75></A><BR><A 
+      href="http://www.sgi.com/developers/library/index.html" 
+      onmouseout="if (good == 1) turnSel('image3')" 
+      onmouseover="if (good == 1) turnOn('image3')"><IMG alt=Library border=0 
+      height=25 src="faq.files/nav-title_lib.gif" width=222></A> </TD></TR>
+  <TR>
+    <TD vAlign=top width=138><!-- Start Dev Tools Sub Navigation Bar -->
+      <TABLE border=0 cellPadding=0 cellSpacing=0 width=138>
+        <TBODY>
+        <TR>
+          <TD><IMG alt=image height=2 src="faq.files/dot_clear.gif" 
+width=5></TD>
+          <TD><IMG alt=image height=2 src="faq.files/dot_clear.gif" 
+          width=20></TD>
+          <TD><IMG alt=image height=2 src="faq.files/dot_clear.gif" 
+          width=116></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD colSpan=2><IMG alt="" height=10 src="faq.files/bullets_dev2.gif" 
+            width=18><FONT face="Geneva, Arial Narrow, Helvetica" 
+            size=2><B>Third Party Products</B></FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD></TD>
+          <TD><FONT face="ARIAL, HELVETICA" size=2><A 
+            href="http://www.sgi.com/Products/appsdirectory.html">Directory</A> 
+            </FONT><BR>&nbsp;</TD></TR>
+        <TR>
+          <TD></TD>
+          <TD colSpan=2><IMG alt="" height=10 src="faq.files/bullets_dev2.gif" 
+            width=18><FONT face="Geneva, Arial Narrow, Helvetica" 
+            size=2><B>Members Only</B></FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD></TD>
+          <TD><FONT face="ARIAL, HELVETICA" size=2><A 
+            href="https://toolbox.sgi.com/toolbox">Developer's</A><BR>&nbsp;&nbsp;<A 
+            href="https://toolbox.sgi.com/toolbox">Toolbox</A><IMG 
+            align=absBottom alt=* height=15 src="faq.files/locko.gif" 
+            width=27><BR><A 
+            href="https://www.sgi.com/developers/devnews/index.html">Developer 
+            News</A><IMG align=absBottom alt=* height=15 
+            src="faq.files/locks.gif" width=27><BR><A 
+            href="https://www.sgi.com/developers/devedge/index.html">DevEdge&nbsp;Email</A><IMG 
+            align=absBottom alt=* height=15 src="faq.files/locko.gif" 
+            width=27><BR><A 
+            href="https://toolbox.sgi.com/toolbox/documents/KnowledgeBase/">KnowledgeBase</A><IMG 
+            align=absBottom alt=* height=15 src="faq.files/locko.gif" 
+            width=27><BR><A 
+            href="http://www.sgi.com/developers/library/doc.html">Developer 
+            Consulting</A> </FONT><BR>&nbsp;</TD></TR>
+        <TR>
+          <TD></TD>
+          <TD colSpan=2><IMG alt="" height=10 src="faq.files/bullets_dev2.gif" 
+            width=18><FONT face="Geneva, Arial Narrow, Helvetica" 
+            size=2><B>Helpful Resources</B></FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD></TD>
+          <TD><FONT face="ARIAL, HELVETICA" size=2><A 
+            href="http://www.sgi.com/developers/library/resource.html">Useful 
+            Links</A><BR><A href="http://www.sgi.com/fun/">Freeware</A><BR><A 
+            href="http://www.sgi.com/developers/library/resources/vst.html">Video 
+            Server Toolkit</A><BR><A 
+            href="http://www.sgi.com/developers/library/resources/y2k.html">Year 
+            2000</A><BR><A href="http://techpubs.sgi.com/">Technical 
+            Publications</A><BR>&nbsp;&nbsp;<A 
+            href="http://techpubs.sgi.com/">Library</A><BR><A 
+            href="http://www.sgi.com/developers/library/resources/asc.html">Application 
+            Solution</A><BR>&nbsp;&nbsp;<A 
+            href="http://www.sgi.com/developers/library/resources/asc.html">Center</A> 
+            </FONT><BR>&nbsp;</TD></TR>
+        <TR>
+          <TD></TD>
+          <TD colSpan=2><IMG alt="" height=10 src="faq.files/bullets_dev2.gif" 
+            width=18><FONT face="Geneva, Arial Narrow, Helvetica" 
+            size=2><B>Localization</B></FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD colSpan=2><IMG alt=* height=10 src="faq.files/nav-bullet3.jpeg" 
+            width=13> <FONT color=#207575 face="ARIAL, HELVETICA" 
+            size=2><B>Localization FAQ</B></FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD></TD>
+          <TD><FONT face="ARIAL, HELVETICA" size=2><A 
+            href="http://www.sgi.com/developers/library/local/rules.html">Programming 
+            Rules</A><BR><A 
+            href="http://www.sgi.com/developers/library/local/code.html">Example 
+            Code</A><BR><A 
+            href="http://www.sgi.com/developers/library/local/glossary.html">Glossaries</A> 
+            </FONT><BR>&nbsp;</TD></TR>
+        <TR>
+          <TD></TD>
+          <TD colSpan=2><IMG alt="" height=10 src="faq.files/bullets_dev2.gif" 
+            width=18><FONT face="Geneva, Arial Narrow, Helvetica" 
+            size=2><B>Archives</B></FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD></TD>
+          <TD><FONT face="ARIAL, HELVETICA" size=2><A 
+            href="https://www.sgi.com/developers/devnews/archives.html">Developer 
+            News</A><IMG align=absBottom alt=* height=15 
+            src="faq.files/lock.gif" width=15><BR><A 
+            href="https://www.sgi.com/developers/devedge/archives.html">DevEdge</A><IMG 
+            align=absBottom alt=* height=15 src="faq.files/lock.gif" 
+            width=15><BR><A href="http://www.sgi.com/developers/nibs/">What's 
+            New</A><BR><A href="http://www.sgi.com/developers/feature/">Feature 
+            Stories</A> </FONT></TD></TR>
+        <TR>
+          <TD></TD>
+          <TD colSpan=2>&nbsp;<BR><IMG alt=image height=2 
+            src="faq.files/dot_clear.gif" width=140> 
+      &nbsp;<BR></TD></TR></TBODY></TABLE></TD>
+    <TD><IMG height=1 src="faq.files/dot_clear.gif" width=20></TD>
+    <TD vAlign=top>&nbsp;
+      <P><!-- Start Content --><FONT face="ARIAL NARROW, HELVETICA" 
+      size=5><B>Localization at SGI</B></FONT> <BR><BR>
+      <P><A 
+      href="http://www.sgi.com/developers/library/local/faq.html#definitions"><FONT 
+      face=ARIAL,HELVETICA>Definition of Terms</FONT></A></P><BR><FONT 
+      face=HELVETICA size=4><B>Essentials - Frequently Asked 
+      Questions</B></FONT> <BR><BR><FONT face=ARIAL,HELVETICA><B>1. What is a 
+      locale ? </B></FONT>
+      <P></P>
+      <P>A locale specifies both the specific country (region/territory) and the 
+      culture (language) (for example: fr_CA and fr_FR). The information has a 
+      format of date and time, currency unit, messages, encoding and so on. 
+      There are locale databases for each locale. When you want to use a certain 
+      country/language environment with applications, you have to change the 
+      locale. <BR></P>
+      <P>Locale name format is, 
+      <BR>"<CODE>language[_territory[.encoding]][@modifier]</CODE>".<BR>(e.g. 
+      <CODE>hu , en_US , en_CA , ko_KR.euc </CODE>) </P>
+      <P>Each locale has several categories including: <CODE>LC_CTYPE</CODE> , 
+      <CODE>LC_NUMERIC</CODE> , <CODE>LC_CTYPE</CODE> , <CODE>LC_NUMERIC</CODE> 
+      , <CODE>LC_TIME</CODE> , <CODE>LC_COLLATE</CODE> , 
+      <CODE>LC_MONETARY</CODE> , <CODE>LC_MESSAGES</CODE> , and <CODE>LC_ALL 
+      </CODE>(LC_ALL is a special category that represents all categories.) 
+      </P><BR><FONT face=ARIAL,HELVETICA><B>2. What environment variables on the 
+      system define the locale setting?</B></FONT> 
+      <P>Applications (and libraries) that are internationalized correctly refer 
+      to some environment variables related to locale. They are ... </P>
+      <UL>
+        <LI><CODE>LC_CTYPE</CODE> 
+        <LI><CODE>LC_NUMERIC</CODE> 
+        <LI><CODE>LC_TIME</CODE> 
+        <LI><CODE>LC_COLLATE</CODE> 
+        <LI><CODE>LC_MONETARY</CODE> 
+        <LI><CODE>LC_MESSAGES</CODE> 
+        <LI><CODE>LC_ALL (sets all categories to specified locale)</CODE> 
+      </LI></UL>
+      <P>You can set a locale for each category. If a locale is not set in a 
+      specific category's environment variable, <CODE>LANG</CODE> environment 
+      variable is used for the category's locale. Further if a locale is not set 
+      in <CODE>LANG </CODE>environment variable, "C" locale (7 bit ASCII) is 
+      used.<BR>
+      <P><B><U>IMPORTANT:</U></B> Applications should not examine these 
+      variables directly. 
+      <P>In C code, you should always use <CODE>setlocale( </CODE>&lt; category 
+      &gt;<CODE>, NULL ) </CODE>to determine the settings for the various 
+      categories. In shell scripts, you should use the 
+      <CODE>locale(1)</CODE>command to determine the settings for each of the 
+      various categories. 
+      <P>One CANNOT assume that any category has the same value as <CODE>LC_ALL 
+      </CODE>or <CODE>$LANG</CODE>. Consider the following specification: 
+      <CODE>/en_US/de/de/de/de/en_US </CODE>
+      <P>Each category is different despite the fact that none of the <CODE>LC_* 
+      </CODE>environment variables are set. The setlocale function and the 
+      locale command will correctly pick all of the various pieces apart. <BR>
+      <P>Programs should seldom query LC_ALL. For example, if you want to look 
+      up messages or HTML files, you should use <CODE>LC_MESSAGES 
+      </CODE>instead.</P><BR>
+      <P><FONT face=ARIAL,HELVETICA><B>3. What code fragment should you put at 
+      the beginning of each application or library to ensure that locale, etc. 
+      is correctly set ? </B></FONT>
+      <P><CODE>For Non-Xt/Motif based programs:</CODE></P><FONT size=2><PRE>
+<CODE>       #include </CODE>&lt; locale.h &gt;
+<CODE>       ...</CODE>
+<CODE>       main(int argc, char* argv[])</CODE>
+<CODE>       {</CODE>
+<CODE>         /* Some variables */</CODE>
+<CODE>         (void)setlocale(LC_ALL, "");</CODE>
+<CODE>         ...</CODE>
+</PRE>
+      <P></FONT><CODE>For Xt/Motif based programs:</CODE></P><FONT size=2><PRE><CODE>       ...</CODE>
+<CODE>       main(int argc, char* argv[])</CODE>
+<CODE>       {</CODE>
+<CODE>         /* Some variables */</CODE>
+<CODE>         XtSetLanguageProc(NULL, NULL, NULL);</CODE>
+<CODE>         ...</CODE>
+
+
+</PRE>
+      <P></FONT><CODE>Or you can use your own procedure:</CODE></P><FONT size=2><PRE><CODE>        #include </CODE>&lt; locale.h &gt;
+<CODE>         ...</CODE>
+<CODE>         main(int argc, char* argv[])</CODE>
+<CODE>         {</CODE>
+<CODE>            /* Some variables */</CODE>
+<CODE>            XtSetLanguageProc(NULL, _myXtDefaultLanguageProc, NULL);</CODE>
+<CODE>            ...</CODE>
+</PRE></FONT><BR>
+      <P><FONT face=ARIAL,HELVETICA><B>4. When do you use message catalogs and 
+      when do you put strings in app-defaults files ? </FONT></B>
+      <P>Message catalogues are used by non-Xt/Motif based programs. Xt/Motif 
+      based programs use resource files, but they also can use message 
+      catalogues.</P>
+      <P>Most user interface components have static values, so a simple X 
+      resource setting is sufficient. To use UI components with values that 
+      change at runtime, one can either: 1) define multiple X resources for all 
+      of the possible values; 2) use a message catalog to determine all of the 
+      possible values In either case, you will need additional code to change 
+      the value at runtime. Unless your application already uses a message 
+      catalog for some other purpose, it is probably best to use X resources so 
+      that all messages remain in a a single location. </P><BR><FONT 
+      face=ARIAL,HELVETICA><B>5. If you need to write shell scripts which can 
+      post notifiers, where should the text for those notifiers go? Should we 
+      have a standard shell script fragment that supports accessing correct text 
+      for notifiers, according to the locale? </B></FONT><BR>
+      <P>You can use the gettxt command to get messages from message catalog 
+      files in shell scripts. <BR>For example: </P><FONT size=2><PRE><CODE>     #!/bin/sh</CODE>
+<CODE>     message=`gettxt catalog_file_name:message_number_1`</CODE>
+<CODE>     button=`gettxt catalog_file_name:message_number_2`</CODE>
+<CODE>     xconfirm -b $button -t $message</CODE>
+
+ OR,
+
+<CODE>     #!/bin/sh</CODE>
+<CODE>     message_file=`gettxt catalog_file_name:message_number_3`</CODE>
+<CODE>     button=`gettxt catalog_file_name:message_number_2`</CODE>
+<CODE>     xconfirm -b $button -file $message_file</CODE>
+</PRE></FONT><BR><A name=definitions><FONT 
+      face=ARIAL,HELVETICA><B>Definition of Terms</FONT></B> </A>
+      <P></P>
+      <P></P>
+      <DIR>
+      <LI><A 
+      href="http://www.sgi.com/developers/library/local/faq.html#internationalization"><FONT 
+      face="ARIAL, HELVETICA">Internationalization</FONT></A> 
+      <LI><A 
+      href="http://www.sgi.com/developers/library/local/faq.html#I18N"><FONT 
+      face="ARIAL ,HELVETICA">I18N</FONT></A> 
+      <LI><A 
+      href="http://www.sgi.com/developers/library/local/faq.html#localization"><FONT 
+      face="ARIAL ,HELVETICA">Localization</FONT></A> 
+      <LI><A 
+      href="http://www.sgi.com/developers/library/local/faq.html#L10N"><FONT 
+      face="ARIAL, HELVETICA">L10N</FONT></A> 
+      <LI><A 
+      href="http://www.sgi.com/developers/library/local/faq.html#translation"><FONT 
+      face="ARIAL, HELVETICA">Translation</FONT></A> 
+      <LI><A 
+      href="http://www.sgi.com/developers/library/local/faq.html#NLS"><FONT 
+      face=ARIAL,HELVETICA>NLS</FONT></A> 
+      <LI><A 
+      href="http://www.sgi.com/developers/library/local/faq.html#locale"><FONT 
+      face=ARIAL,HELVETICA>Locale</FONT></A> 
+      <LI><A 
+      href="http://www.sgi.com/developers/library/local/faq.html#characters"><FONT 
+      face=ARIAL,HELVETICA>Characters</FONT></A> </LI></DIR><BR>
+      <P><A name=internationalization><FONT 
+      face=ARIAL,HELVETICA><B>Internationalization</B></FONT> </A></P>
+      <P>This is a process of establishing the application to accommodate users 
+      with various culture conventions. X/Open further defines the 
+      internationalization is a processing of developing programs without prior 
+      knowledge of the language, cultural data, or character encoding schemes 
+      they are expected to handle.</P>
+      <P>This is also so-called codeset independent programming model. The 
+      X/Open internationalization model is adopted as the programming model for 
+      internationalization.</P>
+      <P>In general, the followings are the culture sensitive operations:</P>
+      <P></P>
+      <BLOCKQUOTE>
+        <P>Date/Time format Monetary format Writing direction Word breaking 
+        Classifications (such as space/controls/printable/etc.) Numeric 
+        expression Messages and dialogs Document format - page size, line break, 
+        and etc... Icons and Symbols Fonts </P></BLOCKQUOTE>
+      <P><A name=I18N><B>I18N</B></A></P>
+      <P>This is the acronym of internationalization (I and N with 18 letters in 
+      between).</P>
+      <P><A name=localization><B>Localization</B> </A></P>
+      <P>This is the process of establishing information within a computer 
+      system specific to each supported language, cultural data, and coded 
+      character set combination. (X/Open) </A></P>
+      <P><A name=L10N><B>L10N</B></A></P>
+      <P>This is the acronym of localization (I and N with 10 letters in 
+      between) </A></P>
+      <P><A name=translation><B>Translation</B> </A></P>
+      <P>This is one of localization tasks to translate and transform the user 
+      interface environment into user culturally-correct friendly environment, 
+      including message translation and interface adjustment.</P>
+      <P><A name=NLS><B>NLS</B> </A></P>
+      <P>National Language Support</P>
+      <P><A name=locale><B>Locale</B> </A></P>
+      <P>The locale is an association of language instances of collating 
+      sequence, character conversions and character classification tables, 
+      language information, and message catalogues.</P>
+      <P><A name=characters><B>Characters</B> </A></P>
+      <P>Character Set: A finite set of different graphic or control characters 
+      that is complete for a given purpose. Coded character set: A set of 
+      unambiguous rules that establishes a character set and the relationship 
+      between the character of the set and its coded representation.</P>
+      <P>Encoding scheme: A set of specific definitions that describe the 
+      philosophy used to represent character data.</P>
+      <P>Character: A member of a set of elements used for the organization, 
+      control, or representation of data.</P>
+      <P>Glyph: A recognizable abstract graphic symbol which is independent of 
+      any specific design.</P>
+      <P>Font: A collection of glyph images having the same basic design.</P>
+      <P>The net is that what you see on the screen, i.e. "&Auml;" can be presented 
+      in different forms depended on the stage in your runtime environment - 
+      file, I/O, processing, displaying, and device level. For example, the "&Auml;" 
+      can be represented as 0x00C4 on the disk as in Unicode and, in 0xC4 for 
+      I/O (8-bit only I/O environment for example) and 0x000000C4 in a wchar_t 
+      process. Furthermore, the "&Auml;" will be represented as 0xC4 if using the ISO 
+      8859-1 font. And the "&Auml;" is represented as 0x63 to be the network encoding 
+      for targeted EBCDIC hosts.</A></P>
+      <P></P></TD></TR></TBODY></TABLE>
+<P>
+<CENTER><!---- Virtual Footer ---->
+<TABLE border=0 cellPadding=0 width=400>
+  <TBODY>
+  <TR>
+    <TD align=right><FONT face="Helvetica, Arial" size=-1><A 
+      href="http://www.sgi.com/company_info/privacy.html" target=TOP>privacy 
+      policy</A></FONT> </TD>
+    <TD align=middle><FONT face="Helvetica, Arial">| </FONT></TD>
+    <TD align=left><FONT face="Helvetica, Arial" size=-1><A 
+      href="mailto:dev_webmaster@sgi.com" target=_top>webmaster</A></FONT> 
+</TD></TR>
+  <TR>
+    <TD align=right><FONT face="Helvetica, Arial" size=-2><A 
+      href="http://www.sgi.com/company_info/copyright.html" 
+      target=_top>Copyright &copy; 2000 Silicon Graphics, Inc.</A> All rights 
+      reserved.</FONT> </TD>
+    <TD align=middle><FONT face="Helvetica, Arial">| </FONT></TD>
+    <TD align=left><FONT face="Helvetica, Arial" size=-2><A 
+      href="http://www.sgi.com/company_info/trademarks/" target=_top>Trademark 
+      Information</A></FONT> </TD></TR></TBODY></TABLE></CENTER></BODY></HTML>

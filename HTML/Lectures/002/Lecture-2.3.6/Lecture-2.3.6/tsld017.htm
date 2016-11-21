@@ -1,0 +1,35 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>"goto" is interesting</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>"goto" is interesting</H1> 
+ <P><UL>
+<LI><H2>objdump -D vmlinux
+</H2>
+<UL>
+<LI>if (softirq_state[this_cpu].active & softirq_state[this_cpu].mask) 		do_softirq();
+<BR>c011a870 &#060schedule&#062: ...... c011a91a: 8b 45 b0 			movl 0xffffffb0(%ebp),%eax c011a91d: 8b 90 80 09 38 c0 	movl 0xc0380980(%eax),%edx c011a923: 23 90 84 09 38 c0 	andl 0xc0380984(%eax),%edx c011a929: 74 05 			je c011a930 &#060schedule+0xc0&#062 c011a92b: e8 80 7f 00 00 		call c01228b0 &#060do_softirq&#062 c011a930: 81 c6 40 64 36 c0 	addl $0xc0366440,%esi 
+<LI>if (softirq_state[this_cpu].active & softirq_state[this_cpu].mask) 		goto handle_softirq; 
+<BR>c011a870 &#060schedule&#062: ...... c011a915: 8b 86 80 c9 37 c0 movl 0xc037c980(%esi),%eax c011a91b: 23 86 84 c9 37 c0 andl 0xc037c984(%esi),%eax c011a921: 0f 85 f9 06 00 00 jne c011b020 &#060schedule+0x7b0&#062 c011a927: 81 c6 40 24 36 c0 addl $0xc0362440,%esi ...... c011b020: e8 8b 78 00 00 call c01228b0 &#060do_softirq&#062 c011b025: e9 fd f8 ff ff jmp c011a927 &#060schedule+0xb7&#062 </UL></UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld016.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld018.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld017.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

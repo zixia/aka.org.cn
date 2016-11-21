@@ -1,0 +1,17 @@
+CREATE DATABASE users
+
+USE users
+
+CREATE TABLE users
+(
+	USERID		VARCHAR(24) NOT NULL PRIMARY KEY,
+		//用户ID
+	MD5PASS 	VARCHAR(32) NOT NULL,
+		//MD5密码
+	IDNUMBER	VARCHAR(18) NOT NULL,
+		//身份证号
+	MAIL		VARCHAR(64) 	    ,
+		//电子邮件
+	LASTIP		VARCHAR(16)
+		//上次登录的IP
+)

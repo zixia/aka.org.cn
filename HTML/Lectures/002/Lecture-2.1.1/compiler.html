@@ -1,0 +1,366 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>Linux上的C/C++编译器和调试器</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+    <META NAME="GENERATOR" CONTENT="StarOffice/5.1 (Linux)">
+    <META NAME="AUTHOR" CONTENT="Yongming Wei">
+    <META NAME="CREATED" CONTENT="20000329;17342600">
+    <META >
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="velvet.jpg">
+
+<A HREF="prog_script.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="make.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=CENTER>1.7&nbsp;&nbsp;Linux 上的 C/C++ 编译器和调试器<BR><BR>
+</H1>
+
+<UL>
+    <LI><P>运行 gcc/egcs</LI>
+    <LI><P>gcc/egcs 的主要选项</LI>
+    <LI><P>gdb</LI>
+    <LI><P>gdb 的常用命令</LI>
+    <LI><P>gdb 使用范例</LI>
+    <LI><P>其他程序/库工具 (ar, objdump, nm, size, strings, strip, ...)</LI>
+    <LI>创建和使用静态库</LI>
+    <LI>创建和使用共享库</LI>
+    <LI>使用高级共享库特性</LI>
+</UL>
+
+<H3>1.7.1&nbsp;&nbsp;运行 gcc/egcs</H3>
+<P>
+Linux 中最重要的软件开发工具是 GCC。GCC 是 GNU 的 C 和 C++ 编译器。实际上，GCC 能够编译三种
+语言：C、C++ 和 Object C（C 语言的一种面向对象扩展）。利用 gcc 命令可同时编译并连接 C 和 
+C++ 源程序。
+</P>
+
+<P>
+#DEMO#: hello.c
+</P>
+
+<P>
+如果你有两个或少数几个 C 源文件，也可以方便地利用 GCC 编译、连接并生成可执行文件。例如，假设你有两个源文件 main.c 和 factorial.c 两个源文件，现在要编译生成一个计算阶乘的程序。
+</P>
+
+<PRE>
+-----------------------
+清单 factorial.c
+-----------------------
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int factorial (int n)
+{
+    if (n &lt;= 1)
+        return 1;
+
+    else
+        return factorial (n - 1) * n;
+}
+-----------------------
+
+-----------------------
+清单  main.c
+-----------------------
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int factorial (int n);
+
+int main (int argc, char **argv)
+{
+    int n;
+
+    if (argc &lt; 2) {
+        printf ("Usage: %s n\n", argv [0]);
+        return -1;
+    }
+    else {
+        n = atoi (argv[1]);
+        printf ("Factorial of %d is %d.\n", n, factorial (n));
+    }
+
+    return 0;
+}
+-----------------------
+
+利用如下的命令可编译生成可执行文件，并执行程序：
+$ gcc -o factorial main.c factorial.c
+$ ./factorial 5
+Factorial of 5 is 120.
+</PRE>
+
+<P>
+GCC 可同时用来编译 C 程序和 C++ 程序。一般来说，C 编译器通过源文件的后缀名来判断是 C 程序还是 C++ 程序。在 Linux 中，C 源文件的后缀名为 .c，而 C++ 源文件的后缀名为 .C 或 .cpp。
+</P>
+<P>
+但是，gcc 命令只能编译 C++ 源文件，而不能自动和 C++ 程序使用的库连接。因此，通常使用 g++ 命令来完成 C++ 程序的编译和连接，该程序会自动调用 gcc 实现编译。
+假设我们有一个如下的 C++ 源文件（hello.C）：
+</P>
+
+<PRE>
+#include &lt;iostream.h&gt;
+
+void main (void)
+{
+    cout &lt;&lt; "Hello, world!" &lt;&lt; endl;
+}
+</PRE>
+
+<P>
+则可以如下调用 g++ 命令编译、连接并生成可执行文件：
+</P>
+
+<PRE>
+$ g++ -o hello hello.C
+$ ./hello
+Hello, world!
+</PRE>
+
+<H3>1.7.2&nbsp;&nbsp;gcc/egcs 的主要选项</H3>
+<PRE>
+                表 1-3  gcc 命令的常用选项
+选项                解释
+-ansi               只支持 ANSI 标准的 C 语法。这一选项将禁止 GNU C 的某些特色，
+                    例如 asm 或 typeof 关键词。
+-c                  只编译并生成目标文件。
+-DMACRO             以字符串“1”定义 MACRO 宏。
+-DMACRO=DEFN        以字符串“DEFN”定义 MACRO 宏。
+-E                  只运行 C 预编译器。
+-g                  生成调试信息。GNU 调试器可利用该信息。
+-IDIRECTORY         指定额外的头文件搜索路径DIRECTORY。
+-LDIRECTORY         指定额外的函数库搜索路径DIRECTORY。
+-lLIBRARY           连接时搜索指定的函数库LIBRARY。
+-m486               针对 486 进行代码优化。
+-o FILE             生成指定的输出文件。用在生成可执行文件时。
+-O0                 不进行优化处理。
+-O 或 -O1           优化生成代码。
+-O2                 进一步优化。
+-O3                 比 -O2 更进一步优化，包括 inline 函数。
+-shared             生成共享目标文件。通常用在建立共享库时。
+-static             禁止使用共享连接。
+-UMACRO             取消对 MACRO 宏的定义。
+-w                  不生成任何警告信息。
+-Wall               生成所有警告信息。
+</PRE>
+
+<P>#DEMO#</P>
+<p>MiniGUI 的编译选项</P>
+
+<H3>1.7.3&nbsp;&nbsp;gdb</H3>
+<PRE>
+GNU 的调试器称为 gdb，该程序是一个交互式工具，工作在字符模式。在 X Window 系统中，
+有一个 gdb 的前端图形工具，称为 xxgdb。gdb 是功能强大的调试程序，可完成如下的调试
+任务：
+* 设置断点；
+* 监视程序变量的值；
+* 程序的单步执行；
+* 修改变量的值。
+在可以使用 gdb 调试程序之前，必须使用 -g 选项编译源文件。可在 makefile 中如下定义
+ CFLAGS 变量：
+CFLAGS = -g
+运行 gdb 调试程序时通常使用如下的命令：
+gdb progname
+
+在 gdb 提示符处键入help，将列出命令的分类，主要的分类有：
+* aliases：命令别名
+* breakpoints：断点定义；
+* data：数据查看；
+* files：指定并查看文件；
+* internals：维护命令；
+* running：程序执行；
+* stack：调用栈查看；
+* statu：状态查看；
+* tracepoints：跟踪程序执行。
+键入 help 后跟命令的分类名，可获得该类命令的详细清单。
+</PRE>
+
+<P>#DENO#</P>
+
+<H3>1.7.4&nbsp;&nbsp;gdb 的常用命令</H3>
+<PRE>
+                表 1-4  常用的 gdb 命令
+命令                        解释
+break NUM               在指定的行上设置断点。
+bt                      显示所有的调用栈帧。该命令可用来显示函数的调用顺序。
+clear                   删除设置在特定源文件、特定行上的断点。其用法为：clear FILENAME:NUM。
+continue                继续执行正在调试的程序。该命令用在程序由于处理信号或断点而
+                        导致停止运行时。
+display EXPR            每次程序停止后显示表达式的值。表达式由程序定义的变量组成。
+file FILE               装载指定的可执行文件进行调试。
+help NAME               显示指定命令的帮助信息。
+info break              显示当前断点清单，包括到达断点处的次数等。
+info files              显示被调试文件的详细信息。
+info func               显示所有的函数名称。
+info local              显示当函数中的局部变量信息。
+info prog               显示被调试程序的执行状态。
+info var                显示所有的全局和静态变量名称。
+kill                    终止正被调试的程序。
+list                    显示源代码段。
+make                    在不退出 gdb 的情况下运行 make 工具。
+next                    在不单步执行进入其他函数的情况下，向前执行一行源代码。
+print EXPR              显示表达式 EXPR 的值。
+<P></P>
+
+<H3>1.7.5&nbsp;&nbsp;gdb 使用范例</H3>
+<PRE>
+-----------------
+清单  一个有错误的 C 源程序 bugging.c
+-----------------
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+static char buff [256];
+static char* string;
+int main ()
+{
+
+    printf ("Please input a string: ");
+    gets (string);
+
+    printf ("\nYour string is: %s\n", string);
+}
+-----------------
+上面这个程序非常简单，其目的是接受用户的输入，然后将用户的输入打印出来。该程序使用了
+一个未经过初始化的字符串地址 string，因此，编译并运行之后，将出现 Segment Fault 错误：
+$ gcc -o test -g test.c
+$ ./test
+Please input a string: asfd
+Segmentation fault (core dumped)
+为了查找该程序中出现的问题，我们利用 gdb，并按如下的步骤进行：
+1．运行 gdb bugging 命令，装入 bugging 可执行文件；
+2．执行装入的 bugging 命令；
+3．使用 where 命令查看程序出错的地方；
+4．利用 list 命令查看调用 gets 函数附近的代码；
+5．唯一能够导致 gets 函数出错的因素就是变量 string。用 print 命令查看 string 的值；
+6．在 gdb 中，我们可以直接修改变量的值，只要将 string 取一个合法的指针值就可以了，为
+此，我们在第 11 行处设置断点；
+7．程序重新运行到第 11 行处停止，这时，我们可以用 set variable 命令修改 string 的取值；
+8．然后继续运行，将看到正确的程序运行结果。
+</PRE>
+
+<P>#DEMO#</P>
+
+<H3>1.7.6&nbsp;&nbsp;其他程序/库工具</H3>
+<P>strip：</P>
+<P>nm：</P>
+<P>size：</P>
+<P>string：</P>
+
+<H3>1.7.7&nbsp;&nbsp;创建和使用静态库</H3>
+
+<P>创建一个静态库是相当简单的。通常使用 ar 程序把一些目标文件（.o）组合在一起，
+成为一个单独的库，然后运行 ranlib，以给库加入一些索引信息。
+</P>
+
+<H3>1.7.8&nbsp;&nbsp;创建和使用共享库</H3>
+<P>特殊的编译和连接选项</P>
+<PRE>
+-D_REENTRANT         使得预处理器符号 _REENTRANT 被定义，这个符号激活一些宏特性。
+-fPIC                选项产生位置独立的代码。由于库是在运行的时候被调入，因此这个
+                     选项是必需的，因为在编译的时候，装入内存的地址还不知道。如果
+                     不使用这个选项，库文件可能不会正确运行。
+-shared              选项告诉编译器产生共享库代码。
+-Wl,-soname          -Wl 告诉编译器将后面的参数传递到连接器。而 -soname 指定了
+                     共享库的 soname。
+</PRE>
+
+<PRE>
+    ＃ 可以把库文件拷贝到 /etc/ld.so.conf 中列举出的任何目录中，并以
+ root 身份运行 ldconfig；或者
+    ＃ 运行 export LD_LIBRARY_PATH='pwd'，它把当前路径加到库搜索路径中去。
+</PRE>
+
+<H3>1.7.9&nbsp;&nbsp;使用高级共享库特性</H3>
+<H4>1. ldd 工具</H4>
+<P>ldd 用来显示执行文件需要哪些共享库, 共享库装载管理器在哪里找到了需要的共享库.</P>
+
+<H4>2. soname</H4>
+<P>
+共享库的一个非常重要的，也是非常难的概念是 soname——简写共享目标名（short for shared object name）。这是一个为共享库（.so）文件而内嵌在控制数据中的名字。如前面提到的，每一个程序都有一个需要使用的库的清单。这个清单的内容是一系列库的 soname，如同 ldd 显示的那样，共享库装载器必须找到这个清单。
+</P>
+
+<P>
+soname 的关键功能是它提供了兼容性的标准。当要升级系统中的一个库时，并且新库的 soname 和老的库的 soname 一样，用旧库连接生成的程序，使用新的库依然能正常运行。这个特性使得在 Linux 下，升级使用共享库的程序和定位错误变得十分容易。 
+</P>
+
+
+<P>
+在 Linux 中，应用程序通过使用 soname，来指定所希望库的版本。库作者也可以通过保留或者改变 soname 来声明，哪些版本是相互兼容的，这使得程序员摆脱了共享库版本冲突问题的困扰。
+</P>
+
+<P>
+查看/usr/local/lib 目录，分析 MiniGUI 的共享库文件之间的关系</P>
+
+<H4>3. 共享库装载器</H4>
+<P>
+当程序被调用的时候，Linux 共享库装载器（也被称为动态连接器）也自动被调用。它的作用是保证程序所需要的所有适当版本的库都被调入内存。共享库装载器名字是 ld.so 或者是 ld-linux.so，这取决于 Linux libc 的版本，它必须使用一点外部交互，才能完成自己的工作。然而它接受在环境变量和配置文件中的配置信息。
+</P>
+
+<P>
+文件 /etc/ld.so.conf 定义了标准系统库的路径。共享库装载器把它作为搜索路径。为了改变这个设置，必须以 root 身份运行 ldconfig 工具。这将更新 /etc/ls.so.cache 文件，这个文件其实是装载器内部使用的文件之一。
+</P>
+
+<P>
+可以使用许多环境变量控制共享库装载器的操作（表1-4+）。
+
+<PRE>
+                        表 1-4+ 共享库装载器环境变量
+变量                       含义
+LD_AOUT_LIBRARY_PATH       除了不使用 a.out 二进制格式外，与 LD_LIBRARY_PATH 相同。
+LD_AOUT_PRELOAD            除了不使用 a.out 二进制格式外，与 LD_PRELOAD 相同。
+LD_KEEPDIR                 只适用于 a.out 库；忽略由它们指定的目录。
+LD_LIBRARY_PATH            将其他目录加入库搜索路径。它的内容应该是由冒号
+                           分隔的目录列表，与可执行文件的 PATH 变量具有相同的格式。
+                           如果调用设置用户 ID 或者进程 ID 的程序，该变量被忽略。
+LD_NOWARN                  只适用于 a.out 库；当改变版本号是，发出警告信息。
+LD_PRELOAD                 首先装入用户定义的库，使得它们有机会覆盖或者重新定义标准库。
+                           使用空格分开多个入口。对于设置用户 ID 或者进程 ID 的程序，
+                           只有被标记过的库才被首先装入。在 /etc/ld.so.perload 中指定
+                           了全局版本号，该文件不遵守这个限制。
+</PRE>
+
+<H4>4. 使用 dlopen</H4>
+<P>
+    另外一个强大的库函数是 dlopen()。该函数将打开一个新库，并把它装入内存。该函数主要用来加载库中的符号，这些符号在编译的时候是不知道的。比如 Apache Web 服务器利用这个函数在运行过程中加载模块，这为它提供了额外的能力。一个配置文件控制了加载模块的过程。这种机制使得在系统中添加或者删除一个模块时，都不需要重新编译了。
+</P>
+
+<P>
+    可以在自己的程序中使用 dlopen()。dlopen() 在 dlfcn.h 中定义，并在 dl 库中实现。它需要两个参数：一个文件名和一个标志。文件名可以是我们学习过的库中的 soname。标志指明是否立刻计算库的依赖性。如果设置为 RTLD_NOW 的话，则立刻计算；如果设置的是 RTLD_LAZY，则在需要的时候才计算。另外，可以指定 RTLD_GLOBAL，它使得那些在以后才加载的库可以获得其中的符号。
+</P>
+
+<P>
+    当库被装入后，可以把 dlopen() 返回的句柄作为给 dlsym() 的第一个参数，以获得符号在库中的地址。使用这个地址，就可以获得库中特定函数的指针，并且调用装载库中的相应函数。
+</P>
+
+<P>
+<BR><BR>
+</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="prog_script.html"><IMG SRC="prev.gif" ALT="Previous"></A> <A HREF="make.html"><IMG SRC="next.gif" ALT="Next"></A> <A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+</BODY>
+</HTML>
+

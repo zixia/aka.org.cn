@@ -1,0 +1,327 @@
+%include "default.mgp"
+%default 1 bgrad
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%page
+%nodefault
+%fore "red", size 7, font "standard", back "darkblue"
+
+%center
+%IMAGE "lidslogo4.jpg"
+
+%center, fore "yellow", font "thick"
+Build a secure linux system with LIDS
+%font "standard"
+
+%size 3, fore "green"
+Xie Huagang
+xhg@software.ict.ac.cn
+
+%size 4, fore "red"
+Software Research Center 
+Institute of Computing Technology
+
+%size 4, fore "yellow"
+Welcome To LIDS World
+http://www.lids.org
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%page
+
+What is LIDS.
+
+
+	A patch to enhance the kernel security.
+		divide current kernel into 2 level security.
+		Protect important files/directories.
+		Protect important processes.
+		Protect raw I/O and hard disk.
+		Use capability to control the system. 
+
+	A tool to administrate the lids. 
+		let you add/delete item of protected files.
+		Online switch security level
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%page
+%bgrad 0 0 16 0 0 "red" "black"
+
+What's wrong with the current GNU/Linux system.
+
+
+%pause
+	superuser (root)'s privilege is too large
+%pause
+	Many system files can be changed easily 
+%pause
+	Modules is easily used to intercept the kernel
+%pause
+	Process is unprotected.
+
+           
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%page
+
+What's the idea behind LIDS
+
+
+%fore "orange"
+%pause
+	Security level in kernel
+%pause
+	Protect important files
+%pause
+	Protect important process
+%pause
+	Using capability
+%pause
+	Seal the kernel
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%page
+
+Build a security linux system step by step
+
+
+%fore "orange"
+Download and patch
+	Download LIDS patch and Official Linux kernel
+	Patch to the kernel
+configure 
+	configure the kernel
+	Initial the LIDS system
+	Reboot the system
+Administration
+	Sealing the kernel
+	Online administrator 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%page
+
+Download LIDS and patch
+
+
+%fore "orange"
+Download LIDS and official linux kernel
+	LIDS Home 	
+		http://www.lids.org/ ftp://ftp.lids.org
+		Mirrors:http://www.lids.org/mirros
+	Kernel:
+		ftp://ftp.kernel.org/ or other mirror sites.
+		ftp://166.111.160.18
+		ftp://ftp.turbolinux.com.cn/pub/mirrors/kernel
+Patch LIDS
+%fore "grey", size 3
+ cd linux_install_path
+ bzip2 -cd linux-2.2.14.tar.bz2 | tar -xvf -
+ cd lids_install_path
+ tar -zxvf lids-0.9pre4-2.2.14.tar.gz
+ 
+ cd linux_install_path
+ patch -p0 </lids_install_path/lids-0.9pre4-2.2.14.patch
+ cd linux
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%page
+
+configure the kernel 
+
+Make the kernel
+%fore "green",size 3
+cd linux
+make menuconfig or make xconfig
+[*] Prompt for development and/or incomplete code/drivers
+[*] Sysctl support
+[*] Linux Intrusion Detection System
+[*] Allow Switch LIDS protections 
+Get password
+[root@lids xhg]# /sbin/lidsadm -P
+MAKE PASSWD
+enter password: 
+Verifying enter password: 
+RipeMD-160 encrypted password : 3d447ecdc3971b27cfd0cfeda0f3f7067f3b3419
+
+make dep clean
+make bzImage 
+make modules modules_install
+
+LILO:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%page
+
+Configure LIDS before reboot
+
+1. Protect Important Files/Directories
+	File Type:
+		Read Only Files/Directory.
+			/bin;/sbin/;/usr/sbin;/boot/;/etc
+		Append Only Files/Directory.
+			/var/log/
+		Exception Files/Directory.
+			/boot/kernel.h;/etc/mtab
+%fore "green", size 3
+Example
+
+lidsadm -Z
+lidsadm -A -r /boot
+lidsadm -A -r /vmlinuz
+lidsadm -A -r /lib
+lidsadm -A -r /root
+lidsadm -A -r /etc
+lidsadm -A -r /sbin
+lidsadm -A -r /usr/sbin
+lidsadm -A -r /bin
+lidsadm -A -r /usr/bin
+lidsadm -A -r /usr/lib
+lidsadm -A -a /var/log
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%page
+
+Sealing the kernel
+
+%size 4
+	What is sealing the kernel.
+	Why need to seal the kernel.
+	How to seal the kernel
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%page
+
+Protect your process 
+
+%size 4
+
+LIDS can protect the process whose parent is init(pid=1), you must seal the kernel with a specified option as below.
+
+%fore "green",size 3  
+lidsadm -I -- +INIT_CHILDREN_LOCK
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%page
+
+Protect more with capability
+
+	What is capability in linux.
+	LIDS and  capability
+%pause
+%fore "green",size 3
+
+CAP_SYS_RAWIO
+
+allow ioperm/iopl and /dev/port access, 
+allow /dev/mem and /dev/kmem acess 
+allow raw block devices(/dev/[sh]d??) acess
+   
+CAP_NET_ADMIN
+
+interface configuration
+administration of IP firewall, masquerading and accounting
+setting debug option on sockets
+modification of routing tables
+setting arbitrary process / process group ownership on sockets
+binding to any address for transparent proxying
+setting TOS (type of service)
+setting promiscuous mode
+clearing driver statistics
+multicasting
+read/write of device-specific registers
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%page
+
+Choose the capability and sealing the kernel
+
+
+%fore "green",size 3
+
+You may put it in a rc script (rc.local, /etc/init.d/lids,
+/etc/rc.d/init.d/lids, etc.) depending upon your distribution and the
+way you administrate your system. The command is, for example :
+
+
+lidsadm -I -- -CAP_SYS_MODULE \ 
+              -CAP_SYS_RAWIO \ 
+              -CAP_SYS_ADMIN \ 
+               -CAP_SYS_PTRACE -CAP_NET_ADMIN \
+               +LOCK_INIT_CHILDREN
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%page
+
+Network Security
+
+	Network Security with capabilty
+		CAP_NET_ADMIN
+		CAP_NET_BIND_SERVICE,etc	
+		CAP_NET_RAW
+	Port scanner detector in kernel
+		cooperated with CAP_NET_RAW	
+		half open scan
+		option selected when configure kernel
+		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%page
+
+Intrusion Responsive system
+
+	Logging the message
+
+	Logging the message via mail server
+              
+	Shutdown the console
+
+%fore "green",size 3
+Apr 12 17:09:20 lids kernel: LIDS: utempter (3 5 inode 62048) pid 904 user (0/0) on NULL tty: Try to open /var/log/wtmp for writing
+Apr 12 17:09:31 lids kernel: LIDS: utempter (3 5 inode 62048) pid 907 user (0/0) on NULL tty: LIDS: more Try to open /var/log/wtmp for writing,logging disabled for 60 seconds
+Apr 12 17:09:31 lids kernel:
+Apr 12 17:10:00 lids kernel: LIDS: insmod (3 5 inode 92932) pid 952 user (0/0) on NULL tty: CAP_SYS_MODULE violation: try to delete module <NULL>
+Apr 12 17:20:00 lids kernel: LIDS: insmod (3 5 inode 92932) pid 980 user (0/0) on NULL tty: CAP_SYS_MODULE violation: try to delete module <NULL>
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%page
+
+LIDS Security Level in kernel
+
+%lcutin,pause
+	Two levels in the kernel
+%rcutin,pause
+	Change security level when booting up.
+		LILO: security=0
+		lids_load = 1 | 0.
+%lcutin,pause
+	Changing security level online with lidsadm
+		 Authentication with kernel
+		 switch with LIDS & LIDS_LOCAL
+			lidsadm -S -- -LIDS.
+			lidsadm -S -- -LIDS_LOCAL
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%page
+
+LIDS Authentication in Kernel 
+
+%size 3
+	160bit MD5.	
+		Get initial password: lidsadm -P
+	Change security level.
+		lidsadm -S -- [+|-]LIDS|LIDS_LOCAL
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%page
+%nodefault
+%fore "red", size 7, font "standard", back "darkblue"
+
+%center
+%IMAGE "lidslogo5.jpg"
+
+%fore "orange", size 7
+%center
+Thanks
+
+Any Question?
+
+;-)
+
+%fore "pink",size 5 
+http://www.lids.org
+xhg@software.ict.ac.cn

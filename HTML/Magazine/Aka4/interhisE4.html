@@ -1,0 +1,323 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>MUD History</TITLE>
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+<BODY TEXT="#000000" BGCOLOR="#eeedb7" LINK="#797E8C" VLINK="#4F4F4F" ALINK="#FF0000">
+<center><H4>A Hypertext History of Multi-User Dimensions</H4></center>
+<p>
+<P>Copyright 1993 Lauren P. Burka 
+<P>In August of 1989, a graduate student at Carnegie Mellon University wrote a 
+game in a weekend that he called TinyMUD. It was a 
+simple, user-extensible multi-user game that was available to anyone on the 
+internet who knew the address and port number (lancelot.avalon.cs.cmu.edu 
+4201). While TinyMUD wasn't the first MUD , its ease of use 
+and portability to many Unix systems caused an explosion of MUD popularity that 
+hasn't yet waned. Now MUDs are at a port near you, in the  or 
+the <I>New York Times</I>.
+<P>MUDs (multi-user dungeons or dimensions) have most of 
+the following characteristics: several people can play at once; the game is 
+partioned into virtual spaces ("rooms") such that people and objects in one room 
+cannot directly interact with people and objects in another room; all 
+interaction takes place in text, not pictures or sounds; communications are 
+handled with TCP sockets; most of the code is written and maintained by 
+university students and is available in the public domain; combinations of 
+objects, rooms and exits allow simple puzzles, while some MUDs with their own 
+programming languages allow for much more complicated puzzles and toys; even 
+MUDs created for serious purposes retain some of the original Adventure or 
+role-playing game atmosphere; and since identities aren't constrained by 
+reality, the characters on muds include close facsimiles of the people who play 
+them, furry animals, science fiction heros, and all ranges of cute, profane, 
+obnoxious, witty, or just plain weird.
+<P>Jim Aspnes (now an instructor at Yale) thought that TinyMUD was just a 
+weekend hack that would lose novelty quickly. He 
+made several decisions, or non-decisions, that contributed to both the coolness 
+and the problems of MUDing.
+<P>
+<H2>The Process from Hell: Memory vs. Disk-based MUDS.</H2>
+<P>Earlier MUDs tended to retain most of the game database on disk. Rooms and 
+objects were fetched from disk as players needed them. This was slow.
+<P>TinyMUD retained the entire database in memory. This design assumed that the 
+database wouldn't grow particularly large. In fact, for small MUDs, a 
+memory-based database is much faster. It is obvious that after the database 
+grows large enough, the process will begin to swap heavily. The machine load 
+will climb as pagefaults collect. Most architectures have a process size limit. 
+Aspnes finally abandoned TinyMUD when it crashed on reaching the 32 megabyte 
+process size limit on his machine. The 
+database bloat problem is exacerbated by MUDs with their own programming 
+languages, leading to huge individual objects and even background processes. 
+LambdaMOO, running at Xerox Parc on a SparcCenter 1000, constitutes a 198 
+megabyte process for a database that takes 80 megabytes on disk as of March 
+1994.
+<P>The performance problems of very large memory-based muds is well known, but 
+in spite of a substantial pool of talented MUD programmers, improvements to 
+database layers are not considered until it's too late. There are several 
+reasons for this:
+<P>Ignorance. Many students know C, but few MUDers have made a study of database 
+design. I recall an argument on the newsgroup rec.games.mud where a student 
+insisted, presumably with a straight face, that disk-based MUDs couldn't 
+possibly work because they would wear out the disk (The student in question was 
+ripped to rhetorical shreds by a sarcastic Marcus J. Ranum. If you don't know 
+who he is, don't worry about it).
+<P>Habit. There have been a couple of MUDs with disk-based database layer. They 
+include UberMUD and UnterMUD by Marcus Ranum (then an employee of DEC) and 
+Andrew Molitor (grad student at Wesleyan University), and TeenyMUD, a project of 
+Andrew Molitor's. UberMUD, which used a b+ tree, proved far too complicated to 
+interest most MUDers (thought it allowed for building some really neat toys)  
+UnterMUD used hash tables, with database access speeds improved by clever 
+caching. 
+It was used in some production MUDs, but the database layer didn't allow some 
+MUDer favorites, such as checking the total number of database objects. The 
+UnterMUD database layer or caching scheme have been put to work in other 
+servers, notably MUSH 2.0. 
+<P>There is at least one long-running TeenyMUD. TeenyMUD uses a flat-file with a 
+direct index, about as efficient as a hash table, though with less sophisticated 
+caching than Unter or Uber. It has an attractively low use of resources, and is 
+recommended for people who just want to try out running a MUD for a week. 
+However, MUDers who are interested in toys and gadgets tend to overlook it 
+because of its lack of a programming language. Needless to say, if your server 
+is entirely memory-based, and your mud process just grew large enough to make 
+disk-basing attractive, it's too late to switch servers without discarding your 
+database.
+<P>Lameness. Enough said.
+<P>Disk-basing is not a magic solution. It complicates checkpointing (making 
+backups while the server is running). A further technical issue is that a 
+disk-based database layer may not improve performance if the database is large 
+enough. In theory, a cache of frequently-visited objects will be retained in 
+memory, and objects will be swapped in as they are referenced. Since objects 
+cannot be grouped on database pages by geographical proximity, any activity that 
+visits a large number of objects in sequence will cause the process to thrash. 
+Since the operating system knows how to swap better than most applications, a 
+disk-based database will be less happy than a memory-based one. Disk-basing will 
+still place a comfortable upper bound on database growth, though the disk image 
+will grow larger, uglier, and more fragmented.
+<P>Rather than resort to a complex software solution for database growth, many 
+MUDs rely on social restrictions on building, or an occasional rm -rf and a 
+fresh start with a new database. Unfortunately, one of the signs and 
+side-effects of a successful MUD is growth, both in size and population. A MUD 
+where players can't build, or where what they build won't stay, occasions far 
+less feeling of community investment or belonging than a community would desire.
+<P>It should be noted that disk, memory, and cpu are the only significant drains 
+on system resources. A MUD with fifty users still consumes a fraction of the net 
+bandwidth of an FTP session and won't slow communications noticibly.
+<P>Between 1989 and 1994, the memory and cpu power of the average Internet host 
+has increased by one or maybe two orders of magnitude. In 1989, however, only a 
+very few people had access to an Internet host with extra cpu cycles to devote 
+to a MUD, especially one that might dominate an entire workstation so that no 
+other processes could hope to run with reasonable response time.
+<P>Meanwhile the number of university students MUDing increased exponentially as 
+MUDers introduced their friends to the new game, but cpu cycles devoted to 
+MUDing increased only slowly. There were two upshots of this disparity.
+<P>People began running MUDs anywhere they could, often without asking the 
+permission of the machine administrators. In 1990, someone using the GNU cluster 
+would often find four or five MUDs running on one machine, all of which would 
+have to be killed before a user could do real work.
+<P>People who controlled the resources to run a MUD gained an enormous amount of 
+power over a growing virtual community, often well out of proportion to the 
+amount of time and emotional energy they devoted to developing the MUD. 
+<P>This brings us to the second big category of MUD issues.
+<P>
+<H2>Whose game is this anyway?</H2>
+<P>Aspnes thought that his game would last for a couple of weeks before people 
+got bored. When they didn't, and he kept it running, many players chose to 
+believe that TinyMUD, and their investment in building, would last indefinitely 
+(or at least until they graduated and lost net access). Meanwhile, Aspnes, the 
+wizard, put less time into administering TinyMUD as it grew larger and harder to 
+control, both in resource usage and in the behavior of the participants.
+<P>TinyMUD's restriction on the number of objects a player can build was a 
+simple monetary system. Pennies were required to build rooms and objects. A 
+player started with no pennies, and would gain some by visiting other peoples' 
+building and finding treasures. Ambitious builders rapidly discovered that the 
+penny system could be circumvented with macros to repeatedly grab valuable 
+treasures. This was good for people with ambitious building projects, but 
+enabled other people to, for instance, create 500 objects called "You found a 
+penny!" and leave them in the Town Square so that anyone walking through was 
+forced to watch all 500 objects scroll past. Once these objects were removed, 
+they still added to database bloat until someone invented a working recycle 
+command.
+<P>Parts of TinyMUD extended in linear fashion with street and subway metaphors. 
+Parts of it sprawled and tangled. There were teleport booths linking regions in 
+five or more dimensions. The steam tunnels in Wesleyan University connected to a 
+University of Florida Campus. Taiwan was right next to Cambridge. There were 
+self-contained puzzles, including a replica of Adventure in the Colossal Cave. 
+There were hangouts, or, more precisely, a hangout.
+<P>The Rec Room was an early piece of the database. It had some toys and 
+scenery. The Rec Room's owner left it linkable and provided free exits outwards 
+for builders. Therefore anyone who had just built something made the entrance 
+and exit connect to the Rec Room instead of a linear part of the database. Soon 
+the Rec Room became the place to be, but also the main traffic nexus.
+<P>Meanwhile, a smaller proportion of MUDers were building (just as well for 
+database bloat) and fewer were exploring. More people were treating TinyMUD as a 
+chat system with furniture. There was a great deal of discussion about trying to 
+encourage, or even force, players to explore. However, hanging out soon came to 
+be accepted as just a vital part of MUDing as building and exploring. Most 
+servers provide systems of conversation utilities as complex as anything 
+provided for building.
+<P>The concentration of people in one virtual room meant that anyone who wished 
+to cause trouble could write a program to connect to the MUD, find that one 
+room, and spew volumes of text. The MUD would become unplayable.
+<P>In response to TinyMUD's perceived shortcomings, MUDers who had the 
+resources, or could beg them of someone else, started new MUDs. These MUDs often 
+had some central planning involved in building, or at least restrictions on who 
+could put what where. All of them had more active wizards. Building restrictions 
+led to squabbles, occasionally quite emphatic and bitter. Builders might see 
+their masterworks recycled by wizards who wanted to cut down on database 
+swapping. The "Rec Room phenomenon" elevated people who owned popular spaces to 
+de-facto wizard status due to their ability to control who could enter or link 
+new building to public space. These people wielded power unequalled by anyone 
+except the site administrator.
+<P>MUDers were largely college students who had just discovered concepts like 
+"freedom of speech" and "artistic expression" and vigorously, if ineffectually, 
+attempted to apply these ideas to items in a shared database. The next stage for 
+MUD conflict was set and still hasn't been resolved.
+<P>Who owns a MUD database? The site administrator? The wizards (people with 
+programming and administrative privileges on the MUD)? The builders who 
+contributed sweat to create the landscape?
+<P>A database is just a file. What happens if you copy it? Who owns the copies? 
+What if there are two copies of the same database running on different machines?
+<P>If the policies of the MUD or site administration change, can builders who 
+disapprove destroy their building? If they don't, is this a sign that they 
+approve of the new administration? What if their building constitutes a "public" 
+area or vital topological interlink?
+<P>Do players have the right to participate in a MUD? Do they have a right to 
+build? Are restrictions on who can participate fair? Do players with an 
+investment in building have a say in the fate of a database? Can it be 
+decommissioned over their protests?
+<P>Distributed MUDing, (like distributed almost-everything) has been proposed as 
+a solution to database ownership issues and all other social ills of MUDs. There 
+even have been some moderately successful distributed MUD experiments. In 
+theory, each builder could maintain a MUD process on their own machines, with 
+their own building. Players can walk from MUD to MUD seamlessly. If a 
+disagreement results, people can easily "take their toys and go home." However, 
+distributed MUDs never quite caught on.
+<P>It should be intuitively obvious that if the problem of user authentication 
+hasn't been solved for systems, there are no satisfactory solutions for a 
+user-level process. A MUD administrator may choose to trust a couple of host 
+MUDs, but if one of those has somewhat lax security, they could allow 
+troublemakers excluded from one MUD to log on to another and walk over.
+<P>Furthermore, a distributed MUD system requires each participating MUD to use 
+the same server code, or at least the same database layer. I am not aware of any 
+satisfactory solution to the problem of porting objects carried by players from 
+one MUD to another, especially as objects with code attached can present nasty 
+security holes.
+<P>
+<H2>"Do what thou wilt, that shall be the whole of the law."</H2>
+<P>As any site administrator knows, people aren't any more reasonable with 
+shared computer resources than they are with shared real-life resources. In the 
+absence of an active administrator, the original TinyMUD database grew not only 
+larger but messier. The net contains its share of young, under-socialized people 
+who would rather break other peoples' toys than build their own, and can cause 
+havoc with a few simple programming tools. The problems can be worse on MUDs 
+because of the relative anonymity available even to people with no skills at 
+evading net security. 
+<P>MUDs are games, but it is generally agreed by most administrators and players 
+that MUDing should be fun, and for most people, the receiving end of harassment 
+is not a fun place to be. But the questions of what constitutes harassment are 
+more painful than any of the programming issues involved. Are gestures of 
+violence or obscenity protected speech or artistic expression, or an upsetting 
+nuissance for more placid MUDers? Does playing a role entitle a player to be 
+rude or aggressive?
+<P>Coercing players to adhere to social norms does little good when there are no 
+social norms. On a MUD geography, gender, ethnicity, status, and even gravity 
+aren't what they seem to be. One can well understand the confusion that results 
+when characters who are blue, furry, or who can fly insist that newcomers behave 
+as they would in real life. Furthermore, a social norm would assume the 
+existance of a society. A bunch of students taking study breaks have other 
+things on their minds than evolving codes of ethics.
+<P>Whether or not MUDs are societies, they generate governments the way mud 
+puddles were once assumed to generate worms. Traditionally there have been three 
+different approaches towards MUD administration.
+<P>There is the Jim Aspnes "leave it alone" method. MUDs tend to grow unruly 
+quickly with no one to boot troublemakers. In the absence of an active 
+administrator, most MUD communities evolve a form of vigilante justice utilizing 
+powerful MUD client software. Defensive capabilities include suppressing output 
+from problem players. As for offensive strategies, it is possible to chase 
+almost anyone away by quoting /usr/dict/words at them, especially if their 
+client isn't as powerful as yours.
+<P>On the other hand, some MUDs make a virtue of neglect by forming a community 
+where obnoxious behavior is the norm, and the central form of interaction is the 
+TinyMUD "kill" command.
+Catharsis is a well-known use of the virtual realm, and with a little work, 
+obscenity can be raised to an art form.
+<P>Some MUDs adopt more autocratic management style. This works best if the 
+person who administers the machine is also the head MUD wizard, and plays often 
+enough to know the players and to spot developing problems. Most such MUDs also 
+utilize a form of registration for players, so that anyone playing must have at 
+least a valid return address, and troublemakers can be permanently toaded.
+The biggest bug in this system is that an autocratic MUD will tend to collect 
+only people who like, or at least tolerate, the head wizard. A more subtle 
+problem is that the administrative load of fielding user complaints, registering 
+new players, and catching flack from users who contest trivial decisions 
+converts even the most congenial people into advanced cases of burn-out, an 
+unacceptable cost for a leisure-time activity. 
+<P>The third option is to evolve a collective MUD administration out of the most 
+capable players. It has been humorously remarked that while adventure gaming 
+muds allowed players to gain levels through solving puzzles and killing monsters 
+until they reached wizardhood and got to build, TinyMUDs and their cousins have 
+a similar form of ranking where players gain points by hanging out with the 
+wizards until they become wizards too. Some of the longest-running MUDs have 
+utilized a collective administration, often controlled by voting. These MUDs 
+evolve convoluted or even vicious politics while wizards and players split into 
+factions and accuse each other of gross improprieties in public fora such as 
+USENET.
+<P>On the other hand, politics are an inevitable part of real life. Some players 
+may consider politics fun, while others regard them with abject horror. The 
+Internet is growing ever more populated, and the blissful anarchy of earlier 
+days may give way to something more complex and sustainable.
+<P>
+<H2>Conclusions: "You can't solve social problems in software."</H2>
+<P>Years ago system administrators were chasing unwanted MUDs off their systems. 
+Now administrators are taking a second look. MUDs offer clear advantages over 
+mailing lists for connecting geographically disparate project members, keeping 
+students on co-op assignments in touch with friends and advisors, and granting 
+disabled students full access to the community. MUDs enable students to talk 
+real-time with students at other institutions, and cut down on the isolation 
+inherent to a suburban university. A virtual model of an institution allows 
+virtual tours for prospective students, employees, and contributors.
+<P>It is clear that further software development is a necessary precursor 
+towards forming stable MUD communities. Virtual communities are as stressed by 
+scarce resources as are real life communities, and knowing that a MUD database 
+will be thrown away as soon as the server exceeds process size or the system 
+software becomes obsolete suppresses building and other acts of community 
+investment.
+<P>Even with improvements to server software, the social problems of living in a 
+text-based virtual community have changed little in five years. Friction will 
+persist even after the stresses of limited resources are removed. 
+<P>There has been mainstream media attention to "social problems" on MUDs (this 
+is unsurprising; sex and death in cyberspace sell more papers than database 
+layer debates do). But if would-be MUD administrators think that virtual rape 
+and MUD addiction are the only issues they face, they will be surprised.
+<P>Should MUDs be anonymous, or should MUD ID's correspond to real-life contact 
+information? Anonymity may facilitate anti-social behavior, but registered 
+identities remove one of a MUD's most useful features: a veil for the shy. A 
+compromise is to restrict access to identity information to the MUD 
+administrators, but anything saved in a file is not as secret as one would wish.
+<P>Who gets to build? Restricting building to a particular theme or layout 
+excludes people with different ideas, but uncontrolled building makes it 
+impossible to to locate anything or explore the database. A bloated MUD is no 
+fun for anyone.
+<P>Who educates new users? Should abusive users be punished on the MUD, or will 
+there be real-life consequences? Can you know anyone's real-life identity for 
+sure? Transplanting your institution's code of behavior to a virtual environment 
+will not work. Notions of "property" and "person" that apply in real life may 
+not in virtual life. Text interaction is simpler than real-life interaction, 
+except that without tone and expression, it may be impossible to tell what 
+effect words have on another person. If one user bombards another with random 
+messages so that she or he is unable to use the MUD, has the offender committed 
+an act of insult, assault, or social inconvenience?
+<P>Even simple issues, like namespace management, can defy an easy answer. How 
+many people named Dave can one mud support? Will assigning unique alpha-numeric 
+user ID's to players kill the social atmosphere?
+<P>A little thought will suffice to show that every social problem cannot be 
+addressed by a code patch. An administrator of a MUD for college undergraduate 
+students might be tempted to install filters to suppress certain words. Students 
+will discover new ways to insult each other faster than the server can be 
+hard-coded for politeness. Since some people can be driven to tears with a few 
+simple English words, speech of any sort would become impossible in short order.
+<P>MUD administrators who ignore these issues will find themselves making up 
+rules on the fly at every incident. On the other hand, the social conditions 
+that make rules work will change much faster on a MUD than in real life.
+<P>"We, the MUDers of the world, in order to form a more perfect database, 
+establish connectivity, insure the availability of the kill command to the 
+competent, provide for a backup MUD in the case of net death, promote the 
+proliferation of clues and secure a site for ourselves and our posterity, do 
+ordain and establish this Constitution of Virtual States of Reality."
+<p></P></BODY></HTML>

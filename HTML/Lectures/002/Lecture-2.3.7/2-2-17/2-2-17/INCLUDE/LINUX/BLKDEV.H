@@ -1,0 +1,127 @@
+#ifndef _LINUX_BLKDEV_H
+#define _LINUX_BLKDEV_H
+
+#include <linux/major.h>
+#include <linux/sched.h>
+#include <linux/genhd.h>
+#include <linux/tqueue.h>
+
+/*
+ * Ok, this is an expanded form so that we can use the same
+ * request for paging requests when that is implemented. In
+ * paging, 'bh' is NULL, and the semaphore is used to wait
+ * for read/write completion.
+ */
+struct request {
+	volatile int rq_status;	/* should split this into a few status bits */
+#define RQ_INACTIVE		(-1)
+#define RQ_ACTIVE		1
+#define RQ_SCSI_BUSY		0xffff
+#define RQ_SCSI_DONE		0xfffe
+#define RQ_SCSI_DISCONNECTING	0xffe0
+
+	kdev_t rq_dev;
+	int cmd;		/* READ or WRITE */
+	int errors;
+	unsigned long sector;
+	unsigned long nr_sectors;
+	unsigned long nr_segments;
+	unsigned long current_nr_sectors;
+	char * buffer;
+	void * special;
+	struct semaphore * sem;
+	struct buffer_head * bh;
+	struct buffer_head * bhtail;
+	struct request * next;
+	int elevator_latency;
+};
+
+typedef void (request_fn_proc) (void);
+typedef struct request ** (queue_proc) (kdev_t dev);
+
+typedef struct elevator_s
+{
+	int read_latency;
+	int write_latency;
+	int max_bomb_segments;
+	unsigned int queue_ID;
+} elevator_t;
+
+#define ELEVATOR_DEFAULTS				\
+((elevator_t) {						\
+	128,			/* read_latency */	\
+	8192,			/* write_latency */	\
+	32,			/* max_bomb_segments */	\
+        0                       /* queue_ID */          \
+	})
+
+extern int blkelv_ioctl(kdev_t, unsigned long, unsigned long);
+
+typedef struct blkelv_ioctl_arg_s {
+	int queue_ID;
+	int read_latency;
+	int write_latency;
+	int max_bomb_segments;
+} blkelv_ioctl_arg_t;
+
+#define BLKELVGET   _IOR(0x12,106,sizeof(blkelv_ioctl_arg_t))
+#define BLKELVSET   _IOW(0x12,107,sizeof(blkelv_ioctl_arg_t))
+
+struct blk_dev_struct {
+	request_fn_proc		*request_fn;
+	/*
+	 * queue_proc has to be atomic
+	 */
+	queue_proc		*queue;
+	void			*data;
+	struct request		*current_request;
+	struct request   plug;
+	struct tq_struct plug_tq;
+
+	elevator_t elevator;
+};
+
+struct sec_size {
+	unsigned block_size;
+	unsigned block_size_bits;
+};
+
+extern struct sec_size * blk_sec[MAX_BLKDEV];
+extern struct blk_dev_struct blk_dev[MAX_BLKDEV];
+extern struct wait_queue * wait_for_request;
+extern void resetup_one_dev(struct gendisk *dev, int drive);
+extern void unplug_device(void * data);
+extern void make_request(int major,int rw, struct buffer_head * bh);
+
+/* md needs this function to remap requests */
+extern int md_map (kdev_t dev, kdev_t *rdev,
+				 unsigned long *rsector, unsigned long size);
+extern int md_make_request (struct buffer_head * bh, int rw);
+extern int md_error (kdev_t mddev, kdev_t rdev);
+
+extern int * blk_size[MAX_BLKDEV];
+
+extern int * blksize_size[MAX_BLKDEV];
+
+extern int * hardsect_size[MAX_BLKDEV];
+
+extern int * max_readahead[MAX_BLKDEV];
+
+extern int * max_sectors[MAX_BLKDEV];
+
+extern int * max_segments[MAX_BLKDEV];
+
+#define MAX_SECTORS 128
+
+#define MAX_SEGMENTS MAX_SECTORS
+
+#define PageAlignSize(size) (((size) + PAGE_SIZE -1) & PAGE_MASK)
+#if 0  /* small readahead */
+#define MAX_READAHEAD PageAlignSize(4096*7)
+#define MIN_READAHEAD PageAlignSize(4096*2)
+#else /* large readahead */
+#define MAX_READAHEAD PageAlignSize(4096*31)
+#define MIN_READAHEAD PageAlignSize(4096*3)
+#endif
+
+#endif

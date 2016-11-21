@@ -1,0 +1,189 @@
+[$ if( $fdat{action} eq 'new' ) $]
+	[- undef $udat{AkaID}; -]
+[$ endif $]
+[*
+use DBI;
+my( $dbh, $sth );
+
+my( $AutoID,$UserID,$UserName,$Password,$Email,$Address,$RegisteredClass,$ListenedClass,$SEX,$IDENTITY,$AGE,$SATISFIY,$LinuxWork,$SUPPORT ) = () ;
+my %CourseList = ();
+my( $AutoID,$Class,$Title,$Teacher,$Date,$Address ) = ();
+
+$dbh = DBI->connect( "DBI:mysql:database=aka;host=localhost", 'aka', 'flying/aka' ) or die "connect!" ;
+
+$sth = $dbh->prepare( q{
+	SELECT AutoID,Class,Title,Teacher,DATE_FORMAT(Date, '%b,%d %a %h:%i%p'),Address
+	FROM CourseList_TB order by AutoID
+	}) or die "prepare";
+$sth->execute or die "execute";
+while( ($AutoID,$Class,$Title,$Teacher,$Date,$Address) = $sth->fetchrow_array ){
+        if ($AutoID < 10){ $AutoID = "0".$AutoID; } else { $AutoID = $AutoID; }
+        $CourseList{$AutoID}{Class} = $Class;
+        $CourseList{$AutoID}{Title} = $Title;
+        $CourseList{$AutoID}{Teacher} = $Teacher;
+        $CourseList{$AutoID}{Date} = $Date;
+        $CourseList{$AutoID}{Address} = $Address;
+}
+$sth->finish;
+
+if( $fdat{action} eq 'edit' ){
+	$sth = $dbh->prepare( q{
+		SELECT AutoID,UserID,UserName,Password,Email,Address,RegisteredClass,ListenedClass
+		FROM StudentList_TB WHERE UserID=?
+	}) or die "prepare";
+	$sth->execute( $udat{AkaID} );
+	( $AutoID,$UserID,$UserName,$Password,$Email,$Address,$RegisteredClass,$ListenedClass )
+		= $sth->fetchrow_array ;
+	foreach $_ ( split( /\t/, $RegisteredClass ) ){
+		$CourseList{$_}{Checked} = 1;
+	} 
+	$sth->finish;
+}
+*]
+
+[- Execute('head') -] 
+[+ $Zixia::t->index() +]
+<br>
+[- Execute('index') -]
+<br>
+[+ $Zixia::t->misc() +]
+<p>
+[+ $Zixia::t->content() +]
+<br>
+[# Register New Account Started #]
+Aka讲座报名：（带有×号的为必填部分；同时也希望您能留下您的联系电话、呼机、住址，以方便我们与你联系；欢迎您<a href="mailto:linuxStudying-subscribe@egroups.com">加入</a>我们的<a href="mailto:linuxStudying@egroups.com">Linux培训邮件列表</a>，在该邮件列表中您可以及时地收到关于本次系列讲座的所有通知和消息，当然你也可以很方便的<a href="mailto:linuxStudying-unsubscribe@egroups.com">退出该邮件列表</a>。<font color=yellow>注意：263信箱可能不能加入该MailList）
+<form method="post" action="save.zixia">
+  <p> <br>
+  </p>
+  <table width=100% border="0" cellspacing="0" cellpadding="0">
+    <tr> 
+      <td><font color=lightgreen>英文 ID：</font></td>
+      <td> 
+        <input type="text" name="UserID" maxlength="16" value="[+ $UserID +]">
+        × </td>
+    </tr>
+    <tr> 
+      <td><font color=lightgreen>真实姓名：</font></td>
+      <td> 
+        <input type="text" name="UserName" maxlength="8" value="[+ $UserName +]">
+        × 中文姓名将做为发奖的身份确认，请务必正确填写 </td>
+    </tr>
+[$ if( $fdat{action} eq 'new' ) $]
+    <tr> 
+      <td><font color=lightgreen>密码：</font></td>
+      <td> 
+        <input type="password" name="Password1" maxlength="32">
+        × </td>
+    </tr>
+    <tr> 
+      <td><font color=lightgreen>密码确认：</font></td>
+      <td> 
+        <input type="password" name="Password2" maxlength="32">
+        × </td>
+    </tr>
+[$ endif $]
+    <tr> 
+      <td><font color=lightgreen>您的 E-Mail：</font></td>
+      <td> 
+        <input type="text" name="Email" maxlength="255" value="[+ $Email +]">
+      × 我们将主要通过该 Email 与您联系 </td>
+    </tr>
+    <tr> 
+      <td><font color=lightgreen>其他联系方式：</font></td>
+      <td> 
+        <input type="text" name="Address" maxlength="255" value="[+ $Address +]">
+        　     (电话、地址) 例：62772031   清华大学28#357</td>
+    </tr>
+    <tr> 
+      <td colspan="2"><br><br><br><br><br><font color=lightgreen>课程列表：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          ====> 请在下列您感兴趣的课程前打钩 <====</font><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <font color=yellow>注意：下列讲课时间、地点和顺序均有可能变动，一切以讲座前的通知为准。</font><br></td>
+    </tr>
+[* foreach $_ ( sort keys (%CourseList) ){
+if($_ eq "01" || $_ eq "11" || $_ eq "16") {
+        print <<__EOH__;
+    <tr> <td colspan="2"><hr width=75% align=left></td> </tr>
+__EOH__
+}
+        print <<__EOH__;
+    <tr>
+      <td colspan="2">
+          <input type="checkbox" name="RegisteredClass" value="$_"
+__EOH__
+	print $CourseList{$_}{Checked}?" checked":undef ;
+        print <<__EOH__;
+          > <font color=yellow>$CourseList{$_}{Class}  -  $CourseList{$_}{Title}</font> by $CourseList{$_}{Teacher} <br>
+      </td>
+    </tr>
+__EOH__
+}*]
+[$ if( $fdat{action} eq 'new' ) $]
+    <tr> 
+      <td><br><br><br><br><br><font color=lightgreen>讲座调查：</font><br><hr></td>
+      <td><br><br><br><br><br><font color=lightgreen>====> 谢谢您能帮助我们完成下列的讲座信息统计 <====</font><br><hr></td>
+    </tr>
+    <tr> 
+      <td  colspan="2"><font color=lightgreen>您的性别：</font></td>
+    </tr>
+    <tr>
+      <td> <input type="radio" name="SEX" value="M"> 男 </td>
+      <td> <input type="radio" name="SEX" value="F"> 女 </td>
+    </tr>
+    <tr> <td><br></td> <td><br></td> </tr>
+    <tr> 
+      <td  colspan="2"><font color=lightgreen>您来自什么机构：</font></td>
+    </tr>
+    <tr>
+      <td> <input type="radio" name="IDENTITY" value="U"> 学院 </td>
+      <td> <input type="radio" name="IDENTITY" value="C"> 公司 </td>
+    </tr>
+    <tr> <td><br></td> <td><br></td> </tr>
+    <tr>
+      <td colspan="2"><font color=lightgreen>您的年龄：</font></td>
+    </tr>
+    <tr>
+      <td> <input type="radio" name="AGE" value="Y"> 30岁以下 </td>
+      <td> <input type="radio" name="AGE" value="O"> 30岁以上 </td>
+    </tr>
+    <tr> <td><br></td> <td><br></td> </tr>
+    <tr>
+      <td  colspan="2"><font color=lightgreen>您对 AKA 第一期 Linux 编程讲座是否满意：</font></td>
+    </tr>
+    <tr>
+      <td> <input type="radio" name="SATISFIY" value="5"> 非常好 </td>
+      <td> <input type="radio" name="SATISFIY" value="4"> 基本满意 </td>
+    </tr>
+    <tr>
+      <td> <input type="radio" name="SATISFIY" value="3"> 还行吧 </td>
+      <td> <input type="radio" name="SATISFIY" value="2"> 不满意 </td>
+    </tr>
+    <tr> <td><br></td> <td><br></td> </tr>
+    <tr>
+      <td  colspan="2"><font color=lightgreen>您最近打算在 Linux 下做一些开发工作吗：</font></td>
+    </tr>
+    <tr>
+      <td> <input type="radio" name="LinuxWork" value="Y"> 是的 </td>
+      <td> <input type="radio" name="LinuxWork" value="N"> 还没有这个打算 </td>
+    </tr>
+    <tr> <td><br></td> <td><br></td> </tr>
+    <tr>
+      <td  colspan="2"><font color=lightgreen>如果您打算做一个新的自由软件项目，您最需要获得什么样的帮助：</font></td>
+    </tr>
+    <tr>
+      <td> <input type="radio" name="SUPPORT" value="F"> 资金支持 </td>
+      <td> <input type="radio" name="SUPPORT" value="O"> 组织支持 </td>
+    </tr>
+    <tr>
+      <td> <input type="radio" name="SUPPORT" value="T"> 技术支持 </td>
+      <td> <input type="radio" name="SUPPORT" value="P"> 宣传支持 </td>
+    </tr>
+[$ endif $]
+  </table>
+  <p> <br>
+  </p>
+	<center><input type="submit" value="提交"></center>
+</form>
+[# Register New Account Finished #]
+<br>
+[- Execute('end') -]

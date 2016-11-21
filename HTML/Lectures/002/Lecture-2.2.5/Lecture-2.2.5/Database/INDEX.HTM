@@ -1,0 +1,39 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta name="Microsoft Theme" content="blank 000, default">
+<meta name="Microsoft Border" content="tlb, default">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/index.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="数据库"></strong></font><br>
+<a href="../Session/index.htm"><img src="../_derived/back_cmp_blank000_back.gif" width="100" height="20" border="0" alt="上一页" align="middle"></a> <a href="../index.htm"><img src="../_derived/home_cmp_blank000_home.gif" width="100" height="20" border="0" alt="主页" align="middle"></a> <a href="../XML/index.htm"><img src="../_derived/next_cmp_blank000_next.gif" width="100" height="20" border="0" alt="下一页" align="middle"></a></p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+<a href="dbpool_conf.htm"><img src="_derived/dbpool_conf.htm_cmp_blank000_vbtn.gif" width="140" height="32" border="0" alt="数据库配置"></a><br><a href="use_dbpool.htm"><img src="_derived/use_dbpool.htm_cmp_blank000_vbtn.gif" width="140" height="32" border="0" alt="使用连接池"></a>
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<p>这里介绍数据库的两种连接办法：</p>
+<ol>
+  <li>使用JDBC直接连接数据库；</li>
+  <li>使用Resin自带的连接池连接数据库（推荐）</li>
+</ol>
+<p>resin可以在它自己的配置文件(/usr/local/resin/conf/resin.conf)中定义数据库连接池，并在其中直接制定JDBC驱动，数据库URL，用户名/密码，JSP中只需要一个连接池的代号就可以使用连接池，可以有效的隐藏底层数据。</p>
+<p>问题：使用Resin自带的连接池是否会降低可移植性？</p>
+<p>个人认为不会。因为Resin是使用了一个类（DBPool）来管理连接池，所有的接口都是DBPool提供，如果以后不使用Resin，肯定还是需要一个连接池管理类，只要接口与DBPool同名即可。</p>
+　
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="right">
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table></body>
+
+</html>

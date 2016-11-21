@@ -1,0 +1,75 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>画一些简单的元素</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>画一些简单的元素</H1> 
+ <P><UL>
+<H2>typedef struct{ short x, y; } XPoint;
+</H2>
+</UL><UL>
+<H2>XDrawPoint(display,d,gc,x,y); XDrawPoints(display,d,gc,points,npoints,mode) 
+</H2>
+</UL><UL>
+<H2>XClearArea(display,w,x,y,width,height,exposures)
+</H2>
+</UL><UL>
+<H2>XClearWindow(display,w) /* clears the window */
+</H2>
+</UL><UL>
+<H2>XFontStruct *XLoadQueryFont(display,name); XFreeFont(display,font_struct) 
+</H2>
+</UL><UL>
+<H2>int XTextWidth(font_struct,str, count)
+</H2>
+</UL><UL>
+<H2>XDrawString(display,d,gc,x, y,string,length)
+</H2>
+</UL><UL>
+<H2>XDrawImageString(display,d,gc,x, y,string,length) /*draws background too*/
+</H2>
+</UL><UL>
+<H2>typedef struct {
+</H2>
+</UL><UL>
+<H2>    char *chars;    /* pointer to string */
+</H2>
+</UL><UL>
+<H2>    int nchars;     /* number of characters */
+</H2>
+</UL><UL>
+<H2>    int delta;      /* delta between strings */
+</H2>
+</UL><UL>
+<H2>    Font font;      /* font to print it in, None don't change */
+</H2>
+</UL><UL>
+<H2>} XTextItem;
+</H2>
+</UL><UL>
+<H2>XDrawText(display,d,gc,x, y,items,nitems); Cursor XCreateFontCursor(display,shape);
+</H2>
+</UL><UL>
+<LI><H2>例子１，２</H2>
+</UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld013.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld015.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld014.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

@@ -1,0 +1,487 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>文件和目录</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        PRE { color: #ffffff; font-family: "fixed" }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="velvet.jpg">
+
+<A HREF="stdio.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="advio.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=CENTER>5.4&nbsp;&nbsp;文件和目录<BR><BR>
+</H1>
+
+<UL>
+    <LI><P>目录项属性</LI>
+    <LI><P>目录读取</LI>
+    <LI><P>文件的访问许可</LI>
+    <LI><P>目录及目录项操作</LI>
+    <LI><P>其他</LI>
+</UL>
+
+<H3>5.4.1&nbsp;&nbsp;目录项属性</H3>
+<UL>
+    <LI>stat/fstat/lstat</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;sys/types.h&gt;
+       #include &lt;sys/stat.h&gt;
+       #include &lt;unistd.h&gt;
+
+       int stat(const char *file_name, struct stat *buf);
+       int fstat(int filedes, struct stat *buf);
+       int lstat(const char *file_name, struct stat *buf);
+-------------------------------------------------------------------------------
+      struct stat
+      {
+          dev_t         st_dev;      /* device */
+          ino_t         st_ino;      /* inode */
+          mode_t        st_mode;     /* protection */
+          nlink_t       st_nlink;    /* number of hard links */
+          uid_t         st_uid;      /* user ID of owner */
+          gid_t         st_gid;      /* group ID of owner */
+          dev_t         st_rdev;     /* device type (if inode device) */
+          off_t         st_size;     /* total size, in bytes */
+          unsigned long st_blksize;  /* blocksize for filesystem I/O */
+          unsigned long st_blocks;   /* number of blocks allocated */
+          time_t        st_atime;    /* time of last access */
+          time_t        st_mtime;    /* time of last modification */
+          time_t        st_ctime;    /* time of last change */
+      };
+===============================================================================
+</PRE>
+
+    <LI>利用下面的宏, 可以根据 stat 结构的 st_mode 成员获知文件的类型</LI>
+
+<PRE>
+===============================================================================
+      S_ISLNK(m)  is it a symbolic link?
+      S_ISREG(m)  regular file?
+      S_ISDIR(m)  directory?
+      S_ISCHR(m)  character device?
+      S_ISBLK(m)  block device?
+      S_ISFIFO(m) fifo?
+      S_ISSOCK(m) socket?
+===============================================================================
+</PRE>
+
+    <LI>利用下面的位掩码, 利用 "与 (&)" 运算, 可从 st_mode 成员中获得某些信息</LI>
+
+<PRE>
+===============================================================================
+       S_IFMT     0170000   bitmask for the file type bitfields
+       S_IFSOCK   0140000   socket
+       S_IFLNK    0120000   symbolic link
+       S_IFREG    0100000   regular file
+       S_IFBLK    0060000   block device
+       S_IFDIR    0040000   directory
+       S_IFCHR    0020000   character device
+       S_IFIFO    0010000   fifo
+       S_ISUID    0004000   set UID bit
+       S_ISGID    0002000   set GID bit
+       S_ISVTX    0001000   sticky bit
+       S_IRWXU    00700     mask for user (file owner) permissions
+       S_IRUSR    00400     user has read permission
+       S_IWUSR    00200     user has write permission
+       S_IXUSR    00100     user has execute permission
+       S_IRWXG    00070     mask for group permissions
+       S_IRGRP    00040     group has read permission
+       S_IWGRP    00020     group has write permission
+       S_IXGRP    00010     group has execute permission
+       S_IRWXO    00007     mask for permissions for others (not in group)
+       S_IROTH    00004     others have read permission
+       S_IWOTH    00002     others have write permisson
+       S_IXOTH    00001     others have execute permission
+===============================================================================
+</PRE>
+    <LI>st_size: 文件大小, 只对正常文件, 符号链接及目录有效</LI>
+    <LI>st_atime: 文件数据的最后访问时间</LI>
+    <LI>st_mtime: 文件数据的最后修改时间</LI>
+    <LI>st_mtime: inode 状态的最后修改时间</LI>
+</UL>
+
+<H3>5.4.2&nbsp;&nbsp;目录读取</H3>
+<UL>
+    <LI>对目录具有读取许可, 就可以获得目录项清单</LI>
+    <LI>opendir/readdir/closedir</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;sys/types.h&gt;
+       #include &lt;dirent.h&gt;
+
+       DIR *opendir(const char *name);
+       struct dirent *readdir(DIR *dir);
+       int closedir(DIR *dir);
+------------------------------------------------------------------------------
+EXAMPLE:
+        /* List directory entries and do something based on file type */
+        static void ListDir (const char* path)
+        {
+            struct dirent* pDirEnt;
+            DIR* dir;
+            struct stat ftype;
+            char fullpath [MAX_PATH + 1];
+
+            dir = opendir (path);
+            while ((pDirEnt = readdir (dir)) != NULL) {
+
+                // Assemble full path name.
+                strcpy (fullpath, path);
+                strcat (fullpath, "/");
+                strcat (fullpath, pDirEnt-&gt;d_name);
+                
+                if (lstat (fullpath, &ftype) &lt; 0 ) {
+                   continue;
+                }
+
+                if (S_ISDIR (ftype.st_mode))
+                    ...
+                else if (S_ISREG(ftype.st_mode))
+                    ...
+                else
+                    ...
+            }
+            closedir(dir);
+        }
+===============================================================================
+</PRE>
+
+    <LI>rewinddir/seekdir/telldir/scandir</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;sys/types.h&gt;
+       #include &lt;dirent.h&gt;
+
+       void rewinddir(DIR *dir);
+
+       void seekdir(DIR *dir, off_t offset);
+       off_t telldir(DIR *dir);
+
+       int scandir(const char *dir, struct dirent ***namelist,
+              int (*select)(const struct dirent *),
+              int (*compar)(const struct dirent **, const struct dirent **));
+
+       int alphasort(const struct dirent **a, const struct dirent **b);
+------------------------------------------------------------------------------
+EXAMPLE:
+       /* print files in current directory in reverse order */
+       #include &lt;dirent.h&gt;
+
+       int main ()
+       {
+           struct dirent **namelist;
+           int n;
+
+           n = scandir (".", &namelist, 0, alphasort);
+           if (n &lt; 0)
+               perror ("scandir");
+           else
+               while (n--) printf("%s\n", namelist[n]-&gt;d_name);
+       }
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>5.4.3&nbsp;&nbsp;文件和目录的访问许可</H3>
+<UL>
+    <LI>文件访问许可</LI>
+
+<PRE>
+===============================================================================
+   S_IRWXU        00700     mask for user (file owner) permissions
+       S_IRUSR    00400     user has read permission
+       S_IWUSR    00200     user has write permission
+       S_IXUSR    00100     user has execute permission
+   S_IRWXG        00070     mask for group permissions
+       S_IRGRP    00040     group has read permission
+       S_IWGRP    00020     group has write permission
+       S_IXGRP    00010     group has execute permission
+   S_IRWXO        00007     mask for permissions for others (not in group)
+       S_IROTH    00004     others have read permission
+       S_IWOTH    00002     others have write permisson
+       S_IXOTH    00001     others have execute permission
+===============================================================================
+</PRE>
+
+    <LI>目录上的可执行许可到底控制什么</LI>
+
+<PRE>
+===============================================================================
+    * 要利用名称打开某个文件, 则必须在名称所涉及的所有目录上有执行许可.
+    * 目录的读许可允许我们获得目录中的文件清单. 可执行许可允许我们通过该目录而访问文件.
+    * 比如要访问 /etc/X11/XF86Config, 则必须拥有 /, /etc, /etc/X11 目录的可执行许可.
+===============================================================================
+</PRE>
+
+    <LI>SUID 和 GUID, 有效 UID 和 有效 GID, 保存的 SUID 和保存的 SGID</LI>
+    <LI>新文件和新目录的所有权</LI>
+<PRE>
+===============================================================================
+    * 新文件的用户 ID 设置为进程的有效组 ID.
+    * POSIX 定义新文件的组 ID 可以是进程的有效组 ID, 也可以是新文件所在目录的组 ID.
+    * Linux 根据目录是否有 SGID 位确定新文件的组 ID. 若有 SGID 标志, 则新文件的
+      组 ID 为所在目录的组 ID, 否则为进程的有效组 ID.
+===============================================================================
+</PRE>
+
+    <LI>用 access 函数可获得用户对文件的访问许可</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+
+       int access(const char *pathname, int mode);
+===============================================================================
+</PRE>
+
+    <LI>mode 的值决定了 access 所测试的许可, 值可取 R_OK, W_OK, X_OK 和 F_OK 的 "或" 组合</LI>
+
+    <LI>umask 设置进程创建文件的许可掩码</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;sys/types.h&gt;
+       #include &lt;sys/stat.h&gt;
+
+       mode_t umask(mode_t mask);
+===============================================================================
+
+</PRE>
+
+    <LI>实际的 umask 值为 mask & 0777</LI>
+    <LI>umask 返回先前的 umask 值, 没有错误返回</LI>
+    <LI>chmod/fchmod, chmod 不对符号链接进行操作</LI>
+<PRE>
+===============================================================================
+       #include &lt;sys/types.h&gt;
+       #include &lt;sys/stat.h&gt;
+
+       int chmod(const char *path, mode_t mode);
+       int fchmod(int fildes, mode_t mode);
+===============================================================================
+</PRE>
+
+    <LI>黏着位 (sticky bit)</LI>
+
+<PRE>
+===============================================================================
+    * 保存交换后的可执行正文, 以便节省装入时间. 该标志已经没有多少实际意义.
+    * 对普通文件没有任何效果.
+    * 对目录, 作为限制删除标志, 用来限制目录项的删除和重命名.
+===============================================================================
+</PRE>
+
+    <LI>chown/fchown/lchown</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;sys/types.h&gt;
+       #include &lt;unistd.h&gt;
+
+       int chown(const char *path, uid_t owner, gid_t group);
+       int fchown(int fd, uid_t owner, gid_t group);
+       int lchown(const char *path, uid_t owner, gid_t group);
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>5.4.4&nbsp;&nbsp;目录及目录项操作</H3>
+<UL>
+    <LI>truncate/ftruncate: 截短文件</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+
+       int truncate(const char *path, off_t length);
+       int ftruncate(int fd, off_t length);
+===============================================================================
+</PRE>
+
+    <LI>打开文件时用 O_TRUNC 可清空文件数据</LI>
+    
+    <LI>link/unlink: 建立指向文件的新目录项/删除目录项或文件</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+
+       int link (const char *oldpath, const char *newpath);
+       int unlink (const char *pathname);
+-------------------------------------------------------------------------------
+unlink 成功的先决条件:
+    * 作用于非目录文件.
+    * 对包含该目录项的目录, 必须具有写和执行许可.
+    * 若目录具有黏着位, 则必须满足: 拥有文件, 拥有目录或具有超级用户特权
+===============================================================================
+</PRE>
+
+    <LI>mkdir/rmdir</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;sys/stat.h&gt;
+       #include &lt;sys/types.h&gt;
+       #include &lt;fcntl.h&gt;
+       #include &lt;unistd.h&gt;
+
+       int mkdir (const char *pathname, mode_t mode);
+       int rmdir (const char *pathname);
+-------------------------------------------------------------------------------
+    * rmdir 只能删除空目录.
+===============================================================================
+</PRE>
+
+    <LI>remove/rename: 删除/重命名</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;stdio.h&gt;
+
+       int remove(const char *pathname);
+       int rename(const char *oldpath, const char *newpath);
+-------------------------------------------------------------------------------
+    * remove 可删除文件和目录, 分别等同于 unlink 和 rmdir.
+===============================================================================
+</PRE>
+
+    <LI>symlink/readlink: 建立/读取符号链接</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+
+       int symlink (const char *oldpath, const char *newpath);
+       int readlink (const char *path, char *buf, size_t bufsiz);
+-------------------------------------------------------------------------------
+    * 建立符号链接时, 不要求 oldpath 一定存在.
+    * open 沿链接前行, readlink 可读取链接本身的信息.
+===============================================================================
+</PRE>
+
+    <LI>chdir/fchdir/getcwd: 改变/获取当前工作目录</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+
+       int chdir(const char *path);
+       int fchdir(int fd);
+
+       char *getcwd(char *buf, size_t size);
+       char *get_current_dir_name(void);
+       char *getwd(char *buf);
+-------------------------------------------------------------------------------
+       * 内核维护的当前目录信息是索引节点而不是完整路径名.
+       * get_current_dir_name 是 GNU 的扩展.
+       * getwd 是 BSD 扩展
+===============================================================================
+</PRE>
+
+    <LI>utime: 修改文件的访问和更新时间</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;sys/types.h&gt;
+       #include &lt;utime.h&gt;
+       
+       int utime (const char *filename, struct utimbuf *buf);
+
+       #include &lt;sys/time.h&gt;
+
+       int utimes (char *filename, struct timeval *tvp);
+-------------------------------------------------------------------------------
+              struct utimbuf {
+                  time_t actime;         /* access time */
+                  time_t modtime;        /* modification time */
+              };
+              
+              struct timeval {
+                  long    tv_sec;        /* seconds */
+                  long    tv_usec;       /* microseconds */
+              };
+-------------------------------------------------------------------------------
+   * utime 返回的时间为日历时间, 即 1970 年 1 月 1 日 0:00:00 (UTC) 开始的秒数.
+   * 对 utimes 必须传递一个两元素的 struct timeval 数组, 分别接受访问时间和
+     修改时间. 这个时间也是自 1970 年 1 月 1 日 0:00:00 (UTC) 算起的.
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>5.4.5&nbsp;&nbsp;其他</H3>
+<UL>
+    <LI>特殊设备文件</LI>
+
+<PRE>
+===============================================================================
+    * stat 结构的 st_dev 包含了文件所在文件系统的设备号.
+    * stat 结构的 st_rdev 只对设备特殊文件有效.
+    * 对 st_dev 和 st_rdev, 用 major 和 minor 两个宏, 可得到主设备号和次设备号.
+===============================================================================
+</PRE>
+
+    <LI>sync 和 fsync: 同步</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+
+       int sync (void);
+       int fsync (int fd);
+       
+       #ifdef _POSIX_SYNCHRONIZED_IO
+       
+       int fdatasync (int fd);
+       
+       #endif
+-------------------------------------------------------------------------------
+    * sync 不等待实际的磁盘 I/O 结束, 只是将所有更新的块缓冲区进行排队.
+    * fsync 和 fdatasync 等待实际的磁盘 I/O 结束.
+    * fdatasync 只更新数据, 而 fsync 还要更新 inode 中的访问时间等信息.
+===============================================================================
+</PRE>
+
+</UL>
+
+<P>
+<BR><BR>
+</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="stdio.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="advio.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+</BODY>
+</HTML>
+

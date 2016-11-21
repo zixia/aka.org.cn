@@ -1,0 +1,62 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>与窗口管理器通信</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>与窗口管理器通信</H1> 
+ <P><UL>
+<LI><H2>Client可以告诉window manager如何显示或处理自己
+</H2>
+</UL><UL>
+<LI><H2>window manager可以忽略这些建议
+</H2>
+<UL>
+XStoreName(display,w, name) 
+<BR><BR>XSetIconName(display,w,icon_name) 
+<BR>
+<BR>typedef struct{
+<BR>long flags; /*InputHint,StateHint,IconPixmapHint,IconWindowHint,
+<BR>            IconPositionHint,IconMaskHint, WindowGroupHint, AllHints */
+<BR>Bool input;           /* does this application rely on the window manager to get keyboard input ? */
+<BR>int initial_state; /*NormalState,ZoomState,IconicState,InactiveState,DontCareState*/
+<BR>Pixmap icon_pixmap;
+<BR>Window icon_window;   /* window to be used as icon */
+<BR>int icon_x, icon_y;   /*initial icon position*/
+<BR>Pixmap icon_mask;
+<BR>XID window_group;     /* windows can be grouped */
+<BR>} XWMHints;
+<BR>
+<BR>typedef struct {
+<BR>  long flags;    /* which fields are defined. */
+<BR>  int x,y;
+<BR>  int width, height;
+<BR>  int min_width, max_width;
+<BR>  int min_height, max_height;
+<BR>  int width_inc, height_inc;
+<BR>  struct {int x; /* numerator   */ nt y; /* demoninator */ } min_aspect, max_aspect;
+<BR>} XSizeHints;
+<BR>
+<BR>void XSetNormalHints(display, w, hints)
+<BR>XSetWMHints(display,w,wmhints)
+<BR>XSetStandardProperties(display,w,window_name,icon_name,  icon_pixmap,argv,argc,hints)</UL></UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld020.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld022.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld021.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

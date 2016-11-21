@@ -1,0 +1,297 @@
+<html>
+<head><title>GIRL语法</title></head>
+<body>
+<h1 align=center>GIRL语法</h1>
+<hr>
+文件girl.y按照yacc的规则给出了GIRL的语法。下面给出其内容及相应的解释（斜体字）：
+<pre>
+%{
+%}
+
+%token  <a href="lex.html">_MODULE_ , _VERSION_ , _IMPORT_</a>
+%token  <a href="lex.html">_TYPE_ , _INTEGER_ , _FLOAT_ , _STRING_</a>
+%token  <a href="lex.html">_COLOR_ , _CURSOR_ , _FONT_ , _PIXMAP_</a>
+%token	<a href="lex.html">_BMP_ , _JPEG_ , _PNG_ , _PPM_ , _PS_ , _TIFF_ , _XPM_</a>
+%token	<a href="lex.html">_WIDGET_ , _SIGNAL_ , _DATASLOT_ , _RECEIVER_ , _TABLE_</a>
+
+%token	<a href="lex.html">NULL</a>
+
+%token	<a href="lex.html">TABLEITEM</a>
+%token	<a href="lex.html">FLOAT , INTEGER , STRING , IDENTIFIER</a>
+
+%token	<a href="lex.html">EQUAL , DOT , COMMA , COLON , SEMICOLON , SENDSLOT</a>
+%token	<a href="lex.html">LINKSLOT , LPAREN , RPAREN , LBRACKET , RBRACKET</a>
+%token	<a href="lex.html">LBRACE , RBRACE</a>
+
+%%
+
+girlfile	:	statementlist
+		;
+
+statementlist	:	statementlist statement
+		|
+		;
+
+statement	:	modulestatement
+		|       versionstatement
+		|	importstatement
+		|	typedefinition
+		|	signaldefinition
+		|	identifierassign
+		|	integerassign
+		|	floatassign
+		|	stringassign
+		|	colorassign
+		|	cursorassign
+		|	fontassign
+		|	pixmapassign
+		|	widgetdefinition
+		;
+</pre><a name="module"></a><pre>
+<a href="module.html#girl-statements">modulestatement</a>	:	_MODULE_ IDENTIFIER SEMICOLON
+		;
+</pre><a name="version"></a><pre>
+<a href="module.html#girl-statements">versionstatement</a>	:	_VERSION_ INTEGER DOT INTEGER DOT INTEGER SEMICOLON
+                        |       _VERSION_ INTEGER DOT INTEGER SEMICOLON
+                        |       _VERSION_ INTEGER SEMICOLON
+                        ;
+
+</pre><a name="import"></a><pre>
+<a href="declare.html#import">importstatement</a>	:	_IMPORT_ IDENTIFIER LBRACE describelist RBRACE
+		;
+
+describelist	:	describelist describe
+		|
+		;
+
+describe	:	integerdescribe
+		|	floatdescribe
+		|	stringdescribe
+		|	colordescribe
+		|	cursordescribe
+		|	fontdescribe
+		|	pixmapdescribe
+		|	widgetdescribe
+		;
+<a href="typedef.html" name="typedef">
+typedefinition</a>	:	IDENTIFIER EQUAL typevalue
+		;
+
+typevalue	:	_TYPE_ LPAREN compoundtypelist RPAREN
+		;
+
+compoundtypelist	:	compoundtypelist COMMA compoundtype
+			|	compoundtype
+			;
+
+compoundtype	:	IDENTIFIER
+		|	LPAREN compoundtypelist RPAREN
+		;
+<a href="signal.html" name="signaldef">
+signaldefinition</a>	:	IDENTIFIER EQUAL signalvalue SEMICOLON
+		;
+
+signalvalue		:	_SIGNAL_
+			|	_SIGNAL_ LPAREN typevalue RPAREN
+			;
+<a href="declare.html#integerdescribe" name="integerdescribe">
+integerdescribe</a>	:	_INTEGER_ identifierlist SEMICOLON
+		;
+<a href="declare.html#floatdescribe" name="floatdescribe">
+floatdescribe</a>	:	_FLOAT_ identifierlist SEMICOLON
+		;
+<a href="declare.html#stringdescribe" name="stringdescribe">
+stringdescribe</a>	:	_STRING_ identifierlist SEMICOLON
+		;
+<a href="declare.html#colordescribe" name="colordescribe">
+colordescribe</a>	:	_COLOR_ identifierlist SEMICOLON
+		;
+<a href="declare.html#cursordescribe" name="cursordescribe">
+cursordescribe</a>	:	_CURSOR_ identifierlist SEMICOLON
+		;
+<a href="declare.html#fontdescribe" name="fontdescribe">
+fontdescribe</a>	:	_FONT_ identifierlist SEMICOLON
+		;
+<a href="declare.html#pixmapdescribe" name="pixmapdescribe">
+pixmapdescribe</a>	:	_PIXMAP_ identifierlist SEMICOLON
+		;
+
+identifierlist	:	identifierlist COMMA IDENTIFIER
+		|	IDENTIFIER
+		;
+<a href="widget.html#widgetdescribe"name="widgetdescribe">
+widgetdescribe</a>	:	_WIDGET_ IDENTIFIER COLON IDENTIFIER LBRACE slotdescribelist RBRACE
+		;
+
+slotdescribelist	:	slotdescribelist slotdescribe
+			|	slotdescribe
+			;
+
+slotdescribe	:	dataslotdescribe
+		|	receiverdescribe
+		|	signalslotdescribe
+		;
+
+dataslotdescribe	:	_DATASLOT_ dataslotdescribelist SEMICOLON
+			;
+
+dataslotdescribelist	:	dataslotdescribelist COMMA dataslotitemdescribe
+			|	dataslotitemdescribe
+			;
+
+dataslotitemdescribe	:	IDENTIFIER LPAREN typevalue RPAREN
+			|	IDENTIFIER LPAREN typevalue RPAREN LINKSLOT INTEGER
+			;
+
+receiverdescribe	:	_RECEIVER_ receiverdescribelist SEMICOLON
+			;
+
+receiverdescribelist	:	receiverdescribelist COMMA receiveritemdescribe
+			|	receiveritemdescribe
+			;
+
+receiveritemdescribe	:	IDENTIFIER LPAREN typevalue RPAREN
+			|	IDENTIFIER LPAREN typevalue RPAREN LINKSLOT INTEGER
+			;
+
+signalslotdescribe	:	_SIGNAL_ signalslotdescribelist SEMICOLON
+			;
+
+signalslotdescribelist	:	signalslotdescribelist COMMA signalslotitemdescribe
+			|	signalslotitemdescribe
+			;
+
+signalslotitemdescribe	:	IDENTIFIER LPAREN identifierlist RPAREN
+			;
+
+identifierassign	:	IDENTIFIER EQUAL IDENTIFIER SEMICOLON
+			;
+<a href="define.html#integer" name="integer">
+integerassign</a>	:	IDENTIFIER EQUAL INTEGER SEMICOLON
+		;
+<a href="define.html#float" name="float">
+floatassign</a>	:	IDENTIFIER EQUAL FLOAT SEMICOLON
+		;
+<a href="define.html#string" name="string">
+stringassign</a>	:	IDENTIFIER EQUAL STRING SEMICOLON
+		;
+<a href="define.html#color" name="color">
+colorassign</a>	:	IDENTIFIER EQUAL colorvalue SEMICOLON
+		;
+
+colorvalue	:	_COLOR_ LPAREN STRING RPAREN
+		|	_COLOR_ LPAREN integervalue COMMA integervalue COMMA integervalue RPAREN
+		;
+integervalue	:	IDENTIFIER
+		|	INTEGER
+		;
+<a href="define.html#cursor" name="cursor">
+cursorassign</a>	:	IDENTIFIER EQUAL cursorvalue SEMICOLON
+		;
+
+cursorvalue	:	_CURSOR_ LPAREN STRING RPAREN
+		;
+<a href="define.html#font" name="font">
+fontassign</a>	:	IDENTIFIER EQUAL fontvalue SEMICOLON
+		;
+
+fontvalue	:	_FONT_ LPAREN STRING RPAREN
+		;
+<a href="define.html#pixmap" name="pixmap">
+pixmapassign</a>	:	IDENTIFIER EQUAL pixmapvalue SEMICOLON
+		;
+
+pixmapvalue	:	_BMP_ LPAREN STRING RPAREN
+		|	_JPEG_ LPAREN STRING RPAREN
+		|	_PNG_ LPAREN STRING RPAREN
+		|	_PPM_ LPAREN STRING RPAREN
+		|	_PS_ LPAREN STRING RPAREN
+		|	_TIFF_ LPAREN STRING RPAREN
+		|	_XPM_ LPAREN STRING RPAREN
+		;
+<a href="widget.html#widgetdefinition" name="widgetdefinition">
+widgetdefinition</a>	:	IDENTIFIER COLON IDENTIFIER LBRACE widgetdefstatelist RBRACE
+			;
+
+widgetdefstatelist	:	widgetdefstatelist widgetdefstateitem
+			|	widgetdefstateitem
+			;
+
+widgetdefstateitem	:	dataslotdefinition
+			|	receiverdefinition
+			|	slotassign
+			|	slotlink
+			|	signalslotdefinition
+			|	signalslotredefinition
+			;
+<a href="widget.html#dataslotdefinition" name="dataslotdefinition">
+dataslotdefinition</a>	:	_DATASLOT_ LPAREN identifierlist RPAREN EQUAL typevalue
+			|	_DATASLOT_ LPAREN identifierlist RPAREN EQUAL typevalue LINKSLOT INTEGER
+			;
+<a href="widget.html#receiverdefinition" name="receiverdefinition">
+receiverdefinition</a>	:	_RECEIVER_ LPAREN IDENTIFIER RPAREN EQUAL LPAREN typevalue COLON receiverfunc COMMA receiverfunc RPAREN
+			|	_RECEIVER_ LPAREN IDENTIFIER RPAREN EQUAL LPAREN typevalue COLON receiverfunc COMMA receiverfunc RPAREN LINKSLOT INTEGER
+			;
+receiverfunc		:	IDENTIFIER
+			|	NULL
+			;
+<a href="widget.html#slotassign" name="slotassign">
+slotassign</a>		:	IDENTIFIER slotassignlist
+			;
+slotassignlist		:	slotassignlist SENDSLOT slotvalue
+			|	SENDSLOT slotvalue
+			;
+
+slotvalue		:	IDENTIFIER
+			|	INTEGER
+			|	FLOAT
+			|	STRING
+			|	colorvalue
+			|	cursorvalue
+			|	fontvalue
+			|	pixmapvalue
+			|	widgetvalue
+			|	tablestatement
+			|	TABLEITEM
+			|	NULL
+			;
+<a href="widget.html#widgetvalue" name="widgetvalue">
+widgetvalue</a>		:	IDENTIFIER LBRACE widgetvaluesublist RBRACE
+			;
+
+widgetvaluesublist	:	widgetvaluesublist widgetvaluesub
+			|
+			;
+
+widgetvaluesub		:	slotassign
+			|	slotlink
+			;
+<a href="widget.html#slotlink" name="slotlink">
+slotlink</a>		:	identifierlist LINKSLOT INTEGER
+			;
+<a href="widget.html#signalslotdefinition" name="signalslotdefinition">
+signalslotdefinition</a>	:	_SIGNAL_ LPAREN IDENTIFIER RPAREN EQUAL IDENTIFIER LPAREN identifierlist RPAREN
+			;
+<a href="widget.html#signalslotredefinition" name="signalslotredefinition">
+signalslotredefinition</a>	:	_SIGNAL_ LPAREN IDENTIFIER RPAREN EQUAL IDENTIFIER
+			;
+<a href="widget.html#table" name="table">
+tablestatement</a>		:	_TABLE_ LBRACKET slotvalue RBRACKET LBRACE tablerowlist RBRACE
+			;
+
+tablerowlist		:	tablerowlist tablerow SEMICOLON
+			|	tablerow SEMICOLON
+			;
+
+tablerow		:	tablerow slotvalue
+			|	slotvalue
+			;
+</pre>
+<hr>
+<table align=center width=100% border=2><tr>
+<td><center><a href="index.html">返回首页</a></center>
+<td><center><a href="lex.html">GIRL词法</a></center>
+<td><center><a href="malito:blazing@263.net">与我联系</a></center>
+</tr></table>
+</body>
+</html>

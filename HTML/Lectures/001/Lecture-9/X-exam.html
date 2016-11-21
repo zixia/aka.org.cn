@@ -1,0 +1,132 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=GB2312">
+    <TITLE>X program examination</TITLE>
+</HEAD>
+<BODY>
+<A HREF="X-prog.html">上一页</A>
+<A HREF="Gnome.html">下一页</A>
+
+
+<P><B><FONT SIZE=+2>A basic example</FONT></B>
+<PRE>
+
+
+#include &ltX11/Xlib.h&gt
+#define HELLO "hello world"
+
+main(int argc, char **argv)
+{
+
+	Display *display;  // X server connection
+	Window *win;       //  Window ID
+
+	GC  gc;                // Grpahics context
+	int bw = 2 		// Border width
+	int bc = BlackPixel;  // Border color
+	int bgc = WhitePixel;  // Window background color
+	XSizeHints   hints;     // Window sizing hints
+	XEvent  event;            // Event data Structure
+
+	// Open the display
+	display = XOpenDisplay(NULL);
+
+	// Set hints for window size and position
+	hints.x = 200; hints.y = 200;
+	hints.width=300; hints.height=200;
+	hints.flags= PPosition| PSize;
+
+	// Create the window
+	win = XCreateSimpleWindow(display, DefaultRootWindow(display), hints.x, hints.y,  hints.width, hints.heigth, bw, bc, bgc);
+
+	XSetStandardProperties(display, win, HELLO, HELLO, argv, argc, &hints);
+
+	// Create a grpahics context for writing the text
+	gc = XCreateGC(dispaly, win, NULL, NULL);
+
+	// Specify events of interest (only exposure)
+	XSelectInput(display, win, ExposureMask);
+
+	// Show the window
+	XMapWindow(display, win);  
+
+	// Event loop
+	while (TRUE) {
+	   XNextEvent(display, &event);
+	   // Discard all but the most recent expose event
+	   if (event.type == Expose && event.xexpose.count == 0){
+               int x, y;
+               while (XCheckTypedEvent(display, Expose, &Event));
+               XClearWindow(display, win);
+               //********  Print "hello world" !! ******
+               XDrawImageString(display, win, gc, 50, 50, HELLO, strlen(HELLO));
+       }  //End if
+    }  // end while
+
+    exit(0);
+
+}
+
+</PRE>
+<P><B><FONT SIZE=+2>A Motif example</FONT></B>
+<PRE>
+<CENTER><P><IMG SRC="push.gif"><P>
+图2：一个Motif编程的例子</CENTER>
+<P>
+#include &lt;Xm/Xm.h&gt; 
+#include &lt;Xm/PushB.h&gt;
+
+main(int argc, char **argv) 
+
+{   Widget top_wid, button;
+    XtAppContext  app;
+   
+    top_wid = XtVaAppInitialize(&amp;app, &quot;Push&quot;, NULL, 0,
+        &amp;argc, argv, NULL, NULL);
+
+    button = XmCreatePushButton(top_wid, &quot;Push_me&quot;, NULL, 0);
+
+<P>  
+
+    /* tell Xt to manage button */
+	XtManageChild(button);
+   
+				/* attach fn to widget */
+    XtAddCallback(button, XmNactivateCallback, pushed_fn, NULL);
+
+    XtRealizeWidget(top_wid); /* display widget hierarchy */
+    XtAppMainLoop(app); /* enter processing loop */ 
+
+}
+
+void pushed_fn(Widget w, XtPointer client_data, 
+               XmPushButtonCallbackStruct *cbs) 
+  {   
+     printf(&quot;Don't Push Me!!\n&quot;);
+  }
+</PRE>
+</SMALL>
+
+Event dispatching can be handled in one of three ways.
+
+
+
+<ul>
+
+<li> Polling: Widgets or application programs poll the devices
+for input.
+
+<li> Messages: Events are asynchronously sent by devices to
+widgets.
+
+<li> A widget may register all callback, which is a pointer to a
+function or method  that handles the event type. The window
+manager will call the specified function whenever the event
+occurs.
+
+</ul>
+<P>
+<A HREF="X-prog.html">上一页</A>
+<A HREF="Gnome.html">下一页</A><P>
+</BODY>
+</HTML>

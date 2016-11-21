@@ -1,0 +1,1411 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Aka 杂志</title>
+</head>
+
+<body bgcolor="#ffffff">
+<div align="center"><center>
+
+<table cellspacing="0" cellpadding="0" width="630" border="0">
+      <tr> 
+        <td bgcolor="#EEEDB7"> 
+          <h1 align="center">The New Methodology<br>
+            新方法论</h1>
+          <div style='layout-grid:15.6pt'> 
+            <p align="center"><b>作者</b> Martin Fowler(Chief Scientist, <a href="http://www.thoughtworks.com/">ThoughtWorks</a>)</p>
+            <p align="center"><b>审校</b> xiaobo [AKA]<b><br>
+              译者</b> xiaobo 燕子 stoneboy ihero Luck 袁媛 <br>
+              mrchenlei_sh iepro 刘昊飞 赵烁 Kreavlin [AKA]</p>
+            <div align="center"><a href="index.html"><font size="2"><b>[返回]</b></font></a></div>
+            <p class=MsoIndexHeading>In the past few years there's been a rapidly 
+              growing interest in "lightweight" methodologies. Alternatively characterized 
+              as an antidote to bureaucracy or a license to hack they've stirred 
+              up interest all over the software landscape. In this essay I explore 
+              the reasons for lightweight methods, focusing not so much on their 
+              weight but on their adaptive nature and their people-first orientation. 
+              I also give a summary and references to the processes in this school 
+              and consider the factors that should influence your choice of whether 
+              to go down this newly trodden path. </p>
+            <p class=MsoIndexHeading>在过去的几年里，人们对“轻量级”方法论的兴趣大大增加了。作为对官僚式方法论的解毒剂或者作为对许可证模式的取代，它们激起了软件领域的广泛兴趣。在这篇文章中我将探讨采用轻量级方法的理由，但并非关注它到底有多重或多轻，而是关注它们的适应性和以人为本的指导思想。考虑可能影响你决定是否在这条新的道路上继续走下去，我还提供了这个学校课程的一个概要和参考。</p>
+            <p>　　Last Significant Update: <a 
+href="newMethodology_Chinese.html#version-list">November 2000</a> </p>
+            <p>　　At <a href="http://www.sdexpo.com/">SD East </a>I gave a keynote 
+              talk <a 
+href="http://www.technetcast.com/tnc_play_stream.html?stream_id=425">Keeping Software 
+              Soft</a> based on this article - which you can watch in streaming 
+              video if you have plenty of time to waste! This article was also 
+              published in an abridged form in the December issue of <a 
+href="http://www.sdmagazine.com/">Software Development</a>. </p>
+            <ul>
+              <li><a 
+  href="newMethodology_Chinese.html#N74">从无到重再到轻</a> 
+              <li><a 
+  href="newMethodology_Chinese.html#N119">预见性与适应性</a> 
+                <ul>
+                  <li><a 
+    href="newMethodology_Chinese.html#N124">设计与施工的分离</a> 
+                  <li><a 
+    href="newMethodology_Chinese.html#N196">需求的不可预见性</a> 
+                  <li><a 
+    href="newMethodology_Chinese.html#N229">预测是不可能的吗？</a> 
+                  <li><a 
+    href="newMethodology_Chinese.html#N250">不可预料过程的控制</a> 
+                  <li><a 
+    href="newMethodology_Chinese.html#N271">适应性客户</a></li>
+                </ul>
+              <li><a 
+  href="newMethodology_Chinese.html#N293">以人为本</a> 
+                <ul>
+                  <li><a 
+    href="newMethodology_Chinese.html#N301">可替换的程序员</a>
+                  <li><a 
+    href="newMethodology_Chinese.html#N340">程序员是需要承担责任的专家</a>
+                  <li><a 
+    href="newMethodology_Chinese.html#N358">管理以人为本的过程</a>
+                  <li><a 
+    href="newMethodology_Chinese.html#N388">商业领导的职责</a></li>
+                </ul>
+              <li><a 
+  href="newMethodology_Chinese.html#N407">自适应过程</a>
+              <li><a 
+  href="newMethodology_Chinese.html#N445">各种方法论</a> 
+                <ul>
+                  <li><a 
+    href="newMethodology_Chinese.html#N453">XP(极限编程)</a>
+                  <li><a 
+    href="newMethodology_Chinese.html#N547">Cockburn的水晶家族</a>
+                  <li><a 
+    href="newMethodology_Chinese.html#N583">开放源码</a>
+                  <li><a 
+    href="newMethodology_Chinese.html#N615">Highsmith的适应性软件开发</a>
+                  <li><a 
+    href="newMethodology_Chinese.html#N657">SCRUM</a> 
+                  <li><a 
+    href="newMethodology_Chinese.html#N693">Coad的特性驱动开发</a>
+                  <li><a 
+    href="newMethodology_Chinese.html#N736">DSDM(动态系统开发方法)</a>
+                  <li><a 
+    href="newMethodology_Chinese.html#N766">RUP是轻型方法吗？</a>
+                  <li><a 
+    href="newMethodology_Chinese.html#N802">其它资源</a></li>
+                </ul>
+              <li><a 
+  href="newMethodology_Chinese.html#N853">应该走轻方法之路吗？</a> 
+                <ul>
+                  <li><a 
+    href="newMethodology_Chinese.html#N897">哪一种可适应性的方法？</a></li>
+                </ul>
+              <li><a 
+  href="newMethodology_Chinese.html#N919">感谢</a>
+              <li><a 
+  href="newMethodology_Chinese.html#N931">修订记录</a></li>
+            </ul>
+            <h2><a name=N74></a>From Nothing, to Heavy, to Light<br>
+              从无到重再到轻 </h2>
+            <p>Most software development is a chaotic activity, often characterized 
+              by the phrase "code and fix". The software is written without much 
+              of an underlying plan, and the design of the system is cobbled together 
+              from many short term decisions. This actually works pretty well 
+              as the system is small, but as the system grows it becomes increasingly 
+              difficult to add new features to the system. Furthermore bugs become 
+              increasingly prevalent and increasingly difficult to fix. A typical 
+              sign of such a system is a long test phase after the system is "feature 
+              complete". Such a long test phase plays havoc with schedules as 
+              testing and debugging is impossible to schedule. <br>
+              大多数的软件开发是一个混乱的过程，经常被形容为“编码和补丁”，写的软件根本没有计划，系统的设计中充斥着许多临时的决定。当系统还很小的时候这确实有效，然而系统变得更大，添加新得功能就会越来越困难。更糟的是，Bug也会越来越多，而且越来越难修补。对于这种系统，经常可以看到这样的情形：在号称“功能完成”后却还要经过一个长长的测试期。这种测试期总是把计划打破，因为测试和调试是无法预先计划的。 
+            </p>
+            <p>We've lived with this style of development for a long time, but 
+              we've also had an alternative for a long time: methodology. Methodologies 
+              impose a disciplined process upon software development with the 
+              aim of making software development more predictable and more efficient. 
+              They do this by developing a detailed process with a strong emphasis 
+              on planning inspired by other engineering disciplines. <br>
+              我们在这样的开发模式中渡过了很长的时间，但在很长的时间里我们也有另外的选择：方法论。方法论在软件开发中强加上一套严格的过程，旨在使软件开发更可预见并更加有效。这些方法论借鉴其它的工程规范，通过制定一个严格强调计划的详细的过程来达到这样的目标。 
+            </p>
+            <p>These methodologies have been around for a long time. They've not 
+              been noticeable for being terribly successful. They are even less 
+              noted for being popular. The most frequent criticism of these methodologies 
+              is that they are bureaucratic. There's so much stuff to do to follow 
+              the methodology that the whole pace of development slows down. Hence 
+              they are often referred to as heavy methodologies, or to use <a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0932633404">Jim 
+              Highsmith's</a> term: monumental methodologies. <br>
+              这些方法论在相当长的一段时间里都逡巡不前。它们并没有获得极大的成功而引起关注，甚至都没有流行起来，只要少数人关心它们。对于这些方法学的最常见的批评是它们太庞大笨重了。这些方法要遵循的规则是如此之多，以致往往阻碍整体的开发进度。因此它们常常被称为重量级方法学，或用Jim 
+              Highsmith的话说：不朽的方法论。 </p>
+            <p>As a reaction to these methodologies, a new group of methodologies 
+              have appeared in the last few years. Although there's no official 
+              name for them, they are often referred to as light methodologies 
+              - signaling a clear reaction to the heavyweight methodologies. For 
+              many people the appeal of these lightweight methodologies is their 
+              reaction to the bureaucracy of the heavy weight methodologies. These 
+              new methods attempt a useful compromise between no process and too 
+              much process, providing just enough process to gain a reasonable 
+              payoff. <br>
+              对这些方法论随之而来的反应是，一系列新的方法论近几年来开始出现。尽管它们还没有正式的名称，它们通常作为与原有的重量级方法论截然不同的轻量级方法论被提及。对许多人来说，他们对于原来这些重量级的方法论的反应便是寻求新的轻量级方法论。这些新方法论努力在没有任何过程控制和太烦琐的过程控制之间的寻找中间路线，它们只要够用就可以了。 
+            </p>
+            <p>The result of all of this is that lightweight methods have some 
+              significant changes in emphasis from heavyweight methods. The most 
+              immediate difference is that they are less document-oriented, usually 
+              emphasizing a smaller amount of documentation for a given task. 
+              In many ways they are rather code-oriented: following a route that 
+              says that the key part of documentation is source code.<br>
+              结果便是，轻量级方法论强调对于重量级方法的一些重要改变。其中最明显的就是：它们更少以文件为导向，对于特定的任务而言，它们只需处理更少的文件。在许多方面，它们更是以代码为导向：遵循“关键文档就是源码”的原则。 
+            </p>
+            <p>However I don't think this is the key point about lightweight methods. 
+              Lack of documentation is a symptom of two much deeper differences: 
+              <br>
+              然而我不认为这是轻量级的关键特征。少一些文件只是以下两种更深层区别的表象而已。 
+            <ul>
+              <li><i>Light methods are adaptive rather than predictive.</i> Heavy 
+                methods tend to try to plan out a large part of the software process 
+                in great detail for a long span of time, this works well until 
+                things change. So their nature is to resist change. The light 
+                methods, however, welcome change. They try to be processes that 
+                adapt and thrive on change, even to the point of changing themselves. 
+                <br>
+                轻量级方法论更主要的是适应性而非计划性。重量级的方法总是要对一个庞大的软件过程制定一个长期的详细的计划，如果事情不发生改变，它是会很有效的。所以它们的天性是要抵制这种改变。相反，轻量级方法学却欢迎改变的到来，它们会努力适应变化并因变化而成长，甚至改变方法学本身。 
+              <li><i>Light methods are people-oriented rather than process-oriented.</i> 
+                They explicitly make a point of trying to work with peoples' nature 
+                rather than against them and to emphasize that software development 
+                should be an enjoyable activity. <br>
+                轻量级方法论是以人为本的而非以过程为本。它们明确表达这样的观点：尊重而非压制人的天性，并强调软件开发应该是一件愉快的事情。 
+              </li>
+            </ul>
+            <p></p>
+            <p>In the following sections I'll explore these differences in more 
+              detail, so that you can understand what an adaptive and people-centered 
+              process is like, it's benefits and drawbacks, and whether it's something 
+              you should use: either as a developer or customer of software. <br>
+              在以下的章节里，我将更详细的与大家探究这些不同点，然后你就可以理解什么是适应的、以人为本的过程，它的优缺点，以及它是否就是你要用的东西：开发者也好，使用者也好。 
+            </p>
+            <h2><a name="N119"></a>Predictive versus Adaptive<br>
+              预见性与适应性 </h2>
+            <h3><a name="N124"></a>Separation of Design and Construction<br>
+              设计与施工的分离 </h3>
+            <p>The usual inspiration for methodologies is engineering disciplines 
+              such as civil or mechanical engineering. Such disciplines put a 
+              lot of emphasis on planning before you build. Such engineers will 
+              work on a series of drawings that precisely indicate what needs 
+              to be built and how these things need to be put together. Many design 
+              decisions, such as how to deal with the load on a bridge, are made 
+              as the drawings are produced. The drawings are then handed over 
+              to a different group, often a different company, to be built. It's 
+              assumed that the construction process will follow the drawings. 
+              In practice the constructors will run into some problems, but these 
+              are usually small.<br>
+              推动方法论发展的动力是工程理论，如土木工程和机械工程。这些理论更多地强调的是建前规划。这类工程师会绘制许多图纸来精确说明需要建什么，这些要建的结构应当如何连接在一起。许多设计决策（如处理桥梁载荷的方法）都是在图纸设计时就定下来的。这些图纸通常会交给另外的群体（通常是另一个公司）来施工，而且通常假定施工过程遵循图纸设计。但施工者在实际建造中肯定会遇到一些问题，不过这些问题一般都很好解决。 
+            </p>
+            <p>Since the drawings specify the pieces and how they need to be put 
+              together, they act as the foundation for a detailed construction 
+              plan. Such a plan can figure out the tasks that need to be done 
+              and what dependencies exist between these tasks. This allows for 
+              a reasonably predictable schedule and budget for construction. It 
+              also says in detail how the people doing the construction work should 
+              do their work. This allows the construction to be less skilled intellectually, 
+              although they are often very skilled manually. <br>
+              图纸规定了有多少结构，它们应当如何组合在一起，因此它是详细的施工规划的基础。详细施工规划清楚地说明了有多少任务，各任务之间的牵连，从而能够合理估算施工时间和施工预算。详细设计规划也说明了工人们应该如何进行工作安排。这样施工中就不必太多动脑，只要手工熟练就可以了。 
+            </p>
+            <p>So what we see here are two fundamentally different activities. 
+              <i>Design</i> which is difficult to predict and requires expensive 
+              and creative people, and <i>construction</i> which is easier to 
+              predict. Once we have the design, we can plan the construction. 
+              Once we have the plan for the construction, we can then deal with 
+              construction in a much more predictable way. In civil engineering 
+              construction is much bigger in both cost and time than design and 
+              planning.<br>
+              从上面我们可以看出，其中涉及到两种根本不同的活动：设计和施工，设计难以预言，而且花费较大，需要有创造性的人才；而施工则易于预见。一旦我们有了设计，就可以做施工规划了。一旦有了施工规划，我们就可以以一种更有预见性的方式来安排施工。在土木工程建设中，施工所用的时间和费用都远比在设计和规划中花费的多。 
+            </p>
+            <p>So the approach for many methodologies looks like this: we want 
+              a predictable schedule that can use people with lower skills. To 
+              do this we must separate design from construction. Therefore we 
+              need to figure out how to do the design for software so that the 
+              construction can be straightforward once the planning is done. <br>
+              许多方法论的就由此而来：首先需要有一个可预期的进度表，然后由没有太多技能的工人就可以实现。为了做到这一点，必须把设计和施工分开。因此就要弄清楚如何做软件设计，这样一旦设计好后，就可以直接“施工”了。 
+            </p>
+            <p>So what form does this plan take? For many, this is the role of 
+              design notations such as the <a 
+href="http://www.amazon.com/exec/obidos/ASIN/020165783X">UML</a>. If we can make 
+              all the significant decisions using the UML, we can build a construction 
+              plan and then hand these designs off to coders as a construction 
+              activity. <br>
+              这个规划应该以什么样的形式呈现呢？在多数情况下，这只是像UML这样的设计任务。如果我们所有的重大决策都是应用UML做出的，那么就可以做出施工规划，然后把这些设计像施工任务一样交给编码人员。 
+            </p>
+            <p>But here lies crucial questions. Can you get a design that is capable 
+              of turning the coding into a construction activity? And if so, is 
+              construction sufficiently larger in cost and time to make this approach 
+              worthwhile? <br>
+              但这正是关键问题所在。你能得到一个把编码简单到有如施工任务那样的设计吗？即便可以，但如果太费时间，又开资大，这样的方法值得采用吗？ 
+            </p>
+            <p>All of this brings a few questions to mind. The first is the matter 
+              of how difficult it is to get a UML-like design into a state that 
+              it can be handed over to programmers. The problem with a UML-like 
+              design is that it can look very good on paper, yet be seriously 
+              flawed when you actually have to program the thing. The models that 
+              civil engineers use are based on many years of practice that are 
+              enshrined in engineering codes. Furthermore the key issues, such 
+              as the way forces play in the design, are amenable to mathematical 
+              analysis. The only checking we can do of UML-like diagrams is peer 
+              review. While this is helpful it leads to errors in the design that 
+              are often only uncovered during coding and testing. Even skilled 
+              designers, such as I consider myself to be, are often surprised 
+              when we turn such a design into software. <br>
+              这又引出几个新问题。首先，把一个类似UML的设计转换成可以移交给程序员的设计有多难。有了类似UML的设计后也还是有问题，虽然它表面上看上去很好，但当必须在编程中实现时却有严重缺陷。土木工程师们所用的模型是基于多年实践经验的，这些实践经验都在工程规划中考虑到了。还有一个关键问题，在设计中使用的方法应该遵从数学分析。对于类似UML的图表，唯一的检查方法是配对校阅(peer 
+              review)。尽管这种方法比较有效，但它会导致设计错误，这些错误只能在编码和测试时发现。即使是熟练的设计者（我自认为我就是），在把这样的设计变成软件时也经常会感到惊讶。 
+            </p>
+            <p>Another issue is that of comparative cost. When you build a bridge, 
+              the cost of the design effort is about 10% of the job, with the 
+              rest being construction. In software the amount of time spent in 
+              coding is much, much less (<a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=1556159005">McConnell</a> 
+              suggests that for a large project, only 15% of the project is code 
+              and unit test, an almost perfect reversal of the bridge building 
+              ratios. Even if you lump in all testing as part of construction, 
+              then design is still 50% of the work.) This raises an important 
+              question about the nature of design in software compared to its 
+              role in other branches of engineering. <br>
+              另一个问题是比较成本，当建造一座桥时，设计开销占整个工作的10%，90%用于施工，而在软件中，用于编码的时间少得多（McConnell建议，对于大型项目，只有15%的开销用于编码和单元测试。而桥梁工程中比率完全相反。即使把所有的测试开销都算在施工中，设计开销也要占到整个工作量的50%）。这就提出了一个重要的问题，软件设计与其他工程相比本质上就不同。 
+            </p>
+            <p>These kinds of questions led Jack Reeves to <a 
+href="http://www.bleading-edge.com/Publications/C++Journal/Cpjour2.htm">suggest</a> 
+              that in fact the source code is a design document and that the construction 
+              phase is actually the use of the compiler and linker. Indeed anything 
+              that you can treat as construction can and should be automated. 
+              <br>
+              这类问题使得Jack Reeves建议，在实际中，编写源代码属于设计阶段，而编译和连接是施工阶段。实际上一切可以被当作“施工”的事情都能够而且应该自动化。 
+            </p>
+            <p>This thinking leads to some important conclusions: <br>
+              这一想法可以得出一些重要结论。 
+            <ul>
+              <li>In software: construction is so cheap as to be free <br>
+                在软件方面：施工如此廉价以致都是免费的。 
+              <li>In software all the effort is design, and thus requires creative 
+                and talented people <br>
+                在软件方面所有的成就来自设计，因此需要有创造性的、有才能的人。 
+              <li>Creative processes are not easily planned, and so predictability 
+                may well be an impossible target. <br>
+                创造性过程是不易于规划的，因此可预言性无疑是不可能的。 
+              <li>We should be very wary of the traditional engineering metaphor 
+                for building software. It's a different kind of activity and requires 
+                a different process <br>
+                在构建软件时，应该对传统工程所隐含的东西非常警惕。构建软件不同于其他活动，它需要采用不同的过程。 </li>
+            </ul>
+            <p></p>
+            <h3><a name="N196"></a>The Unpredictability of Requirements<br>
+              需求的不可预见性 </h3>
+            <p>There's a refrain I've heard on every problem project I've run 
+              into. The developers come to me and say "the problem with this project 
+              is that the requirements are always changing". The thing I find 
+              surprising about this situation is that anyone is surprised by it. 
+              In building business software requirements changes are the norm, 
+              the question is what we do about it. <br>
+              在我所接触的每一个有问题的项目中我都反复听到一种言辞，开发者跑过来对我说：“这个项目的问题就是它的需求老是在变化。”对于这种状况我发现一种惊人的事实：几乎每一个人都被它所震惊。在构建商业软件的过程中需求变化是正常的事件，问题是我们怎样来对待。 
+            </p>
+            <p>One route is to treat changing requirements as the result of poor 
+              requirements engineering. The idea behind requirements engineering 
+              is to get a fully understood picture of the requirements before 
+              you begin building the software, get a customer sign-off to these 
+              requirements, and then set up procedures that limit requirements 
+              changes after the sign-off. <br>
+              一条路是把变化着的需求看作是拙劣的需求控制的后果。需求控制的思想就是在构建软件之前事先勾画出一幅对需求进行全面细致描述的图画，然后在取得客户的肯定之后，建立限制客户肯定后的需求变化的程序条款。 
+            </p>
+            <p>One problem with this is that just trying to understand the options 
+              for requirements is tough. It's even tougher because the development 
+              organization usually doesn't provide cost information on the requirements. 
+              You end up being in the situation where you may have some desire 
+              for a sun roof on your car, but the salesman can't tell you if it 
+              adds $10 to the cost of the car, or $10,000. Without much idea of 
+              the cost, how can you figure out whether you want to pay for that 
+              sunroof? <br>
+              这种方式的一个问题就是要知道需求的变数是非常困难的。更加困难的是开发组织并没有提供关于需求的价值信息。也许你会处于这样一个情况：你想要在自己新买的车上加一个遮阳板，但销售人员却不能告诉你要这样的话是在汽车的价值上再加十美元还是一万美元。对于价值不太肯定，你怎么能够决定是否付钱买下那个遮阳板呢？ 
+            </p>
+            <p>Estimation is hard for many reasons. Part of it is that software 
+              development is a design activity, and thus hard to plan and cost. 
+              Part of it is that the basic materials keep changing rapidly. Part 
+              of it is that so much depends on which individual people are involved, 
+              and individuals are hard to predict and quantify. <br>
+              由于各种原因估算是很困难的。其中的一个原因是软件是一个设计活动，于是很难计划和预算。另一个原因就是基本的原料总是在迅速的改变。此外，还因为项目的成功要更多的依靠参与的人员，而且对人的预测和量化也是复杂的。 
+            </p>
+            <p>Software's intangible nature also cuts in. It's very difficult 
+              to see what value a software feature has until you use it for real. 
+              Only when you use an early version of some software do you really 
+              begin to understand what features are valuable and what parts are 
+              not. <br>
+              软件不确定的本质也是重要的原因。在真正使用一个软件的功能之前很难看清楚它所拥有的价值。只有当你开始使用某个软件的早期版本时你才真正了解什么样的功能是有价值的而什么样的功能不是。 
+            </p>
+            <p>This leads to the ironic point that people expect that requirements 
+              should be changeable. After all software is supposed to be <i>soft.</i> 
+              So not just are requirements changeable, they ought to be changeable. 
+              It takes a lot of energy to get customers of software to fix requirements. 
+              It's even worse if they've ever dabbled in software development 
+              themselves, because then they "know" that software is easy to change. 
+              <br>
+              这样会导致一个反讽的观点产生：人们期待需求应该是变化的。不管怎样，软件应该是软的。因此需求不仅是变化的，也应该是变化的。要使软件的客户确定它们的需求，这要花很大的精力。更加糟糕的是客户自己曾经在软件业内打拼，因为他们懂得软件是容易修改的。 
+            </p>
+            <p>But even if you could settle all that and really could get an accurate 
+              and stable set of requirements you're probably still doomed. In 
+              today's economy the fundamental business forces are changing the 
+              value of software features too rapidly. What might be a good set 
+              of requirements now, is not a good set in six months time. Even 
+              if the customers can fix their requirements, the business world 
+              isn't going to stop for them. And many changes in the business world 
+              are completely unpredictable: anyone who says otherwise is either 
+              lying, or has made a billion on stock market trading. <br>
+              但是尽管你可以解决所有的问题，而且也可以取得一份准确且稳定的需求报告，有可能你还是会穷途末路。在当今的经济中基本的商业力量总是在变化。软件功能的价值也是在迅速的变化。在现在，某一系列的需求可能是好的，但在六个月后可能就不是了。尽管客户可以确定它们的需求，但这个商业的世界不会因为他们暂停下来。而且商业世界中的诸多变数也是完全不可预测的：不同意这么说的人要么是在撒谎，或者刚刚在股票市场上捞了十个亿。 
+            </p>
+            <p>Everything else in software development depends on the requirements. 
+              If you cannot get stable requirements you cannot get a predictable 
+              plan. <br>
+              软件开发中的其他事情取决于需求。如果你不能够取得稳定的需求报告，你就不能得到一个可以预测的计划。 <br>
+            </p>
+            <h3><a name="N229"></a>Is Predictability Impossible?<br>
+              预测是不可能的吗？ </h3>
+            <p>In general, no. There are some software developments where predictability 
+              is possible. Organizations such as NASA's space shuttle software 
+              group are a prime example of where software development can be predictable. 
+              It requires a lot of ceremony, plenty of time, a large team, and 
+              stable requirements. There are projects out there that are space 
+              shuttles. However I don't think much business software fits into 
+              that category. For this you need a different kind of process. <br>
+              一般来讲，预测就是不可能的。当然，某些软件开发中的可预见性是可能的。诸如NASA航天飞机软件开发组这样的机构是软件开发可预测的一个重要的例子。它需要很多的仪规，足够的时间，一个巨大的团队，还有稳定的需求。项目就在那个地方摆着：航天飞机的软件。但是，我不认为大多数的商业软件适用于那个类型，你可能需要一种不同种类的处理方式。 
+            </p>
+            <p>One of the big dangers is to pretend that you can follow a predictable 
+              process when you can't. People who work on methodology are not very 
+              good at identifying boundary conditions: the places where the methodology 
+              passes from appropriate in inappropriate. Most methodologists want 
+              their methodologies to be usable by everyone, so they don't understand 
+              nor publicize their boundary conditions. This leads to people using 
+              a methodology in the wrong circumstances, such as using a predictable 
+              methodology in a unpredictable situation. <br>
+              危险就在于自以为能够进行可以预测的处理方式，但事实上你却不能。研究方法论的人们不太善于辨识边际状态：即方法论从适用到不适用的地方。大多数方法论研究者希望他们的方法能够被每个人使用，因此他们既不理解他们的边界，也不使之公开化。这就使人们在错误的环境下使用一种方法，比如在不可预测的环境下使用可以预测的某个方法。 
+            </p>
+            <p>There's a strong temptation to do that. Predictability is a very 
+              desirable property. However if you believe you can be predictable 
+              when you can't, it leads to situations where people build a plan 
+              early on, then don't properly handle the situation where the plan 
+              falls apart. You see the plan and reality slowly drifting apart. 
+              For a long time you can pretend that the plan is still valid. But 
+              at some point the drift becomes too much and the plan falls apart. 
+              Usually the fall is painful. <br>
+              有一种强烈的诱惑使我们去做预测。可预见性是一种令人渴望的财富。但是如果你相信可以预见未来，然而又突然发现不能，于是就有了这样的情形：你预先构建了一个计划，到了某个时候他们不再准确与事态发展协调，你眼睁睁地看着计划和现实互相分离。很长时间内你可以努力使自己相信计划还是有效的。但是在某些方面这种分离变得太大，计划崩溃。而且通常这种崩溃是令人痛心的。 
+            </p>
+            <p>So if you are in a situation that isn't predictable you can't use 
+              a predictive methodology. That's a hard blow. It means that many 
+              of the models for controlling projects, many of the models for the 
+              whole customer relationship, just aren't true any more. The benefits 
+              of predictability are so great, it's difficult to let them go. Like 
+              so many problems the hardest part is simply realizing that the problem 
+              exists. <br>
+              因此如果你在一种不可预测的环境中你就不能够使用一种可预测的方法论。这是一记重击。它意味着许多控制项目运作的模型，许多维护整个客户关系的模型，就不再是真实的了。可预见性所带来的好处是如此巨大，人们不愿意随便就放手他们。 
+              就像许多问题一样，最重要的部分就是意识到问题的存在。 </p>
+            <p>However letting go of predictability doesn't mean you have to revert 
+              to uncontrollable chaos. Instead you need a process that can give 
+              you control over an unpredictability. That's what adaptivity is 
+              all about. <br>
+              但是对可预见性的放手并不意味着回到不可控制的混乱。相反你需要一种处理方式来控制这种不可预见性。而这就是适应环境所包含的一切。 </p>
+            <h3><a name="N250"></a>Controlling an Unpredictable Process<br>
+              不可预料过程的控制 </h3>
+            <p>So how do we control ourselves in an unpredictable world? The most 
+              important, and still difficult part is to know accurately where 
+              we are. We need an honest feedback mechanism which can accurately 
+              tell us what the situation is at frequent intervals.<br>
+              那么我在一个不可预料的世界中如何控制自己呢？最重要的，而且较困难的是如何确切的知道我们在哪里。我们需要一个忠实的反馈机制，它可以准确的告诉我们当前处于多么频繁的间断之中。 
+            </p>
+            <p>The key to this feedback is iterative development. This is not 
+              a new idea. Iterative development has been around for a while under 
+              many names: incremental, evolutionary, staged, spiral... lots of 
+              names. The key to iterative development is to frequently produce 
+              working versions of the final system that have a subset of the required 
+              features. These working systems are short on functionality, but 
+              should otherwise be faithful to the demands of the final system. 
+              They should be fully integrated and as carefully tested as a final 
+              delivery.<br>
+              这个反馈的关键是进行迭代式开发。这已经不是新思想了。迭代式开发已经以很多名字的形式出现了较长一段时间。如：渐近式开发，演化式开发，分阶段开发，螺旋式开发…等多种名字。迭代式开发的关键是频繁地产生最终系统的工作版本，这些工作版本包含有需求特征的一部分。这些工作系统可能在功能上还有缺陷，但它应包括最终系统的必要部分。这些工作系统作为最终交付的系统，应该进行充分完整的集成，并经过认真的测试。 
+            </p>
+            <p>The point of this is that there is nothing like a tested, integrated 
+              system for bringing a forceful dose of reality into any project. 
+              Documents can hide all sorts of flaws. Untested code can hide plenty 
+              of flaws. But when people actually sit in front of a system and 
+              work with it, then flaws become truly apparent: both in terms of 
+              bugs and in terms of misunderstood requirements. <br>
+              上述观点表明，没有什么东西能象一个经过测试的，完整集成的系统那样给项目带来实际的动力。文档可以隐藏各种缺陷，但实际上当人们坐在系统前并使用它来工作的时候，那些缺陷就变得很明显了：不只是程序中的bug，还有因对需求的误解而带来的问题。 
+            </p>
+            <p>Iterative development makes sense in predictable processes as well. 
+              But it is essential in adaptive processes because an adaptive process 
+              needs to be able to deal with changes in required features. This 
+              leads to a style of planning where long term plans are very fluid, 
+              and the only stable plans are short term plans that are made for 
+              a single iteration. Iterative development gives you a firm foundation 
+              in each iteration that you can base your later plans around.<br>
+              迭代式开发在可以预料的过程中同样有意义。但是它实质上处于一个适应性过程中，因为一个适应性过程需要能够处理需求特征的变化。这就产生了一种计划风格：这里的长期计划是很不固定的；而那些稳定的计划都是些短期计划，并且都是为一次迭代开发制定的。迭代式开发在每次迭代中为你后来的计划提供一个坚实的基础。</p>
+            <p>A key question for this is how long an iteration should be. Different 
+              people give different answers. XP suggests iterations of between 
+              one and three weeks. SCRUM suggests a length of a month. Crystal 
+              will stretch further. The tendency, however, is to make each iteration 
+              as short as you can get away with. This provides more frequent feedback, 
+              so you know where you are more often. <br>
+              问题的关键在于一次迭代开发要花多长时间。不同的人有不同的答案。XP建议迭代周期在一到三周内。SCRUM建议迭代周期为一个月。Crystal建议的时间更长。然而，比较认同的是尽量使得迭代周期尽量短，但你必须能够完成本次迭代中的任务。这样会得到更加频繁的反馈，从而知道那个地方需要更加频繁的迭代工作。 
+            </p>
+            <h3><a name="N271"></a>The Adaptive Customer<br>
+              适应性客户 </h3>
+            <p>This kind of adaptive process requires a different kind of relationship 
+              with a customer than the ones that are often considered, particularly 
+              when development is done by a separate firm. When you hire a separate 
+              firm to do software development, most customers would prefer a fixed-price 
+              contract. Tell the developers what they want, ask for bids, accept 
+              a bid, and then the onus is on the development organization to build 
+              the software. <br>
+              这种适应性过程需要与客户建立一种不同的关系，与通常所认同的关系不一样，特别是当开发任务是由单独一个公司来做时。当你雇一个单独的公司来做软件开发，大多数客户更喜欢价格固定的合同。告诉开发人员他们需要什么，寻求投标，接标，接下来的任务是那个开发组织来开发软件了。 
+            </p>
+            <p>A fixed price contract requires stable requirements and hence a 
+              predictive process. Adaptive processes and unstable requirements 
+              imply you cannot work with the usual notion of fixed-price. Trying 
+              to fit a fixed price model to an adaptive process ends up in a very 
+              painful explosion. The nasty part of this explosion is that the 
+              customer gets hurt every bit as much as the software development 
+              company. After all the customer wouldn't be wanting some software 
+              unless their business needed it. If they don't get it their business 
+              suffers. So even if they pay the development company nothing, they 
+              still lose. Indeed they lose more than they would pay for the software 
+              (why would they pay for the software if the business value of that 
+              software were less?) <br>
+              固定价格的合同需要有固定的需求，还需要可预见的过程。适应性过程和不稳定的需求暗示你将不能按照通常固定价格的那一套方法来做。努力使固定价格模型来适应一个适应性过程将会以痛苦的“爆炸”而告终。这个爆炸让人讨厌的地方就在于：客户与软件开发公司受到同等的伤害。毕竟，客户不会开发什么他们业务不需要的东西，软件达不到要求，业务自然也会受损。因此即使他们没有付任何报酬给开发公司，他们仍然有损失。事实上他们真正损失的要比他们支付软件的费用要大。(如果软件的业务价值比软件开发的价值还小，他们为何要为开发此软件支付报酬呢？) 
+            </p>
+            <p>So there's dangers for both sides in signing a fixed price contract 
+              in conditions where a predictive process cannot be used. This means 
+              that the customer has to work differently. <br>
+              因此如果签署了一个固定价格的合同，同时却没有使用可预见过程，签署合同双方都会有危险。这意味着客户不得不以不同方式进行工作。 </p>
+            <p>In an adaptive process the customer has much finer-grained control 
+              over the software development process. At every iteration they get 
+              both to check progress and to alter the direction of the software 
+              development. This leads to much closer relationship with the software 
+              developers, a true business partnership. This level of engagement 
+              is not for every customer organization, nor for every software developer; 
+              but it's essential to make an adaptive process work properly. <br>
+              在适应性过程中，客户在整个软件开发过程中会有更细粒度的控制。在每次迭代开发中他们既检验过程，也可以调整软件开发的方向。这使得客户和软件开发人员的关系更加密切，成为真正的业务伙伴关系。这个层次上的合作不一定适合于每一个客户，也不一定适合于每个软件开发人员；但它的精华就在于让适应性过程更恰当的工作。 
+            </p>
+            <p>The key benefit for the customer is a much more responsive software 
+              development. A usable, although minimal, system can go into production 
+              early on. The customer can then change its capabilities according 
+              to changes in the business, and also from learning from how the 
+              system is used in reality. <br>
+              客户的重要受益之处在于会有更多相应的软件开发。一个可用的系统(尽管可能有些小)可以在早期开发。客户能够根据业务上的变化，也从学习中，从现实中的系统的使用来改变系统的性能(功能)。 
+            </p>
+            <h2><a name="N293"></a>Putting People First<br>
+              以人为本 </h2>
+            <p>Executing an adaptive process is not easy. In particular it requires 
+              a very effective team of developers. The team needs to be effective 
+              both in the quality of the individuals, and in the way the team 
+              blends together. There's also an interesting synergy: not just does 
+              adaptivity require a strong team, most good developers prefer an 
+              adaptive process. <br>
+              执行适应性方法是不容易的。这特别需要一个高效的开发团队。团队在个人素质和整体融合两方面都需要高效。有趣的是，不仅适应性需求要求一个有力的团队，而优秀的开发者更喜欢适应性方法。 
+            </p>
+            <h3><a name="N301"></a>Plug Compatible Programming Units<br>
+              可替换的程序员</h3>
+            <p>One of the aims of traditional methodologies is to develop a process 
+              where the people involved are replaceable parts. With such a process 
+              you can treat people as resources who are available in various types. 
+              You have an analyst, some coders, some testers, a manager. The individuals 
+              aren't so important, only the roles are important. That way if you 
+              plan a project it doesn't matter which analyst and which testers 
+              you get, just that you know how many you have so you know how the 
+              number of resources affects your plan. <br>
+              传统方法的目标之一就是开发过程中的人员是可替换的部分。按照这种方法可以把各种有用人员看作资源。你有一个分析员，一些编码员，测试员和一个管理者。个人并不重要，重要的是角色。如果你以这种方式做一个项目的计划，那么具体哪个分析员和测试员并不重要，影响你的计划的只是你有几个人，你的资源的数量。 
+            </p>
+            <p>But this raises a key question: are the people involved in software 
+              development replaceable parts? One of the key features of lightweight 
+              methods is that they reject this assumption. <br>
+              但面临一个关键问题：软件开发中人员是可替换的部分吗？“轻量级”方法一个关键的特征就是反对这种假设。 </p>
+            <p>Perhaps the most explicit rejection of people as resources is Alistair 
+              Cockburn. In his paper <a 
+href="http://members.aol.com/humansandt/papers/nonlinear/nonlinear.htm">Characterizing 
+              People as Non-Linear, First-Order Components in Software Development</a>, 
+              he makes the point that predictable processes require components 
+              that behave in a predictable way. However people are not predictable 
+              components. Furthermore his studies of software projects have led 
+              him to conclude the people are the most important factor in software 
+              development. <br>
+              也许科克波恩(Alistair Cockburn)是最反对把人看作资源的人。在他的论文“人员的非线性化，软件开发中的第一要素”(<a 
+href="http://members.aol.com/humansandt/papers/nonlinear/nonlinear.htm">Characterizing 
+              People as Non-Linear, First-Order Components in Software Development</a>)中，他提出一个观点，可预知的过程需要各部分都以可预知的方式运作。然而人不是可预知的部分。此外他对软件项目的研究使他得出结论在软件开发中人是最重要的因素 
+            <blockquote><i>In the title, [of his article] I refer to people as 
+              "components". That is how people are treated in the process / methodology 
+              design literature. The mistake in this approach is that "people" 
+              are highly variable and non-linear, with unique success and failure 
+              modes. Those factors are first-order, not negligible factors. Failure 
+              of process and methodology designers to account for them contributes 
+              to the sorts of unplanned project trajectories we so often see.</i> 
+              <br>
+              -- <a 
+  href="http://members.aol.com/humansandt/papers/nonlinear/nonlinear.htm">[Cockburn, 
+              non-linear]</a> </blockquote>
+            <p></p>
+            <p>Although Cockburn is the most explicit in his people-centric view 
+              of software development, the notion of people first is a common 
+              theme with many thinkers in software. The problem, too often, is 
+              that methodology has been opposed to the notion of people as the 
+              first-order factor in project success. <br>
+              尽管在软件开发中以人为本这一观点上，科克波恩的表达是最详尽最直截了当的，以人为先的见解同样也是其他许多软件思想家们所探讨的共同课题。然而，太常见的问题是方法论早就反对过人是项目成功的第一要素这样的观点。 
+            </p>
+            <p>This creates a strong positive feedback effect. If you expect all 
+              your developers to be plug compatible programming units, you don't 
+              try to treat them as individuals. This lowers morale (and productivity). 
+              The good people look for a better place to be, and you end up with 
+              what you desire: plug compatible programming units. <br>
+              这就为我们提供了一个强有力的实际反馈效果。如果你希望你的开发人员们能够拧成一股绳从而构成一个协调统一的编程小组，你往往就不会把他们当作个人来看了，而这就会减少他们的斗志，降低生产率。这时，有本事的人就会去寻找一个更好的职位，而你所期待的协调统一的编程小组也就结束了。 
+            </p>
+            <p>Deciding that people come first is a big decision, one that requires 
+              a lot of determination to push through. The notion of people as 
+              resources is deeply ingrained in business thinking, it's roots going 
+              back to the impact of <a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0140260803">Frederick 
+              Taylor's</a> Scientific Management approach. In running a factory, 
+              this Taylorist approach makes sense. But for the highly creative 
+              and professional work, which I believe software development to be, 
+              this does not hold. (And in fact modern manufacturing is also moving 
+              away from the Taylorist model.) <br>
+              能够做出以人为先这样一个重大决定是需要很大决心的。受弗雷得里克·泰勒（<a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0140260803">Frederick 
+              Taylor</a>)的科学管理运动影响，以人力作为一种资源的观点在商业思考中早已根深蒂固了。尽管在经常工厂方面，泰勒制意义显著，但这并不适用一切。（而事实上，现代工业也正在逐步脱离泰勒制。） 
+            </p>
+            <h3><a name="N340"></a>Programmers are Responsible Professionals<br>
+              程序员是需要承担责任的专家 </h3>
+            <p>A key part of the Taylorist notion is that the people doing the 
+              work are not the people who can best figure out how best to do that 
+              work. In a factory this may be true for several reasons. Part of 
+              this is that many factory workers are not the most intelligent or 
+              creative people, in part this is because there is a tension between 
+              management and workers in that management makes more money when 
+              the workers make less. <br>
+              泰勒制观点的一个主要部分就是具体工作的人并不是最能理解怎么样能最好的完成这项工作的人。如果是在工厂中，这个概念可以有很多理由来支持它的正确性。比如工厂中的大多数工人并不是最具有智慧或创造力的人；又比如管理层比工人挣更多钱所带来的紧张关系。 
+            </p>
+            <p>Recent history increasingly shows us how untrue this is for software 
+              development. Increasingly bright and capable people are attracted 
+              to software development, attracted by both its glitz and by potentially 
+              large rewards. (Both of which tempted me away from electronic engineering.) 
+              Such schemes as stock options increasingly align the programmers 
+              interests with the company's. <br>
+              最近的情况越来越说明对于软件开发来说这是多么的不正确。越来越多的聪明有能力的人被吸引到软件开发中来，被软件开发的辉煌与潜在的巨大回报所吸引。（这两条同样吸引我离开了电子工程。）而股票期权等条件也逐渐将程序员与公司的利益紧密的连接在了一起。 
+            </p>
+            <p>(There may well be a generational effect here. Some anecdotal evidence 
+              makes me wonder if more brighter people have ventured into software 
+              engineering in the last ten years or so. If so this would be a reason 
+              for why there is such a cult of youth in the computer business, 
+              like most cults there needs to be a grain of truth in it.) <br>
+              （这将会成为一种时代的影响。一些趣闻也让我很想知道在过去的十年里是否有更多的高智商的人们冒险进入了软件工程中。如果是这样这将成为为什么在计算机商业中会有这么一些特殊的年轻人的原因，就像许多狂热的崇拜者。）</p>
+            <p>When you want to hire and retain good people, you have to recognize 
+              that they are competent professionals. As such they are the best 
+              people to decide how to conduct their technical work. The Taylorist 
+              notion of a separate planning department that decides how to do 
+              things only works if the planners understand how to do the job better 
+              than those doing it. If you have bright, motivated people doing 
+              the job then this does not hold. <br>
+              当你想要雇用和保留一些优良的人才，你必须确认他们是有能力的专家。就其本身而论，他们是最适合决定如何引导他们的技术工作的人。泰勒制概念中的单独分离出来的计划部门决定如何做事情这种方式，只能在计划者能够比真正操作者更好的理解如果把工作做好的情况下才好用。如果你的员工聪明并有着动力，那么这就不再适用。 
+            </p>
+            <h3><a name="N358"></a>Managing a People Oriented Process<br>
+              管理以人为本的过程 </h3>
+            <p>People orientation manifests itself in a number of different ways 
+              in lightweight processes. It leads to different effects, not all 
+              of them are consistent. <br>
+              在轻量级过程中，以人为本通过许多不同的方法体现自己。它会导致不同的结果，而这些结果并不都是一致的。 </p>
+            <p>One of the key elements is that of accepting the process rather 
+              the imposition of a process. Often software processes are imposed 
+              by management figures. As such they are often resisted, particularly 
+              when the management figures have had a significant amount of time 
+              away from active development. Accepting a process requires commitment, 
+              and as such needs the active involvement of all the team. <br>
+              一个关键要素是欣然接受这个过程而不是强迫接受。管理要求常常强加于软件过程。同样地，它们也反作用于管理要求，特别是当管理要求与目前开发活动相去甚远时。因此主动接受一个过程需要承担义务，这也需要整个团队的积极参与。 
+            </p>
+            <p>This ends up with the interesting result that only the developers 
+              themselves can choose to follow an adaptive process. This is particularly 
+              true for XP, which requires a lot of discipline to execute. This 
+              is where Crystal is such an effective complement as it aims at being 
+              minimally disciplined. <br>
+              这导致一个有趣的结果就是：只有开发者自己能够选择遵循一个适应的过程。这一点对于XP来说更是如此，因为它需要执行大量的规则。这也正是以最小化规则为目标的Crystal一个有效补充的所在。</p>
+            <p>Another point is that the developers must be able to make <i>all</i> 
+              technical decisions. XP gets to the heart of this where in its planning 
+              process it states that only developers may make estimates on how 
+              much time it will take to do some work.<br>
+              另一个要点是软件开发者必须能够做出所有的技术决策。XP深入问题的本质，它在设计阶段规定只有开发者可以估计做某些工作需要多少时间。 
+            </p>
+            <p>Such technical leadership is a big shift for many people in management 
+              positions. Such an approach requires a sharing of responsibility 
+              where developers and management have an equal place in the leadership 
+              of the project. Notice that I say <i>equal</i>. Management still 
+              plays a role, but recognizes the expertise of developers. <br>
+              对许多处于管理位置的人来说，这种技术领导是一个大的转变。这种新的技术方法需要职责的共享，在项目的领导中开发者和管理者拥有平等的地位。请注意这里我说的是平等。管理在其中依然有作用，但必须尊重开发者的专业技术。 
+            </p>
+            <p>An important reason for this is the rate of change of technology 
+              in our industry. After a few years technical knowledge becomes obsolete. 
+              This half life of technical skills is without parallel in any other 
+              industry. Even technical people have to recognize that entering 
+              management means their technical skills will wither rapidly. Ex-developers 
+              need to recognize that their technical skills will rapidly disappear 
+              and they need to trust and rely on current developers. <br>
+              在我们这个行业里，技术的变化速度是导致这种结果的一个重要因素。几年过去，技术知识就过时了。技能的日新月异是其它任何行业都无法相提并论的。甚至连技术人员都不得不承认进入管理领域就意味着他们的技能迅速衰退。开发出身的管理人员必须承认他们的技能会迅速衰退，他们需要信任并且依靠目前的开发者们。 
+            </p>
+            <h3><a name="N388"></a>The Role of Business Leadership<br>
+              商业领导的职责 </h3>
+            <p>But the technical people cannot do the whole process themselves. 
+              They need guidance on the business needs. This leads to another 
+              important aspect of adaptive processes: they need very close contact 
+              with business expertise. <br>
+              但是技术人员不可能亲自完成所有的过程。他们需要商业需求方面的指导。这就形成了可适应过程的另一个重要方面：他们需要和商业专家紧密联系。 
+            </p>
+            <p>This goes beyond most projects involvement of the business role. 
+              Lightweight teams cannot exist with occasional communication . They 
+              need continuous access to business expertise. Furthermore this access 
+              is not something that is handled at a management level, it is something 
+              that is present for every developer. Since developers are capable 
+              professionals in their own discipline, they need to be able to work 
+              as equals with other professionals in other disciplines. <br>
+              这就超出了涉及商业角色的大部分项目。轻量级团队不可能通过偶然的交流获得生存，而是要不断听取商业专家的意见。此外，这种长期的交流是针对所有开发者的，而不是在一些管理层上进行的。因为开发者在他们自己的学科领域中都是能干的专业人员，所以需要他们在其他领域和其他专业人士平等协作。</p>
+            <p>A large part of this, of course, is due to the nature of adaptive 
+              development. Since the whole premise of adaptive development is 
+              that things change quickly, you need constant contact to advise 
+              everybody of the changes. <br>
+              当然，这其中的大部分都应归于适应性开发的本质。由于适应性开发都是基于事物快速变化这样一个前提条件，因此经常提醒人们注意这个快速的变化。 
+            </p>
+            <p>There is nothing more frustrating to a developer than seeing their 
+              hard work go to waste. So it's important to ensure that there is 
+              good quality business expertise that is both available to the developer 
+              and is of sufficient quality that the developer can trust them. 
+              <br>
+              对于一个开发者，没有什么比看到自己辛勤的工作变成无用的垃圾更加受挫。因此确保高质量商业专家的意见是非常重要的，这些专家的意见对软件开发者来说既要是可以利用的，又要求有足够的质量让他们对此相当的信任。 
+            </p>
+            <h2><a name="N407"></a>The Self-Adaptive Process<br>
+              自适应过程 </h2>
+            <p>So far I've talked about adaptivity in the context of a project 
+              adapting its software frequently to meet the changing requirements 
+              of its customers. However there's another angle to adaptivity: that 
+              of the process changing over time. A project that begins using an 
+              adaptive process won't have the same process a year later. Over 
+              time, the team will find what works for them, and alter the process 
+              to fit. <br>
+              到目前为止，在根据不断满足客户需求变化对软件进行改造中我已经谈到了有关适应性的问题，但是我们还可以从另外一个角度来看适应性，即过程随着时间不断的发生变化。一个项目从一开始就使用适应的过程，那么一年以后它不会还是同样的过程。随着时间的流逝，团队的同志将发现该做什么，并且调整过程以适应它。 
+            </p>
+            <p>The first part of self-adaptivity is regular reviews of the process. 
+              Usually you do these with every iteration. At the end of each iteration, 
+              have a short meeting and ask yourself the following questions (culled 
+              from <a 
+href="http://c2.com/ppr/about/author/norm.html">Norm Kerth</a>) <br>
+              自适应性的第一部分是经常回顾这个过程。这个过程通常是采取迭代的方式进行的，在每次迭代的结束，开一个短会并问自己以下问题：（摘自<a href="http://c2.com/ppr/about/author/norm.html">Norm 
+              Kerth</a>） 
+            <ul>
+              <li>What did we do well? <br>
+                哪些做的不错？ 
+              <li>What have we learned? <br>
+                学到了什么？ 
+              <li>What can we do better? <br>
+                哪些还可以做的更好？ 
+              <li>What puzzles us? <br>
+                哪些还让我们迷惑不解？ </li>
+            </ul>
+            These questions will lead you to ideas to change the process for the 
+            next iteration. In this way a process that starts off with problems 
+            can improve as the project goes on, adapting better to the team that 
+            uses it. <br>
+            这些问题将启发你在下一次迭代时如何改变过程。这样，过程在一开始存在的问题就可以随着项目的进展不断的得到完善，从而就可以更好的让团队使用下去。 
+            <p></p>
+            <p>If self-adaptivity occurs within a project, it's even more marked 
+              across an organization. To deepen the process of self-adaptivity 
+              I suggest teams do a more formal review and major project milestones 
+              following the project retrospective sessions outlined by Norm Kerth. 
+              These retrospectives involve a 2-3 day offsite meeting and a trained 
+              facilitator. Not only do they provide learning for the team, they 
+              also provide learning for the whole organization.<br>
+              发生在项目内部的自适应性比横跨一个公司更加显著。为了加深对自适应性过程的理解，我建议团队工作者们看看Norm Kerth在项目回顾会上关于自适应的概要，然后对以前的工程的进展以及在这个工程中出现的重大转折点作一个客观的回顾。这些回顾包括2到3天的脱岗(offsite)会议和一个训练的服务商(trained 
+              facilitator)。这为团队乃至整个公司的职员提供了学习的机会。 </p>
+            <p>A consequence of self-adaptivity is that you should never expect 
+              to find a single corporate methodology. Instead each team should 
+              not just choose their own process, but should also actively tune 
+              their process as they proceed with the project. While both published 
+              processes and the experience of other projects can act as an inspiration 
+              and a baseline, the developers professional responsibility is to 
+              adapt the process to the task at hand. <br>
+              应用自适应性的结果是，你根本不能指望找到一个对解决所有问题都有效的方法论。每个团队不能仅仅选择他们自己的过程，而应该主动调整他们的过程来适应项目的继续进行。虽然前人的过程和其它工程的一些经验可以对当前的工程有些启示，或是作为当前工程的基底，但开发者的专业责任是让过程适应当前的任务。 
+            </p>
+            <p>This self-adaptivity is most marked in ASD and Crystal. XP's rigid 
+              rules seem to disallow it, but that is only a surface impression 
+              since XP does encourage people to tune the process. The main difference 
+              with XP is that its advocates suggest doing XP by the book for several 
+              iterations before adapting it. In addition reviews are neither emphasized, 
+              nor part of the process, although there are suggestions that reviews 
+              should be made one of the XP practices. <br>
+              在ASD和Crystal中自适应性是最显著的。XP严格的规则看起来不接受它，但这只是表面现象，因为XP鼓励人们调整过程。XP的主要区别在于它的提倡者建议在适应之前预留一些迭代来执行这些规则。另外，尽管有些人建议在某一个XP的实现中进行回顾，但是回顾仍然不应该被强调或是作为过程的一部分。 
+            </p>
+            <h2><a name="N445"></a>The Methodologies<br>
+              各种方法论 </h2>
+            <p>Several methodologies fit under this lightweight banner. While 
+              all of them share many characteristics, there are also some significant 
+              differences. I can't highlight all the points in this brief survey, 
+              but at least I can point you to some places to look. I also can't 
+              speak with significant experience about most of these. I've done 
+              quite a lot of work based on XP, and seen RUP around in many guises, 
+              but with most of the others my knowledge is primarily the less adequate 
+              book knowledge. <br>
+              有好几种方法论都能与上面的标题关联上，它们在大部分方面是类似的但也有一些不同。在这篇简报中我很难对它们作详细的叙述但会告诉你到哪里去找相关的资料。我在XP方面作了很多的工作也看了许多关于RUP的资料，其它方面的方法我就不是很精通了，因而我没有能力对大部分的方法作出经验性的叙述。</p>
+            <h3><a name="N453"></a>XP (Extreme Programming)<br>
+              XP(极限编程) </h3>
+            <p>Of all the lightweight methodologies, this is the one that has 
+              got the most attention. Partly this is because of the remarkable 
+              ability of the leaders of XP, in particular Kent Beck, to get attention. 
+              It's also because of the ability of Kent Beck to attract people 
+              to the approach, and to take a leading role in it. In some ways, 
+              however, the popularity of XP has become a problem, as it has rather 
+              crowded out the other methodologies and their valuable ideas. <br>
+              在所有的小型方法论中XP最引人注目了，部分的原因是XP拥有出色的领头人，特别是Kent Beck，还有一个原因是Kent Beck具有把许多人吸引到这种方法中的能力。然而，XP过分的火爆压制了其它有着优秀思想的方法论。</p>
+            <p>The roots of XP lie in the Smalltalk community, and in particular 
+              the close collaboration of Kent Beck and Ward Cunningham in the 
+              late 1980's. Both of them refined their practices on numerous projects 
+              during the early 90's, extending their ideas of a software development 
+              approach that was both adaptive and people-oriented. <br>
+              XP起源于Smalltalk(面向对象的编程语言)社区，在20世纪80年代后期由于Kent Beck和Ward Cunningham的亲密合作使它有了更进一步的发展。在90年代Kent 
+              Beck和Ward Cunningham根据他们在众多工程项目中的实践经验提炼出了自适应和以人为本的软件开发方法。</p>
+            <p>The crucial step from informal practice to a methodology occurred 
+              in the spring of 1996. Kent was asked to review the progress of 
+              a payroll project for Chrysler. The project was being carried out 
+              in Smalltalk by a contracting company, and was in trouble. Due to 
+              the low quality of the code base, Kent recommended throwing out 
+              the entire code base and starting from scratch his leadership. The 
+              result was the Chrysler C3 project (Chrysler Comprehensive Compensation) 
+              which since became the early flagship and training ground for XP. 
+              <br>
+              从实践经验向一种方法论转化的至关重要的阶段发生在1996年的春天。Kent被邀请对Chrysler公司的一个薪水管理项目的进度作评估。这个项目由一家公司用Smalltalk进行开发，由于代码质量没有得到很好的控制这个项目陷入困境,Kent受委托将整个代码推倒重来，这导致了C3(Chrysler 
+              Comprehensive Compensation: Chrysler公司的综合补偿)项目，该项目是XP方法论的早期标记和训练基地。</p>
+            <p>The first phase of C3 went live in early 1997. The project continued 
+              since and ran into difficulties later, which resulted in the canceling 
+              of further development in 1999. As I write this, it still pays the 
+              original 10,000 salaried employees. <br>
+              C3项目的第一期从1997年初开始，一直持续运行。到1999年出现了运行困难导致了后续开发的中止。在我写这篇文章的时候该项目仍然支付最初10,000人的薪水。</p>
+            <p>XP begins with four values: Communication, Feedback, Simplicity, 
+              and Courage. It then builds up to a dozen practices which XP projects 
+              should follow. Many of these practices are old, tried and tested 
+              techniques, yet often forgotten by many, including most planned 
+              processes. As well as resurrecting these techniques, XP weaves them 
+              into a synergistic whole where each one is reinforced by the others. 
+              <br>
+              XP从四个方面开始：交流，反馈，简洁，勇气。从而建立起一系列XP工程应当遵从的惯例，这些惯例大部分都是成熟的，为人熟知的技术，然而常常被许多人忘记，即使是计划很好的过程。XP复兴、利用这些技术，强调整体的协作。</p>
+            <p>One of the most striking, as well as initially appealing to me, 
+              is its strong emphasis on testing. While all processes mention testing, 
+              most do so with a pretty low emphasis. However XP puts testing at 
+              the foundation of development, with every programmer writing tests 
+              as they write their production code. The tests are integrated into 
+              a continuous integration and build process which yields a highly 
+              stable platform for future development. <br>
+              XP中最领人吃惊的是它强调测试。虽然所有的工程项目都提及测试，但许多并没有把它放在很关键的位置，XP则不同，它认为测试是开发的基础，每一个程序员都必须和写产品代码一样写测试代码。这些测试都被集成到一个可持续运行综合体中,这保证了以后开发的高稳定性。</p>
+            <p>On this platform XP builds an evolutionary design process that 
+              relies on refactoring a simple base system with every iteration. 
+              All design is centered around the current iteration with no design 
+              done for anticipated future needs. The result is a design process 
+              that is disciplined, yet startling, combining discipline with adaptivity 
+              in a way that arguably makes it the most well developed of all the 
+              adaptive methodologies. <br>
+              在这个平台XP建立了一种依赖于可重复设计的简单基础系统的进化设计过程。所有的设计围绕着当前的基础进行，不用考虑将来的需求。这是一种有纪律约束的设计过程，然而令人惊奇的是用自适应的方法组合这些纪律约束可以证明是所有自适应方法论中最好的一种。</p>
+            <p>XP has developed a wide leadership, many of them springing from 
+              the seminal C3 project. As a result there's a lot of sources for 
+              more information. The best <a href="http://www.cutter.com/ead/ead0002.html">summary 
+              </a>at the moment is written by an outsider, Jim Highsmith, whose 
+              own methodology I'll cover later. Kent Beck wrote <i><a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0201616416">Extreme 
+              Programming Explained</a></i> the key manifesto of XP, which explains 
+              the rationale behind the methodology and enough of an explanation 
+              of it to tell folks if they are interested in pursuing it further. 
+              <br>
+              XP已经拥有了大量的领头人，他们大部分来自C3工程，因而有许多关于XP的资料。目前最好的概述是一个局外人写的，他就是Jim Highsmith，我将在以后讲他的方法论。Kent 
+              Beck写了XP的主要宣言，解释了这个方法论的基本原理，用了大量的说明来告诉大伙如果你们想继续追踪该技术就可以去阅读它。</p>
+            <p>Two further books have recently appeared. Three members of the 
+              C3 project: Ron Jeffries, Ann Anderson, and Chet Hendrickson wrote 
+              <i><a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0201708426">Extreme 
+              Programming Installed</a></i>, an explanation of XP based on the 
+              C3 experience. Kent Beck and I wrote <i><a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0201710919">Planning 
+              Extreme Programming</a></i>, which discusses how you do planning 
+              in this adaptive manner. <br>
+              最近又出现了两本更进一步的数。C3项目的三个成员：Ron Jeffries，Ann Anderson，和Chet Hendrickson写了“<i><a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0201708426">Extreme 
+              Programming Installed</a></i>”，一个基于C3开发经验的XP解释。Kent Beck和我写了“<i><a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0201710919">Planning 
+              Extreme Programming</a></i>”，讨论如何用XP这种自适应方法进行规划。</p>
+            <p>As well as books, there are a fair number of web resources. Much 
+              of the early advocacy and development of the XP ideas occurred on 
+              Ward Cunningham's <a 
+href="http://c2.com/cgi/wiki?ExtremeProgrammingRoadmap">wiki web </a>collaborative 
+              writing environment. The wiki remains a fascinating place to discover, 
+              although its rambling nature does lead you into being sucked in. 
+              To find a more structured approach to XP, it's best to start with 
+              two sites from C3 alumni: Ron Jeffries's <a href="http://www.xprogramming.com/">xProgramming.com 
+              </a>and Don Wells's <a 
+href="http://www.extremeprogramming.org/">extremeProgramming.org</a>. Bill Wake's 
+              <a href="http://users.vnet.net/wwake/xp/">xPlorations </a>contains 
+              a slew of useful papers. Robert Martin, the well known author on 
+              C++ and OO design has also joined the list of XP promoters. His 
+              company, <a 
+href="http://www.objectmentor.com/">ObjectMentor</a>, has a number of papers on 
+              its web site, including an XP instance of RUP called <a 
+href="http://www.objectmentor.com/publications/RUPvsXP.pdf">dX</a>. They also 
+              sponsor the <a href="http://www.egroups.com/group/extremeprogramming/">xp 
+              discussion egroup</a>. <br>
+              除了参考书之外还有大量的web资源。大量的早期关于XP的思想的资料在Ward Cunningham的<a 
+href="http://c2.com/cgi/wiki?ExtremeProgrammingRoadmap">wiki web</a>，在该网站中你将会发现许多令你着迷的东西。要想找到关于XP更加结构化的方法，可以从这两个C3成员的网站入手：Ron 
+              Jeffries的<a href="http://www.xprogramming.com/">xProgramming.com</a>和Don 
+              Wells的<a 
+href="http://www.extremeprogramming.org/">extremeProgramming.org</a>。Bill Wake的<a href="http://users.vnet.net/wwake/xp/">xPlorations</a>包含了一系列有用的论文。Robert 
+              Martin，著名的C++面向对象设计方法的发明者也加入了XP发展队列，他的公司：<a 
+href="http://www.objectmentor.com/">ObjectMentor</a>的网站有大量的论文，包括了称作<a 
+href="http://www.objectmentor.com/publications/RUPvsXP.pdf">dX</a>的RUP的XP实例。他们还支持一个XP讨论组<a href="http://www.egroups.com/group/extremeprogramming/">xp 
+              discussion egroup</a>。</p>
+            <h3><a name="N547"></a>Cockburn's Crystal Family<br>
+              Cockburn的水晶家族 </h3>
+            <p><a href="http://members.aol.com/acockburn/">Alistair Cockburn </a>has 
+              been working on methodology ever since he was tasked by IBM to write 
+              about methodology in the early 90's. His approach is unlike most 
+              methodologists, however. Instead of building on solely personal 
+              experience to build a theory of how things should be done, he supplements 
+              his direct experience with actively seeking to interview projects 
+              to see how they work. Furthermore he isn't afraid to alter his views 
+              based on his discoveries: all of which make him my favorite methodologist. 
+              <br>
+              Alistair Cockburn 从90年代初开始为IBM写一些方法论，就一直那个致力于方法论的研究。但是同其它的方法论学者相比，他的方法有些不同。他不是完全基于自己的经验建立事情如何操作的理论，而是把自己的直接经验积极地补充到对工程的调查中，研究一下这些工程是怎么工作的。另外，他勇于基于自己的发现调整自己的观点：所有的这些是他成为我最喜欢的方法论学者。 
+            </p>
+            <p>His book, <i><a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0201498340">Surviving 
+              Object-Oriented Projects</a></i>, was his first piece of advice 
+              on running projects, and remains my number one book recommendation 
+              for running iterative projects. <br>
+              他写的《幸存的面向对象工程》(<i><a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0201498340">Surviving 
+              Object-Oriented Projects</a></i>)是他对正在那些正在进行的工程的第一份建议，也是我对那些不断重复的工程推荐的一本书。 
+            </p>
+            <p>Since that book he's explored light methods further, coming up 
+              with the <a 
+href="http://members.aol.com/acockburn/">Crystal family of methodologies</a>. 
+              It's a family because he believes that different kinds of projects 
+              require different kinds of methodologies. He looks into this variation 
+              along two axes: the number of people in the project, and the consequences 
+              of errors. Each methodology fits into a different part of the grid, 
+              so a 40 person project that can lose discretionary money has a different 
+              methodology than a six person life-critical project. <br>
+              随着他对各种方法的探索，他写了方法论的水晶家族(<a 
+href="http://members.aol.com/acockburn/">Crystal family of methodologies</a>)。因为他相信不同种类的工程需要不同的方法，所以他认为方法应该是一个谱系。他从两个方面观察这个变化：参与工程的人数和错误的结果。每一种方法适合不同部分，一个不能自由支配资金的、需要四十个参与的项目同一个需要六个人参与的项目相比，采用的方法是不同的。 
+            </p>
+            <p>The Crystals share a human orientation with XP, but this people-centeredness 
+              is done in a different way. Alistair considers that people find 
+              it hard to follow a disciplined process, thus rather than follow 
+              XP's high discipline, Alistair explores the least disciplined methodology 
+              that could still succeed, consciously trading off productivity for 
+              ease of execution. He thus considers that although Crystal is less 
+              productive than XP, more people will be able to follow it. <br>
+              水晶家族和XP一样提倡以人为本，但却是不同方向的以人为本。Alistair认为人们很难遵循一个严格纪律的过程，所以不是使用XP的严格纪律，Alistair研究了不太严格的，但是仍然可能成功的方法，有意识的交替使用容易执行的方法。因此他认为虽然水晶没有XP有效率，但有更多的人可以使用这种方法。 
+            </p>
+            <p>Alistair also puts a lot of weight in end of iteration reviews, 
+              thus encouraging the process to be self-improving. His assertion 
+              is that iterative development is there to find problems early, and 
+              then to enable people to correct them. This places more emphasis 
+              on people monitoring their process and tuning it as they develop. 
+              <br>
+              Alistair同样很重视反复回顾，鼓励自我提高的过程。他主张迭代开发很容易较早的发现问题，纠正错误。这更强调论人们在开发时的监控过程，随时作出调整。 
+            </p>
+            <h3><a name="N583"></a>Open Source<br>
+              开放源码 </h3>
+            <p>You may be surprised by this heading. After all open source is 
+              a style of software, not so much a process. However there is a definite 
+              way of doing things in the open source community, and much of their 
+              approach is as applicable to closed source projects as it is to 
+              open source. In particular their process is geared to physically 
+              distributed teams, which is important because most adaptive processes 
+              stress co-located teams. <br>
+              你可能对这个标题感到惊奇。毕竟开发源码是一种软件，而不只是一个过程。然而在开发源码世界使用有限的方法工作，并且多数的方法对非开发源码的工程和开发源码的工程都是相同的。特别的，由于开发团队是分布的，这个过程需要作出调整，这是很重要的，因为大多数适应性的过程压迫着合作团队。 
+            </p>
+            <p>Most open source projects have one or more maintainers. A maintainer 
+              is the only person who is allowed to commit a change into the source 
+              code repository. However people other than the maintainer may make 
+              changes to the code base. The key difference is that other folks 
+              need to send their change to the maintainer, who then reviews it 
+              and applies it to the code base. Usually these changes are made 
+              in the form of patch files which make this process easier. The maintainer 
+              thus is responsible for coordinating the patches and maintaining 
+              the design cohesion of the software. <br>
+              大多数开发源码工程只有一个或者多个维护者。只有一个维护者才可以修改源码库，但是其他人也可以对源码作出修改。两者的差别在于为其他人需要把源码发给维护者，维护者确认无误后再加入代码库。通常代码的变化都通过补丁文件实现，使维护的过程更简单。这样维护者就有调整软件补丁和整合软件设计的责任。 
+            </p>
+            <p>Different projects handle the maintainer role in different ways. 
+              Some have one maintainer for the whole project, some divide into 
+              modules and have a maintainer per module, some rotate the maintainer, 
+              some have multiple maintainers on the same code, others have a combination 
+              of these ideas. Most open source folks are part time, so there is 
+              an issue on how well such a team coordinates for a full time project. 
+              <br>
+              不同的工程对待维护人员的角色处理也是不相同的。有些是整个工程只有一个维护人员；有些工程是被分成模块，每一个模块一个维护人；有些是轮换开发人员；有些是多个维护人员维护相同的代码；另外的一些有可能是上述思想的组合。大多数从事开发源码的人员都是兼职的，于是就有很多争议：对于一个全职的工程如何进行有效的调节。 
+            </p>
+            <p>A particular feature of open source development is that debugging 
+              is highly parallelizable. So many people can be involved in debugging. 
+              When they find a bug they can send the patch to the maintainer. 
+              This is a good role for non-maintainers since most of the time is 
+              spent finding the bug. It's also good for folks without strong design 
+              skills. <br>
+              开发源码的开发有一个独特的特性，就是调试是并行的。非常多的人员在进行调试。当他们发现bug时，就给维护人员发一个补丁。既然大部分时间被用来发现bug，那么对非维护人员是一个很好的角色。这对那些没有很强设计能力的人也是很有帮助的。 
+            </p>
+            <p>The process for open-source isn't well written up as yet. The most 
+              famous paper is Eric Raymond's <i><a 
+href="http://www.tuxedo.org/~esr/writings/cathedral-bazaar">The Cathedral and 
+              the Bazar</a></i>, which while an excellent description is also 
+              rather brief. Karl Fogel's <a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=1576104907">book 
+              </a>on the CVS code repository also contains several good chapters 
+              on open-source process that would be interesting even to those who 
+              never want to do cvs update. <br>
+              开发源码的过程没有办法详细描述。最著名的文章是Eric Raymond的“<i><a 
+href="http://www.tuxedo.org/~esr/writings/cathedral-bazaar">大教堂与市集</a></i>”,这也是对开发源码的一个很好描述，而不只是总结。Karl 
+              Fogel关于CVS代码库的<a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=1576104907">书</a>也有几章是对开放源码的很好描述，即使对那些从来没有想使用CVS的人也是很有意义的。 
+            </p>
+            <h3><a name="N615"></a>Highsmith's Adaptive Software Development<br>
+              Highsmith的适应性软件开发 </h3>
+            <p>Jim Highsmith has spent many years working with predictive methodologies. 
+              He developed them, installed them, taught them, and has concluded 
+              that they are profoundly flawed: particularly for modern businesses. 
+              <br>
+              Jim Highsmith花费多年的时间致力于预见性方法论的研究。他开发使用并讲授这些方法，并且最终得出结论，认为这些方法有着内在深刻的缺陷的：尤其是对于现代商业来说。 
+            </p>
+            <p>His recent <a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0932633404">book 
+              </a>focuses on the adaptive nature of new methodologies, with a 
+              particular emphasis on applying ideas that originate in the world 
+              of complex adaptive systems (commonly referred to as chaos theory.) 
+              It doesn't provide the kind of detailed practices like the XP work 
+              does, but it does provide the fundamental groundwork for why adaptive 
+              development is important and the consequences at the deeper organizational 
+              and management levels. <br>
+              他近期的<a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0932633404">书籍</a>聚焦于新方法论的天然的适应性，尤其是在引发复杂的适应系统中（通常指混沌理论）应用这些想法。它并不像XP行为那样提供某种具体的实践，但是它提供基本的背景行为，以证明为什么适应性开发是重要的，以及在深度的组织和管理级别上的重要地位。 
+            </p>
+            <p>At the heart of ASD are three non-linear, overlapping phases: speculation, 
+              collaboration, and learning. <br>
+              ASD的核心是三个非线性的，重叠的方面：思索，协作和学习。 </p>
+            <p>Highsmith views planning as a paradox in an adaptive environment, 
+              since outcomes are naturally unpredictable. In traditional planning, 
+              deviations from plans are mistakes that should be corrected. In 
+              an adaptive environment, however, deviations guide us towards the 
+              correct solution. <br>
+              Highsmith把计划看作适应性环境中的一个悖论，因为结果必然是不可预知的。在传统计划中，与计划的背离应该得到修正。但是，在适应性环境中，背离引导我们走向正确的答案。 
+            </p>
+            <p>In this unpredictable environment you need people to collaborate 
+              in a rich way in order to deal with the uncertainty. Management 
+              attention is less about telling people what to do, and more about 
+              encouraging communication so that people can come up with creative 
+              answers themselves. <br>
+              在这个不可预知的环境中，你需要人们充分的合作来对付不确定的事情。管理的注意力少放在告诉人们该做什么，而更多的是鼓励交流，这样人们才能够联合起来得到创造性的答案。 
+            </p>
+            <p>In predictive environments, learning is often discouraged. You 
+              lay out things in advance and then follow that design. <br>
+              在可预知的环境中，学习是不被鼓励的。你把事情预先安排好，然后照做就是了。 
+            <blockquote><i>In an adaptive environment, learning challenges all 
+              stakeholders - developers and their customers - to examine their 
+              assumptions and to use the results of each development cycle to 
+              adapt the next. </i><br>
+              -- <a 
+  href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0932633404">[Highsmith]</a> 
+              <br>
+              在适应性的环境中，学习将挑战所有的参赌者--开发者和用户--来检验他们的设想并利用每个开发周期的结果去适应下一个周期。 --<a 
+  href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0932633404">[Highsmith]</a></blockquote>
+            As such learning is a continuous and important feature, one that assumes 
+            that plans and designs must change as development proceeds. <br>
+            由于这样的学习是一种连续的和重要的特征，我们就假设计划和设计必须随开发进程而改变。 
+            <p></p>
+            <blockquote><i>The overriding, powerful, indivisible, predominant 
+              benefit of the Adaptive Development Life Cycle is that it forces 
+              us to confront the mental models that are at the root of our self-delusion. 
+              It forces us to more realistically estimate our ability. </i><br>
+              -- <a 
+  href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0932633404">[Highsmith]</a> 
+              <br>
+              适应性开发生命周期的最重要的，强大的，不可分的，有影响的益处就在于它迫使我们去面对思想中基于我们的错觉而产生的模型。它迫使我们更实际地估计我们的能力。 
+              -- <a 
+  href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0932633404">[Highsmith]</a> 
+            </blockquote>
+            <p>With this emphasis, Highsmith's work focuses directly on to foster 
+              the hard parts of adaptive development, in particular how to foster 
+              collaboration and learning within the project. As such his book 
+              helps provide ideas to foster these "soft" areas which makes a nice 
+              complement to the grounded practice based approaches such as XP, 
+              FDD, and SCRUM. <br>
+              在这些强调之下，Highsmith的工作直接集中于培养适应性开发的硬性部分，尤其是怎样培养项目之内的协作和学习。同样的，他的书提供了如何培养那些“柔性部分”的办法。所谓“柔性”也就是指对与之相接的基于实践的方法，如XP，FDD和SCRUM等的有益补充。 
+            </p>
+            <h3><a name="N657"></a>SCRUM<br>
+              SCRUM </h3>
+            <p>SCRUM has been around for a while in object-oriented circles, although 
+              I'll confess I'm not too au fait with its history or development. 
+              Again it focuses on the fact that defined and repeatable processes 
+              only work for tackling defined and repeatable problems with defined 
+              and repeatable people in defined and repeatable environments. <br>
+              SCRUM在面向对象的周期中已经存在了一段时间，尽管我要承认我对他的历史和开发也不是很熟悉。它的焦点再次集中于它所定义的事实，可重复的过程，可重复的问题，可重复的人和可重复的环境。 
+            </p>
+            <p>SCRUM divides a project into iterations (which they call sprints) 
+              of 30 days. Before you begin a sprint you define the functionality 
+              required for that sprint and then leave the team to deliver it. 
+              The point is to stabilize the requirements during the sprint.<br>
+              SCRUM把一个项目分为若干以30天为单位的反复的过程（他们叫做短程跑）。在你开始一程之前，你定义那一程所需要的功能，并把它留给小组去完成。关键的一点是在这一程中固定需求。 
+            </p>
+            <p>However management does not disengage during the sprint. Every 
+              day the team holds a short (fifteen minute) meeting, called a scrum, 
+              where the team runs through what it will do in the next day. In 
+              particular they surface to the management blocks: impediments to 
+              progress that are getting in the way that management needs to resolve. 
+              They also report on what's been done so management gets a daily 
+              update of where the project is. <br>
+              然而管理并不是脱离这一程。每一天小组要开一个短会（一刻钟左右），称为SCRUM，贯穿这一小组明天要做的事情。特别的，它们被提到管理层：成为阻挡前进，而必须由管理来解决的障碍。他们还要汇报完成了些什么，这样管理者就获得每天有关项目的信息更新。 
+            </p>
+            <p>SCRUM literature focuses mainly on the iterative planning and tracking 
+              process. It's very close to the other lightweights in many respects 
+              and should work well with the coding practices from XP. <br>
+              SCRUM文化主要集中在反复的计划和跟踪执行进程。它在许多方面与其他的次要方面很接近，应该与由XP而来的编程实践配合工作好。 </p>
+            <p>There isn't any book on SCRUM at the moment, but there are a number 
+              of web resources. Ken Schwaber hosts <a 
+href="http://www.controlchaos.com/">controlChaos.com</a> which is probably the 
+              best overview of SCRUM. Jeff Sutherland has always has an active 
+              web site on object technology issues and includes a <a 
+href="http://jeffsutherland.com/scrum/index.html">section </a>on SCRUM. There's 
+              also a good overview of SCRUM practices in the <a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0201433044">PLoPD 
+              4 </a>book. <br>
+              目前为止没有关于SCRUM的任何书籍，但是已经有了许多web资源。Ken Schwaber的主机<a 
+href="http://www.controlchaos.com/">controlChaos.com</a>可能是关于SCRUM介绍的最好的地方。Jeff 
+              Sutherland总有一个活跃的web站点，是关于对象技术问题的，还包括有关SCRUM的一<a 
+href="http://jeffsutherland.com/scrum/index.html">节</a>。在<a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0201433044">PLoPD 
+              4</a>一书中也有一个关于SCRUM实践的很好的概述。 </p>
+            <h3><a name="N693"></a>Coad's Feature Driven Development<br>
+              Coad的特性驱动开发 </h3>
+            <p>Feature Driven Development (FDD) was developed by Jeff De Luca 
+              and long time OO guru Peter Coad. Like the other adaptive methodologies, 
+              it focuses on short iterations that deliver tangible functionality. 
+              In FDD's case the iterations are two weeks long. <br>
+              特性驱动开发（FDD）是由Jeff De Luca和面向对象的宗师Peter Coad所开发的。与其他的适应性方法论一样，它关注于能够带来切实功能的短期重复。在FDD的情况下，重复是以两周为单位的。 
+            </p>
+            <p>FDD has five processes. The first three are done at the beginning 
+              of the project. <br>
+              FDD有五个进程。前三个是在项目开始的时候做的。 
+            <ul>
+              <li>Develop an Overall Model <br>
+                开发总体模型 
+              <li>Build a Features List <br>
+                建特性表 
+              <li>Plan by Feature <br>
+                根据特性做计划 
+              <li>Design by Feature <br>
+                根据特性做设计 
+              <li>Build by Feature <br>
+                根据特性做构建 <br>
+              </li>
+            </ul>
+            The last two are done within each iteration. Each process is broken 
+            down into tasks and is given verification criteria <br>
+            最后两个是在每个重复之内做的。每个进程又再分为任务，并被给与确认标准。 
+            <p></p>
+            <p>The developers come in two kinds: class owners and chief programmers. 
+              The chief programmer are the most experienced developers. They are 
+              assigned features to build. However they don't build them alone. 
+              Instead the chief programmer identifies which classes are involved 
+              in implementing the feature and gathers their class owners together 
+              to form a feature team for developing that feature. The chief programmer 
+              acts as the coordinator, lead designer, and mentor while the class 
+              owners do much of the coding of the feature. <br>
+              开发者有两种：类所有者和主要程序员。主要程序员是最有经验的开发者。他们被指派要构建的特性。但是他们不知道怎样单独去构建，而是主要程序员鉴别哪些类跟实现这一特性有关，并且和它们的类所有者一起形成一个特性小组来开发该特性。主要程序员扮演协调者和领头设计者和指导者的角色，同时类所有者做许多有关该特性的编程工作。 
+            </p>
+            <p>The main description of FDD is in Peter Coad et al's <a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=013011510X">UML 
+              in Color </a>book. His company, <a 
+href="http://www.togethersoft.com/">TogetherSoft</a>, also does consulting and 
+              training on FDD. <br>
+              有关FDD的主要描述在Peter Coad等人的书<a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=013011510X">UML 
+              in Color</a> 中。他的公司<a 
+href="http://www.togethersoft.com/">TogetherSoft</a>，也是咨询和培训FDD的。 </p>
+            <h3><a name="N736"></a>DSDM (Dynamic System Development Method)<br>
+              DSDM（动态系统开发方法）<br>
+            </h3>
+            <p><a href="http://www.dsdm.org/">DSDM </a>started in Britain in 1994 
+              as a consortium of UK companies who wanted to build on the RAD and 
+              iterative development. Starting with 17 founders it now boasts over 
+              a thousand members and has grown outside its British roots. Being 
+              developed by a consortium, it has a different flavor to many of 
+              the other lightweight methods. It has a full time organization supporting 
+              it with manuals, training courses, accreditation programs, and the 
+              like. It also carries a price tag, which has limited my investigation 
+              of the methodology. However Jennifer Stapleton has written a <a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0201178893">book 
+              </a>which gives an overview of the methodology. <br>
+              <a href="http://www.dsdm.org/">DSDM</a>是在1994年由十几家英国公司组成的联盟提出的，这些公司致力于发展RAD（Rapid 
+              Applications Development 快速应用开发）和互动软件开发技术。联盟最早由17家公司组成，发展至今已经拥有超过一千个成员，并已经发展到英国以外的国家。经过联盟的共同努力开发，相对于其它大多数轻量级方法而言，DSDM已经具有了不一样的风格。联盟拥有一个专职的组织负责支持手册的编辑，课程培训，鉴定程序（accreditation 
+              programs）等工作。但这些服务是收费项目，这就限制了我在方法论中的一些研究。Jennifer Stapleton 已经完成一本关于方法论的<a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0201178893">书籍</a>，里面有关于方法论的概述。 
+            </p>
+            <p>Using the method begins with a feasibility and a business study. 
+              The feasibility study considers whether DSDM is appropriate to the 
+              project at hand. The business study is a short series of workshops 
+              to understand the business area where the development takes place. 
+              It also comes up with outline system architectures and project plan. 
+              <br>
+              使用这种方法开始于一个可行性研究和一个商业性研究。可行性的研究要考虑到DSDM是否适合当前的工程。商业性研究是一系列短期的实践，以便了解商业的发展方向。DSDM还可以被作为系统构架和工程计划的大纲来提出。 
+            </p>
+            <p>The rest of the process forms three interwoven cycles : the functional 
+              model cycle produces analysis documentation and prototypes, the 
+              design and build cycle engineers the system for operational use, 
+              and the implementation cycle handles the deployment to operational 
+              use. <br>
+              这个过程的其余部分规划了三个周期：基本模式周期完成分析文档和建造原型；设计和构造周期完成实现了操作用途的系统的设计；实现周期要处理操作用途的实现。 
+            </p>
+            <p>DSDM has underlying principles that include active user interaction, 
+              frequent deliveries, empowered teams, testing throughout the cycle. 
+              Like other light methods they use short timeboxed cycles of between 
+              two and six weeks. There's an emphasis on high quality and adaptivity 
+              towards changing requirements. <br>
+              DSDM 已经包括了一些潜在的准则，这些准则包括了动态的用户交互，频繁的传输，授权团队（empowered teams），遍及整个周期的测试。像其它轻型方法一样，他们也只需要很短的时间周期，大约两到六周之间。在这里必须要强调高品质和高可适应性必须是面向不停的改变的需求的。 
+            </p>
+            <p>I haven't seen much evidence of its use outside the UK, but DSDM 
+              is notable for having much of the infrastructure of more mature 
+              traditional methodologies, while following the principles of the 
+              light methods approach. There does seem to be an issue as to whether 
+              question on whether it's materials encourage more of a process-orientation 
+              and more ceremony than I would like. <br>
+              我没能发现在英国之外DSDM有更多的应用，但是因为具有成熟传统方法论的基本体系结构，而且遵循轻型方法的基本原则，所以它是非常值得我们关注的。这看起来就是一个关于DSDM的本质是否要更多的鼓励面向过程和形式的问题。 
+            </p>
+            <h3><a name="N766"></a>Is RUP a light method?<br>
+              RUP是轻型方法吗？ </h3>
+            <p>Whenever we start discussing methods in the OO arena, we inevitably 
+              come up with the role of the <a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0201707101">Rational 
+              Unified Process</a>. The Unified Process was developed by Philippe 
+              Kruchten, Ivar Jacobson and others at Rational as the process complement 
+              to the UML. RUP is a process framework and as such can accommodate 
+              a wide variety of processes. Indeed this is my main criticism of 
+              RUP - since it can be anything it ends up being nothing. I prefer 
+              a process that tells you what to do rather than provide endless 
+              options. <br>
+              无论何时我们讨论面向对象领域的方法时，我们不可避免的要涉及Rational Unified Process(RUP，Rational统一过程)规则。统一过程是被Philippe 
+              Kruchten, Ivar Jacobson 和Rational公司其它员工作为对UML的过程的补充而开发的。RUP是一个过程式的构架，并且能提供更多的各种各样的过程。实际上下面这句话是我对RUP的评价- 
+              既然RUP可能是任何的过程，那么它到头来也就什么都不是（since it can be anything it ends up 
+              being nothing.）。我更喜欢的是一个明确的告诉你要做些什么的过程而不是一个提供了没完没了的建议的过程。</p>
+            <p>As a result of this process framework mentality, RUP can be used 
+              in a very traditional waterfall style or in an adaptive lightweight 
+              manner. So as a result you can use RUP as a lightweight process, 
+              or as a heavyweight process - it all depends on how you tailor it 
+              in your environment. <br>
+              因为RUP的本质，所以它可以用在一个很传统的瀑布方式开发过程中或者用在一个自适应的轻量级方式的开发过程中。因此，你可以把RUP作为轻量级的开发过程或是重量级的开发过程 
+              -- 这都依赖于特定的环境中怎样去无缝的使用它。 </p>
+            <p>Craig Larman is a strong proponent of using the RUP in a lightweight 
+              manner. His excellent <a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0137488807">introductory 
+              book </a>on OO development contains a process that's very much based 
+              on his light RUP thinking. His view is that much of the recent push 
+              to lightweight methods is nothing more than accepting mainstream 
+              OO development that's been captured as RUP. One of the things that 
+              Craig does is spend the first two or three days of a month long 
+              iteration with the whole team using the UML to outline the design 
+              of the work to be done during the iteration. This is not a blueprint 
+              that can't be deviated from, but rather a sketch that gives people 
+              a perspective on how things can be done over the iteration. <br>
+              Craig Larman是轻量级方式开发过程中使用RUP的强烈建议者。他写的一本非常精彩的关于面向对象开发的书中包括了许多基于他的轻型RUP过程的思想。他的观点就是最近对轻型方法的起主要推动作用的就是接受了主流的面向对象的开发方法，而这种主流的面向对象的开发方法已经被RUP所包含。Craig所做的很多事情中的一件就是花去一个月中的最初两到三天和整个组进行交流，这个组负责在交流过程中用UML做出整个工程设计的大纲。这个大纲并不是一个不可违背的蓝图，而是一个草图，这个草图只是表达了工作人员在相互交流的基础上所提出的如何作一些事情的意见。 
+            </p>
+            <p>Another tack at light RUP is Robert Martin's <a 
+href="http://www.objectmentor.com/publications/RUPvsXP.pdf">dX process</a>. The 
+              dx process is a fully compliant instance of RUP, that just happens 
+              to be identical to XP (turn dX upside down to see the joke). dX 
+              is designed for folks that have to use RUP, but want to use XP. 
+              As such it is both XP and RUP and thus a good example of the lightweight 
+              use of RUP. <br>
+              轻型RUP的另一个方针是Rober Martin的dx过程。dx过程是一个全部按照RUP规范设计的实例，它与XP的概念是一致的。dx就是为那些必须使用RUP的人而开发的。把XP和RUP结合起来，是一个轻量级使用RUP的很好的例子。 
+            </p>
+            <p>For me, one of the key things that needs to happen with RUP is 
+              that the leaders of RUP in the industry need to emphasize their 
+              approach to software development. More than once I have heard people 
+              using RUP who are using a waterfall style development process. Due 
+              to my contacts in the industry I know that Philippe Kruchten and 
+              his team are firm believers in iterative development. Clarifying 
+              these principles and encouraging lightweight instances of RUP such 
+              as Craig's and Robert's work will have an important effect. <br>
+              对我来说，关键的一件事是那些RUP的倡导者需要在工业领域的软件开发中使用RUP。我不只一次的听说有人在瀑布式的开发过程中使用了RUP模式。通过与工业界的联系，我了解到Philippe 
+              Kruchten和它的团队是互动式的开发的坚定的拥护者。阐明这些观点和鼓励使用轻量级RUP实例，就像Cragis 和 Robert所做的那样，将会产生很重要的影响。 
+            </p>
+            <h3><a name="N802"></a>Other Sources<br>
+              其它资源 </h3>
+            <p>There are a number of other papers and discussions about this theme 
+              of light methods. While these may not be full methodologies, they 
+              do offer insights into this growing field. <br>
+              有大量的文章和论坛都在讨论关于轻型方法的问题。但这些并不是完全关于这些方法的，它们只是为这个正在成长的领域提出了自己见解。 </p>
+            <p>The <a href="http://hillside.net/patterns/conferences/">Patterns 
+              Language of Programming</a> conferences has often contained material 
+              that touches on this subject, if only because many of the folks 
+              interested in patterns are also interested in more adaptive and 
+              humane methods. A leading early paper was Jim Coplein's paper at 
+              <a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0201607344">PLoP1</a>. 
+              Ward Cunningham's Episodes pattern language appeared in <a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0201895277">PLoP2</a>. 
+              Jim Coplein now hosts the <a 
+href="http://www.bell-labs.com/cgi-user/OrgPatterns/OrgPatterns">OrgPatterns</a> 
+              site, a wiki which collects together patterns for organizational 
+              patterns. <br>
+              如果大家对模式和适应性和humane的方法感兴趣，<a href="http://hillside.net/patterns/conferences/">程序语言模式</a> 
+              协会的网站上可以得到关于这些题目的材料。较早时发布的主要的文章是Jim Colplein写的<a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0201607344">PLoP1</a>(Patterns 
+              Language of Programming)卷1。在<a 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0201895277">PLoP2</a>中Ward 
+              Cunninghams的插入了一段有关模式语言的文章。JimCoplein 现在已经主管<a 
+href="http://www.bell-labs.com/cgi-user/OrgPatterns/OrgPatterns">OrgPatterns</a>站点，这个站点收集了一些关于模式和组织模式的内容。 
+            </p>
+            <p>Dirk Riehle sent a paper to XP2000 that <a 
+href="http://www.riehle.org/papers/2000/xp-2000.html">compares the value systems</a> 
+              of XP and Adaptive Software Development. The <a 
+href="http://www.togethercommunity.com/coad-letter/Coad-Letter-0070.html">July 
+              edition</a> of the Coad letter compares XP to FDD. The July edition 
+              of IEEE Software includes several articles on "<a 
+href="http://www.computer.org/software/so2000/s4toc.htm">process diversity</a>" 
+              which touch on these methodologies. <br>
+              Dirk Riehle向XP2000发送了一篇比较适应性软件开发与XP系统价值的文章。Coad letter 七月版中比较了XP和FDD。七月版的IEEE包括了几篇关于这些方法论中“过程差异”的文章。 
+            </p>
+            <h2><a name="N853"></a>Should you go light?<br>
+              应该走轻方法之路吗？ </h2>
+            <p>Using a light method is not for everyone. There are a number of 
+              things to bear in mind if you decide to follow this path. However 
+              I certainly believe that the these new methodologies are widely 
+              applicable and should be used by more people than currently consider 
+              them. <br>
+              轻方法并不是人人适用的。你如果打算走这条路的话，就要牢记一些东西。不过，我当然坚信这些新的方法是广泛适用的，并且应该被比现在正在考虑它的更多的人所使用。 
+            </p>
+            <p>In today's environment, the most common methodology is code and 
+              fix. Applying more discipline than chaos will almost certainly help, 
+              and the lightweight approach has the advantage that it is much less 
+              of a step than using a heavyweight method. Here much of the advantage 
+              of the lightweight methods is indeed their weight. Simpler processes 
+              are more likely to be followed when you are used to no process at 
+              all. <br>
+              在目前的情况下，最普通的方法就是代码加修正。施用准则而不加入混乱自然能够有所帮助，而且轻型的方法相对于重型方法有这样的优势，即更不能算是一个步骤。方法越简单就越容易遵循，如果你习惯于没有任何方法的话。 
+            </p>
+            <p>One of the biggest limitations to these new methodologies is how 
+              they handle larger teams. Crystal has been used up to about fifty 
+              people, but beyond that size there is little evidence as to how 
+              you can use an adaptive approach, or even if such approaches work 
+              at all. <br>
+              对于这些新方法来说，最大的限制之一是它们如何处理更大的组。水晶已经被用于多达五十人的团队，但是如果超过这个大小，几乎没有证据表明你如何可以使用可适应性的方法，甚至无法知道这样的方法是否行得通。 
+            </p>
+            <p>Hopefully one message that's clear from this article is that adaptive 
+              approaches are good when your requirements are uncertain or volatile. 
+              If you don't have stable requirements, then you aren't in the position 
+              to have a stable design and follow a planned process. In these situations 
+              an adaptive process may be less comfortable, but it will be more 
+              effective. Often the biggest barrier here is the customer. In my 
+              view it's important for the customer to understand that following 
+              a predictive process when requirements change is risky to them just 
+              as much as it is to development. <br>
+              可以指望的是一条来自这篇文章的信息清楚地表明当你的要求不确定或者是活动的的时候，可适应性的方法是好用的。如果你没有确定的要求，那么你就不能有一个确定的设计和遵循一个规划好的方法。在这些情况下，可适应性方法可能不太舒服，但会更有效率。通常这里最大的障碍是客户。我认为让客户了解遵循一个可预见的方法在要求变动时无论对他们还是对开发者来说都有同样的风险是很重要的。 
+            </p>
+            <p>So you'll notice I've said that if you have more than fifty people 
+              you should use a traditional predictive process and if you change 
+              changing requirements you should use an adaptive process. What if 
+              you have both a large project and changing requirements? I don't 
+              have a good answer to this, so I'd suggest you seek a second opinion. 
+              I can tell you that things will be very difficult, but I suspect 
+              you already know that. <br>
+              所以你将会注意到我已经说过如果你有一个多于五十个人的团队，你应该采用一个传统的可预见的方法；而如果你要改变变化的需求，你就应该采用一个可适应的方法。那么如果你既有一个大型项目又有变化的要求，情况又会如何呢？对此我没有一个很好的答案，因此我建议你寻找另一种意见。我可以告诉你实际情况是很困难的，但我想你已经知道了这一点。 
+            </p>
+            <p>If you are going to take the adaptive route, you need to trust 
+              your developers and involve them in the decision. Adaptive processes 
+              rely on you trusting your developers, so if you consider your developers 
+              to be of low quality and motivation then you should use a predictive 
+              approach. <br>
+              如果你打算采取这可适应性的路线，你需要信赖你的开发者并且使他们参与决策方法。可适应的方法依赖与你对开发者的信赖，因此如果你认为你的开发者素质低下，缺少动力，那么你就应该采用可预见的方法。 
+            </p>
+            <p>So to summarize. The following factors suggest an adaptive process 
+              <br>
+              因此总的说来。 如下的因素表明要使用可适应性的方法。 
+            <ul>
+              <li>Uncertain or volatile requirements <br>
+                不确定或多变的需求。 
+              <li>Responsible and motivated developers <br>
+                负责任而且富有激情的开发者。 
+              <li>Customer who understands and will get involved. <br>
+                了解情况且要参与开发方法的客户。 </li>
+            </ul>
+            <p></p>
+            <p>These factors suggest a predictive process <br>
+              如下的因素表明要使用可预见的方法。 
+            <ul>
+              <li>A team of over fifty <br>
+                一个超过五十个人的团队 
+              <li>Fixed price, or more correctly a fixed scope, contract <br>
+                固定的花费或--更确切地说--固定的范围，约束。 </li>
+            </ul>
+            <p></p>
+            <h3><a name="N897"></a>Which Adaptive Process?<br>
+              哪一种可适应性的方法？ </h3>
+            <p>All of these processes are new, and I can only give some first 
+              hand experience to guide you. In my choice the question lies in 
+              the team size and how much discipline they are prepared to go for. 
+              <br>
+              所有的的这类方法都是新的。 我只能够提供一些第一手的经验以求有所指导。 在我看来，问题集中在团队的大小和他们准备遵循多少的准则。 
+            </p>
+            <p>With a dozen developers or less that are inclined to try it, I'd 
+              certainly push for XP. It may be that the team won't go all out 
+              in the XP process, at least initially, but you still get a lot of 
+              benefit by a partial XP approach. For me the key test of using this 
+              process well is automated unit testing. If the team are prepared 
+              to do that, then the technical foundations will be in place. If 
+              they can't do that, then I don't suspect they'll handle the rest. 
+              <br>
+              对一打或更少的愿意尝试它的开发者，我一定会推荐XP(Extreme Programming)。很可能这个团队在XP方法中不会尽全力，至少在初始阶段不会，但你仍然可以从分部的XP方法中获益匪浅。对于我来说检验用好这种方法与否的关键测试是自动单元测试(automated 
+              unit testing)。如果这个团队准备这样做的话，那么技术基础已经就位。如果他们不能这样做的话，那么我认为他们不能处理其余部分。 
+            </p>
+            <p>If the discipline isn't there, or the team is too large, then I'd 
+              be inclined to follow Crystal's advice. It's certainly the lightest 
+              of the light, and Cockburn is particularly adaptive to the lessons 
+              of development. I'd still use the XP planning process in these cases. 
+              <br>
+              假如没有准则或团队太大，那我愿意遵循水晶（Crystal）的建议。这当然是轻型方法中最轻的并且Cockburn对开发尤其适应。我仍然愿意在这些情形中使用XP规划方法。 
+            </p>
+            <p>Having said that, however, I'm working with a team of forty who 
+              are successfully trying many XP practices and are pretty close to 
+              full XP, so with determination and a committed team you can adapt 
+              your process outside at least some of these boundaries. <br>
+              不过我已经说过我：在一个有着四十人的团队里工作，我们正在成功地尝试许多XP实战而且很接近全面XP。所以有决心和一个投入的团队，你就能调整你的方法使之超越至少其中一些限制。 
+            </p>
+            <p>And that's really the key message. Whatever process you start with 
+              will not be the process that'll really work for you. You have to 
+              take charge of your process, monitor it and adapt it to your circumstances. 
+              In the end it must become your process, any other labels are secondary. 
+              <br>
+              并且这就是关键信息。无论哪个你以之开始的方法都不会是真正适用的那个方法。你不得不掌控你的方法，监视它并且调整它使之适应你的情况。最后它必须成为你的方法，任何其他的记号都是次要的。 
+            </p>
+            <h2><a name="N919"></a>Acknowledgements<br>
+              感谢 </h2>
+            <p>I've taken lots of ideas from people for this paper, more than 
+              I could possibly list. For concrete suggestions I'd like to thank 
+              Marc Balcer, Kent Beck, Alistair Cockburn, Ward Cunningham, Bill 
+              Kimmel, and Frank Westphal.<br>
+              为了完成这篇文章，我采纳了许多别人的观点。这些观点比我所能罗列的还要多。 我要感谢给我提供具体建议的人们，他们是Marc Balcer， 
+              Kent Beck， Alistair Cockburn， Ward Cunningham， Bill Kimmel，和Frank 
+              Westphal。 </p>
+            <p>Do remember that this is an evolving web paper and likely to change 
+              whenever I have the inclination. I'll add a record of significant 
+              changes, however minor changes will occur without comment. <br>
+              记住这是一份发展中的网络文档。我一旦有改动它的念头，就很可能会这么做。 我会记录下重要的改动， 但对于较小的改动就不做记录了。</p>
+            <h2><a name="N931"></a>Revision History</h2>
+            <p>Here's a list of the major updates to this paper 
+            <ul>
+              <li><i>November 2000: </i>Updated section on ASD and added sections 
+                on DSDM and RUP 
+              <li><i>December 2000: </i>Abridged version published in <a 
+  hef="http://www.sdmag.com">Software Development</a> magazine 
+              <li><i>July 2000: </i>Original Publication on martinfowler.com<font size="2"> 
+                </font></li>
+            </ul>
+            </div> <div align="center"><a href="index.html"><font size="2"><b>[返回]</b></font></a></div>
+</td>
+  </tr>
+</table>
+</center></div>
+</body>
+</html>

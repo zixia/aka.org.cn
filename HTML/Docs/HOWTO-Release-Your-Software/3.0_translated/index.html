@@ -1,0 +1,485 @@
+<HTML
+><HEAD
+><TITLE
+>Software Release Practice HOWTO</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.56"><LINK
+REL="NEXT"
+TITLE="Introduction"
+HREF="x30.html"></HEAD
+><BODY
+CLASS="ARTICLE"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="ARTICLE"
+><DIV
+CLASS="TITLEPAGE"
+>
+    <H1
+CLASS="TITLE"
+><A
+NAME="AEN2"
+>自由软件发布方法惯例</A
+></H1
+>
+    <H3
+CLASS="AUTHOR"
+><A
+NAME="AEN4"
+>Eric Steven Raymond</A
+></H3
+><DIV
+CLASS="AFFILIATION"
+><SPAN
+CLASS="ORGNAME"
+><A
+HREF="http://www.tuxedo.org/~esr/"
+TARGET="_top"
+>    Thyrsus Enterprises</A
+><BR></SPAN
+><DIV
+CLASS="ADDRESS"
+><P
+CLASS="ADDRESS"
+>&nbsp;&nbsp;&nbsp;&nbsp;esr@thyrsus.com<br>
+&nbsp;&nbsp;&nbsp;&nbsp;</P
+></DIV
+></DIV
+>
+    <SPAN
+CLASS="RELEASEINFO"
+>版本号：3.0<BR>
+    </SPAN
+> 
+    <P
+CLASS="COPYRIGHT"
+><a href="http://www.linuxdoc.org/HOWTO/Software-Release-Practice-HOWTO/ln18.html">版权所有</a>@2000 
+      Eric S. Raymond</P
+>
+    <P
+CLASS="COPYRIGHT"
+>翻译：<a href="www.aka.org.cn">[AKA]</a> <a href="mailto:taopin@263.net">rover</a></P
+>
+    <P
+CLASS="PUBDATE"
+>$日期：2000年8月21日 18：29：23 $<BR>
+    </P
+>
+    <DIV
+CLASS="REVHISTORY"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+><TR
+>
+          <TH
+ALIGN="LEFT"
+VALIGN="TOP"
+COLSPAN="3"
+><B
+>本文档的修订历史</B
+></TH
+>
+        </TR
+><TR
+>
+          <TD
+ALIGN="LEFT"
+>3.0修订版</TD
+>
+          <TD
+ALIGN="LEFT"
+>2000年8月12日</TD
+>
+          <TD
+ALIGN="LEFT"
+>修订人：esr</TD
+>
+        </TR
+><TR
+>
+          <TD
+ALIGN="LEFT"
+COLSPAN="3"
+>第一个DocBook版。SourceForge上的建议和一个主要章节被加入本文档。</TD
+>
+        </TR
+></TABLE
+></DIV
+><DIV
+><DIV
+CLASS="ABSTRACT"
+><P
+></P
+>
+        <P
+>本文档详细说明了如何发布一个Linux系统下的自由软件项目。依据这些说明，你就可以让用户非常容易的编译并使用你的代码，同时也可以让其他热心的开发人员很容易读懂你的代码并参与到你的项目中来，并优化、改进她。</P
+>
+        <P
+>本文档对与开发者来说应该算是是一本必读教材。即使是有经验的程序员在发布他们的软件时也需要温习一下本文档。另外本文档会定期修订以反映软件发布实践中更好的做法。</P
+>
+      </DIV
+></DIV
+><HR></DIV
+>
+  <DIV
+CLASS="TOC"
+> 
+    <DL
+> 
+      <DT
+><B
+>目录</B
+></DT
+>
+      <DT
+><br>
+        1. <A
+HREF="x30.html"
+>简介</A
+></DT
+>
+      <DD
+> 
+        <DL
+> 
+          <DT
+>1.1. <A
+HREF="x30.html#AEN32"
+>本文档的来由</A
+></DT
+>
+          <DT
+>1.2. <A
+HREF="x30.html#AEN36"
+>如何获得本说明更新的版本</A
+></DT
+>
+        </DL
+>
+      </DD
+>
+      <DT
+><br>
+        2. <A
+HREF="x43.html"
+>优秀项目—档案—的命名惯例</A
+></DT
+>
+      <DD
+> 
+        <DL
+> 
+          <DT
+>2.1. <A
+HREF="x43.html#AEN47"
+>用GNU风格的命名习惯，档案名加主版本号.辅版本号.补丁编号</A
+></DT
+>
+          <DT
+>2.2. <A
+HREF="x43.html#AEN127"
+>有时候也还要尊重一些在局部范围内流行的惯例</A
+></DT
+>
+          <DT
+>2.3. <A
+HREF="x43.html#AEN131"
+>尽量找一个独一无二并且又很容易输入的项目名称（前缀）</A
+></DT
+>
+        </DL
+>
+      </DD
+>
+      <DT
+><br>
+        3. <A
+HREF="x138.html"
+>选择一个好的许可证和版权说明（从理论上探讨）</A
+></DT
+>
+      <DD
+> 
+        <DL
+> 
+          <DT
+>3.1. <A
+HREF="x138.html#AEN141"
+>开源与版权</A
+></DT
+>
+          <DT
+>3.2. <A
+HREF="x138.html#AEN149"
+>怎样才有资格被称为开源软件</A
+></DT
+>
+        </DL
+>
+      </DD
+>
+      <DT
+><br>
+        4. <A
+HREF="x169.html"
+>选择好的许可证和版权（实践篇）</A
+></DT
+>
+      <DD
+> 
+        <DL
+> 
+          <DT
+>4.1. <A
+HREF="x169.html#AEN172"
+>让你自己或者自由软件基金会成为软件的版权所有者</A
+></DT
+>
+          <DT
+>4.2. <A
+HREF="x169.html#AEN175"
+>采用遵照开源定义的许可证</A
+></DT
+>
+          <DT
+>4.3. <A
+HREF="x169.html#AEN179"
+>如果没有特别的需要，最好不要自搞一套许可证</A
+></DT
+>
+        </DL
+>
+      </DD
+>
+      <DT
+><br>
+        5. <A
+HREF="x184.html"
+>好的开发习惯</A
+></DT
+>
+      <DD
+> 
+        <DL
+> 
+          <DT
+>5.1. <A
+HREF="x184.html#AEN189"
+>写标准ANSI C程序或者可移植的脚本程序</A
+></DT
+>
+          <DT
+>5.2. <A
+HREF="x184.html#AEN195"
+>遵守C程序的可移植惯例</A
+></DT
+>
+          <DT
+>5.3. <A
+HREF="x184.html#AEN200"
+>使用autoconf/automake/autoheader工具</A
+></DT
+>
+          <DT
+>5.4. <A
+HREF="x184.html#AEN203"
+>发布前要仔细的检查代码</A
+></DT
+>
+          <DT
+>5.5. <A
+HREF="x184.html#AEN207"
+>发布前要仔细的检查文档和Readmes文件</A
+></DT
+>
+        </DL
+>
+      </DD
+>
+      <DT
+><br>
+        6. <A
+HREF="x210.html"
+>制作项目发布包的好经验</A
+></DT
+>
+      <DD
+> 
+        <DL
+> 
+          <DT
+>6.1. <A
+HREF="x210.html#AEN213"
+>确保tar包解压时会建一个独立的新目录</A
+></DT
+>
+          <DT
+>6.2. <A
+HREF="x210.html#AEN221"
+>制作一个README文件</A
+></DT
+>
+          <DT
+>6.3. <A
+HREF="x210.html#AEN245"
+>遵照标准文件命名规则</A
+></DT
+>
+          <DT
+>6.4. <A
+HREF="x210.html#AEN293"
+>为项目升级做好准备</A
+></DT
+>
+          <DT
+>6.5. <A
+HREF="x210.html#AEN299"
+>提供RPM包</A
+></DT
+>
+        </DL
+>
+      </DD
+>
+      <DT
+><br>
+        7. <A
+HREF="x306.html"
+>好的文档编写惯例</A
+></DT
+>
+      <DD
+> 
+        <DL
+> 
+          <DT
+>7.1. <A
+HREF="x306.html#AEN318"
+>现行的一些好的做法</A
+></DT
+>
+          <DT
+>7.2. <A
+HREF="x306.html#AEN347"
+>也许未来会有些更好的做法</A
+></DT
+>
+        </DL
+>
+      </DD
+>
+      <DT
+><br>
+        8. <A
+HREF="x355.html"
+>好的沟通方式</A
+></DT
+>
+      <DD
+> 
+        <DL
+> 
+          <DT
+>8.1. <A
+HREF="x355.html#AEN358"
+>在c.o.l.a和Freshmeat上公布</A
+></DT
+>
+          <DT
+>8.2. <A
+HREF="x355.html#AEN363"
+>在相关主题新闻组中公布</A
+></DT
+>
+          <DT
+>8.3. <A
+HREF="x355.html#AEN369"
+>建一个与项目相关的网站</A
+></DT
+>
+          <DT
+>8.4. <A
+HREF="x355.html#AEN386"
+>维护一个项目相关邮件列表</A
+></DT
+>
+          <DT
+>8.5. <A
+HREF="x355.html#AEN390"
+>在各大主要项目库站点中发布</A
+></DT
+>
+        </DL
+>
+      </DD
+>
+      <DT
+><br>
+        9. <A
+HREF="x404.html"
+>好的项目管理经验</A
+></DT
+>
+    </DL
+>
+  </DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x30.html"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+>
+      <TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>简介</TD
+>
+    </TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

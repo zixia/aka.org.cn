@@ -1,0 +1,54 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>如何获得本机IP</title>
+<meta name="Microsoft Theme" content="blank 001, default">
+<meta name="Microsoft Border" content="tl, default">
+</head>
+
+<body background="_themes/blank/blbkgnd.gif" bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/new_page_17.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="获得本机IP"></strong></font><br>
+<a href="index.htm"><img src="_derived/home_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="主页" align="middle"></a> <a href="new_page_16.htm"><img src="_derived/up_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="上一层" align="middle"></a> <img src="_derived/new_page_17.htm_cmp_blank000_hbtn_p.gif" width="140" height="32" border="0" alt="获得本机IP" align="middle"> <a href="new_page_18.htm"><img src="_derived/new_page_18.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="对方连接本机的哪个IP？" align="middle"></a> <a href="new_page_19.htm"><img src="_derived/new_page_19.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="如何使用DNS" align="middle"></a> <a href="new_page_20.htm"><img src="_derived/new_page_20.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="文件流方式" align="middle"></a> <a href="new_page_21.htm"><img src="_derived/new_page_21.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="读取一行语句" align="middle"></a> <a href="new_page_30.htm"><img src="_derived/new_page_30.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="不定长参数" align="middle"></a> <a href="new_page_22.htm"><img src="_derived/new_page_22.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="以Daemon方式运行" align="middle"></a> <a href="new_page_23.htm"><img src="_derived/new_page_23.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="端口重用" align="middle"></a> <a href="new_page_24.htm"><img src="_derived/new_page_24.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="用户登录及权限设置" align="middle"></a></p>
+<p align="center">　</p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<font size="+2">
+<blockquote>
+  <p>本机可能会有多个IP，下面这段程序可以获得本机IP：</p>
+  <p>struct hostent *h;</p>
+  <p>char host[100];</p>
+  <p>int i;</p>
+  <p>gethostname(host, 100);</p>
+  <p>if ((h = gethostbyname(host)) == NULL) {</p>
+  <blockquote>
+    <p>printf(&quot;Error : %s!\n&quot;, hstrerror(h_errno));</p>
+    <p>return;</p>
+  </blockquote>
+  <p>};</p>
+  <p>printf(&quot;Default IP: %s\n&quot;, inet_ntoa (*((struct in_addr 
+  *)h-&gt;h_addr)));</p>
+  <p>for (i = 0; i&lt; h-&gt;h_length / sizeof(int); i++) {</p>
+  <blockquote>
+    <p>printf(&quot;IP %d : %s\n&quot;, i+1, inet_ntoa (*((struct in_addr 
+    *)h-&gt;h_addr_list[i])));</p>
+  </blockquote>
+  <p>};</p>
+  <p><font color="#FF0000">需要注意的是，h-&gt;h_addr实际上就是h-&gt;h_addr_list[0]，是为了向前兼容而保留的。</font></p>
+  <p>DNS操作时的错误处理与普通程序不同，gethostbyname通过设置h_errno代表出错号，对应的错误函数有hstrerror()和herror()，分别对应于strerror()和perror()这两个普通的错误函数。</p>
+</blockquote>
+<font size="+1">
+<p>&nbsp;</p>
+</font></font>　
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+</html>

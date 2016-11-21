@@ -1,0 +1,73 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>获得显示器信息</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>获得显示器信息</H1> 
+ <P><UL>
+<H2>int DefaultScreen(display)  /* This returns the default screen number */
+</H2>
+</UL><UL>
+<H2>int ScreenCount(display)    /* This returns the number of possible screens */ 
+</H2>
+</UL><UL>
+<H2>int  DefaultDepth()         /* This routine returns the number   of planes used */
+</H2>
+</UL><UL>
+<H2>unsigned long AllPlanes()   /* The bits in the returned long represent the planes used */
+</H2>
+</UL><UL>
+<H2>int DisplayPlanes(display, screen_number)　 /* returns the number of possible planes*/
+</H2>
+</UL><UL>
+<H2>Colormap DefaultColormap(display, screen_number) /* colors is stored in a table */
+</H2>
+</UL><UL>
+<H2>int DisplayCells(display, screen_number) /* number of entries in the default colormap */
+</H2>
+</UL><UL>
+<H2>unsigned long BlackPixel(display, screen_number) /* These are permanently allocated 
+</H2>
+</UL><UL>
+<H2>unsigned long WhitePixel(display, screen_number) /* entries in  the default colormap */
+</H2>
+</UL><UL>
+<H2>GC DefaultGC(display, screen_number)  /* details about the current  foreground color,     
+</H2>
+</UL><UL>
+<H2>                etc, from a Graphics Context structure. This  routine returns the default one */
+</H2>
+</UL><UL>
+<H2>Window DefaultRootWindow(display)     /* initial window that covers the screen */
+</H2>
+</UL><UL>
+<H2>Visual *DefaultVisual(display,screen_number) /* hardware-specific information*/
+</H2>
+</UL><UL>
+<H2>int DisplayHeight(display,screen_number)    /* height of display in pixels */
+</H2>
+</UL><UL>
+<H2>int DisplayWidth(display,screen_number)     /* width of display in pixels */
+</H2>
+</UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld008.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld010.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld009.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

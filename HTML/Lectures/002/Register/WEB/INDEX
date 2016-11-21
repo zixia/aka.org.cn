@@ -1,0 +1,5 @@
+[+ $udat{AkaID}?"<center><font color=yellow>欢迎你,$udat{AkaID}</font></center>":undef +]<br>
+<a href='http://www.aka.org.cn?'>Aka主页</a><br>
+<a href='register.zixia?action=new'>Aka学员注册</a><br>
+<a href='login.zixia?[+ rand(100) +]'>修改登记课程</a><br>
+<a href='logout.zixia?'>注销(logout)</a><br>

@@ -1,0 +1,29 @@
+人员情况：
+ 
+     沙龙协调：  王曙  （star_wang@sina.com） 
+                 daniel (yu_daniel@263.net)
+                 sirius (wjx.sirius@263.net)
+
+
+     技术专家：
+              PKI ：           王曙    
+                               刘海龙  (hailong_liu@263.net)
+                               
+              IDS ：           杨劲松，(yjs@perfectcenter.net)
+                               吴作顺	(www51@263.net)
+
+                               
+              FIREWALL         王红阳（w.kinghy@263.net)
+              
+              SHELLCODE        童剑  (tongjian@staff.sina.com.cn)
+ 
+
+     杂志：   王玲      :lwang@cnnic.net.cn(北京.女)
+              常建纲	:dasy@263.net(北京)
+              庄昱尧	:zhuangyy@netease.com（上海）
+              liuwei    :settler@263.net(南京)
+              
+
+    
+
+     主页，文字，和媒体联系工作：   燕子 (女.yanzicaow@263.net)

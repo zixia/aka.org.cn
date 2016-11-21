@@ -1,0 +1,6 @@
+Some \- Something in MiniGUI.
+
+#include <minigui/minigui.h>
+
+void Func1 (arg1, arg2);
+void Func2 (void);

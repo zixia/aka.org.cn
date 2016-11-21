@@ -1,0 +1,401 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>配置文件</title>
+<meta name="Microsoft Theme" content="blank 000, default">
+<meta name="Microsoft Border" content="tlb, default">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/resin_files.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="配置文件"></strong></font><br>
+<a href="dl_make.htm"><img src="../_derived/back_cmp_blank000_back.gif" width="100" height="20" border="0" alt="上一页" align="middle"></a> <a href="../index.htm"><img src="../_derived/home_cmp_blank000_home.gif" width="100" height="20" border="0" alt="主页" align="middle"></a> <a href="index.htm"><img src="../_derived/up_cmp_blank000_up.gif" width="100" height="20" border="0" alt="上一层" align="middle"></a> <a href="webroot.htm"><img src="../_derived/next_cmp_blank000_next.gif" width="100" height="20" border="0" alt="下一页" align="middle"></a></p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<p>现在，我们已经按照缺省的配置，跑起来了Resin自带的Web 
+Server。</p>
+<h2><b>resin自带的Webserver</b></h2>
+<p>那么，我们来看看Resin的WebServer是什么样子的：（Resin的文档里面说它自带的WebServer对于静态页面的服务速度比Apache要快一些）</p>
+<p><a href="mailto:zixia@zixia.net">zixia@zixia.net</a>$ cd /usr/local/resin/bin<br>
+<a href="mailto:zixia@zixia.net">zixia@zixia.net</a>$ more httpd.sh<br>
+#! /bin/sh<br>
+#<br>
+# httpd.sh can be called like apachectl<br>
+#<br>
+# httpd.sh -- execs the web server in the foreground<br>
+# httpd.sh start -- starts the web server in the background<br>
+# httpd.sh stop -- stops the web server<br>
+# httpd.sh restart -- restarts the web server<br>
+#!#$#!%$#^%$&amp;Y^%$^@%<br>
+!%%$#^$&amp;^&amp;#^@%#!$!@# 有一些注释，值得一看...<br>
+!#$T%^%$^$^@%$!#$!#</p>
+<p>... ...</p>
+<p><br>
+<u>exec $perl $bin/wrapper.pl -chdir -name &quot;$name&quot; -class 
+&quot;$class&quot; $args $*</u></p>
+<p>#注意上面这行，是httpd.sh的最后一行。</p>
+<p>哇，我说为什么这么厉害，原来是个perl脚本？</p>
+<p><a href="mailto:zixia@zixia.net">zixia@zixia.net</a>$ pwd<br>
+/usr/local/resin/bin<a href="mailto:zixia@zixia.net"><br>
+zixia@zixia.net</a>$ cat wrapper.pl<br>
+#! /usr/bin/perl<br>
+#<br>
+# Helpful for getting file path information<br>
+use File::Basename;<br>
+use Socket;<br>
+#...</p>
+<p>#!#$#!%$#^%$&amp;Y^%$^@%<br>
+!%%$#^$&amp;^&amp;#^@%#!$!@# 有一些注释，值得一看...<br>
+!#$T%^%$^$^@%$!#$!#</p>
+<p>... ...</p>
+<p>&nbsp;&nbsp;&nbsp; # create a keepalive socket<br>
+&nbsp;&nbsp;&nbsp; # when the wrapper dies, the httpd class will detect that and<br>
+&nbsp;&nbsp;&nbsp; # close gracefully<br>
+&nbsp;&nbsp;&nbsp; $addr = pack(&quot;S n a4 x8&quot;, AF_INET, 0, 
+&quot;\0\0\0&quot;);<br>
+&nbsp;&nbsp;&nbsp; ($name, $aliases, $proto) = getprotobyname('tcp');<br>
+&nbsp;&nbsp;&nbsp; socket(S, AF_INET, SOCK_STREAM, $proto) || die &quot;socket: 
+$!&quot;;<br>
+&nbsp;&nbsp;&nbsp; bind(S, $addr) || die &quot;bind: $!&quot;;<br>
+&nbsp;&nbsp;&nbsp; $myaddr = getsockname(S);<br>
+&nbsp;&nbsp;&nbsp; ($fam, $port, $addr) = unpack(&quot;S n a4 x8&quot;, 
+$myaddr);<br>
+&nbsp;&nbsp;&nbsp; listen(S, 5) || die &quot;connect: $!&quot;;<br>
+<br>
+&nbsp;&nbsp;&nbsp; if (fork() == 0) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; close(S);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exec(&quot;$JAVA_EXE $JAVA_ARGS 
+$class -socketwait $port $conf $RESIN_ARGS 1&gt;&gt; $stdout_log 2&gt;&gt; 
+$stderr_log&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(66);<br>
+&nbsp;&nbsp;&nbsp; }</p>
+<p>... ...</p>
+<p>原来resin自带的webserver是通过perl来调用他的java程序的...</p>
+<h2>Resin的配置文件：</h2>
+<p>&lt;!--<br>
+ - The Resin configuration file.<br>
+ -<br>
+ - This example file is more complicated than is needs to be because<br>
+ - it makes several configurations explicit that can be simplified and<br>
+ - because it needs to configure the examples.<br>
+ -<br>
+ - Look in conf/samples for more realistic sample configurations.<br>
+ - conf/samples/simple.conf -- a simple, basic configuration<br>
+ - conf/samples/deploy.conf -- a simple configuration for deployment<br>
+ -<br>
+ - The configuration is based on a purely element-based XML.To make<br>
+ - it easier to read, attributes can be used as syntactic sugar.<br>
+ -<br>
+ - The following are equivalent:<br>
+ - &lt;foo&gt;&lt;bar&gt;13&lt;/bar&gt;&lt;/foo&gt;- canonical 
+representation, but verbose<br>
+ - &lt;foo bar=13/&gt; - typical configuration<br>
+ - &lt;foo&gt;&lt;bar id=13/&gt;&lt;/foo&gt; - sometimes useful<br>
+--&gt;<br>
+&lt;!-- Resin的配置文件就是它了：/usr/local/resin/conf/resin.conf,<br>
+&nbsp;&nbsp;&nbsp; - 这个配置文件是XML格式的，要注意如果配置文件中有XML语法错误，<br>
+&nbsp;&nbsp;&nbsp; - resin的XML解释器会抛出异常，resin自然也无法启动。<br>
+&nbsp;&nbsp;&nbsp; --&gt;<br>
+&lt;caucho.com&gt; &lt;!-- 配置就是从这个标签开始的 --&gt;<br>
+<br>
+&lt;!-- Resin logging.You can uncomment the following useful log.<br>
+ - <br>
+ - &lt;log id='/caucho.com/tcp-server'<br>
+ -href='stderr:'<br>
+ -timestamp='[%H:%M:%S.%s]'/&gt;<br>
+--&gt;<br>
+<br>
+&lt;!-- Security providers.Adding JSSE looks like:<br>
+ - &lt;security-provider id='com.sun.net.ssl.internal.ssl.Provider'/&gt;<br>
+--&gt;<br>
+<br>
+&lt;!-- You can change the compiler to jikes or change the work-dir --&gt;<br>
+&lt;!-- 这里！我们安装的jike就可以在这里派上用场 --&gt;<br>
+&lt;!-- 注视掉它 java compiler='internal' compiler-args=&quot;&quot; 
+work-dir='work'/ --&gt;<br>
+&lt;!-- 换成我们C++编写的Jike! --&gt;<br>
+&lt;java&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;compiler&gt;/usr/local/bin/jikes&lt;/compiler&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;compiler-args&gt;-encoding 
+ISO-8859-1&lt;/compiler-args&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&lt;!-- 注意上面的编码，为了显示汉字 --&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;work-dir&gt;work&lt;/work-dir&gt;<br>
+&lt;/java&gt;<br>
+<br>
+&lt;!--<br>
+ - Sample database pool configuration<br>
+ - The JDBC name is java:comp/jdbc/test<br>
+--&gt;<br>
+&lt;dbpool.sql&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;id&gt;ORCL&lt;/id&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;driver&gt;oracle.jdbc.driver.OracleDriver&lt;/driver&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;url&gt;jdbc:oracle:thin:@localhost:1521:SMTH&lt;/url&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;!-- &lt;url&gt;jdbc:oracle:oci8:@SMTH&lt;/url&gt; --&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;!-- 在Linux下面，好像无法使用Java的JDBC胖Driver(OCI8)，<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 因为似乎Oracle8i安装完毕后，提供给JDBC-OCI8 
+Driver<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 的JNI的动态连接库libocijdbc8.so是for 
+Solaris的<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;user&gt;scott&lt;/user&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;password&gt;tiger&lt;/password&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;max-connections&gt;5&lt;/max-connections&gt;<br>
+&lt;/dbpool.sql&gt;<br>
+&lt;!--<br>
+ - Use precompiled JSP classes if available.<br>
+ - 'static-encoding' - optimization if you stick to one character set<br>
+--&gt;<br>
+&lt;jsp precompile='true' static-encoding='true'/&gt;<br>
+<br>
+&lt;!--<br>
+ - For production sites, change class-update-interval to something<br>
+ - like 60, so it only checks for updates every minute.<br>
+--&gt;<br>
+&lt;http-server&gt;<br>
+&lt;!--<br>
+ - The root file directory of the server.Apache users will change<br>
+ - this to /usr/local/apache/htdocs and IIS users will change it<br>
+ - to d:\inetpub\wwwroot<br>
+--&gt;<br>
+&lt;app-dir&gt;doc&lt;/app-dir&gt;<br>
+<br>
+&lt;!-- the http port --&gt;<br>
+&lt;http port=8080/&gt;<br>
+<br>
+&lt;!-- the srun port, read by both JVM and plugin --&gt;<br>
+&lt;srun host='localhost' port='6802'/&gt;<br>
+<br>
+&lt;!--<br>
+ - How to add SSL:<br>
+ -<br>
+ - &lt;http port=8443&gt;<br>
+ - &lt;ssl&gt;true&lt;/ssl&gt;<br>
+ - &lt;key-store-type&gt;pkcs12&lt;/key-store-type&gt;<br>
+ - &lt;key-store-file&gt;keys/server_cert.p12&lt;/key-store-file&gt;<br>
+ - &lt;key-store-password&gt;changeit&lt;/key-store-password&gt;<br>
+ - &lt;/http&gt;<br>
+--&gt;<br>
+<br>
+&lt;!--<br>
+ - Select an error page to display when the connection fails.<br>
+ -<br>
+ - &lt;error-page location='connection' 
+location='/my-error-page.html'/&gt;<br>
+--&gt;<br>
+<br>
+&lt;!-- To disable /caucho-status, set this to false --&gt;<br>
+&lt;caucho-status&gt;true&lt;/caucho-status&gt;<br>
+<br>
+&lt;!-- how often to check servlets for changes (id used for brevity) --&gt;<br>
+&lt;class-update-interval id='2'/&gt;<br>
+<br>
+&lt;!-- maximum number of threads --&gt;<br>
+&lt;thread-max&gt;150&lt;/thread-max&gt;<br>
+<br>
+&lt;!--<br>
+ - How many threads to wait for keepalives.Should be at least the<br>
+ - number of Apache processes to get good performance.<br>
+--&gt;<br>
+&lt;thread-keepalive id=100/&gt;<br>
+<br>
+&lt;!--<br>
+ - Enable internal caching.<br>
+ - 'size' is the memory size in kb<br>
+ - 'entries' is the number of entries in the memory cache<br>
+--&gt;<br>
+&lt;cache dir='cache' size='1024' entries='1024'/&gt;<br>
+<br>
+&lt;!-- default host if no other host matches --&gt;<br>
+&lt;host id=''&gt;<br>
+&lt;!--<br>
+ - The standalone server should uncomment for access logging.<br>
+ - With another web server, like Apache, the web server will<br>
+ - log this information.<br>
+&lt;access-log id='log/access.log' <br>
+format='%h %l %u %t &quot;%r&quot; %s %b &quot;%{Referer}i&quot; 
+&quot;%{User-Agent}i&quot;'/&gt;<br>
+--&gt;<br>
+<br>
+&lt;error-log id='log/error.log'/&gt;<br>
+<br>
+&lt;web-app id='/'&gt;<br>
+&lt;!--<br>
+ - The classpath directive may be repeated.Source is optional<br>
+ - Servlets and beans generally belong in WEB-INF/classes<br>
+--&gt;<br>
+&lt;classpath id='WEB-INF/classes'<br>
+ source='WEB-INF/classes'<br>
+ compile='true'/&gt;<br>
+<br>
+&lt;!--<br>
+ - Expires time for a cacheable file.Production sites will<br>
+ - normally change this to '15m'<br>
+--&gt;<br>
+&lt;cache-mapping url-pattern='/' expires='2s'/&gt;<br>
+<br>
+&lt;!--<br>
+ - set the pages to be used as welcome (index) files<br>
+--&gt;<br>
+&lt;welcome-file-list&gt;index.xtp, index.jsp, 
+index.html&lt;/welcome-file-list&gt;<br>
+<br>
+&lt;session-config&gt;<br>
+&lt;session-max&gt;4096&lt;/session-max&gt;<br>
+&lt;session-timeout&gt;30&lt;/session-timeout&gt;<br>
+&lt;enable-cookies&gt;true&lt;/enable-cookies&gt;<br>
+&lt;enable-url-rewriting&gt;true&lt;/enable-url-rewriting&gt;<br>
+<br>
+&lt;!--<br>
+ - Store sessions in the filesystem, so they can persist across<br>
+ - servlet and class changes.<br>
+ -<br>
+ - This may be commented out in deployment for better 
+performance.<br>
+--&gt;<br>
+&lt;file-store&gt;sessions&lt;/file-store&gt;<br>
+&lt;/session-config&gt;<br>
+<br>
+&lt;!--<br>
+ - special mapping so /servlet/pkg.MyServlet invokes pkg.MyServlet<br>
+--&gt;<br>
+&lt;servlet-mapping url-pattern='/servlet/*' 
+servlet-name='invoker'/&gt;<br>
+<br>
+&lt;servlet-mapping url-pattern='*.xtp'<br>
+ servlet-name='com.caucho.jsp.XtpServlet'/&gt;<br>
+&lt;servlet-mapping url-pattern='*.jsp'<br>
+ servlet-name='com.caucho.jsp.JspServlet'/&gt;<br>
+<br>
+&lt;!-- <br>
+ - The following entries configuration the examples.You may 
+safely<br>
+ - delete anything from here down.<br>
+--&gt;<br>
+<br>
+&lt;!-- Application init parameters, see Env.java to get the values 
+--&gt;<br>
+&lt;context-param info='An application information string'/&gt;<br>
+<br>
+&lt;!-- snoop-servlet handles all urls starting with /snoop --&gt;<br>
+&lt;servlet-mapping url-pattern='/snoop/*' 
+servlet-name='snoop-servlet'/&gt;<br>
+<br>
+&lt;!-- configure snoop-servlet with init parameters --&gt;<br>
+&lt;servlet servlet-name='snoop-servlet' servlet-class='Env'&gt;<br>
+&lt;init-param info='A servlet information string'/&gt;<br>
+&lt;/servlet&gt;<br>
+<br>
+&lt;!-- /~user maps to user directories --&gt;<br>
+&lt;path-mapping url-regexp='^/~([^/]*)' 
+real-path='/home/$1/public_html/'/&gt;<br>
+&lt;/web-app&gt;<br>
+<br>
+&lt;!-- Define applications (ServletContexts) for the examples.<br>
+ - Singe applications are entirely separate from one another,<br>
+ - including session variables and servlet-mappings, the<br>
+ - servlet-mapping declarations need to be repeated.<br>
+--&gt;<br>
+&lt;web-app id='examples/tags'&gt;<br>
+&lt;/web-app&gt;<br>
+<br>
+&lt;web-app id='examples/tictactoe'/&gt;<br>
+<br>
+&lt;web-app id='examples/navigation'/&gt;<br>
+<br>
+&lt;web-app id='examples/xsl'/&gt;<br>
+<br>
+&lt;web-app id='examples/templates'&gt;<br>
+&lt;servlet-mapping url-pattern='/servlet/*' 
+servlet-name='invoker'/&gt;<br>
+&lt;servlet-mapping url-pattern='/GuestJsp' 
+servlet-name='GuestJsp'/&gt;<br>
+&lt;servlet-mapping url-pattern='/GuestXtp' 
+servlet-name='GuestXtp'/&gt;<br>
+&lt;servlet-mapping url-pattern='/RSS' servlet-name='jsp.RSS'/&gt;<br>
+<br>
+&lt;servlet servlet-name='GuestJsp' servlet-class='jsp.GuestJsp'/&gt;<br>
+&lt;servlet servlet-name='GuestXtp' servlet-class='jsp.GuestXtp'/&gt;<br>
+&lt;/web-app&gt;<br>
+<br>
+&lt;web-app id='/examples/login'/&gt;<br>
+&lt;/host&gt;<br>
+&lt;/http-server&gt;<br>
+&lt;/caucho.com&gt;</p>
+<h2>我使用的Resin的配置文件：</h2>
+<p>&lt;caucho.com&gt;<br>
+ &lt;log id='/caucho.com/tcp-server'<br>
+href='stderr:'<br>
+timestamp='[%H:%M:%S.%s]'/&gt;<br>
+<br>
+&lt;java&gt;<br>
+&lt;compiler&gt;/usr/local/bin/jikes&lt;/compiler&gt;<br>
+&lt;compiler-args&gt;-encoding ISO-8859-1&lt;/compiler-args&gt;<br>
+&lt;work-dir&gt;work&lt;/work-dir&gt;<br>
+&lt;/java&gt;<br>
+<br>
+&lt;dbpool.sql&gt;<br>
+&lt;id&gt;ORCL&lt;/id&gt;<br>
+&lt;driver&gt;oracle.jdbc.driver.OracleDriver&lt;/driver&gt;<br>
+&lt;url&gt;jdbc:oracle:thin:@localhost:1521:SMTH&lt;/url&gt;<br>
+&lt;!-- &lt;url&gt;jdbc:oracle:oci8:@SMTH&lt;/url&gt; --&gt;<br>
+&lt;user&gt;scott&lt;/user&gt;<br>
+&lt;password&gt;tiger&lt;/password&gt;<br>
+&lt;max-connections&gt;5&lt;/max-connections&gt;<br>
+&lt;/dbpool.sql&gt;<br>
+<br>
+&lt;jsp precompile='true' static-encoding='true'/&gt;<br>
+&lt;http-server&gt;<br>
+&lt;app-dir&gt;/webroot&lt;/app-dir&gt;<br>
+&lt;http port=8080/&gt;<br>
+&lt;srun host='localhost' port='6802'/&gt;<br>
+<br>
+&lt;class-update-interval id='2'/&gt;<br>
+&lt;thread-max&gt;150&lt;/thread-max&gt;<br>
+&lt;thread-keepalive id=100/&gt;<br>
+&lt;cache dir='cache' size='1024' entries='1024'/&gt;<br>
+&lt;host id=''&gt;<br>
+&lt;access-log id='log/default-access.log' <br>
+format='%h %l %u %t &quot;%r&quot; %s %b &quot;%{Referer}i&quot; 
+&quot;%{User-Agent}i&quot;'/&gt;<br>
+&lt;error-log id='log/default-error.log'/&gt;<br>
+<br>
+&lt;web-app id='/'&gt;<br>
+&lt;classpath id='WEB-INF/classes'<br>
+ source='WEB-INF/classes'<br>
+ compile='true'/&gt;<br>
+&lt;cache-mapping url-pattern='/' expires='1s'/&gt;<br>
+&lt;welcome-file-list&gt;index.xtp, index.jsp, 
+index.html&lt;/welcome-file-list&gt;<br>
+&lt;session-config&gt;<br>
+&lt;session-max&gt;4096&lt;/session-max&gt;<br>
+&lt;session-timeout&gt;30&lt;/session-timeout&gt;<br>
+&lt;enable-cookies&gt;true&lt;/enable-cookies&gt;<br>
+&lt;enable-url-rewriting&gt;true&lt;/enable-url-rewriting&gt;<br>
+&lt;file-store&gt;sessions&lt;/file-store&gt;<br>
+&lt;/session-config&gt;<br>
+&lt;servlet-mapping url-pattern='*.xtp'<br>
+ servlet-name='com.caucho.jsp.XtpServlet'/&gt;<br>
+&lt;servlet-mapping url-pattern='*.jsp'<br>
+ servlet-name='com.caucho.jsp.JspServlet'/&gt;<br>
+&lt;/web-app&gt;<br>
+&lt;/host&gt;<br>
+&lt;/http-server&gt;<br>
+&lt;/caucho.com&gt;<br>
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="right">
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table></body>
+
+</html>

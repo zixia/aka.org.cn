@@ -1,0 +1,328 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>                            Linux 内存管理子系统导读</TITLE>
+<META NAME="Template" CONTENT="C:\Program Files\Microsoft Office\Templates\Normal.dot">
+</HEAD>
+<BODY LINK="#0000ff">
+
+<FONT SIZE=3><P ALIGN="JUSTIFY">                            Linux </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>内存管理子系统导读</P>
+<P ALIGN="JUSTIFY">本文主要针对</FONT><FONT SIZE=3>2.4</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的</FONT><FONT SIZE=3>kernel</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。</P>
+<P ALIGN="JUSTIFY">关于本文的组织：</FONT><FONT SIZE=3> </P>
+<P ALIGN="JUSTIFY">   </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>我的目标是‘导读’，提供</FONT><FONT SIZE=3>linux</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>内存管理子系统的整体概念，同时给出进一步深入研究某个部分时的辅助信息</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>包括代码组织</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>文件和主要函数的意义和一些参考文档</FONT><FONT SIZE=3>)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。之所以采取这种方式，是因为我本人在阅读代码的过程中，深感“读懂一段代码容易，把握整体思想却极不容易”。而且，在我写一些内核代码时，也觉得很多情况下，不一定非得很具体地理解所有内核代码，往往了解它的接口和整体工作原理就够了。当然，我个人的能力有限，时间也很不够，很多东西也是近期迫于讲座压力临时学的：），内容难免偏颇甚至错误，欢迎大家指正。</P>
+<P ALIGN="JUSTIFY"></P>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI>存储层次结构和</FONT><FONT SIZE=3>x86</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>存储管理硬件（</FONT><FONT SIZE=3>MMU</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>）</LI></P></OL>
+<DIR>
+
+<P ALIGN="JUSTIFY">这里假定大家对虚拟存储，段页机制有一定的了解。主要强调一些很重要的或者容易误解的概念。</P></DIR>
+
+<OL>
+
+<P ALIGN="JUSTIFY"><LI>存储层次</LI></P></OL>
+<DIR>
+
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">      </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>高速缓存</FONT><FONT SIZE=3>(cache)    --</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>〉</FONT><FONT SIZE=3>   </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>主存</FONT><FONT SIZE=3>(main memory)      ---</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>〉</FONT><FONT SIZE=3>     </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>磁盘</FONT><FONT SIZE=3>(disk)</P>
+<P ALIGN="JUSTIFY">   </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>理解存储层次结构的根源：</FONT><FONT SIZE=3>CPU</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>速度和存储器速度的差距。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">   </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>层次结构可行的原因：局部性原理。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">   LINUX</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的任务</FONT><FONT SIZE=3>:</P></DIR>
+
+
+<UL>
+
+<UL>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"><LI>减小</FONT><FONT SIZE=3>footprint</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，提高</FONT><FONT SIZE=3>cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>命中率，充分利用局部性。</LI></P>
+<P ALIGN="JUSTIFY"><LI>实现虚拟存储以满足进程的需求，有效地管理内存分配，力求最合理地利用有限的资源。</LI></P></UL>
+</UL>
+
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">      </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>参考文档：</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">          </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>《</FONT><FONT SIZE=3>too little,too small</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>》</FONT><FONT SIZE=3>by Rik Van Riel, Nov. 27,2000.</P>
+<P ALIGN="JUSTIFY">           </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>以及所有的体系结构教材：）</P>
+<OL>
+
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY"><LI>MMU</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的作用</LI></P>
+<P ALIGN="JUSTIFY">辅助操作系统进行内存管理，提供虚实地址转换等硬件支持。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY"><LI>x86</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的地址</LI></P>
+<P ALIGN="JUSTIFY">逻辑地址：</FONT><FONT SIZE=3> </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>出现在机器指令中，用来制定操作数的地址。段：偏移</P>
+<P ALIGN="JUSTIFY">线性地址：逻辑地址经过分段单元处理后得到线性地址，这是一个</FONT><FONT SIZE=3>32</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>位的无符号整数，可用于定位</FONT><FONT SIZE=3>4G</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>个存储单元。</P>
+<P ALIGN="JUSTIFY">物理地址：线性地址经过页表查找后得出物理地址，这个地址将被送到地址总线上指示所要访问的物理内存单元。</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">LINUX: </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>尽量避免使用段功能以提高可移植性。如通过使用基址为</FONT><FONT SIZE=3>0</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的段，使逻辑地址</FONT><FONT SIZE=3>==</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>线性地址。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY"><LI>x86</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的段</LI></P>
+<P ALIGN="JUSTIFY">保护模式下的段：选择子</FONT><FONT SIZE=3>+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>描述符。不仅仅是一个基地址的原因是为了提供更多的信息：保护、长度限制、类型等。描述符存放在一张表中</FONT><FONT SIZE=3>(GDT</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>或</FONT><FONT SIZE=3>LDT)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，选择子可以认为是表的索引。段寄存器中存放的是选择子，在段寄存器装入的同时，描述符中的数据被装入一个不可见的寄存器以便</FONT><FONT SIZE=3>cpu</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>快速访问。（图）</FONT><FONT SIZE=3>P40</P>
+<P ALIGN="JUSTIFY">   </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>专用寄存器：</FONT><FONT SIZE=3>GDTR(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>包含全局描述附表的首地址</FONT><FONT SIZE=3>),LDTR</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>（当前进程的段描述附表首地址）</FONT><FONT SIZE=3>,TSR</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>（指向当前进程的任务状态段）</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">LINUX</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>使用的段：</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">    __KERNEL_CS</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：</FONT><FONT SIZE=3> </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>内核代码段。范围</FONT><FONT SIZE=3> 0-4G</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。可读、执行。</FONT><FONT SIZE=3>DPL=0</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">    __KERNEL_DS</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：内核代码段。范围</FONT><FONT SIZE=3> 0-4G</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。可读、写。</FONT><FONT SIZE=3>DPL=0</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">    __USER_CS</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：内核代码段。范围</FONT><FONT SIZE=3> 0-4G</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。可读、执行。</FONT><FONT SIZE=3>DPL=3</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">    __USER_DS</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：内核代码段。范围</FONT><FONT SIZE=3> 0-4G</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。可读、写。</FONT><FONT SIZE=3>DPL=3</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">    TSS(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>任务状态段</FONT><FONT SIZE=3>)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：存储进程的硬件上下文，进程切换时使用。（因为</FONT><FONT SIZE=3>x86</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>硬件对</FONT><FONT SIZE=3>TSS</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>有一定支持，所有有这个特殊的段和相应的专用寄存器。）</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">    default_ldt</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：理论上每个进程都可以同时使用很多段，这些段可以存储在自己的</FONT><FONT SIZE=3>ldt</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>段中，但实际</FONT><FONT SIZE=3>linux</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>极少利用</FONT><FONT SIZE=3>x86</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的这些功能，多数情况下所有进程共享这个段，它只包含一个空描述符。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">    </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>还有一些特殊的段用在电源管理等代码中。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">    </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>（在</FONT><FONT SIZE=3>2.2</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>以前，每个进程的</FONT><FONT SIZE=3>ldt</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和</FONT><FONT SIZE=3>TSS</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>段都存在</FONT><FONT SIZE=3>GDT</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>中，而</FONT><FONT SIZE=3>GDT</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>最多只能有</FONT><FONT SIZE=3>8192</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>项，因此整个系统的进程总数被限制在</FONT><FONT SIZE=3>4090</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>左右。</FONT><FONT SIZE=3>2</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。</FONT><FONT SIZE=3>4</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>里不再把它们存在</FONT><FONT SIZE=3>GDT</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>中，从而取消了这个限制。）</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">    __USER_CS</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和</FONT><FONT SIZE=3>__USER_DS</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>段都是被所有在用户态下的进程共享的。注意不要把这个共享和进程空间的共享混淆：虽然大家使用同一个段，但通过使用不同的页表由分页机制保证了进程空间仍然是独立的。</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY"><LI>x86</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的分页机制</LI></P></OL>
+<DIR>
+<DIR>
+
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">x86</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>硬件支持两级页表，奔腾</FONT><FONT SIZE=3>pro</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>以上的型号还支持</FONT><FONT SIZE=3>Physical address Extension Mode</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和三级页表。所谓的硬件支持包括一些特殊寄存器</FONT><FONT SIZE=3>(cr0-cr4)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>、以及</FONT><FONT SIZE=3>CPU</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>能够识别页表项中的一些标志位并根据访问情况做出反应等等。如读写</FONT><FONT SIZE=3>Present</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>位为</FONT><FONT SIZE=3>0</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的页或者写</FONT><FONT SIZE=3>Read/Write</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>位为</FONT><FONT SIZE=3>0</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的页将引起</FONT><FONT SIZE=3>CPU</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>发出</FONT><FONT SIZE=3>page fault</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>异常，访问完页面后自动设置</FONT><FONT SIZE=3>accessed</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>位等。</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY"> linux</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>采用的是一个体系结构无关的三级页表模型（如图），使用一系列的宏来掩盖各种平台的细节。例如，通过把</FONT><FONT SIZE=3>PMD</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>看作只有一项的表并存储在</FONT><FONT SIZE=3>pgd</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>表项中（通常</FONT><FONT SIZE=3>pgd</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>表项中存放的应该是</FONT><FONT SIZE=3>pmd</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>表的首地址），页表的中间目录</FONT><FONT SIZE=3>(pmd)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>被巧妙地‘折叠’到页表的全局目录</FONT><FONT SIZE=3>(pgd)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，从而适应了二级页表硬件。</P></DIR>
+</DIR>
+
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">   </P>
+<P ALIGN="JUSTIFY">  6. TLB</P>
+<P ALIGN="JUSTIFY">     TLB</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>全称是</FONT><FONT SIZE=3>Translation Look-aside Buffer,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>用来加速页表查找。这里关键的一点是：如果操作系统更改了页表内容，它必须相应的刷新</FONT><FONT SIZE=3>TLB</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>以使</FONT><FONT SIZE=3>CPU</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>不误用过时的表项。</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">  7. Cache</P>
+<P ALIGN="JUSTIFY">     Cache </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>基本上是对程序员透明的，但是不同的使用方法可以导致大不相同的性能。</FONT><FONT SIZE=3>linux</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>有许多关键的地方对代码做了精心优化，其中很多就是为了减少对</FONT><FONT SIZE=3>cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>不必要的污染。如把只有出错情况下用到的代码放到</FONT><FONT SIZE=3>.fixup section</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，把频繁同时使用的数据集中到一个</FONT><FONT SIZE=3>cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>行（如</FONT><FONT SIZE=3>struct task_struct</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>），减少一些函数的</FONT><FONT SIZE=3>footprint</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，在</FONT><FONT SIZE=3>slab</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>分配器里头的</FONT><FONT SIZE=3>slab coloring</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>等。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">     </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>另外，我们也必须知道什么时候</FONT><FONT SIZE=3>cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>要无效：新</FONT><FONT SIZE=3>map/remap</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>一页到某个地址、页面换出、页保护改变、进程切换等，也即当</FONT><FONT SIZE=3>cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>对应的那个地址的内容或含义有所变化时。当然，很多情况下不需要无效整个</FONT><FONT SIZE=3>cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，只需要无效某个地址或地址范围即可。实际上，</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">intel</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>在这方面做得非常好用，</FONT><FONT SIZE=3>cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的一致性完全由硬件维护。</P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<P ALIGN="JUSTIFY"><LI>关于</FONT><FONT SIZE=3>x86</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>处理器更多信息，请参照其手册：</FONT><FONT SIZE=3>Volume 3: Architecture and Programming Manual,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>可以从</FONT><A HREF="ftp://download.intel.com/design/pentium/MANUALS/24143004.pdf"><FONT SIZE=3>ftp://download.intel.com/design/pentium/MANUALS/24143004.pdf</FONT></A><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>获得</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">8</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>．</FONT><FONT SIZE=3> Linux </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>相关实现</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">  </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>这一部分的代码和体系结构紧密相关，因此大多位于</FONT><FONT SIZE=3>arch</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>子目录下，而且大量以宏定义和</FONT><FONT SIZE=3>inline</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>函数形式存在于头文件中。以</FONT><FONT SIZE=3>i386</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>平台为例，主要的文件包括：</P>
+<OL>
+<OL>
+
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY"><LI>page.h</LI></P>
+<P ALIGN="JUSTIFY">  </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>页大小、页掩码定义。</FONT><FONT SIZE=3>PAGE_SIZE,PAGE_SHIFT</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和</FONT><FONT SIZE=3>PAGE_MASK</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">  </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>对页的操作，如清除页内容</FONT><FONT SIZE=3>clear_page</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>、拷贝页</FONT><FONT SIZE=3>copy_page</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>、页对齐</FONT><FONT SIZE=3>page_align</P>
+<P ALIGN="JUSTIFY">  </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>还有内核虚地址的起始点：著名的</FONT><FONT SIZE=3>PAGE_OFFSET:)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和相关的内核中虚实地址转换的宏</FONT><FONT SIZE=3>__pa</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和</FONT><FONT SIZE=3>__va.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">  virt_to_page</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>从一个内核虚地址得到该页的描述结构</FONT><FONT SIZE=3>struct page *.</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>我们知道，所有物理内存都由一个</FONT><FONT SIZE=3>memmap</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>数组来描述。这个宏就是计算给定地址的物理页在这个数组中的位置。另外这个文件也定义了一个简单的宏检查一个页是不是合法：</FONT><FONT SIZE=3>VALID_PAGE(page)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。如果</FONT><FONT SIZE=3>page</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>离</FONT><FONT SIZE=3>memmap</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>数组的开始太远以至于超过了最大物理页面应有的距离则是不合法的。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">  </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>比较奇怪的是页表项的定义也放在这里。</FONT><FONT SIZE=3>pgd_t,pmd_t,pte_t</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和存取它们值的宏</FONT><FONT SIZE=3>xxx_val</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><LI>pgtable.h pgtable-2level.h pgtable-3level.h</LI></P></OL>
+</OL>
+<DIR>
+
+<P ALIGN="JUSTIFY">     </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>顾名思义，这些文件就是处理页表的，它们提供了一系列的宏来操作页表。</FONT><FONT SIZE=3>pgtable-2level.h</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和</FONT><FONT SIZE=3>pgtable-2level.h</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>则分别对应</FONT><FONT SIZE=3>x86</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>二级、三级页表的需求。首先当然是表示每级页表有多少项的定义不同了。而且在</FONT><FONT SIZE=3>PAE</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>模式下，地址超过</FONT><FONT SIZE=3>32</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>位，页表项</FONT><FONT SIZE=3>pte_t</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>用</FONT><FONT SIZE=3>64</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>位来表示</FONT><FONT SIZE=3>(pmd_t,pgd_t</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>不需要变</FONT><FONT SIZE=3>)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，一些对整个页表项的操作也就不同。共有如下几类：</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">         [pte/pmd/pgd]_ERROR     </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>出措时要打印项的取值，</FONT><FONT SIZE=3>64</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>位和</FONT><FONT SIZE=3>32</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>位当然不一样。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">         set_[pte/pmd/pgd]         </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>设置表项值</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">         pte_same  </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>比较</FONT><FONT SIZE=3>     pte_page </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>从</FONT><FONT SIZE=3>pte</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>得出所在的</FONT><FONT SIZE=3>memmap</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>位置</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">         pte_none  </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>是否为空。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">         __mk_pte  </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>构造</FONT><FONT SIZE=3>pte</P>
+<P ALIGN="JUSTIFY">      pgtable.h</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的宏太多，不再一一解释。实际上也比较直观，通常从名字就可以看出宏的意义来了。</FONT><FONT SIZE=3>pte_xxx</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>宏的参数是</FONT><FONT SIZE=3>pte_t,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>而</FONT><FONT SIZE=3>ptep_xxx</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的参数是</FONT><FONT SIZE=3>pte_t *</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。</FONT><FONT SIZE=3>2.4 kernel</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>在代码的</FONT><FONT SIZE=3>clean up</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>方面还是作了一些努力，不少地方含糊的名字变明确了，有些函数的可读性页变好了。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">       pgtable.h</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>里除了页表操作的宏外，还有</FONT><FONT SIZE=3>cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和</FONT><FONT SIZE=3>tlb</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>刷新操作，这也比较合理，因为他们常常是在页表操作时使用。这里的</FONT><FONT SIZE=3>tlb</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>操作是以</FONT><FONT SIZE=3>__</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>开始的，也就是说，内部使用的，真正对外接口在</FONT><FONT SIZE=3>pgalloc.h</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>中（这样分开可能是因为在</FONT><FONT SIZE=3>SMP</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>版本中，</FONT><FONT SIZE=3>tlb</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的刷新函数和单机版本区别较大，有些不再是内嵌函数和宏了）。</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY"> 8.3 pgalloc.h</P>
+<P ALIGN="JUSTIFY">    </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>包括页表项的分配和释放宏</FONT><FONT SIZE=3>/</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>函数</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>值得注意的是表项高速缓存的使用：</FONT><FONT SIZE=3>     </P>
+<P ALIGN="JUSTIFY">        pgd/pmd/pte_quicklist</P>
+<P ALIGN="JUSTIFY">    </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>内核中有许多地方使用类似的技巧来减少对内存分配函数的调用，加速频繁使用的分配。如</FONT><FONT SIZE=3>buffer cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>中</FONT><FONT SIZE=3>buffer_head</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和</FONT><FONT SIZE=3>buffer</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，</FONT><FONT SIZE=3>vm</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>区域中最近使用的区域。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">     </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>还有上面提到的</FONT><FONT SIZE=3>tlb</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>刷新的接口</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY"> 8.4 segment.h</P>
+<P ALIGN="JUSTIFY">    </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>定义</FONT><FONT SIZE=3> __KERNEL_CS[DS]  __USER_CS[DS]</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"></P></DIR>
+
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY"> </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>参考：</P><DIR>
+
+<P ALIGN="JUSTIFY">《</FONT><FONT SIZE=3>Understanding the Linux Kernel</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>》的第二章给了一个对</FONT><FONT SIZE=3>linux </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的相关实现的简要描述，</P>
+<P ALIGN="JUSTIFY"></P></DIR>
+
+<OL>
+
+<P ALIGN="JUSTIFY"><LI>物理内存的管理。</LI></P></OL>
+<DIR>
+
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">   2.4</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>中内存管理有很大的变化。在物理页面管理上实现了基于区的伙伴系统（</FONT><FONT SIZE=3>zone based buddy system</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>）。区</FONT><FONT SIZE=3>(zone)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的是根据内存的不同使用类型划分的。对不同区的内存使用单独的伙伴系统</FONT><FONT SIZE=3>(buddy system)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>管理</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>而且独立地监控空闲页等。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">   (</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>实际上更高一层还有</FONT><FONT SIZE=3>numa</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>支持。</FONT><FONT SIZE=3>Numa(None Uniformed Memory Access)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>是一种体系结构，其中对系统里的每个处理器来说</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>不同的内存区域可能有不同的存取时间</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>一般是由内存和处理器的距离决定</FONT><FONT SIZE=3>)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。而一般的机器中内存叫做</FONT><FONT SIZE=3>DRAM</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，即动态随机存取存储器，对每个单元，</FONT><FONT SIZE=3>CPU</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>用起来是一样快的。</FONT><FONT SIZE=3>NUMA</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>中访问速度相同的一个内存区域称为一个</FONT><FONT SIZE=3>Node</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，支持这种结构的主要任务就是要尽量减少</FONT><FONT SIZE=3>Node</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>之间的通信，使得每个处理器要用到的数据尽可能放在对它来说最快的</FONT><FONT SIZE=3>Node</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>中。</FONT><FONT SIZE=3>2.4</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>内核中</FONT><FONT SIZE=3>node&#0;</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>相应的数据结构是</FONT><FONT SIZE=3>pg_data_t</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，每个</FONT><FONT SIZE=3>node</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>拥有自己的</FONT><FONT SIZE=3>memmap</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>数组，把自己的内存分成几个</FONT><FONT SIZE=3>zone</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，每个</FONT><FONT SIZE=3>zone</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>再用独立的伙伴系统管理物理页面。</FONT><FONT SIZE=3>Numa</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>要对付的问题还有很多，也远没有完善，就不多说了</FONT><FONT SIZE=3>)</P>
+<P ALIGN="JUSTIFY">  </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>一些重要的数据结构粗略地表示如下：</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image9.gif"></P></DIR>
+
+<OL>
+
+<P ALIGN="JUSTIFY"><LI>基于区的伙伴系统的设计</FONT><FONT SIZE=3>&#0;</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>物理页面的管理</LI></P></OL>
+<DIR>
+
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">     </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>内存分配的两大问题是：分配效率、碎片问题。一个好的分配器应该能够快速的满足各种大小的分配要求，同时不能产生大量的碎片浪费空间。伙伴系统是一个常用的比较好的算法。</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>解释：</FONT><FONT SIZE=3>TODO)</P>
+<P ALIGN="JUSTIFY">    </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>引入区的概念是为了区分内存的不同使用类型（方法？），以便更有效地利用它们。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">2.4</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>有三个区：</FONT><FONT SIZE=3>DMA, Normal, HighMem</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。前两个在</FONT><FONT SIZE=3>2.2</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>实际上也是由独立的</FONT><FONT SIZE=3>buddy system</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>管理的，但</FONT><FONT SIZE=3>2.2</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>中还没有明确的</FONT><FONT SIZE=3>zone</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的概念。</FONT><FONT SIZE=3>DMA</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>区在</FONT><FONT SIZE=3>x86</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>体系结构中通常是小于</FONT><FONT SIZE=3>16</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>兆的物理内存区，因为</FONT><FONT SIZE=3>DMA</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>控制器只能使用这一段的内存。而</FONT><FONT SIZE=3>HighMem</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>是物理地址超过某个值</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>通常是约</FONT><FONT SIZE=3>900M)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的高端内存。其他的是</FONT><FONT SIZE=3>Normal</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>区内存。由于</FONT><FONT SIZE=3>linux</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>实现的原因，高地址的内存不能直接被内核使用，如果选择了</FONT><FONT SIZE=3>CONFIG_HIGHMEM</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>选项，内核会使用一种特殊的办法来使用它们。（解释：</FONT><FONT SIZE=3>TODO</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>）。</FONT><FONT SIZE=3>HighMem</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>只用于</FONT><FONT SIZE=3>page cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和用户进程。这样分开之后，我们将可以更有针对性地使用内存，而不至于出现把</FONT><FONT SIZE=3>DMA</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>可用的内存大量给无关的用户进程使用导致驱动程序没法得到足够的</FONT><FONT SIZE=3>DMA</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>内存等情况。此外，每个区都独立地监控本区内存的使用情况，分配时系统会判断从哪个区分配比较合算，综合考虑用户的要求和系统现状。</FONT><FONT SIZE=3>2.4</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>里分配页面时可能会和高层的</FONT><FONT SIZE=3>VM</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>代码交互</FONT><FONT SIZE=3>(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>分配时根据空闲页面的情况，内核可能从伙伴系统里分配页面，也可能直接把已经分配的页收回</FONT><FONT SIZE=3>&#0;reclaim</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>等</FONT><FONT SIZE=3>)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，代码比</FONT><FONT SIZE=3>2.2</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>复杂了不少，要全面地理解它得熟悉整个</FONT><FONT SIZE=3>VM</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>工作的机理。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">   </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>整个分配器的主要接口是如下函数</FONT><FONT SIZE=3>(mm.h page_alloc.c)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：</FONT><FONT SIZE=3> </P></DIR>
+
+
+<UL>
+
+<UL>
+<P ALIGN="JUSTIFY"><LI>struct page * alloc_pages(int gfp_mask, unsigned long order)    </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>根据</FONT><FONT SIZE=3>gftp_mask</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的要求，从适当的区分配</FONT><FONT SIZE=3>2^order</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>个页面，返回第一个页的描述符。</LI></P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY"><LI>#define alloc_page(gfp_mask)    alloc_pages(gfp_mask,0)</LI></P>
+<P ALIGN="JUSTIFY"><LI>unsigned long __get_free_pages((int gfp_mask, unsigned long order) </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>工作同</FONT><FONT SIZE=3>alloc_pages,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>但返回首地址。</LI></P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY"><LI>#define __get_free_page(gfp_mask) __get_free_pages(gfp_mask,0)</LI></P>
+<P ALIGN="JUSTIFY"><LI>get_free_page </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>分配一个已清零的页面。</LI></P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY"><LI>__free_page(s) </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和</FONT><FONT SIZE=3>free_page(s)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>释放页面（一个</FONT><FONT SIZE=3>/</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>多个）前者以页面描述符为参数，后者以页面地址为参数。</LI></P></UL>
+</UL>
+<DIR>
+
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">        </P>
+<P ALIGN="JUSTIFY">    </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>关于</FONT><FONT SIZE=3>Buddy</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>算法，许多教科书上有详细的描述，</FONT><FONT SIZE=3>&lt;Understanding the Linux Kernel&gt;</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>第六章对</FONT><FONT SIZE=3>linux</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的实现有一个很好的介绍。关于</FONT><FONT SIZE=3>zone base buddy</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>更多的信息，可以参见</FONT><FONT SIZE=3>Rik Van Riel </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>写的</FONT><FONT SIZE=3>&quot; design for a zone based memory allocator&quot;</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。这个人是目前</FONT><FONT SIZE=3>linuxmm</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的维护者，权威啦。这篇文章有一点过时了，</FONT><FONT SIZE=3>98</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>年写的，当时还没有</FONT><FONT SIZE=3>HighMem</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，但思想还是有效的。还有，下面这篇文章分析</FONT><FONT SIZE=3>2.4</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的实现代码：</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">     http://home.earthlink.net/~jknapka/linux-mm/zonealloc.html</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">  </P>
+<P ALIGN="JUSTIFY">2. Slab--</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>连续物理区域管理</FONT><FONT SIZE=3>        </P>
+<P ALIGN="JUSTIFY">  </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>单单分配页面的分配器肯定是不能满足要求的。内核中大量使用各种数据结构，大小从几个字节到几十上百</FONT><FONT SIZE=3>k</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>不等，都取整到</FONT><FONT SIZE=3>2</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的幂次个页面那是完全不现实的。</FONT><FONT SIZE=3>2.0</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的内核的解决方法是提供大小为</FONT><FONT SIZE=3>2,4,8,16,...,131056</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>字节的内存区域。需要新的内存区域时，内核从伙伴系统申请页面，把它们划分成一个个区域，取一个来满足需求；如果某个页面中的内存区域都释放了，页面就交回到伙伴系统。这样做的效率不高。有许多地方可以改进：</P></DIR>
+
+
+<UL>
+
+<UL>
+<P ALIGN="JUSTIFY"><LI>不同的数据类型用不同的方法分配内存可能提高效率。比如需要初始化的数据结构，释放后可以暂存着，再分配时就不必初始化了。</LI></P></UL>
+</UL>
+
+
+<UL>
+
+<UL>
+<P ALIGN="JUSTIFY"><LI>内核的函数常常重复地使用同一类型的内存区，缓存最近释放的对象可以加速分配和释放。</LI></P></UL>
+</UL>
+
+
+<UL>
+
+<UL>
+<P ALIGN="JUSTIFY"><LI>对内存的请求可以按照请求频率来分类，频繁使用的类型使用专门的缓存，很少使用的可以使用类似</FONT><FONT SIZE=3>2.0</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>中的取整到</FONT><FONT SIZE=3>2</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的幂次的通用缓存。</LI></P></UL>
+</UL>
+
+
+<UL>
+
+<UL>
+<P ALIGN="JUSTIFY"><LI>使用</FONT><FONT SIZE=3>2</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的幂次大小的内存区域时高速缓存冲突的概率较大，有可能通过仔细安排内存区域的起始地址来减少高速缓存冲突。</LI></P></UL>
+</UL>
+
+
+<UL>
+
+<UL>
+<P ALIGN="JUSTIFY"><LI>缓存一定数量的对象可以减少对</FONT><FONT SIZE=3>buddy</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>系统的调用，从而节省时间并减少由此引起的高速缓存污染。</LI></P></UL>
+</UL>
+<DIR>
+
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">      2.2</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>实现的</FONT><FONT SIZE=3>slab</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>分配器体现了这些改进思想。</P>
+<P ALIGN="JUSTIFY">主要数据结构</P>
+<P ALIGN="JUSTIFY">接口：</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">    kmem_cache_create/kmem_cache_destory</P>
+<P ALIGN="JUSTIFY">    kmem_cache_grow/kmem_cache_reap  </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>增长</FONT><FONT SIZE=3>/</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>缩减某类缓存的大小</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">    kmem_cache_alloc/kmem_cache_free  </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>从某类缓存分配</FONT><FONT SIZE=3>/</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>释放一个对象</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">    kmalloc/kfree     </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>通用缓存的分配、释放函数。</P>
+<P ALIGN="JUSTIFY">相关代码</FONT><FONT SIZE=3>(slab.c)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。</P>
+<P ALIGN="JUSTIFY">相关参考：</FONT><FONT SIZE=3> </P>
+<P ALIGN="JUSTIFY">    http://www.lisoleg.net/lisoleg/memory/slab.pdf </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：</FONT><FONT SIZE=3>Slab</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>发明者的论文，必读经典。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">    &lt;Understanding the Linux Kernel&gt; </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>第六章，具体实现的详细清晰的描述。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">    AKA2000</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>年的讲座也有一些大虾讲过这个主题，请访问</FONT><FONT SIZE=3>aka</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>主页：</FONT><FONT SIZE=3>www.aka.org.cn</P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"></P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">3</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>．</FONT><FONT SIZE=3>vmalloc/vfree &#0;</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>物理地址不连续，虚地址连续的内存管理</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">  </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>使用</FONT><FONT SIZE=3>kernel</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>页表。文件</FONT><FONT SIZE=3>vmalloc.c</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，相对简单。</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">三、</FONT><FONT SIZE=3>2.4</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>内核的</FONT><FONT SIZE=3>VM(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>完善中。。。</FONT><FONT SIZE=3>)</P></DIR>
+
+<OL>
+
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"><LI>进程地址空间管理</LI></P>
+<P ALIGN="JUSTIFY">创建，销毁。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">mm_struct, vm_area_struct, mmap/mprotect/munmap</P>
+<P ALIGN="JUSTIFY">page fault</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>处理，</FONT><FONT SIZE=3>demand page, copy on write</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">相关文件：</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">include/linux/mm.h</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：</FONT><FONT SIZE=3>struct page</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>结构的定义，</FONT><FONT SIZE=3>page</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的标志位定义以及存取操作宏定义。</FONT><FONT SIZE=3>struct vm_area_struct</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>定义。</FONT><FONT SIZE=3>mm</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>子系统的函数原型说明。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">include/linux/mman.h:</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和</FONT><FONT SIZE=3>vm_area_struct</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的操作</FONT><FONT SIZE=3>mmap/mprotect/munmap</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>相关的常量宏定义。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">memory.c</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：</FONT><FONT SIZE=3>page fault</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>处理，包括</FONT><FONT SIZE=3>COW</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和</FONT><FONT SIZE=3>demand page</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>等。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">       </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>对一个区域的页表相关操作</FONT><FONT SIZE=3>: </P>
+<P ALIGN="JUSTIFY">         zeromap_page_range: </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>把一个范围内的页全部映射到</FONT><FONT SIZE=3>zero_page</P>
+<P ALIGN="JUSTIFY">         remap_page_range</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：给定范围的页重新映射到另一块地址空间。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">         zap_page_range</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：把给定范围内的用户页释放掉，页表清零。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">mlock.c</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：</FONT><FONT SIZE=3> mlock/munlock</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>系统调用。</FONT><FONT SIZE=3>mlock</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>把页面锁定在物理内存中。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">mmap.c:</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：</FONT><FONT SIZE=3>mmap/munmap/brk</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>系统调用。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">mprotect.c</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：</FONT><FONT SIZE=3> mprotect</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>系统调用。</P>
+<P ALIGN="JUSTIFY">前面三个文件都大量涉及</FONT><FONT SIZE=3>vm_area_struct</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的操作，有很多相似的</FONT><FONT SIZE=3>xxx_fixup</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的代码，它们的任务是修补受到影响的区域，保证</FONT><FONT SIZE=3>vm_area_struct </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>链表正确。</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><LI>交换</LI></P></OL>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">目的：</FONT><FONT SIZE=3> </P></DIR>
+</DIR>
+
+<OL>
+
+<OL>
+
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"><LI>使得进程可以使用更大的地址空间。</LI></P>
+<P ALIGN="JUSTIFY"><LI>同时容纳更多的进程。</LI></P></OL>
+</OL>
+
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">       </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>任务：</FONT><FONT SIZE=3> </P>
+<OL>
+
+<OL>
+
+</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"><LI>选择要换出的页</LI></P>
+<P ALIGN="JUSTIFY"><LI>决定怎样在交换区中存储页面</LI></P>
+<P ALIGN="JUSTIFY"><LI>决定什么时候换出</LI></P></OL>
+</OL>
+
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">        kswapd</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>内核线程：每</FONT><FONT SIZE=3>10</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>秒激活一次</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">          </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>任务：当空闲页面低于一定值时，从进程的地址空间、各类</FONT><FONT SIZE=3>cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>回收页面</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">          </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>为什么不能等到内存分配失败再用</FONT><FONT SIZE=3>try_to_free_pages</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>回收页面？原因：</P>
+<OL>
+
+<OL>
+
+<P ALIGN="JUSTIFY"><LI>有些内存分配时在中断或异常处理调用，他们不能阻塞</LI></P>
+<P ALIGN="JUSTIFY"><LI>有时候分配发生在某个关键路径已经获得了一些关键资源的时候，因此它不能启动</FONT><FONT SIZE=3>IO</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。如果不巧这时所有的路径上的内存分配都是这样，内存就无法释放。</LI></P></OL>
+</OL>
+
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">        kreclaimd  </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>从</FONT><FONT SIZE=3>inactive_clean_list</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>回收页面，由</FONT><FONT SIZE=3>__alloc_pages</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>唤醒。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">        </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>相关文件：</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">            mm/swap.c  kswapd</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>使用的各种参数以及操作页面年龄的函数。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">            mm/swap_file.c  </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>交换分区</FONT><FONT SIZE=3>/</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>文件的操作。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">            mm/page_io.c </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>读或写一个交换页。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">            mm/swap_state.c  swap cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>相关操作</FONT><FONT SIZE=3>,</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>加入</FONT><FONT SIZE=3>/</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>删除</FONT><FONT SIZE=3>/</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>查找一个</FONT><FONT SIZE=3>swap cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>等。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">            mm/vmscan.c  </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>扫描进程的</FONT><FONT SIZE=3>vm_area</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，试图换出一些页面（</FONT><FONT SIZE=3>kswapd</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>）。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">                         reclaim_page</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：从</FONT><FONT SIZE=3>inactive_clean_list</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>回收一个页面，放到</FONT><FONT SIZE=3>free_list</P>
+<P ALIGN="JUSTIFY">                         kclaimd</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>被唤醒后重复调用</FONT><FONT SIZE=3>reclaim_page</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>直到每个区的</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">                             zone-&gt;free_pages&gt;= zone-&gt;pages_low</P>
+<P ALIGN="JUSTIFY">                         page_lauder</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：由</FONT><FONT SIZE=3>__alloc_pages</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和</FONT><FONT SIZE=3>try_to_free_pages</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>等调用。通常是由于</FONT><FONT SIZE=3>freepages + inactive_clean_list</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的页太少了。功能：把</FONT><FONT SIZE=3>inactive_dirty_list</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的页面转移到</FONT><FONT SIZE=3>inactive_clean_list</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，首先把已经被写回文件或者交换区的页面</FONT><FONT SIZE=3>(by bdflush)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>放到</FONT><FONT SIZE=3>inactive_clean_list</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，如果</FONT><FONT SIZE=3>freepages</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>确实短缺，唤醒</FONT><FONT SIZE=3>bdflush</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，再循环一遍把一定数量的</FONT><FONT SIZE=3>dirty</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>页写回。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">           </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>关于这几个队列</FONT><FONT SIZE=3>(active_list,inactive_dirty_list,inactive_clean_list)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的逻辑，请参照：文档：</FONT><FONT SIZE=3>RFC: design for new VM</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，可以从</FONT><FONT SIZE=3>lisoleg</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的文档精华获得。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">,     </P>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI>page cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>、</FONT><FONT SIZE=3>buffer cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和</FONT><FONT SIZE=3>swap cache</LI></P></OL>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">page cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：读写文件时文件内容的</FONT><FONT SIZE=3>cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，大小为一个页。不一定在磁盘上连续。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">buffer cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：读写磁盘块的时候磁盘块内容的</FONT><FONT SIZE=3>cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，</FONT><FONT SIZE=3>buffer cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的内容对应磁盘上一个连续的区域，一个</FONT><FONT SIZE=3>buffer cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>大小可能从</FONT><FONT SIZE=3>512(</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>扇区大小</FONT><FONT SIZE=3>)</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>到一个页。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">swap cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：</FONT><FONT SIZE=3> </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>是</FONT><FONT SIZE=3>page cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的子集。用于多个进程共享的页面被换出到交换区的情况。</P>
+<P ALIGN="JUSTIFY"></P></DIR>
+</DIR>
+
+
+<UL>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY"><LI>page cache </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和</FONT><FONT SIZE=3> buffer cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的关系</LI></P></UL>
+<DIR>
+<DIR>
+
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY"> </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>本质上是很不同的，</FONT><FONT SIZE=3>buffer cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>缓冲磁盘块内容，</FONT><FONT SIZE=3>page cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>缓冲文件的一页内容。</FONT><FONT SIZE=3>page cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>写回时会使用临时的</FONT><FONT SIZE=3>buffer cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>来写磁盘。</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">bdflush</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：</FONT><FONT SIZE=3> </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>把</FONT><FONT SIZE=3>dirty</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的</FONT><FONT SIZE=3>buffer cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>写回磁盘。通常只当</FONT><FONT SIZE=3>dirty</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的</FONT><FONT SIZE=3>buffer</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>太多或者需要更多的</FONT><FONT SIZE=3>buffer</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>而内存开始不足时运行。</FONT><FONT SIZE=3>page_lauder</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>也可能唤醒它。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">kupdate</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>：</FONT><FONT SIZE=3> </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>定时运行，把写回期限已经到了的</FONT><FONT SIZE=3>dirty buffer</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>写回磁盘。</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">2.4</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的改进：</FONT><FONT SIZE=3>page cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和</FONT><FONT SIZE=3>buffer cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>耦合得更好了。在</FONT><FONT SIZE=3>2.2</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>里，磁盘文件的读使用</FONT><FONT SIZE=3>page cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，而写绕过</FONT><FONT SIZE=3>page cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，直接使用</FONT><FONT SIZE=3>buffer cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，因此带来了同步的问题：写完之后必须使用</FONT><FONT SIZE=3>update_vm_cache()</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>更新可能有的</FONT><FONT SIZE=3>page cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。</FONT><FONT SIZE=3>2.4</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>中</FONT><FONT SIZE=3>page cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>做了比较大的改进，文件可以通过</FONT><FONT SIZE=3>page cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>直接写了，</FONT><FONT SIZE=3>page cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>优先使用</FONT><FONT SIZE=3>high memory</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>。而且，</FONT><FONT SIZE=3>2.4</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>引入了新的对象：</FONT><FONT SIZE=3>file address space</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>，它包含用来读写一整页数据的方法。这些方法考虑到了</FONT><FONT SIZE=3>inode</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的更新、</FONT><FONT SIZE=3>page cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>处理和临时</FONT><FONT SIZE=3>buffer</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的使用。</FONT><FONT SIZE=3>page cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>和</FONT><FONT SIZE=3>buffer cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的同步问题就消除了。原来使用</FONT><FONT SIZE=3>inode+offset</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>查找</FONT><FONT SIZE=3>page cache</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>变成通过</FONT><FONT SIZE=3>file address space+offset</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>；原来</FONT><FONT SIZE=3>struct page </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>中的</FONT><FONT SIZE=3>inode</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>成员被</FONT><FONT SIZE=3>address_space</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>类型的</FONT><FONT SIZE=3>mapping</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>成员取代。这个改进还使得匿名内存的共享成为可能（这个在</FONT><FONT SIZE=3>2.2</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>很难实现，许多讨论过）。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">   </P></DIR>
+
+<P ALIGN="JUSTIFY"> 4. </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>虚存系统则从</FONT><FONT SIZE=3>freeBSD</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>借鉴了很多经验，针对</FONT><FONT SIZE=3>2.2</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的问题作了巨大的调整。</P></DIR>
+
+<P ALIGN="JUSTIFY">文档：</FONT><FONT SIZE=3>RFC: design for new VM</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>不可不读。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">    </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>由于时间仓促，新</FONT><FONT SIZE=3>vm</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的很多细微之处我也还没来得及搞清楚。先大致罗列一下，以后我将进一步完善本文，争取把问题说清楚。另外，等这学期考试过后，我希望能为大家提供一些详细注释过的源代码。</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">Lisoleg</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>收集了一些内存管理方面的文档和链接，大家可以看一看。</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY"> </FONT><A HREF="http://www.lisoleg.net/lisoleg/memory/index.html"><FONT SIZE=3>http://www.lisoleg.net/lisoleg/memory/index.html</FONT></A></P>
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY"></P></FONT></BODY>
+</HTML>

@@ -1,0 +1,81 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>事件</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>事件</H1> 
+ <P><UL>
+<LI><H2>事件（event）：Server端发生任何事情都是一个（或多个）事件，server需要把这个事件传给相关的client．Client事先告诉server自己对哪些事件感兴趣（XSelectInput），对其不感兴趣的事件可以丢弃，也可以传给别的窗口．
+</H2>
+</UL><UL>
+<LI><H2>一个窗口可以捕获所有的事件
+</H2>
+</UL><UL>
+<H2>typedef struct {
+</H2>
+</UL><UL>
+<H2>        int type;               /* of event */
+</H2>
+</UL><UL>
+<H2>        Display *display;       /* Display the event was read from */
+</H2>
+</UL><UL>
+<H2>        Window window;          /* window it is reported relative to */
+</H2>
+</UL><UL>
+<H2>        Window root;            /* root window that the event occured on */
+</H2>
+</UL><UL>
+<H2>        Window subwindow;       /* child window */
+</H2>
+</UL><UL>
+<H2>        unsigned long time;     /* milliseconds */
+</H2>
+</UL><UL>
+<H2>        int x, y;               /* pointer coordinates in event window */
+</H2>
+</UL><UL>
+<H2>        int x_root, y_root;     /* coordinates relative to root */
+</H2>
+</UL><UL>
+<H2>        unsigned int state;     /* key or button mask */
+</H2>
+</UL><UL>
+<H2>        unsigned int keycode;   /* detail */
+</H2>
+</UL><UL>
+<H2>        Bool same_screen;       /* same screen flag */
+</H2>
+</UL><UL>
+<H2>} XKeyEvent;
+</H2>
+</UL><UL>
+<H2>
+</H2>
+</UL><UL>
+<H2>typedef XKeyEvent XKeyPressedEvent;
+</H2>
+</UL><UL>
+<H2>typedef XKeyEvent XKeyReleasedEvent;</H2>
+</UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld014.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld016.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld015.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

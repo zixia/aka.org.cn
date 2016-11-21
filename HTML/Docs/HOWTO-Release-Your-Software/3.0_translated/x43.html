@@ -1,0 +1,436 @@
+<HTML
+><HEAD
+><TITLE
+>Good project- and archive- naming practice</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.56"><LINK
+REL="HOME"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Introduction"
+HREF="x30.html"><LINK
+REL="NEXT"
+TITLE="Good licensing and copyright practice: the theory"
+HREF="x138.html"></HEAD
+><BODY
+CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+></TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x30.html"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x138.html"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+>
+  <H1
+CLASS="SECT1"
+><A
+NAME="AEN43"
+>2. 优秀项目 — 档案 — 的命名惯例</A
+></H1
+>
+  <P
+>由于档案维护者的工作量不断增大，许多站点如：Metalab, PSA 和 CPAN 都存在这种情况。因此趋势是许多工作将会由程序来自动完成，而不是全部由人手工去做。</P
+>
+  <P
+>这种情况就使得项目和文档名称规范化工作变得越来越重要，规范的命名可以让程序更容易的识别和获得文档所包含的信息。</P
+>
+  <DIV
+CLASS="SECT2"
+>
+    <H2
+CLASS="SECT2"
+><A
+NAME="AEN47"
+>2.1. </A
+>用GNU风格的命名习惯，档案名加主版本号.辅版本号.补丁编号</H2
+>
+    <P
+>让档案名称符合GNU命名规则是一个与人与己都有好处的事情，GNU的命名规则是：以所有字母都小写的主名称作为前缀，后跟一个破折号，再跟一个版本号，扩展说明，以及其他后缀。</P
+>
+    <P
+>我们举例说明如下：假定你有一个项目叫做“foobar”，现在他的进展状况是 第一版、第二次发布、第三级。如果她只有一个档案包（可能就是所有的源码）， ~~~~~~~~~~~~~~~~~~~~~~~~~一般把这里的level叫做什么？ 
+      那么她的名称应该是：</P
+>
+    <P
+></P
+>
+    <DIV
+CLASS="VARIABLELIST"
+> 
+      <DL
+> 
+        <DT
+>foobar-1.2.3.tar.gz</DT
+>
+        <DD
+> 
+          <P
+>源代码档案</P
+>
+        </DD
+>
+        <DT
+>foobar.lsm</DT
+>
+        <DD
+> 
+          <P
+>LSM文件名 （如果你需要将这个项目提交到Metalab上，则需要这个LSM文件）</P
+>
+        </DD
+>
+      </DL
+>
+    </DIV
+>
+    <P
+>千万不要把名字起成下面的样子：</P
+>
+    <P
+></P
+>
+    <DIV
+CLASS="VARIABLELIST"
+> 
+      <DL
+> 
+        <DT
+>foobar123.tar.gz</DT
+>
+        <DD
+> 
+          <P
+>（这会让人误解为是一个名为“foobar123”的项目）</P
+>
+        </DD
+>
+        <DT
+>foobar1.2.3.tar.gz</DT
+>
+        <DD
+> 
+          <P
+>（这会让人误解为是一个名为“foobar1”项目的第2.3版）</P
+>
+        </DD
+>
+        <DT
+>foobar-v1.2.3.tar.gz</DT
+>
+        <DD
+> 
+          <P
+>（许多处理程序将会把她理解为名为“foobar-v1”的项目）</P
+>
+        </DD
+>
+        <DT
+>foo_bar-1.2.3.tar.gz</DT
+>
+        <DD
+> 
+          <P
+>（下划线读起来即不上口，也不容易让别人输入和记住）</P
+>
+        </DD
+>
+        <DT
+>FooBar-1.2.3.tar.gz</DT
+>
+        <DD
+> 
+          <P
+>（除非这个项目是面向市场运作的，最好不要大小写混用， ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`marketing weenie是什么意思？ 
+            因为这种写法同样不易读、输入和记忆）Unless you <I
+CLASS="EMPHASIS"
+>like</I
+> looking like a marketing weenie. This is also hard for people to speak, type, 
+            and remember.</P
+>
+        </DD
+>
+      </DL
+>
+    </DIV
+>
+    <P
+>如果你想对源代码包和二进制包有所区别，或者想区分不同类型的二进制包、由不同编译选项编译出来的二进制包，请在文件名的“扩展说明”部分来表示那些信息，扩展说明紧跟在版本号之后。也就是说你可以这样起名字：</P
+>
+    <P
+></P
+>
+    <DIV
+CLASS="VARIABLELIST"
+> 
+      <DL
+> 
+        <DT
+>foobar-1.2.3.src.tar.gz</DT
+>
+        <DD
+> 
+          <P
+>表示源代码包</P
+>
+        </DD
+>
+        <DT
+>foobar-1.2.3.bin.tar.gz</DT
+>
+        <DD
+> 
+          <P
+> 表示二进制包</P
+>
+        </DD
+>
+        <DT
+>foobar-1.2.3.bin.ELF.tar.gz</DT
+>
+        <DD
+> 
+          <P
+>表示ELF格式的二进制包</P
+>
+        </DD
+>
+        <DT
+>foobar-1.2.3.bin.ELF.static.tar.gz</DT
+>
+        <DD
+> 
+          <P
+>表示静态链接库的ELF格式二进制包</P
+>
+        </DD
+>
+        <DT
+>foobar-1.2.3.bin.SPARC.tar.gz</DT
+>
+        <DD
+> 
+          <P
+>表示SPACE格式的二进制包</P
+>
+        </DD
+>
+      </DL
+>
+    </DIV
+>
+    <P
+>千万<i>不要</i>使用“foobar-ELF-1.2.3.tar.gz”格式的名称，因为处理程序对“-ELF” 这样的中缀将难以解释。</P
+>
+    <P
+>一个好的名称将按顺序包含下面这些项：</P
+>
+    <P
+></P
+>
+    <OL
+TYPE="1"
+>
+      <LI
+> 
+        <P
+>项目名称前缀</P
+>
+      </LI
+>
+      <LI
+> 
+        <P
+>破折号</P
+>
+      </LI
+>
+      <LI
+> 
+        <P
+>版本号</P
+>
+      </LI
+>
+      <LI
+> 
+        <P
+>点</P
+>
+      </LI
+>
+      <LI
+> 
+        <P
+>“src”或“bin”标记（可选）</P
+>
+      </LI
+>
+      <LI
+> 
+        <P
+>点或者破折号（建议使用点）</P
+>
+      </LI
+>
+      <LI
+> 
+        <P
+>二进制格式和选项（可选）</P
+>
+      </LI
+>
+      <LI
+> 
+        <P
+>归档和压缩后缀</P
+>
+      </LI
+>
+    </OL
+>
+  </DIV
+><DIV
+CLASS="SECT2"
+>
+    <H2
+CLASS="SECT2"
+><A
+NAME="AEN127"
+>2.2. </A
+>有时候也还要尊重一些在局部范围内流行的惯例</H2
+>
+    <P
+>在有些个别项目或社区中还存在着与上面命名规则并不完全一致的，同时又是定义的非常好的他们自己的命名规则。比如Apache的模块通常就采用“mod_foo”那样的命名方式，而且模块名中还会既包含模块的版本号又包含模块可工作的Apache的版本号。同样，Perl模块在版本号中还有形如浮点数那样的表示方式（如1.303，而不是1.3.3），所以Perl 
+      1.303版的模块Foo:Bar的发行包一般会被命名为Foo-Bar-1.303.tar.gz。（顺便说一句，Perl项目本身在1999年末已经采用了本文前面所介绍的GNU标准命名方法）</P
+>
+    <P
+>一方面我们要寻找并尊重那些特殊社区和开发者的特殊命名习惯；同时对于大部分其他的项目，我们建议大家按照标准的命名规则来工作。</P
+>
+  </DIV
+><DIV
+CLASS="SECT2"
+>
+    <H2
+CLASS="SECT2"
+><A
+NAME="AEN131"
+>2.3. </A
+>尽量找一个独一无二并且又很容易输入的项目名称（前缀）</H2
+>
+    <P
+>项目的主名称应该可以被整个项目中的其他文件通用，同时最好她既好读又好写 （输入），还容易让人记住。所以建议你在没有充足理由的时候最好不要用下划 线，不要使用大写字母或有的字母大写。那些垃圾字符会污染人类视觉的阅读习 
+      惯，干扰人们的搜索顺序，当然那么做对于一个商业发行版本命名可能是一个好主意。 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`而且看起来有点象小市民在耍小聪明。 
+    </P
+>
+    <P
+>当两个不同的项目有同样的主名称的时候就会产生混淆。所以最好在你第一次发 布你的项目的时候就能避免这种冲突。有两个网站上的名称统计列表可以帮助你 检查是否冲突，他们是 
+      Metalab(<a href="http://www.ibiblio.org/pub/Linux">http://www.ibiblio.org/pub/Linux</a>)和 
+      Freshmeat(<a href="http://www.freshmeat.net">http://www.freshmeat.net</a>)，另外还有一个好地方是：SourceForge 
+      (<a href="http://www.sourceforge.net">http://www.sourceforge.net</a>)，在这些地方你可以做一点名称检查的工作。</P
+>
+  </DIV
+>
+</DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x30.html"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x138.html"
+>Next</A
+></TD
+></TR
+><TR
+>
+      <TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>简介</TD
+>
+      <TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+>
+      <TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>选择一个好的许可证和版权说明（从理论上探讨）</TD
+>
+    </TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

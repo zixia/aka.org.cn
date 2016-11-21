@@ -1,0 +1,508 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>Perl 的特点、历史和许可证</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+    <META NAME="AUTHOR" CONTENT="Yongming Wei">
+    <META NAME="CREATED" CONTENT="20000329;17342600">
+    <META >
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="velvet.jpg">
+
+<A HREF="bash-adv.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="perl-cgi.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=LEFT>5&nbsp;&nbsp;&nbsp;&nbsp;Perl 的特点、历史和许可证</H1>
+
+<UL>
+  <LI> 
+    <P>Perl 的基本特点
+  </LI>
+  <LI> 
+    <P>Perl 的发展历史
+  </LI>
+  <LI> 
+    <P>Perl 的使用许可证
+  </LI>
+</UL>
+
+<H3>5.1&nbsp;&nbsp;&nbsp;&nbsp;Perl 的基本特点</H3>
+<P><font color="#FFFFFF"><b><i>　　别期望在一刻钟内就能领略Perl的所有神奇之处, 这种情况很像吃香蕉, 用不着吃完整只香蕉后才知其味，每咬一口都是享受，并促使你再咬下一口，再下一口。 
+  　　　　　　　　　　　　　　　　　　　　　　----Larry Wall </i></b></font></P>
+<p>上面这段话是 Perl 项目发起人劳利·华尔( Larry Wall )对学习 Perl 语言的一段经典评论，希望大家都能找到这种感觉。</p>
+<p>　　Perl 是 Practical Extraction and Report Language (实用摘录和报告语言)的简称，是由 Larry Wall 
+  所发起的。现在其最新版本为5.0，但是大家急切期待是 Perl 6.0 的诞生，不过本次讲座中我们还是以 5.0 为基础。<br>
+  <br>
+  　　Perl 的设计目标是帮助 UNIX 用户完成一些常见的任务，这些任务对于 Shell 来说过于沉重或对移植性要求过于严格。Perl 语言中包含了 
+  C、C++、shell,script、sed、awk 这几个语言的语法,它最初的目的就是用来取代 UNIX 中 sed/awk 与 脚本语言的组合,用来汇整信息，产生报表。因此 
+  Perl 语言要远远比前面讲的 BASH 复杂和功能强大。<br>
+  <br>
+  　　Perl 的设计原则或者说 Perl 的设计哲学是以实用为第一优先，也就是力图使 Perl 语言容易使用、有效率、而且完整。</p>
+<p> 　　Perl 是按 GNU Public License 和 Artictic License 两种许可证形式分发的，其实质是开源软件、自由软件的，原先运行于 
+  UNIX 和类 UNIX 系统，现在已可以方便地在OS/2，Windows 9x，Windows/NT等系统下运行。<br>
+  <br>
+  　　Perl 是一种解释运行的语言，和 BASH 程序一样，一般 Perl 程序的第一行需注明自己是一个 Perl 程序而不是 Shell 程序，所以一般将下面一行语句：<br>
+  　　#! /usr/bin/perl 　　作为文件的第一行。 </p>
+<p>　　Perl 由于引入了模块的设计思想，随着版本的改进，功能越来越强。现在 Perl 的功能已经超乎原先设计时的想象，几乎任何事都可以做到，也变成每一部工作站必备的标准工具了。Perl 
+  最为著名的一点就是他对字符串的处理，由于 Internet 对文字信息处理的巨大需求，使得 Perl 的应用如日中天，而且 Perl 语言也的确是一个非常优秀的文字信息处理语言。</p>
+<p><BR>
+</p>
+<H3>5.2&nbsp;&nbsp;&nbsp;&nbsp;Perl 的发展历史</H3>
+<P>最早发布的 Perl 1.0 版是在1987年底出现的，现在已经过去十多年了。下面是 Perl 首席开发者 Larry Wall 对 Perl 发展历程的一个简单回顾：</P>
+
+<pre>    Perl 0 introduced Perl to my officemates.
+    Perl 1 introduced Perl to the world, and changed /\(...\|...\)/ to
+        /(...|...)/.  \(Dan Faigin still hasn't forgiven me. :-\)
+    Perl 2 introduced Henry Spencer's regular expression package.
+    Perl 3 introduced the ability to handle binary data (embedded nulls).
+    Perl 4 introduced the first Camel book.  Really.  We mostly just
+        switched version numbers so the book could refer to 4.000.
+    Perl 5 introduced everything else, including the ability to
+        introduce everything else.
+</pre>
+<P>Perl 从诞生到现在(Year 2000)，他的主要开发参与者有 10 位，他们分别是：<br>
+  　　Larry Wall, <br>
+  　　Andy Dougherty, <br>
+  　　Tom Christiansen, <br>
+  　　Charles Bailey, <br>
+  　　Nick Ing-Simmons, <br>
+  　　Chip Salzenberg, <br>
+  　　Tim Bunce, <br>
+  　　Malcolm Beattie, <br>
+  　　Gurusamy Sarathy, <br>
+  　　Graham Barr. </P>
+<P>下面是一个关于 Perl 历史上各种发行版本的汇总表：</P>
+<pre> 开发者  版本号         发布日期        备注 
+ ===========================================================================
+</pre>
+<p> 
+<pre> Larry   0              Classified.     Don't ask.
+</pre>
+<p> 
+<pre> Larry   1.000          1987-Dec-18
+</pre>
+<p> 
+<pre>          1.001..10     1988-Jan-30
+          1.011..14     1988-Feb-02
+</pre>
+<p> 
+<pre> Larry   2.000          1988-Jun-05
+</pre>
+<p> 
+<pre>          2.001         1988-Jun-28
+</pre>
+<p> 
+<pre> Larry   3.000          1989-Oct-18
+</pre>
+<p> 
+<pre>          3.001         1989-Oct-26
+          3.002..4      1989-Nov-11
+          3.005         1989-Nov-18
+          3.006..8      1989-Dec-22
+          3.009..13     1990-Mar-02
+          3.014         1990-Mar-13
+          3.015         1990-Mar-14
+          3.016..18     1990-Mar-28
+          3.019..27     1990-Aug-10     User subs.
+          3.028         1990-Aug-14
+          3.029..36     1990-Oct-17
+          3.037         1990-Oct-20
+          3.040         1990-Nov-10
+          3.041         1990-Nov-13
+          3.042..43     1990-Jan-??
+          3.044         1991-Jan-12
+</pre>
+<p> 
+<pre> Larry   4.000          1991-Mar-21
+</pre>
+<p> 
+<pre>          4.001..3      1991-Apr-12
+          4.004..9      1991-Jun-07
+          4.010         1991-Jun-10
+          4.011..18     1991-Nov-05
+          4.019         1991-Nov-11     Stable.
+          4.020..33     1992-Jun-08
+          4.034         1992-Jun-11
+          4.035         1992-Jun-23
+ Larry    4.036         1993-Feb-05     Very stable.
+</pre>
+<p> 
+<pre>          5.000alpha1   1993-Jul-31
+          5.000alpha2   1993-Aug-16
+          5.000alpha3   1993-Oct-10
+          5.000alpha4   1993-???-??
+          5.000alpha5   1993-???-??
+          5.000alpha6   1994-Mar-18
+          5.003alpha7   1994-Mar-25
+ Andy     5.000alpha8   1994-Apr-04
+ Larry    5.000alpha9   1994-May-05     ext appears.
+          5.000alpha10  1994-???-??
+          5.000alpha11  1994-???-??
+ Andy     5.000a11a     1994-Jul-07     To fit 14.
+          5.000a11b     1994-Jul-14
+          5.000a11c     1994-Jul-19
+          5.000a11d     1994-Jul-22
+ Larry    5.000alpha12  1994-???-??
+ Andy     5.000a12a     1994-Aug-08
+          5.000a12b     1994-Aug-15
+          5.000a12c     1994-Aug-22
+          5.000a12d     1994-Aug-22
+          5.000a12e     1994-Aug-22
+          5.000a12f     1994-Aug-24
+          5.000a12g     1994-Aug-24
+          5.000a12h     1994-Aug-24
+ Larry    5.000beta1    1994-???-??
+ Andy     5.000b1a      1994-???-??
+ Larry    5.000beta2    1994-Sep-14     Core slushified.
+ Andy     5.000b2a      1994-Sep-14
+          5.000b2b      1994-Sep-17
+          5.000b2c      1994-Sep-17
+ Larry    5.000beta3    1994-Sep-??
+ Andy     5.000b3a      1994-Sep-18
+          5.000b3b      1994-Sep-22
+          5.000b3c      1994-Sep-23
+          5.000b3d      1994-Sep-27
+          5.000b3e      1994-Sep-28
+          5.000b3f      1994-Sep-30
+          5.000b3g      1994-Oct-04
+ Andy     5.000b3h      1994-Oct-07
+</pre>
+<p> 
+<pre> Larry   5.000          1994-Oct-18
+</pre>
+<p> 
+<pre> Andy     5.000a        1994-Dec-19
+          5.000b        1995-Jan-18
+          5.000c        1995-Jan-18
+          5.000d        1995-Jan-18
+          5.000e        1995-Jan-18
+          5.000f        1995-Jan-18
+          5.000g        1995-Jan-18
+          5.000h        1995-Jan-18
+          5.000i        1995-Jan-26
+          5.000j        1995-Feb-07
+          5.000k        1995-Feb-11
+          5.000l        1995-Feb-21
+          5.000m        1995-???-??
+          5.000n        1995-Mar-07
+</pre>
+<p> 
+<pre> Larry   5.001          1995-Mar-13
+</pre>
+<p> 
+<pre> Andy     5.001a        1995-Mar-15
+          5.001b        1995-Mar-31
+          5.001c        1995-Apr-07
+          5.001d        1995-Apr-14
+          5.001e        1995-Apr-18     Stable.
+          5.001f        1995-May-31
+          5.001g        1995-May-25
+          5.001h        1995-May-25
+          5.001i        1995-May-30
+          5.001j        1995-Jun-05
+          5.001k        1995-Jun-06
+          5.001l        1995-Jun-06     Stable.
+          5.001m        1995-Jul-02     Very stable.
+          5.001n        1995-Oct-31     Very unstable.
+          5.002beta1    1995-Nov-21
+          5.002b1a      1995-Nov-??
+          5.002b1b      1995-Dec-04
+          5.002b1c      1995-Dec-04
+          5.002b1d      1995-Dec-04
+          5.002b1e      1995-Dec-08
+          5.002b1f      1995-Dec-08
+ Tom      5.002b1g      1995-Dec-21     Doc release.
+ Andy     5.002b1h      1996-Jan-05
+          5.002b2       1996-Jan-14
+ Larry    5.002b3       1996-Feb-02
+ Andy     5.002gamma    1996-Feb-11
+ Larry    5.002delta    1996-Feb-27
+</pre>
+<p> 
+<pre> Larry   5.002          1996-Feb-29     Prototypes.
+</pre>
+<p> 
+<pre> Charles  5.002_01      1996-Mar-25
+</pre>
+<p> 
+<pre>         5.003          1996-Jun-25     Security release.
+</pre>
+<p> 
+<pre>          5.003_01      1996-Jul-31
+ Nick     5.003_02      1996-Aug-10
+ Andy     5.003_03      1996-Aug-28
+          5.003_04      1996-Sep-02
+          5.003_05      1996-Sep-12
+          5.003_06      1996-Oct-07
+          5.003_07      1996-Oct-10
+ Chip     5.003_08      1996-Nov-19
+          5.003_09      1996-Nov-26
+          5.003_10      1996-Nov-29
+          5.003_11      1996-Dec-06
+          5.003_12      1996-Dec-19
+          5.003_13      1996-Dec-20
+          5.003_14      1996-Dec-23
+          5.003_15      1996-Dec-23
+          5.003_16      1996-Dec-24
+          5.003_17      1996-Dec-27
+          5.003_18      1996-Dec-31
+          5.003_19      1997-Jan-04
+          5.003_20      1997-Jan-07
+          5.003_21      1997-Jan-15
+          5.003_22      1997-Jan-16
+          5.003_23      1997-Jan-25
+          5.003_24      1997-Jan-29
+          5.003_25      1997-Feb-04
+          5.003_26      1997-Feb-10
+          5.003_27      1997-Feb-18
+          5.003_28      1997-Feb-21
+          5.003_90      1997-Feb-25     Ramping up to the 5.004 release.
+          5.003_91      1997-Mar-01
+          5.003_92      1997-Mar-06
+          5.003_93      1997-Mar-10
+          5.003_94      1997-Mar-22
+          5.003_95      1997-Mar-25
+          5.003_96      1997-Apr-01
+          5.003_97      1997-Apr-03     Fairly widely used.
+          5.003_97a     1997-Apr-05
+          5.003_97b     1997-Apr-08
+          5.003_97c     1997-Apr-10
+          5.003_97d     1997-Apr-13
+          5.003_97e     1997-Apr-15
+          5.003_97f     1997-Apr-17
+          5.003_97g     1997-Apr-18
+          5.003_97h     1997-Apr-24
+          5.003_97i     1997-Apr-25
+          5.003_97j     1997-Apr-28
+          5.003_98      1997-Apr-30
+          5.003_99      1997-May-01
+          5.003_99a     1997-May-09
+          p54rc1        1997-May-12     Release Candidates.
+          p54rc2        1997-May-14
+</pre>
+<p> 
+<pre> Chip    5.004          1997-May-15     A major maintenance release.
+</pre>
+<p> 
+<pre> Tim      5.004_01      1997-Jun-13     The 5.004 maintenance track.
+          5.004_02      1997-Aug-07
+          5.004_03      1997-Sep-05
+          5.004_04      1997-Oct-15
+          5.004m5t1     1998-Mar-04     Maintenance Trials (for 5.004_05).
+          5.004_04-m2   1997-May-01
+          5.004_04-m3   1998-May-15
+          5.004_04-m4   1998-May-19
+          5.004_04-MT5  1998-Jul-21
+</pre>
+<p> 
+<pre> Malcolm  5.004_50      1997-Sep-09     The 5.005 development track.
+          5.004_51      1997-Oct-02
+          5.004_52      1997-Oct-15
+          5.004_53      1997-Oct-16
+          5.004_54      1997-Nov-14
+          5.004_55      1997-Nov-25
+          5.004_56      1997-Dec-18
+          5.004_57      1998-Feb-03
+          5.004_58      1998-Feb-06
+          5.004_59      1998-Feb-13
+          5.004_60      1998-Feb-20
+          5.004_61      1998-Feb-27
+          5.004_62      1998-Mar-06
+          5.004_63      1998-Mar-17
+          5.004_64      1998-Apr-03
+          5.004_65      1998-May-15
+          5.004_66      1998-May-29
+ Sarathy  5.004_67      1998-Jun-15
+          5.004_68      1998-Jun-23
+          5.004_69      1998-Jun-29
+          5.004_70      1998-Jul-06
+          5.004_71      1998-Jul-09
+          5.004_72      1998-Jul-12
+          5.004_73      1998-Jul-13
+          5.004_74      1998-Jul-14     5.005 beta candidate.
+          5.004_75      1998-Jul-15     5.005 beta1.
+          5.004_76      1998-Jul-21     5.005 beta2.
+          5.005         1998-Jul-22     Oneperl.
+</pre>
+<p> 
+<pre> Sarathy  5.005_01      1998-Jul-27     The 5.005 maintenance track.
+          5.005_02-T1   1998-Aug-02
+          5.005_02-T2   1998-Aug-05
+          5.005_02      1998-Aug-08
+ Graham   5.005_03      1998-           
+</pre>
+<p> 
+<pre> Sarathy  5.005_50      1998-Jul-26     The 5.006 development track.
+</pre>
+<p>
+<P>关于 Perl 发展历史的更详细信息大家可以从<a href="http://www.perl.com/pub/doc/manual/html/pod/perlhist.html">这里</a>得到。</P>
+<BR>
+<H3>5.3&nbsp;&nbsp;&nbsp;&nbsp;Perl 的使用许可证</H3>
+<P> 我们应该知道 Perl 是一个开放源码的优秀软件，你可以自由的下载该软件去使用和研究，但是 Perl 使用的并不是我们熟知的 GPL 许可证，而是 
+  Artistic 许可证，虽然 Artistic 许可证和 GPL 很类似。简单的说就是 Artistic 许可证比 GPL 的要宽松，你可以出售包含Artistic“包” 
+  的产品，但是绝对不能出售Artistic“包”，不像GPL那么死板。 Artistic 许可证之所以不涉及源码问题是因为 Perl 不存在这个问题。可能大部分人都还不太了解这个许可证。下面是 
+  Artistic 许可证的英文原文，有兴趣的同学可以自己看一遍。</P>
+<P>&nbsp;</P>
+<hr>
+<h2 align="center">The "Artistic License"</h2>
+<h3>Preamble</h3>
+<p> <font color="#FFFFFF">The intent of this document is to state the conditions 
+  under which a Package may be copied, such that the Copyright Holder maintains 
+  some semblance of artistic control over the development of the package, while 
+  giving the users of the package the right to use and distribute the Package 
+  in a more-or-less customary fashion, plus the right to make reasonable modifications. 
+  </font></p>
+<h3>Definitions</h3>
+<blockquote> 
+  <p> <font color="#FFFFFF">"Package" refers to the collection of files distributed 
+    by the Copyright Holder, and derivatives of that collection of files created 
+    through textual modification. </font></p>
+  <p> <font color="#FFFFFF">"Standard Version" refers to such a Package if it 
+    has not been modified, or has been modified in accordance with the wishes 
+    of the Copyright Holder as specified below. </font></p>
+  <p> <font color="#FFFFFF">"Copyright Holder" is whoever is named in the copyright 
+    or copyrights for the package. </font></p>
+  <p> <font color="#FFFFFF">"You" is you, if you're thinking about copying or 
+    distributing this Package. </font></p>
+  <p> <font color="#FFFFFF">"Reasonable copying fee" is whatever you can justify 
+    on the basis of media cost, duplication charges, time of people involved, 
+    and so on. (You will not be required to justify it to the Copyright Holder, 
+    but only to the computing community at large as a market that must bear the 
+    fee.) </font></p>
+  <p> <font color="#FFFFFF">"Freely Available" means that no fee is charged for 
+    the item itself, though there may be fees involved in handling the item. It 
+    also means that recipients of the item may redistribute it under the same 
+    conditions they received it. </font></p>
+</blockquote>
+<ol>
+  <p>
+  <li>You may make and give away verbatim copies of the source form of the Standard 
+    Version of this Package without restriction, provided that you duplicate all 
+    of the original copyright notices and associated disclaimers. 
+    <p></p>
+    <p>
+  <li>You may apply bug fixes, portability fixes and other modifications derived 
+    from the Public Domain or from the Copyright Holder. A Package modified in 
+    such a way shall still be considered the Standard Version. 
+    <p></p>
+    <p>
+  <li>You may otherwise modify your copy of this Package in any way, provided 
+    that you insert a prominent notice in each changed file stating how and when 
+    you changed that file, and provided that you do at least ONE of the following: 
+    <p></p>
+    <p> 
+    <ol type="a">
+      <li>place your modifications in the Public Domain or otherwise make them 
+        Freely Available, such as by posting said modifications to Usenet or an 
+        equivalent medium, or placing the modifications on a major archive site 
+        such as uunet.uu.net, or by allowing the Copyright Holder to include your 
+        modifications in the Standard Version of the Package. 
+      <li>use the modified Package only within your corporation or organization. 
+      <li>rename any non-standard executables so the names do not conflict with 
+        standard executables, which must also be provided, and provide a separate 
+        manual page for each non-standard executable that clearly documents how 
+        it differs from the Standard Version. 
+      <li>make other distribution arrangements with the Copyright Holder. 
+    </ol>
+    <p></p>
+    <p>
+  <li>You may distribute the programs of this Package in object code or executable 
+    form, provided that you do at least ONE of the following: 
+    <p></p>
+    <p> 
+    <ol type="a">
+      <li>distribute a Standard Version of the executables and library files, 
+        together with instructions (in the manual page or equivalent) on where 
+        to get the Standard Version. 
+      <li>accompany the distribution with the machine-readable source of the Package 
+        with your modifications. 
+      <li>give non-standard executables non-standard names, and clearly document 
+        the differences in manual pages (or equivalent), together with instructions 
+        on where to get the Standard Version. 
+      <li>make other distribution arrangements with the Copyright Holder. 
+    </ol>
+    <p></p>
+    <p>
+  <li>You may charge a reasonable copying fee for any distribution of this Package. 
+    You may charge any fee you choose for support of this Package. You may not 
+    charge a fee for this Package itself. However, you may distribute this Package 
+    in aggregate with other (possibly commercial) programs as part of a larger 
+    (possibly commercial) software distribution provided that you do not advertise 
+    this Package as a product of your own. You may embed this Package's interpreter 
+    within an executable of yours (by linking); this shall be construed as a mere 
+    form of aggregation, provided that the complete Standard Version of the interpreter 
+    is so embedded. 
+    <p></p>
+    <p>
+  <li>The scripts and library files supplied as input to or produced as output 
+    from the programs of this Package do not automatically fall under the copyright 
+    of this Package, but belong to whomever generated them, and may be sold commercially, 
+    and may be aggregated with this Package. If such scripts or library files 
+    are aggregated with this Package via the so-called "undump" or "unexec" methods 
+    of producing a binary executable image, then distribution of such an image 
+    shall neither be construed as a distribution of this Package nor shall it 
+    fall under the restrictions of Paragraphs 3 and 4, provided that you do not 
+    represent such an executable image as a Standard Version of this Package. 
+    <p></p>
+    <p>
+  <li>C subroutines (or comparably compiled subroutines in other languages) supplied 
+    by you and linked into this Package in order to emulate subroutines and variables 
+    of the language defined by this Package shall not be considered part of this 
+    Package, but are the equivalent of input as in Paragraph 6, provided these 
+    subroutines do not change the language in any way that would cause it to fail 
+    the regression tests for the language. 
+    <p></p>
+    <p>
+  <li>Aggregation of this Package with a commercial distribution is always permitted 
+    provided that the use of this Package is embedded; that is, when no overt 
+    attempt is made to make this Package's interfaces visible to the end user 
+    of the commercial distribution. Such use shall not be construed as a distribution 
+    of this Package. 
+    <p></p>
+    <p>
+  <li>The name of the Copyright Holder may not be used to endorse or promote products 
+    derived from this software without specific prior written permission. 
+    <p></p>
+    <p>
+  <li> THIS PACKAGE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, 
+    INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTIBILITY AND 
+    FITNESS FOR A PARTICULAR PURPOSE. 
+    <p></p>
+</ol>
+<center>
+  The End 
+</center>
+<hr>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P><BR>
+</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="bash-adv.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="perl-cgi.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+</BODY>
+</HTML>
+

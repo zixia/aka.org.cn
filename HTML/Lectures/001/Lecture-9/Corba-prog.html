@@ -1,0 +1,223 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=GB2312">
+    <TITLE>CORBA programming</TITLE>
+</HEAD>
+<BODY>
+<P><A HREF="Corba.html">上一页</A>
+<A HREF="Orbit-prog.html">下一页</A>
+<P><B><FONT SIZE=+3>CORBA编程</FONT></B><P>
+<P><B><FONT SIZE=+2>IDL的语言映射</FONT></B><P>
+要想用某种语言实现CORBA IDL定义的对象，需要在IDL和该语言间进行映射，称为language mapping。这也是CORBA标准的一部分。目前已制定了映射标准的语言包括：C，C++，Java，Smalltalk，COBOL等。C因为不是OO的语言，所以在CORBA应用中较少使用，但因为GNOME基本是用C实现的，所以这里使用C的映射。
+<P>GNOME中CORBA ORB的实现称为ORBit。最开始GNOME的实现者并未打算实现一个自己的ORB，因为已经有大量免费的实现。他们选择了MICO,但很快发现MICO不能满足GNOME开发的需要，于是Elliot Lee和Dick Porter 决定自己从头写一个新的符合要求的ORB，这就是ORBit。ORBit是按照CORBA2.2标准写的，特别是它的hooks使得与GNOME的应用可以很好的交互。
+<P>ORBit是用C写的，非常小而且非常快，使得它可以应用于很多以前认为不适于CORBA技术的场合。它的主要特点：
+<P><UL><LI>基于C的实现；</LI><BR>
+<LI>执行迅速，节省时间；</LI><BR>
+<LI>空间使用效率很高；</LI><BR>
+<LI>解决实际问题，而不仅仅是一个艺术品；</LI><BR>
+<LI>它是自由软件。</LI><BR></UL>
+<P>目前ORBit支持的语言包括：perl, C++, TCL, Python, Ada, Eiffel。
+
+<P><B><FONT SIZE=+2>举例说明</FONT></B><P>
+<P>编写ORBit下程序常见问题：
+<P><UL><LI>LD_LIBRARY_PATH未定义；</LI><BR>
+<LI>IOR后面跟了一个换行符；</LI><BR>
+<LI>忘了激活POAManager；</LI><BR></UL>
+<P><B><FONT SIZE=+1>IDL文件</FONT></B><P>
+<PRE>
+interface Echo {
+	void echoString(in string input);
+};
+</PRE>
+
+<P><B><FONT SIZE=+1>Client程序</FONT></B><P>
+共分三步：1)初始化ORB， 2)获得对象； 3)使用对象。
+<PRE>
+#include "stdio.h"
+#include "orb/orbit.h"
+
+/*
+ * This header file was generated from the idl
+ */
+
+#include "echo.h"
+
+/*
+ * This is our Echo Object
+ */
+
+Echo echo_client;
+
+int
+main (int argc, char *argv[])
+{
+    CORBA_Environment ev;
+    CORBA_ORB orb;
+
+    FILE * ifp;
+    char * ior;
+    char filebuffer[1024];
+
+    /*
+     * Standard initalisation of the orb. Notice that
+     * ORB_init 'eats' stuff off the command line
+     */
+
+    CORBA_exception_init(&ev);
+    orb = CORBA_ORB_init(&argc, argv, "orbit-local-orb", &ev);
+
+    /*
+     * Get the IOR (object reference). It should be written out
+     * by the echo-server into the file echo.ior. So - if you
+     * are running the server in the same place as the client,
+     * this should be fine!
+     */
+
+    ifp = fopen("echo.ior","r");
+    if( ifp == NULL ) {
+      g_error("No echo.ior file!");
+      exit(-1);
+    }
+
+    fgets(filebuffer,1024,ifp);
+    ior = g_strdup(filebuffer);
+
+    fclose(ifp);
+    /*
+     * Actually get the object. So easy!
+     */
+
+    echo_client = CORBA_ORB_string_to_object(orb, ior, &ev);
+    if (!echo_client) {
+	printf("Cannot bind to %s\n", ior);
+	return 1;
+    }
+
+    /*
+     * Ok. Now we use the echo object...
+     */
+
+    printf("Type messages to the server\n. as the only thing on the line stops\n");
+    while( fgets(filebuffer,1024,stdin) ) {
+      if( filebuffer[0] == '.' && filebuffer[1] == '\n' ) 
+	break;
+
+      /* chop the newline off */
+      filebuffer[strlen(filebuffer)-1] = '\0';
+      
+      /* using the echoString method in the Echo object               */
+      /* this is defined in the echo.h header, compiled from echo.idl */
+
+      Echo_echoString(echo_client,filebuffer,&ev);
+
+      /* catch any exceptions (eg, network is down) */
+
+      if(ev._major != CORBA_NO_EXCEPTION) {
+	printf("we got exception %d from echoString!\n", ev._major);
+	return 1;
+      }
+    }
+      
+    /* Clean up */
+    CORBA_Object_release(echo_client, &ev);
+    CORBA_Object_release((CORBA_Object)orb, &ev);
+
+    return 0;
+}
+
+
+</PRE>
+
+<P><B><FONT SIZE=+1>Server程序</FONT></B><P>
+<PRE>
+#include "stdio.h"
+#include "stdlib.h"
+#include "string.h"
+#include "signal.h"
+#include "orb/orbit.h"
+#include "echo.h"
+
+/* This is so we can get out a valid IOR later... */
+Echo echo_client = CORBA_OBJECT_NIL;
+
+/* declaration of the meat of the process*/
+static void
+do_echoString(PortableServer_Servant servant,
+	      CORBA_char *astring,
+	      CORBA_Environment *ev);
+
+/*
+ * I have **no** idea what this bit does
+ */
+PortableServer_ServantBase__epv base_epv = {
+  NULL,
+  NULL,
+  NULL
+};
+POA_Echo__epv echo_epv = { NULL, do_echoString };
+POA_Echo__vepv poa_echo_vepv = { &base_epv, &echo_epv };
+POA_Echo poa_echo_servant = { NULL, &poa_echo_vepv };
+
+int
+main (int argc, char *argv[])
+{
+    PortableServer_ObjectId objid = {0, sizeof("myEchoString"), "myEchoString"};
+    PortableServer_POA poa;
+
+    CORBA_Environment ev;
+    char *retval;
+    CORBA_ORB orb;
+    FILE * ofp;
+
+    signal(SIGINT, exit);
+    signal(SIGTERM, exit);
+
+    CORBA_exception_init(&ev);
+    orb = CORBA_ORB_init(&argc, argv, "orbit-local-orb", &ev);
+
+    POA_Echo__init(&poa_echo_servant, &ev);
+
+    poa = (PortableServer_POA)CORBA_ORB_resolve_initial_references(orb, "RootPOA", &ev);
+    PortableServer_POAManager_activate(PortableServer_POA__get_the_POAManager(poa, &ev), &ev);
+    PortableServer_POA_activate_object_with_id(poa,
+					       &objid, &poa_echo_servant, &ev);
+
+    echo_client = PortableServer_POA_servant_to_reference(poa,
+							  &poa_echo_servant,
+							  &ev);
+    if (!echo_client) {
+	printf("Cannot get objref\n");
+	return 1;
+    }
+
+    retval = CORBA_ORB_object_to_string(orb, echo_client, &ev);
+
+    ofp = fopen("echo.ior","w");
+
+    fprintf(ofp,"%s", retval);
+    fclose(ofp);
+
+    CORBA_free(retval);
+
+    fprintf(stdout,"Written the file echo.ior with the IOR of this server.\n Now waiting for requests...\n");
+    fflush(stdout);
+    CORBA_ORB_run(orb, &ev);
+
+    return 0;
+}
+
+static void
+do_echoString(PortableServer_Servant servant,
+	      CORBA_char *astring,
+	      CORBA_Environment *ev)
+{
+  g_message("[server] %s", astring);
+  return;
+}
+</PRE>
+
+<P><A HREF="Corba.html">上一页</A>
+<A HREF="Orbit-prog.html">下一页</A>
+<P>
+</BODY>
+</HTML>

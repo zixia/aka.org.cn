@@ -1,0 +1,328 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>进程控制</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        PRE { color: #ffffff; font-family: "fixed" }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="velvet.jpg">
+
+<A HREF="proc.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="thread.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=CENTER>6.2&nbsp;&nbsp;进程控制<BR><BR>
+</H1>
+
+<UL>
+    <LI><P>基本概念</LI>
+    <LI><P>fork 和 vfork</LI>
+    <LI><P>exit</LI>
+    <LI><P>wait 函数</LI>
+    <LI><P>竞态</LI>
+    <LI><P>exec 函数以及脚本解释器</LI>
+    <LI><P>system 函数</LI>
+    <LI><P>进程记帐</LI>
+    <LI><P>用户和组标识符</LI>
+    <LI><P>进程时间</LI>
+</UL>
+
+<H3>6.2.1&nbsp;&nbsp;基本概念</H3>
+<UL>
+    <LI>进程</LI>
+    <LI>派生和执行</LI>
+    <LI>进程标识符</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+
+       pid_t getpid (void);
+       pid_t getppid (void);
+===============================================================================
+</PRE>
+
+    <LI>用户和组标识符</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+       #include &lt;sys/types.h&gt;
+
+       uid_t getuid (void);
+       uid_t geteuid (void);
+       uid_t getgid (void);
+       uid_t getegid (void);
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>6.2.2&nbsp;&nbsp;fork 和 vfork</H3>
+<UL>
+    <LI>fork: 派生子进程</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+       #include &lt;sys/types.h&gt;
+
+       pid_t fork (void);
+-------------------------------------------------------------------------------
+EXAMPLE:
+       /* 派生子进程 */
+
+        #include &lt;sys/types.h&gt;
+        #include &lt;unistd.h&gt;
+
+        void err_sys (const char* info)
+        {
+            perror (info);
+            exit (1);
+        }
+
+        int main (void)
+        {
+            pid_t pid;
+
+            if ( (pid = fork ()) &lt; 0)
+                 err_sys ("fork error");
+            else if (pid &gt; 0) {
+                 // this is parent.
+            }
+            else {
+                // this is child.
+            }
+
+            exit (0);
+        }
+-------------------------------------------------------------------------------
+   * fork 之后, 子进程和父进程共享打开的文件. 这是实现管道等 IPC 机制的基础.
+   * Linux 利用按需分页 (paging on demand) 和写时复制 (copy-on-write) 方式派生子进程.
+===============================================================================
+</PRE>
+
+    <LI>vfork: 用于派生后立即 exec 的情况</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+       #include &lt;sys/types.h&gt;
+
+       pid_t vfork (void);
+-------------------------------------------------------------------------------
+   * 不复制父进程的全部地址空间.
+   * vfork 保证子进程首先运行, 直到调用 exec 或 exit 之后, 父进程才能得到运行机会.
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>6.2.3&nbsp;&nbsp;exit</H3>
+<UL>
+    <LI>exit 调用由 atexit 注册的清除函数, 并关闭所有的标准 I/O 流</LI>
+    <LI>exit 调用 _exit 处理与 UNIX 相关的内容, 比如文件描述符, 作业控制等</LI>
+    <LI>进程的退出状态非常重要. 一般以 0 值表示正常退出</LI>
+<PRE>
+===============================================================================
+       #include &lt;stdlib.h&gt;
+
+       void exit (int status);
+
+       #include &lt;unistd.h&gt;
+
+       void _exit (int status);
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>6.2.4&nbsp;&nbsp;wait 函数</H3>
+<UL>
+    <LI>进程的退出状态必须用 wait 函数由父进程获取, 否则形成</LI>
+    <LI>僵尸进程</LI>
+    <LI>wait/waitpid</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;sys/types.h&gt;
+       #include &lt;sys/wait.h&gt;
+
+       pid_t wait (int *status)
+       pid_t waitpid (pid_t pid, int *status, int options);
+-------------------------------------------------------------------------------
+    * wait 等待某个子进程退出.
+    * waitpid 可等待指定的子进程退出, 可指定 WNOHANG 选项而不阻塞调用进程的执行.
+-------------------------------------------------------------------------------
+用来帮助判断退出状态的宏:
+
+       WIFEXITED (status) 
+               is non-zero if the child exited normally.
+
+       WEXITSTATUS (status)
+               evaluates to the least significant eight  bits  of
+               the  return  code  of  the child which terminated,
+               which may have been set as the argument to a  call
+               to  exit()  or as the argument for a return state-
+               ment in the main program.  This macro can only  be
+               evaluated if WIFEXITED returned non-zero.
+
+       WIFSIGNALED (status)
+               returns  true  if the child process exited because
+               of a signal which was not caught.
+
+       WTERMSIG (status)
+               returns the number of the signal that  caused  the
+               child process to terminate. This macro can only be
+               evaluated if WIFSIGNALED returned non-zero.
+
+       WIFSTOPPED (status)
+               returns true if the child process which caused the
+               return is currently stopped; this is only possible
+               if the call was done using WUNTRACED.
+
+       WSTOPSIG (status)
+               returns the number of the signal which caused  the
+               child  to  stop.  This macro can only be evaluated
+               if WIFSTOPPED returned non-zero.
+===============================================================================
+</PRE>
+
+<LI>wait3/wait4</LI>
+
+<PRE>
+===============================================================================
+       #define _USE_BSD
+
+       #include &lt;sys/types.h&gt;
+       #include &lt;sys/resource.h&gt;
+       #include &lt;sys/wait.h&gt;
+
+       pid_t wait3 (int *status, int options, struct rusage *rusage)
+       pid_t wait4 (pid_t pid, int *status, int options, struct rusage *rusage)
+------------------------------------------------------------------------------
+    * wait3 和 wait4 分别是 wait 和 waitpid 的扩展调用, 它们可以返回子进程的
+      资源使用情况.
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>6.2.5&nbsp;&nbsp;竞态</H3>
+<UL>
+    <LI>Race Condition 的概念</LI>
+</UL>
+
+<H3>6.2.6&nbsp;&nbsp;exec 函数以及脚本解释器</H3>
+<UL>
+    <LI>exec 函数组</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+
+       extern char **environ;
+
+       int execl ( const char *path, const char *arg, ...);
+       int execlp ( const char *file, const char *arg, ...);
+       int execle ( const char *path, const char *arg, ..., char * const envp[]);
+       int execv ( const char *path, char *const argv[]);
+       int execvp ( const char *file, char *const argv[]);
+
+       int  execve  (const  char  *filename, char *const argv [], char *const envp[]);
+------------------------------------------------------------------------------
+    * 以可变参数形式传递命令行时, 最后一个参数应该为 NULL 指针.
+    * execve 是实际的系统调用, 而其他的函数以库函数实现, 最终要调用 execve.
+===============================================================================
+</PRE>
+
+    <LI>脚本解释器</LI>
+</UL>
+
+<H3>6.2.7&nbsp;&nbsp;system 函数</H3>
+<UL>
+    <LI>#自学#</LI>
+</UL>
+
+<H3>6.2.8&nbsp;&nbsp;进程记帐</H3>
+<UL>
+    <LI>#自学#</LI>
+</UL>
+
+<H3>6.2.9&nbsp;&nbsp;用户和组标识符</H3>
+<UL>
+    <LI>#自学#, 注意几个概念: 实际 UID/GID, 有效 UID/GID, 保存的 SUID/SGID</LI>
+    <LI>getlogin: 获取 login name</LI>
+    <LI>cuserid: 获取进程有效用户 ID 的关联名称</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+
+       char * getlogin ( void );
+
+       #include &lt;stdio.h&gt;
+
+       char * cuserid ( char *string );
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>6.2.10&nbsp;&nbsp;进程时间</H3>
+<UL>
+    <LI>times: 获取当前进程的时间信息, 包括用户态时间, 核心态时间等等</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;unistd.h&gt;
+       #include &lt;sys/times.h&gt;
+
+       clock_t times (struct tms *buf);
+-------------------------------------------------------------------------------
+       struct  tms  {
+           clock_t tms_utime;  /* user time */
+           clock_t tms_stime;  /* system time */
+           clock_t tms_cutime; /* user time of children */
+           clock_t tms_cstime; /* system time of children */
+       };
+-------------------------------------------------------------------------------
+    * times 返回的时间均以系统启动以来的时钟滴答计算.
+===============================================================================
+</PRE>
+
+</UL>
+
+<P>
+<BR><BR>
+</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="proc.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="thread.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+</BODY>
+</HTML>
+

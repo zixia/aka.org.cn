@@ -1,0 +1,90 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>KDE±à³Ì: DCOP</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>KDE±à³Ì: DCOP</H1> 
+ <P><UL>
+<LI><H2>DCOP IDL
+</H2>
+<UL>
+class Iface : virtual public DCOPObject
+<BR><BR>{  K_DCOP
+<BR>	public:
+<BR> 	k_dcop:
+<BR>   	 virtual void add( QString s ) = 0;
+<BR> };
+</UL></UL><UL>
+<LI><H2>DCOP Servant
+</H2>
+<UL>
+    DCOPClient *client = kapp-&#062dcopClient();
+<BR><BR>    client-&#062attach();
+<BR>    ByteArray params;
+<BR>    QDataStream stream(params, IO_WriteOnly);
+<BR>    stream &#060&#060 location-&#062text();
+<BR>    if (!client-&#062send("Servant-*", "bookmarkList", "add(QString)", params))
+<BR>       kDebugError( "Error with DCOP");
+<BR>
+</UL></UL><UL>
+<LI><H2>DCOP Servant
+</H2>
+<UL>
+   DCOPClient *client=kapp-&#062dcopClient();
+<BR><BR>   client-&#062attach();
+<BR>   client-&#062registerAs("Servant");
+<BR>   void MainList::add( QString s )
+<BR>	{ insertItem ( new QListViewItem ( this , s ) );	}; </UL></UL></P>
+<P><UL>
+<LI> Marshaller
+</UL><UL>
+
+</UL><UL>
+bool BookmarkList::process(const QCString &fun, const QByteArray &data,
+</UL><UL>
+		        QCString &replyType, QByteArray &replyData)
+</UL><UL>
+{
+</UL><UL>
+  if (fun == "add(QString)") {
+</UL><UL>
+    QDataStream arg(data, IO_ReadOnly);
+</UL><UL>
+    int i; // parameter
+</UL><UL>
+    arg &#062&#062 i;
+</UL><UL>
+    QString result = self-&#062add (i);
+</UL><UL>
+    QDataStream reply(replyData, IO_WriteOnly);
+</UL><UL>
+    reply &#060&#060 result;
+</UL><UL>
+    replyType = "QString";
+</UL><UL>
+    return true;
+</UL><UL>
+  } else {	return false;  }
+</UL><UL>
+}</UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld041.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld043.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld042.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

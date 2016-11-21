@@ -1,0 +1,53 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>WebRoot目录</title>
+<meta name="Microsoft Theme" content="blank 000, default">
+<meta name="Microsoft Border" content="tlb, default">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/webroot.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="WebRoot目录"></strong></font><br>
+<a href="resin_files.htm"><img src="../_derived/back_cmp_blank000_back.gif" width="100" height="20" border="0" alt="上一页" align="middle"></a> <a href="../index.htm"><img src="../_derived/home_cmp_blank000_home.gif" width="100" height="20" border="0" alt="主页" align="middle"></a> <a href="index.htm"><img src="../_derived/up_cmp_blank000_up.gif" width="100" height="20" border="0" alt="上一层" align="middle"></a></p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<p>刚刚开始的时候，看到JSP的webroot有些不习惯。在它的webroot中，多出了一个目录<br>
+WEB-INF/<br>
+&nbsp;&nbsp;&nbsp; [目录] classes/<br>
+&nbsp;&nbsp;&nbsp; [目录] lib/<br>
+&nbsp;&nbsp;&nbsp; [文件] web.xml<br>
+这个目录下面的三个目录分别是：</p>
+<ol>
+  <li>classes/<br>
+    存放JavaBeans。<br>
+    比如你的虚拟主机的名字是download.zixia.net，那么你就可以在classes目录下面建立目录：net/zixia，然后在zixia目录下面书写的JavaBean，就可以在JSP中使用&lt;jsp:useBean...&gt;来加载。<br>
+    例如有WEB-INF/classes/net/zixia/Download.java，那么我就可以在JSP中酱紫写：<br>
+    &lt;jsp:useBean id=&quot;download&quot; class=&quot;net.zixia.Download&quot; 
+    scope=&quot;application&quot;/&gt;</li>
+  <li>lib/<br>
+    存放JAR的library。<br>
+    比如这个WEB的JSP教本中需要进行用户密码加密，我Down到了一个和系统函数crypt功能相同的jar 
+    lib包cryptix32.jar，那么为了能够使用这个包，就需要把这个包放到lib目录下。（也可以把需要用的jar文件放到/usr/local/resin/lib目录下，这样这个libary会对整个resin都可用）</li>
+  <li>web.xml<br>
+    一些配置信息。</li>
+</ol>
+<p>安全问题：WEB-INF目录对于用户来说，是不可见的。因为resin不允许用户浏览WEB-INF目录下的内容。</p>
+<p>除了WEB-INF这个特殊的目录，jsp脚本文件可以放在webroot下的任意地点。所有对jsp页面的请求，resin都会返回这个jsp的执行结果。
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="right">
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table></body>
+
+</html>

@@ -1,0 +1,64 @@
+[*
+my( $dbh, $sth );
+
+my( $AutoID,$UserID,$UserName,$Password,$Email,$Address,$RegisteredClass,$ListenedClass,$SEX,$IDENTITY,$AGE,$SATISFIY,$LinuxWork,$SUPPORT ) = () ;
+my %CourseList = ();
+my $errstr = '';
+my( $AutoID,$Class,$Title,$Teacher,$Date,$Address ) = ();
+
+if( $fdat{UserID} && $fdat{UserName} && $fdat{Email} && $fdat{Address} ){
+	use DBI;
+	$dbh = DBI->connect( "DBI:mysql:database=aka;host=localhost", 'aka', 'flying/aka' ) or die "connect!" ;
+	if( !$udat{AkaID} ){
+                if( !$fdat{Password1} || !$fdat{Password2} ){
+                        $errstr = '请您输入完整的信息！';
+                }else{
+ 		        if( $fdat{Password1} eq $fdat{Password2} ){
+			        $sth = $dbh->prepare( q{
+				        INSERT INTO StudentList_TB
+				        SET UserID=?, UserName=?, Password=?, Email=?, Address=?, RegisteredClass=?, 
+                                            SEX=?, IDENTITY=?, AGE=?, SATISFIY=?, LinuxWork=?, SUPPORT=?
+				        }) or die "prepare";
+			        $sth->execute( $fdat{UserID}, $fdat{UserName}, $fdat{Password1},
+				        $fdat{Email}, $fdat{Address}, $fdat{RegisteredClass}, $fdat{SEX}, $fdat{IDENTITY}, 
+                                        $fdat{AGE}, $fdat{SATISFIY}, $fdat{LinuxWork}, $fdat{SUPPORT} ) or die "execute";
+			        $sth->finish;
+				$sth = $dbh->prepare( q{
+					SELECT AutoID FROM StudentList_TB 
+					WHERE UserID=? }) or die "prepare";
+				$sth->execute( $fdat{UserID} ) or die "execute";
+				$AutoID = $sth->fetchrow_array;
+				$sth->finish;
+                                $AutoID--; $AutoID--;
+			        $errstr = '学员注册成功！请记住您的学员号是：<font color=yellow>' . $AutoID . '</font><br>AKA 真诚欢迎你按时来听讲座！';
+		        }else{
+			        $errstr = '学员注册失败！两次密码不匹配！';
+                        }
+		}
+	}else{
+		$sth = $dbh->prepare( q{
+			UPDATE StudentList_TB
+			SET UserID=?, UserName=?, Email=?, Address=?, RegisteredClass=?
+			WHERE UserID=?
+			}) or die "prepare";
+		$sth->execute( $udat{AkaID}, $fdat{UserName}, $fdat{Email}, $fdat{Address},
+			$fdat{RegisteredClass}, $udat{AkaID} ) or die "execute";
+		$sth->finish;
+		$errstr = '修改信息成功！';
+	}
+}else{
+	$errstr = '请您输入完整的信息！';
+}
+*]
+[- Execute('head') -]
+[+ $Zixia::t->index() +]
+<br>
+[- Execute('index') -]
+<br>
+[+ $Zixia::t->misc() +]
+<p>
+[+ $Zixia::t->content() +]
+<br>
+<h2><font color=red>[+ $errstr +]</font></h2>
+<br>
+[- Execute('end') -]

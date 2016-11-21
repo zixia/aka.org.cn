@@ -1,0 +1,46 @@
+[- $Zixia::times = $udat{times}++ -]
+[- Execute('head') -] 
+[+ $Zixia::t->index() +]
+<br>
+[- Execute('index') -]
+<br>
+[+ $Zixia::t->misc() +]
+<p>
+[+ $Zixia::t->content() +]
+<br>
+<h2>Aka讲座报名（2000年秋季学期）</h2>
+<p><font color=yellow> 请您先仔细阅读以下说明，谢谢。</font>
+<br><br><br><font color=lightgreen>
+第一：本次报名工作全部通过网络的WWW方式进行，们将不再处理在BBS<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上和通过Email报名的申请。<br>
+<br><br>
+第二：本次系列讲座旨在普及Linux和自由软件的编程、应用和研究方<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;面的知识，推动Linux、自由软件及开源软件的发展。所以系列<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;讲座将是完全公开和开放的，任何人均可以免费去听讲，而且<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每次讲座结束后，讲座的所有资料也将会在<a href="http://www.aka.org.cn">AKA的网站</a>上公开。<br>
+<br><br>
+第三：想听讲座的朋友即使不进行报名和登记也完全可以自由的来听<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;讲座，但是我们希望大家能够事先报名。<br>
+<br><br>
+第四：为什么要报名？报名可以帮助我们分析哪些讲座更受大家欢迎，<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;同时报名的朋友还可以有机会获得我们在讲座结束后为大家准备<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;的奖品，另外报名才有资格参加我们最后的考试和认证以及其他<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们现在还没有考虑到的许多好处。<br>
+<br><br>
+第五：本次系列讲座专门设立了一个邮件列表，以便更方便、快捷的将<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每次讲座的预告和其他信息通知给大家。通过向：<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="mailto:linuxStuding-subscribe@egroups.com">linuxStudying-subscribe@egroups.com</a> 发一封任意标题和正文<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;的信件即可加入我们的邮件列表，当然你也可以通过向：<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="mailto:linuxStuding-unsubscribe@egroups.com">linuxStudying-unsubscribe@egroups.com</a> 发一封任意标题和正<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文的信件来方便的退出该邮件列表。需要注意的是，263的免费邮<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱好像不被该邮件列表接受。<br>
+<br><br>
+第六：由于我们准备工作上的问题，第一期讲座将需要等到9月中旬举行。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他工作：包括技术支持组、项目支持组以及讲座其他相关工作<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们正在进行，希望大家能够关注我们的进一步通知。如果你有<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;任何意见和建议，请一定来信告诉我们：<a href="mailto:aka@aka.org.cn">aka@aka.org.cn</a><br>
+<br><br>
+第七：本次报名活动到2000年10月15日截止，在2000年10月15日之前均<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可以通过我们的网站报名，在上述时间后将不再接受报名申请。<br>
+<br></font>
+[- Execute('end') -]

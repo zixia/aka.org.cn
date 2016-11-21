@@ -1,0 +1,415 @@
+<html>
+<head><title>部分GIRL预定义构件的初步实现</title></head>
+<body>
+<h1 align=center>部分GIRL预定义构件的初步实现</h1>
+<hr>
+<pre>
+// 用一个整数（32位）的0~15位表示x、16~31位表示y以提高处理效率。
+// 用一个整数（32位）的0~15位表示w、16~31位表示h以提高处理效率。
+
+#{	// 本部分被插入生成的头文件。
+#ifndef	FALSE
+#define	FALSE	0
+#endif
+#ifndef	TRUE
+#define	TRUE	1
+#endif
+
+#define	GIRL_UP		0
+#define	GIRL_DOWN	1
+#define	GIRL_LEFT	2
+#define	GIRL_RIGHT	3
+
+#define	GIRL_HORIZONTAL		0
+#define	GIRL_VERTICAL		1
+
+#define	GIRL_ALIGN_MINIMUM	0
+#define	GIRL_ALIGN_CENTER	1
+#define	GIRL_ALIGN_MAXIMUM	2
+
+#define	GIRL_NOMRAL	0
+#define	GIRL_ACTIVE	1
+#define	GIRL_PRESSED	2
+
+#}
+
+sig_fresh=signal;
+
+//----------------------------------------------------------------------
+//	定义girlWidget。
+//----------------------------------------------------------------------
+#{
+
+void *girlb_move(girlWidget *pwidget,ghandle receiver,girlObject *pgoPosition,void *pprivate);
+const girlObject *girlb_get_position(const girlWidget *pwidget,ghandle receiver,void *pprivate);
+void *girlb_size(girlWidget *pwidget,ghandle receiver,girlObject *pgoPosition,void *pprivate);
+const girlObject *girlb_get_size(const girlWidget *pwidget,ghandle receiver,void *pprivate);
+
+#define GIRL_FILLSTYLE_TILE     0
+#define GIRL_FILLSTYLE_EXTEND   1
+
+void *girlb_background_seter(girlWidget *pwidget,ghandle receiver,girlObject *pgoPosition,void *pprivate);
+const girlObject *girlb_background_geter(const girlWidget *pwidget,ghandle receiver,void *pprivate);
+void *girlb_background_pixmap_seter(girlWidget *pwidget,ghandle receiver,girlObject *pgoPosition,void *pprivate);
+const girlObject *girlb_background_pixmap_geter(const girlWidget *pwidget,ghandle receiver,void *pprivate);
+void *girlb_background_pixmap_style_seter(girlWidget *pwidget,ghandle receiver,girlObject *pgoPosition,void *pprivate);
+const girlObject *girlb_background_pixmap_style_geter(const girlWidget *pwidget,ghandle receiver,void *pprivate);
+
+void *girlexpose_widget(bool *pbabsorb,girlWidget *pwidget,girlObject *pgobj,void *pprivate);
+
+#}
+
+girlWidget {
+        receiver(position)=(girlt_integer:girlb_move,girlb_get_position)
+        receiver(size)=(girlt_integer:girlb_resize,girl_get_size)
+
+	receiver(background_color)=
+                (girlt_color:girlb_background_seter,girlb_background_geter)
+	receiver(background_pixmap)=
+                (girlt_pixmap:girlb_background_pixmap_seter,girlb_background_pixmap_geter)
+	receiver(background_pixmap_fill_style)=
+                (girlt_integer:girlb_background_pixmap_style_seter,girlb_background_pixmap_style_geter)
+
+        signal(expose)=girlexpose_widget(sig_XExpose)
+        signal(resize)=girlresize_widget(sig_XResizeRequest)
+
+        signal(constructor)=girlconstructor_widget(sig_create)
+        signal(setup)=girlsetup_widget(sig_setup)
+        signal(destructor)=girldestructor_widget(sig_destroy)
+}
+
+
+<a name="label"></a>
+//----------------------------------------------------------------------
+//      定义girlLabel。
+//----------------------------------------------------------------------
+
+#{
+
+void *girlexpose_label(bool *pbabsorb,girlWidget *pwidget,girlObject *pgobj,void *pprivate);
+
+#}
+girlLabel : girlWidget  {
+        dataslot(f_multiline)=girlt_integer
+        dataslot(label)=girlt_string
+
+        signal(expose)=girlexpose_label
+
+        signal(constructor)=girlconstructor_widget(sig_create)
+        signal(setup)=girlsetup_widget(sig_setup)
+        signal(destructor)=girldestructor_widget(sig_destroy)
+}
+
+
+<a name="arrow"></a>
+//----------------------------------------------------------------------
+//      定义girlArrow。
+//----------------------------------------------------------------------
+
+#{
+
+void *girlexpose_arrow(bool *pbabsorb,girlWidget *pwidget,girlObject *pgobj,void *pprivate);
+
+#}
+girlArrow : girlWidget  {
+        dataslot(direction)=girlt_integer       // up,down,left,right
+        dataslot(up_arrow_pixmap,down_arrow_pixmap)=girlt_pixmap
+        dataslot(left_arrow_pixmap,right_arrow_pixmap)=girlt_pixmap
+
+        signal(expose)=girlexpose_arrow
+
+        signal(constructor)=girlconstructor_arrow(sig_create)
+        signal(setup)=girlsetup_arrow(sig_setup)
+        signal(destructor)=girldestructor_arrow(sig_destroy)
+}
+
+
+<a name="seperator"></a>
+//----------------------------------------------------------------------
+//      定义girlSeperator。
+//----------------------------------------------------------------------
+
+#{
+
+void *girlexpose_seperator(bool *pbabsorb,girlWidget *pwidget,girlObject *pgobj,void *pprivate);
+
+#}
+
+girlSeperator : girlWidget  {
+        dataslot(direction)=girlt_integer       // horizontal,vertical
+        dataslot(horizontal_pixmap,vertical_pixmap)=girlt_pixmap
+
+        signal(expose)=girlexpose_seperator
+
+        signal(constructor)=girlconstructor_seperator(sig_create)
+        signal(setup)=girlsetup_seperator(sig_setup)
+        signal(destructor)=girldestructor_seperator(sig_destroy)
+}
+
+
+<a name="bin"></a>
+//----------------------------------------------------------------------
+//      定义girlBin。
+//----------------------------------------------------------------------
+
+girlBin : girlWidget  {
+	receiver(subwidget)=
+                (girlt_widget:girlb_bin_install_subwidget:girlb_bin_get_subwidget)->1
+
+        signal(constructor)=girlconstructor_bin(sig_create)
+        signal(setup)=girlsetup_bin(sig_setup)
+        signal(destructor)=girldestructor_bin(sig_destroy)
+}
+
+
+<a name="frame"></a>
+//----------------------------------------------------------------------
+//      定义girlFrame。
+//----------------------------------------------------------------------
+
+#{
+
+#define GIRL_FRAME_NO_SHADOW            0
+#define GIRL_FRAME_SHADOW_IN            1
+#define GIRL_FRAME_SHADOW_OUT           2
+#define GIRL_FRAME_SHADOW_ETCHED_IN     3
+#define GIRL_FRAME_SHADOW_ETCHED_OUT    4
+
+void *girlexpose_seperator(bool *pbabsorb,girlWidget *pwidget,girlObject *pgobj,void *pprivate);
+
+#}
+girlFrame : girlBin  {
+        dataslot(frame_style)=girlt_integer
+        dataslot(frame_hmargin,frame_vmargin)=girlt_integer
+
+        signal(expose)=girlexpose_frame
+
+        dataslot(subpos,subsize)=girlt_integer
+
+        signal(constructor)=girlconstructor_frame(sig_create)
+        signal(setup)=girlsetup_frame(sig_setup)
+        signal(destructor)=girldestructor_frame(sig_destroy)
+}
+
+<a name="button"></a>
+//----------------------------------------------------------------------
+//      定义girlButton。
+//----------------------------------------------------------------------
+
+sig_btn_pressed=signal;
+
+girlButton : girlFrame  {
+        dataslot(common_frame_style,active_frame_style,pressed_frame_style)=girlt_integer
+
+        signal(mouse_lbtn_pressed)=girllbtnpressed_button(sig_XButton)
+
+        signal(press)=girlpress_button(sig_btn_pressed)
+
+        signal(constructor)=girlconstructor_button(sig_create)
+        signal(setup)=girlsetup_button(sig_setup)
+        signal(destructor)=girldestructor_button(sig_destroy)
+}
+
+girlLabelButton : girlButton  {
+        dataslot(f_multiline)=girlt_integer->1
+        dataslot(label)=girlt_string->2
+
+        subwidget<-girlLabel { f_mulitline->1 label->2 }
+
+        signal(constructor)=girlconstructor_labelbutton(sig_create)
+        signal(setup)=girlsetup_labelbutton(sig_setup)
+        signal(destructor)=girldestructor_labelbutton(sig_destroy)
+}
+
+girlArrowButton : girlButton  {
+        dataslot(direction)=girlt_integer->1    // up,down,left,right
+        dataslot(up_arrow_pixmap)=girlt_pixmap->2
+        dataslot(down_arrow_pixmap)=girlt_pixmap->3
+        dataslot(left_arrow_pixmap)=girlt_pixmap->4
+        dataslot(right_arrow_pixmap)=girlt_pixmap->5
+
+        subwidget<-girlArrow{ 
+		direction->1
+		up_arrow_pixmap->2 down_arrow_pixmap->3,
+		left_arrow_pixmap->4 right_arrow_pixmap->5
+	}
+
+        signal(constructor)=girlconstructor_arrowbutton(sig_create)
+        signal(setup)=girlsetup_arrowbutton(sig_setup)
+        signal(destructor)=girldestructor_arrowbutton(sig_destroy)
+}
+
+<a name="box"></a>
+girlBox : girlWidget  {
+        dataslot(direction)=girlt_integer       // horizontal,vertical
+        dataslot(margin)=girlt_integer
+        dataslot(f_samesize)=girlt_integer
+        dataslot(f_fill)=girlt_integer
+        dataslot(f_align)=girlt_integer //      align_minimum,align_center,align_maximum
+	receiver(subwidgets)=
+                (girl_widget:girlb_box_install_subwidget,girl_box_get_subwidget)
+	// subposition用于确定当前构件插入、卸载位置。
+	receiver(subposition)=
+                (girlt_integer:girlb_box_set_subposition,girl_box_get_subposition)
+        receiver(detach)=(girlt_widget:NULL,girl_box_detach_subwidget)
+
+        signal(constructor)=girlconstructor_box(sig_create)
+        signal(setup)=girlsetup_box(sig_setup)
+        signal(destructor)=girldestructor_box(sig_destroy)
+}
+
+girlAdvBox : girlWidget  {
+        dataslot(direction)=girlt_integer       // horizontal,vertical
+        dataslot(margin)=girlt_integer
+        dataslot(f_min_samesize)=girlt_integer
+	receiver(minimum_subwidgets)=
+                (girl_widget:girlb_advbox_install_subwidget,girl_advbox_get_subwidget)
+	receiver(center_subwidget)=
+                (girl_widget:girlb_advbox_install_subwidget,girl_advbox_get_subwidget)
+        dataslot(f_max_samesize)=girlt_integer
+	receiver(maximum_subwidgets)=
+                (girl_widget:girlb_advbox_install_subwidget,girl_advbox_get_subwidget)
+
+        signal(constructor)=girlconstructor_advbox(sig_create)
+        signal(setup)=girlsetup_advbox(sig_setup)
+        signal(destructor)=girldestructor_advbox(sig_destroy)
+}
+
+<a name="toggle_button"></a>
+girlToggleButton : girlButton  {
+        dataslot(f_multiline)=girlt_integer->1
+        dataslot(label)=girlt_string->2
+
+        dataslot(common_pixmap,active_pixmap,pressed_pixmap)=girlt_pixmap
+
+        subwidget<-girlBox  {
+                subwidgets<-girlWidget {
+			background_pixmap->3
+		}
+                <-girlLabel  {
+			f_multiline->1 label->2
+		}
+	}
+
+	dataslot(subchecker_bitmap)->3
+
+        signal(press)=girlpress_toggle_button(sig_btn_pressed)
+
+        signal(constructor)=girlconstructor_togglebutton(sig_create)
+        signal(setup)=girlsetup_togglebutton(sig_setup)
+        signal(destructor)=girldestructor_togglebutton(sig_destroy)
+}
+
+<a name="check_button"></a>
+girlCheckButton=girlToggleButton;
+
+<a name="radio_button"></a>
+girlRadioButton : girlCheckButton  {
+        dataslot(active_subwidget)=girlt_widget
+        receiver(status_receiver)=(girlt_integer:girl_radiobox_set_status,NULL)
+
+        signal(press)=girlpress_radio_button(sig_btn_pressed)
+
+        signal(constructor)=girlconstructor_radiobutton(sig_create)
+        signal(setup)=girlsetup_radiobutton(sig_setup)
+        signal(destructor)=girldestructor_radiobutton(sig_destroy)
+}
+//  函数girlpress_radio_button在收到信号时，把指向自身的指针发送到active_subwidget中。
+
+<a name="radiogrouper"></a>
+girlRadioGrouper : girlBox  {
+        dataslot(current_selected)=girlt_integer
+        receiver(radiopressed)=(girlt_widget:girlt_radio_button_pressed,NULL)
+}
+//  其中函数girlt_radio_button_pressed，将向当前被选中的按钮和新被选中的按钮发送
+//  状态数据。构件的girl_radiobox_set_status根据这个数据设置状态。
+
+//  给出一个使用RadioButton和RadioGrouper的例子
+//      girlMyRadioGrouper : girlRadioGrouper  {
+//		radiopressed->1
+//              subwidgets<-girlRadioButton {
+//			active_subwidget->1
+//			label<-"First Selection"
+//              }<-girlRadioButton  {
+//			active_subwidget->1
+//			label<-"Second Selection"
+//              }<-girlRadioButton  {
+//			active_subwidget->1
+//			label<-"ThirdFirst Selection"
+//		}
+//	}
+//  或者简写成：
+//      girlMyRadioGrouper : girlRadioGrouper  {
+//		radiopressed->1
+//              subwidgets<-table [ girlRadioButton { active_subwidget->1 label<-$1 } ]  {
+//			"First Selection"; "Second Selection"; "Third Selection"
+//		}
+//	}
+
+<a name="menubutton"></a>
+girlMenuButton : girlLabelButton  {
+        dataslot(accel)=girl_integer
+        dataslot(label)=girl_string
+        dataslot(popupmenu)=girl_widget         // If this dataslot is setted, launch the widget when pressed.
+
+        signal(press)=girlpress_menubutton(sig_btn_press)
+
+        signal(constructor)=girlconstructor_menubutton(sig_create)
+        signal(setup)=girlsetup_menubutton(sig_setup)
+        signal(destructor)=girldestructor_menubutton(sig_destroy)
+}
+
+<a name="menubar"></a>
+girlMenuBar : girlAdvBox  {
+        receiver(accel_recevier)=(girl_integer:girl_menubar_accel_receiver:NULL)
+
+        signal(constructor)=girlconstructor_menubar(sig_create)
+        signal(setup)=girlsetup_menubar(sig_setup)
+        signal(destructor)=girldestructor_menubar(sig_destroy)
+}
+//  所有的MenuButton子构件都应该把数据槽dataslot连接到accel_receiver，以使MenuBar获得加速键表。
+
+<a name="slider"></a>
+girlSlider : girlWidget  {
+        dataslot(direction)=girl_integer                // horizontal, vertical
+        dataslot(minlimit,maxlimit)=girl_integer
+        dataslot(slidersize)=girl_integer
+        receiver(slidervalue)=(girl_integer:girl_slidervalue_seter,girl_slidervalue_geter)
+
+        dataslot(sliderpixmap)=girl_pixmap
+}
+
+girlAddOffsetButton : girlArrowButton  {
+        dataslot(offset)=girl_integer
+        dataslot(value)=girl_integer
+
+        signal(press)=girlpress_addoffsetbutton(sig_btn_pressed)
+}
+girlSubOffsetButton : girlArrowButton  {
+        dataslot(offset)=girl_integer
+        dataslot(value)=girl_integer
+
+        signal(press)=girlpress_suboffsetbutton(sig_btn_pressed)
+}
+
+<a name="scrollbar"></a>
+girlScrollbar : girlBox  {
+        dataslot(direction)=girl_integer->1             // horizontal, vertical
+        dataslot(minlimit)=girl_integer->2
+        dataslot(maxlimit)=girl_integer->3
+        dataslot(pagesize)=girl_integer->4
+        dataslot(scrollvalue)=girl_integer->5
+        subwidgets<-girlSubOffsetButton  { suboffset<-1 value->5 }
+        <-girlSubOffsetButton { suboffset->4 value->5 }
+        <-girlSlider { direction->1 minlimit->2 maxlimit->3 slidersize->4 slidervalue->5 }
+        <-girlAddOffsetButton { addoffset->4 value->5 }
+        <-girlAddOffsetButton { addoffset<-1 value->5 }
+}
+</pre>
+<hr>
+<table align=center width=100% border=2><tr>
+<td><center><a href="index.html">返回首页</a></center>
+<td><center><a href="malito:blazing@263.net">与我联系</a></center>
+</tr></table>
+</body>
+</html>

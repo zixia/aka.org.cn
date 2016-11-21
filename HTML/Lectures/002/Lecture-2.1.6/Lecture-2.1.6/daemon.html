@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>守护进程</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        PRE { color: #ffffff; font-family: "fixed" }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="velvet.jpg">
+
+<A HREF="procrelate.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="ipc.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=CENTER>6.5&nbsp;&nbsp;守护进程<BR><BR>
+</H1>
+
+<UL>
+    <LI><P>基本概念</LI>
+    <LI><P>实现方法</LI>
+</UL>
+
+<H3>6.5.1&nbsp;&nbsp;基本概念</H3>
+<UL>
+    <LI>守护进程就是在后台执行, 没有控制终端或登录 Shell 的进程</LI>
+</UL>
+
+<H3>6.5.2&nbsp;&nbsp;实现方法</H3>
+<OL>
+    <LI>关闭文件描述符: for (i=0; i &lt; NOFILE; i++) close (i);</LI>
+    <LI>甩开控制终端: 打开 /dev/tty, 然后用 ioctl 该文件上执行 TIOCNOTTY 命令</LI>
+    <LI>脱离会话和进程组</LI>
+<PRE>
+===============================================================================
+    * 使用 setsid 设置为新会话的领头进程
+    * 因为 setsid 要求调用进程不是会话的领头进程时才有效.
+    * 因此, 首先可用 fork 派生, 并结束父进程.
+    * 之后调用 setsid, 子进程成为新会话的领头进程, 从而与原有会话, 进程组, tty 脱离.
+    * 但是, 为避免作为新会话领头进程的子进程在打开一个终端设备时, 拥有一个控制终端.
+    * 再次派生, 并结束父进程, 可让子进程成为非会话领头进程.
+
+---------------------------------------
+    if (fork ())
+        exit (0);
+    
+    setsid ();
+
+    if (fork ())
+        exit (0);
+===============================================================================
+</PRE>
+
+    <LI>改变工作目录到根目录: chdir ("/")</LI>
+    <LI>进程的 umask 设置为 0: umask (0)</LI>
+    <LI>处理 SIGCHLD 信号, 为避免形成僵尸进程</LI>
+</OL>
+
+<P>
+<BR><BR>
+</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="procrelate.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="ipc.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+</BODY>
+</HTML>
+

@@ -1,0 +1,90 @@
+<html>
+<head>
+<title>理解文件权限</title>
+</head>
+
+<body>
+<h1 align=center>4.1 理解文件权限</h1>
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;所谓的文件权限，是指对文件的访问权限，包括对文件的读、写、删除、执行。Linux 是一个多用户操作系统，它允许多个用户同时登录和工作。因此 Linux 将一个文件或目录与一个用户和组联系起来。请看下面的例子：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;drwxr-xr-x   5    root    root   1024 Sep 13 03:27 Desktop
+<p>&nbsp;&nbsp;&nbsp;&nbsp;与文件权限相关联的是第一、第三、第四个域。第三个域是文件的所有者，第四个域是文件的所属组，而第一个域则限制了文件的访问权限。在这个例子中，文件的所有者是 root，所属的组是 root，文件的访问权限是 drwxr-xr-x。对于文件和目录讲，每个文件和目录都有一组权限标志和它们结合在一起，在上例中就是第一个域中的内容。下面来仔细分析这个域中各个符号的意义：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该域由 10 个字符组成，可以把它们分为四组，具体含义分别是：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;  d            rwx                 r-x            r-x
+<p>&nbsp;&nbsp;&nbsp;&nbsp;文件类型	所有者权限标志	   组权限标志	其他用户权限标志
+<p>&nbsp;&nbsp;&nbsp;&nbsp;其中：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;文件类型：第一个字符。由于 Linux 系统对与设备、目录、文件都当作是文件来处理，因此该字符表明此文件的类型，字符与对应的意义如下表：
+<TABLE BORDER CELLSPACING=1 CELLPADDING=7 WIDTH=524>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">文件标志</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">文件类型</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">例子</FONT></TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">-</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">普通文件</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">数据文件、</FONT><FONT SIZE=3>ASCII </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>纯文本文件、程序</FONT></TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">d</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">目录</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/bin</FONT></TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">b</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">块设备</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/dev/hda</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>（第一个</FONT><FONT SIZE=3> IDE </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>硬盘）</FONT></TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">c</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">字符设备</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/dev/ttyS1</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>（与</FONT><FONT SIZE=3> DOS </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>种的串口</FONT><FONT SIZE=3> 2 </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>等同）</FONT></TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">s</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">套接字</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/dev/log</FONT></TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">p</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">命名管道</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/dev/initctl</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>（与“</FONT><FONT SIZE=3>|</FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>”等同）</FONT></TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">l</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">符号链接</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/dev/modem-&gt;/dev/ttyS1</FONT></TD>
+</TR>
+</TABLE>
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;权限标志：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;对每个文件或目录都有 4 类不同的用户。每类用户各有一组读、写和执行（搜索）文件的访问权限，这 4 类用户是：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;root：系统特权用户类，既 UID = 0 的用户。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;owner：拥有文件的用户。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;group：共享文件的组访问权限的用户类的用户组名称。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;world：不属于上面 3 类的所有其他用户。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;作为 root，他们自动拥有了所有文件和目录的全面的读、写和搜索的权限，所以没有必要明确指定他们的权限。其他三类用户则可以在耽搁文件或者目录的基础上别授权或撤消权限。因此对另外三类用户，一共 9 个权限位与之对应，分为 3 组，每组 3 个，分别用 r、w、x 来表示，分别对应 owner、group、world。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;权限位对于文件和目录的含义有些许不同。每组 3 个字符对应的含义从左至右的顺序，对于文件来说是：读文件的内容（r）、写数据到文件（w）、做为命令执行该文件（x）。对于目录来说是：读包含在目录中的文件名称（r）、写信息到目录中去（增加和删除索引点的连接）、搜索目录（能用该目录名称作为路径名去访问它所包含的文件或子目录）。具体来说就是：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1． 有只读权限的用户不能用 cd 进入该目录；还必须有执行权限才能进入。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2． 有执行权限的用户只有在知道文件名并拥有该文件的读权限的情况下才可以访问目录下的文件。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3． 必须有读和执行权限才可以使用 ls 列出目录清单，或使用 cd 进入目录。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4． 如用户有目录的写权限，则可以创建、删除或修改目录下的任何文件或子目录，既是该文件或子目录属于其他用户。
+<p align=right><a href=400.html>回家</a></p>
+</body>
+</html>

@@ -1,0 +1,53 @@
+源代码中和进程管理相关的文件
+
+include/linux/
+*	tasks.h: 定义系统进程调度的常量
+*	sched.h
+
+	interrupt.h:
+	tqueue.h
+	wait.h: 
+	locks.h
+	spinlock.h
+	smp_lock.h	
+	timer.h
+	signal.h
+
+	
+kernel/
+*	sched.c
+
+	softirq.c
+	fork.c
+	itimer.c
+	signal.c
+	
+ipc/
+	msg.c
+	shm.c
+	sem.c
+	util.c
+
+arch/i386/kernel
+	process.c
+	entry.s
+	traps.c
+	irq.c
+	irq.h
+	
+include/asm-i386/
+	processor.h
+	irq.h
+	hardirq.h
+	softirq.h
+	semaphore.h
+	locks.h
+	spinlock.h
+	smplock.h
+	......
+	
+Linux Cross Reference Web Site:
+
+http://linux.ict.ac.cn/lxr/source/
+
+	

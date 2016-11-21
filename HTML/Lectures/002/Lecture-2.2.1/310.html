@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>增加用户帐号</title>
+</head>
+
+<body>
+<h1 align=center>3.1 增加用户帐号</h1>
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;新建用户的命令十分简单，在命令行下使用 useradd 命令：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;useradd david
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该命令做了下面几件事：1）在 /etc/passwd 文件中增添了一个入口；2）在 /home 目录下创建新用户的主目录，并将 /etc/skel 目录中的文件拷贝到该目录中去；3）。但是使用了该命令后，新建的用户依然不能登录，因为还没有设置口令，需要再用 passwd 命令为其设置口令后，才能登录。用户的 UID 和 GID 是 useradd 自动选取的，它是将 /etc/passwd 文件中的 UID 加 1，将 etc/group 文件中的 GID 加 1。
+<FONT SIZE=3><P ALIGN="JUSTIFY">useradd </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>命令中还有许多选项，它们的功能如下表：</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=7 WIDTH=355>
+<TR><TD WIDTH="36%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">选项</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">说明</FONT></TD>
+</TR>
+<TR><TD WIDTH="36%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">-u</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">手工设置</FONT><FONT SIZE=3> UID</FONT></TD>
+</TR>
+<TR><TD WIDTH="36%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">-g</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">手工设置</FONT><FONT SIZE=3> GID</FONT></TD>
+</TR>
+<TR><TD WIDTH="36%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">-d</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">设置新用户的主目录</FONT></TD>
+</TR>
+<TR><TD WIDTH="36%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">-G</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">使用户成为其他组的成员</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">增加新用户时，系统将为用户创建一个与用户名相同的组，称为私有组。这一方法是为了能让新用户与其他用户隔离，确保安全性的措施。</P></FONT>
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;删除一个用户，使用类似的命令：userdel，其格式是：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;userdel username
+<p align=right><a href=300.html>回家</a></p>
+</body>
+</html>

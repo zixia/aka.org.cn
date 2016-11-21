@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0060)http://www.martinfowler.com/articles/refactoringRubicon.html -->
+<HTML><HEAD><TITLE>Crossing Refactoring's Rubicon</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META content="MSHTML 5.50.4134.600" name=GENERATOR></HEAD>
+<BODY>
+<HR>
+
+<H1 align=center>Crossing Refactoring's Rubicon </H1>
+<HR>
+
+<P align=center>
+<P align=center><A href="http://www.martinfowler.com/"><B><BIG>Martin 
+Fowler</BIG></B> <BR></A>Chief Scientist, <A 
+href="http://www.thoughtworks.com/">ThoughtWorks</A> </P>
+<P></P>
+<P><I>In January 2001 two Java tools crossed Refactoring's Rubicon. Refactoring 
+in Java now has serious tool support </I></P>
+<P>As I suspect anyone who's reading this knows, I'm a big fan of refactoring. 
+It's something I've wrote about and talked about for several years now. But one 
+thing I also know is that this is the early days of refactoring. In my <A 
+href="http://www1.fatbrain.com/asp/bookinfo/bookinfo.asp?theisbn=0201485672">book</A>, 
+I describe how to manually refactor programs. Yet manual refactoring really is 
+about cutting down a forest with an axe - we need refactoring tools to take a 
+real chain saw to the problem. </P>
+<P>Of course refactoring tools are not unknown. Even before I started work on 
+the refactoring book, John Brant and Don Roberts came up with the <A 
+href="http://chip.cs.uiuc.edu/users/brant/Refactory/">Smalltalk Refactoring 
+Browser</A>. This awesome tool makes refactoring much quicker and more 
+pleasurable. The trouble is that it is a Smalltalk tool, and not many people are 
+using Smalltalk. Indeed I've hardly ever used the Refactoring Browser because 
+most of the work I've done in the last few years has been in Java. </P>
+<P>But the Refactoring Browser makes one thing very clear. Tool support for 
+refactoring is both possible and valuable. I always believed it was only a 
+matter of time. As a popular memory-managed language, I expected that Java would 
+soon have such tools. </P><A name=N32></A>
+<H2>Approaching The Rubicon</H2>
+<P>In 1999 a number of people contacted me about tools they were working on that 
+supported refactoring. I keep a list of these tools at <A 
+href="http://www.refactoring.com/">http://www.refactoring.com/</A>(there another 
+list on the <A 
+href="http://c2.com/cgi/wiki?RefactoringBrowserForJava">wiki</A>). Although 
+refactoring.com is hardly a hub of the web people clearly wanted to be listed 
+amongst the refactoring tools. </P>
+<P>However I'm not at all interested in reviewing refactoring tools on the site. 
+There are many things that interest me, but reviewing software products is not 
+one of them. I'm happy to keep a list, but reviews I'll leave to others. </P>
+<P>Having said that some minimum standards are in order. A couple of vendors 
+wanted me to mention their tools. I looked at their "Move Method" capability, 
+and found that although they could move a method body from one class to another, 
+they didn't alter the callers. As a result a program no longer compiles after 
+applying the transformation: hardly semantics preserving! </P>
+<P>There were tools that were more honest about their capabilities. A number 
+offered the ability to do various kinds of renaming, such as <A 
+href="http://www.refactoring.com/catalog/renameMethod.html">Rename Method</A>. 
+Now providing the callers are adjusted, renaming counts as a refactoring - and a 
+very useful one to boot. Also several tools support <A 
+href="http://www.refactoring.com/catalog/moveClass.html">Move Class </A>and, 
+since repackaging is a pain in the neck in Java, this is a very useful 
+refactoring. </P>
+<P>All of these were encouraging signs. But even so I was not seriously excited. 
+All these were steps, but there was a key barrier to cross. </P><A name=N73></A>
+<H2>The Rubicon</H2>
+<P>The kinds of renames that I've been talking about require some analysis of 
+the software, but it's fairly shallow. You can do renames with without going too 
+deep into the structure of the program. Indeed many people do renames manually 
+by editor search/replace or through simple regular expression based scripts. To 
+go the full extent into refactoring you actually have to analyze and manipulate 
+the parse tree of the program, as John and Don describe in the book. </P>
+<P>A refactoring that needs this capability is <A 
+href="http://www.refactoring.com/catalog/extractMethod.html">Extract Method</A>. 
+While one reviewer on amazon described this as merely cut and paste, Extract 
+Method actually requires some serious work. You have to analyze the method, find 
+any temporary variables, then figure out what to do with them. The analysis is 
+not something you can do by regular expression manipulation. It requires some 
+careful work. </P>
+<P>That's why I see it as a key refactoring. If you can do Extract Method, it 
+probably means you can go on more refactorings. It's the sign that says "I'm 
+serious about this". </P><A name=N93></A>
+<H2>Crossing the Rubicon</H2>
+<P>The first thing that made me think there was a serious attempt at crossing 
+the Rubicon was in mid-1999 when I was contacted by Instantiations. For those 
+that don't know, Instantiations is one of the most highly regarded names in OO 
+circles. Born out of the Portland Smalltalk community the company was one of the 
+major parts of Digitalk and did a lot of serious work in Smalltalk. Since then 
+they've moved onto to Java and developed several products, including Jove - a 
+native compiler. </P>
+<P>So when Instantiations said they were starting work on a refactoring tool 
+(then codenamed Alchemy - now called jFactor) I was excited because I knew they 
+had the understanding to do a good job. I was even more encouraged when they 
+said that the first refactoring they were going to tackle was Extract Method. 
+</P>
+<P>However they weren't the first across the river. That prize goes to <A 
+href="http://www.xref-tech.com/speller">X-ref</A>: a plug in for emacs developed 
+by Marian Vittek. To be honest this didn't have a big effect on me as I don't do 
+my Java in emacs. Also x-ref's extraction has some limitations and Marian's 
+outfit is a small operation. But it got there and is well worth looking at if 
+you use emacs regularly. </P>
+<P>If X-ref was the rowboat crossing the Rubicon, Instantiations crossed the 
+river in style. Their tool jFactor supports a nice list of refactorings, 
+including Extract Method, in a very professional looking tool. <A 
+href="http://www.instantiations.com/jfactor/">jFactor </A>is available as a plug 
+in for IBM's Visual Age for Java. Now extract method is just a case of select 
+the code, choose the menu item, and type in the name. Refactoring is here in 
+style. </P>
+<P>jFactor was enough for me to consider January 2001 a banner month for 
+refactoring, but I got a pleasant surprise. For a while IntelliJ have been 
+building an IDE for Java that was liked for its Visual Age like searching 
+capabilities. They added various renaming capabilities to the tool which made it 
+a minor favorite on the sixth floor here where we were unable to use Visual Age. 
+Then in January I got a surprise email - their <A 
+href="http://www.intellij.com/idea/">IDEA </A>tool now supports Extract Method. 
+</P><A name=N129></A>
+<H2>Going Further</H2>
+<P>The January flurry is exiting for me, as I'm convinced that refactoring tools 
+are going to make a big impact on software engineering. Indeed I've called John 
+and Don's Refactoring Browser the biggest step forwards in development tools 
+since the IDE. I also hope that now the Rubicon of Extract Method is crossed, 
+more refactorings will follow. Certainly I urge you check out these tools and 
+try out their refactoring capabilities. </P>
+<P>As a side note, I'm not going to provide reviews of these tools. Doing a 
+proper review is too time consuming. I do keep in touch with these vendors and 
+will be doing what I can to help their developments. However I would be 
+interested in seeing feedback on these tools and will continue to maintain a 
+list on refactoring.com information about refactoring tools. I'll also post tool 
+news on that site as the vendors share it with me. </P>
+<HR>
+
+<P>&copy; <SMALL>Copyright <A href="http://www.martinfowler.com/">Martin Fowler</A>, 
+all rights reserved</SMALL> </P></BODY></HTML>

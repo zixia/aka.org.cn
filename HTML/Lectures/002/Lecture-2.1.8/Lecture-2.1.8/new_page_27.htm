@@ -1,0 +1,80 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>使用多线程轮询机制的程序</title>
+<meta name="Microsoft Theme" content="blank 001, default">
+<meta name="Microsoft Border" content="tl, default">
+</head>
+
+<body background="_themes/blank/blbkgnd.gif" bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/new_page_27.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="单线程轮询程序"></strong></font><br>
+<a href="index.htm"><img src="_derived/home_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="主页" align="middle"></a> <a href="new_page_25.htm"><img src="_derived/up_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="上一层" align="middle"></a> <a href="new_page_39.htm"><img src="_derived/new_page_39.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="设计的要点" align="middle"></a> <a href="new_page_40.htm"><img src="_derived/new_page_40.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="程序结构" align="middle"></a> <a href="new_page_26.htm"><img src="_derived/new_page_26.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="简单的FTP Server" align="middle"></a> <img src="_derived/new_page_27.htm_cmp_blank000_hbtn_p.gif" width="140" height="32" border="0" alt="单线程轮询程序" align="middle"> <a href="new_page_32.htm"><img src="_derived/new_page_32.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="网络仿真设备" align="middle"></a></p>
+<p align="center">　</p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<p><a href="new_page_31.htm#select"><font size="6">select函数的解释</font></a></p>
+<p>　</p>
+<p><font size="6">程序段节选：</font></p>
+<p><font size="5">int listenfd, connfd, maxfd=0; </font></p>
+<p><font size="5">int nready; </font></p>
+<p><font size="5">fd_set rset, allset; </font></p>
+<p><font size="5">struct sockaddr_in cliaddr, servaddr; </font></p>
+<p><font size="5">int clilen;</font></p>
+<p>　</p>
+<p><font size="5">listenfd = socket(AF_INET, SOCK_STREAM, 0); </font></p>
+<p><font size="5">if (listenfd &gt; maxfd) maxfd = listenfd;</font></p>
+<p>　</p>
+<p><font size="5">memset(&amp;servaddr, 0, sizeof(servaddr)); </font></p>
+<p><font size="5">servaddr.sin_family = AF_INET; </font></p>
+<p><font size="5">servaddr.sin_addr.s_addr = htonl(INADDR_ANY); </font></p>
+<p><font size="5">servaddr.sin_port = htons(4321);</font></p>
+<p>　</p>
+<p><font size="5">bind(listenfd, (struct sockaddr *) &amp;servaddr, 
+sizeof(servaddr));</font></p>
+<p>　</p>
+<p><font size="5">FD_ZERO(&amp;allset); </font></p>
+<p><font size="5">FD_SET(listenfd, &amp;allset); </font></p>
+<p><font size="5">listen(listenfd, 10);</font></p>
+<p>　</p>
+<p><font size="5">/* main loop */</font></p>
+<p><font size="5">while (1) { </font></p>
+<blockquote>
+  <p><font size="5">rset = allset; </font></p>
+  <p><font size="5">nready = select(maxfd+1, &amp;rset, NULL, NULL, NULL);</font></p>
+  <p>　</p>
+  <p><font size="5">if (FD_ISSET(listenfd, &amp;rset)) { </font></p>
+  <blockquote>
+    <p><font size="5">/* 有新的客户端连接请求</font></p>
+    <p><font size="5">clilen = sizeof(cliaddr); </font></p>
+    <p><font size="5">connfd = accept(listenfd, (struct 
+    sockaddr*)&amp;cliaddr,&amp;clilen);</font></p>
+    <p><font size="5">if (client_num == FD_SETSIZE) { </font></p>
+    <blockquote>
+      <p><font size="5">fprintf(stderr, &quot;too many clients\n&quot;); </font></p>
+      <p><font size="5">exit(-1); </font></p>
+    </blockquote>
+    <p><font size="5">}</font></p>
+    <p><font size="5">FD_SET(connfd, &amp;allset); </font></p>
+    <p><font size="5">if (connfd &gt; maxfd) maxfd = connfd; </font></p>
+    <p><font size="5">if (--nready &lt;= 0) continue; </font></p>
+  </blockquote>
+  <p><font size="5">}</font></p>
+  <p>　</p>
+  <p><font size="5">//以下依次判断FD_ISSET(某个socket, &amp;rset) 
+  并做相应处理 </font></p>
+</blockquote>
+<p><font size="5">}</font></p>
+　
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+</html>

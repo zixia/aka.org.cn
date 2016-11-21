@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>理解 SUID 和 SGID</title>
+</head>
+
+<body>
+<h1 align=center>4.3 理解 SUID 和 SGID</h1>
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在上面的章节中，我们知道了文件的权限可以用三个八进制数字表示。其实文件的权限应该用四个八进制来表示，不过用 ls -l 命令时，只显示三个罢了。那个没有显示的八进制数字其实是第一个，它用来设定一些特殊权限。这个八进制数字的三个位是：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;SUID  SGID  sticky-bit
+<p>&nbsp;&nbsp;&nbsp;&nbsp;它们的含义是：
+<TABLE BORDER CELLSPACING=1 CELLPADDING=7 WIDTH=568>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">SUID</FONT></TD>
+<TD WIDTH="86%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">当设置了</FONT><FONT SIZE=3> SUID </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>位的文件被执行时，该文件将以所有者的身份运行，也就是说无论谁来执行这个文件，他都有文件所有者的特权。如果所有者是</FONT><FONT SIZE=3> root </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>的话，那么执行人就有超级用户的特权了。这时该位将变成一个安全漏洞，因此不要轻易设置该位。</FONT></TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">SGID</FONT></TD>
+<TD WIDTH="86%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">与上面的内容类似。文件运行时，运行者将具有所属组的特权。</FONT></TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="CENTER">sticky-bit</FONT></TD>
+<TD WIDTH="86%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">sticky </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>位要求操作系统既是在可执行程序退出后，仍要在内存中保留该程序的映象。这样做是为了节省大型程序的启动时间。但是会占用系统资源。因此设置该位，不如把程序写好。</FONT></TD>
+</TR>
+</TABLE>
+<p align=right><a href=400.html>回家</a></p>
+</body>
+</html>

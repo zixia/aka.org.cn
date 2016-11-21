@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=x-gbk">
+  <title>Goodness</title>
+</head>
+<body>
+<br>
+<h3 class="HeadB"><a name="20825"></a>How Good Is a Runnable Process?</h3>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+<p class="Body">Theheart of the scheduling algorithm includes identifying
+the best candidateamong all processes in the runqueue list. This is what
+the <code class="Literal">goodness(&nbsp; )</code> function does. It receives
+as input parameters <code class="Literal">prev</code> (the descriptor pointer
+of the previously running process) and &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; <code class="Literal">p</code> (the descriptor pointer of the process
+to evaluate). The integervalue <code class="Literal">c</code> returned by
+<code class="Literal">goodness(&nbsp; )</code> measures the "goodness" of
+<code class="Literal">p</code> and hasthe following meanings:</p>
+<dl>
+<dt class="ListVariableTerm"><em class="Emphasis">c</em> = -1000 </dt>
+  <dd class="ListVariable"><code class="Literal">p</code> must never be selected;
+this value is returned when the runqueuelist contains only <code class="Literal">
+init_task</code>.</dd>
+    <dt class="ListVariableTerm"><em class="Emphasis">c</em> = 0 </dt>
+      <dd class="ListVariable"><code class="Literal">p</code> has exhausted
+its quantum. Unless <code class="Literal">p</code>&nbsp; is the first process
+in the runqueue list and all runnable processes havealso exhausted their
+quantum, it will not be selected for execution.</dd>
+        <dt class="ListVariableTerm">0 &lt; <em class="Emphasis">c</em> &lt;
+1000 </dt>
+          <dd class="ListVariable"><code class="Literal">p</code> is a conventional
+process that has not exhausted its quantum; ahigher value of <code class="Literal">
+c</code> denotes a higher level ofgoodness.</dd>
+            <dt class="ListVariableTerm"><em class="Emphasis">c</em> &gt;=
+1000 </dt>
+              <dd class="ListVariable"><code class="Literal">p</code> is
+a real-time process; a higher value of <code class="Literal">c</code> denotes
+a higher level of goodness.</dd>
+                </dl>
+                <p class="Body">The <code class="Literal">goodness(&nbsp;
+)</code> function is equivalent to: &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+                <pre><code class="Code">if (p-&gt;policy != SCHED_OTHER) </code>
+<code class="Code">       return 1000 + p-&gt;rt_priority; </code>
+<code class="Code">if (p-&gt;counter == 0) </code>
+<code class="Code">       return 0; </code>
+<code class="Code">if (p-&gt;mm == prev-&gt;mm) </code>
+<code class="Code">       return p-&gt;counter + p-&gt;priority + 1; </code>
+<code class="Code">return p-&gt;counter + p-&gt;priority; </code></pre>
+                <p class="Body">If the process is real-time, its goodness
+is set to at least 1000. If itis a conventional process that has exhausted
+its quantum, its goodness isset to 0; otherwise, it is set to <code class="Literal">
+p-&gt;counter + p-&gt;priority</code>.</p>
+                <p class="Body">A small bonus is given to <code class="Literal">
+p</code> if it shares theaddress space with <code class="Literal">prev</code>
+ (i.e., if their processdescriptors' <code class="Literal">mm</code> fields
+point to the same memorydescriptor). The rationale for this bonus is that
+if <code class="Literal">p</code> runs right after <code class="Literal">
+prev</code>, it will usethe same page tables, hence the same memory; some
+of the valuable data maystill be in the hardware cache.</p>
+                </body>
+                </html>

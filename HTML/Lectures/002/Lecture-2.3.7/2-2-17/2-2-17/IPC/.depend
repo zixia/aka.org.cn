@@ -1,0 +1,30 @@
+msg.o: \
+   /usr/src/linux-2.2.17/include/linux/malloc.h \
+   /usr/src/linux-2.2.17/include/linux/msg.h \
+   /usr/src/linux-2.2.17/include/linux/interrupt.h \
+   /usr/src/linux-2.2.17/include/linux/smp_lock.h \
+   /usr/src/linux-2.2.17/include/linux/init.h \
+   /usr/src/linux-2.2.17/include/asm/uaccess.h
+sem.o: \
+   /usr/src/linux-2.2.17/include/linux/malloc.h \
+   /usr/src/linux-2.2.17/include/linux/smp_lock.h \
+   /usr/src/linux-2.2.17/include/linux/init.h \
+   /usr/src/linux-2.2.17/include/asm/uaccess.h
+shm.o: \
+   /usr/src/linux-2.2.17/include/linux/malloc.h \
+   /usr/src/linux-2.2.17/include/linux/shm.h \
+   /usr/src/linux-2.2.17/include/linux/swap.h \
+   /usr/src/linux-2.2.17/include/linux/smp_lock.h \
+   /usr/src/linux-2.2.17/include/linux/init.h \
+   /usr/src/linux-2.2.17/include/linux/vmalloc.h \
+   /usr/src/linux-2.2.17/include/linux/tasks.h \
+   /usr/src/linux-2.2.17/include/linux/bigmem.h \
+   /usr/src/linux-2.2.17/include/linux/pagemap.h \
+   /usr/src/linux-2.2.17/include/asm/uaccess.h \
+   /usr/src/linux-2.2.17/include/asm/pgtable.h
+util.o: \
+   /usr/src/linux-2.2.17/include/linux/mm.h \
+   /usr/src/linux-2.2.17/include/linux/shm.h \
+   /usr/src/linux-2.2.17/include/linux/init.h \
+   /usr/src/linux-2.2.17/include/linux/msg.h \
+   $(wildcard /usr/src/linux-2.2.17/include/config/sysvipc.h)

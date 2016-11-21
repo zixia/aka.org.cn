@@ -1,0 +1,83 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>AKA杂志第三期：Yahoo! and FreeBSD</title>
+</head>
+
+<body>
+<div align="center"><center>
+
+<table border="0" width="630">
+  <tr>
+    <td></td>
+    <td bgcolor="#EEEDB7"><p align="center">　</p>
+    <p align="center"><big><big><strong>Yahoo! and FreeBSD</strong></big></big></p>
+    <p align="center"><font size="2">作者：</font><small>David Filo，Co-founder of Yahoo!</small></p>
+    <p align="center"><font size="2">翻译: </font>taurus<font size="2">[AKA]</font></p>
+    <h1 align="center"><a href="cover2.html"><font size="2">[返回]</font></a></h1>
+    <hr>
+    <p><br>
+    　　当我们在斯坦福大学完成 Yahoo 
+    开发的时候，使用的两台计算机分别是：运行 OSF 的 DEC Alpha 和运行 
+    SunOS 的 Sparc 20。最初这两台机器完全能满足工作需要，但不久我们就发现所用的操作系统在设计时都不具备处理大量 
+    HTTP 
+    请求的能力。事实上，当时还没有任何商业系统可以解决我们所面临的扩展问题，这也是身处网络技术最前沿所必须面对的无奈现实。 
+    <br>
+    <br>
+    　　离开斯坦福之后，我们又用过几种平台包括 SGI IRIX，Linux 和 BSDI，但其性能和稳定性都不能令人满意，我们只得继续寻找。随着 
+    Yahoo 的日渐流行，平台的可扩展能力和稳定性是最关键的。那时我们 
+    FreeBSD 还一无所知，但当读到有关介绍时，我决定试它一试。 <br>
+    <br>
+    　　以前我经历过许多次 PC 
+    操作系统那恼人的漫长的安装过程，所以现在有些怀疑是否还想再用三天来安装另一个系统。然而 
+    FreeBSD 的安装却出乎意料的顺利：到 FreeBSD 
+    站点下载一张启动软盘映象文件，再用它引导计算机，并回答几个问题，几分钟就通过网络安装完成了。这是我所遇到的安装过程最简单省力的操作系统。 
+    <br>
+    <br>
+    　　几天之后我安装一台 FreeBSD 服务器加进我们的 Web 
+    服务器集群中，结果它的性能明显优于其它机器，而且运行也更稳定。试验时间持续了几个星期，我们对 
+    FreeBSD 很满意。除了诱人的价格之外，主要应归功于 FreeBSD 
+    的稳定性、运行性能和允许访问源代码的特点。从此，我们的产品和开发环境就几乎离不开它了。 
+    <br>
+    <br>
+    　　初时我们还对 FreeBSD 
+    的技术支持和发展方向心存疑问，但事实证明我们能够从其核心小组（core 
+    team）及其他用户处得到大力的支持。有了这些支持和源代码，我们遇到的问题几乎都可以立即得到解决。在过去的两年中，我们对 
+    FreeBSD 
+    及其工作人员有了更多的了解，也明确了它的组织结构和发展方向。 
+    <br>
+    <br>
+    　　我们最初使用 Pentium 100 来运行 FreeBSD 2.0.5.，随后逐渐把其余的服务器也转向 
+    FreeBSD，到现在我们有 50 多台服务器全都运行不同版本的 2.1 STABLE。同时我们还在测试 
+    2.2版，希望能在半年内取代 2.1。我们的机型从 64MB 内存的 Pentium 100 
+    到 256MB 内存的 PPro200 都有，当需要进行额外的 I/O 
+    操作时，就利用能扫描多重磁盘的 ccd，网络则采用100Mbps 
+    的以太网。整体的系统配置性价比极高。（编者注：ccd 
+    可将多个物理磁盘镜象成一个大的逻辑磁盘）。 <br>
+    <br>
+    　　FreeBSD 运行非常稳定，我们已连续 180 天每天接受 400 万以上 HTTP 
+    请求。在一台 128MB 内存的 PPro200 上，结合 ccd 
+    磁盘扫描技术，我们可一天处理 1200 万 HTTP 
+    请求。美中不足的就是，为 FreeBSD 
+    写的第三方软件极少。尽管这种情况已在改变，但短期内也难见成效。目前唯一的途径就是由 
+    Yahoo! 
+    和其他公司联合起来，让软件开发商们把注意力转向这个庞大的市场。 
+    <br>
+    <br>
+    　　为了能在快速发展的同时升级我们的服务，我们期望能利用 SMP 
+    来达到更优的性能价格比。从这个角度看，在其它平台（如 Alpha）上运行 
+    FreeBSD 也是可行的。FreeBSD 还可能提供更多的服务如大型的可靠的 RAID 
+    文件服务器。总之，我们认为 FreeBSD 
+    在性能，稳定性，技术支持方面都十分出色，在使用它两年之后，我们还未发现任何其它产品能取而代之。（编者注：98 
+    年 10 月份正式发行的 FreeBSD 3.0 已开始支持 SMP 和 Alpha 平台）。 <br>
+    <br>
+    </p>
+    <hr>
+    <p align="center"><a href="cover2.html"><strong><font size="2">[返回]</font></strong></a></p>
+    <p align="center">　</td>
+  </tr>
+</table>
+</center></div>
+</body>
+</html>

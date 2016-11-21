@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>终端编程</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        PRE { color: #ffffff; font-family: "fixed" }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="velvet.jpg">
+
+<A HREF="thread.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="ptty.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=CENTER>7.6&nbsp;&nbsp;终端编程<BR><BR>
+</H1>
+
+<UL>
+    <LI>基本终端 I/O</LI>
+    <LI>ncurses 库</LI>
+    <LI>newt 库</LI>
+</UL>
+
+<H3>7.6.1&nbsp;&nbsp;基本终端 I/O</H3>
+<UL>
+    <LI>终端 I/O 非常烦琐, 由于有许多不同的终端类型, 各种终端的能力也不同.</LI>
+    <LI>UNIX/Linux 使用 terminfo 数据库来描述终端能力以及调用对应功能的方法.</LI>
+    <LI>POSIX 定义了完成终端 I/O 的标准方法: TERMIOS 函数族</LI>
+    <LI>从而避免使用大量的 ioctl 函数调用</LI>
+    <LI>终端 I/O 的两种模式</LI>
+<PRE>
+===============================================================================
+    * 正规 (canonical) 模式: 终端输入以行处理. 终端驱动程序提供行编辑能力.
+    * 非正规模式: 输入字符不以行处理.
+===============================================================================
+</PRE>
+
+    <LI>Cbreak 模式</LI>
+<PRE>
+===============================================================================
+    * 非正规模式
+    * 关闭回显
+    * 每次一个字节 (c_cc [VMIN] = 1, c_cc [VTIME] = 0)
+===============================================================================
+</PRE>
+
+    <LI>Raw 模式</LI>
+<PRE>
+===============================================================================
+    * 非正规模式
+    * 关闭回显
+    * 禁止 CR 到 NL 的映射 (ICRNL), 输入奇偶校验 (INPCK), 输入第 8 位的截取 (ISTRIP),
+      以及输出流控制 (IXON)
+    * 8 位字符 (CS8), 奇偶校验被禁止 (PARENB)
+    * 禁止所有的输出处理 (OPOST)
+    * 每次一个字节 (c_cc [VMIN] = 1, c_cc [VTIME] = 0)
+===============================================================================
+</PRE>
+
+    <LI>终端属性的获取和设置</LI>
+<PRE>
+===============================================================================
+       #include &lt;termios.h&gt;
+       #include &lt;unistd.h&gt;
+
+       int tcgetattr (int fd, struct termios *termios_p);
+       int tcsetattr (int fd, int optional_actions, struct termios *termios_p);
+-------------------------------------------------------------------------------
+       struct termios {
+              tcflag_t c_iflag;      /* input modes */
+              tcflag_t c_oflag;      /* output modes */
+              tcflag_t c_cflag;      /* control modes */
+              tcflag_t c_lflag;      /* local modes */
+              cc_t c_cc [NCCS];      /* control chars */
+      }
+-------------------------------------------------------------------------------
+   * c_?flag 包含大量可控制的模式选项.
+   * c_cc 用来修改终端的特殊字符映射.
+   * c_cc 还可用来设置系统在什么情况下返回数据:
+       o 接收到指定数量的数据, c_cc [VMIN] 决定.
+       o 或者给定时间之后, c_cc [VTIME] 决定.
+===============================================================================
+</PRE>
+
+    <LI>波特率函数</LI>
+<PRE>
+===============================================================================
+       #include &lt;termios.h&gt;
+       #include &lt;unistd.h&gt;
+
+       speed_t cfgetospeed (struct termios *termios_p);
+       speed_t cfgetispeed (struct termios *termios_p);
+
+       int cfsetospeed (struct termios *termios_p, speed_t speed);
+       int cfsetispeed (struct termios *termios_p, speed_t speed);
+===============================================================================
+</PRE>
+
+    <LI>线路控制函数</LI>
+<PRE>
+===============================================================================
+       #include &lt;termios.h&gt;
+       #include &lt;unistd.h&gt;
+
+       int tcdrain (int fd);
+       int tcflush (int fd, int queue_selector);
+       int tcflow (int fd, int action);
+       int tcsendbreak (int fd, int duration);
+===============================================================================
+</PRE>
+
+    <LI>进程组控制函数</LI>
+<PRE>
+===============================================================================
+       #include &lt;termios.h&gt;
+       #include &lt;unistd.h&gt;
+
+       pid_t tcgetpgrp (int fd);
+       int tcsetpgrp (int fd, pid_t pgrpid);
+===============================================================================
+</PRE>
+
+    <LI>cfmakeraw: 设置终端的 Raw 模式</LI>
+<PRE>
+===============================================================================
+cfmakeraw 如下设置终端属性:
+
+     termios_p-&gt;c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP
+                                   | INLCR | IGNCR | ICRNL | IXON);
+     termios_p-&gt;c_oflag &= ~OPOST;
+     termios_p-&gt;c_lflag &= ~(ECHO | ECHONL | ICANON | ISIG | IEXTEN);
+     termios_p-&gt;c_cflag &= ~(CSIZE | PARENB);
+     termios_p-&gt;c_cflag |= CS8;
+===============================================================================
+</PRE>
+
+    <LI>其他函数</LI>
+<PRE>
+===============================================================================
+       #include &lt;stdio.h&gt;
+
+       char *ctermid (char *s);         /* 返回控制终端名称 */
+-------------------------------------------------------------------------------
+       #include &lt;unistd.h&gt;
+
+       int isatty (int desc);          /* 判断描述符是否为终端 */
+       char *ttyname (int desc);       /* 返回终端名称 */
+===============================================================================
+</PRE>
+
+    <LI>终端窗口改变</LI>
+<PRE>
+===============================================================================
+    * 利用 ioctl 的 TIOCGWINSZ 和 TIOCSWINSZ 命令可获得或设置终端窗口.
+    * 终端窗口改变时, 前台进程组中的进程将接收到 SIGWINCH 消息.
+    * 这一消息对伪终端应用程序很有意义.
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>7.6.2&nbsp;&nbsp;ncurses 库</H3>
+<UL>
+    <LI>ncurses 的名称表示 new curses，它是标准 curses 函数库的一个全新实现，是与 curses 完全兼容的增强版本。ncurses 库能够帮助程序实现全屏的 I/O。</LI>
+    <LI>#自学 ncurses 库的编程#</LI>
+</UL>
+
+<H3>7.6.3&nbsp;&nbsp;newt 库</H3>
+<UL>
+    <LI>是 Red Hat 在 ncurses 基础上开发的高级用户界面库, 支持窗口以及按钮, 输入框等简单控件.</LI>
+    <LI>Red Hat 在安装程序和配置工具中大量使用了 newt 库.</LI>
+    <LI>#自学 newt 库接口#</LI>
+</UL>
+
+<P>
+<BR><BR>
+</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="thread.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="ptty.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+</BODY>
+</HTML>
+

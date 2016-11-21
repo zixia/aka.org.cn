@@ -1,0 +1,595 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  
+  <meta http-equiv="content-type" content="text/html; charset=x-gbk">
+  <title>System Calls Related to Scheduling</title>
+</head>
+<body>
+<h2 class="HeadA"><a name="77170"></a>System Calls Related to Scheduling</h2>
+<table border="1">
+  <caption><b class="TableLabel"><a name="51998">Table 10-1:</a></b><b class="TableTitle">
+System Calls Related to Scheduling </b></caption><tbody>
+    <tr>
+      <th rowspan="1" colspan="1">
+      <p class="CellHeading">System Call</p>
+      </th>
+      <th rowspan="1" colspan="1">
+      <p class="CellHeading">Description</p>
+      </th>
+    </tr>
+    <tr>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody"><code class="Literal">nice(  )</code></p>
+      </td>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody">Change the priority of a conventionalprocess.</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody"><code class="Literal">getpriority( )</code></p>
+      </td>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody">Get the maximum priority of a groupof conventional
+      <br>
+processes.</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody"><code class="Literal">setpriority( )</code></p>
+      </td>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody">Set the priority of a group of conventionalprocesses.</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody"><code class="Literal">sched_getscheduler( )</code></p>
+      </td>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody">Get the scheduling policy of a process.</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody"><code class="Literal">sched_setscheduler( )</code></p>
+      </td>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody">Set the scheduling policy and priorityof a process.</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody"><code class="Literal">sched_getparam( )</code></p>
+      </td>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody">Get the scheduling priority of aprocess.</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody"><code class="Literal">sched_setparam( )</code></p>
+      </td>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody">Set the priority of a process.</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody"><code class="Literal">sched_yield( )</code></p>
+      </td>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody">Relinquish the processor voluntarilywithout blocking.</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody"><code class="Literal">sched_get_priority_min( 
+)</code></p>
+      </td>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody">Get the minimum priority value fora policy.</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody"><code class="Literal">sched_get_priority_max( 
+)</code></p>
+      </td>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody">Get the maximum priority value fora policy.</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody"><code class="Literal">sched_rr_get_interval( )</code></p>
+      </td>
+      <td rowspan="1" colspan="1">
+      <p class="CellBody">Get the time quantum value for theRound Robin policy.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; 
+<p class="Body">Several system calls have been introduced to allow processes
+to change theirpriorities and scheduling policies. As a general rule, users
+are always allowedto lower the priorities of their processes. However, if
+they want to modifythe priorities of processes belonging to some other user
+or if they wantto increase the priorities of their own processes, they must
+have superuserprivileges.</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; 
+<h3 class="HeadB">The nice(&nbsp; ) System Call</h3>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; 
+<p class="Body">The <code class="Literal">nice(&nbsp; )<a href="#footnote-7" title="Footnote" class="footnote">
+[7]</a></code> system call allows processes to change their base priority.
+The integer value contained in the <code class="Literal">increment</code>
+&nbsp; parameter is used to modify the <code class="Literal">priority</code>
+ fieldof the process descriptor. The <code class="Literal">nice</code> Unix
+command,which allows users to run programs with modified scheduling priority,
+isbased on this system call.</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; 
+<p class="Body">The <code class="Literal">sys_nice(&nbsp; )</code> service
+routine handles the &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <code class="Literal">nice(&nbsp;
+)</code> system call. Although the <code class="Literal">increment</code>
+&nbsp; parameter may have any value, absolute values larger than 40 are trimmed
+down to 40. Traditionally, negative values correspond to requests for priority
+increments and require superuser privileges, while positive ones correspond
+to requests for priority decrements.</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; 
+<p class="Body">The function starts by copying the value of <code class="Literal">
+increment</code>&nbsp; into the <code class="Literal">newprio</code> local
+variable. In the caseof a negative increment, the function invokes the <code class="Literal">
+capable(&nbsp; )</code> function to verify whether the process has a <code class="Literal">
+CAP_SYS_NICE</code> capability. We shall discuss that function, togetherwith
+the notion of capability, in <em class="EmphasisRoman">Chapter 19, </em><cite class="Citation">
+Program Execution</cite>. If the user turns out to have the capability required
+to change priorities, <code class="Literal">sys_nice(&nbsp; ) </code>changes
+thesign of <code class="Literal">newprio</code> and it sets the <code class="Literal">
+increase</code> local flag: </p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; <pre><code class="Code">increase = 0 </code>
+<code class="Code">newprio = increment; </code>
+<code class="Code">if (increment &lt; 0) { </code>
+<code class="Code">    if (!capable(CAP_SYS_NICE)) </code>
+<code class="Code">        return -EPERM; </code>
+<code class="Code">    newprio = -increment; </code>
+<code class="Code">    increase = 1; </code>
+<code class="Code">} </code>
+</pre>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; 
+<p class="Body">If <code class="Literal">newprio</code> has a value larger
+than 40, the functiontrims it down to 40. At this point, the <code class="Literal">
+newprio</code>&nbsp; local variable may have any value included from 0 to
+40, inclusive. Thevalue is then converted according to the priority scale
+used by the schedulingalgorithm. Since the highest base priority allowedis
+2 <em class="Symbol">&times; </em><code class="Literal">DEF_PRIORITY</code>
+, the new value is:</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; 
+<center> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; 
+<p class="EquationHolder"><img src="eqch3.gif" align="Baseline">&nbsp; </p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; </center>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; 
+<p class="Body">The resulting value is copied into <code class="Literal">
+increment</code>&nbsp; with the proper sign: </p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; <pre><code class="Code">if (newprio &gt; 40) </code>
+<code class="Code">    newprio = 40; </code>
+<code class="Code">newprio = (newprio * DEF_PRIORITY + 10) / 20; </code>
+<code class="Code">increment = newprio; </code>
+<code class="Code">if (increase) </code>
+<code class="Code">    increment = -increment; </code>
+</pre>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; 
+<p class="Body">Since <code class="Literal">newprio</code> is an integervariable,
+the expressionin the code is equivalent to the formula shown earlier.</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; 
+<p class="Body">The function then sets the final value of <code class="Literal">
+priority</code>&nbsp; by subtracting the value of <code class="Literal">increment</code>
+ fromit. However, the final base priority of the process cannot be smaller
+than1 or larger than 2 <em class="Symbol">&times; </em><code class="Literal">
+DEF_PRIORITY</code>: </p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; <pre><code class="Code">if (current-&gt;priority - increment &lt; 1) </code>
+<code class="Code">    current-&gt;priority = 1; </code>
+<code class="Code">else if (current-&gt;priority &gt; DEF_PRIORITY*2) </code>
+<code class="Code">    current-&gt;priority = DEF_PRIORITY*2; </code>
+<code class="Code">else </code>
+<code class="Code">    current-&gt;priority -= increment; </code>
+<code class="Code">return 0; </code>
+</pre>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; 
+<p class="Body">A <code class="Literal">niced</code> process changes over
+time like any otherprocess, getting extra priority if necessary or dropping
+back in deferenceto other processes.</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; 
+<h3 class="HeadB">The getpriority(&nbsp; ) and setpriority(&nbsp; ) System
+Calls</h3>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; 
+<p class="Body">The <code class="Literal">nice(&nbsp; )</code> system call
+affects only the processthat invokes it. Two other system calls, denotedas
+<code class="Literal">getpriority(&nbsp; )</code> and <code class="Literal">
+setpriority(&nbsp; )</code>,act on the base priorities of all processes in
+a given group. <code class="Literal">getpriority(&nbsp; )</code> returns20
+plus the highest base priority among allprocesses in a given group; <code class="Literal">
+setpriority(&nbsp; )</code>sets the base priority of all processes in a given
+group to a given value.</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; 
+<p class="Body">The kernel implements these system calls by means of the<code class="Literal">
+sys_getpriority(&nbsp; )</code> and <code class="Literal">sys_setpriority(&nbsp;
+)</code>&nbsp; service routines. Both of them actessentially on the same
+group of parameters:</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; 
+<dl>
+<dt class="ListVariableTerm"><code class="Literal">which</code></dt>
+  <dd class="ListVariable">Identifies the group of processes; it can assume
+one of the following values:</dd>
+    <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+    <dt class="FM-ListVariableTerm"><code class="Literal">PRIO_PROCESS</code></dt>
+      <dd class="FM-ListVariable">Select the processes according to their
+process ID (<code class="Literal">pid</code> field of the process descriptor).</dd>
+        <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+        <dt class="FM-ListVariableTerm"><code class="Literal">PRIO_PGRP</code></dt>
+          <dd class="FM-ListVariable">Select the processes according to their
+group ID (<code class="Literal">pgrp</code>&nbsp; field of the process descriptor).</dd>
+            <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            </p>
+            <dt class="FM-ListVariableTerm"><code class="Literal">PRIO_USER</code></dt>
+              <dd class="FM-ListVariable">Select the processes accordingto
+their user ID (<code class="Literal">uid</code>&nbsp; field of the process
+descriptor).</dd>
+                <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; </p>
+                <dt class="ListVariableTerm"><code class="Literal">who</code></dt>
+                  <dd class="ListVariable">Value of the <code class="Literal">
+pid</code>, <code class="Literal">pgrp</code>, or <code class="Literal">uid</code>
+ field (depending on the value of <code class="Literal">which</code>) tobe
+used for selecting the processes. If <code class="Literal">who</code>is 0,
+its value is set to that of the corresponding field ofthe &nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   
+                <code class="Literal">current</code> process.</dd>
+                    <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+                    <dt class="ListVariableTerm"><code class="Literal">niceval</code></dt>
+                      <dd class="ListVariable">The new base priority value
+(needed only by <code class="Literal">sys_setpriority(&nbsp; )</code>). It
+should range between -20 (highest priority) and +20 (minimumpriority).</dd>
+                        <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+                        </dl>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <p class="Body">As stated before, only processeswith
+a <code class="Literal">CAP_SYS_NICE</code>&nbsp; capability are allowedto
+increase their own base priority or to modifythat of other processes.</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <p class="Body">As we have seen in Chapter 8, system
+calls return a negative value only ifsome error occurred. For that reason,
+                        <code class="Literal">getpriority(&nbsp; )</code>
+ does not return a normal nice value ranging between -20 and 20,but rather
+a nonnegative value ranging between 0 and 40.</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <h3 class="HeadB"><a name="40766"></a>System Calls
+Related to Real-Time Processes</h3>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <p class="Body">We now introduce a group of system
+calls that allow processes to change theirscheduling discipline and, in particular,
+to become real-time processes.As usual, a process must have a <code class="Literal">
+CAP_SYS_NICE</code>&nbsp; capability in order to modify the values of the
+                        <code class="Literal">rt_priority</code>&nbsp; and
+                        <code class="Literal">policy</code> process descriptor
+fields of anyprocess, including itself.</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <h4 class="HeadC">The sched_getscheduler(&nbsp; )
+and sched_setscheduler(&nbsp; ) system calls</h4>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <p class="Body">The <code class="Literal">sched_getscheduler(&nbsp;
+)</code> system call queriesthe scheduling policy currentlyapplied to the
+process identified by the&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <code class="Literal">
+pid</code> parameter. If <code class="Literal">pid</code> equals 0, the policy
+of the calling process will be retrieved. On success, the system call returns
+the policy for the process: <code class="Literal">SCHED_FIFO</code>, <code class="Literal">
+SCHED_RR</code>, or <code class="Literal">SCHED_OTHER</code>. The corresponding
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; <code class="Literal">sys_sched_getscheduler(&nbsp;
+)</code> service routine invokes <code class="Literal">find_task_by_pid(&nbsp;
+)</code>, which locates the process descriptor correspondingto the given
+                       <code class="Literal">pid</code> and returns thevalue
+of its &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <code class="Literal">policy</code> field.</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <p class="Body">The <code class="Literal">sched_setscheduler(&nbsp;
+)</code> system call setsboth the scheduling policy and the associated parameters
+for the processidentified by the parameter <code class="Literal">pid</code>
+. If <code class="Literal">pid</code> is equal to 0, the scheduler parameters
+of the calling processwill be set.</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <p class="Body">The corresponding <code class="Literal">
+sys_sched_setscheduler(&nbsp; )</code>&nbsp; function checks whether thescheduling
+policy specified by the <code class="Literal">policy</code> parameterand
+the new static priority specified by the <code class="Literal">param-&gt;sched_priority</code>
+ parameter are valid. It also checks whetherthe process has <code class="Literal">
+CAP_SYS_NICE</code> capability or whetherits owner has superuser rights.If
+everything is OK, it executes the followingstatements: </p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; <pre><code class="Code">p-&gt;policy = policy; </code>
+<code class="Code">p-&gt;rt_priority = param-&gt;sched_priority; </code>
+<code class="Code">if (p-&gt;next_run) </code>
+<code class="Code">    move_first_runqueue(p); </code>
+<code class="Code">current-&gt;need_resched = 1; </code>
+</pre>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <h4 class="HeadC">The sched_ getparam(&nbsp; ) and
+sched_setparam(&nbsp; ) system calls</h4>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <p class="Body">The <code class="Literal">sched_getparam(&nbsp;
+)</code> system call retrievesthe scheduling parameters for the process identified
+by <code class="Literal">pid</code>. If <code class="Literal">pid</code>is
+0, the parameters of the &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <code class="Literal">
+current</code> process are retrieved. The corresponding <code class="Literal">
+sys_sched_getparam(&nbsp; )</code> service routine, as one would expect,findsthe
+process descriptor pointer associated with <code class="Literal">pid</code>
+, stores its <code class="Literal">rt_priority</code> field ina local variableof
+type <code class="Literal">sched_param</code>, and invokes              
+         <code class="Literal">copy_to_user(&nbsp; )</code> to copy it into
+the process address space at theaddress specified by the                
+       <code class="Literal">param</code> parameter.</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <p class="Body">The <code class="Literal">sched_setparam(&nbsp;
+)</code> system call is similarto <code class="Literal">sched_setscheduler(&nbsp;
+)</code>: it differs from thelatter by not letting the caller set the <code class="Literal">
+policy</code>&nbsp; field's value.<a href="#footnote-8" title="Footnote" class="footnote">
+[8]</a>&nbsp; The corresponding <code class="Literal">sys_sched_setparam(&nbsp;
+)</code> serviceroutine is almost identical to <code class="Literal">sys_sched_setscheduler(&nbsp;
+)</code>, but the policy of the affected process is never changed.</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <h4 class="HeadC">The sched_ yield(&nbsp; ) system
+call</h4>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <p class="Body">The <code class="Literal">sched_yield(&nbsp;
+)</code> system call allows a processto relinquish the CPU voluntarilywithout
+being suspended; the process remainsin a <code class="Literal">TASK_RUNNING</code>
+ state, but the scheduler putsit at the end of the runqueue list. In this
+way, other processes having thesame dynamic priority will have a chance to
+run. The call is used mainlyby <code class="Literal">SCHED_FIFO</code> processes.</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <p class="Body">The corresponding <code class="Literal">
+sys_sched_ yield(&nbsp; )</code> serviceroutine executes these statements:
+                        </p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; <pre><code class="Code">if (current-&gt;policy == SCHED_OTHER) </code>
+<code class="Code">    current-&gt;policy |= SCHED_YIELD; </code>
+<code class="Code">current-&gt;need_resched = 1; </code>
+<code class="Code">move_last_runqueue(current); </code>
+</pre>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <p class="Body">Notice that the <code class="Literal">
+SCHED_YIELD</code> field is set inthe <code class="Literal">policy</code>
+ field of the process descriptor onlyif the process is a conventional <code class="Literal">
+SCHED_OTHER</code>&nbsp; process. As a result, the next invocation of <code class="Literal">
+schedule(&nbsp; )</code> will view this process as one that has exhausted
+its time quantum(see how <code class="Literal">schedule(&nbsp; )</code> handles
+the <code class="Literal">SCHED_YIELD</code> field).</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <h4 class="HeadC">The sched_ get_priority_min(&nbsp;
+) and sched_ get_priority_max(&nbsp; ) system calls</h4>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <p class="Body">The <code class="Literal">sched_get_priority_min(&nbsp;
+)</code> and <code class="Literal">sched_get_priority_max(&nbsp; )</code>
+ system calls return, respectively, theminimum and the maximum real-timestatic
+priority value that can be usedwith the scheduling policy identifiedby the
+                        <code class="Literal">policy</code>&nbsp; parameter.</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <p class="Body">The <code class="Literal">sys_sched_get_priority_min(&nbsp;
+)</code> service routinereturns 1 if <code class="Literal">current</code>
+ is a real-time process,0 otherwise.</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <p class="Body">The <code class="Literal">sys_sched_get_priority_max(&nbsp;
+)</code> service routinereturns 99 (the highest priority) if <code class="Literal">
+current</code>&nbsp; is a real-time process, 0 otherwise.</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <h4 class="HeadC">The sched_rr_ get_interval(&nbsp;
+) system call</h4>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <p class="Body">The <code class="Literal">sched_rr_get_interval(&nbsp;
+)</code> system call shouldget the round robin time quantum for the named
+real-time process.</p>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;                         
+                        <p class="Body">The corresponding <code class="Literal">
+sys_sched_rr_get_interval(&nbsp; )</code>&nbsp; service routine does notoperate
+as expected, since it always returns a150-millisecond value in the      
+                 <code class="Literal">timespec</code> structurepointedto
+by <code class="Literal">tp</code>. This system call remains effectivelyunimplemented
+in Linux.</p>
+                        
+                        </body>
+                        </html>

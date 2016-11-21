@@ -1,0 +1,13 @@
+Manager and Customer Rights
+1. You have the right to an overall plan, to know what can be accom-plished,when, and at what cost.
+2. You have the right to get the most possible value out of every pro-gramming week.
+3. You have the right to see progress in a running system, proven to work by passing repeatable tests that you specify.
+4. You have the right to change your mind, to substitute functionality,and to change priorities without paying exorbitant costs.
+5. You have the right to be informed of schedule changes, in time to choose how to reduce scope to restore the original date. You can cancel at any time and be left with a useful working system reflect-ing investment to date.
+
+Programmer Rights
+1. You have the right to know what is needed, with clear declarations of priority.
+2. You have the right to produce quality work at all times.
+3. You have the right to ask for and receive help from peers, superiors,and customers.
+4. You have the right to make and update your own estimates.
+5. You have the right to accept your responsibilities instead of having them assigned to you.

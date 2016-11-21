@@ -1,0 +1,50 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>LinuxThreads</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>LinuxThreads</H1> 
+ <P><UL>
+<LI><H2>A true process sharing memory space with others
+</H2>
+</UL><UL>
+<LI><H2>Clone
+</H2>
+<UL>
+n threads, but n+2 process, "Linux needs only one clone" (Plan 9, R-Fork; SGI S-Proc)
+<BR></UL></UL><UL>
+<LI><H2>synchronization resource unfairness
+</H2>
+<UL>
+one thread may unlock then lock before scheduling, e.g. two printfs
+<BR><BR>forcing resource transference
+</UL></UL><UL>
+<LI><H2>singal dispatching problem
+</H2>
+<UL>
+If the signal is sent via kill() or the tty interface (e.g. by pressing ctrl-C), then the POSIX specs say that the handler is executed by any thread in the process that does not currently block the signal. 
+<BR><BR>The latter case is where LinuxThreads departs from the POSIX specs. In LinuxThreads, there is no real notion of ``the process as a whole'': in the kernel, each thread is really a distinct process with a distinct PID, and signals sent to the PID of a thread can only be handled by that thread. 
+</UL></UL><UL>
+<LI><H2>Expensive for context, switch, synchronization</H2>
+</UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld019.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld021.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld020.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

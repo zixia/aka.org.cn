@@ -1,0 +1,72 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>KDE编程: KDE(续)</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>KDE编程: KDE(续)</H1> 
+ <P><UL>
+MainWindow::MainWindow ( char * name ) : KTMainWindow ( name )
+<BR>{
+<BR>    QPopupMenu *filemenu = new QPopupMenu;
+<BR>    filemenu-&#062insertItem( i18n( "&Open" ), this, SLOT(fileOpen()) );
+<BR>    filemenu-&#062insertItem( i18n( "&Save" ), this, SLOT(fileSave()) );
+<BR>    filemenu-&#062insertItem( i18n( "&Quit" ), kapp, SLOT(quit()) );
+<BR>    QString about =
+<BR>            i18n("This is an Example.\n"
+<BR>                 "(c) 1999-2000 by Somebody.\n");
+<BR>    QPopupMenu *helpmenu = helpMenu( about );
+<BR>    KMenuBar *menu = new KMenuBar( this );
+<BR>    menu-&#062insertItem( i18n( "&File" ), filemenu );
+<BR>    menu-&#062insertSeparator();
+<BR>    menu-&#062insertItem( i18n( "&Help" ), helpmenu );
+<BR>    setMenu( menu );
+<BR>     QTextView *hello=new QTextView(
+<BR>       i18n("Hello World !"), "", this );
+<BR>    setView( hello );
+<BR> } 
+<BR> </UL></P>
+<P><UL>
+int main( int argc, char **argv )
+</UL><UL>
+{
+</UL><UL>
+    KApplication a( argc, argv, "example");
+</UL><UL>
+ 
+</UL><UL>
+    MainWindow *window=new MainWindow( "Example" );
+</UL><UL>
+    window-&#062resize( 400, 300 );
+</UL><UL>
+ 
+</UL><UL>
+    a.setMainWidget( window );
+</UL><UL>
+    window-&#062show();
+</UL><UL>
+ 
+</UL><UL>
+    return a.exec();
+</UL><UL>
+} </UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld040.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld042.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld041.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

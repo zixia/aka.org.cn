@@ -1,0 +1,493 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Aka 杂志</title>
+</head>
+
+<body bgcolor="#ffffff">
+<div align="center"><center>
+
+<table cellspacing="0" cellpadding="0" width="630" border="0">
+      <tr> 
+        <td bgcolor="#EEEDB7"> 
+          <h1 align="center">Extreme Programming FAQ</h1>
+          <div style='layout-grid:15.6pt'> 
+            <p align="center"><b>校对</b> <a href="http://qlw9.myetang.com/">钱五哥</a> 
+              [AKA]<b> <br>
+              译者</b> 喻海涛 郭宏杰 罗予晋[AKA]</p>
+            <div align="center">
+              <p><a href="index.html"><font size="2"><b>[返回]</b></font></a></p>
+              <p>&nbsp;</p>
+            </div>
+            <ul>
+              <li><a href="#intro">简介</a> 
+              <li><a href="#objections">反对意见</a> 
+              <li><a href="#learningmore">更多的资料</a> </li>
+            </ul>
+            <h2><a name=intro>Introduction</a><br>
+              简介 </h2>
+            <h3>What is Extreme Programming? Does it involve bungee cords?<br>
+              什么是极限编程（Extreme Programming）？它需要蹦级保险绳么?:-) </h3>
+            <p>　　Extreme Programming (or XP) is a set of values, principles and 
+              practices for rapidly developing high-quality software that provides 
+              the highest value for the customer in the fastest way possible. 
+              XP is extreme in the sense that it takes 12 well-known software 
+              development "best practices" to their logical extremes -- turning 
+              them all up to "10" (or "11" for Spinal Tap fans). See Kent Beck's 
+              introduction to Extreme Programming Explained for more details.<br>
+              极限编程（Extreme Programming，或简称XP）是一套能快速开发高质量软件所需的价值观、原则和活动的集合，使软件能以尽可能快的速度开发出来并向客户提供最高的效益。说XP是极限在于它将12个众所周知的软件开发的“最佳活动”都发挥到极限“10分”（或到“11分”对超级发烧友）。更详细的细节可参看Kent 
+              Beck的关于极限编程的介绍。 </p>
+            <h3>What does this have to do with <a 
+href="http://www.microsoft.com/windowsxp/">Windows XP</a>?<br>
+              它和Windows XP有什么关系？ </h3>
+            <p>Absolutely nothing. In February 2001, Microsoft announced that 
+              the next release of their consumer Windows operating system would 
+              be called "Windows XP". The use of "XP" as shorthand for Extreme 
+              Programming predates Microsoft's use of "XP" by 2-3 years.<br>
+              绝对无关。在2001年2月，微软宣布他们下一个要发布的Windows操作系统叫做“Windows XP”，用"XP"做为极限编程的缩写在2～3年前就预测了微软的"XP"用法。 
+            </p>
+            <h3>Is XP a methodology?<br>
+              XP是一种方法学么？ </h3>
+            <p>No and yes. No, it's not a methodology in the sense of a lot of 
+              paperwork and additional hoops for developers to jump through. But 
+              yes, in the sense that it is a repeatable process for developing 
+              software, it is in fact a methodology, although a lightweight one.<br>
+              可以说不是，也可以说是。说它不是一种方法学是因为开发者可以跳过许多纸面上的东西和附加的条条框框；说它是，是因为它对于开发软件来说是一种可重复的过程，它实际上也是一种方法学，但是属于“轻量级”的。 
+            </p>
+            <p><a href="http://members.aol.com/~acockburn">Alistair Cockburn</a>, 
+              who studies methodologies for a living, characterizes XP as a lightweight, 
+              low-ceremony, high-discipline methodology.<br>
+              <a href="http://members.aol.com/~acockburn">Alistair Cockburn</a>,一个研究方法学的学者，描述XP为轻量级的、不讲究繁文缛节的、高纪律性的方法学。 
+              <br>
+            </p>
+            <h3>Where did XP come from?<br>
+              XP起源于何处？ </h3>
+            <p>XP was originated by <a href="http://c2.com/ppr/about/author/kent.html">Kent 
+              Beck</a>, based on his years of practice as an O-O software developer, 
+              and in particular, his work with <a href="http://c2.com/cgi/wiki?WardCunningham">Ward 
+              Cunningham</a> using the Smalltalk programming language. Because 
+              Smalltalk was the first popular O-O language, Ward and Kent have 
+              been doing object-oriented programming longer than just about anyone 
+              else. <br>
+              XP最早是由Kent Beck提出来的，源于他多年的O-O实践，特别是他和Ward Cunningham一起使用Smalltalk语言进行开发的工作经验。因为Smalltalk是第一种流行的O-O语言，Ward和Kent比其他任何人都有更长的面向对象的编程经历。 
+            </p>
+            <h3>What are the basic practices of XP?<br>
+              XP的基本实践是什么？ </h3>
+            <p>The 12 core practices of XP are:<br>
+              12个XP的核心实践是： </p>
+            <ol>
+              <li><b>The Planning Game</b>: Business and development cooperate 
+                to produce the maximum business value as rapidly as possible. 
+                The planning game happens at various scales, but the basic rules 
+                are always the same: <br>
+                游戏策划：结合业务和开发以尽可能快地产生商业效益。游戏策划的范围各有不同，但基本原则都是一样的： 
+                <ol>
+                  <li>Business comes up with a list of desired features for the 
+                    system. Each feature is written out as a <b>User Story</b>, 
+                    which gives the feature a name, and describes in broad strokes 
+                    what is required. User stories are typically written on 4x6 
+                    cards. <br>
+                    业务提供了一张系统的期望特征表，把每个特征作为一个用户需求（User Story）记录下来,其中包括特征名和需求的各种提法。用户需求典型地是写在4x6的卡片上。 
+                  <li>Development estimates how much effort each story will take, 
+                    and how much effort the team can produce in a given time interval 
+                    (the iteration). <br>
+                    开发工作要估计每条需求所需要的工作量，以及开发团队在一个时间段（一次迭代）里能完成的工作量。 
+                  <li>Business then decides which stories to implement in what 
+                    order, as well as when and how often to produce a production 
+                    releases of the system. <br>
+                    然后企业就确定用何种顺序实现哪些用户需求，同时确定可发布的产品以的发布频度。 </li>
+                </ol>
+              <li><b>Small Releases</b>: Start with the smallest useful feature 
+                set. Release early and often, adding a few features each time. 
+                <br>
+                短时发布：以实现最小的可用特征集开始。尽早发布和更新，每次只增加少数几个新特征。 
+              <li><b>System Metaphor</b>: Each project has an organizing metaphor, 
+                which provides an easy to remember naming convention.<br>
+                系统绰号：每个项目有一个有规律的绰号，提供容易记住的命名规则。 
+              <li><b>Simple Design</b>: Always use the simplest possible design 
+                that gets the job done. The requirements will change tomorrow, 
+                so only do what's needed to meet today's requirements. <br>
+                简要设计：使用尽可能最简单的设计来完成工作。需求也许明天就会改变，因此我们所需的只是完成今天所遇到的需求。 
+              <li><b>Continuous Testing</b>: Before programmers add a feature, 
+                they write a test for it. When the suite runs, the job is done. 
+                Tests in XP come in two basic flavors. <br>
+                连续测试：在程序员增加一项特征前就完成测试程序。当整个系统能运行时，测试任务也就结束了。XP中的测试包括两种类型： 
+                <ol>
+                  <li><b>Unit Tests</b> are written by the developers to test 
+                    functionality as they write it. Each unit test typically tests 
+                    only a single class, or a small cluster of classes. <br>
+                    单元测试（Unit Tests）(代码)是开发者编写用来对他们所做的程序进行功能测试的。每个单元测试典型地只测试单个的类或很少几个类的组合。 
+                  <li><b>Acceptance Tests</b> (also known as <b>Functional Tests</b>) 
+                    are specified by the customer to test that the overall system 
+                    is functioning as specified. Acceptance tests typically test 
+                    the entire system, or some large chunk of it. When all the 
+                    acceptance tests pass for a given user story, that story is 
+                    considered complete. <br>
+                    验收测试(也被称为功能测试)是由客户指定来测试整个系统是否完成既定功能。验收测试通常测试整个系统，或系统中一些大的模块。当验收测试达到某条给定需求后，此需求就认为已经完成了。 
+                  </li>
+                </ol>
+              <li><b>Refactoring</b>: Refactor out any duplicate code generated 
+                in a coding session. You can do this with confidence that you 
+                didn't break anything because you have the tests. <br>
+                求精（Refactoring）：去掉在编码过程中产生的任何重复代码，你可以自信地认为这么做不会破坏任何东西，因为你还有测试作为后盾。 
+              <li><b>Pair Programming</b>: All production code is written by two 
+                programmers sitting at one machine. Essentially, all code is reviewed 
+                as it is written.<br>
+                编程对子：所有代码都是坐在同一台机器前的两个程序员共同编写的，因此所有代码在编写的同时就完成了复查工作。 
+              <li><b>Collective Code Ownership</b>: No single person "owns" a 
+                module. Any developer is expect to be able to work on any part 
+                of the codebase at any time. <br>
+                集体代码所有权：没有单独的一个人能“拥有”一个模块，所有开发者都能在任何时候针对代码库的任何部分进行工作。 
+              <li><b>Continuous Integration</b>: All changes are integrated into 
+                the codebase at least daily. The tests have to run 100% both before 
+                and after integration. <br>
+                连续整合：至少每天都将所有的改变整合到代码库中，在整合前后都要进行100%的测试。 
+              <li><b>40-Hour Work Week</b>: Programmers go home on time. In crunch 
+                mode, up to one week of overtime is allowed. But multiple consecutive 
+                weeks of overtime are treated as a sign that something is very 
+                wrong with the process. <br>
+                每周4干40小时：让开发人员按时回家。在特殊情况下，最多也只允许加班一周，但连续加班几周就是工作过程出了问题的迹象。 
+              <li><b>On-site Customer</b>: Development team has continuous access 
+                to a real live customer, that is, someone who will actually be 
+                using the system. For commercial software with lots of customers, 
+                a customer proxy (usually the product manager) is used instead. 
+                <br>
+                在位(on-site)客户：开发团队要经常和活生生的客户接触，即系统的实际用户。对于有很多客户的商业软件，可以用客户代理（经常就是产品经理）来代替。 
+              <li><b>Coding Standards</b>: Everyone codes to the same standards. 
+                Ideally, you shouldn't be able to tell by looking at it who on 
+                the team has touched a specific piece of code. <br>
+                编码标准：每个人都按相同的标准编写代码。理想情况下，你无法通过看代码的形式来说出是团队中的谁编写的。 </li>
+            </ol>
+            <h3>What does a typical extreme programming project look like?<br>
+              一个典型的极限开发项目是什么样的？ </h3>
+            <p>The first thing you'd notice is that all the programmers are in 
+              a room together, usually sitting around a large table in the middle 
+              of the room. The programmers may have desks or offices nearby, but 
+              you can tell by the piles of books are piled that the big table 
+              is where the action is.<br>
+              你注意到的第一件事是所有程序员都同在一间屋里，经常是围坐在房屋中间的一张大桌子边。程序员们也许在旁边也有桌子和办公室，但你可通过所堆起来的成堆的书来确定大桌子才是真正的活动场所。 
+            </p>
+            <p>XP teams work in a series of fixed iteration cycles. Iterations 
+              typically last 1, 2 or 3 weeks each depending on the team. (A given 
+              team will almost always use same the iteration size for every iteration.) 
+              <br>
+              XP团队按一系列固定的迭代周期进行工作，根据团队的不同一个迭代周期通常持续1～3星期。（给定团队通常在每个开发周期都用相同的时间） 
+            </p>
+            <p>At the beginning of each iteration, the team gets together with 
+              the customer for a planning meeting. In that meeting, they go over 
+              the features the customer wants done in that iteration, breaking 
+              each feature down into individual engineering tasks. Individual 
+              developers then sign up for specific tasks, and estimate those tasks. 
+              No developer is allowed to sign up for more work in the coming iteration 
+              than he completed in the previous iteration.<br>
+              在每个开发周期的开始，团队和客户一起开一个计划会议。在会上他们要核实客户希望在本周期内要完成的特性，将每个特性分割为单独的工程任务。然后每个开发人员登记承担特定的任务并估计这些任务的工作量。不允许开发人员在下一个周期中承担比他上一个周期中所能完成的更多的工作。 
+            </p>
+            <p>During the rest of the iteration, the team will implement the features 
+              they signed up for, pair programming on all production code. All 
+              code is written test-first -- that is, the developers don't write 
+              any code until they have a failing test case. The developers write 
+              unit tests to test individual classes and subsystems. The customer 
+              provides functional or acceptance tests to validate the features 
+              that the programmers are developing.<br>
+              在迭代周期的其他时间内，团队要实现他们所登记承担的任务，所有代码由编程对子一起完成。所有代码都是以测试第一（test-first）的原则来写的，也就是说开发者在程序没有出现测试失败之前不必修改代码。如果没有完成测试程序，开发人员就不能写功能代码。客户提供功能测试或验收测试来核实开发者所开发出来的特性。 
+            </p>
+            <p>At the end of the iteration (usually on a Friday), the programmers 
+              deliver a working system to the customer. The system may not be 
+              complete, but all functionality that is implemented works completely, 
+              without bugs. The customer accepts delivery, and the team goes home 
+              early. The next Monday everyone meets again to plan the next iteration, 
+              and the cycle repeats itself.<br>
+              在迭代周期结束时（通常是星期五），开发团队为客户提供一个可工作的系统。此系统可能不完整，但实现的所有功能都能完全无bug地工作，客户接受此版本后开发团队就可早回家休息。到了下星期一所有人重新聚集在一起策划下一个迭代周期的工作，如此重复循环。 
+            </p>
+            <p>Actual product release is almost a non-event. The customer takes 
+              delivered system from some iteration, and distributes it to the 
+              end users. The system is always very nearly defect-free, so the 
+              only question is when the developers have added enough functionality 
+              to make it worthwhile for the end users to upgrade.<br>
+              一次性发布产品几乎是不可能的。客户拿到经过一些迭代周期开发出的系统就发布给最终用户，这个系统通常几乎是没有缺陷的，因此唯一的问题是什么时候开发者才能增加足够的功能以值得最终用户去进行升级。 
+            </p>
+            <h3>How big a project will XP work with?<br>
+              XP可以完成多大的项目? </h3>
+            <p>Easily up to a dozen programmers. Up to twice that with some difficulty. 
+              Beyond that, you'll need something else, either augmenting XP with 
+              more traditional heavyweight practices, or splitting the project 
+              among two or more regular XP teams, with some teams becoming customers 
+              for other teams.<br>
+              很容易完成一个需要有12人的项目. 若要完成一个两倍大的项目就比较困难了。超过这些, 你就会需要一些别的东西, 或添加一些传统处理大任务型项目的实践, 
+              或把这个项目组分解到两个或两个以上XP 团队中, 让其中一些团队当另外一些团队的客户。 </p>
+            <h3><a name=xpvsuml>How does XP compare to UML?</a><br>
+              XP 与UML是什么关系? </h3>
+            <p>XP is a development process; <a href="http://www.rational.com/uml/">UML</a> 
+              is a design notation. Most XPers are fluent in UML, and periodically 
+              draw UML diagrams on marker boards to work out design issues. Most 
+              XP projects don't have reams of printed UML diagrams, although there 
+              may be a brief design overview document that contains a few simple 
+              diagrams to show canonical class relationships in the system.<br>
+              XP 是一个开发的过程; UML是一种设计符号。 大部分 XP 开发人员对 UML 很熟悉, 并且随时地在记事板上画一些UML 
+              图表以便能够想出更好的设计方案。尽管会有一些包含系统中主要类关系的简明概要设计文档，大多数 XP 项目并没有大量打印出来的 UML 
+              图表。 </p>
+            <h3><a name=xpvsrup>How does XP compare to RUP?</a><br>
+              XP 与RUP是什么关系? </h3>
+            <p>The <a href="http://www.rational.com/rup/index.jsp">Rational Unified 
+              Process</a>, or RUP, is a customizable "one size fits all process". 
+              It defines lots of roles, processes and documents, but essentially 
+              all of them are optional. <a href="http://c2.com/cgi/wiki?RobertCecilMartin">Robert 
+              C. Martin</a> has made a pretty good case that <a 
+href="http://www.objectmentor.com/publications/RUPvsXP.pdf">XP is in fact a minimal 
+              instance of RUP</a>.<br>
+              RUP（Rational Unified Process）,是一个可以定制的 "适合各种过程的统一尺度". 它定义了许多角色, 
+              过程和文档，但本质上它们都是可选的。 Robert C. Martin 曾经作一个很好的比喻：XP 实际上是RUP的一个最小实例。 
+            </p>
+            <h3><a name=xpvscmm>How does XP compare to CMM?</a><br>
+              XP 与CMM是什么关系? </h3>
+            <p>General consensus on the XP mailing list is that XP is close to 
+              the spirit of <a href="http://www.sei.cmu.edu/cmm/cmm.html">CMM</a>. 
+              However, real-world CMM practitioners tend to place a much higher 
+              emphasis on ceremonial meetings and paper documentation than XPers 
+              do, so it's unclear if an XP shop would receive a high CMM rating.<br>
+              关于XP 邮件列表的共识是XP 接近CMM精神. 然而，相对于XP开发人员而言，现实世界中的CMM 实践者更重视正式的会议和书面文档，所以很难说是否一个XP团队会得到一个高CMM级别。</p>
+            <h3><a name=yagni>What does YAGNI mean?</a><br>
+              YAGNI 是什么意思? </h3>
+            <p>"You aren't gonna need it," a general refrain when someone suggests 
+              building functionality for the system that isn't required by any 
+              current user story. For example:<br>
+              "你不会需要它," 这是当某人建议为系统增加当前任何用户都不想要的功能时得到的一个普遍答复。例如: </p>
+            <p>Programmer 1: "It says here we need to save the default number 
+              of widgets between sessions. I'd better write a generalized object 
+              persistence mechanism."<br>
+              程序员 1: "我们需要保存会话间缺省的窗口部件数目。我最好写一个通用的持久性对象机制。" </p>
+            <p>Programmer 2: "YAGNI. Just write out a one-line text file for now. 
+              If we need more later, we'll add it later."<br>
+              程序员 2: "YAGNI.现在写了一个单行的文本文件就行了。如果我们以后需要更多功能，那就以后再把它加上。" </p>
+            <h3><a name=dtsttcpw>What does ''Do the simplest thing that could 
+              possibly work.'' (DTSTTCPW) mean?</a><br>
+              "完成够用的、最简单的东西" (DTSTTCPW)什么意思? </h3>
+            <p>This is something an XP coach will say when he sees an XP developer 
+              doing something that is needlessly complicated. In general, XP says 
+              don't overdesign your system....<br>
+              这是当一个XP教练看到一个XP 开发员在干一些没有必要的复杂东西时。会说的话总而言之,一般来说， XP不会过分设计你的系统.... 
+            </p>
+            <h3><a name=simplest>How can you know one approach is simpler than 
+              another?</a><br>
+              你怎会知道一个方法比另一个方法简单? </h3>
+            <p></p>
+            <p>XP actually has a very specific definition of "simplest" (based 
+              on the list in Extreme Programming Explained, p.109):<br>
+              其实XP 有一个很明确的“最简单”的定义 (根据Extreme Programming p.109解释的条目): </p>
+            <ol>
+              <li>The system (code plus tests) clearly communicates everything 
+                that needs to be communicated at the current instant in its development. 
+                This means that it runs every existing test, and that the source 
+                code clearly reveals the <br>
+                系统 (代码加测试) 明确地传送任何在开发中当前时刻需要传送的信息。这意味着它运行着每一个已存在的测试，并且源代码对任何一个读代码的人清晰地显示出它背后所隐含的意思。 
+                intention behind it to anyone who reads it. <br>
+              <li>The system contains no duplicate code, unless that would violate 
+                (1). <br>
+                这个系统不包含重复的代码，否则就会违反 (1)。 
+              <li>The system contains the minimum number of classes possible without 
+                violating (1) or (2). <br>
+                这个系统包含尽可能少的类，并且同时不违背 (1) 或(2)。 
+              <li>The system contains the minimum number of methods possible, 
+                consistent with (1) (2) and (3). <br>
+                这个系统包含尽可能少的方法，并且同时不违背 (1) ，(2)和(3). </li>
+            </ol>
+            <h3><a name=oaoo>What does "Once and Only Once" (OAOO) mean?</a><br>
+              “一次并且仅仅一次” (OAOO) 什么意思? </h3>
+            <p>Once and only once is just shorthand for the first two items in 
+              the XP definition of "simplest". (1) says you need to say everything 
+              that needs to be said once. (2) says you need to say it only once, 
+              avoiding duplication.<br>
+              一次并且仅仅一次是XP中"最简单"定义中前两项的速记法。 (1) 该说的每样东西只说一遍。 (2) 该说的只说一遍，不要重复。 
+            </p>
+            <h3><a name=glossary>Where can I get a more complete glossary of XP 
+              terms?</a><br>
+              在什么地方可以得到更为完整的XP术语集? </h3>
+            <p>There's a fairly extensive XP glossary available at <a 
+href="http://c2.com/cgi/wiki?XpGlossary">http://c2.com/cgi/wiki?XpGlossary</a>. 
+              This is part of Ward Cunningham's amazing Wiki system.<br>
+              <a 
+href="http://c2.com/cgi/wiki?XpGlossary">http://c2.com/cgi/wiki?XpGlossary</a> 
+              有一个颇为广泛的XP术语集。这是Ward Cunningham 的惊人 Wiki 系统的一部分。 </p>
+            <h2><a name=objections>Common Objections</a><br>
+              反对意见 </h2>
+            <h3>Isn't XP just undisciplined "hacking" or "cowboy coding"?<br>
+              难道XP不就是没有纪律的"黑客"或"牛仔编码"? </h3>
+            <p>Don't let the lack of paperwork and meetings fool you. Unless you're 
+              at least a CMM level 3 shop, XP is likely more disciplined than 
+              the way you produce software today. Some examples of that discipline:<br>
+              不要让缺乏文档和会议来愚弄你。除非你已经达到了CMM 3级或更高级别,否则 XP 比起你现在生产软件的方法可能更讲纪律。下面是此纪律的几个例子: 
+            </p>
+            <ul>
+              <li>XPers won't write any functionality that doesn't fulfill a specific, 
+                explicit customer need. <br>
+                XP开发人员不会编程实现任何不满足一个特定的，直接的客户需求的功能。 
+              <li>XPers won't write any code without first writing a failing test 
+                <br>
+                如果没有完成测试程序，开发人员就不能写功能代码。
+              <li>XPers write all production code in pairs. <br>
+                XP开发人员两两组合来编写所有的代码。 
+              <li>XPers deliver a fully functional (albeit possibly feature limited) 
+                system at the end of each 1-3 week iteration. <br>
+                XP开发人员在每一个1~3周的循环时段结束时递交完全的功能（虽然特性有限）系统。 </li>
+            </ul>
+            <h3>Won't pair programming cut productivity in half?<br>
+              难道两两组合编程不会让生产率减半吗? </h3>
+            <p>It turns out that two programmers working as a pair are more than 
+              twice as productive as a single programmer working alone, and also 
+              produce higher quality code. The big gain is not, as you might think, 
+              in avoiding little syntax errors, but rather in avoiding the big 
+              picture errors -- the ones where you blow an entire afternoon barking 
+              up the wrong tree.<br>
+              事实证明两个程序员一起工作比单独工作的程序员生产力至少提高了一倍，并且产生了更高质量的代码。这个大的收获并不象你想象的那样在于避免句法错误，而是在于避免大错误-就像你苦干一下午，剥光了一棵树的皮，到头来却发现弄错了对象。 
+            </p>
+            <p><a href="http://collaboration.csc.ncsu.edu/laurie/">Laurie Williams</a> 
+              has done empirical studies of pair programming. Her work is summarized 
+              in the paper <a 
+href="http://members.aol.com/humansandt/papers/pairprogrammingcostbene/pairprogrammingcostbene.htm">The 
+              Costs and Benefits of Pair Programming</a>, which she co-wrote with 
+              <a 
+href="http://members.aol.com/~acockburn">Alistair Cockburn</a>. In this study, 
+              after only a few pairing sessions, pairs of programmers were roughly 
+              as twice as productive as solo programmers, yet produced substantially 
+              fewer defects.<br>
+              Laurie Williams 曾经做过关于编程对子的经验调研。她的工作在论文《编程对子的代价和收益》（The Costs and 
+              Benefits of Pair Programming）中得到总结，这篇论文是她与 Alistair Cockburn合写的. 
+              在这个研究中, 仅仅通过几次对子会议，程序员对子的工作效率大约就是单个工作程序员的两倍，尽管还会有几个代码错误。 </p>
+            <h3>With pair programming and collective code ownership, how are programmers 
+              supposed to be recognized and compensated?<br>
+              在编程对子和代码所有权归于集体的情况下，程序员们的工作是如何被认定和给于报酬的呢？ </h3>
+            <p>XP has collective <i>code</i> ownership, but individual <i>task</i> 
+              ownership. Each developer signs up for tasks at the beginning of 
+              each iteration. He is then responsible for completing those tasks 
+              by pairing with another developer. At the end of each iteration, 
+              the customer decides if the task is complete or not. After a year, 
+              you'll have a long list of completed tasks to show your manager.<br>
+              XP中代码所有权权是集体的，但是任务是个人的。每个开发人员在每次迭代的开始是承担某些任务。那么他就要与另一个开发人员搭档负责完成那些任务。在每次迭代的终点，客户来决定这项任务是否完成。一年后，你就可以把一个长长的完成的任务的清单给你的经理看。 
+            </p>
+            <h3>Isn't it annoying having someone looking over your shoulder while 
+              you program?<br>
+              当你编程的时候，总有人在你肩膀后面注视你是不是让人感到不自在？ </h3>
+            <p>Pair programming means two people working side-by-side on the same 
+              problem on the same computer; if someone is looking over your shoulder, 
+              you're doing it wrong. Typically, the person "driving" the keyboard 
+              and mouse will be focused primarily on tactical issues in coding 
+              the current method, while the non-driver will focus more on strategic 
+              issues, like how the method fits into the system, and is it needed 
+              at all in the first places. It's kind of like a road rally, where 
+              a driver and a navigator collaborate to get over a given course 
+              in the best time.<br>
+              双人编程意味着两个人坐在一起在一个计算机上解决同一个的问题；如果有人在你肩膀后面注视你，就说明工作方式有误。典型的情况是，通过键盘和鼠标直接进行编程的人首要考虑的是基于目前算法写代码的战术问题，而另一个则更加关心战略问题，即如何使算法适用于系统并在最初首先判定它的必要性。这很像公路汽车拉力赛，驾驶员和领航员在最短的时间内合作克服遇到的问题。 
+            </p>
+            <h3>Won't pair programming interfere with "flow", which requires solitude 
+              and silence?<br>
+              编程对子会不会干扰到"顺畅性"呢？它可是需要的孤独和安静的环境。 </h3>
+            <p>Pair programming appears to access another kind of flow, which 
+              is shared between the two people pairing. There's some talking, 
+              but not a lot of idle chitchat, and and it's easier to return to 
+              the state if someone interrupts you.<br>
+              看起来编程对子可以达到另一种形式的"顺畅性"。它由配对的两人共享。他们之间会有一些有益的而不是喋喋不休的闲聊，而且如果有人打断你们的话，应该更容易回到状态。 
+            </p>
+            <h3>How can you possibly test everything? Don't you get a combinatoric 
+              explosion?<br>
+              你如何能够测试所有的问题？你没有遇到组合爆炸吗？ </h3>
+            <p>It's true that computation theory pretty much proves you can't 
+              validate every possible state of a non-trivial system. However, 
+              in practice, an experience programmer can produce a pretty good 
+              set of tests that will result in a high degree of confidence that 
+              the system is working correctly.<br>
+              计算理论很好的证明了对一个非平凡系统你不可能核实它的所有的可能的状态。当然在实际中，一个有经验的程序员能够给出一个相当不错的测试集，通过测试的系统能够获得更高的正确运行的信任程度。 
+            </p>
+            <p>It's sort of like those probabilistic tests used to produce large 
+              prime numbers for public-key cryptography. You can't tell for certain 
+              that a number is prime without trying to factor it, but you can 
+              apply a number of simpler tests that will verify its primeness to 
+              any degree of certainty that you want.<br>
+              这类似于那些用来为公开密匙系统产生大质数的概率测试。你不能没有试着分解某个数就肯定地说这个数是质数，但是你可以使用大量的简单测试在某种你需要的程度上确认它是质数。 
+            </p>
+            <h3>Won't simple design leave you with a program that won't scale 
+              well?<br>
+              难道简单设计不会使你的程序不能很好地扩展吗？ </h3>
+            <p>Simple design, practiced alone typically would have this result. 
+              But XP says that after you do the simplest thing that could possibly 
+              work, you go back and refactor your code until everything your code 
+              needs to express appears <a 
+href="http://www.jera.com/techinfo/xpfaq.html#oaoo">once and only once</a> within 
+              the code base.<br>
+              只使用简单设计通常确实会产生这种结果。但是XP说的是，在你的作了最简单的能够工作的东西后，你回去求精你的代码直到你的代码所要表达的所有事情在你的代码库中出现且只出现一次。 
+            </p>
+            <h3>Won't <a href="http://www.jera.com/techinfo/xpfaq.html#yagni">YAGNI</a> 
+              lead you to design dead-ends down the road?<br>
+              难道YAGNI不会引导你沿着没有出路的设计道路走下去吗？ </h3>
+            <p>General experience in the XP community is an unqualified "no". 
+              At the very worst, it may happen, but so rarely that your wins from 
+              all the other YAGNIs will more than pay for having to backtrack 
+              once in a while.<br>
+              XP社会的普遍经验认为这绝对不可能。虽然在最坏情况下，这是可能的，但你从所有其它的YAGNI那里赢来的价值很少会超过你为偶尔的倒退所做的付出。 
+            </p>
+            <h3>I don't think I [want to do/can sell my bosses on doing] all of 
+              the practices. Can I leave some out and still be doing XP?<br>
+              我觉得我没法[实施或者能让我老板接受]做所有XP实践。我能只做其中一些而仍被称为是XP吗？</h3>
+            <p>Many of the practices work well in isolation, so it's quite possible 
+              you'd be better off using the ones you feel like than none at all. 
+              However there's a synergistic effect to using all of them together 
+              that you'll be missing out on. As a result, a lot of people in the 
+              XP community feel strongly that if you're not using all 12 practices, 
+              you're not doing XP.<br>
+              大部分实践都能够独自的很好的工作，所以你使用其中一些肯定会比什么都不用会使你有更好的境况。然而，将所有的实践配合在一起使用会有更好的效果。XP社会的许多人强烈认为如果你没有用到所有的12个实践，你就不是在做XP。 
+            </p>
+            <p>As a practical matter, there's currently no XP certification authority. 
+              You can do whatever you want, and no XP Gestapo is going to kick 
+              in your door. But if you're not using all 12 practices, you probably 
+              could be going faster.<br>
+              一个实际的情况是目前没有一个XP的权威认证。你可以随便做你想做的，没有XP的盖世太保来敲你的门。但是如果你没有使用所有的12个实践，你可能会走得更快。 
+            </p>
+            <h2><a name=learningmore>Learning More</a><br>
+              更多的资料 </h2>
+            <h3>Where can I learn more about XP?<br>
+              在哪儿我能学到更多的XP的知识？ </h3>
+            <p>The best place to start is currently Kent Beck's book "Extreme 
+              Programming Explained: Embracing Change", (available from <a 
+href="http://www.amazon.com/exec/obidos/ASIN/0201616416">Amazon.com</a> among 
+              other places). This book is essentially the definitive guide to 
+              XP at the moment, and a fairly quick read.<br>
+              目前最好的起点是Kent Beck的书：《Extreme Programming Explained: Embracing Change》（可以从Amazon.com或其他地方获得。）这本书是现在权威的XP指南，也是一本很容易读的书。 
+            </p>
+            <p>Once you have an overview of XP, visit Ward Cunningham's <a 
+href="http://c2.com/ppr/wiki/RecentChanges/WikiWikiWeb.html">Wiki Wiki Web</a> 
+              (or Wiki for short). Wiki is a simple, yet powerful hypertext system. 
+              Anyone can add or modify any page on Wiki, so the system collects 
+              the knowledge of thousands of people into a (semi) coherent whole. 
+              Started as a system for cataloging Design Patterns, Wiki has grown 
+              to include literally hundreds of pages related to XP. A good starting 
+              point is <a 
+href="http://c2.com/cgi/wiki?ExtremeProgrammingRoadmap">http://c2.com/cgi/wiki?ExtremeProgrammingRoadmap</a>.<br>
+              一旦你有了一个XP的总体概念，请访问Ward Cunningham的<a 
+href="http://c2.com/ppr/wiki/RecentChanges/WikiWikiWeb.html">Wiki Wiki Web</a>（简称 
+              Wiki）。Wiki是一个简单的但功能强大的超文本系统。任何人能增加或修改它上面的任何页面。这样，该系统集中了数千人的知识于一个（半）连贯的整体之中。从一个设计模式的目录系统，Wiki已经成长为包含了数百页XP相关页面的系统。可以从这里开始： 
+              <a 
+href="http://c2.com/cgi/wiki?ExtremeProgrammingRoadmap">http://c2.com/cgi/wiki?ExtremeProgrammingRoadmap</a>. 
+            </p>
+            <p>There's also a lively XP mailing list on Yahoo Groups (formerly 
+              eGroups). To subscribe, send a blank email to <a 
+href="mailto:extremeprogramming-subscribe@yahoogroups.com">extremeprogramming-subscribe@yahoogroups.com</a>. 
+              Or see the archives on the web at <a 
+href="http://groups.yahoo.com/group/extremeprogramming">http://groups.yahoo.com/group/extremeprogramming</a>. 
+              <br>
+              在Yahoo讨论组（正式的提法是eGroups）中也有一个活跃的XP邮件列表。向 <a 
+href="mailto:extremeprogramming-subscribe@yahoogroups.com">extremeprogramming-subscribe@yahoogroups.com</a> 
+              发内容为空的邮件就可以登记参加。或者访问其文档库，链接是：<a 
+href="http://groups.yahoo.com/group/extremeprogramming">http://groups.yahoo.com/group/extremeprogramming</a>。 
+            </p>
+            <hr>
+            <p>XP FAQ &copy; 2001 John Brewer</p>
+            <p>Send updates &amp; suggestions to <a 
+href="mailto:xpfaq@jera.com">xpfaq@jera.com</a></p>
+            <p align="center"><a href="index.html"><font size="2"><b>[返回]</b></font></a></p>
+          </div>
+        </td>
+  </tr>
+</table>
+</center></div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>从头写一个控件</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>从头写一个控件</H1> 
+ <P><UL>
+<LI><H2>头文件，宏定义
+</H2>
+</UL><UL>
+<LI><H2>_get_type()函数
+</H2>
+<UL>
+<LI>struct _GtkTypeInfo
+<LI>{  gchar *type_name;
+<LI>  guint object_size;
+<LI>  guint class_size;
+<LI>  GtkClassInitFunc class_init_func;
+<LI>  GtkObjectInitFunc object_init_func;
+<LI>  GtkArgSetFunc arg_set_func;
+<LI>  GtkArgGetFunc arg_get_func;
+<LI>};
+</UL></UL><UL>
+<LI><H2>_class_init()函数
+</H2>
+<UL>
+<LI>gint gtk_signal_new( const gchar         *name,
+<LI>                     GtkSignalRunType     run_type,
+<LI>                     GtkType              object_type,
+<LI>                     gint                 function_offset,
+<LI>                     GtkSignalMarshaller  marshaller,
+<LI>                     GtkType              return_val,
+<LI>                     guint                nparams,
+<LI>                     ...);
+</UL></UL><UL>
+<LI><H2>_init()函数, _new()函数</H2>
+</UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld028.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld030.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld029.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

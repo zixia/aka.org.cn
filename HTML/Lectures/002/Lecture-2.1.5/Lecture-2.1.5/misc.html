@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>其他文件系统或 I/O 相关主题</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        PRE { color: #ffffff; font-family: "fixed" }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="velvet.jpg">
+
+<A HREF="advio.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=CENTER>5.6&nbsp;&nbsp;其他文件系统或 I/O 相关主题<BR><BR>
+</H1>
+
+<UL>
+    <LI><P>系统数据文件</LI>
+    <LI><P>登录记帐</LI>
+    <LI><P>系统标识</LI>
+    <LI><P>时间和日期</LI>
+</UL>
+
+<H3>5.6.1&nbsp;&nbsp;系统数据文件</H3>
+<UL>
+    <LI>口令文件: /etc/passwd</LI>
+<PRE>
+===============================================================================
+    * 要获取口令文件的单个条目信息, 可利用 getpwuid 和 getpwnam, 分别以用户 ID 和
+      用户名作为参数, 这两个函数均返回 struct passwd 结构指针, 该结构的成员与 
+      /etc/passwd 文件的字段一一对应.
+    * 要遍历口令文件, 可利用 setpwent, getpwent, endpwent 函数组.
+    * getpwent 每次调用时返回下一个条目.
+===============================================================================
+</PRE>
+
+    <LI>组文件: /etc/group: getgrgid, getpwnam; setgrent, getgrent, endgrent.</LI>
+    <LI>辅助组 ID: getgroups, setgroups, initgroups</LI>
+</UL>
+
+<H3>5.6.2&nbsp;&nbsp;登录记帐</H3>
+<UL>
+    <LI>/var/log/utmp: 当前登录的所有用户</LI>
+    <LI>/var/log/wtmp: 所有的登录和注销日志</LI>
+</UL>
+
+<H3>5.6.3&nbsp;&nbsp;系统标识</H3>
+<UL>
+    <LI>uname</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;sys/utsname.h&gt;
+
+       int uname (struct utsname *buf);
+-------------------------------------------------------------------------------
+       struct utsname {
+              char sysname[SYS_NMLN];
+              char nodename[SYS_NMLN];
+              char release[SYS_NMLN];
+              char version[SYS_NMLN];
+              char machine[SYS_NMLN];
+              char domainname[SYS_NMLN];
+       };
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>5.6.4&nbsp;&nbsp;时间和日期</H3>
+<UL>
+    <LI>time</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;time.h&gt;
+
+       time_t time(time_t *t);
+-------------------------------------------------------------------------------
+    * time 返回日历时间, 即 1970 年 1 月 1 日 0:00:00 (UTC) 开始的秒数, 称为 Epoch.
+===============================================================================
+</PRE>
+
+    <LI>日历时间到分解时间的转换: gmtime, localtime</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;time.h&gt;
+
+       struct tm *gmtime (const time_t *timep);
+       struct tm *localtime (const time_t *timep);
+-------------------------------------------------------------------------------
+              struct tm
+              {
+                  int tm_sec;         /* seconds  [0, 61]*/
+                  int tm_min;         /* minutes [0, 59]*/
+                  int tm_hour;        /* hours [0, 23]*/
+                  int tm_mday;        /* day of the month [1, 31]*/
+                  int tm_mon;         /* month [0, 11]*/
+                  int tm_year;        /* years since 1900*/
+                  int tm_wday;        /* day of the week [0, 6]*/
+                  int tm_yday;        /* day in the year [0, 365]*/
+                  int tm_isdst;       /* daylight saving time */
+              };
+-------------------------------------------------------------------------------
+    * gmtime 不转换为本地时间, 即忽略系统的时区设置.
+    * localtime 转换为本地时间, 包括时区和夏时制.
+===============================================================================
+</PRE>
+
+    <LI>分解时间到日历时间的转换: mktime</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;time.h&gt;
+
+       time_t mktime(struct tm *timeptr);
+-------------------------------------------------------------------------------
+    * 受 TZ 和 LC_TIME 的影响
+===============================================================================
+</PRE>
+
+    <LI>生成可读时间字符串: asctime, ctime</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;time.h&gt;
+
+       char *asctime(const struct tm *timeptr);
+       char *ctime(const time_t *timep);
+-------------------------------------------------------------------------------
+    * asctime 的参数是分解时间
+    * ctime 的参数是日历时间
+    * ctime 受 TZ 和 LC_TIME 的影响
+===============================================================================
+</PRE>
+
+    <LI>格式化时间: strftime</LI>
+
+<PRE>
+===============================================================================
+       #include &lt;time.h&gt;
+
+       size_t strftime (char *s, size_t max, const char *format,
+                           const struct tm *tm);
+-------------------------------------------------------------------------------
+    * format 指定格式信息
+    * 有将近 50 个格式化字符, 包括: %a (简写星期), %B (完整月份名称) 等等.
+-------------------------------------------------------------------------------
+
+===============================================================================
+</PRE>
+
+</UL>
+
+<P>
+<BR><BR>
+</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="advio.html"><IMG SRC="prev.gif" ALT="Previous"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+</BODY>
+</HTML>
+

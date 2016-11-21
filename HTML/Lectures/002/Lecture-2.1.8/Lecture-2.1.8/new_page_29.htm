@@ -1,0 +1,134 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>获取/设置参数</title>
+<meta name="Microsoft Theme" content="blank 001, default">
+<meta name="Microsoft Border" content="tl, default">
+</head>
+
+<body background="_themes/blank/blbkgnd.gif" bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/new_page_29.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="获取/设置参数"></strong></font><br>
+<a href="index.htm"><img src="_derived/home_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="主页" align="middle"></a> <a href="new_page_6.htm"><img src="_derived/up_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="上一层" align="middle"></a> <a href="new_page_28.htm"><img src="_derived/new_page_28.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="转换函数" align="middle"></a> <a href="new_page_31.htm"><img src="_derived/new_page_31.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="网络连接函数" align="middle"></a> <img src="_derived/new_page_29.htm_cmp_blank000_hbtn_p.gif" width="140" height="32" border="0" alt="获取/设置参数" align="middle"></p>
+<p align="center">　</p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<p><font size="6">取得本地主机名：</font></p>
+<font size="+2">
+<blockquote>
+  <p>int gethostname(char *hostname, size_t size);</p>
+  <p>获得主机名存到hostname中。</p>
+  <p>&nbsp;</p>
+</blockquote>
+<p></font></p>
+<p><font size="6">取得本地的信息：</font></p>
+<font size="+2">
+<blockquote>
+  <p>int getsockname(int sockfd, struct sockaddr *addr, int *addrlen);</p>
+  <p>addr存有返回的主机信息。</p>
+  <p>示例：</p>
+  <blockquote>
+    <p>struct sockaddr_in sa;</p>
+    <p>int len = sizeof(sa);</p>
+    <p>getpeername(sockfd, (struct sockaddr *)&amp;sa, &amp;len);</p>
+    <p>printf(&quot;本地IP：%s&quot;, inet_ntoa(sa.sin_addr));</p>
+    <p>&nbsp;</p>
+  </blockquote>
+</blockquote>
+<p>　</p>
+</font>
+<p><font size="6">取得对方主机的信息：</font></p>
+<font size="+2">
+<blockquote>
+  <p>int getpeername(int sockfd, struct sockaddr *addr, int *addrlen);</p>
+  <p>addr存有返回的主机信息。</p>
+  <p>示例：</p>
+  <blockquote>
+    <p>struct sockaddr_in sa;</p>
+    <p>int len = sizeof(sa);</p>
+    <p>getpeername(sockfd, (struct sockaddr *)&amp;sa, &amp;len);</p>
+    <p>printf(&quot;对方IP：%s&quot;, inet_ntoa(sa.sin_addr));</p>
+    <p>&nbsp;</p>
+  </blockquote>
+</blockquote>
+<p></p>
+</font>
+<p><font size="6">获得DNS信息：</font></p>
+<font size="+2">
+<blockquote>
+  <p>struct hostent *gethostbyname(const char *name);</p>
+  <p>struct hostent *gethostbyaddr(const char *addr, int len, int type);</p>
+  <p>返回了一个指向struct hostent的指针，struct hostent定义如下：</p>
+  <blockquote>
+    <p>struct hostent {</p>
+    <blockquote>
+      <p>char *h_name; /* official name of host */</p>
+      <p>char **h_aliases; /* alias list */</p>
+      <p>int h_addrtype; /* host address type */</p>
+      <p>int h_length; /* length of address */</p>
+      <p>char **h_addr_list; /* list of addresses */</p>
+    </blockquote>
+    <p>};</p>
+    <p>#define h_addr h_addr_list[0] /* for backward compatibility */</p>
+  </blockquote>
+  <p>对于如何获得DNS信息，将在后面的程序片断中详细讲解。</p>
+  <p>DNS操作时的错误处理与普通程序不同，gethostbyname通过设置h_errno代表出错号，对应的错误函数有hstrerror()和herror()，分别对应于strerror()和perror()这两个普通的错误函数。</p>
+</blockquote>
+<p></font></p>
+<p><font size="6">获得或改变socket属性</font></p>
+<font size="+2">
+<blockquote>
+  <p>int getsockopt(int sockfd, int level, int name, char *value, int *optlen);</p>
+  <p>int setsockopt(int sockfd, int level, int name, char *value, int *optlen);</p>
+  <blockquote>
+    <p>对于socket编程，level一般为常数SOL_SOCKET</p>
+    <p>name属性类型，value属性参数，optlen属性内存块的长度</p>
+    <p>常用的有：</p>
+    <p>SO_RCVTIMEO，SO_SNDTIMEO：获得或设置socket发送/接收的timeout。</p>
+    <p>SO_SNDBUF，SO_RCVBUF：获得或设置socket发送/接收的buffer大小。</p>
+    <p>SO_BROADCAST：获得或设置socket状况，使之可以广播发送数据报。（只能用于UDP方式）。</p>
+    <p>SO_REUSEADDR：设置该socket绑定的端口可以被重用。</p>
+    <p><font color="#FF0000">注意：在Linux系统中，如果一个socket绑定了某个端口，该socket正常关闭或程序退出后，在一段时间内该端口依然保持被绑定的状态，其他程序（或者重新启动的原程序）无法绑定该端口。可以通过调用以下语句避免该问题：</font></p>
+    <blockquote>
+      <p><font color="#FF0000">opt = 1;<br>
+      len = sizeof(opt);<br>
+      setsockopt(sockfd,SOL_SOCKET,SO_REUSEADDR,&amp;opt,&amp;len);</font></p>
+      <p>&nbsp;</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p></font></p>
+<p><font size="6"><a name="ioctl"></a>获得或改变socket的I/O属性：</font></p>
+<font size="+2">
+<blockquote>
+  <p>int ioctl(int sockfd,long cmd,unsigned long* argp);</p>
+  <blockquote>
+    <p>cmd属性类型，argp属性的参数。</p>
+    <p>常用的有：</p>
+    <p>FIONREAD，返回socket缓冲区中未读数据的字节数</p>
+    <p>FIONBIO，argp为零时为阻塞模式，非零时为非阻塞模式</p>
+    <p>SIOCATMARK ，判断是否有未读的带外数据（仅用于TCP协议），返回true或false</p>
+  </blockquote>
+  <p>　</p>
+  <p>int fcntl(int fd, int cmd, long arg);</p>
+  <blockquote>
+    <p>F_SETFL，arp为O_NONBLOCK时进入非阻塞模式，为0时进入阻塞模式。</p>
+    <p>F_GETFL，获得属性。</p>
+  </blockquote>
+</blockquote>
+<p>&nbsp;</p>
+</font>
+<p>　</p>
+　
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+</html>

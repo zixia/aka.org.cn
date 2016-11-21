@@ -1,0 +1,692 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=GB2312">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./程序的加载.files/filelist.xml">
+<title>可执行格式</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>何碧筠</o:Author>
+  <o:LastAuthor>何碧筠</o:LastAuthor>
+  <o:Revision>4</o:Revision>
+  <o:TotalTime>19</o:TotalTime>
+  <o:Created>2000-12-12T16:50:00Z</o:Created>
+  <o:LastSaved>2000-12-13T06:21:00Z</o:LastSaved>
+  <o:Pages>2</o:Pages>
+  <o:Words>308</o:Words>
+  <o:Characters>1759</o:Characters>
+  <o:Company>清华大学</o:Company>
+  <o:Lines>14</o:Lines>
+  <o:Paragraphs>3</o:Paragraphs>
+  <o:CharactersWithSpaces>2160</o:CharactersWithSpaces>
+  <o:Version>9.2812</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:PunctuationKerning/>
+  <w:DrawingGridVerticalSpacing>7.8 磅</w:DrawingGridVerticalSpacing>
+  <w:DisplayHorizontalDrawingGridEvery>0</w:DisplayHorizontalDrawingGridEvery>
+  <w:DisplayVerticalDrawingGridEvery>2</w:DisplayVerticalDrawingGridEvery>
+  <w:Compatibility>
+   <w:SpaceForUL/>
+   <w:BalanceSingleByteDoubleByteWidth/>
+   <w:DoNotLeaveBackslashAlone/>
+   <w:ULTrailSpace/>
+   <w:DoNotExpandShiftReturn/>
+   <w:AdjustLineHeightInTable/>
+   <w:UseFELayout/>
+  </w:Compatibility>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:宋体;
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-alt:SimSun;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 135135232 16 0 262145 0;}
+@font-face
+	{font-family:黑体;
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-alt:SimHei;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:1 135135232 16 0 262144 0;}
+@font-face
+	{font-family:"\@黑体";
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:1 135135232 16 0 262144 0;}
+@font-face
+	{font-family:"\@宋体";
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:1 135135232 16 0 262144 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	mso-pagination:none;
+	font-size:10.5pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:宋体;
+	mso-font-kerning:1.0pt;}
+h1
+	{mso-style-next:正文;
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:12.0pt;
+	margin-left:0cm;
+	text-align:center;
+	text-indent:0cm;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	mso-list:l0 level1 lfo2;
+	font-size:22.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-font-kerning:22.0pt;
+	mso-bidi-font-weight:normal;}
+h2
+	{mso-style-next:正文（首行缩进两字）;
+	margin-top:13.0pt;
+	margin-right:0cm;
+	margin-bottom:13.0pt;
+	margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	text-indent:0cm;
+	line-height:172%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	mso-list:l0 level2 lfo2;
+	font-size:16.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:黑体;
+	mso-bidi-font-family:"Times New Roman";
+	mso-font-kerning:1.0pt;
+	mso-bidi-font-weight:normal;}
+h3
+	{mso-style-next:正文（首行缩进两字）;
+	margin-top:6.0pt;
+	margin-right:0cm;
+	margin-bottom:6.0pt;
+	margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	text-indent:0cm;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	mso-list:l0 level3 lfo2;
+	font-size:14.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-font-kerning:1.0pt;
+	mso-bidi-font-weight:normal;}
+h4
+	{mso-style-next:正文（首行缩进两字）;
+	margin-top:6.0pt;
+	margin-right:0cm;
+	margin-bottom:6.0pt;
+	margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	text-indent:0cm;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:4;
+	mso-list:l0 level4 lfo2;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:黑体;
+	mso-bidi-font-family:"Times New Roman";
+	mso-font-kerning:1.0pt;
+	mso-bidi-font-weight:normal;}
+h5
+	{mso-style-next:正文（首行缩进两字）;
+	margin-top:14.0pt;
+	margin-right:0cm;
+	margin-bottom:14.5pt;
+	margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	text-indent:0cm;
+	line-height:155%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:5;
+	mso-list:l0 level5 lfo2;
+	font-size:14.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-font-kerning:1.0pt;
+	mso-bidi-font-weight:normal;}
+h6
+	{mso-style-next:正文（首行缩进两字）;
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.2pt;
+	margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	text-indent:0cm;
+	line-height:132%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:6;
+	mso-list:l0 level6 lfo2;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:黑体;
+	mso-bidi-font-family:"Times New Roman";
+	mso-font-kerning:1.0pt;
+	mso-bidi-font-weight:normal;}
+p.MsoHeading7, li.MsoHeading7, div.MsoHeading7
+	{mso-style-next:正文（首行缩进两字）;
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.2pt;
+	margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	text-indent:0cm;
+	line-height:132%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:7;
+	mso-list:l0 level7 lfo2;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:宋体;
+	mso-font-kerning:1.0pt;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+p.MsoHeading8, li.MsoHeading8, div.MsoHeading8
+	{mso-style-next:正文（首行缩进两字）;
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.2pt;
+	margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	text-indent:0cm;
+	line-height:132%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:8;
+	mso-list:l0 level8 lfo2;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:黑体;
+	mso-bidi-font-family:"Times New Roman";
+	mso-font-kerning:1.0pt;}
+p.MsoHeading9, li.MsoHeading9, div.MsoHeading9
+	{mso-style-next:正文（首行缩进两字）;
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.2pt;
+	margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	text-indent:0cm;
+	line-height:132%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:9;
+	mso-list:l0 level9 lfo2;
+	font-size:10.5pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:黑体;
+	mso-bidi-font-family:"Times New Roman";
+	mso-font-kerning:1.0pt;}
+p.MsoNormalIndent, li.MsoNormalIndent, div.MsoNormalIndent
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	text-indent:21.0pt;
+	mso-pagination:none;
+	font-size:10.5pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:宋体;
+	mso-font-kerning:1.0pt;}
+ /* Page Definitions */
+@page
+	{mso-page-border-surround-header:no;
+	mso-page-border-surround-footer:no;}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:42.55pt;
+	mso-footer-margin:49.6pt;
+	mso-paper-source:0;
+	layout-grid:15.6pt;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+@list l0
+	{mso-list-id:774327653;
+	mso-list-template-ids:-242946596;}
+@list l0:level1
+	{mso-level-number-format:none;
+	mso-level-style-link:"标题 1";
+	mso-level-suffix:none;
+	mso-level-text:"";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	margin-left:0cm;
+	text-indent:0cm;}
+@list l0:level2
+	{mso-level-number-format:none;
+	mso-level-style-link:"标题 2";
+	mso-level-suffix:none;
+	mso-level-text:"";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	margin-left:0cm;
+	text-indent:0cm;}
+@list l0:level3
+	{mso-level-number-format:none;
+	mso-level-style-link:"标题 3";
+	mso-level-suffix:none;
+	mso-level-text:"";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	margin-left:0cm;
+	text-indent:0cm;}
+@list l0:level4
+	{mso-level-number-format:none;
+	mso-level-style-link:"标题 4";
+	mso-level-suffix:none;
+	mso-level-text:"";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	margin-left:0cm;
+	text-indent:0cm;}
+@list l0:level5
+	{mso-level-number-format:none;
+	mso-level-style-link:"标题 5";
+	mso-level-suffix:none;
+	mso-level-text:"";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	margin-left:0cm;
+	text-indent:0cm;}
+@list l0:level6
+	{mso-level-number-format:none;
+	mso-level-style-link:"标题 6";
+	mso-level-suffix:none;
+	mso-level-text:"";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	margin-left:0cm;
+	text-indent:0cm;}
+@list l0:level7
+	{mso-level-number-format:none;
+	mso-level-style-link:"标题 7";
+	mso-level-suffix:none;
+	mso-level-text:"";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	margin-left:0cm;
+	text-indent:0cm;}
+@list l0:level8
+	{mso-level-number-format:none;
+	mso-level-style-link:"标题 8";
+	mso-level-suffix:none;
+	mso-level-text:"";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	margin-left:0cm;
+	text-indent:0cm;}
+@list l0:level9
+	{mso-level-number-format:none;
+	mso-level-style-link:"标题 9";
+	mso-level-suffix:none;
+	mso-level-text:"";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	margin-left:0cm;
+	text-indent:0cm;}
+ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+</head>
+
+<body lang=ZH-CN style='tab-interval:21.0pt;text-justify-trim:punctuation'>
+
+<div class=Section1 style='layout-grid:15.6pt'>
+
+<h2 style='margin-left:0cm;text-indent:0cm'><span style='font-family:黑体;
+mso-ascii-font-family:Arial'>程序的加载：可执行链接格式</span><span lang=EN-US>ELF</span></h2>
+
+<p class=MsoNormalIndent><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>不是所有程序都使用相同的文件格式存储，</span><span
+lang=EN-US>Linux</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>使用二进制处理程序把它们之间的区别掩盖掉了。</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US>Linux</span><span style='font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>当前</span><span
+lang=EN-US>&quot;</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>本地的</span><span lang=EN-US>&quot;</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>可执行格式（如果</span><span lang=EN-US>&quot;</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>本地</span><span lang=EN-US>&quot;</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>在系统中可以给各种格式提供良好支持）是可执行链接格式（</span><span lang=EN-US>ELF</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>）。</span></p>
+
+<p class=MsoNormalIndent><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>二进制处理程序通过某种内嵌在文件开头的</span><span
+lang=EN-US>&quot;magic</span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>序列</span><span
+lang=EN-US>&quot;</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>（一个特殊字节序列）来识别文件，有时也会通过文件名的一些特性。例如，你会看到的</span><span
+lang=EN-US>Java</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>处理程序可以保证文件名以</span><span lang=EN-US>.class</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>结尾并且前四个字节是（以十六进制）</span><span lang=EN-US>0xcafebabe</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>，这是</span><span lang=EN-US>Java</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>标准所定义的。</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US>@ ./arch/i386/kernel<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US>/*</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US><span style="mso-spacerun:
+yes">&nbsp;</span>* sys_execve() executes a new program.</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US><span style="mso-spacerun:
+yes">&nbsp;</span>*/</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US>asmlinkage int sys_execve(struct
+pt_regs regs)</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US>{</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>int
+error;</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>char
+* filename;</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>lock_kernel();</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>filename
+= getname((char *) regs.ebx);</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>error
+= PTR_ERR(filename);</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>if
+(IS_ERR(filename))</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>goto
+out;</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>error
+= do_execve(filename, (char **) regs.ecx, (char **) regs.edx, &amp;regs);</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>if
+(error == 0)</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>current-&gt;flags
+&amp;= ~PF_DTRACE;</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>putname(filename);</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US>out:</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>unlock_kernel();</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>return
+error;</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US>}</span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormalIndent><span lang=EN-US>do_execve(...) @ ./fs/exec.c </span></p>
+
+<p class=MsoNormalIndent><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>实际是通过系统调用</span><span
+lang=EN-US>sys_execve </span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>，修改</span><span
+lang=EN-US>current</span><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>的值，生成新进程。</span></p>
+
+<h2 style='margin-left:0cm;text-indent:0cm'><span style='font-family:黑体;
+mso-ascii-font-family:Arial'>一个例子：</span><span lang=EN-US>Java</span><span
+style='font-family:黑体;mso-ascii-font-family:Arial'>二进制处理程序</span></h2>
+
+<p class=MsoNormalIndent><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>如同前面你看到的一样，</span><b
+style='mso-bidi-font-weight:normal'><span lang=EN-US>do_execve</span></b><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>遍历一个代表二进制处理程序的</span><b style='mso-bidi-font-weight:normal'><span
+lang=EN-US>struct linux_binfmt</span></b><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>结构的链接列表，调用每个结构的</span><b
+style='mso-bidi-font-weight:normal'><span lang=EN-US>load_binary</span></b><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>成员指向的函数直到其中一个成功（当然也或者到已经试验完了所有的格式为止）。但是这些结构又从何而来呢？函数</span><b
+style='mso-bidi-font-weight:normal'><span lang=EN-US>load_binary</span></b><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>是如何实现的？为了寻找这些答案，让我们来看一下</span><span lang=EN-US>fs/binfmt_java.c</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>文件。</span></p>
+
+<p class=MsoNormalIndent><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>这个模块处理一些不是涉及在</span><span
+lang=EN-US>Web</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>浏览器上使用</span><b style='mso-bidi-font-weight:
+normal'><span lang=EN-US>java_format</span></b><span style='font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>执行的</span><span
+lang=EN-US>Java</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>程序的</span><span lang=EN-US>Java</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>二进制文件和相关的函数。它使用</span><b style='mso-bidi-font-weight:normal'><span
+lang=EN-US>applet_format</span></b><span style='font-family:宋体;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman"'>及相关函数处理</span><span
+lang=EN-US>Java</span><span style='font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>小程序（</span><span lang=EN-US>Applet</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>）。如果重写</span><span lang=EN-US>fs/binfmt_java.c</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>中的函数用来加强</span><span lang=EN-US>Java</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>小程序函数和非</span><span lang=EN-US>Java</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>小程序函数之间的相同代码的数量就更好了。虽然它注定最终要被“</span><span lang=EN-US>misc</span><span
+style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>”二进制处理程序取代，但是现在还只是在讨论，尚未实行。</span></p>
+
+<h4 style='margin-left:0cm;text-indent:0cm'><span lang=EN-US>do_load_java</span></h4>
+
+<p class=MsoNormal style='text-indent:35.9pt;mso-char-indent-count:3.42;
+mso-char-indent-size:10.45pt'><span lang=EN-US style='mso-bidi-font-size:10.0pt'><span
+style="mso-spacerun: yes">&nbsp;</span></span><span style='mso-bidi-font-size:
+10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>这是实际处理装载</span><span lang=EN-US style='mso-bidi-font-size:
+10.0pt'>Java</span><span style='mso-bidi-font-size:10.0pt;font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>的</span><span
+lang=EN-US style='mso-bidi-font-size:10.0pt'>.class</span><span
+style='mso-bidi-font-size:10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>文件工作的函数。</span><span lang=EN-US
+style='mso-bidi-font-size:10.0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:35.9pt;mso-char-indent-count:3.42;
+mso-char-indent-size:10.45pt'><span style='mso-bidi-font-size:10.0pt;
+font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>通过检测特征数字</span><span lang=EN-US style='mso-bidi-font-size:
+10.0pt'>0xcafebabe</span><span style='mso-bidi-font-size:10.0pt;font-family:
+宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>开始，这是因为</span><span
+lang=EN-US style='mso-bidi-font-size:10.0pt'>Java</span><span style='mso-bidi-font-size:
+10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>标准规定所有有效的类文件都使用这个字符序列开始。接着开始执行健全性检测，一直到</span><span
+lang=EN-US style='mso-bidi-font-size:10.0pt'>9147</span><span style='mso-bidi-font-size:
+10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>行，确保没有递归调用而且正在请求执行的可执行文件是以</span><span lang=EN-US
+style='mso-bidi-font-size:10.0pt'>.class</span><span style='mso-bidi-font-size:
+10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>结尾的。</span><span lang=EN-US style='mso-bidi-font-size:10.0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:35.9pt;mso-char-indent-count:3.42;
+mso-char-indent-size:10.45pt'><span lang=EN-US style='mso-bidi-font-size:10.0pt'><span
+style="mso-spacerun: yes">&nbsp;</span></span><span style='mso-bidi-font-size:
+10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>此处，所有的健全性检测已经通过了。现在，</span><span lang=EN-US
+style='mso-bidi-font-size:10.0pt'>do_load_java</span><span style='mso-bidi-font-size:
+10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>取得文件的基本名字，将其和</span><span lang=EN-US style='mso-bidi-font-size:
+10.0pt'>Java</span><span style='mso-bidi-font-size:10.0pt;font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>字节码解释程序一起放置到程序空间中，并试图执行</span><span
+lang=EN-US style='mso-bidi-font-size:10.0pt'>Java</span><span style='mso-bidi-font-size:
+10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>字节码解释程序。</span><span lang=EN-US style='mso-bidi-font-size:
+10.0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:35.9pt;mso-char-indent-count:3.42;
+mso-char-indent-size:10.45pt'><span lang=EN-US style='mso-bidi-font-size:10.0pt'><span
+style="mso-spacerun: yes">&nbsp;</span></span><span style='mso-bidi-font-size:
+10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>使用我们在</span><span lang=EN-US style='mso-bidi-font-size:10.0pt'>do_execve</span><span
+style='mso-bidi-font-size:10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>中见到的同一个进程执行解释程序。特殊情况下，就像查询</span><span
+lang=EN-US style='mso-bidi-font-size:10.0pt'>do_load_java</span><span
+style='mso-bidi-font-size:10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>的方法一样，使用</span><span lang=EN-US
+style='mso-bidi-font-size:10.0pt'>search_binary_handler</span><span
+style='mso-bidi-font-size:10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>为解释程序查询二进制处理程序。（实际上，虽然它不一定非要是</span><span
+lang=EN-US style='mso-bidi-font-size:10.0pt'>ELF</span><span style='mso-bidi-font-size:
+10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>二进制文件，但是它也可能是。）</span><span lang=EN-US style='mso-bidi-font-size:
+10.0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:35.9pt;mso-char-indent-count:3.42;
+mso-char-indent-size:10.45pt'><span style='mso-bidi-font-size:10.0pt;
+font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>记住其它处理程序不会分配新的</span><span lang=EN-US style='mso-bidi-font-size:
+10.0pt'>struct task_struct</span><span style='mso-bidi-font-size:10.0pt;
+font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>结构——我们在使用</span><span lang=EN-US style='mso-bidi-font-size:
+10.0pt'>fork</span><span style='mso-bidi-font-size:10.0pt;font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>的时候也碰到了这个问题。其它处理程序只是修改现存进程的</span><span
+lang=EN-US style='mso-bidi-font-size:10.0pt'>struct task_struct</span><span
+style='mso-bidi-font-size:10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>结构。如果你希望细致地了解这是如何实现的，你的入手点应该是</span><span
+lang=EN-US style='mso-bidi-font-size:10.0pt'>do_load_elf_binary</span><span
+style='mso-bidi-font-size:10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>——我们关心的部分从</span><span lang=EN-US
+style='mso-bidi-font-size:10.0pt'>8273</span><span style='mso-bidi-font-size:
+10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>行开始。</span><span lang=EN-US style='mso-bidi-font-size:10.0pt'><o:p></o:p></span></p>
+
+<h4 style='margin-left:0cm;text-indent:0cm'><span lang=EN-US>load_java</span></h4>
+
+<p class=MsoNormal style='text-indent:35.9pt;mso-char-indent-count:3.42;
+mso-char-indent-size:10.45pt'><span lang=EN-US style='mso-bidi-font-size:10.0pt'>load_java</span><span
+style='mso-bidi-font-size:10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>是其它外部对象装载</span><span lang=EN-US
+style='mso-bidi-font-size:10.0pt'>.class</span><span style='mso-bidi-font-size:
+10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>文件时所使用的函数。它首先递增内核模块使用的计数（如果作为内核模块编译），随后又将其递减，但是实际的工作是由</span><span
+lang=EN-US style='mso-bidi-font-size:10.0pt'>do_load_java</span><span
+style='mso-bidi-font-size:10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>处理的。</span><span lang=EN-US
+style='mso-bidi-font-size:10.0pt'><o:p></o:p></span></p>
+
+<h4 style='margin-left:0cm;text-indent:0cm'><span lang=EN-US>java_format</span></h4>
+
+<p class=MsoNormal style='text-indent:35.9pt;mso-char-indent-count:3.42;
+mso-char-indent-size:10.45pt'><span style='mso-bidi-font-size:10.0pt;
+font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>通过比较</span><span lang=EN-US style='mso-bidi-font-size:10.0pt'>java_format</span><span
+style='mso-bidi-font-size:10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>的初始化和</span><span lang=EN-US
+style='mso-bidi-font-size:10.0pt'>struct linux_binfmt</span><span
+style='mso-bidi-font-size:10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>结构的定义，你可以看出这个模块没有提供对共享库和内核卸载的支持，只提供了对装载可执行程序的支持；而且这种支持是通过</span><span
+lang=EN-US style='mso-bidi-font-size:10.0pt'>load_java</span><span
+style='mso-bidi-font-size:10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>函数实现的。</span><span lang=EN-US
+style='mso-bidi-font-size:10.0pt'><o:p></o:p></span></p>
+
+<h4 style='margin-left:0cm;text-indent:0cm'><span lang=EN-US>init_java_binfmt</span></h4>
+
+<p class=MsoNormal style='text-indent:35.9pt;mso-char-indent-count:3.42;
+mso-char-indent-size:10.45pt'><span style='mso-bidi-font-size:10.0pt;
+font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>指向这个模块的项是</span><span lang=EN-US style='mso-bidi-font-size:
+10.0pt'>init_java_binfmt</span><span style='mso-bidi-font-size:10.0pt;
+font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>，它把两个静态</span><span lang=EN-US style='mso-bidi-font-size:
+10.0pt'>struct linux_binfmt</span><span style='mso-bidi-font-size:10.0pt;
+font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>结构</span><span lang=EN-US style='mso-bidi-font-size:10.0pt'>java_format</span><span
+style='mso-bidi-font-size:10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>和</span><span lang=EN-US
+style='mso-bidi-font-size:10.0pt'>applet_format</span><span style='mso-bidi-font-size:
+10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>的地址压入系统列表中。如果对</span><span lang=EN-US style='mso-bidi-font-size:
+10.0pt'>Java</span><span style='mso-bidi-font-size:10.0pt;font-family:宋体;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"'>二进制文件的支持被编译进了内核，就在</span><span
+lang=EN-US style='mso-bidi-font-size:10.0pt'>9355</span><span style='mso-bidi-font-size:
+10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>行调用</span><span lang=EN-US style='mso-bidi-font-size:10.0pt'>init_java_binfmt</span><span
+style='mso-bidi-font-size:10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman"'>，或者如果</span><span lang=EN-US
+style='mso-bidi-font-size:10.0pt'>Java</span><span style='mso-bidi-font-size:
+10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>二进制文件的支持被作为一个内核模块编译进了内核，就使用</span><span lang=EN-US
+style='mso-bidi-font-size:10.0pt'>kmod</span><span style='mso-bidi-font-size:
+10.0pt;font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'>任务。</span><span lang=EN-US style='mso-bidi-font-size:10.0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

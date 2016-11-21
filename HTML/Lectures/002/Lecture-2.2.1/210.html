@@ -1,0 +1,104 @@
+<html>
+<head>
+<title>文件系统层次结构</title>
+</head>
+
+<body>
+<h1 align=center>2.1 文件系统的层次结构</h1>
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Linux 采用了树形的目录结构。最上面的节点是根（/），也就是在安装的过程中，要求用户必须输入的那个挂装点。在根下面生成了许多分支。由于 Linux 使用了标准化的层次结构，因此这些分支都被预先定义了含义，以及它应该包含的内容。下表是这些目录的含义：
+<TABLE BORDER CELLSPACING=1 CELLPADDING=7 WIDTH=451 align=center>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">目录</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="CENTER">解释</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/bin</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">二进制可执行命令</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/dev</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">设备特殊文件</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/etc</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">系统管理和配置文件</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/home</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">用户主目录的基点</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/lib</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">标准程序设计库</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/sbin</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">系统管理命令</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/tmp</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">公用的临时文件存储点</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/usr/X11</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">X-window </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>系统文件</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/usr/adm</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">系统管理的数据文件</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/usr/bin</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">其他的可执行命令</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/usr/lib</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">库和软件包的配置文件</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/usr/local/bin</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">本地增加的命令</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/usr/local/lib</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">本地增加的库</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/usr/local/src</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">本地命令的源文件</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/usr/man</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">系统联机的手册页</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/usr/src/linux</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">Linux </FONT><FONT FACE="宋体" LANG="ZH-CN" SIZE=3>内核源代码</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT SIZE=3><P ALIGN="JUSTIFY">/var</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="宋体" LANG="ZH-CN" SIZE=3><P ALIGN="JUSTIFY">某些大文件的溢出区</FONT></TD>
+</TR>
+</TABLE>
+<p align=right><a href=200.html>回家</a></p>
+</body>
+</html>

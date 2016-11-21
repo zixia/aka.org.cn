@@ -1,0 +1,208 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=GB2312">
+    <TITLE>Gnome Programming</TITLE>
+</HEAD>
+<BODY>
+<P><A HREF="Orbit-prog.html">上一页</A>
+<A HREF="Gnome-desktop.html">下一页</A>
+<P><B><FONT SIZE=+3>GNOME编程</FONT></B><P>
+GNOME的各个地方都用到了CORBA，例如：File Manager, Panel, Window Manager, 以及极其重要的Bonobo。通过使用CORBA，应用之间的接口变得清晰，交互变的简单。
+<P>但大家现在已经知道GNOME是一个GUI开发环境，有自己的一整套开发方法和接口，所有的GNOME应用都有一个事件循环用来处理应用与用户，及应用之间的交互。CORBA更是一整套的开发规范，每个CORBA的Server也都必须有一个消息循环来接收发自Client的请求。如何将这两套系统结合起来呢？
+<P><B><FONT SIZE=+2>Gnorba：GNOME的CORBA框架</FONT></B><P>
+<P>Gnorba的作用就是方便GNOME应用轻松地使用CORBA(即ORBit)。这是一个非常有用的库。它主要包括三个部分：<P>
+<UL><LI>初始化</LI><P>
+<P>在GNOME下的CORBA程序使用gnome_CORBA_init函数完成初始化。它实际上是对ORBit的初始化函数CORBA_ORB_init和GNOME的初始化函数gnome_init的包裹，把ORBit的事件循环集成到GTK的事件循环中。<P>
+<LI>Naming Services</LI><P>
+<P>Name Service是用来寻找CORBA的servers的，就象DNS是用来寻找hostname的IP的。同理，要想获得DNS服务，首先需要找到一个DNS Server；要想获得CORBA的Name Service，也需要获得一个Naming Server。
+<P>ORBit下的Name Serive有两个问题：1) 需要手工启动orbit-name-server；2) 它与CORBA_ORB_resolve_initial_reference函数并不合作。
+<P>Gnorba实现了一个gnome_name_service_get函数用来检查和启动orbit-name-server，并返回它的引用供使用。这个函数实际上把信息存在X的根视窗的一个CORBA_NAME_SERVICE 属性中，CORBA的Client和Server只需要查找这个值，就可以获得Naming Server了。如果不在X环境下，这个功能是无法实现的，这就是前面两个问题出现的原因。其实它就是CORBA_ORB_resolve_initial_reference的一个包裹。<P>
+<LI>GOAD:GNOME Object Activation Directory</LI><P>
+<P>有了orbit-name-server，一个对象就可以通过它找到自己要访问的CORBA Server。但是它怎么知道现在那些Server可用呢？另外，让所有的Servers都运行在内存中也是没有必要的，因为可能并没有Client需要它的服务。这就是GOAD存在的意义。例如它提供的一个函数goad_server_list_get可以当前在GOAD注册的所有的servers；goad_server_activate_exe可以激活一个Server。
+<P>一个server要想能被GOAD管理，需要注册。其实也就是在一个以.gnorba为后缀的文件中填写一些信息。如cdplayer_applet.gnorba的内容如下：
+<PRE>
+[cdplayer_applet]
+type=exe
+repo_id=IDL:GNOME/Applet:1.0
+description=CD player applet
+location_info=cdplayer_applet   
+</PRE>
+<P>
+<P>
+<LI>GNOME的CORBA框架还提供了很多标准的接口，如工厂，引用计数等。</LI>
+<P></UL>
+<P><B><FONT SIZE=+2>GNOME桌面的CORBA实现</FONT></B><P>
+如果设计的Server仅以一个函数库的形式出现，而所有的GUI完全由Client完成，那么这样的GNOME应用是很简单的。
+<P><B><FONT SIZE=+1>简单GNOME程序举例</FONT></B><P>
+<P><B>IDL文件</B><P><PRE>
+interface Calculator
+{
+      double add(in double number1, in double number2);
+      
+};
+</PRE>
+<P><B>Server实现</B><P>
+<PRE>
+#include "calculator-impl.c"
+#include <stdio.h>
+
+int
+main(int argc, char* argv[])
+{
+  CORBA_ORB                 orb;
+  CORBA_Environment*        ev;
+  PortableServer_ObjectId*  oid;
+  Calculator                calculator;
+  PortableServer_POA        root_poa;
+  PortableServer_POAManager pm;
+  CORBA_char*               objref;
+  
+  ev = g_new0(CORBA_Environment,1);
+
+  CORBA_exception_init(ev);
+
+  orb = CORBA_ORB_init(&argc, argv, "orbit-local-orb", ev);
+  /* Handle exception somehow */
+  root_poa = (PortableServer_POA)CORBA_ORB_resolve_initial_references(orb, "RootPOA", ev);
+  /* Handle exception somehow */
+  
+  calculator = impl_Calculator__create(root_poa, ev);
+  /* Handle exception somehow */
+
+  objref                 = CORBA_ORB_object_to_string(orb, calculator, ev);
+  /* Handle exception somehow */
+  fprintf(stderr, "%s\n", objref);
+
+  pm = PortableServer_POA__get_the_POAManager(root_poa, ev);
+  /* Handle exception somehow */
+  PortableServer_POAManager_activate(pm, ev);
+  /* Handle exception somehow */
+  CORBA_ORB_run(orb, ev);
+  return 0;
+}
+
+CORBA_double
+do_add(impl_POA_Calculator * servant,
+		    CORBA_double number1,
+		    CORBA_double number2,
+		    CORBA_Environment * ev)
+{
+   CORBA_double retval;
+
+   retval = number1 + number2;
+   return retval;
+}
+</PRE>
+
+<P><B>没有GNOME GUI的Client实现</B><P>
+<PRE>
+#include "orb/orbit.h"
+#include "calculator.h"
+#include <stdio.h>
+int
+main(int argc, char* argv[])
+{
+        CORBA_Environment ev;
+	CORBA_ORB         orb;
+	CORBA_Object      server;
+        CORBA_double      res;
+        gchar*            dummy_argv[2];
+        gint              dummy_argc;
+
+        dummy_argc = 1;
+        dummy_argv[0] = argv[0];
+        dummy_argv[1] = 0;
+
+	CORBA_exception_init(&ev);
+	orb = CORBA_ORB_init(&dummy_argc, dummy_argv, "orbit-local-orb", &ev);
+	server = CORBA_ORB_string_to_object(orb, argv[1], &ev);
+	res = Calculator_add(server,1.0, 2.0, &ev);
+	fprintf(stdout,"1.0 + 2.0 = %2.0f\n", res);
+	CORBA_Object_release(server,&ev);
+	exit(0);
+}
+</PRE>
+<P><B>GNOME GUI下的Client实现</B><P>
+<PRE>
+#include <orb/orbit.h>
+#include "calculator.h"
+
+int
+main(int argc, char* argv[])
+{
+        CORAB_Environment env;
+	CORBA_ORB         orb;
+	CORBA_Object      server;
+        CORBA_double      res;
+        GtkWidget*        app;
+        gchar*            dummy_argv[2]
+        gint              dummy_argc;
+
+	CORBA_exception_init(&ev);
+        dummy_argc = 1;
+        dummy_argv[0] = argv[0];
+        dummy_argv[1] = 0;
+	orb = gnome_CORBA_init("simple-calculator", NULL, &dummy_argc, dummy_argv, 0, NULL, &ev);
+	server = CORBA_ORB_string_to_object(orb, argv[1], &ev);
+        app = create_gui(server);
+        gtk_widget_show_all(app);
+        gtk_main();
+	exit(0);
+};
+          
+GtkWidget*
+create_gui(CORBA_Object server)
+{
+   /*
+     create the gui with all the elemts.
+     e1 is the entry widget for the first value;
+     e2 is the entry widget for the second value;
+     res is the widget to display the result;
+     b_add is the button to add the two values;
+     b_sub is the button to subtract the two values;
+     window is the top level window 
+  */
+
+  /* create all the widgets and place them in the window */
+  ......
+  gtk_object_add(b_add, "calc-server", server);
+  gtk_object_add(b_add, "e1", e1);
+  gtk_object_add(b_add, "e2", e2);
+  gtk_object_add(b_add, "res", res);
+
+
+  gtk_signal_connect(b_add, "clicked", add_it, 0);
+
+  return hbox;
+}
+
+void
+add_it(GtkWidget* o, CORBA_Environment* ev)
+{
+   GtkWidget* e1;
+   GtkWidget* e2;
+   GtkWidget* res;
+   CORBA_double d1;
+   CORBA_double d2;
+   CORBA_double d3;
+
+   /*
+    extract the values from the e1, e2 entry fields.
+    convert the strings to double values and assign these
+    values to d1, d2 respectivly
+   */
+   res = Calculator_add(d1, d2, ev);
+   /*
+    convert res to a string and display it in the
+    res widget
+   */
+}
+
+</PRE>   
+
+<P>
+<P><A HREF="Orbit-prog.html">上一页</A>
+<A HREF="Gnome-desktop.html">下一页</A>
+<P>
+</BODY>
+</HTML>

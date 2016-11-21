@@ -1,0 +1,70 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>如何使用DNS</title>
+<meta name="Microsoft Theme" content="blank 001, default">
+<meta name="Microsoft Border" content="tl, default">
+</head>
+
+<body background="_themes/blank/blbkgnd.gif" bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="宋体">
+
+<p align="center"><font size="6"><strong><img src="_derived/new_page_19.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="如何使用DNS"></strong></font><br>
+<a href="index.htm"><img src="_derived/home_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="主页" align="middle"></a> <a href="new_page_16.htm"><img src="_derived/up_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="上一层" align="middle"></a> <a href="new_page_17.htm"><img src="_derived/new_page_17.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="获得本机IP" align="middle"></a> <a href="new_page_18.htm"><img src="_derived/new_page_18.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="对方连接本机的哪个IP？" align="middle"></a> <img src="_derived/new_page_19.htm_cmp_blank000_hbtn_p.gif" width="140" height="32" border="0" alt="如何使用DNS" align="middle"> <a href="new_page_20.htm"><img src="_derived/new_page_20.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="文件流方式" align="middle"></a> <a href="new_page_21.htm"><img src="_derived/new_page_21.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="读取一行语句" align="middle"></a> <a href="new_page_30.htm"><img src="_derived/new_page_30.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="不定长参数" align="middle"></a> <a href="new_page_22.htm"><img src="_derived/new_page_22.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="以Daemon方式运行" align="middle"></a> <a href="new_page_23.htm"><img src="_derived/new_page_23.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="端口重用" align="middle"></a> <a href="new_page_24.htm"><img src="_derived/new_page_24.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="用户登录及权限设置" align="middle"></a></p>
+<p align="center">　</p>
+
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="宋体">
+
+
+
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="宋体">
+
+<font size="6">下面这段程序，能够将参数中的域名解析成IP：</font>
+<!--mstheme--></font><pre><font size="5">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;netinet/in.h&gt;</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">int 
+main (int argc, char *argv[])
+{
+	struct hostent *h;</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">	/* 检测命令行中的参数是否存在 */
+	if (argc != 2) { 
+		/* 如果没有参数，给出使用方法 */
+		fprintf (stderr &quot;usage: getip address\n&quot;);
+		</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">		/* 然后退出 */
+		exit(1);
+	}
+	</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">	/* 取得主机信息 */
+	if（(h=gethostbyname(argv[1])) == NULL）
+	{ 
+		/* 如果gethostbyname失败，则给出错误信息 */
+		herror(&quot;gethostbyname&quot;);</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">		/* 然后退出 */
+		exit(1);
+	}
+	</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">	/* 列印程序取得的信息 */
+	printf(&quot;Host name : %s\n&quot;, h-&gt;h_name);
+	printf(&quot;IP Address : %s\n&quot;, inet_ntoa (*((struct in_addr *)h-&gt;h_addr))）;</font></pre><!--mstheme--><font face="宋体">
+<!--mstheme--></font><pre><font size="5">	/* 返回 */
+	return 0;
+}</font></pre><!--mstheme--><font face="宋体">
+<p>　</p>
+<p><font size="5" color="#FF0000"><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">使用</span><span lang="EN-US">gethostbyname()</span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">函数，你不能使用</span><span lang="EN-US">perror()</span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">来输出错误信息（因为错误代码存储在</span><span lang="EN-US">h_errno</span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">中而不是</span><span lang="EN-US">errno</span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">中。所以，你需要调用</span><span lang="EN-US">herror()</span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">函数。</span></font>
+
+<!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+</html>

@@ -1,0 +1,305 @@
+标题： A new place to LKM：netfilter
+作者： yawl <yawl@nsfocus.com>
+时间： 2000-10
+
+目录：
+－.前言
+二.分析
+三.例子代码
+四.附录：与2.2在应用方面的区别简介
+五.后记
+
+
+－.前言
+
+  在linux2.2内核中的防火墙ipchains已经被用户广泛认可,它提供了完整的防火墙功能（包过滤，地址伪装，透明代理）
+，又避免了商业防火墙那高的惊人的价格。如果你用的是某款国产防火墙，那么十有八九你实际在受到ipchains（有些
+甚至是2.0系列中ipfwadm）的保护:-).在未来的2.4内核中，被称为netfilter（http://netfilter.kernelnotes.org/）
+的防火墙以更好的结构重新构造，并实现了许多新功能，如完整的动态NAT(2.2内核实际是多对一的"地址伪装")，基于
+MAC及用户的过滤，真正的基于状态的过滤（不再是简单的查看tcp的标志位等），包速率限制等。
+  在原有的网络部分的LKM中，如果对网络部分进行处理，一般是先生成struct packet_type结构，在用dev_add_pack
+将其插入网络层（注意此时的packet_type实际相当于一个的三层的协议，如ip_packet_type，ipx_8023_packet_type
+等），具体的例子可参见phrack 55期<Building into the linux network layer>和本月小四写的月刊文章<利用LLKM处
+理网络通信----对抗IDS、Firewall>。
+  而netfilter本身在IP层内提供了另外的5个插入点（其文档中称为HOOK）：NF_IP_PRE_ROUTING，NF_IP_LOCAL_IN，
+NF_IP_FORWARD，NF_IP_LOCAL_OUT，NF_IP_POST_ROUTING，分别对应IP层的五个不同位置，这样理论上在写lkm时便可以
+选择更适合的切入点，再辅以netfilter内置的新功能（如connect tracking）,应该会帮助写出功能更强的lkm。
+  本来准备写出一个完整的例子（限制IP连接数），但计划总赶不上变化:-(，只好先贴出个简单的例子来，权且自我安
+慰成抛砖引玉了。
+  本文的参考配置是linux2.4.0-test4和iptable-1.1.1，好，开始抛砖，闪人喽！  
+  
+
+二.分析
+  通俗的说，netfilter的架构就是在整个网络流程的若干位置放置了一些检测点（HOOK），而在每个检测点上上登记了
+一些处理函数进行处理（如包过滤，NAT等，甚至可以是用户自定义的功能）。	
+  IP层的五个HOOK点的位置如下图所示（copy from <packet filter howto>） ：
+                       
+          --->[1]--->[ROUTE]--->[3]--->[5]--->
+                        |            ^
+                        |            |
+                        |         [ROUTE]
+                        v            |
+                       [2]          [4]
+                        |            ^
+                        |            |
+                        v            |
+		       [local process]                 
+		              
+[1]:NF_IP_PRE_ROUTING：刚刚进入网络层的数据包通过此点（刚刚进行完版本号，校验和等检测），源地址转换在此点
+进行；
+[2]:NF_IP_LOCAL_IN：经路由查找后，送往本机的通过此检查点,INPUT包过滤在此点进行；
+[3]:NF_IP_FORWARD：要转发的包通过此检测点,FORWORD包过滤在此点进行；
+[4]:NF_IP_LOCAL_OUT：本机进程发出的包通过此检测点，OUTPUT包过滤在此点进行；
+[5]:NF_IP_POST_ROUTING：所有马上便要通过网络设备出去的包通过此检测点，内置的目的地址转换功能（包括地址伪
+装）在此点进行。			   	
+
+  在IP层代码中，有一些带有NF_HOOK宏的语句，如IP的转发函数中有：
+
+<-ipforward.c ip_forward()->		       
+NF_HOOK(PF_INET, NF_IP_FORWARD, skb, skb->dev, dev2,
+		       ip_forward_finish);
+
+  其中NF_HOOK宏的定义提炼如下：
+
+<-/include/linux/netfilter.h->		       
+#ifdef CONFIG_NETFILTER
+#define NF_HOOK(pf, hook, skb, indev, outdev, okfn)			\
+(list_empty(&nf_hooks[(pf)][(hook)])					\
+ ? (okfn)(skb)								\
+ : nf_hook_slow((pf), (hook), (skb), (indev), (outdev), (okfn)))
+#else /* !CONFIG_NETFILTER */
+#define NF_HOOK(pf, hook, skb, indev, outdev, okfn) (okfn)(skb)
+#endif /*CONFIG_NETFILTER*/ 
+		       		       
+  如果在编译内核时没有配置netfilter时，就相当于调用最后一个参数，此例中即执行ip_forward_finish函数；
+否则进入HOOK点，执行通过nf_register_hook（）登记的功能（这句话表达的可能比较含糊，实际是进入
+nf_hook_slow（）函数，再由它执行登记的函数）。
+
+  NF_HOOK宏的参数分别为：
+1.pf：协议族名，netfilter架构同样可以用于IP层之外，因此这个变量还可以有诸如PF_INET6，PF_DECnet等名字。
+2.hook：HOOK点的名字，对于IP层，就是取上面的五个值；
+3.skb：不用多解释了吧；
+4.indev：进来的设备，以struct net_device结构表示；
+5.outdev：出去的设备，以struct net_device结构表示；
+(后面可以看到，以上五个参数将传到用nf_register_hook登记的处理函数中。)
+6.okfn:是个函数指针，当所有的该HOOK点的所有登记函数调用完后，转而走此流程。
+
+  这些点是已经在内核中定义好的，除非你是这部分内核代码的维护者，否则无权增加或修改，而在此检测点进行的处
+理，则可由用户指定。像packet filter,NAT,connection track这些功能，也是以这种方式提供的。正如netfilter的
+当初的设计目标－－提供一个完善灵活的框架，为扩展功能提供方便。 
+
+  如果我们想加入自己的代码,便要用nf_register_hook函数，其函数原型为：
+  int nf_register_hook(struct nf_hook_ops *reg)
+  我们考察一下struct nf_hook_ops结构：
+  
+struct nf_hook_ops
+{
+	struct list_head list;
+
+	/* User fills in from here down. */
+	nf_hookfn *hook;
+	int pf;
+	int hooknum;
+	/* Hooks are ordered in ascending priority. */
+	int priority;
+};
+
+  我们的工作便是生成一个struct nf_hook_ops结构的实例，并用nf_register_hook将其HOOK上。其中list项我们总要
+初始化为{NULL,NULL}；由于一般在IP层工作，pf总是PF_INET；hooknum就是我们选择的HOOK点;一个HOOK点可能挂多个
+处理函数，谁先谁后，便要看优先级，即priority的指定了。netfilter_ipv4.h中用一个枚举类型指定了内置的处理函
+数的优先级：
+
+enum nf_ip_hook_priorities {
+	NF_IP_PRI_FIRST = INT_MIN,
+	NF_IP_PRI_CONNTRACK = -200,
+	NF_IP_PRI_MANGLE = -150,
+	NF_IP_PRI_NAT_DST = -100,
+	NF_IP_PRI_FILTER = 0,
+	NF_IP_PRI_NAT_SRC = 100,
+	NF_IP_PRI_LAST = INT_MAX,
+};
+
+  hook是提供的处理函数，也就是我们的主要工作，其原型为：
+
+unsigned int nf_hookfn(unsigned int hooknum,
+			       struct sk_buff **skb,
+			       const struct net_device *in,
+			       const struct net_device *out,
+			       int (*okfn)(struct sk_buff *));
+
+  它的五个参数将由NFHOOK宏传进去。			       	  
+  了解了这些，基本上便可以可以写一个lkm出来了。
+
+三.例子代码
+
+这段代码是一个例子，其功能实现了一个IDS,检测几个简单攻击(land,winnuke)和特殊扫描(nmap)，当然，不会有人真把
+它当严肃的IDS使用吧:-)。可以利用类似结构干点别的。。。
+
+<-example.c begin->
+
+/*
+*  netfilter module example: it`s a kernel IDS(be quie,donot laugh, my friend)
+*  yawl@nsfocus.com
+*  Compile:gcc -O -c -Wall sample.c ，under linux2.4 kernel,netfilter is needed.
+*/
+
+#define __KERNEL__
+#define MODULE
+
+#include <linux/module.h>
+#include <linux/skbuff.h>
+#include <linux/netdevice.h>
+#include <linux/config.h>
+#include <linux/ip.h>
+#include <linux/tcp.h>
+#include <linux/udp.h>
+#include <linux/netfilter_ipv4.h>
+
+#define ALERT(fmt,args...) printk("nsfocus: " fmt, ##args)
+/*message will be print to screen(too many~),and logged to /var/log/message*/
+
+static unsigned int sample(unsigned int hooknum,struct sk_buff **skb,
+				const struct net_device *in,
+				const struct net_device *out,int (*okfn)(struct sk_buff *))
+{
+	struct iphdr *iph;
+	struct tcphdr *tcph;
+	struct udphdr *udph;
+	
+	__u32	sip;
+	__u32	dip;
+	__u16	sport;
+	__u16	dport;
+	
+	iph=(*skb)->nh.iph;
+	sip=iph->saddr;
+	dip=iph->daddr;
+
+	/*play ip packet here
+	(note:checksum has been checked,if connection track is enabled,defrag have been done )*/
+	if(iph->ihl!=5){
+		ALERT("IP packet with packet from %d.%d.%d.%d to %d.%d.%d.%d\n",NIPQUAD(sip),NIPQUAD(dip));
+	}
+	
+	if(iph->protocol==6){
+		tcph=(struct tcphdr*)((__u32 *)iph+iph->ihl);
+		sport=tcph->source;
+		dport=tcph->dest;
+		/*play tcp packet here*/
+		if((tcph->syn)&&(sport==dport)&&(sip==dip)){
+			ALERT("maybe land attack\n");	
+		}
+		if(ntohs(tcph->dest)==139&&tcph->urg){
+			ALERT("maybe winnuke a from %d.%d.%d.%d to %d.%d.%d.%d\n",NIPQUAD(sip),NIPQUAD(dip));
+		}
+		if(tcph->ece&&tcph->cwr){
+        		ALERT("queso from %d.%d.%d.%d to %d.%d.%d.%d\n",NIPQUAD(sip),NIPQUAD(dip));
+        	}
+   		if((tcph->fin)&&(tcph->syn)&&(!tcph->rst)&&(!tcph->psh)&&(!tcph->ack)&&(!tcph->urg)){
+        		ALERT("SF_scan from %d.%d.%d.%d to %d.%d.%d.%d\n",NIPQUAD(sip),NIPQUAD(dip));
+        	}
+   		if((!tcph->fin)&&(!tcph->syn)&&(!tcph->rst)&&(!tcph->psh)&&(!tcph->ack)&&(!tcph->urg)){
+        		ALERT("NULL_scan from %d.%d.%d.%d to %d.%d.%d.%d\n",NIPQUAD(sip),NIPQUAD(dip));
+        	}
+   		if(tcph->fin&&tcph->syn&&tcph->rst&&tcph->psh&&tcph->ack&&tcph->urg){
+        		ALERT("FULL_Xmas_scan from %d.%d.%d.%d to %d.%d.%d.%d\n",NIPQUAD(sip),NIPQUAD(dip));
+        	}
+   		if((tcph->fin)&&(!tcph->syn)&&(!tcph->rst)&&(tcph->psh)&&(!tcph->ack)&&(tcph->urg)){
+        		ALERT("XMAS_Scan(FPU)from %d.%d.%d.%d to %d.%d.%d.%d\n",NIPQUAD(sip),NIPQUAD(dip));
+        	}
+	}	
+
+	else if(iph->protocol==17){
+		udph=(struct udphdr *)((__u32 *)iph+iph->ihl);
+		sport=udph->source;
+		dport=udph->dest;
+		/*play udp packet here*/
+	}
+	
+	else if(iph->protocol==1){
+		/*play icmp packet here*/
+	}	
+
+	else if(iph->protocol==2){
+		ALERT("igmp packet from %d.%d.%d.%d to %d.%d.%d.%d\n",NIPQUAD(sip),NIPQUAD(dip));
+		/*play igmp packet here*/
+	}	
+
+	else{
+		ALERT("unknown protocol%d packet from %d.%d.%d.%d to %d.%d.%d.%d\n",iph->protocol,NIPQUAD(sip),NIPQUAD(dip));
+	}
+	return NF_ACCEPT;
+	/*for it is IDS,we just accept all packet,
+	if you really want to drop this skb,just return NF_DROP*/
+	
+}
+
+static struct nf_hook_ops iplimitfilter
+={ {NULL,NULL} ,sample,PF_INET,NF_IP_PRE_ROUTING,NF_IP_PRI_FILTER-1};
+
+int init_module(void)
+{
+	return nf_register_hook(&iplimitfilter);
+}
+
+void cleanup_module(void)
+{
+	nf_unregister_hook(&iplimitfilter);
+}
+
+<-example.c end->
+
+四.附录：与2.2在应用方面的区别简介
+
+  本来还想详细介绍一下iptables的用法，但如果说的太详细的话，还不如索性将HOWTO翻译一下，于是干脆了却了这个
+念头，只顺便简介一下与以前版本的变化（而且是我认为最重要的）。如果ipchains本来便没有在你的脑子中扎根，
+其实便没有必要看这部分。  
+  netfilter，又可称为iptables.开发初期准备将packet filter和NAT的配置工具完全分开，一个称为iptables,另一个
+称为ipnatctl，而将整个项目成为netfilter.但后来可能是还是习惯2.2内核中用ipchians一个工具干两件事的用法,又
+改为全部用iptables配置了。
+  理论上还可以用2.2系列的ipchains和2.0系列的ipfwadm作配置工具，但只是做兼容或过渡的考虑了。通过源码看到
+他们也是通过现有的结构HOOK上去的（主要是net/ipv4/netfilter目录下的ip_fw_compat.c,ip_fw_compat_masq.c,
+ip_fw_compat_redir.c,ipchains_core.c,ipfwadm_core.c这几个文件）。  
+  一个重要的变化是原有的INPUT,OUTPUT（原来是小写的input,ouput）链（现在应称为表?）的位置变了,原来的input
+,output的位置相当于现在的NF_IP_PRE_ROUTING，NF_IP_POST_ROUTING 。原有的结构确实不太合理，转发的包要经过三
+条链，现在INPUT专指去往本机的，OUPUT专指从本机发出的，而FOWARD仍旧是转发的包。
+  举两个简单的例子：
+  1.作地址伪装(场景:对外通过拨号连接internet)注意原来的MASQ变成好长的MASQUERATE,而伪装相当于SNAT,因此位置
+是在POSTROUTING：
+  
+  iptables -t nat -A POSTROUTING －o ppp0 -j MASQUERATE
+  
+  2.还有一个限制包速率的功能比较好玩，例如如下规则：
+  
+  iptables -A FORWARD -p tcp --syn -m limit --limit 1/s -j ACCEPT
+  
+  简单的说就是在转发时（-A FORWARD：因为是防火墙嘛），如果是tcp协议，且有syn标记（-p tcp --syn），可以限制
+为每秒一个（-m limit --limit 1/s ），行动项是ACCEPT。最后连起来意义就是每秒只允许转发一个tcp连接请求。
+	
+  
+五.后记  
+  netfilter还提供了许多新功能，如可以将包转发到应用层，由应用程序进行处理等，可目前我还没有分析多少，
+慢慢抽出点时间看吧。唉，尽管以前看过ipchains的代码，但netfilter实在变动太大了，一切都要从头看起:-(  
+  最后，当然要感谢Rusty Russell，netfilter项目的负责人，不仅为我们提供了这个强大好用的工具，还写了大量非常
+优秀的文档。      
+
+
+参考文献：
+
+[1.] Linux 2.4 Packet Filtering HOWTO
+	Rusty Russell, mailing list netfilter@lists.samba.org
+  	v1.0.1 Mon May  1 18:09:31 CST 2000
+[2.] Linux IPCHAINS-HOWTO
+  	Paul Russell, ipchains@rustcorp.com
+  	v1.0.7, Fri Mar 12 13:46:20 CST 1999
+[3.] Linux 2.4 NAT HOWTO
+  	Rusty Russell, mailing list netfilter@lists.samba.org
+  	v1.0.1 Mon May  1 18:38:22 CST 2000
+[4.] Linux netfilter Hacking HOWTO
+  	Rusty Russell, mailing list netfilter@lists.samba.org
+  	v1.0.1 Sat Jul  1 18:24:41 EST 2000   
+[5.] Writing a Module for netfilter 
+	by Paul "Rusty" Russell  
+	Linux Magazine June 2000 http://www.linux-mag.com/2000-06/gear_01.html  	
+[6.] Salvatore Sanfilippo<antirez@invece.org>写的一份netfilter sample,但可惜我找不到出处了，只剩下手头
+	的一份打印稿，But anyway,thanks to Salvatore.

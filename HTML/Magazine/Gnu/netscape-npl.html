@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+<HEAD>
+<TITLE>Netscape Public License - GNU Project - Free Software Foundation (FSF)</TITLE>
+<LINK REV="made" HREF="mailto:webmasters@www.gnu.org">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#1F00FF" ALINK="#FF0000" VLINK="#9900DD">
+<H3>On the Netscape Public License</H3>
+<P>
+by <A HREF="/people/rms.html"><STRONG>Richard Stallman</STRONG></A>
+<P>
+
+<A HREF="/graphics/gnu-head-sm.jpg"><IMG SRC="/graphics/gnu-head-sm.jpg"
+   ALT=" [image of the Head of a GNU] "
+   WIDTH="129" HEIGHT="122">&#32;(jpeg 7k)</A>
+<A HREF="/graphics/gnu-head.jpg">(jpeg 21k)</A>
+<A HREF="/philosophy/gif.html">no gifs due to patent problems</A>
+
+<P>
+<center>This article was written March 10-12.
+As of March 20 I have not yet seen a newer version
+but one may exist.</center>
+
+<P>
+The Netscape Public License or NPL represents a serious attempt to
+design new free software distribution terms.  It is an interesting
+attempt, but it has major flaws which need to be corrected.  One flaw
+is so serious that we should regard it as making a program non-free.
+The others have diverse consequences: one sends a bad philosophical
+message, while another creates a major practical problem for the free
+software community.
+
+<P>
+The NPL is still a draft, and still being changed; the aim of this
+article is not to attack and condemn, but to encourage improvements in
+the NPL.  If some of these problems have been corrected by the time
+you read this, so much the better, and we can put those obsolete
+issues aside.
+<P>
+
+<H4>1. Not all users are equal</H4>
+
+<P>
+The first problem I noticed in the NPL was that it does not give
+Netscape and the rest of us equal rights, as the GNU GPL does.  Under
+the NPL, we can use Netscape's code only as specified in the NPL, but
+Netscape can use our changes in any way at all--even in proprietary
+licensed versions of the software.
+
+<P>
+The problem here is subtle, because this does not make the program
+non-free.  It does not stop us from redistributing the program, or
+from changing it; it does not deny us any particular freedom.
+Considered from a purely pragmatic viewpoint, it may not look like a
+problem at all.
+
+<P>
+The problem lies in the deeper message embodied in this condition.  It
+denies the idea of cooperation among equals that our community rests
+on, and says that working on a free program means contributing to a
+proprietary software product.  Those who accept this condition are
+likely to be changed by it, and the change will not strengthen our
+community.
+
+<P>
+One proposed solution for this asymmetry is to put a time limit on
+it--perhaps three or five years.  That would be a big improvement,
+because the time limit would deny the problematical deeper message.
+
+<P>
+The practical effects of this condition are minimized by another
+drawback of the NPL: it is not designed as a thorough copyleft.  In
+other words, it does not try very hard to ensure that modifications
+made by users are available as free software.
+
+<P>
+<H4>2. Not a copyleft</H4>
+
+<P>
+The NPL has the form of a copyleft; it explicitly says that all
+modifications made by users must be released under the NPL.  But this
+applies only to modifications to the existing code--not to added
+subroutines, if they are put in separate files.  As a practical
+matter, this means it is easy to make proprietary changes if you want
+to: just put the bulk of your code into a separate file, and call the
+collection a Larger Work.  Only the subroutine calls added to the old
+files will have to be released under the NPL, and they will not be
+very useful on their own.
+
+<P>
+The lack of real copyleft is not a catastrophe; it does not make the
+software non-free.  For example, the XFree86 distribution terms do not try
+to use copyleft at all, yet XFree86 is free software nonetheless.  BSD is
+also non-copylefted free software (although the BSD terms have a <A
+HREF="/philosophy/bsd.html">serious drawback</A> and should not be
+imitated--if you want to release non-copylefted free software, please
+use the XFree86 terms instead).  Netscape software can also be <A
+HREF="http://www.gnu.org/philosophy/categories.html">free software</A>
+without being copylefted.
+
+<P>
+However, while this is not catastrophic, it is nonetheless a drawback.
+And because the NPL looks like a copyleft, some users may be confused
+about it, and might adopt the NPL, thinking that they are obtaining
+the benefits of copyleft for their software, when that is not the
+case.  To avoid this outcome, we will need to work hard to educate
+people about an issue that is not easy to explain in a few words.
+<P>
+
+<H4>3. Not respecting privacy</H4>
+
+<P>
+The next problem in the NPL is a show-stopper: if you make a change,
+you are required to publish it.  Private changes for your own use are
+not allowed; distributing a change only to a few friends is also
+forbidden.
+
+<P>
+When we think about the issues of free software, we usually focus on
+the freedom to distribute and modify, because this is what software
+developers most often try to prevent.  But the freedom NOT to
+distribute a copy, when you don't wish to, is also important.  For
+example, the freedom to make a modification and not show it to anyone
+is part of what we call ``privacy.''  The freedom to distribute your
+modification to a few friends, but not show it to the general public
+(or not show it YET) is also essential.  (Of course, if the program is
+free, your friends will be free to pass it on to others if they want
+to--but they will not be required to.)
+
+<P>
+Correcting the NPL to respect this basic freedom is absolutely
+essential, and our community must insist firmly on this.  It is not
+worth sacrificing a vital freedom for one additional program, no
+matter how useful and exciting it may be.
+
+<P>
+<H4>4. Not compatible with the GPL</H4>
+
+<P>
+There is one other serious problem in the NPL: it is incompatible with
+the GNU GPL.  It is impossible to combine NPL-covered code and GNU
+GPL-covered code together in one program, not even by linking separate
+object files or libraries; no matter how this is done, it has to
+violate one license or the other.
+
+<P>
+This conflict occurs because the GPL is serious about copyleft: it was
+designed to ensure that all changes and extensions to a free program
+must be free.  So it does not leave a loophole for making changes
+proprietary by putting them into a separate file.  To close this
+loophole, the GPL does not allow linking the copylefted program with
+code that has other restrictions or conditions--such as the NPL.
+
+<P>
+Being incompatible with the GPL does not make a program non-free; it
+does not raise a basic ethical issue.  But it is likely to create a
+serious problem for our community, dividing the code base into two
+collections that cannot be mixed.  As a practical matter, this problem
+needs to be solved.
+
+<P>
+Solving this by changing the GPL is possible, but that would entail
+abandoning copyleft--which would do more harm than good.  But it is
+possible to solve this problem with a small change in the NPL.  (See
+below for a specific way of doing this.)
+
+<P>
+<H4>5. A note about names</H4>
+<P>
+
+<P>
+NPL stands for Netscape Public License, but GPL does not stand for GNU
+Public License.  The full name of the our license is the GNU General
+Public License, abbreviated GNU GPL.  Sometimes people leave out the
+word ``GNU'' and write just GPL.
+
+<P>
+<H4>Conclusion</H4>
+
+<P>
+Since problems 3 and 4 are the most serious, I hope that people will
+politely and rationally explain to Netscape the importance of solving
+them.  Solutions are available; they just have to decide to use them.
+There is talk that Netscape has decided to correct problem 3--but
+letting them know this is important to you can't do any harm.  There
+is no word that they plan to correct problem 4.
+
+<HR>
+
+<P>
+Here is a possible way to permit linking NPL-covered code and
+GPL-covered code together.  It can be done by adding these two
+paragraphs to the NPL:
+
+<P>
+<PRE>
+A.1. You may distribute a Covered Work under the terms of the GNU
+     General Public License, version 2 or newer, as published by the
+     Free Software Foundation, when it is included in a Larger Work
+     which is as a whole distributed under the terms of the same
+     version of the GNU General Public License.
+
+A.2. If you have received a copy of a Larger Work under the terms of a
+     version or a choice of versions of the GNU General Public
+     License, and you make modifications to some NPL-covered portions
+     of this Larger Work, you have the option of altering these
+     portions to say that their distribution terms are that version or
+     that choice of versions of GNU General Public License.
+</PRE>
+<P>
+This allows people to combine NPL-covered code with GPL-covered code,
+and to distribute the combined work under the terms of the GNU GPL.
+
+<P>
+It permits people to release modifications to such combined works
+under the terms of the GNU GPL--but the easiest way to release them is
+under the NPL.
+
+<P>
+When people take advantage of A.2, their changes will be released only
+under the terms of the GNU GPL; so these changes would not be
+available for Netscape to use in proprietary versions.  It makes sense
+that Netscape would see this as unfortunate.
+
+<P>
+However, the NPL gives proprietary software developers an easy way to
+make their changes entirely unavailable to Netscape--by putting their
+code into separate files and calling the combination a Larger Work.
+In fact, this is easier, for them, than A.2 is for GPL users.
+
+<P>
+If Netscape feels it can live with the trouble of (effectively)
+proprietary modifications, surely the trouble of GPL-covered
+modifications is a small by comparison.  If Netscape believes that
+practical considerations will encourage most of the proprietary
+software world to release its changes back to Netscape, without being
+compelled to, the same reasons ought to apply in the free software
+world as well.  Netscape should recognize that this change is
+acceptable, and adopt it, to avoid confronting free software
+developers with a serious dilemma.
+
+<HR>
+
+<H4><A HREF="/philosophy/philosophy.html">Other Texts to Read</A></H4>
+
+<HR>
+
+Return to <A HREF="/home.html">GNU's home page</A>.
+<P>
+
+Please send FSF &amp; GNU inquiries &amp; questions to 
+
+<A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>.
+There are also <A HREF="/home.html#ContactInfo">other ways to
+contact</A> the FSF.
+<P>
+
+Please send comments on these web pages to
+
+<A HREF="mailto:webmasters@www.gnu.org"><EM>webmasters@www.gnu.org</EM></A>,
+send other questions to
+<A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>.
+<P>
+Copyright (C) 1998 Free Software Foundation, Inc.,
+59 Temple Place - Suite 330, Boston, MA  02111,  USA
+<P>
+Verbatim copying and distribution of this entire article is
+permitted in any medium, provided this notice is preserved.<P>
+Updated:
+<!-- hhmts start -->
+17 Dec 1998 tower
+<!-- hhmts end -->
+<HR>
+</BODY>
+</HTML>
+
+

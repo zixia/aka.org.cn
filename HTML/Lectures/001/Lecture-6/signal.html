@@ -1,0 +1,265 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+    <TITLE>信号</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312-80">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
+    <STYLE>
+    <!--
+        H1 { color: #ffff00 }
+        H2 { color: #ffff00 }
+        H3 { color: #ff00ff }
+        H4 { color: #ffff00 }
+        TD P { color: #b880b8 }
+        LI { color: #ffffff }
+        P { color: #00ffff }
+        PRE { color: #ffffff; font-family: "fixed" }
+        A:link { color: #00b8ff }
+        A:visited { color: #ff3366 }
+    -->
+    </STYLE>
+</HEAD>
+<BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="images/velvet.jpg">
+
+<A HREF="unreliable.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+<H1 ALIGN=CENTER>6.1&nbsp;&nbsp;信号<BR><BR>
+</H1>
+
+<UL>
+    <LI>概念</LI>
+    <LI>沿革</LI>
+    <LI>可重入性, 中断系统调用</LI>
+    <LI>Linux 中的信号</LI>
+    <LI>Linux 的信号实现</LI>
+</UL>
+
+<H3>6.1.1&nbsp;&nbsp;概念</H3>
+<UL>
+    <LI>信号是异步事件</LI>
+
+<PRE>
+===============================================================================
+    * 异步/同步: 不可预见/可预见
+    * 一般的 UNIX 系统有 30 或 31 个信号
+    * 信号有自己的名称和对应的编号
+    * 信号和异常处理机制
+===============================================================================
+</PRE>
+
+    <LI>信号的产生条件</LI>
+
+<PRE>
+===============================================================================
+    * 用户在按下特定的键之后, 将向该终端上的前台进程组发送信号. 比如, Ctrl+C.
+    * 硬件异常会产生信号: 比如被 0 除, 无效内存引用等.
+    * kill(2) 系统调用可允许进程向其他进程或进程组发送任意信号.
+    * kill(1) 命令允许用户向进程发送任意信号.
+    * 软件设置的条件, 比如 SIGALARM.
+===============================================================================
+</PRE>
+
+    <LI>信号的关联动作 (action) 或信号的处置 (disposition)</LI>
+
+<PRE>
+===============================================================================
+   * 忽略信号. 有两个信号永远不能忽略: SIGKILL 和 SIGSTOP, 它们为超级用户提供了
+     杀死和停止进程的必要方法. 忽略硬件异常产生的信号会出现什么样的问题?
+   * 捕获信号. 告诉内核在出现信号时调用我们自己定义的处理函数. 比如可以在处理
+     SIGCHLD 信号时利用 waitpid 获得子进程的退出状态, 以避免生成僵尸进程.
+   * 使用默认动作. 每个信号有其默认动作.
+-------------------------------------------------------------------------------
+   * 某些信号不能被忽略, 也不能被捕获.
+===============================================================================
+</PRE>
+
+    <LI>POSIX 定义的信号</LI>
+
+<PRE>
+===============================================================================
+       信号         值      动作     注释
+       -------------------------------------------------------------------------
+       SIGHUP        1        A      Hangup detected on controlling terminal
+                                     or death of controlling process
+       SIGINT        2        A      Interrupt from keyboard
+       SIGQUIT       3        A      Quit from keyboard
+       SIGILL        4        A      Illegal Instruction
+       SIGABRT       6        C      Abort signal from abort(3)
+       SIGFPE        8        C      Floating point exception
+       SIGKILL       9       AEF     Kill signal
+       SIGSEGV      11        C      Invalid memory reference
+       SIGPIPE      13        A      Broken pipe: write to pipe with no readers
+       SIGALRM      14        A      Timer signal from alarm(2)
+       SIGTERM      15        A      Termination signal
+       SIGUSR1   30,10,16     A      User-defined signal 1
+       SIGUSR2   31,12,17     A      User-defined signal 2
+       SIGCHLD   20,17,18     B      Child stopped or terminated
+       SIGCONT   19,18,25            Continue if stopped
+       SIGSTOP   17,19,23    DEF     Stop process
+       SIGTSTP   18,20,24     D      Stop typed at tty
+       SIGTTIN   21,21,26     D      tty input for background process
+       SIGTTOU   22,22,27     D      tty output for background process
+-------------------------------------------------------------------------------
+    * 信号值是 Linux 系统在不同平台上的取值, 第一个数对 Alpha 和 Sparc 有效, 中
+      间的数对 i386 和 PowerPC 有效, 最后一个数对 MIPS 有效. "-" 表现缺少该信号.
+
+    * A: 默认动作是终止进程
+    * B: 默认动作是忽略信号
+    * C: 默认动作是 core 转储
+    * D: 默认动作是停止进程
+    * E: 信号不能被捕获
+    * F: 信号不能被忽略
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>6.1.2&nbsp;&nbsp;沿革</H3>
+<UL>
+    <LI>信号出现在 UNIX 的早期版本中</LI>
+    <LI>但早期的信号模型是不可靠的, 信号可能被丢失, 也很难处理关键段</LI>
+    <LI>UNIX 的两个重要分支 BSD 和 System V 分别对早期的信号进行了扩展</LI>
+    <LI>但这两个系统的扩展并不兼容</LI>
+    <LI>POSIX 统一了这两种实现, 最终提供了可靠的信号模型</LI>
+</UL>
+
+<H3>6.1.3&nbsp;&nbsp;可重入性, 中断系统调用</H3>
+<UL>
+    <LI>可重入性的概念. 调用某个函数的过程中出现信号, 如果信号处理函数中再次调用该函数, 会出现什么样的后果?</LI>
+<PRE>
+===============================================================================
+可重入函数:
+
+     int foo1 (int a) {
+         return a*2;
+     }
+-------------------------------------------------------------------------------
+不可重入函数:
+
+     void foo2 (int a) {
+         static int integer [20];
+         static int i;
+
+         if (i &gt; 19 )
+             return;
+
+         integer [i] = a;
+         i ++;
+     }
+===============================================================================
+</PRE>
+
+    <LI>由于 errno 的特殊性, 如果信号处理函数调用了可能会修改 errno 的函数, 则应该保存并恢复 errno 的值</LI>
+
+    <LI>中断系统调用 (Interrupted System Call)</LI>
+    <LI>进程调用 "慢" 系统调用时, 如果发生信号, 内核会终止系统调用, 以便让进程有机会处理信号</LI>
+    <LI>慢系统调用: 可能会永远阻塞的系统调用</LI>
+
+<PRE>
+===============================================================================
+慢系统调用的分类:
+    * 从终端设备, 管道和网络设备上的文件读取.
+    * 向上述文件写入.
+    * 某些设备上的文件打开.
+    * pause 和 wait 系统调用.
+    * 某些 ioctl 操作.
+    * 某些进程间通讯函数.
+===============================================================================
+</PRE>
+
+    <LI>发生中断系统调用时, 被中断的系统调用返回错误值, 而 errno 被设置为 EINTR</LI>
+    <LI>BSD/Linux 对某些系统调用在发生中断系统调用时, 可自动重新启动该系统调用</LI>
+</UL>
+
+<H3>6.1.4&nbsp;&nbsp;Linux 中的信号</H3>
+<UL>
+    <LI>Linux 除支持上述 POSIX 定义的信号外, 还支持下面的信号</LI>
+
+<PRE>
+===============================================================================
+       Signal       Value     Action   Comment
+       ---------------------------------------------------------------------
+       SIGTRAP        5         CG     Trace/breakpoint trap
+       SIGIOT         6         CG     IOT trap. A synonym for SIGABRT
+       SIGEMT       7,-,7       G
+       SIGBUS      10,7,10      AG     Bus error
+       SIGSYS      12,-,12      G      Bad argument to routine (SVID)
+       SIGSTKFLT    -,16,-      AG     Stack fault on coprocessor
+       SIGURG      16,23,21     BG     Urgent condition on socket (4.2 BSD)
+       SIGIO       23,29,22     AG     I/O now possible (4.2 BSD)
+       SIGPOLL                  AG     A synonym for SIGIO (System V)
+       SIGCLD       -,-,18      G      A synonym for SIGCHLD
+       SIGXCPU     24,24,30     AG     CPU time limit exceeded (4.2 BSD)
+       SIGXFSZ     25,25,31     AG     File size limit exceeded (4.2 BSD)
+       SIGVTALRM   26,26,28     AG     Virtual alarm clock (4.2 BSD)
+       SIGPROF     27,27,29     AG     Profile alarm clock
+       SIGPWR      29,30,19     AG     Power failure (System V)
+       SIGINFO      29,-,-      G      A synonym for SIGPWR
+       SIGLOST      -,-,-       AG     File lock lost
+       SIGWINCH    28,28,20     BG     Window resize signal (4.3 BSD, Sun)
+       SIGUNUSED    -,31,-      AG     Unused signal
+-------------------------------------------------------------------------------
+    * 信号值是 Linux 系统在不同平台上的取值, 第一个数对 Alpha 和 Sparc 有效, 中
+      间的数对 i386 和 PowerPC 有效, 最后一个数对 MIPS 有效. "-" 表现缺少该信号.
+
+    * A: 默认动作是终止进程
+    * B: 默认动作是忽略信号
+    * C: 默认动作是 core 转储
+    * D: 默认动作是停止进程
+    * E: 信号不能被捕获
+    * F: 信号不能被忽略
+    * G: 非 POSIX 信号
+===============================================================================
+</PRE>
+
+</UL>
+
+<H3>6.1.5&nbsp;&nbsp;Linux 的信号实现</H3>
+<UL>
+    <LI>Linux 中没有信号的优先级</LI>
+    <LI>Linux 中没有信号不排队</LI>
+    <LI>i386 Linux 的每个进程有两个 32 位字, 分别表示当前挂起的信号以及阻塞信号</LI>
+    <LI>32 位字的每一位对应一个信号</LI>
+    <LI>如果产生信号, 且该信号不是 SIGKILL 或 SIGSTOP, 则当该信号没有被阻塞时才会被处理</LI>
+    <LI>否则就是挂起的 (pending) 信号</LI>
+    <LI>Linux 用 sigaction 结构表示每个信号的处理方式</LI>
+    <LI>信号发生时并不会立即得到处理, Linux 在如下几种情况下才有可能处理进程的信号.</LI>
+<PRE>
+===============================================================================
+   * 每次进程从系统调用中退出时.
+   * 内核在调度程序中选择执行该进程时.
+===============================================================================
+</PRE>
+    <LI>如果有任何一个未被阻塞的信号发出，内核就根据 sigaction 结构数组中的信息进行处理</LI>
+<PRE>
+===============================================================================
+    1．检查对应的 sigaction 结构，如果该信号不是 SIGKILL 或 SIGSTOP 信号，且被忽略，
+       则不处理该信号。
+    2．如果该信号利用默认的处理程序处理，则由内核处理该信号，否则转向第 3 步。
+    3．该信号由进程自己的处理程序处理，内核将修改当前进程的调用堆栈帧，并将进程的程
+       序计数寄存器修改为信号处理程序的入口地址。此后，指令将跳转到信号处理程序，当从信
+       号处理程序中返回时，实际就返回了进程的用户模式部分。
+===============================================================================
+</PRE>
+
+</UL>
+
+<P>
+<BR><BR>
+</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="images/striped.gif" NAME="Ruler" ALIGN=BOTTOM WIDTH=532 HEIGHT=13 BORDER=0></P>
+
+<P>
+<BR><BR>
+</P>
+
+<A HREF="unreliable.html"><IMG SRC="next.gif" ALT="Next"></A>
+<A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
+
+</BODY>
+</HTML>
+

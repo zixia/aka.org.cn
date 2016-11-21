@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=GB2312">
+    <TITLE>X architecture</TITLE>
+</HEAD>
+<BODY>
+<A HREF="X-what.html">上一页</A>
+<A HREF="X-prop.html">下一页</A>
+<p><B><FONT SIZE=+3>X的体系结构</FONT></B><UL>
+<P>X Window并不是一个单一的软件，而是由一组软件协同工作的一个系统。主要是由X Server和X Clients通过X Protocol在网络上通信完成应用任务。X Client决定做什么，X Server则决定怎么做。其基本架构为：
+<P><BR>
+<CENTER>
+<P><IMG SRC="X-arch.gif" BORDER=0 HEIGHT=84 WIDTH=391>
+<BR><P>图1：X系统的基本构成</CENTER>
+
+<LI>
+<FONT SIZE=+2>X Server</FONT></LI>
+<P>X Server控制了所有的X资源和实体，同时负责一切由client所传来的X事件。
+<UL>
+<LI>
+X资源：色彩，字形等；</LI>
+
+<LI>
+实体：输入，输出装置，显示器、键盘、鼠标等；</LI>
+
+<LI>
+X事件：键盘的输入，鼠标的移动，窗口大小改变等等；</LI>
+
+<LI>
+错误信息。</LI>
+</UL>
+一般情况下，我们可以将X
+Server简化理解为Display
+Server，就是管理显示器的。事实上，X
+Server通常也是根据其管理的显卡类型来命名的，如XF86_SVGA，XF86_VGA16，XF86_MONO等。X Server的实现可以是单线程的也可以是多线程的。现有的X Server种类包括Workstation，X Terminal，PC X Server，Web Browser。</UL>
+
+<UL>
+<LI>
+<FONT SIZE=+2>X Client(X application)</FONT></LI>
+<P>X Client就是X中的应用程序。很多在其它桌面系统中属于系统的功能，在X中都只是一个Client，特别是窗口管理器(Windows
+Manager: WM)。这种结构，使得X下的软件开发非常灵活。
+<BR>一个X Client若想要运行，必须打开一个显示器，连接一个X
+Server，然后通过与X
+Server之间的通信来完成所有的工作。
+<CENTER>
+<P><IMG SRC="X-arch-detail.gif" HEIGHT=684 WIDTH=710>
+<P>图2：X Server与Client间的交互</CENTER>
+</UL>
+
+<UL>
+<LI>
+<FONT SIZE=+2>X Protocol</FONT></LI>
+<P>X Protocol定义了应用和它的显示之间的客户/服务器关系。通过这个协议，应用与它的显示被分离开来。更进一步地，X协议被定义为两层：设备相关和设备无关的；X Client与X Server之间的通信是异步的双向协议，任何提供字节流通信的方式都可以使用，可以是IPC，也可以是TCP/IP。X Protocol隐藏了操作系统和硬件的特殊性。这样大大简化了应用的开发和X Window System的可移植性。
+</UL>
+<P><A HREF="X-what.html">上一页</A>
+<A HREF="X-prop.html">下一页</A>
+</BODY>
+</HTML>

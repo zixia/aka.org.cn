@@ -1,0 +1,47 @@
+<html>
+
+<head>
+<title>Introduction to the Internet Protocols</title>
+</head>
+
+<BODY TEXT="#000000" BGCOLOR="#eeedb7" LINK="#797E8C" VLINK="#4F4F4F" ALINK="#FF0000">
+
+<center><h4>TCPÖ®ÍâµÄÐ­Òé£ºUDPºÍICMP</h4></center>
+<center>By Xiabo</center>
+<p>&nbsp;&nbsp;Copyright (C) 1987, Charles L. Hedrick. </p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;ÈÎºÎÈË¿ÉÒÔ²¿·Ö»òÈ«²¿µÄ¸´ÖÆÕâ·ÝÎÄ¼þ£¬µ«±ØÐë£º</p>
+<blockquote><p>(1)¶Ô±¾ÎÄ¼þÈ«ÎÄµÄÈÎºÎ¸´ÖÆ»òÔÙ°æ±ØÐë±êÃ÷Rutgers 
+University£¬²¢ÇÒ±ØÐë°üÀ¨Õâ¸öÉùÃ÷£»
+<p>(2)¶Ô±¾ÎÄµÄÈÎºÎÆäËûÓ¦ÓÃ¶¼Ó¦¸ÃÖ¸Òý¶ÔÕâ¸öÊÖ²áºÍRutgers University£¬ÒÔ¼°±¾ÎÄµÄ°æÈ¨ÊôÓÚCharles HedrickÇÒµÃµ½Ðí
+¿ÉÊ¹ÓÃµÄÊÂÊµ¡£
+</blockquote>
+
+
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Æù½ñÎªÖ¹£¬ÎÒÃÇÒÑ¾­ÃèÊöÁË½öÊ¹ÓÃTCPµÄÁ¬½Ó¡£ÎÒÃÇÖªµÀTCPÓÐÒåÎñ°ÑÏûÏ¢·Ö³ÉÊý¾Ý°ü£¬²¢ÇÒ
+ÔÙÖØÐÂÕýÈ·µÄ×éºÏËüÃÇ¡£È»¶ø£¬ÔÚÐí¶àÓ¦ÓÃÖÐ£¬ÎÒÃÇ»áÓÐÕâÑùµÄÏûÏ¢£ºËüÃÇÖ»ÐèÒªÒ»¸öÊý¾Ý°ü¾Í¿ÉÒÔÁË¡£ÀýÈçÃû×Ö²éÕÒ¡£
+µ±Ò»¸öÓÃ»§ÏëÒªºÍÁíÒ»¸öÏµÍ³Á¬½ÓÊ±£¬ËûÍ¨³£¸ø³öµÄÊÇÄÇ¸öÏµÍ³µÄÃû×Ö£¬¶ø²»ÊÇInternetµØÖ·¡£ÏµÍ³Ê×ÏÈ±ØÐë°ÑÃû×Ö·­Òë³É
+µØÖ·¡£Òò´Ë£¬ÓÃ»§µÄÏµÍ³¾Í»á°Ñ²éÑ¯ÇëÇó·¢ËÍ¸øÓµÓÐÕâÖÖÊý¾Ý¿âµÄÏµÍ³¡£ÕâÖÖÇëÇó»áÊÇ·Ç³£¶ÌµÄ¡£Ëüµ±È»Ö»ÒªÒ»¸öÊý¾Ý°ü¾Í
+¹»ÁË¡£Ó¦´ðÒ²ÊÇÍ¬ÑùµÄÇé¿ö¡£Òò´Ë£¬Ê¹ÓÃTCP¾ÍÏÔµÃÓÐµãÉµ¡£µ±È»£¬TCPËù×öµÄÊÂÇé²¢²»½ö½öÊÇ°ÑÏûÏ¢·Ö³É¼¸¸öÊý¾Ý°ü¡£Ëü»¹
+ÒªÈ·ÈÏÊý¾ÝÊÇ·ñÊÕµ½£¬±ØÒªÊ±½øÐÐÖØ·¢¡£µ«¶ÔÓÚÕâÖÖÒ»¸öÊý¾Ý°ü¾Í¿ÉÒÔÈÝÄÉµÄÎÊÌâ£¬ÎÒÃÇ²»ÐèÒªËùÓÐTCPµÄ¸´ÔÓµÄ¶«Î÷¡£ÎÒÃÇ
+Èç¹û¼¸ÃëÖÓÖ®ºóÃ»ÓÐÊÕµ½Ó¦´ð£¬ÄÇÃ´ÖØÐÂ·¢ÎÊ¾ÍÊÇÁË¡£¶ÔÓÚÕâÑùµÄÓ¦ÓÃ£¬³ýÁËTCP£¬»¹ÓÐÆäËü¿É¹©Ñ¡ÔñµÄÐ­Òé¡£</p>
+
+
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;×î³£ÓÃµÄÑ¡ÔñÊÇUDP£¨¡°ÓÃ»§Êý¾Ý°üÐ­Òé¡±£©¡£UDPÊÇÎªÄÇÐ©Äã²»ÐèÒª½«Êý¾Ý°üË³ÐòÅÅ·ÅµÄÓ¦ÓÃ
+Éè¼ÆµÄ¡£ËüÏóTCPÒ»ÑùÊÊºÏÔÚÏµÍ³ÖÐÓ¦ÓÃ¡£ËüÓÐÒ»¸öUDPÍ·¡£ÍøÂç³ÌÐò°ÑUDPÍ·¼ÓÔÚÄãµÄÊý¾ÝÇ°Ãæ£¬¾ÍÏóËü»á°ÑÒ»¸öTCPÍ··ÅÔÚ
+ÄãµÄÊý¾ÝÇ°ÃæÒ»Ñù¡£È»ºóUDPÔÚ°ÑUDPÐ­ÒéºÅ·ÅÔÚÔ­±¾·ÅTCPÐ­ÒéºÅµÄµØ·½ºó°ÑÊý¾Ý·¢¸øIP£¬Ëü»áÔÙ¼ÓÉÏÒ»¸öIPÍ·¡£È»¶ø£¬UDP
+²¢²»×öTCPËù×öµÄÈ«²¿´¦Àí¡£Ëü²»°ÑÊý¾Ý·Ö³É¶à¸öÊý¾Ý°ü¡£Ëü²»¶ÔÊý¾Ý½øÐÐ¸ú×ÙÒÔ±ã±ØÒªÊ±ÖØ·¢Êý¾Ý¡£ËùÓÐUDPËùÌá¹©µÄÖ»ÊÇ
+¶Ë¿ÚºÅ£¬ÕâÑù¶à¸ö³ÌÐò¿ÉÒÔÒ»ÆðÊ¹ÓÃUDP¡£UDP¶Ë¿ÚºÅµÄÊ¹ÓÃºÍTCP¶Ë¿ÚºÅµÄÊ¹ÓÃÊÇÒ»ÑùµÄ¡£Ê¹ÓÃUDPµÄ·þÎñÆ÷Ò²ÓÐÖÜÖª¶Ë¿Ú¡£
+Çë×¢ÒâUDPÍ·±ÈTCPÍ·Òª¶Ì¡£ËüÈÔÈ»ÓÐÔ´ºÍÄ¿±ê¶Ë¿ÚºÅ£¬ÒÔ¼°Ð£ÑéºÍ,
+µ«Õâ¾ÍÊÇÊÂÇéµÄÈ«²¿¡£Ã»ÓÐÐòÁÐºÅ£¬ÒòÎªÕâÊÇ²»±ØÒªµÄ¡£UDP±»´¦ÀíÃû×Ö²éÕÒµÄÐ­Òé£¨Çë²Î¼ûIEN 116£¬RFC 882£¬ÒÔ¼°RFC
+ 883£©ÒÔ¼°Ò»ÏµÁÐÀàËÆµÄÐ­ÒéËùÊ¹ÓÃ¡£</p>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;ÁíÒ»¸ö¿É¹©Ñ¡ÔñµÄÐ­ÒéÊÇICMP£¨¡°Internet¿ØÖÆÏûÏ¢Ð­Òé¡±£©¡£ICMP±»ÓÃÓÚ´¦Àí´íÎóÏûÏ¢£¬
+ÒÔ¼°ÆäËüTCP/IPÈí¼þ×Ô¼ºÒª´¦ÀíµÄÏûÏ¢£¬¶ø·ÇÌØ¶¨µÄÓÃ»§³ÌÐò¡£ÀýÈç£¬ÄãÊÔÍ¼Á¬½ÓÒ»¸öÖ÷»ú£¬ÄãµÄÏµÍ³Ò²Ðí»áµÃµ½Ò»¸öICMP
+ÏûÏ¢Ëµ¡°Ö÷»úÎÞ·¨Á¬½Ó¡±¡£ICMPÒ²¿ÉÒÔ±»ÓÃÀ´ÕÒ³öÒ»Ð©¹ØÓÚÍøÂçµÄÐÅÏ¢¡£ICMPµÄÏêÏ¸×ÊÁÏÇë²Î¼ûRFC 792¡£ICMPÒ²ÊÇ°ÑÏûÏ¢·
+ÅÔÚÒ»¸öÊý¾Ý°üÖÐ£¬ÔÚÕâÒ»µãÉÏËüºÍUDPÀàËÆ¡£È»¶ø£¬ËüÉõÖÁ±ÈUDP»¹Òª¼òµ¥¡£ÔÚICMPÍ·ÖÐÃ»ÓÐ¶Ë¿ÚºÅ¡£ÒòÎª£¬ËùÓÐµÄICMPÏûÏ¢
+ÊÇÓÉÍøÂçÈí¼þ×Ô¼º½âÊÍµÄ£¬Òò´Ë²»ÐèÒª¸øÒ»¸ö¶Ë¿ÚºÅËµICMPÏûÏ¢Ó¦¸ÃÌá¹©¸øË­¡£</p>
+</body>
+</html>

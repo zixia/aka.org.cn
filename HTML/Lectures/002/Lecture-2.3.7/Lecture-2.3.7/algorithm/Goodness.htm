@@ -1,0 +1,204 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb_2312-80">
+<title>Goodness</title>
+</head>
+
+<body>
+
+<h2 style="margin-left:0cm;text-indent:0cm"><span
+style="font-family:黑体;
+mso-ascii-font-family:Arial">计算</span><span lang="EN-US">goodness</span><span
+style="font-family:黑体;mso-ascii-font-family:Arial">值</span></h2>
+
+<p class="MsoNormalIndent"><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;"> 
+&nbsp;&nbsp;&nbsp; 进程的</span><span lang="EN-US">goodness</span><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">值通过</span><b
+style="mso-bidi-font-weight:normal"><span lang="EN-US">goodness</span></b><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">函数计算。</span><b
+style="mso-bidi-font-weight:normal"><span lang="EN-US">goodness</span></b><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">返回下面两类中的一个值：</span><span
+lang="EN-US">1,000</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">以下或者</span><span
+lang="EN-US">1,000</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">以上。</span><span
+lang="EN-US">1,000</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">和</span><span
+lang="EN-US">1,000</span><span
+style="font-family:
+宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">以上的值只能赋给“实时”进程，从</span><span
+lang="EN-US">0</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">到</span><span
+lang="EN-US">999</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">的值只能赋给“普通”进程。实际上普通进程的</span><span
+lang="EN-US">goodness</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">值只使用了这个范围底部的一部分，从</span><span
+lang="EN-US">0</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">到</span><span
+lang="EN-US">41</span><span
+style="font-family:
+宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">（或者对于</span><span
+lang="EN-US">SMP</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">来说是</span><span
+lang="EN-US">0</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">到</span><span
+lang="EN-US">56</span><span
+style="font-family:
+宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">，因为</span><span
+lang="EN-US">SMP</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">模式会优先照顾等待同一个处理器的进程）。无论是在</span><span
+lang="EN-US">SMP</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">还是在</span><span
+lang="EN-US">UP</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">上，实时进程的</span><span
+lang="EN-US">goodness</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">值的范围都是从</span><span
+lang="EN-US">1,001</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">到</span><span
+lang="EN-US">1,099</span><span
+style="font-family:
+宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">。</span></p>
+
+<p class="MsoNormalIndent"><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;"> 
+&nbsp;&nbsp;&nbsp; 有关这两类</span><span lang="EN-US">goodness</span><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">结果的重要的一点是该值在实时系统中的范围肯定会比非实时系统的范围要高（因此偏移量（</span><span
+lang="EN-US">offset</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">）是</span><span
+lang="EN-US">100</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">而不是</span><span
+lang="EN-US">1000</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">）。</span><span
+lang="EN-US">POSIX..1b</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">规定内核要确保在实时进程和非实时进程同时竞争</span><span
+lang="EN-US">CPU</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">时，实时进程要优先于非实时进程。由于调度程序总是选择具有最大</span><span
+lang="EN-US">goodness</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">值的进程，又由于任何尚未释放</span><span
+lang="EN-US">CPU</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">的实时进程的</span><span
+lang="EN-US">goodness</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">值总是比非实时进程的</span><span
+lang="EN-US">goodness</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">大，</span><span
+lang="EN-US">Linux</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">对这一点的遵守是很容易得到证明的。</span></p>
+
+<p class="MsoNormalIndent"><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;"> 
+&nbsp;&nbsp;&nbsp; 尽管在</span><b style="mso-bidi-font-weight:normal"><span
+lang="EN-US">goodness</span></b><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">上面的标题注释中有所说明，该函数还是从不会返回</span><span
+lang="EN-US">-1,000</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">的，也不会返回其它的负值。由于</span><span
+lang="EN-US">idle</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">进程的</span><b
+style="mso-bidi-font-weight:normal"><span lang="EN-US">counter</span></b><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">值为负，所以如果使用</span><span
+lang="EN-US">idle</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">进程作为参数调用</span><b
+style="mso-bidi-font-weight:
+normal"><span lang="EN-US">goodness</span></b><span
+style="font-family:宋体;
+mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">，就会返回负值，但这是不会发生的。</span></p>
+
+<p class="MsoNormalIndent"><b style="mso-bidi-font-weight:normal"><span lang="EN-US"> 
+&nbsp;&nbsp;&nbsp; goodness</span></b><span
+style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">只是一个简单的函数，但是它是</span><span
+lang="EN-US">Linux</span><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">调度程序必不可少的部分。运行对立中的每个进程每次执行</span><b
+style="mso-bidi-font-weight:normal"><span lang="EN-US">schedule</span></b><span
+style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">时都可能调用它，因此其执行速度必须很快。但是如果一旦它调度失误，那么整个系统都要遭殃了。考虑到这些冲突压力，我想改进现有的系统是相当困难的。</span></p>
+
+<h3 class="HeadB"><a name="20825"></a>How Good Is a Runnable Process?&nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </h3>
+
+<p class="Body">Theheart of the scheduling algorithm includes identifying the best 
+candidateamong all processes in the runqueue list. This is what the <code>goodness(&nbsp; 
+)</code> function does. It receives as input parameters <code>prev</code> (the descriptor 
+pointer of the previously running process) and &nbsp; <code>p</code> (the descriptor 
+pointer of the process to evaluate). The integervalue <code>c</code> returned by <code>goodness(&nbsp; 
+)</code> measures the &quot;goodness&quot; of <code>p</code> and hasthe following 
+meanings:
+
+<dl>
+  <dt class="ListVariableTerm"><em>c</em> = -1000 </dt>
+  <dd class="ListVariable"><code>p</code> must never be selected; this value is returned when 
+    the runqueuelist contains only <code>init_task</code>.</dd>
+  <dt class="ListVariableTerm"><em>c</em> = 0 </dt>
+  <dd class="ListVariable"><code>p</code> has exhausted its quantum. Unless <code>p</code>&nbsp; 
+    is the first process in the runqueue list and all runnable processes havealso exhausted 
+    their quantum, it will not be selected for execution.</dd>
+  <dt class="ListVariableTerm">0 &lt; <em>c</em> &lt; 1000 </dt>
+  <dd class="ListVariable"><code>p</code> is a conventional process that has not exhausted its 
+    quantum; ahigher value of <code>c</code> denotes a higher level ofgoodness.</dd>
+  <dt class="ListVariableTerm"><em>c</em> &gt;= 1000 </dt>
+  <dd class="ListVariable"><code>p</code> is a real-time process; a higher value of <code>c</code> 
+    denotes a higher level of goodness.</dd>
+</dl>
+
+<p class="Body">The <code>goodness(&nbsp; )</code> function is equivalent to: &nbsp;&nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+
+<pre><code>if (p-&gt;policy != SCHED_OTHER) </code>
+<code>       return 1000 + p-&gt;rt_priority; </code>
+<code>if (p-&gt;counter == 0) </code>
+<code>       return 0; </code>
+<code>if (p-&gt;mm == prev-&gt;mm) </code>
+<code>       return p-&gt;counter + p-&gt;priority + 1; </code>
+<code>return p-&gt;counter + p-&gt;priority; </code></pre>
+
+<p class="Body">If the process is real-time, its goodness is set to at least 1000. If itis 
+a conventional process that has exhausted its quantum, its goodness isset to 0; otherwise, 
+it is set to <code>p-&gt;counter + p-&gt;priority</code>.</p>
+
+<p class="Body">A small bonus is given to <code>p</code> if it shares theaddress space 
+with <code>prev</code> (i.e., if their processdescriptors' <code>mm</code> fields point to 
+the same memorydescriptor). The rationale for this bonus is that if <code>p</code> runs 
+right after <code>prev</code>, it will usethe same page tables, hence the same memory; 
+some of the valuable data maystill be in the hardware cache.</p>
+</body>
+</html>

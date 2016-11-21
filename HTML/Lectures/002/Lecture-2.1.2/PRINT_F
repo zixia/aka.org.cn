@@ -1,0 +1,7 @@
+#!/usr/bin/perl
+
+@a = (1 , 2, 3);
+printf @a;
+print "\n";
+print @a;
+print "\n"; 

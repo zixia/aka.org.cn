@@ -1,0 +1,372 @@
+<HTML
+><HEAD
+><TITLE
+>Good project- and archive- naming practice</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.56"><LINK
+REL="HOME"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Introduction"
+HREF="x30.html"><LINK
+REL="NEXT"
+TITLE="Good licensing and copyright practice: the theory"
+HREF="x138.html"></HEAD
+><BODY
+CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+></TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x30.html"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x138.html"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN43"
+>2. Good project- and archive- naming practice</A
+></H1
+><P
+>As the load on maintainers of archives like Metalab, the PSA
+site and CPAN increases, there is an increasing trend for submissions
+to be processed partly or wholly by programs (rather than entirely by
+a human).</P
+><P
+>This makes it more important for project and archive-file names
+to fit regular patterns that computer programs can parse and
+understand.</P
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN47"
+>2.1. Use GNU-style names with a stem and major.minor.patch numbering.</A
+></H2
+><P
+>It's helpful to everybody if your archive files all have GNU-like
+names -- all-lower-case alphanumeric stem prefix, followed by a dash,
+followed by a version number, extension, and other suffixes.</P
+><P
+>Let's suppose you have a project you call `foobar' at version 1,
+release 2, level 3.  If it's got just one archive part (presumably the
+sources), here's what its names should look:</P
+><P
+></P
+><DIV
+CLASS="VARIABLELIST"
+><DL
+><DT
+>foobar-1.2.3.tar.gz</DT
+><DD
+><P
+>The source archive</P
+></DD
+><DT
+>foobar.lsm</DT
+><DD
+><P
+>The LSM file (assuming you're submitting to Metalab).</P
+></DD
+></DL
+></DIV
+><P
+>Please <I
+CLASS="EMPHASIS"
+>don't</I
+> use these:</P
+><P
+></P
+><DIV
+CLASS="VARIABLELIST"
+><DL
+><DT
+>foobar123.tar.gz</DT
+><DD
+><P
+>This looks to many programs like an archive
+for a project called`foobar123' with no version number.</P
+></DD
+><DT
+>foobar1.2.3.tar.gz</DT
+><DD
+><P
+>This looks to many programs like an archive
+for a project called `foobar1' at version 2.3.</P
+></DD
+><DT
+>foobar-v1.2.3.tar.gz</DT
+><DD
+><P
+>Many programs think this goes with a
+project called `foobar-v1'.</P
+></DD
+><DT
+>foo_bar-1.2.3.tar.gz</DT
+><DD
+><P
+>The underscore is hard for people to speak,
+type, and remember.</P
+></DD
+><DT
+>FooBar-1.2.3.tar.gz</DT
+><DD
+><P
+>Unless you <I
+CLASS="EMPHASIS"
+>like</I
+> looking like a
+marketing weenie.  This is also hard for people to speak, type, and 
+remember.</P
+></DD
+></DL
+></DIV
+><P
+>If you have to differentiate between source and binary archives, or
+between different kinds of binary, or express some kind of build
+option in the file name, please treat that as a file extension to go
+<I
+CLASS="EMPHASIS"
+>after</I
+> the version number. That is, please do this:</P
+><P
+></P
+><DIV
+CLASS="VARIABLELIST"
+><DL
+><DT
+>foobar-1.2.3.src.tar.gz</DT
+><DD
+><P
+>sources</P
+></DD
+><DT
+>foobar-1.2.3.bin.tar.gz</DT
+><DD
+><P
+> binaries, type not specified</P
+></DD
+><DT
+>foobar-1.2.3.bin.ELF.tar.gz</DT
+><DD
+><P
+>ELF binaries</P
+></DD
+><DT
+>foobar-1.2.3.bin.ELF.static.tar.gz</DT
+><DD
+><P
+>ELF binaries statically linked</P
+></DD
+><DT
+>foobar-1.2.3.bin.SPARC.tar.gz</DT
+><DD
+><P
+>SPARC binaries</P
+></DD
+></DL
+></DIV
+><P
+>Please <I
+CLASS="EMPHASIS"
+>don't</I
+> use names like
+`foobar-ELF-1.2.3.tar.gz', because programs have a hard time telling
+type infixes (like `-ELF') from the stem.</P
+><P
+>A good general form of name has these parts in order:</P
+><P
+></P
+><OL
+TYPE="1"
+><LI
+><P
+>project prefix</P
+></LI
+><LI
+><P
+>dash</P
+></LI
+><LI
+><P
+>version number</P
+></LI
+><LI
+><P
+>dot</P
+></LI
+><LI
+><P
+>"src" or "bin" (optional)</P
+></LI
+><LI
+><P
+>dot or dash (dot preferred)</P
+></LI
+><LI
+><P
+>binary type and options (optional)</P
+></LI
+><LI
+><P
+>archiving and compression extensions</P
+></LI
+></OL
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN127"
+>2.2. But respect local conventions where appropriate</A
+></H2
+><P
+>Some projects and communities have well-defined conventions for names and
+version numbers that aren't necessarily compatible with the above advice.
+For instance, Apache modules are generally named like mod_foo, and have
+both their own version number and the version of Apache with which they
+work.  Likewise, Perl modules have version numbers that can be treated as
+floating point numbers (e.g., you might see 1.303 rather than 1.3.3), and
+the distributions are generally named Foo-Bar-1.303.tar.gz for version
+1.303 of module Foo::Bar. (Perl itself, on the other hand, switched to
+using the conventions described un this document in late 1999.)</P
+><P
+>Look for and respect the conventions of specialized
+communities and developers; for general use, follow the above
+guidelines.</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN131"
+>2.3. Try hard to choose a name prefix that is unique and easy to type</A
+></H2
+><P
+>The stem prefix should be common to all a project's files, and it
+should be easy to read, type, and remember.  So please don't use
+underscores.  And don't capitalize or BiCapitalize without extremely
+good reason -- it messes up the natural human-eyeball search order and
+looks like some marketing weenie trying to be clever.</P
+><P
+>It confuses people when two different projects have the same
+stem name.  So try to check for collisions before your first release.
+Two good places to check are the <A
+HREF="http://www.ibiblio.org/pub/Linux/"
+TARGET="_top"
+>index file of Metalab</A
+>
+and the appindex at <A
+HREF="http://www.freshmeat.net/"
+TARGET="_top"
+>Freshmeat</A
+>.  Another good place
+to check is <A
+HREF="http://www.sourceforge.net/"
+TARGET="_top"
+>SourceForge</A
+>;
+do a name search there.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x30.html"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x138.html"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Introduction</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Good licensing and copyright practice: the theory</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

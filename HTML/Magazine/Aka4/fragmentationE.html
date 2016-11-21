@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Introduction to the Internet Protocols</TITLE>
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+<META content="MSHTML 5.00.2014.210" name=GENERATOR></HEAD>
+<BODY TEXT="#000000" BGCOLOR="#eeedb7" LINK="#797E8C" VLINK="#4F4F4F" ALINK="#FF0000">
+
+<center><H4>Datagram fragmentation and reassembly</H4></center>
+<P>Copyright (C) 1987, Charles L. Hedrick. Anyone may reproduce this document, 
+in whole or in part, provided that: (1) any copy or republication of the entire 
+document must show Rutgers University as the source, and must include this 
+notice; and (2) any other use of this material must reference this manual and 
+Rutgers University, and the fact that the material is copyright by Charles 
+Hedrick and is used by permission. 
+<P>TCP/IP is designed for use with many different kinds of network. 
+Unfortunately, network designers do not agree about how big packets can be. 
+Ethernet packets can be 1500 octets long. Arpanet packets have a maximum of 
+around 1000 octets. Some very fast networks have much larger packet sizes. At 
+first, you might think that IP should simply settle on the smallest possible 
+size. Unfortunately, this would cause serious performance problems. When 
+transferring large files, big packets are far more efficient than small ones. So 
+we want to be able to use the largest packet size possible. But we also want to 
+be able to handle networks with small limits. There are two provisions for this. 
+First, TCP has the ability to "negotiate" about datagram size. When a TCP 
+connection first opens, both ends can send the maximum datagram size they can 
+handle. The smaller of these numbers is used for the rest of the connection. 
+This allows two implementations that can handle big datagrams to use them, but 
+also lets them talk to implementations that can't handle them. However this 
+doesn't completely solve the problem. The most serious problem is that the two 
+ends don't necessarily know about all of the steps in between. For example, when 
+sending data between Rutgers and Berkeley, it is likely that both computers will 
+be on Ethernets. Thus they will both be prepared to handle 1500-octet datagrams. 
+However the connection will at some point end up going over the Arpanet. It 
+can't handle packets of that size. For this reason, there are provisions to 
+split datagrams up into pieces. (This is referred to as "fragmentation".) The IP 
+header contains fields indicating the a datagram has been split, and enough 
+information to let the pieces be put back together. If a gateway connects an 
+Ethernet to the Arpanet, it must be prepared to take 1500-octet Ethernet packets 
+and split them into pieces that will fit on the Arpanet. Furthermore, every host 
+implementation of TCP/IP must be prepared to accept pieces and put them back 
+together. This is referred to as "reassembly". 
+<P>TCP/IP implementations differ in the approach they take to deciding on 
+datagram size. It is fairly common for implementations to use 576-byte datagrams 
+whenever they can't verify that the entire path is able to handle larger 
+packets. This rather conservative strategy is used because of the number of 
+implementations with bugs in the code to reassemble fragments. Implementors 
+often try to avoid ever having fragmentation occur. Different implementors take 
+different approaches to deciding when it is safe to use large datagrams. Some 
+use them only for the local network. Others will use them for any network on the 
+same campus. 576 bytes is a "safe" size, which every implementation must 
+support. 
+</BODY></HTML>
