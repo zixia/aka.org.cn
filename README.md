@@ -4,9 +4,9 @@ AKA Information &amp; Technology Organization Home Page
 
 Pull Request is welcome! (for old fashion team members ...)
 
-## Screenshot
+## Screenshot (2003)
 
-[![AKA Web (2005)](docs/images/aka-web.png)](http://www.aka.net.cn)
+[![AKA Web (2003)](docs/images/aka-web.png)](http://www.aka.net.cn)
 
 ## HISTORY
 
