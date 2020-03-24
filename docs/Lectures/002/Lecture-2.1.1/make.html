@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <HTML>
 <HEAD>
-    <TITLE>GNU make �� makefile</TITLE>
+    <TITLE>GNU make 和 makefile</TITLE>
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
     <META NAME="GENERATOR" CONTENT="StarOffice/5.1 (Linux)">
     <META NAME="AUTHOR" CONTENT="Yongming Wei">
@@ -27,49 +27,49 @@
 <A HREF="utilities.html"><IMG SRC="next.gif" ALT="Next"></A>
 <A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
 
-<H1 ALIGN=CENTER>1.8&nbsp;&nbsp;GNU make �� makefile<BR><BR>
+<H1 ALIGN=CENTER>1.8&nbsp;&nbsp;GNU make 和 makefile<BR><BR>
 </H1>
 
 <UL>
     <LI><P>GNU make</LI>
-    <LI><P>makefile �����ṹ</LI>
-    <LI><P>makefile ����</LI>
-    <LI><P>GNU make ����ҪԤ�������</LI>
-    <LI><P>��������</LI>
-    <LI><P>makefile ����</LI>
-    <LI><P>���� make</LI>
+    <LI><P>makefile 基本结构</LI>
+    <LI><P>makefile 变量</LI>
+    <LI><P>GNU make 的主要预定义变量</LI>
+    <LI><P>隐含规则</LI>
+    <LI><P>makefile 范例</LI>
+    <LI><P>运行 make</LI>
 </UL>
 
 <H3>1.8.1&nbsp;&nbsp;GNU make</H3>
 <PRE>
-�ڴ��͵Ŀ�����Ŀ�У�ͨ���м�ʮ���ϰٸ���Դ�ļ������ÿ�ξ��ֹ����� gcc ������б���Ļ������
-�ǳ������㡣��ˣ�����ͨ������ make �������Զ���ɱ��빤������Щ����������������޸���ĳ����
-Դ�ļ�����ֻ���±����⼸��Դ�ļ������ĳ��ͷ�ļ����޸��ˣ������±������а�����ͷ�ļ���Դ�ļ���
-���������Զ�����ɴ��򻯿������������ⲻ��Ҫ�����±��롣
-ʵ���ϣ�make ����ͨ��һ����Ϊ makefile ���ļ�����ɲ��Զ�ά�����빤����makefile ��Ҫ����ĳ��
-�﷨���б�д������˵������α������Դ�ļ����������ɿ�ִ���ļ�����������Դ�ļ�֮���������ϵ��
-���޸�������ĳ��Դ�ļ�ʱ���������Դ�ļ������ڸ��ļ�����ҲҪ���±��������������ļ���Դ�ļ���
-makefile �ļ������������������ Windows NT �µı�����ά��������Ϣ�ĳ��÷�����ֻ���ڼ��ɿ�����
-���У��û�ͨ���ѺõĽ����޸� makefile �ļ����ѡ�
-Ĭ������£�GNU make �����ڵ�ǰ����Ŀ¼�а�����˳������ makefile��
+在大型的开发项目中，通常有几十到上百个的源文件，如果每次均手工键入 gcc 命令进行编译的话，则会
+非常不方便。因此，人们通常利用 make 工具来自动完成编译工作。这些工作包括：如果仅修改了某几个
+源文件，则只重新编译这几个源文件；如果某个头文件被修改了，则重新编译所有包含该头文件的源文件。
+利用这种自动编译可大大简化开发工作，避免不必要的重新编译。
+实际上，make 工具通过一个称为 makefile 的文件来完成并自动维护编译工作。makefile 需要按照某种
+语法进行编写，其中说明了如何编译各个源文件并连接生成可执行文件，并定义了源文件之间的依赖关系。
+当修改了其中某个源文件时，如果其他源文件依赖于该文件，则也要重新编译所有依赖该文件的源文件。
+makefile 文件是许多编译器，包括 Windows NT 下的编译器维护编译信息的常用方法，只是在集成开发环
+境中，用户通过友好的界面修改 makefile 文件而已。
+默认情况下，GNU make 工具在当前工作目录中按如下顺序搜索 makefile：
 * GNUmakefile
 * makefile
 * Makefile
-�� UNIX ϵͳ�У�ϰ��ʹ�� Makefile ��Ϊ makfile �ļ������Ҫʹ�������ļ���Ϊ makefile�����������
-������� make ����ѡ��ָ�� makefile �ļ���
+在 UNIX 系统中，习惯使用 Makefile 作为 makfile 文件。如果要使用其他文件作为 makefile，则可利用类
+似下面的 make 命令选项指定 makefile 文件：
 $ make -f Makefile.debug
 </PRE>
 
-<H3>1.8.2&nbsp;&nbsp;makefile �����ṹ</H3>
+<H3>1.8.2&nbsp;&nbsp;makefile 基本结构</H3>
 <PRE>
-makefile ��һ������������ݣ�
-* ��Ҫ�� make ���ߴ�������Ŀ��ͨ����Ŀ���ļ��Ϳ�ִ���ļ���ͨ��ʹ�á�Ŀ�꣨target����һ������ʾ
-Ҫ��������Ŀ��
-* Ҫ��������Ŀ��������Щ�ļ���
-* ����ÿ����Ŀʱ��Ҫ���е����
-���磬������������һ�� C++ Դ�ļ� test.C����Դ�ļ��������Զ����ͷ�ļ� test.h����Ŀ���ļ� test.o
- ��ȷ����������Դ�ļ���test.C �� test.h�����⣬�����ֻϣ������ g++ ���������� test.o Ŀ���ļ���
-��ʱ���Ϳ����������µ� makefile ������ test.o �Ĵ�������
+makefile 中一般包含如下内容：
+* 需要由 make 工具创建的项目，通常是目标文件和可执行文件。通常使用“目标（target）”一词来表示
+要创建的项目。
+* 要创建的项目依赖于哪些文件。
+* 创建每个项目时需要运行的命令。
+例如，假设你现在有一个 C++ 源文件 test.C，该源文件包含有自定义的头文件 test.h，则目标文件 test.o
+ 明确依赖于两个源文件：test.C 和 test.h。另外，你可能只希望利用 g++ 命令来生成 test.o 目标文件。
+这时，就可以利用如下的 makefile 来定义 test.o 的创建规则：
 
 # This makefile just is a example.
 # The following lines indicate how test.o depends
@@ -78,26 +78,26 @@ makefile ��һ������������ݣ�
 test.o: test.C test.h
     g++ -c -g test.C
 
-�����������ע�⵽����һ���ַ�Ϊ # ����Ϊע���С���һ����ע����ָ�� test.o ΪĿ�꣬���������� 
-test.C �� test.h �ļ���������ָ������δ�Ŀ�����������ļ�����Ŀ�ꡣ
-�� test.C �� test.h �ļ��ڱ���֮���ֱ��޸ģ��� make ���߿��Զ����±��� test.o�������ǰ������
-����֮�䣬test.C �� test.h ��û�б��޸ģ����� test.o �����ڵĻ�����û�б�Ҫ���±��롣��������
-��ϵ�ڶ�Դ�ļ��ĳ��������������Ҫ��ͨ������������ϵ�Ķ��壬make ���߿ɱ������಻��Ҫ�ı��빤
-������Ȼ������ Shell �ű�Ҳ���Դﵽ�Զ������Ч�������ǣ�Shell �ű���ȫ�������κ�Դ�ļ�������
-��Щ����Ҫ���±����Դ�ļ����� make ������ɸ���Ŀ����һ�α����ʱ���Ŀ����������Դ�ļ��ĸ���
-ʱ����Զ��ж�Ӧ�������ĸ�Դ�ļ���
-һ�� makefile �ļ��пɶ�����Ŀ�꣬���� make target �����ָ��Ҫ�����Ŀ�꣬�����ָ��Ŀ�꣬
-��ʹ�õ�һ��Ŀ�ꡣͨ����makefile �ж����� clean Ŀ�꣬�����������������е��м��ļ������磺
+从上面的例子注意到，第一个字符为 # 的行为注释行。第一个非注释行指定 test.o 为目标，并且依赖于 
+test.C 和 test.h 文件。随后的行指定了如何从目标所依赖的文件建立目标。
+当 test.C 或 test.h 文件在编译之后又被修改，则 make 工具可自动重新编译 test.o，如果在前后两次
+编译之间，test.C 和 test.h 均没有被修改，而且 test.o 还存在的话，就没有必要重新编译。这种依赖
+关系在多源文件的程序编译中尤其重要。通过这种依赖关系的定义，make 工具可避免许多不必要的编译工
+作。当然，利用 Shell 脚本也可以达到自动编译的效果，但是，Shell 脚本将全部编译任何源文件，包括
+哪些不必要重新编译的源文件，而 make 工具则可根据目标上一次编译的时间和目标所依赖的源文件的更新
+时间而自动判断应当编译哪个源文件。
+一个 makefile 文件中可定义多个目标，利用 make target 命令可指定要编译的目标，如果不指定目标，
+则使用第一个目标。通常，makefile 中定义有 clean 目标，可用来清除编译过程中的中间文件，例如：
 clean:
     rm -f *.o
-���� make clean ʱ����ִ�� rm -f *.o �������ɾ�����б�������в����������м��ļ���
+运行 make clean 时，将执行 rm -f *.o 命令，最终删除所有编译过程中产生的所有中间文件。
 </PRE>
 
-<H3>1.8.3&nbsp;&nbsp;makefile ����</H3>
+<H3>1.8.3&nbsp;&nbsp;makefile 变量</H3>
 <PRE>
-GNU �� make ���߳��ṩ�н���Ŀ��Ļ�������֮�⣬����������ڱ��������Թ�ϵ�Լ�����Ŀ����������
-ɫ������֮һ���Ǳ������Ķ��������������Ҫ����ͬ�ı���ѡ��ͬʱ����ʮ���� C Դ�ļ�����Ϊÿ��Ŀ
-��ı���ָ���߳��ı���ѡ��Ļ������Ƿǳ���ζ�ġ������ü򵥵ı������壬�ɱ������ַ�ζ�Ĺ�����
+GNU 的 make 工具除提供有建立目标的基本功能之外，还有许多便于表达依赖性关系以及建立目标的命令的特
+色。其中之一就是变量或宏的定义能力。如果你要以相同的编译选项同时编译十几个 C 源文件，而为每个目
+标的编译指定冗长的编译选项的话，将是非常乏味的。但利用简单的变量定义，可避免这种乏味的工作：
 
 # Define macros for name of compiler
 CC = gcc
@@ -109,84 +109,84 @@ CCFLAGS = -D_DEBUG -g -m486
 test.o: test.c test.h
     $(CC) -c $(CCFLAGS) test.c
 
-������������У�CC �� CCFLAGS ���� make �ı�����GNU make ͨ����֮Ϊ������������ UNIX �� make 
-���߳�֮Ϊ�꣬ʵ����ͬһ���������� makefile �����ñ�����ֵʱ��ֻ�������֮ǰ���� $ ���ţ���
-����� $(CC) �� $(CCFLAGS)��
+在上面的例子中，CC 和 CCFLAGS 就是 make 的变量。GNU make 通常称之为变量，而其他 UNIX 的 make 
+工具称之为宏，实际是同一个东西。在 makefile 中引用变量的值时，只需变量名之前添加 $ 符号，如
+上面的 $(CC) 和 $(CCFLAGS)。
 </PRE>
 
-<H3>1.8.4&nbsp;&nbsp;GNU make ����ҪԤ�������</H3>
+<H3>1.8.4&nbsp;&nbsp;GNU make 的主要预定义变量</H3>
 <PRE>
-GNU make ������Ԥ����ı�������Щ������������ĺ��壬���ڹ�����ʹ�á��� 1-5 ������һЩ��Ҫ��
-Ԥ�������������Щ�����⣬GNU make �������еĻ���������Ϊ�Լ���Ԥ���������
+GNU make 有许多预定义的变量，这些变量具有特殊的含义，可在规则中使用。表 1-5 给出了一些主要的
+预定义变量，除这些变量外，GNU make 还将所有的环境变量作为自己的预定义变量。
 
-                        �� 1-5  GNU make ����ҪԤ�������
-Ԥ�������                      ����
-$*              ��������չ����Ŀ���ļ����ơ�
-$+              ���е������ļ����Կո�ֿ������Գ��ֵ��Ⱥ�Ϊ�򣬿��ܰ����ظ��������ļ���
-$&lt;              ��һ�������ļ������ơ�
-$?              ���е������ļ����Կո�ֿ�����Щ�����ļ����޸����ڱ�Ŀ��Ĵ�����������
-$@              Ŀ����������ơ�
-$^              ���е������ļ����Կո�ֿ����������ظ��������ļ���
-$%              ���Ŀ���ǹ鵵��Ա����ñ�����ʾĿ��Ĺ鵵��Ա���ơ����磬���Ŀ������
-                Ϊ mytarget.so(image.o)���� $@ Ϊ mytarget.so���� $% Ϊ image.o��
-AR              �鵵ά����������ƣ�Ĭ��ֵΪ ar��
-ARFLAGS         �鵵ά�������ѡ�
-AS              ����������ƣ�Ĭ��ֵΪ as��
-ASFLAGS         �������ѡ�
-CC              C �����������ƣ�Ĭ��ֵΪ cc��
-CFLAGS          C ��������ѡ�
-CPP             C Ԥ�����������ƣ�Ĭ��ֵΪ $(CC) -E��
-CPPFLAGS        C Ԥ�����ѡ�
-CXX             C++ �����������ƣ�Ĭ��ֵΪ g++��
-CXXFLAGS        C++ ��������ѡ�
-FC              FORTRAN �����������ƣ�Ĭ��ֵΪ f77��
-FFLAGS          FORTRAN ��������ѡ�
+                        表 1-5  GNU make 的主要预定义变量
+预定义变量                      含义
+$*              不包含扩展名的目标文件名称。
+$+              所有的依赖文件，以空格分开，并以出现的先后为序，可能包含重复的依赖文件。
+$&lt;              第一个依赖文件的名称。
+$?              所有的依赖文件，以空格分开，这些依赖文件的修改日期比目标的创建日期晚。
+$@              目标的完整名称。
+$^              所有的依赖文件，以空格分开，不包含重复的依赖文件。
+$%              如果目标是归档成员，则该变量表示目标的归档成员名称。例如，如果目标名称
+                为 mytarget.so(image.o)，则 $@ 为 mytarget.so，而 $% 为 image.o。
+AR              归档维护程序的名称，默认值为 ar。
+ARFLAGS         归档维护程序的选项。
+AS              汇编程序的名称，默认值为 as。
+ASFLAGS         汇编程序的选项。
+CC              C 编译器的名称，默认值为 cc。
+CFLAGS          C 编译器的选项。
+CPP             C 预编译器的名称，默认值为 $(CC) -E。
+CPPFLAGS        C 预编译的选项。
+CXX             C++ 编译器的名称，默认值为 g++。
+CXXFLAGS        C++ 编译器的选项。
+FC              FORTRAN 编译器的名称，默认值为 f77。
+FFLAGS          FORTRAN 编译器的选项。
 </PRE>
 
-<H3>1.8.5&nbsp;&nbsp;��������</H3>
+<H3>1.8.5&nbsp;&nbsp;隐含规则</H3>
 <PRE>
-GNU make ������һЩ���õĻ������Ĺ�����Щ����������δӲ�ͬ�������ļ������ض����͵�Ŀ�ꡣ
-GNU make ֧���������͵���������
-* ��׺����Suffix Rule������׺�����Ƕ�������������Ϸ�񷽷�����׺�������˽�һ������ĳ��
-��׺���ļ������磬.c �ļ���ת��Ϊ��������һ�ֺ�׺���ļ������磬.o �ļ����ķ�����ÿ����׺��
-���������ɶԳ��ֵĺ�׺�����壬���磬�� .c �ļ�ת��Ϊ .o �ļ��ĺ�׺����ɶ���Ϊ��
+GNU make 包含有一些内置的或隐含的规则，这些规则定义了如何从不同的依赖文件建立特定类型的目标。
+GNU make 支持两种类型的隐含规则：
+* 后缀规则（Suffix Rule）。后缀规则是定义隐含规则的老风格方法。后缀规则定义了将一个具有某个
+后缀的文件（例如，.c 文件）转换为具有另外一种后缀的文件（例如，.o 文件）的方法。每个后缀规
+则以两个成对出现的后缀名定义，例如，将 .c 文件转换为 .o 文件的后缀规则可定义为：
 
 .c.o:
 $(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $&lt;
 
-* ģʽ����pattern rules�������ֹ������ͨ�ã���Ϊ��������ģʽ��������Ӹ��ӵ������Թ���
-ģʽ���������ǳ�������������򣬵���Ŀ�����Ƶ�ǰ�����һ�� % �ţ�ͬʱ����������Ŀ�������
-�ļ�֮��Ĺ�ϵ�����������ģʽ����������ν�����һ�� X.c �ļ�ת��Ϊ X.o �ļ���
+* 模式规则（pattern rules）。这种规则更加通用，因为可以利用模式规则定义更加复杂的依赖性规则。
+模式规则看起来非常类似于正则规则，但在目标名称的前面多了一个 % 号，同时可用来定义目标和依赖
+文件之间的关系，例如下面的模式规则定义了如何将任意一个 X.c 文件转换为 X.o 文件：
 
 %.c:%.o
 $(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $&lt;
 
 </PRE>
 
-<H3>1.8.6&nbsp;&nbsp;makefile ����</H3>
+<H3>1.8.6&nbsp;&nbsp;makefile 范例</H3>
 <P>#SAMPLE#</P>
-<P>CCE �� Makefile</P>
+<P>CCE 的 Makefile</P>
 
-<H3>1.8.7&nbsp;&nbsp;���� make</H3>
+<H3>1.8.7&nbsp;&nbsp;运行 make</H3>
 <PRE>
-����֪����ֱ���� make ����ĺ������Ŀ�����ɽ���ָ����Ŀ�꣬���ֱ������ make��������һ��
-Ŀ�ꡣ���ǻ�֪�������� make -f mymakefile ����������ָ�� make ʹ���ض��� makefile��������
-Ĭ�ϵ� GNUmakefile��makefile �� Makefile���� GNU make �����һЩ����ѡ��� 1-6 ������
-��Щѡ�
+我们知道，直接在 make 命令的后面键入目标名可建立指定的目标，如果直接运行 make，则建立第一个
+目标。我们还知道可以用 make -f mymakefile 这样的命令指定 make 使用特定的 makefile，而不是
+默认的 GNUmakefile、makefile 或 Makefile。但 GNU make 命令还有一些其他选项，表 1-6 给出了
+这些选项。
 
-                        �� 1-6  GNU make ����ĳ���������ѡ��
+                        表 1-6  GNU make 命令的常用命令行选项
 
-������ѡ��              ����
--C DIR              �ڶ�ȡ makefile ֮ǰ�ı䵽ָ����Ŀ¼ DIR��
--f FILE             ��ָ���� FILE �ļ���Ϊ makefile��
--h                  ��ʾ���е� make ѡ�
--i                  �������е�����ִ�д���
--I DIR              ���������� makefile �ļ�ʱ�������ø�ѡ��ָ������Ŀ¼��
--n                  ֻ��ӡҪִ�е��������ִ����Щ���
--p                  ��ʾ make �������ݿ����������
--s                  ��ִ������ʱ����ʾ���
--w                  �ڴ��� makefile ֮ǰ��֮����ʾ����Ŀ¼��
--W FILE             �ٶ��ļ� FILE �Ѿ����޸ġ�
+命令行选项              含义
+-C DIR              在读取 makefile 之前改变到指定的目录 DIR。
+-f FILE             以指定的 FILE 文件作为 makefile。
+-h                  显示所有的 make 选项。
+-i                  忽略所有的命令执行错误。
+-I DIR              当包含其他 makefile 文件时，可利用该选项指定搜索目录。
+-n                  只打印要执行的命令，但不执行这些命令。
+-p                  显示 make 变量数据库和隐含规则。
+-s                  在执行命令时不显示命令。
+-w                  在处理 makefile 之前和之后，显示工作目录。
+-W FILE             假定文件 FILE 已经被修改。
 </PRE>
 
 <P>

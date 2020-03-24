@@ -1,25 +1,25 @@
-¡¾AKA¡¿½²×ù ±¨Ãû¿ªÊ¼ÁË
+ã€AKAã€‘è®²åº§ æŠ¥åå¼€å§‹äº†
 
-¡¾AKA¡¿½²×ù ±¨Ãû¿ªÊ¼ÁË
-         ôß IBM developerWorks & AKA ÁªºÏÏµÁÐ½²×ù
+ã€AKAã€‘è®²åº§ æŠ¥åå¼€å§‹äº†
+         æš¨ IBM developerWorks & AKA è”åˆç³»åˆ—è®²åº§
 -------------------------------------------------
 
-µÚÈýÆÚ AKA ½²×ù±¨Ãû¹¤×÷¿ªÊ¼ÁË£¡±¨ÃûÍøÖ·ÊÇ£º
+ç¬¬ä¸‰æœŸ AKA è®²åº§æŠ¥åå·¥ä½œå¼€å§‹äº†ï¼æŠ¥åç½‘å€æ˜¯ï¼š
     http://aka.org.cn/Lectures/003/Prepare/announce.html
 
-±¾´Î±¨Ãû¹¤×÷È«²¿Í¨¹ýÍøÂçµÄWWW·½Ê½½øÐÐ£¬²»´¦ÀíÔÚBBSÉÏºÍÍ¨¹ýEmail
-±¨ÃûµÄÉêÇë¡£ÏµÁÐ½²×ùÖ¼ÔÚÆÕ¼°ÖªÊ¶¡¢´Ù½ø½»Á÷¡£ËùÒÔÏµÁÐ½²×ù½«ÊÇÍê
-È«¹«¿ªºÍ¿ª·ÅµÄ£¬ÈÎºÎÈË¾ù¿ÉÒÔÃâ·ÑÀ´Ìý½²£¬¶øÇÒÃ¿´Î½²×ù½áÊøºó£¬½²
-×ùµÄËùÓÐ×ÊÁÏÒ²½«»áÔÚAKAµÄÍøÕ¾ÉÏ¹«¿ª¡£ 
+æœ¬æ¬¡æŠ¥åå·¥ä½œå…¨éƒ¨é€šè¿‡ç½‘ç»œçš„WWWæ–¹å¼è¿›è¡Œï¼Œä¸å¤„ç†åœ¨BBSä¸Šå’Œé€šè¿‡Email
+æŠ¥åçš„ç”³è¯·ã€‚ç³»åˆ—è®²åº§æ—¨åœ¨æ™®åŠçŸ¥è¯†ã€ä¿ƒè¿›äº¤æµã€‚æ‰€ä»¥ç³»åˆ—è®²åº§å°†æ˜¯å®Œ
+å…¨å…¬å¼€å’Œå¼€æ”¾çš„ï¼Œä»»ä½•äººå‡å¯ä»¥å…è´¹æ¥å¬è®²ï¼Œè€Œä¸”æ¯æ¬¡è®²åº§ç»“æŸåŽï¼Œè®²
+åº§çš„æ‰€æœ‰èµ„æ–™ä¹Ÿå°†ä¼šåœ¨AKAçš„ç½‘ç«™ä¸Šå…¬å¼€ã€‚ 
 
-ÎÒÃÇÔÚÇ°Á½ÆÚ½²×ùÖÐ¶¼Îª²Î¼Ó½²×ùµÄÍ¬Ñ§×¼±¸ÁËÎï³¬ËùÖµµÄ½±Æ·£¬ÕâÆÚ
-½²×ùÎÒÃÇ½«¼ÌÐø±£³ÖÕâ¸ö×ö·¨¡£±¨ÃûµÄÍ¬Ñ§¼´ÓÐ»ú»áÔÚ½²×ù½áÊøÊ±»ñÔù
-¾«ÃÀ½±Æ·Ò»·Ý¡£
+æˆ‘ä»¬åœ¨å‰ä¸¤æœŸè®²åº§ä¸­éƒ½ä¸ºå‚åŠ è®²åº§çš„åŒå­¦å‡†å¤‡äº†ç‰©è¶…æ‰€å€¼çš„å¥–å“ï¼Œè¿™æœŸ
+è®²åº§æˆ‘ä»¬å°†ç»§ç»­ä¿æŒè¿™ä¸ªåšæ³•ã€‚æŠ¥åçš„åŒå­¦å³æœ‰æœºä¼šåœ¨è®²åº§ç»“æŸæ—¶èŽ·èµ 
+ç²¾ç¾Žå¥–å“ä¸€ä»½ã€‚
 
-¹ØÓÚ±¾ÆÚ½²×ùµÄ³õ²½°²ÅÅ£¬Çë¼û£º
+å…³äºŽæœ¬æœŸè®²åº§çš„åˆæ­¥å®‰æŽ’ï¼Œè¯·è§ï¼š
     http://aka.org.cn/Lectures/003/Prepare/planDraft.html
 
 
 ====================================================
 IBM developerWorks(www.cn.ibm.com/developerWorks) 
-AKA(http://www.aka.org.cn)     ¹²×£±¾ÆÚ½²×ùÔ²Âú³É¹¦¡£
+AKA(http://www.aka.org.cn)     å…±ç¥æœ¬æœŸè®²åº§åœ†æ»¡æˆåŠŸã€‚

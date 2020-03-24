@@ -1,10 +1,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <HTML>
 <HEAD>
-    <TITLE>Ïß³ÌÖĞµÄĞÅºÅ´¦Àí</TITLE>
+    <TITLE>çº¿ç¨‹ä¸­çš„ä¿¡å·å¤„ç†</TITLE>
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312-80">
-    <META NAME="COPYRIGHT" CONTENT="ÎºÓÀÃ÷">
-    <META NAME="AUTHOR" CONTENT="ÎºÓÀÃ÷">
+    <META NAME="COPYRIGHT" CONTENT="é­æ°¸æ˜">
+    <META NAME="AUTHOR" CONTENT="é­æ°¸æ˜">
     <STYLE>
     <!--
         H1 { color: #ffff00 }
@@ -26,27 +26,27 @@
 <A HREF="terminal.html"><IMG SRC="next.gif" ALT="Next"></A>
 <A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
 
-<H1 ALIGN=CENTER>6.5&nbsp;&nbsp;Ïß³ÌÖĞµÄĞÅºÅ´¦Àí<BR><BR>
+<H1 ALIGN=CENTER>6.5&nbsp;&nbsp;çº¿ç¨‹ä¸­çš„ä¿¡å·å¤„ç†<BR><BR>
 </H1>
 
 <UL>
-        <LI>¸ÅÄî</LI>
+        <LI>æ¦‚å¿µ</LI>
         <LI>pthread_sigmask</LI>
-        <LI>pthread_kill ºÍ sigwait</LI>
+        <LI>pthread_kill å’Œ sigwait</LI>
 </UL>
 
-<H3>6.5.1&nbsp;&nbsp;¸ÅÄî</H3>
+<H3>6.5.1&nbsp;&nbsp;æ¦‚å¿µ</H3>
 <UL>
-    <LI>°´ÕÕ POSIX, Òì²½ (Íâ²¿) ĞÅºÅ·¢ËÍµ½Õû¸ö½ø³Ì.</LI>
-    <LI>ËùÓĞÏß³Ì¹²ÏíÍ¬Ò»¸öÉèÖÃ, ¼´Í¨¹ı sigaction ÉèÖÃµÄÏß³Ì´¦ÖÃ·½·¨.</LI>
-    <LI>Ã¿¸öÏß³ÌÓĞ×Ô¼ºµÄĞÅºÅÑÚÂë, Ïß³Ì¿â¸ù¾İ¸ÃÑÚÂë¾ö¶¨½«ĞÅºÅ·¢ËÍµ½ÄÄ¸öÏß³Ì.</LI>
-    <LI>ÓÉÓÚ Linux Ïß³ÌÊµÏÖÉÏµÄ¶ÀÌØĞÔ, Íâ²¿ĞÅºÅÊ¼ÖÕ·¢ËÍµ½ÌØ¶¨µÄÏß³Ì.</LI>
+    <LI>æŒ‰ç…§ POSIX, å¼‚æ­¥ (å¤–éƒ¨) ä¿¡å·å‘é€åˆ°æ•´ä¸ªè¿›ç¨‹.</LI>
+    <LI>æ‰€æœ‰çº¿ç¨‹å…±äº«åŒä¸€ä¸ªè®¾ç½®, å³é€šè¿‡ sigaction è®¾ç½®çš„çº¿ç¨‹å¤„ç½®æ–¹æ³•.</LI>
+    <LI>æ¯ä¸ªçº¿ç¨‹æœ‰è‡ªå·±çš„ä¿¡å·æ©ç , çº¿ç¨‹åº“æ ¹æ®è¯¥æ©ç å†³å®šå°†ä¿¡å·å‘é€åˆ°å“ªä¸ªçº¿ç¨‹.</LI>
+    <LI>ç”±äº Linux çº¿ç¨‹å®ç°ä¸Šçš„ç‹¬ç‰¹æ€§, å¤–éƒ¨ä¿¡å·å§‹ç»ˆå‘é€åˆ°ç‰¹å®šçš„çº¿ç¨‹.</LI>
 </UL>
 
 <H3>6.5.2&nbsp;&nbsp;pthread_sigmask</H3>
 <UL>
-    <LI>pthread_sigmask ÓÃÀ´¶¨ÒåÏß³ÌµÄĞÅºÅÑÚÂë</LI>
-    <LI>Æä½Ó¿ÚÓë sigprocmask Ò»Ñù</LI>
+    <LI>pthread_sigmask ç”¨æ¥å®šä¹‰çº¿ç¨‹çš„ä¿¡å·æ©ç </LI>
+    <LI>å…¶æ¥å£ä¸ sigprocmask ä¸€æ ·</LI>
 <PRE>
 ===============================================================================
        #include &lt;pthread.h&gt;
@@ -58,7 +58,7 @@
 
 </UL>
 
-<H3>6.5.3&nbsp;&nbsp;pthread_kill ºÍ sigwait</H3>
+<H3>6.5.3&nbsp;&nbsp;pthread_kill å’Œ sigwait</H3>
 <PRE>
 ===============================================================================
        #include <pthread.h>
@@ -70,10 +70,10 @@
 </PRE>
 
 <UL>
-    <LI>pthread_kill ÏòÌØ¶¨µÄÏß³Ì·¢ËÍĞÅºÅ.</LI>
-    <LI>sigwait Ôİ¶¨µ÷ÓÃÏß³Ì, Ö±µ½ set ÖĞ¶¨ÒåµÄÄ³¸öĞÅºÅµİ´ïµ÷ÓÃÏß³Ì.</LI>
-    <LI>sigwait ·µ»ØÊ±, sig ÖĞ±£´æµÄÊÇ½ÓÊÕµ½µÄĞÅºÅ±àºÅ.</LI>
-    <LI>sigwait ËùµÈ´ıµÄĞÅºÅ±ØĞëÔÚËùÓĞÏß³ÌÖĞ×èÈû, ¶ø²»½ö½öÊÇµ÷ÓÃÏß³Ì.</LI>
+    <LI>pthread_kill å‘ç‰¹å®šçš„çº¿ç¨‹å‘é€ä¿¡å·.</LI>
+    <LI>sigwait æš‚å®šè°ƒç”¨çº¿ç¨‹, ç›´åˆ° set ä¸­å®šä¹‰çš„æŸä¸ªä¿¡å·é€’è¾¾è°ƒç”¨çº¿ç¨‹.</LI>
+    <LI>sigwait è¿”å›æ—¶, sig ä¸­ä¿å­˜çš„æ˜¯æ¥æ”¶åˆ°çš„ä¿¡å·ç¼–å·.</LI>
+    <LI>sigwait æ‰€ç­‰å¾…çš„ä¿¡å·å¿…é¡»åœ¨æ‰€æœ‰çº¿ç¨‹ä¸­é˜»å¡, è€Œä¸ä»…ä»…æ˜¯è°ƒç”¨çº¿ç¨‹.</LI>
 </UL>
 
 <P>

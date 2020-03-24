@@ -25,10 +25,10 @@
 <LI><H2>Case of SMP
 </H2>
 <UL>
-<LI>���̵���sbrk��brk�����ͷ�һƬ�ڴ��������Լ��ĵ�ַ�ռ䡣
-<LI>�ͷ�ҳ��ʱ��ҳ��������
-<LI>�ں˽�ϵͳ���ַ����ӳ�䵽��һ������ҳ�档
-<LI>����дһ��������COWҳ�档
+<LI>进程调用sbrk，brk或者释放一片内存区缩减自己的地址空间。
+<LI>释放页面时对页面的清除。
+<LI>内核将系统虚地址重新映射到另一个物理页面。
+<LI>进程写一个共享的COW页面。
 <BR>include/asm-i386/pgtable.h
 <BR>source/include/asm-i386/pgalloc.h
 <BR>source/arch/i386/kernel/smp.c</UL></UL></P>

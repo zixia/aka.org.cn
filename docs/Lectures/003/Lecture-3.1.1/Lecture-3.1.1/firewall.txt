@@ -1,18 +1,18 @@
-					·À»ğÇ½¼¼Êõ·ÖÎö½²Òå
+					é˜²ç«å¢™æŠ€æœ¯åˆ†æè®²ä¹‰
 					yawl@docshow.net
 					
-Ò» »ù±¾¸ÅÄî
+ä¸€ åŸºæœ¬æ¦‚å¿µ
 
-1.1 ·À»ğÇ½·ÖÀà£º
-	°ü¹ıÂË
-	´úÀí£¨Ó¦ÓÃ²ãÍø¹Ø£©
+1.1 é˜²ç«å¢™åˆ†ç±»ï¼š
+	åŒ…è¿‡æ»¤
+	ä»£ç†ï¼ˆåº”ç”¨å±‚ç½‘å…³ï¼‰
 
-1.2 ´úÀí:
+1.2 ä»£ç†:
 
-	Á½¸öÁ¬½Ó£¨browserÓëproxyÖ®¼ä,proxyÓëweb serverÖ®¼ä£©¡£
-	¹¤×÷ÔÚÓ¦ÓÃ²ã¡£
+	ä¸¤ä¸ªè¿æ¥ï¼ˆbrowserä¸proxyä¹‹é—´,proxyä¸web serverä¹‹é—´ï¼‰ã€‚
+	å·¥ä½œåœ¨åº”ç”¨å±‚ã€‚
 
-	Ö±½Ó·¢Íù·şÎñÆ÷µÄ°ü£º
+	ç›´æ¥å‘å¾€æœåŠ¡å™¨çš„åŒ…ï¼š
 	GET / HTTP/1.1
 	Accept:	*/*
 	Accept-Language: zh-cn
@@ -21,7 +21,7 @@
 	Host: www.lisoleg.net
 	Connection: Keep-Alive
 		
-	Íù´úÀí·¢³öµÄ°ü£º							
+	å¾€ä»£ç†å‘å‡ºçš„åŒ…ï¼š							
 	GET http://www.lisoleg.net/ HTTP/1.1
 	Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/vnd.ms-powerpoint, application/msword, */*
 	Accept-Language: zh-cn
@@ -32,17 +32,17 @@
 	Host: www.lisoleg.net
 	Proxy-Connection: Keep-Alive
 	
-	ÔöÇ¿£º
+	å¢å¼ºï¼š
 	cache
 			
-1.3 °ü¹ıÂË
-	µ¥IP°ü¼ì²â
-	È±Ïİ£ºÎŞ×´Ì¬
+1.3 åŒ…è¿‡æ»¤
+	å•IPåŒ…æ£€æµ‹
+	ç¼ºé™·ï¼šæ— çŠ¶æ€
 
-1.4 ÔöÇ¿1£­×´Ì¬¼ì²â£¨Stateful Inspection£©£¬ÓÖ³Æ¶¯Ì¬°ü¹ıÂË(dynamic packet filtering)
-	1.4.1 ¹æÔò±íºÍ¶¯Ì¬×´Ì¬±í
+1.4 å¢å¼º1ï¼çŠ¶æ€æ£€æµ‹ï¼ˆStateful Inspectionï¼‰ï¼Œåˆç§°åŠ¨æ€åŒ…è¿‡æ»¤(dynamic packet filtering)
+	1.4.1 è§„åˆ™è¡¨å’ŒåŠ¨æ€çŠ¶æ€è¡¨
 	
-	1.4.2 ftpµÄÀı×Ó£º
+	1.4.2 ftpçš„ä¾‹å­ï¼š
 	A 4847->B 21 PORT 192,168,7,60,18,241
 	B 21->A 4847 PORT command successful.
 	
@@ -54,27 +54,27 @@
 	> non-FTP requests), the firewall allows the traffic. After the transfer is complete, the 
 	> firewall closes the ports involved.
 	
-	1.4.3 Á½ÖÖÊµÏÖ·½·¨£º
-	1.4.3.1 checkpoint FW1£¬netfilter
-	1.4.3.2 ¶¯Ì¬Ìí¼Ó¹æÔò£¨ipchains patch£©
+	1.4.3 ä¸¤ç§å®ç°æ–¹æ³•ï¼š
+	1.4.3.1 checkpoint FW1ï¼Œnetfilter
+	1.4.3.2 åŠ¨æ€æ·»åŠ è§„åˆ™ï¼ˆipchains patchï¼‰
 	> I believe it does exactly what I want: Installing a temporary
        	> "backward"-rule to let packets in as a response to an
        	> outgoing request.
 	
 
-1.5 ÔöÇ¿2£­µØÖ·×ª»»:
-	1.5.1 ¾²Ì¬NAT
-	1.5.2 ¶¯Ì¬NAT
-	1.5.3 µØÖ·Î±×°
+1.5 å¢å¼º2ï¼åœ°å€è½¬æ¢:
+	1.5.1 é™æ€NAT
+	1.5.2 åŠ¨æ€NAT
+	1.5.3 åœ°å€ä¼ªè£…
 
 
-1.6 ÔöÇ¿3-VPN:
-	Î»ÖÃµÄÓÅÔ½ĞÔ
+1.6 å¢å¼º3-VPN:
+	ä½ç½®çš„ä¼˜è¶Šæ€§
 
-¶ş LinuxÏÂ·À»ğÇ½µÄÊµÏÖÖ®Ò»£¨2.2ÄÚºË£©£º
+äºŒ Linuxä¸‹é˜²ç«å¢™çš„å®ç°ä¹‹ä¸€ï¼ˆ2.2å†…æ ¸ï¼‰ï¼š
 
-2.1 ½Ø»ñÎ»ÖÃ£º
-	ÍøÂç²ã
+2.1 æˆªè·ä½ç½®ï¼š
+	ç½‘ç»œå±‚
 	
 	          ----------------------------------------------------------------
 	          |            ACCEPT/                              lo interface |
@@ -93,9 +93,9 @@
 	     DENY
 
 
-2.2 ÌáÁ¶³öµÄ´úÂë£º
+2.2 æç‚¼å‡ºçš„ä»£ç ï¼š
 
-ÊäÈë¼ì²â£º
+è¾“å…¥æ£€æµ‹ï¼š
 	/*
 	 * 	Main IP Receive routine.
 	 */
@@ -130,14 +130,14 @@
 		}
 	#endif /* CONFIG_FIREWALL */
 	
-		return skb->dst->input(skb); //¸ù¾İÂ·ÓÉ²éÕÒµÄ½á¹û¾ö¶¨ÊÇ×ª·¢(ip_forward)»¹ÊÇ·¢ÍùÉÏ²ã(ip_local_deliver)
+		return skb->dst->input(skb); //æ ¹æ®è·¯ç”±æŸ¥æ‰¾çš„ç»“æœå†³å®šæ˜¯è½¬å‘(ip_forward)è¿˜æ˜¯å‘å¾€ä¸Šå±‚(ip_local_deliver)
 	drop:
-	        kfree_skb(skb);	//Èç¹û¹æÔòÆ¥ÅäµÄ½á¹ûÊÇFW_REJECT£¬FW_BLOCK£¬¶ªÆú´Ë°ü
+	        kfree_skb(skb);	//å¦‚æœè§„åˆ™åŒ¹é…çš„ç»“æœæ˜¯FW_REJECTï¼ŒFW_BLOCKï¼Œä¸¢å¼ƒæ­¤åŒ…
 	        return(0);
 	
 	}
 
-×ª·¢¼ì²â£º
+è½¬å‘æ£€æµ‹ï¼š
 	int ip_forward(struct sk_buff *skb)
 	{
 	...
@@ -158,14 +158,14 @@
 	...
 	}
 
-Êä³ö¼ì²â£º£¨²»Í¬µÄÉÏ²ãĞ­Òé×ß²»Í¬µÄÁ÷³Ì£¬Òò´Ë¼ì²âµã½Ï¶à£©
-	UDP/RAW/ICMP±¨ÎÄ:ip_build_xmit
-	TCP±¨ÎÄ:ip_queue_xmit
-	×ª·¢µÄ°ü£ºip_forward
-	ÆäËû£ºip_build_and_send_pkt
+è¾“å‡ºæ£€æµ‹ï¼šï¼ˆä¸åŒçš„ä¸Šå±‚åè®®èµ°ä¸åŒçš„æµç¨‹ï¼Œå› æ­¤æ£€æµ‹ç‚¹è¾ƒå¤šï¼‰
+	UDP/RAW/ICMPæŠ¥æ–‡:ip_build_xmit
+	TCPæŠ¥æ–‡:ip_queue_xmit
+	è½¬å‘çš„åŒ…ï¼šip_forward
+	å…¶ä»–ï¼šip_build_and_send_pkt
 
 
-Êµ¼ÊµÄÆ¥Åä£º
+å®é™…çš„åŒ¹é…ï¼š
 	/*
 	 *	Returns one of the generic firewall policies, like FW_ACCEPT.
 	 *
@@ -173,16 +173,16 @@
 	 *	user checking mode (counters are not updated, TOS & mark not done).
 	 */
 	static int 
-	ip_fw_check(struct iphdr *ip, 		//IPÍ·Î»ÖÃ
-		    const char *rif,		//³ö¿ÚÍø¿¨µÄÃû×Ö
-		    __u16 *redirport,		//¶Ë¿Ú×ª·¢Ê±ÓÃµ½
-		    struct ip_chain *chain,	//¹æÔòÁ´µÄÃû×Ö
-		    struct sk_buff *skb,	//Òª¼ì²âµÄÊı¾İ°ü
+	ip_fw_check(struct iphdr *ip, 		//IPå¤´ä½ç½®
+		    const char *rif,		//å‡ºå£ç½‘å¡çš„åå­—
+		    __u16 *redirport,		//ç«¯å£è½¬å‘æ—¶ç”¨åˆ°
+		    struct ip_chain *chain,	//è§„åˆ™é“¾çš„åå­—
+		    struct sk_buff *skb,	//è¦æ£€æµ‹çš„æ•°æ®åŒ…
 		    unsigned int slot,		
-		    int testing)		//¼ûº¯Êı±¾ÉíµÄ×¢ÊÍ
+		    int testing)		//è§å‡½æ•°æœ¬èº«çš„æ³¨é‡Š
 
-µ÷ÓÃ¾ÙÀı£º
-	call_in_firewallÊµ¼Êµ÷ÓÃipfw_input_check£¬¶øipfw_input_checkÖĞÓĞ£º
+è°ƒç”¨ä¸¾ä¾‹ï¼š
+	call_in_firewallå®é™…è°ƒç”¨ipfw_input_checkï¼Œè€Œipfw_input_checkä¸­æœ‰ï¼š
 	int ipfw_input_check(struct firewall_ops *this, int pf, struct device *dev, 
 			     void *phdr, void *arg, struct sk_buff **pskb)
 	{
@@ -190,24 +190,24 @@
 				   arg, IP_FW_INPUT_CHAIN, *pskb, SLOT_NUMBER(), 0);
 	}
 
-Êµ¼ÊÁ÷³Ì£º
+å®é™…æµç¨‹ï¼š
 
 	ip_fw_check
 	{
-		´Ó´«ÈëµÄskb²ÎÊıÖĞÌáÈ¡Ô´µØÖ·src,Ä¿µÄµØÖ·dst£¬Ô´¶Ë¿Úsrc_port,Ä¿µÄ¶Ë¿Údst_port£¬
-		TCP·¢ÆğÁ¬½Ó±êÖ¾tcpsyn£¬·ÖÆ¬°üÎ»ÒÆoffset£¬IP°üTOSÏûÏ¢oldtos£»
+		ä»ä¼ å…¥çš„skbå‚æ•°ä¸­æå–æºåœ°å€src,ç›®çš„åœ°å€dstï¼Œæºç«¯å£src_port,ç›®çš„ç«¯å£dst_portï¼Œ
+		TCPå‘èµ·è¿æ¥æ ‡å¿—tcpsynï¼Œåˆ†ç‰‡åŒ…ä½ç§»offsetï¼ŒIPåŒ…TOSæ¶ˆæ¯oldtosï¼›
 		
 		......  
 		
-		f = chain->chain;	//È¡³ö¹æÔòÁ´µÄµÄÒ»Ìõ¹æÔò,¹æÔòÁ´ÓÉchain²ÎÊı´«Èë
+		f = chain->chain;	//å–å‡ºè§„åˆ™é“¾çš„çš„ä¸€æ¡è§„åˆ™,è§„åˆ™é“¾ç”±chainå‚æ•°ä¼ å…¥
 		count = 0;		
 		do {
-			for (; f; f = f->next) {	//±éÀú¹æÔòÁ´ÖĞµÄ¹æÔò£¬Ö±µ½Æ¥Åä£¨ip_rule_match·µ»Ø1£©
+			for (; f; f = f->next) {	//éå†è§„åˆ™é“¾ä¸­çš„è§„åˆ™ï¼Œç›´åˆ°åŒ¹é…ï¼ˆip_rule_matchè¿”å›1ï¼‰
 				count++;
 				if (ip_rule_match(f,rif,ip,
 						  tcpsyn,src_port,dst_port,offset)) {
 					if (!testing
-					    && !ip_fw_domatch(f, ip, rif, chain->label,//×÷Ğ©±ê¼Ç£¬Ò»°ã·µ»Ø1
+					    && !ip_fw_domatch(f, ip, rif, chain->label,//ä½œäº›æ ‡è®°ï¼Œä¸€èˆ¬è¿”å›1
 							      skb, slot, 
 							      src_port, dst_port,
 							      count, tcpsyn)) {
@@ -217,13 +217,13 @@
 					break;
 				}
 			}
-			if(f) { //ÕÒµ½Æ¥Åä¹æÔò
+			if(f) { //æ‰¾åˆ°åŒ¹é…è§„åˆ™
 	
 				......
 	
-			}else { //Õâ´Î±éÀú¸ù±¾Ã»ÕÒµ½
-				ÊÇ´Ó±ğµÄµØ·½Ìø×ª¹ıÀ´µÄ£¬Ôò×ª»ØÈ¥£¬È»ºó¼ÌĞø±éÀú£»
-				·ñÔòÓ¦ÓÃÕâÌõÁ´µÄÈ±Ê¡¹æÔò; 
+			}else { //è¿™æ¬¡éå†æ ¹æœ¬æ²¡æ‰¾åˆ°
+				æ˜¯ä»åˆ«çš„åœ°æ–¹è·³è½¬è¿‡æ¥çš„ï¼Œåˆ™è½¬å›å»ï¼Œç„¶åç»§ç»­éå†ï¼›
+				å¦åˆ™åº”ç”¨è¿™æ¡é“¾çš„ç¼ºçœè§„åˆ™; 
 			}	
 			
 		} while (ret == FW_SKIP+2);	 
@@ -235,24 +235,24 @@
 	}
 
 
-ËéÆ¬£º
-	¸ù¾İµÚÒ»¸öÆ¬µÄÏûÏ¢½øĞĞ¹ıÂË£¬ÆäËû·ÖÆ¬ÔòÔÊĞíÍ¨¹ı¡£Èç¹û¹æÔòÊÇ¶ªÆúµÄ»°£¬ËäÈ»ºóÃæµÄ·ÖÆ¬¶¼¿Éµ½´ïÖ÷»ú£¬
-	µ«ÓÉÓÚµÚÒ»Æ¬±»ÂËµôÁË£¬ÎŞ·¨ÖØ×é³É¹¦£¬Òò´Ë´ÓĞ§¹ûÉÏÒ²Ïàµ±ÓÚÕû¸öIP°ü±»¶ªÆú¡£
+ç¢ç‰‡ï¼š
+	æ ¹æ®ç¬¬ä¸€ä¸ªç‰‡çš„æ¶ˆæ¯è¿›è¡Œè¿‡æ»¤ï¼Œå…¶ä»–åˆ†ç‰‡åˆ™å…è®¸é€šè¿‡ã€‚å¦‚æœè§„åˆ™æ˜¯ä¸¢å¼ƒçš„è¯ï¼Œè™½ç„¶åé¢çš„åˆ†ç‰‡éƒ½å¯åˆ°è¾¾ä¸»æœºï¼Œ
+	ä½†ç”±äºç¬¬ä¸€ç‰‡è¢«æ»¤æ‰äº†ï¼Œæ— æ³•é‡ç»„æˆåŠŸï¼Œå› æ­¤ä»æ•ˆæœä¸Šä¹Ÿç›¸å½“äºæ•´ä¸ªIPåŒ…è¢«ä¸¢å¼ƒã€‚
 
-	´æÔÚµÄÂ©¶´µÈ.
+	å­˜åœ¨çš„æ¼æ´ç­‰.
 
 
 
-2.3 ¹æÔò£º
+2.3 è§„åˆ™ï¼š
 
 	from 192.168.7.0/24 to 192.168.6.32/32 tcp 80 BLOCK
 
 
 
-¹æÔòµÄÊı¾İ½á¹¹±íÊ¾:
+è§„åˆ™çš„æ•°æ®ç»“æ„è¡¨ç¤º:
 
 
-	¹æÔòÁ´
+	è§„åˆ™é“¾
 	struct ip_chain
 	{
 		ip_chainlabel label;	    /* Defines the label for each block */
@@ -264,7 +264,7 @@
 		struct ip_reent reent[0];   /* Actually several of these */
 	};
 	
-	¹æÔò
+	è§„åˆ™
 	struct ip_fwkernel
 	{
 		struct ip_fw ipfw;
@@ -276,7 +276,7 @@
 		struct ip_counters counters[0]; /* Actually several of these */
 	};
 	 
-	´ıÆ¥ÅäµÄÊı¾İ°üÏûÏ¢
+	å¾…åŒ¹é…çš„æ•°æ®åŒ…æ¶ˆæ¯
 	struct ip_fw 
 	{
 		struct in_addr fw_src, fw_dst;		/* Source and destination IP addr */
@@ -297,12 +297,12 @@
 
 
 
-2.4 µØÖ·×ª»»
+2.4 åœ°å€è½¬æ¢
 	ip_fw_demasquerade 
 	ip_fw_masquerade 
 
 
-Èı LinuxÏÂ·À»ğÇ½µÄÊµÏÖÖ®¶ş£¨2.4ÄÚºË£©£º
+ä¸‰ Linuxä¸‹é˜²ç«å¢™çš„å®ç°ä¹‹äºŒï¼ˆ2.4å†…æ ¸ï¼‰ï¼š
 3.1
 	A Packet Traversing the Netfilter System:  
 	 
@@ -317,7 +317,7 @@
 	                    v                |  Filter
 
 
-3.2 Àı×Ó
+3.2 ä¾‹å­
 	
 ## Insert connection-tracking modules (not needed if built into kernel).
 # insmod ip_conntrack
@@ -333,13 +333,13 @@
 # iptables -A INPUT -j block
 # iptables -A FORWARD -j block
 
-3.3 ¹æÔòµÄÃèÊö
-	Ò»Ìõ¹æÔò·ÖÎªÈı²¿·Ö£º
-	struct ipt_entry	//Ö÷ÒªÓÃÀ´Æ¥ÅäIPÍ·
-	struct ip_match	//¶îÍâµÄÆ¥Åä£¨tcpÍ·£¬macµØÖ·µÈ£©
-	struct ip_target	//³ıÈ±Ê¡µÄ¶¯×÷Íâ£¨ÈçACCEPT£¬DROP£©£¬¿ÉÒÔÔö¼ÓĞÂµÄ£¨ÈçREJECT£©¡£
+3.3 è§„åˆ™çš„æè¿°
+	ä¸€æ¡è§„åˆ™åˆ†ä¸ºä¸‰éƒ¨åˆ†ï¼š
+	struct ipt_entry	//ä¸»è¦ç”¨æ¥åŒ¹é…IPå¤´
+	struct ip_match	//é¢å¤–çš„åŒ¹é…ï¼ˆtcpå¤´ï¼Œmacåœ°å€ç­‰ï¼‰
+	struct ip_target	//é™¤ç¼ºçœçš„åŠ¨ä½œå¤–ï¼ˆå¦‚ACCEPTï¼ŒDROPï¼‰ï¼Œå¯ä»¥å¢åŠ æ–°çš„ï¼ˆå¦‚REJECTï¼‰ã€‚
 
-3.4 ´úÂëÌáÁ¶
+3.4 ä»£ç æç‚¼
 
 ip_input.c:
 	/*
@@ -363,13 +363,13 @@ netfilter.h:
 	#define NF_HOOK(pf, hook, skb, indev, outdev, okfn) (okfn)(skb)
 	#endif /*CONFIG_NETFILTER*/
 
-´óµÄ¿ò¼Ü£º"HOOK±í"£º
+å¤§çš„æ¡†æ¶ï¼š"HOOKè¡¨"ï¼š
 	struct list_head nf_hooks[NPROTO][NF_MAX_HOOKS];	//netfilter.c
-	Í¨¹ınf_register_hookºÍnf_unregister_hookÍê³ÉÌí¼ÓÉ¾³ı¹¤×÷£¬nf_iterate¸ºÔğÖ´ĞĞhookÉÏµÄº¯Êı¡£
+	é€šè¿‡nf_register_hookå’Œnf_unregister_hookå®Œæˆæ·»åŠ åˆ é™¤å·¥ä½œï¼Œnf_iterateè´Ÿè´£æ‰§è¡Œhookä¸Šçš„å‡½æ•°ã€‚
  	
- 	Ôö¼ÓÓÃ»§×Ô¶¨ÒåµÄHOOK£¬²Î¼û¡¾8¡¿£¬¡¾10¡¿£º
+ 	å¢åŠ ç”¨æˆ·è‡ªå®šä¹‰çš„HOOKï¼Œå‚è§ã€8ã€‘ï¼Œã€10ã€‘ï¼š
  
-ÖØÒªÁ÷³Ì£¨½¨Òé½áºÏnetfilter hacking howto 4.1.3À´¿´£©£º
+é‡è¦æµç¨‹ï¼ˆå»ºè®®ç»“åˆnetfilter hacking howto 4.1.3æ¥çœ‹ï¼‰ï¼š
 /* Returns one of the generic firewall policies, like NF_ACCEPT. */
 unsigned int
 ipt_do_table(struct sk_buff **pskb,
@@ -398,34 +398,34 @@ ipt_do_table(struct sk_buff **pskb,
 	t = ipt_get_target(e);
 	
 	...
-	verdict = t->u.kernel.target->target(pskb, hook, in, out, t->data, userdata);//·Ç±ê×¼µÄtarget×ßÕâÒ»²½
+	verdict = t->u.kernel.target->target(pskb, hook, in, out, t->data, userdata);//éæ ‡å‡†çš„targetèµ°è¿™ä¸€æ­¥
 	
 	...
 	return verdict;
 }	      	
  
-Òª¼ÓÇ¿¶ÔÕâ¶Î»°µÄÀí½â(netfilter hacking howto 4.1½Ú) £º
+è¦åŠ å¼ºå¯¹è¿™æ®µè¯çš„ç†è§£(netfilter hacking howto 4.1èŠ‚) ï¼š
 >iptables does not register with any netfilter hooks: it relies on
 >other modules to do that and feed it the packets as appropriate; a
 >module must register the netfilter hooks and ip_tables separately, and
 >provide the mechanism to call ip_tables when the hook is reached.
 
-ËÄ LinuxÏÂ·À»ğÇ½µÄÊµÏÖÖ®Èı£¨checkpoint FW1£©
+å›› Linuxä¸‹é˜²ç«å¢™çš„å®ç°ä¹‹ä¸‰ï¼ˆcheckpoint FW1ï¼‰
 
-ÈÃÎÒÃÇ¿´¿´checkpointµÄÔÚlinuxÉÏµÄ·À»ğÇ½ÊÇÈçºÎÊµÏÖµÄ£¬×îÖÕÎÒÃÇ»á·¢ÏÖ£¬¾¹È»ºÍlkmÊ¹ÓÃµÄÊÖ¶Î²î²»¶à£º£©
+è®©æˆ‘ä»¬çœ‹çœ‹checkpointçš„åœ¨linuxä¸Šçš„é˜²ç«å¢™æ˜¯å¦‚ä½•å®ç°çš„ï¼Œæœ€ç»ˆæˆ‘ä»¬ä¼šå‘ç°ï¼Œç«Ÿç„¶å’Œlkmä½¿ç”¨çš„æ‰‹æ®µå·®ä¸å¤šï¼šï¼‰
 
-fw1Í¨¹ıdev_add_packµÄ°ì·¨¼ÓÔØÊäÈë¹ıÂËº¯Êı£¬µ«ÊÇÔÚnet_bh()ÖĞ£¬´«ÍùÍøÂç²ãµÄskbuffÊÇ¿ËÂ¡µÄ,¼´
+fw1é€šè¿‡dev_add_packçš„åŠæ³•åŠ è½½è¾“å…¥è¿‡æ»¤å‡½æ•°ï¼Œä½†æ˜¯åœ¨net_bh()ä¸­ï¼Œä¼ å¾€ç½‘ç»œå±‚çš„skbuffæ˜¯å…‹éš†çš„,å³
 skb2=skb_clone(skb, GFP_ATOMIC);
 if(skb2)				
 	pt_prev->func(skb2, skb->dev, pt_prev);	
-¶øfw1ÊÇÔõÃ´½â¾öÕâ¸öÎÊÌâµÄÄØ£¿¼ûÏÂÃæµÄ´úÂë£º	
+è€Œfw1æ˜¯æ€ä¹ˆè§£å†³è¿™ä¸ªé—®é¢˜çš„å‘¢ï¼Ÿè§ä¸‹é¢çš„ä»£ç ï¼š	
 
-ÊäÈëÒ»£º
+è¾“å…¥ä¸€ï¼š
 	
-	; ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ?
+	; å“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ª?
 			align 4
 	
-	; ÛÛÛÛÛÛÛÛÛÛÛÛÛÛ?S U B	R O U T	I N E ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ?
+	; åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹?S U B	R O U T	I N E åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹?
 	
 	; Attributes: bp-based frame
 	
@@ -447,16 +447,16 @@ if(skb2)
 			add	esp, 0FFFFFFF4h
 			push	offset fw_ip_packet_type
 			call	dev_add_pack
-			mov	ebx, fw_ip_packet_type+10h	;Èç¹û¿¼ÂÇ×Ö½Ú¶ÔÆëÎÊÌâµÄ»°fw_ip_packet_type+10hÕâÊ±Ó¦¸ÃÊÇip_packet_type
+			mov	ebx, fw_ip_packet_type+10h	;å¦‚æœè€ƒè™‘å­—èŠ‚å¯¹é½é—®é¢˜çš„è¯fw_ip_packet_type+10hè¿™æ—¶åº”è¯¥æ˜¯ip_packet_type
 			mov	dword ptr ds:fw_type_list, ebx
 			jmp	short loc_0_802CB9C
-	; ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ?
+	; å“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ª?
 			align 4
 	
 	loc_0_802CB90:				; CODE XREF: fwinstallin+41j
 			add	esp, 0FFFFFFF4h
 			push	ebx
-			call	dev_remove_pack		;fw1°Ñip_packet_typeĞªÔØµôÁË£¬È»ºó×Ô¼ºÔÚ×Ô¼ºµÄ´¦Àíº¯Êı(fw_filterin)ÖĞµ÷ip_recv
+			call	dev_remove_pack		;fw1æŠŠip_packet_typeæ­‡è½½æ‰äº†ï¼Œç„¶åè‡ªå·±åœ¨è‡ªå·±çš„å¤„ç†å‡½æ•°(fw_filterin)ä¸­è°ƒip_recv
 			mov	ebx, [ebx+10h]
 	
 	loc_0_802CB9C:				; CODE XREF: fwinstallin+2Dj
@@ -481,7 +481,7 @@ if(skb2)
 			test	esi, esi
 			jnz	short loc_0_802CBA7
 			jmp	short loc_0_802CC14
-	; ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ?
+	; å“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ª?
 			align 8
 	
 	loc_0_802CBD0:				; CODE XREF: fwinstallin+12j
@@ -517,20 +517,20 @@ if(skb2)
 			retn
 	fwinstallin	endp	
 	
-ÊäÈë¶ş£º
+è¾“å…¥äºŒï¼š
 	public fw_ip_packet_type
 	fw_ip_packet_type dd 8,	0, offset fw_filterin, 2 dup(0)	; DATA XREF: fwinstallin+17o
 
 
-Êä³öµÄ¹ÒÔØºÍlkmµÄÊÖ·¨Ò»Ñù£¬¸ü¸Ädev->hard_start_xmit¡£dev½á¹¹ÔÚ2.2°æ±¾µÄ·¢Õ¹¹ı³ÌÖĞ±äÁËÒ»´Î£¬
-ÎªÁË¼æÈİfw1¶ÔÕâµãÒ²×öÁË´¦Àí¡£
+è¾“å‡ºçš„æŒ‚è½½å’Œlkmçš„æ‰‹æ³•ä¸€æ ·ï¼Œæ›´æ”¹dev->hard_start_xmitã€‚devç»“æ„åœ¨2.2ç‰ˆæœ¬çš„å‘å±•è¿‡ç¨‹ä¸­å˜äº†ä¸€æ¬¡ï¼Œ
+ä¸ºäº†å…¼å®¹fw1å¯¹è¿™ç‚¹ä¹Ÿåšäº†å¤„ç†ã€‚
 	
 	
-Êä³öÒ»£º
-	; ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ?
+è¾“å‡ºä¸€ï¼š
+	; å“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ª?
 			align 4
 	
-	; ÛÛÛÛÛÛÛÛÛÛÛÛÛÛ?S U B	R O U T	I N E ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ?
+	; åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹?S U B	R O U T	I N E åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹?
 	
 	; Attributes: bp-based frame
 	
@@ -551,7 +551,7 @@ if(skb2)
 			xor	esi, esi
 			mov	ebx, ds:dev_base
 			jmp	short loc_0_802D0A8
-	; ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ?
+	; å“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ª?
 	
 	loc_0_802D096:				; CODE XREF: fwinstallout+50j
 			add	esp, 0FFFFFFFCh
@@ -621,14 +621,14 @@ if(skb2)
 			retn
 	fwinstallout	endp	
 	
-Êä³ö¶ş£º	
+è¾“å‡ºäºŒï¼š	
 	
 	
 	
-	; ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ?
+	; å“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ª?
 			align 10h
 	
-	; ÛÛÛÛÛÛÛÛÛÛÛÛÛÛ?S U B	R O U T	I N E ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ?
+	; åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹?S U B	R O U T	I N E åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹?
 	
 	; Attributes: bp-based frame
 	
@@ -667,12 +667,12 @@ if(skb2)
 			mov	eax, 6Ah
 			jmp	loc_0_802D074	
 			
-Êä³öÈı£º			
+è¾“å‡ºä¸‰ï¼š			
 			
-	; ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ?
+	; å“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ªå“ª?
 			align 8
 	
-	; ÛÛÛÛÛÛÛÛÛÛÛÛÛÛ?S U B	R O U T	I N E ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ?
+	; åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹?S U B	R O U T	I N E åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹åœ¹?
 	
 	; Attributes: bp-based frame
 	
@@ -695,30 +695,30 @@ if(skb2)
 			retn
 	xmit_func_addr	endp			
 
-FW1ÓëlinuxµÄÒ»Ğ©±È½Ï£¬¿ÉÒÔ²Î¿´²Î¿¼ÎÄÏ×¡¾11¡¿
+FW1ä¸linuxçš„ä¸€äº›æ¯”è¾ƒï¼Œå¯ä»¥å‚çœ‹å‚è€ƒæ–‡çŒ®ã€11ã€‘
 
 
-Îå ²Î¿¼ÎÄÏ×
-	¡¾1¡¿ÁË½âCheck Point FW-1×´Ì¬±í
+äº” å‚è€ƒæ–‡çŒ®
+	ã€1ã€‘äº†è§£Check Point FW-1çŠ¶æ€è¡¨
 		http://magazine.nsfocus.com/detail.asp?id=538
-	¡¾2¡¿A Stateful Inspection of FireWall-1
+	ã€2ã€‘A Stateful Inspection of FireWall-1
 		http://www.dataprotect.com/bh2000/
-	¡¾3¡¿Linux IPCHAINS-HOWTO
+	ã€3ã€‘Linux IPCHAINS-HOWTO
 		http://www.linuxdoc.org	
-	¡¾4¡¿·À»ğÇ½ĞÂÉú´ú£ºStateful£­inspection	
+	ã€4ã€‘é˜²ç«å¢™æ–°ç”Ÿä»£ï¼šStatefulï¼inspection	
 		http://www.liuxuan.com/safe/anquan/html/firewall/04.htm
-	¡¾5¡¿netfilterÕ¾µãÉÏµÄÎÄµµ	
+	ã€5ã€‘netfilterç«™ç‚¹ä¸Šçš„æ–‡æ¡£	
 		http://netfilter.kernelnotes.org	
-	¡¾6¡¿Application Gateways and Stateful Inspection:A Brief Note Comparing and Contrasting	
+	ã€6ã€‘Application Gateways and Stateful Inspection:A Brief Note Comparing and Contrasting	
 		http://www.avolio.com/apgw+spf.html	
-	¡¾7¡¿Internet Firewalls:Frequently Asked Questions	
+	ã€7ã€‘Internet Firewalls:Frequently Asked Questions	
 		http://www.interhack.net/pubs/fwfaq
-	¡¾8¡¿Writing a Module for netfilter 	
+	ã€8ã€‘Writing a Module for netfilter 	
 		http://www.linux-mag.com/2000-06/gear_01.html
-	¡¾9¡¿ipchainsµÄÔ´´úÂë·ÖÎö 
+	ã€9ã€‘ipchainsçš„æºä»£ç åˆ†æ 
 		http://www.lisoleg.net/lisoleg/network/ipchains.zip
-	¡¾10¡¿ÄÚºË·À»ğÇ½netfilterÈëÃÅ
+	ã€10ã€‘å†…æ ¸é˜²ç«å¢™netfilterå…¥é—¨
 		http://magazine.nsfocus.com/detail.asp?id=637
-	¡¾11¡¿Check Point Firewall-1 on Linux, Part Two
+	ã€11ã€‘Check Point Firewall-1 on Linux, Part Two
 		http://www.securityfocus.com/frames/?focus=linux&content=/focus/linux/articles/checkpoint2.html		
 	

@@ -1,40 +1,40 @@
-¡¾AKA¡¿½²×ù ¡ª¡ª BluetoothÀ¶ÑÀ¼¼Êõ·¢Õ¹ÓëÓ¦ÓÃ
+ã€AKAã€‘è®²åº§ â€”â€” Bluetoothè“ç‰™æŠ€æœ¯å‘å±•ä¸Žåº”ç”¨
 
-¡¾AKA¡¿½²×ù ¡ª¡ª BluetoothÀ¶ÑÀ¼¼Êõ·¢Õ¹ÓëÓ¦ÓÃ
-         ôß IBM developerWorks & AKA ÁªºÏÏµÁÐ½²×ù
+ã€AKAã€‘è®²åº§ â€”â€” Bluetoothè“ç‰™æŠ€æœ¯å‘å±•ä¸Žåº”ç”¨
+         æš¨ IBM developerWorks & AKA è”åˆç³»åˆ—è®²åº§
 
-Ö÷Ìâ£ºBluetoothÀ¶ÑÀ¼¼Êõ·¢Õ¹ÓëÓ¦ÓÃ
-Ê±¼ä£º4 ÔÂ 8 ÈÕ (ÐÇÆÚÈÕ)ÏÂÎç 2:30 - 4£º30
-µØµã£º±±¾©ÓÊµç´óÑ§Í¼Êé¹Ý±¨¸æÌü£¬±±¾©ÓÊµç´óÑ§µØÍ¼: £¨¼ûÏÂ£© 
-Ö÷½²ÈË£ºÖÜÕý½ÌÊÚ
+ä¸»é¢˜ï¼šBluetoothè“ç‰™æŠ€æœ¯å‘å±•ä¸Žåº”ç”¨
+æ—¶é—´ï¼š4 æœˆ 8 æ—¥ (æ˜ŸæœŸæ—¥)ä¸‹åˆ 2:30 - 4ï¼š30
+åœ°ç‚¹ï¼šåŒ—äº¬é‚®ç”µå¤§å­¦å›¾ä¹¦é¦†æŠ¥å‘ŠåŽ…ï¼ŒåŒ—äº¬é‚®ç”µå¤§å­¦åœ°å›¾: ï¼ˆè§ä¸‹ï¼‰ 
+ä¸»è®²äººï¼šå‘¨æ­£æ•™æŽˆ
 
-ÄÚÈÝ¼ò½é£º 
+å†…å®¹ç®€ä»‹ï¼š 
 ========= 
 Who Is Bluetooth?
 Bluetooth Applications
-Bluetooth¡¡advantage
+Bluetoothã€€advantage
 Bluetooth main techniques
 Bluetooth challenges
 
 /*************************************************************/ 
 
-±±¾©ÓÊµç´óÑ§µØÍ¼£º
-£½£½£½£½£½£½£½£½£½
-³Ë×ù¡¡375¡¢902 ¡¢392¡¢849¡¢16¡¢387¡¡µ½Ñ§ÔºÂ·ÏÂ¡£±±¾©ÓÊµç´óÑ§¾ÍÔÚ³µ
-Õ¾µÄÅÔ±ß»òÕý¶ÔÃæ£¨ÒòÎªÊÇµ¥ÐÐµÀ£©¡£
-Àë±±¾©ÓÊµç´óÑ§Ô¶µÄÅóÓÑ¿É¿¼ÂÇµØÌú£¬ÔÚÎ÷Ö±ÃÅÏÂ»»³Ë375»ò16Â·¼´¿É¡£
-ÒªÊÇ²»ÊìÏ¤µØÐÎ£¬ÔÚ¼»ÃÅÇÅ¸½½ü£¨ÄÏ£©´òÌý±±¾©ÓÊµç´óÑ§¡£
+åŒ—äº¬é‚®ç”µå¤§å­¦åœ°å›¾ï¼š
+ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼
+ä¹˜åº§ã€€375ã€902 ã€392ã€849ã€16ã€387ã€€åˆ°å­¦é™¢è·¯ä¸‹ã€‚åŒ—äº¬é‚®ç”µå¤§å­¦å°±åœ¨è½¦
+ç«™çš„æ—è¾¹æˆ–æ­£å¯¹é¢ï¼ˆå› ä¸ºæ˜¯å•è¡Œé“ï¼‰ã€‚
+ç¦»åŒ—äº¬é‚®ç”µå¤§å­¦è¿œçš„æœ‹å‹å¯è€ƒè™‘åœ°é“ï¼Œåœ¨è¥¿ç›´é—¨ä¸‹æ¢ä¹˜375æˆ–16è·¯å³å¯ã€‚
+è¦æ˜¯ä¸ç†Ÿæ‚‰åœ°å½¢ï¼Œåœ¨è“Ÿé—¨æ¡¥é™„è¿‘ï¼ˆå—ï¼‰æ‰“å¬åŒ—äº¬é‚®ç”µå¤§å­¦ã€‚
 
-±¾´Î½²×ùÓÉ£º
-£½£½£½£½£½£½£½£½£½
-°¢¿¨ÐÅÏ¢¼¼ÊõÐ­»á(http://www.AKA.org.cn)
-±±¾©ÓÊµç´óÑ§ÑÐ¾¿Éú»á
+æœ¬æ¬¡è®²åº§ç”±ï¼š
+ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼
+é˜¿å¡ä¿¡æ¯æŠ€æœ¯åä¼š(http://www.AKA.org.cn)
+åŒ—äº¬é‚®ç”µå¤§å­¦ç ”ç©¶ç”Ÿä¼š
 IBM developerWorks (ibm.com/developerWorks/cn)
  
-                                        ¹²Í¬Ö÷°ì
+                                        å…±åŒä¸»åŠž
  
-ÌØ±ðËµÃ÷£º
+ç‰¹åˆ«è¯´æ˜Žï¼š
 =========
-½²Òå½«ÔÚ½²×ùÏÖ³¡·Ö·¢£¬²¢ÔÚ»áºóÌùµ½IBM developerWorksÖÐ¹úÍøÕ¾
-(ibm.com/developerWorks/cn)ºÍAKAÍøÕ¾(http://www.aka.org.cn)£¬
-ÒÔ±ã´ó¼Ò²Î¿¼¡£
+è®²ä¹‰å°†åœ¨è®²åº§çŽ°åœºåˆ†å‘ï¼Œå¹¶åœ¨ä¼šåŽè´´åˆ°IBM developerWorksä¸­å›½ç½‘ç«™
+(ibm.com/developerWorks/cn)å’ŒAKAç½‘ç«™(http://www.aka.org.cn)ï¼Œ
+ä»¥ä¾¿å¤§å®¶å‚è€ƒã€‚

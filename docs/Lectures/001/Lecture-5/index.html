@@ -1,10 +1,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <HTML>
 <HEAD>
-    <TITLE>���彲</TITLE>
+    <TITLE>第五讲</TITLE>
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312-80">
-    <META NAME="COPYRIGHT" CONTENT="κ����">
-    <META NAME="AUTHOR" CONTENT="κ����">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
     <STYLE>
     <!--
         H1 { color: #ffff00; font-family: "timmons", serif }
@@ -19,197 +19,197 @@
 <BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="images/velvet.jpg">
 
 <H1 ALIGN=CENTER>
-���彲  �ļ�ϵͳ, I/O, ���̼����̼�ͨѶ
+第五讲  文件系统, I/O, 进程及进程间通讯
 </H1>
 
-<H2>����˼·</H2>
+<H2>整体思路</H2>
 <P>
-���ν��������� APUE �������Ϊ����, �ص�ͻ�� UNIX �����ɫ��������������ϵͳ�б��ʱ�����漰������, ͬʱ�ص㽲�� Linux �������. �Ӷ��ܹ������ھ� UNIX/Linux �ϵ��ļ�ϵͳ, I/O �����̺ͽ��̼�ͨѶ��һ����Ϊ������˽�. <BR>
-�����Ը������Ϊ��, �ص㽲��İ����ϵͳ���û���.
+本次讲座内容以 APUE 相关内容为蓝本, 重点突出 UNIX 相关特色或者在其他操作系统中编程时很少涉及的内容, 同时重点讲解 Linux 相关主题. 从而能够让听众就 UNIX/Linux 上的文件系统, I/O 及进程和进程间通讯有一个较为深入的了解. <BR>
+讲座以概念解释为主, 重点讲述陌生的系统调用或函数.
 </P>
 
-<H2>��Ҫ����</H2>
+<H2>主要内容</H2>
 <UL SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
         <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-        <A HREF="fs.html">�ļ�ϵͳ����</A></P>
+        <A HREF="fs.html">文件系统构造</A></P>
         <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-        <A HREF="fileio.html">�ļ� I/O</A></P>
+        <A HREF="fileio.html">文件 I/O</A></P>
         <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-        <A HREF="stdio.html">��׼ I/O ��</A></P>
+        <A HREF="stdio.html">标准 I/O 库</A></P>
         <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-        <A HREF="dir.html">�ļ���Ŀ¼</A></P>
+        <A HREF="dir.html">文件和目录</A></P>
         <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-        <A HREF="advio.html">�߼� I/O</A></P>
+        <A HREF="advio.html">高级 I/O</A></P>
         <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-        <A HREF="misc.html">�����ļ�ϵͳ�� I/O �������</A></P>
+        <A HREF="misc.html">其他文件系统或 I/O 相关主题</A></P>
         <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-        <A HREF="proc.html">���̼����̻���</A></P>
+        <A HREF="proc.html">进程及进程环境</A></P>
         <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-        <A HREF="proctl.html">���̿���</A></P>
+        <A HREF="proctl.html">进程控制</A></P>
         <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-        <A HREF="thread.html">�߳�</A></P>
+        <A HREF="thread.html">线程</A></P>
         <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-        <A HREF="procrelate.html">���̹�ϵ</A></P>
+        <A HREF="procrelate.html">进程关系</A></P>
         <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-        <A HREF="daemon.html">�ػ�����</A></P>
+        <A HREF="daemon.html">守护进程</A></P>
         <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-        <A HREF="ipc.html">���̼�ͨѶ</A></P>
+        <A HREF="ipc.html">进程间通讯</A></P>
 </UL>
 
-<H2>������Ҫ��</H2>
+<H2>各部分要点</H2>
 <UL SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
     <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-    5.1  �ļ�ϵͳ����</P>
+    5.1  文件系统构造</P>
     <UL>
-        <LI>��������</LI>
-        <LI>�����ڵ�</LI>
-        <LI>Ŀ¼��Ŀ¼��</LI>
-        <LI>�ļ��Ķ�λ</LI>
-        <LI>����</LI>
-		<LI>�ļ�ϵͳ���ϵͳ���������ٵ�����</LI>
+        <LI>基本概念</LI>
+        <LI>索引节点</LI>
+        <LI>目录和目录项</LI>
+        <LI>文件的定位</LI>
+        <LI>链接</LI>
+		<LI>文件系统相关系统调用所面临的问题</LI>
     </UL>
     <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-    5.2  �ļ� I/O</P>
+    5.2  文件 I/O</P>
     <UL>
-        <LI>��������</LI>
-        <LI>���ϵͳ����</LI>
-        <LI>Open �Լ��ļ��Ĵ򿪱�־</LI>
-        <LI>ԭ�Ӳ���</LI>
-        <LI>�ļ�����</LI>
-        <LI>dup �� dup2</LI>
-        <LI>fcntl �� ioctl</LI>
-		<LI>���׻����ĸ���</LI>
+        <LI>基本概念</LI>
+        <LI>相关系统调用</LI>
+        <LI>Open 以及文件的打开标志</LI>
+        <LI>原子操作</LI>
+        <LI>文件共享</LI>
+        <LI>dup 和 dup2</LI>
+        <LI>fcntl 和 ioctl</LI>
+		<LI>容易混淆的概念</LI>
     </UL>
     <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-    5.3  ��׼ I/O ��</P>
+    5.3  标准 I/O 库</P>
     <UL>
-        <LI>��������</LI>
-        <LI>�������</LI>
-        <LI>��Ϥ�ı�׼ I/O ����</LI>
-        <LI>İ���ı�׼ I/O ����</LI>
+        <LI>基本概念</LI>
+        <LI>缓冲机制</LI>
+        <LI>熟悉的标准 I/O 函数</LI>
+        <LI>陌生的标准 I/O 函数</LI>
     </UL>
     <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-    5.4  �ļ���Ŀ¼</P>
+    5.4  文件和目录</P>
     <UL>
-        <LI>Ŀ¼������</LI>
-        <LI>Ŀ¼��ȡ</LI>
-        <LI>�ļ��ķ�������</LI>
-        <LI>Ŀ¼��Ŀ¼�����</LI>
-        <LI>����</LI>
+        <LI>目录项属性</LI>
+        <LI>目录读取</LI>
+        <LI>文件的访问许可</LI>
+        <LI>目录及目录项操作</LI>
+        <LI>其他</LI>
     </UL>
     <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-    5.5  �߼� I/O</P>
+    5.5  高级 I/O</P>
     <UL>
-        <LI>Linux ��ֱ�ӵ� I/O �˿ڶ�д</LI>
-        <LI>��¼����</LI>
-        <LI>I/O �๤</LI>
-        <LI>�첽 I/O</LI>
-        <LI>�ڴ�ӳ��</LI>
+        <LI>Linux 中直接的 I/O 端口读写</LI>
+        <LI>记录锁定</LI>
+        <LI>I/O 多工</LI>
+        <LI>异步 I/O</LI>
+        <LI>内存映射</LI>
     </UL>
     <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-    5.6  �����ļ�ϵͳ�� I/O �������</P>
+    5.6  其他文件系统和 I/O 相关主题</P>
     <UL>
-        <LI>ϵͳ�����ļ�</LI>
-        <LI>��¼����</LI>
-        <LI>ϵͳ��ʶ</LI>
-        <LI>ʱ�������</LI>
+        <LI>系统数据文件</LI>
+        <LI>登录记帐</LI>
+        <LI>系统标识</LI>
+        <LI>时间和日期</LI>
     </UL>
     <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-    5.7  ���̼����̻���</P>
+    5.7  进程及进程环境</P>
     <UL>
-        <LI>��������</LI>
-        <LI>main ����</LI>
-        <LI>�����в����� popt ��</LI>
-        <LI>��������</LI>
-        <LI>C ������ڴ沼��</LI>
-        <LI>������</LI>
-        <LI>�ڴ����</LI>
-        <LI>����ĳ���ת</LI>
-        <LI>���̵���Դ����</LI>
+        <LI>基本概念</LI>
+        <LI>main 函数</LI>
+        <LI>命令行参数及 popt 库</LI>
+        <LI>环境变量</LI>
+        <LI>C 程序的内存布局</LI>
+        <LI>共享库</LI>
+        <LI>内存分配</LI>
+        <LI>程序的长跳转</LI>
+        <LI>进程的资源限制</LI>
     </UL>
     <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-    5.8  ���̿���</P>
+    5.8  进程控制</P>
     <UL>
-        <LI>��������</LI>
-        <LI>fork �� vfork</LI>
+        <LI>基本概念</LI>
+        <LI>fork 和 vfork</LI>
         <LI>exit</LI>
-        <LI>wait ����</LI>
-        <LI>��̬</LI>
-        <LI>exec �����Լ��ű�������</LI>
-        <LI>system ����</LI>
-        <LI>���̼���</LI>
-        <LI>�û������ʶ��</LI>
-        <LI>����ʱ��</LI>
+        <LI>wait 函数</LI>
+        <LI>竞态</LI>
+        <LI>exec 函数以及脚本解释器</LI>
+        <LI>system 函数</LI>
+        <LI>进程记帐</LI>
+        <LI>用户和组标识符</LI>
+        <LI>进程时间</LI>
     </UL>
     <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-    5.9  �߳�</P>
+    5.9  线程</P>
     <UL>
-        <LI>��������</LI>
-        <LI>�̵߳Ĵ���������</LI>
-        <LI>�߳�ͬ������</LI>
-        <LI>ʵ������: MiniGUI �е���Ϣ����</LI>
-        <LI>����</LI>
+        <LI>基本概念</LI>
+        <LI>线程的创建和销毁</LI>
+        <LI>线程同步机制</LI>
+        <LI>实例分析: MiniGUI 中的消息传递</LI>
+        <LI>其他</LI>
     </UL>
     <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-    5.10  ���̹�ϵ</P>
+    5.10  进程关系</P>
     <UL>
-        <LI>��������</LI>
-        <LI>�ն˺������¼����</LI>
-        <LI>������</LI>
-        <LI>�Ự</LI>
-        <LI>�����ն�</LI>
-        <LI>Shell �е�����ִ��</LI>
-        <LI>��ҵ����</LI>
+        <LI>基本概念</LI>
+        <LI>终端和网络登录过程</LI>
+        <LI>进程组</LI>
+        <LI>会话</LI>
+        <LI>控制终端</LI>
+        <LI>Shell 中的命令执行</LI>
+        <LI>作业控制</LI>
     </UL>
     <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-    5.11 �ػ�����</P>
+    5.11 守护进程</P>
     <UL>
-        <LI>��������</LI>
-        <LI>ʵ�ַ���</LI>
+        <LI>基本概念</LI>
+        <LI>实现方法</LI>
     </UL>
     <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-    5.12 ���̼�ͨѶ</P>
+    5.12 进程间通讯</P>
     <UL>
-        <LI>��������</LI>
-        <LI>�ܵ�</LI>
+        <LI>基本概念</LI>
+        <LI>管道</LI>
         <LI>FIFO</LI>
-        <LI>System V �� IPC ����</LI>
-        <LI>�����ڴ�</LI>
-        <LI>�ź���</LI>
+        <LI>System V 的 IPC 机制</LI>
+        <LI>共享内存</LI>
+        <LI>信号量</LI>
     </UL>
 </UL>
 
-<H2>˼���⼰��ҵ</H2>
+<H2>思考题及作业</H2>
 <OL>
-    <LI>dup �ɸ����ļ�������, �����ܲ���ͨ�����δ�ͬһ���ļ��������ļ�������? �����������ֲ���������.</LI>
-    <LI>��׷��ģʽ���ļ�֮��, �ܷ�ʹ�� lseek ��ȡ����λ�õ�����, �ܷ��� lseek �滻��������? �Ա�д������֤֮.</LI>
-    <LI>Ϊ MiniGUI ��дһ�� "���ļ�" �Ի���, ����ͱ�̽ӿڿɲο� Win32 �� "���ļ�" �Ի���. </LI>
-    <LI>��дһ���ػ�����, �ý���ÿһ������ϵͳ��־������һ����¼, �������̵�ʱ����Ϣ����Դ������Ϣ.</LI>
-    <LI>��дһ���򵥵� Shell ����, �ó��������»����� Shell ����: �����в�������, ��������ض���, �ܵ�</LI>
-    <LI>��дһ���Լ��� system ����</LI>
+    <LI>dup 可复制文件描述符, 我们能不能通过两次打开同一个文件而复制文件描述符? 试描述这两种操作的区别.</LI>
+    <LI>用追加模式打开文件之后, 能否使用 lseek 读取其他位置的数据, 能否用 lseek 替换其他数据? 试编写程序验证之.</LI>
+    <LI>为 MiniGUI 编写一个 "打开文件" 对话框, 界面和编程接口可参考 Win32 的 "打开文件" 对话框. </LI>
+    <LI>编写一个守护进程, 该进程每一分钟向系统日志中添加一条记录, 包括进程的时间信息和资源限制信息.</LI>
+    <LI>编写一个简单的 Shell 程序, 该程序有如下基本的 Shell 功能: 命令行参数传递, 输入输出重定向, 管道</LI>
+    <LI>编写一个自己的 system 函数</LI>
 </OL>
 
-<H2>�ο���Ŀ</H2>
+<H2>参考书目</H2>
 <OL>
     <LI>W. Richard Stevens, <I>Advanced Programming in the UNIX Environment</I></LI>
     <LI>John Goerzen, <I>The Linux Programming Bible</I></LI>
     <LI>Phil Cornes, <I>The Linux A - Z</I></LI>
     <LI>Naba Barkakati, <I>The Linux Secrets</I></LI>
-    <LI>κ������, ��Linux ʵ�ý̡̳�</LI>
-    <LI>κ������, ��ѧ�� Linux �� Windows NT��</LI>
+    <LI>魏永明等, 《Linux 实用教程》</LI>
+    <LI>魏永明等, 《学用 Linux 与 Windows NT》</LI>
 </OL>
 
-<H2>��һ������</H2>
+<H2>进一步读物</H2>
 <UL>
     <LI>W. Richard Stevens, <I>Advanced Programming in the UNIX Environment</I>, From Chpater 3 to Chapter 15.</LI>
 </UL>
 
-<H2>����</H2>
-������<A HREF="mailto:ymwei@263.net">κ����</A>���⡣��ӭ�κ�����ͽ��飬�ɷ� email: <A HREF="mailto:ymwei@263.net">ymwei@263.net</A> ��κ������ϵ��
+<H2>反馈</H2>
+本讲由<A HREF="mailto:ymwei@263.net">魏永明</A>讲解。欢迎任何意见和建议，可发 email: <A HREF="mailto:ymwei@263.net">ymwei@263.net</A> 与魏永明联系。
 
 <P>
 <CENTER>
-<A HREF="http://www.aka.citf.net/Lectures/index.html">AKA ��������ϵ�н���</A>
+<A HREF="http://www.aka.citf.net/Lectures/index.html">AKA 自由软件系列讲座</A>
 </CENTER>
 </P>
 

@@ -1,75 +1,75 @@
-ʱ�䣺1999��7��25������9:00
-�ص㣺�п�Ժ������ NCICС¥�����ң���¥
-���⣺LisoLeg��Linux�ں����� �� Linux Virtual Server
-��ϯ��25�ˣ�kongming, leoyong, rover, wincloud, ����, xingnaw, manchair, waterbird,
-            finance, pipal, xji, vertex, deedy, ���ҷ�, pangpang, yjf, laotie,
-            softmagic, chenhao, valencia, li_xiaofeng, wensong, walt ��
-���֣�waterbird
-������lao_tie, wensong
+时间：1999年7月25日上午9:00
+地点：中科院计算所 NCIC小楼会议室，二楼
+主题：LisoLeg、Linux内核剖析 和 Linux Virtual Server
+出席：25人：kongming, leoyong, rover, wincloud, 徐涛, xingnaw, manchair, waterbird,
+            finance, pipal, xji, vertex, deedy, 张岩峰, pangpang, yjf, laotie,
+            softmagic, chenhao, valencia, li_xiaofeng, wensong, walt 等
+主持：waterbird
+主讲：lao_tie, wensong
 
-��ϸ��¼��
+详细记录：
 
 	
-  20����AKA��Ҫ��Ա��һЩAKA������֧���߲μ�������ԡ�Lisoleg ר�⽲����Ϊ�����ɳ
-������ص����п�Ժ�������ĵĶ���С¥�����ҡ���лwalt����Ϊ�����ṩ���鳡����
+  20余名AKA主要成员和一些AKA的热心支持者参加了这次以“Lisoleg 专题讲座”为主题的沙
+龙活动，地点在中科院智能中心的二层小楼会议室。感谢walt教授为我们提供会议场所。
 
-  �������ݷ����󲿷֣�
-  <1> ����������lisoleg�Ĺ�����չ��
-  <2> �����Գ�ɳ�������ɽ����������ġ�Linux Vitual Server Project��
+  会议内容分两大部分：
+  <1> 由老铁介绍lisoleg的工作进展；
+  <2> 由来自长沙的张文松介绍了他做的“Linux Vitual Server Project”
 
-******************************<1>  ����Lisoleg*****************************  
+******************************<1>  关于Lisoleg*****************************  
   
-  �������ȼ򵥽�����Lisoleg, ��LinuxԴ��ѧϰС�飬�Ļ��������
-  a. ��������: �������Linux�ں˵���Ҫ�Լ�BBS��ʽ�Ĳ��㡣
-  b. ��ʽ����mailing list + website��ʽ, ��Ա��Ҫ����mailing list���н�����������
-     ��ֲ�ʽ���������ڽ��ɹ����ܳ���Lisoleg�¿���
-  c. ����ʱ�䣺1999��1��13�ա�
-  d. �ɹ����ܣ������Ѿ��ܽ��5���ܿ���1���¿���        
+  老铁首先简单介绍了Lisoleg, 即Linux源码学习小组，的基本情况。
+  a. 成立动机: 深刻理解Linux内核的需要以及BBS方式的不足。
+  b. 方式：用mailing list + website方式, 成员主要依赖mailing list进行交流，基于网
+     络分布式工作，定期将成果汇总出“Lisoleg月刊”
+  c. 成立时间：1999年1月13日。
+  d. 成果汇总：至今已经总结出5期周刊和1期月刊。        
 
-  ���ţ���������Lisoleg����Ҫ�������ݣ�
-  a. ��Linux Source Code�����򹤳̣����Ķ����룬�����ĵ�������ǿԴ��Ŀɶ��ԡ�
-  b. Ѱ�ҹ�ģ���ѶȺ��ʵ�project������Ŀ��ѧϰ��
-  c. ������ĵ��ķ��롢�����������Լ��������Ӧ�õĴ��롣
+  接着，他介绍了Lisoleg的主要工作内容：
+  a. 对Linux Source Code做逆向工程，即阅读代码，补充文档，以增强源码的可读性。
+  b. 寻找规模和难度合适的project，以项目促学习。
+  c. 对相关文档的翻译、汉化工作。以及剖析相关应用的代码。
 
-  ��������LinuxԴ�������ṹ��
-   ���ģ�飺���̵���(Process Scheduler)��
-             �ڴ����(Memory Manager)��
-             �����ļ�ϵͳ(Virtual File System)��
-             ����ӿ�(Network Interface)��
-             ���̼�ͨ��(Inter-Process Communication)��
-   ����֮���������ϵ��ͼ��ʾ�����˴������AKA��ҳ��www.aka.citf.net��
+  还介绍了Linux源码的整体结构：
+   五大模块：进程调度(Process Scheduler)，
+             内存管理(Memory Manager)，
+             虚拟文件系统(Virtual File System)，
+             网络接口(Network Interface)，
+             进程间通信(Inter-Process Communication)。
+   它们之间的依赖关系如图所示。（此处请访问AKA主页：www.aka.citf.net）
 
-  ����������������̵�̸��Linux�������ص��Լ�Ϊʲô�ܻ�óɹ���ԭ��
-  a. ������Ա�࣬�ֲ�ʽ��һ��һ��������ֻרע��һ��ģ�飬��Ȼ����ʵ����ҪҲ��
-     �����ģ��ġ�
-  b. Linux�ĳ�����ϵ�ṹ���кܺõĿ����ԺͿ���չ�ԣ������������������ݳ���
-     ����֧�ֶ���Ӳ��ƽ̨������ֲ��ǿ���ȵȡ�
+  最后，老铁从软件工程的谈了Linux开发的特点以及为什么能获得成功的原因：
+  a. 开发人员多，分布式；一般一个开发者只专注于一个模块，当然出于实际需要也有
+     做多个模块的。
+  b. Linux的抽象体系结构具有很好的开放性和可扩展性；利用了面向对象的数据抽象技
+     术；支持多种硬件平台，可移植性强。等等。
 
-  ����ϸ�����ݿ��Դ�AKA WWW��ҳ��(�����ṩ�Ĳ���)�õ���
-  �ݽ�����������������ʱ�䣬walt�����ĵ���ʽ����"hypertext"��ʽ������source code
-  �����һ��
+  更详细的内容可以从AKA WWW网页中(老铁提供的材料)得到。
+  演讲结束后是自由讨论时间，walt建议文档形式采用"hypertext"形式，并与source code
+  混合在一起。
   
-  ���ӭ��ҷ���laotie���ǵ�Lisoleg����ҳ��lisoleg.yeah.net !
+  最后欢迎大家访问laotie他们的Lisoleg的主页：lisoleg.yeah.net !
 
 **********************<2> Linux Vitual Server Project*************************
 
-  �������������ɽ���������"Linux ���������"��ͬ�������˴�ҵ�Ũ����Ȥ��
+  接下来，张文松介绍了他的"Linux 虚拟服务器"，同样引起了大家的浓厚兴趣。
 
-  ����������ĸ������ͨ��������ʽʵ�ֶ�̨�������ļ�Ⱥ(cluster)��ʹ�����Ƕ���
-  �ͻ���˵�൱��һ̨�����ܵķ��������Ӷ���ø��õ�����/�۸�ȡ������ķ�������
-  �ɱ��������������Ժã���ȫ���ܺõ��ŵ㣬���кܸߵ�ʵ��Ӧ�ü�ֵ��
+  虚拟服务器的概念就是通过软件方式实现多台服务器的集群(cluster)，使得它们对于
+  客户来说相当于一台高性能的服务器，从而获得更好的性能/价格比。这样的方案具有
+  成本低廉，可伸缩性好，安全性能好等优点，具有很高的实际应用价值。
 
-  ���ķ������Բ�������3�ַ�ʽ��ʵ�֣�
+  他的方案可以采用以下3种方式来实现：
   a. VS via NAT(Network Address Translation)
   b. VS via Tunneling
   c. VS via Direct Routing
 
-  �÷����Ѿ�Ϊ�������ISPվ����ã�����ú�����ʵ��Ӧ�ñ�����Ⱥ�Ĺ�ģ���Դﵽ254̨��
+  该方案已经为美国多个ISP站点采用，并获得好评，实际应用表明集群的规模可以达到254台！
 
-  ���弼��ϸ���뿴AKA WWW ��ҳ���������ṩ�Ĳ��ϣ���
+  具体技术细节请看AKA WWW 主页（张文松提供的材料）。
 
-  ��Ϥ�����������ᱻ���뵽��һ���汾��Linux Kernel(kernel 2.4.0)��ȥ��
+  据悉，本方案将会被加入到下一个版本的Linux Kernel(kernel 2.4.0)中去。
 
-  �ݽ�����������������ʱ�䣬��Ҿʹ˷������������ҵ����ۣ������ɲ�����˴�ҵĸ������⡣
+  演讲结束后是自由讨论时间，大家就此方案进行了热烈的讨论，张文松并解答了大家的各种问题。
 
-  ���ӭ��ҷ���Linux �����������վ�㣺http://proxy.iinchina.net/~wensong/ippfvs  !
+  最后欢迎大家访问Linux 虚拟服务器的站点：http://proxy.iinchina.net/~wensong/ippfvs  !

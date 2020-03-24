@@ -5,7 +5,7 @@
 <HEAD>
 
 <meta name="GENERATOR" content="Microsoft Internet Assistant for Microsoft PowerPoint 97">
- <TITLE>�źű������Ĺ���</TITLE> 
+ <TITLE>信号被处理的过程</TITLE> 
 </HEAD>
 
 <BODY     >
@@ -28,34 +28,34 @@
 <P>Slide 26 of 44</P>
 </CENTER>
 <!-- <UL>
-<H2>�źű������Ĺ���</H2>
+<H2>信号被处理的过程</H2>
 </UL></P>
 <P><UL>
-<LI><H2>�źŷ�����signal emission��
+<LI><H2>信号发出（signal emission）
 </H2>
 <UL>
-<LI>�źŷ�����ָGTKΪһ���ض��Ķ����һ���ض����ź�ִ�����еĴ�������Ĺ��̣�
-<LI>����һ���ź��ϵ����д��������ִ��˳�������Ǳ����õĴ���һ�£�
-<LI>һ���źŷ����ķ���ֵ�����һ����ִ�еĴ�������ķ���ֵ��
-<LI>�������е��¼��źŶ���GTK_RUN_LAST���ͣ�������������ִ�е�ȱʡ�������򣬳�����ʹ��gtk_signal_connect_after()��
+<LI>信号发出特指GTK为一个特定的对象和一个特定的信号执行所有的处理程序的过程；
+<LI>绑定在一个信号上的所有处理程序的执行顺序与它们被设置的次序一致；
+<LI>一次信号发出的返回值是最后一个被执行的处理程序的返回值；
+<LI>由于所有的事件信号都是GTK_RUN_LAST类型，因此它将是最后执行的缺省处理程序，除非你使用gtk_signal_connect_after()；
 </UL></UL><UL>
-<LI><H2>�źŴ���
+<LI><H2>信号传播
 </H2>
 <UL>
-<LI>���¼��������Ǹ��ؼ���ʼ��
-<LI>����һ����ͨ���¼���event������������źŴ������򷵻�TRUE����ֹͣһ�д�����
-<LI>���򣬷���һ���ض����ź��� "button_press_event" ���������TRUE����ֹͣ������
-<LI>���򣬽�����ת�Ƶ�����ؼ��ĸ���������������������
-<LI>�������У�ֱ��ĳ���������򷵻�TRUE���͵��ﶥ���ؼ���
+<LI>从事件发生的那个控件开始；
+<LI>发出一个普通的事件“event”。如果它的信号处理程序返回TRUE，则停止一切处理；
+<LI>否则，发出一个特定的信号如 "button_press_event" 。如果返回TRUE，则停止处理；
+<LI>否则，将控制转移到这个控件的父亲那里，继续上面的两步；
+<LI>持续进行，直到某个处理程序返回TRUE，和到达顶级控件。
 </UL></UL><UL>
-<LI><H2>ע������
+<LI><H2>注意事项
 </H2>
 <UL>
-<LI>����һ��ȱʡ��������ʱ�����Ĵ�������ķ���ֵ���ܲ������κ����ã�������ʹ��gtk_signal_connect_after()��������
-<LI>Ϊ��ֹȱʡ��������ִ�У�����Ҫ��
+<LI>当有一个缺省处理程序时，您的处理程序的返回值可能不产生任何作用，除非您使用gtk_signal_connect_after()来绑定它；
+<LI>为阻止缺省处理程序执行，您需要：
 <UL>
-<LI>��gtk_signal_connect()���󶨣�
-<LI>��gtk_signal_emit_stop_by_name()��ֹͣ�źż���������
+<LI>用gtk_signal_connect()来绑定；
+<LI>用gtk_signal_emit_stop_by_name()来停止信号继续传播。
 </UL></UL></UL></P>
 <P>  -->
 </Body>

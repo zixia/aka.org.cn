@@ -4,7 +4,7 @@
    <meta http-equiv="Content-Type" content="text/html; charset=gb_2312-80">
    <meta name="Generator" content="Microsoft Word 97">
    <meta name="GENERATOR" content="Mozilla/4.51 [b]C-CCK-MCD   (Win98; I) [Netscape]">
-   <title>Linux���Ľ��ܽ���</title>
+   <title>Linux核心介绍讲义</title>
 </head>
 <body>
 
@@ -13,10 +13,10 @@
 <dir>
 <dir>
 <dir>
-<dl><a NAME="title"></a><b><font size=+2>Linux<font face="����">ϵͳ���ý���</font></font></b>
-<p><b><font size=+1><a href="#c1">Linux<font face="����">��ϵͳ���õ�ʵ��</font></a></font></b>
-<br><b><font size=+1><a href="#c2">Linux<font face="����">�е�ϵͳ����</font></a></font></b>
-<br><b><font size=+1><a href="#c3">Linux<font face="����">����������Ͷ����ں�</font></a></font></b>
+<dl><a NAME="title"></a><b><font size=+2>Linux<font face="隶书">系统调用讲义</font></font></b>
+<p><b><font size=+1><a href="#c1">Linux<font face="宋体">下系统调用的实现</font></a></font></b>
+<br><b><font size=+1><a href="#c2">Linux<font face="宋体">中的系统调用</font></a></font></b>
+<br><b><font size=+1><a href="#c3">Linux<font face="宋体">中怎样编译和定制内核</font></a></font></b>
 <br>&nbsp;</dl>
 </dir>
 </dir>
@@ -26,85 +26,85 @@
 
 <ul>
 <li>
-<a NAME="c1"></a><b><font size=+1>Linux<font face="����">��ϵͳ���õ�ʵ��</font></font></b></li>
+<a NAME="c1"></a><b><font size=+1>Linux<font face="宋体">下系统调用的实现</font></font></b></li>
 </ul>
 
 <ol>
 <li>
-<b>Unix/Linux<font face="����">����ϵͳ����ϵ�ṹ��ϵͳ���ý���</font></b></li>
+<b>Unix/Linux<font face="宋体">操作系统的体系结构及系统调用介绍</font></b></li>
 </ol>
 
 <ol TYPE="A">
 <ol TYPE="A">
 <li>
-<b><font face="����"><font size=+0>ʲô�ǲ���ϵͳ��ϵͳ����</font></font></b></li>
+<b><font face="宋体"><font size=+0>什么是操作系统和系统调用</font></font></b></li>
 <b></b>
-<p><br><b>&nbsp;&nbsp;&nbsp; </b>����ϵͳ�Ǵ�Ӳ�������������������ڸ���������û���������Ӧ�ó���������ֱ����Ӳ�����������û������ṩ�������񣬲�ʹ����ͬӲ�����Ը��롣��Ϊ����Ӧ���������²��Ӳ����ֻ������Ӧ�ó�����ܷܺ�����ڸ��ֲ�ͬ��Unixϵͳ֮���ƶ���ϵͳ������Unix/Linux����ϵͳ���û������ṩ֧�ֵĽӿڣ�ͨ����Щ�ӿ�Ӧ�ó��������ϵͳ������񣬿���ת�����ϵͳ��������ϵͳ����ɷ���󣬽����ƺͽ�����ظ��û�����
-<br><b>��</b>
+<p><br><b>&nbsp;&nbsp;&nbsp; </b>操作系统是从硬件抽象出来的虚拟机，在该虚拟机上用户可以运行应用程序。它负责直接与硬件交互，向用户程序提供公共服务，并使它们同硬件特性隔离。因为程序不应该依赖于下层的硬件，只有这样应用程序才能很方便的在各种不同的Unix系统之间移动。系统调用是Unix/Linux操作系统向用户程序提供支持的接口，通过这些接口应用程序向操作系统请求服务，控制转向操作系统，而操作系统在完成服务后，将控制和结果返回给用户程序。
+<br><b>　</b>
 <li>
-<b><font size=+0>Unix/Linux<font face="����">ϵͳ��ϵ�ṹ</font></font></b></li>
+<b><font size=+0>Unix/Linux<font face="宋体">系统体系结构</font></font></b></li>
 
-<p><br>һ��<font size=+0>Unix/Linux<font face="����">ϵͳ��Ϊ������Σ��û��������Լ�Ӳ����</font></font>
+<p><br>一个<font size=+0>Unix/Linux<font face="宋体">系统分为三个层次：用户、核心以及硬件。</font></font>
 <br><img SRC="a1.gif" height=298 width=479>
-<br><font face="����"><font size=+0>��&nbsp;&nbsp;&nbsp; ����ϵͳ�������û���������ļ�ı߽磬ͨ��ϵͳ���ý��̿����û�ģʽת�����ģʽ���ں���ģʽ�����һ���ķ���������ڷ����û�ģʽ��</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ϵͳ���ýӿڿ�������</font>C<font face="����">�����е���ͨ�������ú����ƣ�����ͨ����ͨ�������Щ��������ӳ��ɽ������ϵͳ����Ҫ��ԭ�</font></font>
-<p><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp; ��Щ����ԭ��ֻ���ṩһ���������ܼ�����ͨ�������Щ���������úͷ�װ�������γɷḻ����ǿ���ϵͳ���ÿ⡣���������˻�������������ı��˼�롪��ϵͳ����ֻ���ṩ���ʺ��ĵĻ������ƣ���������ͨ��ϵͳ���ÿ������֡�</font></font>
-<p><font size=+0><font face="����">����</font>execv, execl, execlv, opendir
+<br><font face="宋体"><font size=+0>　&nbsp;&nbsp;&nbsp; 其中系统调用是用户程序与核心间的边界，通过系统调用进程可由用户模式转入核心模式，在核心模式下完成一定的服务请求后在返回用户模式。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 系统调用接口看起来和</font>C<font face="宋体">程序中的普通函数调用很相似，它们通常是通过库把这些函数调用映射成进入操作系统所需要的原语。</font></font>
+<p><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp; 这些操作原语只是提供一个基本功能集，而通过库对这些操作的引用和封装，可以形成丰富而且强大的系统调用库。这里体现了机制与策略相分离的编程思想——系统调用只是提供访问核心的基本机制，而策略是通过系统调用库来体现。</font></font>
+<p><font size=+0><font face="宋体">例：</font>execv, execl, execlv, opendir
 , readdir...</font>
-<p><b><font face="����"><font size=+0>��</font></font></b>
+<p><b><font face="宋体"><font size=+0>　</font></font></b>
 <li>
-<b><font face="����"><font size=+0>Unix/Linux����ģʽ����ַ�ռ��������</font></font></b></li>
+<b><font face="宋体"><font size=+0>Unix/Linux运行模式，地址空间和上下文</font></font></b></li>
 
 <br>&nbsp;
 <p>&nbsp;
-<p><b><font face="����"><font size=+0>����ģʽ������̬����</font></font></b>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; һ�ּ����Ӳ��Ҫ����</font>Unix/Linux<font face="����">ϵͳ��������Ҫ�ṩ��������ģʽ�������ȼ��ĺ���ģʽ�͵����ȼ����û�ģʽ��</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ʵ�����������������������ϵ�ִ��ģʽ���磺</font>intel
-80x86<font face="����">��ϵ�ṹ�����Ĳ�ִ����Ȩ���ڲ���Ȩ��ߡ�</font>Unix<font face="����">ֻ��Ҫ���㼴�����ˣ����������ڸ����ȼ�����֮Ϊ����̬��������Χ��������</font>shell<font face="����">���༭����</font>Xwindow<font face="����">�ȵȶ����ڵ����ȼ����У���֮Ϊ�û�̬��֮���Բ�ȡ��ͬ��ִ��ģʽ��Ҫԭ��ʱΪ�˱����������û������ڽϵ͵���Ȩ�������У����ǽ���������������ƻ��������̻��ںˡ�������ɵ��ƻ��ᱻ�ֲ�������Ӱ��ϵͳ����������߽��̡����û�������Ҫ�����Ȩģʽ�²�����ɵ�ĳЩ����ʱ�������ϸ���ϵͳ�����ṩ�ӿڲ��ܽ�����Ȩģʽ��Ȼ��ִ�е������ṩ�����޹��ܡ�</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ÿ������̬��Ӧ�����Լ��Ķ�ջ����</font>Linux<font face="����">�У���Ϊ�û�ջ�ͺ���ջ���û�ջ�������û�ִ̬��ʱ�������õĲ������ֲ��������������ݽṹ����Щϵͳ��ר��Ϊȫ���жϴ����ṩ���ж�ջ������</font>x86<font face="����">�в�û���ж�ջ���ж��ڵ�ǰ���̵ĺ���ջ�д�����</font></font>
-<p><b><font face="����"><font size=+0>��ַ�ռ䣺</font></font></b>
-<p><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp; ������Ȩģʽ���б����ĸ���Ŀ���ǶԵ�ַ�ռ�ı������û����̲�Ӧ���ܹ��������еĵ�ַ�ռ䣺ֻ��ͨ��ϵͳ�����������ϸ����ƵĽӿڣ����̲��ܽ������̬�����ʵ��ܱ�������һ���ֵ�ַ�ռ�����ݣ���һ����ͨ������������ϵͳʹ�á����⣬���������֮��ĵ�ַ�ռ�Ҳ��Ӧ����㻥�á�����������Ҫ�ṩһ�ֻ�������һƬ�����ڴ���ʵ��ͬһ���̲�ͬ��ַ�ռ��ϵı������Լ���ͬ����֮���ַ�ռ�ı�����</font></font>
-<p><font size=+0>&nbsp;&nbsp;&nbsp; Unix/Linux<font face="����">��ͨ�����������ƺܺõ�ʵ�������ֱ����������ϵͳ�У�������ʹ�õĵ�ַ��ֱ�Ӷ�Ӧ�����Ĵ洢��Ԫ��ÿ�����̶����Լ������ռ䣬ÿ���������Լ��������ַ�ռ䣬�������ַ������ͨ����ַת������ת����Ϊ������ַ�����á�����Ϊ���н��̹��������ڴ���Դ�����Ա���ͨ��һ���ķ������������ֹ�����Դ��ͨ�����ϵͳ�ܺõ�ʵ�������ֱ�����ÿ�����̵ĵ�ַ�ռ�ͨ����ַת������ӳ�䵽��ͬ�������洢ҳ���ϣ������ͱ�֤�˽���ֻ�ܷ����Լ��ĵ�ַ�ռ�����Ӧ��ҳ������ܷ��ʻ��޸��������̵ĵ�ַ�ռ��Ӧ��ҳ�档</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; �����ַ�ռ��Ϊ�������֣��û��ռ��ϵͳ�ռ䡣���û�ģʽ��ֻ�ܷ����û��ռ���ں���ģʽ�¿��Է���ϵͳ�ռ���û��ռ䡣ϵͳ�ռ���ÿ�����̵������ַ�ռ��ж��ǹ̶��ģ���������ϵͳ��ֻ��һ���ں�ʵ�������У�������н��̶�ӳ�䵽��һ�ں˵�ַ�ռ䡣�ں���ά��ȫ�����ݽṹ��ÿ�����̵�һЩ������Ϣ�����߰�������Ϣʹ���ں˿��Է����κν��̵ĵ�ַ�ռ䡣ͨ����ַת�����ƽ��̿���ֱ�ӷ��ʵ�ǰ���̵ĵ�ַ�ռ䣨ͨ��</font>MMU<font face="����">������ͨ��һЩ����ķ���Ҳ���Է��ʵ��������̵ĵ�ַ�ռ䡣</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; �������н��̶������ںˣ�����ϵͳ�ռ����ܱ����ģ��������û�̬�޷����ʡ����������Ҫ�����ںˣ������ͨ��ϵͳ���ýӿڡ����̵���һ��ϵͳ����ʱ��ͨ��ִ��һ�������ָ����ָ������ƽ̨��صģ�ÿ��ϵͳ���ṩ��ר�ŵ�</font>trap<font face="����">�������</font>x86<font face="����">��</font>Linux<font face="����">����ʹ��</font>int
-<font face="����">ָ�ʹϵͳ�����ں�̬����������Ȩ�����ںˣ����ں����������ɲ�������ϵͳ������ɺ��ں�ִ����һ������ָ�ϵͳ���ص��û�̬������Ȩ���ظ����̡�</font></font>
-<p><b><font face="����"><font size=+0>�����ģ�</font></font></b>
-<p><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp; һ�����̵������Ŀ��Է�Ϊ�������֣��û��������ġ��Ĵ����������Լ�ϵͳ�������ġ�</font></font>
-<p><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp; �û��������ģ����ġ����ݡ��û�ջ�Լ������洢����</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; �Ĵ��������ģ�����Ĵ�����</font>IP<font face="����">������</font>CPU<font face="����">��ִ�е�����ָ���ַ��������״̬�Ĵ�����</font>EFLAGS<font face="����">����ջָ�룬ͨ�üĴ�����</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ϵͳ�������ģ����̱���</font>(proc<font face="����">�ṹ</font>)<font face="����">��</font>U<font face="����">������</font>Linux<font face="����">�����������ֱ��ϳ�</font>task_struct<font face="����">��������ҳ��</font>(mm_struct
-, vm_area_struct, pgd, pmd, pte<font face="����">��</font>)<font face="����">������ջ�ȡ�</font></font>
-<p><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp; ȫ������������Ϣ�����һ�����̵����л��������������̵���ʱ�������ȫ����������Ϣ�����л����µ��ȵĽ��̲������С����̾��������ĵļ��ϵ�һ��������</font></font>
-<p><font face="����"><font size=+0>��</font></font>
+<p><b><font face="宋体"><font size=+0>运行模式（运行态）：</font></font></b>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 一种计算机硬件要运行</font>Unix/Linux<font face="宋体">系统，至少需要提供两种运行模式：高优先级的核心模式和低优先级的用户模式。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 实际上许多计算机都有两种以上的执行模式。如：</font>intel
+80x86<font face="宋体">体系结构就有四层执行特权，内层特权最高。</font>Unix<font face="宋体">只需要两层即可以了：核心运行在高优先级，称之为核心态；其它外围软件包括</font>shell<font face="宋体">，编辑程序，</font>Xwindow<font face="宋体">等等都是在低优先级运行，称之为用户态。之所以采取不同的执行模式主要原因时为了保护，由于用户进程在较低的特权级上运行，它们将不能意外或故意的破坏其它进程或内核。程序造成的破坏会被局部化而不影响系统中其它活动或者进程。当用户进程需要完成特权模式下才能完成的某些功能时，必须严格按照系统调用提供接口才能进入特权模式，然后执行调用所提供的有限功能。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 每种运行态都应该有自己的堆栈。在</font>Linux<font face="宋体">中，分为用户栈和核心栈。用户栈包括在用户态执行时函数调用的参数、局部变量和其它数据结构。有些系统中专门为全局中断处理提供了中断栈，但是</font>x86<font face="宋体">中并没有中断栈，中断在当前进程的核心栈中处理。</font></font>
+<p><b><font face="宋体"><font size=+0>地址空间：</font></font></b>
+<p><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp; 采用特权模式进行保护的根本目的是对地址空间的保护，用户进程不应该能够访问所有的地址空间：只有通过系统调用这种受严格限制的接口，进程才能进入核心态并访问到受保护的那一部分地址空间的数据，这一部分通常是留给操作系统使用。另外，进程与进程之间的地址空间也不应该随便互访。这样，就需要提供一种机制来在一片物理内存上实现同一进程不同地址空间上的保护，以及不同进程之间地址空间的保护。</font></font>
+<p><font size=+0>&nbsp;&nbsp;&nbsp; Unix/Linux<font face="宋体">中通过虚存管理机制很好的实现了这种保护，在虚存系统中，进程所使用的地址不直接对应物理的存储单元。每个进程都有自己的虚存空间，每个进程有自己的虚拟地址空间，对虚拟地址的引用通过地址转换机制转换成为物理地址的引用。正因为所有进程共享物理内存资源，所以必须通过一定的方法来保护这种共享资源，通过虚存系统很好的实现了这种保护：每个进程的地址空间通过地址转换机制映射到不同的物理存储页面上，这样就保证了进程只能访问自己的地址空间所对应的页面而不能访问或修改其它进程的地址空间对应的页面。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 虚拟地址空间分为两个部分：用户空间和系统空间。在用户模式下只能访问用户空间而在核心模式下可以访问系统空间和用户空间。系统空间在每个进程的虚拟地址空间中都是固定的，而且由于系统中只有一个内核实例在运行，因此所有进程都映射到单一内核地址空间。内核中维护全局数据结构和每个进程的一些对象信息，后者包括的信息使得内核可以访问任何进程的地址空间。通过地址转换机制进程可以直接访问当前进程的地址空间（通过</font>MMU<font face="宋体">），而通过一些特殊的方法也可以访问到其它进程的地址空间。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 尽管所有进程都共享内核，但是系统空间是受保护的，进程在用户态无法访问。进程如果需要访问内核，则必须通过系统调用接口。进程调用一个系统调用时，通过执行一组特殊的指令（这个指令是与平台相关的，每种系统都提供了专门的</font>trap<font face="宋体">命令，基于</font>x86<font face="宋体">的</font>Linux<font face="宋体">中是使用</font>int
+<font face="宋体">指令）使系统进入内核态，并将控制权交给内核，由内核替代进程完成操作。当系统调用完成后，内核执行另一组特征指令将系统返回到用户态，控制权返回给进程。</font></font>
+<p><b><font face="宋体"><font size=+0>上下文：</font></font></b>
+<p><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp; 一个进程的上下文可以分为三个部分：用户级上下文、寄存器上下文以及系统级上下文。</font></font>
+<p><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp; 用户级上下文：正文、数据、用户栈以及共享存储区；</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 寄存器上下文：程序寄存器（</font>IP<font face="宋体">），即</font>CPU<font face="宋体">将执行的下条指令地址，处理机状态寄存器（</font>EFLAGS<font face="宋体">），栈指针，通用寄存器；</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 系统级上下文：进程表项</font>(proc<font face="宋体">结构</font>)<font face="宋体">和</font>U<font face="宋体">区，在</font>Linux<font face="宋体">中这两个部分被合成</font>task_struct<font face="宋体">，区表及页表</font>(mm_struct
+, vm_area_struct, pgd, pmd, pte<font face="宋体">等</font>)<font face="宋体">，核心栈等。</font></font>
+<p><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp; 全部的上下文信息组成了一个进程的运行环境。当发生进程调度时，必须对全部上下文信息进行切换，新调度的进程才能运行。进程就是上下文的集合的一个抽象概念。</font></font>
+<p><font face="宋体"><font size=+0>　</font></font>
 <li>
-<b><font face="����"><font size=+0>ϵͳ���õĹ��ܺͷ���</font></font></b></li>
+<b><font face="宋体"><font size=+0>系统调用的功能和分类</font></font></b></li>
 </ol>
 </ol>
 
 <dir>
-<dir><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ����ϵͳ�����������ڼ�Ļ���Է�Ϊ�������֣��ϰ벿��</font>(top
-half)<font face="����">���°벿��</font>(bottom half)<font face="����">�������ϰ벿��ΪӦ�ó����ṩϵͳ���û����ݵķ�����ͬ�������ɵ�ǰִ�еĽ��������ڵ�ǰ������������ִ�в�����ֱ�ӷ��ʵ�ǰ���̵����ݽṹ�����°벿�������ɴ���Ӳ���жϵ��ӳ����������첽�����Щ�ӳ���ĵ��ú�ִ���뵱ǰ�����޹ء��ϰ벿����������������Ϊ�����������ǵ�ǰ���̣��°벿�ֲ���������������Ϊ�����°벿�ֻ���������һ���޹��Ľ��������������ġ�</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ϵͳ���ÿ��Կ�����һ������</font>Unix/Linux<font face="����">���̹������ӳ���⣬������������Ȩ��ʽ�����У����Դ�ȡ�������ݽṹ������֧�ֵ��û������ݡ�ϵͳ���õ���Ҫ������ʹ�û�����ʹ�ò���ϵͳ�ṩ���й��豸�������ļ�ϵͳ�����̿��ƽ���ͨѶ�Լ��洢��������Ĺ��ܣ�������Ҫ�˽����ϵͳ���ڲ��ṹ���й�Ӳ����ϸ�����⣬�Ӷ������û������ͱ���ϵͳ�Լ������Դ�����ʡ�</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ϵͳ���÷�Ϊ�������֣����ļ���ϵͳ�����ĺͽ�����ϵͳ�������������֡����к��ļ���ϵͳ�����Ĳ��ֽ�һ���ɿ��԰������豸�ļ��Ľ���������ͨ�ļ��Ľ�����ϵͳ���ã�</font>open,
-close, ioctl, create, unlink, . . . <font face="����">�����������ص�ϵͳ�����ְ������̿���ϵͳ���ã�</font>fork,
-exit, getpid, . . . <font face="����">�������̼�ͨѶ���洢���������̵��ȵȷ����ϵͳ���á�</font></font>
-<br><b><font face="����"></font></b>&nbsp;</dir>
+<dir><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 操作系统核心在运行期间的活动可以分为两个部分：上半部分</font>(top
+half)<font face="宋体">和下半部分</font>(bottom half)<font face="宋体">，其中上半部分为应用程序提供系统调用或自陷的服务，是同步服务，由当前执行的进程引起，在当前进程上下文中执行并允许直接访问当前进程的数据结构；而下半部分则是由处理硬件中断的子程序，是属于异步活动，这些子程序的调用和执行与当前进程无关。上半部分允许被阻塞，因为这样阻塞的是当前进程；下半部分不允许被阻塞，因为阻塞下半部分会引起阻塞一个无辜的进程甚至整个核心。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 系统调用可以看作是一个所有</font>Unix/Linux<font face="宋体">进程共享的子程序库，但是它是在特权方式下运行，可以存取核心数据结构和它所支持的用户级数据。系统调用的主要功能是使用户可以使用操作系统提供的有关设备管理、文件系统、进程控制进程通讯以及存储管理方面的功能，而不必要了解操作系统的内部结构和有关硬件的细节问题，从而减轻用户负担和保护系统以及提高资源利用率。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 系统调用分为两个部分：与文件子系统交互的和进程子系统交互的两个部分。其中和文件子系统交互的部分进一步由可以包括与设备文件的交互和与普通文件的交互的系统调用（</font>open,
+close, ioctl, create, unlink, . . . <font face="宋体">）；与进程相关的系统调用又包括进程控制系统调用（</font>fork,
+exit, getpid, . . . <font face="宋体">），进程间通讯，存储管理，进程调度等方面的系统调用。</font></font>
+<br><b><font face="宋体"></font></b>&nbsp;</dir>
 </dir>
 
-<dir><b>2.Linux<font face="����">��ϵͳ���õ�ʵ��</font></b>
-<br><font face="����">&nbsp;&nbsp;&nbsp; ����</font>i386<font face="����">Ϊ��˵����</font>
-<br><b><font size=+0><font face="����">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-A.��</font>Linux<font face="����">��ϵͳ����������������ĵģ�</font></font></b></dir>
+<dir><b>2.Linux<font face="宋体">下系统调用的实现</font></b>
+<br><font face="宋体">&nbsp;&nbsp;&nbsp; （以</font>i386<font face="宋体">为例说明）</font>
+<br><b><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+A.在</font>Linux<font face="宋体">中系统调用是怎样陷入核心的？</font></font></b></dir>
 
 <dir>
-<dir>&nbsp;&nbsp;&nbsp; ϵͳ������ʹ��ʱ��һ��ĺ������ú����ƣ����Ƕ������б���������ģ��������ò���������û�̬������̬��ת����������ǰ���ᵽ�ģ�ϵͳ������Ҫ��һ��״̬ת����
-<p>&nbsp;&nbsp;&nbsp; ��ÿ��ƽ̨�ϣ������ض���ָ�����ʹ���̵�ִ�����û�̬ת��Ϊ����̬������ָ���������ϵͳ���루<font size=+0>operating
-system trap<font face="����">��������ͨ��ִ������ָ��󣬱�����ں���̬����ϵͳ���ô��롣</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ��</font>Linux<font face="����">����ͨ�����ж���ʵ����������ģ���</font>x86<font face="����">ƽ̨�ϣ�����ָ����</font>int
-0x80<font face="����">��Ҳ����˵��</font>Linux<font face="����">�У�ϵͳ���õĽӿ���һ���жϴ�����������������������ͨ���жϴ���������ʵ��ϵͳ���õ���ڽ��ں�����ϸ���ܡ�</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ����������Ҫ��ϵͳ����ʱ����</font>INT
-0x80<font face="����">����һ���ĳ�ʼ�������潫��������̣�</font></font>
-<p><font size=+0><font face="����">1.ʹ�û���ӳ���</font>setup_idt<font face="����">��</font>linux/arch/i386/kernel/head.S<font face="����">����ʼ��</font>idt<font face="����">�����ж���������������ʱ���е���ں���ƫ�Ƶ�ַ������Ϊ</font>ignore_int</font></dir>
+<dir>&nbsp;&nbsp;&nbsp; 系统调用在使用时和一般的函数调用很相似，但是二者是有本质性区别的，函数调用不能引起从用户态到核心态的转换，而正如前面提到的，系统调用需要有一个状态转换。
+<p>&nbsp;&nbsp;&nbsp; 在每种平台上，都有特定的指令可以使进程的执行由用户态转换为核心态，这种指令称作操作系统陷入（<font size=+0>operating
+system trap<font face="宋体">）。进程通过执行陷入指令后，便可以在核心态运行系统调用代码。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 在</font>Linux<font face="宋体">中是通过软中断来实现这种陷入的，在</font>x86<font face="宋体">平台上，这条指令是</font>int
+0x80<font face="宋体">。也就是说在</font>Linux<font face="宋体">中，系统调用的接口是一个中断处理函数的特例。具体怎样通过中断处理函数来实现系统调用的入口将在后面详细介绍。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 这样，就需要在系统启动时，对</font>INT
+0x80<font face="宋体">进行一定的初始化，下面将描述其过程：</font></font>
+<p><font size=+0><font face="宋体">1.使用汇编子程序</font>setup_idt<font face="宋体">（</font>linux/arch/i386/kernel/head.S<font face="宋体">）初始化</font>idt<font face="宋体">表（中断描述符表），这时所有的入口函数偏移地址都被设为</font>ignore_int</font></dir>
 </dir>
 
 <ol TYPE="I">
@@ -123,50 +123,50 @@ system trap<font face="����">��������ͨ��ִ������ָ��󣬱�����ں���̬����ϵͳ�
 <p>dec %ecx
 <p>jne rp_sidt
 <p>ret
-<p>selector = __KERNEL_CS, DPL = 0, TYPE = E, P = 1<font face="����">��</font>;
-<p><font size=+0>2.Start_kernel()(linux/init/main.c)<font face="����">����</font>trap_init()(linux/arch/i386/kernel/trap.c)<font face="����">���������ж������������ڸú����ʵ������ͨ�����ú���</font>set_system_gate(SYSCALL_VECTOR,&amp;system_call)<font face="����">����ɸ�������õġ����е�</font>SYSCALL_VECTOR<font face="����">����</font>0x80<font face="����">����</font>system_call<font face="����">����һ������Ӻ������������ж�</font>0x80<font face="����">�Ĵ�����������Ҫ����������</font>a.
-<font face="����">�Ĵ��������ĵı��棻</font>b.
-<font face="����">��ת��ϵͳ���ô����������ں������ϸ������Щ���ݡ�</font></font></ol>
+<p>selector = __KERNEL_CS, DPL = 0, TYPE = E, P = 1<font face="宋体">）</font>;
+<p><font size=+0>2.Start_kernel()(linux/init/main.c)<font face="宋体">调用</font>trap_init()(linux/arch/i386/kernel/trap.c)<font face="宋体">函数设置中断描述符表。在该函数里，实际上是通过调用函数</font>set_system_gate(SYSCALL_VECTOR,&amp;system_call)<font face="宋体">来完成该项的设置的。其中的</font>SYSCALL_VECTOR<font face="宋体">就是</font>0x80<font face="宋体">，而</font>system_call<font face="宋体">则是一个汇编子函数，它即是中断</font>0x80<font face="宋体">的处理函数，主要完成两项工作：</font>a.
+<font face="宋体">寄存器上下文的保存；</font>b.
+<font face="宋体">跳转到系统调用处理函数。在后面会详细介绍这些内容。</font></font></ol>
 </ol>
-<font face="����"><font size=+0>��</font></font>
+<font face="宋体"><font size=+0>　</font></font>
 <dir>
 <dir>
 <dir>
-<dir><font face="����">������˵������������</font>
-<p>&nbsp;&nbsp;&nbsp; set_system_gate()<font face="����">����</font>linux/arch/i386/kernel/trap.S<font face="����">�ж���ģ��ڸ��ļ��л������˼������Ƶĺ���</font>set_intr_gate(),
-set_trap_gate, set_call_gate()<font face="����">����Щ������������ͬһ������Ӻ���</font>__set_gate()<font face="����">���ú�������������������������</font>IDT<font face="����">�е�ÿһ���һ������������</font>
+<dir><font face="宋体">（补充说明：门描述符</font>
+<p>&nbsp;&nbsp;&nbsp; set_system_gate()<font face="宋体">是在</font>linux/arch/i386/kernel/trap.S<font face="宋体">中定义的，在该文件中还定义了几个类似的函数</font>set_intr_gate(),
+set_trap_gate, set_call_gate()<font face="宋体">。这些函数都调用了同一个汇编子函数</font>__set_gate()<font face="宋体">，该函数的作用是设置门描述符。</font>IDT<font face="宋体">中的每一项都是一个门描述符。</font>
 <p>#define _set_gate(gate_addr,type,dpl,addr)
 <p>set_gate(idt_table+n,15,3,addr);
-<p><font face="����">&nbsp;&nbsp;&nbsp; �������������������ڿ���ת�ƣ����л����ѡ���ӣ���������Ϊ</font>__KERNEL_CS<font face="����">��ָ��</font>GDT<font face="����">�е�һ���������������ں���ƫ�Ƶ�ַ���ŷ�����Ȩ����</font>DPL<font face="����">���Լ����ͱ�ʶ��</font>TYPE<font face="����">����</font>Set_system_gate<font face="����">��</font>DPL<font face="����">Ϊ</font>3<font face="����">����ʾ����Ȩ��</font>3<font face="����">�������Ȩ����Ҳ���Է��ʸ��ţ�</font>type<font face="����">Ϊ</font>15<font face="����">����ʾΪ</font>386<font face="����">�ж��š���</font>
-<p><img SRC="a2.gif" height=326 width=577><font face="����"><font size=+0>��</font></font>
-<br><font face="����"><font size=+0>��</font></font></dir>
+<p><font face="宋体">&nbsp;&nbsp;&nbsp; 门描述符的作用是用于控制转移，其中会包括选择子，这里总是为</font>__KERNEL_CS<font face="宋体">（指向</font>GDT<font face="宋体">中的一项段描述符）、入口函数偏移地址、门访问特权级（</font>DPL<font face="宋体">）以及类型标识（</font>TYPE<font face="宋体">）。</font>Set_system_gate<font face="宋体">的</font>DPL<font face="宋体">为</font>3<font face="宋体">，表示从特权级</font>3<font face="宋体">（最低特权级）也可以访问该门，</font>type<font face="宋体">为</font>15<font face="宋体">，表示为</font>386<font face="宋体">中断门。）</font>
+<p><img SRC="a2.gif" height=326 width=577><font face="宋体"><font size=+0>　</font></font>
+<br><font face="宋体"><font size=+0>　</font></font></dir>
 </dir>
 </dir>
 </dir>
 
 <ol>
-<ol><b><font face="����"><font size=+0>B.��ϵͳ������ص����ݽṹ</font></font></b>
-<p><font face="����"><font size=+0>1.ϵͳ���ô��������ĺ�������Լ��</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ���������ԡ�</font>sys_<font face="����">����ͷ���������ϵͳ���õ����֡����磬ϵͳ����</font>fork()<font face="����">�Ĵ�����������</font>sys_fork()<font face="����">��</font></font>
+<ol><b><font face="宋体"><font size=+0>B.与系统调用相关的数据结构</font></font></b>
+<p><font face="宋体"><font size=+0>1.系统调用处理函数的函数名的约定</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 函数名都以“</font>sys_<font face="宋体">”开头，后面跟该系统调用的名字。例如，系统调用</font>fork()<font face="宋体">的处理函数名是</font>sys_fork()<font face="宋体">。</font></font>
 <p><font size=+0>asmlinkage int sys_fork(struct pt_regs regs);</font>
-<p><font size=+0><font face="����">���������</font>asmlinkage<font face="����">��˵����</font></font>
-<p><font face="����"><font size=+0>��</font></font>
-<br><font size=+0><font face="����">2.ϵͳ���úţ�</font>System Call Number<font face="����">��</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ������Ϊÿ��ϵͳ���ö�����һ��Ψһ�ı�ţ������ŵĶ�����</font>linux/include/asm/unistd.h<font face="����">�У���ŵĶ��巽ʽ������ʾ��</font></font>
+<p><font size=+0><font face="宋体">（补充关于</font>asmlinkage<font face="宋体">的说明）</font></font>
+<p><font face="宋体"><font size=+0>　</font></font>
+<br><font size=+0><font face="宋体">2.系统调用号（</font>System Call Number<font face="宋体">）</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 核心中为每个系统调用定义了一个唯一的编号，这个编号的定义在</font>linux/include/asm/unistd.h<font face="宋体">中，编号的定义方式如下所示：</font></font>
 <p><font size=+0>#define __NR_exit 1</font>
 <p><font size=+0>#define __NR_fork 2</font>
 <p><font size=+0>#define __NR_read 3</font>
 <p><font size=+0>#define __NR_write 4</font>
 <p><font size=+0>. . . . . .</font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; �û��ڵ���һ��ϵͳ����ʱ��ϵͳ���úź���Ϊ�������ݸ��ж�</font>0x80<font face="����">�����ñ��ʵ�����Ǻ��潫Ҫ�ᵽ��ϵͳ���ñ�</font>(sys_call_table)<font face="����">���±꣬ͨ����ֵ�����ҵ���ӳϵͳ���õĴ���������ַ��</font></font>
-<p><font face="����"><font size=+0>��</font></font>
-<br><font face="����"><font size=+0>3.ϵͳ���ñ�</font></font></ol>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 用户在调用一个系统调用时，系统调用号号作为参数传递给中断</font>0x80<font face="宋体">，而该标号实际上是后面将要提到的系统调用表</font>(sys_call_table)<font face="宋体">的下标，通过该值可以找到相映系统调用的处理函数地址。</font></font>
+<p><font face="宋体"><font size=+0>　</font></font>
+<br><font face="宋体"><font size=+0>3.系统调用表</font></font></ol>
 </ol>
 
 <dir>
 <dir>
 <dir>
-<dir><font size=+0><font face="����">ϵͳ���ñ��Ķ��巽ʽ���£���</font>linux/arch/i386/kernel/entry.S<font face="����">��</font></font>
+<dir><font size=+0><font face="宋体">系统调用表的定义方式如下：（</font>linux/arch/i386/kernel/entry.S<font face="宋体">）</font></font>
 <p><font size=+0>ENTRY(sys_call_table)</font>
 <dir><font size=+0>.long SYMBOL_NAME(sys_ni_syscall)</font>
 <p><font size=+0>.long SYMBOL_NAME(sys_exit)</font>
@@ -174,10 +174,10 @@ set_trap_gate, set_call_gate()<font face="����">����Щ������������ͬһ������Ӻ�
 <p><font size=+0>.long SYMBOL_NAME(sys_read)</font>
 <p><font size=+0>.long SYMBOL_NAME(sys_write)</font>
 <p><font size=+0>. . . . . .</font></dir>
-<font size=+0><font face="����">ϵͳ���ñ���¼�˸���ϵͳ���ô�����������ڵ�ַ����ϵͳ���ú�Ϊƫ���������׵��ܹ��ڸñ����ҵ���Ӧ����������ַ����</font>linux/include/linux/sys.h<font face="����">�ж����</font>NR_syscalls<font face="����">��ʾ�ñ������ɵ����ϵͳ��������</font>NR_syscalls
-= 256<font face="����">��</font></font>
-<p><font face="����"><font size=+0>��</font></font>
-<br><b><font face="����"><font size=+0>C.ϵͳ���ú����ӿ������ת��Ϊ��������</font></font></b>
+<font size=+0><font face="宋体">系统调用表记录了各个系统调用处理函数的入口地址，以系统调用号为偏移量很容易的能够在该表中找到对应处理函数地址。在</font>linux/include/linux/sys.h<font face="宋体">中定义的</font>NR_syscalls<font face="宋体">表示该表能容纳的最大系统调用数，</font>NR_syscalls
+= 256<font face="宋体">。</font></font>
+<p><font face="宋体"><font size=+0>　</font></font>
+<br><b><font face="宋体"><font size=+0>C.系统调用函数接口是如何转化为陷入命令</font></font></b>
 <br>&nbsp;</dir>
 </dir>
 </dir>
@@ -185,13 +185,13 @@ set_trap_gate, set_call_gate()<font face="����">����Щ������������ͬһ������Ӻ�
 
 <ol TYPE="A">
 <ol TYPE="A">&nbsp;
-<br><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp; ��ǰ���ᵽ�ģ�ϵͳ������ͨ��һ������ָ��������̬��Ȼ����ݴ������ĵ�ϵͳ���ú�Ϊ������ϵͳ���ñ����ҵ���ӳ�Ĵ���������ڵ�ַ�����ｫ��ϸ������һ���̡�</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ���ǻ�����</font>x86<font face="����">Ϊ��˵����</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ��������ָ����һ������ָ��������������ϵͳʵ�ֵ�ƽ̨������</font>x86<font face="����">�У�����ָ����</font>int
-0x80<font face="����">������Ȼ�����û��ڱ��ʱӦ��ʹ�õ���䣬��Ϊ�⽫ʹ���û�����������ֲ�������ڲ���ϵͳ���ϲ���Ҫʵ��һ����Ӧ��ϵͳ���ÿ⣬ÿ��ϵͳ���ö��ڸÿ��а�����һ����ڵ㣨�����ǿ�����</font>fork,
-open, close<font face="����">�ȵȣ�����Щ�����Գ���Ա�ǿɼ��ģ�����Щ�⺯���Ĺ������Զ�Ӧϵͳ���ú���Ϊ������ִ������ָ��</font>int
-0x80<font face="����">�����������ִ��������ϵͳ���ô�����������һ�����̵���һ���ض���ϵͳ���ÿ����ڵ㣬����ͬ�������κκ���һ�������ڿ⺯��ҲҪ����һ��ջ֡����������ִ������ָ��ʱ������������״̬ת��������̬�������ں���ջִ�к��Ĵ��롣</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; �������һ��ʾ����</font>linux/include/asm/unistd.h<font face="����">����</font></font>
+<br><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp; 如前面提到的，系统调用是通过一条陷入指令进入核心态，然后根据传给核心的系统调用号为索引在系统调用表中找到相映的处理函数入口地址。这里将详细介绍这一过程。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 我们还是以</font>x86<font face="宋体">为例说明：</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 由于陷入指令是一条特殊指令，而且依赖与操作系统实现的平台，如在</font>x86<font face="宋体">中，这条指令是</font>int
+0x80<font face="宋体">，这显然不是用户在编程时应该使用的语句，因为这将使得用户程序难于移植。所以在操作系统的上层需要实现一个对应的系统调用库，每个系统调用都在该库中包含了一个入口点（如我们看到的</font>fork,
+open, close<font face="宋体">等等），这些函数对程序员是可见的，而这些库函数的工作是以对应系统调用号作为参数，执行陷入指令</font>int
+0x80<font face="宋体">，以陷入核心执行真正的系统调用处理函数。当一个进程调用一个特定的系统调用库的入口点，正如同它调用任何函数一样，对于库函数也要创建一个栈帧。而当进程执行陷入指令时，它将处理机状态转换到核心态，并且在核心栈执行核心代码。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 这里给出一个示例（</font>linux/include/asm/unistd.h<font face="宋体">）：</font></font>
 <p><font size=+0>#define _syscallN(type, name, type1, arg1, type2, arg2,
 . . . ) \</font>
 <p><font size=+0>type name(type1 arg1,type2 arg2) \</font>
@@ -203,26 +203,26 @@ open, close<font face="����">�ȵȣ�����Щ�����Գ���Ա�ǿɼ��ģ�����Щ�⺯���Ĺ��
 \</font>
 <p><font size=+0>. . . . . .</font>
 <p><font size=+0>__syscall_return(type,__res); \</font>
-<p><font face="����"><font size=+0>}</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ��ִ��һ��ϵͳ���ÿ��ж����ϵͳ������ں���ʱ��ʵ��ִ�е����������ϵ�һ�δ��롣����ǣ�浽һЩ</font>gcc<font face="����">��Ƕ��ʽ������ԣ�������ϸ�Ľ��ܣ�ֻ��˵�������壺</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ����</font>__NR_##name<font face="����">��ϵͳ���úţ���</font>name
-== ioctl<font face="����">����Ϊ</font>__NR_ioctl<font face="����">�����������ڼĴ���</font>eax<font face="����">����Ϊ�������ݸ��ж�</font>0x80<font face="����">�Ĵ�����������ϵͳ���õ���������</font>arg1,
-arg2, ��<font face="����">�����α�����</font>ebx, ecx, . . .<font face="����">��ͨ�üĴ����У�����Ϊϵͳ���ô��������Ĳ�������Щ����������������ĵĽ����ں�����ܡ�</font></font>
-<p><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp; ���潫ʾ��˵����</font></font>
+<p><font face="宋体"><font size=+0>}</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 在执行一个系统调用库中定义的系统调用入口函数时，实际执行的是类似如上的一段代码。这里牵涉到一些</font>gcc<font face="宋体">的嵌入式汇编语言，不做详细的介绍，只简单说明其意义：</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 其中</font>__NR_##name<font face="宋体">是系统调用号，如</font>name
+== ioctl<font face="宋体">，则为</font>__NR_ioctl<font face="宋体">，它将被放在寄存器</font>eax<font face="宋体">中作为参数传递给中断</font>0x80<font face="宋体">的处理函数。而系统调用的其它参数</font>arg1,
+arg2, …<font face="宋体">则依次被放入</font>ebx, ecx, . . .<font face="宋体">等通用寄存器中，并作为系统调用处理函数的参数，这些参数是怎样传入核心的将会在后面介绍。</font></font>
+<p><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp; 下面将示例说明：</font></font>
 <p><font size=+0>int func1()</font>
 <p><font size=+0>{</font>
 <p><font size=+0>int fd, retval;</font>
-<p><font size=+0>fd = open(filename, ����);</font>
-<p><font size=+0>����</font>
+<p><font size=+0>fd = open(filename, ……);</font>
+<p><font size=+0>……</font>
 <p><font size=+0>ioctl(fd, cmd, arg);</font>
 <p><font size=+0>. . .</font>
 <p><font size=+0>}</font>
-<p><font face="����"><font size=+0>��</font></font>
+<p><font face="宋体"><font size=+0>　</font></font>
 <p><font size=+0>func2()</font>
 <p><font size=+0>{</font>
 <p><font size=+0>int fd, retval;</font>
-<p><font size=+0>fd = open(filename, ����);</font>
-<p><font size=+0>����</font>
+<p><font size=+0>fd = open(filename, ……);</font>
+<p><font size=+0>……</font>
 <p><font size=+0>__asm__ __volatile__(\</font>
 <p><font size=+0>"int $0x80\n\t"\</font>
 <p><font size=+0>:"=a"(retval)\</font>
@@ -230,28 +230,28 @@ arg2, ��<font face="����">�����α�����</font>ebx, ecx, . . .<font face="����">��
 <p><font size=+0>"b"(fd),\</font>
 <p><font size=+0>"c"(cmd),\</font>
 <p><font size=+0>"d"(arg));</font>
-<p><font face="����"><font size=+0>}</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ������������</font>Linux/x86<font face="����">�����еĽ��Ӧ����һ���ġ�</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ���ɸ��⺯������ӳ�䵽ͬһ��ϵͳ������ڵ㡣ϵͳ������ڵ��ÿ��ϵͳ���ö������������﷨�����壬���⺯��ͨ���ṩһ��������Ľӿڡ���ϵͳ����</font>exec<font face="����">�м��в�ͬ�ĵ��÷�ʽ��</font>execl,
-execle,<font face="����">�ȣ�����ʵ����ֻ��ͬһϵͳ���õĲ�ͬ�ӿڶ��ѡ�������Щ���ã����ǵĿ⺯�������Ǹ��ԵĲ������Դ�������ʵ�ָ��Ե��ص㣬�������ն���ӳ�䵽ͬһ��������ڵ㡣</font></font>
-<p><font face="����"><font size=+0>��<b>D.ϵͳ���������ں˺����γ�ʼ������</b></font></font></ol>
+<p><font face="宋体"><font size=+0>}</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 这两个函数在</font>Linux/x86<font face="宋体">上运行的结果应该是一样的。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 若干个库函数可以映射到同一个系统调用入口点。系统调用入口点对每个系统调用定义其真正的语法和语义，但库函数通常提供一个更方便的接口。如系统调用</font>exec<font face="宋体">有集中不同的调用方式：</font>execl,
+execle,<font face="宋体">等，它们实际上只是同一系统调用的不同接口而已。对于这些调用，它们的库函数对它们各自的参数加以处理，来实现各自的特点，但是最终都被映射到同一个核心入口点。</font></font>
+<p><font face="宋体"><font size=+0>　<b>D.系统调用陷入内核后作何初始化处理</b></font></font></ol>
 </ol>
 
 <dir>
-<dir><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ������ִ��ϵͳ����ʱ���ȵ���ϵͳ���ÿ��ж���ĳ���������ú���ͨ����չ����ǰ���ᵽ��</font>_syscallN<font face="����">����ʽͨ��</font>INT
-0x80<font face="����">��������ģ������Ҳ����ͨ���Ĵ����������ġ�</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ����һ���֣����ǽ�����</font>INT
-0x80<font face="����">�Ĵ�������</font>system_call<font face="����">��</font></font>
-<p><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp; ˼��һ�¾ͻᷢ�֣��ڵ���ǰ�͵��ú�ִ��̬��ȫ����ͬ��ǰ�������û�ջ��ִ���û�̬���򣬺����ں���ջ��ִ�к���̬���롣��ô��Ϊ�˱�֤�ں����ڲ�ִ����ϵͳ���ú��ܹ����ص��õ����ִ���û����룬�����ڽ������̬ʱ����ʱ��������ѹ��һ�������Ĳ㣻�ڴӺ��ķ���ʱ�ᵯ��һ�������Ĳ㣬�����û����̾Ϳ��Լ������С�</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ��ô����Щ��������Ϣ������������ģ��������������Щ��������Ϣ�أ���������</font>x86<font face="����">Ϊ��˵����</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ��ִ��</font>INT<font face="����">ָ��ʱ��ʵ����������¼���������</font></font>
-<p><font size=+0><font face="����">1.����</font>INT<font face="����">ָ����˲�ͬ���ȼ�֮��Ŀ���ת�ƣ��������ȴ�</font>TSS<font face="����">������״̬�Σ��л�ȡ�����ȼ��ĺ��Ķ�ջ��Ϣ��</font>SS<font face="����">��</font>ESP<font face="����">����2.�ѵ����ȼ���ջ��Ϣ��</font>SS<font face="����">��</font>ESP<font face="����">�������������ȼ���ջ��������ջ���У�</font></font>
-<br><font size=+0><font face="����">3.��</font>EFLAGS<font face="����">�����</font>CS<font face="����">��</font>EIP<font face="����">��������ȼ���ջ������ջ���С�</font></font>
-<br><font size=+0><font face="����">4.ͨ��</font>IDT<font face="����">����</font>CS<font face="����">��</font>EIP<font face="����">������ת�����жϴ���������</font></font></dir>
+<dir><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 当进程执行系统调用时，先调用系统调用库中定义某个函数，该函数通常被展开成前面提到的</font>_syscallN<font face="宋体">的形式通过</font>INT
+0x80<font face="宋体">来陷入核心，其参数也将被通过寄存器传往核心。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 在这一部分，我们将介绍</font>INT
+0x80<font face="宋体">的处理函数</font>system_call<font face="宋体">。</font></font>
+<p><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp; 思考一下就会发现，在调用前和调用后执行态完全不相同：前者是在用户栈上执行用户态程序，后者在核心栈上执行核心态代码。那么，为了保证在核心内部执行完系统调用后能够返回调用点继续执行用户代码，必须在进入核心态时保存时往核心中压入一个上下文层；在从核心返回时会弹出一个上下文层，这样用户进程就可以继续运行。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 那么，这些上下文信息是怎样被保存的，被保存的又是那些上下文信息呢？这里仍以</font>x86<font face="宋体">为例说明。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 在执行</font>INT<font face="宋体">指令时，实际完成了以下几条操作：</font></font>
+<p><font size=+0><font face="宋体">1.由于</font>INT<font face="宋体">指令发生了不同优先级之间的控制转移，所以首先从</font>TSS<font face="宋体">（任务状态段）中获取高优先级的核心堆栈信息（</font>SS<font face="宋体">和</font>ESP<font face="宋体">）；2.把低优先级堆栈信息（</font>SS<font face="宋体">和</font>ESP<font face="宋体">）保留到高优先级堆栈（即核心栈）中；</font></font>
+<br><font size=+0><font face="宋体">3.把</font>EFLAGS<font face="宋体">，外层</font>CS<font face="宋体">，</font>EIP<font face="宋体">推入高优先级堆栈（核心栈）中。</font></font>
+<br><font size=+0><font face="宋体">4.通过</font>IDT<font face="宋体">加载</font>CS<font face="宋体">，</font>EIP<font face="宋体">（控制转移至中断处理函数）</font></font></dir>
 </dir>
 
 <dir>
-<dir><font size=+0><font face="����">Ȼ��ͽ������ж�</font>0x80<font face="����">�Ĵ�������</font>system_call<font face="����">�ˣ��ڸú���������ʹ����һ����</font>SAVE_ALL<font face="����">���ú�Ķ���������ʾ��</font></font>
+<dir><font size=+0><font face="宋体">然后就进入了中断</font>0x80<font face="宋体">的处理函数</font>system_call<font face="宋体">了，在该函数中首先使用了一个宏</font>SAVE_ALL<font face="宋体">，该宏的定义如下所示：</font></font>
 <p><font size=+0>#define SAVE_ALL \</font>
 <dir>
 <dir>
@@ -270,7 +270,7 @@ execle,<font face="����">�ȣ�����ʵ����ֻ��ͬһϵͳ���õĲ�ͬ�ӿڶ��ѡ�������Щ�
 <p><font size=+0>movl %edx,%es;</font></dir>
 </dir>
 </dir>
-<font size=+0><font face="����">&nbsp;&nbsp;&nbsp; �ú�Ĺ���һ�����ǽ��Ĵ���������ѹ�뵽����ջ�У�����ϵͳ���ã�ͬʱҲ��ϵͳ���ò����Ĵ�����̣���Ϊ�ڲ�ͬ��Ȩ��֮�����ת��ʱ��</font>INT<font face="����">ָ�ͬ��</font>CALL<font face="����">ָ������Ὣ����ջ�Ĳ����Զ��������ڲ��ջ�С������ڵ���ϵͳ����ʱ����������ǰ����������ᵽ���������Ѳ���ָ���������Ĵ����У�Ȼ�����������֮��ʹ��</font>SAVE_ALL<font face="����">����Щ�����ڼĴ����еĲ�������ѹ�����ջ���������Ĳ���ʹ���û�����Ĳ������������</font>system_call<font face="����">��Դ���룺</font></font>
+<font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 该宏的功能一方面是将寄存器上下文压入到核心栈中，对于系统调用，同时也是系统调用参数的传入过程，因为在不同特权级之间控制转换时，</font>INT<font face="宋体">指令不同于</font>CALL<font face="宋体">指令，它不会将外层堆栈的参数自动拷贝到内层堆栈中。所以在调用系统调用时，必须先象前面的例子里提到的那样，把参数指定到各个寄存器中，然后在陷入核心之后使用</font>SAVE_ALL<font face="宋体">把这些保存在寄存器中的参数依次压入核心栈，这样核心才能使用用户传入的参数。下面给出</font>system_call<font face="宋体">的源代码：</font></font>
 <p><font size=+0>ENTRY(system_call)</font>
 <dir>
 <dir><font size=+0>pushl %eax # save orig_eax</font>
@@ -285,26 +285,26 @@ execle,<font face="����">�ȣ�����ʵ����ֻ��ͬһϵͳ���õĲ�ͬ�ӿڶ��ѡ�������Щ�
 </dir>
 </dir>
 <font size=+0>. . . . . .</font>
-<p><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-���������������й����ǣ�</font></font>
-<br><font size=+0><font face="����">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-1.����</font>EAX<font face="����">�Ĵ�������Ϊ��</font>SAVE_ALL<font face="����">�б����</font>EAX<font face="����">�Ĵ����ᱻ���õķ���ֵ�����ǣ�</font></font>
-<br><font size=+0><font face="����">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-2.����</font>SAVE_ALL<font face="����">����Ĵ��������ģ�</font></font>
-<br><font size=+0><font face="����">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-3.�жϵ�ǰ�����Ƿ��ǺϷ�ϵͳ���ã�</font>EAX<font face="����">��ϵͳ���úţ���Ӧ��С��</font>NR_syscalls<font face="����">����</font></font>
-<br><font size=+0><font face="����">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-4.���������</font>PF_TRACESYS<font face="����">��־������ת��</font>syscall_trace<font face="����">�������ｫ��ѵ�ǰ���̹������丸���̷���</font>SIGTRAP<font face="����">������Ҫ��Ϊ����&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-�õ��Զϵ����Ƶģ�</font></font>
-<br><font size=+0><font face="����">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-5.���û������</font>PF_TRACESYS<font face="����">��־������ת����ϵͳ���õĴ���������ڡ���������</font>EAX<font face="����">����ǰ���ᵽ��ϵͳ���úţ���Ϊƫ�ƣ���ϵ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-ͳ���ñ�</font>sys_call_table<font face="����">�в��Ҵ���������ڵ�ַ������ת������ڵ�ַ��</font></font>
-<br><font face="����"><font size=+0>��</font></font>
+<p><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+在这里所做的所有工作是：</font></font>
+<br><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1.保存</font>EAX<font face="宋体">寄存器，因为在</font>SAVE_ALL<font face="宋体">中保存的</font>EAX<font face="宋体">寄存器会被调用的返回值所覆盖；</font></font>
+<br><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+2.调用</font>SAVE_ALL<font face="宋体">保存寄存器上下文；</font></font>
+<br><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+3.判断当前调用是否是合法系统调用（</font>EAX<font face="宋体">是系统调用号，它应该小于</font>NR_syscalls<font face="宋体">）；</font></font>
+<br><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+4.如果设置了</font>PF_TRACESYS<font face="宋体">标志，则跳转到</font>syscall_trace<font face="宋体">，在那里将会把当前进程挂起并向其父进程发送</font>SIGTRAP<font face="宋体">，这主要是为了设&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+置调试断点而设计的；</font></font>
+<br><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+5.如果没有设置</font>PF_TRACESYS<font face="宋体">标志，则跳转到该系统调用的处理函数入口。这里是以</font>EAX<font face="宋体">（即前面提到的系统调用号）作为偏移，在系&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+统调用表</font>sys_call_table<font face="宋体">中查找处理函数入口地址，并跳转到该入口地址。</font></font>
+<br><font face="宋体"><font size=+0>　</font></font>
 <dir>
 <dir>
 <dir>
-<dir><font face="����"><font size=+0>��</font>����˵����</font>
-<br>1.GET_CURRENT<font face="����">��</font></dir>
+<dir><font face="宋体"><font size=+0>（</font>补充说明：</font>
+<br>1.GET_CURRENT<font face="宋体">宏</font></dir>
 </dir>
 </dir>
 </dir>
@@ -316,18 +316,18 @@ execle,<font face="����">�ȣ�����ʵ����ֻ��ͬһϵͳ���õĲ�ͬ�ӿڶ��ѡ�������Щ�
 <br>#define GET_CURRENT(reg) \
 <p>movl %esp, reg; \
 <p>andl $-8192, reg;
-<p><font face="����">&nbsp;&nbsp;&nbsp; ��������ȡ�õ�ǰ���̵�</font>task_struct<font face="����">�ṹ��ָ�뷵�ص�</font>reg<font face="����">�У���Ϊ��</font>Linux<font face="����">�к���ջ��λ����</font>task_struct<font face="����">֮�������ҳ�洦��</font>8192bytes<font face="����">�������Դ˴���ջָ����</font>-8192<font face="����">��õ�����</font>task_struct<font face="����">�ṹָ�룬��</font>task_struct<font face="����">��ƫ��Ϊ</font>4<font face="����">��λ���ǳ�Ա</font>flags<font face="����">��������ָ��</font>testb
-$0x20,flags(%ebx)<font face="����">���ľ���</font>task_struct->flags<font face="����">��</font>
+<p><font face="宋体">&nbsp;&nbsp;&nbsp; 其作用是取得当前进程的</font>task_struct<font face="宋体">结构的指针返回到</font>reg<font face="宋体">中，因为在</font>Linux<font face="宋体">中核心栈的位置是</font>task_struct<font face="宋体">之后的两个页面处（</font>8192bytes<font face="宋体">），所以此处把栈指针与</font>-8192<font face="宋体">则得到的是</font>task_struct<font face="宋体">结构指针，而</font>task_struct<font face="宋体">中偏移为</font>4<font face="宋体">的位置是成员</font>flags<font face="宋体">，在这里指令</font>testb
+$0x20,flags(%ebx)<font face="宋体">检测的就是</font>task_struct->flags<font face="宋体">。</font>
 <p><img SRC="a3.gif" height=394 width=552>
-<br><font face="����">2.��ջ�еĲ���</font>
-<p><font face="����">&nbsp;&nbsp;&nbsp; ����ǰ���ᵽ�ģ�</font>SAVE_ALL<font face="����">��ϵͳ���ò����Ĵ�����̣���ִ����</font>SAVE_ALL<font face="����">��������</font>CALL<font face="����">ָ������䴦������ʱ����ջ�ĽṹӦ������ͼ��ʾ����ʱ�Ķ�ջ�ṹ��������ִ��һ����ͨ�������ĺ���������һ���ģ������ڶ�ջ�ж�Ӧ��˳���ǣ�</font>arg1<font face="����">��</font>
-ebx<font face="����">������</font>arg2, ecx<font face="����">��</font>,<font face="����">��</font>arg3,
-edx<font face="����">��</font>. . . . . .<font face="����">��������</font>SAVE_ALL<font face="����">ѹջ�ķ�˳����Щ���������û���ʹ��ϵͳ����ʱ��ͼ���͸����ĵĲ������������ں��ĵĵ��ô���������ʹ�ò��������ֵ��ͷ�����</font>
-<p>asmlinkage int sys_fork(struct pt_regs regs)<font face="����">��</font>
-<p>asmlinkage int sys_open(const char * filename, int flags, int mode)<font face="����">��</font>
-<p><font face="����">&nbsp;&nbsp;&nbsp; ��</font>sys_fork<font face="����">�У���������ջ�е�������Ϊһ��</font>struct
-pt_regs<font face="����">���͵Ĳ������ò����Ľṹ�Ͷ�ջ�Ľṹ��һ�µģ����Կ���ʹ�ö�ջ�е�ȫ����Ϣ������</font>sys_open<font face="����">�в���</font>filename,
-flags, mode<font face="����">���ö�Ӧ���ջ�е�</font>ebx, ecx, edx<font face="����">��λ�ã�����Щ�Ĵ��������û���ͨ��</font>C<font face="����">�����ϵͳ����ʱ����Щ����ָ���ļĴ�����</font>
+<br><font face="宋体">2.堆栈中的参数</font>
+<p><font face="宋体">&nbsp;&nbsp;&nbsp; 正如前面提到的，</font>SAVE_ALL<font face="宋体">是系统调用参数的传入过程，当执行完</font>SAVE_ALL<font face="宋体">并且再由</font>CALL<font face="宋体">指令调用其处理函数时，堆栈的结构应该如上图所示。这时的堆栈结构看起来和执行一个普通带参数的函数调用是一样的，参数在堆栈中对应的顺序是（</font>arg1<font face="宋体">，</font>
+ebx<font face="宋体">），（</font>arg2, ecx<font face="宋体">）</font>,<font face="宋体">（</font>arg3,
+edx<font face="宋体">）</font>. . . . . .<font face="宋体">，这正是</font>SAVE_ALL<font face="宋体">压栈的反顺序，这些参数正是用户在使用系统调用时试图传送给核心的参数。下面是在核心的调用处理函数中使用参数的两种典型方法：</font>
+<p>asmlinkage int sys_fork(struct pt_regs regs)<font face="宋体">；</font>
+<p>asmlinkage int sys_open(const char * filename, int flags, int mode)<font face="宋体">；</font>
+<p><font face="宋体">&nbsp;&nbsp;&nbsp; 在</font>sys_fork<font face="宋体">中，把整个堆栈中的内容视为一个</font>struct
+pt_regs<font face="宋体">类型的参数，该参数的结构和堆栈的结构是一致的，所以可以使用堆栈中的全部信息。而在</font>sys_open<font face="宋体">中参数</font>filename,
+flags, mode<font face="宋体">正好对应与堆栈中的</font>ebx, ecx, edx<font face="宋体">的位置，而这些寄存器正是用户在通过</font>C<font face="宋体">库调用系统调用时给这些参数指定的寄存器。</font>
 <p><font size=+0>__asm__ __volatile__(\</font>
 <p><font size=+0>"int $0x80\n\t"\</font>
 <p><font size=+0>:"=a"(retval)\</font>
@@ -335,8 +335,8 @@ flags, mode<font face="����">���ö�Ӧ���ջ�е�</font>ebx, ecx, edx<font face="�
 <p><font size=+0>"b"(filename),\</font>
 <p><font size=+0>"c"(flags),\</font>
 <p><font size=+0>"d"(mode));</font>
-<p><font face="����"><font size=-2>��</font></font>
-<br><font face="����">3.�������ʹ���û��ռ�Ĳ���</font></ol>
+<p><font face="宋体"><font size=-2>　</font></font>
+<br><font face="宋体">3.核心如何使用用户空间的参数</font></ol>
 </dir>
 </dir>
 </ol>
@@ -345,10 +345,10 @@ flags, mode<font face="����">���ö�Ӧ���ջ�е�</font>ebx, ecx, edx<font face="�
 <dir>
 <dir>
 <dir>
-<dir><font face="����">��ʹ��ϵͳ����ʱ����Щ������ָ�룬��Щָ����ָ������û��ռ�</font>DS<font face="����">�Ĵ����Ķ�ѡ�������������еĵ�ַ������</font>2.2<font face="����">֮ǰ�İ汾�У�����̬��</font>DS<font face="����">�μĴ������еĶ�ѡ���Ӻ��û�̬�Ķ�ѡ���������Ķε�ַ��ͬ��ǰ��Ϊ</font>0xC0000000,
-<font face="����">����Ϊ</font>0x00000000<font face="����">����������ʹ����Щ����ʱ�Ͳ��ܶ�ȡ����ȷ��λ�á�������Ҫͨ������ĺ��ĺ������磺</font>memcpy_fromfs,
-mencpy_tofs<font face="����">�������û��ռ����ݶζ�ȡ����������Щ�����У���ʹ��</font>FS<font face="����">�Ĵ�������Ϊ��ȡ�����ĶμĴ����ģ�</font>FS<font face="����">�Ĵ�����ϵͳ���ý������̬ʱ�������</font>USER_DS<font face="����">��</font>DS<font face="����">�������</font>KERNEL_DS<font face="����">������</font>2.2<font face="����">֮��İ汾�û�̬�ͺ���̬ʹ�õ�</font>DS<font face="����">�ж�ѡ���������Ķε�ַ��һ���ģ�����</font>0x00000000<font face="����">�������Բ���Ҫ�پ����������������Ĺ��̶�ֱ��ʹ�ò����ˡ�</font></dir>
-2.2<font face="����">���Ժ�İ汾</font>linux/arch/i386/head.S
+<dir><font face="宋体">在使用系统调用时，有些参数是指针，这些指针所指向的是用户空间</font>DS<font face="宋体">寄存器的段选择子所描述段中的地址，而在</font>2.2<font face="宋体">之前的版本中，核心态的</font>DS<font face="宋体">段寄存器的中的段选择子和用户态的段选择子描述的段地址不同（前者为</font>0xC0000000,
+<font face="宋体">后者为</font>0x00000000<font face="宋体">），这样在使用这些参数时就不能读取到正确的位置。所以需要通过特殊的核心函数（如：</font>memcpy_fromfs,
+mencpy_tofs<font face="宋体">）来从用户空间数据段读取参数，在这些函数中，是使用</font>FS<font face="宋体">寄存器来作为读取参数的段寄存器的，</font>FS<font face="宋体">寄存器在系统调用进入核心态时被设成了</font>USER_DS<font face="宋体">（</font>DS<font face="宋体">被设成了</font>KERNEL_DS<font face="宋体">）。在</font>2.2<font face="宋体">之后的版本用户态和核心态使用的</font>DS<font face="宋体">中段选择子描述的段地址是一样的（都是</font>0x00000000<font face="宋体">），所以不需要再经过上面那样烦琐的过程而直接使用参数了。</font></dir>
+2.2<font face="宋体">及以后的版本</font>linux/arch/i386/head.S
 <p>ENTRY(gdt_table)
 <dir>.quad 0x0000000000000000/* NULL descriptor */
 <p>.quad 0x0000000000000000/* not used */
@@ -372,15 +372,15 @@ mencpy_tofs<font face="����">�������û��ռ����ݶζ�ȡ����������Щ�����У���ʹ��<
 <p>.quad 0xc0c392000000ffff /* 0x18 kernel 1GB data at 0xC0000000 */
 <p>.quad 0x00cbfa000000ffff /* 0x23 user 3GB code at 0x00000000 */
 <p>.quad 0x00cbf2000000ffff /* 0x2b user 3GB data at 0x00000000 *
-<p>��
-<p><font face="����">��</font>2.0<font face="����">����ں���</font>SAVE_ALL<font face="����">�궨�廹������������䣺</font>
+<p>　
+<p><font face="宋体">在</font>2.0<font face="宋体">版的内核中</font>SAVE_ALL<font face="宋体">宏定义还有这样几条语句：</font>
 <p>"movl $" STR(KERNEL_DS) ",%edx\n\t" \
 <p>"mov %dx,%ds\n\t" \
 <p>"mov %dx,%es\n\t" \
 <p>"movl $" STR(USER_DS) ",%edx\n\t" \
 <p>"mov %dx,%fs\n\t" \
 <p>"movl $0,%edx\n\t" \
-<p><font size=-2>��</font>
+<p><font size=-2>　</font>
 <br>&nbsp;</dir>
 </dir>
 </dir>
@@ -388,43 +388,43 @@ mencpy_tofs<font face="����">�������û��ռ����ݶζ�ȡ����������Щ�����У���ʹ��<
 </dir>
 
 <dir>
-<dir><b><font face="����"><font size=+0>E.���÷���</font></font></b>
-<br>���÷��صĹ���Ҫ���Ĺ���������Ӧ����Ҫ��һЩ����Щ����������ÿ�δӺ���̬�����û�̬����Ҫ���ģ����ｫ��Ҫ��˵����
-<p>1.�ж���û�����жϣ����������ת�����жϴ�����
-<br>2.�жϵ�ǰ�����Ƿ���Ҫ���µ��ȣ������Ҫ����ת�����ȴ�����
-<br>3.�����ǰ�����й�����źŻ�û�д���������ת���źŴ�����
-<br>4.ʹ����<font size=+0>RESTORE_ALL<font face="����">���������б�</font>SAVE_ALL<font face="����">ѹ�����ջ�����ݲ���ʹ��</font>iret<font face="����">�����û�̬��</font></font>
-<p><b><font face="����"><font size=+0>F.ʵ������</font></font></b></dir>
+<dir><b><font face="宋体"><font size=+0>E.调用返回</font></font></b>
+<br>调用返回的过程要做的工作比其响应过程要多一些，这些工作几乎是每次从核心态返回用户态都需要做的，这里将简要的说明：
+<p>1.判断有没有软中断，如果有则跳转到软中断处理；
+<br>2.判断当前进程是否需要重新调度，如果需要则跳转到调度处理；
+<br>3.如果当前进程有挂起的信号还没有处理，则跳转到信号处理；
+<br>4.使用用<font size=+0>RESTORE_ALL<font face="宋体">来弹出所有被</font>SAVE_ALL<font face="宋体">压入核心栈的内容并且使用</font>iret<font face="宋体">返回用户态。</font></font>
+<p><b><font face="宋体"><font size=+0>F.实例介绍</font></font></b></dir>
 </dir>
 
 <dir>
-<dir><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ǰ�������ϵͳ������ص����ݽṹ�Լ���</font>Linux<font face="����">��ʹ��һ��ϵͳ���õĹ�����ÿһ�������������ģ����潫��ǰ������и��������˵��������</font>Linux<font face="����">������һ��ϵͳ���á�</font></font>
-<p><font size=+0><font face="����">����ʵ�ֵ�ϵͳ����</font>hello<font face="����">�������ڿ���̨�ϴ�ӡһ����䣬û���κι��ܡ�</font></font>
-<p><font size=+0><font face="����">1.�޸�</font>linux/include/i386/unistd.h<font face="����">������������һ����䣺</font></font></dir>
+<dir><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 前面介绍了系统调用相关的数据结构以及在</font>Linux<font face="宋体">中使用一个系统调用的过程中每一步是怎样处理的，下面将把前面的所有概念串起来，说明怎样在</font>Linux<font face="宋体">中增加一个系统调用。</font></font>
+<p><font size=+0><font face="宋体">这里实现的系统调用</font>hello<font face="宋体">仅仅是在控制台上打印一条语句，没有任何功能。</font></font>
+<p><font size=+0><font face="宋体">1.修改</font>linux/include/i386/unistd.h<font face="宋体">，在里面增加一条语句：</font></font></dir>
 </dir>
 
 <ol TYPE="I">
 <ol TYPE="I">&nbsp;
-<br><font size=+0>#define __NR_hello ???<font face="����">��������ֿ�����Ϊ���İ汾��ͬ����ͬ��</font></font>
-<br><font size=+0><font face="����">2.��ĳ�����ʵ�Ŀ¼�У��磺</font>linux/kernel<font face="����">������һ��</font>hello.c<font face="����">���޸ĸ�Ŀ¼�µ�</font>Makefile<font face="����">������ӳ��</font>.o<font face="����">�ļ�����</font>Makefile<font face="����">�оͿ����ˣ���</font></font>
-<br><font size=+0><font face="����">3.��д</font>hello.c</font>
+<br><font size=+0>#define __NR_hello ???<font face="宋体">（这个数字可能因为核心版本不同而不同）</font></font>
+<br><font size=+0><font face="宋体">2.在某个合适的目录中（如：</font>linux/kernel<font face="宋体">）增加一个</font>hello.c<font face="宋体">，修改该目录下的</font>Makefile<font face="宋体">（把相映的</font>.o<font face="宋体">文件列入</font>Makefile<font face="宋体">中就可以了）。</font></font>
+<br><font size=+0><font face="宋体">3.编写</font>hello.c</font>
 <p><font size=+0>. . . . . .</font>
 <p><font size=+0>asmlinkage int sys_hello(char * str)</font>
 <p><font size=+0>{</font>
-<p><font size=+0>printk(��My syscall: hello, I know what you say to me:
-%s ! \n��, str);</font>
+<p><font size=+0>printk(“My syscall: hello, I know what you say to me:
+%s ! \n”, str);</font>
 <p><font size=+0>return 0;</font>
 <p><font size=+0>}</font>
-<p><font face="����"><font size=-2>��</font></font>
-<br><font size=+0><font face="����">4.�޸�</font>linux/arch/i386/kernel/entry.S<font face="����">������������һ����䣺</font></font>
+<p><font face="宋体"><font size=-2>　</font></font>
+<br><font size=+0><font face="宋体">4.修改</font>linux/arch/i386/kernel/entry.S<font face="宋体">，在里面增加一条语句：</font></font>
 <p><font size=+0>ENTRY(sys_call_table)</font>
 <p><font size=+0>. . . . . .</font>
 <p><font size=+0>.long SYMBOL_NAME(sys_hello)</font>
-<p><font face="����"><font size=+0>�����޸ģ�</font></font>
-<p><font size=+0>.rept NR_syscalls-???<font face="����"> </font>/* ???
+<p><font face="宋体"><font size=+0>并且修改：</font></font>
+<p><font size=+0>.rept NR_syscalls-???<font face="宋体"> </font>/* ???
 = ??? +1 */</font>
 <p><font size=+0>.long SYMBOL_NAME(sys_ni_syscall)</font>
-<br><font size=+0><font face="����">5.��</font>linux/include/i386/<font face="����">������</font>hello.h<font face="����">����������Ӧ��������������䣺</font></font></ol>
+<br><font size=+0><font face="宋体">5.在</font>linux/include/i386/<font face="宋体">中增加</font>hello.h<font face="宋体">，里面至少应包括这样几条语句：</font></font></ol>
 </ol>
 
 <dir>
@@ -432,18 +432,18 @@ mencpy_tofs<font face="����">�������û��ռ����ݶζ�ȡ����������Щ�����У���ʹ��<
 <dir>
 <dir>
 <dir><font size=+0>#include &lt;linux/unistd.h></font>
-<p><font face="����"><font size=+0>��</font></font>
+<p><font face="宋体"><font size=+0>　</font></font>
 <p><font size=+0>#ifdef __KERNEL</font>
 <p><font size=+0>#else</font>
 <p><font size=+0>inline _syscall1(int, hello, char *, str);</font>
 <p><font size=+0>#endif</font>
-<p><font size=+0><font face="����">�����Ϳ���ʹ��ϵͳ����</font>hello<font face="����">��</font></font>
-<p><font face="����"><font size=+0>��</font></font>
+<p><font size=+0><font face="宋体">这样就可以使用系统调用</font>hello<font face="宋体">了</font></font>
+<p><font face="宋体"><font size=+0>　</font></font>
 <br>&nbsp;
-<p><font face="����"><font size=+0>��&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<p><font face="宋体"><font size=+0>　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 <a href="#title">Back</a></font></font>
-<p><font face="����"><font size=+0>��</font></font></dir>
+<p><font face="宋体"><font size=+0>　</font></font></dir>
 </dir>
 </dir>
 </dir>
@@ -451,63 +451,63 @@ mencpy_tofs<font face="����">�������û��ռ����ݶζ�ȡ����������Щ�����У���ʹ��<
 
 <ul>
 <li>
-<a NAME="c2"></a><b><font size=+1>Linux<font face="����">�е�ϵͳ����</font></font></b></li>
+<a NAME="c2"></a><b><font size=+1>Linux<font face="宋体">中的系统调用</font></font></b></li>
 </ul>
 
-<ol><b>1�� ������ص�ϵͳ����</b>
+<ol><b>1． 进程相关的系统调用</b>
 <br><b><font size=+0>Fork &amp; vfork &amp; clone</font></b>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ������һ��ָ��ִ��������ִ�л�������ִ�л�����һ��ϵͳ��Դ�ļ��ϣ���Щ��Դ��</font>Linux<font face="����">�б�����ɸ������ݶ��󣺽��̿��ƿ顢���ռ䡢�ļ�ϵͳ���ļ�</font>I/O<font face="����">���źŴ������������Դ���һ�����̵Ĺ��̾�����Щ���ݶ���Ĵ������̡�</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; �ڵ���ϵͳ����</font>fork<font face="����">����һ������ʱ���ӽ���ֻ����ȫ���Ƹ����̵���Դ�������õ����ӽ��̶����ڸ����̣��������õĲ����ԣ����Ƕ���֮���ͨѶ��Ҫͨ��ר�ŵ�ͨѶ���ƣ��磺</font>pipe<font face="����">��</font>fifo<font face="����">��</font>System
-V IPC<font face="����">���Ƶȣ�����ͨ��</font>fork<font face="����">�����ӽ���ϵͳ�����ܴ���Ҫ������������ÿ����Դ������һ������������������</font>fork<font face="����">��һ������ʮ�ִ��ϵͳ���ã���Щ�������������е�����¶��Ǳ���ģ�����ĳ����</font>fork<font face="����">��һ���ӽ��̺����ӽ��̽�����Ϊ�˵���</font>exec<font face="����">ִ����һ��ִ���ļ�����ô��</font>fork<font face="����">�����ж������ռ�ĸ��ƽ���һ������Ĺ��̣�����</font>Linux<font face="����">���ǲ�ȡ��</font>copy-on-write<font face="����">������������һ����������Ĺ���ֻ�����������ֵĸ����Լ�ҳ���Ĵ���������û�а�������Ҳ��Ŀ����������⣬��ʱһ�������о��м��������ļ��㵥Ԫ����������ͬ�ĵ�ַ�ռ��ϻ����޳�ͻ�������㣬����Ϊ�˰���Щ���㵥Ԫ���䵽��ͬ�Ĵ������ϣ���Ҫ���������ӽ��̣�Ȼ������ӽ��̷ֱ�������ͨ��һ���Ľ��̼�ͨѶ��ͬ�����ưѼ��������ܣ��������������������Ŀ������������ֿ�����ʱ���Ե������м�������ĺô���</font></font>
-<p><font face="����"><font size=+0>��</font></font><img SRC="a4.gif" height=351 width=479>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ��˵���˰Ѽ��㵥Ԫ���󵽽������ǲ���ֵģ���Ҳ��������ϵͳ�ж��������̵߳ĸ����ԭ���ڽ����߳�ǰ���Ƚ�������</font>vfork<font face="����">ϵͳ���ã�</font>vfork<font face="����">ϵͳ���ò�ͬ��</font>fork<font face="����">����</font>vfork<font face="����">�������ӽ��̹�����ַ�ռ䣬Ҳ����˵�ӽ�����ȫ�����ڸ����̵ĵ�ַ�ռ��ϣ��ӽ��̶������ַ�ռ��κ����ݵ��޸�ͬ��Ϊ������������������</font>vfork<font face="����">�����ӽ��̺󣬸����̻ᱻ����ֱ���ӽ��̵���</font>exec<font face="����">��</font>exit<font face="����">�������ĺô������ӽ��̱������������Ϊ�˵���</font>exec<font face="����">ִ����һ������ʱ����Ϊ���Ͳ���Ը����̵ĵ�ַ�ռ����κ����ã����ԶԵ�ַ�ռ�ĸ����Ƕ���ģ�ͨ��</font>vfork<font face="����">���Լ��ٲ���Ҫ�Ŀ�����</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ��</font>Linux<font face="����">�У�</font>
-fork<font face="����">��</font>vfork<font face="����">���ǵ���ͬһ�����ĺ���</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 进程是一个指令执行流及其执行环境，其执行环境是一个系统资源的集合，这些资源在</font>Linux<font face="宋体">中被抽象成各种数据对象：进程控制块、虚存空间、文件系统，文件</font>I/O<font face="宋体">、信号处理函数。所以创建一个进程的过程就是这些数据对象的创建过程。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 在调用系统调用</font>fork<font face="宋体">创建一个进程时，子进程只是完全复制父进程的资源，这样得到的子进程独立于父进程，具有良好的并发性，但是二者之间的通讯需要通过专门的通讯机制，如：</font>pipe<font face="宋体">，</font>fifo<font face="宋体">，</font>System
+V IPC<font face="宋体">机制等，另外通过</font>fork<font face="宋体">创建子进程系统开销很大，需要将上面描述的每种资源都复制一个副本。这样看来，</font>fork<font face="宋体">是一个开销十分大的系统调用，这些开销并不是所有的情况下都是必须的，比如某进程</font>fork<font face="宋体">出一个子进程后，其子进程仅仅是为了调用</font>exec<font face="宋体">执行另一个执行文件，那么在</font>fork<font face="宋体">过程中对于虚存空间的复制将是一个多余的过程（由于</font>Linux<font face="宋体">中是采取了</font>copy-on-write<font face="宋体">技术，所以这一步骤的所做的工作只是虚存管理部分的复制以及页表的创建，而并没有包括物理也面的拷贝）；另外，有时一个进程中具有几个独立的计算单元，可以在相同的地址空间上基本无冲突进行运算，但是为了把这些计算单元分配到不同的处理器上，需要创建几个子进程，然后各个子进程分别计算最后通过一定的进程间通讯和同步机制把计算结果汇总，这样做往往有许多格外的开销，而且这种开销有时足以抵消并行计算带来的好处。</font></font>
+<p><font face="宋体"><font size=+0>　</font></font><img SRC="a4.gif" height=351 width=479>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 这说明了把计算单元抽象到进程上是不充分的，这也就是许多系统中都引入了线程的概念的原因。在讲述线程前首先介绍以下</font>vfork<font face="宋体">系统调用，</font>vfork<font face="宋体">系统调用不同于</font>fork<font face="宋体">，用</font>vfork<font face="宋体">创建的子进程共享地址空间，也就是说子进程完全运行在父进程的地址空间上，子进程对虚拟地址空间任何数据的修改同样为父进程所见。但是用</font>vfork<font face="宋体">创建子进程后，父进程会被阻塞直到子进程调用</font>exec<font face="宋体">或</font>exit<font face="宋体">。这样的好处是在子进程被创建后仅仅是为了调用</font>exec<font face="宋体">执行另一个程序时，因为它就不会对父进程的地址空间有任何引用，所以对地址空间的复制是多余的，通过</font>vfork<font face="宋体">可以减少不必要的开销。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 在</font>Linux<font face="宋体">中，</font>
+fork<font face="宋体">和</font>vfork<font face="宋体">都是调用同一个核心函数</font></font>
 <p><font size=+0>&nbsp;&nbsp;&nbsp; do_fork(unsigned long clone_flag, unsigned
 long usp, struct pt_regs)</font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ����</font>clone_flag<font face="����">����</font>CLONE_VM,
-CLONE_FS, CLONE_FILES, CLONE_SIGHAND, CLONE_PID<font face="����">��</font>CLONE_VFORK<font face="����">�ȵȱ�־λ���κ�һλ����</font>1<font face="����">��������������ӽ��̺͸����̹�����λ��Ӧ����Դ��������</font>vfork<font face="����">��ʵ���У�</font>cloneflags
-= CLONE_VFORK | CLONE_VM | SIGCHLD<font face="����">�����ʾ�ӽ��̺͸����̹�����ַ�ռ䣬ͬʱ</font>do_fork<font face="����">����</font>CLONE_VFORK<font face="����">�������λ����</font>1<font face="����">�ˣ��ӽ��̻�Ѹ����̵ĵ�ַ�ռ���ס��ֱ���ӽ����˳���ִ��</font>exec<font face="����">ʱ���ͷŸ�����</font></font>
-<p><font face="����"><font size=+0>��</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; �ڽ���</font>clone<font face="����">ϵͳ����ǰ�ȼ򵥽����̵߳�һЩ���</font></font>
-<p><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp; �߳����ڽ��̵Ļ����Ͻ�һ���ĳ���Ҳ����˵һ�����̷�Ϊ�������֣��̼߳��Ϻ���Դ���ϡ��߳��ǽ����е�һ����̬������Ӧ����һ�������ָ�����������е������߳̽��������������Դ�������߳�Ӧ�����Լ���˽�ж��󣺱���������������ջ�ͼĴ��������ġ�</font></font>
-<p><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp; �̷߳�Ϊ�������ͣ�</font></font>
-<p><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp; �ں��̡߳����������̺��û��̡߳�</font></font>
-<p><b><font face="����"><font size=+0>�ں��̣߳�</font></font></b>
-<p><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp; ���Ĵ����ͳ��������ں˵��ڲ������������ģ���������ִ��һ��ָ���ĺ�����һ���ں��̲߳���Ҫ</font>��<font size=+0>һ���û�������ϵ�������������ں˵����Ķκ�ȫ�����ݣ������Լ����ں˶�ջ�����ܹ������ı����Ȳ���ʹ�ñ�׼���ں�ͬ�����ƣ����Ա������ķ��䵽һ�������������С��ں��̵߳ĵ������ڲ���Ҫ����̬��ת�������е�ַ�ռ������ӳ�䣬������ں��̼߳����������л����ڽ��̼����������л���öࡣ</font></font>
-<p><b><font face="����"><font size=+0>���������̣�</font></font></b>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; �����������Ǻ���֧�ֵ��û��̣߳�����һ�������Ľ������ṩ���߳̿��ơ���Щ���������̱������ĵ��ȣ������ڶ�������������У�ÿһ�����������̶�������һ���ں��߳��ϣ����������������������ְ󶨶�����Ч�ġ����������̱��������Ȳ��ҹ�����ַ�ռ�ͽ����е�������Դ������ÿ��</font>LWP<font face="����">��Ӧ�����Լ��ĳ�����������Ĵ������ϡ�����ջ���û�ջ��</font></font>
-<p><b><font face="����"><font size=+0>�û��̣߳�</font></font></b>
-<p><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp; �û��߳���ͨ���߳̿�ʵ�ֵġ����ǿ�����û���ں˲����´������ͷź͹������߳̿��ṩ��ͬ���͵��ȵķ������������̿���ʹ�ô������̶߳��������ں���Դ������ʡȥ������ϵͳ�������û��̵߳�ʵ���ǿ��ܵģ���Ϊ�û��̵߳������Ŀ�����û���ں˸�Ԥ������±���ͻָ���ÿ���û��̶߳��������Լ����û���ջ��һ�����������û����Ĵ����������Լ����ź����ε�״̬��Ϣ���ڴ�������ͨ�����浱ǰ�̵߳Ķ�ջ�ͼĴ������������µ����̵߳���Щ������ʵ���û��߳�֮��ĵ��Ⱥ��������л���</font></font>
-<p><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp; �ں���Ȼ������̵��л�����Ϊֻ���ں˾����޸��ڴ�����Ĵ�����Ȩ�����û��̲߳��������ĵ���ʵ�壬�ں˶�����һ����֪����ֻ�ǵ����û��߳��µĽ��̻������������̣���Щ������ͨ���߳̿⺯�����������ǵ��̡߳���һ�����̱���ռʱ�����������û��̶߳�����ռ����һ���û��̱߳�����ʱ������������������������̣��������ֻ��һ�����������̣������������û��̶߳��ᱻ������</font></font>
-<p><font face="����"><font size=+0>��</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ��ȷ����Щ�����������</font>Linux<font face="����">���̺߳�</font>clone<font face="����">ϵͳ���á�</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ������ʵ����</font>MT<font face="����">�Ĳ���ϵͳ�У��磺</font>Solaris<font face="����">��</font>Digital
-Unix<font face="����">�ȣ��� �̺߳ͽ���ͨ���������ݽṹ�������ʾ�� ���̱�����̱߳��
-һ�����̱������ָ�����ɸ��̱߳�� �������ڽ��̵�ʱ��Ƭ���ٵ����̡߳�&nbsp;
-������</font>Linux<font face="����">��û�����������֣�&nbsp; ����ͳһʹ��</font>task_struct<font face="����">���������н���</font>/<font face="����">�̣߳�ֻ���߳����߳�֮�����Դ�ǹ����ģ���Щ��Դ������ǰ���ᵽ���ģ���桢�ļ�ϵͳ���ļ�</font>I/O<font face="����">�Լ��źŴ�����������</font>PID<font face="����">�еļ��֡�</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 其中</font>clone_flag<font face="宋体">包括</font>CLONE_VM,
+CLONE_FS, CLONE_FILES, CLONE_SIGHAND, CLONE_PID<font face="宋体">，</font>CLONE_VFORK<font face="宋体">等等标志位，任何一位被置</font>1<font face="宋体">了则表明创建的子进程和父进程共享该位对应的资源。所以在</font>vfork<font face="宋体">的实现中，</font>cloneflags
+= CLONE_VFORK | CLONE_VM | SIGCHLD<font face="宋体">，这表示子进程和父进程共享地址空间，同时</font>do_fork<font face="宋体">会检查</font>CLONE_VFORK<font face="宋体">，如果该位被置</font>1<font face="宋体">了，子进程会把父进程的地址空间锁住，直到子进程退出或执行</font>exec<font face="宋体">时才释放该锁。</font></font>
+<p><font face="宋体"><font size=+0>　</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 在讲述</font>clone<font face="宋体">系统调用前先简单介绍线程的一些概念。</font></font>
+<p><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp; 线程是在进程的基础上进一步的抽象，也就是说一个进程分为两个部分：线程集合和资源集合。线程是进程中的一个动态对象，它应该是一组独立的指令流，进程中的所有线程将共享进程里的资源。但是线程应该有自己的私有对象：比如程序计数器、堆栈和寄存器上下文。</font></font>
+<p><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp; 线程分为三种类型：</font></font>
+<p><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp; 内核线程、轻量级进程和用户线程。</font></font>
+<p><b><font face="宋体"><font size=+0>内核线程：</font></font></b>
+<p><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp; 它的创建和撤消是由内核的内部需求来决定的，用来负责执行一个指定的函数，一个内核线程不需要</font>和<font size=+0>一个用户进程联系起来。它共享内核的正文段核全局数据，具有自己的内核堆栈。它能够单独的被调度并且使用标准的内核同步机制，可以被单独的分配到一个处理器上运行。内核线程的调度由于不需要经过态的转换并进行地址空间的重新映射，因此在内核线程间做上下文切换比在进程间做上下文切换快得多。</font></font>
+<p><b><font face="宋体"><font size=+0>轻量级进程：</font></font></b>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 轻量级进程是核心支持的用户线程，它在一个单独的进程中提供多线程控制。这些轻量级进程被单独的调度，可以在多个处理器上运行，每一个轻量级进程都被绑定在一个内核线程上，而且在它的生命周期这种绑定都是有效的。轻量级进程被独立调度并且共享地址空间和进程中的其它资源，但是每个</font>LWP<font face="宋体">都应该有自己的程序计数器、寄存器集合、核心栈和用户栈。</font></font>
+<p><b><font face="宋体"><font size=+0>用户线程：</font></font></b>
+<p><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp; 用户线程是通过线程库实现的。它们可以在没有内核参与下创建、释放和管理。线程库提供了同步和调度的方法。这样进程可以使用大量的线程而不消耗内核资源，而且省去大量的系统开销。用户线程的实现是可能的，因为用户线程的上下文可以在没有内核干预的情况下保存和恢复。每个用户线程都可以有自己的用户堆栈，一块用来保存用户级寄存器上下文以及如信号屏蔽等状态信息的内存区。库通过保存当前线程的堆栈和寄存器内容载入新调度线程的那些内容来实现用户线程之间的调度和上下文切换。</font></font>
+<p><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp; 内核仍然负责进程的切换，因为只有内核具有修改内存管理寄存器的权力。用户线程不是真正的调度实体，内核对它们一无所知，而只是调度用户线程下的进程或者轻量级进程，这些进程再通过线程库函数来调度它们的线程。当一个进程被抢占时，它的所有用户线程都被抢占，当一个用户线程被阻塞时，它会阻塞下面的轻量级进程，如果进程只有一个轻量级进程，则它的所有用户线程都会被阻塞。</font></font>
+<p><font face="宋体"><font size=+0>　</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 明确了这些概念后，来讲述</font>Linux<font face="宋体">的线程和</font>clone<font face="宋体">系统调用。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 在许多实现了</font>MT<font face="宋体">的操作系统中（如：</font>Solaris<font face="宋体">，</font>Digital
+Unix<font face="宋体">等）， 线程和进程通过两种数据结构来抽象表示： 进程表项和线程表项，
+一个进程表项可以指向若干个线程表项， 调度器在进程的时间片内再调度线程。&nbsp;
+但是在</font>Linux<font face="宋体">中没有做这种区分，&nbsp; 而是统一使用</font>task_struct<font face="宋体">来管理所有进程</font>/<font face="宋体">线程，只是线程与线程之间的资源是共享的，这些资源可是是前面提到过的：虚存、文件系统、文件</font>I/O<font face="宋体">以及信号处理函数甚至</font>PID<font face="宋体">中的几种。</font></font>
 <p><img SRC="a5.gif" height=221 width=447>
-<br><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; Ҳ����˵</font>Linux<font face="����">�У�ÿ���̶߳���һ��</font>task_struct<font face="����">�������̺߳ͽ��̿���ʹ��ͬһ���������ȡ���ʵ</font>Linux<font face="����">�����У����������̺ͽ���û�����ϵĲ����Ϊ</font>Linux<font face="����">�н��̵ĸ����Ѿ���������˼���״̬����Դ�ļ��ϣ���Щ��Դ�ڽ��̼���Թ��������һ��</font>task<font face="����">��ռ���е���Դ������һ��</font>HWP<font face="����">�����һ��</font>task<font face="����">������</font>task<font face="����">����������Դ������</font>LWP<font face="����">��</font></font>
-<p><font size=+0>&nbsp;&nbsp;&nbsp; clone<font face="����">ϵͳ���þ���һ���������������̵�ϵͳ���ã�</font></font>
+<br><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 也就是说</font>Linux<font face="宋体">中，每个线程都有一个</font>task_struct<font face="宋体">，所以线程和进程可以使用同一调度器调度。其实</font>Linux<font face="宋体">核心中，轻量级进程和进程没有质上的差别，因为</font>Linux<font face="宋体">中进程的概念已经被抽象成了计算状态加资源的集合，这些资源在进程间可以共享。如果一个</font>task<font face="宋体">独占所有的资源，则是一个</font>HWP<font face="宋体">，如果一个</font>task<font face="宋体">和其它</font>task<font face="宋体">共享部分资源，则是</font>LWP<font face="宋体">。</font></font>
+<p><font size=+0>&nbsp;&nbsp;&nbsp; clone<font face="宋体">系统调用就是一个创建轻量级进程的系统调用：</font></font>
 <p><font size=+0>&nbsp;&nbsp;&nbsp; int clone(int (*fn)(void * arg), void
 *stack, int flags, void * arg);</font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ����</font>fn<font face="����">��������������ִ�еĹ��̣�</font>stack<font face="����">��������������ʹ�õĶ�ջ��</font>flags<font face="����">������ǰ���ᵽ��</font>CLONE_VM,
-CLONE_FS, CLONE_FILES, CLONE_SIGHAND,CLONE_PID<font face="����">����ϡ�</font>Clone
-<font face="����">��</font>fork<font face="����">��</font>vfork<font face="����">��ʵ��ʱ���ǵ��ú��ĺ���</font>do_fork<font face="����">��</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 其中</font>fn<font face="宋体">是轻量级进程所执行的过程，</font>stack<font face="宋体">是轻量级进程所使用的堆栈，</font>flags<font face="宋体">可以是前面提到的</font>CLONE_VM,
+CLONE_FS, CLONE_FILES, CLONE_SIGHAND,CLONE_PID<font face="宋体">的组合。</font>Clone
+<font face="宋体">和</font>fork<font face="宋体">，</font>vfork<font face="宋体">在实现时都是调用核心函数</font>do_fork<font face="宋体">。</font></font>
 <p><font size=+0>&nbsp;&nbsp;&nbsp; do_fork(unsigned long clone_flag, unsigned
-long usp, struct pt_regs)<font face="����">��</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ��</font>fork<font face="����">��</font>vfork<font face="����">��ͬ���ǣ�</font>fork<font face="����">ʱ</font>clone_flag
-= SIGCHLD<font face="����">��</font></font>
-<p><font size=+0>&nbsp;&nbsp;&nbsp; vfork<font face="����">ʱ</font>clone_flag
-= CLONE_VM | CLONE_VFORK | SIGCHLD<font face="����">��</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ����</font>clone<font face="����">�У�</font>clone_flag<font face="����">���û�������</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; �������һ��ʹ��</font>clone<font face="����">�����ӡ�</font></font>
+long usp, struct pt_regs)<font face="宋体">；</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 和</font>fork<font face="宋体">、</font>vfork<font face="宋体">不同的是，</font>fork<font face="宋体">时</font>clone_flag
+= SIGCHLD<font face="宋体">；</font></font>
+<p><font size=+0>&nbsp;&nbsp;&nbsp; vfork<font face="宋体">时</font>clone_flag
+= CLONE_VM | CLONE_VFORK | SIGCHLD<font face="宋体">；</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 而在</font>clone<font face="宋体">中，</font>clone_flag<font face="宋体">由用户给出。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 下面给出一个使用</font>clone<font face="宋体">的例子。</font></font>
 <p><font size=+0>&nbsp;&nbsp;&nbsp; Void * func(int arg)</font>
 <p><font size=+0>&nbsp;&nbsp;&nbsp; {</font>
 <p><font size=+0>&nbsp;&nbsp;&nbsp; . . . . . .</font>
 <p><font size=+0>&nbsp;&nbsp;&nbsp; }</font>
 <p><font size=+0>&nbsp;&nbsp;&nbsp; int main()</font>
-<p><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp; {</font></font>
+<p><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp; {</font></font>
 <p><font size=+0>int clone_flag, arg;</font>
 <p><font size=+0>. . . . . .</font>
 <p><font size=+0>clone_flag = CLONE_VM | CLONE_SIGHAND | CLONE_FS |</font>
@@ -516,38 +516,38 @@ long usp, struct pt_regs)<font face="����">��</font></font>
 <p><font size=+0>stack += STACK_FRAME;</font>
 <p><font size=+0>retval = clone((void *)func, stack, clone_flag, arg);</font>
 <p><font size=+0>. . . . . .</font>
-<p><font face="����"><font size=+0>}</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ������</font>clone<font face="����">���÷���</font>pthread_create<font face="����">��Щ���ƣ����ߵ�������Ĳ������</font>clone<font face="����">�Ǵ���һ��</font>LWP<font face="����">���Ժ����ǿɼ��ģ��ɺ��ĵ��ȣ���</font>pthread_create<font face="����">ͨ��ֻ�Ǵ���һ���û��̣߳��Ժ����ǲ��ɼ��ģ����߳̿���ȡ�</font></font>
-<p><b><font face="����"><font size=+0>��</font></font></b>
-<p><b><font face="����"><font size=+0>Nanosleep &amp; sleep</font></font></b>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; sleep��</font>nanosleep<font face="����">����ʹ����˯��һ��ʱ��󱻻��ѣ����Ƕ��ߵ�ʵ����ȫ��ͬ��</font></font>
-<p><font size=+0>&nbsp;&nbsp;&nbsp; Linux<font face="����">�в�û���ṩϵͳ����</font>sleep<font face="����">��</font>sleep<font face="����">���ڿ⺯����ʵ�ֵģ�����ͨ������</font>alarm<font face="����">���趨����ʱ�䣬����</font>sigsuspend<font face="����">�����̹������ź�</font>SIGALARM<font face="����">�ϣ�</font>sleep<font face="����">ֻ�ܾ�ȷ���뼶�ϡ�</font></font>
-<p><font size=+0>&nbsp;&nbsp;&nbsp; nanosleep<font face="����">����</font>Linux<font face="����">�е�ϵͳ���ã�����ʹ�ö�ʱ����ʵ�ֵģ��õ���ʹ���ý���˯�ߣ�������ʱ�������ϼ���һ��</font>time_list<font face="����">�Ͷ�ʱ����</font>time_list<font face="����">�ṹ���������ʱ���Լ����Ѻ�ִ�еĺ�����ͨ��</font>nanosleep<font face="����">����Ķ�ʱ����ִ�к���������ɻ��ѵ�ǰ���̵Ĺ��ܡ�ϵͳͨ��һ���Ļ��ƶ�ʱ�����Щ���У�����ͨ��ϵͳ����������ĺ󣬴Ӻ��ķ����û�̬ǰ��Ҫ��鵱ǰ���̵�ʱ��Ƭ�Ƿ��Ѿ��ľ�������������</font>schedule()<font face="����">�������µ��ȣ��ú����оͻ��鶨ʱ�����У��������жϷ���ǰҲ�����˼�飩�������ʱʱ���ѳ�������ִ�ж�ʱ��ָ���ĺ������ѵ��ý��̡���Ȼ������ϵͳʱ��Ƭ���ܶ�ʧ������</font>nanosleep<font face="����">����Ҳ���Ǻܸߡ�</font></font>
-<p><font size=+0>&nbsp;&nbsp;&nbsp; alarm<font face="����">Ҳ��ͨ����ʱ��ʵ�ֵģ������侫��ֻ��ȷ���뼶�����⣬�����õĶ�ʱ��ִ�к�������ָ��ʱ����ǰ���̷���</font>SIGALRM<font face="����">�źš�</font></font>
-<p><font face="����"><font size=+0>��</font></font>
-<br><b><font face="����"><font size=+0>2.�洢��ص�ϵͳ����</font></font></b></ol>
+<p><font face="宋体"><font size=+0>}</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 看起来</font>clone<font face="宋体">的用法和</font>pthread_create<font face="宋体">有些相似，两者的最根本的差别在于</font>clone<font face="宋体">是创建一个</font>LWP<font face="宋体">，对核心是可见的，由核心调度，而</font>pthread_create<font face="宋体">通常只是创建一个用户线程，对核心是不可见的，由线程库调度。</font></font>
+<p><b><font face="宋体"><font size=+0>　</font></font></b>
+<p><b><font face="宋体"><font size=+0>Nanosleep &amp; sleep</font></font></b>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; sleep和</font>nanosleep<font face="宋体">都是使进程睡眠一段时间后被唤醒，但是二者的实现完全不同。</font></font>
+<p><font size=+0>&nbsp;&nbsp;&nbsp; Linux<font face="宋体">中并没有提供系统调用</font>sleep<font face="宋体">，</font>sleep<font face="宋体">是在库函数中实现的，它是通过调用</font>alarm<font face="宋体">来设定报警时间，调用</font>sigsuspend<font face="宋体">将进程挂起在信号</font>SIGALARM<font face="宋体">上，</font>sleep<font face="宋体">只能精确到秒级上。</font></font>
+<p><font size=+0>&nbsp;&nbsp;&nbsp; nanosleep<font face="宋体">则是</font>Linux<font face="宋体">中的系统调用，它是使用定时器来实现的，该调用使调用进程睡眠，并往定时器队列上加入一个</font>time_list<font face="宋体">型定时器，</font>time_list<font face="宋体">结构里包括唤醒时间以及唤醒后执行的函数，通过</font>nanosleep<font face="宋体">加入的定时器的执行函数仅仅完成唤醒当前进程的功能。系统通过一定的机制定时检查这些队列（比如通过系统调用陷入核心后，从核心返回用户态前，要检查当前进程的时间片是否已经耗尽，如果是则调用</font>schedule()<font face="宋体">函数重新调度，该函数中就会检查定时器队列，另外慢中断返回前也会做此检查），如果定时时间已超过，则执行定时器指定的函数唤醒调用进程。当然，由于系统时间片可能丢失，所以</font>nanosleep<font face="宋体">精度也不是很高。</font></font>
+<p><font size=+0>&nbsp;&nbsp;&nbsp; alarm<font face="宋体">也是通过定时器实现的，但是其精度只精确到秒级，另外，它设置的定时器执行函数是在指定时间向当前进程发送</font>SIGALRM<font face="宋体">信号。</font></font>
+<p><font face="宋体"><font size=+0>　</font></font>
+<br><b><font face="宋体"><font size=+0>2.存储相关的系统调用</font></font></b></ol>
 
-<dir><font size=+0>mmap<font face="����">���ļ�ӳ��</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; �ڽ����ļ�ӳ��ĸ���ʱ�����ɱ����Ҫǣ�浽��棨</font>SVR
-4<font face="����">��</font>VM<font face="����">����ʵ���ϣ��ļ�ӳ�����������ĸ���ļ�ӳ��һ������û��ṩ��һ���ʩ���Ƶ��û����ļ�ӳ�䵽�Լ���ַ�ռ��ĳ�����֣�ʹ�ü򵥵��ڴ����ָ���д�ļ�����һ���棬��Ҳ���������ں˵Ļ�����֯ģʽ��������ģʽ�֣��ں˽�������ַ�ռ���Ϊ�����ļ�֮���һ�鲻ͬ�����ӳ�䡣</font></font>
-<p><font size=+0>&nbsp;&nbsp;&nbsp; Unix<font face="����">�еĴ�ͳ�ļ����ʷ�ʽ�ǣ�������</font>open<font face="����">ϵͳ���ô��ļ���Ȼ��ʹ��</font>read<font face="����">��</font>write<font face="����">�Լ�</font>lseek<font face="����">�ȵ��ý���˳������漴��</font>I/O<font face="����">�����ַ�ʽ�Ƿǳ���Ч�ģ�ÿһ��</font>I/O<font face="����">��������Ҫһ��ϵͳ���á����⣬������ɸ����̷���ͬһ���ļ���ÿ�����̶�Ҫ���Լ��ĵ�ַ�ռ�ά��һ���������˷����ڴ�ռ䡣������ܹ�ͨ��һ���Ļ��ƽ�ҳ��ӳ�䵽���̵ĵ�ַ�ռ��У�Ҳ����˵����ͨ���򵥵Ĳ���ĳЩ�ڴ�������ݽṹ���ӳ��Ĵ����������̷���ҳ��ʱ����һ��ȱҳ�жϣ��ں˽�ҳ������ڴ沢�Ҹ���ҳ��ָ���ҳ�档�������ַ�ʽ�ǳ�������ͬһ�����Ĺ�����</font></font>
-<p><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp; ��������������ַ�ʽ�ĶԱ�ͼ��</font></font>
-<p><font face="����"><font size=+0>��</font></font><img SRC="a6.gif" height=418 width=437>
-<p><font size=+0>&nbsp;&nbsp;&nbsp; VM<font face="����">���������ķ�����Ƶģ�����Ķ�����ָ�ڴ�����ڴ������һ����������ĸ���������ڴ�����󱸴洢֮���ӳ�䡣ϵͳ����ʹ�ö������͵ĺ󱸴洢�����罻���ռ䣬���ػ���Զ���ļ��Լ�֡����ȵȡ�</font>VM<font face="����">ϵͳ������ͳһ����������ͬһ�����������������ȡҳ����߻�дҳ��ȡ�ÿ�ֲ�ͬ�ĺ󱸴洢�������ò�ͬ�ķ���ʵ����Щ������������ϵͳ������һ��ͳһ�Ľӿڣ�ÿ�ֺ󱸴洢�����Լ���ʵ�ַ�����</font></font>
-<p><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp; ���������̵ĵ�ַ�ռ�ͱ���Ϊһ��ӳ�䵽��ͬ���ݶ����ϵĵ�ӳ����ɡ����е���Ч��ַ������Щӳ�䵽���ݶ����ϵĵ�ַ����Щ����Ϊӳ������ҳ���ṩ�˳־��Եĺ󱸴洢��ӳ��ʹ���û�����ֱ��Ѱַ��Щ����</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ֵ��������ǣ�</font>VM<font face="����">��ϵ�ṹ������</font>Unix<font face="����">ϵͳ�����е�</font>Unix<font face="����">ϵͳ���壬�����ģ����ݼ���ջ�������Խ����ڻ���</font>VM<font face="����">ϵͳ֮�ϡ�ͬʱ��</font>VM<font face="����">��ϵ�ṹҲ�Ƕ����ڴ洢�����ģ��洢�������ɲ���ϵͳʵʩ�ģ��磺������ȡʲô���ĶԻ��������ҳ�㷨�������ǲ�ȡ�ֶλ��Ƿ�ҳ���ƽ��д洢��������������ν������ַת����Ϊ������ַ�ȵȣ�</font>Linux<font face="����">����һ�ֽ�</font>Three
-Level Page Table<font face="����">�Ļ��ƣ�����Щ�����ڴ����ĸ����޹ء�</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; �������</font>Linux<font face="����">��</font>VM<font face="����">��ʵ�֡�</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ����ͼ��ʾ��һ������Ӧ�ð���һ��</font>mm_struct<font face="����">��</font>memory
-manage struct<font face="����">�����ýṹ�ǽ��������ַ�ռ�ĳ�����������������˽�������ռ��һЩ������Ϣ��</font>start_code,
-end_code, start_data, end_data, start_brk, end_brk<font face="����">�ȵ���Ϣ�����⣬Ҳ��һ��ָ������������</font>(vm_area_struct
-<font face="����">��</font>virtual
-memory area)<font face="����">��ָ�룬�����ǰ��������ַ������˳�����еġ�</font></font>
+<dir><font size=+0>mmap<font face="宋体">：文件映射</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 在讲述文件映射的概念时，不可避免的要牵涉到虚存（</font>SVR
+4<font face="宋体">的</font>VM<font face="宋体">）。实际上，文件映射是虚存的中心概念，文件映射一方面给用户提供了一组措施，似的用户将文件映射到自己地址空间的某个部分，使用简单的内存访问指令读写文件；另一方面，它也可以用于内核的基本组织模式，在这种模式种，内核将整个地址空间视为诸如文件之类的一组不同对象的映射。</font></font>
+<p><font size=+0>&nbsp;&nbsp;&nbsp; Unix<font face="宋体">中的传统文件访问方式是，首先用</font>open<font face="宋体">系统调用打开文件，然后使用</font>read<font face="宋体">，</font>write<font face="宋体">以及</font>lseek<font face="宋体">等调用进行顺序或者随即的</font>I/O<font face="宋体">。这种方式是非常低效的，每一次</font>I/O<font face="宋体">操作都需要一次系统调用。另外，如果若干个进程访问同一个文件，每个进程都要在自己的地址空间维护一个副本，浪费了内存空间。而如果能够通过一定的机制将页面映射到进程的地址空间中，也就是说首先通过简单的产生某些内存管理数据结构完成映射的创建。当进程访问页面时产生一个缺页中断，内核将页面读入内存并且更新页表指向该页面。而且这种方式非常方便于同一副本的共享。</font></font>
+<p><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp; 下面给出以上两种方式的对比图：</font></font>
+<p><font face="宋体"><font size=+0>　</font></font><img SRC="a6.gif" height=418 width=437>
+<p><font size=+0>&nbsp;&nbsp;&nbsp; VM<font face="宋体">是面向对象的方法设计的，这里的对象是指内存对象：内存对象是一个软件抽象的概念，它描述内存区与后备存储之间的映射。系统可以使用多种类型的后备存储，比如交换空间，本地或者远程文件以及帧缓存等等。</font>VM<font face="宋体">系统对它们统一处理，采用同一操作集操作，比如读取页面或者回写页面等。每种不同的后备存储都可以用不同的方法实现这些操作。这样，系统定义了一套统一的接口，每种后备存储给出自己的实现方法。</font></font>
+<p><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp; 这样，进程的地址空间就被视为一组映射到不同数据对象上的的映射组成。所有的有效地址就是那些映射到数据对象上的地址。这些对象为映射它的页面提供了持久性的后备存储。映射使得用户可以直接寻址这些对象。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 值得提出的是，</font>VM<font face="宋体">体系结构独立于</font>Unix<font face="宋体">系统，所有的</font>Unix<font face="宋体">系统语义，如正文，数据及堆栈区都可以建构在基本</font>VM<font face="宋体">系统之上。同时，</font>VM<font face="宋体">体系结构也是独立于存储管理的，存储管理是由操作系统实施的，如：究竟采取什么样的对换和请求调页算法，究竟是采取分段还是分页机制进行存储管理，究竟是如何将虚拟地址转换成为物理地址等等（</font>Linux<font face="宋体">中是一种叫</font>Three
+Level Page Table<font face="宋体">的机制），这些都与内存对象的概念无关。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 下面介绍</font>Linux<font face="宋体">中</font>VM<font face="宋体">的实现。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 如下图所示，一个进程应该包括一个</font>mm_struct<font face="宋体">（</font>memory
+manage struct<font face="宋体">），该结构是进程虚拟地址空间的抽象描述，里面包括了进程虚拟空间的一些管理信息：</font>start_code,
+end_code, start_data, end_data, start_brk, end_brk<font face="宋体">等等信息。另外，也有一个指向进程虚存区表</font>(vm_area_struct
+<font face="宋体">：</font>virtual
+memory area)<font face="宋体">的指针，该链是按照虚拟地址的增长顺序排列的。</font></font>
 <p><img SRC="a7.gif" height=417 width=540>
-<br><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ��</font>Linux<font face="����">���̵ĵ�ַ�ռ䱻������������</font>vma<font face="����">����ÿ������</font>vma<font face="����">������Ӧ�����ַ�ռ���һ������������</font>vma<font face="����">�ǿ��Ա������ͱ����Ķ���ʵ�壬�����</font>vma<font face="����">����ǰ���ᵽ���ڴ�����������</font>vm_area_struct<font face="����">�Ľṹ�����У�ǰ�벿���ǹ����ģ��������޹ص�һЩ���ݳ�Ա���磺ָ��</font>mm_struct<font face="����">��ָ�룬��ַ��Χ�ȵȣ���벿��������������صĳ�Ա����������Ҫ����һ��ָ��</font>vm_operation_struct<font face="����">��������ָ��</font>vm_ops<font face="����">��</font>vm_pos<font face="����">��������һ���麯������������</font>vma<font face="����">�����޹صĽӿڡ�ÿһ���ض������࣬��ÿ��</font>vma<font face="����">���Ͷ���������������ʵ����Щ��������������ˣ�</font>open,
-close, unmap, protect, sync, nopage, wppage, swapout<font face="����">��Щ������</font></font>
+<br><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 在</font>Linux<font face="宋体">进程的地址空间被分作许多区（</font>vma<font face="宋体">），每个区（</font>vma<font face="宋体">）都对应虚拟地址空间上一段连续的区域，</font>vma<font face="宋体">是可以被共享和保护的独立实体，这里的</font>vma<font face="宋体">就是前面提到的内存对象。这里给出</font>vm_area_struct<font face="宋体">的结构，其中，前半部分是公共的，与类型无关的一些数据成员，如：指向</font>mm_struct<font face="宋体">的指针，地址范围等等，后半部分则是与类型相关的成员，其中最重要的是一个指向</font>vm_operation_struct<font face="宋体">向量表的指针</font>vm_ops<font face="宋体">，</font>vm_pos<font face="宋体">向量表是一组虚函数，定义了与</font>vma<font face="宋体">类型无关的接口。每一个特定的子类，即每种</font>vma<font face="宋体">类型都必须在向量表中实现这些操作。这里包括了：</font>open,
+close, unmap, protect, sync, nopage, wppage, swapout<font face="宋体">这些操作。</font></font>
 <p><font size=+0>struct vm_area_struct {</font>
-<p><font size=+0>/*<font face="����">�����ģ���</font>vma<font face="����">�����޹ص�</font>
+<p><font size=+0>/*<font face="宋体">公共的，与</font>vma<font face="宋体">类型无关的</font>
 */</font>
 <dir>
 <dir><font size=+0>struct mm_struct * vm_mm;</font>
@@ -561,94 +561,94 @@ close, unmap, protect, sync, nopage, wppage, swapout<font face="����">��Щ������
 <p><font size=+0>struct vm_area_struct * vm_avl_right;</font>
 <p><font size=+0>struct vm_area_struct *vm_next_share;</font>
 <p><font size=+0>struct vm_area_struct **vm_pprev_share;</font>
-<p><font size=+0>/* <font face="����">��������ص�</font> */</font>
+<p><font size=+0>/* <font face="宋体">与类型相关的</font> */</font>
 <p><font size=+0>struct vm_operations_struct * vm_ops;</font>
 <p><font size=+0>unsigned long vm_pgoff;</font>
 <p><font size=+0>struct file * vm_file;</font>
-<p><font size=+0>unsigned long vm_raend<font face="����">��</font></font>
+<p><font size=+0>unsigned long vm_raend<font face="宋体">；</font></font>
 <p><font size=+0>void * vm_private_data;</font></dir>
 </dir>
 </dir>
-<font size=+0><font face="����">}</font>;</font>
+<font size=+0><font face="宋体">}</font>;</font>
 <p><font size=+0>vm_ops: open, close, no_page, swapin, swapout . . . .
 . .</font>
-<dir><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ������</font>VM<font face="����">�Ļ�����������ǿ��Խ���</font>mmap,
-munmap<font face="����">ϵͳ�����ˡ�</font>mmap<font face="����">����ʵ���Ͼ���һ���ڴ����</font>vma<font face="����">�Ĵ������̣�</font>mmap<font face="����">�ĵ��ø�ʽ�ǣ�</font></font>
+<dir><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 介绍完</font>VM<font face="宋体">的基本概念后，我们可以讲述</font>mmap,
+munmap<font face="宋体">系统调用了。</font>mmap<font face="宋体">调用实际上就是一个内存对象</font>vma<font face="宋体">的创建过程，</font>mmap<font face="宋体">的调用格式是：</font></font>
 <dir><font size=+0>void * mmap(void *start, size_t length, int prot , int
 flags, int fd, off_t offset);</font></dir>
-<font size=+0><font face="����">����</font>start<font face="����">��ӳ���ַ��</font>length<font face="����">��ӳ�䳤�ȣ����</font>flags<font face="����">��</font>MAP_FIXED<font face="����">������λ����ò���ͨ�������ԣ������ҽ��̵�ַ�ռ��е�һ�����ȷ��ϵĿ�������</font>Fd<font face="����">��ӳ���ļ����ļ������</font>offset<font face="����">��ӳ���ļ��е�ƫ�Ƶ�ַ��</font>prot<font face="����">��ӳ�䱣��Ȩ�ޣ�������</font>PROT_EXEC,
-PROT_READ, PROT_WRITE, PROT_NONE<font face="����">��</font>flags<font face="����">����ָӳ�����ͣ�������</font>MAP_FIXED,
-MAP_PRIVATE, MAP_SHARED<font face="����">���ò������뱻ָ��Ϊ</font>MAP_PRIVATE<font face="����">��</font>MAP_SHARED<font face="����">����֮һ��</font>MAP_PRIVATE<font face="����">�Ǵ���һ��дʱ����ӳ��</font>(copy-on-write)<font face="����">��Ҳ����˵����ж������ͬʱӳ�䵽һ���ļ��ϣ�ӳ�佨��ʱֻ�ǹ���ͬ���Ĵ洢ҳ�棬����ĳ������ͼ�޸�ҳ�����ݣ�����һ���������ý���˽�ã������κ��޸Ķ��������̶����ɼ�����</font>MAP_SHARED<font face="����">�������޸����ʹ��ͬһ�������κν��̶�ҳ����޸Ķ��������̶��ǿɼ��ġ�</font></font>
-<p><font size=+0>Mmap<font face="����">ϵͳ���õ�ʵ�ֹ����ǣ�</font></font>
-<p><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp; 1.��ͨ���ļ�ϵͳ��λҪӳ����ļ���</font></font>
-<br><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp; 2.Ȩ�޼�飬ӳ���Ȩ�޲��ᳬ���ļ��򿪵ķ�ʽ��Ҳ����˵����ļ�����ֻ����ʽ�򿪣���ô����������һ����дӳ�䣻</font></font>
-<br><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; 3.����һ��</font>vma<font face="����">���󣬲���֮���г�ʼ����</font></font>
-<br><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; 4.����ӳ���ļ���</font>mmap<font face="����">����������Ҫ�����Ǹ�</font>vm_ops<font face="����">��������ֵ��</font></font>
-<br><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; 5.�Ѹ�</font>vma<font face="����">����ý��̵�</font>vma<font face="����">�����У�������Ժ�ǰ���</font>vma<font face="����">�ϲ���ϲ���</font></font>
-<br><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; 6.�����Ҫ��</font>VM_LOCKED(<font face="����">ӳ������������</font>)<font face="����">��ʽӳ�䣬�򷢳�ȱҳ���󣬰�ӳ��ҳ������ڴ��У�</font></font></dir>
+<font size=+0><font face="宋体">其中</font>start<font face="宋体">是映射地址，</font>length<font face="宋体">是映射长度，如果</font>flags<font face="宋体">的</font>MAP_FIXED<font face="宋体">不被置位，则该参数通常被忽略，而查找进程地址空间中第一个长度符合的空闲区域；</font>Fd<font face="宋体">是映射文件的文件句柄，</font>offset<font face="宋体">是映射文件中的偏移地址；</font>prot<font face="宋体">是映射保护权限，可以是</font>PROT_EXEC,
+PROT_READ, PROT_WRITE, PROT_NONE<font face="宋体">，</font>flags<font face="宋体">则是指映射类型，可以是</font>MAP_FIXED,
+MAP_PRIVATE, MAP_SHARED<font face="宋体">，该参数必须被指定为</font>MAP_PRIVATE<font face="宋体">和</font>MAP_SHARED<font face="宋体">其中之一，</font>MAP_PRIVATE<font face="宋体">是创建一个写时拷贝映射</font>(copy-on-write)<font face="宋体">，也就是说如果有多个进程同时映射到一个文件上，映射建立时只是共享同样的存储页面，但是某进程企图修改页面内容，则复制一个副本给该进程私用，它的任何修改对其它进程都不可见。而</font>MAP_SHARED<font face="宋体">则无论修改与否都使用同一副本，任何进程对页面的修改对其它进程都是可见的。</font></font>
+<p><font size=+0>Mmap<font face="宋体">系统调用的实现过程是：</font></font>
+<p><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp; 1.先通过文件系统定位要映射的文件；</font></font>
+<br><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp; 2.权限检查，映射的权限不会超过文件打开的方式，也就是说如果文件是以只读方式打开，那么则不允许建立一个可写映射；</font></font>
+<br><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 3.创建一个</font>vma<font face="宋体">对象，并对之进行初始化；</font></font>
+<br><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 4.调用映射文件的</font>mmap<font face="宋体">函数，其主要工作是给</font>vm_ops<font face="宋体">向量表赋值；</font></font>
+<br><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 5.把该</font>vma<font face="宋体">链入该进程的</font>vma<font face="宋体">链表中，如果可以和前后的</font>vma<font face="宋体">合并则合并；</font></font>
+<br><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 6.如果是要求</font>VM_LOCKED(<font face="宋体">映射区不被换出</font>)<font face="宋体">方式映射，则发出缺页请求，把映射页面读入内存中；</font></font></dir>
 
-<dir><font size=+0>munmap(void * start, size_t length)<font face="����">��</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; �õ��ÿ��Կ�����</font>mmap<font face="����">��һ������̡����������д�</font>start<font face="����">��ʼ</font>length<font face="����">���ȵ�һ�������ӳ��رգ������������ǡ�ö�Ӧһ��</font>vma<font face="����">�����п��ܻ�ָ���򼸸�</font>vma<font face="����">��</font></font>
-<p><font size=+0>Msync(void * start, size_t length, int flags) <font face="����">��</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ��ӳ��������޸Ļ�д���󱸴洢�С���Ϊ</font>munmap<font face="����">ʱ������֤ҳ���д�����������</font>msync<font face="����">����ô�п�����</font>munmap<font face="����">��ʧ��ӳ�������޸ġ�����</font>flags<font face="����">������</font>MS_SYNC,
-MS_ASYNC, MS_INVALIDATE<font face="����">��</font>MS_SYNC<font face="����">Ҫ���д��ɺ�ŷ��أ�</font>MS_ASYNC<font face="����">������д������������أ�</font>MS_INVALIDATE<font face="����">ʹ�û�д�����ݸ��¸��ļ�������ӳ�䡣</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ��ϵͳ������ͨ������ӳ���ļ���</font>sync<font face="����">��������ɹ����ġ�</font></font>
+<dir><font size=+0>munmap(void * start, size_t length)<font face="宋体">：</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 该调用可以看作是</font>mmap<font face="宋体">的一个逆过程。它将进程中从</font>start<font face="宋体">开始</font>length<font face="宋体">长度的一段区域的映射关闭，如果该区域不是恰好对应一个</font>vma<font face="宋体">，则有可能会分割几个或几个</font>vma<font face="宋体">。</font></font>
+<p><font size=+0>Msync(void * start, size_t length, int flags) <font face="宋体">：</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 把映射区域的修改回写到后备存储中。因为</font>munmap<font face="宋体">时并不保证页面回写，如果不调用</font>msync<font face="宋体">，那么有可能在</font>munmap<font face="宋体">后丢失对映射区的修改。其中</font>flags<font face="宋体">可以是</font>MS_SYNC,
+MS_ASYNC, MS_INVALIDATE<font face="宋体">，</font>MS_SYNC<font face="宋体">要求回写完成后才返回，</font>MS_ASYNC<font face="宋体">发出回写请求后立即返回，</font>MS_INVALIDATE<font face="宋体">使用回写的内容更新该文件的其它映射。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 该系统调用是通过调用映射文件的</font>sync<font face="宋体">函数来完成工作的。</font></font>
 <p><font size=+0>brk(void * end_data_segement):</font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; �����̵����ݶ���չ��</font>end_data_segement<font face="����">ָ���ĵ�ַ����ϵͳ���ú�</font>mmap<font face="����">��ʵ�ַ�ʽʮ�����ƣ�ͬ���ǲ���һ��</font>vma<font face="����">��Ȼ��ָ�������ԡ������ڴ�֮ǰ��Ҫ��һЩ�Ϸ��Լ�飬����õ�ַ�Ƿ����</font>mm->end_code<font face="����">��</font>end_data_segement<font face="����">��</font>mm->brk<font face="����">֮���Ƿ񻹴�������</font>vma<font face="����">�ȵȡ�ͨ��</font>brk<font face="����">������</font>vma<font face="����">ӳ����ļ�Ϊ�գ��������ӳ�������</font>vma<font face="����">���ƣ���������ӳ�䲻����һ�����ܡ�����ʹ�õĿ⺯��</font>malloc<font face="����">����ͨ��</font>brk<font face="����">ʵ�ֵģ�ͨ������������Ӻ�����֤ʵ��㣺</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 将进程的数据段扩展到</font>end_data_segement<font face="宋体">指定的地址，该系统调用和</font>mmap<font face="宋体">的实现方式十分相似，同样是产生一个</font>vma<font face="宋体">，然后指定其属性。不过在此之前需要做一些合法性检查，比如该地址是否大于</font>mm->end_code<font face="宋体">，</font>end_data_segement<font face="宋体">和</font>mm->brk<font face="宋体">之间是否还存在其它</font>vma<font face="宋体">等等。通过</font>brk<font face="宋体">产生的</font>vma<font face="宋体">映射的文件为空，这和匿名映射产生的</font>vma<font face="宋体">相似，关于匿名映射不做进一步介绍。我们使用的库函数</font>malloc<font face="宋体">就是通过</font>brk<font face="宋体">实现的，通过下面这个例子很容易证实这点：</font></font>
 <p><font size=+0>main()</font>
 <p><font size=+0>{</font>
 <p><font size=+0>char * m, * n;</font>
 <p><font size=+0>int size;</font>
-<p><font size=+0>��</font>
+<p><font size=+0>　</font>
 <p><font size=+0>m = (char *)sbrk(0);</font>
 <p><font size=+0>printf("sbrk addr = %08lx\n", m);</font>
-<p><font size=+0>do <font face="����">{</font></font>
+<p><font size=+0>do <font face="宋体">{</font></font>
 <p><font size=+0>n = malloc(1024);</font>
 <p><font size=+0>printf("malloc addr = %08lx\n", n);</font>
 <dir>
 <dir>
 <dir>
-<dir><font size=+0><font face="����">}</font>w hile(n &lt; m);</font>
+<dir><font size=+0><font face="宋体">}</font>w hile(n &lt; m);</font>
 <p><font size=+0>m = (char *)sbrk(0);</font></dir>
 </dir>
 </dir>
 </dir>
 <font size=+0>printf("new sbrk addr = %08lx\n", m);</font>
 <p><font size=+0>}</font>
-<p><font face="����"><font size=+0>��</font></font></dir>
+<p><font face="宋体"><font size=+0>　</font></font></dir>
 <font size=+0>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sbrk addr = 0804a000</font>
 <dir><font size=+0>malloc addr = 080497d8</font>
 <p><font size=+0>malloc addr = 08049be0</font>
 <p><font size=+0>malloc addr = 08049fe8</font>
 <p><font size=+0>malloc addr = 0804a3f0</font>
 <p><font size=+0>new sbrk addr = 0804b000</font>
-<p><b><font size=+0><font face="����">3.���̼�ͨ�ţ�</font>IPC<font face="����">��</font></font></b></dir>
+<p><b><font size=+0><font face="宋体">3.进程间通信（</font>IPC<font face="宋体">）</font></font></b></dir>
 
 <ol>&nbsp;
-<br>&nbsp;&nbsp;&nbsp; ���̼�ͨѶ����ͨ���ܶ��ֻ��ƣ�����<font size=+0>signal,
-pipe, fifo, System V IPC, <font face="����">�Լ�</font>socket<font face="����">�ȵȣ�ǰ���ָ���ȽϺ����⣬�������ؽ��ܹ���</font>System
-V IPC<font face="����">��</font></font>
-<p><font size=+0>&nbsp;&nbsp;&nbsp; System V IPC<font face="����">�������ֻ��ƣ�</font>message<font face="����">���������̷��͸�ʽ����������������Ľ��̣���</font>shared
-memory<font face="����">���������̼乲�����������ַ�ռ�Ĳ������򣩺�</font>semaphore<font face="����">���������̼�ͬ����ִ�У���</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ����ϵͳ������Ϊ���Ƿֱ�ά����һ����������������ϵͳ������������</font>IPC<font face="����">����ļ��ϣ�����������һ����ֵ</font>ID<font face="����">������ͨ�����</font>ID<font face="����">���Բ��ҵ���Ҫʹ�õ�</font>IPC<font face="����">��Դ������ÿ����һ��</font>IPC<font face="����">����ϵͳ�ж�������Ӧ�ı�������һ�֮���������̣���������Ȩ�Ľ��̣�ֻҪͨ����</font>IPC<font face="����">�����</font>ID<font face="����">�������������</font></font>
-<p><font size=+0>&nbsp;&nbsp;&nbsp; IPC<font face="����">�������ʹ��</font>IPC_RMID<font face="����">��������ʾ���ͷţ������������ʹ��ڻ״̬���������е�ʹ�����Ľ��̶��Ѿ���ֹ�����ֻ���ĳЩʱ��ʮ�����ã�����Ҳ����Ϊ����������ʹ�ò���ϵͳ�ں��޷��ж�</font>IPC<font face="����">�����Ǳ��û���������������������������ʹ�û��Ǳ����������ġ�</font></font>
-<p><font size=+0>&nbsp;&nbsp;&nbsp; Linux<font face="����">��ֻ�ṩ��һ��ϵͳ���ýӿ�</font>ipc()<font face="����">���������</font>System
-V IPC<font face="����">���������ǳ�ʹ�õ��ǽ����ڸõ���֮�ϵĿ⺯���ӿڡ�����������</font>IPC<font face="����">�����к����Ƶ����ֵ��ã�</font>xxxget,
-(msgsnd, msgrcv)<font face="����">��</font>semopt | (shmat, shmdt), xxxctl</font>
-<p><font size=+0>&nbsp;&nbsp;&nbsp; Xxxget<font face="����">����ȡ���ã���ϵͳ��������߲�ѯһ��</font>IPC<font face="����">��Դ������ֵ�Ǹ�</font>IPC<font face="����">�����</font>ID<font face="����">���õ����������ļ�ϵͳ��</font>open,
-create<font face="����">���ã�</font></font>
-<p><font size=+0>&nbsp;&nbsp;&nbsp; Xxxctl<font face="����">�����Ƶ��ã����ٰ������ֲ���</font>:XXX_RMID<font face="����">���ͷ�</font>IPC<font face="����">����</font>,
-XXX_STAT<font face="����">����ѯ״̬��</font>, XXX_SET<font face="����">������״̬��Ϣ����</font></font>
+<br>&nbsp;&nbsp;&nbsp; 进程间通讯可以通过很多种机制，包括<font size=+0>signal,
+pipe, fifo, System V IPC, <font face="宋体">以及</font>socket<font face="宋体">等等，前几种概念都比较好理解，这里着重介绍关于</font>System
+V IPC<font face="宋体">。</font></font>
+<p><font size=+0>&nbsp;&nbsp;&nbsp; System V IPC<font face="宋体">包括三种机制：</font>message<font face="宋体">（允许进程发送格式化的数据流到任意的进程）、</font>shared
+memory<font face="宋体">（允许进程间共享它们虚拟地址空间的部分区域）和</font>semaphore<font face="宋体">（允许进程间同步的执行）。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 操作系统核心中为它们分别维护着一个表，这三个表是系统中所有这三种</font>IPC<font face="宋体">对象的集合，表的索引是一个数值</font>ID<font face="宋体">，进程通过这个</font>ID<font face="宋体">可以查找到需要使用的</font>IPC<font face="宋体">资源。进程每创建一个</font>IPC<font face="宋体">对象，系统中都会在相应的表中增加一项。之后其它进程（具有许可权的进程）只要通过该</font>IPC<font face="宋体">对象的</font>ID<font face="宋体">则可以引用它。</font></font>
+<p><font size=+0>&nbsp;&nbsp;&nbsp; IPC<font face="宋体">对象必须使用</font>IPC_RMID<font face="宋体">命令来显示的释放，否则这个对象就处于活动状态，甚至所有的使用它的进程都已经终止。这种机制某些时候十分有用，但是也正因为这种特征，使得操作系统内核无法判断</font>IPC<font face="宋体">对象是被用户故意遗留下来供将来其它进程使用还是被无意抛弃的。</font></font>
+<p><font size=+0>&nbsp;&nbsp;&nbsp; Linux<font face="宋体">中只提供了一个系统调用接口</font>ipc()<font face="宋体">来完成所有</font>System
+V IPC<font face="宋体">操作，我们常使用的是建立在该调用之上的库函数接口。对于这三种</font>IPC<font face="宋体">，都有很相似的三种调用：</font>xxxget,
+(msgsnd, msgrcv)<font face="宋体">｜</font>semopt | (shmat, shmdt), xxxctl</font>
+<p><font size=+0>&nbsp;&nbsp;&nbsp; Xxxget<font face="宋体">：获取调用，在系统中申请或者查询一个</font>IPC<font face="宋体">资源，返回值是该</font>IPC<font face="宋体">对象的</font>ID<font face="宋体">，该调用类似于文件系统的</font>open,
+create<font face="宋体">调用；</font></font>
+<p><font size=+0>&nbsp;&nbsp;&nbsp; Xxxctl<font face="宋体">：控制调用，至少包括三种操作</font>:XXX_RMID<font face="宋体">（释放</font>IPC<font face="宋体">对象）</font>,
+XXX_STAT<font face="宋体">（查询状态）</font>, XXX_SET<font face="宋体">（设置状态信息）；</font></font>
 <p><font size=+0>&nbsp;&nbsp;&nbsp; (msgsnd, msgrcv) | Semopt | (shmat,
-shmdt)|<font face="����">���������ã���Щ���õĹ�����</font>IPC<font face="����">��������Ͳ�ͬ���нϴ���졣</font></font>
-<p><b><font face="����"><font size=+0>4.�ļ�ϵͳ��صĵ���</font></font></b>
-<p>&nbsp;&nbsp;&nbsp; �ļ��������������ݵģ����ļ�ϵͳ��������û���֯�������Լ���ȡ��ͬ���ļ����ں������û�ͨ��һ���ϸ���Ĺ����Խӿ����ļ�ϵͳ���н���������ӿڶ��û��������ļ�ϵͳ��ϸ�ڣ�ͬʱָ�����������ϵͳ���õ���Ϊ�����塣<font size=+0>Linux<font face="����">֧���������ļ�ϵͳ����</font>ext2<font face="����">��</font>msdos,
-ntfs, proc, dev, ufs, nfs<font face="����">�ȵȣ���Щ�ļ�ϵͳ��ʵ������ͬ�Ľӿڣ���˸�Ӧ�ó����ṩ��һ���Ե���ͼ����ÿ���ļ�ϵͳ��ʵ��ʱ���ܶ�ĳ�����������һ�������ơ��磺�ļ����ĳ��ȣ��Ƿ�֧�����е��ļ�ϵͳ�ӿڵ��á�</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; Ϊ��֧�ֶ��ļ�ϵͳ��</font>sun<font face="����">�����һ��</font>vnode/vfs<font face="����">�ӿڣ�</font>SVR4<font face="����">�н�֮ʵ�ֳ���һ�ֹ�ҵ��׼����</font>Linux<font face="����">��Ϊһ��</font>Unix<font face="����">��</font>clone<font face="����">�壬��ȻҲʵ�������ֽӿڣ�ֻ�����Ľӿڶ����</font>SVR4<font face="����">�����в�ͬ��</font>Vnode/Vfs<font face="����">�ӿڵ������������������˼�룬</font>Vfs<font face="����">�������ļ�ϵͳ�������ں��е�һ���ļ�ϵͳ��</font>Vnode<font face="����">������ڵ㣩�����ں��е�һ���ļ������Ƕ����Ա���Ϊ������࣬�����Դ�����������ͬ��������ʵ�ֲ�ͬ���ļ�ϵͳ��</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ����ƪ��ԭ������ֻ�Ǵ�ŵĽ���һ������ͨ��</font>Vnode/Vfs<font face="����">�ṹ��ʵ���ļ�ϵͳ�ͷ����ļ���</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ��</font>Linux<font face="����">��֧�ֵ�ÿ���ļ�ϵͳ������һ��</font>file_system_type<font face="����">�ṹ���˽ṹ�ĺ�����</font>read_super<font face="����">�������ú�������ȡ�ļ�ϵͳ�ĳ����顣</font>Linux<font face="����">��֧�ֵ������ļ�ϵͳ���ᱻע����һ��</font>file_system_type<font face="����">�ṹ���У�ע������ϵͳ��ʼ��ʱ����</font>regsiter_filesystem()<font face="����">��ɣ�����ļ�ϵͳ����ģ��ķ�ʽʵ�֣������ڵ���</font>init_module<font face="����">ʱ��ɡ�</font></font>
+shmdt)|<font face="宋体">：操作调用，这些调用的功能随</font>IPC<font face="宋体">对象的类型不同而有较大差异。</font></font>
+<p><b><font face="宋体"><font size=+0>4.文件系统相关的调用</font></font></b>
+<p>&nbsp;&nbsp;&nbsp; 文件是用来保存数据的，而文件系统则可以让用户组织，操纵以及存取不同的文件。内核允许用户通过一个严格定义的过程性接口与文件系统进行交互，这个接口对用户屏蔽了文件系统的细节，同时指定了所有相关系统调用的行为和语义。<font size=+0>Linux<font face="宋体">支持许多中文件系统，如</font>ext2<font face="宋体">，</font>msdos,
+ntfs, proc, dev, ufs, nfs<font face="宋体">等等，这些文件系统都实现了相同的接口，因此给应用程序提供了一致性的视图。但每种文件系统在实现时可能对某个方面加以了一定的限制。如：文件名的长度，是否支持所有的文件系统接口调用。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 为了支持多文件系统，</font>sun<font face="宋体">提出了一种</font>vnode/vfs<font face="宋体">接口，</font>SVR4<font face="宋体">中将之实现成了一种工业标准。而</font>Linux<font face="宋体">作为一种</font>Unix<font face="宋体">的</font>clone<font face="宋体">体，自然也实现了这种接口，只是它的接口定义和</font>SVR4<font face="宋体">的稍有不同。</font>Vnode/Vfs<font face="宋体">接口的设计体现了面向对象的思想，</font>Vfs<font face="宋体">（虚拟文件系统）代表内核中的一个文件系统，</font>Vnode<font face="宋体">（虚拟节点）代表内核中的一个文件，它们都可以被视为抽象基类，并可以从中派生出不同的子类以实现不同的文件系统。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 由于篇幅原因，这里只是大概的介绍一下怎样通过</font>Vnode/Vfs<font face="宋体">结构来实现文件系统和访问文件。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 在</font>Linux<font face="宋体">中支持的每种文件系统必须有一个</font>file_system_type<font face="宋体">结构，此结构的核心是</font>read_super<font face="宋体">函数，该函数将读取文件系统的超级块。</font>Linux<font face="宋体">中支持的所有文件系统都会被注册在一条</font>file_system_type<font face="宋体">结构链中，注册是在系统初始化时调用</font>regsiter_filesystem()<font face="宋体">完成，如果文件系统是以模块的方式实现，则是在调用</font>init_module<font face="宋体">时完成。</font></font>
 <p><img SRC="a8.gif" height=388 width=573>
-<br><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ��</font>mount<font face="����">ĳ�ֿ��豸ʱ��������ϵͳ����</font>mount<font face="����">���õ����н������ȼ������ļ�ϵͳ�Ƿ�ע����ϵͳ���У����ע�������ȸ����ļ�ϵͳ����һ��</font>super_block<font face="����">�������г�ʼ���������������ļ�ϵͳ��</font>read_super<font face="����">���������</font>super_block<font face="����">�ṹ˽�����ݵĸ�ֵ����������Ҫ�Ĺ����Ǹ�</font>super_block<font face="����">��</font>s_ops<font face="����">��ֵ��</font>s_ops<font face="����">��һ�����������������ļ�ϵͳ����ʵ����һ�������</font></font>
+<br><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 当</font>mount<font face="宋体">某种块设备时，将调用系统调用</font>mount<font face="宋体">，该调用中将会首先检查该类文件系统是否注册在系统种中，如果注册了则先给该文件系统分配一个</font>super_block<font face="宋体">，并进行初始化，最后调用这种文件系统的</font>read_super<font face="宋体">函数来完成</font>super_block<font face="宋体">结构私有数据的赋值。其中最主要的工作是给</font>super_block<font face="宋体">的</font>s_ops<font face="宋体">赋值，</font>s_ops<font face="宋体">是一个函数向量表，由文件系统各自实现了一组操作。</font></font>
 <p><font size=+0>struct super_operations {</font>
 <p><font size=+0>void (*read_inode) (struct inode *);</font>
 <p><font size=+0>void (*write_inode) (struct inode *);</font>
@@ -660,35 +660,35 @@ ntfs, proc, dev, ufs, nfs<font face="����">�ȵȣ���Щ�ļ�ϵͳ��ʵ������ͬ�Ľӿڣ
 <p><font size=+0>int (*remount_fs) (struct super_block *, int *, char *);</font>
 <p><font size=+0>void (*clear_inode) (struct inode *);</font>
 <p><font size=+0>void (*umount_begin) (struct super_block *);</font>
-<p><font size=+0><font face="����">}</font>;</font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ������������ж������ļ�ϵͳ�ж���</font>inode<font face="����">�Ĳ�����������֮������ļ�ϵͳ���ļ����в����Ļ�����</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; �ڸ�</font>super_block<font face="����">��</font>s_ops<font face="����">��ֵ���ٸ����ļ�ϵͳ����һ��</font>vfsmount<font face="����">�ṹ�����ýṹע�ᵽϵͳά������һ����</font>vfsmntlist<font face="����">�У�����</font>mount<font face="����">�ϵ��ļ�ϵͳ���ڸ�������һ���</font>umount<font face="����">ʱ���������ɾ����һ����ͷų����顣</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ����һ���Ѿ�</font>mount<font face="����">���ļ�ϵͳ���κ��ļ��Ĳ�������Ӧ���Բ���һ��</font>inode<font face="����">ʵ�����������ļ�ϵͳ����������һ�����ڸ��ļ�ϵͳ���ڴ�</font>i<font face="����">�ڵ㡣�����ȵ����ļ���λ����</font>lookup_dentry<font face="����">����Ŀ¼���濴�Ƿ�ʹ�ù����ļ��������û���򻺴����Ҳ�����������Ҫ��</font>i<font face="����">�ӵ������ε���·���ϵ�����Ŀ¼</font>I<font face="����">�ӵ��</font>lookup<font face="����">��������</font>lookup<font face="����">�����л����</font>iget<font face="����">�������ú��������յ��ó������</font>s_ops->read_inode<font face="����">��ȡĿ���ļ��Ĵ���</font>I<font face="����">�ڵ㣨��һ�������¾������豸��������ˣ�ͨ���������������</font>read<font face="����">������ȡ����</font>I<font face="����">�ڵ㣩��</font>read_inode<font face="����">��������Ҫ�����ǳ�ʼ��</font>inode<font face="����">��һЩ˽������</font>(<font face="����">�������ݴ洢λ�ã��ļ���С�ȵ�</font>)<font face="����">�Լ���</font>inode_operations<font face="����">�������ر���ֵ�����ո�</font>inode<font face="����">������һ��Ŀ¼����ṹ</font>dentry<font face="����">�з��ء�</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; �ڻ�����ļ���</font>inode<font face="����">֮�󣬶��ڸ��ļ�������һ�в��������˸�������Ϊ���Դ�</font>inode
-<font face="����">����ļ������������ر�</font>file_operatoins<font face="����">���ÿ��ر�������˱�׼���ļ�</font>I/O<font face="����">�ӿڵ�ʵ�֣�����</font>read,
-write, lseek, mmap, ioctl<font face="����">�ȵȡ���Щ������ڽ������й����ļ���ϵͳ������������մ�����ڣ�ͨ����Щ������ڻ���洢���ļ���Ӳ�豸�����������������������򷵻����ݡ���Ȼ���м仹��ǣ�浽һЩ����</font>buffer<font face="����">�Ĺ������⣬����Ͳ�׸���ˡ�</font></font>
-<p><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp; ͨ��������Щ������Ӧ��������Ϊʲô����ʹ��ͳһ��ϵͳ���ýӿ������ʲ�ͬ�ļ�ϵͳ���͵��ļ��ˣ���Ϊ���ļ�ϵͳ��ʵ��һ�㣬���ѵͲ�Ĳ��������ˣ��û��ɼ���ֻ�Ǹ߲�ɼ���һ�µ�ϵͳ���ýӿڡ�</font></font>
-<p><font face="����"><font size=+0>��</font></font>
-<br><b><font face="����">5.��</font>module<font face="����"><font size=+0>��ص�ϵͳ����</font></font></b></ol>
+<p><font size=+0><font face="宋体">}</font>;</font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 由于这组操作中定义了文件系统中对于</font>inode<font face="宋体">的操作，所以是之后对于文件系统中文件所有操作的基础。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 在给</font>super_block<font face="宋体">的</font>s_ops<font face="宋体">赋值后，再给该文件系统分配一个</font>vfsmount<font face="宋体">结构，将该结构注册到系统维护的另一条链</font>vfsmntlist<font face="宋体">中，所有</font>mount<font face="宋体">上的文件系统都在该链中有一项。在</font>umount<font face="宋体">时，则从链中删除这一项并且释放超级块。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 对于一个已经</font>mount<font face="宋体">的文件系统中任何文件的操作首先应该以产生一个</font>inode<font face="宋体">实例，即根据文件系统的类型生成一个属于该文件系统的内存</font>i<font face="宋体">节点。这首先调用文件定位函数</font>lookup_dentry<font face="宋体">查找目录缓存看是否使用过该文件，如果还没有则缓存中找不到，于是需要的</font>i<font face="宋体">接点则依次调用路径上的所有目录</font>I<font face="宋体">接点的</font>lookup<font face="宋体">函数，在</font>lookup<font face="宋体">函数中会调用</font>iget<font face="宋体">函数，该函数中最终调用超级块的</font>s_ops->read_inode<font face="宋体">读取目标文件的磁盘</font>I<font face="宋体">节点（这一步再往下就是由设备驱动完成了，通过调用驱动程序的</font>read<font face="宋体">函数读取磁盘</font>I<font face="宋体">节点），</font>read_inode<font face="宋体">函数的主要功能是初始化</font>inode<font face="宋体">的一些私有数据</font>(<font face="宋体">比如数据存储位置，文件大小等等</font>)<font face="宋体">以及给</font>inode_operations<font face="宋体">函数开关表赋值，最终该</font>inode<font face="宋体">被绑定在一个目录缓存结构</font>dentry<font face="宋体">中返回。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 在获得了文件的</font>inode<font face="宋体">之后，对于该文件的其它一切操作都有了根基。因为可以从</font>inode
+<font face="宋体">获得文件操作函数开关表</font>file_operatoins<font face="宋体">，该开关表里给出了标准的文件</font>I/O<font face="宋体">接口的实现，包括</font>read,
+write, lseek, mmap, ioctl<font face="宋体">等等。这些函数入口将是所有关于文件的系统调用请求的最终处理入口，通过这些函数入口会向存储该文件的硬设备驱动发出请求并且由驱动程序返回数据。当然这中间还会牵涉到一些关于</font>buffer<font face="宋体">的管理问题，这里就不赘述了。</font></font>
+<p><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp; 通过讲述这些，我们应该明白了为什么可以使用统一的系统调用接口来访问不同文件系统类型的文件了：因为在文件系统的实现一层，都把低层的差异屏蔽了，用户可见的只是高层可见的一致的系统调用接口。</font></font>
+<p><font face="宋体"><font size=+0>　</font></font>
+<br><b><font face="宋体">5.与</font>module<font face="宋体"><font size=+0>相关的系统调用</font></font></b></ol>
 
-<dir><font size=+0>&nbsp;&nbsp;&nbsp; Linux<font face="����">���ṩ��һ�ֶ�̬���ػ�ж���ں�����Ļ��ơ���ģ�顣ͨ�����ֻ���</font>Linux<font face="����">�û�����Ϊ�Լ����Ա���һ������С���ں�ӳ���ļ������⣬���ں��м��غ�ж��ģ�鲻��Ҫ���±��������ں��Լ���������������ͨ��һ����������ߵ�����һ�����е�ϵͳ�м���ģ�飬�ڲ���Ҫʱж��ģ�顣ģ�����������๦�ܣ������ļ�ϵͳ���豸������ϵͳ֧�ֵ�ִ���ļ���ʽ������ϵͳ���ú��жϴ�����������ģ�������¡�</font></font>
-<p><font size=+0>&nbsp;&nbsp;&nbsp; Linux<font face="����">���ṩ����ϵͳ�����Ӻ�ж��ģ��Ľӿڣ�</font>create_module()<font face="����">��</font>init_module
-(), delete_module()<font face="����">����Щϵͳ����ͨ������ֱ��Ϊ����Աʹ�õģ����ǽ�����Ϊʵ��һЩϵͳ������ṩ�Ľӿڣ���</font>insmod,
-rmmod<font face="����">������ʹ����Щϵͳ����ǰ�����ȼ���Ŀ���ļ����û����̵ĵ�ַ�ռ䣬�������Ŀ���ļ���ʽ���ض��Ŀ⺯��</font>(<font face="����">�磺</font>libobj.a<font face="����">�е�һЩ����</font>)<font face="����">����ɣ���</font></font>
-<p><font size=+0>&nbsp;&nbsp;&nbsp; Linux<font face="����">�ĺ�����ά����һ��</font>module_list<font face="����">�б���ÿ�������ص������е�ģ�鶼������ռ��һ�ϵͳ����</font>create_module()<font face="����">�����ڸ��б���ע��ĳ��ָ����ģ�飬��</font>init_module<font face="����">����ʹ��ģ��Ŀ���ļ����ݵ�ӳ������ʼ��������ע��ĸ�ģ�飬���ҵ��ø�ģ��ĳ�ʼ����������ʼ������ͨ�����һЩ�ض��ĳ�ʼ�������������ļ�ϵͳ�ĳ�ʼ�����������ڲ���ϵͳ��ע����ļ�ϵͳ��</font>delete_module<font face="����">���Ǵ�ϵͳ��ж��һ��ģ�飬����Ҫ�����Ǵ�</font>module_list<font face="����">��ɾ����ģ���Ӧ��</font>module<font face="����">�ṹ���ҵ��ø�ģ���</font>cleanup<font face="����">����ж������˽����Ϣ��</font></font>
+<dir><font size=+0>&nbsp;&nbsp;&nbsp; Linux<font face="宋体">中提供了一种动态加载或卸载内核组件的机制——模块。通过这种机制</font>Linux<font face="宋体">用户可以为自己可以保持一个尽量小的内核映像文件，另外，往内核中加载和卸载模块不需要重新编译整个内核以及引导机器。可以通过一定的命令或者调用在一个运行的系统中加载模块，在不需要时卸载模块。模块可以完成许多功能，比如文件系统、设备驱动，系统支持的执行文件格式，甚至系统调用和中断处理都可以用模块来更新。</font></font>
+<p><font size=+0>&nbsp;&nbsp;&nbsp; Linux<font face="宋体">中提供了往系统中添加和卸载模块的接口，</font>create_module()<font face="宋体">，</font>init_module
+(), delete_module()<font face="宋体">，这些系统调用通常不是直接为程序员使用的，它们仅仅是为实现一些系统命令而提供的接口，如</font>insmod,
+rmmod<font face="宋体">，（在使用这些系统调用前必须先加载目标文件到用户进程的地址空间，这必须由目标文件格式所特定的库函数</font>(<font face="宋体">如：</font>libobj.a<font face="宋体">中的一些函数</font>)<font face="宋体">来完成）。</font></font>
+<p><font size=+0>&nbsp;&nbsp;&nbsp; Linux<font face="宋体">的核心中维护了一个</font>module_list<font face="宋体">列表，每个被加载到核心中的模块都在其中占有一项，系统调用</font>create_module()<font face="宋体">就是在该列表里注册某个指定的模块，而</font>init_module<font face="宋体">则是使用模块目标文件内容的映射来初始化核心中注册的该模块，并且调用该模块的初始化函数，初始化函数通常完成一些特定的初始化操作，比如文件系统的初始化函数就是在操作系统中注册该文件系统。</font>delete_module<font face="宋体">则是从系统中卸载一个模块，其主要工作是从</font>module_list<font face="宋体">中删除该模块对应的</font>module<font face="宋体">结构并且调用该模块的</font>cleanup<font face="宋体">函数卸载其它私有信息。</font></font>
 <br>&nbsp;
 <br>&nbsp;
-<p><font face="����"><font size=+0>��&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<p><font face="宋体"><font size=+0>　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 <a href="#title">Back</a></font></font></dir>
 
 <ul>
 <li>
-<a NAME="c3"></a><b><font size=+1>Linux<font face="����">����������Ͷ����ں�</font></font></b></li>
+<a NAME="c3"></a><b><font size=+1>Linux<font face="宋体">中怎样编译和定制内核</font></font></b></li>
 </ul>
 
-<ol><b><font face="����"><font size=+0>1.�����ں�ǰע�������</font></font></b>
-<p>&nbsp;&nbsp;&nbsp; ���ϵͳ��������Դ�Ƿ�������ں˵�Ҫ����<font size=+0>linux/Document<font face="����">Ŀ¼����һ����</font>Changes<font face="����">���ļ��������о��˵�ǰ�ں˰汾����Ҫ�����������İ汾�ţ�</font></font>
+<ol><b><font face="宋体"><font size=+0>1.编译内核前注意的事项</font></font></b>
+<p>&nbsp;&nbsp;&nbsp; 检查系统上其它资源是否符合新内核的要求。在<font size=+0>linux/Document<font face="宋体">目录下有一个叫</font>Changes<font face="宋体">的文件，里面列举了当前内核版本所需要的其它软件的版本号，</font></font>
 <p><font size=+0>- Kernel modutils&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 2.1.121&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 ; insmod -V</font>
@@ -711,40 +711,40 @@ rmmod<font face="����">������ʹ����Щϵͳ����ǰ�����ȼ���Ŀ���ļ����û����̵ĵ��
 2.7.2.8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 ; ls -l /usr/lib/libg++.so.*</font>
 <p><font size=+0>. . . . . .</font>
-<p><font face="����"><font size=+0>�������һ�����оٸ������汾�ŵ�������������Ҫ���ȸ���Ӧ������������һ��ͨ�����Ժ��ԡ�</font></font>
-<p><b><font face="����"><font size=+0>2.�����ں�</font></font></b>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ʹ��</font>make config<font face="����">����</font>make
-menuconfig, make xconfig<font face="����">�������ںˡ����а���ѡ����豸������������ѡ������豸֧�֡��ļ�ϵͳ�ȵȣ��û����Ը����Լ������������й������á�ÿ��ѡ�������С�</font>y<font face="����">���͡�</font>n<font face="����">������ѡ��ѡ��</font>y<font face="����">����ʾ����Ӧ��֧�ֱ�����ںˣ�ѡ��</font>n<font face="����">����ʾ���ṩ����֧�֣����е��е�����ѡ��</font>m<font face="����">�������ʾ�Ѹ�֧�ֱ���ɿɼ���ģ�飬��ǰ���ᵽ��</font>module<font face="����">����������Ͱ�װģ���ں������ܡ�</font></font>
-<p><font face="����"><font size=+0>&nbsp;&nbsp;&nbsp; ���˳�㽲��һ��������ں��������Լ��Ĺ���֧�֡�</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ��������������Ҫ���Լ����ں��м���һ���ļ�ϵͳ</font>tfile<font face="����">����������ļ�ϵͳ�Ĵ������</font>linux/fs<font face="����">�½���һ��</font>tfile<font face="����">Ŀ¼����Դ�ļ���������Ŀ¼�£�Ȼ���޸�</font>linux/fs<font face="����">�µ�</font>Makefile<font face="����">���Ѷ�Ӧ���ļ�ϵͳ��Ŀ���ļ�����Ŀ���ļ��б��У�����޸�</font>linux/fs/Config.in<font face="����">�ļ�������</font></font>
-<p><font size=+0>bool 'tfile fs support' CONFIG_TFILE_FS<font face="����">����</font></font>
-<p><font size=+0>tristate ��tfile fs support' CONFIG_TFILE_FS</font>
-<p><font size=+0><font face="����">������</font>Make menuconfig<font face="����">ʱ��</font>filesystem<font face="����">ѡ���¾Ϳ��Կ���</font></font>
-<p><font size=+0>&lt; > tfile fs support<font face="����">һ����</font></font>
-<p><b><font face="����"><font size=+0>3.�����ں�</font></font></b>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; �����ú��ں˺���Ǳ����ں��ˣ��ڱ���֮ǰ����Ӧ��ִ��</font>make
-dep<font face="����">�������������ϵ����������޸�</font>linux<font face="����">��ÿ����Ŀ¼�µ�</font>.depend<font face="����">�ļ������ļ������˸�Ŀ¼��ÿ��Ŀ���ļ�����Ҫ��ͷ�ļ�������·���ķ�ʽ�о٣���</font></font>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; Ȼ�����ʹ��</font>make
-bzImage<font face="����">�����������ں��ˡ����������н����󽫻���</font>linux/arch/asm/boot/<font face="����">����һ������</font>bzImage<font face="����">��ӳ���ļ���</font></font>
-<p><b><font face="����"><font size=+0>4.ʹ�����ں�����</font></font></b>
-<p><font size=+0><font face="����">&nbsp;&nbsp;&nbsp; ��ǰ����������ӳ���ļ�������</font>/boot<font face="����">Ŀ¼�£�Ҳ����ֱ�ӽ���һ���������ӣ���������ʡȥÿ�α����Ŀ�����������������������Ϊ</font>vmlinuz-new<font face="����">����ô���޸�</font>/etc/lilo.conf<font face="����">��������������ô������</font></font>
+<p><font face="宋体"><font size=+0>其中最后一项是列举该软件版本号的命令，如果不符合要求先给相应软件升级，这一步通常可以忽略。</font></font>
+<p><b><font face="宋体"><font size=+0>2.配置内核</font></font></b>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 使用</font>make config<font face="宋体">或者</font>make
+menuconfig, make xconfig<font face="宋体">配置新内核。其中包括选择块设备驱动程序、网络选项、网络设备支持、文件系统等等，用户可以根据自己的需求来进行功能配置。每个选项至少有“</font>y<font face="宋体">”和“</font>n<font face="宋体">”两种选择，选择“</font>y<font face="宋体">”表示把相应的支持编译进内核，选“</font>n<font face="宋体">”表示不提供这种支持，还有的有第三种选择“</font>m<font face="宋体">”，则表示把该支持编译成可加载模块，即前面提到的</font>module<font face="宋体">，怎样编译和安装模块在后面会介绍。</font></font>
+<p><font face="宋体"><font size=+0>&nbsp;&nbsp;&nbsp; 这里，顺便讲述一下如何在内核中增加自己的功能支持。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 假如我们现在需要在自己的内核中加入一个文件系统</font>tfile<font face="宋体">，在完成了文件系统的代码后，在</font>linux/fs<font face="宋体">下建立一个</font>tfile<font face="宋体">目录，把源文件拷贝到该目录下，然后修改</font>linux/fs<font face="宋体">下的</font>Makefile<font face="宋体">，把对应该文件系统的目标文件加入目标文件列表中，最后修改</font>linux/fs/Config.in<font face="宋体">文件，加入</font></font>
+<p><font size=+0>bool 'tfile fs support' CONFIG_TFILE_FS<font face="宋体">或者</font></font>
+<p><font size=+0>tristate ‘tfile fs support' CONFIG_TFILE_FS</font>
+<p><font size=+0><font face="宋体">这样在</font>Make menuconfig<font face="宋体">时在</font>filesystem<font face="宋体">选单下就可以看到</font></font>
+<p><font size=+0>&lt; > tfile fs support<font face="宋体">一项了</font></font>
+<p><b><font face="宋体"><font size=+0>3.编译内核</font></font></b>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 在配置好内核后就是编译内核了，在编译之前首先应该执行</font>make
+dep<font face="宋体">命令建立好依赖关系，该命令将会修改</font>linux<font face="宋体">中每个子目录下的</font>.depend<font face="宋体">文件，该文件包含了该目录下每个目标文件所需要的头文件（绝对路径的方式列举）。</font></font>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 然后就是使用</font>make
+bzImage<font face="宋体">命令来编译内核了。该命令运行结束后将会在</font>linux/arch/asm/boot/<font face="宋体">产生一个名叫</font>bzImage<font face="宋体">的映像文件。</font></font>
+<p><b><font face="宋体"><font size=+0>4.使用新内核引导</font></font></b>
+<p><font size=+0><font face="宋体">&nbsp;&nbsp;&nbsp; 把前面编译产生的映像文件拷贝到</font>/boot<font face="宋体">目录下（也可以直接建立一个符号连接，这样可以省去每次编译后的拷贝工作），这里暂且命名为</font>vmlinuz-new<font face="宋体">，那么再修改</font>/etc/lilo.conf<font face="宋体">，在其中增加这么几条：</font></font>
 <p><font size=+0>image = /boot/vmlinuz-new</font>
 <p><font size=+0>root = /dev/hda1</font>
 <p><font size=+0>label = new</font>
 <p><font size=+0>read-only</font>
-<p><font size=+0><font face="����">��������</font>lilo<font face="����">�����ôϵͳ������ʱ�Ϳ���ѡ�����ں������ˡ�</font></font>
-<p><b><font face="����"><font size=+0>5.����ģ���ʹ��ģ��</font></font></b></ol>
+<p><font size=+0><font face="宋体">并且运行</font>lilo<font face="宋体">命令，那么系统在启动时就可以选用新内核引导了。</font></font>
+<p><b><font face="宋体"><font size=+0>5.编译模块和使用模块</font></font></b></ol>
 
 <dir>
-<dir><font size=+0><font face="����">��</font>linux/<font face="����">Ŀ¼��ִ��</font>make
-modules<font face="����">����ģ�飬Ȼ��ʹ������</font>make modules_install<font face="����">����װģ�飨���еĿɼ���ģ���Ŀ���ļ��ᱻ������</font>/lib/modules/2.2.12/<font face="����">��������֮��Ϳ���ͨ��ִ��</font>insmod
-<font face="����">��ģ��������</font>rmmod<font face="����">��ģ���������������ػ�ж�ع���ģ���ˡ�</font></font>
-<p><b><font face="����"><font size=+1>��</font></font></b>
-<p><b><font face="����"><font size=+1>��</font></font></b>
+<dir><font size=+0><font face="宋体">在</font>linux/<font face="宋体">目录下执行</font>make
+modules<font face="宋体">编译模块，然后使用命令</font>make modules_install<font face="宋体">来安装模块（所有的可加载模块的目标文件会被拷贝到</font>/lib/modules/2.2.12/<font face="宋体">），这样之后就可以通过执行</font>insmod
+<font face="宋体">〈模块名〉和</font>rmmod<font face="宋体">〈模块名〉命令来加载或卸载功能模块了。</font></font>
+<p><b><font face="宋体"><font size=+1>　</font></font></b>
+<p><b><font face="宋体"><font size=+1>　</font></font></b>
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 <a href="#title">Back</a>
-<br><font face="����">��</font></dir>
+<br><font face="宋体">　</font></dir>
 </dir>
 
 </body>

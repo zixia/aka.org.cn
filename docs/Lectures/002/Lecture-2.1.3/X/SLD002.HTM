@@ -5,7 +5,7 @@
 <HEAD>
 
 <meta name="GENERATOR" content="Microsoft Internet Assistant for Microsoft PowerPoint 97">
- <TITLE>X����ϵ�ṹ</TITLE> 
+ <TITLE>X的体系结构</TITLE> 
 </HEAD>
 
 <BODY     >
@@ -28,7 +28,7 @@
 <P>Slide 2 of 44</P>
 </CENTER>
 <!-- <UL>
-<H2>X����ϵ�ṹ</H2>
+<H2>X的体系结构</H2>
 </UL></P>
 <P><UL>
 <LI><H2>
@@ -46,23 +46,23 @@
 <LI><H2>X Server
 </H2>
 <UL>
-<LI>���������е�X��Դ��ʵ�壬ͬʱ����һ����client��������X�¼�
+<LI>控制了所有的X资源和实体，同时负责一切由client所传来的X事件
 <UL>
-<LI>X��Դ��ɫ�ʣ����εȣ� ʵ�壺���룬���װ�ã� X�¼������̵����룬�����ƶ������ڴ�С�ı�ȵȣ� ������Ϣ��
+<LI>X资源：色彩，字形等； 实体：输入，输出装置； X事件：键盘的输入，鼠标的移动，窗口大小改变等等； 错误信息。
 </UL></UL></UL><UL>
 <LI><H2> X Client
 </H2>
 <UL>
-<LI>����X�е�Ӧ�ó���
+<LI>就是X中的应用程序。
 <UL>
-<LI>һ��X Client����Ҫ���У������һ����ʾ��������һ��X Server��Ȼ��ͨ����X Server֮���ͨ����������еĹ��������ֽṹ��ʹ��X�µ����������ǳ���
+<LI>一个X Client若想要运行，必须打开一个显示器，连接一个X Server，然后通过与X Server之间的通信来完成所有的工作。这种结构，使得X下的软件开发非常灵活。
 </UL></UL></UL><UL>
 <LI><H2> X Protocol
 </H2>
 <UL>
-<LI>������Ӧ�ú�������ʾ֮��Ŀͻ�/��������ϵ��
+<LI>定义了应用和它的显示之间的客户/服务器关系。
 <UL>
-<LI>ͨ�����Э�飬Ӧ����������ʾ�����뿪���������˲���ϵͳ��Ӳ���������ԡ�����������Ӧ�õĿ����Ϳ���ֲ�ԡ� </UL></UL></UL></P>
+<LI>通过这个协议，应用与它的显示被分离开来。隐藏了操作系统和硬件的特殊性。这样大大简化了应用的开发和可移植性。 </UL></UL></UL></P>
 <P>  -->
 </Body>
 </HTML>

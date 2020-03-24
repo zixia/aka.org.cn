@@ -1,48 +1,48 @@
-ºìÆìLinux     edu@redflag-linux.com
+çº¢æ——Linux     edu@redflag-linux.com
               partner@redflag-linux.com
 RedHat        (E)mailto:mlim@redhat.com
 TurboLinux    dillion.chen@turbolinux.com.cn
               jasminel@turbolinux.com.cn 
               jobs@turbolinux.com.cn
-              ±±¾©ÊĞ½¨¹úÃÅÍâ´ó½ÖÒ»ºÅ¹úÃ³Î÷Â¥516ÊÒ ¹«¹Ø²¿ÊÕ 100004  µç»°£º65054020
+              åŒ—äº¬å¸‚å»ºå›½é—¨å¤–å¤§è¡—ä¸€å·å›½è´¸è¥¿æ¥¼516å®¤ å…¬å…³éƒ¨æ”¶ 100004  ç”µè¯ï¼š65054020
 XTeamLinux    info@xteamlinux.com.cn
-              ±±¾©ÊĞº£µíÇøÉÏµØÎå½Ö5ºÅ¸ßÁ¢¶şÇ§´óÏÃÈı²ã Xteam£¨ÖĞ¹ú£©Èí¼ş¼¼ÊõÓĞÏŞ¹«Ë¾ 100088  µç»°£º62976011
+              åŒ—äº¬å¸‚æµ·æ·€åŒºä¸Šåœ°äº”è¡—5å·é«˜ç«‹äºŒåƒå¤§å¦ä¸‰å±‚ Xteamï¼ˆä¸­å›½ï¼‰è½¯ä»¶æŠ€æœ¯æœ‰é™å…¬å¸ 100088  ç”µè¯ï¼š62976011
 Oracle        monica.li@oracle.com
               becky.chen@oracle.com
               hotline_cn@oracle.com 
-              ±±¾©½¨¹úÃÅÍâ´ó½Ö1ºÅ¹úÃ³´óÏÃ2×ù2208ÊÒ ¹«¹Ø²¿ÊÕ 100004 µç»°£º65386688×ª333
+              åŒ—äº¬å»ºå›½é—¨å¤–å¤§è¡—1å·å›½è´¸å¤§å¦2åº§2208å®¤ å…¬å…³éƒ¨æ”¶ 100004 ç”µè¯ï¼š65386688è½¬333
 Intel         solution-services-questions@intel.com
               yiqun.ma@intel.com
-HP            ±±¾©ÊĞ³¯ÑôÇø¶«Èı»·ÄÏÂ·2ºÅ±±¾©2380ĞÅÏäÖĞ¹ú»İÆÕ´óÏÃÖĞ¹ú»İÆÕÓĞÏŞ¹«Ë¾ ¹«¹Ø²¿ÊÕ 100004  µç»°: 65643888 
-              °²½İÂ×¿Æ¼¼ÓĞÏŞ¹«Ë¾ ±±¾©ÊĞ³¯ÑôÇø¶«Èı»·ÄÏÂ·2ºÅ ÖĞ¹ú»İÆÕ´óÏÃ8²ã 100022 µç»°: 1065645500 
+HP            åŒ—äº¬å¸‚æœé˜³åŒºä¸œä¸‰ç¯å—è·¯2å·åŒ—äº¬2380ä¿¡ç®±ä¸­å›½æƒ æ™®å¤§å¦ä¸­å›½æƒ æ™®æœ‰é™å…¬å¸ å…¬å…³éƒ¨æ”¶ 100004  ç”µè¯: 65643888 
+              å®‰æ·ä¼¦ç§‘æŠ€æœ‰é™å…¬å¸ åŒ—äº¬å¸‚æœé˜³åŒºä¸œä¸‰ç¯å—è·¯2å· ä¸­å›½æƒ æ™®å¤§å¦8å±‚ 100022 ç”µè¯: 1065645500 
               webfeedback@csgdev.business.agilent.com
 Sun            customeraccess_pr@sun.com
                melly.yue@sun.com 
-               ±±¾©ÄÏÀñÊ¿Â·66ºÅ½¨Íş´óÏÃ16²ã 100045  µç»°£º68035588 
-°Ù¶È           pr@baidu.com
+               åŒ—äº¬å—ç¤¼å£«è·¯66å·å»ºå¨å¤§å¦16å±‚ 100045  ç”µè¯ï¼š68035588 
+ç™¾åº¦           pr@baidu.com
                webmaster@baidu.com
-ÀË³±           webmaster@yahome.com.cn
+æµªæ½®           webmaster@yahome.com.cn
                guangd@langchao.com.cn
                webmaster@mail.chaoyue.com
                gzg@genersoft.com
                huhaigen@genersoft.com
                LDM@genersoft.com
-               ÀË³±·şÎñÆ÷ÊÂÒµ²¿ÓªÏú×Ü²¿ ±±¾©ÉÏµØĞÅÏ¢ÖĞÂ·7½Ö2ºÅÒ»²ã 100085  µç»°: 82895418
+               æµªæ½®æœåŠ¡å™¨äº‹ä¸šéƒ¨è¥é”€æ€»éƒ¨ åŒ—äº¬ä¸Šåœ°ä¿¡æ¯ä¸­è·¯7è¡—2å·ä¸€å±‚ 100085  ç”µè¯: 82895418
 Sumsung        webmaster@isamsung.com.cn
-               ±±¾©ÊĞ³¯ÑôÇø¶«»·ÄÏÂ·2ºÅ ÕĞÉÌ¾Ö´óÏÃ23²ã ÈıĞÇµç×Ó¹«¹Ø²¿ÊÕ 100022  µç»°£º65668100
-Êï¹â           nbd@dawning.com.cn
+               åŒ—äº¬å¸‚æœé˜³åŒºä¸œç¯å—è·¯2å· æ‹›å•†å±€å¤§å¦23å±‚ ä¸‰æ˜Ÿç”µå­å…¬å…³éƒ¨æ”¶ 100022  ç”µè¯ï¼š65668100
+æ›™å…‰           nbd@dawning.com.cn
                apple_smart@shuguang.net.cn
                peng@shuguang.net.cn
 VIA
-±±´ó·½Õı        apabi@founder.com.cn
+åŒ—å¤§æ–¹æ­£        apabi@founder.com.cn
                master@founderbn.com
                ecfounder_mail@ecfounder.com
                ITtraining@founder.com.cn
                webmaster@founder.com.cn
                webmaster@infofounder.com.cn
-Çå»ªÍ¬·½       webmaster.thtf.com.cn
-ÖĞĞ¾           webmaster@smics.com
-Çå»ª×Ï¹â       tutv@public2.east.net.cn
+æ¸…ååŒæ–¹       webmaster.thtf.com.cn
+ä¸­èŠ¯           webmaster@smics.com
+æ¸…åç´«å…‰       tutv@public2.east.net.cn
                unisnet@thunis.com
                marketing@thunisoft.com
                HP-UNIS@THUNIS.COM
@@ -51,8 +51,8 @@ VIA
                QQyang@thunis.com
                waxli@thunis.com
                unisnews@thunis.com
-               ±±¾©Çå»ª´óÑ§×Ï¹â´óÂ¥208ÊÒ×Ï¹âÍøÂç¹«¹Ø²¿ÊÕ 100084  µç»°£º62701188 
-±±´óÇàÄñ       Hanson_tao@cs.pku.edu.cn
+               åŒ—äº¬æ¸…åå¤§å­¦ç´«å…‰å¤§æ¥¼208å®¤ç´«å…‰ç½‘ç»œå…¬å…³éƒ¨æ”¶ 100084  ç”µè¯ï¼š62701188 
+åŒ—å¤§é’é¸Ÿ       Hanson_tao@cs.pku.edu.cn
                webmaster@jbu.com.cn
                wangsong@jbbis.com.cn
                wxq@jbtraining.com.cn
@@ -61,53 +61,53 @@ VIA
                tianchun@tele-cyber.com.cn
                hr@jbbis.com.cn
                webmaster@jb-aptech.com.cn
-»ªÊ¤            wcr@teamsun.com.cn
-¶«´ó°¢¶ûÅÉ      liuzhuoxun@neusoft.com
+åèƒœ            wcr@teamsun.com.cn
+ä¸œå¤§é˜¿å°”æ´¾      liuzhuoxun@neusoft.com
                 tianfx@neusoft.com
-ÖĞÈí            css@css.com.cn
+ä¸­è½¯            css@css.com.cn
                 cyber@cybersoft.com.cn
                 zming_l@sina.com
                 bw@cybersoft.com.cn
                 jw2531@yeah.net
-                ±±¾©ÊĞº£µíÇøÑ§ÔºÄÏÂ·55ºÅ»ù´¡Èí¼şÊÂÒµ²¿ 100081  µç»°£º62177728
+                åŒ—äº¬å¸‚æµ·æ·€åŒºå­¦é™¢å—è·¯55å·åŸºç¡€è½¯ä»¶äº‹ä¸šéƒ¨ 100081  ç”µè¯ï¼š62177728
 Motorola        a16723@email.mot.com
                 a11334@email.mot.com
-                ±±¾©ÊĞ³¯ÑôÇø¶«Èı»·ÄÏÂ·¶şºÅ Ä¦ÍĞÂŞÀ­£¨ÖĞ¹ú£©µç×ÓÓĞÏŞ¹«Ë¾ 100022  µç»°£º65642288
-Ericsson        ÖĞ¹ú±±¾©ÊĞ³¯ÑôÇø¹â»ªÂ·7ºÅººÍş´óÏÃ9²ã °®Á¢ĞÅ£¨ÖĞ¹ú£©ÓĞÏŞ¹«Ë¾ ÆóÒµ×ÉÑ¯¼°Æ·ÅÆÍÆ¹ã²¿ 100004  µç»°£º65615566
+                åŒ—äº¬å¸‚æœé˜³åŒºä¸œä¸‰ç¯å—è·¯äºŒå· æ‘©æ‰˜ç½—æ‹‰ï¼ˆä¸­å›½ï¼‰ç”µå­æœ‰é™å…¬å¸ 100022  ç”µè¯ï¼š65642288
+Ericsson        ä¸­å›½åŒ—äº¬å¸‚æœé˜³åŒºå…‰åè·¯7å·æ±‰å¨å¤§å¦9å±‚ çˆ±ç«‹ä¿¡ï¼ˆä¸­å›½ï¼‰æœ‰é™å…¬å¸ ä¼ä¸šå’¨è¯¢åŠå“ç‰Œæ¨å¹¿éƒ¨ 100004  ç”µè¯ï¼š65615566
 CA              support china@cai.com
-                ÖĞ¹ú±±¾©ÊĞ³¯ÑôÇø¹â»ªÂ·1ºÅ ±±¾©¼ÎÀïÖĞĞÄ11²ã ¹ÚÈºµçÄÔ£¨ÖĞ¹ú£©ÓĞÏŞ¹«Ë¾  100020   µç»°£º65611136 
+                ä¸­å›½åŒ—äº¬å¸‚æœé˜³åŒºå…‰åè·¯1å· åŒ—äº¬å˜‰é‡Œä¸­å¿ƒ11å±‚ å† ç¾¤ç”µè„‘ï¼ˆä¸­å›½ï¼‰æœ‰é™å…¬å¸  100020   ç”µè¯ï¼š65611136 
 Yahoo           jobs-cn-engineer@yahoo-inc.com
 Cisco           china-academy-master@cisco.com
                 Chinese-tac@cisco.com
                 miliu@cisco.com
-                ±±¾©ÊĞ¶«³ÇÇø¶«³¤°²½ÖÒ»ºÅ ¶«·½¹ã³¡¶«·½¾­Ã³³Ç¶« Cisco¹«Ë¾ ¹«¹Ø²¿ÊÕ µç»°:65267777 
+                åŒ—äº¬å¸‚ä¸œåŸåŒºä¸œé•¿å®‰è¡—ä¸€å· ä¸œæ–¹å¹¿åœºä¸œæ–¹ç»è´¸åŸä¸œ Ciscoå…¬å¸ å…¬å…³éƒ¨æ”¶ ç”µè¯:65267777 
 Siemens         haixia.yu@pek1.siemens.com.cn
                 xiaoping.sun@pek1.siemens.com.cn
                 haiping.zhou@pek1.siemens.com.cn
-                ±±¾©ÊĞ³¯ÑôÇøÍû¾©ÖĞ»·ÄÏÂ·7ºÅ Î÷ÃÅ×Ó£¨ÖĞ¹ú£©ÓĞÏŞ¹«Ë¾ ¹«¹Ø²¿ ÊÕ  µç»°£º64721888
+                åŒ—äº¬å¸‚æœé˜³åŒºæœ›äº¬ä¸­ç¯å—è·¯7å· è¥¿é—¨å­ï¼ˆä¸­å›½ï¼‰æœ‰é™å…¬å¸ å…¬å…³éƒ¨ æ”¶  ç”µè¯ï¼š64721888
 Nortel          euroinfo@europem01.nt.com
                 ebusines@americasm01.nt.com
                 nortelr@americasm01.nt.com
                 nortel.response@nt.com
-LG              ÖĞ¹ú.±±¾©³¯ÑôÇø¾ÆÏÉÇÅ±±Â·5ºÅ¾©Îï´óÏÃ5²ã LGµç×Ó£¨ÖĞ¹ú£©IT²úÆ·ÓªÏú×Ü²¿  100015  µç»°£º64317493-96
+LG              ä¸­å›½.åŒ—äº¬æœé˜³åŒºé…’ä»™æ¡¥åŒ—è·¯5å·äº¬ç‰©å¤§å¦5å±‚ LGç”µå­ï¼ˆä¸­å›½ï¼‰ITäº§å“è¥é”€æ€»éƒ¨  100015  ç”µè¯ï¼š64317493-96
 ACER            bjsro@acer.com.cn
                 service@acer.com.cn
                 webmaster@acercm.com.cn
                 service@acercm.com.cn
                 resume@acercm.com.cn
-NokiaÑĞ¾¿ÖĞĞÄ   rdchina@nokia.com
+Nokiaç ”ç©¶ä¸­å¿ƒ   rdchina@nokia.com
 CTC             webmaster@ctc.org.cn
                 mail@ctc.org.cn 
-Íø´ó            webmaster@service.netbig.com
+ç½‘å¤§            webmaster@service.netbig.com
 SAP             q.tao@sap.com
-                ±±¾©ÊĞ³¯ÑôÇø¹â»ªÂ·1ºÅ¼ÎÀïÖĞĞÄÄÏÂ¥12²ã  SAP ±±¾© ¹«¹Ø²¿ ÊÕ  100020  µç»°£º65618868
+                åŒ—äº¬å¸‚æœé˜³åŒºå…‰åè·¯1å·å˜‰é‡Œä¸­å¿ƒå—æ¥¼12å±‚  SAP åŒ—äº¬ å…¬å…³éƒ¨ æ”¶  100020  ç”µè¯ï¼š65618868
 UTStarcom       info@utstar.com.cn
                 webmaster@utstar.com.cn
-ÓÃÓÑ            cyg@ufsoft.com.cn
+ç”¨å‹            cyg@ufsoft.com.cn
                 webmaster@ufsoft.com.cn
-»ªË¶            info@asus.com.cn
+åç¡•            info@asus.com.cn
                 tsd@asus.com.cn
-½ğÉ½            fangw@kingsoft.net
+é‡‘å±±            fangw@kingsoft.net
                 guohui@kingsoft.net
                 quli@bj.kingsoft.net
                 juli@kingsoft.net

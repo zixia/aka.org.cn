@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <HTML>
 <HEAD>
-<title>BASH �Ļ����﷨</title>
+<title>BASH 的基本语法</title>
 <meta http-equiv="Content-Type" content="text/html; charset=gb_2312-80">
 <META NAME="AUTHOR" CONTENT="Yongming Wei">
 <META NAME="CREATED" CONTENT="20000329;17342600">
@@ -26,151 +26,151 @@
 <A HREF="bash-spec.html"><IMG SRC="next.gif" ALT="Next"></A>
 <A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
 
-<H1 ALIGN=LEFT>2&nbsp;&nbsp;&nbsp;&nbsp;BASH �Ļ����﷨</H1>
+<H1 ALIGN=LEFT>2&nbsp;&nbsp;&nbsp;&nbsp;BASH 的基本语法</H1>
 
 <UL>
   <LI> 
-    <P>��򵥵����� ���� Hello World!
+    <P>最简单的例子 —— Hello World!
   </LI>
   <LI> 
-    <P>�������롢����ʹ������
+    <P>关于输入、输出和错误输出
   </LI>
   <LI> 
-    <P>BASH �жԱ����Ĺ涨���� C ���Ե���ͬ��
+    <P>BASH 中对变量的规定（与 C 语言的异同）
   </LI>
   <LI> 
-    <P>BASH �еĻ������̿����﷨
+    <P>BASH 中的基本流程控制语法
   </LI>
   <LI> 
-    <P>������ʹ��
+    <P>函数的使用
   </LI>
 </UL>
 
-<H3>2.1&nbsp;&nbsp;&nbsp;&nbsp;��򵥵����� ���� Hello World!</H3>
-<P>�������еĽ����̵�������ߵĵ�һ�����Ӷ��� Hello World ������ô���ǽ���Ҳ�ʹ�������ӳ����������˽� BASH��</P>
-<P>�� vi �༭���༭һ�� <a href="hello">hello �ļ�</a>���£�<br>
+<H3>2.1&nbsp;&nbsp;&nbsp;&nbsp;最简单的例子 —— Hello World!</H3>
+<P>几乎所有的讲解编程的书给读者的第一个例子都是 Hello World 程序，那么我们今天也就从这个例子出发，来逐步了解 BASH。</P>
+<P>用 vi 编辑器编辑一个 <a href="hello">hello 文件</a>如下：<br>
   <br>
   <font color="#FFFFFF"><b>#!/bin/bash <br>
   # This is a very simple example<br>
   echo Hello World </b></font></P>
-<P>������򵥵�һ�� BASH ����ͱ�д���ˡ������м���������Ҫ˵��һ�£�</P>
-<P><font color="#FFFFFF">һ����һ�е� #! ��ʲô��˼<br>
-  ������һ�е� /bin/bash ����ʲô��˼<br>
-  �����ڶ�����ע���� <br>
-  �ģ�echo ���<br>
-  �壬���ִ�иó���</font></P>
-<P>#! ��˵�� hello ����ļ������͵ģ��е������� Windows ϵͳ���ò�ͬ�ļ���׺����ʾ��ͬ�ļ����͵���˼��������ͬ����Linux ϵͳ���� 
-  &quot;#!&quot; �����ִ��������Ϣȷ�����ļ������ͣ�������һ����ͬѧ�ǻ�ȥ�Ժ����ͨ�� &quot;man magic&quot;���� �� 
-  /usr/share/magic �ļ����˽��ⷽ��ĸ������ݡ��� BASH �� ��һ�е� &quot;#!&quot; ������� &quot;/bin/bash&quot; 
-  �ͱ������ļ���һ�� BASH ������Ҫ�� /bin Ŀ¼�µ� bash ����������ִ�С�BASH �������һ���Ǵ���� /bin Ŀ¼�£������� Linux 
-  ϵͳ�Ƚ��ر�bash Ҳ�п��ܱ������ /sbin ��/usr/local/bin ��/usr/bin ��/usr/sbin �� /usr/local/sbin 
-  ������Ŀ¼�£�������Ҳ������������ &quot;locate bash&quot; &quot;find / -name bash 2&gt; /dev/null&quot; 
-  �� &quot;whereis bash&quot; �����������ҳ� bash ���ڵ�λ�ã������Ȼ�Ҳ��������������Ҫ�Լ����ְ�װһ�� BASH �������ˡ�</P>
-<P>�ڶ��е� &quot;# This is a ...&quot; ���� BASH �����ע�ͣ��� BASH �����дӡ�#���ţ�ע�⣺����������ǡ�!���ŵĳ��⣩��ʼ����β�Ķ��в��־��������ǳ����ע�͡������е� 
-  echo ���Ĺ����ǰ� echo ������ַ����������׼�����ȥ������ echo ������� &quot;Hello World&quot; ����ַ�������� 
-  &quot;Hello World&quot;����ִ��ͱ���ʾ�ڿ���̨�ն˵���Ļ���ˡ���Ҫע����� BASH �еľ����������β����û�зֺš�</P>
-<P>���ִ�иó����أ������ַ�����һ������ʽ�ƶ� BASH ȥִ�У�</P>
-<P><font color="#FFFFFF"><b>$ bash hello ��<br>
-  $ sh hello ������ sh ��ָ�� bash ��һ�����ӣ���lrwxrwxrwx 1 root root 4 Aug 20 05:41 /bin/sh 
-  -> bash����</b></font></P>
-<P>���߿����Ƚ� hello �ļ���Ϊ����ִ�е��ļ���Ȼ��ֱ������������ʱ���� hello �ļ���һ�е� &quot;#! /bin/bash&quot; 
-  �����ã�ϵͳ���Զ���/bin/bash ����ȥ����ִ�� hello �ļ��ģ�</P>
+<P>这样最简单的一个 BASH 程序就编写完了。这里有几个问题需要说明一下：</P>
+<P><font color="#FFFFFF">一，第一行的 #! 是什么意思<br>
+  二，第一行的 /bin/bash 又是什么意思<br>
+  三，第二行是注释吗 <br>
+  四，echo 语句<br>
+  五，如何执行该程序</font></P>
+<P>#! 是说明 hello 这个文件的类型的，有点类似于 Windows 系统下用不同文件后缀来表示不同文件类型的意思（但不相同）。Linux 系统根据 
+  &quot;#!&quot; 及该字串后面的信息确定该文件的类型，关于这一问题同学们回去以后可以通过 &quot;man magic&quot;命令 及 
+  /usr/share/magic 文件来了解这方面的更多内容。在 BASH 中 第一行的 &quot;#!&quot; 及后面的 &quot;/bin/bash&quot; 
+  就表明该文件是一个 BASH 程序，需要由 /bin 目录下的 bash 程序来解释执行。BASH 这个程序一般是存放在 /bin 目录下，如果你的 Linux 
+  系统比较特别，bash 也有可能被存放在 /sbin 、/usr/local/bin 、/usr/bin 、/usr/sbin 或 /usr/local/sbin 
+  这样的目录下；如果还找不到，你可以用 &quot;locate bash&quot; &quot;find / -name bash 2&gt; /dev/null&quot; 
+  或 &quot;whereis bash&quot; 这三个命令找出 bash 所在的位置；如果仍然找不到，那你可能需要自己动手安装一个 BASH 软件包了。</P>
+<P>第二行的 &quot;# This is a ...&quot; 就是 BASH 程序的注释，在 BASH 程序中从“#”号（注意：后面紧接着是“!”号的除外）开始到行尾的多有部分均被看作是程序的注释。的三行的 
+  echo 语句的功能是把 echo 后面的字符串输出到标准输出中去。由于 echo 后跟的是 &quot;Hello World&quot; 这个字符串，因此 
+  &quot;Hello World&quot;这个字串就被显示在控制台终端的屏幕上了。需要注意的是 BASH 中的绝大多数语句结尾处都没有分号。</P>
+<P>如何执行该程序呢？有两种方法：一种是显式制定 BASH 去执行：</P>
+<P><font color="#FFFFFF"><b>$ bash hello 或<br>
+  $ sh hello （这里 sh 是指向 bash 的一个链接，“lrwxrwxrwx 1 root root 4 Aug 20 05:41 /bin/sh 
+  -> bash”）</b></font></P>
+<P>或者可以先将 hello 文件改为可以执行的文件，然后直接运行它，此时由于 hello 文件第一行的 &quot;#! /bin/bash&quot; 
+  的作用，系统会自动用/bin/bash 程序去解释执行 hello 文件的：</P>
 <P><font color="#FFFFFF"><b>$ chmod u+x hello<br>
   $ ./hello</b></font></P>
-<P>�˴�û��ֱ�� ��$ hello������Ϊ��ǰĿ¼���ǵ�ǰ�û���ִ���ļ���Ĭ��Ŀ¼��������ǰĿ¼��.����ΪĬ��Ŀ¼��һ������ȫ�����á�</P>
-<P>��Ҫע����ǣ�BASH ����ִ�к�ʵ���� Linux ϵͳ�����⿪����һ�����������еġ�</P>
+<P>此处没有直接 “$ hello”是因为当前目录不是当前用户可执行文件的默认目录，而将当前目录“.”设为默认目录是一个不安全的设置。</P>
+<P>需要注意的是，BASH 程序被执行后，实际上 Linux 系统是另外开设了一个进程来运行的。</P>
 <BR>
 
-<H3>2.2&nbsp;&nbsp;&nbsp;&nbsp;�������롢����ʹ������</H3>
-<P><I> </I>���ַ��ն˻����У���׼����/��׼����ĸ���ܺ����⡣���뼴ָ��һ��Ӧ�ó������������룬�����ǴӼ������뻹�Ǵӱ���ļ����룻�����ָӦ�ó�������������һЩ��Ϣ���� 
-  Windows ϵͳ�²�ͬ���ǣ�Linux ϵͳ�»���һ����׼��������ĸ�����������Ҫ��Ϊ������Ժ�ϵͳά��Ŀ�Ķ����õģ���������ڱ�׼����ֿ�������һЩ�߼��Ĵ�����Ϣ�����������������Ϣ���Ӷ�����һ���û���ʹ�á�</P>
-<P>�� Linux ϵͳ�У���׼����(stdin)Ĭ��Ϊ�������룻��׼���(stdout)Ĭ��Ϊ��Ļ�������׼�������(stderr)Ĭ��Ҳ���������Ļ������� 
-  std ��ʾ standard������ BASH ��ʹ����Щ����ʱһ�㽫��׼�����ʾΪ 1������׼���������ʾΪ 2���������Ǿ�����˵�����ʹ�����ǣ��ر��Ǳ�׼����ͱ�׼���������</P>
-<P>���롢�������׼���������Ҫ���� I/O ���ض��򣬾���˵��Ҫ�ı����ǵ�Ĭ�����á��ȿ�������ӣ�</P>
+<H3>2.2&nbsp;&nbsp;&nbsp;&nbsp;关于输入、输出和错误输出</H3>
+<P><I> </I>在字符终端环境中，标准输入/标准输出的概念很好理解。输入即指对一个应用程序或命令的输入，无论是从键盘输入还是从别的文件输入；输出即指应用程序或命令产生的一些信息；与 
+  Windows 系统下不同的是，Linux 系统下还有一个标准错误输出的概念，这个概念主要是为程序调试和系统维护目的而设置的，错误输出于标准输出分开可以让一些高级的错误信息不干扰正常的输出信息，从而方便一般用户的使用。</P>
+<P>在 Linux 系统中：标准输入(stdin)默认为键盘输入；标准输出(stdout)默认为屏幕输出；标准错误输出(stderr)默认也是输出到屏幕（上面的 
+  std 表示 standard）。在 BASH 中使用这些概念时一般将标准输出表示为 1，将标准错误输出表示为 2。下面我们举例来说明如何使用他们，特别是标准输出和标准错误输出。</P>
+<P>输入、输出及标准错误输出主要用于 I/O 的重定向，就是说需要改变他们的默认设置。先看这个例子：</P>
 <P><font color="#FFFFFF"><b>$ ls &gt; ls_result<br>
   $ ls -l &gt;&gt; ls_result</b></font></P>
-<P>��������������ֱ� ls ����Ľ������ض��� ls_result �ļ��к�׷�ӵ� ls_result �ļ��У��������������Ļ�ϡ�&quot;&gt;&quot;�����������׼����ͱ�׼����������ض���Ĵ������ţ��������� 
-  &quot;&gt;&quot; ���ţ��� &quot;&gt;&gt;&quot; ���ʾ�����ԭ���Ķ�׷�����������������һ����΢���ӵ����ӣ�</P>
+<P>上面这两个命令分别将 ls 命令的结果输出重定向到 ls_result 文件中和追加到 ls_result 文件中，而不是输出到屏幕上。&quot;&gt;&quot;就是输出（标准输出和标准错误输出）重定向的代表符号，连续两个 
+  &quot;&gt;&quot; 符号，即 &quot;&gt;&gt;&quot; 则表示不清除原来的而追加输出。下面再来看一个稍微复杂的例子：</P>
 <P><b><font color="#FFFFFF">$ find /home -name lost* 2&gt; err_result</font></b></P>
-<P>��������� &quot;&gt;&quot; ����֮ǰ����һ�� &quot;2&quot;��&quot;2&gt;&quot; ��ʾ����׼��������ض������� 
-  /home Ŀ¼����ЩĿ¼����Ȩ�����Ʋ��ܷ��ʣ���˻����һЩ��׼�������������� err_result �ļ��С���ҿ�������һ�� <font color="#FFFFFF"><i>find 
-  /home -name lost* 2&gt;&gt;err_result</i></font> ��������ʲô�����</P>
-<P>���ֱ��ִ�� <i><font color="#FFFFFF">find /home -name lost* &gt; all_result</font></i> 
-  ��������ֻ�б�׼��������� all_result �ļ��У�Ҫ���ñ�׼��������ͱ�׼����һ���������뵽�ļ��У��Ǹ���ô���أ�������������ӣ�</P>
+<P>这个命令在 &quot;&gt;&quot; 符号之前多了一个 &quot;2&quot;，&quot;2&gt;&quot; 表示将标准错误输出重定向。由于 
+  /home 目录下有些目录由于权限限制不能访问，因此会产生一些标准错误输出被存放在 err_result 文件中。大家可以设想一下 <font color="#FFFFFF"><i>find 
+  /home -name lost* 2&gt;&gt;err_result</i></font> 命令会产生什么结果？</P>
+<P>如果直接执行 <i><font color="#FFFFFF">find /home -name lost* &gt; all_result</font></i> 
+  ，其结果是只有标准输出被存入 all_result 文件中，要想让标准错误输出和标准输入一样都被存入到文件中，那该怎么办呢？看下面这个例子：</P>
 <P><b><font color="#FFFFFF">$ find /home -name lost* &gt; all_result 2&gt;&amp; 
   1</font></b></P>
-<P>������������н����Ƚ���׼�������Ҳ�ض��򵽱�׼����У��ٽ���׼����ض��� all_result ����ļ��С��������ǾͿ��Խ����е�������洢���ļ����ˡ�Ϊʵ���������ܣ�����һ�ּ���д�����£�</P>
+<P>上面这个例子中将首先将标准错误输出也重定向到标准输出中，再将标准输出重定向到 all_result 这个文件中。这样我们就可以将所有的输出都存储到文件中了。为实现上述功能，还有一种简便的写法如下：</P>
 <P><b><font color="#FFFFFF">$ find /home -name lost* &gt;&amp; all_result</font></b></P>
-<p>�����Щ������Ϣ������Ҫ��������������������ܿ��ڶ����ó�����Ϣ�ĸ��ţ�</p>
+<p>如果那些出错信息并不重要，下面这个命令可以让你避开众多无用出错信息的干扰：</p>
 <p><b><font color="#FFFFFF">$ find /home -name lost* 2&gt; /dev/null</font></b></p>
 <p></p>
-<p>ͬѧ�ǻ�ȥ�󻹿���������һ�����¼����ض���ʽ���������ʲô�����Ϊʲô��</p>
+<p>同学们回去后还可以再试验一下如下几种重定向方式，看看会出什么结果，为什么？</p>
 <p></p>
 <P><b><font color="#FFFFFF">$ find /home -name lost* &gt; all_result 1&gt;&amp; 
   2 <br>
   $ find /home -name lost* 2&gt; all_result 1&gt;&amp; 2<br>
   $ find /home -name lost* 2&gt;&amp; 1 &gt; all_result</font></b> </P>
-<P>����һ���ǳ����õ��ض���������� &quot;-&quot;���뿴����������ӣ�</P>
+<P>另外一个非常有用的重定向操作符是 &quot;-&quot;，请看下面这个例子：</P>
 <P><b><font color="#FFFFFF">$ (cd /source/directory && tar cf - . ) | (cd /dest/directory 
   && tar xvfp -) </font></b> </P>
-<P>�������ʾ�� /source/directory Ŀ¼�µ������ļ�ͨ��ѹ���ͽ�ѹ�����ٵ�ȫ���ƶ��� /dest/directory Ŀ¼��ȥ����������� 
-  /source/directory �� /dest/directory ������ͬһ���ļ�ϵͳ��ʱ����ʾ���ر�����ơ�</P>
-<P>���滹���ֲ��������÷���</P>
-<P><b><i><font color="#FFFFFF">n<&- ��ʾ�� n ������ر� <br>
-  <&- ��ʾ�رձ�׼���루���̣�<br>
-  n>&- ��ʾ�� n ������ر�<br>
-  >&- ��ʾ����׼����ر�</font></i></b></P>
+<P>该命令表示把 /source/directory 目录下的所有文件通过压缩和解压，快速的全部移动到 /dest/directory 目录下去，这个命令在 
+  /source/directory 和 /dest/directory 不处在同一个文件系统下时将显示出特别的优势。</P>
+<P>下面还几种不常见的用法：</P>
+<P><b><i><font color="#FFFFFF">n<&- 表示将 n 号输入关闭 <br>
+  <&- 表示关闭标准输入（键盘）<br>
+  n>&- 表示将 n 号输出关闭<br>
+  >&- 表示将标准输出关闭</font></i></b></P>
 <P>&nbsp;</P>
 
-<H3>2.3&nbsp;&nbsp;&nbsp;&nbsp;BASH �жԱ����Ĺ涨���� C ���Ե���ͬ��</H3>
-<P> �����������ǽ������⣬�ȿ��� BASH �еı�������ζ����ʹ�õġ�������Ϥ C ���Եĳ���Ա�����ǽ����� BASH �еĶ�����÷��� C �������кβ�ͬ��</P>
-<H4>2.3.1. BASH �еı�������</H4>
-<P>���������������ϰ���һ�� BASH �б������÷���Ȼ����ȥ���� BASH �б���ʹ���� C �����еĲ�ͬ��BASH �еı������ǲ��ܺ��б����֣����ܺ��� 
-  &quot;-&quot; �ȱ����ַ���Ҳ���ܺ��пո�</P>
-<h4>2.3.1.1 �򵥱���</h4>
-<p>�� BASH �б��������ǲ���Ҫ�ģ�û�� &quot;int i&quot; �����Ķ�����̡��������һ��������ֻҪ��û����ǰ�汻���������ֱ�ӿ����ã���Ȼ��ʹ�øñ����ĵ�һ�����Ӧ���Ƕ�������ֵ�ˣ�����㲻����ֵҲû��ϵ��ֻ�����ñ����ǿգ� 
-  ע�⣺�� NULL������ 0 ����������������ֵ��Ȼ�﷨�ϲ����ԣ�������һ���õı��ϰ�ߡ��������ǿ�����������ӣ�</p>
-<p>������ vi �༭�������<a href="hello2">�ļ� hello2</a>��</p>
+<H3>2.3&nbsp;&nbsp;&nbsp;&nbsp;BASH 中对变量的规定（与 C 语言的异同）</H3>
+<P> 好了下面我们进入正题，先看看 BASH 中的变量是如何定义和使用的。对于熟悉 C 语言的程序员，我们将解释 BASH 中的定义和用法与 C 语言中有何不同。</P>
+<H4>2.3.1. BASH 中的变量介绍</H4>
+<P>我们先来从整体上把握一下 BASH 中变量的用法，然后再去分析 BASH 中变量使用与 C 语言中的不同。BASH 中的变量都是不能含有保留字，不能含有 
+  &quot;-&quot; 等保留字符，也不能含有空格。</P>
+<h4>2.3.1.1 简单变量</h4>
+<p>在 BASH 中变量定义是不需要的，没有 &quot;int i&quot; 这样的定义过程。如果想用一个变量，只要他没有在前面被定义过，就直接可以用，当然你使用该变量的第一条语句应该是对他赋初值了，如果你不赋初值也没关系，只不过该变量是空（ 
+  注意：是 NULL，不是 0 ）。不给变量赋初值虽然语法上不反对，但不是一个好的编程习惯。好了我们看看下面的例子：</p>
+<p>首先用 vi 编辑下面这个<a href="hello2">文件 hello2</a>：</p>
 <p><font color="#FFFFFF"><b>#!/bin/bash <br>
   # give the initialize value to STR<br>
   STR="Hello World" <br>
   echo $STR <br>
   </b></font><br>
-  ���������������������Ҫע�����漸�㣺</p>
-<p><font color="#FFFFFF">һ��������ֵʱ��'='�������߶������пո�<br>
-  ����BASH �е�����β����Ҫ�ֺţ�&quot;;&quot;����<br>
-  ���������ڱ�����ֵ����FORѭ�����ͷ�У�BASH �еı���ʹ�ñ����ڱ���ǰ��&quot;$&quot;���ţ�ͬѧ�ǿ��Խ���������е����и�Ϊ &quot;echo 
-  STR&quot; �����ԣ��������ʲô�����<br>
-  �ģ����� BASH ��������һ���µĽ��������еģ����Ըó����еı�������͸�ֵ����ı��������̻�ԭʼ Shell ��ͬ��������ֵ��Ҳ����Ӱ�����ǵ����С�</font></p>
-<p>��ϸ�µ��ĵ������ᵽ�Ե������������ı��������� BASH ����Ϊ�������� '$STR' ����������Ϊ������ַ��������Ҹ�Ϊ��׼�ı������÷�ʽ�� ${STR} 
-  �����ģ�$STR �Բ����Ƕ� ${STR} ��һ�ּ򻯡��ڸ�������£����п��ܲ�������ĵط�������ô� {} �ı�ʾ��ʽ��</p>
-<p>BASH �еı�����Ȼ����Ҫ���壬Ҳ��û������һ˵��һ�����������Ա�����Ϊһ���ַ�����Ҳ���Ա��ٶ���Ϊ����������Ըñ��������������㣬���ͱ�����Ϊ������������������ַ������������ͱ�����Ϊһ���ַ������뿴�����<a href="x">����</a>��</p>
+  在上面这个程序中我们需要注意下面几点：</p>
+<p><font color="#FFFFFF">一，变量赋值时，'='左右两边都不能有空格；<br>
+  二，BASH 中的语句结尾不需要分号（&quot;;&quot;）；<br>
+  三，除了在变量赋值和在FOR循环语句头中，BASH 中的变量使用必须在变量前加&quot;$&quot;符号，同学们可以将上面程序中第三行改为 &quot;echo 
+  STR&quot; 再试试，看看会出什么结果。<br>
+  四，由于 BASH 程序是在一个新的进程中运行的，所以该程序中的变量定义和赋值不会改变其他进程或原始 Shell 中同名变量的值，也不会影响他们的运行。</font></p>
+<p>更细致的文档甚至提到以但引号括起来的变量将不被 BASH 解释为变量，如 '$STR' ，而被看成为纯粹的字符串。而且更为标准的变量引用方式是 ${STR} 
+  这样的，$STR 自不过是对 ${STR} 的一种简化。在复杂情况下（即有可能产生歧义的地方）最好用带 {} 的表示方式。</p>
+<p>BASH 中的变量既然不需要定义，也就没有类型一说，一个变量即可以被定义为一个字符串，也可以被再定义为整数。如果对该变量进行整数运算，他就被解释为整数；如果对他进行字符串操作，他就被看作为一个字符串。请看下面的<a href="x">例子</a>：</p>
 <p><b><font color="#FFFFFF">#!/bin/bash <br>
   x=1999 <br>
   let "x = $x + 1" <br>
   echo $x <br>
   x="olympic'"$x <br>
   echo $x</font></b></p>
-<p>���������������㣬�����¼��֣�&quot; <font color="#FFFFFF">+ - * / %</font> &quot;�����ǵ���˼��������˼��ͬ����������һ��ͨ�� 
-  let �� expr ������ָ����ʵ�֣���Ա��� x �� 1 ����д����<font color="#FFFFFF">let &quot;x = $x + 
-  1&quot;</font> ���� <font color="#FFFFFF">x=`expr $x + 1`</font></p>
-<p>�ڱȽϲ����ϣ������������ַ�������������ͬ������±���</p>
+<p>关于整数变量计算，有如下几种：&quot; <font color="#FFFFFF">+ - * / %</font> &quot;，他们的意思和字面意思相同。整数运算一般通过 
+  let 和 expr 这两个指令来实现，如对变量 x 加 1 可以写作：<font color="#FFFFFF">let &quot;x = $x + 
+  1&quot;</font> 或者 <font color="#FFFFFF">x=`expr $x + 1`</font></p>
+<p>在比较操作上，整数变量和字符串变量各不相同，详见下表：</p>
 <div align="center">
   <table width="75%" border="1">
     <tr> 
       <td width="26%"> 
-        <div align="center">��Ӧ�Ĳ���</div>
+        <div align="center">对应的操作</div>
       </td>
       <td width="37%"> 
-        <div align="center">��������</div>
+        <div align="center">整数操作</div>
       </td>
       <td width="37%"> 
-        <div align="center">�ַ�������</div>
+        <div align="center">字符串操作</div>
       </td>
     </tr>
     <tr> 
       <td width="26%"> 
-        <div align="center">��ͬ</div>
+        <div align="center">相同</div>
       </td>
       <td width="37%"> 
         <div align="center">-eq</div>
@@ -181,7 +181,7 @@
     </tr>
     <tr> 
       <td width="26%"> 
-        <div align="center">��ͬ</div>
+        <div align="center">不同</div>
       </td>
       <td width="37%"> 
         <div align="center">-ne</div>
@@ -192,7 +192,7 @@
     </tr>
     <tr> 
       <td width="26%"> 
-        <div align="center">����</div>
+        <div align="center">大于</div>
       </td>
       <td width="37%"> 
         <div align="center">-gt</div>
@@ -203,7 +203,7 @@
     </tr>
     <tr> 
       <td width="26%"> 
-        <div align="center">С��</div>
+        <div align="center">小于</div>
       </td>
       <td width="37%"> 
         <div align="center">-lt</div>
@@ -214,7 +214,7 @@
     </tr>
     <tr> 
       <td width="26%"> 
-        <div align="center">���ڻ����</div>
+        <div align="center">大于或等于</div>
       </td>
       <td width="37%"> 
         <div align="center">-ge</div>
@@ -225,7 +225,7 @@
     </tr>
     <tr> 
       <td width="26%"> 
-        <div align="center">С�ڻ����</div>
+        <div align="center">小于或等于</div>
       </td>
       <td width="37%"> 
         <div align="center">-le</div>
@@ -236,7 +236,7 @@
     </tr>
     <tr> 
       <td width="26%"> 
-        <div align="center">Ϊ��</div>
+        <div align="center">为空</div>
       </td>
       <td width="37%"> 
         <div align="center"></div>
@@ -247,7 +247,7 @@
     </tr>
     <tr> 
       <td width="26%"> 
-        <div align="center">��Ϊ��</div>
+        <div align="center">不为空</div>
       </td>
       <td width="37%"> 
         <div align="center"></div>
@@ -259,276 +259,276 @@
   </table>
 </div>
 <p><br>
-  ���磺</p>
-<p>�Ƚ��ַ��� a �� b �Ƿ���Ⱦ�д����<font color="#FFFFFF">if [ $a = $b ]</font><br>
-  �ж��ַ��� a �Ƿ�Ϊ�վ�д���� <font color="#FFFFFF">if [ -z $a ]</font><br>
-  �ж��������� a �Ƿ���� b ��д����<font color="#FFFFFF">if [ $a -gt $b ]</font></p>
-<p>��ϸ�µ��ĵ��Ƽ����ַ����Ƚ�ʱ������Ҫʹ�� -n ������ ! -z �����档�����з��� &quot;!&quot; ��ʾ�󷴲�����</p>
-<p>BASH �еı����������ڶ� ���� �� �ַ��� ���в������⣬��һ����������Ϊ�ļ�������BASH �� Linux ����ϵͳ�� Shell�����ϵͳ���ļ���Ȼ�� 
-  BASH ��Ҫ��������Ҫ������ <font color="#FFFFFF">if [ -x /root ]</font> ���������ж� /root Ŀ¼�Ƿ���Ա���ǰ�û����롣�±��г��� 
-  BASH �������ж��ļ����ԵĲ�������</p>
+  比如：</p>
+<p>比较字符串 a 和 b 是否相等就写作：<font color="#FFFFFF">if [ $a = $b ]</font><br>
+  判断字符串 a 是否为空就写作： <font color="#FFFFFF">if [ -z $a ]</font><br>
+  判断整数变量 a 是否大于 b 就写作：<font color="#FFFFFF">if [ $a -gt $b ]</font></p>
+<p>更细致的文档推荐在字符串比较时尽量不要使用 -n ，而用 ! -z 来代替。（其中符号 &quot;!&quot; 表示求反操作）</p>
+<p>BASH 中的变量除了用于对 整数 和 字符串 进行操作以外，另一个作用是作为文件变量。BASH 是 Linux 操作系统的 Shell，因此系统的文件必然是 
+  BASH 需要操作的重要对象，如 <font color="#FFFFFF">if [ -x /root ]</font> 可以用于判断 /root 目录是否可以被当前用户进入。下表列出了 
+  BASH 中用于判断文件属性的操作符：</p>
 <div align="center">
   <table width="50%" border="1">
     <tr> 
       <td width="27%"> 
-        <div align="center">�����</div>
+        <div align="center">运算符</div>
       </td>
-      <td width="73%">���壨 ��������Ҫ��ʱ���� TRUE ��</td>
+      <td width="73%">含义（ 满足下面要求时返回 TRUE ）</td>
     </tr>
     <tr> 
       <td width="27%"> 
         <div align="center">-e file</div>
       </td>
-      <td width="73%">�ļ� file �Ѿ�����</td>
+      <td width="73%">文件 file 已经存在</td>
     </tr>
     <tr> 
       <td width="27%"> 
         <div align="center">-f file</div>
       </td>
-      <td width="73%">�ļ� file ����ͨ�ļ�</td>
+      <td width="73%">文件 file 是普通文件</td>
     </tr>
     <tr> 
       <td width="27%"> 
         <div align="center">-s file</div>
       </td>
-      <td width="73%">�ļ� file ��С��Ϊ��</td>
+      <td width="73%">文件 file 大小不为零</td>
     </tr>
     <tr> 
       <td width="27%"> 
         <div align="center">-d file</div>
       </td>
-      <td width="73%">�ļ� file ��һ��Ŀ¼</td>
+      <td width="73%">文件 file 是一个目录</td>
     </tr>
     <tr> 
       <td width="27%"> 
         <div align="center">-r file</div>
       </td>
-      <td width="73%">�ļ� file �Ե�ǰ�û����Զ�ȡ</td>
+      <td width="73%">文件 file 对当前用户可以读取</td>
     </tr>
     <tr> 
       <td width="27%"> 
         <div align="center">-w file</div>
       </td>
-      <td width="73%">�ļ� file �Ե�ǰ�û�����д��</td>
+      <td width="73%">文件 file 对当前用户可以写入</td>
     </tr>
     <tr> 
       <td width="27%"> 
         <div align="center">-x file</div>
       </td>
-      <td width="73%">�ļ� file �Ե�ǰ�û�����ִ��</td>
+      <td width="73%">文件 file 对当前用户可以执行</td>
     </tr>
     <tr> 
       <td width="27%"> 
         <div align="center">-g file</div>
       </td>
-      <td width="73%">�ļ� file �� GID ��־������</td>
+      <td width="73%">文件 file 的 GID 标志被设置</td>
     </tr>
     <tr> 
       <td width="27%"> 
         <div align="center">-u file</div>
       </td>
-      <td width="73%">�ļ� file �� UID ��־������</td>
+      <td width="73%">文件 file 的 UID 标志被设置</td>
     </tr>
     <tr> 
       <td width="27%"> 
         <div align="center">-O file</div>
       </td>
-      <td width="73%">�ļ� file �����ڵ�ǰ�û���</td>
+      <td width="73%">文件 file 是属于当前用户的</td>
     </tr>
     <tr> 
       <td width="27%"> 
         <div align="center">-G file</div>
       </td>
-      <td width="73%">�ļ� file ���� ID �͵�ǰ�û���ͬ</td>
+      <td width="73%">文件 file 的组 ID 和当前用户相同</td>
     </tr>
     <tr> 
       <td width="27%"> 
         <div align="center">file1 -nt file2</div>
       </td>
-      <td width="73%">�ļ� file1 �� file2 ����</td>
+      <td width="73%">文件 file1 比 file2 更新</td>
     </tr>
     <tr> 
       <td width="27%"> 
         <div align="center">file1 -ot file2</div>
       </td>
-      <td width="73%">�ļ� file1 �� file2 ����</td>
+      <td width="73%">文件 file1 比 file2 更老</td>
     </tr>
   </table>
 </div>
 <p><br>
-  ע�⣺�ϱ��е� file �� file1��file2 ����ָĳ���ļ���Ŀ¼��·����</p>
-<h4>2.3.1.1. ���ھֲ�����</h4>
-<p>�� BASH ���������һ��������ʹ���ˣ���ôֱ���ó���Ľ�β���ñ�����һֱ��Ч��Ϊ��ʹ��ĳ������������һ���ֲ�������У��������˾ֲ������ĸ��BASH 
-  �У��ڱ����״α�����ֵʱ���� local �ؼ��־Ϳ�������һ���ֲ����������������<a href="local">����</a>��</p>
+  注意：上表中的 file 及 file1、file2 都是指某个文件或目录的路径。</p>
+<h4>2.3.1.1. 关于局部变量</h4>
+<p>在 BASH 程序中如果一个变量被使用了，那么直到该程序的结尾，该变量都一直有效。为了使得某个变量存在于一个局部程序块中，就引入了局部变量的概念。BASH 
+  中，在变量首次被赋初值时加上 local 关键字就可以声明一个局部变量，如下面这个<a href="local">例子</a>：</p>
 <p><b><font color="#FFFFFF">#!/bin/bash <br>
   HELLO=Hello <br>
   function hello { <br>
-  ����local HELLO=World <br>
-  ����echo $HELLO <br>
+  　　local HELLO=World <br>
+  　　echo $HELLO <br>
   } <br>
   echo $HELLO <br>
   hello <br>
   echo $HELLO</font></b></p>
-<p>�ó����ִ�н���ǣ�</p>
+<p>该程序的执行结果是：</p>
 <p><b><font color="#FFFFFF">Hello<br>
   World<br>
   Hello </font></b></p>
-<p>���ִ�н������ȫ�ֱ��� $HELLO ��ֵ��ִ�к��� hello ʱ��û�б��ı䡣Ҳ����˵�ֲ����� $HELLO ��Ӱ��ֻ�����ں����Ǹ�������С�</p>
-<h4>2.3.2. BASH �еı����� C �����б���������</h4>
-<p>��������Ϊԭ������Ϥ BASH ��̣����Ƿǳ���Ϥ C ���Եĳ���Ա�ܽ�һ���� BASH ������ʹ�ñ�����Ҫע������⡣</p>
-<p><font color="#FFFFFF">1��BASH �еı���������ʱ����Ҫ�ڱ���ǰ���� &quot;$&quot; ���ţ� ��һ�θ�ֵ����Forѭ����ͷ�����ü� 
-  &quot;$&quot;���� ����<br>
-  2��BASH ��û�и������㣬���Ҳ��û�и������͵ı������ã�<br>
-  3��BASH �е����α����ıȽϷ����� C ��������ȫ��ͬ���������α�������������Ҳ��Ҫ���� let �� expr �����������</font></p>
-<h3>2.4&nbsp;&nbsp;&nbsp;&nbsp;BASH �еĻ������̿����﷨</h3>
-<P> BASH �м������� C �����г��õ����п��ƽṹ����������֧��ѭ���ȣ�������һ���ܡ�
+<p>这个执行结果表明全局变量 $HELLO 的值在执行函数 hello 时并没有被改变。也就是说局部变量 $HELLO 的影响只存在于函数那个程序块中。</p>
+<h4>2.3.2. BASH 中的变量与 C 语言中变量的区别</h4>
+<p>这里我们为原来不熟悉 BASH 编程，但是非常熟悉 C 语言的程序员总结一下在 BASH 环境中使用变量需要注意的问题。</p>
+<p><font color="#FFFFFF">1，BASH 中的变量在引用时都需要在变量前加上 &quot;$&quot; 符号（ 第一次赋值及在For循环的头部不用加 
+  &quot;$&quot;符号 ）；<br>
+  2，BASH 中没有浮点运算，因此也就没有浮点类型的变量可用；<br>
+  3，BASH 中的整形变量的比较符号与 C 语言中完全不同，而且整形变量的算术运算也需要经过 let 或 expr 语句来处理；</font></p>
+<h3>2.4&nbsp;&nbsp;&nbsp;&nbsp;BASH 中的基本流程控制语法</h3>
+<P> BASH 中几乎含有 C 语言中常用的所有控制结构，如条件分支、循环等，下面逐一介绍。
 <h4>2.4.1 if...then...else</h4>
-<P>if ��������жϺͷ�֧�����﷨����� C ���Ե� if �ǳ����ơ��伸�ֻ����ṹΪ��
+<P>if 语句用于判断和分支，其语法规则和 C 语言的 if 非常相似。其几种基本结构为：
 <P><b><i><font color="#FFFFFF">if [ expression ]<br>
   then<br>
-  ����statments<br>
+  　　statments<br>
   fi</font></i></b>
-<P> ����
+<P> 或者
 <P><font color="#FFFFFF"><b><i>if [ expression ]<br>
   then<br>
-  ����statments<br>
+  　　statments<br>
   else<br>
-  ����statments<br>
+  　　statments<br>
   fi</i></b></font>
-<P>���� 
+<P>或者 
 <P><font color="#FFFFFF"><b><i>if [ expression ]<br>
   then<br>
-  ����statments<br>
+  　　statments<br>
   else if [ expression ]<br>
-  ����then <br>
-  ��������statments<br>
-  ����else<br>
-  ��������statments <br>
+  　　then <br>
+  　　　　statments<br>
+  　　else<br>
+  　　　　statments <br>
   fi</i></b></font>
-<P>����
+<P>或者
 <P><font color="#FFFFFF"><b><i>if [ expression ]<br>
   then<br>
-  ����statments<br>
+  　　statments<br>
   elif [ expression ]<br>
-  ����then<br>
-  ��������statments<br>
-  ����else<br>
-  ��������statments<br>
+  　　then<br>
+  　　　　statments<br>
+  　　else<br>
+  　　　　statments<br>
   fi</i></b></font>
-<P>ֵ��˵����������㽫 if �� then ����д��һ�����棬�ͱ����� then ǰ����Ϸֺţ��磺<font color="#FFFFFF">if 
-  [ expression ]; then ... </font>���������<a href="if">����</a>˵�������ʹ�� if �����ж���䣺
+<P>值得说明的是如果你将 if 和 then 简洁的写在一行里面，就必须在 then 前面加上分号，如：<font color="#FFFFFF">if 
+  [ expression ]; then ... </font>。下面这个<a href="if">例子</a>说明了如何使用 if 条件判断语句：
 <P><b><font color="#FFFFFF">#!/bin/bash <br>
   <br>
   if [ $1 -gt 90 ] <br>
   then <br>
-  ����echo "Good, $1" <br>
+  　　echo "Good, $1" <br>
   elif [ $1 -gt 70 ] <br>
-  ����then <br>
-  ��������echo "OK, $1" <br>
-  ����else <br>
-  ��������echo "Bad, $1" <br>
+  　　then <br>
+  　　　　echo "OK, $1" <br>
+  　　else <br>
+  　　　　echo "Bad, $1" <br>
   fi <br>
   <br>
   exit 0</font></b> 
-<P>���������е� $1 ��ָ�����еĵ�һ��������������ں���ġ�<a href="bash-spec.html">BASH �е����Ᵽ����</a>���н��⡣ 
+<P>上面例子中的 $1 是指命令行的第一个参数，这个会在后面的“<a href="bash-spec.html">BASH 中的特殊保留字</a>”中讲解。 
 <h4>2.4.2 for</h4>
-<P>for ѭ���ṹ�� C ������������ͬ���� BASH �� for ѭ���Ļ����ṹ�ǣ�
+<P>for 循环结构与 C 语言中有所不同，在 BASH 中 for 循环的基本结构是：
 <P><b><i><font color="#FFFFFF">for $var in [list]<br>
   do<br>
-  ����statments<br>
+  　　statments<br>
   done</font></i></b>
-<p>���� $var ��ѭ�����Ʊ�����[list] �� $var ��Ҫ������һ�����ϣ�do/done �԰�����ѭ���壬�൱�� C �����е�һ�Դ����š��������do 
-  �� for ��д��ͬһ�У������� do ǰ����� &quot;;&quot;���磺 <font color="#FFFFFF">for $var in 
-  [list]; do</font> ��������һ������ for ����ѭ�������ӣ�</p>
+<p>其中 $var 是循环控制变量，[list] 是 $var 需要遍历的一个集合，do/done 对包含了循环体，相当于 C 语言中的一对大括号。另外如果do 
+  和 for 被写在同一行，必须在 do 前面加上 &quot;;&quot;。如： <font color="#FFFFFF">for $var in 
+  [list]; do</font> 。下面是一个运用 for 进行循环的例子：</p>
 <p><font color="#FFFFFF"><b>#!/bin/bash <br>
   <br>
   for day in Sun Mon Tue Wed Thu Fri Sat <br>
   do <br>
-  ����echo $day <br>
+  　　echo $day <br>
   done <br>
   <br>
-  # ����б���������һ��˫�����У�����Ϊ��һ��Ԫ�� <br>
+  # 如果列表被包含在一对双引号中，则被认为是一个元素 <br>
   for day in "Sun Mon Tue Wed Thu Fri Sat" <br>
   do <br>
-  ����echo $day <br>
+  　　echo $day <br>
   done <br>
   <br>
   exit 0</b></font></p>
-<p>ע������������У��� for �������еı��� day ��û�м� &quot;$&quot; ���ŵģ�����ѭ�����ڣ�echo �����б��� $day �Ǳ������ 
-  &quot;$&quot; ���ŵġ��������д�� for day ��û�к���� in [list] ���֣��� day ��ȡ�������е����в�������<a href="for2">�������</a>��</p>
+<p>注意上面的例子中，在 for 所在那行的变量 day 是没有加 &quot;$&quot; 符号的，而在循环体内，echo 所在行变量 $day 是必须加上 
+  &quot;$&quot; 符号的。另外如果写成 for day 而没有后面的 in [list] 部分，则 day 将取遍命令行的所有参数。如<a href="for2">这个程序</a>：</p>
 <p><b><font color="#FFFFFF">#!/bin/bash <br>
   <br>
   for param <br>
   do <br>
-  ����echo $param <br>
+  　　echo $param <br>
   done <br>
   <br>
   exit 0</font></b></p>
-<p>������������г����������в�����for ѭ���ṹ��ѭ���屻������ do/done ���У���Ҳ�Ǻ���� while��until ѭ�������е��ص㡣</p>
+<p>上面这个程序将列出所有命令行参数。for 循环结构的循环体被包含在 do/done 对中，这也是后面的 while、until 循环所具有的特点。</p>
 
 <h4>2.4.3 while</h4>
-<P>while ѭ���Ļ����ṹ�ǣ�
+<P>while 循环的基本结构是：
 <P><b><i><font color="#FFFFFF">while [ condition ]<br>
   do<br>
-  ����statments<br>
+  　　statments<br>
   done</font></i></b>
-<P>����ṹ�����Լ���дһ����������֤�� 
+<P>这个结构请大家自己编写一个例子来验证。 
 <h4>2.4.4 until</h4>
-<P>until ѭ���Ļ����ṹ�ǣ�
+<P>until 循环的基本结构是：
 <P><b><i><font color="#FFFFFF">until [ condition is TRUE ]<br>
   do<br>
-  ����statments<br>
+  　　statments<br>
   done</font></i></b> 
-<p>����ṹҲ�����Լ���дһ����������֤�� 
+<p>这个结构也请大家自己编写一个例子来验证。 
 <h4>2.4.5 case</h4>
-<P>BASH �е� case �ṹ�� C �����е� switch ���Ĺ��ܱȽ����ƣ��������ڽ��ж����֧���ơ�������ṹ�ǣ�
+<P>BASH 中的 case 结构与 C 语言中的 switch 语句的功能比较类似，可以用于进行多项分支控制。其基本结构是：
 <P><b><i><font color="#FFFFFF">case &quot;$var&quot; in<br>
-  ��condition1 )<br>
-  ����statments1;;<br>
-  ��condition2 )<br>
-  ����statments2;;<br>
-  ��...<br>
-  ��* )<br>
-  ����default statments;;<br>
+  　condition1 )<br>
+  　　statments1;;<br>
+  　condition2 )<br>
+  　　statments2;;<br>
+  　...<br>
+  　* )<br>
+  　　default statments;;<br>
   esac </font></i></b>
-<P>����������������� case �ṹ���з�ִ֧�е�<a href="case">����</a>�� 
+<P>下面这个程序是运用 case 结构进行分支执行的<a href="case">例子</a>： 
 <P><b><font color="#FFFFFF">#!/bin/bash <br>
   <br>
   echo "Hit a key, then hit return." <br>
   read Keypress <br>
   <br>
   case "$Keypress" in <br>
-  ��[a-z] ) echo "Lowercase letter";; <br>
-  ��[A-Z] ) echo "Uppercase letter";; <br>
-  ��[0-9] ) echo "Digit";; <br>
-  ��* ) echo "Punctuation, whitespace, or other";; <br>
+  　[a-z] ) echo "Lowercase letter";; <br>
+  　[A-Z] ) echo "Uppercase letter";; <br>
+  　[0-9] ) echo "Digit";; <br>
+  　* ) echo "Punctuation, whitespace, or other";; <br>
   esac <br>
   <br>
   exit 0</font></b> 
-<P>���������еĵ����� &quot;read Keypress&quot; һ���е� read ����ʾ�Ӽ����϶�ȡ���롣�������ڱ������ <a href="bash-adv.html">BASH 
-  �������߼�����</a>�н��⡣ 
+<P>上面例子中的第四行 &quot;read Keypress&quot; 一句中的 read 语句表示从键盘上读取输入。这个命令将在本讲义的 <a href="bash-adv.html">BASH 
+  的其他高级问题</a>中讲解。 
 <h4>2.4.6 break/continue</h4>
-<P>��Ϥ C ���Ա�̵Ķ�����Ϥ break ���� continue ��䡣BASH ��ͬ������������䣬�������ú��÷�Ҳ�� C ��������ͬ��break 
-  �������ó������̴ӵ�ǰѭ��������ȫ�������� continue ��������������ѭ����ʣ�ಿ�ֲ�ֱ�ӽ�����һ��ѭ����
+<P>熟悉 C 语言编程的都很熟悉 break 语句和 continue 语句。BASH 中同样有这两条语句，而且作用和用法也和 C 语言中相同，break 
+  语句可以让程序流程从当前循环体中完全跳出，而 continue 语句可以跳过当次循环的剩余部分并直接进入下一次循环。
 <P>&nbsp;
-<H3>2.5&nbsp;&nbsp;&nbsp;&nbsp;������ʹ��</H3>
-<P> BASH ��һ����Լ򵥵Ľű����ԣ�����Ϊ�˷���ṹ������ƣ�BASH ��Ҳ�ṩ�˺�������Ĺ��ܡ�BASH �еĺ�������ܼ򵥣�ֻҪ����������д�Ϳ����ˣ�
+<H3>2.5&nbsp;&nbsp;&nbsp;&nbsp;函数的使用</H3>
+<P> BASH 是一个相对简单的脚本语言，不过为了方便结构化的设计，BASH 中也提供了函数定义的功能。BASH 中的函数定义很简单，只要向下面这样写就可以了：
 <P><b><i><font color="#FFFFFF">function my_funcname { <br>
-  ��code block<br>
+  　code block<br>
   } </font></i></b>
-<P>����
+<P>或者
 <P><b><i><font color="#FFFFFF">my_funcname() { <br>
-  ��code block<br>
+  　code block<br>
   } </font></i></b>
-<P>����ĵڶ���д�����ӽ��� C �����е�д����BASH ��Ҫ�����Ķ�������ں���ʹ��֮ǰ�����Ǻ� C ������ͷ�ļ�˵�����������Ĳ�ͬ��
-<P>����һ������������θ��������ݲ����ͻ�÷���ֵ��BASH �к��������Ķ��岢����Ҫ�ں������崦���ƶ�����ֻ��Ҫ�ں���������ʱ�� BASH �ı������� 
-  $1 $2 ... �����þͿ����ˣ�BASH �ķ���ֵ������ return �����ָ������һ���ض������������û�� return �����ʽ�ķ���һ������ֵ���򷵻�ֵ���Ǹú������һ�����ִ�еĽ����һ��Ϊ 
-  0�����ִ��ʧ�ܷ��ش����룩�������ķ���ֵ�ڵ��øú����ĳ�������ͨ�� $? ����������á��������Ǿ�����һ���ú�������������ƽ����<a href="func">����</a>��
+<P>上面的第二种写法更接近于 C 语言中的写法。BASH 中要求函数的定义必须在函数使用之前，这是和 C 语言用头文件说明函数方法的不同。
+<P>更进一步的问题是如何给函数传递参数和获得返回值。BASH 中函数参数的定义并不需要在函数定义处就制定，而只需要在函数被调用时用 BASH 的保留变量 
+  $1 $2 ... 来引用就可以了；BASH 的返回值可以用 return 语句来指定返回一个特定的整数，如果没有 return 语句显式的返回一个返回值，则返回值就是该函数最后一条语句执行的结果（一般为 
+  0，如果执行失败返回错误码）。函数的返回值在调用该函数的程序体中通过 $? 保留字来获得。下面我们就来看一个用函数来计算整数平方的<a href="func">例子</a>：
 <P><b><font color="#FFFFFF">#!/bin/bash <br>
   <br>
   square() { <br>
-  ��let "res = $1 * $1" <br>
-  ��return $res <br>
+  　let "res = $1 * $1" <br>
+  　return $res <br>
   } <br>
   <br>
   square $1 <br>

@@ -1,9 +1,9 @@
-�й�WLAN�Ķ������ǵ���1998��ոսӴ������ʱ�򣬶���һ���й����簲ȫ���顣��������
-ǿ��ͨ�����ߵ�ͨѶ������������緢�Ͳ�����Ϣ��Σ����
-��������WLAN�ĸ���Э��Ƚ��˽⣬���Ը����ǽ����ⷽ���֪ʶ��
+有关WLAN的东西，记得我1998年刚刚接触网络的时候，读过一本有关网络安全的书。其中尤其
+强调通过无线电通讯这个环节向网络发送病毒信息的危害。
+如果你对于WLAN的各种协议比较了解，可以给我们讲讲这方面的知识。
 
 
-�� ��
+李 峰
 phone 010-63952211 ext 8007
 E-mail : lifeng71@btamail.net.cn  or lifeng@tengtu.com.cn
 
@@ -13,39 +13,39 @@ E-mail : lifeng71@btamail.net.cn  or lifeng@tengtu.com.cn
 From: "yu_daniel" <yu_daniel@sohu.com>
 To: <akasec_salon@yahoogroups.com>
 Sent: Thursday, April 11, 2002 3:00 PM
-Subject: Re: Re: [akasec salon] Re: Re: ��: [akasec salon] Re: [akasec= salon]
-Re: �� ��: [ak asec= salon] Re: ��: [akasec s a lon]= agree
+Subject: Re: Re: [akasec salon] Re: Re: 答复: [akasec salon] Re: [akasec= salon]
+Re: 答 复: [ak asec= salon] Re: 答复: [akasec s a lon]= agree
 
 
-> �Ǻǡ��ǵġ��������簲ȫ�����Ǻܶ෽������ݡ���ͬ��Э�飬��ͬ�Ĳ�Ρ��ҿ�����
-�����ںܶ����߰�ȫ���о�������Ҳ�Ǻܺá���Ϊ���Ǳ��ҵ���WLANҪ�硣����������WLAN��
-���ܿ졣���ܶ���鶼Ҫ����WLAN�豸�ˡ�����һ���µģ�����İ�ȫ������һ���ܹ�����
-�ռ䡣������Э���о��ġ���ӭ��Һ�����������Э������ݡ�
-> ���۹����ۡ�����һЩʵ�飬��һЩ��������۱����ʵ�Ÿ�Ϊ��Ч�����Ҿ���DDOS����
-�ܺõ��о��ԡ������кܶ�������Ķ�����DDOS������ҲӦ�ø��ϡ�
+> 呵呵。是的。我想网络安全可以是很多方面的内容。不同的协议，不同的层次。我看到国
+外现在很多无线安全的研究。做的也是很好。因为他们比我的用WLAN要早。现在老美的WLAN普
+及很快。连很多会议都要求用WLAN设备了。所以一个新的，特殊的安全领域将是一个很广阔的
+空间。我是做协议研究的。欢迎大家和我讨论网络协议的内容。
+> 讨论归讨论。能做一些实验，把一些设想和理论变成现实才更为有效果。我觉得DDOS就有
+很好的研究性。现在有很多国际论文都讨论DDOS。我们也应该跟上。
 > 
 > 
-> ����
+> 　　
 > 
-> ======= 2002-04-11 ����������д����=======
+> ======= 2002-04-11 您在来信中写道：=======
 > 
-> >����Ϊ��Ȼ���������簲ȫ�����ǲ�Ҫֻ��Ŀ������������Ự�㣬����㣬���������
-�簲ȫҲӦ����ע���о�������Э������Ҳ�������۳���tcp/ipЭ��֮�������Э�顣�����
-�ǰ�ÿ����εĸ�������簲ȫ�����ⶼ��ֵ����ۡ����룬���ǲ���һ����ȷ��˼·��Эͬ
-����ϵͳ�İ�ȫ������
+> >我认为既然是讨论网络安全，我们不要只将目光锁定在网络会话层，网络层，物理层的网
+络安全也应当关注和研究。网络协议我们也可以讨论除了tcp/ip协议之外的其他协议。如果我
+们把每个层次的概念和网络安全的问题都充分的讨论。我想，我们才有一个明确的思路来协同
+做好系统的安全工作。
 > >
 > >----- Original Message ----- 
-> >From: "����" <liupeng@infosec.pku.edu.cn>
+> >From: "刘鹏" <liupeng@infosec.pku.edu.cn>
 > >To: <akasec_salon@yahoogroups.com>
 > >Sent: Thursday, April 11, 2002 10:35 AM
-> >Subject: [akasec_salon] Re: Re: ��: [akasec salon] Re: [akasec salon]Re: ��
- ��: [akasec= salon] Re: ��: [akasec s a lon] agree
+> >Subject: [akasec_salon] Re: Re: 答复: [akasec salon] Re: [akasec salon]Re: 答
+ 复: [akasec= salon] Re: 答复: [akasec s a lon] agree
 > >
 > >
-> >> �����Ҿ���HoneypotҲ��ֵ�ô���о���һ�����ݡ�
+> >> 另外我觉得Honeypot也是值得大家研究的一个内容。
 > >> 
 > >> 
-> >>                ����
+> >>                刘鹏
 > >>                liupeng@infosec.pku.edu.cn
 > >> 2002-04-11 
 > >> 
@@ -86,24 +86,24 @@ Re: �� ��: [ak asec= salon] Re: ��: [akasec s a lon]= agree
 > Fu Xiaoyu
 > 
 >       \\\|///
-> ���� \\��- -��//
-> ������(��@ @��)
-> ����oOOo-(_)-oOOo������������������������������������
-> ��
-> ��  Standardization Department
-> ��  Mobile Communication R&D Center
-> ��  China Academy of Telecommunication Technology(CATT)
-> ��  No.40,Xueyuan Road
-> ��  Beijing,China
-> ��  100083
-> ��  Tel:+8610 62304422EXT244
-> ��  Fax:+8610 62303127
-> ��  Mailto:fuxy@catt.ac.cn or yu_daniel@yahoo.com
-> ����oooO
-> ����(�� )-��Oooo ������������������������������������
-> ���� \ (�� ( ��)
-> ������\_)�� ) /
-> ���������� (_/
+> 　　 \\　- -　//
+> 　　　(　@ @　)
+> ┏━oOOo-(_)-oOOo━━━━━━━━━━━━━━━━━┓
+> ┃
+> ┃  Standardization Department
+> ┃  Mobile Communication R&D Center
+> ┃  China Academy of Telecommunication Technology(CATT)
+> ┃  No.40,Xueyuan Road
+> ┃  Beijing,China
+> ┃  100083
+> ┃  Tel:+8610 62304422EXT244
+> ┃  Fax:+8610 62303127
+> ┃  Mailto:fuxy@catt.ac.cn or yu_daniel@yahoo.com
+> ┃　oooO
+> ┗━(　 )-━Oooo ━━━━━━━━━━━━━━━━━┛
+> 　　 \ (　 ( 　)
+> 　　　\_)　 ) /
+> 　　　　　 (_/
 > 
 > ****
 > 
@@ -111,21 +111,21 @@ Re: �� ��: [ak asec= salon] Re: ��: [akasec s a lon]= agree
 > akasec_salon-unsubscribe@yahoogroups.com
 > 
 >  
-�����ù�stachel���о��汾����������2��������������syn��udp��ack��
-null��icmp �Ⱥ�ˮ����������
+我曾用过stachel的研究版本，最多可以用2个机器做攻击。syn、udp、ack、
+null、icmp 等洪水都可以做。
 
-�����һ��DDoS��������ۻ�����ȼ�һЩ��һ������һ��DDoSԭ������ʾһ
-�£��ô�ҿ���Ч���������кö����ѻ�û�����������������ֶν��ܣ���ʾ����
-���ٸ��ݴ�ҵ���Ҫ��ȷ���ڶ������������Ρ�xyiding
-                         AKA��ȫɳ������CISSPѧϰС��
+建议第一次DDoS问题的讨论会可以先简单一些：一、介绍一下DDoS原理，演示一
+下，让大家看看效果（估计有好多朋友还没见过）；二、防御手段介绍，演示。以
+后再根据大家的需要来确定第二次甚至第三次。xyiding
+                         AKA安全沙龙成立CISSP学习小组
 
-    AKA��ȫɳ����������ķ�չ���������˲������簲ȫר����רҵ��Ա�������ǡ���
-������Ա�����飬AKA��ȫɳ��׼������CISSP����ѧϰС��(cissp_beijing)�����ǻ�ӭ
-��CISSP����Ȥ�������Ǽ���С�飬���һ�����ۡ�ѧϰ��
+    AKA安全沙龙经过半年的发展，已吸引了不少网络安全专家与专业人员加入我们。经
+部分人员的提议，AKA安全沙龙准备成立CISSP北京学习小组(cissp_beijing)，我们欢迎
+对CISSP感兴趣的朋友们加入小组，大家一起讨论、学习。
 
-    CISSP����Certified Information Systems Security Professional���Ƿ�Ӯ����˾
-ISC2(http://www.isc2.org/)����Ϣϵͳ��ȫ��ҵ��Ա���е�רҵ��֤��ISC2�����˰�ȫ
-��CBK(Common Body of Knowledge)��������ȫ�ֳ���ʮ����
+    CISSP，即Certified Information Systems Security Professional，是非赢利公司
+ISC2(http://www.isc2.org/)对信息系统安全从业人员进行的专业认证。ISC2定义了安全
+的CBK(Common Body of Knowledge)，即将安全分成了十个域：
 	* Security Management Practices 
 	* Security Architecture and Models 
 	* Access Control Systems & Methodology 
@@ -136,50 +136,50 @@ ISC2(http://www.isc2.org/)����Ϣϵͳ��ȫ��ҵ��Ա���е�רҵ��֤��ISC2�����˰�ȫ
 	* Telecommunications, Network & Internet Security 
 	* Business Continuity Planning 
 	* Law, Investigations & Ethics 
-ÿ�������ַ�Ϊ�ܶ಻ͬ��֪ʶ�㣬��ϸ���ܿɼ���CISSP Study Guide�����ĵ�����1991
-�꿪ʼ������10�����ҵķ�չ��ȫ���CISSP������ǧ�ˡ�
+每个域中又分为很多不同的知识点，详细介绍可见《CISSP Study Guide》等文档。从1991
+年开始，经过10年左右的发展，全球的CISSP已有数千人。
 
-    CISSP����ѧϰС�鲻�շѣ�С���Ա��Ҫ���ھۻᣬѧϰ������CISSP��׼�����ϣ�
-AKA��ȫɳ��Ҳ��Ƕ��ڵ���һЩר�����ʹ��һ��ۻᡣ
+    CISSP北京学习小组不收费，小组成员需要定期聚会，学习，交流CISSP的准备材料，
+AKA安全沙龙也会非定期地请一些专家来和大家一起聚会。
 
-    ���ǻ�ӭ��ȫרҵ��Ա����CISSP����ѧϰС��(С����������������)�����������
-������Ա���ţ�
+    我们欢迎安全专业人员加入CISSP北京学习小组(小组人数会有所限制)，有意者请给
+下列人员发信：
 	
 	Daniel Yu (yu_daniel@sohu.com)
-	κ�̳� (david_wei@getjob.com.cn)
-	Kevin Wang (star_wang@sina.com)��
-��λ�ã���������CISSPѧϰС�������֪ͨ����Ұ�����һ�¡�
-����Ҫ�����ŵ����ϡ�TAOPINҲ���æ����վ����һ�£�лл��
+	魏继超 (david_wei@getjob.com.cn)
+	Kevin Wang (star_wang@sina.com)。
+各位好，附件里是CISSP学习小组成立的通知。大家帮助贴一下。
+燕子要把它放到网上。TAOPIN也请帮忙在网站上做一下，谢谢。
 
-�Ǻǡ��ǵġ��������簲ȫ�����Ǻܶ෽������ݡ���ͬ��Э�飬��ͬ�Ĳ�Ρ��ҿ���������
-�ںܶ����߰�ȫ���о�������Ҳ�Ǻܺá���Ϊ���Ǳ��ҵ���WLANҪ�硣����������WLAN�ռ���
-�졣���ܶ���鶼Ҫ����WLAN�豸�ˡ�����һ���µģ�����İ�ȫ������һ���ܹ����Ŀռ�
-��������Э���о��ġ���ӭ��Һ�����������Э������ݡ�
-���۹����ۡ�����һЩʵ�飬��һЩ��������۱����ʵ�Ÿ�Ϊ��Ч�����Ҿ���DDOS���к�
-�õ��о��ԡ������кܶ�������Ķ�����DDOS������ҲӦ�ø��ϡ�
+呵呵。是的。我想网络安全可以是很多方面的内容。不同的协议，不同的层次。我看到国外现
+在很多无线安全的研究。做的也是很好。因为他们比我的用WLAN要早。现在老美的WLAN普及很
+快。连很多会议都要求用WLAN设备了。所以一个新的，特殊的安全领域将是一个很广阔的空间
+。我是做协议研究的。欢迎大家和我讨论网络协议的内容。
+讨论归讨论。能做一些实验，把一些设想和理论变成现实才更为有效果。我觉得DDOS就有很
+好的研究性。现在有很多国际论文都讨论DDOS。我们也应该跟上。
 
 
-����
+　　
 
-======= 2002-04-11 ����������д����=======
+======= 2002-04-11 您在来信中写道：=======
 
->����Ϊ��Ȼ���������簲ȫ�����ǲ�Ҫֻ��Ŀ������������Ự�㣬����㣬�����������
-��ȫҲӦ����ע���о�������Э������Ҳ�������۳���tcp/ipЭ��֮�������Э�顣�������
-��ÿ����εĸ�������簲ȫ�����ⶼ��ֵ����ۡ����룬���ǲ���һ����ȷ��˼·��Эͬ��
-��ϵͳ�İ�ȫ������
+>我认为既然是讨论网络安全，我们不要只将目光锁定在网络会话层，网络层，物理层的网络
+安全也应当关注和研究。网络协议我们也可以讨论除了tcp/ip协议之外的其他协议。如果我们
+把每个层次的概念和网络安全的问题都充分的讨论。我想，我们才有一个明确的思路来协同做
+好系统的安全工作。
 >
 >----- Original Message ----- 
->From: "����" <liupeng@infosec.pku.edu.cn>
+>From: "刘鹏" <liupeng@infosec.pku.edu.cn>
 >To: <akasec_salon@yahoogroups.com>
 >Sent: Thursday, April 11, 2002 10:35 AM
->Subject: [akasec_salon] Re: Re: ��: [akasec salon] Re: [akasec salon]Re: �� ��
-: [akasec= salon] Re: ��: [akasec s a lon] agree
+>Subject: [akasec_salon] Re: Re: 答复: [akasec salon] Re: [akasec salon]Re: 答 复
+: [akasec= salon] Re: 答复: [akasec s a lon] agree
 >
 >
->> �����Ҿ���HoneypotҲ��ֵ�ô���о���һ�����ݡ�
+>> 另外我觉得Honeypot也是值得大家研究的一个内容。
 >> 
 >> 
->>                ����
+>>                刘鹏
 >>                liupeng@infosec.pku.edu.cn
 >> 2002-04-11 
 >> 
@@ -187,67 +187,67 @@ AKA��ȫɳ��Ҳ��Ƕ��ڵ���һЩר�����ʹ��һ��ۻᡣ
 >> Dorm Phone  :(010)62763508
 >> 
 >> 
-����뷨�ܺá�����������Ҫ��Ҫ����ƺá��ղ�tongjia����˵���豸�𣿱������Ǹ�ʵ��
-��������ͼ������������ټӸ��ʼǱ����ƾͿ��������ˡ�
-�ȴӼ򵥵Ŀ�ʼ���������������ǿ���ר�ų���һ�� DDOS�ķ���С�顣��DDOS��������д�
-�����о������ۡ�����������к�����Ȥ�����ǿ����������ۡ�
+这个想法很好。不过我想主要是要先设计好。刚才tongjia不是说有设备吗？北航的那个实验
+室有网络和几个服务器。再加个笔记本估计就可以了做了。
+先从简单的开始。慢慢分析。我们可以专门成立一个 DDOS的分析小组。对DDOS的情况进行大
+量的研究和讨论。这个方向我有很有兴趣。我们可以慢慢讨论。
 
-����
+　　
 
-======= 2002-04-12 ����������д����=======
+======= 2002-04-12 您在来信中写道：=======
 
->�����ù�stachel���о��汾����������2��������������syn��udp��ack��
->null��icmp �Ⱥ�ˮ����������
+>我曾用过stachel的研究版本，最多可以用2个机器做攻击。syn、udp、ack、
+>null、icmp 等洪水都可以做。
 >
->�����һ��DDoS��������ۻ�����ȼ�һЩ��һ������һ��DDoSԭ������ʾһ
->�£��ô�ҿ���Ч���������кö����ѻ�û�����������������ֶν��ܣ���ʾ����
->���ٸ��ݴ�ҵ���Ҫ��ȷ���ڶ������������Ρ�
+>建议第一次DDoS问题的讨论会可以先简单一些：一、介绍一下DDoS原理，演示一
+>下，让大家看看效果（估计有好多朋友还没见过）；二、防御手段介绍，演示。以
+>后再根据大家的需要来确定第二次甚至第三次。
 >
-yu_daniel,���ã�
+yu_daniel,您好！
 
-����DDos��Syn flood��ԭ�������������ֻ�Ǵӹ����ĽǶ�ȥʵʩ�ġ���entercap��Syn f
-lood�������׵��ֵ���Solaris�������׸�������tfn2k��DDos���ܽ���udp flood������cpu��
-Դ����tcp/syn flood�����Ĵ���������������icmp flood�����Ĵ��������о�����tuning��
-FreeBSD��ddos������΢��Щ��
+　　DDos和Syn flood我原来都玩过，不过只是从攻击的角度去实施的。用entercap做Syn f
+lood，最容易得手的是Solaris，很容易搞死。用tfn2k做DDos，能进行udp flood（消耗cpu资
+源），tcp/syn flood（消耗带宽、连接数），icmp flood（消耗带宽），感觉经过tuning的
+FreeBSD抗ddos性能稍微好些。
 
-	����ǽ��ڵĻ����������ṩһ̨ Cisco3548 switch, һ̨ NetScreen 100 firewall��
+	如果是近期的话我这里能提供一台 Cisco3548 switch, 一台 NetScreen 100 firewall。
 
-======= 2002-04-10 17:03:00 ����������д����=======
+======= 2002-04-10 17:03:00 您在来信中写道：=======
 
->���һ��ɳ��ֻ����DDOS����һ������˼�������ʲô�뷨��
->�����Ҿ�����������б�Ҫ�����׼��������һ�Ρ�
->�Ǽ�Ȼ����ⷽ�����Ϥ��Ը����֯�������Ҽ�����Ը��һ��׼�����ˣ��ú�׼��һ�����
-����Ҳ�ܺá����ƿ���ѧ���ܶ�����Ķ�����
+>如果一次沙龙只讨论DDOS我想一定有意思。大家有什么想法。
+>不过我觉得这个问题有必要深入的准备和讨论一次。
+>那既然你对这方面很熟悉又愿意组织，我想找几个人愿意一起准备的人，好好准备一次这个
+讨论也很好。估计可以学到很多深入的东西。
 >
->����
+>　　
 >
->======= 2002-04-05 ����������д����=======
+>======= 2002-04-05 您在来信中写道：=======
 >
->>������һ��ɳ���ɣ������кܶ����Ѷ����ԡ������Ҫ������һ֮���ҿ���ë���Լ���
->>��ȫ�޳��Է���Ϊ������Ҫ���ǵõ���Щ�˽�Syn flood���������ѵ�֧�֣�brainstormһ
-�£���������router��swith�������������Լ��ķ���ǽ��֪������һ��㶼�ܺá���ǰ����
-֯��ɳ�����У�ѡ����Щ���ܻ���ײ���𻨵ļ�����һһ�ڻ���չʾ��������ͷ���ܣ���ͼ��
-slide����ÿ�����ʵ�顣һ��ɳ�����������ж��ذ����ǡ�
->>Ŀǰ���簲ȫ������̽���׶Σ������Ǻ�۵���ϵ����׼���Ǿ���İ�ȫ������û���γ�
-�̶���ģʽ������Ҳ�����������ڵ�һ���뷨���ܿ��ܳ�Ϊ���ȫ���һ����������Ʒ����
-�������ڿ����������ɡ�����ĳ�����˻��߹�˾�ǲ����ġ�����������IDS����Ҳ��������
-����ʵ�ַ�ʽ�����۱�׼�������ֶε�һֱ�ǰ�ȫ�������۲��ݵĻ��⣩
+>>是主持一次沙龙吧？相信有很多朋友都可以。如果需要，在五一之后，我可以毛遂自荐。
+>>完全赞成以防御为主。重要的是得到那些了解Syn flood防御的朋友的支持，brainstorm一
+下，无论是在router和swith上做，还是用自己的防火墙，知道哪怕一点点都很好。会前的组
+织请沙龙进行，选出那些可能会碰撞出火花的技术，一一在会上展示出来，口头介绍，画图，
+slide，最好可以有实验。一次沙龙不够，还有二回啊，呵。
+>>目前网络安全还处在探索阶段，无论是宏观的体系、标准还是具体的安全技术都没有形成
+固定的模式，国外也是这样。现在的一个想法，很可能成为今后安全界的一个技术、产品，哪
+怕它现在看起来很幼稚。单靠某个高人或者公司是不够的。（最近的这次IDS技术也是这样，
+技术实现方式、评价标准、测试手段等一直是安全厂家争论不休的话题）
 >>
->>-----ԭʼ�ʼ�-----
->>������: yu_daniel [mailto:yu_daniel@sohu.com]
->>����ʱ��: 2002��4��5�� 13:57
->>�ռ���: akasec_salon@yahoogroups.com
->>����: [akasec_salon] Re: ��: [akasec salon] agree
->>
->>
->>���뷨
+>>-----原始邮件-----
+>>发件人: yu_daniel [mailto:yu_daniel@sohu.com]
+>>发送时间: 2002年4月5日 13:57
+>>收件人: akasec_salon@yahoogroups.com
+>>主题: [akasec_salon] Re: 答复: [akasec salon] agree
 >>
 >>
->>     ����ܺ��������һ��DDOS����ʾ����Ҳ�Ǻ�ֵ�á��豸�ҹ��Ʋ������⡣���ǿ���
-�Ҹ���˾��ʲô�ط��Ƚ���һ�¡�����һ�����ǵĳ��ؾͿ��ԡ�������Ǽ򵥵İ�һЩ����ʵ
-��һ����˼������������ʾ�ܶ�ط����С�������Ϸ��������ǿ����Ұ�ȫ��˾��ʵ������
-�Ĳ�Ʒ���������ǾͿ��������ǵ�router,switch���豸�ˡ�
->>     ����λԸ����֯һ�������Ļ�ء����ǰ�ȫɳ�����԰�������֯��
+>>好想法
+>>
+>>
+>>     如果能很深入的做一次DDOS的演示讨论也是很值得。设备我估计不是问题。我们可以
+找个公司或什么地方先借用一下。或用一下他们的场地就可以。如果光是简单的把一些攻击实
+现一下意思不大。这样的演示很多地方都有。如果加上防御，我们可以找安全公司来实验他们
+的产品。这样我们就可以用他们的router,switch和设备了。
+>>     有那位愿意组织一个这样的活动呢。我们安全沙龙可以帮助你组织。
 >>
 >>
 >>daniel
@@ -255,41 +255,41 @@ slide����ÿ�����ʵ�顣һ��ɳ�����������ж��ذ����ǡ�
 >>
 >>
 >>
->>>SYN FLOOD����ԭ��
+>>>SYN FLOOD攻击原理
 >>>
->>>SYN FLOOD������ʾ���޷�����ʩ��
+>>>SYN FLOOD攻击演示（无防御措施）
 >>>
->>>SYN FLOOD������ʩ����
+>>>SYN FLOOD防御措施讨论
 >>>
->>>SYN FLOOD������ʾ���з�����ʩ��
+>>>SYN FLOOD攻击演示（有防御措施）
 >>>
->>>�����������ⲻ�ں��࣬D.o.S������ʽ�Ƚ϶࣬��ʵԭ�����ܲ�࣬һ�����۵�����
-Щ���������
+>>>我想讨论问题不在乎多，D.o.S攻击方式比较多，其实原理功能差不多，一种讨论的深入
+些这样会更好
 >>>
->>>��Ȼ�豸�Ͽ��ܲ�����router ��switch����û�У��������Ǿ�ģ��һ����վ��������վ
-��������Ȼ���޸�ϵͳ����װIDS��firewall����ʩ
+>>>虽然设备上可能不够，router ，switch我们没有，但是我们就模拟一个网站？攻击网站
+服务器，然后修改系统，安装IDS，firewall软措施
 >>>
->>>Ӳ��ʩ������������Ҳ���ԣ����ߴ�������ʲô�ð취Ҳ�У����������david_wei
+>>>硬措施有条件再讨论也可以，或者大家如果有什么好办法也行，个人意见。david_wei
 >>>
->>>-----ԭʼ�ʼ�-----
->>>������: Xu Yiding ��һ�� [����] [mailto:yiding.xu@marsec.net]
->>>����ʱ��: 2002��4��5�� 13:25
->>>�ռ���: akasec_salon@yahoogroups.com
->>>����: ��: [akasec_salon] agree
->>>
->>>
->>>Syn flood ������DoS�Ĺ�����
->>>�������ۡ�����������ʾ��������Ҫ�������豸��û��router��switch�Ļ���ʾ��������
-����Щ��
->>>
->>>-----ԭʼ�ʼ�-----
->>>������: κ�̳� [mailto:david_wei@getjob.com.cn]
->>>����ʱ��: 2002��4��5�� 13:16
->>>�ռ���: akasec_salon@yahoogroups.com
->>>����: ��: [akasec_salon] agree
+>>>-----原始邮件-----
+>>>发件人: Xu Yiding 徐一丁 [北京] [mailto:yiding.xu@marsec.net]
+>>>发送时间: 2002年4月5日 13:25
+>>>收件人: akasec_salon@yahoogroups.com
+>>>主题: 答复: [akasec_salon] agree
 >>>
 >>>
->>>����syn flood�����ͷ���
+>>>Syn flood 和其他DoS的攻防。
+>>>很想讨论。攻击倒好演示，防御主要靠网络设备，没有router和switch的话演示起来可能
+困难些。
 >>>
->>>��Σ�
+>>>-----原始邮件-----
+>>>发件人: 魏继超 [mailto:david_wei@getjob.com.cn]
+>>>发送时间: 2002年4月5日 13:16
+>>>收件人: akasec_salon@yahoogroups.com
+>>>主题: 答复: [akasec_salon] agree
+>>>
+>>>
+>>>讨论syn flood攻击和防御
+>>>
+>>>如何？
 

@@ -1,49 +1,49 @@
-11��5��ɳ����Ҫ
+11月5日沙龙记要
 
-�μ��ˣ�
-��Ʒ  rover  taopin@263.net  �廪��ѧ�����ϵ��ʿ��
-���  sweetmoon  xu_hui@icst.pku.edu.cn  �������о���
-��С��  xiaobo  xiaobo@chinaren.com  ���ҽ�������������
-����  finalheaven  finalheaven@zixia.net  �廪��еϵ
-�Ի�  roy  roy@zixia.net  �廪��еϵ
-�վ���  ameng  vhdl@263.net  ·�Ϲ�˾
-��Ͷ�  hunter  hdyang@yeah.net  �У���
-��׿��  zixia  zixia@yahoo.com  �廪��ѧ
+参加人：
+陶品  rover  taopin@263.net  清华大学计算机系博士生
+徐辉  sweetmoon  xu_hui@icst.pku.edu.cn  北大方正研究生
+何小波  xiaobo  xiaobo@chinaren.com  国家教育部考试中心
+秦岭  finalheaven  finalheaven@zixia.net  清华机械系
+翟华  roy  roy@zixia.net  清华机械系
+苏京萌  ameng  vhdl@263.net  路迪公司
+杨和东  hunter  hdyang@yeah.net  中？所
+李卓桓  zixia  zixia@yahoo.com  清华大学
 
-�������⣺�������簲ȫ�ͷ���ǽ��
+讨论主题：关于网络安全和防火墙等
 
-��¼��
-xiaobo: У԰�������������Ҫ��½�ٷ��ʵ���������һ���̶������������ɣ�����������
-        ���Ķ���Ȩ�����������ľ����Ѿ���Զ�ˡ�
-ameng: ĳЩ��ҵ��������(ע�⣬�����㷨�����ǲ�Ʒ)���п����к��ŵġ���ĳЩ�����
-       (������������)�п��ܻᱻʹ�á�
-hunter: ���ڵķ���ǽ�����Ѿ����ģ���Ҫ�ǰ����˺ͼ��ܵȼ�����
-        ������ҵ����ίԱ��Ҫ������㷨���벻������
-        ����о�Ӳ�����ܱȽ��ȣ��������ܿ�������оƬ����������ȣ���
-        ���簲ȫ������ϵͳ���ķ���չ��
-ameng: SmartCard(CPU+E2PROM+FlashMem)��DES�����㷨�����Դﵽ10�����룬��Ҫ����
-       RSA�ȸ��ӵ��㷨�������û����ܡ���Ҫ����Ϊ�ǶԳ��㷨�ĸ����ԣ������ٶ�����
-       �����˵���Գ��㷨��ʵ���ϱȽϿ졣
-       ���ÿ���չ�����ˣ��ſ� -> �洢���� -> �߼����ܿ� -> SmartCard
-hunter: ������һ�ָ���ʱ����ͬ���������ϱ仯��Կ�ļ��ܲ�Ʒ��
-rover: �����˺�����У��ָ����������֤��ʵ�������
-hunter: ������һ������˼�ķ�������ȫ������ʩ����ͨ���������������������������ϵ�
-        ���ݼ��顣
-zixia: ������Linux�µķ���ǽ�������ˣ�����ָ�����а����˶�����TCP/IP�Ĳ�ͬ�����
-       ͨ�����ӻ�����ʵ�ֵġ�������IPchinas�������������˼� -n ѡ�����IPChians
-       ��������������ɵ��ٶ�̫�������⡣
-       ������ 2.4 �ں���һ���Զ����Ƹ������������ӵ����ԡ�
-hunter: ������ FastCGI �Ծ�̬ҳ������ٶ���߲����󣬵��Զ�̬ҳ������ٶ��������
-        �����⡣
-zixia: Resin �� FastCGI ԭ�����ơ�
-zixia: IPTable ���ں˽�ϵĻ��ƣ�IPTable ���롢����ת��ʱ���и��Եİ�ȫ���򣬱���
-       Ϊchians.
-       IPTable ������2.4�ں˽��ʹ�ã�2.2�ں���ʹ�� IPChians��2.0�ں������IPfwadm��
-       deny �� drop ֮�������
-ameng: IPTable �Ĺ���ǿ�� IPchians
-zixia: google.com ��ѯ�ǳ��ã�google ��Ӣ����˼Ϊ 10 �� 100 �η������ǳ��޴�����֡�
-roy: ������ Windows ϵͳ�µķ���ǽ��Norton �� Windows �±ȽϺõķ���ǽ��Ʒ��
-zixia: ������ PGP Desktop����Ϊ����������������Ч���в�СӰ�죬�����������ļ�����
-       ��Կ��ϵ���ܡ�
-       ������ Win2000 �µ�ץ��������Analyzer
-       ������ Frame ��Ŀ�����Ŀ���뷽����ϣ���ܹ�Ϊ�û����Ƹ��Ի��Ŀͻ��ˡ�
+记录：
+xiaobo: 校园网中网络访问需要登陆再访问的做法，在一定程度上限制了自由，这种做法与
+        《阅读的权利》中所描绘的景象已经相差不远了。
+ameng: 某些商业加密软件(注意，不是算法，而是产品)是有可能有后门的。在某些情况下
+       (比如政治因素)有可能会被使用。
+hunter: 现在的防火墙技术已经泛滥，主要是包过滤和加密等技术。
+        国家商业加密委员会要求加密算法必须不公开。
+        最近研究硬件加密比较热（包括加密卡、加密芯片、加密主板等）。
+        网络安全正在向系统化的方向发展。
+ameng: SmartCard(CPU+E2PROM+FlashMem)做DES加密算法最快可以达到10几毫秒，而要想做
+       RSA等复杂的算法则不能让用户忍受。主要是因为非对称算法的复杂性，所以速度慢。
+       相对来说，对称算法在实现上比较快。
+       信用卡发展经历了：磁卡 -> 存储器卡 -> 逻辑加密卡 -> SmartCard
+hunter: 介绍了一种根据时间上同步，并不断变化密钥的加密产品。
+rover: 介绍了海淀驾校用指纹做身份认证的实际情况。
+hunter: 介绍了一种有意思的服务器安全防卫措施，即通过其他服务器对主服务器做不断的
+        内容检验。
+zixia: 介绍了Linux下的防火墙（包过滤），并指出所有包过滤都是在TCP/IP的不同层次上
+       通过钩子机制来实现的。介绍了IPchinas的情况。并解答了加 -n 选项避免IPChians
+       对域名解析而造成的速度太慢的问题。
+       介绍了 2.4 内核中一种自动抑制高流量网络链接的特性。
+hunter: 讨论了 FastCGI 对静态页面访问速度提高并不大，但对动态页面访问速度提高显著
+        的问题。
+zixia: Resin 与 FastCGI 原理类似。
+zixia: IPTable 与内核结合的机制，IPTable 在入、出及转发时都有各自的安全规则，被称
+       为chians.
+       IPTable 必须与2.4内核结合使用，2.2内核则使用 IPChians，2.0内核则采用IPfwadm。
+       deny 与 drop 之间的区别。
+ameng: IPTable 的功能强于 IPchians
+zixia: google.com 查询非常好，google 的英文意思为 10 的 100 次方，即非常巨大的数字。
+roy: 介绍了 Windows 系统下的防火墙，Norton 是 Windows 下比较好的防火墙产品。
+zixia: 介绍了 PGP Desktop，认为该软件对网卡工作效率有不小影响，但该软件对文件可做
+       公钥体系加密。
+       介绍了 Win2000 下的抓包软件：Analyzer
+       介绍了 Frame 项目的设计目标与方法，希望能够为用户定制个性化的客户端。

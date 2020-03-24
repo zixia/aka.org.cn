@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <HTML>
 <HEAD>
-    <TITLE>Linux �ı�̳�ʶ</TITLE>
+    <TITLE>Linux 的编程常识</TITLE>
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
     <META NAME="GENERATOR" CONTENT="StarOffice/5.1 (Linux)">
     <META NAME="AUTHOR" CONTENT="Yongming Wei">
@@ -27,146 +27,146 @@
 <A HREF="scenario.html"><IMG SRC="next.gif" ALT="Next"></A>
 <A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
 
-<H1 ALIGN=CENTER>1.4&nbsp;&nbsp;Linux �ı�̳�ʶ<BR><BR>
+<H1 ALIGN=CENTER>1.4&nbsp;&nbsp;Linux 的编程常识<BR><BR>
 </H1>
 
 <UL>
-    <LI><P>��׼ (ANSI C, POSIX, SVID, XPG, ...)</LI>
-    <LI><P>�������ϵͳ����</LI>
-    <LI><P>�����ĵ� (man, info, HOW-TO, ...)</LI>
-    <LI><P>C ���Ա�̷��</LI>
-    <LI><P>���ͷ�ļ��ı���λ��</LI>
-    <LI><P>�����⼰���������</LI>
+    <LI><P>标准 (ANSI C, POSIX, SVID, XPG, ...)</LI>
+    <LI><P>函数库和系统调用</LI>
+    <LI><P>在线文档 (man, info, HOW-TO, ...)</LI>
+    <LI><P>C 语言编程风格</LI>
+    <LI><P>库和头文件的保存位置</LI>
+    <LI><P>共享库及其相关配置</LI>
 </UL>
 
-<H3>1.4.1&nbsp;&nbsp;��׼ (ANSI C, POSIX, SVID, XPG, ...)</H3>
+<H3>1.4.1&nbsp;&nbsp;标准 (ANSI C, POSIX, SVID, XPG, ...)</H3>
 <UL>
-    <LI>ANSI C����һ��׼�� ANSI���������ұ�׼�֣��� 1989 ���ƶ��� C ���Ա�׼��
-        ������ ISO�����ʱ�׼����֯������Ϊ��׼�����Ҳ��Ϊ ISO C��<BR>
-        ANSI C ��Ŀ����Ϊ���ֲ���ϵͳ�ϵ� C �����ṩ����ֲ�Ա�֤�������������� UNIX��
-        �ñ�׼���������� C ������Ե��﷢�����壬���һ�������һ����׼�⡣�������Ը���
-        ͷ�ļ�����Ϊ 15 �����֣����а������ַ����� (&lt;ctype.h&gt;)�������� (&lt;errno.h&gt;)��
-        ���㳣�� (&lt;float.h&gt;)����ѧ���� (&lt;math.h&gt;)����׼���� (&lt;stddef.h&gt;)��
-        ��׼ I/O (&lt;stdio.h&gt;)�����ߺ��� (&lt;stdlib.h&gt;)���ַ������� (&lt;string.h&gt;)��
-        ʱ������� (&lt;time.h&gt;)���ɱ������ (&lt;stdarg.h&gt;)���ź� (&lt;signal.h&gt;)��
-        �Ǿֲ���ת (&lt;setjmp.h&gt;)��������Ϣ (&lt;local.h&gt;)��������� (&lt;assert.h&gt;)
-        �ȵȡ�</LI>
-    <LI>POSIX���ñ�׼����� IEEE �����ı�׼�壬�����Ѿ��� ISO ����Ϊ���ʱ�׼���ñ�׼�ľ�������
-        �� 1.1.3��POSIX.1 �� POSIX.2 �ֱ����� POSIX ���ݲ���ϵͳ�� C ����ϵͳ�ӿ�
-        �Լ� shell �͹��߱�׼����������׼��ͨ���ᵽ�ı�׼��</LI>
-    <LI>SVID��System V �Ľӿ�������System V �ӿ�������SVID�������� AT&&;T Unix System V ����
-        ϵͳ���ĵ����Ƕ� POSIX ��׼����չ������</LI>
-    <LI>XPG��X/Open ����ֲ��ָ�ϡ�X/Open ����ֲ��ָ�ϣ��� X/Open Company, Ltd.���棩��
-        �Ǳ� POSIX ��Ϊһ��ı�׼��X/Open ӵ�� Unix �İ�Ȩ���� XPG ��ָ����Ϊ Unix 
-        ����ϵͳ���������Ҫ��</LI>
+    <LI>ANSI C：这一标准是 ANSI（美国国家标准局）于 1989 年制定的 C 语言标准。
+        后来被 ISO（国际标准化组织）接受为标准，因此也称为 ISO C。<BR>
+        ANSI C 的目标是为各种操作系统上的 C 程序提供可移植性保证，而不仅仅限于 UNIX。
+        该标准不仅定义了 C 编程语言的语发和语义，而且还定义了一个标准库。这个库可以根据
+        头文件划分为 15 个部分，其中包括：字符类型 (&lt;ctype.h&gt;)、错误码 (&lt;errno.h&gt;)、
+        浮点常数 (&lt;float.h&gt;)、数学常数 (&lt;math.h&gt;)、标准定义 (&lt;stddef.h&gt;)、
+        标准 I/O (&lt;stdio.h&gt;)、工具函数 (&lt;stdlib.h&gt;)、字符串操作 (&lt;string.h&gt;)、
+        时间和日期 (&lt;time.h&gt;)、可变参数表 (&lt;stdarg.h&gt;)、信号 (&lt;signal.h&gt;)、
+        非局部跳转 (&lt;setjmp.h&gt;)、本地信息 (&lt;local.h&gt;)、程序断言 (&lt;assert.h&gt;)
+        等等。</LI>
+    <LI>POSIX：该标准最初由 IEEE 开发的标准族，部分已经被 ISO 接受为国际标准。该标准的具体内容
+        见 1.1.3。POSIX.1 和 POSIX.2 分别定义了 POSIX 兼容操作系统的 C 语言系统接口
+        以及 shell 和工具标准。这两个标准是通常提到的标准。</LI>
+    <LI>SVID：System V 的接口描述。System V 接口描述（SVID）是描述 AT&&;T Unix System V 操作
+        系统的文档，是对 POSIX 标准的扩展超集。</LI>
+    <LI>XPG：X/Open 可移植性指南。X/Open 可移植性指南（由 X/Open Company, Ltd.出版），
+        是比 POSIX 更为一般的标准。X/Open 拥有 Unix 的版权，而 XPG 则指定成为 Unix 
+        操作系统必须满足的要求。</LI>
 </UL>
 
-<H3>1.4.2&nbsp;&nbsp;�������ϵͳ����</H3>
+<H3>1.4.2&nbsp;&nbsp;函数库和系统调用</H3>
 
 <H4>1. glibc</H4>
 <P>
-������֪��C ���Բ�û��Ϊ�����Ĳ�������������/������ڴ�������ַ����������ṩ���õ�֧�֡�
-�෴����Щ����һ���ɱ�׼�ġ������⡱���ṩ��GNU �� C �����⣬�� glibc���� Linux ������Ҫ��
-�����⣬�������� ISO C ��׼ָ�������еĿ⺯�����Լ��� POSIX ������ UNIX ����ϵͳ
-ͳ����ָ���ĸ�����ɫ������������ GNU ϵͳ��ص���չ��Ŀǰ�����е� Linux ϵͳʹ�� glibc 2.0 
-���ϵİ汾��glibc �������±�׼��</P>
+众所周知，C 语言并没有为常见的操作，例如输入/输出、内存管理，字符串操作等提供内置的支持。
+相反，这些功能一般由标准的“函数库”来提供。GNU 的 C 函数库，即 glibc，是 Linux 上最重要的
+函数库，它定义了 ISO C 标准指定的所有的库函数，以及由 POSIX 或其他 UNIX 操作系统
+统变种指定的附加特色，还包括有与 GNU 系统相关的扩展。目前，流行的 Linux 系统使用 glibc 2.0 
+以上的版本。glibc 基于如下标准：</P>
 <UL>
-    <LI>ISO C: C ������ԵĹ��ʱ�׼���� ANSI C��</LI>
-    <LI>POSIX��GNU C ������ʵ���� ISO/IEC 9945-1:1996 ��POSIX ϵͳӦ�ó����̽ӿڣ�
-        �� POSIX.1��ָ�������к������ñ�׼�Ƕ� ISO C ����չ�������ļ�ϵͳ�ӿ�ԭ
-        ��豸��ص��ն˿��ƺ����Լ����̿��ƺ�����ͬʱ��GUN C �����⻹֧�ֲ�����
-        ISO/IEC 9945-2:1993��POSIX Shell �� ���߱�׼���� POSIX.2��ָ���ĺ�����
-        ���а������ڴ����������ʽ��ģʽƥ��ĺ�����</LI>
-    <LI>Berkeley Unix��BSD �� SunOS��GNU C �����ⶨ����ĳЩ UNIX �汾����δ��׼���ĺ�����
-        ������ 4.2 BSD, 4.3 BSD, 4.4 BSD Unix ϵͳ������Berkeley Unix��)�Լ���SunOS��
-        �����е� 4.2 BSD ���֣����а�����ĳЩ Unix System V �Ĺ��ܣ���BSD ��������
-        �������ӡ�select ������BSD �źŴ��������Լ��׽��ֵȵȡ�</LI>
-    <LI>SVID��System V �Ľӿ�������GNU C �����ⶨ���˴������ SVID ָ����δ�� ISO C 
-        �� POSIX ��׼ָ���ĺ��������� System V ��֧�ֺ����������̼�ͨ�ź͹����ڴ桢
-        hsearch �� drand48 �����塢fmtmsg �Լ�һЩ��ѧ������</LI>
-    <LI>XPG��X/Open ����ֲ��ָ�ϡ�GNU C ��������ѭ X/Open ����ֲ��ָ�ϣ�Issue 4.2��
-        �Լ����е� XSI��X/Open ϵͳ�ӿڣ�����ϵͳ����չ��ͬʱҲ��ѭ���е� X/Open Unix 
-        ��չ��</LI>
+    <LI>ISO C: C 编程语言的国际标准，即 ANSI C。</LI>
+    <LI>POSIX：GNU C 函数库实现了 ISO/IEC 9945-1:1996 （POSIX 系统应用程序编程接口，
+        即 POSIX.1）指定的所有函数。该标准是对 ISO C 的扩展，包括文件系统接口原
+        语、设备相关的终端控制函数以及进程控制函数。同时，GUN C 函数库还支持部分由
+        ISO/IEC 9945-2:1993（POSIX Shell 和 工具标准，即 POSIX.2）指定的函数，
+        其中包括用于处理正则表达式和模式匹配的函数。</LI>
+    <LI>Berkeley Unix：BSD 和 SunOS。GNU C 函数库定义了某些 UNIX 版本中尚未标准化的函数，
+        尤其是 4.2 BSD, 4.3 BSD, 4.4 BSD Unix 系统（即“Berkeley Unix”)以及“SunOS”
+        （流行的 4.2 BSD 变种，其中包含有某些 Unix System V 的功能）。BSD 函数包括
+        符号链接、select 函数、BSD 信号处理函数以及套接字等等。</LI>
+    <LI>SVID：System V 的接口描述。GNU C 函数库定义了大多数由 SVID 指定而未被 ISO C 
+        和 POSIX 标准指定的函数。来自 System V 的支持函数包括进程间通信和共享内存、
+        hsearch 和 drand48 函数族、fmtmsg 以及一些数学函数。</LI>
+    <LI>XPG：X/Open 可移植性指南。GNU C 函数库遵循 X/Open 可移植性指南（Issue 4.2）
+        以及所有的 XSI（X/Open 系统接口）兼容系统的扩展，同时也遵循所有的 X/Open Unix 
+        扩展。</LI>
 </UL>
 
-<H4>2. ������Ҫ������</H4>
+<H4>2. 其他重要函数库</H4>
 <P>
-�� glibc ֮�⣬���е� Linux ���а��л�������һЩ�����ĺ����⣬��Щ�����������Ҫ��λ��
-���磺</P>
+除 glibc 之外，流行的 Linux 发行版中还包含有一些其他的函数库，这些函数库具有重要地位，
+例如：</P>
 <UL>
-    <LI>GNU Libtool��GNU Libtool ʵ����һ���ű����ɹ��ߣ�������Ϊ�������������ṩһ����
-        �Ĺ�����֧�֡�<BR>
-        ��ǰ�����Դ������Ŀ�����Ҫ���ù�������ŵ㣬�����Ϊÿ����������֧�ֵ�ƽ̨��д
-        ���Ƶ�֧�ִ��롣���һ���Ҫ������ýӿڣ��Ա��������İ�װ�����ܹ���ȷѡ��Ҫ������
-        �����͡����� GNU Libtool������Լ򻯿����ߵ���һ����������һ�������Ľű���ͬʱ��װ
-        ����ƽ̨��ص��������Լ��û����档GNU Libtool ��ʹÿ���������͵��������ܿ�ͨ��
-        һ���ԵĽӿڻ�ã�ͬʱΪ����Ա�����������������ԡ�GNU Libtool һ���Խӿ��ǿɿ��ģ�
-        �û������Ķ���Щ��ɬ���ĵ����Ա���ÿ��ƽ̨�Ͻ��������⡣����ֻ������������������
-        �ű������� libtool ��ɷ����Ĺ�����</LI>
-    <LI>CrackLib��CrackLib Ϊ�û��ṩ��һ�� C ���Ժ����ӿڣ�������һ�������ɱ����û�ѡ��
-        �����ƽ�����롣�ú������������ passwd �ĳ�����ʹ�á�</LI>
-    <LI>LibGTop��LibGTop ��һ���ܹ���ȡ������Ϣ�Լ�ϵͳ������Ϣ�ĺ����⣬��Щ��Ϣ������
-        ϵͳ��һ����Ϣ��SYS V IPC ���ơ������б���������Ϣ������ӳ�䡢�ļ�ϵͳʹ����Ϣ�ȡ�</LI>
-    <LI>ͼ���ļ����������⣺���� libungif��libtiff��libpng��Imlib �ȣ��ɷֱ���������
-        GIF��TIFF��PNG �Լ�����һЩ��ʽͼ���ļ���</LI>
+    <LI>GNU Libtool：GNU Libtool 实际是一个脚本生成工具，它可以为软件包开发者提供一般性
+        的共享库支持。<BR>
+        以前，如果源代码包的开发者要利用共享库的优点，则必须为每个软件包可支持的平台编写
+        定制的支持代码。并且还需要设计配置接口，以便软件包的安装程序能够正确选择要建立的
+        库类型。利用 GNU Libtool，则可以简化开发者的这一工作。它在一个单独的脚本中同时封装
+        了与平台相关的依赖性以及用户界面。GNU Libtool 可使每个宿主类型的完整功能可通过
+        一般性的接口获得，同时为程序员隐藏了宿主的特殊性。GNU Libtool 一致性接口是可靠的，
+        用户不必阅读那些晦涩的文档，以便在每个平台上建立共享库。他们只需运行软件包的配置
+        脚本，而由 libtool 完成繁复的工作。</LI>
+    <LI>CrackLib：CrackLib 为用户提供了一个 C 语言函数接口，利用这一函数，可避免用户选择
+        容易破解的密码。该函数库可在类似 passwd 的程序中使用。</LI>
+    <LI>LibGTop：LibGTop 是一个能够获取进程信息以及系统运行信息的函数库，这些信息包括：
+        系统的一般信息、SYS V IPC 限制、进程列表、进程信息、进程映射、文件系统使用信息等。</LI>
+    <LI>图形文件操作函数库：包括 libungif、libtiff、libpng、Imlib 等，可分别用来操作
+        GIF、TIFF、PNG 以及其他一些格式图形文件。</LI>
 </UL>
 
-<H4>3. ϵͳ����</H4>
+<H4>3. 系统调用</H4>
 <P>
-ϵͳ�����ǲ���ϵͳ�ṩ���ⲿ����Ľӿڡ��� C �����У�����ϵͳ��ϵͳ����ͨ��ͨ��
-�������õ���ʽ��ɣ�������Ϊ��Щ������װ��ϵͳ���õ�ϸ�ڣ���ϵͳ���õ���ڡ������Լ�
-����ֵ�� C ���Եĺ������ù���ʵ�֡��� Linux ϵͳ�У�ϵͳ���ú��������� glibc �С� </P>
+系统调用是操作系统提供给外部程序的接口。在 C 语言中，操作系统的系统调用通常通过
+函数调用的形式完成，这是因为这些函数封装了系统调用的细节，将系统调用的入口、参数以及
+返回值用 C 语言的函数调用过程实现。在 Linux 系统中，系统调用函数定义在 glibc 中。 </P>
 <P>
-̸��ϵͳ����ʱ����Ҫע�����¼��㣺</P>
+谈到系统调用时，需要注意如下几点：</P>
 <UL>
-    <LI>ϵͳ���ú���ͨ���ڳɹ�ʱ���� 0 ֵ�����ɹ�ʱ���ط���ֵ�����Ҫ���ʧ��ԭ����
-        Ҫ�ж� errno ���ȫ�ֱ�����ֵ��errno �а����д�����롣</LI>
-    <LI>����ϵͳ���õķ�������ͨ��ͨ�����ò������ݡ���ʱ����Ҫ�ں��������д���һ��
-        ��������ַ�������ص����ݾͱ����ڸû������С�</LI>
-    <LI>������Ϊϵͳ���ú�����Ҫ������������ִ��Ч�ʸߡ�Ҫע�⣬ϵͳ������һ���ǳ���ʱ
-        �Ĺ��̡�</LI>
+    <LI>系统调用函数通常在成功时返回 0 值，不成功时返回非零值。如果要检查失败原因，则
+        要判断 errno 这个全局变量的值，errno 中包含有错误代码。</LI>
+    <LI>许多系统调用的返回数据通常通过引用参数传递。这时，需要在函数参数中传递一个
+        缓冲区地址，而返回的数据就保存在该缓冲区中。</LI>
+    <LI>不能认为系统调用函数就要比其他函数的执行效率高。要注意，系统调用是一个非常耗时
+        的过程。</LI>
 </UL>
 
 <P>
-�й�ϵͳ�������ǽ����Ժ���ϸ������
+有关系统调用我们将在以后详细讲述。
 </P>
 
-<H3>1.4.3&nbsp;&nbsp;�����ĵ� (man, info, HOW-TO, ...)</H3>
+<H3>1.4.3&nbsp;&nbsp;在线文档 (man, info, HOW-TO, ...)</H3>
 <H4>1. man</H4>
 <P>
-man���� manunal���� UNIX ϵͳ�ֲ�ĵ��Ӱ汾������ϰ�ߣ�UNIX ϵͳ�ֲ�ͨ����Ϊ
-��ͬ�Ĳ��֣���С�ڣ��� section����ÿ��С�ڲ�����ͬ��ϵͳ���ݡ�Ŀǰ��С�ڻ������£�
+man，即 manunal，是 UNIX 系统手册的电子版本。根据习惯，UNIX 系统手册通常分为
+不同的部分（或小节，即 section），每个小节阐述不同的系统内容。目前的小节划分如下：
 </P>
 
 <OL>
-     <LI>�����ͨ�û�����</LI>
-     <LI>ϵͳ���ã��ں˽ӿ�</LI>
-     <LI>��������ã���ͨ�������еĺ���</LI>
-     <LI>�����ļ���/dev Ŀ¼�е������ļ�</LI>
-     <LI>�ļ���ʽ��Լ����/etc/passwd ���ļ��ĸ�ʽ</LI>
-     <LI>��Ϸ��</LI>
-     <LI>�����Լ������׼�ļ�ϵͳ���֡��ֲ�ҳ�ṹ����������</LI>
-     <LI>ϵͳ�������</LI>
-     <LI>�ں����̣��Ǳ�׼���ֲ�С�ڡ����� Linux �ں˵Ŀ���������</LI>
+     <LI>命令：普通用户命令</LI>
+     <LI>系统调用：内核接口</LI>
+     <LI>函数库调用：普通函数库中的函数</LI>
+     <LI>特殊文件：/dev 目录中的特殊文件</LI>
+     <LI>文件格式和约定：/etc/passwd 等文件的格式</LI>
+     <LI>游戏。</LI>
+     <LI>杂项和约定：标准文件系统布局、手册页结构等杂项内容</LI>
+     <LI>系统管理命令。</LI>
+     <LI>内核例程：非标准的手册小节。便于 Linux 内核的开发而包含</LI>
 </OL>
 
 <P>
-�����ֲ�С�ڣ�</P>
+其他手册小节：</P>
 <UL>
-     <LI>l: PostgreSQL ���ݿ�����</LI>
-     <LI>n: TCL/TK ����</LI>
+     <LI>l: PostgreSQL 数据库命令</LI>
+     <LI>n: TCL/TK 命令</LI>
 </UL>
 
 <P>
-�ֲ�ҳһ�㱣���� /usr/man Ŀ¼�£�����ÿ����Ŀ¼���� man1, man2, ..., manl, mann��
-������ͬ���ֲ�С�ڡ�ʹ�� man ����鿴�ֲ�ҳ��</P>
+手册页一般保存在 /usr/man 目录下，其中每个子目录（如 man1, man2, ..., manl, mann）
+包含不同的手册小节。使用 man 命令查看手册页。</P>
 
 <P>
-man �����У�<BR>
+man 命令行：<BR>
 man  [-acdfFhkKtwW]  [-m  system]  [-p  string]  [-C config_file] [-M path] [-P
        pager] [-S section_list] [section] name
 <P>
-���������У�<BR>
+常用命令行：<BR>
 $ man open<BR>
 $ man 7 man<BR>
 $ man ./myman.3<BR>
@@ -174,103 +174,103 @@ $ man ./myman.3<BR>
 
 <H4>2. info</H4>
 <P>
-Linux �еĴ���������������߶��������������������� GNU ��Ŀ����Щ��������
-���������ĵ����� info �ļ�����ʽ���ڡ�info ������ GNU �ĳ��ı�����ϵͳ��
+Linux 中的大多数软件开发工具都是来自自由软件基金会的 GNU 项目，这些工具软件
+件的在线文档都以 info 文件的形式存在。info 程序是 GNU 的超文本帮助系统。
 </P>
 
 <P>
-info �ĵ�һ�㱣���� /usr/info Ŀ¼�£�ʹ�� info ����鿴 info �ĵ���</P>
+info 文档一般保存在 /usr/info 目录下，使用 info 命令查看 info 文档。</P>
 
 <P>
-Ҫ���� info�������� shell ��ʾ�������� info��Ҳ������ GNU �� emacs �м��� Esc-x ��� info��
+要运行 info，可以在 shell 提示符后输入 info，也可以在 GNU 的 emacs 中键入 Esc-x 后跟 info。
 </P>
 
 <PRE>
-info ����ϵͳ�ĳ�ʼ��Ļ��ʾ��һ������Ŀ¼������Խ�����ƶ������� * ������˵����棬Ȼ�󰴻س���
-��������⣬Ҳ���Լ��� m���������˵������ƶ���������⡣���磬����Լ��� m��Ȼ���ټ��� gcc ����
-���� gcc �����С�
-�����Ҫ������֮����ת��������ס���µļ����������
-* n����ת���ýڵ����һ���ڵ㣻
-* p����ת���ýڵ����һ���ڵ㣻
-* m: ָ���˵�����ѡ������һ���ڵ㣻
-* f�����뽻���������⣻
-* l������ô����е����һ���ڵ㣻
-* TAB����ת���ô��ڵ���һ�����ı����ӣ�
-* RET�������괦�ĳ��ı����ӣ�
-* u��ת����һ�����⣻
-* d���ص� info �ĳ�ʼ�ڵ�Ŀ¼��
-* h������ info �̳̣�
-* q���˳� info��
+info 帮助系统的初始屏幕显示了一个主题目录，你可以将光标移动到带有 * 的主题菜单上面，然后按回车键
+进入该主题，也可以键入 m，后跟主题菜单的名称而进入该主题。例如，你可以键入 m，然后再键入 gcc 而进
+进入 gcc 主题中。
+如果你要在主题之间跳转，则必须记住如下的几个命令键：
+* n：跳转到该节点的下一个节点；
+* p：跳转到该节点的上一个节点；
+* m: 指定菜单名而选择另外一个节点；
+* f：进入交叉引用主题；
+* l：进入该窗口中的最后一个节点；
+* TAB：跳转到该窗口的下一个超文本链接；
+* RET：进入光标处的超文本链接；
+* u：转到上一级主题；
+* d：回到 info 的初始节点目录；
+* h：调出 info 教程；
+* q：退出 info。
 </PRE>
 
 <P>#DEMO#</P>
 
 <H4>3. HOW-TO</H4>
 <P>
-�ɹ��û��ο��������ĵ�����һ����ʽ�� HOWTO �ļ�����Щ�ļ�λ��ϵͳ�� /usr/doc/HOWTO Ŀ¼�¡�
-HOWTO �ļ����ļ�������һ�� -HOWTO ��׺�����Ҷ����ı��ļ���</P>
+可供用户参考的联机文档的另一种形式是 HOWTO 文件，这些文件位于系统的 /usr/doc/HOWTO 目录下。
+HOWTO 文件的文件名都有一个 -HOWTO 后缀，并且都是文本文件。</P>
 
 <P>
-ÿһ�� HOWTO �ļ����� Linux ĳһ�������Ϣ��������֧�ֵ�Ӳ������ν���һ�������̡�
+每一个 HOWTO 文件包含 Linux 某一方面的信息，例如它支持的硬件或如何建立一个引导盘。
 </P>
 
 <P>
-Ҫ��鿴��Щ�ļ������� /usr/doc/HOWTO Ŀ¼��ʹ�� more ���������ʽ���£�<BR>
+要想查看这些文件，进入 /usr/doc/HOWTO 目录，使用 more 命令，具体形式如下：<BR>
 $ cd /usr/doc/HOWTO; more <I>topic-name</I>-HOWTO
 </P>
 
 <P>
-���⣬HOWTO �ĵ�����������ʽ���ļ������� HTML �� PS �ȣ������� /usr/doc/HOWTO/other-formats �¡�
+另外，HOWTO 文档还有其他格式的文件，例如 HTML 和 PS 等，保存在 /usr/doc/HOWTO/other-formats 下。
 </P>
 
-<H4>4. ����</H4>
+<H4>4. 其他</H4>
 <P>
-Linux ���ں��ĵ�һ��������ں�Դ�����У�Ŀ¼���£�/usr/src/<I>linux-2.x.x</I>/Documentation
-</P>
-
-<P>
-/usr/doc Ŀ¼�°����д������ض�������������ص�˵�����ĵ���
-</P>
-
-<H3>1.4.4&nbsp;&nbsp;C ���Ա�̷��</H3>
-<P>
-��д��һС�ڵ�Ŀ�������Ѵ���ڱ�̹�����ע���̷�������ֻ���ڱ�дһЩС����ϰ���򣬳���
-ֻ��һ�����г��Ļ�����̷����ܲ�����Ҫ��Ȼ����������������һ����п������������ߣ���ϣ��
-�ڹ�һ��ʱ��֮�󣬻��ܹ���ȷ�����Լ��ĳ���Ļ����ͱ����������õı��ϰ�ߡ��������ϰ�ߵ���
-����̷��������Ҫ��һ�����ݡ�
+Linux 的内核文档一般包含在内核源代码中，目录如下：/usr/src/<I>linux-2.x.x</I>/Documentation
 </P>
 
 <P>
-���õı�̷����������෽�����������Ա��������Ķ��� Linux �ں�Դ����Ļ������ܻ�Գ����
-�����������㵹�����õı�̷��������Ӵ���Ŀɶ��ԣ�������������ͷ�����������ǳ����ң���
-�ſ�һ�۾͸�������ͷת���ˡ���̷����������һ������Ա���ۺ����ʡ�
+/usr/doc 目录下包含有大量与特定软件或函数库相关的说明性文档。
+</P>
+
+<H3>1.4.4&nbsp;&nbsp;C 语言编程风格</H3>
+<P>
+编写这一小节的目的是提醒大家在编程过程中注意编程风格。如果你只是在编写一些小的练习程序，程序
+只有一两百行长的话，编程风格可能并不重要。然而，如果你和许多人一起进行开发工作，或者，你希望
+在过一段时间之后，还能够正确理解自己的程序的话，就必须养成良好的编程习惯。在诸多编程习惯当中
+，编程风格是最重要的一项内容。
+</P>
+
+<P>
+良好的编程风格可以在许多方面帮助开发人员。如果你阅读过 Linux 内核源代码的话，可能会对程序的
+优美编排所倾倒。良好的编程风格可以增加代码的可读性，并帮助你理清头绪。如果程序非常杂乱，大
+概看一眼就该让你晕头转向了。编程风格最能体现一个程序员的综合素质。
 </P>
 <P>
-������߿��ܶ� Windows ���Ƴ������������������Ϥ�����ַ��������˷ǳ����ӵĺ���������������
-�ȵ��������������͵����������ǲ��ô�Сд��д�ķ�ʽ�����ڱ������ƣ����������ǰ׺�İ취����ʾ
-�����ͣ�����:<BR>
+许多读者可能对 Windows 所推崇的匈牙利命名法很熟悉。这种方法定义了非常复杂的函数、变量、类型
+等的命名方法，典型的命名方法是采用大小写混写的方式，对于变量名称，则采用添加前缀的办法来表示
+其类型，例如:<BR>
 char szBuffer[20];<BR>
 int nCount;<BR>
-���� sz �� n �ֱ�����ַ�����������Ϊ�˱�ʾһ���������ƣ��������µı��������ǿ��ܵģ�<BR>
+利用 sz 和 n 分别代表字符串和整数。为了表示一个变量名称，采用如下的变量名称是可能的：<BR>
 int iThisIsAVeryLongVariable;
 </P>
 
 <P>
-�� Linux �У����Ǿ����������Ƕ���ǳ��򵥵ĺ����ӿںͱ������ơ��� Linux �ں˵�Դ�����У����Կ�
-�� Linux �ں�Դ����ı�����˵����<linux_source>/ Documentation/CodingStyle����UNIX ϵͳ��һ��
-�ص�����ƾ��ɣ������ػ�ľʽԭ��C ����������� UNIX ����ϵͳ���� UNIX �����ԭ��һ����
-C ���Ա��㷺�Ͽɺ�ʹ�õ�һ����Ҫԭ��������������Լ�����ԡ���ˣ������� C ���Ա�д����ʱ��
-ʼ��Ӧ��������������ԭ�򣬶���Ӧ��ʹ�÷ǳ����ӵı�������������Linus Ϊ Linux �ں˶���
-�� C ���Ա�����Ҫ�����£�
+在 Linux 中，我们经常看到的是定义非常简单的函数接口和变量名称。在 Linux 内核的源代码中，可以看
+到 Linux 内核源代码的编码风格说明（<linux_source>/ Documentation/CodingStyle）。UNIX 系统的一个
+特点是设计精巧，并遵守积木式原则。C 语言最初来自 UNIX 操作系统，与 UNIX 的设计原则一样，
+C 语言被广泛认可和使用的一个重要原因是它的灵活性以及简洁性。因此，在利用 C 语言编写程序时，
+始终应当符合其简洁的设计原则，而不应当使用非常复杂的变量命名方法。Linus 为 Linux 内核定义
+的 C 语言编码风格要点如下：
 </P>
 
 <OL>
     <LI>
-����ʱ��ʹ�ó���Ϊ 8 ���ַ����� Tab �������������������� 3 ������Ӧ����������Ƴ���
+缩进时，使用长度为 8 个字符宽的 Tab 键。如果程序的缩进超过 3 级，则应考虑重新设计程序。
     </LI>
     <LI>
-�����ŵ�λ�á��������Ķ������⣬Ӧ����������ŷ�����β�������Ҵ����ŷ������ס�
-�����Ķ�����Ӧ�����Ҵ����ŷ������ס�������ʾ��<BR>
+大括号的位置。除函数的定义体外，应当将左大括号放在行尾，而将右大括号放在行首。
+函数的定义体应将左右大括号放在行首。如下所示：<BR>
 int function(int x, int y)<BR>
 {<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (x == y) {<BR>
@@ -286,40 +286,40 @@ int function(int x, int y)<BR>
     </LI>
 
     <LI>
-Ӧ���ü��������������Ա����������޳�ʹ�ô�Сд��д����ʽ��������ʹ�������Ե����ƣ�
-�����ܲ�ʹ��ȫ�ֱ�������������������������ʾ���������ͣ����ö�С���������Ʊ�ʾ�ֲ�������
-���ֺ�����С���Ӷ�����ʹ�ù���ľֲ�������
+应采用简洁的命名方法。对变量名，不赞成使用大小写混写的形式，但鼓励使用描述性的名称；
+尽可能不使用全局变量；不采用匈牙利命名法表示变量的类型；采用短小精悍的名称表示局部变量；
+保持函数短小，从而避免使用过多的局部变量。
     </LI>
 
     <LI>
-���ֺ�����С������
+保持函数短小精悍。
     </LI>
     <LI>
-��Ӧ����ǿ��ע�͵����ã�Ӧ�������úõı�������������ӹ����ע�͡�
+不应过分强调注释的作用，应尽量采用好的编码风格而不是添加过多的注释。
     </LI>
 </OL>
 
-<H3>1.4.5&nbsp;&nbsp;���ͷ�ļ��ı���λ��</H3>
-<H4>1. ������</H4>
+<H3>1.4.5&nbsp;&nbsp;库和头文件的保存位置</H3>
+<H4>1. 函数库</H4>
 <UL>
-    <LI> /lib��ϵͳ�ر������� </LI>
-    <LI> /usr/lib����׼������;�̬�� </LI>
-    <LI> /usr/i486-linux-libc5/lib��libc5 �����Ժ����� </LI>
-    <LI> /usr/X11R6/lib��X11R6 �ĺ����� </LI>
-    <LI> /usr/local/lib�����غ����� </LI>
+    <LI> /lib：系统必备共享库 </LI>
+    <LI> /usr/lib：标准共享库和静态库 </LI>
+    <LI> /usr/i486-linux-libc5/lib：libc5 兼容性函数库 </LI>
+    <LI> /usr/X11R6/lib：X11R6 的函数库 </LI>
+    <LI> /usr/local/lib：本地函数库 </LI>
 </UL>
 
-<H4>2. ͷ�ļ�</H4>
+<H4>2. 头文件</H4>
 <UL>
-    <LI> /usr/include��ϵͳͷ�ļ� </LI>
-    <LI> /usr/local/include������ͷ�ļ� </LI>
+    <LI> /usr/include：系统头文件 </LI>
+    <LI> /usr/local/include：本地头文件 </LI>
 </UL>
 
-<H3>1.4.6&nbsp;&nbsp;�����⼰���������</H3>
+<H3>1.4.6&nbsp;&nbsp;共享库及其相关配置</H3>
 <UL>
-    <LI> /etc/ld.so.conf�����������������λ�� </LI>
-    <LI> ldconfig��������������ߣ�һ���ڸ����˹�����֮��Ҫ���и����� </LI>
-    <LI> ldd���ɲ鿴��ִ���ļ���ʹ�õĹ����� </LI>
+    <LI> /etc/ld.so.conf：包含共享库的搜索位置 </LI>
+    <LI> ldconfig：共享库管理工具，一般在更新了共享库之后要运行该命令 </LI>
+    <LI> ldd：可查看可执行文件所使用的共享库 </LI>
 </UL>
 
 <P>

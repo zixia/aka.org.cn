@@ -4,34 +4,34 @@
     <TITLE>CORBA programming</TITLE>
 </HEAD>
 <BODY>
-<P><A HREF="Corba.html">��һҳ</A>
-<A HREF="Orbit-prog.html">��һҳ</A>
-<P><B><FONT SIZE=+3>CORBA���</FONT></B><P>
-<P><B><FONT SIZE=+2>IDL������ӳ��</FONT></B><P>
-Ҫ����ĳ������ʵ��CORBA IDL����Ķ�����Ҫ��IDL�͸����Լ����ӳ�䣬��Ϊlanguage mapping����Ҳ��CORBA��׼��һ���֡�Ŀǰ���ƶ���ӳ���׼�����԰�����C��C++��Java��Smalltalk��COBOL�ȡ�C��Ϊ����OO�����ԣ�������CORBAӦ���н���ʹ�ã�����ΪGNOME��������Cʵ�ֵģ���������ʹ��C��ӳ�䡣
-<P>GNOME��CORBA ORB��ʵ�ֳ�ΪORBit���ʼGNOME��ʵ���߲�δ����ʵ��һ���Լ���ORB����Ϊ�Ѿ��д�����ѵ�ʵ�֡�����ѡ����MICO,���ܿ췢��MICO��������GNOME��������Ҫ������Elliot Lee��Dick Porter �����Լ���ͷдһ���µķ���Ҫ���ORB�������ORBit��ORBit�ǰ���CORBA2.2��׼д�ģ��ر�������hooksʹ����GNOME��Ӧ�ÿ��ԺܺõĽ�����
-<P>ORBit����Cд�ģ��ǳ�С���ҷǳ��죬ʹ��������Ӧ���ںܶ���ǰ��Ϊ������CORBA�����ĳ��ϡ�������Ҫ�ص㣺
-<P><UL><LI>����C��ʵ�֣�</LI><BR>
-<LI>ִ��Ѹ�٣���ʡʱ�䣻</LI><BR>
-<LI>�ռ�ʹ��Ч�ʺܸߣ�</LI><BR>
-<LI>���ʵ�����⣬����������һ������Ʒ��</LI><BR>
-<LI>��������������</LI><BR></UL>
-<P>ĿǰORBit֧�ֵ����԰�����perl, C++, TCL, Python, Ada, Eiffel��
+<P><A HREF="Corba.html">上一页</A>
+<A HREF="Orbit-prog.html">下一页</A>
+<P><B><FONT SIZE=+3>CORBA编程</FONT></B><P>
+<P><B><FONT SIZE=+2>IDL的语言映射</FONT></B><P>
+要想用某种语言实现CORBA IDL定义的对象，需要在IDL和该语言间进行映射，称为language mapping。这也是CORBA标准的一部分。目前已制定了映射标准的语言包括：C，C++，Java，Smalltalk，COBOL等。C因为不是OO的语言，所以在CORBA应用中较少使用，但因为GNOME基本是用C实现的，所以这里使用C的映射。
+<P>GNOME中CORBA ORB的实现称为ORBit。最开始GNOME的实现者并未打算实现一个自己的ORB，因为已经有大量免费的实现。他们选择了MICO,但很快发现MICO不能满足GNOME开发的需要，于是Elliot Lee和Dick Porter 决定自己从头写一个新的符合要求的ORB，这就是ORBit。ORBit是按照CORBA2.2标准写的，特别是它的hooks使得与GNOME的应用可以很好的交互。
+<P>ORBit是用C写的，非常小而且非常快，使得它可以应用于很多以前认为不适于CORBA技术的场合。它的主要特点：
+<P><UL><LI>基于C的实现；</LI><BR>
+<LI>执行迅速，节省时间；</LI><BR>
+<LI>空间使用效率很高；</LI><BR>
+<LI>解决实际问题，而不仅仅是一个艺术品；</LI><BR>
+<LI>它是自由软件。</LI><BR></UL>
+<P>目前ORBit支持的语言包括：perl, C++, TCL, Python, Ada, Eiffel。
 
-<P><B><FONT SIZE=+2>����˵��</FONT></B><P>
-<P>��дORBit�³��򳣼����⣺
-<P><UL><LI>LD_LIBRARY_PATHδ���壻</LI><BR>
-<LI>IOR�������һ�����з���</LI><BR>
-<LI>���˼���POAManager��</LI><BR></UL>
-<P><B><FONT SIZE=+1>IDL�ļ�</FONT></B><P>
+<P><B><FONT SIZE=+2>举例说明</FONT></B><P>
+<P>编写ORBit下程序常见问题：
+<P><UL><LI>LD_LIBRARY_PATH未定义；</LI><BR>
+<LI>IOR后面跟了一个换行符；</LI><BR>
+<LI>忘了激活POAManager；</LI><BR></UL>
+<P><B><FONT SIZE=+1>IDL文件</FONT></B><P>
 <PRE>
 interface Echo {
 	void echoString(in string input);
 };
 </PRE>
 
-<P><B><FONT SIZE=+1>Client����</FONT></B><P>
-����������1)��ʼ��ORB�� 2)��ö��� 3)ʹ�ö���
+<P><B><FONT SIZE=+1>Client程序</FONT></B><P>
+共分三步：1)初始化ORB， 2)获得对象； 3)使用对象。
 <PRE>
 #include "stdio.h"
 #include "orb/orbit.h"
@@ -128,7 +128,7 @@ main (int argc, char *argv[])
 
 </PRE>
 
-<P><B><FONT SIZE=+1>Server����</FONT></B><P>
+<P><B><FONT SIZE=+1>Server程序</FONT></B><P>
 <PRE>
 #include "stdio.h"
 #include "stdlib.h"
@@ -216,8 +216,8 @@ do_echoString(PortableServer_Servant servant,
 }
 </PRE>
 
-<P><A HREF="Corba.html">��һҳ</A>
-<A HREF="Orbit-prog.html">��һҳ</A>
+<P><A HREF="Corba.html">上一页</A>
+<A HREF="Orbit-prog.html">下一页</A>
 <P>
 </BODY>
 </HTML>

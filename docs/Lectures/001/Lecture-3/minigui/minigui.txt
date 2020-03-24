@@ -1,30 +1,30 @@
-MiniGUI�������:
+MiniGUI简介如下:
 
- MiniGUI ��һ��С��ͼ���û�����֧�ֿ�, ����֧��С��Ƕ��ʽϵͳ��
-��ҵ����ϵͳ. ��ν���, �� MiniGUI ��Ŀ����Ҫ������κ�����򵥽���
-�� MiniGUI Ŀǰ��״���ͽ�һ���ķ�չ����. Ŀǰ, MiniGUI �߱����¹���:
+ MiniGUI 是一种小型图形用户界面支持库, 用于支持小型嵌入式系统或
+工业控制系统. 这次讲座, 由 MiniGUI 项目的主要开发人魏永明简单介绍
+了 MiniGUI 目前的状况和进一步的发展方向. 目前, MiniGUI 具备如下功能:
 
-* ��������߳������еĶര�ڡ�
-* �����߳��������ڵĸ�����
-* Ԥ����Ŀؼ��ࡣ
-* �Ի���
-* ��Ϣ���ݻ��ơ�
-* GDI ������MoveTo��LineTo��FillBox��Rectangle��Circle��TextOut��DrawText�ȵȣ�>��
-* Windows ����Դ�ļ�֧�֣���λͼ�����ڻ���� 256 ɫ����ͼ�ꡢ���ȡ�
-* �������
-* ��ʱ����MSG_TIMER ��Ϣ����
-* ���ټ���
-* GB2312 �ַ���֧�֡�
-* �������뷨֧�֡�
-* GIF �� JPG ֧�֡�
-* ������Beep, ETC/INI �ļ������ȣ���
+* 多个单独线程中运行的多窗口。
+* 单个线程中主窗口的附属。
+* 预定义的控件类。
+* 对话框。
+* 消息传递机制。
+* GDI 函数（MoveTo、LineTo、FillBox、Rectangle、Circle、TextOut、DrawText等等）>。
+* Windows 的资源文件支持，如位图（少于或等于 256 色）、图标、光标等。
+* 插入符。
+* 定时器（MSG_TIMER 消息）。
+* 加速键。
+* GB2312 字符集支持。
+* 汉字输入法支持。
+* GIF 和 JPG 支持。
+* 其他（Beep, ETC/INI 文件操作等）。
 
-MiniGUI ��һ������Ҫ��չ����������:
+MiniGUI 下一步的主要发展开发方向有:
 
-* ���ܵĿ���������, ����֧��Ӧ������Ҫ��.
-* ������Ͷ�����֧��, ���е�����֧��ϣ���ܹ�֧�� PCF �� TTF ����.
-* �ײ�ͼ�ο��� FrameBuffer �� GGI �ϵ�ת��.
-* �������뷨֧��.
-* �ؼ�������.
-* C++ ��̽��, �ɲο� MFC �� QT ʵ��.
-* ����, ��������������.
+* 功能的可配置能力, 便于支持应用特殊要求.
+* 多字体和多语种支持, 其中的字体支持希望能够支持 PCF 和 TTF 字体.
+* 底层图形库向 FrameBuffer 或 GGI 上的转变.
+* 多种输入法支持.
+* 控件的完善.
+* C++ 编程借口, 可参考 MFC 或 QT 实现.
+* 其他, 包括代码整理等.

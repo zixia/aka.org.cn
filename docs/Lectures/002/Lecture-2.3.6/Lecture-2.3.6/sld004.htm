@@ -34,13 +34,13 @@
 <LI><H2>Cache coherence is not enough
 </H2>
 <UL>
-Cache��������Ҫ���Ĳ�ͬ��������ִ�еģ���ͬһ���ڴ�λ�õĶ�д������˳�򡣶�������ʱ��ϣ���ڴ�ϵͳ���ܱ�֤�Բ�ͬ�ڴ�λ�õĶ�д������˳��
+Cache密致性主要关心不同处理器上执行的，对同一个内存位置的读写操作的顺序。而我们有时候希望内存系统，能保证对不同内存位置的读写操作的顺序。
 <BR><BR>(Goodman)
-<BR>Processor Consistency: A multiprocessor is said to be processor consistency if the result of any execution is the same as if the operations of each individual processor appear in the sequential order specified by its program��
+<BR>Processor Consistency: A multiprocessor is said to be processor consistency if the result of any execution is the same as if the operations of each individual processor appear in the sequential order specified by its program。
 <BR>(Gharachorloo)
-<LI>����һȡ������LOAD����ִ��֮ǰ��������ͬһ��������������һLOAD��ȡ������������ɣ�
-<LI>����һ��������STORE����ִ��֮ǰ��������ͬһ��������������һSTORE�ķô����������ȡ�������ʹ���������������ɡ�
-<BR>�ڴ�����һ����ģ���У�ÿ���������ڵ�W��R�ô�����ǿ���Υ���ģ��Ӷ�ʹ��һЩ�����������ƹ���ǰ��д�����ȱ�ִ�У��ڲ��ƻ���ȷ�Ե�ǰ�������ϵͳ�����ܡ�������о����������������һ����ģ���µĳ�������ܱ���˳��һ������Ҫ�߳���Լ30%��
+<LI>在任一取数操作LOAD允许执行之前，所有在同一处理机中先于这一LOAD的取数操作都以完成；
+<LI>在任一存数操作STORE允许执行之前，所有在同一处理机中先于这一STORE的访存操作（包括取数操作和存数操作）都已完成。
+<BR>在处理机一致性模型中，每个处理机内的W→R访存次序是可以违反的，从而使得一些读操作得以绕过以前的写操作先被执行，在不破坏正确性的前提下提高系统的性能。最近的研究结果表明，处理机一致性模型下的程序的性能比在顺序一致性下要高出大约30%。
 <BR>Release Consistency: Spinlock in Linux</UL></UL></P>
 <P>  -->
 </Body>

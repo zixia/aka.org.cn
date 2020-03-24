@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <HTML>
 <HEAD>
-    <TITLE>ʵ�ù���</TITLE>
+    <TITLE>实用工具</TITLE>
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
     <META NAME="AUTHOR" CONTENT="Yongming Wei">
     <META NAME="CREATED" CONTENT="20000329;17342600">
@@ -25,65 +25,65 @@
 <A HREF="make.html"><IMG SRC="prev.gif" ALT="Previous"></A>
 <A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
 
-<H1 ALIGN=CENTER>1.9&nbsp;&nbsp;ʵ�ù���<BR><BR>
+<H1 ALIGN=CENTER>1.9&nbsp;&nbsp;实用工具<BR><BR>
 </H1>
 
 <UL>
-    <LI><P>�������ʽ</LI>
-    <LI><P>ѹ���͹鵵���� (gzip, bzip2, tar, ...)</LI>
-    <LI><P>���������� (grep, find, sort, ...)</LI>
-    <LI><P>�ļ��༭ (sed, tr)</LI>
-    <LI><P>�ļ��Ƚ� (cmp, comm, diff, ...)</LI>
-    <LI><P>���� (ed, emacs, ...)</LI>
+    <LI><P>正则表达式</LI>
+    <LI><P>压缩和归档工具 (gzip, bzip2, tar, ...)</LI>
+    <LI><P>搜索和排序 (grep, find, sort, ...)</LI>
+    <LI><P>文件编辑 (sed, tr)</LI>
+    <LI><P>文件比较 (cmp, comm, diff, ...)</LI>
+    <LI><P>其他 (ed, emacs, ...)</LI>
 </UL>
 
-<H3>1.9.1&nbsp;&nbsp;�������ʽ</H3>
+<H3>1.9.1&nbsp;&nbsp;正则表达式</H3>
 <PRE>
-�������ʽ�� shell�����߳���Perl �������зǳ���Ҫ�ĵ�λ���������ʽͨ��
-һЩ������ű�ʾ�ض����ַ���ģʽ�������������ַ�������
+正则表达式在 shell、工具程序、Perl 语言中有非常重要的地位。正则表达式通过
+一些特殊符号表示特定的字符串模式。常见的特殊字符包括：
 
-�ַ�                ����
-^                   ���ڴ��������ַ���֮ǰ��ƥ�����׵���
-$                   ���ڴ��������ַ���֮��ƥ����ĩ����
-\&lt;                  ƥ��һ���ֵ���ͷ
-\&gt;                  ƥ��һ���ֵ���β
-.                   ƥ�����ⵥ�������ַ�
-[str]               ƥ���ַ��� str �е����ⵥ���ַ�
-[^str]              ƥ�䲻���ַ��� str �е����ⵥ���ַ�
-[a-c]               ƥ��� a �� c ֮�����һ�ַ�
-*                   ƥ��ǰһ���ַ��� 0 �λ��γ���
-\                   ���������ַ������⺬�壬���俴����ͨ�ַ�
+字符                功能
+^                   置于待搜索的字符串之前，匹配行首的字
+$                   置于待搜索的字符串之后，匹配行末的字
+\&lt;                  匹配一个字的字头
+\&gt;                  匹配一个字的字尾
+.                   匹配任意单个正文字符
+[str]               匹配字符串 str 中的任意单个字符
+[^str]              匹配不在字符串 str 中的任意单个字符
+[a-c]               匹配从 a 到 c 之间的任一字符
+*                   匹配前一个字符的 0 次或多次出现
+\                   忽略特殊字符的特殊含义，将其看作普通字符
 
-����������ַ���
-�ַ�                ����
-+                   �ظ�ƥ��ǰһ�� 1 ������
-?                   �ظ�ƥ��ǰһ�� 0 �λ� 1 ��
-{j}                 �ظ�ƥ��ǰһ�� j ��
-{j, }               �ظ�ƥ��ǰһ�� j ������
-{, k}               �ظ�ƥ��ǰһ����� k ��
-{j, k}              �ظ�ƥ��ǰһ�� j �� k ��
-s | t               ƥ�� s �� t �е�һ��
-(exp)               ������ʽ exp ��Ϊ�����
+扩充的特殊字符：
+字符                功能
++                   重复匹配前一项 1 次以上
+?                   重复匹配前一项 0 次或 1 次
+{j}                 重复匹配前一项 j 次
+{j, }               重复匹配前一项 j 次以上
+{, k}               重复匹配前一项最多 k 次
+{j, k}              重复匹配前一项 j 到 k 次
+s | t               匹配 s 或 t 中的一项
+(exp)               将表达式 exp 作为单项处理
 
 </PRE>
 
-<H3>1.9.2&nbsp;&nbsp;ѹ���͹鵵����</H3>
-<P>gzip, bzip2, tar ��</P>
+<H3>1.9.2&nbsp;&nbsp;压缩和归档工具</H3>
+<P>gzip, bzip2, tar 等</P>
 <P>#DEMO#</P>
 
-<H3>1.9.3&nbsp;&nbsp;����������</H3>
+<H3>1.9.3&nbsp;&nbsp;搜索和排序</H3>
 <P>grep find</P>
 <P>#DEMO#</P>
 
-<H3>1.9.4&nbsp;&nbsp;�ļ��༭</H3>
+<H3>1.9.4&nbsp;&nbsp;文件编辑</H3>
 <P>sed, tr</P>
 <P>#DEMO#</P>
 
-<H3>1.9.5&nbsp;&nbsp;�ļ��Ƚ�</H3>
+<H3>1.9.5&nbsp;&nbsp;文件比较</H3>
 <P>cmp, comm, diff, patch</P>
 <P>#DEMO#</P>
 
-<H3>1.9.6&nbsp;&nbsp;����</H3>
+<H3>1.9.6&nbsp;&nbsp;其他</H3>
 <P>ed, vi, emacs</P>
 <P>#DEMO#</P>
 

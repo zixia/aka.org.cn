@@ -1,56 +1,56 @@
 <html>
-<head><title>GIRLģ��</title></head>
+<head><title>GIRL模块</title></head>
 <body>
-<h1 align=center>GIRLģ��</h1>
+<h1 align=center>GIRL模块</h1>
 <hr>
-<p>ÿһ��GIRLԴ�ļ�����һ��GIRLģ�顣Ϊ��֧��ģ�鹦�ܣ�GIRL�����ṩ��������䣨б���ֱ�ʾ
-��������������ڷ������ڵ�����Ϊ��ѡ�������������
+<p>每一个GIRL源文件构成一个GIRL模块。为了支持模块功能，GIRL语言提供了下述语句（斜体字表示
+命令参数。出现在方括号内的内容为可选的命令参数）：
 <a name="girl-statements"></a>
 <ul>
-<li><a href="yacc.html#module">module <i>ģ����</i></a>;
-<p>module������ڸ�����GIRL�ļ���ģ��������һ��GIRL�ļ��У��������һ�������ҽ����ܹ�����
-һ��module��䡣
-<li><a href="yacc.html#version">version <i>���汾��</i>[<i>.�ΰ汾��</i>[<i>.ĩ�汾��</i>]]</a>;
-<p>version���ڸ�����ģ��İ汾�š���һ��GIRL�ļ��У��������һ�������ҽ����ܹ�����һ��version
-��䡣���ĩ�汾�Ų����֣�����0������ΰ汾�Ų����֣�����0��
+<li><a href="yacc.html#module">module <i>模块名</i></a>;
+<p>module语句用于给出本GIRL文件的模块名。在一个GIRL文件中，必须出现一个，并且仅仅能够出现
+一个module语句。
+<li><a href="yacc.html#version">version <i>主版本号</i>[<i>.次版本号</i>[<i>.末版本号</i>]]</a>;
+<p>version用于给出本模块的版本号。在一个GIRL文件中，必须出现一个，并且仅仅能够出现一个version
+语句。如果末版本号不出现，则看作0。如果次版本号不出现，则看作0。
 </ul>
-<p>GIRLԴ�ļ�����������girlc����󣬽����������ļ���.i.h��.i.c��.i.cpp����GIRLԴ�ļ��п���
-����������ʽ����ֱ�ӱ�������girlc���ɵ�ͷ�ļ���Դ�ļ������ݣ�
+<p>GIRL源文件经过编译器girlc编译后，将生成两个文件：.i.h、.i.c或.i.cpp。在GIRL源文件中可以
+按照如下形式给出直接被插入由girlc生成的头文件和源文件的内容：
 <ul>
-<li>������"#{"��"#}"֮������ݣ�����������GIRLԴ�ļ��г��ֵ�˳�������girl�����������ͷ�ļ��У�
-<li>������"%{"��"%}"֮�䡢���߳�����"%%{"��"%%}"֮������ݣ�����������GIRLԴ�ļ��г��ֵ�˳���
-����girl�����������C/C++Դ�ļ��С����У�"%{"��"%}"��ʾϣ��GIRL����C���Է�ʽ���CԴ�ļ���"%%{"
-��"%%}"��ʾϣ��GIRL����C++���Է�ʽ���C++Դ�ļ�����һ��GIRLԴ�ļ��У�ֻҪ������һ��"%%{""%%}"
-�ṹ���Ͱ���C++��ʽ���C++Դ�ļ���
+<li>出现在"#{"和"#}"之间的内容，将被按照在GIRL源文件中出现的顺序插入由girl编译器输出的头文件中；
+<li>出现在"%{"和"%}"之间、或者出现在"%%{"和"%%}"之间的内容，将被按照在GIRL源文件中出现的顺序插
+入由girl编译器输出的C/C++源文件中。其中，"%{"和"%}"表示希望GIRL按照C语言方式输出C源文件。"%%{"
+和"%%}"表示希望GIRL按照C++语言方式输出C++源文件。在一个GIRL源文件中，只要出现了一个"%%{""%%}"
+结构，就按照C++方式输出C++源文件。
 </ul>
-<p>Ϊ����C/C++Эͬ������GIRLģ������ܹ���C/C++�����ʡ�Ϊ�ˣ�GIRL�ṩ�����к�����
+<p>为了与C/C++协同工作，GIRL模块必须能够被C/C++所访问。为此，GIRL提供了下列函数：
 <ul>
-<li>girl *girl_initialize_module_ģ����(void);
-<p>�ú������ڴ���ģ�����Ϊ�˱���C/C++��������ͻ���������к���ģ�������ú���������girlc����
-��ͷ�ļ��и���˵���������������ͷ�ļ�֮��Ϳ���ֱ�ӵ����ˡ����ֵ��÷�ʽ�������ڱ���ʱ���ӵ�
-GIRLģ�飬Ҳ������Plug-in����ǰ����Ӧ�ó������֪����Ҫ������ģ������
+<li>girl *girl_initialize_module_模块名(void);
+<p>该函数用于创建模块对象。为了避免C/C++函数名冲突，函数名中含有模块名。该函数将在由girlc生成
+的头文件中给出说明。在引入了这个头文件之后就可以直接调用了。这种调用方式即适用于编译时连接的
+GIRL模块，也适用于Plug-in。但前提是应用程序必须知道需要创建的模块名。
 <li>ghandle girl_install_module(girl *pgirl);
-<p>�ú������ڰ�װ����ģ�顣����ģ�����������װ���ɹ�������ghnull��
+<p>该函数用于安装给定模块。返回模块句柄。如果安装不成功，返回ghnull。
 <li>ghandle girl_install_module_check(girl *pgirl,gint major_req,gint minor_req,gint micro_req);
-<p>�ú����ڰ�װ����ģ��֮ǰ���ȼ��ģ��汾�š�����汾�Ų�������Ҫ���������˳����Ҹ���������Ϣ��
-����������Ϣ�ķ�ʽ��<a href="application.html#check_version">girl_check_version</a>�ķ�ʽ��ȫ��ͬ��
+<p>该函数在安装给定模块之前首先检测模块版本号。如果版本号不能满足要求，则立即退出并且给出出错信息。
+给出错误信息的方式与<a href="application.html#check_version">girl_check_version</a>的方式完全相同。
 <li>gint girl_get_module_major_version(ghandle hgirl);
-<p>�ú������ظ���ģ������汾�š�
+<p>该函数返回给定模块的主版本号。
 <li>gint girl_get_module_minor_version(ghandle hgirl);
-<p>�ú������ظ���ģ��Ĵΰ汾�š�
+<p>该函数返回给定模块的次版本号。
 <li>gint girl_get_module_micro_version(ghandle hgirl);
-<p>�ú������ظ���ģ���ĩ�汾�š�
+<p>该函数返回给定模块的末版本号。
 <li>void girl_uninstall_module(ghandle hgirl);
-<p>�ú�������ж�ظ���ģ�顣girl_uninstall_module��������Ҫ�Զ��ͷ�ģ��ռ�õ�ϵͳ��Դ��
+<p>该函数用于卸载给定模块。girl_uninstall_module将根据需要自动释放模块占用的系统资源。
 <li>ghandle girl_get_handle(const char *identifier);
-<p>�ú������ڻ�ȡָ����ʶ������Ӧ�ľ����
+<p>该函数用于获取指定标识符所对应的句柄。
 </ul>
 <hr>
 <table align=center width=100% border=2><tr>
-<td><center><a href="index.html">������ҳ</a></center>
-<td><center><a href="application.html">��һҳ��Ӧ�ó��������</a></center>
-<td><center><a href="comment.html">��һҳ��GIRLԴ�ļ��е�ע�ͺͺ��滻</a></center>
-<td><center><a href="malito:blazing@263.net">������ϵ</a></center>
+<td><center><a href="index.html">返回首页</a></center>
+<td><center><a href="application.html">上一页：应用程序服务函数</a></center>
+<td><center><a href="comment.html">下一页：GIRL源文件中的注释和宏替换</a></center>
+<td><center><a href="malito:blazing@263.net">与我联系</a></center>
 </tr></table>
 </body>
 </html>

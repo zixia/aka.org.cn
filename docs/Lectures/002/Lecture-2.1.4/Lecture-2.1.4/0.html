@@ -1,36 +1,36 @@
 <html>
 <head>
-<title>  Ŀ¼�ṹ </title>
+<title>  目录结构 </title>
 </head>
 
 <body>
-<h1 align=center>CVS �� automake</h1>
+<h1 align=center>CVS 和 automake</h1>
 
-<h2 align=center>Ŀ¼</h2>
-<h3 align=center><a href=100.html>һ��CVS</a></h3>
-<h3 align=center><a href=200.html>����Automake</a></h3>
-<h3 align=center><a href=300.html>���������Ż�</a></h3>
+<h2 align=center>目录</h2>
+<h3 align=center><a href=100.html>一、CVS</a></h3>
+<h3 align=center><a href=200.html>二、Automake</a></h3>
+<h3 align=center><a href=300.html>三、代码优化</a></h3>
 <h3 align=center>&nbsp;</h3>
 <h3 align=center>&nbsp;</h3>
-<h3 align=left><font size="3">��¼������automake/conf��<a href="CVS-automake-autoconf.doc">Word�ļ�</a></font></h3>
+<h3 align=left><font size="3">附录：关于automake/conf的<a href="CVS-automake-autoconf.doc">Word文件</a></font></h3>
 <h3 align=left>&nbsp;</h3>
-<h3 align=left><font color="#0000FF">ϰ�⣺</font></h3>
-<h3 align=left>1���ڱ���ʹ�� root �˺Ŵ���һ���ֿ⣬Ȼ��ʹ���������ϵ���ͨ�˺ŶԲֿ�ʹ�� cvs checkout ���������°汾����ע��Բֿ�Ȩ�޵����ã��� 
+<h3 align=left><font color="#0000FF">习题：</font></h3>
+<h3 align=left>1。在本地使用 root 账号创建一个仓库，然后使用两个以上的普通账号对仓库使用 cvs checkout 命令，获得最新版本。（注意对仓库权限的设置）。 
   <br>
   <br>
-  2����һ����ͨ�˺ţ�ʹ�� cvs �ı�ǹ��ܣ����ж�� commit ���ܣ�Ȼ������ǰĳ���汾�� <br>
+  2。用一个普通账号，使用 cvs 的标记功能，进行多次 commit 功能，然后获得以前某个版本。 <br>
   <br>
-  3��ʹ�� root �˺ţ��鿴�ڸ��°汾ʱ���ֿ����ļ��ı仯�� <br>
+  3。使用 root 账号，查看在更新版本时，仓库中文件的变化。 <br>
   <br>
-  4������ս����ϵ�ͼ���Լ�����һ������ Makefile �Ĳ���ͼ������ʹ�������������ļ�֮��Ĺ�ϵ�� <br>
+  4。请参照讲义上的图，自己画出一个制作 Makefile 的步骤图，标明使用软件和生成文件之间的关系。 <br>
   <br>
-  5�����Լ�дһ�����򣬽� .h �ļ��� .c �ļ����ڲ�ͬ��Ŀ¼�У�ʹ�� autoconf �� automake ����Makefile��<br>
+  5。请自己写一个程序，将 .h 文件和 .c 文件放在不同的目录中，使用 autoconf 和 automake 制作Makefile。<br>
   <br>
-  6�����ȴ���һ��Ŀ¼������ sample��Ȼ���ڸ�Ŀ¼�´������ɸ���Ŀ¼������ step1��step2 �ȡ�����ÿ����Ŀ¼�д���һ���򵥵�С�������ʹ�� 
-  autoconf �� automake �� sample Ŀ¼�д���һ�� Makefile����ͬʱ��ÿ����Ŀ¼��Ҳ���� Makefile��ʹ���� sample 
-  ��ʹ��һ�� make ������ܱ����������Ŀ¼�еĿ�ִ���ļ��� <br>
+  6。请先创建一个目录，比如 sample，然后在该目录下创建若干个子目录，比如 step1，step2 等。并在每个子目录中创建一个简单的小程序。最后使用 
+  autoconf 和 automake 在 sample 目录中创建一个 Makefile，并同时在每个子目录中也创建 Makefile，使得在 sample 
+  中使用一次 make 命令，就能编译出所有子目录中的可执行文件。 <br>
   <br>
-  7����ϸ�Ķ� <a href="http://www.minigui.org">minigui</a> �� configure �ļ��� Makefile��Ū��ÿһ�����Ǹ�ʲô�����ġ� 
+  7。仔细阅读 <a href="http://www.minigui.org">minigui</a> 的 configure 文件和 Makefile，弄懂每一步都是干什么工作的。 
   <br>
 </h3>
 </body>

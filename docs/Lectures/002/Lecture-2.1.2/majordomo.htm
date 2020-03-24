@@ -5,108 +5,108 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312">
 
 <BODY bgcolor=000000 link=#eeff00 vlink=#00e text=#ffffff>
-��ר����ܡ� 
+【专题介绍】 
 <center>
-                  ���ģ�����������Ҫ����֮��������<br>
+                  大规模计算机网络主要服务之管理方法<br>
                                 (2)
 <p>
-                      �����ʼ����������ɷ���(5) 
+                      电子邮件环境的生成方法(5) 
 </center>
 <p>
-3.2 �й�ģ�ʼ����������Majordom
+3.2 中规模邮件组管理软件Majordom
 <p>
-  ǰһ���������ܵķ�����Ȼ��,����ȴ����һЩ����.
+  前一节中所介绍的方法虽然简单,但是却存在一些问题.
 <dt><dl>
-<dt>  (1) ���ʼ���Ĳμ���������ʱ,��¼�������ֹ��������鷳�����׳���.
-<dt>  (2) �޷�Ӧ��������û�Ҫ��.����,�ʼ�����ż��Զ���ִ,�鿴�μ�����Ϣ��.
-<dt>  (3) �����ڶ����ʼ����ͳһ����,�Ͷ�Ͷ���ߵ�Ͷ����������.
-<dt>  (4) ���������˷���Ϣ,CPU��Դռ�ýϴ�.
+<dt>  (1) 当邮件组的参加人数过多时,登录管理等手工工作既麻烦又容易出错.
+<dt>  (2) 无法应付更多的用户要求.例如,邮件组的信件自动回执,查看参加者信息等.
+<dt>  (3) 不利于多种邮件组的统一管理,和对投稿者的投稿活动加以限制.
+<dt>  (4) 容易生成退返信息,CPU资源占用较大.
 </dl>
-  �Բμ������϶���д����ʼ���, ��Ҫ����ר�õĹ�������.Ŀǰ,�Ƚϳ��õ���
-�������кܶ�.����,��������������һ������Majordomo�������ʼ���ķ���.
+  对参加人数较多的中大型邮件组, 需要采用专用的管理软件.目前,比较常用的这
+类软件有很多.这里,让我们先来介绍一下利用Majordomo来建立邮件组的方法.
 <p>
 3.2.1 Majordomo
 <p>
-  MajordomoΪ���ԶԶ���ʼ�������Զ�������Perl�����. ����Majordomo����
-�Զ��ع����û���¼,�˳�,�û���Ѱ,������һЩ�û�����.�����Խ���һЩ���õ�
-�ܿ��ʼ���(moderated list), �Բμ���,���μ�����Ͷ�ݵĸ���Ƚ��м��,����
-�������Ա�þ��Ƿ�����û�����. ϵͳ����Ա����ͨ�������ʼ����ʼ�����п�
-��.
+  Majordomo为可以对多个邮件组进行自动处理的Perl程序包. 利用Majordomo可以
+自动地管理用户登录,退出,用户查寻,和其他一些用户请求.并可以建立一些常用的
+受控邮件组(moderated list), 对参加者,及参加者所投递的稿件等进行监控,由邮
+件组管理员裁决是否接受用户请求. 系统管理员可以通过电子邮件对邮件组进行控
+制.
 <p>
-  Majordom�������е��������ļ��Ժ���ά����. ����һ�������ʼ��������
-��Listproc/ListServe���,Majordomo�Ƚ�����Ϊ����������, �����ʼ��������
-����ԱѸ�ٽ����ʼ���.����,����Majordomo����Perl���������ɵ�,��ͨPerl����
-�Ĺ���Ա���԰����Լ�����Ҫ�Ķ�����,�����ʺ����Լ����ʼ���ϵͳ.
+  Majordom的最大的有点在于它的简单性和易维护性. 与另一个大型邮件组管理软
+件Listproc/ListServe相比,Majordomo比较容易为人们所理解, 便于邮件组的新手
+管理员迅速建立邮件组.另外,由于Majordomo是用Perl程序所构成的,精通Perl程序
+的管理员可以按照自己的需要改动程序,构筑适合于自己的邮件组系统.
 <p>
-  ����Majordomo�����ʼ���ʱ,��Ҫ�õ�Perl���򻷾�. Perl����İ�װ������˵
-���뱾����Ŀ���޹�,��������ʡ��.���λ���߲�����Ӧ�����Լ�׼���ù�������.
+  利用Majordomo建立邮件组时,需要用到Perl程序环境. Perl程序的安装方法等说
+明与本连载目的无关,这里予以省略.请各位读者参照相应文献自己准备好工作环境.
 <p>
-3.2.2 ��װMajordomo������
+3.2.2 安装Majordomo服务器
 <p>
-  (1) ׼������<br>
-      ��Ӹ���FTP����������majordom�����°�.��ǰ(1997��4��)�����°�Ϊ:
+  (1) 准备工作<br>
+      请从各大FTP服务器下载majordom的最新版.当前(1997年4月)的最新版为:
 <p>
       majoedomo-1.94.1.tar.gz
 <p>
-      ʹ�øð汾ʱ��Ҫ�õ�5.001���ϵ�Perl.<br>
-      Ϊ������majordomo��ҪΪ������û�ID(user id)���û���ID(group id).
-      ����majordomo���û���һ��Ϊmajordom. ͬʱΪ�˷���,����Ҳ���Բ���ͬ
-      ��������. ����ٶ�UID=1000,GID=1000,���majordomo����,�������ʼ���
-      ���û���Ŀ¼Ϊ/home/majordomo.
+      使用该版本时需要用到5.001以上的Perl.<br>
+      为了运行majordomo需要为其决定用户ID(user id)和用户组ID(group id).
+      运行majordomo的用户名一般为majordom. 同时为了方便,组名也可以采用同
+      样的名称. 这里假定UID=1000,GID=1000,存放majordomo程序,及建立邮件组
+      的用户根目录为/home/majordomo.
 <p>
-      ��vipw����༭/etc/passwd�ļ������û���:<br>
+      用vipw命令编辑/etc/passwd文件添加用户名:<br>
       % vipw<br>
       majordom:*:1000:1000:Majordomo Server:/home/majordomo:
 <p>
-      �༭/etc/group�ļ������û�����:<br>
+      编辑/etc/group文件添加用户组名:<br>
       % vi /etc/group<br>
       majordom:*:1000:majordom
 <p>
-      ����majordom���û���Ŀ¼:<br>
+      建立majordom的用户根目录:<br>
       % mkdir /home/majordomo<br>
       % chown majordom.majordom /home/majordomo<br>
       % chmod 755 /home/majordomo
 <p>
-  (2) չ��Դ����
+  (2) 展开源程序
 <p>
-      ����ٶ�չ����/pub/mailĿ¼��.<br>
+      这里假定展开在/pub/mail目录下.<br>
       % cd /home/mail<br>
       % gtar -zxvf majordomo-1.94.1.tar.gz<br>
-      (ע��,û��GNU tar ʱ: gzcat majordomo-1.94.1.tar.gz|tar xvf -)<br>
+      (注意,没有GNU tar 时: gzcat majordomo-1.94.1.tar.gz|tar xvf -)<br>
       % cd majordomo-1.94.1
 <p>
-  (3) ������ڻ����޸�Makefile�ļ�
+  (3) 针对所在环境修改Makefile文件
 <p>
-      �޸�perl����·��<br>
+      修改perl程序路径<br>
       PERL=/usr/local/bin/perl 
 <p>
-      ָ����������<br>
+      指定编译命令<br>
       CC = gcc<br>
-      (Solarisϵͳʱ��ʹ��/opt/SUNWspro/bin/cc)
+      (Solaris系统时请使用/opt/SUNWspro/bin/cc)
 <p>
-      �趨W_HOME����,ָ��majordomo·��(�ʼ����Ŀ¼)<br>
+      设定W_HOME参数,指定majordomo路径(邮件组根目录)<br>
       W_BIN= /home/majordomo
 <p>
-      ָ��UID��GID<br>
+      指定UID和GID<br>
       W_USER  = 1000<br>
       W_GROUP = 1000
 <p>
-      ָ�������ֲ��ļ����λ��<br>
+      指定联机手册文件存放位置<br>
       MAN = /usr/local/man
 <p>
-      ��POSIXϵͳ(Sun Solaris, SGI Irix 5 and 6, Dec Ultrix MIPS, # BSDI
-      or other 4.4-based BSD, Linux)ָ�����²���:<br>
+      对POSIX系统(Sun Solaris, SGI Irix 5 and 6, Dec Ultrix MIPS, # BSDI
+      or other 4.4-based BSD, Linux)指定以下参数:<br>
       WRAPPER_OWNER = root<br>
       WRAPPER_GROUP = $(W_GROUP)<br>
       WRAPPER_MODE = 4755<br>
       POSIX = -DPOSIX_UID=$(W_USER) -DPOSIX_GID=$(W_GROUP)
 <p>
-  (4) ���ɸ�ʽ�ļ�majordomo.cf
+  (4) 生成格式文件majordomo.cf
 <p>
-      �޸�Դ�������������ĸ�ʽ�ļ�����sample.cf������majordomo.cf.<br>
+      修改源程序中所附带的格式文件样本sample.cf来生成majordomo.cf.<br>
       % cp sample.cf majordomo.cf
 <p>
-      �޸����²���:<br>
+      修改以下参数:<br>
       $whereami = "mailserv.domain";<br>
       $homedir = "/home/majordomo";<br>
       $listdir = "/home/majordomo/lists";<br>
@@ -114,38 +114,38 @@
       $log = "$homedir/Majordomo.log";<br>
       $sendmail_command = "/usr/lib/sendmail";
 <p>
-  (5) ����Դ����װִ���ô���
+  (5) 编译源程序安装执行用代码
 <p>
       % make install<br>
       % make install-wrapper
 <p>
-      ������ֱ��������ִ�� make clean,Ȼ�����޸�Makefile�ļ�,���±���.
-      (��ע��wrapper���û�����ΪrootȨ��ֵΪ4755).
+      如果出现编译错误请执行 make clean,然后再修改Makefile文件,重新编译.
+      (请注意wrapper的用户属性为root权限值为4755).
 <p>
-      �����ʼ�������Ŀ¼:<br>
+      生成邮件组存放用目录:<br>
       % mkdir /home/majordomo/lists<br>
       % chown majordom.majordom /home/majordomo/lists
 <p>
-  (6) ���԰�װ�������ʽ�ļ��趨�Ƿ����:
+  (6) 测试安装结果及格式文件设定是否合适:
 <p>
       % cd /home/majordomo <br>
       % ./wrapper config-test<br>
-      ���perl�İ汾����ʱ�����һЩ������Ϣ,��ʱ�����perl�汾.
+      如果perl的版本过低时会出现一些错误信息,这时请更新perl版本.
 <p>
-      �޸�/etc/aliases�ļ�(SolarisʱΪ/etc/mail/aliases),׷����������:<br>
+      修改/etc/aliases文件(Solaris时为/etc/mail/aliases),追加以下内容:<br>
       #<br>
       # majordomo 1.94.1<br>
       #<br>
-      owner-owner: mlmaster (�����������ID)<br>
+      owner-owner: mlmaster (请填入管理者ID)<br>
       majordomo: "|/home/majordomo/wrapper majordomo"<br>
       majordom: majordomo<br>
-      majordomo-owner: mlmaster (�����������ID)<br>
-      owner-majordomo: mlmaster (�����������ID)
+      majordomo-owner: mlmaster (请填入管理者ID)<br>
+      owner-majordomo: mlmaster (请填入管理者ID)
 <p>
-      Ȼ��ִ��newaliases����,ʹ�趨��Ч.
+      然后执行newaliases命令,使设定生效.
 <p>
-      ��majordom@mailserve.domain�����ż����з�������������,���ִ�н��
-      ����,�������Ϊ��װ��������:
+      向majordom@mailserve.domain发送信件进行服务器动作测试,如果执行结果
+      如下,则可以认为安装工作正常:
 <p>
       % mail -v majordom@mailserve.domain<br>
       Subject: <br>
@@ -157,7 +157,7 @@
       "|/home/majordomo/wrapper majordomo"... Connecting to prog...<br>
       "|/home/majordomo/wrapper majordomo"... Sent<br>
 <p> 
-      ��ʱ,�����յ�һ���ִ�ż�:<br>
+      这时,可以收到一封回执信件:<br>
       % mail<br>
       >N  6 Majordomo  Sun Apr 13 13:32  19/678  "Majordomo results"<br>
       & (CR)<br>
@@ -176,42 +176,42 @@
 <p>
       &
 <p>
-      ������δ�����ʼ���,�����������������.
+      由于尚未建立邮件组,因此这个结果是正常的.
 <p>
-  ����Ϊֹ,���û�г���ʲô����������İ�װ����������.��������Ҫ���ֽ�
-���ʼ���.
+  至此为止,如果没有出现什么问题服务器的安装工作便告结束.接下来需要着手建
+立邮件组.
 <p>
-3.2.3 �����ʼ���
+3.2.3 建立邮件组
 <p>
-  ����,������������һ������Ϊ"majo"���ʼ���.�ʼ���"majo"��ʵ�彫����װ��
-/home/majordomo/listsĿ¼��.
+  这里,让我们来建立一个名称为"majo"的邮件组.邮件组"majo"的实体将被安装到
+/home/majordomo/lists目录下.
 <p>
-  (1) ��¼�ʼ���
+  (1) 登录邮件组
 <p>
-      �ٶ�"majo"�Ĺ���ԱΪ"mlmaster".
+      假定"majo"的管理员为"mlmaster".
 <p>
-      �����ʼ���ע���ļ�:<br>
+      生成邮件组注册文件:<br>
       % touch /home/majordomo/lists/majo
 <p>
-      �����ʼ��������ͨ�����ļ�:<br>
+      建立邮件组管理者通行字文件:<br>
       % vi /home/majordomo/lists/majo.passwd<br>
-      major-pass	(����ͨ����)
+      major-pass	(填入通行字)
 <p>
-      �����ʼ������ݼ���ļ�,�����ʼ���"majo"�ļ򵥽���:<br>
+      生成邮件组内容简介文件,填入邮件组"majo"的简单介绍:<br>
       % vi /home/majordomo/lists/majo.intro<br>
-      !!��ӭ���μӱ��ʼ���!!
+      !!欢迎您参加本邮件组!!
 <p>
-      �����ʼ���ļ�ʹ��˵���ļ�:<br>
+      生成邮件组的简单使用说明文件:<br>
       % vi /home/majordomo/lists/majo.info<br>
-      !!��ӭ���μӱ��ʼ���!!<br>
-      ���ʼ����ڿ���ʹ����������:<br>
+      !!欢迎您参加本邮件组!!<br>
+      本邮件组内可以使用以下命令:<br>
       .......
 <p>
-      �޸��ļ�����Ȩ�޼�����:<br>
+      修改文件处理权限及属性:<br>
       % chown majordom.majordom /home/majordomo/lists/majo.*
 <p>      
-      �޸�/etc/aliases�ļ�,׷����������(ע��,���з�����,�����м������ʵ�
-      �ػ���:
+      修改/etc/aliases文件,追加以下内容(注意,因行幅所限,下例中加入了适当
+      地换行:
 <pre>
       #
       majo:"|/home/majordomo/wrapper resend -l majo -h mailserv.domain 
@@ -223,20 +223,20 @@
       majo-owner: owner-majo
 </pre>
 
-      Ȼ��ִ��newaliases����,ʹ�趨��Ч.
+      然后执行newaliases命令,使设定生效.
 <p>
-  (2) ��¼�μ���
+  (2) 登录参加者
 <p>
-      ����ֱ�ӱ༭/home/majordomo/lists/majo�ļ�,�ڸ��ļ�������μ��ߵ�
-      ַ.Ҳ������Email�����е�¼.
+      可以直接编辑/home/majordomo/lists/majo文件,在该文件中填入参加者地
+      址.也可以用Email来进行登录.
 <p>
       % mail majordom@mailserv.domain<br>
       Subject: <br>
-      subscribe major user@host.domain (�����¼��ַ)
+      subscribe major user@host.domain (填入登录地址)
       .
 <p>
-      �����¼�ɹ�,������յ�һ������majordom@mailserv.domain���ż�.����
-      ����:
+      如果登录成功,则可以收到一封来自majordom@mailserv.domain的信件.内容
+      如下:
 <pre>
       >>>> subscribe majo user@host.domain
       Your request to Majordomo@mailserv.domain
@@ -262,7 +262,7 @@
 
       Majordomo@mailserv.domain
 </pre>
-    ���ʼ������Աmlmaster�������յ�һ�������ż�,��������:
+    在邮件组管理员mlmaster处将会收到一封许可信件,内容如下:
 <pre>
      user@host.domain <usr> requests that you approve the following:
 
@@ -280,223 +280,223 @@
 
      Majordomo@mailserv.domain
 </pre>
-   �������Աͬ�������¼,����Ը�majordom����,������д������һ������:
+   如果管理员同意这项登录,则可以给majordom回信,在信中写入以下一行内容:
 <pre>
     approve majo.pass subscribe majo user@host.domain
             ^^^^^^^^^
-            ����Ϊ/home/majordomo/lists/majo.passwd������¼������.
+            这里为/home/majordomo/lists/majo.passwd中所登录的内容.
 </pre>
    
-   ���ɳɹ�ʱ, ����Ա(mlmaster)���յ�һ����(Subject)Ϊ"SUBSCRIBE majo"��
-   �ż�.��������:
+   许可成功时, 管理员(mlmaster)将收到一封题(Subject)为"SUBSCRIBE majo"的
+   信件.内容如下:
  <p> 
     user@host.domain has been added to majo.
 <p> 
-   ͬʱ, �ڵ�¼��(user@host.domain)�������յ�һ����Ϊ"Welcome to majo"��
-   �ż�.�����н����м򵥵Ĳμ����˳�����˵��,��major.intro�е�����.
+   同时, 在登录者(user@host.domain)处将会收到一封题为"Welcome to majo"的
+   信件.内容中将含有简单的参加与退出方法说明,及major.intro中的内容.
 <p>
-   ����,Ҳ�����߻���:Ϊʲô��¼������������? <br>
-   Ҫ�ش���һ�����������һ��"�ʼ���ĸ�ʽ�ļ��趨".
+   这里,也许读者会问:为什么登录手续这样繁杂? <br>
+   要回答这一问题请参阅下一节"邮件组的格式文件设定".
 <p>
-3.2.4 �ʼ���ĸ�ʽ�ļ��趨
+3.2.4 邮件组的格式文件设定
 <p> 
-   ���������ʼ���"majo"Ϊ������˵��.
+   这里扔以邮件组"majo"为例进行说明.
 <p>
-   �������ɵĸ����ʼ���ĸ�ʽ�ļ�����Ҫ���������趨����,��������������
-   ��.<br>
-   (ע��,�ڳ�ʼ����ʱ,�ø�ʽ�ļ�,���������е�majo.config��������. ���û�
-   ��Majordomo���������������ż�ʱ,ϵͳ�����Զ�����һ��ʡȱ��ʽ�ļ�,����
-   ���ԶԸ��ļ������Ķ�, ���������Լ����ʼ���ĸ�ʽ�ļ�,�Ա���ʼ������
-   ����.)
+   在所生成的各个邮件组的格式文件中主要含有以下设定参数,请根据所需加以设
+   定.<br>
+   (注意,在初始生成时,该格式文件,例如上例中的majo.config并不存在. 当用户
+   向Majordomo服务器发送请求信件时,系统将会自动生成一个省缺格式文件,读者
+   可以对该文件稍作改动, 即可生成自己的邮件组的格式文件,以便对邮件组加以
+   控制.)
 <dl>
-<dt>   admin_passwd = �ַ���
-<dd>       �ʼ��������ͨ����.ʡȱֵΪmajo.passwd�ļ����趨ֵ. 
-<dd>       ʡȱֵΪmajo.admin
-<dd>       ��: admin_passwd = majo.pass
+<dt>   admin_passwd = 字符串
+<dd>       邮件组管理者通行字.省缺值为majo.passwd文件中设定值. 
+<dd>       省缺值为majo.admin
+<dd>       例: admin_passwd = majo.pass
 <p>
 <dt>   administrivia = yes/no
-<dd>       yes: majordomo�����յ����ż��н������μ���,��ȡ������.����,������
-            (Subject),���ż�����ǰ�������Ƿ�Ϊ��д��Сд��"subscribe",��
-            "unsubscribe"; �Ƿ���"help"��"RCPT:"��Ϣ;�Ƿ���"change..
-            .address"����Ϣ.���������������Ϣ, ����Ӧ���ż����͸��ʼ�
-            �����Ա.�ʼ������Ա����ͨ���������ż�����"Approved:"��ͷ��
-            �����û�����.
-<dd>        no: ֻ����һ����������.
-<dd>       ʡȱֵΪyes.
+<dd>       yes: majordomo在所收到的信件中进行两次检索,抽取命令行.例如,标题行
+            (Subject),或信件正文前五行中是否为大写或小写的"subscribe",或
+            "unsubscribe"; 是否含有"help"或"RCPT:"信息;是否含有"change..
+            .address"等信息.如果发现了这类信息, 则将相应的信件传送给邮件
+            组管理员.邮件组管理员可以通过给回送信件添加"Approved:"信头来
+            处理用户请求.
+<dd>        no: 只进行一次上述检索.
+<dd>       省缺值为yes.
 <p>
 <dt>    advertise <<  END
-<dd>    �������
-<dd>    �������
+<dd>    正规表现
+<dd>    正规表现
 <dd>    ...
 <dd>    END
-<dd>       ���յ�����lists(�ʼ����б�)����������ż�ʱ, ���ż������ߵ�ַ����
-       ���������ֽ��бȽ�, �������������в����иõ�ַʱ,���������͵�
-       lists�������ʾ���ʼ�����;���������ߵ�ַ�����������ȫһ��ʱ,����
-       lists�������ʾ���ʼ�����.�����������Ϊ����ʱ,�򹫿�lists����,��
-       ����lists������ͱ��ʼ�����.
-       ʡȱֵΪ����.
+<dd>       当收到含有lists(邮件组列表)命令的请求信件时, 将信件发送者地址与这
+       里的正规表现进行比较, 如果在正规表现中不含有该地址时,则在所回送的
+       lists结果不提示本邮件组名;仅当发送者地址与正规表现完全一致时,才在
+       lists结果中提示本邮件组名.当正规表现行为空行时,则公开lists命令,对
+       所有lists请求回送本邮件组名.
+       省缺值为空行.
 <p>
-<dd>       ��:
+<dd>       例:
 <dd>             advertise <<  END
    <dd>          user1@host1.domain1
 <dd>             user2@host2.domain2
 <dd>             END
 <p>
 <dt>    noadvertise  <<  END
-<dd>    �������
-<dd>    �������
+<dd>    正规表现
+<dd>    正规表现
 <dd>    ...
 <dd>    END
-<dd>       ��advertise�����෴,�����յ���lists�����ż�֮�����ߵ�ַ���������
-       ����ֽ��бȽ�,�������������к��иõ�ַʱ,���������͵�lists���
-       �в���ʾ���ʼ�����;��֮����ʾ���ʼ�����.�����������Ϊ����ʱ,��
-       ��lists����,������lists������ͱ��ʼ�����.
-<dd>       ʡȱֵΪ����.
+<dd>       与advertise正好相反,将所收到的lists请求信件之发送者地址与这里的正
+       规表现进行比较,如果在正规表现中含有该地址时,则在所回送的lists结果
+       中不提示本邮件组名;反之则提示本邮件组名.当正规表现行为空行时,则公
+       开lists命令,对所有lists请求回送本邮件组名.
+<dd>       省缺值为空行.
             
-<dd>       ��:
+<dd>       例:
 <dd>             noadvertise  <<  END
 <dd>             user1@host1.domain1
 <dd>             user2@host2.domain2
 <dd>             END
 <p>
-<dt>    approve_passwd = �ַ���
-<dd>       ָ��ִ�й���������ʱ����Ҫ��ͨ����. ��"Approved:"��ͷ�������ͨ��
-       ��,��������ִ��Ϊ�û������������.
-<dd>       ʡȱֵΪ"majo.pass".
-   <dd>    ��: approve_passwd = majo.pass
+<dt>    approve_passwd = 字符串
+<dd>       指定执行管理用命令时所需要的通行字. 在"Approved:"信头中填入该通行
+       字,即可允许执行为用户所请求的命令.
+<dd>       省缺值为"majo.pass".
+   <dd>    例: approve_passwd = majo.pass
 <p>
-<dt>    archive_dir  = Ŀ¼���ַ���
-<dd>       Majordomo-1.94.1�ṩ���׿��(archive)����. ����������ָ���ż���Ŀ
-       ¼��.����Ա��Ҫ���ձ���majordomoʱ,��majordomo.cf����ָ�����ʼ���
-       ��Ŀ¼($listdir)�½�����Ŀ¼,���趨��UID��GIDΪmajordom.
-<dd>       ʡȱֵΪ"majo.archive".
-<dd>       (��,�ż���·��Ϊ/home/majordom/lists/majo.archive)
+<dt>    archive_dir  = 目录名字符串
+<dd>       Majordomo-1.94.1提供简易库存(archive)功能. 本参数用于指定信件库目
+       录名.管理员需要按照编译majordomo时,在majordomo.cf中所指定的邮件组
+       根目录($listdir)下建立该目录,并设定其UID和GID为majordom.
+<dd>       省缺值为"majo.archive".
+<dd>       (即,信件库路径为/home/majordom/lists/majo.archive)
 <p>
 <dt>    comments <<  END
-<dd>    ��ʾ��Ϣ
-<dd>    ��ʾ��Ϣ
+<dd>    提示信息
+<dd>    提示信息
 <dd>    ...
 <dd>    END
-<dd>       Ϊ�ʼ������Ա�ṩ��ʾ��Ϣ.һ�㲻̫����.
+<dd>       为邮件组管理员提供提示信息.一般不太常用.
 <p>
 <dt>    date_info = yes/no
-<dd>       yes: ʡȱֵ. Ϊnewinfo������������������ձ��ʱ����Ϣ.
-<dd>        no: Ϊinfo���������������info�ļ������ձ��ʱ����Ϣ.
+<dd>       yes: 省缺值. 为newinfo命令的输出结果添加最终变更时间信息.
+<dd>        no: 为info命令的输出结果添加info文件的最终变更时间信息.
 <p>
 <dt>    debug = yes/no
-<dd>       yes: ʡȱֵ. �����������þ�����ʽ.������Ϣ��������"mail -v"�����
-            ִ�н����.
+<dd>       yes: 省缺值. 服务器调试用纠错方式.纠错信息将出现在"mail -v"命令的
+            执行结果中.
 <p>
-<dt>    description = �ַ���(50�ֽ�����)
-<dd>       ������ָ�����ַ�������Ϊ��ʾ��ʾ��lists�������г����ʼ������.     
-<dd>       ʡȱֵ:δָ��.
-   <dd>    ��: description = �й�����������
+<dt>    description = 字符串(50字节以内)
+<dd>       这里所指定的字符串将作为提示显示在lists命令所列出的邮件组后面.     
+<dd>       省缺值:未指定.
+   <dd>    例: description = 中国问题讨论组
 <p>
 <dt>    get_access = open/closed/list
-<dd>       open: ʡȱֵ.�����ż��������Ȩ��.���������û�ͨ���ż���get������
-             �����ż�����֮�ı��ļ�.
-<dd>     closed: ��ֹ�û������ż�����֮�ı��ļ�.
-<dd>       list: �����ʼ���֮�μ��߿����ż��������Ȩ��.
+<dd>       open: 省缺值.开放信件库的下载权限.允许所有用户通过信件用get命令来
+             下载信件库内之文本文件.
+<dd>     closed: 禁止用户下载信件库内之文本文件.
+<dd>       list: 仅对邮件组之参加者开放信件库的下载权限.
 <p>
 <dt>    index_access = open/closed/list
-<dd>       ��get_access����,���û���index�����������.
-<dd>       ʡȱֵ:open.
+<dd>       与get_access类似,对用户的index命令加以限制.
+<dd>       省缺值:open.
 <p>
 <dt>    info_access = open/closed/list
-<dd>       ��get_access����,���û���info�����������.
-<dd>       ʡȱֵ:open.
+<dd>       与get_access类似,对用户的info命令加以限制.
+<dd>       省缺值:open.
 <p>
 <dt>    intro_access = open/closed/list
-<dd>       ��get_access����,���û���intro�����������.
-<dd>       ʡȱֵ:open.
+<dd>       与get_access类似,对用户的intro命令加以限制.
+<dd>       省缺值:open.
 <p>
-<dt>    maxlength = ��ֵ
-<dd>       ָ���ż�֮����ı�����.ʡȱֵΪ40000.
+<dt>    maxlength = 数值
+<dd>       指定信件之最大文本长度.省缺值为40000.
 <p>
 <dt>    message_fronter << END
-<dd>    ˵����
-<dd>    ˵����
+<dd>    说明文
+<dd>    说明文
 <dd>    ....
 <dd>    END
-<dd>       ΪͶ�嵽���ʼ���������ż�������ǰ��׷��˵����.
-<dd>       ʡȱֵ:δָ��.
+<dd>       为投稿到本邮件组的所有信件在正文前面追加说明文.
+<dd>       省缺值:未指定.
 <p>
 <dt>    message_headers << END
-<dd>    �¶�����ͷ
-<dd>    �¶�����ͷ
+<dd>    新定义信头
+<dd>    新定义信头
 <dd>    ...
 <dd>    END
-<dd>       ΪͶ�嵽���ʼ���������ż�׷���¶�����ͷ.
-<dd>       ʡȱֵ:δָ��.
-<dd>       ��:
+<dd>       为投稿到本邮件组的所有信件追加新定义信头.
+<dd>       省缺值:未指定.
+<dd>       例:
 <dd>            message_headers << END
 <dd>            Comment: This is a Test Server.
 <dd>            Comment: To join this list, mail a "subscribe" command to me.
 <dd>            END
 <p>          
 <dt>    moderate = yes/no
-<dd>       yes: �趨�����. Ͷ�嵽���ʼ���������ż����辭������Ա�����ĺ��
-            ���Ÿ����вμ���.
-<dd>        no: ʡȱֵ.�����ʼ���.
+<dd>       yes: 设定监控组. 投稿到本邮件组的所有信件均需经过管理员的审阅后才
+            播放给所有参加者.
+<dd>        no: 省缺值.公开邮件组.
 <p>
-<dt>    moderator = ��ַ�ַ���
-<dd>       moderate=yesʱ,ָ�������ߵ�ַ.
-<dd>       ʡȱֵ:δָ��.
+<dt>    moderator = 地址字符串
+<dd>       moderate=yes时,指定审阅者地址.
+<dd>       省缺值:未指定.
 <p>
 <dt>    precedence = bulk
-<dd>       ׷��"Precedence:"��ͷ. ���ƴ����ż��Ļ�����Ϣ.
+<dd>       追加"Precedence:"信头. 抑制错发信件的回送信息.
 <p>
-<dt>    reply_to = ��ַ�ַ���
-<dd>       ׷��"Reply-to:"��ͷ.ָ�����͵�ַ.
-   <dd>    ʡȱֵ:δָ��.
+<dt>    reply_to = 地址字符串
+<dd>       追加"Reply-to:"信头.指定回送地址.
+   <dd>    省缺值:未指定.
 <p>    
-<dt>    restrict_post = �ļ���[:�ļ���]
-<dd>       ���øò������Զ�Ͷ���߼�������.����������ָ�����ļ��ж����˵��û�
-       Ͷ��.����ָ������ļ���(��":"����).���ַ�ʽ���ʺ��ڵ�����־�Ȳ���
-       ʽ�ʼ���.
-<dd>       ʡȱֵ:δָ��.
+<dt>    restrict_post = 文件名[:文件名]
+<dd>       利用该参数可以对投稿者加以限制.仅允许在所指定的文件中定义了的用户
+       投稿.可以指定多个文件名(用":"隔开).这种方式正适合于电子杂志等播放
+       式邮件组.
+<dd>       省缺值:未指定.
 
 <dt>    strip = yes/no
-<dd>       ��Щ�ʼ���ַ����������һЩGCOS˵��.����:
+<dd>       有些邮件地址中往往含有一些GCOS说明.例如:
 <dd>          user@host.domain "User Name"
-<dd>       Ϊ��֤���ʼ����ܹ���ȷ�Ĵ����ż�, ��������ָ��Ϊyesʱ���Բ�������
-       Щ��ַ˵��.
-<dd>       ʡȱֵ:yes.
+<dd>       为保证供邮件组能够正确的传递信件, 将本参数指定为yes时可以不保存这
+       些地址说明.
+<dd>       省缺值:yes.
 <p>
 <dt>    subscribe_policy = open/closed/auto/open+confirm
-<dd>              open: �Է�����μ�����ת������Ա��׼.������������.
-<dd>            closed: ���вμ��������Ҫ��������Ա��׼.
-<dd>              auto: �Զ��������вμ�����.
-<dd>      open+confirm: �����вμ��������һ��ע��������ȷ��. ����û��Ļ�
-                    �ʹ�����ȷ,����������뱾�ʼ���.
-<dd>       ʡȱֵ:open.
+<dd>              open: 对非正规参加申请转交管理员批准.接受正规申请.
+<dd>            closed: 所有参加申请均需要经过管理员批准.
+<dd>              auto: 自动受理所有参加申请.
+<dd>      open+confirm: 对所有参加请求分配一个注册代码进行确认. 如果用户的回
+                    送代码正确,则允许其加入本邮件组.
+<dd>       省缺值:open.
 <p>
 <dt>    unsubscribe_policy = open/closed/auto
-<dd>       ���˳�����֮��,����subscribe_policy��������һ��.
-   <dd>    ʡȱֵ:open.
+<dd>       除退出含义之外,均与subscribe_policy参数功能一致.
+   <dd>    省缺值:open.
 <p>
 <dt>    which_access = open/closed/list
-<dd>       open: ����which����Ȩ��.�û������ø�����鿴�Լ��������ʼ���.
-<dd>     closed: ��ֹ�û�ʹ��which����.
-<dd>       list: �������ʼ���Ĳμ���ʹ��which����.
-<dd>     ʡȱֵ:open.
+<dd>       open: 公开which命令权限.用户可以用该命令查看自己的所属邮件组.
+<dd>     closed: 禁止用户使用which命令.
+<dd>       list: 仅允许邮件组的参加者使用which命令.
+<dd>     省缺值:open.
 <p>
 <dt>    who_access = open/closed/list
-<dd>       open: ����who����Ȩ��.�û������ø�����鿴�ʼ���μ�������.
-<dd>     closed: ��ֹ�û�ʹ��who����.
-<dd>       list: �������ʼ���Ĳμ���ʹ��who����.
-<dd>     ʡȱֵ:open.
+<dd>       open: 公开who命令权限.用户可以用该命令查看邮件组参加者名单.
+<dd>     closed: 禁止用户使用who命令.
+<dd>       list: 仅允许邮件组的参加者使用who命令.
+<dd>     省缺值:open.
 </dl>
 <p>
-  ���϶�Majordomo����Ҫ��ʽ���Ʋ��������˼򵥵ؽ���. Majordomo�л�����һ
-Щ���õĲ���, ��:���ʽ�ʼ�����ز����ȵ�.����Ȥ�Ķ��������Majordom����
-�����ı��ļ�.
+  以上对Majordomo的主要格式控制参数进行了简单地介绍. Majordomo中还含有一
+些有用的参数, 如:汇编式邮件组相关参数等等.有兴趣的读者请参阅Majordom所附
+带的文本文件.
 <p>
-  ��ʽ�ļ���:
+  格式文件例:
 <pre>
       date_info           =   yes
       date_intro          =   yes
-      description         =   �й�����������
+      description         =   中国问题讨论组
       get_access          =   list
       index_access        =   list
       info_access         =   list
@@ -511,36 +511,36 @@
       unsubscribe_policy  =   open
 </pre>
 
-3.2.5 �ʼ���������������ż���
+3.2.5 邮件组的题名辅助及信件库
 <p>
-  ���û����μӵ��ʼ���϶�ʱ,ÿ�콫��Ӹ����ʼ��鴫�������ż�. ��ʱ,���
-�����ʼ��������͵ı�����(Subject:)����ñ�����Ӧ���ʼ����������к�. ����
-��Majordomo ����û�������,��Ҫ�õ�distribute����������. �°�Majordomo
-�Ѿ������ṩ���ֹ���. ����,��Ҫ���ʼ���"majo"�ı���������"[MAJO:���к�]"
-ʱ�ľ����趨��������.
+  当用户所参加的邮件组较多时,每天将会从各个邮件组传来许多信件. 这时,如果
+各个邮件组所发送的标题栏(Subject:)中最好标有相应的邮件组名和序列号. 早期
+的Majordomo 由于没有这项功能,需要用到distribute等其他软件. 新版Majordomo
+已经可以提供这种功能. 例如,需要给邮件组"majo"的标题栏添加"[MAJO:序列号]"
+时的具体设定方法如下.
 <p>
- (1) ��sequencer�������ӱ������к�
+ (1) 用sequencer命令添加标题序列号
 <p>
 <dl>
-<dt>     (a)�༭/home/majordom/lists/majo.seq�ļ�,���ӳ�ʼ���к�"1".
-<dt>     (b)�޸�majo.config�ļ�,��������������:
+<dt>     (a)编辑/home/majordom/lists/majo.seq文件,添加初始序列号"1".
+<dt>     (b)修改majo.config文件,添加下述定义行:
 <dd>        subject_prefix = [$LIST:$SEQNUM]
-<dt>     (c)�޸�/etc/aliases�ļ�,��
+<dt>     (c)修改/etc/aliases文件,将
    <dd>     major: "|/home/majordomo/wrapper resend -l major -h mailserv.domain 
 <dd>                    major-going"
-<dt>        �޸�Ϊ:
+<dt>        修改为:
 <dd>        major: "|/home/majordomo/wrapper sequencer -l major -n -h 
 <dd>                    mailserv.domain major-going"
-<dt>     (d)ִ��newaliases����.
+<dt>     (d)执行newaliases命令.
 </dl>
-     ����,����ʵ����������.<br>
-     ����,������Ȼ����һ������.����Majordom-1.94-1����������sequencerʱ,
-     �����ż��ı������������������:
+     这样,即可实现上述功能.<br>
+     但是,这里仍然存在一个问题.利用Majordom-1.94-1中所附带的sequencer时,
+     回送信件的标题栏会出现以下情形:
 <p>
        Subject: [MAJO:10]Re:[MAJO:9]Re:[MAJO:8]
 <p>
-     ��������ȥ�ǳ��ѿ�.Ϊ�˽���������,�������²���ļ����޸�sequencer
-     ����:
+     这样看上去非常难看.为了解决这个问题,请用以下差分文件来修改sequencer
+     程序:
 <pre>
      ------------------------------------------------------------------
      *** Tools/sequencer     Wed Jan 29 20:26:33 1997
@@ -561,52 +561,52 @@
        }
      ------------------------------------------------------------------
 </pre>
- (2) ��sequencer����ʵ���ż��⹦��
+ (2) 用sequencer命令实现信件库功能
 <p>
-     ����sequencer�������ʵ����distributeͬ�ȿ�湦��.�趨������:
+     利用sequencer命令可以实现与distribute同等库存功能.设定例如下:
 
 <dl>
-<dt>     (a)�����ż���Ŀ¼
+<dt>     (a)生成信件库目录
 <dd>        % mkdir /home/majordom/lists/majo.archive
 <dd>        % chown majordom.majordom /home/majordom/lists/majo.archive
 <dd>        % chmod 755 /home/majordom/lists/majo.archive
 <p>
-<dt>     (b)ȷ��majordom.cf֮128,129�������Ƿ�����������һ��
+<dt>     (b)确认majordom.cf之128,129行内容是否与下述内容一致
 <dd>        $filedir = "$listdir";
 <dd>        $filedir_suffix = ".archive";
 <p>
-<dt>     (c)�޸�/etc/aliases�ļ�,��
+<dt>     (c)修改/etc/aliases文件,将
 <dd>        major: "|/home/majordomo/wrapper sequencer -l major -n -h 
 <dd>                    mailserv.domain major-going"
-<dt>        �޸�Ϊ:
+<dt>        修改为:
 <dd>        major: "|/home/majordomo/wrapper sequencer -l major -N -h 
 <dd>                    mailserv.domain major-going"
 </dl>
-     ����,���û���majo@mailserv.domain�����ż�ʱ, �ż������Զ��ı�������
-     ����/home/majordom/lists/majo.archive��,��ͬ��Ϊ�佨��һ����ΪINDEX
-     �������ļ�.�����ļ�������index��������ȡ.
+     这样,当用户向majo@mailserv.domain发送信件时, 信件将会自动的保存在信
+     件库/home/majordom/lists/majo.archive中,相同将为其建立一个名为INDEX
+     的索引文件.索引文件可以用index命令来获取.
 <p>
-3.2.6 Majordomo�Ļ�������
+3.2.6 Majordomo的基本命令
 <p>
-  ��Ҫ�˽�Majordomo�Ļ�������֮ʹ�÷���ʱ, ������majordomo����������һ��
-���������Ϊ"help"���ż�,ϵͳ�����͸���һ��˵����. �������˵����,���Ÿ�
-λ�����ܹ��Լ�����majordom�Ļ���ʹ�÷���.
+  需要了解Majordomo的基本命令之使用方法时, 可以向majordomo服务器发送一封
+标题或正文为"help"的信件,系统将回送给您一份说明书. 参照这份说明书,相信各
+位读者能够自己掌握majordom的基本使用方法.
 <p>
-3.2.7 Majordomo�������
+3.2.7 Majordomo的问题点
 <p>
-  Majordomo��Ϊһ���ʼ������������Ȼ�кܶ��ŵ�,��Ҳ������һЩ���ݺ��ӵ�
-����.
+  Majordomo作为一个邮件组管理软件虽然有很多优点,但也存在着一些不容忽视的
+问题.
 <dl>
-<dt>  ��Majordomo���ڲ�����Perl��������,ִ��ʱ�Ϸ�ʱ��.�����ڴ��ģ�ʼ���.
-<dt>  ��Majordomo�ڴ����ż�ʱ������ϵͳ��MTA.
-<dt>  �����������ܽ���.
-<dt>  ���������޷����ƴ����ż��Ļ�����Ϣ.
-<dt>  ����ϵͳ���ֹ��Ϻ�,�ʼ�����жϹ����ָ��Ƚ�����.
-<dt>  �����߱��û�����ͨ���ֹ���.
-<dt>  ���û��޷������Լ�����Ҫ(����,���ݸ���״����ʱת��)�����ʼ���.
-<dt>  �����߱��ʼ���ķ�ɢ��������.
+<dt>  ·Majordomo由于采用了Perl程序语言,执行时较费时间.不利于大规模邮件组.
+<dt>  ·Majordomo在传递信件时依赖于系统的MTA.
+<dt>  ·库存管理功能较弱.
+<dt>  ·基本上无法控制错发信件的回送信息.
+<dt>  ·当系统出现故障后,邮件组的中断工作恢复比较困难.
+<dt>  ·不具备用户级的通行字功能.
+<dt>  ·用户无法根据自己的需要(例如,根据负荷状况定时转发)控制邮件组.
+<dt>  ·不具备邮件组的分散管理功能.
 </dl>
-  Majordomo��û����Ϊ��Щ����Ĵ���,��Ӱ�����������е�����. ��Ϊһ������
-�ʼ����������Ӯ����Խ��Խ����û�.
-<p align="right">(Ǯ��/fei@come.or.jp)</p>
+  Majordomo并没有因为这些问题的存在,而影响它在网络中的名声. 作为一个中型
+邮件组管理软件赢得了越来越多的用户.
+<p align="right">(钱飞/fei@come.or.jp)</p>
 <hr>

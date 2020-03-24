@@ -1,22 +1,22 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <!-- saved from url=(0040)http://166.111.215.235:8080/lecture.html -->
-<HTML><HEAD><TITLE>FTP/MAIL/SSH·şÎñµÄÅäÖÃ</TITLE>
+<HTML><HEAD><TITLE>FTP/MAIL/SSHæœåŠ¡çš„é…ç½®</TITLE>
 <META content="text/html; charset=gb2312" http-equiv=Content-Type>
 <META content="MSHTML 5.00.2614.3500" name=GENERATOR></HEAD>
 <BODY><A name=top></A>
-<H2>Ö÷ÒªÄÚÈİ:</H2>
-<H3>FTP/MAIL/SSHµÈ·şÎñµÈÅäÖÃ</H3>
+<H2>ä¸»è¦å†…å®¹:</H2>
+<H3>FTP/MAIL/SSHç­‰æœåŠ¡ç­‰é…ç½®</H3>
 <UL>
-  <LI>FTP·şÎñ: <A 
+  <LI>FTPæœåŠ¡: <A 
   href="index.html#wu-ftpd">wu-ftpd</A> 
-  <LI>MAIL·şÎñ: <A 
+  <LI>MAILæœåŠ¡: <A 
   href="index.html#sendmail">sendmail</A> 
-  <LI>SSH·şÎñ: <A 
+  <LI>SSHæœåŠ¡: <A 
   href="index.html#openssh">openssh</A> </LI>
 </UL>
 <HR SIZE=1>
 <A name=wu-ftpd></A>
-<H3>wu-ftpdµÄ»ù±¾ÅäÖÃ</H3>wu-ftpdµÄÖ÷ÒªÅäÖÃÎÄ¼ş<BR>
+<H3>wu-ftpdçš„åŸºæœ¬é…ç½®</H3>wu-ftpdçš„ä¸»è¦é…ç½®æ–‡ä»¶<BR>
 <TABLE border=1>
   <TBODY>
   <TR>
@@ -34,27 +34,27 @@
 <HR SIZE=1>
 
 <P>
-<H4>/etc/ftpusers - ½ûÖ¹ftpÓÃ»§µÇÂ½µÄÁĞ±í</H4>È±Ê¡Çé¿öÏÂ, Ö÷Òª°üÀ¨ÏµÍ³ÓÃ»§ºÍÌØÈ¨ÓÃ»§.<BR>root, bin, daemon, 
+<H4>/etc/ftpusers - ç¦æ­¢ftpç”¨æˆ·ç™»é™†çš„åˆ—è¡¨</H4>ç¼ºçœæƒ…å†µä¸‹, ä¸»è¦åŒ…æ‹¬ç³»ç»Ÿç”¨æˆ·å’Œç‰¹æƒç”¨æˆ·.<BR>root, bin, daemon, 
 adm, lp,<BR>sync, shutdown, halt, mail, news,<BR>uucp, operator, games, 
-nobody<BR>¿ÉÒÔ½«Ï£Íû½ûÖ¹ftpµÇÂ½µÄÓÃ»§¼ÓÈëµ½Õâ¸öÎÄ¼şÖĞ<BR><BR><B>×¢Òâ: 
-µÇÂ½ÔËĞĞ³ÌĞòÈç¹û²»°üÀ¨ÔÚ/etc/shellsÖĞÕâ¸öÓÃ»§Ò²ÎŞ·¨Í¨¹ıftpdµÇÂ¼</B> 
+nobody<BR>å¯ä»¥å°†å¸Œæœ›ç¦æ­¢ftpç™»é™†çš„ç”¨æˆ·åŠ å…¥åˆ°è¿™ä¸ªæ–‡ä»¶ä¸­<BR><BR><B>æ³¨æ„: 
+ç™»é™†è¿è¡Œç¨‹åºå¦‚æœä¸åŒ…æ‹¬åœ¨/etc/shellsä¸­è¿™ä¸ªç”¨æˆ·ä¹Ÿæ— æ³•é€šè¿‡ftpdç™»å½•</B> 
 <P></P>
 <HR SIZE=1>
 
 <P>
-<H4>/etc/ftphosts ÓÃ»§ÓëµØÖ··ÃÎÊ±í</H4><PRE>Ö¸Áî:
+<H4>/etc/ftphosts ç”¨æˆ·ä¸åœ°å€è®¿é—®è¡¨</H4><PRE>æŒ‡ä»¤:
  allow &lt;username&gt; &lt;addrglob&gt; [&lt;addrglob&gt; ...]
  deny &lt;username&gt; &lt;addrglob&gt; [&lt;addrglob&gt; ...]
 
-&lt;addrglob&gt;ÊÇ¸ñÊ½¿ÉÒÔÊÇ: address/cidr »ò address:netmask
-±ÈÈç192.168.8.0/24ºÍ192.168.8.0:255.255.255.0
+&lt;addrglob&gt;æ˜¯æ ¼å¼å¯ä»¥æ˜¯: address/cidr æˆ– address:netmask
+æ¯”å¦‚192.168.8.0/24å’Œ192.168.8.0:255.255.255.0
 </PRE>
 <P></P>
 <HR SIZE=1>
 
 <P>
-<H4>/etc/ftpconversions ÎÄ¼ş×ª»»ÅäÖÃÎÄ¼ş</H4>ÅäÖÃÖ¸Áî¹²·Ö8½Ú, 
-ÓÃ:¸ô¿ª<BR>%1:%2:%3:%4:%5:%6:%7:%8<BR>
+<H4>/etc/ftpconversions æ–‡ä»¶è½¬æ¢é…ç½®æ–‡ä»¶</H4>é…ç½®æŒ‡ä»¤å…±åˆ†8èŠ‚, 
+ç”¨:éš”å¼€<BR>%1:%2:%3:%4:%5:%6:%7:%8<BR>
 <OL>
   <LI>Strip Prefix 
   <LI>Strip Postfix 
@@ -63,16 +63,16 @@ nobody<BR>¿ÉÒÔ½«Ï£Íû½ûÖ¹ftpµÇÂ½µÄÓÃ»§¼ÓÈëµ½Õâ¸öÎÄ¼şÖĞ<BR><BR><B>×¢Òâ:
   <LI>External Command 
   <LI>Types 
   <LI>Options 
-  <LI>Description </LI></OL>µ±getÃüÁîÖĞµÄÎÄ¼şÃû, ÓëÊµ¼ÊÎÄ¼şÃû·ûºÏÆ¥ÅäµÄÊ±ºò, Ö´ĞĞÏàÓ¦µÄ²Ù×÷.<BR><PRE>Àı×Ó:
+  <LI>Description </LI></OL>å½“getå‘½ä»¤ä¸­çš„æ–‡ä»¶å, ä¸å®é™…æ–‡ä»¶åç¬¦åˆåŒ¹é…çš„æ—¶å€™, æ‰§è¡Œç›¸åº”çš„æ“ä½œ.<BR><PRE>ä¾‹å­:
  :.Z: : :/bin/compress -d -c %s:T_REG|T_ASCII:O_UNCOMPRESS:UNCOMPRESS
-</PRE>ftpµ±Ç°Ä¿Â¼ÏÂÓĞ¸öÎÄ¼şÃûÎªtest.Z, ÓÃ»§ftpµÇÂ½ºóÊ¹ÓÃ <PRE>  get test
-</PRE>ÕæÕıÏÂÔØµÃµ½µÄÎÄ¼şÎªcompress -d -c test.ZµÄ½á¹û. 
+</PRE>ftpå½“å‰ç›®å½•ä¸‹æœ‰ä¸ªæ–‡ä»¶åä¸ºtest.Z, ç”¨æˆ·ftpç™»é™†åä½¿ç”¨ <PRE>  get test
+</PRE>çœŸæ­£ä¸‹è½½å¾—åˆ°çš„æ–‡ä»¶ä¸ºcompress -d -c test.Zçš„ç»“æœ. 
 <P></P>
 <HR SIZE=1>
 
 <P>
-<H4>/etc/ftpaccess wu-ftpdµÄÖ÷ÒªÅäÖÃÎÄ¼ş</H4>ÏêÏ¤µÄÅäÖÃÃüÁî, ¿ÉÒÔ´Óman 
-ftpaccessÖĞµÃµ½<BR><BR>¾ßÌåµÄÒ»¸öÁĞ×Ó <PRE>class   all   real,guest,anonymous  *
+<H4>/etc/ftpaccess wu-ftpdçš„ä¸»è¦é…ç½®æ–‡ä»¶</H4>è¯¦æ‚‰çš„é…ç½®å‘½ä»¤, å¯ä»¥ä»man 
+ftpaccessä¸­å¾—åˆ°<BR><BR>å…·ä½“çš„ä¸€ä¸ªåˆ—å­ <PRE>class   all   real,guest,anonymous  *
 
 email root@localhost
 
@@ -101,21 +101,21 @@ passwd-check rfc822 warn
 <HR SIZE=1>
 
 <P>
-<H4>class - ¶¨ÒåÒ»¸ö×é</H4><PRE>  class &lt;class&gt; &lt;typelist&gt; &lt;addrglob&gt; [&lt;addrglob&gt; ...]
+<H4>class - å®šä¹‰ä¸€ä¸ªç»„</H4><PRE>  class &lt;class&gt; &lt;typelist&gt; &lt;addrglob&gt; [&lt;addrglob&gt; ...]
 </PRE>
-<UL>&lt;typelist&gt;ÎªÀàĞÍÁĞ±í 
-  <LI>real - ÕıÊ½µÄÓÃ»§, ÓµÓĞ»úÆ÷ÉÏµÄÕÊ»§ 
-  <LI>guest - guestÓÃ»§, ¶ÔÓ¦ÓÚguest, guestgroupµÄÅäÖÃ 
-  <LI>anonymous - ftp, anonymousÓÃ»§ </LI></UL>
+<UL>&lt;typelist&gt;ä¸ºç±»å‹åˆ—è¡¨ 
+  <LI>real - æ­£å¼çš„ç”¨æˆ·, æ‹¥æœ‰æœºå™¨ä¸Šçš„å¸æˆ· 
+  <LI>guest - guestç”¨æˆ·, å¯¹åº”äºguest, guestgroupçš„é…ç½® 
+  <LI>anonymous - ftp, anonymousç”¨æˆ· </LI></UL>
 <P></P>
 <HR SIZE=1>
 
-<P><B>email</B>: ¶¨Òåftp¹ÜÀíÔ±µÄemailµØÖ·<BR><B>loginfails</B> 5: 5´Î´íÎóµÇÂ¼Ö®ºó, ¼ÇÂ¼´íÎóĞÅÏ¢, 
-¹Ø±ÕÁ¬½Ó<BR><BR></P>
+<P><B>email</B>: å®šä¹‰ftpç®¡ç†å‘˜çš„emailåœ°å€<BR><B>loginfails</B> 5: 5æ¬¡é”™è¯¯ç™»å½•ä¹‹å, è®°å½•é”™è¯¯ä¿¡æ¯, 
+å…³é—­è¿æ¥<BR><BR></P>
 <HR SIZE=1>
 
 <P>
-<H4>Ö¸¶¨µÇÂ½logoÎÄ¼ş(message)ÓëREADMEÎÄ¼ş</H4><PRE>readme README* login
+<H4>æŒ‡å®šç™»é™†logoæ–‡ä»¶(message)ä¸READMEæ–‡ä»¶</H4><PRE>readme README* login
 readme README* cwd=*
 
 message /welcome.msg login
@@ -123,7 +123,7 @@ message .message     cwd=*
 
 readme &lt;path&gt; {&lt;when&gt; &lt;class&gt;}
 message &lt;path&gt; {&lt;when&gt; &lt;class&gt;}
-</PRE><BR>ÔÚÕâĞ©ÎÄ¼şÖĞ, ¿ÉÒÔÊ¹ÓÃÌØÊâµÄ·ûºÅÀ´Ìæ´úÒ»Ğ©ftp·şÎñÆ÷µÄĞÅÏ¢ <PRE>				
+</PRE><BR>åœ¨è¿™äº›æ–‡ä»¶ä¸­, å¯ä»¥ä½¿ç”¨ç‰¹æ®Šçš„ç¬¦å·æ¥æ›¿ä»£ä¸€äº›ftpæœåŠ¡å™¨çš„ä¿¡æ¯ <PRE>				
        %T      local time (form Thu Nov 15 17:12:42 1990)
        %F      free space in partition of CWD (kbytes)
                [not supported on all systems]
@@ -152,38 +152,38 @@ message &lt;path&gt; {&lt;when&gt; &lt;class&gt;}
 delete		no		guest,anonymous
 overwrite	no		guest,anonymous
 rename		no		guest,anonymous
-</PRE>ÉèÖÃ²Ù×÷È¨ÏŞ<BR><B>chmod</B> &lt;yes|no&gt; &lt;typelist&gt;<BR><B>delete</B> 
+</PRE>è®¾ç½®æ“ä½œæƒé™<BR><B>chmod</B> &lt;yes|no&gt; &lt;typelist&gt;<BR><B>delete</B> 
 &lt;yes|no&gt; &lt;typelist&gt;<BR><B>overwrite</B> &lt;yes|no&gt; 
 &lt;typelist&gt;<BR><B>rename</B> &lt;yes|no&gt; 
 &lt;typelist&gt;<BR><B>umask</B> &lt;yes|no&gt; 
-&lt;typelist&gt;<BR>typelist¿ÉÒÔÊÇreal, guest, anonymous»òÕßclassÃû<BR>compress, 
-tarÍ¬ÉÏ<BR>
+&lt;typelist&gt;<BR>typelistå¯ä»¥æ˜¯real, guest, anonymousæˆ–è€…classå<BR>compress, 
+taråŒä¸Š<BR>
 <P></P>
 <HR SIZE=1>
 
 <P><PRE><B>shutdown</B> /etc/shutmsg
-</PRE>ÉèÖÃshutdownÎÄ¼ş. 
-Èç¹ûftpd¼ì²âµ½/etc/shutmsgÔòÔÚ´òÓ¡¸ÃÎÄ¼şºó¹Ø±ÕÁ¬½Ó.<BR>¿ÉÒÔÊ¹ÓÃftpshutÃüÁîÉú³ÉÕâ¸öÎÄ¼şÀ´¹Ø±Õftp<BR><BR><PRE><B>passwd-check</B> rfc822 warn
+</PRE>è®¾ç½®shutdownæ–‡ä»¶. 
+å¦‚æœftpdæ£€æµ‹åˆ°/etc/shutmsgåˆ™åœ¨æ‰“å°è¯¥æ–‡ä»¶åå…³é—­è¿æ¥.<BR>å¯ä»¥ä½¿ç”¨ftpshutå‘½ä»¤ç”Ÿæˆè¿™ä¸ªæ–‡ä»¶æ¥å…³é—­ftp<BR><BR><PRE><B>passwd-check</B> rfc822 warn
 </PRE>
-<UL>È·¶¨anonymousÓÃ»§µÇÂ½Ê±¿ÚÁî¼à²éµÄ·½Ê½ 
+<UL>ç¡®å®šanonymousç”¨æˆ·ç™»é™†æ—¶å£ä»¤ç›‘æŸ¥çš„æ–¹å¼ 
   <LI>none no password checking performed. 
   <LI>trivial password must contain an '@'. 
   <LI>rfc822 password must be an rfc822 compliant address.<BR>
   <LI>warn warn the user, but allow them to log in. 
   <LI>enforce warn the user, and then log them out. </LI></UL>
-<P></P><A href="http://166.111.215.235:8080/lecture.html#top">»Øµ½Ò³Ê×</A> 
+<P></P><A href="http://166.111.215.235:8080/lecture.html#top">å›åˆ°é¡µé¦–</A> 
 <HR SIZE=1>
 <A name=sendmail></A>
 <P>
-<H3>sendmailµÄ»ù±¾ÅäÖÃ</H3>
-<OL>Ê¹ÓÃsendmail.mcÀ´Éú³Ésendmail.cf 
-  <LI>È·¶¨°²×°ÁËsendmail-cf 
-  <LI>¶¨ÖÆsendmail.mc 
-  <LI>Ê¹ÓÃm4Éú³Ésendmail.cf </LI></OL>
+<H3>sendmailçš„åŸºæœ¬é…ç½®</H3>
+<OL>ä½¿ç”¨sendmail.mcæ¥ç”Ÿæˆsendmail.cf 
+  <LI>ç¡®å®šå®‰è£…äº†sendmail-cf 
+  <LI>å®šåˆ¶sendmail.mc 
+  <LI>ä½¿ç”¨m4ç”Ÿæˆsendmail.cf </LI></OL>
 <P></P>
 <HR SIZE=1>
 
-<P>È±Ê¡µÄsendmail.mcÎÄ¼ş(redhat¶ÔÓ¦ÎÄ¼şÔÚ/etc/sendmail.mc) <PRE>divert(-1)
+<P>ç¼ºçœçš„sendmail.mcæ–‡ä»¶(redhatå¯¹åº”æ–‡ä»¶åœ¨/etc/sendmail.mc) <PRE>divert(-1)
 dnl This is the macro config file used to generate the /etc/sendmail.cf
 dnl file. If you modify thei file you will have to regenerate the
 dnl /etc/sendmail.cf by running this macro config through the m4
@@ -220,90 +220,90 @@ dnl not hav 24x7 DNS do need this.
 FEATURE(`accept_unresolvable_domains')
 FEATURE(`relay_local_from')
 dnl FEATURE(`relay_based_on_MX')
-</PRE>dnlºóÃæÖ±µ½ĞĞÄ©, ¶¼»á±»m4ºöÂÔ, Ïàµ±ÓÚm4ÎÄ¼şÖĞµÄ×¢ÊÍ 
+</PRE>dnlåé¢ç›´åˆ°è¡Œæœ«, éƒ½ä¼šè¢«m4å¿½ç•¥, ç›¸å½“äºm4æ–‡ä»¶ä¸­çš„æ³¨é‡Š 
 <P></P>
 <HR SIZE=1>
 
-<P>include(`/usr/lib/sendmail-cf/m4/cf.m4')<BR>Ö¸¶¨sendmail-cfµÄ°²×°Â·¾¶<BR></P>
+<P>include(`/usr/lib/sendmail-cf/m4/cf.m4')<BR>æŒ‡å®šsendmail-cfçš„å®‰è£…è·¯å¾„<BR></P>
 <P>define(`confAUTO_REBUILD')<BR>confAUTO_REBUILD - 
-×Ô¶¯Ë¢ĞÂaliasesÊı¾İ¿â.<BR><BR>define(`confTO_CONNECT', `1m')<BR>confTO_CONNECT - 
+è‡ªåŠ¨åˆ·æ–°aliasesæ•°æ®åº“.<BR><BR>define(`confTO_CONNECT', `1m')<BR>confTO_CONNECT - 
 Timeout.connect, 
-Á¬½Ó³¬Ê±Îª1·ÖÖÓ<BR><BR>define(`confTRY_NULL_MX_LIST',true)<BR>confTRY_NULL_MX_LIST - 
-ºÍÓÊ¼şÂ½ÓÎËã·¨ÓĞ¹ØÏµ<BR><BR>define(`confDONT_PROBE_INTERFACES',true)<BR>confDONT_PROBE_INTERFACES 
+è¿æ¥è¶…æ—¶ä¸º1åˆ†é’Ÿ<BR><BR>define(`confTRY_NULL_MX_LIST',true)<BR>confTRY_NULL_MX_LIST - 
+å’Œé‚®ä»¶é™†æ¸¸ç®—æ³•æœ‰å…³ç³»<BR><BR>define(`confDONT_PROBE_INTERFACES',true)<BR>confDONT_PROBE_INTERFACES 
 - 
-²»°ó¶¨interface<BR><BR>define(`PROCMAIL_MAILER_PATH',`/usr/bin/procmail')<BR>PROCMAIL_MAILER_PATH 
-- ÉèÖÃprocmailµÄÂ·¾¶<BR></P>
-<P>FEATURE(`smrsh',`/usr/sbin/smrsh')<BR>Ö¸¶¨smrshµÄÂ·¾¶<BR><BR>FEATURE(`mailertable',`hash 
+ä¸ç»‘å®šinterface<BR><BR>define(`PROCMAIL_MAILER_PATH',`/usr/bin/procmail')<BR>PROCMAIL_MAILER_PATH 
+- è®¾ç½®procmailçš„è·¯å¾„<BR></P>
+<P>FEATURE(`smrsh',`/usr/sbin/smrsh')<BR>æŒ‡å®šsmrshçš„è·¯å¾„<BR><BR>FEATURE(`mailertable',`hash 
 -o 
-/etc/mail/mailertable')<BR>Ö¸¶¨Ê¹ÓÃmailertableÊı¾İ¿â<BR><BR>FEATURE(`virtusertable',`hash 
+/etc/mail/mailertable')<BR>æŒ‡å®šä½¿ç”¨mailertableæ•°æ®åº“<BR><BR>FEATURE(`virtusertable',`hash 
 -o 
-/etc/mail/virtusertable')<BR>Ö¸¶¨Ê¹ÓÃvirtusertableÊı¾İ¿â<BR><BR>FEATURE(redirect)<BR>ÔÊĞíredirect¹¦ÄÜ<BR><BR>FEATURE(always_add_domain)<BR>always_add_domain½«foo@domain×÷Îª±¾µØÓÊ¼ş<BR><BR>FEATURE(use_cw_file)<BR>use_cw_fileÖ¸¶¨Ê¹ÓÃsendmail.cw<BR>sendmail.cw±£´æËùÓĞµÄ±¾µØ»úÆ÷Ãû<BR><BR>FEATURE(local_procmail)<BR>Ê¹ÓÃprocmail×÷Îª±¾µØÓÊµİÆ÷<BR></P>
-<P>FEATURE(`access_db')<BR>Ê¹ÓÃaccessÊı¾İ¿â<BR><BR>FEATURE(`blacklist_recipients')<BR>Í¬Ê±ÊÊÓÃÓÚ·¢ËÍÕßÓë½ÓÊÕÕß<BR><BR>FEATURE(`accept_unresolvable_domains')<BR>½ÓÊÕÄÇĞ©ÎŞ·¨½âÎöÓòÃûµÄÓÊ¼ş<BR><BR>FEATURE(`relay_local_from')<BR>×ª·¢user@localdomain·¢À´µÄÓÊ¼ş<BR></P>
+/etc/mail/virtusertable')<BR>æŒ‡å®šä½¿ç”¨virtusertableæ•°æ®åº“<BR><BR>FEATURE(redirect)<BR>å…è®¸redirectåŠŸèƒ½<BR><BR>FEATURE(always_add_domain)<BR>always_add_domainå°†foo@domainä½œä¸ºæœ¬åœ°é‚®ä»¶<BR><BR>FEATURE(use_cw_file)<BR>use_cw_fileæŒ‡å®šä½¿ç”¨sendmail.cw<BR>sendmail.cwä¿å­˜æ‰€æœ‰çš„æœ¬åœ°æœºå™¨å<BR><BR>FEATURE(local_procmail)<BR>ä½¿ç”¨procmailä½œä¸ºæœ¬åœ°é‚®é€’å™¨<BR></P>
+<P>FEATURE(`access_db')<BR>ä½¿ç”¨accessæ•°æ®åº“<BR><BR>FEATURE(`blacklist_recipients')<BR>åŒæ—¶é€‚ç”¨äºå‘é€è€…ä¸æ¥æ”¶è€…<BR><BR>FEATURE(`accept_unresolvable_domains')<BR>æ¥æ”¶é‚£äº›æ— æ³•è§£æåŸŸåçš„é‚®ä»¶<BR><BR>FEATURE(`relay_local_from')<BR>è½¬å‘user@localdomainå‘æ¥çš„é‚®ä»¶<BR></P>
 <HR SIZE=1>
 
 <P>
-<H4>sendmailÖĞÊµÓÃµÄÑ¡Ïî</H4>²é¿´sendmail.cf, O¿ªÍ·µÄĞĞ, ¶¼ÊÇÑ¡Ïî. ÉèÖÃÕâĞ©Ñ¡ÏîµÄÁíÒ»¸ö°ì·¨, 
-ÊÇÔÚsendmailÆğ¶¯µÄÊ±ºò, 
-Ê¹ÓÃ-Oname=varÀ´ÉèÖÃ.<BR><BR><B>QueueDirectory</B>=/var/spool/mqueue<BR>ÉèÖÃ¶ÓÁĞÄ¿Â¼. 
-Õâ¸öµÄÊµ¼ÊÓÃ·¨, ÊÇ½«È±Ê¡¶ÓÁĞÖĞÑ¡ÖĞµÄmail¸´ÖÆµ½Ò»¸öÁÙÊ±Ä¿Â¼, È»ºó<BR>chown root.mail tmp<BR>chmod 755 
-tmp<BR>ÕâÑùtmp¾Í¿ÉÒÔ×÷ÎªÁÙÊ±¶ÓÁĞÁË.<BR>¿ÉÒÔÖ¸¶¨ÌØ±ğµÄsendmailÅäÖÃÀ´´¦ÀíÕâ¸ö¶ÓÁĞÖĞµÄmail, 
-±ÈÈçËµÁ¢¿Ì½«ÕâĞ©ĞÅµ¯³ö¶ÓÁĞ<BR>sendmail -OQueueDirectory=tmp -OTimeout.queuereturn=0 
--q<BR><BR><B>Timeout.*</B><BR>ÕâĞ©Ñ¡Ïî¶¼ÊÇÓÃÀ´ÉèÖÃ¸÷ÖÖ³¬Ê±Ê±¼äµÄ.<BR>Èç¹ûÏ£Íûmail·¢ËÍÊ§°Ü, Á¢¿Ìµ¯»Ø, 
-¶ø²»ÊÇÔÚ¶ÓÁĞÖĞµÈ´ıÖØ·¢, ¿ÉÒÔÊ¹ÓÃ<BR>sendmail -OTimeout.queuereturn=0 ...<BR>Èç¹ûÊÇ²¦ºÅÓÃ»§, 
-²»Ï£ÍûÊÕµ½¶ÓÁĞÖÍÁôµÄ¾¯¸æmail, ¿ÉÒÔĞŞ¸Äsendmail.cf<BR>#O Timeout.queuewarn=4h<BR>O 
-Timeout.queuewarn=5d<BR>ÕâÑù¾Í½«¾¯¸æÊ±¼äÓÉËÄĞ¡Ê±±ä³ÉÎåÌìÁË.<BR><BR>¾ßÌå¿ÉÒÔÉèÖÃµÄ³¬Ê±ÓĞ<BR>Timeout.initial=5m<BR>Timeout.connect=5m<BR>Timeout.iconnect=5m<BR>Timeout.helo=5m<BR>Timeout.mail=10m<BR>Timeout.rcpt=1h<BR>Timeout.datainit=5m<BR>Timeout.datablock=1h<BR>Timeout.datafinal=1h<BR>Timeout.rset=5m<BR>Timeout.quit=2m<BR>Timeout.misc=2m<BR>Timeout.command=1h<BR>Timeout.ident=30s<BR>Timeout.fileopen=60s<BR>Timeout.queuereturn=5d<BR>Timeout.queuereturn.normal=5d<BR>Timeout.queuereturn.urgent=2d<BR>Timeout.queuereturn.non-urgent=7d<BR>Timeout.queuewarn=4h<BR>Timeout.queuewarn.normal=4h<BR>Timeout.queuewarn.urgent=1h<BR>Timeout.queuewarn.non-urgent=12h<BR>Timeout.hoststatus=30m<BR><BR>SmtpGreetingMessage=$j 
-Sendmail $v/$Z; $b<BR>ÉèÖÃsendmail SMTP daemonÁ¬½Ó½¨Á¢Ê±µÄÌáÊ¾ĞÅÏ¢<BR>ÎªÁËÒş²ØÏµÍ³ĞÅÏ¢, 
-¿ÉÒÔ×öÏàÓ¦µÄĞŞ¸Ä.<BR><BR>MaxMessageSize=1000000<BR>ÉèÖÃsendmail½ÓÊÕÓÊ¼şµÄ×î´ó³ß´ç, 
-Èç¹ûÏ£Íû½ÓÊÕ¸ü´óµÄÓÊ¼ş»òÏŞÖÆÓÊ¼ş´óĞ¡¼õÇá·şÎñ¸´ÔÓ, ¿ÉÒÔĞŞ¸ÄÕâ¸öÑ¡Ïî<BR><BR>
+<H4>sendmailä¸­å®ç”¨çš„é€‰é¡¹</H4>æŸ¥çœ‹sendmail.cf, Oå¼€å¤´çš„è¡Œ, éƒ½æ˜¯é€‰é¡¹. è®¾ç½®è¿™äº›é€‰é¡¹çš„å¦ä¸€ä¸ªåŠæ³•, 
+æ˜¯åœ¨sendmailèµ·åŠ¨çš„æ—¶å€™, 
+ä½¿ç”¨-Oname=varæ¥è®¾ç½®.<BR><BR><B>QueueDirectory</B>=/var/spool/mqueue<BR>è®¾ç½®é˜Ÿåˆ—ç›®å½•. 
+è¿™ä¸ªçš„å®é™…ç”¨æ³•, æ˜¯å°†ç¼ºçœé˜Ÿåˆ—ä¸­é€‰ä¸­çš„mailå¤åˆ¶åˆ°ä¸€ä¸ªä¸´æ—¶ç›®å½•, ç„¶å<BR>chown root.mail tmp<BR>chmod 755 
+tmp<BR>è¿™æ ·tmpå°±å¯ä»¥ä½œä¸ºä¸´æ—¶é˜Ÿåˆ—äº†.<BR>å¯ä»¥æŒ‡å®šç‰¹åˆ«çš„sendmailé…ç½®æ¥å¤„ç†è¿™ä¸ªé˜Ÿåˆ—ä¸­çš„mail, 
+æ¯”å¦‚è¯´ç«‹åˆ»å°†è¿™äº›ä¿¡å¼¹å‡ºé˜Ÿåˆ—<BR>sendmail -OQueueDirectory=tmp -OTimeout.queuereturn=0 
+-q<BR><BR><B>Timeout.*</B><BR>è¿™äº›é€‰é¡¹éƒ½æ˜¯ç”¨æ¥è®¾ç½®å„ç§è¶…æ—¶æ—¶é—´çš„.<BR>å¦‚æœå¸Œæœ›mailå‘é€å¤±è´¥, ç«‹åˆ»å¼¹å›, 
+è€Œä¸æ˜¯åœ¨é˜Ÿåˆ—ä¸­ç­‰å¾…é‡å‘, å¯ä»¥ä½¿ç”¨<BR>sendmail -OTimeout.queuereturn=0 ...<BR>å¦‚æœæ˜¯æ‹¨å·ç”¨æˆ·, 
+ä¸å¸Œæœ›æ”¶åˆ°é˜Ÿåˆ—æ»ç•™çš„è­¦å‘Šmail, å¯ä»¥ä¿®æ”¹sendmail.cf<BR>#O Timeout.queuewarn=4h<BR>O 
+Timeout.queuewarn=5d<BR>è¿™æ ·å°±å°†è­¦å‘Šæ—¶é—´ç”±å››å°æ—¶å˜æˆäº”å¤©äº†.<BR><BR>å…·ä½“å¯ä»¥è®¾ç½®çš„è¶…æ—¶æœ‰<BR>Timeout.initial=5m<BR>Timeout.connect=5m<BR>Timeout.iconnect=5m<BR>Timeout.helo=5m<BR>Timeout.mail=10m<BR>Timeout.rcpt=1h<BR>Timeout.datainit=5m<BR>Timeout.datablock=1h<BR>Timeout.datafinal=1h<BR>Timeout.rset=5m<BR>Timeout.quit=2m<BR>Timeout.misc=2m<BR>Timeout.command=1h<BR>Timeout.ident=30s<BR>Timeout.fileopen=60s<BR>Timeout.queuereturn=5d<BR>Timeout.queuereturn.normal=5d<BR>Timeout.queuereturn.urgent=2d<BR>Timeout.queuereturn.non-urgent=7d<BR>Timeout.queuewarn=4h<BR>Timeout.queuewarn.normal=4h<BR>Timeout.queuewarn.urgent=1h<BR>Timeout.queuewarn.non-urgent=12h<BR>Timeout.hoststatus=30m<BR><BR>SmtpGreetingMessage=$j 
+Sendmail $v/$Z; $b<BR>è®¾ç½®sendmail SMTP daemonè¿æ¥å»ºç«‹æ—¶çš„æç¤ºä¿¡æ¯<BR>ä¸ºäº†éšè—ç³»ç»Ÿä¿¡æ¯, 
+å¯ä»¥åšç›¸åº”çš„ä¿®æ”¹.<BR><BR>MaxMessageSize=1000000<BR>è®¾ç½®sendmailæ¥æ”¶é‚®ä»¶çš„æœ€å¤§å°ºå¯¸, 
+å¦‚æœå¸Œæœ›æ¥æ”¶æ›´å¤§çš„é‚®ä»¶æˆ–é™åˆ¶é‚®ä»¶å¤§å°å‡è½»æœåŠ¡å¤æ‚, å¯ä»¥ä¿®æ”¹è¿™ä¸ªé€‰é¡¹<BR><BR>
 <P></P>
 <HR SIZE=1>
 
 <P>
-<H4>sendmailÏà¹ØÊı¾İ¿âµÄ¹¦ÄÜÓëÎ¬»¤</H4><B>/etc/aliases</B>ÊÇÏµÍ³ÓÊ¼ş±ğÃûÎÄ¼ş, 
-ĞèÒªÊ¹ÓÃ<BR>newaliases<BR>ÃüÁî, ¸üĞÂÒ»ÏÂÊı¾İ¿â. Èç¹ûsendmailÉèÖÃÁËAutoRebuildµÄ¹¦ÄÜ, 
-½¨Òé´ÓĞÂÆğ¶¯Ò»´ÎSendmail.<BR><BR>¶ÔÓÚÒ»°ãµÄÊı¾İ¿âÎÄ¼ş, Èçaccess, mailertableµÈµÈ, ¿ÉÒÔÊ¹ÓÃÃüÁî<BR>makemap 
-hash dbname.db &gt; dbname<BR>À´¹¹ÔìÊı¾İ¿â. µ±ÕâĞ©Êı¾İ¿â±»ĞŞ¸ÄÒÔºó, 
-Ò²ĞèÒªÊ¹ÓÃÏàÍ¨µÄÃüÁî½øĞĞÍ¬²½¸üĞÂ<BR><BR><B>access</B>Ìá¹©¼òµ¥µÄ·ÃÎÊ¿ØÖÆ¹¦ÄÜ<BR>¿ÉÒÔ¼òµ¥µÄ½«²»Ïë½ÓÊÕµÄÓÊ¼şµÄÓÊ¼şµØÖ·, Ğ´ÔÚÕâ¸öÎÄ¼şÖĞ. 
+<H4>sendmailç›¸å…³æ•°æ®åº“çš„åŠŸèƒ½ä¸ç»´æŠ¤</H4><B>/etc/aliases</B>æ˜¯ç³»ç»Ÿé‚®ä»¶åˆ«åæ–‡ä»¶, 
+éœ€è¦ä½¿ç”¨<BR>newaliases<BR>å‘½ä»¤, æ›´æ–°ä¸€ä¸‹æ•°æ®åº“. å¦‚æœsendmailè®¾ç½®äº†AutoRebuildçš„åŠŸèƒ½, 
+å»ºè®®ä»æ–°èµ·åŠ¨ä¸€æ¬¡Sendmail.<BR><BR>å¯¹äºä¸€èˆ¬çš„æ•°æ®åº“æ–‡ä»¶, å¦‚access, mailertableç­‰ç­‰, å¯ä»¥ä½¿ç”¨å‘½ä»¤<BR>makemap 
+hash dbname.db &gt; dbname<BR>æ¥æ„é€ æ•°æ®åº“. å½“è¿™äº›æ•°æ®åº“è¢«ä¿®æ”¹ä»¥å, 
+ä¹Ÿéœ€è¦ä½¿ç”¨ç›¸é€šçš„å‘½ä»¤è¿›è¡ŒåŒæ­¥æ›´æ–°<BR><BR><B>access</B>æä¾›ç®€å•çš„è®¿é—®æ§åˆ¶åŠŸèƒ½<BR>å¯ä»¥ç®€å•çš„å°†ä¸æƒ³æ¥æ”¶çš„é‚®ä»¶çš„é‚®ä»¶åœ°å€, å†™åœ¨è¿™ä¸ªæ–‡ä»¶ä¸­. 
 <BR>Example:<BR>foo@bar.com 
-REJECT<BR>ÕâÑùËùÓĞ·¢ËÍ¸øfoo@bar.comµÄmail¶¼½«±»¾ÜÊÕµÄ.<BR>accessÎÄ¼ş»¹ÓĞ¸ü¶àÓÃ·¨, 
-¿ÉÒÔÔÚsendmail-docÖĞµÄREADME.cfÖĞÕÒµ½.<BR><B>mailertable</B>ÊÇÓÊ¼şÂ·ÓÉÊı¾İÎÄ¼ş<BR>±ÈÈç <PRE>.               esmtp:[mail.tsinghua.edu.cn]
+REJECT<BR>è¿™æ ·æ‰€æœ‰å‘é€ç»™foo@bar.comçš„mailéƒ½å°†è¢«æ‹’æ”¶çš„.<BR>accessæ–‡ä»¶è¿˜æœ‰æ›´å¤šç”¨æ³•, 
+å¯ä»¥åœ¨sendmail-docä¸­çš„README.cfä¸­æ‰¾åˆ°.<BR><B>mailertable</B>æ˜¯é‚®ä»¶è·¯ç”±æ•°æ®æ–‡ä»¶<BR>æ¯”å¦‚ <PRE>.               esmtp:[mail.tsinghua.edu.cn]
 foo.com         esmtp:[mail1.foo.com]
 .foo.com        esmtp:[mail2.foo.com]
 bar.org         esmtp:other.mail.com
-</PRE>¿ÉÒÔ¿´³öÀ´, mailertableÖĞµÄÃ¿ÌõÓÊ¼şÂ·ÓÉÎªÁ½ÁĞ. Ç°ÃæÒ»ÁĞ<BR>ÒÔhostname»òdomainname×÷Îªkey, 
-ºóÃæÒ»ÁĞÎªÊ¹ÓÃµÄÍ¶µİÆ÷Óë<BR>Ä¿±êÖ÷»ú. ´ÓÕâ¸ömailertableÎÄ¼şÖĞ¿ÉÒÔ¿´³öÀ´, È±Ê¡Çé¿öÏÂ,<BR>ËùÓĞmail¶¼Ê¹ÓÃesmtpĞ­Òé, 
-·¢ËÍ¸ømail.tsinghua.edu.cn, <BR>¶ÔÓÚ·¢ËÍ¸øtoo@foo.comµÄmail, 
-ÔòÖ±½Ó·¢ËÍ¸ømail1.foo.com.<BR>ÇëÖ÷Òâ¼¸µã, foo.comÓë.foo.comÊÇ²»Í¬µÄ, 
-.foo.comÊÇÆ¥ÅäËùÓĞ<BR>xxx.foo.comÕâÑùµÄ»úÆ÷ÃûµÄ. ¶øÕâÑùµÄ»úÆ÷ÃûÊÇÎŞ·¨Ê¹ÓÃfoo.com<BR>À´Æ¥ÅäµÄ. 
-sendmailÊÇÑ¡Ôñ×î´óµÄÆ¥ÅäÀ´È·¶¨ÓÊ¼şÂ·ÓÉµÄ. <BR>[mail.tsinghua.edu.cn]Óëmail.tsinghua.edu.cnÊÇ²»ÏàÍ¬µÄ, 
-<BR>[mail.tsinghua.edu.cn]Ê¹ÓÃÓë[IP]µÄµØÖ·Ò»ÑùµÄ´¦Àí·½·¨, <BR>ÕâÑù¿ÉÒÔ¼õÉÙDNS²éÑ¯, Ìá¸ßÓÊ¼ş·¢ËÍËÙ¶È. 
-<BR><BR><B>virtusertable</B>Ìá¹©×î¼òµ¥µÄÓÊ¼şĞéÄâÖ÷»úµÄ¹¦ÄÜ<BR><PRE>Example:
+</PRE>å¯ä»¥çœ‹å‡ºæ¥, mailertableä¸­çš„æ¯æ¡é‚®ä»¶è·¯ç”±ä¸ºä¸¤åˆ—. å‰é¢ä¸€åˆ—<BR>ä»¥hostnameæˆ–domainnameä½œä¸ºkey, 
+åé¢ä¸€åˆ—ä¸ºä½¿ç”¨çš„æŠ•é€’å™¨ä¸<BR>ç›®æ ‡ä¸»æœº. ä»è¿™ä¸ªmailertableæ–‡ä»¶ä¸­å¯ä»¥çœ‹å‡ºæ¥, ç¼ºçœæƒ…å†µä¸‹,<BR>æ‰€æœ‰mailéƒ½ä½¿ç”¨esmtpåè®®, 
+å‘é€ç»™mail.tsinghua.edu.cn, <BR>å¯¹äºå‘é€ç»™too@foo.comçš„mail, 
+åˆ™ç›´æ¥å‘é€ç»™mail1.foo.com.<BR>è¯·ä¸»æ„å‡ ç‚¹, foo.comä¸.foo.comæ˜¯ä¸åŒçš„, 
+.foo.comæ˜¯åŒ¹é…æ‰€æœ‰<BR>xxx.foo.comè¿™æ ·çš„æœºå™¨åçš„. è€Œè¿™æ ·çš„æœºå™¨åæ˜¯æ— æ³•ä½¿ç”¨foo.com<BR>æ¥åŒ¹é…çš„. 
+sendmailæ˜¯é€‰æ‹©æœ€å¤§çš„åŒ¹é…æ¥ç¡®å®šé‚®ä»¶è·¯ç”±çš„. <BR>[mail.tsinghua.edu.cn]ä¸mail.tsinghua.edu.cnæ˜¯ä¸ç›¸åŒçš„, 
+<BR>[mail.tsinghua.edu.cn]ä½¿ç”¨ä¸[IP]çš„åœ°å€ä¸€æ ·çš„å¤„ç†æ–¹æ³•, <BR>è¿™æ ·å¯ä»¥å‡å°‘DNSæŸ¥è¯¢, æé«˜é‚®ä»¶å‘é€é€Ÿåº¦. 
+<BR><BR><B>virtusertable</B>æä¾›æœ€ç®€å•çš„é‚®ä»¶è™šæ‹Ÿä¸»æœºçš„åŠŸèƒ½<BR><PRE>Example:
   info@foo.com foo-info
   info@bar.com bar-info
   @baz.org kite@any.where
-</PRE>ÕâÑù·¢¸øinfo@foo.comµÄÓÊ¼ş, ¶¼½«±»´«·¢¸øfoo-infoÓÃ»§, ÏàÍ¬µÄ info@bar.comµÄÓÊ¼ş½«»á×ª·¢¸øbar-infoÓÃ»§, 
-ËùÓÉ·¢¸ø@baz.org µÄÓÃ»§, 
-½«×ª·¢¸økite@any.where.<BR>virtusertableÖĞ»¹¿ÉÒÔÊ¹ÓÃ%1À´±íÊ¾Ô­ÓÊ¼şÖĞuserµÄ²¿·Ö.<BR>@foo.com 
-%1@elsewahere.com<BR><BR>ÒÔÉÏÊı¾İ¿âµÄÓÃ·¨, ¶¼¿ÉÒÔÔÚsendmail-docÖĞREADME.cfÕÒµ½ÏêÏ¤½éÉÜ.<BR>
-<P></P><A href="http://166.111.215.235:8080/lecture.html#top">·µ»ØÒ³Ê×</A> 
+</PRE>è¿™æ ·å‘ç»™info@foo.comçš„é‚®ä»¶, éƒ½å°†è¢«ä¼ å‘ç»™foo-infoç”¨æˆ·, ç›¸åŒçš„ info@bar.comçš„é‚®ä»¶å°†ä¼šè½¬å‘ç»™bar-infoç”¨æˆ·, 
+æ‰€ç”±å‘ç»™@baz.org çš„ç”¨æˆ·, 
+å°†è½¬å‘ç»™kite@any.where.<BR>virtusertableä¸­è¿˜å¯ä»¥ä½¿ç”¨%1æ¥è¡¨ç¤ºåŸé‚®ä»¶ä¸­userçš„éƒ¨åˆ†.<BR>@foo.com 
+%1@elsewahere.com<BR><BR>ä»¥ä¸Šæ•°æ®åº“çš„ç”¨æ³•, éƒ½å¯ä»¥åœ¨sendmail-docä¸­README.cfæ‰¾åˆ°è¯¦æ‚‰ä»‹ç».<BR>
+<P></P><A href="http://166.111.215.235:8080/lecture.html#top">è¿”å›é¡µé¦–</A> 
 <HR SIZE=1>
 <A name=openssh></a>
 <P>
-<H3>openssh</H3>sshÊÇSecure ShellµÄ¼ò³Æ. Ïàµ±ÓÚÒ»¸öÔÚ°²È«¹ÜµÀÖĞµÄtelnet, ËùÓĞÊı¾İ¶¼ÊÇ¼ÓÃÜ´«ÊäµÄ, 
-¿ÉÒÔºÜºÃµÄ·À·¶ÍøÂçÇÔÌı. <BR><BR><B>openssh</B>ÊÇOpen BSDµÄÒ»¸ö²¿·Ö, ÊÇÍêÈ«freeµÄsshÊµÏÖ, Í¬Ê±Ö§³Össh1, 
-ssh2, ÒÑ¾­±»ÒÆÖ²µ½¸÷ÖÖUnixÆ½Ì¨ÉÏ. <BR><BR>opensshÒÀÀµÓÚopenssl, Òò´Ë°²×°opensshÇ°, 
-±ØĞëÏÈÒª°²×°openssl.<BR>
+<H3>openssh</H3>sshæ˜¯Secure Shellçš„ç®€ç§°. ç›¸å½“äºä¸€ä¸ªåœ¨å®‰å…¨ç®¡é“ä¸­çš„telnet, æ‰€æœ‰æ•°æ®éƒ½æ˜¯åŠ å¯†ä¼ è¾“çš„, 
+å¯ä»¥å¾ˆå¥½çš„é˜²èŒƒç½‘ç»œçªƒå¬. <BR><BR><B>openssh</B>æ˜¯Open BSDçš„ä¸€ä¸ªéƒ¨åˆ†, æ˜¯å®Œå…¨freeçš„sshå®ç°, åŒæ—¶æ”¯æŒssh1, 
+ssh2, å·²ç»è¢«ç§»æ¤åˆ°å„ç§Unixå¹³å°ä¸Š. <BR><BR>opensshä¾èµ–äºopenssl, å› æ­¤å®‰è£…opensshå‰, 
+å¿…é¡»å…ˆè¦å®‰è£…openssl.<BR>
 <P></P>
 <HR SIZE=1>
 
-<H3>opensshµÄ¼òµ¥Ê¹ÓÃ</H3><B>Server¶ËµÄÆğ¶¯</B><BR>µ¥¶ÀÔËĞĞ, 
-Ö±½ÓÔËĞĞ<BR>sshd<BR><BR>Ê¹ÓÃinetdÆğ¶¯<BR>ÔÚ/etc/inetd.confÖĞÌí¼ÓÒ»ĞĞ<BR><PRE>ssh stream  tcp nowait  root    /usr/sbin/tcpd ssh -i
-</PRE>È»ºóÖØĞÂÆğ¶¯inetd¾Í¿ÉÒÔÁË.<BR><BR><B>Client¶Ë</B><BR>ssh -l user host<BR>or<BR>ssh 
+<H3>opensshçš„ç®€å•ä½¿ç”¨</H3><B>Serverç«¯çš„èµ·åŠ¨</B><BR>å•ç‹¬è¿è¡Œ, 
+ç›´æ¥è¿è¡Œ<BR>sshd<BR><BR>ä½¿ç”¨inetdèµ·åŠ¨<BR>åœ¨/etc/inetd.confä¸­æ·»åŠ ä¸€è¡Œ<BR><PRE>ssh stream  tcp nowait  root    /usr/sbin/tcpd ssh -i
+</PRE>ç„¶åé‡æ–°èµ·åŠ¨inetdå°±å¯ä»¥äº†.<BR><BR><B>Clientç«¯</B><BR>ssh -l user host<BR>or<BR>ssh 
 user@host<BR>
 <P></P>
 <HR SIZE=1>
 
-<P>sshdµÄÅäÖÃÎÄ¼ş( /etc/ssh/sshd_config) <BR><PRE># This is ssh server systemwide configuration file.
+<P>sshdçš„é…ç½®æ–‡ä»¶( /etc/ssh/sshd_config) <BR><PRE># This is ssh server systemwide configuration file.
 
 Port 22
 #Protocol 2,1
@@ -360,22 +360,22 @@ UseLogin no
 <P></P>
 <HR SIZE=1>
 
-<P><PRE>scp µÄÊ¹ÓÃ·½·¨
+<P><PRE>scp çš„ä½¿ç”¨æ–¹æ³•
   scp [-pqrvC46] [-P port] [-c cipher] [-i identity_file]
       [[user@]host1:]file1 [...] [[user@]host2:]file2
-</PRE>Ê¹ÓÃssh-keygenÉú³Ékey<BR><BR>ssh-keygen [ -f key_file ] Éú³ÉRSA key, 
-ÓÃÓÚssh1Ğ­Òé<BR>ssh-keygen -d [ -f key_file ] Éú³ÉDSA key, ÓÃÓÚssh2Ğ­Òé<BR><BR>×¢Òâ: ×÷ÎªHost 
-KeyÊ¹ÓÃµÄkey, passphrase±ØĞëÎª¿Õ<BR><BR>
+</PRE>ä½¿ç”¨ssh-keygenç”Ÿæˆkey<BR><BR>ssh-keygen [ -f key_file ] ç”ŸæˆRSA key, 
+ç”¨äºssh1åè®®<BR>ssh-keygen -d [ -f key_file ] ç”ŸæˆDSA key, ç”¨äºssh2åè®®<BR><BR>æ³¨æ„: ä½œä¸ºHost 
+Keyä½¿ç”¨çš„key, passphraseå¿…é¡»ä¸ºç©º<BR><BR>
 <P></P>
 <HR SIZE=1>
 
 <P>
-<H3>Ê¹ÓÃkey×öÑéÖ¤</H3>È±Ê¡Çé¿öÏÂ, sshÈÔÈ»Ê¹ÓÃ´«Í³µÄ¿ÚÁîÑéÖ¤. ¿ÉÒÔÍ¨¹ı¼òµ¥µÄÅäÖÃ, ÊµÏÖÍ¨¹ıÃÜ³×µÄÑéÖ¤.<BR>¹ı³Ì:<BR>
+<H3>ä½¿ç”¨keyåšéªŒè¯</H3>ç¼ºçœæƒ…å†µä¸‹, sshä»ç„¶ä½¿ç”¨ä¼ ç»Ÿçš„å£ä»¤éªŒè¯. å¯ä»¥é€šè¿‡ç®€å•çš„é…ç½®, å®ç°é€šè¿‡å¯†åŒ™çš„éªŒè¯.<BR>è¿‡ç¨‹:<BR>
 <OL>
-  <LI>ÓÃssh-keygenÉú³ÉÓÃ»§ÃÜ³×, ´æ·ÅÔÚ~/.ssh/ÏÂ, ÎÄ¼şÃûÎª identity. 
-  <LI>½«~/.ssh/identity.pub¸´ÖÆµ½Ô¶³Ì»úÆ÷ÓÃ»§ÕÊ»§ÉÏ, ²¢Ìí¼Óµ½~/.ssh/authorized_keysÖĞ. 
-  <LI>±ØĞëÈ·¶¨Ô¶³Ì»úÆ÷ÉÏ~/.ssh/authorized_keysÊôĞÔÎª400. 
-</LI></OL>ÕâÑù¾Í¿ÉÒÔÍ¨¹ıkeyÀ´ÑéÖ¤ÓÃ»§ÁË.<BR>¿ÉÒÔÍ¨¹ıÒ»¸öÃüÁîÀ´Íê³ÉÒÔÉÏ²Ù×÷<BR><PRE>ssh-keygen -f ~/.ssh/identity; cat ~/.ssh/identity.pub | \
+  <LI>ç”¨ssh-keygenç”Ÿæˆç”¨æˆ·å¯†åŒ™, å­˜æ”¾åœ¨~/.ssh/ä¸‹, æ–‡ä»¶åä¸º identity. 
+  <LI>å°†~/.ssh/identity.pubå¤åˆ¶åˆ°è¿œç¨‹æœºå™¨ç”¨æˆ·å¸æˆ·ä¸Š, å¹¶æ·»åŠ åˆ°~/.ssh/authorized_keysä¸­. 
+  <LI>å¿…é¡»ç¡®å®šè¿œç¨‹æœºå™¨ä¸Š~/.ssh/authorized_keyså±æ€§ä¸º400. 
+</LI></OL>è¿™æ ·å°±å¯ä»¥é€šè¿‡keyæ¥éªŒè¯ç”¨æˆ·äº†.<BR>å¯ä»¥é€šè¿‡ä¸€ä¸ªå‘½ä»¤æ¥å®Œæˆä»¥ä¸Šæ“ä½œ<BR><PRE>ssh-keygen -f ~/.ssh/identity; cat ~/.ssh/identity.pub | \
 ssh user@remote "mkdir ~/.ssh; &gt; ~/.ssh/authorized_keys ; \
 chmod 400 ~/.ssh/authorized_keys"
 </PRE>
@@ -383,12 +383,12 @@ chmod 400 ~/.ssh/authorized_keys"
 <HR SIZE=1>
 
 <P>
-<H4>rsyncÓësshÅäºÏÊ¹ÓÃ</H4>rsyncÊÇ¸ö·Ç³£ºÃµÄÍøÂçÎÄ¼ş´«Êä³ÌĞò, ºÜÊÊºÏ´óÁ¿ÎÄ¼şµÄ¸´ÖÆ.<BR><BR>rsync¿ÉÒÔÓërsh, 
-sshÅäºÏÊ¹ÓÃ, server/client¶¼ĞèÒª°²×°ssh/rsync<BR><BR>rsync -e /usr/bin/ssh 
-......<BR>»òÕß¶¨Òå»·¾³±äÁ¿<BR>export RSYNC_RSH=/usr/bin/ssh 
-(bash)<BR>¾Í¿ÉÒÔÖ±½ÓÈÃrsyncÈ¥Ê¹ÓÃsshÁË.<BR><BR>
-<H4>cvsÖĞÊ¹ÓÃssh</H4>cvs¿ÉÒÔÊ¹ÓÃrsh, ssh×÷Îª´«Êä¹ÜµÀ. <BR>export 
+<H4>rsyncä¸sshé…åˆä½¿ç”¨</H4>rsyncæ˜¯ä¸ªéå¸¸å¥½çš„ç½‘ç»œæ–‡ä»¶ä¼ è¾“ç¨‹åº, å¾ˆé€‚åˆå¤§é‡æ–‡ä»¶çš„å¤åˆ¶.<BR><BR>rsyncå¯ä»¥ä¸rsh, 
+sshé…åˆä½¿ç”¨, server/clientéƒ½éœ€è¦å®‰è£…ssh/rsync<BR><BR>rsync -e /usr/bin/ssh 
+......<BR>æˆ–è€…å®šä¹‰ç¯å¢ƒå˜é‡<BR>export RSYNC_RSH=/usr/bin/ssh 
+(bash)<BR>å°±å¯ä»¥ç›´æ¥è®©rsyncå»ä½¿ç”¨sshäº†.<BR><BR>
+<H4>cvsä¸­ä½¿ç”¨ssh</H4>cvså¯ä»¥ä½¿ç”¨rsh, sshä½œä¸ºä¼ è¾“ç®¡é“. <BR>export 
 CVS_RSH=/usr/bin/ssh<BR>export CVSROOT=:ext:user@host:/path<BR>
 <P></P>
 <HR SIZE=1>
-<A href="http://166.111.215.235:8080/lecture.html#top">·µ»ØÒ³Ê×</A> </BODY></HTML>
+<A href="http://166.111.215.235:8080/lecture.html#top">è¿”å›é¡µé¦–</A> </BODY></HTML>

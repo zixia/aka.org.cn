@@ -1,10 +1,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <HTML>
 <HEAD>
-    <TITLE>�ļ�I/O</TITLE>
+    <TITLE>文件I/O</TITLE>
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312-80">
-    <META NAME="COPYRIGHT" CONTENT="κ����">
-    <META NAME="AUTHOR" CONTENT="κ����">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
     <STYLE>
     <!--
         H1 { color: #ffff00 }
@@ -26,31 +26,31 @@
 <A HREF="stdio.html"><IMG SRC="next.gif" ALT="Next"></A>
 <A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
 
-<H1 ALIGN=CENTER>5.2&nbsp;&nbsp;�ļ�I/O<BR><BR>
+<H1 ALIGN=CENTER>5.2&nbsp;&nbsp;文件I/O<BR><BR>
 </H1>
 
 <UL>
-    <LI><P>��������</LI>
-    <LI><P>���ϵͳ����</LI>
-    <LI><P>Open �Լ��ļ��Ĵ򿪱�־</LI>
-    <LI><P>ԭ�Ӳ���</LI>
-    <LI><P>�ļ�����</LI>
-    <LI><P>dup �� dup2</LI>
-    <LI><P>fcntl �� ioctl</LI>
-    <LI><P>���׻����ĸ���</LI>
+    <LI><P>基本概念</LI>
+    <LI><P>相关系统调用</LI>
+    <LI><P>Open 以及文件的打开标志</LI>
+    <LI><P>原子操作</LI>
+    <LI><P>文件共享</LI>
+    <LI><P>dup 和 dup2</LI>
+    <LI><P>fcntl 和 ioctl</LI>
+    <LI><P>容易混淆的概念</LI>
 </UL>
 
-<H3>5.2.1&nbsp;&nbsp;��������</H3>
+<H3>5.2.1&nbsp;&nbsp;基本概念</H3>
 <UL>
-    <LI>�ļ�������. STD??_FILENO, OPEN_MAX</LI>
-    <LI>�ļ��������������ڵ�Ĺ�ϵ</LI>
+    <LI>文件描述符. STD??_FILENO, OPEN_MAX</LI>
+    <LI>文件描述符和索引节点的关系</LI>
 </UL>
 
-<H3>5.2.2&nbsp;&nbsp;���ϵͳ����</H3>
+<H3>5.2.2&nbsp;&nbsp;相关系统调用</H3>
 <UL>
     <LI>open/creat/close</LI>
     <LI>mode_t: primitive system type</LI>
-    <LI>ϵͳ���õķ���ֵ</LI>
+    <LI>系统调用的返回值</LI>
 
 <PRE>
 ===============================================================================
@@ -79,7 +79,7 @@
 ===============================================================================
 </PRE>
 
-<P ALIGN=CENTER>�嵥 5-1: �����ж����ļ� (hole.c)</P>
+<P ALIGN=CENTER>清单 5-1: 建立有洞的文件 (hole.c)</P>
 <PRE>
 ===============================================================================
 #include &lt;sys/types.h&gt;
@@ -129,12 +129,12 @@ int main (void)
 ===============================================================================
 </PRE>
 
-    <LI>I/O Ч������</LI>
+    <LI>I/O 效率问题</LI>
 </UL>
 
-<H3>5.2.3&nbsp;&nbsp;Open �Լ��ļ��Ĵ򿪱�־</H3>
+<H3>5.2.3&nbsp;&nbsp;Open 以及文件的打开标志</H3>
 <UL>
-    <LI>Open ��ԭ��</LI>
+    <LI>Open 的原型</LI>
 
 <PRE>
 ===============================================================================
@@ -146,7 +146,7 @@ int main (void)
 ===============================================================================
 </PRE>
 
-    <LI>�ļ��Ĵ򿪱�־: flags</LI>
+    <LI>文件的打开标志: flags</LI>
 
 <PRE>
 ===============================================================================
@@ -160,7 +160,7 @@ int main (void)
 ===============================================================================
 </PRE>
 
-    <LI>�ļ��ķ�������: mode</LI>
+    <LI>文件的访问许可: mode</LI>
 <PRE>
 ===============================================================================
        S_IRWXU                               00700
@@ -179,31 +179,31 @@ int main (void)
        S_IXOTH                               00001
 ===============================================================================
 </PRE>
-    <LI>ָ�� O_CREATE ʱ, ����ָ�� mode</LI>
-    <LI>���ļ����ļ�����: (mode & ~umask)</LI>
-    <LI>creat �ȼ��� open (pathname, O_CREAT | O_WRONLY | O_TRUNC, mode)</LI>
+    <LI>指定 O_CREATE 时, 必须指定 mode</LI>
+    <LI>新文件的文件许可: (mode & ~umask)</LI>
+    <LI>creat 等价于 open (pathname, O_CREAT | O_WRONLY | O_TRUNC, mode)</LI>
 </UL>
 
-<H3>5.2.4&nbsp;&nbsp;ԭ�Ӳ���</H3>
+<H3>5.2.4&nbsp;&nbsp;原子操作</H3>
 <UL>
-    <LI>����: ��������ͬʱ��һ���ļ�׷�Ӽ�¼</LI>
-    <LI>ԭ�Ӳ����ĸ���</LI>
-    <LI>��������Ľ���취</LI>
-    <LI>����һ������: �����ļ�</LI>
+    <LI>问题: 两个进程同时向一个文件追加记录</LI>
+    <LI>原子操作的概念</LI>
+    <LI>上述问题的解决办法</LI>
+    <LI>另外一个问题: 创建文件</LI>
 </UL>
 
-<H3>5.2.5&nbsp;&nbsp;�ļ�����</H3>
+<H3>5.2.5&nbsp;&nbsp;文件共享</H3>
 <UL>
-    <LI>�ں��������ļ������ݽṹ</LI>
+    <LI>内核中用于文件的数据结构</LI>
 
 <P ALIGN=CENTER><IMG SRC="images/file.gif" ALT="opened file"><BR>
-ͼ 5-6  ���̵��ļ���Ϣ</P>
+图 5-6  进程的文件信息</P>
 
-    <LI>����������Щ��Ϣ</LI>
-    <LI>ϵͳ���õ��׷�������Щ�ı�: write, write with O_APPEND, lseek</LI>
+    <LI>共享的是哪些信息</LI>
+    <LI>系统调用到底发生了哪些改变: write, write with O_APPEND, lseek</LI>
 </UL>
 
-<H3>5.2.6&nbsp;&nbsp;dup �� dup2</H3>
+<H3>5.2.6&nbsp;&nbsp;dup 和 dup2</H3>
 <PRE>
 ===============================================================================
        #include &lt;unistd.h&gt;
@@ -213,12 +213,12 @@ int main (void)
 ===============================================================================
 </PRE>
 <UL>
-    <LI>dup �ĸ�����Ϊ</LI>
-    <LI>dup2 �ĸ�����Ϊ. dup2 ��һ��ԭ�Ӳ���</LI>
-    <LI>���ƺ���ʲô</LI>
+    <LI>dup 的复制行为</LI>
+    <LI>dup2 的复制行为. dup2 是一个原子操作</LI>
+    <LI>复制后共享什么</LI>
 </UL>
 
-<H3>5.2.7&nbsp;&nbsp;fcntl �� ioctl</H3>
+<H3>5.2.7&nbsp;&nbsp;fcntl 和 ioctl</H3>
 <PRE>
 ===============================================================================
        #include &lt;unistd.h&gt;
@@ -235,31 +235,31 @@ int main (void)
 </PRE>
 
 <UL>
-    <LI>fcntl ��;1: ���������� (cmd=F_DUPFD)</LI>
-    <LI>fcntl ��;2: ��ȡ/�����ļ���������־ (cmd=F_GETFD or F_SETFD). Ψһ��־: FD_CLOEXEC</LI>
-    <LI>fcntl ��;3: ��ȡ/�����ļ�״̬��־ (cmd=F_GETFL or F_SETFL). ֻ���޸�: O_APPEND, O_NONBLOCK �� O_ASYNC</LI>
-    <LI>fcntl ��;4: ��ȡ/���ü�¼�� (cmd=F_GETLK, F_SETLK or F_SETLKW)</LI>
-    <LI>fcntl ��;5: ��ȡ/�����첽 I/O (cmd=F_GETOWN, F_SETOWN, F_GETSIG* or F_SETSIG*)</LI>
-    <LI>ioctl -- �κβ�����ǰ��������ɵĹ���������ͨ���ú������.</LI>
+    <LI>fcntl 用途1: 复制描述符 (cmd=F_DUPFD)</LI>
+    <LI>fcntl 用途2: 获取/设置文件描述符标志 (cmd=F_GETFD or F_SETFD). 唯一标志: FD_CLOEXEC</LI>
+    <LI>fcntl 用途3: 获取/设置文件状态标志 (cmd=F_GETFL or F_SETFL). 只能修改: O_APPEND, O_NONBLOCK 和 O_ASYNC</LI>
+    <LI>fcntl 用途4: 获取/设置记录锁 (cmd=F_GETLK, F_SETLK or F_SETLKW)</LI>
+    <LI>fcntl 用途5: 获取/设置异步 I/O (cmd=F_GETOWN, F_SETOWN, F_GETSIG* or F_SETSIG*)</LI>
+    <LI>ioctl -- 任何不能用前述函数完成的工作均可以通过该函数完成.</LI>
 </UL>
 
 <PRE>
 ===============================================================================
-    ioctl ����������    ��������      ��Ҫ������ͷ�ļ�
-    ���̾���            DIOxxx        &lt;disklabel.h&gt;
-    �ļ� I/O            FIOxxx        &lt;ioctl.h&gt;
-    �Ŵ� I/O            MTIOxxx       &lt;mtio.h&gt;
-    �׽��� I/O          SIOxxx        &lt;ioctl.h&gt;
-    �ն� I/O            TIOxxx        &lt;termios.h&gt;
+    ioctl 的适用类型    常量名称      还要包含的头文件
+    磁盘卷标            DIOxxx        &lt;disklabel.h&gt;
+    文件 I/O            FIOxxx        &lt;ioctl.h&gt;
+    磁带 I/O            MTIOxxx       &lt;mtio.h&gt;
+    套接字 I/O          SIOxxx        &lt;ioctl.h&gt;
+    终端 I/O            TIOxxx        &lt;termios.h&gt;
 ===============================================================================
 </PRE>
 
-<H3>5.2.8&nbsp;&nbsp;���׻����ĸ���</H3>
+<H3>5.2.8&nbsp;&nbsp;容易混淆的概念</H3>
 <UL>
-    <LI>���̵��ļ�������: �ļ���������־�Լ�ָ���ں��ļ�����ָ��</LI>
-    <LI>�ں��ļ���: �ļ�״̬��־, �ļ���ǰλ���Լ�ָ�� vnode ��ָ��</LI>
-    <LI>vnode: �ļ����������</LI>
-    <LI>�����ϵ��ļ�: inode + ����</LI>
+    <LI>进程的文件描述符: 文件描述符标志以及指向内核文件表的指针</LI>
+    <LI>内核文件表: 文件状态标志, 文件当前位置以及指向 vnode 的指针</LI>
+    <LI>vnode: 文件对象的属性</LI>
+    <LI>磁盘上的文件: inode + 数据</LI>
 </UL>
 
 <P>

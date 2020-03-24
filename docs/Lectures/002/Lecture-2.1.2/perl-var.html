@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <HTML>
 <HEAD>
-    <TITLE>Perl µÄ±äÁ¿</TITLE>
+    <TITLE>Perl çš„å˜é‡</TITLE>
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
     <META NAME="AUTHOR" CONTENT="Yongming Wei">
     <META NAME="CREATED" CONTENT="20000329;17342600">
@@ -26,73 +26,73 @@
 <A HREF="perl-syntax.html"><IMG SRC="next.gif" ALT="Next"></A>
 <A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
 
-<H1 ALIGN=LEFT>7&nbsp;&nbsp;&nbsp;&nbsp;Perl µÄ±äÁ¿</H1>
+<H1 ALIGN=LEFT>7&nbsp;&nbsp;&nbsp;&nbsp;Perl çš„å˜é‡</H1>
 
 <UL>
   <LI> 
-    <P>¼òµ¥±äÁ¿
+    <P>ç®€å•å˜é‡
   </LI>
   <LI> 
-    <P>Êý×é
+    <P>æ•°ç»„
   </LI>
   <LI> 
-    <P>¹ØÁªÊý×é
+    <P>å…³è”æ•°ç»„
   </LI>
   <LI> 
-    <P>¸÷ÖÖÔËËã·û»ã×Ü
+    <P>å„ç§è¿ç®—ç¬¦æ±‡æ€»
   </LI>
 </UL>
 
-<H3>7.1&nbsp;&nbsp;&nbsp;&nbsp;¼òµ¥±äÁ¿</H3>
-<P>Perl µÄ Hello World ÊÇÔõÃ´Ð´µÄÄØ£¿Çë¿´ÏÂÃæµÄ³ÌÐò£º</P>
+<H3>7.1&nbsp;&nbsp;&nbsp;&nbsp;ç®€å•å˜é‡</H3>
+<P>Perl çš„ Hello World æ˜¯æ€Žä¹ˆå†™çš„å‘¢ï¼Ÿè¯·çœ‹ä¸‹é¢çš„ç¨‹åºï¼š</P>
 <P><b><font color="#FFFFFF">#!/usr/bin/perl<br>
   print &quot;Hello World&quot;</font></b></P>
-<P>Õâ¸ö³ÌÐòºÍÇ°Ãæ BASH µÄ Hello World ³ÌÐò¼¸ºõÏàÍ¬£¬Ö»ÊÇµÚÒ»ÐÐ»»³ÉÁË #!/usr/bin/perl £¬»¹ÓÐÏÔÊ¾µÄÊ±ºòÓÃµÄÊÇ print£¬¶ø²»ÊÇ 
-  echo¡£ÓÐÁËÇ°Ãæ BASH »ù´¡ºÍ C ÓïÑÔµÄ»ù´¡£¬Ðí¶à Perl µÄÖªÊ¶¿ÉÒÔºÜÈÝÒ×µÄ¾Í¿´¶®ºÍ¼Ç×¡£¬ÏÂÃæÎÒÃÇ¾Í´Ó¼òµ¥±äÁ¿¿ªÊ¼¡£</P>
-<P>¼òµ¥±äÁ¿ÊÇ±êÁ¿£¬ÊÇ Perl ´¦ÀíµÄ×î¼òµ¥µÄÊý¾ÝÀàÐÍ¡£±êÁ¿¿ÉÒÔÊÇÊý×Ö(Èç2,3»ò2.5e6)£¬ Ò²¿ÉÒÔÊÇ×Ö·û´®¡£Perl ÖÐµÄ±êÁ¿±äÁ¿ÒÔÃÀÔª·ûºÅ &quot;$&quot; 
-  ºÍÒ»¸ö×ÖÄ¸¿ªÊ¼£¬ºóÃæ¿ÉÒÔ¸ú×ÖÄ¸¡¢Êý×ÖºÍÏÂ»®Ïß£¬Perl µÄ±äÁ¿Çø·Ö´óÐ¡Ð´£¬Òò´Ë $a ºÍ $A ÊÇ´ú±í²»Í¬µÄ±äÁ¿¡£ºÍ BASH ÖÐ²»Í¬µÄÊÇ Perl ÓïÑÔÖÐµÄ±äÁ¿¼´Ê¹ÊÇÔÚ×î³õ¸³ÖµµÄÊ±ºòÒ²±ØÐëÔÚ±äÁ¿Ç°Ãæ¼ÓÉÏ 
-  &quot;$&quot; ·ûºÅ£¬¶øÇÒ Perl ²»ÒªÇó &quot;=&quot; ×óÓÒ±ØÐëÃ»ÓÐ¿Õ¸ñ¡£</P>
-<P>ËäÈ» Perl ÖÐºÍ BASH Ò»Ñù£¬Ã»ÓÐ±äÁ¿ÀàÐÍµÄ¸ÅÄî£¬ÎÒÃÇ»¹ÊÇ¿ÉÒÔ°Ñ¼òµ¥±äÁ¿·ÖÎªÊýÖµÐÍºÍ×Ö·û´®ÐÍÀ´Àí½â¡£ÔÚ¸³ÖµÊ±£¬Èç¹ûÊÇ¸³Öµ³É×Ö·û´®£¬ÔòÐèÒªÔÚ×Ö·û´®Á½±ß¼ÓÉÏË«ÒýºÅ£¨»òµ¥ÒýºÅ£©£»Èç¹ûÊÇÊýÖµÔò¾Í²»ÓÃÁË£¬¶øÇÒ 
-  Perl ÖÐ»¹¿ÉÒÔ½ÓÊÜ8/16£¨ÒÔ0¿ªÍ·/ÒÔ0x»ò0X¿ªÍ·£©½øÖÆµÄÕûÊý£¬»¹¿ÉÒÔ½ÓÊÜÈç 2.5,-6.3e5,-2.3-e6 ÕâÑùµÄ¸¡µãÊý¡£¹ØÓÚ¼òµ¥±äÁ¿¾ÙÀýÈçÏÂ£º</P>
+<P>è¿™ä¸ªç¨‹åºå’Œå‰é¢ BASH çš„ Hello World ç¨‹åºå‡ ä¹Žç›¸åŒï¼Œåªæ˜¯ç¬¬ä¸€è¡Œæ¢æˆäº† #!/usr/bin/perl ï¼Œè¿˜æœ‰æ˜¾ç¤ºçš„æ—¶å€™ç”¨çš„æ˜¯ printï¼Œè€Œä¸æ˜¯ 
+  echoã€‚æœ‰äº†å‰é¢ BASH åŸºç¡€å’Œ C è¯­è¨€çš„åŸºç¡€ï¼Œè®¸å¤š Perl çš„çŸ¥è¯†å¯ä»¥å¾ˆå®¹æ˜“çš„å°±çœ‹æ‡‚å’Œè®°ä½ï¼Œä¸‹é¢æˆ‘ä»¬å°±ä»Žç®€å•å˜é‡å¼€å§‹ã€‚</P>
+<P>ç®€å•å˜é‡æ˜¯æ ‡é‡ï¼Œæ˜¯ Perl å¤„ç†çš„æœ€ç®€å•çš„æ•°æ®ç±»åž‹ã€‚æ ‡é‡å¯ä»¥æ˜¯æ•°å­—(å¦‚2,3æˆ–2.5e6)ï¼Œ ä¹Ÿå¯ä»¥æ˜¯å­—ç¬¦ä¸²ã€‚Perl ä¸­çš„æ ‡é‡å˜é‡ä»¥ç¾Žå…ƒç¬¦å· &quot;$&quot; 
+  å’Œä¸€ä¸ªå­—æ¯å¼€å§‹ï¼ŒåŽé¢å¯ä»¥è·Ÿå­—æ¯ã€æ•°å­—å’Œä¸‹åˆ’çº¿ï¼ŒPerl çš„å˜é‡åŒºåˆ†å¤§å°å†™ï¼Œå› æ­¤ $a å’Œ $A æ˜¯ä»£è¡¨ä¸åŒçš„å˜é‡ã€‚å’Œ BASH ä¸­ä¸åŒçš„æ˜¯ Perl è¯­è¨€ä¸­çš„å˜é‡å³ä½¿æ˜¯åœ¨æœ€åˆèµ‹å€¼çš„æ—¶å€™ä¹Ÿå¿…é¡»åœ¨å˜é‡å‰é¢åŠ ä¸Š 
+  &quot;$&quot; ç¬¦å·ï¼Œè€Œä¸” Perl ä¸è¦æ±‚ &quot;=&quot; å·¦å³å¿…é¡»æ²¡æœ‰ç©ºæ ¼ã€‚</P>
+<P>è™½ç„¶ Perl ä¸­å’Œ BASH ä¸€æ ·ï¼Œæ²¡æœ‰å˜é‡ç±»åž‹çš„æ¦‚å¿µï¼Œæˆ‘ä»¬è¿˜æ˜¯å¯ä»¥æŠŠç®€å•å˜é‡åˆ†ä¸ºæ•°å€¼åž‹å’Œå­—ç¬¦ä¸²åž‹æ¥ç†è§£ã€‚åœ¨èµ‹å€¼æ—¶ï¼Œå¦‚æžœæ˜¯èµ‹å€¼æˆå­—ç¬¦ä¸²ï¼Œåˆ™éœ€è¦åœ¨å­—ç¬¦ä¸²ä¸¤è¾¹åŠ ä¸ŠåŒå¼•å·ï¼ˆæˆ–å•å¼•å·ï¼‰ï¼›å¦‚æžœæ˜¯æ•°å€¼åˆ™å°±ä¸ç”¨äº†ï¼Œè€Œä¸” 
+  Perl ä¸­è¿˜å¯ä»¥æŽ¥å—8/16ï¼ˆä»¥0å¼€å¤´/ä»¥0xæˆ–0Xå¼€å¤´ï¼‰è¿›åˆ¶çš„æ•´æ•°ï¼Œè¿˜å¯ä»¥æŽ¥å—å¦‚ 2.5,-6.3e5,-2.3-e6 è¿™æ ·çš„æµ®ç‚¹æ•°ã€‚å…³äºŽç®€å•å˜é‡ä¸¾ä¾‹å¦‚ä¸‹ï¼š</P>
 <P><b><font color="#FFFFFF">$a=23; <br>
   $a = "hello"; <br>
-  $a = 010;£¨±íÊ¾Ê®½øÖÆµÄ 8£©<br>
+  $a = 010;ï¼ˆè¡¨ç¤ºåè¿›åˆ¶çš„ 8ï¼‰<br>
   $a = 0x10;<br>
   $a = 0X10;</font></b></P>
-<P>ºÍ C ÓïÑÔÀàËÆ£¬ÔÚË«ÒýºÅÖ®ÖÐ¿ÉÒÔÓÃ·´Ð±¸Ü±íÊ¾Ò»Ð©ÌØÊâ×ªÒå×Ö·û£¬¼ûÏÂ±í£º</P>
+<P>å’Œ C è¯­è¨€ç±»ä¼¼ï¼Œåœ¨åŒå¼•å·ä¹‹ä¸­å¯ä»¥ç”¨åæ–œæ è¡¨ç¤ºä¸€äº›ç‰¹æ®Šè½¬ä¹‰å­—ç¬¦ï¼Œè§ä¸‹è¡¨ï¼š</P>
 <table border=1 width="49%">
   <tbody> 
   <tr> 
-    <td width="20%"><strong>½á ¹¹</strong></td>
-    <td width="80%"><strong>º¬ Òå</strong></td>
+    <td width="20%"><strong>ç»“ æž„</strong></td>
+    <td width="80%"><strong>å« ä¹‰</strong></td>
   </tr>
   <tr> 
     <td width="20%">\n</td>
-    <td width="80%">»»ÐÐ</td>
+    <td width="80%">æ¢è¡Œ</td>
   </tr>
   <tr> 
     <td width="20%">\r</td>
-    <td width="80%">»Ø³µ</td>
+    <td width="80%">å›žè½¦</td>
   </tr>
   <tr> 
     <td width="20%">\t</td>
-    <td width="80%">Ë®Æ½ÖÃ±í·û</td>
+    <td width="80%">æ°´å¹³ç½®è¡¨ç¬¦</td>
   </tr>
   <tr> 
     <td width="20%">\f</td>
-    <td width="80%">»»Ò³·û</td>
+    <td width="80%">æ¢é¡µç¬¦</td>
   </tr>
   <tr> 
     <td width="20%">\b</td>
-    <td width="80%">ÍË¸ñ</td>
+    <td width="80%">é€€æ ¼</td>
   </tr>
   <tr> 
     <td width="20%">\v</td>
-    <td width="80%">´¹Ö±ÖÃ±í·û</td>
+    <td width="80%">åž‚ç›´ç½®è¡¨ç¬¦</td>
   </tr>
   <tr> 
     <td width="20%">\a</td>
-    <td width="80%">ÏìÁå</td>
+    <td width="80%">å“é“ƒ</td>
   </tr>
   <tr> 
     <td width="20%">\e</td>
@@ -100,149 +100,149 @@
   </tr>
   <tr> 
     <td width="20%">\007</td>
-    <td width="80%">ÈÎÒ»°Ë½øÖÆASCIIÖµ(ÕâÀï007±íÊ¾bell)</td>
+    <td width="80%">ä»»ä¸€å…«è¿›åˆ¶ASCIIå€¼(è¿™é‡Œ007è¡¨ç¤ºbell)</td>
   </tr>
   <tr> 
     <td width="20%">\x7f</td>
-    <td width="80%">ÈÎÒ»Ê®Áù½øÖÆASCIIÖµ</td>
+    <td width="80%">ä»»ä¸€åå…­è¿›åˆ¶ASCIIå€¼</td>
   </tr>
   <tr> 
     <td width="20%">\cC</td>
-    <td width="80%">ÈÎÒ»¡°¿ØÖÆ¡±×Ö·û</td>
+    <td width="80%">ä»»ä¸€â€œæŽ§åˆ¶â€å­—ç¬¦</td>
   </tr>
   <tr> 
     <td width="20%">\\</td>
-    <td width="80%">·´Ð±¸Ü</td>
+    <td width="80%">åæ–œæ </td>
   </tr>
   <tr> 
     <td width="20%">\"</td>
-    <td width="80%">Ë«ÒýºÅ</td>
+    <td width="80%">åŒå¼•å·</td>
   </tr>
   <tr> 
     <td width="20%">\l</td>
-    <td width="80%">ÏÂÒ»×ÖÄ¸Ð¡Ð´</td>
+    <td width="80%">ä¸‹ä¸€å­—æ¯å°å†™</td>
   </tr>
   <tr> 
     <td width="20%">\L</td>
-    <td width="80%">ÒÔºóËùÓÐ×ÖÄ¸Ð¡Ð´Ö±µ½\E</td>
+    <td width="80%">ä»¥åŽæ‰€æœ‰å­—æ¯å°å†™ç›´åˆ°\E</td>
   </tr>
   <tr> 
     <td width="20%">\u</td>
-    <td width="80%">ÏÂÒ»×ÖÄ¸´óÐ´</td>
+    <td width="80%">ä¸‹ä¸€å­—æ¯å¤§å†™</td>
   </tr>
   <tr> 
     <td width="20%">\U</td>
-    <td width="80%">ÒÔºóËùÓÐ×ÖÄ¸´óÐ´Ö±µ½\E</td>
+    <td width="80%">ä»¥åŽæ‰€æœ‰å­—æ¯å¤§å†™ç›´åˆ°\E</td>
   </tr>
   <tr> 
     <td width="20%">\E</td>
-    <td width="80%">½áÊø\LºÍ\U</td>
+    <td width="80%">ç»“æŸ\Lå’Œ\U</td>
   </tr>
   </tbody>
 </table>
-<P>ÁíÍâÔÚ Perl ÓïÑÔÀï£¬ÎÒÃÇ³£»á¿´µ½ my ÕâÑùµÄ±äÁ¿¶¨Òå£¬Èç£º</P>
+<P>å¦å¤–åœ¨ Perl è¯­è¨€é‡Œï¼Œæˆ‘ä»¬å¸¸ä¼šçœ‹åˆ° my è¿™æ ·çš„å˜é‡å®šä¹‰ï¼Œå¦‚ï¼š</P>
 <P><b><font color="#FFFFFF">my $a = &quot;local var&quot;;</font></b></P>
-<P>Õâ±íÊ¾ $a ÊÇÒ»¸ö³ÌÐò¿éµÄ¾Ö²¿±äÁ¿¡£</P>
+<P>è¿™è¡¨ç¤º $a æ˜¯ä¸€ä¸ªç¨‹åºå—çš„å±€éƒ¨å˜é‡ã€‚</P>
 <P>&nbsp;</P>
-<H3>7.2&nbsp;&nbsp;&nbsp;&nbsp;Êý×é</H3>
-<P><I> </I>Êý×éÊÇ±êÁ¿Êý¾ÝµÄÓÐÐòÁÐ±í¡£Êý×é¿ÉÒÔº¬´Ó 0 ¸öÔªËØ´óÐ¡ Ö±µ½ Äã¼ÆËã»úÄÚ´æ¿ÉÒÔÖ§³ÖµÄ´óÐ¡¡£Êý×éÓÃÀ¨ºÅÄÚÒÔ¶ººÅ·Ö¸ôµÄÒ»ÏµÁÐÔªËØÀ´±íÊ¾¡£Èç£º</P>
+<H3>7.2&nbsp;&nbsp;&nbsp;&nbsp;æ•°ç»„</H3>
+<P><I> </I>æ•°ç»„æ˜¯æ ‡é‡æ•°æ®çš„æœ‰åºåˆ—è¡¨ã€‚æ•°ç»„å¯ä»¥å«ä»Ž 0 ä¸ªå…ƒç´ å¤§å° ç›´åˆ° ä½ è®¡ç®—æœºå†…å­˜å¯ä»¥æ”¯æŒçš„å¤§å°ã€‚æ•°ç»„ç”¨æ‹¬å·å†…ä»¥é€—å·åˆ†éš”çš„ä¸€ç³»åˆ—å…ƒç´ æ¥è¡¨ç¤ºã€‚å¦‚ï¼š</P>
 <P><b><font color="#FFFFFF">@a=(1,2,3,4,5)<br>
   @a=("aka",1974,173.5)</font></b></P>
-<P>ÔÚ Perl ÖÐ¶ÔÊý×é±äÁ¿ºÍÇ°ÃæµÄ¼òµ¥±äÁ¿µÄ´æ´¢ÊÇÔÚ²»Í¬µÄ¿Õ¼äÖÐ£¬¶ÔÊý×éµÄÒýÓÃÐèÒªÔÚ±äÁ¿Ç°¼Ó &quot;@&quot; ·ûºÅ¡£</P>
-<P>Êý×éµÄ¸³ÖµÓÉÏÂÃæ¼¸ÖÖÓÃ·¨ÐèÒª×¢Òâ£º</P>
+<P>åœ¨ Perl ä¸­å¯¹æ•°ç»„å˜é‡å’Œå‰é¢çš„ç®€å•å˜é‡çš„å­˜å‚¨æ˜¯åœ¨ä¸åŒçš„ç©ºé—´ä¸­ï¼Œå¯¹æ•°ç»„çš„å¼•ç”¨éœ€è¦åœ¨å˜é‡å‰åŠ  &quot;@&quot; ç¬¦å·ã€‚</P>
+<P>æ•°ç»„çš„èµ‹å€¼ç”±ä¸‹é¢å‡ ç§ç”¨æ³•éœ€è¦æ³¨æ„ï¼š</P>
 <table border=1 width="81%">
   <tbody> 
   <tr> 
     <td width="20%">@a=(1,2,3);</td>
-    <td width="80%"># ³õÊ¼»¯Ò»¸öÕûÊýÊý×é¡£</td>
+    <td width="80%"># åˆå§‹åŒ–ä¸€ä¸ªæ•´æ•°æ•°ç»„ã€‚</td>
   </tr>
   <tr> 
     <td width="20%" height="35">$a=@a;</td>
-    <td width="80%" height="35"># ÕâÀï±íÊ¾½«Êý×é @a µÄ³¤¶È¸³¸ø $a£¬´ËÊ± $a ºÍ @a ²»ÊÇÒ»¸ö±äÁ¿£¬ËûÃÇ²»ÔÚÒ»¸ö´æ´¢¿Õ¼äÀï£¬ÒýÓÃÊ±²»»á·¢Éú»ìÏý¡£</td>
+    <td width="80%" height="35"># è¿™é‡Œè¡¨ç¤ºå°†æ•°ç»„ @a çš„é•¿åº¦èµ‹ç»™ $aï¼Œæ­¤æ—¶ $a å’Œ @a ä¸æ˜¯ä¸€ä¸ªå˜é‡ï¼Œä»–ä»¬ä¸åœ¨ä¸€ä¸ªå­˜å‚¨ç©ºé—´é‡Œï¼Œå¼•ç”¨æ—¶ä¸ä¼šå‘ç”Ÿæ··æ·†ã€‚</td>
   </tr>
   <tr> 
     <td width="20%">($a, $b, $c)=(1,2,3);</td>
-    <td width="80%"># ÕâÀï±íÊ¾½« 1 ¸³¸ø $a£»2 ¸³¸ø $b£»3 ¸³¸ø $c£»</td>
+    <td width="80%"># è¿™é‡Œè¡¨ç¤ºå°† 1 èµ‹ç»™ $aï¼›2 èµ‹ç»™ $bï¼›3 èµ‹ç»™ $cï¼›</td>
   </tr>
   <tr> 
     <td width="20%">@a=(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;);</td>
-    <td width="80%"># ³õÊ¼»¯Ò»¸ö×Ö·û´®Êý×é¡£</td>
+    <td width="80%"># åˆå§‹åŒ–ä¸€ä¸ªå­—ç¬¦ä¸²æ•°ç»„ã€‚</td>
   </tr>
   <tr> 
     <td width="20%">@b=@a;</td>
-    <td width="80%"># ±íÊ¾°ÑÊý×é @a ¿½±´Ò»·Ý¸øÊý×é @b£¬@a Óë @b ²»ÏíÓÐ¹²Í¬µÄ´æ´¢¿Õ¼ä£¬ËûÃÇ±Ë´Ë·ÖÀë¡£</td>
+    <td width="80%"># è¡¨ç¤ºæŠŠæ•°ç»„ @a æ‹·è´ä¸€ä»½ç»™æ•°ç»„ @bï¼Œ@a ä¸Ž @b ä¸äº«æœ‰å…±åŒçš„å­˜å‚¨ç©ºé—´ï¼Œä»–ä»¬å½¼æ­¤åˆ†ç¦»ã€‚</td>
   </tr>
   <tr> 
     <td width="20%">@c=(@a,@b);</td>
-    <td width="80%"># ±íÊ¾Êý×é @c ÓµÓÐ @a ºÍ @b µÄËùÓÐÔªËØ£¬ÈÔÈ»ÊÇÒ»Î¬Êý×é£¬¶ø²»ÊÇ·¢ÉúÁËÇ¶Ì×¡£</td>
+    <td width="80%"># è¡¨ç¤ºæ•°ç»„ @c æ‹¥æœ‰ @a å’Œ @b çš„æ‰€æœ‰å…ƒç´ ï¼Œä»ç„¶æ˜¯ä¸€ç»´æ•°ç»„ï¼Œè€Œä¸æ˜¯å‘ç”Ÿäº†åµŒå¥—ã€‚</td>
   </tr>
   <tr> 
     <td width="20%">($a,@b)=@a;</td>
-    <td width="80%"># ±íÊ¾±äÁ¿ $a µÈÓÚÊý×é @a µÄµÚÒ»¸öÔªËØ£¬@b ¿½±´ÁË @a µÄÊ£ÓàÔªËØ¡£</td>
+    <td width="80%"># è¡¨ç¤ºå˜é‡ $a ç­‰äºŽæ•°ç»„ @a çš„ç¬¬ä¸€ä¸ªå…ƒç´ ï¼Œ@b æ‹·è´äº† @a çš„å‰©ä½™å…ƒç´ ã€‚</td>
   </tr>
   <tr> 
     <td width="20%">@a=();</td>
-    <td width="80%"># ±íÊ¾²úÉú»òÇå¿ÕÒ»¸öÊý×é¡£</td>
+    <td width="80%"># è¡¨ç¤ºäº§ç”Ÿæˆ–æ¸…ç©ºä¸€ä¸ªæ•°ç»„ã€‚</td>
   </tr>
   <tr> 
     <td width="20%">($a)=@b;</td>
-    <td width="80%">±äÁ¿ $a µÈÓÚÊý×é @b µÄµÚÒ»¸öÔªËØµÄÖµ¡£</td>
+    <td width="80%">å˜é‡ $a ç­‰äºŽæ•°ç»„ @b çš„ç¬¬ä¸€ä¸ªå…ƒç´ çš„å€¼ã€‚</td>
   </tr>
   <tr> 
     <td width="20%">@b[i]</td>
-    <td width="80%">ÒýÓÃÊý×é @b µÄµÚ i ¸öÔªËØ¡£</td>
+    <td width="80%">å¼•ç”¨æ•°ç»„ @b çš„ç¬¬ i ä¸ªå…ƒç´ ã€‚</td>
   </tr>
   <tr> 
     <td width="20%">$b[i]</td>
-    <td width="80%">Èç¹û b ±íÊ¾Ò»¸öÊý×éµÄ»°£¬Æäº¬ÒåÍ¬ÉÏ¡£</td>
+    <td width="80%">å¦‚æžœ b è¡¨ç¤ºä¸€ä¸ªæ•°ç»„çš„è¯ï¼Œå…¶å«ä¹‰åŒä¸Šã€‚</td>
   </tr>
   <tr> 
     <td width="20%">$a[i,j]=[x,y]</td>
-    <td width="80%">½«Êý×é @a µÄµÚ i ºÍµÚ j ¸öÔªËØ¸³ÖµÎª x ºÍ y¡£</td>
+    <td width="80%">å°†æ•°ç»„ @a çš„ç¬¬ i å’Œç¬¬ j ä¸ªå…ƒç´ èµ‹å€¼ä¸º x å’Œ yã€‚</td>
   </tr>
   <tr> 
     <td width="20%">@a[i,j]=@a[j,i]</td>
-    <td width="80%">½«Êý×é @a µÄµÚ i ºÍµÚ j ¸öÔªËØµÄÖµ»¥Ïà½»»»¡£</td>
+    <td width="80%">å°†æ•°ç»„ @a çš„ç¬¬ i å’Œç¬¬ j ä¸ªå…ƒç´ çš„å€¼äº’ç›¸äº¤æ¢ã€‚</td>
   </tr>
   </tbody> 
 </table>
 <P>&nbsp;</P>
 <P><BR>
 </P>
-<H3>7.3&nbsp;&nbsp;&nbsp;&nbsp;¹ØÁªÊý×é</H3>
-<P> ¹ØÁªÊý×éÊÇ Perl ÓïÑÔÖÐÌØÓÐµÄÒ»ÖÖÊý¾Ý½á¹¹£¬ÊÇÒ»¸ö¹¦ÄÜÇ¿´óµÄÊý×é£¬ËûÓëÆÕÍ¨Êý×éµÄ²»Í¬ÔÚÓÚ¹ØÁªÊý×é²»ÊÇÍ¨¹ýÕûÊýÏÂ±êÀ´Ë÷Òý£¬¶øÊÇÍ¨¹ý¡°¼üÖµ¡±½øÐÐË÷Òý¡£Ê¹ÓÃ¹ØÁªÊý×éÐèÒªÔÚ±äÁ¿Ç°Ãæ¼ÓÉÏ 
-  &quot;%&quot; ºÅ£¬¹ØÁªÊý×éµÄ¸ñÊ½Èç£º</P>
+<H3>7.3&nbsp;&nbsp;&nbsp;&nbsp;å…³è”æ•°ç»„</H3>
+<P> å…³è”æ•°ç»„æ˜¯ Perl è¯­è¨€ä¸­ç‰¹æœ‰çš„ä¸€ç§æ•°æ®ç»“æž„ï¼Œæ˜¯ä¸€ä¸ªåŠŸèƒ½å¼ºå¤§çš„æ•°ç»„ï¼Œä»–ä¸Žæ™®é€šæ•°ç»„çš„ä¸åŒåœ¨äºŽå…³è”æ•°ç»„ä¸æ˜¯é€šè¿‡æ•´æ•°ä¸‹æ ‡æ¥ç´¢å¼•ï¼Œè€Œæ˜¯é€šè¿‡â€œé”®å€¼â€è¿›è¡Œç´¢å¼•ã€‚ä½¿ç”¨å…³è”æ•°ç»„éœ€è¦åœ¨å˜é‡å‰é¢åŠ ä¸Š 
+  &quot;%&quot; å·ï¼Œå…³è”æ•°ç»„çš„æ ¼å¼å¦‚ï¼š</P>
 <P><b><font color="#FFFFFF">ARRAY=(key1,value1,key2,value2,key3,value3); </font></b></P>
-<P>ÉÏÃæÃ¿¸ö key ¶¼¶ÔÓ¦×ÅÒ»¸ö value¡£¹ØÁªÊý×éÊÇ´æÔÚÔÚÁíÍâÒ»¸ö´æ´¢¿Õ¼äÖÐ£¬²»ºÍ¼òµ¥±äÁ¿ÒÔ¼°Êý×éÏà»ìÏý¡£</P>
-<P>¶Ô¹ØÁªÊý×éµÄ²Ù×÷ÓÐÈçÏÂ¹æÔò£º </P>
+<P>ä¸Šé¢æ¯ä¸ª key éƒ½å¯¹åº”ç€ä¸€ä¸ª valueã€‚å…³è”æ•°ç»„æ˜¯å­˜åœ¨åœ¨å¦å¤–ä¸€ä¸ªå­˜å‚¨ç©ºé—´ä¸­ï¼Œä¸å’Œç®€å•å˜é‡ä»¥åŠæ•°ç»„ç›¸æ··æ·†ã€‚</P>
+<P>å¯¹å…³è”æ•°ç»„çš„æ“ä½œæœ‰å¦‚ä¸‹è§„åˆ™ï¼š </P>
 <ol>
-  <li>ÔÚ¹ØÁªÊý×éÖÐÔö¼Ó¡¢¸ü¸ÄÒ»¶ÔÊý¾Ý£ºARRAY={key}=value; ÔÚ¹ØÁªÊý×éARRAYÖÐ¼ÓÉÏÒ»¶Ô key-value£¬ÒªÔÚ¹ØÁªÊý×éÃû³ÆÇ°¼ÓÉÏ 
-    $ ºÅ£¬¶øÇÒ key µÄÃû³ÆÒªÔÚ {} ·ûºÅÖ®¼ä£¬×îºóÔÙÖ¸¶¨ key Ëù¶ÔÓ¦µÄ value Öµ¡£Èç¹ûÔÚÕâ¸ö¹ØÁªÊý×éÖÐÒÑ¾­ÓÐÕâ¸ö key ÁË.¾Í»á¸ü¸ÄÕâ¸ö 
-    key Ëù¶ÔÓ¦µÄ value ¡£ <br>
+  <li>åœ¨å…³è”æ•°ç»„ä¸­å¢žåŠ ã€æ›´æ”¹ä¸€å¯¹æ•°æ®ï¼šARRAY={key}=value; åœ¨å…³è”æ•°ç»„ARRAYä¸­åŠ ä¸Šä¸€å¯¹ key-valueï¼Œè¦åœ¨å…³è”æ•°ç»„åç§°å‰åŠ ä¸Š 
+    $ å·ï¼Œè€Œä¸” key çš„åç§°è¦åœ¨ {} ç¬¦å·ä¹‹é—´ï¼Œæœ€åŽå†æŒ‡å®š key æ‰€å¯¹åº”çš„ value å€¼ã€‚å¦‚æžœåœ¨è¿™ä¸ªå…³è”æ•°ç»„ä¸­å·²ç»æœ‰è¿™ä¸ª key äº†.å°±ä¼šæ›´æ”¹è¿™ä¸ª 
+    key æ‰€å¯¹åº”çš„ value ã€‚ <br>
     <br>
-  <li>keys(%array) ²Ù×÷·û¿ÉÉú³ÉÓÉ¹ØÁªÊý×é %array ÖÐµÄËùÓÐµ±Ç°¹Ø¼ü×Ö×é³ÉµÄÁÐ±í¡£¼´·µ»ØÆæÊýºÅÔªËØ(µÚ1,3,5,7...¸ö)µÄÁÐ±í¡£<br>
-    <br>
-  
-  <li>values(%array) ²Ù×÷·û·µ»ØÓÉ¹ØÁªÊý×é %array ÖÐËùÓÐµ±Ç°Öµ×é³ÉµÄÁÐ±í£¬¼´·µ»ØÅ¼Êý¸öÁÐ±í¡£<br>
+  <li>keys(%array) æ“ä½œç¬¦å¯ç”Ÿæˆç”±å…³è”æ•°ç»„ %array ä¸­çš„æ‰€æœ‰å½“å‰å…³é”®å­—ç»„æˆçš„åˆ—è¡¨ã€‚å³è¿”å›žå¥‡æ•°å·å…ƒç´ (ç¬¬1,3,5,7...ä¸ª)çš„åˆ—è¡¨ã€‚<br>
     <br>
   
-  <li>echo(%array) ²Ù×÷·û·µ»ØÓÉ ¹Ø¼ü×Ö/Öµ¶Ô ¹¹³ÉµÄÔªËØ¶ÔÁÐ±í¡£¶ÔÍ¬Ò»Êý×éÔÙ½øÐÐ´Ë²Ù×÷Ê±·µ»ØÏÂÒ»¶ÔÖµÖ±ÖÁ½áÊø¡£ÈôÃ»ÓÐ¸ü¶àµÄ¶ÔÊ±£¬echo() 
-    ·µ»Ø¿Õ±í¡£ (ÕâÔÚ´òÓ¡È«²¿ÁÐ±íÖÐºÜÓÐÓÃ) <br>
+  <li>values(%array) æ“ä½œç¬¦è¿”å›žç”±å…³è”æ•°ç»„ %array ä¸­æ‰€æœ‰å½“å‰å€¼ç»„æˆçš„åˆ—è¡¨ï¼Œå³è¿”å›žå¶æ•°ä¸ªåˆ—è¡¨ã€‚<br>
     <br>
-  <li>É¾³ýÒ»¶ÔÔÚ¹ØÁªÊý×éÖÐµÄÊý¾Ý£ºdelete $ARRAY{key}; delete ÊÇ Perl ËùÌá¹©µÄº¯Êý£¬×÷ÓÃÊÇÉ¾³ý¹ØÁªÊý×éÖÐµÄÒ»¸ö key 
-    ÒÔ¼°Õâ¸ö key Ëù¶ÔÓ¦µÄ value¡£Ê¹ÓÃ·½·¨ÊÇÔÚ delete º¯ÊýÖ®ºó£¬Ö¸¶¨¹ØÁªÊý×éÖÐÒªÉ¾³ýµÄ key Ãû³Æ¡£ </li>
+  
+  <li>echo(%array) æ“ä½œç¬¦è¿”å›žç”± å…³é”®å­—/å€¼å¯¹ æž„æˆçš„å…ƒç´ å¯¹åˆ—è¡¨ã€‚å¯¹åŒä¸€æ•°ç»„å†è¿›è¡Œæ­¤æ“ä½œæ—¶è¿”å›žä¸‹ä¸€å¯¹å€¼ç›´è‡³ç»“æŸã€‚è‹¥æ²¡æœ‰æ›´å¤šçš„å¯¹æ—¶ï¼Œecho() 
+    è¿”å›žç©ºè¡¨ã€‚ (è¿™åœ¨æ‰“å°å…¨éƒ¨åˆ—è¡¨ä¸­å¾ˆæœ‰ç”¨) <br>
+    <br>
+  <li>åˆ é™¤ä¸€å¯¹åœ¨å…³è”æ•°ç»„ä¸­çš„æ•°æ®ï¼šdelete $ARRAY{key}; delete æ˜¯ Perl æ‰€æä¾›çš„å‡½æ•°ï¼Œä½œç”¨æ˜¯åˆ é™¤å…³è”æ•°ç»„ä¸­çš„ä¸€ä¸ª key 
+    ä»¥åŠè¿™ä¸ª key æ‰€å¯¹åº”çš„ valueã€‚ä½¿ç”¨æ–¹æ³•æ˜¯åœ¨ delete å‡½æ•°ä¹‹åŽï¼ŒæŒ‡å®šå…³è”æ•°ç»„ä¸­è¦åˆ é™¤çš„ key åç§°ã€‚ </li>
 </ol>
-<p>ÏÂÃæÊÇÒ»Ð©¹ØÁªÊý×é²Ù×÷µÄÀý×Ó£º</p>
+<p>ä¸‹é¢æ˜¯ä¸€äº›å…³è”æ•°ç»„æ“ä½œçš„ä¾‹å­ï¼š</p>
 <table border=1 width="90%">
   <tbody> 
   <tr> 
     <td width="41%">%fred=(one,"aka",two,"free"); $a=$fred{one};</td>
-    <td width="59%"># $aµÈÓÚ"aka"<br>
+    <td width="59%"># $aç­‰äºŽ"aka"<br>
     </td>
   </tr>
   <tr> 
     <td width="41%">$b=$fred{two};</td>
-    <td width="59%"># $bµÈÓÚ"free"<br>
+    <td width="59%"># $bç­‰äºŽ"free"<br>
     </td>
   </tr>
   <tr> 
@@ -262,26 +262,26 @@
   </tr>
   <tr> 
     <td width="41%">($index,$content)=echo(%fred);</td>
-    <td width="59%"># ´ËÊ± $index µÄÖµÎª one£¬$content µÄÖµÎª "aka"£¬ÔÙÖ´ÐÐÒ»´Î $index ÎªÖµÎª two£¬$name 
-      µÄÖµÎª "yes"</td>
+    <td width="59%"># æ­¤æ—¶ $index çš„å€¼ä¸º oneï¼Œ$content çš„å€¼ä¸º "aka"ï¼Œå†æ‰§è¡Œä¸€æ¬¡ $index ä¸ºå€¼ä¸º twoï¼Œ$name 
+      çš„å€¼ä¸º "yes"</td>
   </tr>
   <tr> 
     <td width="41%">@a=%fred;</td>
-    <td width="59%"># ½«¹ØÁªÊý×é fred Ö¸¶¨¸øÊý×é a£¬ÕâÊ± @a=(one,"aka",two,"yes")<br>
+    <td width="59%"># å°†å…³è”æ•°ç»„ fred æŒ‡å®šç»™æ•°ç»„ aï¼Œè¿™æ—¶ @a=(one,"aka",two,"yes")<br>
     </td>
   </tr>
   <tr> 
     <td width="41%">%b=@a;</td>
-    <td width="59%"># ½«Êý×é a Ö¸¶¨¸ø¹ØÁªÊý×é b£¬ÕâÊ± %b=(one,"aka",two,"yes")<br>
+    <td width="59%"># å°†æ•°ç»„ a æŒ‡å®šç»™å…³è”æ•°ç»„ bï¼Œè¿™æ—¶ %b=(one,"aka",two,"yes")<br>
     </td>
   </tr>
   <tr> 
     <td width="41%">delete $fred{one};</td>
-    <td width="59%"># ½«¹ØÁªÊý×éÖÐ key ÖµÎª one µÄÒ»¶Ô key-value É¾³ý£¬ÕâÊ± %fred=(two,"yes")</td>
+    <td width="59%"># å°†å…³è”æ•°ç»„ä¸­ key å€¼ä¸º one çš„ä¸€å¯¹ key-value åˆ é™¤ï¼Œè¿™æ—¶ %fred=(two,"yes")</td>
   </tr>
   <tr> 
     <td width="41%">%x=();</td>
-    <td width="59%"># °Ñ %x ¹ØÁªÊý×éÖÃ¿Õ<br>
+    <td width="59%"># æŠŠ %x å…³è”æ•°ç»„ç½®ç©º<br>
     </td>
   </tr>
   </tbody>
@@ -289,330 +289,330 @@
 
 <P>&nbsp; </P>
 
-<H3>7.4&nbsp;&nbsp;&nbsp;&nbsp;¸÷ÖÖÔËËã·ûºÅ»ã×Ü</H3>
-<P>¸³Öµ(Assignment)ÔËËã·û<br>
-  ËãÊõ(Arithmetic)ÔËËã·û<br>
-  ÊýÖµ(Numeric Values)¹ØÏµÔËËã·û<br>
-  ×Ö·û´®(String Values)¹ØÏµÔËËã·û<br>
-  Âß¼­(Logical)ÔËËã<br>
-  ÆäËü³£ÓÃµÄÔËËã·û<br>
-  ³£ÓÃµÄÎÄ¼þÊý¾Ý(File Test)ÔËËã·û 
+<H3>7.4&nbsp;&nbsp;&nbsp;&nbsp;å„ç§è¿ç®—ç¬¦å·æ±‡æ€»</H3>
+<P>èµ‹å€¼(Assignment)è¿ç®—ç¬¦<br>
+  ç®—æœ¯(Arithmetic)è¿ç®—ç¬¦<br>
+  æ•°å€¼(Numeric Values)å…³ç³»è¿ç®—ç¬¦<br>
+  å­—ç¬¦ä¸²(String Values)å…³ç³»è¿ç®—ç¬¦<br>
+  é€»è¾‘(Logical)è¿ç®—<br>
+  å…¶å®ƒå¸¸ç”¨çš„è¿ç®—ç¬¦<br>
+  å¸¸ç”¨çš„æ–‡ä»¶æ•°æ®(File Test)è¿ç®—ç¬¦ 
 <P>&nbsp;
 <table border=0 height=1 width="85%">
   <tbody> 
   <tr> 
-    <td colspan=3 height=18 width=570><strong><font color="#FFFFFF">¸³Öµ(Assignment)ÔËËã·û</font><br>
+    <td colspan=3 height=18 width=570><strong><font color="#FFFFFF">èµ‹å€¼(Assignment)è¿ç®—ç¬¦</font><br>
       </strong> 
       <hr>
       <strong><br>
       </strong></td>
   </tr>
   <tr> 
-    <td height=18 valign=top width=83><strong>·ûºÅ</strong></td>
-    <td height=18 valign=top width=167><strong>·¶Àý</strong></td>
-    <td height=18 valign=top width=312><strong>ËµÃ÷</strong></td>
+    <td height=18 valign=top width=83><strong>ç¬¦å·</strong></td>
+    <td height=18 valign=top width=167><strong>èŒƒä¾‹</strong></td>
+    <td height=18 valign=top width=312><strong>è¯´æ˜Ž</strong></td>
   </tr>
   <tr> 
     <td height=18 valign=top width=83>=</td>
     <td height=18 valign=top width=167>$x=$y;</td>
-    <td height=18 valign=top width=312>½«$xµÄÖµÖ¸ÅÉ¸ø$y</td>
+    <td height=18 valign=top width=312>å°†$xçš„å€¼æŒ‡æ´¾ç»™$y</td>
   </tr>
   <tr> 
     <td height=34 valign=top width=83>+=</td>
     <td height=34 valign=top width=167>$x+=$y;<br>
       $x=$x+$y;</td>
-    <td height=34 valign=top width=312>½«$x¼Ó$yÖ®ºóÔÙÖ¸ÅÉ¸ø$x</td>
+    <td height=34 valign=top width=312>å°†$xåŠ $yä¹‹åŽå†æŒ‡æ´¾ç»™$x</td>
   </tr>
   <tr> 
     <td height=34 valign=top width=83>-=</td>
     <td height=34 valign=top width=167>$x-=$y;<br>
       $x=$x-$y;</td>
-    <td height=34 valign=top width=312>½«$x¼õ$yÖ®ºóÔÙÖ¸ÅÉ¸ø$x</td>
+    <td height=34 valign=top width=312>å°†$xå‡$yä¹‹åŽå†æŒ‡æ´¾ç»™$x</td>
   </tr>
   <tr> 
     <td height=34 valign=top width=83>*=</td>
     <td height=34 valign=top width=167>$x*=$y;<br>
       $x=$x*$y;</td>
-    <td height=34 valign=top width=312>½«$x³Ë$yÖ®ºóÔÙÖ¸ÅÉ¸ø$x</td>
+    <td height=34 valign=top width=312>å°†$xä¹˜$yä¹‹åŽå†æŒ‡æ´¾ç»™$x</td>
   </tr>
   <tr> 
     <td height=34 valign=top width=83>/=</td>
     <td height=34 valign=top width=167>$x/=$y;<br>
       $x=$x/$y;</td>
-    <td height=34 valign=top width=312>Çó³ö$x³ýÒÔ$yÖ®ºóµÄÉÌÊý,ÔÙÖ¸ÅÉ¸ø$x</td>
+    <td height=34 valign=top width=312>æ±‚å‡º$xé™¤ä»¥$yä¹‹åŽçš„å•†æ•°,å†æŒ‡æ´¾ç»™$x</td>
   </tr>
   <tr> 
     <td height=34 valign=top width=83>**=</td>
     <td height=34 valign=top width=167>$x**=$y;<br>
       $x=$x**$y;</td>
-    <td height=34 valign=top width=312>½«$x³ËÉÏ$y´Î·½Ö®ºóÔÙÖ¸ÅÉ¸ø$x</td>
+    <td height=34 valign=top width=312>å°†$xä¹˜ä¸Š$yæ¬¡æ–¹ä¹‹åŽå†æŒ‡æ´¾ç»™$x</td>
   </tr>
   <tr> 
     <td height=34 valign=top width=83>%=</td>
     <td height=34 valign=top width=167>$x%=$y;<br>
       $x=$x%$y;</td>
-    <td height=34 valign=top width=312>Çó³ö$x³ýÒÔ$yµÄÓàÊýÒÔºó,ÔÙÖ¸ÅÉ¸ø$x </td>
+    <td height=34 valign=top width=312>æ±‚å‡º$xé™¤ä»¥$yçš„ä½™æ•°ä»¥åŽ,å†æŒ‡æ´¾ç»™$x </td>
   </tr>
   <tr> 
     <td height=34 valign=top width=83>.=</td>
     <td height=34 valign=top width=167>$str1.=$str2;<br>
       $str1=$str1.$str2;</td>
-    <td height=34 valign=top width=312>½«$str1Õâ¸ö×Ö·û´®ÔÙ¼ÓÉÏ$str2Õâ¸ö×Ö·û´®Ö®ºó,ÔÙÖ¸ÅÉ¸ø$str1Õâ¸ö×Ö·û´®</td>
+    <td height=34 valign=top width=312>å°†$str1è¿™ä¸ªå­—ç¬¦ä¸²å†åŠ ä¸Š$str2è¿™ä¸ªå­—ç¬¦ä¸²ä¹‹åŽ,å†æŒ‡æ´¾ç»™$str1è¿™ä¸ªå­—ç¬¦ä¸²</td>
   </tr>
   <tr> 
     <td height=34 valign=top width=83>x=</td>
     <td height=34 valign=top width=167>$strx=$y;<br>
       $str=$strx$y;</td>
-    <td height=34 valign=top width=312>ÖØ¸´$str×Ö·û´®$y´Î,²¢·´½á¹ûÖ¸ÅÉ¸østrÕâ¸ö×Ö·û´®</td>
+    <td height=34 valign=top width=312>é‡å¤$strå­—ç¬¦ä¸²$yæ¬¡,å¹¶åç»“æžœæŒ‡æ´¾ç»™strè¿™ä¸ªå­—ç¬¦ä¸²</td>
   </tr>
   <tr> 
     <td colspan=3 height=22 width=570><strong><br>
-      <font color="#FFFFFF">ËãÊõ(Arithmetic)ÔËËã·û</font></strong>&nbsp;<br>
+      <font color="#FFFFFF">ç®—æœ¯(Arithmetic)è¿ç®—ç¬¦</font></strong>&nbsp;<br>
       <hr>
       &nbsp; </td>
   </tr>
   <tr> 
-    <td height=17 style="BORDER-TOP: medium none" valign=top width=83><strong>·ûºÅ</strong></td>
-    <td height=17 style="BORDER-TOP: medium none" valign=top width=167><strong>·¶Àý</strong></td>
-    <td height=17 style="BORDER-TOP: medium none" valign=top width=312><strong>ËµÃ÷</strong></td>
+    <td height=17 style="BORDER-TOP: medium none" valign=top width=83><strong>ç¬¦å·</strong></td>
+    <td height=17 style="BORDER-TOP: medium none" valign=top width=167><strong>èŒƒä¾‹</strong></td>
+    <td height=17 style="BORDER-TOP: medium none" valign=top width=312><strong>è¯´æ˜Ž</strong></td>
   </tr>
   <tr> 
     <td height=17 style="BORDER-TOP: medium none" valign=top width=83>+</td>
     <td height=17 style="BORDER-TOP: medium none" valign=top width=167>$z=$x+$y</td>
-    <td height=17 style="BORDER-TOP: medium none" valign=top width=312>½«$xºÍ$yÏà¼ÓÖ®ºó,ÔÙ½«½á¹ûÖ¸ÅÉ¸ø$z</td>
+    <td height=17 style="BORDER-TOP: medium none" valign=top width=312>å°†$xå’Œ$yç›¸åŠ ä¹‹åŽ,å†å°†ç»“æžœæŒ‡æ´¾ç»™$z</td>
   </tr>
   <tr> 
     <td height=17 style="BORDER-TOP: medium none" valign=top width=83>-</td>
     <td height=17 style="BORDER-TOP: medium none" valign=top width=167>$z=$x-$y</td>
-    <td height=17 style="BORDER-TOP: medium none" valign=top width=312>½«$x¼õµô$yÖ®ºó,ÔÙ½«½á¹ûÖ¸ÅÉ¸ø$z</td>
+    <td height=17 style="BORDER-TOP: medium none" valign=top width=312>å°†$xå‡æŽ‰$yä¹‹åŽ,å†å°†ç»“æžœæŒ‡æ´¾ç»™$z</td>
   </tr>
   <tr> 
     <td height=17 style="BORDER-TOP: medium none" valign=top width=83>*</td>
     <td height=17 style="BORDER-TOP: medium none" valign=top width=167>$z=$x*$y</td>
-    <td height=17 style="BORDER-TOP: medium none" valign=top width=312>½«$xºÍ$yÏà³ËÖ®ºó,ÔÙ½«½á¹ûÖ¸ÅÉ¸ø$z</td>
+    <td height=17 style="BORDER-TOP: medium none" valign=top width=312>å°†$xå’Œ$yç›¸ä¹˜ä¹‹åŽ,å†å°†ç»“æžœæŒ‡æ´¾ç»™$z</td>
   </tr>
   <tr> 
     <td height=17 style="BORDER-TOP: medium none" valign=top width=83>/</td>
     <td height=17 style="BORDER-TOP: medium none" valign=top width=167>$z=$x/$y</td>
-    <td height=17 style="BORDER-TOP: medium none" valign=top width=312>½«$x³ýÒÔ$yÖ®ºó,ÔÙ½«ÉÌÊýÖ¸ÅÉ¸ø$z</td>
+    <td height=17 style="BORDER-TOP: medium none" valign=top width=312>å°†$xé™¤ä»¥$yä¹‹åŽ,å†å°†å•†æ•°æŒ‡æ´¾ç»™$z</td>
   </tr>
   <tr> 
     <td height=17 style="BORDER-TOP: medium none" valign=top width=83>%</td>
     <td height=17 style="BORDER-TOP: medium none" valign=top width=167>$z=$x%$y</td>
-    <td height=17 style="BORDER-TOP: medium none" valign=top width=312>½«$x³ýÒÔ$yÖ®ºó,ÔÙ½«ÓàÊýÖ¸ÅÉ¸ø$z</td>
+    <td height=17 style="BORDER-TOP: medium none" valign=top width=312>å°†$xé™¤ä»¥$yä¹‹åŽ,å†å°†ä½™æ•°æŒ‡æ´¾ç»™$z</td>
   </tr>
   <tr> 
     <td height=17 style="BORDER-TOP: medium none" valign=top width=83>**</td>
     <td height=17 style="BORDER-TOP: medium none" valign=top width=167>$z=$x**$y</td>
-    <td height=17 style="BORDER-TOP: medium none" valign=top width=312>½«$x³ËÒÔ$yÖ®ºó,ÔÙ½«½á¹ûÖ¸ÅÉ¸ø$z</td>
+    <td height=17 style="BORDER-TOP: medium none" valign=top width=312>å°†$xä¹˜ä»¥$yä¹‹åŽ,å†å°†ç»“æžœæŒ‡æ´¾ç»™$z</td>
   </tr>
   <tr> 
     <td height=17 style="BORDER-TOP: medium none" valign=top width=83>++</td>
     <td height=17 style="BORDER-TOP: medium none" valign=top width=167>$x++;++$x;</td>
-    <td height=17 style="BORDER-TOP: medium none" valign=top width=312>ÈçÍ¬$x=$x++1;½«$x¼ÓÒ»ÒÔºóÔÙ½«½á¹ûÖ¸ÅÉ¸ø$x</td>
+    <td height=17 style="BORDER-TOP: medium none" valign=top width=312>å¦‚åŒ$x=$x++1;å°†$xåŠ ä¸€ä»¥åŽå†å°†ç»“æžœæŒ‡æ´¾ç»™$x</td>
   </tr>
   <tr> 
     <td height=17 style="BORDER-TOP: medium none" valign=top width=83>--</td>
     <td height=17 style="BORDER-TOP: medium none" valign=top width=167>$x--;--$x;</td>
-    <td height=17 style="BORDER-TOP: medium none" valign=top width=312>ÈçÍ¬$x=$x-1;½«$x¼õÒ»ÒÔºóÔÙ½«½á¹ûÖ¸ÅÉ¸ø$x</td>
+    <td height=17 style="BORDER-TOP: medium none" valign=top width=312>å¦‚åŒ$x=$x-1;å°†$xå‡ä¸€ä»¥åŽå†å°†ç»“æžœæŒ‡æ´¾ç»™$x</td>
   </tr>
   <tr> 
     <td height=33 style="BORDER-TOP: medium none" valign=top width=83>.</td>
     <td height=33 style="BORDER-TOP: medium none" valign=top width=167>$z=$x.$y;</td>
-    <td height=33 style="BORDER-TOP: medium none" valign=top width=312>½«$x×Ö·û´®ºÍ$y×Ö·û´®Á¬½ÓÖ®ºó,ÔÙ½«½á¹ûÖ¸ÅÉ¸ø$z</td>
+    <td height=33 style="BORDER-TOP: medium none" valign=top width=312>å°†$xå­—ç¬¦ä¸²å’Œ$yå­—ç¬¦ä¸²è¿žæŽ¥ä¹‹åŽ,å†å°†ç»“æžœæŒ‡æ´¾ç»™$z</td>
   </tr>
   <tr> 
     <td colspan=3 height=19 width=570><strong><br>
-      <font color="#FFFFFF"> ÊýÖµ(Numeric Values)¹ØÏµÔËËã·û</font><br>
+      <font color="#FFFFFF"> æ•°å€¼(Numeric Values)å…³ç³»è¿ç®—ç¬¦</font><br>
       </strong> 
       <hr>
       <strong> <br>
       </strong></td>
   </tr>
   <tr> 
-    <td height=18 valign=top width=83><strong>·ûºÅ</strong></td>
-    <td height=18 valign=top width=167><strong>·¶Àý</strong></td>
-    <td height=18 valign=top width=312><strong>ËµÃ÷</strong></td>
+    <td height=18 valign=top width=83><strong>ç¬¦å·</strong></td>
+    <td height=18 valign=top width=167><strong>èŒƒä¾‹</strong></td>
+    <td height=18 valign=top width=312><strong>è¯´æ˜Ž</strong></td>
   </tr>
   <tr> 
     <td height=18 valign=top width=83>&gt;</td>
     <td height=18 valign=top width=167>$x&gt;$y</td>
-    <td height=18 valign=top width=312>Èç¹û$x´óÓÚ$y,·µ»Ø1µÄÖµ,·ñÔò·µ»Ø0</td>
+    <td height=18 valign=top width=312>å¦‚æžœ$xå¤§äºŽ$y,è¿”å›ž1çš„å€¼,å¦åˆ™è¿”å›ž0</td>
   </tr>
   <tr> 
     <td height=18 valign=top width=83>&gt;=</td>
     <td height=18 valign=top width=167>$x&gt;=$y</td>
-    <td height=18 valign=top width=312>Èç¹û$x´óÓÚµÈÓÚ$y,·µ»Ø1µÄÖµ,·ñÔò·µ»Ø0</td>
+    <td height=18 valign=top width=312>å¦‚æžœ$xå¤§äºŽç­‰äºŽ$y,è¿”å›ž1çš„å€¼,å¦åˆ™è¿”å›ž0</td>
   </tr>
   <tr> 
     <td height=18 valign=top width=83>&lt;</td>
     <td height=18 valign=top width=167>$x&lt;$y</td>
-    <td height=18 valign=top width=312>Èç¹û$xÐ¡ÓÚ$y,·µ»Ø1µÄÖµ,·ñÔò·µ»Ø0</td>
+    <td height=18 valign=top width=312>å¦‚æžœ$xå°äºŽ$y,è¿”å›ž1çš„å€¼,å¦åˆ™è¿”å›ž0</td>
   </tr>
   <tr> 
     <td height=18 valign=top width=83>&lt;=</td>
     <td height=18 valign=top width=167>$x&lt;=$y</td>
-    <td height=18 valign=top width=312>Èç¹û$xÐ¡ÓÚµÈÓÚ$y,·µ»Ø1µÄÖµ,·ñÔò·µ»Ø0</td>
+    <td height=18 valign=top width=312>å¦‚æžœ$xå°äºŽç­‰äºŽ$y,è¿”å›ž1çš„å€¼,å¦åˆ™è¿”å›ž0</td>
   </tr>
   <tr> 
     <td height=18 valign=top width=83>==</td>
     <td height=18 valign=top width=167>$x==$y</td>
-    <td height=18 valign=top width=312>Èç¹û$xµÈÓÚ$y,·µ»Ø1µÄÖµ,·ñÔò·µ»Ø0</td>
+    <td height=18 valign=top width=312>å¦‚æžœ$xç­‰äºŽ$y,è¿”å›ž1çš„å€¼,å¦åˆ™è¿”å›ž0</td>
   </tr>
   <tr> 
     <td height=18 valign=top width=83>!=</td>
     <td height=18 valign=top width=167>$x!=$y</td>
-    <td height=18 valign=top width=312>Èç¹û$x²»µÈÓÚ$y,·µ»Ø1µÄÖµ,·ñÔò·µ»Ø0</td>
+    <td height=18 valign=top width=312>å¦‚æžœ$xä¸ç­‰äºŽ$y,è¿”å›ž1çš„å€¼,å¦åˆ™è¿”å›ž0</td>
   </tr>
   <tr> 
     <td height=34 valign=top width=83>&lt;=&gt;</td>
     <td height=34 valign=top width=167>$x&lt;=&gt;$y</td>
-    <td height=34 valign=top width=312>Èç¹û$x´óÓÚ$y,·µ»Ø1µÄÖµ,Èç¹û$xµÈÓÚ$y,·ñÔò·µ»Ø0;&amp;127;Èç¹û 
-      $xÐ¡ÓÚ$y,Ôò·µ»Ø-1µÄÖµ</td>
+    <td height=34 valign=top width=312>å¦‚æžœ$xå¤§äºŽ$y,è¿”å›ž1çš„å€¼,å¦‚æžœ$xç­‰äºŽ$y,å¦åˆ™è¿”å›ž0;&amp;127;å¦‚æžœ 
+      $xå°äºŽ$y,åˆ™è¿”å›ž-1çš„å€¼</td>
   </tr>
   <tr> 
     <td colspan=3 height=19 width=570><strong><br>
-      <font color="#FFFFFF">×Ö·û´®(String Values)¹ØÏµÔËËã·û</font><br>
+      <font color="#FFFFFF">å­—ç¬¦ä¸²(String Values)å…³ç³»è¿ç®—ç¬¦</font><br>
       </strong> 
       <hr>
       <strong> <br>
       </strong></td>
   </tr>
   <tr> 
-    <td height=18 valign=top width=83><strong>·ûºÅ</strong></td>
-    <td height=18 valign=top width=167><strong>·¶Àý</strong></td>
-    <td height=18 valign=top width=312><strong>ËµÃ÷</strong></td>
+    <td height=18 valign=top width=83><strong>ç¬¦å·</strong></td>
+    <td height=18 valign=top width=167><strong>èŒƒä¾‹</strong></td>
+    <td height=18 valign=top width=312><strong>è¯´æ˜Ž</strong></td>
   </tr>
   <tr> 
     <td height=18 valign=top width=83>gt</td>
     <td height=18 valign=top width=167>$str1 gt $str2</td>
-    <td height=18 valign=top width=312>Èç¹û$str1´óÓÚ$str2,·µ»Ø1µÄÖµ,·ñÔò·µ»Ø0</td>
+    <td height=18 valign=top width=312>å¦‚æžœ$str1å¤§äºŽ$str2,è¿”å›ž1çš„å€¼,å¦åˆ™è¿”å›ž0</td>
   </tr>
   <tr> 
     <td height=18 valign=top width=83>ge</td>
     <td height=18 valign=top width=167>$str1 ge $str2</td>
-    <td height=18 valign=top width=312>Èç¹û$str1´óÓÚµÈÓÚ$str2,·µ»Ø1µÄÖµ,·ñÔò·µ»Ø0</td>
+    <td height=18 valign=top width=312>å¦‚æžœ$str1å¤§äºŽç­‰äºŽ$str2,è¿”å›ž1çš„å€¼,å¦åˆ™è¿”å›ž0</td>
   </tr>
   <tr> 
     <td height=18 valign=top width=83>lt</td>
     <td height=18 valign=top width=167>$str1 lt $str2</td>
-    <td height=18 valign=top width=312>Èç¹û$str1Ð¡ÓÚ$str2,·µ»Ø1µÄÖµ,·ñÔò·µ»Ø0</td>
+    <td height=18 valign=top width=312>å¦‚æžœ$str1å°äºŽ$str2,è¿”å›ž1çš„å€¼,å¦åˆ™è¿”å›ž0</td>
   </tr>
   <tr> 
     <td height=18 valign=top width=83>le</td>
     <td height=18 valign=top width=167>$str1 le $str2</td>
-    <td height=18 valign=top width=312>Èç¹û$str1Ð¡ÓÚµÈÓÚ$str2,·µ»Ø1µÄÖµ,·ñÔò·µ»Ø0</td>
+    <td height=18 valign=top width=312>å¦‚æžœ$str1å°äºŽç­‰äºŽ$str2,è¿”å›ž1çš„å€¼,å¦åˆ™è¿”å›ž0</td>
   </tr>
   <tr> 
     <td height=18 valign=top width=83>eq</td>
     <td height=18 valign=top width=167>$str1 ep $str2</td>
-    <td height=18 valign=top width=312>Èç¹û$str1µÈÓÚ$str2,·µ»Ø1µÄÖµ,·ñÔò·µ»Ø0</td>
+    <td height=18 valign=top width=312>å¦‚æžœ$str1ç­‰äºŽ$str2,è¿”å›ž1çš„å€¼,å¦åˆ™è¿”å›ž0</td>
   </tr>
   <tr> 
     <td height=18 valign=top width=83>ne</td>
     <td height=18 valign=top width=167>$str1 ne $str2</td>
-    <td height=18 valign=top width=312>Èç¹û$str1²»µÈÓÚ$str2,·µ»Ø1µÄÖµ,·ñÔò·µ»Ø0</td>
+    <td height=18 valign=top width=312>å¦‚æžœ$str1ä¸ç­‰äºŽ$str2,è¿”å›ž1çš„å€¼,å¦åˆ™è¿”å›ž0</td>
   </tr>
   <tr> 
     <td height=50 valign=top width=83>cmp</td>
     <td height=50 valign=top width=167>$str1 cmp $str2</td>
-    <td height=50 valign=top width=312>Èç¹û$str1´óÓÚ$str2,·µ»Ø1µÄÖµ,Èç¹û$str1µÈÓÚ$str2,·µ»Ø0,Èç¹û$str1Ð¡ÓÚ$str2,Ôò·µ»Ø-1µÄÖµ</td>
+    <td height=50 valign=top width=312>å¦‚æžœ$str1å¤§äºŽ$str2,è¿”å›ž1çš„å€¼,å¦‚æžœ$str1ç­‰äºŽ$str2,è¿”å›ž0,å¦‚æžœ$str1å°äºŽ$str2,åˆ™è¿”å›ž-1çš„å€¼</td>
   </tr>
   <tr> 
-    <td colspan=3 height=543 width=570><strong><font color="#FFFFFF">Âß¼­(Logical)ÔËËã</font></strong> 
+    <td colspan=3 height=543 width=570><strong><font color="#FFFFFF">é€»è¾‘(Logical)è¿ç®—</font></strong> 
       <br>
       <hr>
       <p align=justify><font color="#FFFF00"><b>1) $x &amp;&amp; $y(And)</b></font></p>
-      <p align=justify><font color="#FFFF00">$x </font><font color="#FFFFFF"><b><i>¡¡</i></b></font><font color="#FFFFFF"><b><i>¡¡</i></b></font><font color="#FFFFFF"><b><i>¡¡</i></b></font><font color="#FFFF00">$y 
-        </font><font color="#FFFFFF"><b><i>¡¡</i></b></font><font color="#FFFFFF"><b><i>¡¡</i></b></font><font color="#FFFFFF"><b><i>¡¡</i></b></font><font color="#FFFF00">½á¹û</font></p>
-      <p align=justify><font color="#FFFF00">Õæ(True) Õæ(True) Õæ(True) </font></p>
-      <p align=justify><font color="#FFFF00">Õæ(True) ¼Ù(False) Õæ(True) </font></p>
-      <p align=justify><font color="#FFFF00">¼Ù(False) Õæ(True) ¼Ù(False)</font></p>
-      <p align=justify><font color="#FFFF00">¼Ù(False) ¼Ù(False) ¼Ù(False)</font></p>
+      <p align=justify><font color="#FFFF00">$x </font><font color="#FFFFFF"><b><i>ã€€</i></b></font><font color="#FFFFFF"><b><i>ã€€</i></b></font><font color="#FFFFFF"><b><i>ã€€</i></b></font><font color="#FFFF00">$y 
+        </font><font color="#FFFFFF"><b><i>ã€€</i></b></font><font color="#FFFFFF"><b><i>ã€€</i></b></font><font color="#FFFFFF"><b><i>ã€€</i></b></font><font color="#FFFF00">ç»“æžœ</font></p>
+      <p align=justify><font color="#FFFF00">çœŸ(True) çœŸ(True) çœŸ(True) </font></p>
+      <p align=justify><font color="#FFFF00">çœŸ(True) å‡(False) çœŸ(True) </font></p>
+      <p align=justify><font color="#FFFF00">å‡(False) çœŸ(True) å‡(False)</font></p>
+      <p align=justify><font color="#FFFF00">å‡(False) å‡(False) å‡(False)</font></p>
       <p align=justify><font color="#FFFF00"><b>2) $x || $y(Or)</b></font></p>
-      <p align=justify><font color="#FFFF00">$x </font><font color="#FFFFFF"><b><i>¡¡</i></b></font><font color="#FFFFFF"><b><i>¡¡</i></b></font><font color="#FFFFFF"><b><i>¡¡</i></b></font><font color="#FFFF00">$y 
-        </font><font color="#FFFFFF"><b><i>¡¡</i></b></font><font color="#FFFFFF"><b><i>¡¡</i></b></font><font color="#FFFFFF"><b><i>¡¡</i></b></font><font color="#FFFF00">½á¹û</font></p>
-      <p align=justify><font color="#FFFF00">Õæ(True) Õæ(True) Õæ(True) </font></p>
-      <p align=justify><font color="#FFFF00">Õæ(True) ¼Ù(False) Õæ(True) </font></p>
-      <p align=justify><font color="#FFFF00">¼Ù(False) Õæ(True) Õæ(True)</font></p>
-      <p align=justify><font color="#FFFF00">¼Ù(False) ¼Ù(False) ¼Ù(False)</font></p>
+      <p align=justify><font color="#FFFF00">$x </font><font color="#FFFFFF"><b><i>ã€€</i></b></font><font color="#FFFFFF"><b><i>ã€€</i></b></font><font color="#FFFFFF"><b><i>ã€€</i></b></font><font color="#FFFF00">$y 
+        </font><font color="#FFFFFF"><b><i>ã€€</i></b></font><font color="#FFFFFF"><b><i>ã€€</i></b></font><font color="#FFFFFF"><b><i>ã€€</i></b></font><font color="#FFFF00">ç»“æžœ</font></p>
+      <p align=justify><font color="#FFFF00">çœŸ(True) çœŸ(True) çœŸ(True) </font></p>
+      <p align=justify><font color="#FFFF00">çœŸ(True) å‡(False) çœŸ(True) </font></p>
+      <p align=justify><font color="#FFFF00">å‡(False) çœŸ(True) çœŸ(True)</font></p>
+      <p align=justify><font color="#FFFF00">å‡(False) å‡(False) å‡(False)</font></p>
       <p align=justify><font color="#FFFF00"><b>3) $x(Not)</b></font></p>
-      <p align=justify><font color="#FFFF00">$x </font><font color="#FFFFFF"><b><i>¡¡</i></b></font><font color="#FFFFFF"><b><i>¡¡</i></b></font><font color="#FFFFFF"><b><i>¡¡</i></b></font><font color="#FFFF00">½á¹û</font></p>
-      <p align=justify><font color="#FFFF00">Õæ(True) ¼Ù(False)</font></p>
-      <p align=justify><font color="#FFFF00">¼Ù(False) Õæ(True) </font></p>
+      <p align=justify><font color="#FFFF00">$x </font><font color="#FFFFFF"><b><i>ã€€</i></b></font><font color="#FFFFFF"><b><i>ã€€</i></b></font><font color="#FFFFFF"><b><i>ã€€</i></b></font><font color="#FFFF00">ç»“æžœ</font></p>
+      <p align=justify><font color="#FFFF00">çœŸ(True) å‡(False)</font></p>
+      <p align=justify><font color="#FFFF00">å‡(False) çœŸ(True) </font></p>
     </td>
   </tr>
   <tr> 
     <td colspan=3 height=379 width=570><strong><font color="#FFFFFF"><br>
-      ÆäËü³£ÓÃµÄÔËËã·û</font></strong> 
+      å…¶å®ƒå¸¸ç”¨çš„è¿ç®—ç¬¦</font></strong> 
       <hr>
-      <p align=justify><strong><font color="#FFFF00">Ö¸Áî</font></strong><font color="#FFFF00">:..Çø¿éÔËËã·û(Range 
+      <p align=justify><strong><font color="#FFFF00">æŒ‡ä»¤</font></strong><font color="#FFFF00">:..åŒºå—è¿ç®—ç¬¦(Range 
         Operator)</font></p>
-      <p align=justify><font color="#FFFF00"><strong>ËµÃ÷</strong>:Õâ¸öÔËËã·ûÊÇ Perl ÓïÑÔÖÐÌØÓÐµÄÔËËã·û£¬ÊÇÒ»¸öºÜÊµÓÃµÄÔËËã·û¡£</font></p>
-      <p align=justify><font color="#FFFF00"><strong>·¶Àý</strong>:</font></p>
+      <p align=justify><font color="#FFFF00"><strong>è¯´æ˜Ž</strong>:è¿™ä¸ªè¿ç®—ç¬¦æ˜¯ Perl è¯­è¨€ä¸­ç‰¹æœ‰çš„è¿ç®—ç¬¦ï¼Œæ˜¯ä¸€ä¸ªå¾ˆå®žç”¨çš„è¿ç®—ç¬¦ã€‚</font></p>
+      <p align=justify><font color="#FFFF00"><strong>èŒƒä¾‹</strong>:</font></p>
       <p align=justify><font color="#FFFF00"><b><font color="#FFFFFF">@digits=(1..9); 
-        # ´ËÊ± @digits=(1,2,3,4,5,6,7,8,9);<br>
-        @digits=('01'..'05'); # ´ËÊ± @digits=(01,02,03,04,05);<br>
-        @char=('A'..'E'); # ´ËÊ± @char('A','B','C','D','E',);<br>
-        @total=(1..3,'A'..'B'); # ´ËÊ± @total=(1,2,3'A','B');</font></b></font></p>
-      <p align=justify><font color="#FFFF00"><strong>Ö¸Áî</strong>: Ìõ¼þÔËËã·û(Conditional 
+        # æ­¤æ—¶ @digits=(1,2,3,4,5,6,7,8,9);<br>
+        @digits=('01'..'05'); # æ­¤æ—¶ @digits=(01,02,03,04,05);<br>
+        @char=('A'..'E'); # æ­¤æ—¶ @char('A','B','C','D','E',);<br>
+        @total=(1..3,'A'..'B'); # æ­¤æ—¶ @total=(1,2,3'A','B');</font></b></font></p>
+      <p align=justify><font color="#FFFF00"><strong>æŒ‡ä»¤</strong>: æ¡ä»¶è¿ç®—ç¬¦(Conditional 
         Operator)</font></p>
-      <p align=justify><font color="#FFFF00"><strong>ËµÃ÷</strong>: £¨ÅÐ±ðÔËËãÊ½? ÔËËãÊ½1: 
-        ÔËËãÊ½2£©Õâ¸öÓï·¨µÄÒâÒåºÍCÓïÑÔÒ»Ñù£ºÈç¹ûÅÐ±ðÔËËãÊ½µÄÖµÊÇÕæ(True)µÄ»°£¬Ôò×öÔËËãÊ½ 1 µÄÔËËã£»Èç¹ûÅÐ±ðÔËËãÊ½ÊÇ¼Ù(False)µÄ»°£¬Ôò×öÔËËãÊ½ 
-        2 µÄÔËËã¡£</font></p>
-      <p align=justify><font color="#FFFF00"><strong>·¶Àý</strong>:</font></p>
+      <p align=justify><font color="#FFFF00"><strong>è¯´æ˜Ž</strong>: ï¼ˆåˆ¤åˆ«è¿ç®—å¼? è¿ç®—å¼1: 
+        è¿ç®—å¼2ï¼‰è¿™ä¸ªè¯­æ³•çš„æ„ä¹‰å’ŒCè¯­è¨€ä¸€æ ·ï¼šå¦‚æžœåˆ¤åˆ«è¿ç®—å¼çš„å€¼æ˜¯çœŸ(True)çš„è¯ï¼Œåˆ™åšè¿ç®—å¼ 1 çš„è¿ç®—ï¼›å¦‚æžœåˆ¤åˆ«è¿ç®—å¼æ˜¯å‡(False)çš„è¯ï¼Œåˆ™åšè¿ç®—å¼ 
+        2 çš„è¿ç®—ã€‚</font></p>
+      <p align=justify><font color="#FFFF00"><strong>èŒƒä¾‹</strong>:</font></p>
       <p align=justify><font color="#FFFF00"><b><font color="#FFFFFF">$price = 
         ($age&gt;60)? 100:200;</font></b><br>
-        Èç¹û $age ´óÓÚ60µÄ»°£¬Ôò$priceµÈÓÚ100£¬·ñÔò$priceµÈÓÚ200¡£</font></p>
+        å¦‚æžœ $age å¤§äºŽ60çš„è¯ï¼Œåˆ™$priceç­‰äºŽ100ï¼Œå¦åˆ™$priceç­‰äºŽ200ã€‚</font></p>
     </td>
   </tr>
   <tr> 
     <td colspan=3 height=19 width=570><strong><font color="#FFFFFF"><br>
-      ³£ÓÃµÄÎÄ¼þÊý¾Ý(File test)ÔËËã·û</font><br>
+      å¸¸ç”¨çš„æ–‡ä»¶æ•°æ®(File test)è¿ç®—ç¬¦</font><br>
       </strong> 
       <hr>
       <strong> <br>
       </strong></td>
   </tr>
   <tr> 
-    <td height=18 width=83><strong>·¶Àý</strong></td>
-    <td colspan=2 height=18 width=483><strong>ËµÃ÷</strong></td>
+    <td height=18 width=83><strong>èŒƒä¾‹</strong></td>
+    <td colspan=2 height=18 width=483><strong>è¯´æ˜Ž</strong></td>
   </tr>
   <tr> 
     <td height=18 width=83>-r $file</td>
-    <td colspan=2 height=18 width=483>Èç¹û $file ÊÇ¿É¶ÁÈ¡µÄ»°£¬·µ»Ø 1</td>
+    <td colspan=2 height=18 width=483>å¦‚æžœ $file æ˜¯å¯è¯»å–çš„è¯ï¼Œè¿”å›ž 1</td>
   </tr>
   <tr> 
     <td height=18 width=83>-w $file</td>
-    <td colspan=2 height=18 width=483>Èç¹û $file ÊÇ¿ÉÐ´ÈëµÄ»°£¬·µ»Ø 1</td>
+    <td colspan=2 height=18 width=483>å¦‚æžœ $file æ˜¯å¯å†™å…¥çš„è¯ï¼Œè¿”å›ž 1</td>
   </tr>
   <tr> 
     <td height=18 width=83>-x $file</td>
-    <td colspan=2 height=18 width=483>Èç¹û $file ÊÇ¿ÉÖ´ÐÐµÄ»°£¬·µ»Ø 1</td>
+    <td colspan=2 height=18 width=483>å¦‚æžœ $file æ˜¯å¯æ‰§è¡Œçš„è¯ï¼Œè¿”å›ž 1</td>
   </tr>
   <tr> 
     <td height=18 width=83>-e $file</td>
-    <td colspan=2 height=18 width=483>Èç¹û $file ´æÔÚµÄ»°£¬·µ»Ø 1</td>
+    <td colspan=2 height=18 width=483>å¦‚æžœ $file å­˜åœ¨çš„è¯ï¼Œè¿”å›ž 1</td>
   </tr>
   <tr> 
     <td height=16 width=83>-s $file</td>
-    <td colspan=2 height=16 width=483>·µ»Ø $file µÄÎÄ¼þ´óÐ¡(bytes)</td>
+    <td colspan=2 height=16 width=483>è¿”å›ž $file çš„æ–‡ä»¶å¤§å°(bytes)</td>
   </tr>
   <tr> 
     <td height=18 width=83>-f $file</td>
-    <td colspan=2 height=18 width=483>Èç¹û $file ÊÇÕý³£ÎÄ¼þµÄ»°£¬·µ»Ø 1</td>
+    <td colspan=2 height=18 width=483>å¦‚æžœ $file æ˜¯æ­£å¸¸æ–‡ä»¶çš„è¯ï¼Œè¿”å›ž 1</td>
   </tr>
   <tr> 
     <td height=18 width=83>-T $file</td>
-    <td colspan=2 height=18 width=483>Èç¹û $file ÊÇÎÄ±¾ÎÄ¼þµÄ»°£¬·µ»Ø 1</td>
+    <td colspan=2 height=18 width=483>å¦‚æžœ $file æ˜¯æ–‡æœ¬æ–‡ä»¶çš„è¯ï¼Œè¿”å›ž 1</td>
   </tr>
   <tr> 
     <td height=18 width=83>-B $file</td>
-    <td colspan=2 height=18 width=483>Èç¹û $file ÊÇBinaryÎÄ¼þµÄ»°£¬·µ»Ø 1</td>
+    <td colspan=2 height=18 width=483>å¦‚æžœ $file æ˜¯Binaryæ–‡ä»¶çš„è¯ï¼Œè¿”å›ž 1</td>
   </tr>
   <tr> 
     <td height=18 width=83>-M $file</td>
-    <td colspan=2 height=18 width=483>·µ»Ø $file ÎÄ¼þ×îºóÒ»´Î¸ü¸ÄÊ±¼äµ½ÏÖÔÚµÄÈÕÆÚÊý</td>
+    <td colspan=2 height=18 width=483>è¿”å›ž $file æ–‡ä»¶æœ€åŽä¸€æ¬¡æ›´æ”¹æ—¶é—´åˆ°çŽ°åœ¨çš„æ—¥æœŸæ•°</td>
   </tr>
   </tbody> 
 </table>

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <HTML>
 <HEAD>
-    <TITLE>Linux�ϵ�C/C++�������͵�����</TITLE>
+    <TITLE>Linux上的C/C++编译器和调试器</TITLE>
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
     <META NAME="GENERATOR" CONTENT="StarOffice/5.1 (Linux)">
     <META NAME="AUTHOR" CONTENT="Yongming Wei">
@@ -27,23 +27,23 @@
 <A HREF="make.html"><IMG SRC="next.gif" ALT="Next"></A>
 <A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
 
-<H1 ALIGN=CENTER>1.8&nbsp;&nbsp;Linux �ϵ� C/C++ �������͵�����<BR><BR>
+<H1 ALIGN=CENTER>1.8&nbsp;&nbsp;Linux 上的 C/C++ 编译器和调试器<BR><BR>
 </H1>
 
 <UL>
-    <LI><P>���� gcc/egcs</LI>
-    <LI><P>gcc/egcs ����Ҫѡ��</LI>
+    <LI><P>运行 gcc/egcs</LI>
+    <LI><P>gcc/egcs 的主要选项</LI>
     <LI><P>gdb</LI>
-    <LI><P>gdb �ĳ�������</LI>
-    <LI><P>gdb ʹ�÷���</LI>
-    <LI><P>��������/�⹤�� (ar, objdump, nm, size, strings, strip, ...)</LI>
+    <LI><P>gdb 的常用命令</LI>
+    <LI><P>gdb 使用范例</LI>
+    <LI><P>其他程序/库工具 (ar, objdump, nm, size, strings, strip, ...)</LI>
 </UL>
 
-<H3>1.8.1&nbsp;&nbsp;���� gcc/egcs</H3>
+<H3>1.8.1&nbsp;&nbsp;运行 gcc/egcs</H3>
 <P>
-Linux ������Ҫ���������������� GCC��GCC �� GNU �� C �� C++ ��������ʵ���ϣ�GCC �ܹ���������
-���ԣ�C��C++ �� Object C��C ���Ե�һ�����������չ�������� gcc �����ͬʱ���벢���� C �� 
-C++ Դ����
+Linux 中最重要的软件开发工具是 GCC。GCC 是 GNU 的 C 和 C++ 编译器。实际上，GCC 能够编译三种
+语言：C、C++ 和 Object C（C 语言的一种面向对象扩展）。利用 gcc 命令可同时编译并连接 C 和 
+C++ 源程序。
 </P>
 
 <P>
@@ -51,9 +51,9 @@ C++ Դ����
 </P>
 
 <PRE>
-��������������������� C Դ�ļ���Ҳ���Է�������� GCC ���롢���Ӳ����ɿ�ִ���ļ������磬��������
-����Դ�ļ� main.c �� factorial.c ����Դ�ļ�������Ҫ��������һ������׳˵ĳ���
-�嵥 factorial.c
+如果你有两个或少数几个 C 源文件，也可以方便地利用 GCC 编译、连接并生成可执行文件。例如，假设你有
+两个源文件 main.c 和 factorial.c 两个源文件，现在要编译生成一个计算阶乘的程序。
+清单 factorial.c
 -----------------------
 #include <stdio.h>
 #include <stdlib.h>
@@ -69,7 +69,7 @@ int factorial (int n)
 -----------------------
 
 -----------------------
-�嵥  main.c
+清单  main.c
 -----------------------
 #include <stdio.h>
 #include <stdlib.h>
@@ -92,18 +92,18 @@ int main (int argc, char **argv)
     return 0;
 }
 -----------------------
-�������µ�����ɱ������ɿ�ִ���ļ�����ִ�г���
+利用如下的命令可编译生成可执行文件，并执行程序：
 $ gcc -o factorial main.c factorial.c
 $ ./factorial 5
 Factorial of 5 is 120.
 </PRE>
 
 <PRE>
-GCC ��ͬʱ�������� C ����� C++ ����һ����˵��C ������ͨ��Դ�ļ��ĺ�׺�����ж��� C ������ C+
-+ ������ Linux �У�C Դ�ļ��ĺ�׺��Ϊ .c���� C++ Դ�ļ��ĺ�׺��Ϊ .C �� .cpp��
-���ǣ�gcc ����ֻ�ܱ��� C++ Դ�ļ����������Զ��� C++ ����ʹ�õĿ����ӡ���ˣ�ͨ��ʹ�� g++ ��������
-��� C++ ����ı�������ӣ��ó�����Զ����� gcc ʵ�ֱ��롣
-����������һ�����µ� C++ Դ�ļ���hello.C����
+GCC 可同时用来编译 C 程序和 C++ 程序。一般来说，C 编译器通过源文件的后缀名来判断是 C 程序还是 C+
++ 程序。在 Linux 中，C 源文件的后缀名为 .c，而 C++ 源文件的后缀名为 .C 或 .cpp。
+但是，gcc 命令只能编译 C++ 源文件，而不能自动和 C++ 程序使用的库连接。因此，通常使用 g++ 命令来完
+完成 C++ 程序的编译和连接，该程序会自动调用 gcc 实现编译。
+假设我们有一个如下的 C++ 源文件（hello.C）：
 
 #include <iostream.h>
 
@@ -112,7 +112,7 @@ void main (void)
     cout << "Hello, world!" << endl;
 }
 
-��������µ��� g++ ������롢���Ӳ����ɿ�ִ���ļ���
+则可以如下调用 g++ 命令编译、连接并生成可执行文件：
 
 $ g++ -o hello hello.C
 $ ./hello
@@ -120,92 +120,92 @@ Hello, world!
 
 </PRE>
 
-<H3>1.8.2&nbsp;&nbsp;gcc/egcs ����Ҫѡ��</H3>
+<H3>1.8.2&nbsp;&nbsp;gcc/egcs 的主要选项</H3>
 <PRE>
-                �� 1-3  gcc ����ĳ���ѡ��
-ѡ��                ����
--ansi               ֻ֧�� ANSI ��׼�� C �﷨����һѡ���ֹ GNU C ��ĳЩ��ɫ��
-                    ���� asm �� typeof �ؼ��ʡ�
--c                  ֻ���벢����Ŀ���ļ���
--DMACRO             ���ַ�����1������ MACRO �ꡣ
--DMACRO=DEFN        ���ַ�����DEFN������ MACRO �ꡣ
--E                  ֻ���� C Ԥ��������
--g                  ���ɵ�����Ϣ��GNU �����������ø���Ϣ��
--IDIRECTORY         ָ�������ͷ�ļ�����·��DIRECTORY��
--LDIRECTORY         ָ������ĺ���������·��DIRECTORY��
--lLIBRARY           ����ʱ����ָ���ĺ�����LIBRARY��
--m486               ��� 486 ���д����Ż���
--o FILE             ����ָ��������ļ����������ɿ�ִ���ļ�ʱ��
--O0                 �������Ż�������
--O �� -O1           �Ż����ɴ��롣
--O2                 ��һ���Ż���
--O3                 �� -O2 ����һ���Ż������� inline ������
--shared             ���ɹ���Ŀ���ļ���ͨ�����ڽ���������ʱ��
--static             ��ֹʹ�ù������ӡ�
--UMACRO             ȡ���� MACRO ��Ķ��塣
--w                  �������κξ�����Ϣ��
--Wall               �������о�����Ϣ��
+                表 1-3  gcc 命令的常用选项
+选项                解释
+-ansi               只支持 ANSI 标准的 C 语法。这一选项将禁止 GNU C 的某些特色，
+                    例如 asm 或 typeof 关键词。
+-c                  只编译并生成目标文件。
+-DMACRO             以字符串“1”定义 MACRO 宏。
+-DMACRO=DEFN        以字符串“DEFN”定义 MACRO 宏。
+-E                  只运行 C 预编译器。
+-g                  生成调试信息。GNU 调试器可利用该信息。
+-IDIRECTORY         指定额外的头文件搜索路径DIRECTORY。
+-LDIRECTORY         指定额外的函数库搜索路径DIRECTORY。
+-lLIBRARY           连接时搜索指定的函数库LIBRARY。
+-m486               针对 486 进行代码优化。
+-o FILE             生成指定的输出文件。用在生成可执行文件时。
+-O0                 不进行优化处理。
+-O 或 -O1           优化生成代码。
+-O2                 进一步优化。
+-O3                 比 -O2 更进一步优化，包括 inline 函数。
+-shared             生成共享目标文件。通常用在建立共享库时。
+-static             禁止使用共享连接。
+-UMACRO             取消对 MACRO 宏的定义。
+-w                  不生成任何警告信息。
+-Wall               生成所有警告信息。
 </PRE>
 <P></P>
 
 <H3>1.8.3&nbsp;&nbsp;gdb</H3>
 <PRE>
-GNU �ĵ�������Ϊ gdb���ó�����һ������ʽ���ߣ��������ַ�ģʽ���� X Window ϵͳ�У���һ�� gdb ��
-ǰ��ͼ�ι��ߣ���Ϊ xxgdb��gdb �ǹ���ǿ��ĵ��Գ��򣬿�������µĵ�������
-* ���öϵ㣻
-* ���ӳ��������ֵ��
-* ����ĵ���ִ�У�
-* �޸ı�����ֵ��
-�ڿ���ʹ�� gdb ���Գ���֮ǰ������ʹ�� -g ѡ�����Դ�ļ������� makefile �����¶��� CFLAGS ������
+GNU 的调试器称为 gdb，该程序是一个交互式工具，工作在字符模式。在 X Window 系统中，有一个 gdb 的
+前端图形工具，称为 xxgdb。gdb 是功能强大的调试程序，可完成如下的调试任务：
+* 设置断点；
+* 监视程序变量的值；
+* 程序的单步执行；
+* 修改变量的值。
+在可以使用 gdb 调试程序之前，必须使用 -g 选项编译源文件。可在 makefile 中如下定义 CFLAGS 变量：
 CFLAGS = -g
-���� gdb ���Գ���ʱͨ��ʹ�����µ����
+运行 gdb 调试程序时通常使用如下的命令：
 gdb progname
 
-�� gdb ��ʾ��������help�����г�����ķ��࣬��Ҫ�ķ����У�
-* aliases���������
-* breakpoints���ϵ㶨�壻
-* data�����ݲ鿴��
-* files��ָ�����鿴�ļ���
-* internals��ά�����
-* running������ִ�У�
-* stack������ջ�鿴��
-* statu��״̬�鿴��
-* tracepoints�����ٳ���ִ�С�
-���� help �������ķ��������ɻ�ø����������ϸ�嵥��
+在 gdb 提示符处键入help，将列出命令的分类，主要的分类有：
+* aliases：命令别名
+* breakpoints：断点定义；
+* data：数据查看；
+* files：指定并查看文件；
+* internals：维护命令；
+* running：程序执行；
+* stack：调用栈查看；
+* statu：状态查看；
+* tracepoints：跟踪程序执行。
+键入 help 后跟命令的分类名，可获得该类命令的详细清单。
 
 </PRE>
 
 <P>#DENO#</P>
 
-<H3>1.8.4&nbsp;&nbsp;gdb �ĳ�������</H3>
+<H3>1.8.4&nbsp;&nbsp;gdb 的常用命令</H3>
 <PRE>
-                �� 1-4  ���õ� gdb ����
-����                        ����
-break NUM               ��ָ�����������öϵ㡣
-bt                      ��ʾ���еĵ���ջ֡���������������ʾ�����ĵ���˳��
-clear                   ɾ���������ض�Դ�ļ����ض����ϵĶϵ㡣���÷�Ϊ��clear FILENAME:NUM��
-continue                ����ִ�����ڵ��Եĳ��򡣸��������ڳ������ڴ����źŻ�ϵ��
-                        ����ֹͣ����ʱ��
-display EXPR            ÿ�γ���ֹͣ����ʾ����ʽ��ֵ������ʽ�ɳ�����ı�����ɡ�
-file FILE               װ��ָ���Ŀ�ִ���ļ����е��ԡ�
-help NAME               ��ʾָ������İ�����Ϣ��
-info break              ��ʾ��ǰ�ϵ��嵥����������ϵ㴦�Ĵ����ȡ�
-info files              ��ʾ�������ļ�����ϸ��Ϣ��
-info func               ��ʾ���еĺ������ơ�
-info local              ��ʾ�������еľֲ�������Ϣ��
-info prog               ��ʾ�����Գ����ִ��״̬��
-info var                ��ʾ���е�ȫ�ֺ;�̬�������ơ�
-kill                    ��ֹ�������Եĳ���
-list                    ��ʾԴ����Ρ�
-make                    �ڲ��˳� gdb ����������� make ���ߡ�
-next                    �ڲ�����ִ�н�����������������£���ǰִ��һ��Դ���롣
-print EXPR              ��ʾ����ʽ EXPR ��ֵ��
+                表 1-4  常用的 gdb 命令
+命令                        解释
+break NUM               在指定的行上设置断点。
+bt                      显示所有的调用栈帧。该命令可用来显示函数的调用顺序。
+clear                   删除设置在特定源文件、特定行上的断点。其用法为：clear FILENAME:NUM。
+continue                继续执行正在调试的程序。该命令用在程序由于处理信号或断点而
+                        导致停止运行时。
+display EXPR            每次程序停止后显示表达式的值。表达式由程序定义的变量组成。
+file FILE               装载指定的可执行文件进行调试。
+help NAME               显示指定命令的帮助信息。
+info break              显示当前断点清单，包括到达断点处的次数等。
+info files              显示被调试文件的详细信息。
+info func               显示所有的函数名称。
+info local              显示当函数中的局部变量信息。
+info prog               显示被调试程序的执行状态。
+info var                显示所有的全局和静态变量名称。
+kill                    终止正被调试的程序。
+list                    显示源代码段。
+make                    在不退出 gdb 的情况下运行 make 工具。
+next                    在不单步执行进入其他函数的情况下，向前执行一行源代码。
+print EXPR              显示表达式 EXPR 的值。
 <P></P>
 
-<H3>1.8.5&nbsp;&nbsp;gdb ʹ�÷���</H3>
+<H3>1.8.5&nbsp;&nbsp;gdb 使用范例</H3>
 <PRE>
 -----------------
-�嵥  һ���д���� C Դ���� bugging.c
+清单  一个有错误的 C 源程序 bugging.c
 -----------------
 #include <stdio.h>
 #include <stdlib.h>
@@ -221,31 +221,31 @@ int main ()
     printf ("\nYour string is: %s\n", string);
 }
 -----------------
-�����������ǳ��򵥣���Ŀ���ǽ����û������룬Ȼ���û��������ӡ�������ó���ʹ����һ��δ������
-ʼ�����ַ�����ַ string����ˣ����벢����֮�󣬽����� Segment Fault ����
+上面这个程序非常简单，其目的是接受用户的输入，然后将用户的输入打印出来。该程序使用了一个未经过初
+始化的字符串地址 string，因此，编译并运行之后，将出现 Segment Fault 错误：
 $ gcc -o test -g test.c
 $ ./test
 Please input a string: asfd
 Segmentation fault (core dumped)
-Ϊ�˲��Ҹó����г��ֵ����⣬�������� gdb���������µĲ�����У�
-1������ gdb bugging ���װ�� bugging ��ִ���ļ���
-2��ִ��װ��� bugging ���
-3��ʹ�� where ����鿴��������ĵط���
-4������ list ����鿴���� gets ���������Ĵ��룻
-5��Ψһ�ܹ����� gets �������������ؾ��Ǳ��� string���� print ����鿴 string ��ֵ��
-6���� gdb �У����ǿ���ֱ���޸ı�����ֵ��ֻҪ�� string ȡһ���Ϸ���ָ��ֵ�Ϳ����ˣ�Ϊ�ˣ������ڵ�
- 11 �д����öϵ㣻
-7�������������е��� 11 �д�ֹͣ����ʱ�����ǿ����� set variable �����޸� string ��ȡֵ��
-8��Ȼ��������У���������ȷ�ĳ������н����
+为了查找该程序中出现的问题，我们利用 gdb，并按如下的步骤进行：
+1．运行 gdb bugging 命令，装入 bugging 可执行文件；
+2．执行装入的 bugging 命令；
+3．使用 where 命令查看程序出错的地方；
+4．利用 list 命令查看调用 gets 函数附近的代码；
+5．唯一能够导致 gets 函数出错的因素就是变量 string。用 print 命令查看 string 的值；
+6．在 gdb 中，我们可以直接修改变量的值，只要将 string 取一个合法的指针值就可以了，为此，我们在第
+ 11 行处设置断点；
+7．程序重新运行到第 11 行处停止，这时，我们可以用 set variable 命令修改 string 的取值；
+8．然后继续运行，将看到正确的程序运行结果。
 </PRE>
 
 <P>#DEMO#</P>
 
-<H3>1.8.6&nbsp;&nbsp;��������/�⹤��</H3>
-<P>strip��</P>
-<P>nm��</P>
-<P>size��</P>
-<P>string��</P>
+<H3>1.8.6&nbsp;&nbsp;其他程序/库工具</H3>
+<P>strip：</P>
+<P>nm：</P>
+<P>size：</P>
+<P>string：</P>
 
 <P>
 <BR><BR>

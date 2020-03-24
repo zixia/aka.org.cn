@@ -1,43 +1,43 @@
-1. ��ӭ�����簲ȫ����Ȥ�������Ǽ��뵽China Dragon��Ŀ����!
+1. 欢迎对网络安全感兴趣的朋友们加入到China Dragon项目中来!
 
-China Dragon����AKA��ȫɳ�������һ�������͵����簲ȫ��Ŀ����Ŀ�����о�
-δ�������簲ȫ����(�����ڹ����)������С��Χ�����ۣ���ǰ���ṩ������
-������
+China Dragon是由AKA安全沙龙发起的一个开放型的网络安全项目，其目标是研究
+未来的网络安全技术(侧重于攻与防)，经过小范围的讨论，当前可提供的线索
+包括：
 
-    9.11�����簲ȫ�����壬����ս�����簲ȫ�����尲ȫ�����/��ȷ�����
-�����������簲ȫ̬�Ʒ�����Ԥ�������簲ȫ�ľ���ѧ˼������Ϣϵͳ��ȫ�밲
-���Ľ�һ����ϣ���Ϣϵͳ�Ĵ����Է�������ȫ�ֶεĽ�һ����չ(��������ǽ��
-IDS��VPN��Anti-Virus��PKI��Computer Forensics��Honeypot & Honeynet,
-��ƣ����ѻָ�����ȫ�����ȵķ�չ, etc.)�������߿���ѡ���Ŀ�꼰������
+    9.11对网络安全的意义，超限战与网络安全，整体安全与深度/广度防御以
+及反击，网络安全态势分析和预警，网络安全的军事学思考，信息系统安全与安
+防的进一步结合，信息系统的脆弱性分析，安全手段的进一步发展(包括防火墙，
+IDS，VPN，Anti-Virus，PKI，Computer Forensics，Honeypot & Honeynet,
+审计，灾难恢复及安全管理等的发展, etc.)，攻击者可能选择的目标及方法，
 ......
 
-����һ��ʱ��ĳﱸ��������Ŀ���м���������(���������Ⱥ�)��
+经过一段时间的筹备，现在项目已有几个发起人(排名不分先后)：
 
-	Sun Rui(sunshally@sina.com) ��Ϣ��ȫ�����ص�ʵ����
-        ��ע�������簲ȫ̬�Ʒ�������ȫ����
+	Sun Rui(sunshally@sina.com) 信息安全国家重点实验室
+        关注方向：网络安全态势分析，安全管理
 
-	David(richdavid@163.com) ��Ϣ��ȫ��ʿ�о���
-	��ע������һ����������ϵ�ṹ�����簲ȫ©��
+	David(richdavid@163.com) 信息安全博士研究生
+	关注方向：下一代互联网体系结构及网络安全漏洞
 
-	Heidi Wang(heidiww@sohu.com) ��Ϣ��ȫ��ʿ�о���
-	��ע�������簲ȫ�����ּ��
+	Heidi Wang(heidiww@sohu.com) 信息安全博士研究生
+	关注方向：网络安全和入侵检测
 	
-	Kevin Wang(kevinw@vip.163.com) ��ĿЭ����
-	��ע�������簲ȫ�ľ���ѧ˼������Ϣս
+	Kevin Wang(kevinw@vip.163.com) 项目协调人
+	关注方向：网络安全的军事学思考，信息战
 
-	��ĿЭ��С�飺Daniel (fuxy@catt.ac.cn)
+	项目协调小组：Daniel (fuxy@catt.ac.cn)
 		      Shown Kent(shown_kent@sohu.com)
 		      Kevin Wang(kevinw@vip.163.com)
 
-����ϣ���и�������Ѽ���China Dragon��Ŀ����ҿ���ѡ��������еķ���Ҳ��
-���Լ������µķ��򣬵�����ϣ���������Ǿ��ܳ�һ�׶��Եĳɹ�(������papers��
-Ҳ�����ǿ����еĳ������ȣ���Ȼ���߽�ϸ���)����4��5�·ݣ�ÿ����������Ҫ
-��һ����ȷ�����Ŀ�ꡣ
+我们希望有更多的朋友加入China Dragon项目，大家可以选择加入已有的方向，也可
+以自己发起新的方向，但我们希望今年我们就能出一阶段性的成果(可以是papers，
+也可以是可运行的程序代码等，当然二者结合更好)。在4，5月份，每个参与者需要
+进一步明确今年的目标。
 
-ע����ĿЭ��С��������ǶԸ�������Ŀ�ṩ��Ŀ�������������跨�ṩ����ľ��ѣ�
-���ϵ���Դ��
+注：项目协调小组的任务是对各个子项目提供项目，包括外联，设法提供必需的经费，
+资料等资源。
 
-��������ֱ�ӷ��Ÿ���ĿЭ��С���Ա��cdragon@yahoogroups.com
+有意者请直接发信给项目协调小组成员或cdragon@yahoogroups.com
 
-��Honeynet & Honeypot����Ȥ��������(�Ǻǣ����������ṩ�豸��������������)
-��ֱ�Ӹ���λ��ĿЭ����Ա��ϵ��
+对Honeynet & Honeypot感兴趣的朋友们(呵呵，包括可以提供设备、环境的朋友们)
+请直接给几位项目协调人员联系。

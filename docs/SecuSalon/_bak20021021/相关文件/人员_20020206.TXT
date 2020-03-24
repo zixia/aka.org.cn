@@ -1,29 +1,29 @@
-ÈËÔ±Çé¿ö£º
+äººå‘˜æƒ…å†µï¼š
  
-     É³ÁúĞ­µ÷£º  ÍõÊï  £¨star_wang@sina.com£© 
+     æ²™é¾™åè°ƒï¼š  ç‹æ›™  ï¼ˆstar_wang@sina.comï¼‰ 
                  daniel (yu_daniel@263.net)
                  sirius (wjx.sirius@263.net)
 
 
-     ¼¼Êõ×¨¼Ò£º
-              PKI £º           ÍõÊï    
-                               Áõº£Áú  (hailong_liu@263.net)
+     æŠ€æœ¯ä¸“å®¶ï¼š
+              PKI ï¼š           ç‹æ›™    
+                               åˆ˜æµ·é¾™  (hailong_liu@263.net)
                                
-              IDS £º           Ñî¾¢ËÉ£¬(yjs@perfectcenter.net)
-                               Îâ×÷Ë³	(www51@263.net)
+              IDS ï¼š           æ¨åŠ²æ¾ï¼Œ(yjs@perfectcenter.net)
+                               å´ä½œé¡º	(www51@263.net)
 
                                
-              FIREWALL         ÍõºìÑô£¨w.kinghy@263.net)
+              FIREWALL         ç‹çº¢é˜³ï¼ˆw.kinghy@263.net)
               
-              SHELLCODE        Í¯½£  (tongjian@staff.sina.com.cn)
+              SHELLCODE        ç«¥å‰‘  (tongjian@staff.sina.com.cn)
  
 
-     ÔÓÖ¾£º   ÍõÁá      :lwang@cnnic.net.cn(±±¾©.Å®)
-              ³£½¨¸Ù	:dasy@263.net(±±¾©)
-              ×¯êÅÒ¢	:zhuangyy@netease.com£¨ÉÏº££©
-              liuwei    :settler@263.net(ÄÏ¾©)
+     æ‚å¿—ï¼š   ç‹ç²      :lwang@cnnic.net.cn(åŒ—äº¬.å¥³)
+              å¸¸å»ºçº²	:dasy@263.net(åŒ—äº¬)
+              åº„æ˜±å°§	:zhuangyy@netease.comï¼ˆä¸Šæµ·ï¼‰
+              liuwei    :settler@263.net(å—äº¬)
               
 
     
 
-     Ö÷Ò³£¬ÎÄ×Ö£¬ºÍÃ½ÌåÁªÏµ¹¤×÷£º   Ñà×Ó (Å®.yanzicaow@263.net)
+     ä¸»é¡µï¼Œæ–‡å­—ï¼Œå’Œåª’ä½“è”ç³»å·¥ä½œï¼š   ç‡•å­ (å¥³.yanzicaow@263.net)

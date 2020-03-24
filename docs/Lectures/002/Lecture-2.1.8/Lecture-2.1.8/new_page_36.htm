@@ -9,17 +9,17 @@
 <meta name="Microsoft Border" content="tl, default">
 </head>
 
-<body background="_themes/blank/blbkgnd.gif" bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="ËÎÌå">
+<body background="_themes/blank/blbkgnd.gif" bgcolor="#FFFFFF" text="#000000" link="#999999" vlink="#990000" alink="#666666"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><!--mstheme--><font face="å®‹ä½“">
 
-<p align="center"><font size="6"><strong><img src="_derived/new_page_36.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="FTP ServerÍ·ÎÄ¼þ"></strong></font><br>
-<a href="index.htm"><img src="_derived/home_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="Ö÷Ò³" align="middle"></a> <a href="new_page_26.htm"><img src="_derived/up_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="ÉÏÒ»²ã" align="middle"></a> <img src="_derived/new_page_36.htm_cmp_blank000_hbtn_p.gif" width="140" height="32" border="0" alt="FTP ServerÍ·ÎÄ¼þ" align="middle"> <a href="new_page_37.htm"><img src="_derived/new_page_37.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="FTP Server³ÌÐò" align="middle"></a></p>
-<p align="center">¡¡</p>
+<p align="center"><font size="6"><strong><img src="_derived/new_page_36.htm_cmp_blank000_bnr.gif" width="600" height="60" border="0" alt="FTP Serverå¤´æ–‡ä»¶"></strong></font><br>
+<a href="index.htm"><img src="_derived/home_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="ä¸»é¡µ" align="middle"></a> <a href="new_page_26.htm"><img src="_derived/up_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="ä¸Šä¸€å±‚" align="middle"></a> <img src="_derived/new_page_36.htm_cmp_blank000_hbtn_p.gif" width="140" height="32" border="0" alt="FTP Serverå¤´æ–‡ä»¶" align="middle"> <a href="new_page_37.htm"><img src="_derived/new_page_37.htm_cmp_blank000_hbtn.gif" width="140" height="32" border="0" alt="FTP Serverç¨‹åº" align="middle"></a></p>
+<p align="center">ã€€</p>
 
-<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="ËÎÌå">
+<!--mstheme--></font></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%"><!--mstheme--><font face="å®‹ä½“">
 
 
 
-<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="ËÎÌå">
+<!--mstheme--></font></td><td valign="top" width="24"></td><!--msnavigation--><td valign="top"><!--mstheme--><font face="å®‹ä½“">
 
 <!--mstheme--></font><pre><font size="5">
 /*      Writen by Pacific, 2000/11/23   
@@ -66,10 +66,10 @@ Support command:
 #include &lt;string.h&gt;
 #include &lt;stdio.h&gt;
 #include &lt;sys/types.h&gt;
-</font></pre><!--mstheme--><font face="ËÎÌå">
+</font></pre><!--mstheme--><font face="å®‹ä½“">
 <!--mstheme--></font><pre><font size="5">#define BUFSIZE         (1024)
 #define ERRS(x)         outs(&quot;550 %s: &quot; x, param)
-</font></pre><!--mstheme--><font face="ËÎÌå">
+</font></pre><!--mstheme--><font face="å®‹ä½“">
 <!--mstheme--></font><pre><font size="5">//buffer and string 
 char inbuf[BUFSIZE];
 char genbuf[BUFSIZE];
@@ -77,7 +77,7 @@ char hostname[BUFSIZE];
 char path[PATH_MAX];
 char rename_file[PATH_MAX];
 char username[100];
-char basedir[PATH_MAX];</font></pre><!--mstheme--><font face="ËÎÌå">
+char basedir[PATH_MAX];</font></pre><!--mstheme--><font face="å®‹ä½“">
 <!--mstheme--></font><pre><font size="5">//system arguments
 unsigned int ftp_port = 21;
 unsigned int max_conn = 65535;
@@ -86,37 +86,37 @@ unsigned int file_rest = 0;
 unsigned int timeout = 300;
 unsigned int file_rest = 0;
 char transfer_type='i';
-int system_uid;</font></pre><!--mstheme--><font face="ËÎÌå">
+int system_uid;</font></pre><!--mstheme--><font face="å®‹ä½“">
 <!--mstheme--></font><pre><font size="5">//boolean
 int user_valid = 0;
 int input_user = 0;
 int anonymous_login = 0;
 int pasv_mode = 0;
-int transfer = 0;</font></pre><!--mstheme--><font face="ËÎÌå">
+int transfer = 0;</font></pre><!--mstheme--><font face="å®‹ä½“">
 <!--mstheme--></font><pre><font size="5">int listenfd;
 int connfd;
 int pasvfd;
 FILE *file;
 int data_pid = 0;
-FILE *data_file;</font></pre><!--mstheme--><font face="ËÎÌå">
+FILE *data_file;</font></pre><!--mstheme--><font face="å®‹ä½“">
 <!--mstheme--></font><pre><font size="5">#define NO_CHECK                1
 #define NEED_PARAM              2
 #define NO_PARAM                4
 #define CHECK_LOGIN             8
 #define CHECK_NOLOGIN   16
-#define NO_TRANSFER             32</font></pre><!--mstheme--><font face="ËÎÌå">
+#define NO_TRANSFER             32</font></pre><!--mstheme--><font face="å®‹ä½“">
 <!--mstheme--></font><pre><font size="5">struct _cmd_list {
         char *cmd;
         void (*func)(char *param);
         int check;
-};</font></pre><!--mstheme--><font face="ËÎÌå">
+};</font></pre><!--mstheme--><font face="å®‹ä½“">
 <!--mstheme--></font><pre><font size="5">struct _port {
         uint32_t host;
         uint16_t port;
-} remote_port, local_port;</font></pre><!--mstheme--><font face="ËÎÌå">
-<!--mstheme--></font><pre><font size="5">int port_base = 3072;</font></pre><!--mstheme--><font face="ËÎÌå">
-<!--mstheme--></font><pre><font size="5">#endif  //__FTPD_H__</font></pre><!--mstheme--><font face="ËÎÌå">
-<font size="5">¡¡</font>
+} remote_port, local_port;</font></pre><!--mstheme--><font face="å®‹ä½“">
+<!--mstheme--></font><pre><font size="5">int port_base = 3072;</font></pre><!--mstheme--><font face="å®‹ä½“">
+<!--mstheme--></font><pre><font size="5">#endif  //__FTPD_H__</font></pre><!--mstheme--><font face="å®‹ä½“">
+<font size="5">ã€€</font>
 
 <!--mstheme--></font><!--msnavigation--></td></tr><!--msnavigation--></table></body>
 

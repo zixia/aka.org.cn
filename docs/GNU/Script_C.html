@@ -5,24 +5,24 @@
 </head>
 
 <body bgcolor="#FFFFFF">
-<p>���������������߿�����Ŀ����Script C��Ŀ��ʽ����</p>
-<p> ����1999������죬���˸���������Ҫһ������script ���ԣ�����������ɷ��ص�Ӳ�����Թ���������ʱ���ڶ�һЩ�¿�����Ӳ����burning test���������飩������һ���������ʱ�Ĺ����������ò����ղ���Ҫ�󷴸������и��ֳ���ֱ����ҹ�������һ��ǿ���script���ԣ�����ģ���˵���ꡢ���̶��������Ҿ���һ�����߼��ж��������ǾͿ��Խ���ˣ�ֻ��Ҫ���ղ��Թ淶дһ��script��Ȼ������һ���ϣ��ڶ������Ϳ���ֱ��ȥ��ӡ�����ò��Խ�����ˡ� 
+<p>　　共创联盟在线开发项目——Script C项目正式启动</p>
+<p> 　　1999年的夏天，有人告诉我他需要一种灵活的script 语言，来帮助他完成繁重的硬件测试工作。他那时正在对一些新开发的硬件作burning test（烤机试验），这是一个枯燥而费时的工作，他不得不按照测试要求反复的运行各种程序直到深夜。如果有一种强大的script语言，可以模拟人的鼠标、键盘动作，并且具有一定的逻辑判断能力，那就可以解放了：只需要按照测试规范写一个script，然后运行一晚上，第二天来就可以直接去打印机上拿测试结果表了。 
 </p>
-<p>�����������Ҫ���Һ�ͬѧ�����һ��������C���Ե�script����Ϊ��д�˹���ǿ��Ŀ⺯��������ģ���˵Ĳ�������Ϊ��ֻ��Ϊ�ˡ�Auto Test�����������ǳ�֮Ϊ��Auto 
-  Test Script���������ats�ű�����������ҿ����ڡ�������������������汾�� </p>
-<p>�����������ڶ��script������ȣ�ats���ŵ��Ǻ�ͻ���ģ���֧��API���ã�֧���Ӻ�����֧��#include������ʹ��if, goto, while�ȿ�����䡭����Щ�����Ǹ߼����ԵĹ��ܡ������ҵģ�ͬʱ��atsҲ����������ȱ�ݡ���Ϊ��ʱֻ�������������м򵥵ġ������˵Ĳ��������๤��������������ϣ����������٣���֧��ָ��ͽṹ����ʹ������API���ù����޷���ȫ���ӡ� 
+<p>　　根据这个要求，我和同学设计了一种类似于C语言的script，并为它写了功能强大的库函数，用来模拟人的操作。因为这只是为了“Auto Test”，所以我们称之为“Auto 
+  Test Script”，这就是ats脚本的由来，大家可以在“软件包”里下载这个版本。 </p>
+<p>　　与其他众多的script语言相比，ats的优点是很突出的：它支持API调用，支持子函数，支持#include，可以使用if, goto, while等控制语句……这些明显是高级语言的功能。但不幸的，同时，ats也有着致命的缺陷。因为当时只考虑用它来进行简单的“代替人的操作”这类工作，所以在设计上，数据类型少，不支持指针和结构。这使得它的API调用功能无法完全发挥。 
 </p>
-<p>������ǰЩʱ���Ҽ�����ISee�Ŀ�����<a href="http://cosoft.org.cn/projects/iseeexplorer/">http://cosoft.org.cn/projects/iseeexplorer/</a>�������Ǽ���Ȥ�Ĺ�����������Ϊ�������˹��ף���ֻ������������ѹ����ѹ�ĺ���:) 
-  �Ҵ�����������ǰд���Ƕ�ats���룬ʹISee��һ���������Ŀ����߽ӿڡ�����Ҫ��ats�������ĸı䣬Ҳ�����ֻ��һ���ԭ���Ĵ���ᱻʹ�á������ Script 
-  C �������� </p>
-<p>����Script C�ƻ�����Ƴ�һ�ֽ���ִ�еġ�C���Է��Ľű����ԡ����������bat�������޷���ɣ�����C����д������̫�����˵����๤������û��java�ĸ߰�ȫ�Ե��ܹ�ֱ��ʹ��ϵͳ��������Դ������ʹ��API���ڹ�����Ҫ��javaǿ��Ŀǰֻ����֧�� 
-  Windows ϵͳ������ 95/98/SE/ME/2000/NT/2000/XP �������ǽ�����ʹ�����������ֲ������ƽ̨�� </p>
-<p>�����������ܴ�ϣ������Ȥ�������������뿪���� </p>
-<p>����ע����Ŀ��ϸ����뿴<a href="http://cosoft.org.cn/projects/scriptc/">http://cosoft.org.cn/projects/scriptc/</a>�����뷽��������ע�ᣬȻ���ע��ID��һЩ��Ϣ������Ŀ����Ա�� 
+<p>　　在前些时候，我加入了ISee的开发（<a href="http://cosoft.org.cn/projects/iseeexplorer/">http://cosoft.org.cn/projects/iseeexplorer/</a>），这是件有趣的工作，许多人为此做出了贡献，我只是添加了两个压缩解压的函数:) 
+  我打算利用起以前写的那堆ats代码，使ISee有一个快速灵活的开发者接口。这需要对ats做大量的改变，也许最后只有一点点原来的代码会被使用。这就是 Script 
+  C 的由来。 </p>
+<p>　　Script C计划被设计成一种解释执行的、C语言风格的脚本语言。它用来完成bat批处理无法完成，而用C语言写程序又太复杂了的这类工作。它没有java的高安全性但能够直接使用系统的许多资源，可以使用API，在功能上要比java强大。目前只打算支持 
+  Windows 系统，包括 95/98/SE/ME/2000/NT/2000/XP 。但我们将尽量使代码很容易移植到其他平台。 </p>
+<p>　　工作量很大，希望感兴趣的朋友们来参与开发！ </p>
+<p>　　注：项目详细情况请看<a href="http://cosoft.org.cn/projects/scriptc/">http://cosoft.org.cn/projects/scriptc/</a>，参与方法在联盟注册，然后把注册ID和一些信息发给项目管理员！ 
 </p>
 <p>kangsh<br>
   kangsh@163.net<br>
-  �������ˣ�http://www.cosoft.org.cn)<br>
+  共创联盟（http://www.cosoft.org.cn)<br>
   2002-01-16 </p>
 </body>
 </html>

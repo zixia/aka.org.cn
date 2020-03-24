@@ -1,104 +1,104 @@
 <html>
-<head><title>GIRL�ź�</title></head>
+<head><title>GIRL信号</title></head>
 <body>
-<h1 align=center>GIRL�ź�</h1>
+<h1 align=center>GIRL信号</h1>
 <hr>
-<h2>1��Ԥ�����ź�</h2>
-<p>��GIRLԴ�����C/C++Ӧ�ó����п���ֱ������Ԥ�����źš�GIRL�ṩԤ�����źŵ�Ŀ�������ض�
-ʱ����GIRLϵͳ�Զ��򹹼����͵��źţ������Ԥ���Ĺ�����
-<p>GIRLԤ������ź��У�
+<h2>1。预定义信号</h2>
+<p>在GIRL源程序和C/C++应用程序中可以直接引用预定义信号。GIRL提供预定义信号的目的是在特定
+时刻有GIRL系统自动向构件发送的信号，以完成预定的工作。
+<p>GIRL预定义的信号有：
 <ul>
-<li>sig_create���������źš����ź��ڹ���ʵ����������������������δ�����õ�ʱ���͸�����ʵ����
-<li>sig_setup���������źš����ź��ڹ���ʵ������֮��ϵͳ�Թ���ʵ���ĳ�ʼ�����֮�󣬹�����ʾ
-֮ǰ���͸�����ʵ����
-<li>sig_destroy���������źš����ź��ڹ���ʵ������֮�󣬱�ɾ��֮ǰ���͸�����ʵ����
-<li>sig_accel�����������źţ�������ʾ���ټ�ֵ�����ź����յ��ڱ�������صļ��ټ���ʱ���͸�
-����ʵ����
-<li>sig_KeyEvent���¼����������źš���X Window�¼��źţ���X Window����XKeyEvent�¼�ʱ���͡�
-<li>sig_ButtonEvent���¼����������źš���X Window�¼��źţ���X Window����XButtonEvent�¼�ʱ
-���͡�
-<li>sig_MotionEvent���¼����������źš���X Window�¼��źţ���X Window����XMotionEvent�¼�ʱ
-���͡�
-<li>sig_CrossingEvent���¼����������źš���X Window�¼��źţ���X Window����XCrossingEvent
-�¼�ʱ���͡�
-<li>sig_FocusEvent���¼����������źš���X Window�¼��źţ���X Window����XFocusEvent�¼�ʱ
-���͡�
-<li>sig_ExposeEvent���¼����������źš���X Window�¼��źţ���X Window����XExposeEvent�¼�
-ʱ���͡�
-<li>sig_GraphicsEvent���¼����������źš���X Window�¼��źţ���X Window����XGraphicsEvent
-�¼�ʱ���͡�
-<li>sig_NoExposeEvent���¼����������źš���X Window�¼��źţ���X Window����XNoExposeEvent
-�¼�ʱ���͡�
-<li>sig_VisibilityEvent���¼����������źš���X Window�¼��źţ���X Window����XVisibilityEvent
-�¼�ʱ���͡�
-<li>sig_CreateWindowEvent���¼����������źš���X Window�¼��źţ���X Window����XCreateWindowEvent
-�¼�ʱ���͡�
-<li>sig_DestroyWindowEvent���¼����������źš���X Window�¼��źţ���X Window����XDestroyWindowEvent
-�¼�ʱ���͡�
-<li>sig_UnmapEvent���¼����������źš���X Window�¼��źţ���X Window����XUnmapEvent�¼�ʱ
-���͡�
-<li>sig_MapEvent���¼����������źš���X Window�¼��źţ���X Window����XMapEvent�¼�ʱ���͡�
-<li>sig_ReparentEvent���¼����������źš���X Window�¼��źţ���X Window����XReparentEvent
-�¼�ʱ���͡�
-<li>sig_ConfigureEvent���¼����������źš���X Window�¼��źţ���X Window����XConfigurateEvent
-�¼�ʱ���͡�
-<li>sig_GravityEvent���¼����������źš���X Window�¼��źţ���X Window����XGravityEvent
-�¼�ʱ���͡�
-<li>sig_ResizeRequestEvent���¼����������źš���X Window�¼��źţ���X Window����XResizeRequestEvent
-�¼�ʱ���͡�
-<li>sig_ConfigureRequestEvent���¼����������źš���X Window�¼��źţ���X Window����XConfigureRequestEvent
-�¼�ʱ���͡�
-<li>sig_CirculateEvent���¼����������źš���X Window�¼��źţ���X Window����XCirculateEvent
-�¼�ʱ���͡�
-<li>sig_CirculateRequestEvent���¼����������źš���X Window�¼��źţ���X Window����XCirculateRequestEvent
-�¼�ʱ���͡�
-<li>sig_PropertyEvent���¼����������źš���X Window�¼��źţ���X Window����XPropertyEven
-t�¼�ʱ���͡�
-<li>sig_SelectionClearEvent���¼����������źš���X Window�¼��źţ���X Window����XSelectionClearEvent
-�¼�ʱ���͡�
-<li>sig_SelectionRequestEvent���¼����������źš���X Window�¼��źţ���X Window����XSelectionRequestEvent
-�¼�ʱ���͡�
-<li>sig_SelectionEvent���¼����������źš���X Window�¼��źţ���X Window����XSelectionEvent
-�¼�ʱ���͡�
-<li>sig_ColormapEvent���¼����������źš���X Window�¼��źţ���X Window����XColormapEvent
-�¼�ʱ���͡�
-<li>sig_ClientEvent���¼����������źš���X Window�¼��źţ���X Window����XClientEvent
-�¼�ʱ���͡�
-<li>sig_MappingEvent���¼����������źš���X Window�¼��źţ���X Window����XMappingEvent
-�¼�ʱ���͡�
-<li>sig_ErrorEvent���¼����������źš���X Window�¼��źţ���X Window����XErrorEvent�¼�
-ʱ���͡�
-<li>sig_KeymapEvent���¼����������źš���X Window�¼��źţ���X Window����XKeymapEvent
-�¼�ʱ���͡�
+<li>sig_create：无类型信号。该信号在构件实例被创建，但构件内容尚未被设置的时候发送给构件实例。
+<li>sig_setup：无类型信号。该信号在构件实例创建之后，系统对构件实例的初始化完成之后，构件显示
+之前发送给构件实例。
+<li>sig_destroy：无类型信号。该信号在构件实例隐藏之后，被删除之前发送给构件实例。
+<li>sig_accel：整数类型信号，整数表示加速键值。该信号在收到于本构件相关的加速键的时候发送给
+构件实例。
+<li>sig_KeyEvent：事件数据类型信号。是X Window事件信号，在X Window给出XKeyEvent事件时发送。
+<li>sig_ButtonEvent：事件数据类型信号。是X Window事件信号，在X Window给出XButtonEvent事件时
+发送。
+<li>sig_MotionEvent：事件数据类型信号。是X Window事件信号，在X Window给出XMotionEvent事件时
+发送。
+<li>sig_CrossingEvent：事件数据类型信号。是X Window事件信号，在X Window给出XCrossingEvent
+事件时发送。
+<li>sig_FocusEvent：事件数据类型信号。是X Window事件信号，在X Window给出XFocusEvent事件时
+发送。
+<li>sig_ExposeEvent：事件数据类型信号。是X Window事件信号，在X Window给出XExposeEvent事件
+时发送。
+<li>sig_GraphicsEvent：事件数据类型信号。是X Window事件信号，在X Window给出XGraphicsEvent
+事件时发送。
+<li>sig_NoExposeEvent：事件数据类型信号。是X Window事件信号，在X Window给出XNoExposeEvent
+事件时发送。
+<li>sig_VisibilityEvent：事件数据类型信号。是X Window事件信号，在X Window给出XVisibilityEvent
+事件时发送。
+<li>sig_CreateWindowEvent：事件数据类型信号。是X Window事件信号，在X Window给出XCreateWindowEvent
+事件时发送。
+<li>sig_DestroyWindowEvent：事件数据类型信号。是X Window事件信号，在X Window给出XDestroyWindowEvent
+事件时发送。
+<li>sig_UnmapEvent：事件数据类型信号。是X Window事件信号，在X Window给出XUnmapEvent事件时
+发送。
+<li>sig_MapEvent：事件数据类型信号。是X Window事件信号，在X Window给出XMapEvent事件时发送。
+<li>sig_ReparentEvent：事件数据类型信号。是X Window事件信号，在X Window给出XReparentEvent
+事件时发送。
+<li>sig_ConfigureEvent：事件数据类型信号。是X Window事件信号，在X Window给出XConfigurateEvent
+事件时发送。
+<li>sig_GravityEvent：事件数据类型信号。是X Window事件信号，在X Window给出XGravityEvent
+事件时发送。
+<li>sig_ResizeRequestEvent：事件数据类型信号。是X Window事件信号，在X Window给出XResizeRequestEvent
+事件时发送。
+<li>sig_ConfigureRequestEvent：事件数据类型信号。是X Window事件信号，在X Window给出XConfigureRequestEvent
+事件时发送。
+<li>sig_CirculateEvent：事件数据类型信号。是X Window事件信号，在X Window给出XCirculateEvent
+事件时发送。
+<li>sig_CirculateRequestEvent：事件数据类型信号。是X Window事件信号，在X Window给出XCirculateRequestEvent
+事件时发送。
+<li>sig_PropertyEvent：事件数据类型信号。是X Window事件信号，在X Window给出XPropertyEven
+t事件时发送。
+<li>sig_SelectionClearEvent：事件数据类型信号。是X Window事件信号，在X Window给出XSelectionClearEvent
+事件时发送。
+<li>sig_SelectionRequestEvent：事件数据类型信号。是X Window事件信号，在X Window给出XSelectionRequestEvent
+事件时发送。
+<li>sig_SelectionEvent：事件数据类型信号。是X Window事件信号，在X Window给出XSelectionEvent
+事件时发送。
+<li>sig_ColormapEvent：事件数据类型信号。是X Window事件信号，在X Window给出XColormapEvent
+事件时发送。
+<li>sig_ClientEvent：事件数据类型信号。是X Window事件信号，在X Window给出XClientEvent
+事件时发送。
+<li>sig_MappingEvent：事件数据类型信号。是X Window事件信号，在X Window给出XMappingEvent
+事件时发送。
+<li>sig_ErrorEvent：事件数据类型信号。是X Window事件信号，在X Window给出XErrorEvent事件
+时发送。
+<li>sig_KeymapEvent：事件数据类型信号。是X Window事件信号，在X Window给出XKeymapEvent
+事件时发送。
 </ul>
-<h2>2���Զ����ź�</h2>
-<p>�Զ����ź�ֻ����GIRLԴ�ļ��ж��塣ֻ�ܶ��������˵���źš�ͬһ���źſ����ڶ��GIRLģ����
-�����壬���źŶ�Ӧ���������ͱ�����ȫ��ͬ������ͻ�������ʱ���´���
-<p>��GIRLԴ�ļ��ж����źŵ���ʽ���£�<ul>
-<li><i>�źű�ʶ��</i>=signal(<i>�ź��������ͱ�ʶ��</i>)
-<li><i>�źű�ʶ��</i>=signal
+<h2>2。自定义信号</h2>
+<p>自定义信号只能在GIRL源文件中定义。只能定义而不能说明信号。同一个信号可以在多个GIRL模块中
+被定义，但信号对应的数据类型必须完全相同，否则就会在连接时导致错误。
+<p>在GIRL源文件中定义信号的形式如下：<ul>
+<li><i>信号标识符</i>=signal(<i>信号数据类型标识符</i>)
+<li><i>信号标识符</i>=signal
 </ul>
-<p>����������ʽ�ֱ������������źź��������źš�����ͨ��������ͷ�ļ����Ա��ڸ���ģ�����á�
-<p>GIRLϵͳ�����Զ������Զ����źţ���������ͨ���������º��������Զ����źţ�<ul>
+<p>上述两种形式分别定义了有类型信号和无类型信号。它们通常出现在头文件中以便于各个模块引用。
+<p>GIRL系统不会自动发送自定义信号，构件可以通过调用以下函数发送自定义信号：<ul>
 <li>void girl_emit_signal_data(girlWidget *pwidget,ghandle signal,girlObject *pgobj);
-<p>��������ź�signal���͸�����ʵ��pwidget���ź�����Ϊpgobj��pgobj�����ͱ����signal�������������
-��ƥ�䡣�����ƥ���򱾵�����Ч��
+<p>本好书把信号signal发送给构件实例pwidget。信号数据为pgobj。pgobj的类型必须和signal定义的数据类型
+相匹配。如果不匹配则本调用无效。
 <li>void girl_emit_signal(girlWidget *pwidget,ghandle signal);
-<p>���������ڷ����������źš������źű������������źţ���������������Ч��
+<p>本函数用于发送无数据信号。给出信号必须是无类型信号，否则上述调用无效。
 </ul>
-<p>�������������Ա����ڷ���Ԥ�����źš�
-<h2>3���źŵĴ�������</h2>
-<p>Ԥ�����źź��Զ����ź��ڴ���������û���κ�����
-<p>����յ��źŹ������κ�һ���źŽӿڶ�û�����ӵ������źţ�������źŽ����ݸ����չ����ĸ�����������
-��ϵ����ֱ���ҵ�һ��������������źŽ��������ӡ����ֱ�������ڹ��������ź���Ȼû�б����������жϸ�
-�ź��Ƿ��Ǽ��ټ�������Ǽ��ټ�������������͸�����ټ����ӵĹ�����������źžͱ����������͸�����
-����������
+<p>上述函数还可以被用于发送预定义信号。
+<h2>3。信号的传播机制</h2>
+<p>预定义信号和自定义信号在传播机制上没有任何区别。
+<p>如果收到信号构件的任何一个信号接口都没有连接到给出信号，则给出信号将传递给接收构件的父构件（窗口
+关系）。直到找到一个父构件与给出信号进行了连接。如果直到主窗口构件给出信号仍然没有被处理，则判断该
+信号是否是加速键。如果是加速键，则给出被发送给与加速键连接的构件。否则该信号就被抛弃（或发送给窗口
+管理器）。
 <hr>
 <table align=center width=100% border=2><tr>
-<td><center><a href="index.html">������ҳ</a></center>
-<td><center><a href="typedef.html">��һҳ��GIRL�����Ͷ���</a></center>
-<td><center><a href="declare.html">��һҳ����GIRL�����˵��</a></center>
-<td><center><a href="malito:blazing@263.net">������ϵ</a></center>
+<td><center><a href="index.html">返回首页</a></center>
+<td><center><a href="typedef.html">上一页：GIRL的类型定义</a></center>
+<td><center><a href="declare.html">下一页：对GIRL对象的说明</a></center>
+<td><center><a href="malito:blazing@263.net">与我联系</a></center>
 </tr></table>
 </body>
 </html>

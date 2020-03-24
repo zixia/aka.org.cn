@@ -1,13 +1,13 @@
 <html>
-<head><title>²¿·ÖGIRLÔ¤¶¨Òå¹¹¼şµÄ³õ²½ÊµÏÖ</title></head>
+<head><title>éƒ¨åˆ†GIRLé¢„å®šä¹‰æ„ä»¶çš„åˆæ­¥å®ç°</title></head>
 <body>
-<h1 align=center>²¿·ÖGIRLÔ¤¶¨Òå¹¹¼şµÄ³õ²½ÊµÏÖ</h1>
+<h1 align=center>éƒ¨åˆ†GIRLé¢„å®šä¹‰æ„ä»¶çš„åˆæ­¥å®ç°</h1>
 <hr>
 <pre>
-// ÓÃÒ»¸öÕûÊı£¨32Î»£©µÄ0~15Î»±íÊ¾x¡¢16~31Î»±íÊ¾yÒÔÌá¸ß´¦ÀíĞ§ÂÊ¡£
-// ÓÃÒ»¸öÕûÊı£¨32Î»£©µÄ0~15Î»±íÊ¾w¡¢16~31Î»±íÊ¾hÒÔÌá¸ß´¦ÀíĞ§ÂÊ¡£
+// ç”¨ä¸€ä¸ªæ•´æ•°ï¼ˆ32ä½ï¼‰çš„0~15ä½è¡¨ç¤ºxã€16~31ä½è¡¨ç¤ºyä»¥æé«˜å¤„ç†æ•ˆç‡ã€‚
+// ç”¨ä¸€ä¸ªæ•´æ•°ï¼ˆ32ä½ï¼‰çš„0~15ä½è¡¨ç¤ºwã€16~31ä½è¡¨ç¤ºhä»¥æé«˜å¤„ç†æ•ˆç‡ã€‚
 
-#{	// ±¾²¿·Ö±»²åÈëÉú³ÉµÄÍ·ÎÄ¼ş¡£
+#{	// æœ¬éƒ¨åˆ†è¢«æ’å…¥ç”Ÿæˆçš„å¤´æ–‡ä»¶ã€‚
 #ifndef	FALSE
 #define	FALSE	0
 #endif
@@ -36,7 +36,7 @@
 sig_fresh=signal;
 
 //----------------------------------------------------------------------
-//	¶¨ÒågirlWidget¡£
+//	å®šä¹‰girlWidgetã€‚
 //----------------------------------------------------------------------
 #{
 
@@ -81,7 +81,7 @@ girlWidget {
 
 <a name="label"></a>
 //----------------------------------------------------------------------
-//      ¶¨ÒågirlLabel¡£
+//      å®šä¹‰girlLabelã€‚
 //----------------------------------------------------------------------
 
 #{
@@ -103,7 +103,7 @@ girlLabel : girlWidget  {
 
 <a name="arrow"></a>
 //----------------------------------------------------------------------
-//      ¶¨ÒågirlArrow¡£
+//      å®šä¹‰girlArrowã€‚
 //----------------------------------------------------------------------
 
 #{
@@ -126,7 +126,7 @@ girlArrow : girlWidget  {
 
 <a name="seperator"></a>
 //----------------------------------------------------------------------
-//      ¶¨ÒågirlSeperator¡£
+//      å®šä¹‰girlSeperatorã€‚
 //----------------------------------------------------------------------
 
 #{
@@ -149,7 +149,7 @@ girlSeperator : girlWidget  {
 
 <a name="bin"></a>
 //----------------------------------------------------------------------
-//      ¶¨ÒågirlBin¡£
+//      å®šä¹‰girlBinã€‚
 //----------------------------------------------------------------------
 
 girlBin : girlWidget  {
@@ -164,7 +164,7 @@ girlBin : girlWidget  {
 
 <a name="frame"></a>
 //----------------------------------------------------------------------
-//      ¶¨ÒågirlFrame¡£
+//      å®šä¹‰girlFrameã€‚
 //----------------------------------------------------------------------
 
 #{
@@ -193,7 +193,7 @@ girlFrame : girlBin  {
 
 <a name="button"></a>
 //----------------------------------------------------------------------
-//      ¶¨ÒågirlButton¡£
+//      å®šä¹‰girlButtonã€‚
 //----------------------------------------------------------------------
 
 sig_btn_pressed=signal;
@@ -248,7 +248,7 @@ girlBox : girlWidget  {
         dataslot(f_align)=girlt_integer //      align_minimum,align_center,align_maximum
 	receiver(subwidgets)=
                 (girl_widget:girlb_box_install_subwidget,girl_box_get_subwidget)
-	// subpositionÓÃÓÚÈ·¶¨µ±Ç°¹¹¼ş²åÈë¡¢Ğ¶ÔØÎ»ÖÃ¡£
+	// subpositionç”¨äºç¡®å®šå½“å‰æ„ä»¶æ’å…¥ã€å¸è½½ä½ç½®ã€‚
 	receiver(subposition)=
                 (girlt_integer:girlb_box_set_subposition,girl_box_get_subposition)
         receiver(detach)=(girlt_widget:NULL,girl_box_detach_subwidget)
@@ -314,17 +314,17 @@ girlRadioButton : girlCheckButton  {
         signal(setup)=girlsetup_radiobutton(sig_setup)
         signal(destructor)=girldestructor_radiobutton(sig_destroy)
 }
-//  º¯Êıgirlpress_radio_buttonÔÚÊÕµ½ĞÅºÅÊ±£¬°ÑÖ¸Ïò×ÔÉíµÄÖ¸Õë·¢ËÍµ½active_subwidgetÖĞ¡£
+//  å‡½æ•°girlpress_radio_buttonåœ¨æ”¶åˆ°ä¿¡å·æ—¶ï¼ŒæŠŠæŒ‡å‘è‡ªèº«çš„æŒ‡é’ˆå‘é€åˆ°active_subwidgetä¸­ã€‚
 
 <a name="radiogrouper"></a>
 girlRadioGrouper : girlBox  {
         dataslot(current_selected)=girlt_integer
         receiver(radiopressed)=(girlt_widget:girlt_radio_button_pressed,NULL)
 }
-//  ÆäÖĞº¯Êıgirlt_radio_button_pressed£¬½«Ïòµ±Ç°±»Ñ¡ÖĞµÄ°´Å¥ºÍĞÂ±»Ñ¡ÖĞµÄ°´Å¥·¢ËÍ
-//  ×´Ì¬Êı¾İ¡£¹¹¼şµÄgirl_radiobox_set_status¸ù¾İÕâ¸öÊı¾İÉèÖÃ×´Ì¬¡£
+//  å…¶ä¸­å‡½æ•°girlt_radio_button_pressedï¼Œå°†å‘å½“å‰è¢«é€‰ä¸­çš„æŒ‰é’®å’Œæ–°è¢«é€‰ä¸­çš„æŒ‰é’®å‘é€
+//  çŠ¶æ€æ•°æ®ã€‚æ„ä»¶çš„girl_radiobox_set_statusæ ¹æ®è¿™ä¸ªæ•°æ®è®¾ç½®çŠ¶æ€ã€‚
 
-//  ¸ø³öÒ»¸öÊ¹ÓÃRadioButtonºÍRadioGrouperµÄÀı×Ó
+//  ç»™å‡ºä¸€ä¸ªä½¿ç”¨RadioButtonå’ŒRadioGrouperçš„ä¾‹å­
 //      girlMyRadioGrouper : girlRadioGrouper  {
 //		radiopressed->1
 //              subwidgets<-girlRadioButton {
@@ -338,7 +338,7 @@ girlRadioGrouper : girlBox  {
 //			label<-"ThirdFirst Selection"
 //		}
 //	}
-//  »òÕß¼òĞ´³É£º
+//  æˆ–è€…ç®€å†™æˆï¼š
 //      girlMyRadioGrouper : girlRadioGrouper  {
 //		radiopressed->1
 //              subwidgets<-table [ girlRadioButton { active_subwidget->1 label<-$1 } ]  {
@@ -367,7 +367,7 @@ girlMenuBar : girlAdvBox  {
         signal(setup)=girlsetup_menubar(sig_setup)
         signal(destructor)=girldestructor_menubar(sig_destroy)
 }
-//  ËùÓĞµÄMenuButton×Ó¹¹¼ş¶¼Ó¦¸Ã°ÑÊı¾İ²ÛdataslotÁ¬½Óµ½accel_receiver£¬ÒÔÊ¹MenuBar»ñµÃ¼ÓËÙ¼ü±í¡£
+//  æ‰€æœ‰çš„MenuButtonå­æ„ä»¶éƒ½åº”è¯¥æŠŠæ•°æ®æ§½dataslotè¿æ¥åˆ°accel_receiverï¼Œä»¥ä½¿MenuBarè·å¾—åŠ é€Ÿé”®è¡¨ã€‚
 
 <a name="slider"></a>
 girlSlider : girlWidget  {
@@ -408,8 +408,8 @@ girlScrollbar : girlBox  {
 </pre>
 <hr>
 <table align=center width=100% border=2><tr>
-<td><center><a href="index.html">·µ»ØÊ×Ò³</a></center>
-<td><center><a href="malito:blazing@263.net">ÓëÎÒÁªÏµ</a></center>
+<td><center><a href="index.html">è¿”å›é¦–é¡µ</a></center>
+<td><center><a href="malito:blazing@263.net">ä¸æˆ‘è”ç³»</a></center>
 </tr></table>
 </body>
 </html>

@@ -1,62 +1,62 @@
 <html>
-<head><title>GIRL�Լ��ټ���֧��</title></head>
+<head><title>GIRL对加速键的支持</title></head>
 <body>
-<h1 align=center>GIRL�Լ��ټ���֧��</h1>
+<h1 align=center>GIRL对加速键的支持</h1>
 <hr>
-<p>Ϊ�˼��źŴ������ƣ����뵥���������ټ�����Ϊ���ټ��źŵĽ������������ڼ��ټ������ߵ�
-�����У����Ӵ��ڹ�ϵ��������������������ټ����ͱ��������ź��ɸ��ڵ����ӽڵ㴫����
-<p>���ǵ����ټ�������ĳЩ�ض��Ĺ�����ʹ�ã������ɹ�������ע����ټ������û�б�Ҫ��GIRLԴ
-�ļ��и���ע����ټ����ֶΡ������������ɹ������������Լ��ע����ټ������磬�Ѳ˵����ַ���
-��&֮����ַ���Ϊ���ټ��ַ�����
-<p>Ϊ�˸����ټ�ע���ṩ���������ټ���C/C++�����б������������C/C++�������ͨ������ʸ���
-�ļ��ټ������м��ټ�����ͷ�ļ�keysym.h�ж��塣����Ϊÿ�����ټ������˵����ĺ꣬���ṩ������
-���Ա��ڷ��ʼ��ټ���
+<p>为了简化信号传播机制，必须单独处理加速键。因为加速键信号的接收者往往不在加速键处理者的
+子树中（父子窗口关系），如果不单独处理加速键，就必须允许信号由父节点向子节点传播。
+<p>考虑到加速键总是在某些特定的构件中使用，可以由构件自行注册加速键。因此没有必要在GIRL源
+文件中给出注册加速键的手段。构件将根据由构件本身定义的约定注册加速键（例如，把菜单项字符串
+中&之后的字符作为加速键字符）。
+<p>为了给加速键注册提供便利，加速键在C/C++程序中被定义成整数。C/C++程序可以通过宏访问给定
+的加速键。所有加速键宏在头文件keysym.h中定义。除了为每个加速键定义了单独的宏，还提供了如下
+宏以便于访问加速键：
 <ul>
-<li>GIRL_ALT(key)��key�����Ǽ����ϳ��������������ʾAlt-key��
-<li>GIRL_CTRL(key)��key�����Ǽ����ϳ��������������ʾCtrl-key��
-<li>GIRL_SHIFT(key)��key�����Ǽ����ϳ��������������ʾShift-key��
-<li>GIRL_ALT_CTRL(key)��key�����Ǽ����ϳ��������������ʾAlt-Ctrl-key��
-<li>GIRL_ALT_SHIFT(key)��key�����Ǽ����ϳ��������������ʾAlt-Shift-key��
-<li>GIRL_CTRL_SHIFT(key)��key�����Ǽ����ϳ��������������ʾCtrl-Shift-key��
-<li>GIRL_ALT_CTRL_SHIFT(key)��key�����Ǽ����ϳ��������������ʾAlt-Ctrl-Shift-key��
+<li>GIRL_ALT(key)：key可以是键盘上常见的任意键。表示Alt-key。
+<li>GIRL_CTRL(key)：key可以是键盘上常见的任意键。表示Ctrl-key。
+<li>GIRL_SHIFT(key)：key可以是键盘上常见的任意键。表示Shift-key。
+<li>GIRL_ALT_CTRL(key)：key可以是键盘上常见的任意键。表示Alt-Ctrl-key。
+<li>GIRL_ALT_SHIFT(key)：key可以是键盘上常见的任意键。表示Alt-Shift-key。
+<li>GIRL_CTRL_SHIFT(key)：key可以是键盘上常见的任意键。表示Ctrl-Shift-key。
+<li>GIRL_ALT_CTRL_SHIFT(key)：key可以是键盘上常见的任意键。表示Alt-Ctrl-Shift-key。
 </ul>
-<p>Ϊ�˼򻯼��ټ�ע��������Ѽ��ټ�����顣���ټ����������ڳ�������ӡ�ɾ�����ټ����ṹ
-girlAccelGroup���ڱ�ʾ���ټ��顣
-<p>����ע����ټ����Ե������º�����
+<p>为了简化加速键注册操作，把加速键编程组。加速键编组有利于成组地添加、删除加速键。结构
+girlAccelGroup用于表示加速键组。
+<p>构件注册加速键可以调用以下函数：
 <ul>
 <li>void girl_setup_accelgroup(girlAccelGroup *pgag,gint accel,girlWidget *pwidget);
-<p>��ʼ�������ļ��ټ��������Ұ�accel��Ϊ��һ�����ټ��������ָü��ټ�ʱ��Ԥ�����ź�
-sig_accel�������͸������Ĺ�����
+<p>初始化给出的加速键表，并且把accel作为第一个加速键。当出现该加速键时，预定义信号
+sig_accel将被发送给给出的构件。
 <li>gint girl_clear_accelgroup(girlAccelGroup *pgag);
-<p>��������ļ��ټ���������ü��ټ�������װ�ˣ���ô�������Զ�ж�ء�������ټ�������
-Ӱ����ټ���ָ���Ĺ�������Ӧ�ó����˳�֮ǰ������������м��ټ��������򽫲����ڴ�й©��
+<p>清除给出的加速键表。如果该加速键表被安装了，那么它将被自动卸载。清除加速键表不会
+影响加速键表指定的构件。在应用程序退出之前，必须清除所有加速键表，否则将产生内存泄漏。
 <li>void girl_append_accelgroup(girlAccelGroup *pgag,gint accel);
-<p>��accel���ӵ��������ټ���֮�󡣵����ָü��ټ�ʱ��Ԥ�����ź�sig_accel�������͸���
-girl_setup_accelgroup�и����Ĺ�����
+<p>把accel添加到给定加速键表之后。当出现该加速键时，预定义信号sig_accel将被发送给在
+girl_setup_accelgroup中给出的构件。
 <li>gint girl_first_accel(girlAccelGroup *pgag,gint *scanproc);
-<p>��ȡ���ټ����е�һ�����ټ����������NOKEY�����ʾɨ����ɡ�����scanproc���ڴ���ɨ����̡�
+<p>获取加速键表中第一个加速键。如果返回NOKEY，则表示扫描完成。整数scanproc用于储存扫描进程。
 <li>gint girl_next_accel(girlAccelGroup *pgag,gint *scanproc);
-<p>��ȡ���ټ����е���һ�����ټ����������NOKEY�����ʾɨ����ɡ�����scanproc���ڴ���ɨ����̡�
+<p>获取加速键表中的下一个加速键。如果返回NOKEY，则表示扫描完成。整数scanproc用于储存扫描进程。
 <li>girlWidget *girl_get_accelgroup_widget(girlAccelGroup *pgag);
-<p>��ȡ���ټ���ָ��������
+<p>获取加速键表指定构件。
 <li>bool girl_install_accelgroup(girlAccelGroup *pgag);
-<p>�Ѹ����ļ��ټ�����װ��ϵͳ��ȥ���������ʾ��װ�ɹ������ؼٱ�ʾ��װʧ�ܡ�
+<p>把给定的加速键表安装到系统中去。返回真表示安装成功。返回假表示安装失败。
 <li>void girl_uninstall_accelgroup(girlAccelGroup *pgag);
-<p>��ϵͳ��ж�ظ����ļ��ټ�����
+<p>从系统中卸载给定的加速键表。
 <li>bool girl_send_accel(girlAccelGroup *pgag,gint accel);
-<p>�Ѽ��ټ����͸�ָ���ļ��ټ�������������ļ��ټ������и����ļ��ټ�����ô��Ԥ�����ź�sig_accel
-���͸���girl_setup_accelgroup��ָ���Ĺ�����
+<p>把加速键发送给指定的加速键表。如果给定的加速键表含有给定的加速键，那么将预定义信号sig_accel
+发送给在girl_setup_accelgroup中指定的构件。
 <li>bool girl_send_accel_all(gint accel);
-<p>�Ѽ��ټ����͸����а�װ��ϵͳ�еļ��ټ�����
+<p>把加速键发送给所有安装到系统中的加速键表。
 </ul>
-<p>��Ҫ˵�����ǣ������ͬһ�����ټ����г������ظ��ļ��ټ������һ�����ټ��������ԡ����ͬһ��
-���ټ������ڲ�ͬ�ļ��ټ����У���װ�ļ��ټ����еļ��ټ�������ʹ�á�
+<p>需要说明的是：如果在同一个加速键表中出现了重复的加速键，则后一个加速键将被忽略。如果同一个
+加速键出现在不同的加速键表中，后安装的加速键表中的加速键被优先使用。
 <hr>
 <table align=center width=100% border=2><tr>
-<td><center><a href="index.html">������ҳ</a></center>
-<td><center><a href="widget.html">��һҳ������GIRL����</a></center>
-<td><center><a href="usegirlc.html">��һҳ��ʹ��GIRL�ı�����girlc</a></center>
-<td><center><a href="malito:blazing@263.net">������ϵ</a></center>
+<td><center><a href="index.html">返回首页</a></center>
+<td><center><a href="widget.html">上一页：关于GIRL构件</a></center>
+<td><center><a href="usegirlc.html">下一页：使用GIRL的编译器girlc</a></center>
+<td><center><a href="malito:blazing@263.net">与我联系</a></center>
 </tr></table>
 </body>
 </html>

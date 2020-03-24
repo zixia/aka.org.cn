@@ -1,10 +1,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <HTML>
 <HEAD>
-    <TITLE>±ê×¼ I/O ¿â</TITLE>
+    <TITLE>æ ‡å‡† I/O åº“</TITLE>
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
-    <META NAME="COPYRIGHT" CONTENT="ÎºÓÀÃ÷">
-    <META NAME="AUTHOR" CONTENT="ÎºÓÀÃ÷">
+    <META NAME="COPYRIGHT" CONTENT="é­æ°¸æ˜">
+    <META NAME="AUTHOR" CONTENT="é­æ°¸æ˜">
     <STYLE>
     <!--
         H1 { color: #ffff00 }
@@ -26,32 +26,32 @@
 <A HREF="dir.html"><IMG SRC="next.gif" ALT="Next"></A>
 <A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
 
-<H1 ALIGN=CENTER>5.3&nbsp;&nbsp;±ê×¼ I/O ¿â<BR><BR>
+<H1 ALIGN=CENTER>5.3&nbsp;&nbsp;æ ‡å‡† I/O åº“<BR><BR>
 </H1>
 
 <UL>
-    <LI><P>»ù±¾¸ÅÄî</LI>
-    <LI><P>»º³å»úÖÆ</LI>
-    <LI><P>ÊìÏ¤µÄ±ê×¼ I/O º¯Êı</LI>
-    <LI><P>Ä°ÉúµÄ±ê×¼ I/O º¯Êı</LI>
+    <LI><P>åŸºæœ¬æ¦‚å¿µ</LI>
+    <LI><P>ç¼“å†²æœºåˆ¶</LI>
+    <LI><P>ç†Ÿæ‚‰çš„æ ‡å‡† I/O å‡½æ•°</LI>
+    <LI><P>é™Œç”Ÿçš„æ ‡å‡† I/O å‡½æ•°</LI>
 </UL>
 
-<H3>5.3.1&nbsp;&nbsp;»ù±¾¸ÅÄî</H3>
+<H3>5.3.1&nbsp;&nbsp;åŸºæœ¬æ¦‚å¿µ</H3>
 <UL>
-    <LI>ANSI C ºÍ±ê×¼ I/O ¿â</LI>
-    <LI>Á÷ºÍ FILE ¶ÔÏó</LI>
-    <LI>±ê×¼ FILE ¶ÔÏó: stdin, stdout, stderror</LI>
-    <LI>»º³åºÍ·Ç»º³å I/O</LI>
+    <LI>ANSI C å’Œæ ‡å‡† I/O åº“</LI>
+    <LI>æµå’Œ FILE å¯¹è±¡</LI>
+    <LI>æ ‡å‡† FILE å¯¹è±¡: stdin, stdout, stderror</LI>
+    <LI>ç¼“å†²å’Œéç¼“å†² I/O</LI>
 </UL>
 
-<H3>5.3.2&nbsp;&nbsp;»º³å»úÖÆ</H3>
+<H3>5.3.2&nbsp;&nbsp;ç¼“å†²æœºåˆ¶</H3>
 <UL>
-    <LI>»º³åµÄÄ¿µÄ</LI>
-    <LI>»º³åÀàĞÍ 1: ÍêÈ«»º³å</LI>
-    <LI>»º³åÀàĞÍ 2: ĞĞ»º³å</LI>
-    <LI>»º³åÀàĞÍ 3: ÎŞ»º³å</LI>
-    <LI>UNIX µÄÄ¬ÈÏ»º³å: ±ê×¼´íÎóÎŞ»º³å, ÆäËûÁ÷Èç¹ûÊÇÖÕ¶ËÉè±¸ÔòÎªĞĞ»º³å, ·ñÔòÎªÍêÈ«»º³å. </LI>
-    <LI>ÔÚ´ò¿ªÁ÷, ÇÒÖ´ĞĞÈÎºÎ¶ÁĞ´²Ù×÷Ö®Ç°, ¿ÉÒÔÓÃ setbuf, setvbuf µÈº¯Êı¸Ä±äÁ÷µÄ»º³åÀàĞÍ. </LI>
+    <LI>ç¼“å†²çš„ç›®çš„</LI>
+    <LI>ç¼“å†²ç±»å‹ 1: å®Œå…¨ç¼“å†²</LI>
+    <LI>ç¼“å†²ç±»å‹ 2: è¡Œç¼“å†²</LI>
+    <LI>ç¼“å†²ç±»å‹ 3: æ— ç¼“å†²</LI>
+    <LI>UNIX çš„é»˜è®¤ç¼“å†²: æ ‡å‡†é”™è¯¯æ— ç¼“å†², å…¶ä»–æµå¦‚æœæ˜¯ç»ˆç«¯è®¾å¤‡åˆ™ä¸ºè¡Œç¼“å†², å¦åˆ™ä¸ºå®Œå…¨ç¼“å†². </LI>
+    <LI>åœ¨æ‰“å¼€æµ, ä¸”æ‰§è¡Œä»»ä½•è¯»å†™æ“ä½œä¹‹å‰, å¯ä»¥ç”¨ setbuf, setvbuf ç­‰å‡½æ•°æ”¹å˜æµçš„ç¼“å†²ç±»å‹. </LI>
 <PRE>
 ===============================================================================
         #include &lt;stdio.h&gt;
@@ -63,10 +63,10 @@
         int setvbuf(FILE *stream, char *buf, int mode , size_t size);
 ===============================================================================
 </PRE>
-    <LI>setbuf: ¹Ø±Õ»ò´ò¿ª»º³å, buf ´óĞ¡±ØĞëÎª BUFSIZE (stdio.h)</LI>
-    <LI>setvbuf: Ã÷È·Ö¸¶¨»º³åÀàĞÍ, ÒÔ¼°»º³åÇø´óĞ¡. type ¿ÉÈ¡ _IONBF, _IOLBF, _IOFBF Ö®Ò»</LI>
-    <LI>Ç°Èı¸öº¯Êı½ö½öÊÇ setvbuff µÄ±ğÃû¶øÒÑ.</LI>
-    <LI>Ë¢ĞÂ»º³å: fflush. stream Îª NULL Ê±Ë¢ĞÂËùÓĞÁ÷</LI>
+    <LI>setbuf: å…³é—­æˆ–æ‰“å¼€ç¼“å†², buf å¤§å°å¿…é¡»ä¸º BUFSIZE (stdio.h)</LI>
+    <LI>setvbuf: æ˜ç¡®æŒ‡å®šç¼“å†²ç±»å‹, ä»¥åŠç¼“å†²åŒºå¤§å°. type å¯å– _IONBF, _IOLBF, _IOFBF ä¹‹ä¸€</LI>
+    <LI>å‰ä¸‰ä¸ªå‡½æ•°ä»…ä»…æ˜¯ setvbuff çš„åˆ«åè€Œå·².</LI>
+    <LI>åˆ·æ–°ç¼“å†²: fflush. stream ä¸º NULL æ—¶åˆ·æ–°æ‰€æœ‰æµ</LI>
 <PRE>
 ===============================================================================
         #include &lt;stdio.h&gt;
@@ -76,28 +76,28 @@
 </PRE>
 </UL>
 
-<H3>5.3.3&nbsp;&nbsp;ÊìÏ¤µÄ±ê×¼ I/O º¯Êı</H3>
+<H3>5.3.3&nbsp;&nbsp;ç†Ÿæ‚‰çš„æ ‡å‡† I/O å‡½æ•°</H3>
 <UL>
-    <LI>Á÷µÄ´ò¿ªºÍ¹Ø±Õ: fopen/fclose</LI>
-    <LI>ÓÃ fopen ´ò¿ªµÄÎÄ¼şµÄ·ÃÎÊĞí¿ÉÎª: S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH</LI>
-    <LI>µ¥×Ö·ûÊäÈë: getc/fgetc/getchar</LI>
-    <LI>getc Ò»°ãÊµÏÖÎªºê</LI>
-    <LI>Á÷µÄ´íÎó´¦Àí: ferror/feof/clearerr</LI>
-    <LI>clearerr Çå³ı´íÎó±êÖ¾ºÍEOF±êÖ¾</LI>
-    <LI>·µ»¹×Ö·û: ungetc</LI>
-    <LI>µ¥×Ö·ûÊä³ö: putc/fputc/putchar</LI>
-    <LI>ĞĞÊäÈë: gets/fgets</LI>
-    <LI>ĞĞÊä³ö: puts/fputs</LI>
-    <LI>¶ş½øÖÆ¶ÁĞ´: fwrite/fread</LI>
-    <LI>¶ş½øÖÆ¶ÁĞ´Ê±µÄ½á¹¹Ìå¶ÔÆëÎÊÌâ</LI>
-    <LI>Á÷µÄ¶¨Î»: ftell/fseek/rewind, SEEK_CUR, SEEK_SET, SEEK_END</LI>
-    <LI>rewind µÈÍ¬ÓÚ fseek(stream, 0L, SEEK_SET), µ«ÒªÇå³ı´íÎó±êÖ¾.</LI>
-    <LI>Á÷µÄ¶¨Î»: fgetpos/fsetpos</LI>
-    <LI>¸ñÊ½»¯Êä³ö: printf/fprintf/sprintf</LI>
-    <LI>¸ñÊ½»¯ÊäÈë: scanf/fscanf/sscanf</LI>
+    <LI>æµçš„æ‰“å¼€å’Œå…³é—­: fopen/fclose</LI>
+    <LI>ç”¨ fopen æ‰“å¼€çš„æ–‡ä»¶çš„è®¿é—®è®¸å¯ä¸º: S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH</LI>
+    <LI>å•å­—ç¬¦è¾“å…¥: getc/fgetc/getchar</LI>
+    <LI>getc ä¸€èˆ¬å®ç°ä¸ºå®</LI>
+    <LI>æµçš„é”™è¯¯å¤„ç†: ferror/feof/clearerr</LI>
+    <LI>clearerr æ¸…é™¤é”™è¯¯æ ‡å¿—å’ŒEOFæ ‡å¿—</LI>
+    <LI>è¿”è¿˜å­—ç¬¦: ungetc</LI>
+    <LI>å•å­—ç¬¦è¾“å‡º: putc/fputc/putchar</LI>
+    <LI>è¡Œè¾“å…¥: gets/fgets</LI>
+    <LI>è¡Œè¾“å‡º: puts/fputs</LI>
+    <LI>äºŒè¿›åˆ¶è¯»å†™: fwrite/fread</LI>
+    <LI>äºŒè¿›åˆ¶è¯»å†™æ—¶çš„ç»“æ„ä½“å¯¹é½é—®é¢˜</LI>
+    <LI>æµçš„å®šä½: ftell/fseek/rewind, SEEK_CUR, SEEK_SET, SEEK_END</LI>
+    <LI>rewind ç­‰åŒäº fseek(stream, 0L, SEEK_SET), ä½†è¦æ¸…é™¤é”™è¯¯æ ‡å¿—.</LI>
+    <LI>æµçš„å®šä½: fgetpos/fsetpos</LI>
+    <LI>æ ¼å¼åŒ–è¾“å‡º: printf/fprintf/sprintf</LI>
+    <LI>æ ¼å¼åŒ–è¾“å…¥: scanf/fscanf/sscanf</LI>
 </UL>
 
-<H3>5.3.4&nbsp;&nbsp;Ä°ÉúµÄ±ê×¼ I/O º¯Êı</H3>
+<H3>5.3.4&nbsp;&nbsp;é™Œç”Ÿçš„æ ‡å‡† I/O å‡½æ•°</H3>
 <UL>
     <LI>freopen/fdopen</LI>
 
@@ -133,7 +133,7 @@
 ===============================================================================
 </PRE>
 
-    <LI>¸ñÊ½»¯Êä³öµÄÁíÒ»ÖÖĞÎÊ½: vprintf/vfprintf/vsprintf</LI>
+    <LI>æ ¼å¼åŒ–è¾“å‡ºçš„å¦ä¸€ç§å½¢å¼: vprintf/vfprintf/vsprintf</LI>
 
 <PRE>
 ===============================================================================
@@ -145,7 +145,7 @@
        int vsprintf(char *str, const char *format, va_list ap);
        int vsnprintf(char *str, size_t size, const char  *format, va_list ap);
 -------------------------------------------------------------------------------
-SAMPLE:    myMessageBox º¯Êı
+SAMPLE:    myMessageBox å‡½æ•°
 
 int myMessageBox (HWND hwnd, DWORD dwStyle, char* title, char* text, ...)
 {
@@ -176,7 +176,7 @@ int myMessageBox (HWND hwnd, DWORD dwStyle, char* title, char* text, ...)
 ===============================================================================
 </PRE>
 
-    <LI>¿É±ä²ÎÊıº¯ÊıµÄ²ÎÊı´¦Àí: va_start/va_end</LI>
+    <LI>å¯å˜å‚æ•°å‡½æ•°çš„å‚æ•°å¤„ç†: va_start/va_end</LI>
 
 <PRE>
 ===============================================================================

@@ -1,11 +1,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <HTML>
 <HEAD>
-    <TITLE>���彲</TITLE>
+    <TITLE>第五讲</TITLE>
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
     <META NAME="GENERATOR" CONTENT="StarOffice/5.1 (Linux)">
-    <META NAME="COPYRIGHT" CONTENT="κ����">
-    <META NAME="AUTHOR" CONTENT="κ����">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
     <META NAME="CREATED" CONTENT="20000329;17342600">
     <META >
     <STYLE>
@@ -20,38 +20,38 @@
 </HEAD>
 <BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" bgcolor="#000000">
 <br>
-<p>��������ν���֪ͨ�� </p>
-<p>�������⣺Linux������⣺�ļ�ϵͳ��I/O�����̺ͽ��̼�ͨѶ<br>
-  ����ʱ�䣺5��14�գ������գ����� 2:00 �� 5:00 <br>
-  �����ص㣺�廪��ѧ����¥ 2 �� 404 ��������¥��������¥�� һֱ��ת��<br>
-  ����������������A����ģʽ��ѵ���ġ����ǣ��� <br>
-  ����������κ����</p>
-<p>�������ݼ�飺<br>
-  �����������ν��������� APUE �������Ϊ����, �ص�ͻ�� UNIX �����ɫ��<br>
-  ����������������ϵͳ�б��ʱ�����漰������, ͬʱ�ص㽲�� Linux �����<br>
-  ������. �Ӷ����ܹ������ھ� UNIX/Linux �ϵ��ļ�ϵͳ, I/O �����̺ͽ���<br>
-  ������ͨѶ��һ����Ϊ������˽�. </p>
-<p>���������Ը������Ϊ��, �ص㽲��İ����ϵͳ���û���.</p>
-<p>������Ҫ���ݰ���: <br>
-  ����* �ļ�ϵͳ����. �����ڵ�, Ŀ¼�ṹ��Ŀ¼���.<br>
-  ����* �ļ� I/O. Open �Ĵ򿪱�־, ׷��ģʽ��ԭ�Ӳ���. <br>
-  ����* ��׼ I/O ��. �������, İ���ı�׼ I/O �⺯��. <br>
-  ����* �ļ���Ŀ¼. Ŀ¼������, Ŀ¼��ȡ, ��������.<br>
-  ����* �߼� I/O. I/O �˿ڶ�д, ��¼����, I/O �๤, �ڴ�ӳ��, Linux �е��첽 I/O. <br>
-  ����* �����ļ�ϵͳ�� I/O �������. ������, ϵͳ�ļ�����, ʱ�������. <br>
-  ����* ���̼����̻���. main ����, �����в����� popt ��, ��������, C �����ڴ� ���ֵ�. <br>
-  ����* ���̿���. ����״̬, ���̴����ͳ����ִ�е� <br>
-  ����* �߳�. �̵߳Ĵ���, �߳�ͬ�����Ƶ�. ʵ������. <br>
-  ����* ���̹�ϵ. ������, �Ự, �����ն�, Shell �е�����ִ��. <br>
-  ����* �ػ�����. ʵ�ַ���. <br>
-  ����* ���̼�ͨѶ. �ܵ�, FIFO, System V IPC (�ص��ǹ����ڴ���ź���). </p>
-<p>�����ο���Ŀ: <br>
-  ����1. W. Richard Stevens, Advanced Programming in the UNIX Environment. <br>
-  ����2. John Goerzen, Linux Programming Bible. <br>
-  ����3. Naba Barkakati, Red Hat Linux 6 Secrets. <br>
-  ����4. Phil Cornes, Linux A-Z. </p>
+<p>　　第五次讲座通知： </p>
+<p>　　主题：Linux编程主题：文件系统及I/O，进程和进程间通讯<br>
+  　　时间：5月14日（星期日）下午 2:00 － 5:00 <br>
+  　　地点：清华大学西主楼 2 区 404 （从西主楼二区上四楼， 一直右转，<br>
+  　　　　　见到“A管理模式培训中心”即是）。 <br>
+  　　主讲：魏永明</p>
+<p>　　内容简介：<br>
+  　　　　本次讲座内容以 APUE 相关内容为蓝本, 重点突出 UNIX 相关特色或<br>
+  　　者在其他操作系统中编程时很少涉及的内容, 同时重点讲解 Linux 相关主<br>
+  　　题. 从而让能够让听众就 UNIX/Linux 上的文件系统, I/O 及进程和进程<br>
+  　　间通讯有一个较为深入的了解. </p>
+<p>　　讲座以概念解释为主, 重点讲述陌生的系统调用或函数.</p>
+<p>　　主要内容包括: <br>
+  　　* 文件系统构造. 索引节点, 目录结构和目录项等.<br>
+  　　* 文件 I/O. Open 的打开标志, 追加模式和原子操作. <br>
+  　　* 标准 I/O 库. 缓冲机制, 陌生的标准 I/O 库函数. <br>
+  　　* 文件和目录. 目录项属性, 目录读取, 访问许可.<br>
+  　　* 高级 I/O. I/O 端口读写, 记录锁定, I/O 多工, 内存映射, Linux 中的异步 I/O. <br>
+  　　* 其他文件系统或 I/O 相关主题. 共享库, 系统文件操作, 时间和日期. <br>
+  　　* 进程及进程环境. main 函数, 命令行参数及 popt 库, 环境变量, C 程序内存 布局等. <br>
+  　　* 进程控制. 进程状态, 进程创建和程序的执行等 <br>
+  　　* 线程. 线程的创建, 线程同步机制等. 实例分析. <br>
+  　　* 进程关系. 进程组, 会话, 控制终端, Shell 中的命令执行. <br>
+  　　* 守护进程. 实现方法. <br>
+  　　* 进程间通讯. 管道, FIFO, System V IPC (重点是共享内存和信号量). </p>
+<p>　　参考书目: <br>
+  　　1. W. Richard Stevens, Advanced Programming in the UNIX Environment. <br>
+  　　2. John Goerzen, Linux Programming Bible. <br>
+  　　3. Naba Barkakati, Red Hat Linux 6 Secrets. <br>
+  　　4. Phil Cornes, Linux A-Z. </p>
 <p>-------<br>
-  ���ɡ�Э�������� �� Ϊ������</p>
+  自由、协作、创造 — 为了明天</p>
 </BODY>
 </HTML>
 

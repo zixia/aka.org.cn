@@ -1,23 +1,23 @@
 <html>
 <head>
-<title>�޸��ļ�Ȩ��</title>
+<title>修改文件权限</title>
 </head>
 
 <body>
-<h1 align=center>4.2 �޸��ļ�Ȩ��</h1>
+<h1 align=center>4.2 修改文件权限</h1>
 <br>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;���Ƚ��޸��ļ�������Ȩ��ʹ�� chown �� chgrp ���
-<p>&nbsp;&nbsp;&nbsp;&nbsp;chown new_user file or directory���޸��ļ���Ŀ¼�������ߡ�
-<p>&nbsp;&nbsp;&nbsp;&nbsp;chgrp new_group file or directory���޸��ļ���Ŀ¼�������顣
-<p>&nbsp;&nbsp;&nbsp;&nbsp;������Ҫע����ǣ���ͨ�û����ܽ��ļ���Ŀ¼������Ȩ�������ˣ�ֻ�� root ����һȨ�ޡ�������ͨ�û���Ȩ�ı��ļ���Ŀ¼�������顣
+<p>&nbsp;&nbsp;&nbsp;&nbsp;首先讲修改文件的所有权，使用 chown 和 chgrp 命令：
+<p>&nbsp;&nbsp;&nbsp;&nbsp;chown new_user file or directory：修改文件或目录的所有者。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;chgrp new_group file or directory：修改文件或目录的所属组。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这里需要注意的是：普通用户不能将文件或目录的所有权交与他人，只有 root 有这一权限。但是普通用户有权改变文件或目录的所属组。
 <br>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;����ÿ���û���Ȩ�޶����� rwx ��λ��ɣ���˿����������˽������ֱ�ʾ�ļ��ķ���Ȩ��һ���˽������ֿ������������������ֱ�ʾ����ô�����Ӧ��ȨֵΪ 4 ��λ��Ӧ r��ȨֵΪ 2 ��λ��Ӧ w��ȨֵΪ 1 ��λ��Ӧ x������һ���û���������λ�����Ӧ��Ȩֵ�����ͣ��Ϳ��Եó��Ը����û��ķ���Ȩ�ޡ�
-<p>&nbsp;&nbsp;&nbsp;&nbsp;�ı��ļ�����Ȩ�޵������� chmod����ʽ�ǣ�
+<p>&nbsp;&nbsp;&nbsp;&nbsp;由于每类用户的权限都是由 rwx 三位组成，因此可以用三个八进制数字表示文件的访问权。一个八进制数字可以用三个二进制数字表示，那么与其对应，权值为 4 的位对应 r，权值为 2 的位对应 w，权值为 1 的位对应 x。对于一类用户，将这三位与其对应的权值相乘求和，就可以得出对该类用户的访问权限。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;改变文件访问权限的命令是 chmod，格式是：
 <p>&nbsp;&nbsp;&nbsp;&nbsp;chmod permission file_name
-<p>&nbsp;&nbsp;&nbsp;&nbsp;���� chmod 764 a.txt,����ʾ�����ļ��������ߣ����жԸ��ļ�����д��ִ�е�Ȩ�ޡ������ļ���������û���ӵ�ж���д��Ȩ�ޡ����������û���ֻ�ж�Ȩ�ޡ�
-<p>&nbsp;&nbsp;&nbsp;&nbsp;������Ҫע����ǣ��ļ��Ĵ�������Ψһ�����޸ĸ��ļ�����Ȩ�޵���ͨ�û�������һ�������޸��ļ�����Ȩ�޵��û��� root��
-<p>&nbsp;&nbsp;&nbsp;&nbsp;����һ�ֱ�ʾ�������������ַ������趨�ļ�����Ȩ�ޡ����ж��� r ��ʾ��д�� w ��ʾ��ִ���� x ��ʾ���������� u ��ʾ�����û��� g ��ʾ�������û��� o ��ʾ�������û��� a ��ʾ����ô�������Ӿ�д�������ģ����
+<p>&nbsp;&nbsp;&nbsp;&nbsp;比如 chmod 764 a.txt,它表示对于文件的所有者，具有对该文件读、写、执行的权限。对于文件所属组的用户，拥有读、写的权限。对于其他用户，只有读权限。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这里需要注意的是：文件的创建者是唯一可以修改该文件访问权限的普通用户，另外一个可以修改文件访问权限的用户是 root。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;还有一种表示方法，就是用字符串来设定文件访问权限。其中读用 r 表示，写用 w 表示，执行用 x 表示；所有者用 u 表示，组用户用 g 表示，其他用户用 o 表示，所有用户用 a 表示。那么上面例子就写成西面的模样：
 <p>&nbsp;&nbsp;&nbsp;&nbsp;chmod a+r,u+w,u+x,g+w a.txt
-<p align=right><a href=400.html>�ؼ�</a></p>
+<p align=right><a href=400.html>回家</a></p>
 </body>
 </html>

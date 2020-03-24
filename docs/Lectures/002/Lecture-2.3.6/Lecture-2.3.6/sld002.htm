@@ -37,9 +37,9 @@
 Cache coherence
 <BR><BR>	write propagation, write serialization, 
 <BR>I/O operation
-<BR>����һ��������κ�ִ�н������ÿ���ڴ�λ�ã����ܹ���һ���Ը�λ�õĲ����ļ��봮�����У����ռ��봮�����е�ִ�н����ʵ��ִ�н��һ����
-<LI>���У�����һ�����������Ĳ������ڼ��봮�������еĴ�����ý������ڴ�ϵͳʵ�ʷ���Ĵ�����һ���ģ�
-<LI>ÿ�����������ص�ֵ�����ڼ��봮�������У���������Ǹ�λ�õ�д������д��ֵ��
+<BR>对于一个程序的任何执行结果，对每个内存位置，都能构造一个对该位置的操作的假想串行序列，按照假想串行序列的执行结果与实际执行结果一样。
+<LI>其中，由任一进程所发出的操作，在假想串行序列中的次序，与该进程向内存系统实际发射的次序是一样的；
+<LI>每个读操作返回的值，是在假想串行序列中，最近的向那个位置的写操作所写的值。
 </UL></UL><UL>
 <H2>	MESI( Modified-Exclusive-Shared-Invalid)
 </H2>

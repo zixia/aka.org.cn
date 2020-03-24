@@ -2,7 +2,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<title>Aka ÔÓÖ¾</title>
+<title>Aka æ‚å¿—</title>
 </head>
 
 <body bgcolor="#ffffff">
@@ -13,19 +13,19 @@
         <td bgcolor="#EEEDB7"> 
           <h1 align="center">JUnit best practices </h1>
           <div style='layout-grid:15.6pt'>
-<h1 align=center>JUnit ×î¼ÑÊµ¼ù</h1>
+<h1 align=center>JUnit æœ€ä½³å®è·µ</h1>
             <h3 align=center>Techniques for building resilient, relocatable, multithreaded 
               JUnit tests</h3>
-            <h3 align=center>Ò»ÏîÁé»îµÄ¡¢¿ÉÖØ¶¨Î»µÄ¶àÏß³ÌJUnit²âÊÔ¼¼Êõ </h3>
+            <h3 align=center>ä¸€é¡¹çµæ´»çš„ã€å¯é‡å®šä½çš„å¤šçº¿ç¨‹JUnitæµ‹è¯•æŠ€æœ¯ </h3>
             <blockquote> 
-              <p align="center"><b>×÷Õß</b> <strong><a href="mailto:andrew.schneider@javaworld.com">Andy 
+              <p align="center"><b>ä½œè€…</b> <strong><a href="mailto:andrew.schneider@javaworld.com">Andy 
                 Schneider</a></strong></p>
-              <p align="center"><b>ÒëÕß</b> À×ÔÆ·É javawebstart Barret gstian [AKA]<br>
-                <b>Ğ£¶Ô</b> gstian [AKA]</p>
-              <div align="center"><a href="../return/index.html"><font size="2"><b>[·µ»Ø]</b></font></a></div>
+              <p align="center"><b>è¯‘è€…</b> é›·äº‘é£ javawebstart Barret gstian [AKA]<br>
+                <b>æ ¡å¯¹</b> gstian [AKA]</p>
+              <div align="center"><a href="../return/index.html"><font size="2"><b>[è¿”å›]</b></font></a></div>
               <p> 
               <p><strong>Summary<br>
-                ÕªÒª </strong><br>
+                æ‘˜è¦ </strong><br>
                 Extreme Programming's rise in popularity among the Java community 
                 has prompted more development teams to use JUnit: a simple test 
                 framework for building and executing unit tests. Like any toolkit, 
@@ -33,20 +33,20 @@
                 Andy Schneider discusses good and bad ways to use JUnit and provides 
                 practical recommendations for its use by development teams. In 
                 addition, he explains simple mechanisms to support: <br>
-                JavaÉçÇøÀïÃæÁ÷ĞĞµÄ±à³ÌÈÈµÄ²»¶ÏÉıÎÂÊ¹Ô½À´Ô½¶àµÄ¿ª·¢ÍÅ¶ÓÊ¹ÓÃ JUnit½øĞĞ²âÊÔ¡£JUnit 
-                ÊÇÒ»ÖÖ¹¹ÔìºÍ½øĞĞµ¥Ôª²âÊÔµÄ¼ò±ãµÄ²âÊÔ¿ò¼Ü¡£¾ÍÏóËùÓĞµÄ¹¤¾ß°üÒ»Ñù£¬JUnit ¿ÉÒÔ±»¸ßĞ§µÄÊ¹ÓÃ£¬Ò²¿ÉÒÔ±»µÍĞ§µÄÊ¹ÓÃ¡£ÔÚÕâÆªÎÄÕÂÖÖ£¬Andy 
-                SchneiderÌÖÂÛÁËJUnit µÄ¸ßĞ§ºÍµÍĞ§µÄÊ¹ÓÃ·½·¨£¬²¢ÇÒÎª¿ª·¢ÍÅ¶ÓÌá¹©ÁËÊµÓÃµÄJUnitÊ¹ÓÃ½¨Òé¡£ÁíÍâ£¬ËûÌá¹©ÁË¼¸ÖÖ¼òµ¥µÄ»úÖÆÀ´½âÊÍÁ½ÖÖ·½·¨µÄ²î±ğ:
+                Javaç¤¾åŒºé‡Œé¢æµè¡Œçš„ç¼–ç¨‹çƒ­çš„ä¸æ–­å‡æ¸©ä½¿è¶Šæ¥è¶Šå¤šçš„å¼€å‘å›¢é˜Ÿä½¿ç”¨ JUnitè¿›è¡Œæµ‹è¯•ã€‚JUnit 
+                æ˜¯ä¸€ç§æ„é€ å’Œè¿›è¡Œå•å…ƒæµ‹è¯•çš„ç®€ä¾¿çš„æµ‹è¯•æ¡†æ¶ã€‚å°±è±¡æ‰€æœ‰çš„å·¥å…·åŒ…ä¸€æ ·ï¼ŒJUnit å¯ä»¥è¢«é«˜æ•ˆçš„ä½¿ç”¨ï¼Œä¹Ÿå¯ä»¥è¢«ä½æ•ˆçš„ä½¿ç”¨ã€‚åœ¨è¿™ç¯‡æ–‡ç« ç§ï¼ŒAndy 
+                Schneiderè®¨è®ºäº†JUnit çš„é«˜æ•ˆå’Œä½æ•ˆçš„ä½¿ç”¨æ–¹æ³•ï¼Œå¹¶ä¸”ä¸ºå¼€å‘å›¢é˜Ÿæä¾›äº†å®ç”¨çš„JUnitä½¿ç”¨å»ºè®®ã€‚å¦å¤–ï¼Œä»–æä¾›äº†å‡ ç§ç®€å•çš„æœºåˆ¶æ¥è§£é‡Šä¸¤ç§æ–¹æ³•çš„å·®åˆ«:
               </p>
               <p> 
               <ul>
                 <li>Automatic construction of composite tests <br>
-                  ×éºÏ²âÊÔµÄ×Ô¶¯¹¹¼ş
+                  ç»„åˆæµ‹è¯•çš„è‡ªåŠ¨æ„ä»¶
                 <li>Multithreaded test cases <br>
-                  ¶àÏß³Ì²âÊÔÓÃÀı </li>
+                  å¤šçº¿ç¨‹æµ‹è¯•ç”¨ä¾‹ </li>
               </ul>
          <p>This article assumes some familiarity with JUnit. <em>(4,000 
                 words)</em> <br>
-           ÔÄ¶Á±¾ÆªÎÄÕÂ£¬ĞèÒªÄú¶ÔJUnitÂÔÖªÒ»¶ş¡£ </p>
+           é˜…è¯»æœ¬ç¯‡æ–‡ç« ï¼Œéœ€è¦æ‚¨å¯¹JUnitç•¥çŸ¥ä¸€äºŒã€‚ </p>
             </blockquote>
             <p><img height=2 alt="" src="../return/JUnit%20best%20practices.files/blue.gif" width="100%" 
 border=0> 
@@ -58,18 +58,18 @@ border=0>
               sometimes contradict themselves and each other -- this is deliberate. 
               In my experience, there are rarely hard and fast rules in development, 
               and guidelines that claim to be are misleading. <br>
-             JUnitÊÇÒ»¸öÓĞÌØÉ«µÄ¹¤¾ß°ü£ºÊìÖªËüµÄÌØĞÔµÄÇé¿öÏÂ²¢Ï¸ĞÄµÄÊ¹ÓÃ£¬ËüÔÚÄã¿ª·¢ÓÅÁ¼µÄ½¡×³µÄ²âÊÔÉÏÊĞÓĞ°ïÖúµÄ¡£Èç¹û±»Ã¤Ä¿µÄÊ¹ÓÃ£¬Ëü¿ÉÄÜ¾ÍÏñÒ»¶ÑÒâ´óÀûÃæÌõ£¬¶ø²»ÊÇ²âÊÔ¼¯¡£±¾ÎÄ¸ø³öÁËÒ»Ğ©¿ÉÒÔ°ïÖúÄã±ÜÃâÕâĞ©ÉúÃæÍÅ¶ñÃÎµÄÖ¸µ¼·½Õë¡£ÕâĞ©Ö¸µ¼·½ÕëÓĞÊ±¿´ÆğÀ´»áÏà»¥Ã¬¶Ü¡ª¡ª¡ª¡ªÕâÊÇ¹ÊÒâµÄ¡£ÒÔÎÒµÄ¾­Ñé£¬ÔÚ¿ª·¢ÖĞºÜÉÙÓĞÓ²ĞÔ¶ø·½±ãµÄ¹æÔò¡£ÈÎºÎÉù³ÆÊÇÕâÖÖ¹æÔòµÄÖ¸µ¼·½Õë¶¼ÊÇÎóµ¼¡£ 
+             JUnitæ˜¯ä¸€ä¸ªæœ‰ç‰¹è‰²çš„å·¥å…·åŒ…ï¼šç†ŸçŸ¥å®ƒçš„ç‰¹æ€§çš„æƒ…å†µä¸‹å¹¶ç»†å¿ƒçš„ä½¿ç”¨ï¼Œå®ƒåœ¨ä½ å¼€å‘ä¼˜è‰¯çš„å¥å£®çš„æµ‹è¯•ä¸Šå¸‚æœ‰å¸®åŠ©çš„ã€‚å¦‚æœè¢«ç›²ç›®çš„ä½¿ç”¨ï¼Œå®ƒå¯èƒ½å°±åƒä¸€å †æ„å¤§åˆ©é¢æ¡ï¼Œè€Œä¸æ˜¯æµ‹è¯•é›†ã€‚æœ¬æ–‡ç»™å‡ºäº†ä¸€äº›å¯ä»¥å¸®åŠ©ä½ é¿å…è¿™äº›ç”Ÿé¢å›¢æ¶æ¢¦çš„æŒ‡å¯¼æ–¹é’ˆã€‚è¿™äº›æŒ‡å¯¼æ–¹é’ˆæœ‰æ—¶çœ‹èµ·æ¥ä¼šç›¸äº’çŸ›ç›¾â€”â€”â€”â€”è¿™æ˜¯æ•…æ„çš„ã€‚ä»¥æˆ‘çš„ç»éªŒï¼Œåœ¨å¼€å‘ä¸­å¾ˆå°‘æœ‰ç¡¬æ€§è€Œæ–¹ä¾¿çš„è§„åˆ™ã€‚ä»»ä½•å£°ç§°æ˜¯è¿™ç§è§„åˆ™çš„æŒ‡å¯¼æ–¹é’ˆéƒ½æ˜¯è¯¯å¯¼ã€‚ 
             <p>We'll also closely examine two useful additions to the developer's 
               toolkit: <br>
-              ÎÒÃÇÍ¬Ê±»¹½«ÉîÈë¼ì²é¿ª·¢ÕßµÄ¹¤¾ß°üÀïµÄÁ½¸öÓĞÓÃµÄ¸½¼ÓÎï£º 
+              æˆ‘ä»¬åŒæ—¶è¿˜å°†æ·±å…¥æ£€æŸ¥å¼€å‘è€…çš„å·¥å…·åŒ…é‡Œçš„ä¸¤ä¸ªæœ‰ç”¨çš„é™„åŠ ç‰©ï¼š 
             <p> 
             <ul>
               <li>A mechanism for automatically creating test suites from classfiles 
                 in part of a filesystem <br>
-				Ò»ÖÖ¿ÉÒÔ´Ó²¿·ÖÎÄ¼şÏµÍ³ÀïÃæ×Ô¶¯´´½¨²âÊÔ¼¯µÄ»úÖÆ
+				ä¸€ç§å¯ä»¥ä»éƒ¨åˆ†æ–‡ä»¶ç³»ç»Ÿé‡Œé¢è‡ªåŠ¨åˆ›å»ºæµ‹è¯•é›†çš„æœºåˆ¶
               <li>A new <code>TestCase</code> that better supports tests in multiple 
                 threads <br>
-                Ò»ÖÖ¸üºÃÖ§³Ö¶àÏß³ÌµÄĞÂ²âÊÔÓÃÀı¡£ </li>
+                ä¸€ç§æ›´å¥½æ”¯æŒå¤šçº¿ç¨‹çš„æ–°æµ‹è¯•ç”¨ä¾‹ã€‚ </li>
             </ul>
             <p>When faced with unit testing, many teams end up producing some 
               kind of testing framework. JUnit, available as open source, eliminates 
@@ -77,14 +77,14 @@ border=0>
               JUnit, best used as an integral part of a development testing regime, 
               provides a mechanism that developers can use to consistently write 
               and execute tests. So, what are the JUnit best practices? <br>
-            µ±Ãæ¶Ôµ¥Ôª²âÊÔÊ±£¬Ğí¶àÍÅ¶Ó¶¼»á×Ô¼ºÈ¥Íê³ÉÄ³ÖÖ²âÊÔ¿ò¼Ü¡£JUnit×öÎªÒ»ÖÖ¿ª·ÅÈí¼ş£¬Í¨¹ıÎªµ¥Ôª²âÊÔÌá¹©Ò»ÖÖÏÖ³ÉµÄ²âÊÔ¿ò¼Ü£¬À´Ïû³ıÕâÖÖ·±ÖØµÄÈÎÎñ¡£JUnit×÷ÎªÒ»¸ö¿ª·¢²âÊÔÌåÖÆÕûÌåÖĞµÄÒ»²¿·Ö¸ø¿ª·¢ÕßÌá¹©ÁËÒ»ÖÖ¿ÉÒÔÒ»ÖÂµØ±àĞ´ºÍÖ´ĞĞ²âÊÔµÄ»úÖÆ¡£¼ÈÈ»Èç´Ë£¬ÄÇÃ´£¬Ê²Ã´ÊÇJUnitµÄ×î¼ÑÊµ¼ù£¿ 
+            å½“é¢å¯¹å•å…ƒæµ‹è¯•æ—¶ï¼Œè®¸å¤šå›¢é˜Ÿéƒ½ä¼šè‡ªå·±å»å®ŒæˆæŸç§æµ‹è¯•æ¡†æ¶ã€‚JUnitåšä¸ºä¸€ç§å¼€æ”¾è½¯ä»¶ï¼Œé€šè¿‡ä¸ºå•å…ƒæµ‹è¯•æä¾›ä¸€ç§ç°æˆçš„æµ‹è¯•æ¡†æ¶ï¼Œæ¥æ¶ˆé™¤è¿™ç§ç¹é‡çš„ä»»åŠ¡ã€‚JUnitä½œä¸ºä¸€ä¸ªå¼€å‘æµ‹è¯•ä½“åˆ¶æ•´ä½“ä¸­çš„ä¸€éƒ¨åˆ†ç»™å¼€å‘è€…æä¾›äº†ä¸€ç§å¯ä»¥ä¸€è‡´åœ°ç¼–å†™å’Œæ‰§è¡Œæµ‹è¯•çš„æœºåˆ¶ã€‚æ—¢ç„¶å¦‚æ­¤ï¼Œé‚£ä¹ˆï¼Œä»€ä¹ˆæ˜¯JUnitçš„æœ€ä½³å®è·µï¼Ÿ 
             <p><font size=+1><strong>Do not use the test-case constructor to set 
               up a test case </strong></font><br>
-              <font size=+1><strong>²»ÒªÊ¹ÓÃ²âÊÔÓÃÀı¹¹ÔìÆ÷À´´´½¨Ò»¸ö²âÊÔÓÃÀı</strong></font><br>
+              <font size=+1><strong>ä¸è¦ä½¿ç”¨æµ‹è¯•ç”¨ä¾‹æ„é€ å™¨æ¥åˆ›å»ºä¸€ä¸ªæµ‹è¯•ç”¨ä¾‹</strong></font><br>
               <br>
               Setting up a test case in the constructor is not a good idea. Consider: 
               <br>
-              Ê¹ÓÃ¹¹ÔìÆ÷À´½¨Á¢Ò»¸ö²âÊÔÓÃÀı²¢²»ÊÇ¸öºÃÖ÷Òâ£¬ÀıÈç£º 
+              ä½¿ç”¨æ„é€ å™¨æ¥å»ºç«‹ä¸€ä¸ªæµ‹è¯•ç”¨ä¾‹å¹¶ä¸æ˜¯ä¸ªå¥½ä¸»æ„ï¼Œä¾‹å¦‚ï¼š 
             <p><code>public class SomeTest extends TestCase <br>
               &nbsp;&nbsp;&nbsp;public SomeTest (String testName) { <br>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super (testName); <br>
@@ -97,7 +97,7 @@ border=0>
               throw an <code>AssertionFailedError</code>, indicating that the 
               test case could not be instantiated. Here is an example of the resulting 
               stack trace: <br>
-              ÏëÏóÒ»ÏÂµ±Ö´ĞĞ°²×°Ê±£¬´úÂëÅ×³öÒ»¸öIllegalStateExceptionÒì³£¡£×öÎª»ØÓ¦£¬JUnitÒ²»áÅ×³öÒ»¸öAssertionFailedErrorÒì³£À´Ö¸Ê¾²âÊÔÓÃÀıÎŞ·¨ÊµÀı»¯¡£ÏÂÃæÊÇÒ»¸ö¶ÑÕ»¸ú×Ù½á¹ûÊ¾Àı£º 
+              æƒ³è±¡ä¸€ä¸‹å½“æ‰§è¡Œå®‰è£…æ—¶ï¼Œä»£ç æŠ›å‡ºä¸€ä¸ªIllegalStateExceptionå¼‚å¸¸ã€‚åšä¸ºå›åº”ï¼ŒJUnitä¹Ÿä¼šæŠ›å‡ºä¸€ä¸ªAssertionFailedErrorå¼‚å¸¸æ¥æŒ‡ç¤ºæµ‹è¯•ç”¨ä¾‹æ— æ³•å®ä¾‹åŒ–ã€‚ä¸‹é¢æ˜¯ä¸€ä¸ªå †æ ˆè·Ÿè¸ªç»“æœç¤ºä¾‹ï¼š 
             <p><code>junit.framework.AssertionFailedError: Cannot instantiate 
               test case: test1 at <br>
               junit.framework.Assert.fail(Assert.java:143) at <br>
@@ -116,12 +116,12 @@ border=0>
               that the test case could not be instantiated. It doesn't detail 
               the original error's location or place of origin. This lack of information 
               makes it hard to deduce the exception's underlying cause. <br>
-              Õâ¸ö¶ÑÕ»¸ú×ÙÃ»ÓĞÌá¹©¶àÉÙÓĞ¼ÛÖµµÄĞÅÏ¢¡£ËüÖ»ÊÇ±íÃ÷²âÊÔÓÃÀı²»ÄÜ±»ÊµÀı»¯¡£Ëü²¢Ã»ÓĞ³õÊ¼»¯Ê±²úÉú´íÎóµÄ´íÎóÎ»ÖÃºÍ´íÎóÀ´Ô´µÄÏêÏ¸ĞÅÏ¢¡£ĞÅÏ¢µÄÈ±·¦Ê¹µÃÍÆ¶Ï¸ÃÒì³£³öÏÖµÄÔ­Òò±äµÃÀ§ÄÑ¡£ 
+              è¿™ä¸ªå †æ ˆè·Ÿè¸ªæ²¡æœ‰æä¾›å¤šå°‘æœ‰ä»·å€¼çš„ä¿¡æ¯ã€‚å®ƒåªæ˜¯è¡¨æ˜æµ‹è¯•ç”¨ä¾‹ä¸èƒ½è¢«å®ä¾‹åŒ–ã€‚å®ƒå¹¶æ²¡æœ‰åˆå§‹åŒ–æ—¶äº§ç”Ÿé”™è¯¯çš„é”™è¯¯ä½ç½®å’Œé”™è¯¯æ¥æºçš„è¯¦ç»†ä¿¡æ¯ã€‚ä¿¡æ¯çš„ç¼ºä¹ä½¿å¾—æ¨æ–­è¯¥å¼‚å¸¸å‡ºç°çš„åŸå› å˜å¾—å›°éš¾ã€‚ 
             <p>Instead of setting up the data in the constructor, perform test 
               setup by overriding <code>setUp()</code>. Any exception thrown within 
               <code>setUp()</code> is reported correctly. Compare this stack trace 
               with the previous example: <br>
-              ·ÅÆúÔÚ¹¹ÔìÆ÷ÖĞ´´½¨Êı¾İ,Í¨¹ıÖØÔØsetUp()À´Ö´ĞĞ²âÊÔ´´½¨£¬¡£ÈÎºÎÔÚsetUp()ÖĞ²úÉúµÄÒì³£¶¼»á±»×¼È·µÄ±¨¸æ¡£ÓëÇ°Ò»¸öÀı×Ó¶ÔÕÕ,±È½ÏÏÂÃæµÄ¶ÑÕ»¸ú×Ù£º 
+              æ”¾å¼ƒåœ¨æ„é€ å™¨ä¸­åˆ›å»ºæ•°æ®,é€šè¿‡é‡è½½setUp()æ¥æ‰§è¡Œæµ‹è¯•åˆ›å»ºï¼Œã€‚ä»»ä½•åœ¨setUp()ä¸­äº§ç”Ÿçš„å¼‚å¸¸éƒ½ä¼šè¢«å‡†ç¡®çš„æŠ¥å‘Šã€‚ä¸å‰ä¸€ä¸ªä¾‹å­å¯¹ç…§,æ¯”è¾ƒä¸‹é¢çš„å †æ ˆè·Ÿè¸ªï¼š 
             <p><code>java.lang.IllegalStateException: Oops at bp.DTC.setUp(DTC.java:34) 
               at <br>
               junit.framework.TestCase.runBare(TestCase.java:127) at <br>
@@ -134,14 +134,14 @@ border=0>
             <p>This stack trace is much more informative; it shows which exception 
               was thrown (<code>IllegalStateException</code>) and from where. 
               That makes it far easier to explain the test setup's failure. <br>
-              Õâ¸ö¶ÑÕ»¸ú×Ùº¬ÓĞ¸ü¶àµÄĞÅÏ¢Á¿¡£Ëü±íÃ÷ÁËÒì³£ÀàĞÍ£¨IllegalStateException£©£¬ ÒÔ¼°²úÉúÎ»ÖÃ¡£ÕâÊ¹µÃ¿ÉÒÔ¸üÈİÒ×½âÊÍÎªºÎ²âÊÔ½¨Á¢Ê§°Ü¡£ 
+              è¿™ä¸ªå †æ ˆè·Ÿè¸ªå«æœ‰æ›´å¤šçš„ä¿¡æ¯é‡ã€‚å®ƒè¡¨æ˜äº†å¼‚å¸¸ç±»å‹ï¼ˆIllegalStateExceptionï¼‰ï¼Œ ä»¥åŠäº§ç”Ÿä½ç½®ã€‚è¿™ä½¿å¾—å¯ä»¥æ›´å®¹æ˜“è§£é‡Šä¸ºä½•æµ‹è¯•å»ºç«‹å¤±è´¥ã€‚ 
             <p><font size=+1><strong>Don't assume the order in which tests within 
               a test case run </strong></font><br>
-              <font size=+1><strong>²»ÒªÍÆ²âÒ»¸ö²âÊÔÓÃÀıÔËĞĞÖĞ¸÷²âÊÔµÄÖ´ĞĞË³Ğò</strong></font><br>
+              <font size=+1><strong>ä¸è¦æ¨æµ‹ä¸€ä¸ªæµ‹è¯•ç”¨ä¾‹è¿è¡Œä¸­å„æµ‹è¯•çš„æ‰§è¡Œé¡ºåº</strong></font><br>
               <br>
               You should not assume that tests will be called in any particular 
               order. Consider the following code segment: <br>
-              Äã²»Ó¦¸ÃÈÏÎª¸÷²âÊÔÓÃÀı»á°´ÕÕÈÎºÎÌØ¶¨Ë³Ğò±»µ÷ÓÃ¡£¿¼ÂÇÏÂÃæµÄ´úÂëÆ¬¶Ï£º 
+              ä½ ä¸åº”è¯¥è®¤ä¸ºå„æµ‹è¯•ç”¨ä¾‹ä¼šæŒ‰ç…§ä»»ä½•ç‰¹å®šé¡ºåºè¢«è°ƒç”¨ã€‚è€ƒè™‘ä¸‹é¢çš„ä»£ç ç‰‡æ–­ï¼š 
             <p><code>public class SomeTestCase extends TestCase { <br>
               &nbsp;&nbsp;&nbsp;public SomeTestCase (String testName) { <br>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super (testName); <br>
@@ -161,13 +161,13 @@ border=0>
               order will not affect other tests. If the tests are coupled, the 
               errors that result from a minor update may prove difficult to find. 
               <br>
-              ÔÚÕâ¸öÀı×ÓÖĞ£¬µ±Ê¹ÓÃÓ³ÉäÊ±£¬JUnit½«°´ÕÕºÎÖÖË³ĞòÖ´ĞĞÕâĞ©²âÊÔ²¢²»ÄÜÈ·¶¨¡£ÔÚ²»Í¬µÄÆ½Ì¨¼°Java VMÉÏ£¬¿ÉÄÜ²úÉú²»Í¬µÄ½á¹û£¬³ı·ÇÄãµÄ²âÊÔ±»ÊÂÏÈÉè¼ÆÎª°´Ä³ÖÖË³ĞòÖ´ĞĞ¡£ÓÉÓÚÖ´ĞĞË³ĞòµÄ¸Ä±ä²»»áÓ°ÏìÆäËü²âÊÔ£¬±ÜÃâÕâÖÖ¶ÌÔİµÄñîºÏÊ¹µÃÄãµÄ²âÊÔÓÃÀı¸ü¼Ó½¡×³¡£Èç¹û²âÊÔñîºÏÔÚÒ»Æğ£¬ÓÉÓÚÒ»¸öĞ¡±ä¶¯ÒıÆğµÄ´íÎóÒ²Ğí»áÄÑÓÚ·¢ÏÖ¡£ 
+              åœ¨è¿™ä¸ªä¾‹å­ä¸­ï¼Œå½“ä½¿ç”¨æ˜ å°„æ—¶ï¼ŒJUnitå°†æŒ‰ç…§ä½•ç§é¡ºåºæ‰§è¡Œè¿™äº›æµ‹è¯•å¹¶ä¸èƒ½ç¡®å®šã€‚åœ¨ä¸åŒçš„å¹³å°åŠJava VMä¸Šï¼Œå¯èƒ½äº§ç”Ÿä¸åŒçš„ç»“æœï¼Œé™¤éä½ çš„æµ‹è¯•è¢«äº‹å…ˆè®¾è®¡ä¸ºæŒ‰æŸç§é¡ºåºæ‰§è¡Œã€‚ç”±äºæ‰§è¡Œé¡ºåºçš„æ”¹å˜ä¸ä¼šå½±å“å…¶å®ƒæµ‹è¯•ï¼Œé¿å…è¿™ç§çŸ­æš‚çš„è€¦åˆä½¿å¾—ä½ çš„æµ‹è¯•ç”¨ä¾‹æ›´åŠ å¥å£®ã€‚å¦‚æœæµ‹è¯•è€¦åˆåœ¨ä¸€èµ·ï¼Œç”±äºä¸€ä¸ªå°å˜åŠ¨å¼•èµ·çš„é”™è¯¯ä¹Ÿè®¸ä¼šéš¾äºå‘ç°ã€‚ 
             <p>In situations where ordering tests makes sense -- when it is more 
               efficient for tests to operate on some shared data that establish 
               a fresh state as each test runs -- use a static <code>suite()</code> 
               method like this one to ensure the ordering: <br>
-              ÔÚÄ³Ğ©Çé¿öÏÂ£¬²âÊÔµÄË³Ğò»¹ÊÇÓĞÒâÒåµÄ¡ª¡ª¡ª¡ªÀıÈç£¬²âÊÔÃÇ¿ÉÒÔÊ¹ÓÃÒ»Ğ©¹²ÏíÊı¾İÊ±À´Ìá¸ßĞ§ÂÊ¡£ÕâĞ©¹²ÏíÊı¾İ¶ÔÓÚÃ¿¸ö²âÊÔÔËĞĞÊ±¶¼»á½¨Á¢Ò»¸öĞÂµÄ×´Ì¬¡£¡ª¡ª¡ª¡ª¿ÉÒÔÊ¹ÓÃÒ»¸ö¾²Ì¬µÄ 
-              suite() ·½·¨À´±£Ö¤Ö´ĞĞË³Ğò£¬ÈçÏÂ£º 
+              åœ¨æŸäº›æƒ…å†µä¸‹ï¼Œæµ‹è¯•çš„é¡ºåºè¿˜æ˜¯æœ‰æ„ä¹‰çš„â€”â€”â€”â€”ä¾‹å¦‚ï¼Œæµ‹è¯•ä»¬å¯ä»¥ä½¿ç”¨ä¸€äº›å…±äº«æ•°æ®æ—¶æ¥æé«˜æ•ˆç‡ã€‚è¿™äº›å…±äº«æ•°æ®å¯¹äºæ¯ä¸ªæµ‹è¯•è¿è¡Œæ—¶éƒ½ä¼šå»ºç«‹ä¸€ä¸ªæ–°çš„çŠ¶æ€ã€‚â€”â€”â€”â€”å¯ä»¥ä½¿ç”¨ä¸€ä¸ªé™æ€çš„ 
+              suite() æ–¹æ³•æ¥ä¿è¯æ‰§è¡Œé¡ºåºï¼Œå¦‚ä¸‹ï¼š 
             <p><code>public static Test suite() { <br>
               &nbsp;&nbsp;&nbsp;suite.addTest(new SomeTestCase ("testDoThisFirst";)); 
               <br>
@@ -180,26 +180,26 @@ border=0>
               order your tests will be called in, because JUnit employs a <code>Vector</code> 
               to store tests. However, you can expect the above tests to be executed 
               in the order they were added to the test suite. <br>
-              ÔÚJUnit API ÎÄµµÖĞ²¢Ã»ÓĞ±£Ö¤ÄãµÄ²âÊÔ±»µ÷ÓÃµÄË³Ğò£¬ÒòÎªJUnitÊ¹ÓÃVÒ»¸öÇø¶ÎÀ´´æ·Å²âÊÔ¡£ È»¶ø£¬Äã¿ÉÒÔ±£Ö¤ÉÏÃæµÄ²âÊÔ°´ÕÕËüÃÇ±»¼ÓÈë²âÊÔ¼¯µÄË³Ğò±»Ö´ĞĞ¡£ 
+              åœ¨JUnit API æ–‡æ¡£ä¸­å¹¶æ²¡æœ‰ä¿è¯ä½ çš„æµ‹è¯•è¢«è°ƒç”¨çš„é¡ºåºï¼Œå› ä¸ºJUnitä½¿ç”¨Vä¸€ä¸ªåŒºæ®µæ¥å­˜æ”¾æµ‹è¯•ã€‚ ç„¶è€Œï¼Œä½ å¯ä»¥ä¿è¯ä¸Šé¢çš„æµ‹è¯•æŒ‰ç…§å®ƒä»¬è¢«åŠ å…¥æµ‹è¯•é›†çš„é¡ºåºè¢«æ‰§è¡Œã€‚ 
             <p><font size=+1><strong>Avoid writing test cases with side effects 
               </strong></font><br>
-              <font size=+1><strong>±ÜÃâĞ´´øÓĞ¸±×÷ÓÃµÄ²âÊÔÓÃÀı </strong></font><br>
+              <font size=+1><strong>é¿å…å†™å¸¦æœ‰å‰¯ä½œç”¨çš„æµ‹è¯•ç”¨ä¾‹ </strong></font><br>
               Test cases that have side effects exhibit two problems: <br>
-              ´øÓĞ¸±×÷ÓÃµÄ²âÊÔÓÃÀı»á³öÏÖÏÂÃæÁ½¸öÎÊÌâ£º 
+              å¸¦æœ‰å‰¯ä½œç”¨çš„æµ‹è¯•ç”¨ä¾‹ä¼šå‡ºç°ä¸‹é¢ä¸¤ä¸ªé—®é¢˜ï¼š 
             <p> 
             <ul>
               <li>They can affect data that other test cases rely upon <br>
-                ËüÃÇ»áÓ°ÏìÆäËû²âÊÔÓÃÀıËùÒÀÀµµÄÊı¾İ 
+                å®ƒä»¬ä¼šå½±å“å…¶ä»–æµ‹è¯•ç”¨ä¾‹æ‰€ä¾èµ–çš„æ•°æ® 
               <li>You cannot repeat tests without manual intervention <br>
-                Äã²»ÄÜÔÚÃ»ÓĞÊÖ¹¤¸ÉÔ¤µÄÇé¿öÏÂÖØ¸´²âÊÔ </li>
+                ä½ ä¸èƒ½åœ¨æ²¡æœ‰æ‰‹å·¥å¹²é¢„çš„æƒ…å†µä¸‹é‡å¤æµ‹è¯• </li>
             </ul>
             <p>In the first situation, the individual test case may operate correctly. 
               However, if incorporated into a <code>TestSuite</code> that runs 
               every test case on the system, it may cause other test cases to 
               fail. That failure mode can be difficult to diagnose, and the error 
               may be located far from the test failure. <br>
-              ÔÚµÚÒ»ÖÖÇé¿öÏÂ£¬¶ÀÁ¢µÄ²âÊÔÓÃÀıÒ²Ğí¿ÉÒÔÕıÈ·µÄÖ´ĞĞ£¬È»¶ø£¬µ±ËüÃÇ±»ÖÃÈëÒ»¸öÖ´ĞĞ ¸ÃÏµÍ³ÖĞËùÓĞ²âÊÔµÄ²âÊÔ¼¯Ê±£¬¿ÉÄÜµ¼ÖÂÆäËû²âÊÔÓÃÀıÊ§°Ü¡£µ«ÕâÖÖÊ§°ÜµÄ×ö·¨ºÜÄÑ 
-              Õï¶Ï³öÀ´£¬´íÎóÒ²ĞíÀëÊ§°ÜµÄµØ·½ºÜÔ¶¡£ 
+              åœ¨ç¬¬ä¸€ç§æƒ…å†µä¸‹ï¼Œç‹¬ç«‹çš„æµ‹è¯•ç”¨ä¾‹ä¹Ÿè®¸å¯ä»¥æ­£ç¡®çš„æ‰§è¡Œï¼Œç„¶è€Œï¼Œå½“å®ƒä»¬è¢«ç½®å…¥ä¸€ä¸ªæ‰§è¡Œ è¯¥ç³»ç»Ÿä¸­æ‰€æœ‰æµ‹è¯•çš„æµ‹è¯•é›†æ—¶ï¼Œå¯èƒ½å¯¼è‡´å…¶ä»–æµ‹è¯•ç”¨ä¾‹å¤±è´¥ã€‚ä½†è¿™ç§å¤±è´¥çš„åšæ³•å¾ˆéš¾ 
+              è¯Šæ–­å‡ºæ¥ï¼Œé”™è¯¯ä¹Ÿè®¸ç¦»å¤±è´¥çš„åœ°æ–¹å¾ˆè¿œã€‚ 
             <p>In the second situation, a test case may have updated some system 
               state so that it cannot run again without manual intervention, which 
               may consist of deleting test data from the database (for example). 
@@ -208,13 +208,13 @@ border=0>
               could no longer be run in an unattended mode, removing your ability 
               to run tests overnight or as part of some automated periodic test 
               run. <br>
-              ÔÚµÚ¶şÖÖÇé¿öÏÂ£¬Ò»¸ö²âÊÔÓÃÀı¿ÉÄÜÔËĞĞºó¸ü¸ÄÁËÏµÍ³×´Ì¬£¬ÒÔÖÁÓÚËü²»ÄÜÔÚÃ»ÓĞÊÖ¹¤¸ÉÔ¤ µÄÇé¿öÏÂ±»ÔÙ´ÎÖ´ĞĞ¡£ÀıÈç£¬ÕâÓĞ¿ÉÄÜÊÇ´ÓÊı¾İ¿âÖĞÉ¾³ıÁË²âÊÔÊı¾İÔì³ÉµÄ¡£ÔÚÊÖ¹¤ 
-              ¸ÉÔ¤Ö®Ç°£¬×ĞÏ¸µÄ¿¼ÂÇÏÂÃæÁ½µã:Ê×ÏÈ£¬ÊÖ¹¤¸ÉÔ¤Ó¦¸Ã±»¼ÇÂ¼ÔÚÎÄµµµ±ÖĞ£¬Æä´Î£¬ÕâÖÖ²âÊÔ²» ÄÜÔÚÎŞÈË¼à¿ØµÄÇé¿öÏÂ±»Ö´ĞĞ£¬Ó¦¸ÃÈ¥µôËüÃÇÍ¨ÏüÖ´ĞĞ²âÊÔ»òÕß×÷Îª×Ô¶¯ÔËĞĞµÄÖÜÆÚĞÔ²âÊÔµÄÒ»²¿·ÖµÄÄÜÁ¦.
+              åœ¨ç¬¬äºŒç§æƒ…å†µä¸‹ï¼Œä¸€ä¸ªæµ‹è¯•ç”¨ä¾‹å¯èƒ½è¿è¡Œåæ›´æ”¹äº†ç³»ç»ŸçŠ¶æ€ï¼Œä»¥è‡³äºå®ƒä¸èƒ½åœ¨æ²¡æœ‰æ‰‹å·¥å¹²é¢„ çš„æƒ…å†µä¸‹è¢«å†æ¬¡æ‰§è¡Œã€‚ä¾‹å¦‚ï¼Œè¿™æœ‰å¯èƒ½æ˜¯ä»æ•°æ®åº“ä¸­åˆ é™¤äº†æµ‹è¯•æ•°æ®é€ æˆçš„ã€‚åœ¨æ‰‹å·¥ 
+              å¹²é¢„ä¹‹å‰ï¼Œä»”ç»†çš„è€ƒè™‘ä¸‹é¢ä¸¤ç‚¹:é¦–å…ˆï¼Œæ‰‹å·¥å¹²é¢„åº”è¯¥è¢«è®°å½•åœ¨æ–‡æ¡£å½“ä¸­ï¼Œå…¶æ¬¡ï¼Œè¿™ç§æµ‹è¯•ä¸ èƒ½åœ¨æ— äººç›‘æ§çš„æƒ…å†µä¸‹è¢«æ‰§è¡Œï¼Œåº”è¯¥å»æ‰å®ƒä»¬é€šå®µæ‰§è¡Œæµ‹è¯•æˆ–è€…ä½œä¸ºè‡ªåŠ¨è¿è¡Œçš„å‘¨æœŸæ€§æµ‹è¯•çš„ä¸€éƒ¨åˆ†çš„èƒ½åŠ›.
             <p><font size=+1><strong>Call a superclass's setUp() and tearDown() 
               methods when subclassing</strong></font><font size=+1><strong><br>
-              ×ÓÀà»¯µÄÊ±ºò£¬µ÷ÓÃ¸¸ÀàµÄ setUp() ·½·¨ºÍ tearDown() ·½·¨</strong></font><br>
+              å­ç±»åŒ–çš„æ—¶å€™ï¼Œè°ƒç”¨çˆ¶ç±»çš„ setUp() æ–¹æ³•å’Œ tearDown() æ–¹æ³•</strong></font><br>
               When you consider: <br>
-              ¿¼ÂÇÈçÏÂÇé¿ö£º 
+              è€ƒè™‘å¦‚ä¸‹æƒ…å†µï¼š 
             <p><code>public class SomeTestCase extends AnotherTestCase { <br>
               &nbsp;&nbsp;&nbsp;// A connection to a database <br>
               &nbsp;&nbsp;&nbsp;private Database theDatabase; <br>
@@ -235,14 +235,14 @@ border=0>
               in <code>AnotherTestCase</code> initializes. Of course, there are 
               exceptions: if you design the base class to work with arbitrary 
               test data, there won't be a problem. <br>
-              ÄãÄÜ·¢ÏÖÒş²ØÆäÖĞµÄÄÇ¸öĞèÒªÉîË¼µÄ´íÎóÂğ£¿setUp()·½·¨Ó¦¸Ãµ÷ÓÃ¸¸ÀàµÄsetUp()·½·¨ÒÔ±£Ö¤ÄÜ¹»³õÊ¼»¯ÔÚ¸¸ÀàAnotherTestCase ÖĞ¶¨ÒåµÄ²âÊÔ»·¾³¡£µ±È»£¬ÕâÒ²²¢²»ÊÇ¾ø¶ÔµÄ--Èç¹û¸¸ÀàÉè¼Æ³É¿ÉÒÔÍ¨ÓÃµÄ»ùÀàµÄ»°£¬ÄÇÃ´£¬ÒÔÉÏ¾Í²»ÊÇÒ»¸öÎÊÌâ¡£ 
+              ä½ èƒ½å‘ç°éšè—å…¶ä¸­çš„é‚£ä¸ªéœ€è¦æ·±æ€çš„é”™è¯¯å—ï¼ŸsetUp()æ–¹æ³•åº”è¯¥è°ƒç”¨çˆ¶ç±»çš„setUp()æ–¹æ³•ä»¥ä¿è¯èƒ½å¤Ÿåˆå§‹åŒ–åœ¨çˆ¶ç±»AnotherTestCase ä¸­å®šä¹‰çš„æµ‹è¯•ç¯å¢ƒã€‚å½“ç„¶ï¼Œè¿™ä¹Ÿå¹¶ä¸æ˜¯ç»å¯¹çš„--å¦‚æœçˆ¶ç±»è®¾è®¡æˆå¯ä»¥é€šç”¨çš„åŸºç±»çš„è¯ï¼Œé‚£ä¹ˆï¼Œä»¥ä¸Šå°±ä¸æ˜¯ä¸€ä¸ªé—®é¢˜ã€‚ 
             <p><!-- break --> 
             <p><font size=+1><strong>Do not load data from hard-coded locations 
               on a filesystem </strong></font><br>
-              <font size=+1><strong>²»Òª´ÓÎÄ¼şÏµÍ³ÀïÄÇĞ©´úÂëÒÑ¹Ì¶¨µÄÎ»ÖÃ¼ÓÔØÊı¾İ </strong></font><br>
+              <font size=+1><strong>ä¸è¦ä»æ–‡ä»¶ç³»ç»Ÿé‡Œé‚£äº›ä»£ç å·²å›ºå®šçš„ä½ç½®åŠ è½½æ•°æ® </strong></font><br>
               Tests often need to load data from some location in the filesystem. 
               Consider the following: <br>
-              ²âÊÔ¾­³£Òª´ÓÎÄ¼şÏµÍ³ÖĞ¶ÁÈëÊı¾İ£¬ÈçÏÂ£º 
+              æµ‹è¯•ç»å¸¸è¦ä»æ–‡ä»¶ç³»ç»Ÿä¸­è¯»å…¥æ•°æ®ï¼Œå¦‚ä¸‹ï¼š 
             <p><code>public void setUp () { <br>
               &nbsp;&nbsp;&nbsp;FileInputStream inp ("C:\\TestData\\dataSet1.dat"); 
               <br>
@@ -251,17 +251,17 @@ border=0>
               </code> 
             <p>The code above relies on the data set being in the <code>C:\TestData</code> 
               path. That assumption is incorrect in two situations: <br>
-              ÉÏÃæÕâ¶Î´úÂëÒÀÀµÓÚC:\TestDateÖĞµÄÊı¾İ¡£ÔÚÏÂÃæ£²ÖÖÇé¿öÏÂ£¬ÉÏÃæµÄ¼ÙÉè»á³öÏÖÈçÏÂÎÊÌâ£º 
+              ä¸Šé¢è¿™æ®µä»£ç ä¾èµ–äºC:\TestDateä¸­çš„æ•°æ®ã€‚åœ¨ä¸‹é¢ï¼’ç§æƒ…å†µä¸‹ï¼Œä¸Šé¢çš„å‡è®¾ä¼šå‡ºç°å¦‚ä¸‹é—®é¢˜ï¼š 
             <p> 
             <ul>
               <li>A tester does not have room to store the test data on <code>C:</code> 
                 and stores it on another disk <br>
-                ¿ÉÄÜÔÚCÅÌÃ»ÓĞ×ã¹»µÄ¿Õ¼ä´æ´¢²âÊÔÊı¾İ£¬¶ø°ÑËü´æÔÚÆäËüµÄ´ÅÅÌÉÏ 
+                å¯èƒ½åœ¨Cç›˜æ²¡æœ‰è¶³å¤Ÿçš„ç©ºé—´å­˜å‚¨æµ‹è¯•æ•°æ®ï¼Œè€ŒæŠŠå®ƒå­˜åœ¨å…¶å®ƒçš„ç£ç›˜ä¸Š 
               <li>The tests run on another platform, such as Unix<br>
-                ²âÊÔ°¸Àı¿ÉÄÜÔËĞĞÔÚÁíÍâµÄÆ½Ì¨ÉÏ£¬±ÈÈçUnix </li>
+                æµ‹è¯•æ¡ˆä¾‹å¯èƒ½è¿è¡Œåœ¨å¦å¤–çš„å¹³å°ä¸Šï¼Œæ¯”å¦‚Unix </li>
             </ul>
             <p>One solution might be: <br>
-              ÒÔÏÂÊÇÒ»ÖÖ½â¾ö·½°¸£º 
+              ä»¥ä¸‹æ˜¯ä¸€ç§è§£å†³æ–¹æ¡ˆï¼š 
             <p><code>public void setUp () { <br>
               &nbsp;&nbsp;&nbsp;FileInputStream inp ("dataSet1.dat"); <br>
               &nbsp;&nbsp;&nbsp;... <br>
@@ -271,12 +271,12 @@ border=0>
               directory as the test data. If several different test cases assume 
               this, it is difficult to integrate them into one test suite without 
               continually changing the current directory. <br>
-              µ«ÊÇ£¬ÉÏÃæµÄ½â¾ö·½°¸ÊÇ°Ñ²âÊÔÊı¾İ·ÅÔÚÔËĞĞ²âÊÔ°¸ÀıµÄÄ¿Â¼ÖĞ£¬Èç¹û°ÑÕâÑùµÄ¼¸¸ö²âÊÔ°¸Àı¼¯³ÉÆğÀ´×÷Îª²âÊÔ¼¯À´ÔËĞĞµÄ»°£¬Ö»ÓĞ²âÊÔ¼¯ÔÚÔËĞĞ¹ı³ÌÖĞ²»¶ÏµÄ¸Ä±äµ±Ç°Ä¿Â¼²ÅĞĞ¡£ 
+              ä½†æ˜¯ï¼Œä¸Šé¢çš„è§£å†³æ–¹æ¡ˆæ˜¯æŠŠæµ‹è¯•æ•°æ®æ”¾åœ¨è¿è¡Œæµ‹è¯•æ¡ˆä¾‹çš„ç›®å½•ä¸­ï¼Œå¦‚æœæŠŠè¿™æ ·çš„å‡ ä¸ªæµ‹è¯•æ¡ˆä¾‹é›†æˆèµ·æ¥ä½œä¸ºæµ‹è¯•é›†æ¥è¿è¡Œçš„è¯ï¼Œåªæœ‰æµ‹è¯•é›†åœ¨è¿è¡Œè¿‡ç¨‹ä¸­ä¸æ–­çš„æ”¹å˜å½“å‰ç›®å½•æ‰è¡Œã€‚ 
             <p>To solve the problem, access the dataset using either <code>Class.getResource()</code> 
               or <code>Class.getResourceAsStream()</code>. Using them, however, 
               means that resources load from a location relative to the class's 
               origin. <br>
-              Òª½â¾öÕâ¸öÎÊÌâ£¬¿ÉÒÔÊ¹ÓÃClass.getResource()»òÕßClass.getResourceAsStream()ÕâÖÖ·ÃÎÊ×ÊÔ´µÄĞÎÊ½À´·ÃÎÊÊı¾İ£¬ËüÃÇ¶¼ÊÇ´ÓÀàµÄÏà¶ÔÂ·¾¶À´·ÃÎÊ×ÊÔ´µÄ¡£ 
+              è¦è§£å†³è¿™ä¸ªé—®é¢˜ï¼Œå¯ä»¥ä½¿ç”¨Class.getResource()æˆ–è€…Class.getResourceAsStream()è¿™ç§è®¿é—®èµ„æºçš„å½¢å¼æ¥è®¿é—®æ•°æ®ï¼Œå®ƒä»¬éƒ½æ˜¯ä»ç±»çš„ç›¸å¯¹è·¯å¾„æ¥è®¿é—®èµ„æºçš„ã€‚ 
             <p>Test data should, if possible, be stored with the source code in 
               a configuration management (CM) system. However, if you're using 
               the aforementioned resource mechanism, you'll need to write a script 
@@ -287,7 +287,7 @@ border=0>
               test data within the source tree. One such mechanism is a class. 
               If a class can be mapped to a specific source directory, you could 
               write code like this: <br>
-              Èç¹û¿ÉÄÜµÄ»°£¬²âÊÔÊı¾İÓ¦¸ÃºÍÔ´³ÌĞòÒ»Æğ´æ·Åµ½ÅäÖÃ¹ÜÀíÏµÍ³ÖĞ¡£Èç¹ûÊ¹ÓÃÇ°ÃæÌáµ½µÄ·ÃÎÊ×ÊÔ´µÄĞÎÊ½£¬¾ÍÒª×Ô¼ºĞ´½Å±¾À´°ÑËùÓĞµÄ²âÊÔÊı¾İ´ÓÅäÖÃ¹ÜÀíÏµÍ³ÖĞÈ¡³öÀ´¼ÓÈëÒª²âÊÔ°¸ÀıµÄclasspathÖĞ¡£»¹ÓĞÒ»ÖÖ·½·¨ÊÇ°Ñ²âÊÔÊı¾İºÍÔ´³ÌĞò´æ·ÅÔÚÒ»Æğ£¬Ê¹ÓÃºÍÎ»ÖÃÎŞ¹ØµÄ·½·¨À´²éÕÒ²âÊÔÊı¾İ¡£ÒÔÀàÎªÀı£¬Èç¹ûÀàÄÜ¹»±»Ó³Éäµ½Ò»¸öÌØ¶¨µÄÄ¿Â¼£¬ÏàÓ¦µÄ´úÂë¿ÉÒÔÈçÏÂ£º 
+              å¦‚æœå¯èƒ½çš„è¯ï¼Œæµ‹è¯•æ•°æ®åº”è¯¥å’Œæºç¨‹åºä¸€èµ·å­˜æ”¾åˆ°é…ç½®ç®¡ç†ç³»ç»Ÿä¸­ã€‚å¦‚æœä½¿ç”¨å‰é¢æåˆ°çš„è®¿é—®èµ„æºçš„å½¢å¼ï¼Œå°±è¦è‡ªå·±å†™è„šæœ¬æ¥æŠŠæ‰€æœ‰çš„æµ‹è¯•æ•°æ®ä»é…ç½®ç®¡ç†ç³»ç»Ÿä¸­å–å‡ºæ¥åŠ å…¥è¦æµ‹è¯•æ¡ˆä¾‹çš„classpathä¸­ã€‚è¿˜æœ‰ä¸€ç§æ–¹æ³•æ˜¯æŠŠæµ‹è¯•æ•°æ®å’Œæºç¨‹åºå­˜æ”¾åœ¨ä¸€èµ·ï¼Œä½¿ç”¨å’Œä½ç½®æ— å…³çš„æ–¹æ³•æ¥æŸ¥æ‰¾æµ‹è¯•æ•°æ®ã€‚ä»¥ç±»ä¸ºä¾‹ï¼Œå¦‚æœç±»èƒ½å¤Ÿè¢«æ˜ å°„åˆ°ä¸€ä¸ªç‰¹å®šçš„ç›®å½•ï¼Œç›¸åº”çš„ä»£ç å¯ä»¥å¦‚ä¸‹ï¼š 
             <p><code>InputStream inp = SourceResourceLoader.getResourceAsStream 
               (this.getClass (), "dataSet1.dat"); <br>
               </code> 
@@ -298,24 +298,24 @@ border=0>
               source file lies. The resource loads from that directory. For Unix 
               and NT, the mapping is straightforward: replace every instance of 
               '.' with <code>File.separatorChar</code>. <br>
-              ÏÖÔÚÒª¿¼ÂÇµÄÊÇÔõÃ´°ÑÒ»¸öÀàÓ³Éäµ½°üº¬ÏàÓ¦Ô´ÎÄ¼şµÄÄ¿Â¼¡£¿ÉÒÔÍ¨¹ıÏµÍ³ÊôĞÔÀ´ÉèÖÃÔ´ÎÄ¼ş¸ùÄ¿Â¼¡£ÀàµÄ°üÃû¿ÉÒÔ±êÖ¾Ô´ÎÄ¼şµÄ´æ·ÅÎ»ÖÃ¡£ÔÚUnixºÍNTÉÏ£¬ÕâÖÖÓ³ÉäÊÇÖ±½ÓµÄ£º°Ñ'.'Ìæ»»³ÉÎªFile.separatorChar¾Í¿ÉÒÔÁË¡£ 
+              ç°åœ¨è¦è€ƒè™‘çš„æ˜¯æ€ä¹ˆæŠŠä¸€ä¸ªç±»æ˜ å°„åˆ°åŒ…å«ç›¸åº”æºæ–‡ä»¶çš„ç›®å½•ã€‚å¯ä»¥é€šè¿‡ç³»ç»Ÿå±æ€§æ¥è®¾ç½®æºæ–‡ä»¶æ ¹ç›®å½•ã€‚ç±»çš„åŒ…åå¯ä»¥æ ‡å¿—æºæ–‡ä»¶çš„å­˜æ”¾ä½ç½®ã€‚åœ¨Unixå’ŒNTä¸Šï¼Œè¿™ç§æ˜ å°„æ˜¯ç›´æ¥çš„ï¼šæŠŠ'.'æ›¿æ¢æˆä¸ºFile.separatorCharå°±å¯ä»¥äº†ã€‚ 
             <p><font size=+1><strong>Keep tests in the same location as the source 
               code </strong></font><br>
-              <font size=+1><strong>°Ñ²âÊÔ°¸ÀıºÍÔ´ÎÄ¼ş·ÅÔÚÒ»Æğ</strong></font><br>
+              <font size=+1><strong>æŠŠæµ‹è¯•æ¡ˆä¾‹å’Œæºæ–‡ä»¶æ”¾åœ¨ä¸€èµ·</strong></font><br>
               If the test source is kept in the same location as the tested classes, 
               both test and class will compile during a build. This forces you 
               to keep the tests and classes synchronized during development. Indeed, 
               unit tests not considered part of the normal build quickly become 
               dated and useless. <br>
-              Èç¹û²âÊÔ°¸ÀıºÍÒª²âÊÔµÄ´úÂë·ÅÔÚÒ»Æğ£¬ÄÇÃ´¿ÉÒÔÍ¬Ê±¶ÔÕâÁ½Õß±àÒë¡£ÕâÑù¿ÉÒÔ±£Ö¤ÔÚ¿ª·¢¹ı³ÌÖĞ²âÊÔºÍ´úÂë±£³ÖÍ¬²½¡£Êµ¼ÊÉÏ£¬²»ÔÚÕı³£µÄ°æ±¾ÖĞµÄµ¥Ôª²âÊÔÂíÉÏ»á±äµÄ¹ıÊ±¡¢ÎŞÓÃ¡£ 
+              å¦‚æœæµ‹è¯•æ¡ˆä¾‹å’Œè¦æµ‹è¯•çš„ä»£ç æ”¾åœ¨ä¸€èµ·ï¼Œé‚£ä¹ˆå¯ä»¥åŒæ—¶å¯¹è¿™ä¸¤è€…ç¼–è¯‘ã€‚è¿™æ ·å¯ä»¥ä¿è¯åœ¨å¼€å‘è¿‡ç¨‹ä¸­æµ‹è¯•å’Œä»£ç ä¿æŒåŒæ­¥ã€‚å®é™…ä¸Šï¼Œä¸åœ¨æ­£å¸¸çš„ç‰ˆæœ¬ä¸­çš„å•å…ƒæµ‹è¯•é©¬ä¸Šä¼šå˜çš„è¿‡æ—¶ã€æ— ç”¨ã€‚ 
             <p><font size=+1><strong>Name tests properly<br>
-             ÕıÈ·ÃüÃû²âÊÔ°¸Àı </strong></font><br>
+             æ­£ç¡®å‘½åæµ‹è¯•æ¡ˆä¾‹ </strong></font><br>
               Name the test case <code>TestClassUnderTest</code>. For example, 
               the test case for the class <code>MessageLog</code> should be <code>TestMessageLog</code>. 
               That makes it simple to work out what class a test case tests. Test 
               methods' names within the test case should describe what they test: 
               <br>
-             ¸ø²âÊÔ°¸ÀıÆğÃûTestClassUnderTest¡£ÀıÈç£¬ÀàMessageLogµÄ²âÊÔ°¸ÀıµÄÃû×ÖÓ¦¸ÃÊÇTestMessageLog¡£ÕâÑù¿ÉÒÔºÜÈİÒ×µÄ¿´³öÊÇ¶ÔÄÄ¸öÀà½øĞĞ²âÊÔ¡£Í¬Ê±£¬²âÊÔ°¸ÀıµÄ·½·¨Ó¦¸ÃÇå³şµÄ±íÃ÷Òª²âÊ²Ã´£º 
+             ç»™æµ‹è¯•æ¡ˆä¾‹èµ·åTestClassUnderTestã€‚ä¾‹å¦‚ï¼Œç±»MessageLogçš„æµ‹è¯•æ¡ˆä¾‹çš„åå­—åº”è¯¥æ˜¯TestMessageLogã€‚è¿™æ ·å¯ä»¥å¾ˆå®¹æ˜“çš„çœ‹å‡ºæ˜¯å¯¹å“ªä¸ªç±»è¿›è¡Œæµ‹è¯•ã€‚åŒæ—¶ï¼Œæµ‹è¯•æ¡ˆä¾‹çš„æ–¹æ³•åº”è¯¥æ¸…æ¥šçš„è¡¨æ˜è¦æµ‹ä»€ä¹ˆï¼š 
             <p> 
             <ul>
               <li><code>testLoggingEmptyMessage()</code> 
@@ -325,39 +325,39 @@ border=0>
             </ul>
             <p>Proper naming helps code readers understand each test's purpose. 
               <br>
-              ÕıÈ·µÄÃüÃû¿ÉÒÔ°ïÖú±ğÈËÀí½âÃ¿¸ö²âÊÔµÄÄ¿µÄ¡£ 
+              æ­£ç¡®çš„å‘½åå¯ä»¥å¸®åŠ©åˆ«äººç†è§£æ¯ä¸ªæµ‹è¯•çš„ç›®çš„ã€‚ 
             <p><font size=+1><strong>Ensure that tests are time-independent<br>
-              ±£Ö¤²âÊÔÊÇºÍÊ±¼äÎŞ¹ØµÄ </strong></font><br>
+              ä¿è¯æµ‹è¯•æ˜¯å’Œæ—¶é—´æ— å…³çš„ </strong></font><br>
               Where possible, avoid using data that may expire; such data should 
               be either manually or programmatically refreshed. It is often simpler 
               to instrument the class under test, with a mechanism for changing 
               its notion of today. The test can then operate in a time-independent 
               manner without having to refresh the data. <br>
-              Ö»Òª¿ÉÄÜ£¬±ÜÃâÊ¹ÓÃ¿ÉÄÜ¹ıÆÚµÄÊı¾İ;ÕâÑùµÄÊı¾İÒªÃ´ÊÖ¹¤£¬ÒªÃ´ÓÉ³ÌĞòÀ´Ë¢ĞÂ¡£ÔÚ²âÊÔÏÂ½¨Á¢Ò»¸öÀà¾­³£ĞèÒª¸ü¼ò»¯Ğ©£¬ÒªÓÃÒ»ÖÖ¿ÉÒÔÓëÏÖÔÚµÄË¼Ïë±£³ÖÍ¬²½µÄ»úÖÆ.ÕâÑù£¬²âÊÔ°¸Àı¾Í¿ÉÒÔºÍÊ±¼äÎŞ¹Ø£¬²»ĞèÒªË¢ĞÂÊı¾İ¡£ 
+              åªè¦å¯èƒ½ï¼Œé¿å…ä½¿ç”¨å¯èƒ½è¿‡æœŸçš„æ•°æ®;è¿™æ ·çš„æ•°æ®è¦ä¹ˆæ‰‹å·¥ï¼Œè¦ä¹ˆç”±ç¨‹åºæ¥åˆ·æ–°ã€‚åœ¨æµ‹è¯•ä¸‹å»ºç«‹ä¸€ä¸ªç±»ç»å¸¸éœ€è¦æ›´ç®€åŒ–äº›ï¼Œè¦ç”¨ä¸€ç§å¯ä»¥ä¸ç°åœ¨çš„æ€æƒ³ä¿æŒåŒæ­¥çš„æœºåˆ¶.è¿™æ ·ï¼Œæµ‹è¯•æ¡ˆä¾‹å°±å¯ä»¥å’Œæ—¶é—´æ— å…³ï¼Œä¸éœ€è¦åˆ·æ–°æ•°æ®ã€‚ 
             <p><font size=+1><strong>Consider locale when writing tests<br>
-              Ğ´²âÊÔÊ±¿¼ÂÇµØÖ·µÄÓ°Ïì </strong></font><br>
+              å†™æµ‹è¯•æ—¶è€ƒè™‘åœ°å€çš„å½±å“ </strong></font><br>
               Consider a test that uses dates. One approach to creating dates 
               would be: <br>
-              ¿¼ÂÇÊ¹ÓÃÈÕÆÚµÄÒ»¸ö²âÊÔ°¸Àı¡£Ò»ÖÖ´´½¨ÈÕÆÚµÄ·½·¨£º 
+              è€ƒè™‘ä½¿ç”¨æ—¥æœŸçš„ä¸€ä¸ªæµ‹è¯•æ¡ˆä¾‹ã€‚ä¸€ç§åˆ›å»ºæ—¥æœŸçš„æ–¹æ³•ï¼š 
             <p><code>Date date = DateFormat.getInstance ().parse ("dd/mm/yyyy"); 
               <br>
               </code> 
             <p>Unfortunately, that code doesn't work on a machine with a different 
               locale. Therefore, it would be far better to write: <br>
-              ²»ĞÒµÄÊÇ£¬Õâ¶Î´úÂëÔÚ²»Í¬µÄ»úÆ÷ÉÏ²»ÄÜÕı³£µÄÔËĞĞ¡£Òò´Ë£¬¿ÉÒÔ»»ÓÃÏÂÃæ½ÏºÃµÄ·½Ê½£º 
+              ä¸å¹¸çš„æ˜¯ï¼Œè¿™æ®µä»£ç åœ¨ä¸åŒçš„æœºå™¨ä¸Šä¸èƒ½æ­£å¸¸çš„è¿è¡Œã€‚å› æ­¤ï¼Œå¯ä»¥æ¢ç”¨ä¸‹é¢è¾ƒå¥½çš„æ–¹å¼ï¼š 
             <p><code>Calendar cal = Calendar.getInstance (); <br>
               Cal.set (yyyy, mm-1, dd); <br>
               Date date = Calendar.getTime (); <br>
               </code> 
             <p>The second approach is far more resilient to locale changes. <br>
-              µÚ¶şÖĞ·½·¨¿ÉÒÔ¸üÁé»îµÄÊÊÓ¦µØÖ·µÄ¸Ä±ä¡£ 
+              ç¬¬äºŒä¸­æ–¹æ³•å¯ä»¥æ›´çµæ´»çš„é€‚åº”åœ°å€çš„æ”¹å˜ã€‚ 
             <p><font size=+1><strong>Utilize JUnit's assert/fail methods and exception 
               handling for clean test code<br>
-              ÀûÓÃJUnit'sµÄassert/fail·½·¨ºÍÒì³£»úÖÆ´´½¨¸É¾»µÄ´úÂë </strong></font><br>
+              åˆ©ç”¨JUnit'sçš„assert/failæ–¹æ³•å’Œå¼‚å¸¸æœºåˆ¶åˆ›å»ºå¹²å‡€çš„ä»£ç  </strong></font><br>
               Many JUnit novices make the mistake of generating elaborate try 
               and catch blocks to catch unexpected exceptions and flag a test 
               failure. Here is a trivial example of this: <br>
-              Ğí¶à³õÑ§Õß¿ÉÄÜ»á¾«ĞÄÉè¼ÆÒ»Ğ©Òì³£²¶×½À´²¶×½Òì³££¬²¢±êÖ¾²âÊÔ³öÏÖ´íÎó¡£ÈçÏÂ£º 
+              è®¸å¤šåˆå­¦è€…å¯èƒ½ä¼šç²¾å¿ƒè®¾è®¡ä¸€äº›å¼‚å¸¸æ•æ‰æ¥æ•æ‰å¼‚å¸¸ï¼Œå¹¶æ ‡å¿—æµ‹è¯•å‡ºç°é”™è¯¯ã€‚å¦‚ä¸‹ï¼š 
             <p><code>public void exampleTest () { <br>
               &nbsp;&nbsp;&nbsp;try { <br>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// do some test <br>
@@ -370,9 +370,9 @@ border=0>
             <p>JUnit automatically catches exceptions. It considers uncaught exceptions 
               to be errors, which means the above example has redundant code in 
               it. <br>
-              JUnit¿ÉÒÔ×Ô¶¯µÄ²¶×½Òì³££¬°ÑÃ»ÓĞ½Ø»ñµÄÒì³£¿´×÷´íÎó£¬ËùÒÔ£¬ÉÏÃæµÄ´úÂëÓĞÈßÓà´úÂë¡£ 
+              JUnitå¯ä»¥è‡ªåŠ¨çš„æ•æ‰å¼‚å¸¸ï¼ŒæŠŠæ²¡æœ‰æˆªè·çš„å¼‚å¸¸çœ‹ä½œé”™è¯¯ï¼Œæ‰€ä»¥ï¼Œä¸Šé¢çš„ä»£ç æœ‰å†—ä½™ä»£ç ã€‚ 
             <p>Here's a far simpler way to achieve the same result: <br>
-              ÒÔÏÂÒÔÒ»ÖÖ¸ü¼ò½àµÄ·½Ê½ÊµÏÖÉÏÃæµÄÀı×Ó£º 
+              ä»¥ä¸‹ä»¥ä¸€ç§æ›´ç®€æ´çš„æ–¹å¼å®ç°ä¸Šé¢çš„ä¾‹å­ï¼š 
             <p><code>public void exampleTest () throws SomeApplicationException 
               { <br>
               &nbsp;&nbsp;&nbsp;// do some test <br>
@@ -380,42 +380,42 @@ border=0>
               </code> 
             <p>In this example, the redundant code has been removed, making the 
               test easier to read and maintain (since there is less code). <br>
-              ÔÚ´Ë£¬³ıÈ¥ÁËÈßÓàµÄ´úÂë£¬Ê¹µÃ²âÊÔÒ×¶ÁÒ×Î¬»¤(ÒòÎª´úÂëºÜÉÙ)¡£ 
+              åœ¨æ­¤ï¼Œé™¤å»äº†å†—ä½™çš„ä»£ç ï¼Œä½¿å¾—æµ‹è¯•æ˜“è¯»æ˜“ç»´æŠ¤(å› ä¸ºä»£ç å¾ˆå°‘)ã€‚ 
             <p>Use the wide variety of assert methods to express your intention 
               in a simpler fashion. Instead of writing: <br>
-              Ê¹ÓÃ¹ã·ºµÄ¶àÑùĞÔµÄÓĞĞ§·½·¨À´±í´ïÄãµÄÒâÍ¼¡£²»Ó¦¸Ã£º 
+              ä½¿ç”¨å¹¿æ³›çš„å¤šæ ·æ€§çš„æœ‰æ•ˆæ–¹æ³•æ¥è¡¨è¾¾ä½ çš„æ„å›¾ã€‚ä¸åº”è¯¥ï¼š 
             <p><code>assert (creds == 3); <br>
               </code> 
             <p>Write: <br>
-              ¶øÊÇ£º 
+              è€Œæ˜¯ï¼š 
             <p><code>assertEquals ("The number of credentials should be 3", 3, 
               creds); <br>
               </code> 
             <p>The above example is much more useful to a code reader. And if 
               the assertion fails, it provides the tester with more information. 
               JUnit also supports floating point comparisons: <br>
-              ÉÏÃæµÄ´úÂëÈÃÈËºÜÈİÒ×µÄ¶Á¶®£¬²¢ÇÒ¼´Ê¹ÉÏÃæµÄÎ¬»¤Ê§°Ü£¬¿ÉÒÔÌá¹©¸ø²âÊÔÕß¸ü¶àµÄĞÅÏ¢¡£JUnitÍ¬ÑùÖ§³Ö¸¡µãÊıµÄ±È½Ï£º 
+              ä¸Šé¢çš„ä»£ç è®©äººå¾ˆå®¹æ˜“çš„è¯»æ‡‚ï¼Œå¹¶ä¸”å³ä½¿ä¸Šé¢çš„ç»´æŠ¤å¤±è´¥ï¼Œå¯ä»¥æä¾›ç»™æµ‹è¯•è€…æ›´å¤šçš„ä¿¡æ¯ã€‚JUnitåŒæ ·æ”¯æŒæµ®ç‚¹æ•°çš„æ¯”è¾ƒï¼š 
             <p><code>assertEquals ("some message", result, expected, delta); <br>
               </code> 
             <p>When you compare floating point numbers, this useful function saves 
               you from repeatedly writing code to compute the difference between 
               the result and the expected value. <br>
-              µ±±È½Ï¸¡µãÀàĞÍµÄÊı¾İÊ±£¬¿ÉÒÔ²»±ØÔÙĞ´Í¬Ñù¹¦ÄÜµÄ´úÂë¡£ 
+              å½“æ¯”è¾ƒæµ®ç‚¹ç±»å‹çš„æ•°æ®æ—¶ï¼Œå¯ä»¥ä¸å¿…å†å†™åŒæ ·åŠŸèƒ½çš„ä»£ç ã€‚ 
             <p>Use <code>assertSame()</code> to test for two references that point 
               to the same object. Use <code>assertEquals()</code> to test for 
               two objects that are equal. <br>
-              Òª²âÊÔÁ½¸öÒıÓÃÊÇ·ñÖ¸ÏòÍ¬Ò»¸ö¶ÔÏó£¬Ê¹ÓÃassertSame()·½·¨£»Òª²âÊÔÁ½¸ö¶ÔÏóÊÇ·ñÏàµÈ£¬Ê¹ÓÃassertEquals()·½·¨ 
+              è¦æµ‹è¯•ä¸¤ä¸ªå¼•ç”¨æ˜¯å¦æŒ‡å‘åŒä¸€ä¸ªå¯¹è±¡ï¼Œä½¿ç”¨assertSame()æ–¹æ³•ï¼›è¦æµ‹è¯•ä¸¤ä¸ªå¯¹è±¡æ˜¯å¦ç›¸ç­‰ï¼Œä½¿ç”¨assertEquals()æ–¹æ³• 
             <p><font size=+1><strong>Document tests in javadoc<br>
-              javadocÏÂµÄÎÄµµ²âÊÔ </strong></font><br>
+              javadocä¸‹çš„æ–‡æ¡£æµ‹è¯• </strong></font><br>
               Test plans documented in a word processor tend to be error-prone 
               and tedious to create. Also, word-processor-based documentation 
               must be kept synchronized with the unit tests, adding another layer 
               of complexity to the process. If possible, a better solution would 
               be to include the test plans in the tests' <code>javadoc</code>, 
               ensuring that all test plan data reside in one place. <br>
-              ÔÚÒ»¸ö×Ö´¦ÀíÆ÷Àï´´½¨ĞèÒª¹éµµµÄ²âÊÔ¼Æ»®Ò×ÓÚ³öÏÖ´íÎóÇÒµ¥µ÷·¦Î¶¡£ÁíÍâ£¬»ùÓÚ×Ö´¦ÀíÆ÷µÄÎÄ¼ş±ØĞëÓëµ¥Ôª²âÊÔ±£³ÖÍ¬²½£¬Õâ¸ø´¦Àí¹ı³ÌÔö¼ÓÁË¶îÍâÒ»²ãµÄ¸´ÔÓĞÔ¡£Èç¹û¿ÉÄÜ£¬¸üºÃµÄ½â¾ö·½·¨ÊÇ½«²âÊÔ¼Æ»®°üÀ¨ÔÚ²âÊÔµÄjavadoc£¬È·±£ËùÓĞµÄ²âÊÔ¼Æ»®Êı¾İ±£´æÔÚÒ»¸öµØ·½¡£ 
+              åœ¨ä¸€ä¸ªå­—å¤„ç†å™¨é‡Œåˆ›å»ºéœ€è¦å½’æ¡£çš„æµ‹è¯•è®¡åˆ’æ˜“äºå‡ºç°é”™è¯¯ä¸”å•è°ƒä¹å‘³ã€‚å¦å¤–ï¼ŒåŸºäºå­—å¤„ç†å™¨çš„æ–‡ä»¶å¿…é¡»ä¸å•å…ƒæµ‹è¯•ä¿æŒåŒæ­¥ï¼Œè¿™ç»™å¤„ç†è¿‡ç¨‹å¢åŠ äº†é¢å¤–ä¸€å±‚çš„å¤æ‚æ€§ã€‚å¦‚æœå¯èƒ½ï¼Œæ›´å¥½çš„è§£å†³æ–¹æ³•æ˜¯å°†æµ‹è¯•è®¡åˆ’åŒ…æ‹¬åœ¨æµ‹è¯•çš„javadocï¼Œç¡®ä¿æ‰€æœ‰çš„æµ‹è¯•è®¡åˆ’æ•°æ®ä¿å­˜åœ¨ä¸€ä¸ªåœ°æ–¹ã€‚ 
             <p><font size=+1><strong>Avoid visual inspection<br>
-              ±ÜÃâÄ¿ÊÓ¼ì²é </strong></font><br>
+              é¿å…ç›®è§†æ£€æŸ¥ </strong></font><br>
               Testing servlets, user interfaces, and other systems that produce 
               complex output is often left to visual inspection. Visual inspection 
               -- a human inspecting output data for errors -- requires patience, 
@@ -423,33 +423,33 @@ border=0>
               attention to detail: attributes not often found in the average human 
               being. Below are some basic techniques that will help reduce the 
               visual inspection component of your test cycle. <br>
-              ²âÊÔservlets£¬ÓÃ»§½çÃæ£¬ºÍÆäËû²úÉú¸´ÔÓÊä³öµÄÏµÍ³Í¨³£²ÉÓÃÄ¿ÊÓ¼ì²é¡£Ä¿ÊÓ¼ì²é¡ª¡ªÒ»¸öÈËÎªÁË·¢ÏÖ´íÎó¼ì²éÊä³öµÄÊı¾İ¡ª¡ªĞèÒªÄÍĞÄ£¬´¦Àí´óÁ¿ĞÅÏ¢µÄÄÜÁ¦£¬ÒÔ¼°¶ÔÏ¸½ÚµÄ¶´²ìÁ¦£ºÕâĞ©Í¨³£²»»áÊÇÒ»°ãÈËÉíÉÏËù¾ß±¸µÄ¡£ÒÔÏÂÊÇÒ»Ğ©»ù±¾µÄ¼¼Êõ¿ÉÒÔÓÃÀ´°ïÖú¼õÉÙÄãµÄ²âÊÔÖÜÆÚÖĞÄ¿ÊÓ¼ì²é¡£ 
+              æµ‹è¯•servletsï¼Œç”¨æˆ·ç•Œé¢ï¼Œå’Œå…¶ä»–äº§ç”Ÿå¤æ‚è¾“å‡ºçš„ç³»ç»Ÿé€šå¸¸é‡‡ç”¨ç›®è§†æ£€æŸ¥ã€‚ç›®è§†æ£€æŸ¥â€”â€”ä¸€ä¸ªäººä¸ºäº†å‘ç°é”™è¯¯æ£€æŸ¥è¾“å‡ºçš„æ•°æ®â€”â€”éœ€è¦è€å¿ƒï¼Œå¤„ç†å¤§é‡ä¿¡æ¯çš„èƒ½åŠ›ï¼Œä»¥åŠå¯¹ç»†èŠ‚çš„æ´å¯ŸåŠ›ï¼šè¿™äº›é€šå¸¸ä¸ä¼šæ˜¯ä¸€èˆ¬äººèº«ä¸Šæ‰€å…·å¤‡çš„ã€‚ä»¥ä¸‹æ˜¯ä¸€äº›åŸºæœ¬çš„æŠ€æœ¯å¯ä»¥ç”¨æ¥å¸®åŠ©å‡å°‘ä½ çš„æµ‹è¯•å‘¨æœŸä¸­ç›®è§†æ£€æŸ¥ã€‚ 
             <p><strong>Swing<br>
               Swing </strong><br>
               When testing a Swing-based UI, you can write tests to ensure that: 
               <br>
-              µ±²âÊÔÒ»¸ö»ùÓÚSwingµÄÓÃ»§½çÃæÊ±£¬Äã¿ÉÒÔĞ´Ò»Ğ©²âÊÔÒÔ±£Ö¤£º 
+              å½“æµ‹è¯•ä¸€ä¸ªåŸºäºSwingçš„ç”¨æˆ·ç•Œé¢æ—¶ï¼Œä½ å¯ä»¥å†™ä¸€äº›æµ‹è¯•ä»¥ä¿è¯ï¼š 
             <p> 
             <ul>
               <li>All the components reside in the correct panels <br>
-                ËùÓĞµÄ¹¹¼ş¶¼ÔÚÊÊµ±µÄÃæ°åÀï 
+                æ‰€æœ‰çš„æ„ä»¶éƒ½åœ¨é€‚å½“çš„é¢æ¿é‡Œ 
               <li>You've configured the layout managers correctly <br>
-                È·±£ÕıÈ·ÅäÖÃÁË°æÊ½¹ÜÀíÆ÷ 
+                ç¡®ä¿æ­£ç¡®é…ç½®äº†ç‰ˆå¼ç®¡ç†å™¨ 
               <li>Text widgets have the correct fonts <br>
-                Text widgets(ÎÄ×Ö¼¯)ÀïÓĞÕıÈ·µÄ×ÖÌå </li>
+                Text widgets(æ–‡å­—é›†)é‡Œæœ‰æ­£ç¡®çš„å­—ä½“ </li>
             </ul>
             <p>A more thorough treatment of this can be found in the worked example 
               of testing a GUI, referenced in the <a 
 href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resources">Resources</a> 
               section.<br>
-              Õâ·½Ãæ¸üÏêÏ¸µÄ´¦Àí·½Ê½¿ÉÒÔÔÚÒ»¸ö²âÊÔÄ³GUIµÄ³É¹¦Àı×ÓÖĞÕÒµ½£¬²Î¿¼<a href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resources">×ÊÁÏ</a>ÕÂ½Ú¡£ 
+              è¿™æ–¹é¢æ›´è¯¦ç»†çš„å¤„ç†æ–¹å¼å¯ä»¥åœ¨ä¸€ä¸ªæµ‹è¯•æŸGUIçš„æˆåŠŸä¾‹å­ä¸­æ‰¾åˆ°ï¼Œå‚è€ƒ<a href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resources">èµ„æ–™</a>ç« èŠ‚ã€‚ 
             <p><strong>XML<br>
               XML </strong><br>
               When testing classes that process XML, it pays to write a routine 
               that compares two XML DOMs for equality. You can then programmatically 
               define the correct DOM in advance and compare it with the actual 
               output from your processing methods. <br>
-              µ±²âÊÔ´¦ÀíXMLµÄÀàÊ±£¬Ğ´Ò»¸ö³ÌĞò±È½ÏÁ½¸öXML DOMÊÇ·ñÏàµÈ¡£ÕâÑùÄã¿ÉÒÔÔ¤ÏÈ¾«È·µØ¶¨ÒåÕıÈ·µÄDOM²¢ÇÒÓëÊ¹ÓÃÄãµÄ´¦Àí·½·¨µÃ³öµÄÊµ¼Ê½á¹ûÏà±È½Ï¡£ 
+              å½“æµ‹è¯•å¤„ç†XMLçš„ç±»æ—¶ï¼Œå†™ä¸€ä¸ªç¨‹åºæ¯”è¾ƒä¸¤ä¸ªXML DOMæ˜¯å¦ç›¸ç­‰ã€‚è¿™æ ·ä½ å¯ä»¥é¢„å…ˆç²¾ç¡®åœ°å®šä¹‰æ­£ç¡®çš„DOMå¹¶ä¸”ä¸ä½¿ç”¨ä½ çš„å¤„ç†æ–¹æ³•å¾—å‡ºçš„å®é™…ç»“æœç›¸æ¯”è¾ƒã€‚ 
             <p><strong>Servlets<br>
               Servlets </strong><br>
               With servlets, a couple of approaches can work. You can write a 
@@ -457,25 +457,25 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               must contain derivations of classes found in the normal servlet 
               environment. These derivations should allow you to preconfigure 
               their responses to method calls from the servlet. <br>
-              ÔÚservlets·½Ãæ£¬ÓĞÒ»´ó¶ÑµÄ·½·¨¹ÜÓÃ¡£Äã¿ÉÒÔÔÚ²âÊÔÖĞĞ´Ò»¸öÑÆservlet¿ò¼Ü²¢ÇÒÔ¤ÏÈÅäÖÃËü¡£¿ò¼Ü±ØĞë°üÀ¨ÔÚÕı³£servlet»·¾³ÖĞµÄÀàµÄ³ö´¦¡£ÕâĞ©³ö´¦ÔÊĞíÄãÔ¤ÏÈÅäÖÃËüÃÇ¶ÔÀ´×ÔservletµÄ·½·¨µ÷ÓÃµÄ·´Ó¦¡£ 
+              åœ¨servletsæ–¹é¢ï¼Œæœ‰ä¸€å¤§å †çš„æ–¹æ³•ç®¡ç”¨ã€‚ä½ å¯ä»¥åœ¨æµ‹è¯•ä¸­å†™ä¸€ä¸ªå“‘servletæ¡†æ¶å¹¶ä¸”é¢„å…ˆé…ç½®å®ƒã€‚æ¡†æ¶å¿…é¡»åŒ…æ‹¬åœ¨æ­£å¸¸servletç¯å¢ƒä¸­çš„ç±»çš„å‡ºå¤„ã€‚è¿™äº›å‡ºå¤„å…è®¸ä½ é¢„å…ˆé…ç½®å®ƒä»¬å¯¹æ¥è‡ªservletçš„æ–¹æ³•è°ƒç”¨çš„ååº”ã€‚ 
             <p>For example: <br>
-              ÀıÈç£º 
+              ä¾‹å¦‚ï¼š 
             <p> 
             <ul>
               <li><code>HttpServletRequest</code> can be subclassed to allow the 
                 test class to specify the header, method, path info, and other 
                 data <br>
-                HttpServletRequest¿ÉÒÔ¶¨Òå³É×Ó¼¯ÒÔÔÊĞí²âÊÔÀàÖ¸¶¨ÆäÏûÏ¢Í·£¬·½·¨£¬Â·¾¶ĞÅÏ¢£¬ºÍÆäËûÊı¾İ 
+                HttpServletRequestå¯ä»¥å®šä¹‰æˆå­é›†ä»¥å…è®¸æµ‹è¯•ç±»æŒ‡å®šå…¶æ¶ˆæ¯å¤´ï¼Œæ–¹æ³•ï¼Œè·¯å¾„ä¿¡æ¯ï¼Œå’Œå…¶ä»–æ•°æ® 
               <li><code>HttpServletResponse</code> can be subclassed to return 
                 an output stream that stores the servlets' responses in a string 
                 for later checking <br>
-                HttpServletResponse¿ÉÒÔ¶¨Òå³É×Ó¼¯·µ»ØÒ»¸ö½«servletÏìÓ¦±£´æÔÚÒ»¸ö×Ö·û´®µÄÊä³öÁ÷ÒÔ±¸ÉÔºóµÄ¼ì²é¡£ </li>
+                HttpServletResponseå¯ä»¥å®šä¹‰æˆå­é›†è¿”å›ä¸€ä¸ªå°†servletå“åº”ä¿å­˜åœ¨ä¸€ä¸ªå­—ç¬¦ä¸²çš„è¾“å‡ºæµä»¥å¤‡ç¨åçš„æ£€æŸ¥ã€‚ </li>
             </ul>
             <p>A simpler solution is to use <code>HttpUnit</code> to test your 
               servlets. <code>HttpUnit</code> provides a DOM view of a request's 
               results, which makes it relatively simple to compare actual data 
               with expected results. <br>
-              Ò»¸ö±È½Ï¼òµ¥µÄ½â¾ö·½·¨ÊÇÊ¹ÓÃHttpUnitÀ´²âÊÔÄãµÄservlet¡£ HttpUnit Ìá¹©ÁËÒ»¸ö¹ØÓÚÇëÇó½á¹ûµÄDOMµÄÊÓµã£¬ÕâÊ¹±È½ÏÊµ¼ÊÊı¾İºÍÆÚÍûµÃµ½µÄ½á¹ûÏà¶Ô¼òµ¥¡£ 
+              ä¸€ä¸ªæ¯”è¾ƒç®€å•çš„è§£å†³æ–¹æ³•æ˜¯ä½¿ç”¨HttpUnitæ¥æµ‹è¯•ä½ çš„servletã€‚ HttpUnit æä¾›äº†ä¸€ä¸ªå…³äºè¯·æ±‚ç»“æœçš„DOMçš„è§†ç‚¹ï¼Œè¿™ä½¿æ¯”è¾ƒå®é™…æ•°æ®å’ŒæœŸæœ›å¾—åˆ°çš„ç»“æœç›¸å¯¹ç®€å•ã€‚ 
             <p>You can avoid visual inspection in many ways. However, sometimes 
               it is more cost-effective to use visual inspection or a more specialized 
               testing tool. For example, testing a UI's dynamic behavior within 
@@ -484,10 +484,10 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               perform some visual inspection as part of testing. However, that 
               doesn't mean the general rule -- don't visually inspect -- should 
               be ignored. <br>
-              Äã¿ÉÒÔÓÃºÜ¶à·½·¨±ÜÃâÄ¿ÊÓ¼ì²é¡£µ«ÊÇ£¬ÓĞÊ±Ê¹ÓÃÄ¿ÊÓ¼ì²é»òÒ»ÖÖ¸ü×¨ÓÃµÄ²âÊÔ¹¤¾ß»á¸ü¼Ó½ÚÊ¡³É±¾¡£ÀıÈç£¬²âÊÔÔÚJUnitµÄÒ»¸öÓÃ»§½çÃæµÄ¶¯Ì¬ĞĞÎªÊÇ¸´ÔÓµÄ£¬µ«È´ÓĞ¿ÉÄÜ¡£¹ºÂò¿ÉÀûÓÃµÄÖÚ¶àÓÃ»§½çÃæ¼ÇÂ¼/»Ø·ÅµÄ²âÊÔ¹¤¾ßÖĞµÄÒ»ÖÖ£¬»òÕß½øĞĞÒ»Ğ©Ä¿ÊÓ¼ì²é×÷Îª²âÊÔµÄÒ»²¿·Ö½«ÊÇÒ»¸ö¸üºÃµÄÖ÷Òâ¡£µ«ÊÇ£¬ÄÇ²¢²»ÒâÎ¶×ÅÒ»°ãµÄ¹æÔò¡ª¡ª²»Òª½øĞĞÄ¿ÊÓ¼ì²é¡ª¡ªÓ¦¸Ã±»ºöÂÔ¡£ 
+              ä½ å¯ä»¥ç”¨å¾ˆå¤šæ–¹æ³•é¿å…ç›®è§†æ£€æŸ¥ã€‚ä½†æ˜¯ï¼Œæœ‰æ—¶ä½¿ç”¨ç›®è§†æ£€æŸ¥æˆ–ä¸€ç§æ›´ä¸“ç”¨çš„æµ‹è¯•å·¥å…·ä¼šæ›´åŠ èŠ‚çœæˆæœ¬ã€‚ä¾‹å¦‚ï¼Œæµ‹è¯•åœ¨JUnitçš„ä¸€ä¸ªç”¨æˆ·ç•Œé¢çš„åŠ¨æ€è¡Œä¸ºæ˜¯å¤æ‚çš„ï¼Œä½†å´æœ‰å¯èƒ½ã€‚è´­ä¹°å¯åˆ©ç”¨çš„ä¼—å¤šç”¨æˆ·ç•Œé¢è®°å½•/å›æ”¾çš„æµ‹è¯•å·¥å…·ä¸­çš„ä¸€ç§ï¼Œæˆ–è€…è¿›è¡Œä¸€äº›ç›®è§†æ£€æŸ¥ä½œä¸ºæµ‹è¯•çš„ä¸€éƒ¨åˆ†å°†æ˜¯ä¸€ä¸ªæ›´å¥½çš„ä¸»æ„ã€‚ä½†æ˜¯ï¼Œé‚£å¹¶ä¸æ„å‘³ç€ä¸€èˆ¬çš„è§„åˆ™â€”â€”ä¸è¦è¿›è¡Œç›®è§†æ£€æŸ¥â€”â€”åº”è¯¥è¢«å¿½ç•¥ã€‚ 
             <p><!-- break --> 
             <p><font size=+1><strong>Keep tests small and fast<br>
-              ±£³Ö²âÊÔĞ¡¶ø¿ìËÙ </strong></font><br>
+              ä¿æŒæµ‹è¯•å°è€Œå¿«é€Ÿ </strong></font><br>
               Executing every test for the entire system shouldn't take hours. 
               Indeed, developers will more consistently run tests that execute 
               quickly. Without regularly running the full set of tests, it will 
@@ -496,16 +496,16 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               will be lost. This means stress tests and load tests for single 
               classes or small frameworks of classes shouldn't be run as part 
               of the unit test suite; they should be executed separately. <br>
-              Ö´ĞĞÃ¿Ò»ÏîÈ«ÃæµÄÏµÍ³²âÊÔ²»¸Ã»¨¼¸¸öĞ¡Ê±¡£ÊÇµÄ£¬¿ª·¢ÕßÓ¦¸Ã¸ü¼ÓÒ»¹áµÄ½øĞĞÄÇĞ©Ö´ĞĞ¿ìËÙµÄ²âÊÔ¡£Ã»ÓĞÓĞ¹æÂÉµØ½øĞĞÈ«Ì×²âÊÔ£¬µ±×÷³ö¸Ä±äÊ±£¬½«ºÜÄÑÖ¤ÊµÕû¸öÏµÍ³µÄÓĞĞ§ĞÔ¡£´íÎó½«»áõæÊÖõæ½Å½øÀ´£¬µ¥Ôª²âÊÔµÄºÃ´¦Ò²»áÉ¥Ê§¡£ÕâÒâÎ¶×ÅÕë¶Ôµ¥Ò»ÀàºÍĞ¡¿ò¼ÜÀàµÄÖØµã²âÊÔºÍ¸ºÔØ²âÊÔ²»¸Ã×÷Îªµ¥Ôª²âÊÔ¼¯ºÏµÄÒ»²¿·Ö£»ËüÃÇÓ¦¸Ã·Ö¿ª½øĞĞ¡£ 
+              æ‰§è¡Œæ¯ä¸€é¡¹å…¨é¢çš„ç³»ç»Ÿæµ‹è¯•ä¸è¯¥èŠ±å‡ ä¸ªå°æ—¶ã€‚æ˜¯çš„ï¼Œå¼€å‘è€…åº”è¯¥æ›´åŠ ä¸€è´¯çš„è¿›è¡Œé‚£äº›æ‰§è¡Œå¿«é€Ÿçš„æµ‹è¯•ã€‚æ²¡æœ‰æœ‰è§„å¾‹åœ°è¿›è¡Œå…¨å¥—æµ‹è¯•ï¼Œå½“ä½œå‡ºæ”¹å˜æ—¶ï¼Œå°†å¾ˆéš¾è¯å®æ•´ä¸ªç³»ç»Ÿçš„æœ‰æ•ˆæ€§ã€‚é”™è¯¯å°†ä¼šè¹‘æ‰‹è¹‘è„šè¿›æ¥ï¼Œå•å…ƒæµ‹è¯•çš„å¥½å¤„ä¹Ÿä¼šä¸§å¤±ã€‚è¿™æ„å‘³ç€é’ˆå¯¹å•ä¸€ç±»å’Œå°æ¡†æ¶ç±»çš„é‡ç‚¹æµ‹è¯•å’Œè´Ÿè½½æµ‹è¯•ä¸è¯¥ä½œä¸ºå•å…ƒæµ‹è¯•é›†åˆçš„ä¸€éƒ¨åˆ†ï¼›å®ƒä»¬åº”è¯¥åˆ†å¼€è¿›è¡Œã€‚ 
             <p><font size=+1><strong>Use the reflection-driven JUnit API<br>
-              Ê¹ÓÃÓ³ÉäÇı¶¯µÄJUnit API </strong></font><br>
+              ä½¿ç”¨æ˜ å°„é©±åŠ¨çš„JUnit API </strong></font><br>
               Allowing <code>TestSuite</code> to populate itself with test cases 
               using reflection reduces maintenance time. Reflection ensures that 
               you don't need to update the <code>suite()</code> implementation 
               whenever a new test is added. <br>
-              ÔÊĞíTestSuiteÊ¹ÓÃÓ³ÉäÔÚ²âÊÔ»·¾³ÏÂ·±Ö³×Ô¼º¿ÉÒÔ¼õÉÙÎ¬»¤Ê±¼ä¡£µ±ĞÂµÄ²âÊÔ±»¼Ó½øÀ´Ê±£¬Ó³ÉäÈ·±£Äã²»ĞèÒª¸üĞÂsuite()¡£ 
+              å…è®¸TestSuiteä½¿ç”¨æ˜ å°„åœ¨æµ‹è¯•ç¯å¢ƒä¸‹ç¹æ®–è‡ªå·±å¯ä»¥å‡å°‘ç»´æŠ¤æ—¶é—´ã€‚å½“æ–°çš„æµ‹è¯•è¢«åŠ è¿›æ¥æ—¶ï¼Œæ˜ å°„ç¡®ä¿ä½ ä¸éœ€è¦æ›´æ–°suite()ã€‚ 
             <p><font size=+1><strong>Build a test case for the entire system<br>
-              ÎªÕû¸öÏµÍ³½¨Á¢Ò»¸ö²âÊÔ»·¾³ </strong></font><br>
+              ä¸ºæ•´ä¸ªç³»ç»Ÿå»ºç«‹ä¸€ä¸ªæµ‹è¯•ç¯å¢ƒ </strong></font><br>
               It is important to build a test case for the entire system. If one 
               test case exercises the whole system, then developers can test the 
               impact their changes will have on every class in the system. This 
@@ -513,7 +513,7 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               effects being caught earlier. Without a universal test case, developers 
               tend to test only the class they have modified. Also, running all 
               the tests for the system becomes a painstaking manual process.<br>
-              ÎªÕû¸öÏµÍ³½¨Á¢Ò»¸ö²âÊÔ»·¾³ÊÇÖØÒªµÄ¡£Èç¹ûÒ»¸ö²âÊÔ»·¾³¶ÔÓÚÕû¸öÏµÍ³ĞĞÖ®ÓĞĞ§£¬ÄÇÃ´¿ª·¢Õß¿ÉÒÔ²âÊÔËûÃÇµÄ¸ÄÕı»á¶ÔÏµÍ³ÖĞµÄÃ¿¸öÀàÓĞÊ²Ã´Ó°Ïì¡£ÕâÔö¼ÓÁËÓÉÓÚÏÈÇ°·¢ÏÖµÄ²»ÔøÔ¤ÁÏµ½µÄÒ»ÃæµÄÓ°Ïì¶øÒıÆğµÄ·¸´íÎóµÄ¼¸ÂÊ¡£Ã»ÓĞÒ»¸öÍ¨ÓÃµÄ²âÊÔ»·¾³µÄ»°£¬¿ª·¢Õß½«Ö»ÄÜ²âÊÔËûÃÇĞŞ¸Ä¹ıµÄÀà¡£´ËÍâ£¬ÔËĞĞÏµÍ³µÄÃ¿Ò»Ïî²âÊÔ½«³ÉÎªÒ»¸ö¼è¿àµÄÊÖ¹¤¹ı³Ì¡£ 
+              ä¸ºæ•´ä¸ªç³»ç»Ÿå»ºç«‹ä¸€ä¸ªæµ‹è¯•ç¯å¢ƒæ˜¯é‡è¦çš„ã€‚å¦‚æœä¸€ä¸ªæµ‹è¯•ç¯å¢ƒå¯¹äºæ•´ä¸ªç³»ç»Ÿè¡Œä¹‹æœ‰æ•ˆï¼Œé‚£ä¹ˆå¼€å‘è€…å¯ä»¥æµ‹è¯•ä»–ä»¬çš„æ”¹æ­£ä¼šå¯¹ç³»ç»Ÿä¸­çš„æ¯ä¸ªç±»æœ‰ä»€ä¹ˆå½±å“ã€‚è¿™å¢åŠ äº†ç”±äºå…ˆå‰å‘ç°çš„ä¸æ›¾é¢„æ–™åˆ°çš„ä¸€é¢çš„å½±å“è€Œå¼•èµ·çš„çŠ¯é”™è¯¯çš„å‡ ç‡ã€‚æ²¡æœ‰ä¸€ä¸ªé€šç”¨çš„æµ‹è¯•ç¯å¢ƒçš„è¯ï¼Œå¼€å‘è€…å°†åªèƒ½æµ‹è¯•ä»–ä»¬ä¿®æ”¹è¿‡çš„ç±»ã€‚æ­¤å¤–ï¼Œè¿è¡Œç³»ç»Ÿçš„æ¯ä¸€é¡¹æµ‹è¯•å°†æˆä¸ºä¸€ä¸ªè‰°è‹¦çš„æ‰‹å·¥è¿‡ç¨‹ã€‚ 
             <p>If we built a test case for the entire system, it would consist 
               of all the other test cases, already defined. The test case would 
               define the <code>suite()</code> method, which would add all test 
@@ -526,24 +526,24 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               the test suite, build a test case that automatically builds a <code>TestSuite</code> 
               from all of your system's test cases. Here is an outline of the 
               requirements for such a test case:<br>
-              Èç¹ûÎÒÃÇÎªÕû¸öÏµÍ³½¨Á¢Ò»¸ö²âÊÔ»·¾³£¬ÕâĞè°üÀ¨ËùÓĞÒÑ¾­¶¨ÒåµÄÆäËü²âÊÔ»·¾³¡£²âÊÔ»·¾³Ğè¶¨Òåsuite() ·½·¨£¬Õâ»áÊ¹ËùÓĞÏµÍ³¶¨ÒåµÄ²âÊÔ»·¾³¼Óµ½TestSuite¡£ 
-             Õâ¸ö²âÊÔ×éºÏ»áÓÉsuite()·½·¨·µ»Ø¡£Èç¹ûÄãÓĞĞí¶à²âÊÔ»·¾³£¬½¨Á¢ÕâÑùÒ»¸ö²âÊÔ×éºÏ½«ºÄ·Ñ´óÁ¿Ê±¼ä¡£ ÁíÍâ£¬µ±ĞÂµÄ²âÊÔ»·¾³±»¼ÓÈë»òÕßÏÖÓĞµÄ²âÊÔ»·¾³±»¸ÄÃû»òÉ¾³ıÊ±£¬Äã±ØĞë¸üĞÂÈ«¾Ö²âÊÔ»·¾³¡£È¡´úÊÖ¶¯½¨Á¢ºÍÎ¬»¤²âÊÔ×éºÏ£¬ 
-         ½¨Á¢Ò»¸öÄÜ×Ô¶¯½¨Á¢ºÍÎ¬»¤À´×ÔÄãÏµÍ³µÄÈ«²¿²âÊÔ»·¾³µÄ²âÊÔ×éºÏ¡£ÕâÀïÓĞÒ»¸ö¶ÔÓÚ´´½¨Ò»¸ö²âÊÔ»·¾³ĞèÇóµÄ´ó¸ÅÃèÊö£º 
+              å¦‚æœæˆ‘ä»¬ä¸ºæ•´ä¸ªç³»ç»Ÿå»ºç«‹ä¸€ä¸ªæµ‹è¯•ç¯å¢ƒï¼Œè¿™éœ€åŒ…æ‹¬æ‰€æœ‰å·²ç»å®šä¹‰çš„å…¶å®ƒæµ‹è¯•ç¯å¢ƒã€‚æµ‹è¯•ç¯å¢ƒéœ€å®šä¹‰suite() æ–¹æ³•ï¼Œè¿™ä¼šä½¿æ‰€æœ‰ç³»ç»Ÿå®šä¹‰çš„æµ‹è¯•ç¯å¢ƒåŠ åˆ°TestSuiteã€‚ 
+             è¿™ä¸ªæµ‹è¯•ç»„åˆä¼šç”±suite()æ–¹æ³•è¿”å›ã€‚å¦‚æœä½ æœ‰è®¸å¤šæµ‹è¯•ç¯å¢ƒï¼Œå»ºç«‹è¿™æ ·ä¸€ä¸ªæµ‹è¯•ç»„åˆå°†è€—è´¹å¤§é‡æ—¶é—´ã€‚ å¦å¤–ï¼Œå½“æ–°çš„æµ‹è¯•ç¯å¢ƒè¢«åŠ å…¥æˆ–è€…ç°æœ‰çš„æµ‹è¯•ç¯å¢ƒè¢«æ”¹åæˆ–åˆ é™¤æ—¶ï¼Œä½ å¿…é¡»æ›´æ–°å…¨å±€æµ‹è¯•ç¯å¢ƒã€‚å–ä»£æ‰‹åŠ¨å»ºç«‹å’Œç»´æŠ¤æµ‹è¯•ç»„åˆï¼Œ 
+         å»ºç«‹ä¸€ä¸ªèƒ½è‡ªåŠ¨å»ºç«‹å’Œç»´æŠ¤æ¥è‡ªä½ ç³»ç»Ÿçš„å…¨éƒ¨æµ‹è¯•ç¯å¢ƒçš„æµ‹è¯•ç»„åˆã€‚è¿™é‡Œæœ‰ä¸€ä¸ªå¯¹äºåˆ›å»ºä¸€ä¸ªæµ‹è¯•ç¯å¢ƒéœ€æ±‚çš„å¤§æ¦‚æè¿°ï¼š 
             <p> 
             <ul>
               <li>It should not be self-loading; that would cause recursion. As 
                 such, we need to mark test cases as not loadable.<br>
-                ²»Ó¦¸Ã×ÔÎÒµ÷ÓÃ£»ÄÇ»áÒıÆğµİ¹é¡£Í¬ÑùµÄ£¬ÎÒÃÇĞèÒª±ê×¢²âÊÔ»·¾³²»¿ÉÔØÈë¡£ 
+                ä¸åº”è¯¥è‡ªæˆ‘è°ƒç”¨ï¼›é‚£ä¼šå¼•èµ·é€’å½’ã€‚åŒæ ·çš„ï¼Œæˆ‘ä»¬éœ€è¦æ ‡æ³¨æµ‹è¯•ç¯å¢ƒä¸å¯è½½å…¥ã€‚ 
               <li>It should not load classes derived from <code>TestCase</code>s 
                 that are meant to be subclasses, and not directly executed.<br>
-                ²»¸ÃÔØÈëÄÇĞ©ÑÜÉú×ÔTestCaseµÄÀà£¬ÕâÒâÎ¶×Å¶¨ÒåÎª×Ó¼¯£¬ÇÒ²»Ö±½ÓÖ´ĞĞ¡£ 
+                ä¸è¯¥è½½å…¥é‚£äº›è¡ç”Ÿè‡ªTestCaseçš„ç±»ï¼Œè¿™æ„å‘³ç€å®šä¹‰ä¸ºå­é›†ï¼Œä¸”ä¸ç›´æ¥æ‰§è¡Œã€‚ 
               <li>It should distinguish between unit tests and other tests, like 
                 load or stress tests. That will let different tests run at different 
                 times.<br>
-                µ¥Ôª²âÊÔºÍÆäËû²âÊÔÏñ¸ºÔØ»òÖØµã²âÊÔÒ»ÑùÓ¦¸ÃÓĞËùÇø±ğ¡£²»Í¬µÄ²âÊÔÔËĞĞ²»Í¬µÄ´ÎÊı¡£ 
+                å•å…ƒæµ‹è¯•å’Œå…¶ä»–æµ‹è¯•åƒè´Ÿè½½æˆ–é‡ç‚¹æµ‹è¯•ä¸€æ ·åº”è¯¥æœ‰æ‰€åŒºåˆ«ã€‚ä¸åŒçš„æµ‹è¯•è¿è¡Œä¸åŒçš„æ¬¡æ•°ã€‚ 
               <li>It should recurse down a directory structure, looking for test 
                 cases to add to the test suite.<br>
-                ÔÚÒ»¸öÄ¿Â¼½á¹¹ÏÂµİ¹é£¬ÒÔÑ°ÕÒ¼ÓÈë²âÊÔ×éºÏµÄ²âÊÔ»·¾³¡£ </li>
+                åœ¨ä¸€ä¸ªç›®å½•ç»“æ„ä¸‹é€’å½’ï¼Œä»¥å¯»æ‰¾åŠ å…¥æµ‹è¯•ç»„åˆçš„æµ‹è¯•ç¯å¢ƒã€‚ </li>
             </ul>
             <p>We can use the Java type system to determine what sort of test 
               a test case represents. We can have test cases extend classes like 
@@ -556,28 +556,28 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               Test cases will be loaded if they have this field declared with 
               a value matching a string that the automatic test case has been 
               configured with. To build this, we'll implement three classes:<br>
-              ÎÒÃÇ¿ÉÒÔÊ¹ÓÃÒ»¸öJavaÀàĞÍµÄÏµÍ³À´ÅĞ¶ÏÒ»¸ö²âÊÔ»·¾³´ú±íÊ²Ã´ÑùµÄ²âÊÔ¡£ÎÒÃÇ¿ÉÒÔÓĞ²âÊÔ»·¾³ À©Õ¹ÀàÈçUnitTest£¬StressTest£¬LoadTestµÈµÈ¡£ 
-              µ«ÊÇ£¬Õâ»áÊ¹²âÊÔ»·¾³ÀàÔÚ²âÊÔÀàĞÍÖĞÄÑÒÔÔÙÀûÓÃ£¬ÒòÎª²âÊÔÀàĞÍµÄ¾ö¶¨ÊÇÔÚ¿¿½ü¼Ì³Ğ²ã´ÎµÄ¸ù²¿×÷³öµÄ£»Ëü±¾¸ÃÔÚÃ¿¸öÒ¶ÏÂ×÷³ö¡£ ×÷ÎªÒ»¸ö¿ÉÑ¡·½°¸£¬ÎÒÃÇ¿ÉÒÔÊ¹ÓÃÒ»¸öÓò½«²âÊÔÇø·Ö¿ªÀ´£ºpublic 
-              static final String TEST_ALL_TEST_TYPE¡£Èç¹ûÕâ¸öÓòÉùÃ÷µÄÖµ·ûºÏ²âÊÔ»·¾³Ëù×Ô¶¯ÅäÖÃµÄ×Ö·û´®£¬ÄÇÃ´²âÊÔ»·¾³½«±»¶ÁÈë¡£½¨Á¢Õâ¸ö£¬ÎÒÃÇĞèÒªÊµÏÖÈı¸öÀà¡£ 
+              æˆ‘ä»¬å¯ä»¥ä½¿ç”¨ä¸€ä¸ªJavaç±»å‹çš„ç³»ç»Ÿæ¥åˆ¤æ–­ä¸€ä¸ªæµ‹è¯•ç¯å¢ƒä»£è¡¨ä»€ä¹ˆæ ·çš„æµ‹è¯•ã€‚æˆ‘ä»¬å¯ä»¥æœ‰æµ‹è¯•ç¯å¢ƒ æ‰©å±•ç±»å¦‚UnitTestï¼ŒStressTestï¼ŒLoadTestç­‰ç­‰ã€‚ 
+              ä½†æ˜¯ï¼Œè¿™ä¼šä½¿æµ‹è¯•ç¯å¢ƒç±»åœ¨æµ‹è¯•ç±»å‹ä¸­éš¾ä»¥å†åˆ©ç”¨ï¼Œå› ä¸ºæµ‹è¯•ç±»å‹çš„å†³å®šæ˜¯åœ¨é è¿‘ç»§æ‰¿å±‚æ¬¡çš„æ ¹éƒ¨ä½œå‡ºçš„ï¼›å®ƒæœ¬è¯¥åœ¨æ¯ä¸ªå¶ä¸‹ä½œå‡ºã€‚ ä½œä¸ºä¸€ä¸ªå¯é€‰æ–¹æ¡ˆï¼Œæˆ‘ä»¬å¯ä»¥ä½¿ç”¨ä¸€ä¸ªåŸŸå°†æµ‹è¯•åŒºåˆ†å¼€æ¥ï¼špublic 
+              static final String TEST_ALL_TEST_TYPEã€‚å¦‚æœè¿™ä¸ªåŸŸå£°æ˜çš„å€¼ç¬¦åˆæµ‹è¯•ç¯å¢ƒæ‰€è‡ªåŠ¨é…ç½®çš„å­—ç¬¦ä¸²ï¼Œé‚£ä¹ˆæµ‹è¯•ç¯å¢ƒå°†è¢«è¯»å…¥ã€‚å»ºç«‹è¿™ä¸ªï¼Œæˆ‘ä»¬éœ€è¦å®ç°ä¸‰ä¸ªç±»ã€‚ 
             <p> 
             <ul>
               <li><strong><code>ClassFinder</code></strong> recursively searches 
                 a directory tree for classfiles. Each classfile is loaded and 
                 the class's full class name is extracted. That class name is added 
                 to a list for later loading. 
-              <li><strong><code>ClassFinder</code></strong> ÔÚÒ»¸öÄ¿Â¼Ê÷µİ¹éËÑË÷ÀàÎÄ¼ş¡£Ã¿¸öÀàÎÄ¼ş±»¶ÁÈë£¬ÀàµÄÈ«³Æ±»Õ¹¿ª¡£Õâ¸öÀàÃû³Æ±»¼Óµ½Ò»¸öÁĞ±íÀïÒÔ±¸ÉÔºó¶ÁÈë¡£ 
+              <li><strong><code>ClassFinder</code></strong> åœ¨ä¸€ä¸ªç›®å½•æ ‘é€’å½’æœç´¢ç±»æ–‡ä»¶ã€‚æ¯ä¸ªç±»æ–‡ä»¶è¢«è¯»å…¥ï¼Œç±»çš„å…¨ç§°è¢«å±•å¼€ã€‚è¿™ä¸ªç±»åç§°è¢«åŠ åˆ°ä¸€ä¸ªåˆ—è¡¨é‡Œä»¥å¤‡ç¨åè¯»å…¥ã€‚ 
               <li><strong><code>TestCaseLoader</code></strong> loads each class 
                 in the list found by <code>ClassFinder</code> and determines if 
                 it is a test case. If it is, it is added to a list. 
-              <li><strong><code>TestCaseLoader</code></strong> ¶ÁÈëÓÉClassFinderÕÒµ½µÄÁĞ±íÖĞµÄÃ¿¸öÀà²¢ÅĞ¶ÏËüÊÇ·ñÎªÒ»¸ö²âÊÔ»·¾³¡£Èç¹ûÊÇ£¬±»¼ÓÈëÒ»¸öÁĞ±í¡£ 
+              <li><strong><code>TestCaseLoader</code></strong> è¯»å…¥ç”±ClassFinderæ‰¾åˆ°çš„åˆ—è¡¨ä¸­çš„æ¯ä¸ªç±»å¹¶åˆ¤æ–­å®ƒæ˜¯å¦ä¸ºä¸€ä¸ªæµ‹è¯•ç¯å¢ƒã€‚å¦‚æœæ˜¯ï¼Œè¢«åŠ å…¥ä¸€ä¸ªåˆ—è¡¨ã€‚ 
               <li><strong><code>TestAll</code></strong> is a subclass of <code>TestCase</code> 
                 with an implementation of <code>suite()</code> that will load 
                 in a set of test cases by <code>TestCaseLoader</code>. </li>
-              <li><strong><code>TestAll</code></strong> ÊÇTestCaseµÄ×Ó¼¯£¬¾ßÓĞÒ»¸ösuite()µÄÊµÏÖ£¬¿ÉÒÔ¶ÁÈëÒ»ÅúÓÉTestCaseLoaderÉú³ÉµÄµÄ²âÊÔÓÃÀı¡£ 
+              <li><strong><code>TestAll</code></strong> æ˜¯TestCaseçš„å­é›†ï¼Œå…·æœ‰ä¸€ä¸ªsuite()çš„å®ç°ï¼Œå¯ä»¥è¯»å…¥ä¸€æ‰¹ç”±TestCaseLoaderç”Ÿæˆçš„çš„æµ‹è¯•ç”¨ä¾‹ã€‚ 
               </li>
             </ul>
             <p>Let's look at each class in turn.<br>
-              ÈÃÎÒÃÇ°´Ë³Ğò¿´Ò»¸öÃ¿¸öÀà¡£ 
+              è®©æˆ‘ä»¬æŒ‰é¡ºåºçœ‹ä¸€ä¸ªæ¯ä¸ªç±»ã€‚ 
             <p><strong>ClassFinder<br>
               ClassFinder </strong><br>
               <code>ClassFinder</code> locates the classes within the system to 
@@ -585,7 +585,7 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               classes. <code>ClassFinder</code> then finds all the classes in 
               the directory tree and stores them for later use. The first part 
               of <code>ClassFinder</code>'s implementation is below:<br>
-              ClassFinder¶¨Î»Òª²âÊÔµÄÏµÍ³ÀïµÄÃ¿¸öÀà¡£ËüÊ¹ÓÃÒ»¸ö±£´æÏµÍ³ËùÓĞÀàµÄÄ¿Â¼½á¹¹¡£ClassFinderÈ»ºóÔÚÄ¿Â¼Ê÷ÀïÕÒµ½ËùÓĞÀà£¬²¢±£´æËüÃÇÒÔ±¸ÉÔºóÊ¹ÓÃ¡£µÚÒ»²¿·ÖµÄClassFinderÊµÏÖÈçÏÂ£º 
+              ClassFinderå®šä½è¦æµ‹è¯•çš„ç³»ç»Ÿé‡Œçš„æ¯ä¸ªç±»ã€‚å®ƒä½¿ç”¨ä¸€ä¸ªä¿å­˜ç³»ç»Ÿæ‰€æœ‰ç±»çš„ç›®å½•ç»“æ„ã€‚ClassFinderç„¶ååœ¨ç›®å½•æ ‘é‡Œæ‰¾åˆ°æ‰€æœ‰ç±»ï¼Œå¹¶ä¿å­˜å®ƒä»¬ä»¥å¤‡ç¨åä½¿ç”¨ã€‚ç¬¬ä¸€éƒ¨åˆ†çš„ClassFinderå®ç°å¦‚ä¸‹ï¼š 
             <p><code>public class ClassFinder { <br>
               &nbsp;&nbsp;&nbsp;// The cumulative list of classes found. <br>
               &nbsp;&nbsp;&nbsp;final private Vector classNameList = new Vector 
@@ -627,7 +627,7 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
             <p>In the code above, we iterate over all the files in a directory. 
               If a filename has a ".class" extension, we determine the fully qualified 
               class name of the class stored in the classfile, as seen here: <br>
-              ÔÚÉÏÃæµÄ´úÂëÖĞ£¬ÎÒÃÇÖØÉêÁËÒ»¸öÄ¿Â¼ÀïµÄËùÓĞÎÄ¼ş¡£Èç¹ûÒ»¸öÎÄ¼şÓĞ.classµÄÀ©Õ¹Ãû£¬ÎÒÃÇ¾Í²â¶¨´æÔÚÀàÎÄ¼şÀïµÄÀàµÄÓĞĞ§ÀàÃû³Æ£¬¾ÍÈçÄãËù¼û£º 
+              åœ¨ä¸Šé¢çš„ä»£ç ä¸­ï¼Œæˆ‘ä»¬é‡ç”³äº†ä¸€ä¸ªç›®å½•é‡Œçš„æ‰€æœ‰æ–‡ä»¶ã€‚å¦‚æœä¸€ä¸ªæ–‡ä»¶æœ‰.classçš„æ‰©å±•åï¼Œæˆ‘ä»¬å°±æµ‹å®šå­˜åœ¨ç±»æ–‡ä»¶é‡Œçš„ç±»çš„æœ‰æ•ˆç±»åç§°ï¼Œå°±å¦‚ä½ æ‰€è§ï¼š 
             <p><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JcfClassInputStream 
               inputStream = new JcfClassInputStream(new FileInputStream (file)); 
               <br>
@@ -647,11 +647,11 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               name, but that doesn't work well for build systems that don't store 
               classes according to this structure. Nor does it work for inner 
               classes. <br>
-              ÕâĞ©´úÂëÊ¹ÓÃJCF°üÀ´¶ÁÈëÀàÎÄ¼şÒÔ¼°²â¶¨±£´æÔÚÀïÃæµÄÀàµÄÃû³Æ¡£JCF°üÊÇÒ»Ì×¶ÁÈëºÍ¼ì²âÀàÎÄ¼şµÄ¹¤¾ßÀà¡£(²ÎÔÄ<a href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resources">×ÊÔ´</a>ÒÔ»ñµÃ½øÒ»²½µÄĞÅÏ¢¡£)JCF°üÔÊĞíÎÒÃÇÑ°ÕÒÃ¿¸öÀàµÄÈ«³Æ¡£ÎÒÃÇÄÜ´ÓÄ¿Â¼ÃûÍÆ¶Ï³öÀàµÄÃû³Æ£¬µ«¶ÔÓÚÄÇĞ©²»ÊÇÒÔÕâÖÖ½á¹¹±£´æÀàµÄÏµÍ³¾ÍĞĞ²»Í¨ÁË¡£¶øÇÒÉî²ãµÄÀàÒ²²»ÄÜÓÃÕâÖÖ·½·¨¡£ 
+              è¿™äº›ä»£ç ä½¿ç”¨JCFåŒ…æ¥è¯»å…¥ç±»æ–‡ä»¶ä»¥åŠæµ‹å®šä¿å­˜åœ¨é‡Œé¢çš„ç±»çš„åç§°ã€‚JCFåŒ…æ˜¯ä¸€å¥—è¯»å…¥å’Œæ£€æµ‹ç±»æ–‡ä»¶çš„å·¥å…·ç±»ã€‚(å‚é˜…<a href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resources">èµ„æº</a>ä»¥è·å¾—è¿›ä¸€æ­¥çš„ä¿¡æ¯ã€‚)JCFåŒ…å…è®¸æˆ‘ä»¬å¯»æ‰¾æ¯ä¸ªç±»çš„å…¨ç§°ã€‚æˆ‘ä»¬èƒ½ä»ç›®å½•åæ¨æ–­å‡ºç±»çš„åç§°ï¼Œä½†å¯¹äºé‚£äº›ä¸æ˜¯ä»¥è¿™ç§ç»“æ„ä¿å­˜ç±»çš„ç³»ç»Ÿå°±è¡Œä¸é€šäº†ã€‚è€Œä¸”æ·±å±‚çš„ç±»ä¹Ÿä¸èƒ½ç”¨è¿™ç§æ–¹æ³•ã€‚ 
             <p>Lastly, we check to see if the file is actually a directory. (See 
               the code snippet below.) If it is, we recurse into it. This allows 
               us to discover all the classes in a directory tree:<br>
-              ×îºó£¬ÎÒÃÇ²é¿´Ò»ÏÂÎÄ¼şÊÇ·ñÈ·ÊµÊÇÒ»¸öÄ¿Â¼¡£(Çë¿´ÏÂÃæµÄ´úÂëÆ¬¶Ï¡£)Èç¹ûÊÇ£¬ÎÒÃÇÔÙµİ¹é½øÈë¡£ÕâÔÊĞíÎÒÃÇ·¢ÏÖËùÓĞÔÚÒ»¸öÄ¿Â¼Ê÷ÀïµÄÀà£º 
+              æœ€åï¼Œæˆ‘ä»¬æŸ¥çœ‹ä¸€ä¸‹æ–‡ä»¶æ˜¯å¦ç¡®å®æ˜¯ä¸€ä¸ªç›®å½•ã€‚(è¯·çœ‹ä¸‹é¢çš„ä»£ç ç‰‡æ–­ã€‚)å¦‚æœæ˜¯ï¼Œæˆ‘ä»¬å†é€’å½’è¿›å…¥ã€‚è¿™å…è®¸æˆ‘ä»¬å‘ç°æ‰€æœ‰åœ¨ä¸€ä¸ªç›®å½•æ ‘é‡Œçš„ç±»ï¼š 
             <p><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else 
               if(file.isDirectory()) { <br>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;findAndStoreTestClasses 
@@ -675,7 +675,7 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               names from <code>ClassFinder</code>. This code snippet shows the 
               top-level method for adding a class that represents a <code>TestCase</code> 
               to the list of test cases: <br>
-              TestCaseLoaderÔÚClassFinderÖĞµÃµ½µÄÀàÃû×ÖÑ°ÕÒ²âÊÔ»·¾³¡£Õâ¸ö´úÂëÆ¬¶ÏÕ¹Ê¾ÁËÔö¼ÓÒ»¸ö¶ÔÓÚËùÓĞ²âÊÔ»·¾³ÁĞ±íÌåÏÖTestCaseµÄÀàµÄ¶¥¼¶·½·¨£º 
+              TestCaseLoaderåœ¨ClassFinderä¸­å¾—åˆ°çš„ç±»åå­—å¯»æ‰¾æµ‹è¯•ç¯å¢ƒã€‚è¿™ä¸ªä»£ç ç‰‡æ–­å±•ç¤ºäº†å¢åŠ ä¸€ä¸ªå¯¹äºæ‰€æœ‰æµ‹è¯•ç¯å¢ƒåˆ—è¡¨ä½“ç°TestCaseçš„ç±»çš„é¡¶çº§æ–¹æ³•ï¼š 
             <p><code>public class TestCaseLoader { <br>
               &nbsp;&nbsp;&nbsp;final private Vector classList = new Vector (); 
               <br>
@@ -713,19 +713,19 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               </code> 
             <p>You'll find the meat of the class in the <code>isATestCaseOfTheCorrectType()</code> 
               method, listed below. For each class being considered, it:<br>
-              Äã»áÔÚÏÂÃæÕÒµ½ÔÚisATestCaseOfTheCorrectType()·½·¨ÖĞisATestCaseOfTheCorrectType()ÖĞÀàµÄÄÚÈİ¡£¶ÔÓÚÃ¿¸öÔÚ¿¼ÂÇ·¶Î§ÄÚµÄÀà£ºËü½«
+              ä½ ä¼šåœ¨ä¸‹é¢æ‰¾åˆ°åœ¨isATestCaseOfTheCorrectType()æ–¹æ³•ä¸­isATestCaseOfTheCorrectType()ä¸­ç±»çš„å†…å®¹ã€‚å¯¹äºæ¯ä¸ªåœ¨è€ƒè™‘èŒƒå›´å†…çš„ç±»ï¼šå®ƒå°†
             <p> 
             <ul>
               <li>Determines whether it is derived from <code>TestCase</code>. 
                 If not, it is not a test case.<br>
-                ÅĞ¶ÏÊÇ·ñ´ÓTestCaseÑÜÉú¶øÀ´¡£Èç¹û²»ÊÇ£¬Ëü¾Í²»ÊÇ²âÊÔÓÃÀı¡£ 
+                åˆ¤æ–­æ˜¯å¦ä»TestCaseè¡ç”Ÿè€Œæ¥ã€‚å¦‚æœä¸æ˜¯ï¼Œå®ƒå°±ä¸æ˜¯æµ‹è¯•ç”¨ä¾‹ã€‚ 
               <li>Determines whether the field <code>public final static TEST_ALL_TEST_TYPE</code> 
                 has a value matching that specified in the member field <code>requiredType</code>.<br>
-                ÅĞ¶Ïpublic final static TEST_ALL_TEST_TYPEµÄÓòÊÇ·ñÓĞÒ»¸ö·ûºÏÔÚrequiredType³ÉÔ±ÓòÖĞÖ¸¶¨µÄÖµ¡£ 
+                åˆ¤æ–­public final static TEST_ALL_TEST_TYPEçš„åŸŸæ˜¯å¦æœ‰ä¸€ä¸ªç¬¦åˆåœ¨requiredTypeæˆå‘˜åŸŸä¸­æŒ‡å®šçš„å€¼ã€‚ 
               </li>
             </ul>
             <p>Here's the code:<br>
-              ÒÔÏÂÊÇ´úÂë£º 
+              ä»¥ä¸‹æ˜¯ä»£ç ï¼š 
             <p><code>&nbsp;&nbsp;&nbsp;private boolean isATestCaseOfTheCorrectType 
               (final Class testCaseClass) { <br>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean isOfTheCorrectType = 
@@ -769,7 +769,7 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               name. It loads the class (if it can be loaded); if the class is 
               a test case and of the required type, the method adds the class 
               to its list of test cases:<br>
-              ÏÂÒ»²½£¬loadTestCases()·½·¨¼ì²éÃ¿¸öÀàµÄÃû×Ö¡£Ëü¶ÁÈëÀà£¨Èç¹û¿ÉÒÔ¶ÁÈëµÄ»°£©£»Èç¹ûÀàÊÇ²âÊÔ»·¾³²¢ÇÒ·ûºÏËùĞèÀàĞÍ£¬·½·¨½«¼ÓÀàµ½ËüµÄ²âÊÔ»·¾³ÁĞ±í£º 
+              ä¸‹ä¸€æ­¥ï¼ŒloadTestCases()æ–¹æ³•æ£€æŸ¥æ¯ä¸ªç±»çš„åå­—ã€‚å®ƒè¯»å…¥ç±»ï¼ˆå¦‚æœå¯ä»¥è¯»å…¥çš„è¯ï¼‰ï¼›å¦‚æœç±»æ˜¯æµ‹è¯•ç¯å¢ƒå¹¶ä¸”ç¬¦åˆæ‰€éœ€ç±»å‹ï¼Œæ–¹æ³•å°†åŠ ç±»åˆ°å®ƒçš„æµ‹è¯•ç¯å¢ƒåˆ—è¡¨ï¼š 
             <p><code>&nbsp;&nbsp;&nbsp;public void loadTestCases (final Iterator 
               classNamesIterator) { <br>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while (classNamesIterator.hasNext 
@@ -819,13 +819,13 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               <code>TestSuite</code> as part of its implementation of the <code>suite()</code> 
               method. The result: a test case that automatically extracts every 
               defined test case in the system, ready for execution by JUnit.<br>
-              TestCall½«ËùÓĞµÄ¶«Î÷·ÅÔÚÒ»Æğ.ËüÓÃÒÔÇ°Ìáµ½¹ıµÄÀàÔÚÏµÍ³Àï½¨Á¢Ò»¸ö¶¨ÒåºÃµÄ²âÊÔÊµÀıÁĞ±í.È»ºóÌí¼ÓÕâĞ©²âÊÔÊµÀıµ½²âÊÔ¼¯Àï,²¢×÷Îª²âÊÔ¼¯·½·¨µÄÒ»²¿·Ö·µ»Øµ½suite()º¯Êı.½á¹û¾ÍÊÇÉú³ÉÒ»¸ö×¼±¸ÔÚJUnitÀıÖ´ĞĞµÄÊµÀı,¶øÕâ¸öÊµÀı¿ÉÒÔ×Ô¶¯ÊÍ·Å´æ´¢ÔÚÏµÍ³ÀïµÄÔ¤ÏÈ¶¨ÒåºÃµÄ²âÊÔÊµÀı. 
+              TestCallå°†æ‰€æœ‰çš„ä¸œè¥¿æ”¾åœ¨ä¸€èµ·.å®ƒç”¨ä»¥å‰æåˆ°è¿‡çš„ç±»åœ¨ç³»ç»Ÿé‡Œå»ºç«‹ä¸€ä¸ªå®šä¹‰å¥½çš„æµ‹è¯•å®ä¾‹åˆ—è¡¨.ç„¶åæ·»åŠ è¿™äº›æµ‹è¯•å®ä¾‹åˆ°æµ‹è¯•é›†é‡Œ,å¹¶ä½œä¸ºæµ‹è¯•é›†æ–¹æ³•çš„ä¸€éƒ¨åˆ†è¿”å›åˆ°suite()å‡½æ•°.ç»“æœå°±æ˜¯ç”Ÿæˆä¸€ä¸ªå‡†å¤‡åœ¨JUnitä¾‹æ‰§è¡Œçš„å®ä¾‹,è€Œè¿™ä¸ªå®ä¾‹å¯ä»¥è‡ªåŠ¨é‡Šæ”¾å­˜å‚¨åœ¨ç³»ç»Ÿé‡Œçš„é¢„å…ˆå®šä¹‰å¥½çš„æµ‹è¯•å®ä¾‹. 
             <p><code>public class TestAll extends TestCase { <br>
               </code> 
             <p>The <code>addAllTests()</code> method iterates over the classes 
               loaded by the <code>TestCaseLoader</code> and adds them to the test 
               suite:<br>
-              º¯ÊıaddAllTests()ÖØÉêÓÉTestCaseLoaderËù¼ÓÔØµÄÀà,²¢°ÑËûÃÇÌí¼Óµ½²âÊÔ¼¯Àï: 
+              å‡½æ•°addAllTests()é‡ç”³ç”±TestCaseLoaderæ‰€åŠ è½½çš„ç±»,å¹¶æŠŠä»–ä»¬æ·»åŠ åˆ°æµ‹è¯•é›†é‡Œ: 
             <p><code>&nbsp;&nbsp;&nbsp;private static int addAllTests(final TestSuite 
               suite, final Iterator classIterator) <br>
               &nbsp;&nbsp;&nbsp;throws java.io.IOException { <br>
@@ -852,8 +852,8 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               to find all the classes, and the <code>TestCaseLoader</code> to 
               load all the appropriate test cases. It then adds these to a new 
               <code>TestSuite</code>:<br>
-              ÓÃº¯Êısuite(),²âÊÔµÄÇé¿ö¿ÉÒÔ±»Ìí¼Óµ½²âÊÔ¼¯ÀïÃæ,È»ºó·µ»Øµ½JUnitÖ´ĞĞ.Ëü°üº¬ÁË´ÓÏµÍ³ÊôĞÔ"class_root" ÀïÃæÄÇĞ©ÀàËù´æÖüµÄµØ·½.ËüÒ²°üº¬ÁË´ÓÏµÍ³ÊôĞÔ"test_type"ÀïÃæÄÇĞ©¿ÉÒÔ±»¼ÓÔØµÄ²âÊÔÀàµÄÀàĞÍ.ËüÊ¹ÓÃClassF- 
-              inderÀ´Ñ°ÕÒËùÓĞµÄÀà,²¢ÓÃTestCaseLoaderÀ´¼ÓÔØËùÓĞµÄ²âÊÔÊµÀı,²¢½«ÕâĞ©ÊµÀıÌí¼Óµ½Ò»¸öĞÂµÄ²âÊÔ¼¯ÀïÃæ: 
+              ç”¨å‡½æ•°suite(),æµ‹è¯•çš„æƒ…å†µå¯ä»¥è¢«æ·»åŠ åˆ°æµ‹è¯•é›†é‡Œé¢,ç„¶åè¿”å›åˆ°JUnitæ‰§è¡Œ.å®ƒåŒ…å«äº†ä»ç³»ç»Ÿå±æ€§"class_root" é‡Œé¢é‚£äº›ç±»æ‰€å­˜è´®çš„åœ°æ–¹.å®ƒä¹ŸåŒ…å«äº†ä»ç³»ç»Ÿå±æ€§"test_type"é‡Œé¢é‚£äº›å¯ä»¥è¢«åŠ è½½çš„æµ‹è¯•ç±»çš„ç±»å‹.å®ƒä½¿ç”¨ClassF- 
+              inderæ¥å¯»æ‰¾æ‰€æœ‰çš„ç±»,å¹¶ç”¨TestCaseLoaderæ¥åŠ è½½æ‰€æœ‰çš„æµ‹è¯•å®ä¾‹,å¹¶å°†è¿™äº›å®ä¾‹æ·»åŠ åˆ°ä¸€ä¸ªæ–°çš„æµ‹è¯•é›†é‡Œé¢: 
             <p><code>&nbsp;&nbsp;&nbsp;public static Test suite() <br>
               &nbsp;&nbsp;&nbsp;throws Throwable { <br>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try { <br>
@@ -905,16 +905,16 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               </code> 
             <p>To test an entire system using these classes, execute the following 
               command (in a Windows command shell):<br>
-              ÎªÁËÓÃÕâĞ©ÀàÀ´²âÊÔÒ»¸öÍêÕûµÄÏµÍ³,ÇëÖ´ĞĞÏÂÃæµÄÃüÁî(ÔÚWindows»·¾³ÏÂ): 
+              ä¸ºäº†ç”¨è¿™äº›ç±»æ¥æµ‹è¯•ä¸€ä¸ªå®Œæ•´çš„ç³»ç»Ÿ,è¯·æ‰§è¡Œä¸‹é¢çš„å‘½ä»¤(åœ¨Windowsç¯å¢ƒä¸‹): 
             <p><code>java -cp C:\project\classes;C:\junit3.2\junit.jar:C:\jcf\jcfutils.zip 
               -Dclass_root=C:\project\classes -Dtest_type=UNIT junit.ui.TestRunner 
               bp.TestAll <br>
               </code> 
             <p>This command loads and runs all test cases of type <code>UNIT</code> 
               that have classes stored under <code>C:\project\classes</code>.<br>
-              Õâ¸öÃüÁî¼ÓÔØÔËĞĞÁËËùÓĞµÄUNIT²âÊÔÀà,ÕâĞ©²âÊÔÀàÔÚC:\project\classesÀïÒÑ±»·Ö±ğ´æ´¢. 
+              è¿™ä¸ªå‘½ä»¤åŠ è½½è¿è¡Œäº†æ‰€æœ‰çš„UNITæµ‹è¯•ç±»,è¿™äº›æµ‹è¯•ç±»åœ¨C:\project\classesé‡Œå·²è¢«åˆ†åˆ«å­˜å‚¨. 
             <p><font size=+1><strong>Test thread safety<br>
-              °²È«µÄÏß³Ì²âÊÔ </strong></font><br>
+              å®‰å…¨çš„çº¿ç¨‹æµ‹è¯• </strong></font><br>
               You'll want to guarantee the status of supposedly thread-safe classes 
               by testing them. Such tests prove difficult using Junit 3.2's existing 
               set of facilities. You can use <code>junit.extensions.ActiveTest</code> 
@@ -926,15 +926,15 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               First, I'll show how <code>MultiThreadedTestCase</code> assists 
               with multithreaded testing. Then I'll show how <code>MultiThreadedTestCase</code> 
               is implemented.<br>
-              Í¨¹ı²âÊÔ,ÄãÏëÈ·±£ÕâĞ©±»²âÊÔµÄÏß³Ì´¦ÓÚ°²È«×´Ì¬.µ«ÊÇÓÃJunit 3.2'sÌá¹©µÄÏÖ³ÉµÄ¹¤¾ßÍê³ÉÕâĞ©²âÊÔÊÇÀ§ÄÑµÄ.Äã¿ÉÒÔÊ¹ÓÃjunit.extensions.ActiveTestÔÚ²»Í¬µÄÏß³ÌÖĞÔËĞĞÒ»¸ö²âÊÔÊµÀı,µ«ÊÇ²âÊÔ¼¯Ö»ÄÜÈ·±£ÔÚrun()º¯ÊıÀïÒ»¸ö²âÊÔÊµÀıÊÇ¿ÉÒÔÕı³£Íê³ÉµÄ,¶øÓÃjunit.extensions.ActiveTest²»¿ÉÒÔ.ÎÒÃÇ¿ÉÒÔ¾¡Á¦¶¨ÒåÒ»¸ö¾«È·µÄ¹¤×÷¼¯ActiveTestSuite(¶¯Ì¬²âÊÔ¼¯)À´Ìæ»»Ëü,ÈÃÎÒÃÇ¿´Ò»¸ö¼òµ¥µÄ½â¾ö·½·¨: 
-              MultiThreadedTestCase(¶àÏß³Ì²âÊÔ¼¯).Ê×ÏÈÎÒ½«Õ¹Ê¾ÈçºÎÓÃ¶àÏß³Ì²âÊÔÀ´¸¨Öú¶àÏß³Ì²âÊÔÊµÀı.È»ºó½«Õ¹Ê¾¶àÏß³ÌÊµÀıÊÇÔõÃ´ÑùÔËĞĞµÄ. 
+              é€šè¿‡æµ‹è¯•,ä½ æƒ³ç¡®ä¿è¿™äº›è¢«æµ‹è¯•çš„çº¿ç¨‹å¤„äºå®‰å…¨çŠ¶æ€.ä½†æ˜¯ç”¨Junit 3.2'sæä¾›çš„ç°æˆçš„å·¥å…·å®Œæˆè¿™äº›æµ‹è¯•æ˜¯å›°éš¾çš„.ä½ å¯ä»¥ä½¿ç”¨junit.extensions.ActiveTeståœ¨ä¸åŒçš„çº¿ç¨‹ä¸­è¿è¡Œä¸€ä¸ªæµ‹è¯•å®ä¾‹,ä½†æ˜¯æµ‹è¯•é›†åªèƒ½ç¡®ä¿åœ¨run()å‡½æ•°é‡Œä¸€ä¸ªæµ‹è¯•å®ä¾‹æ˜¯å¯ä»¥æ­£å¸¸å®Œæˆçš„,è€Œç”¨junit.extensions.ActiveTestä¸å¯ä»¥.æˆ‘ä»¬å¯ä»¥å°½åŠ›å®šä¹‰ä¸€ä¸ªç²¾ç¡®çš„å·¥ä½œé›†ActiveTestSuite(åŠ¨æ€æµ‹è¯•é›†)æ¥æ›¿æ¢å®ƒ,è®©æˆ‘ä»¬çœ‹ä¸€ä¸ªç®€å•çš„è§£å†³æ–¹æ³•: 
+              MultiThreadedTestCase(å¤šçº¿ç¨‹æµ‹è¯•é›†).é¦–å…ˆæˆ‘å°†å±•ç¤ºå¦‚ä½•ç”¨å¤šçº¿ç¨‹æµ‹è¯•æ¥è¾…åŠ©å¤šçº¿ç¨‹æµ‹è¯•å®ä¾‹.ç„¶åå°†å±•ç¤ºå¤šçº¿ç¨‹å®ä¾‹æ˜¯æ€ä¹ˆæ ·è¿è¡Œçš„. 
             <p>To use <code>MultiThreadedTestCase</code>, we implement the standard 
               elements of a <code>TestCase</code>, but we derive from <code>MultiThreadedTestCase</code>. 
               The standard elements are the class declaration, the constructor, 
               and since we're using <code>TestAll</code>, the definition of the 
               test type:<br>
-              ÎªÊ¹ÓÃMultiThreadedTestCase,ÎÒÃÇÊ¹ÓÃÒ»¸ö±ê×¼ÔªËØTestCase,µ«ÎÒÃÇ´ÓMultiThreadedTestCaseÀï´´½¨. 
-              Õâ¸ö±ê×¼µÄÔªËØÊÇÒ»¸öÀàµÄËµÃ÷,ÊÇ´´½¨Õß,¼ÈÈ»ÎÒÃÇÊ¹ÓÃTestAll,ÏÂÃæÊÇ²âÊÔÀàµÄ¶¨Òå: 
+              ä¸ºä½¿ç”¨MultiThreadedTestCase,æˆ‘ä»¬ä½¿ç”¨ä¸€ä¸ªæ ‡å‡†å…ƒç´ TestCase,ä½†æˆ‘ä»¬ä»MultiThreadedTestCaseé‡Œåˆ›å»º. 
+              è¿™ä¸ªæ ‡å‡†çš„å…ƒç´ æ˜¯ä¸€ä¸ªç±»çš„è¯´æ˜,æ˜¯åˆ›å»ºè€…,æ—¢ç„¶æˆ‘ä»¬ä½¿ç”¨TestAll,ä¸‹é¢æ˜¯æµ‹è¯•ç±»çš„å®šä¹‰: 
             <p><code>public class MTTest extends MultiThreadedTestCase { <br>
               &nbsp;&nbsp;&nbsp;/** <br>
               &nbsp;&nbsp;&nbsp;&nbsp;* Basic constructor - called by the test 
@@ -955,7 +955,7 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               class under test. After each operation the class invariants and 
               post-conditions would be tested to ensure that the class was behaving 
               properly.<br>
-              Ò»¸ö¶àÏß³ÌµÄ²âÊÔÊµÀıĞèÒª²úÉúĞí¶àµÄÏß³Ì.ÎÒÃÇ±ØĞëÖ´ĞĞÕâĞ©Ïß³Ì,²¢µÈ´ıËûÃÇÍê³É½«½á¹û·µ»Øµ½JUnit--ÕâÒ»ÇĞÔÚÏÂÃæµÄÀı×ÓÖĞ¿ÉÒÔÍê³É.ÕâĞ©´úÂëÊÇÎ¢²»×ãµÀµÄ.Êµ¼ÊÉÏ,ÕâĞ©´úÂëÔÚÏÂÃæ²âÊÔµÄÀàÖĞÄÜ¹»²úÉúĞí¶àµÄÖ´ĞĞ²»Í¬¶¯×÷µÄÏß³Ì.ÔÚÃ¿Ò»¸ö¶¯×÷ºó,ÕâĞ©ÀàµÄ±äÁ¿ºÍºóĞøµÄÌõ¼ş½«»á±»²âÊÔÒÔÈ·±£Õâ¸öÀàÊÇ±»Õı³£µÄÖ´ĞĞµÄ. 
+              ä¸€ä¸ªå¤šçº¿ç¨‹çš„æµ‹è¯•å®ä¾‹éœ€è¦äº§ç”Ÿè®¸å¤šçš„çº¿ç¨‹.æˆ‘ä»¬å¿…é¡»æ‰§è¡Œè¿™äº›çº¿ç¨‹,å¹¶ç­‰å¾…ä»–ä»¬å®Œæˆå°†ç»“æœè¿”å›åˆ°JUnit--è¿™ä¸€åˆ‡åœ¨ä¸‹é¢çš„ä¾‹å­ä¸­å¯ä»¥å®Œæˆ.è¿™äº›ä»£ç æ˜¯å¾®ä¸è¶³é“çš„.å®é™…ä¸Š,è¿™äº›ä»£ç åœ¨ä¸‹é¢æµ‹è¯•çš„ç±»ä¸­èƒ½å¤Ÿäº§ç”Ÿè®¸å¤šçš„æ‰§è¡Œä¸åŒåŠ¨ä½œçš„çº¿ç¨‹.åœ¨æ¯ä¸€ä¸ªåŠ¨ä½œå,è¿™äº›ç±»çš„å˜é‡å’Œåç»­çš„æ¡ä»¶å°†ä¼šè¢«æµ‹è¯•ä»¥ç¡®ä¿è¿™ä¸ªç±»æ˜¯è¢«æ­£å¸¸çš„æ‰§è¡Œçš„. 
             <p><code>&nbsp;&nbsp;&nbsp;public void testMTExample () <br>
               &nbsp;&nbsp;&nbsp;{ <br>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Create 100 threads containing 
@@ -985,7 +985,7 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
             <p>Now that I've shown how to use <code>MultiThreadedTestCase</code>, 
               I'll examine the implementation. First, we declare the class and 
               add an array where the running threads will be stored:<br>
-              ¼ÈÈ»ÎÒÒÑ¾­ÑİÊ¾ÁËÔõÃ´Ê¹ÓÃ¶àÏß³Ì²âÊÔÊµÀı,½ÓÏÂÀ´ÎÒ½«¼ì²éÒ»ÏÂÖ´ĞĞÇé¿ö.Ê×ÏÈ,ÎÒÃÇ¶¨ÒåÒ»¸öÀà,²¢ÔÚÒÑÔËĞĞÏß³ÌÀïÌí¼ÓÒ»¸öÊı×é: 
+              æ—¢ç„¶æˆ‘å·²ç»æ¼”ç¤ºäº†æ€ä¹ˆä½¿ç”¨å¤šçº¿ç¨‹æµ‹è¯•å®ä¾‹,æ¥ä¸‹æ¥æˆ‘å°†æ£€æŸ¥ä¸€ä¸‹æ‰§è¡Œæƒ…å†µ.é¦–å…ˆ,æˆ‘ä»¬å®šä¹‰ä¸€ä¸ªç±»,å¹¶åœ¨å·²è¿è¡Œçº¿ç¨‹é‡Œæ·»åŠ ä¸€ä¸ªæ•°ç»„: 
             <p><code>public class MultiThreadedTestCase extends TestCase { <br>
               &nbsp;&nbsp;&nbsp;/** <br>
               &nbsp;&nbsp;&nbsp;&nbsp;* The threads that are executing. <br>
@@ -996,7 +996,7 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               that declares that the test case's <code>run()</code> will be passed. 
               We override <code>run()</code> so we can store the <code>testResult</code> 
               for later population by the test threads:<br>
-              ´ÓÏÂÃæÎÒÃÇ¿ÉÒÔ¿´µ½,testResultÀàËùÏÔÊ¾µÄrun()º¯ÊıµÄ²âÊÔ½á¹ûÊÇÄÜ¹»Ë³ÀûÍ¨¹ıµÄ.ÎªÁË·½±ã¹Û²ìÎÒÃÇ¿ÉÒÔÆÁ±Îrun()º¯Êı±£´æ²âÊÔÏß³ÌtestResultÖĞµÄ½á¹û 
+              ä»ä¸‹é¢æˆ‘ä»¬å¯ä»¥çœ‹åˆ°,testResultç±»æ‰€æ˜¾ç¤ºçš„run()å‡½æ•°çš„æµ‹è¯•ç»“æœæ˜¯èƒ½å¤Ÿé¡ºåˆ©é€šè¿‡çš„.ä¸ºäº†æ–¹ä¾¿è§‚å¯Ÿæˆ‘ä»¬å¯ä»¥å±è”½run()å‡½æ•°ä¿å­˜æµ‹è¯•çº¿ç¨‹testResultä¸­çš„ç»“æœ 
             <p><code>&nbsp;&nbsp;&nbsp;/** <br>
               &nbsp;&nbsp;&nbsp;&nbsp;* The tests TestResult. <br>
               &nbsp;&nbsp;&nbsp;&nbsp;*/ <br>
@@ -1021,7 +1021,7 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               in a seperate thread. All the threads are created and then started 
               at the same time. The method waits until every thread has finished 
               and then returns:<br>
-              ÔÚ·ÖÀëµÄÏß³ÌÀïÔËĞĞrunTestCaseRunnables()¶¼»áÔËĞĞÒ»´ÎTestCaseRunnable.ËùÓĞµÄÕâĞ©Ïß³Ì¶¼ÊÇ¶¼ÊÇÍ¬Ê±±»´´½¨ºÍÔËĞĞµÄ.¶ørunTestCaseRunnable()ÔòÒªµÈÃ¿Ò»¸öÏß³ÌÔËĞĞÍê²¢·µ»Ø: 
+              åœ¨åˆ†ç¦»çš„çº¿ç¨‹é‡Œè¿è¡ŒrunTestCaseRunnables()éƒ½ä¼šè¿è¡Œä¸€æ¬¡TestCaseRunnable.æ‰€æœ‰çš„è¿™äº›çº¿ç¨‹éƒ½æ˜¯éƒ½æ˜¯åŒæ—¶è¢«åˆ›å»ºå’Œè¿è¡Œçš„.è€ŒrunTestCaseRunnable()åˆ™è¦ç­‰æ¯ä¸€ä¸ªçº¿ç¨‹è¿è¡Œå®Œå¹¶è¿”å›: 
             <p><code>&nbsp;&nbsp;&nbsp;protected void runTestCaseRunnables (final 
               TestCaseRunnable[] runnables) { <br>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(runnables == null) { <br>
@@ -1058,7 +1058,7 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
             <p>Exceptions caught in the test threads must be propagated into the 
               <code>testResult</code> instance we saved from the <code>run()</code> 
               method. <code>handleException()</code>, below, does just that:<br>
-              ÔÚ²âÊÔÏß³ÌÀïÃæÒç³öÇé¿öµÄ²¶×½±ØĞëÄÜ¹»±»´«ËÍµ½ÎÒÃÇ´Órun()º¯ÊıtestResultÊµÀıÀïÃæ.ÏÂÃæÊÇÒç³öÇé¿ö´¦ÀíµÄ´úÂë: 
+              åœ¨æµ‹è¯•çº¿ç¨‹é‡Œé¢æº¢å‡ºæƒ…å†µçš„æ•æ‰å¿…é¡»èƒ½å¤Ÿè¢«ä¼ é€åˆ°æˆ‘ä»¬ä»run()å‡½æ•°testResultå®ä¾‹é‡Œé¢.ä¸‹é¢æ˜¯æº¢å‡ºæƒ…å†µå¤„ç†çš„ä»£ç : 
             <p><code>&nbsp;&nbsp;&nbsp;/** <br>
               &nbsp;&nbsp;&nbsp;&nbsp;* Handle an exception. Since multiple threads 
               won't have their <br>
@@ -1086,7 +1086,7 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               purpose of this class is to provide an environment (<code>runTestCase()</code>) 
               where thrown exceptions will be caught and passed to JUnit. The 
               implementation of this class is:<br>
-              ×îºó,ÎÒÃÇ¿ÉÒÔÎªÃ¿Ò»¸ö²âÊÔµÄÏß³Ì¶¨ÒåÒ»¸öÀ©Õ¹µÄÀà.Õâ¸öÀà¿ÉÒÔÓÃÀ´Ìá¹©Ò»ÖÖ»·¾³ (runTestCase())ÒÔ²¶×½Ïß³ÌÖĞµÄÒç³öÇé¿ö²¢·µ»Øµ½JUnit.Õâ¸öÀàµÄÀı×ÓÈçÏÂ: 
+              æœ€å,æˆ‘ä»¬å¯ä»¥ä¸ºæ¯ä¸€ä¸ªæµ‹è¯•çš„çº¿ç¨‹å®šä¹‰ä¸€ä¸ªæ‰©å±•çš„ç±».è¿™ä¸ªç±»å¯ä»¥ç”¨æ¥æä¾›ä¸€ç§ç¯å¢ƒ (runTestCase())ä»¥æ•æ‰çº¿ç¨‹ä¸­çš„æº¢å‡ºæƒ…å†µå¹¶è¿”å›åˆ°JUnit.è¿™ä¸ªç±»çš„ä¾‹å­å¦‚ä¸‹: 
             <p><code>&nbsp;&nbsp;&nbsp;/** <br>
               &nbsp;&nbsp;&nbsp;&nbsp;* A test case thread. Override runTestCase 
               () and define <br>
@@ -1130,10 +1130,10 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               like a single-threaded test. The unit test developer can extend 
               that test case to develop multithreaded tests, without spending 
               much time developing thread-handling code.<br>
-              ÒÔÉÏµÄimplementationÄÜ¿ÉÒÔÓÃÀ´½â¾ö¶àÏß³Ì²âÊÔÖĞµÄÒ»Ğ©ÎÊÌâ.Ëü¿ÉÒÔ´¦ÀíÔÚ¶àÏß³Ì²âÊÔÖĞµÄÀıÍâÒç³öÇé¿ö,²¢ÇÒ¿ÉÒÔÍ¨¹ıËûÃÇ·µ»Øµ½JUnit.ÔÚ²»ºÄ·Ñ¸ü¹ıµÄÊ±¼ä¸ÄÉÆ¶àÏß³Ì´úÂëµÄÍ¬Ê±, 
-              µ¥Ôª²âÊÔµÄ¿ª·¢Õß¿ÉÒÔÔö¼Ó²âÊÔµÄÌõ¼şÀ´½øÒ»²½¸ÄÉÆ¶àÏß³ÌµÄ²âÊÔ. 
+              ä»¥ä¸Šçš„implementationèƒ½å¯ä»¥ç”¨æ¥è§£å†³å¤šçº¿ç¨‹æµ‹è¯•ä¸­çš„ä¸€äº›é—®é¢˜.å®ƒå¯ä»¥å¤„ç†åœ¨å¤šçº¿ç¨‹æµ‹è¯•ä¸­çš„ä¾‹å¤–æº¢å‡ºæƒ…å†µ,å¹¶ä¸”å¯ä»¥é€šè¿‡ä»–ä»¬è¿”å›åˆ°JUnit.åœ¨ä¸è€—è´¹æ›´è¿‡çš„æ—¶é—´æ”¹å–„å¤šçº¿ç¨‹ä»£ç çš„åŒæ—¶, 
+              å•å…ƒæµ‹è¯•çš„å¼€å‘è€…å¯ä»¥å¢åŠ æµ‹è¯•çš„æ¡ä»¶æ¥è¿›ä¸€æ­¥æ”¹å–„å¤šçº¿ç¨‹çš„æµ‹è¯•. 
             <p><font size=+1><strong>Conclusion<br>
-              ½áÂÛ: </strong></font><br>
+              ç»“è®º: </strong></font><br>
               Using JUnit to develop robust tests takes some practice (as does 
               writing tests). This article contains a number of techniques for 
               improving your tests' usefulness. Those techniques range from avoiding 
@@ -1144,8 +1144,8 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               suite that removes the overhead of maintaining hand-coded test suites 
               and a mechanism for reducing the effort of developing multithreaded 
               JUnit test cases.<br>
-              ÔËÓÃJUnitÀ´½øĞĞÇ¿×³µÄ²âÊÔĞèÒª×ö¶à¸ö·½ÃæµÄÁ·Ï°(±ÈÈçĞ´Ò»Ğ©²âÊÔ³ÌĞò).ÕâÆªÎÄÕÂÎªÄãÌá¸ß²âÊÔµÄÓĞÓÃĞÔÌá¹©ÁËĞí¶à¼¼ÇÉ.ÕâĞ©¼¼ÇÉµÄ·¶Î§°üÀ¨±ÜÃâÒ»Ğ©»ù±¾µÄ´íÎó(±ÈÈç²»»áÊ¹ÓÃ 
-              setup()ÕâÑùµÄ´úÂë)Ö±µ½¸üµ½²ã´ÎµÄÒ»Ğ©Éè¼ÆÎÊÌâ(Èç±ÜÃâintertest coupling) .ÔÚÕâÀïÎÒÒÑÌá¹©ÁËĞí¶à»ù±¾µÄË¼ÏëÀ´°ïÖúÄãÓÃJUnit²âÊÔUI»òÕßÍøÒ³Ó¦ÓÃ³ÌĞò.¶øÇÒÎÒÒ²ÒÑ¾­ËµÃ÷ÔõÃ´¹¹½¨Ò»¸ö¿ÉÒÔ×Ô¶¯µÄÇå³ıÄÇĞ©ÁôÔÚÊÖĞ´´úÂëÖĞ²âÊÔÓï¾äµÄ²âÊÔ¼¯ºÍ¿ÉÒÔ×Ô¶¯¼õ»¯ÔÚÔËÓÃ¶àÏß³ÌµÄJUnit²âÊÔÊ±µÄ»úÖÆ. 
+              è¿ç”¨JUnitæ¥è¿›è¡Œå¼ºå£®çš„æµ‹è¯•éœ€è¦åšå¤šä¸ªæ–¹é¢çš„ç»ƒä¹ (æ¯”å¦‚å†™ä¸€äº›æµ‹è¯•ç¨‹åº).è¿™ç¯‡æ–‡ç« ä¸ºä½ æé«˜æµ‹è¯•çš„æœ‰ç”¨æ€§æä¾›äº†è®¸å¤šæŠ€å·§.è¿™äº›æŠ€å·§çš„èŒƒå›´åŒ…æ‹¬é¿å…ä¸€äº›åŸºæœ¬çš„é”™è¯¯(æ¯”å¦‚ä¸ä¼šä½¿ç”¨ 
+              setup()è¿™æ ·çš„ä»£ç )ç›´åˆ°æ›´åˆ°å±‚æ¬¡çš„ä¸€äº›è®¾è®¡é—®é¢˜(å¦‚é¿å…intertest coupling) .åœ¨è¿™é‡Œæˆ‘å·²æä¾›äº†è®¸å¤šåŸºæœ¬çš„æ€æƒ³æ¥å¸®åŠ©ä½ ç”¨JUnitæµ‹è¯•UIæˆ–è€…ç½‘é¡µåº”ç”¨ç¨‹åº.è€Œä¸”æˆ‘ä¹Ÿå·²ç»è¯´æ˜æ€ä¹ˆæ„å»ºä¸€ä¸ªå¯ä»¥è‡ªåŠ¨çš„æ¸…é™¤é‚£äº›ç•™åœ¨æ‰‹å†™ä»£ç ä¸­æµ‹è¯•è¯­å¥çš„æµ‹è¯•é›†å’Œå¯ä»¥è‡ªåŠ¨å‡åŒ–åœ¨è¿ç”¨å¤šçº¿ç¨‹çš„JUnitæµ‹è¯•æ—¶çš„æœºåˆ¶. 
             <p>JUnit is an excellent framework for unit-testing Java applications. 
               One final thought: If you just started using JUnit to produce unit 
               tests, stick at it. For the first few weeks, you may not see any 
@@ -1154,7 +1154,7 @@ href="http://www.javaworld.com/javaworld/jw-12-2000/jw-1221-junit_p.html#resourc
               to enhance existing code. Then you'll run your tests, pick up new 
               bugs, and fix them. You'll be far more confident in your code base 
               and you will see the value of unit testing.<br>
-              JUnit ÊÇÒ»¸öÓÃÔÚJava µ¥Ôª²âÊÔÓ¦ÓÃµÄÓÅĞãµÄÆ½Ì¨.ËüµÄÖÕ¼«Ä¿±ê¾ÍÊÇÒªÊµÏÖÕâÑùµÄÒ»ÖÖÀíÄî: Èç¹ûÄãÊ¹ÓÃJUnit À´½øĞĞµ¥Ôª²âÊÔ,Äã¾Í»áÏ²»¶Ëü,²¢»á¼á³ÖÏÂÈ¥.ÔÚ¸Õ¿ªÊ¼µÄ¼¸¸öĞÇÆÚÀï,ÄãÒ²Ğí²»ÄÜÃ÷°×ÄãÒÑÎªÄãµÄÀÍ¶¯×öÁË¶àÉÙÕæÕıÓĞÒâË¼µÄ¹±Ï×.ÉõÖÁ»á¸Ğ¾õµ½ÔÚ½ø¶ÈÉÏ·´¶øÂıÁËÏÂÀ´.µ«ÊÇ,ÔÚ¹ı¼¸¸öĞÇÆÚ,Äã¾Í»áÍêÉÆÒÑÍê³ÉµÄ±àÂë¹¤×÷.È»ºó½øĞĞµ÷ÊÔ,ÕÒ³ö³ÌĞòÖĞµÄĞÂµÄÂ©¶´,²¢ĞŞ²¹ËûÃÇ.½¥½¥µÄÄã»á¶ÔÄãµÄ±àÂë¹¦µ×Ô½À´Ô½×ÔĞÅ,¶øÇÒ»á½øÒ»²½ÈÏÊ¶µ½½øĞĞµ¥Ôª²âÊÔµÄ¼ÛÖµ! 
+              JUnit æ˜¯ä¸€ä¸ªç”¨åœ¨Java å•å…ƒæµ‹è¯•åº”ç”¨çš„ä¼˜ç§€çš„å¹³å°.å®ƒçš„ç»ˆæç›®æ ‡å°±æ˜¯è¦å®ç°è¿™æ ·çš„ä¸€ç§ç†å¿µ: å¦‚æœä½ ä½¿ç”¨JUnit æ¥è¿›è¡Œå•å…ƒæµ‹è¯•,ä½ å°±ä¼šå–œæ¬¢å®ƒ,å¹¶ä¼šåšæŒä¸‹å».åœ¨åˆšå¼€å§‹çš„å‡ ä¸ªæ˜ŸæœŸé‡Œ,ä½ ä¹Ÿè®¸ä¸èƒ½æ˜ç™½ä½ å·²ä¸ºä½ çš„åŠ³åŠ¨åšäº†å¤šå°‘çœŸæ­£æœ‰æ„æ€çš„è´¡çŒ®.ç”šè‡³ä¼šæ„Ÿè§‰åˆ°åœ¨è¿›åº¦ä¸Šåè€Œæ…¢äº†ä¸‹æ¥.ä½†æ˜¯,åœ¨è¿‡å‡ ä¸ªæ˜ŸæœŸ,ä½ å°±ä¼šå®Œå–„å·²å®Œæˆçš„ç¼–ç å·¥ä½œ.ç„¶åè¿›è¡Œè°ƒè¯•,æ‰¾å‡ºç¨‹åºä¸­çš„æ–°çš„æ¼æ´,å¹¶ä¿®è¡¥ä»–ä»¬.æ¸æ¸çš„ä½ ä¼šå¯¹ä½ çš„ç¼–ç åŠŸåº•è¶Šæ¥è¶Šè‡ªä¿¡,è€Œä¸”ä¼šè¿›ä¸€æ­¥è®¤è¯†åˆ°è¿›è¡Œå•å…ƒæµ‹è¯•çš„ä»·å€¼! 
               <img height=8 
 src="../return/JUnit%20best%20practices.files/dingbat.gif" width=8> <!-- end body text --> 
             <p><a name=bio></a> 
@@ -1174,9 +1174,9 @@ src="../return/JUnit%20best%20practices.files/dingbat.gif" width=8> <!-- end bod
                   and small-scale systems. Schneider has been using xUnit in projects 
                   for over 18 months. His interests include distributed architectures 
                   and development processes.<br>
-                  ×÷Õß¼ò½é: <br>
-                  Andy schneider :ÊÇÒ»¸öBJSSµÄ¼¼Êõ¼Ü¹¹ÈËÔ±,Ëû×Ô´Ó1988ÄêÒÔÀ´Ò»Ö±ÔÚÓÃÃæÏò¶ÔÏóµÄ¼¼Êõ¼Ü¹¹´óĞÍµÄºÍĞ¡ĞÍµÄÏµÍ³,Schneider 
-                  ´Ó18¸öÔÂÇ°¾Í°ÑxUnitÓÃÔÚÁË¹¤³Ì·½Ãæ.ËûµÄÑĞ¾¿·½ÏòÖ÷ÒªÔÚ·Ö²¼Ê½ÏµÍ³¼°ÆäÏµÍ³µÄ·¢Õ¹·½Ãæ </td>
+                  ä½œè€…ç®€ä»‹: <br>
+                  Andy schneider :æ˜¯ä¸€ä¸ªBJSSçš„æŠ€æœ¯æ¶æ„äººå‘˜,ä»–è‡ªä»1988å¹´ä»¥æ¥ä¸€ç›´åœ¨ç”¨é¢å‘å¯¹è±¡çš„æŠ€æœ¯æ¶æ„å¤§å‹çš„å’Œå°å‹çš„ç³»ç»Ÿ,Schneider 
+                  ä»18ä¸ªæœˆå‰å°±æŠŠxUnitç”¨åœ¨äº†å·¥ç¨‹æ–¹é¢.ä»–çš„ç ”ç©¶æ–¹å‘ä¸»è¦åœ¨åˆ†å¸ƒå¼ç³»ç»ŸåŠå…¶ç³»ç»Ÿçš„å‘å±•æ–¹é¢ </td>
               </tr>
               </tbody>
             </table>
@@ -1236,7 +1236,7 @@ src="http://ad.doubleclick.net/adl/idg.us.jwsurvey/jwsurvey121900;sz=1x1;tile=16
             <!--End-Survey--> <!--Big AD--> 
             <p class=MsoIndexHeading>&nbsp;</p>
           </div>
-          <div align="center"><a href="../return/index.html"><font size="2"><b>[·µ»Ø]</b></font></a></div>
+          <div align="center"><a href="../return/index.html"><font size="2"><b>[è¿”å›]</b></font></a></div>
 </td>
   </tr>
 </table>

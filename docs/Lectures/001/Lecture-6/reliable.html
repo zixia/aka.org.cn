@@ -1,10 +1,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <HTML>
 <HEAD>
-    <TITLE>�ɿ��ź�</TITLE>
+    <TITLE>可靠信号</TITLE>
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312-80">
-    <META NAME="COPYRIGHT" CONTENT="κ����">
-    <META NAME="AUTHOR" CONTENT="κ����">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
     <STYLE>
     <!--
         H1 { color: #ffff00 }
@@ -26,42 +26,42 @@
 <A HREF="function.html"><IMG SRC="next.gif" ALT="Next"></A>
 <A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
 
-<H1 ALIGN=CENTER>6.3&nbsp;&nbsp;�ɿ��ź�<BR><BR>
+<H1 ALIGN=CENTER>6.3&nbsp;&nbsp;可靠信号<BR><BR>
 </H1>
 
 <UL>
-        <LI>�����ԭ��</LI>
-        <LI>�źż��������</LI>
-        <LI>�ɿ��ź�ϵͳ����</LI>
-        <LI>sigsetjmp �� siglongjmp</LI>
-        <LI>��ҵ�����ź�</LI>
+        <LI>术语和原语</LI>
+        <LI>信号集及其操作</LI>
+        <LI>可靠信号系统调用</LI>
+        <LI>sigsetjmp 和 siglongjmp</LI>
+        <LI>作业控制信号</LI>
 </UL>
 
-<H3>6.3.1&nbsp;&nbsp;�����ԭ��</H3>
+<H3>6.3.1&nbsp;&nbsp;术语和原语</H3>
 <UL>
-    <LI>�źŲ���, �����͸�����: �������źŵ��¼�����ʱ</LI>
-    <LI>�źŵݴ�: ���źŵĶ�������ʱ</LI>
-    <LI>���̿������źŵĵݴ�</LI>
+    <LI>信号产生, 即发送给进程: 当导致信号的事件发生时</LI>
+    <LI>信号递达: 当信号的动作发生时</LI>
+    <LI>进程可阻塞信号的递达</LI>
 <PRE>
 ===============================================================================
-�����������������ź�ʱ, ����źŵĶ�����Ĭ�϶����Ͳ����ź�, ���������η���
-֮ǰ, �źű��ֹ���:
-    * ���̽⿪�źŵ�����
-    * �ı䶯��Ϊ����
+产生被进程阻塞的信号时, 如果信号的动作是默认动作和捕获信号, 则下列情形发生
+之前, 信号保持挂起:
+    * 进程解开信号的阻塞
+    * 改变动作为忽略
 ===============================================================================
 </PRE>
 
-    <LI>ϵͳ���źŵݴ�ʱ�ſ�����δ��������ź�, �������źŲ���ʱ</LI>
-    <LI>��������ź��ٴβ���, ��ϵͳ��ѡ���εݴ��ź�, ��ֻ�ݴ�һ��.</LI>
-    <LI>ǰ�߳�Ϊ�Ŷ��ź�.</LI>
-    <LI>����ϵͳ���źŲ������Ŷ�. Linux?</LI>
-    <LI>ÿ��������һ�����嵱ǰ�����źż����ź�����</LI>
-    <LI>�źż��� select �����е��ļ���������һ��, �� POSIX ���˵�����������, ���������źż���</LI>
+    <LI>系统在信号递达时才考虑如何处理阻塞信号, 而不是信号产生时</LI>
+    <LI>如果阻塞信号再次产生, 则系统可选择多次递达信号, 或只递达一次.</LI>
+    <LI>前者称为排队信号.</LI>
+    <LI>常见系统对信号不进行排队. Linux?</LI>
+    <LI>每个进程有一个定义当前阻塞信号集的信号掩码</LI>
+    <LI>信号集和 select 函数中的文件描述符集一样, 是 POSIX 引人的新数据类型, 用来定义信号集合</LI>
 </UL>
 
-<H3>6.3.2&nbsp;&nbsp;�źż��������</H3>
+<H3>6.3.2&nbsp;&nbsp;信号集及其操作</H3>
 <UL>
-    <LI>�źż��Ĳ�������, sigsetops</LI>
+    <LI>信号集的操作函数, sigsetops</LI>
 <PRE>
 ===============================================================================
        #include &lt;signal.h&gt;
@@ -72,11 +72,11 @@
        int sigdelset (sigset_t *set, int signum);
        int sigismember (const sigset_t *set, int signum);
 -------------------------------------------------------------------------------
-����������һ��ʵ��:
+上述函数的一种实现:
 
        #define sigemptyset (ptr)       ( *(ptr) = 0 )
        #define sigfillset (ptr)        ( *(ptr) = ~(sigset_t)0, 0 )
-                      /* C ���ԵĶ��������: �����ұߵ�ֵ��Ϊ����ʽ�ķ���ֵ */
+                      /* C 语言的逗号运算符: 返回右边的值作为表达式的返回值 */
 
        #include &lt;signal.h&gt;
        #include &lt;errno.h&gt;
@@ -110,7 +110,7 @@
 
 </UL>
 
-<H3>6.3.3&nbsp;&nbsp;�ɿ��ź�ϵͳ����</H3>
+<H3>6.3.3&nbsp;&nbsp;可靠信号系统调用</H3>
 <UL>
     <LI>sigaction, sigprocmask, sigpending, sigsuspend</LI>
 <PRE>
@@ -127,49 +127,49 @@
                   void (*sa_sigaction) (int, siginfo_t *, void *);
                   sigset_t sa_mask;
                   int sa_flags;
-                  void (*sa_restorer)(void);     // ������Ԫ��, ��Ӧʹ��
+                  void (*sa_restorer)(void);     // 废弃的元素, 不应使用
               }
 -------------------------------------------------------------------------------
 sigaction:
 
-    * sigaction ���ڸı�����ڽ��յ��ź�ʱ�Ķ���.
-    * sigaction ��ָ���� SIGKILL �� SIGSTOP ֮����źŵĶ��� (act-&gt;sa_handler),
-      ��ȡ SIG_DFL, SIG_IGN ���û����庯��.
-    * sigaction ��ָ���ڴ��� signum �ź�ʱ, Ӧ���������źż� (act-&gt;sa_mask).
-    * sigaction ��ָ���źŴ��������е���Ϊ (act-&gt;sa_flags), ������־ "��" �Ľ��:
-        o SA_NOCLDSTOP: �ӽ���ֹͣʱ������ SIGCHLD.
-        o SA_ONESHOT �� SA_RESETHAND: �����źŶ���ΪĬ��ֵ.
-        o SA_RESTART: ������ź��ж���ϵͳ����, ����������ϵͳ����.
-        o SA_NOMASK �� SA_NODEFER: ��Ҫ�������źŴ��������н���ͬһ�ź�.
-        o SA_SIGINFO: �źŴ�������������������. ��ʱ, �������� act-&gt;sa_sigaction
-          Ԫ��, ���� siginfo_t ���ں˴��ݵ��źŴ��������еķ����ź�ʱ���̵�״̬
-          ��Ϣ. ��ϸ��Ϣ, �ɲ��� sigaction(2) �ֲ�ҳ.
-    * oldact �ǿ�ʱ, �ɷ�����ǰ������.
+    * sigaction 用于改变进程在接收到信号时的动作.
+    * sigaction 可指定除 SIGKILL 和 SIGSTOP 之外的信号的动作 (act-&gt;sa_handler),
+      可取 SIG_DFL, SIG_IGN 和用户定义函数.
+    * sigaction 可指定在处理 signum 信号时, 应该阻塞的信号集 (act-&gt;sa_mask).
+    * sigaction 可指定信号处理过程中的行为 (act-&gt;sa_flags), 下述标志 "或" 的结果:
+        o SA_NOCLDSTOP: 子进程停止时不接收 SIGCHLD.
+        o SA_ONESHOT 或 SA_RESETHAND: 重置信号动作为默认值.
+        o SA_RESTART: 如果该信号中断慢系统调用, 则重新启动系统调用.
+        o SA_NOMASK 或 SA_NODEFER: 不要避免在信号处理函数中接收同一信号.
+        o SA_SIGINFO: 信号处理函数接受三个参数. 这时, 必须设置 act-&gt;sa_sigaction
+          元素, 其中 siginfo_t 是内核传递到信号处理函数中的发生信号时进程的状态
+          信息. 详细信息, 可参阅 sigaction(2) 手册页.
+    * oldact 非空时, 可返回先前的设置.
 
-    * ���� SA_SIGINFO �� siginfo_t ʵ����Ч�Ĵ洢����.
+    * 利用 SA_SIGINFO 和 siginfo_t 实现有效的存储管理.
 -------------------------------------------------------------------------------
 sigprocmask:
 
-    * sigprocmask ���ڸı���̵ĵ�ǰ�����źż�.
-    * how ��ȡ SIG_BLOCK, SIG_UNBLOCK �� SIG_MASKSET. ǰ���������ֱ��ڵ�ǰ����
-      �źż������ӻ�ɾ���� set ָ�����źż�, SIG_MASK ������ȫ���������źż�.
-    * oldset �ǿ�ʱ, �ɷ�����ǰ������.
+    * sigprocmask 用于改变进程的当前阻塞信号集.
+    * how 可取 SIG_BLOCK, SIG_UNBLOCK 和 SIG_MASKSET. 前两个动作分别在当前阻塞
+      信号集中添加或删除由 set 指定的信号集, SIG_MASK 用于完全设置阻塞信号集.
+    * oldset 非空时, 可返回先前的设置.
 -------------------------------------------------------------------------------
 sigpending:
 
-    * sigpending ���ڼ��������ź�.
+    * sigpending 用于检验挂起的信号.
 -------------------------------------------------------------------------------
 sigsuspend:
 
-    * sigsuspend �����ڽ��յ�ĳ���ź�֮ǰ, ��ʱ�� mask �滻���̵��ź�����, ��
-      ��ͣ����ִ��.
-    * sigsuspend ���غ󽫻ָ�����֮ǰ���ź�����.
-    * ��ϵͳ����ʼ�շ��� -1, ���� errno ����Ϊ EINTR.
-    * ��ϵͳ����ʵ������������ͣ����������ԭ�Ӳ���.
+    * sigsuspend 用于在接收到某个信号之前, 临时用 mask 替换进程的信号掩码, 并
+      暂停进程执行.
+    * sigsuspend 返回后将恢复调用之前的信号掩码.
+    * 该系统调用始终返回 -1, 并将 errno 设置为 EINTR.
+    * 该系统调用实际是阻塞并暂停两个动作的原子操作.
 ===============================================================================
 </PRE>
 
-    <LI>�����ؼ������ʾ��</LI>
+    <LI>保护关键代码段示例</LI>
 <PRE>
 ===============================================================================
     #include &lt;signal.h&gt;
@@ -248,20 +248,20 @@ sigsuspend:
         return;
     }
 -------------------------------------------------------------------------------
-    * �� Linux ��, �������ͷ�ļ�:
+    * 在 Linux 下, 必须包含头文件:
 
     #include &lt;bsd/signal.h&gt;
 
-      �Ա�ʹ�ÿɿ��� signal ����. ����ʹ�� sigaction ����.
+      以便使用可靠的 signal 函数. 或者使用 sigaction 函数.
 ===============================================================================
 </PRE>
 
 </UL>
 
-<H3>6.3.4&nbsp;&nbsp;sigsetjmp �� siglongjmp</H3>
+<H3>6.3.4&nbsp;&nbsp;sigsetjmp 和 siglongjmp</H3>
 <UL>
-    <LI>sigsetjmp �� siglongjmp ר���ڴ��źŴ��������н���Զ��ת</LI>
-    <LI>���ܹ���ȷָ���Ƿ񱣴��ź�����</LI>
+    <LI>sigsetjmp 和 siglongjmp 专用于从信号处理函数中进行远跳转</LI>
+    <LI>并能够明确指定是否保存信号掩码</LI>
 
 <PRE>
 ===============================================================================
@@ -270,15 +270,15 @@ sigsuspend:
        int sigsetjmp (sigjmp_buf env, int savesigs);
        void siglongjmp (sigjmp_buf env, int val);
 -------------------------------------------------------------------------------
-    * ��� savesigs ����, �� siglongjmp ����ת֮�󽫻ָ�������ź�����.
+    * 如果 savesigs 非零, 则 siglongjmp 在添转之后将恢复保存的信号掩码.
 ===============================================================================
 </PRE>
 
 </UL>
 
-<H3>6.3.5&nbsp;&nbsp;��ҵ�����ź�</H3>
+<H3>6.3.5&nbsp;&nbsp;作业控制信号</H3>
 <UL>
-    <LI>#��ѧ#</LI>
+    <LI>#自学#</LI>
 </UL>
 
 <P>

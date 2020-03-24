@@ -4,18 +4,18 @@
     <TITLE>GTK+ programming</TITLE>
 </HEAD>
 <BODY>
-<P><A HREF="Gnome.html">��һҳ</A>
-<A HREF="Corba.html">��һҳ</A>
-<P><B><FONT SIZE=+3>GTK+���</FONT></B><P>
-GTK(GIMP Toolkit)��һ������GUI�Ŀ⣬��LGPL�����������ΪGIMPд�ģ���Ŀǰ�ѷ�չΪһ������ǿ���������һ��ͨ�ù��ߡ��ر��Ǳ�GNOMEѡ��ʹ��GTK+��Ϊ����������ȡ��Motif��ΪX��GUI�����ı�׼������ơ���ȻGTK+����Ҫ�������X�ϣ���ʵ�ϣ�ĿǰGTK+�Ѿ����˳ɹ���windows�汾��
-<P>�������ʣ�GIMP�����߾���GTK+�����ߡ�
+<P><A HREF="Gnome.html">上一页</A>
+<A HREF="Corba.html">下一页</A>
+<P><B><FONT SIZE=+3>GTK+编程</FONT></B><P>
+GTK(GIMP Toolkit)是一个生成GUI的库，按LGPL发布。最初是为GIMP写的，但目前已发展为一个功能强大、设计灵活的一个通用工具。特别是被GNOME选中使得GTK+广为流传，大有取代Motif成为X上GUI开发的标准库的趋势。当然GTK+并不要求必须在X上，事实上，目前GTK+已经有了成功的windows版本。
+<P>毫无疑问，GIMP的作者就是GTK+的作者。
 <UL><li>Peter Mattis: petm@xcf.berkeley.edu </li><br>
 <li>Spencer Kimball: spencer@xcf.berkeley.edu </li><br>
 <li>Josh MacDonald: jmacd@xcf.berkeley.edu </li><br></UL><P>
 
-GTK��Ȼ����Cд�ģ���ֻ�ṩC�ĺ������ýӿڣ�������ʹ������Ϥ��������ʹ��GTK����ΪGTK+�Ѿ����󶨵������������е������ϣ��磺C++, Guile, Perl, Python, TOM, Ada95, Objective C, Free Pascal, and Eiffel.
+GTK虽然是用C写的，即只提供C的函数调用接口，您可以使用你熟悉的语言了使用GTK，因为GTK+已经被绑定到几乎所有流行的语言上，如：C++, Guile, Perl, Python, TOM, Ada95, Objective C, Free Pascal, and Eiffel.
 
-<P><B><FONT SIZE=+2>GTK+�������</FONT></B><P>
+<P><B><FONT SIZE=+2>GTK+程序举例</FONT></B><P>
 <PRE>
 #include <gtk/gtk.h>
 
@@ -118,10 +118,10 @@ int main( int   argc,
 /* example-end */
 </PRE>
 
-<P><B><FONT SIZE=+2>GTK+���¼����źŴ���</FONT></B><P>
-GTK��һ���¼������Ĺ��߼���һ��GTKӦ��ͨ����gtk_main������ֱ��һ���¼���������ʱ���Ʊ����ݸ����ʵĺ�����
+<P><B><FONT SIZE=+2>GTK+的事件与信号处理</FONT></B><P>
+GTK是一个事件驱动的工具集，一个GTK应用通常在gtk_main上休眠直到一个事件发生，这时控制被传递给合适的函数。
 <P> 
-<P><B><FONT SIZE=+1>�źŰ�</FONT></B><P>
+<P><B><FONT SIZE=+1>信号绑定</FONT></B><P>
 <PRE>
 gint gtk_signal_connect( GtkObject *object,
                          gchar *name,
@@ -142,27 +142,27 @@ void gtk_signal_handler_unblock( GtkObject *object,
 
 </PRE>
 
-<P><B><FONT SIZE=+1>�źű������Ĺ���</FONT></B><P>
-<P><B>�źŷ���</B><P>
-<UL><LI>�źŷ���(signal emission)��ָGTKΪһ���ض��Ķ����һ���ض����ź�ִ�����еĴ�������Ĺ��̣�</LI><BR>
-<LI>����һ���ź��ϵ����д��������ִ��˳�������Ǳ����õĴ���һ�£�</LI><BR>
-<LI>һ���źŷ����ķ���ֵ�����һ����ִ�еĴ�������ķ���ֵ��</LI><BR>
-<LI>�������е��¼��źŶ���GTK_RUN_LAST���ͣ�������������ִ�е�ȱʡ�������򣬳�����ʹ��gtk_signal_connect_after()��</LI><BR>
+<P><B><FONT SIZE=+1>信号被处理的过程</FONT></B><P>
+<P><B>信号发出</B><P>
+<UL><LI>信号发出(signal emission)特指GTK为一个特定的对象和一个特定的信号执行所有的处理程序的过程；</LI><BR>
+<LI>绑定在一个信号上的所有处理程序的执行顺序与它们被设置的次序一致；</LI><BR>
+<LI>一次信号发出的返回值是最后一个被执行的处理程序的返回值；</LI><BR>
+<LI>由于所有的事件信号都是GTK_RUN_LAST类型，因此它将是最后执行的缺省处理程序，除非你使用gtk_signal_connect_after()；</LI><BR>
 </UL>
-<P><B>�źŴ���</B><P>
-<UL><LI>���¼��������Ǹ��ؼ���ʼ��</LI><BR>
-<LI>����һ����ͨ���¼���event������������źŴ������򷵻�TRUE����ֹͣһ�д�����</LI><BR>
-<LI>���򣬷���һ���ض���"button_press_event"�źš��������TRUE����ֹͣ������</LI><BR>
-<LI>���򣬽�����ת�Ƶ�����ؼ��ĸ���������������������</LI><BR>
-<LI>�������У�ֱ��ĳ���������򷵻�TRUE���͵��ﶥ���ؼ���</LI><BR></UL>
-<P><B>ע������</B><P>
-1. ����һ��ȱʡ��������ʱ�����Ĵ�������ķ���ֵ���ܲ������κ����ã�������ʹ��gtk_signal_connect_after()��������<P>
-2. Ϊ��ֹȱʡ��������ִ�У�����Ҫ��<P>
-<UL><LI>��gtk_signal_connect()���󶨣�</LI><BR>
-<LI>��gtk_signal_emit_stop_by_name()��ֹͣ�źż���������</LI></UL><P>
-3. ��GTK+������ʱ�����Կ���ʹ��GDK�ȿ⡣<BR>
+<P><B>信号传播</B><P>
+<UL><LI>从事件发生的那个控件开始；</LI><BR>
+<LI>发出一个普通的事件“event”。如果它的信号处理程序返回TRUE，则停止一切处理；</LI><BR>
+<LI>否则，发出一个特定的"button_press_event"信号。如果返回TRUE，则停止处理；</LI><BR>
+<LI>否则，将控制转移到这个控件的父亲那里，继续上面的两步；</LI><BR>
+<LI>持续进行，直到某个处理程序返回TRUE，和到达顶级控件。</LI><BR></UL>
+<P><B>注意事项</B><P>
+1. 当有一个缺省处理程序时，您的处理程序的返回值可能不产生任何作用，除非您使用gtk_signal_connect_after()来绑定它；<P>
+2. 为阻止缺省处理程序执行，您需要：<P>
+<UL><LI>用gtk_signal_connect()来绑定；</LI><BR>
+<LI>用gtk_signal_emit_stop_by_name()来停止信号继续传播。</LI></UL><P>
+3. 当GTK+不够用时，可以考虑使用GDK等库。<BR>
 <P>
-<P><A HREF="Gnome.html">��һҳ</A>
-<A HREF="Corba.html">��һҳ</A><P>
+<P><A HREF="Gnome.html">上一页</A>
+<A HREF="Corba.html">下一页</A><P>
 </BODY>
 </HTML>

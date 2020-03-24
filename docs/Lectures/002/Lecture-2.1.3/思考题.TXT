@@ -1,20 +1,20 @@
-1. (�Ѷȣ���)�������ص���ϵ�ṹ����X server, X client,
+1. (难度：低)请描述Ｘ的体系结构，即X server, X client,
 Window manager, X
-protocol�Ĺ�ϵ�������Linux�ģ�ϵͳ��Gnome,
-KDE���������
-2. (�Ѷȣ���)����ͣ��µ��¼��������ƣ������API��
+protocol的关系，并结合Linux的Ｘ系统，Gnome,
+KDE具体分析．
+2. (难度：低)请解释Ｘ下的事件驱动机制，及相关API．
 3.
-(�Ѷȣ���)���������һ����ͨӦ�õ����ɹ��̺͹������̣�������ÿһ���ľ��庬�壬��Ϊʲô��Ҫ��һ����
-4. (�Ѷȣ���)GTK+, CORBA,
-Gnome�����ʲô��ϵ������GTK+дһ��"hello
-world"���ڣ���Gnomeдһ��"hello
-world"��appletǶ��panel�У�
-5. (�Ѷȣ���)QT, DCOP,
-KDE�����ʲô��ϵ������QTдһ��"hello
-world"���ڣ���KDEдһ��"hello
-world"�Ĵ���Ƕ��panel��tray�У�
+(难度：中)请给出Ｘ下一个普通应用的生成过程和工作流程，并解释每一步的具体含义，及为什么需要这一步．
+4. (难度：中)GTK+, CORBA,
+Gnome与Ｘ是什么关系？请用GTK+写一个"hello
+world"窗口；用Gnome写一个"hello
+world"的applet嵌在panel中．
+5. (难度：中)QT, DCOP,
+KDE与Ｘ是什么关系？请用QT写一个"hello
+world"窗口；用KDE写一个"hello
+world"的窗口嵌在panel的tray中．
 6.
-(�Ѷȣ���)Gnome��KDE�ı���������ʲô����ϲ����һ����Ϊʲô��
+(难度：高)Gnome与KDE的本质区别是什么？您喜欢那一个，为什么？
 7.
-(�Ѷȣ���)Components��scripting��ʲô��˼��KDE�����֧��scripting�ģ��ܾ�һ��������
-8. (�Ѷȣ���)GTK+��widget�ؼ���ʲôԭ�������ʵ��һ���ؼ���
+(难度：高)Components的scripting是什么意思？KDE是如何支持scripting的？能举一个例子吗？
+8. (难度：高)GTK+的widget控件是什么原理？如何实现一个控件？

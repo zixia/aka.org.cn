@@ -1,42 +1,42 @@
-¡¾AKA¡¿ITÑÐÌÖ»á£­£­»ùÓÚ×é¼þµÄÏµÍ³¼Ü¹¹Éè¼Æ
+ã€AKAã€‘ITç ”è®¨ä¼šï¼ï¼åŸºäºŽç»„ä»¶çš„ç³»ç»Ÿæž¶æž„è®¾è®¡
 
 
-Èç¹ûÄúÄÜ½«Õâ¸öÏûÏ¢·¢²¼ÔÚºÏÊÊµÄÍøÕ¾£¬ÂÛÌ³µÈ³¡Ëù£¬ÎÒÃÇ½«´ú±í¹ã´ó³ÌÐòÔ±²»Ê¤¸Ð¼¤¡£ 
-ÑÐÌÖ»áÊÇÃâ·Ñ¿ª·ÅµÄ£¬ÄãÖ»ÐèÒªÔÚÏÖ³¡ÌîÐ´Ò»¸öµÇ¼Ç±í¾Í¿ÉÒÔÁË¡£
+å¦‚æžœæ‚¨èƒ½å°†è¿™ä¸ªæ¶ˆæ¯å‘å¸ƒåœ¨åˆé€‚çš„ç½‘ç«™ï¼Œè®ºå›ç­‰åœºæ‰€ï¼Œæˆ‘ä»¬å°†ä»£è¡¨å¹¿å¤§ç¨‹åºå‘˜ä¸èƒœæ„Ÿæ¿€ã€‚ 
+ç ”è®¨ä¼šæ˜¯å…è´¹å¼€æ”¾çš„ï¼Œä½ åªéœ€è¦åœ¨çŽ°åœºå¡«å†™ä¸€ä¸ªç™»è®°è¡¨å°±å¯ä»¥äº†ã€‚
 
-¹ØÓÚÎÒÃÇµÄ×ÚÖ¼£¬»î¶¯ÐÎÊ½£¬ÏÖ³¡Ãâ·Ñ¼¼Êõ×ÊÁÏ£¬ÁªÂç·½·¨µÈÐÅÏ¢£¬Çëµ½ÍøÕ¾£º
-http://www.akaer.org ÉÏ²éÑ¯¡£
+å…³äºŽæˆ‘ä»¬çš„å®—æ—¨ï¼Œæ´»åŠ¨å½¢å¼ï¼ŒçŽ°åœºå…è´¹æŠ€æœ¯èµ„æ–™ï¼Œè”ç»œæ–¹æ³•ç­‰ä¿¡æ¯ï¼Œè¯·åˆ°ç½‘ç«™ï¼š
+http://www.akaer.org ä¸ŠæŸ¥è¯¢ã€‚
 =====================================================================
 
-                 ¡¾ IT ÏÈ ·æ Ïµ ÁÐ ÑÐ ÌÖ »á ¡¿ 
+                 ã€ IT å…ˆ é”‹ ç³» åˆ— ç ” è®¨ ä¼š ã€‘ 
                       http://www.akaer.org 
-                  ¡¶ »ùÓÚ×é¼þµÄÏµÍ³¼Ü¹¹Éè¼Æ ¡· 
+                  ã€Š åŸºäºŽç»„ä»¶çš„ç³»ç»Ÿæž¶æž„è®¾è®¡ ã€‹ 
 
 ====================================================================== 
 
-Ê± ¼ä 
-¡¾ 2002 Äê 6 ÔÂ 2 ÈÕ ÖÜ ÈÕ ÏÂÎç 2 µã ¡¿ 
+æ—¶ é—´ 
+ã€ 2002 å¹´ 6 æœˆ 2 æ—¥ å‘¨ æ—¥ ä¸‹åˆ 2 ç‚¹ ã€‘ 
 
-µØ µã 
-¡¾ Ñ§ÑÐ´óÏÃ ¶þÂ¥¶à¹¦ÄÜÌü ¡¿ 
+åœ° ç‚¹ 
+ã€ å­¦ç ”å¤§åŽ¦ äºŒæ¥¼å¤šåŠŸèƒ½åŽ… ã€‘ 
 
-¾ßÌå·½Î»¼ûhttp://www.akaer.org/activity/adress.htm(Çë×¢Òâ³¡µØÎ»ÖÃ£©
+å…·ä½“æ–¹ä½è§http://www.akaer.org/activity/adress.htm(è¯·æ³¨æ„åœºåœ°ä½ç½®ï¼‰
 
-Ò»¡¢Ö÷ ³Ö ÈË£º 
+ä¸€ã€ä¸» æŒ äººï¼š 
 
-Ðì Òã £­ AKA É³Áú³ÉÔ± ¡¡mobile:13621143460¡¡¡¡E-MAIL: xuas@akaer.org 
+å¾ æ¯… ï¼ AKA æ²™é¾™æˆå‘˜ ã€€mobile:13621143460ã€€ã€€E-MAIL: xuas@akaer.org 
 
-¶þ¡¢¼ò½é
+äºŒã€ç®€ä»‹
 
-¼¼ÊõÖØµã£ºUML¡¢J2EE¡¢XML¡¢¡¢Web·þÎñ
+æŠ€æœ¯é‡ç‚¹ï¼šUMLã€J2EEã€XMLã€ã€WebæœåŠ¡
 
-ÌýÖÚ£º   ÏîÄ¿¹ÜÀí£¬ÏµÍ³¼Ü¹¹Éè¼ÆÊ¦
+å¬ä¼—ï¼š   é¡¹ç›®ç®¡ç†ï¼Œç³»ç»Ÿæž¶æž„è®¾è®¡å¸ˆ
 
-±³¾°£ºÕâÊÇAKAÉ³ÁúIT ÏÈ ·æ Ïµ ÁÐ ÑÐ ÌÖ »á---»ùÓÚ×é¼þµÄÏµÍ³¼Ü¹¹Éè¼Æ,±¾ÆÚ
-ÑÐÌÖ»áµÄÖ÷½²ÈËÀ´×ÔbeansÈí¼þ£¨±±¾©£©ÓÐÏÞ¹«Ë¾¡£beansÈí¼þ¹«Ë¾ÊÇÒ»¼ÒÔÚ×é¼þ
-¼¼Êõ·½ÃæÁìÏÈµÄÊÀ½ç¼¶Èí¼þ¹«Ë¾¡£
+èƒŒæ™¯ï¼šè¿™æ˜¯AKAæ²™é¾™IT å…ˆ é”‹ ç³» åˆ— ç ” è®¨ ä¼š---åŸºäºŽç»„ä»¶çš„ç³»ç»Ÿæž¶æž„è®¾è®¡,æœ¬æœŸ
+ç ”è®¨ä¼šçš„ä¸»è®²äººæ¥è‡ªbeansè½¯ä»¶ï¼ˆåŒ—äº¬ï¼‰æœ‰é™å…¬å¸ã€‚beansè½¯ä»¶å…¬å¸æ˜¯ä¸€å®¶åœ¨ç»„ä»¶
+æŠ€æœ¯æ–¹é¢é¢†å…ˆçš„ä¸–ç•Œçº§è½¯ä»¶å…¬å¸ã€‚
 
-ÄÚÈÝ£º»ùÓÚJ2EEÆ½Ì¨ºÍXML±ê×¼£¬Ê¹ÓÃUMLÉè¼ÆÏµÍ³¼Ü¹¹
+å†…å®¹ï¼šåŸºäºŽJ2EEå¹³å°å’ŒXMLæ ‡å‡†ï¼Œä½¿ç”¨UMLè®¾è®¡ç³»ç»Ÿæž¶æž„
 
 1. What is a framework
 2. Types of framework
@@ -48,11 +48,11 @@ http://www.akaer.org ÉÏ²éÑ¯¡£
 - Use of Hub and Spoke
 - Use of Web services
 
-Èý¡¢Ö÷½²ÈË½éÉÜ: 
+ä¸‰ã€ä¸»è®²äººä»‹ç»: 
 
-Tay Chee Chong£º
+Tay Chee Chongï¼š
 
-ÌýÖÚ¿ÉÒÔÊ¹ÓÃÖÐÓ¢ÎÄÁ½ÖÖÓïÑÔºÍÖ÷½²ÈË½»Á÷¡£
+å¬ä¼—å¯ä»¥ä½¿ç”¨ä¸­è‹±æ–‡ä¸¤ç§è¯­è¨€å’Œä¸»è®²äººäº¤æµã€‚
 
 Graduated in 1995.
 
@@ -88,19 +88,19 @@ to exhibit the load handling and performance that Kernl has. As a prove
 of technology, a Workflow system for the project is built using Kernl 
 running on IBM AIX, WebLogic 6 and Oracle.
 
-ËÄ¡¢¼¼ÊõÖ§³ÖºÍÃâ·Ñ¼¼Êõ×ÊÁÏ 
+å››ã€æŠ€æœ¯æ”¯æŒå’Œå…è´¹æŠ€æœ¯èµ„æ–™ 
 
 ---------------------------------------------------------------------- 
 
-¼¼ÊõÖ§³Ö³§ÉÌ----±±¾©±´¶÷Ë¹Èí¼þÓÐÏÞ¹«Ë¾ http://www.beansfactory.com.
+æŠ€æœ¯æ”¯æŒåŽ‚å•†----åŒ—äº¬è´æ©æ–¯è½¯ä»¶æœ‰é™å…¬å¸ http://www.beansfactory.com.
 
-ÏÖ³¡Ìá¹©ÎÄµµ¹©´ó¼ÒÑÐ¾¿ÓÃ¡£
+çŽ°åœºæä¾›æ–‡æ¡£ä¾›å¤§å®¶ç ”ç©¶ç”¨ã€‚
 
 http://www.akaer.org/ 
 
-http://www.aka.org.cn ÉÏÈ¥²éÑ¯¡£ 
+http://www.aka.org.cn ä¸ŠåŽ»æŸ¥è¯¢ã€‚ 
 
-ËæÊ±»ñµÃ×îÐÂµÄÑÐÌÖ»áÐÅÏ¢£¬ÇëµÇ¼ÇÎÒÃÇµÄÓÊ¼þÁÐ±í£¨http://www.akaer.org)¡£
+éšæ—¶èŽ·å¾—æœ€æ–°çš„ç ”è®¨ä¼šä¿¡æ¯ï¼Œè¯·ç™»è®°æˆ‘ä»¬çš„é‚®ä»¶åˆ—è¡¨ï¼ˆhttp://www.akaer.org)ã€‚
 
-¼ÓÈëÎÒÃÇ¡¡email to : xuas@akaer.org
+åŠ å…¥æˆ‘ä»¬ã€€email to : xuas@akaer.org
 

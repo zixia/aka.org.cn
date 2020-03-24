@@ -1,10 +1,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <HTML>
 <HEAD>
-    <TITLE>������</TITLE>
+    <TITLE>第六讲</TITLE>
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312-80">
-    <META NAME="COPYRIGHT" CONTENT="κ����">
-    <META NAME="AUTHOR" CONTENT="κ����">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
     <STYLE>
     <!--
         H1 { color: #ffff00; font-family: "timmons", serif }
@@ -19,124 +19,124 @@
 <BODY TEXT="#ffff00" LINK="#00b8ff" VLINK="#ff3366" BACKGROUND="images/velvet.jpg">
 
 <H1 ALIGN=CENTER>
-������  �ź�, �ն˺Ϳ���̨ͼ��
+第六讲  信号, 终端和控制台图形
 </H1>
 
-<H2>����˼·</H2>
+<H2>整体思路</H2>
 <P>
-���ν���ǰ�벿���ǵ��彲������, �������� UNIX/Linux �ϵ��ź�, �ն˼�����̨ͼ�εȱ�̼������н���. <BR>
-�����Ը������Ϊ��, �ص㽲��İ����ϵͳ���û����Լ� Linux ���е�һЩ��̼���.
+本次讲座前半部分是第五讲的延续, 将继续就 UNIX/Linux 上的信号, 终端及控制台图形等编程技术进行讲解. <BR>
+讲座以概念解释为主, 重点讲述陌生的系统调用或函数以及 Linux 特有的一些编程技术.
 </P>
 
-<H2>��Ҫ����</H2>
+<H2>主要内容</H2>
 <UL SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
         <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-        <A HREF="signal.html">�ź�</A></P>
+        <A HREF="signal.html">信号</A></P>
         <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-        <A HREF="unreliable.html">���ɿ��ź�</A></P>
+        <A HREF="unreliable.html">不可靠信号</A></P>
         <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-        <A HREF="reliable.html">�ɿ��ź�</A></P>
+        <A HREF="reliable.html">可靠信号</A></P>
         <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-        <A HREF="function.html">���ź���صĺ���</A></P>
+        <A HREF="function.html">与信号相关的函数</A></P>
         <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-        <A HREF="thread.html">�߳��е��źŴ���</A></P>
+        <A HREF="thread.html">线程中的信号处理</A></P>
         <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-        <A HREF="terminal.html">�ն˱��</A></P>
+        <A HREF="terminal.html">终端编程</A></P>
         <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-        <A HREF="ptty.html">α�ն�</A></P>
+        <A HREF="ptty.html">伪终端</A></P>
         <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-        <A HREF="graphics.html">Linux ����̨�ϵ�ͼ�α�̼��</A></P>
+        <A HREF="graphics.html">Linux 控制台上的图形编程简介</A></P>
 </UL>
 
-<H2>������Ҫ��</H2>
+<H2>各部分要点</H2>
 <UL SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
     <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-    6.1  �ź�</P>
+    6.1  信号</P>
     <UL>
-        <LI>����</LI>
-        <LI>�ظ�</LI>
-        <LI>��������, �ж�ϵͳ����</LI>
-        <LI>Linux �е��ź�</LI>
-        <LI>Linux ���ź�ʵ��</LI>
+        <LI>概念</LI>
+        <LI>沿革</LI>
+        <LI>可重入性, 中断系统调用</LI>
+        <LI>Linux 中的信号</LI>
+        <LI>Linux 的信号实现</LI>
     </UL>
     <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-    6.2  ���ɿ��ź�</P>
+    6.2  不可靠信号</P>
     <UL>
-        <LI>signal ϵͳ����</LI>
-        <LI>���ɿ��źŵ�����</LI>
+        <LI>signal 系统调用</LI>
+        <LI>不可靠信号的问题</LI>
     </UL>
     <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-    6.3  �ɿ��ź�</P>
+    6.3  可靠信号</P>
     <UL>
-        <LI>�����ԭ��</LI>
-        <LI>�źż��������</LI>
-        <LI>�ɿ��ź�ϵͳ����</LI>
-        <LI>sigsetjmp �� siglongjmp</LI>
-        <LI>��ҵ�����ź�</LI>
+        <LI>术语和原语</LI>
+        <LI>信号集及其操作</LI>
+        <LI>可靠信号系统调用</LI>
+        <LI>sigsetjmp 和 siglongjmp</LI>
+        <LI>作业控制信号</LI>
     </UL>
     <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-    6.4  ���ź���صĺ���</P>
+    6.4  与信号相关的函数</P>
     <UL>
-        <LI>kill �� raise</LI>
-        <LI>alarm �� pause</LI>
-        <LI>abort, system �� sleep</LI>
+        <LI>kill 和 raise</LI>
+        <LI>alarm 和 pause</LI>
+        <LI>abort, system 和 sleep</LI>
     </UL>
     <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-    6.5  �߳��е��źŴ���</P>
+    6.5  线程中的信号处理</P>
     <UL>
-        <LI>����</LI>
+        <LI>概念</LI>
         <LI>pthread_sigmask</LI>
-        <LI>pthread_kill �� pthread_sigwait</LI>
+        <LI>pthread_kill 和 pthread_sigwait</LI>
     </UL>
     <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-    6.6  �ն˱��</P>
+    6.6  终端编程</P>
     <UL>
-        <LI>�����ն� I/O</LI>
-        <LI>ncurses ��</LI>
-        <LI>newt ��</LI>
+        <LI>基本终端 I/O</LI>
+        <LI>ncurses 库</LI>
+        <LI>newt 库</LI>
     </UL>
     <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-    6.7  α�ն�</P>
+    6.7  伪终端</P>
     <UL>
-        <LI>����</LI>
-        <LI>���</LI>
+        <LI>概念</LI>
+        <LI>编程</LI>
     </UL>
     <P><IMG SRC="images/poliball.gif" WIDTH=16 HEIGHT=16 ALIGN=ABSMIDDLE>
-    6.8  ����̨�ϵ�ͼ�α�̼��</P>
+    6.8  控制台上的图形编程简介</P>
     <UL>
         <LI>SVGALib</LI>
         <LI>FrameBuffer</LI>
         <LI>GGI</LI>
-        <LI>MiniGUI �� Microwindows</LI>
+        <LI>MiniGUI 和 Microwindows</LI>
     </UL>
 </UL>
 
-<H2>˼���⼰��ҵ</H2>
+<H2>思考题及作业</H2>
 <OL>
-    <LI>Ϊ���彲�ĵ�����͵����������źŴ���, ��Ϊ������� Shell ������ҵ��������.</LI>
-    <LI>���� CCE ���� VCOnGUI ��α�ն�ʵ��.</LI>
-    <LI>Ϊ CCE ���� VCOnGUI �������ն˻�����, �Ӷ������� Linux ����̨һ��, ���� Shift+PgDn �� Shift+PgUp ����ʾ�����ն˵�����.</LI>
+    <LI>为第五讲的第五题和第六题增加信号处理, 并为第五题的 Shell 添加作业控制能力.</LI>
+    <LI>分析 CCE 或者 VCOnGUI 的伪终端实现.</LI>
+    <LI>为 CCE 或者 VCOnGUI 的添加终端缓冲区, 从而可以像 Linux 控制台一样, 利用 Shift+PgDn 和 Shift+PgUp 键显示滚过终端的内容.</LI>
 </OL>
 
-<H2>�ο���Ŀ</H2>
+<H2>参考书目</H2>
 <OL>
     <LI>W. Richard Stevens, <I>Advanced Programming in the UNIX Environment</I></LI>
     <LI>John Goerzen, <I>The Linux Programming Bible</I></LI>
     <LI>Uresh Vahalia, <I>UNIX Internals - The New Frontiers</I></LI>
-    <LI>κ������, ��Linux ʵ�ý̡̳�</LI>
+    <LI>魏永明等, 《Linux 实用教程》</LI>
 </OL>
 
-<H2>��һ������</H2>
+<H2>进一步读物</H2>
 <UL>
     <LI>W. Richard Stevens, <I>Advanced Programming in the UNIX Environment</I>, From Chpater 3 to Chapter 15.</LI>
 </UL>
 
-<H2>����</H2>
-������<A HREF="mailto:ymwei@263.net">κ����</A>���⡣��ӭ�κ�����ͽ��飬�ɷ� email: <A HREF="mailto:ymwei@263.net">ymwei@263.net</A> ��κ������ϵ��
+<H2>反馈</H2>
+本讲由<A HREF="mailto:ymwei@263.net">魏永明</A>讲解。欢迎任何意见和建议，可发 email: <A HREF="mailto:ymwei@263.net">ymwei@263.net</A> 与魏永明联系。
 
 <P>
 <CENTER>
-<A HREF="http://www.aka.citf.net/Lectures/index.html">AKA ��������ϵ�н���</A>
+<A HREF="http://www.aka.citf.net/Lectures/index.html">AKA 自由软件系列讲座</A>
 </CENTER>
 </P>
 

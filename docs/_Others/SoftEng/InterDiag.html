@@ -2,43 +2,43 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<title>˳��ͼ��Э��ͼ</title>
+<title>顺序图和协作图</title>
 </head>
 
 <body background="Images/bkgd.gif">
 
-<h1 align="center">˳��ͼ��Э��ͼ</h1>
+<h1 align="center">顺序图和协作图</h1>
 
-<p>���������ĽǶ�������ϵͳ�Ĺ�������һ�����ͨ���໥������Ϣ����ɵģ�˳��ͼ��Э��ͼ����ͨ�����������Ķ������Ϣ������ϵͳ�Ķ�̬��Ϊ�ġ���������һ��˳��ͼ������Use 
-Case AddTask��</p>
+<p>从面向对象的角度来看，系统的功能是由一组对象通过相互发送消息来完成的，顺序图和协作图就是通过描述这样的对象和消息来描述系统的动态行为的。我们先用一个顺序图来描述Use 
+Case AddTask。</p>
 
-<p>AddTask�Ĺ�������ToDo���м���һ��Task����Ĳ���Ӧ���ǣ� 
+<p>AddTask的功能是向ToDo表中加入一个Task项，它的步骤应该是： 
 
 <ol>
-  <li>�򿪼���Task��Ĵ��ڣ�</li>
-  <li>������Ӧ��Ϣ��</li>
-  <li>����һ��Task����</li>
-  <li>�����Task���뵽Task���С�</li>
+  <li>打开加入Task项的窗口；</li>
+  <li>输入相应信息；</li>
+  <li>生成一个Task对象；</li>
+  <li>把这个Task加入到Task表中。</li>
 </ol>
 
-<p>��ô�����ǵ�˳��ͼ�Ϳ��Ի��ɣ�</p>
+<p>那么，我们的顺序图就可以画成：</p>
 
-<p align="center"><img src="Images/Seq.gif" width="410" height="324" alt="˳��ͼ"></p>
+<p align="center"><img src="Images/Seq.gif" width="410" height="324" alt="顺序图"></p>
 
-<p align="left">ͼ�У������ʾһ�����󣬷����е�������ð��֮ǰ�Ĳ����Ƕ�������֣�ð��֮����Ƕ���������������֡������������ֱ�����Ƕ���������ߣ���ʾ�����մ��ϵ��µ�ʱ�������ĳ��ʱ���ڴ��ڡ������ļ�ͷ��ʾ����֮�����ϢͨѶ������Щ�����ĳ������ʾĳ����������ִ�е�ʱ��͵��ù�ϵ��</p>
+<p align="left">图中，方块表示一个对象，方块中的文字中冒号之前的部分是对象的名字，冒号之后的是对象所属的类的名字。方块下面的竖直虚线是对象的生命线，表示对象按照从上到下的时间轴的在某段时间内存在。对象间的箭头表示对象之间的消息通讯。而那些狭长的长方块表示某个操作方法执行的时间和调用关系。</p>
 
-<p>˳��ͼ��һ�������ֵܡ���Э��ͼ��AddTask��Э��ͼ�������ġ�</p>
+<p>顺序图有一个孪生兄弟——协作图，AddTask的协作图是这样的。</p>
 
-<p align="center"><img src="Images/Collab.gif" width="404" height="324" alt="Э��ͼ"></p>
+<p align="center"><img src="Images/Collab.gif" width="404" height="324" alt="协作图"></p>
 
-<p>������ͼ��������ʵ��ͬһ�ֶ�������ʵ��ĳ��ϵͳ���ܵ�һ����������֮�����Ϣ���ݡ�������˳��ͼ�У�ʱ������Ϊһ����ʽ�����س��ֵģ����ǵ�˳��ͼ�ڹ���ʵʱϵͳʱ�ر����á�����Э��ͼ�У�û����ʽ��ʱ�����أ����Ƕ���֮��Ĺ�����һĿ��Ȼ�ģ����������һ���໥�����Ķ�����ﾳ�п������ǵ���Ϣ�����Ǻ��а����ġ�˳��ͼ��Э��ͼ�Ƕ�ͬһ����Ĳ�ͬ�ǶȵĿ��졣</p>
+<p>这两种图描述的其实是同一种东西，即实现某种系统功能的一组对象和它们之间的消息传递。不过在顺序图中，时间是作为一个显式的因素出现的，这是的顺序图在构造实时系统时特别有用。而在协作图中，没有显式的时间因素，但是对象之间的关联是一目了然的，这对我们在一组相互关联的对象的语境中考察它们的消息传递是很有帮助的。顺序图和协作图是对同一事物的不同角度的考察。</p>
 
-<p align="left">���Ǵ�Use Case��Ȼ���Ե������õ�������˳��ͼ����˳��ͼ�����ǿ��Է��������ࡣ���ƣ�������һ�����ڣ�������Ҫ��һ����Ӧ�Ĵ����ࣻ������һ��Task������Ӧ�ľ͵���һ��Task�࣬���Ƶģ�Tasks���������������֯Task�ļ��϶���Ҳ�Ǳ���ġ�Great!�����㿴��Use 
-Case��˳��ͼ��ʶ��ͷ�����������˰ɣ��ڴ�ͳ�������������У����ʶ���ǿ�������Ա�ľ������������еģ���̫���԰����ˡ���������Use 
-Case�ĸ���Ϳ���Ϊ��������ʶ���ṩһ��������������֧�㡣ͨ������Use 
-Case����������˳��ͼ�������ټ��ϴ�ͳ�Ķ��������еĶ������Ŀ��죬���Է��ִ������ϵͳ��ص��ࡣ����������������ҪҲ�������ѵ�ʶ��ͷ�����Ĺ�����Ҳ����һ�����صķ����ˣ������һָ��������ࣩ���������˶�����ʤ���������ˡ�</p>
+<p align="left">我们从Use Case自然语言的描述得到了它的顺序图，从顺序图中我们可以发现许多类。你瞧，我们有一个窗口，所以需要有一个对应的窗口类；我们有一个Task对象，相应的就得有一个Task类，类似的，Tasks这个用来管理和组织Task的集合对象也是必须的。Great!现在你看到Use 
+Case和顺序图对识别和发现类的作用了吧！在传统的面向对象分析中，类的识别是靠分析人员的经验和灵感来进行的，这太难以把握了。现在有了Use 
+Case的概念，就可以为对象和类的识别提供一个有力的线索和支点。通过分析Use 
+Case，构造它的顺序图描述，再加上传统的对问题域中的对象和类的考察，可以发现大多数和系统相关的类。面向对象分析中最重要也是最困难的识别和分析类的工作再也不是一种神秘的法术了（你凌空一指，变出了类），现在人人都可以胜任这个活儿了。</p>
 
-<p>����ʶ��ͷ���Use Case�����ǵ���������������Ը�һ�����ˡ������������ַ���ϵͳ�ľ�̬�ṹ����������ķ�������ơ�</p>
+<p>经过识别和分析Use Case，我们的需求分析工作可以告一段落了。现在我们着手分析系统的静态结构——就是类的分析和设计。</p>
 
 <table border="0" width="150" cellspacing="5" cellpadding="5">
   <tr>

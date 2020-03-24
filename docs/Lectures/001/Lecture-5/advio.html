@@ -1,10 +1,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <HTML>
 <HEAD>
-    <TITLE>�߼� I/O</TITLE>
+    <TITLE>高级 I/O</TITLE>
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312-80">
-    <META NAME="COPYRIGHT" CONTENT="κ����">
-    <META NAME="AUTHOR" CONTENT="κ����">
+    <META NAME="COPYRIGHT" CONTENT="魏永明">
+    <META NAME="AUTHOR" CONTENT="魏永明">
     <STYLE>
     <!--
         H1 { color: #ffff00 }
@@ -26,24 +26,24 @@
 <A HREF="misc.html"><IMG SRC="next.gif" ALT="Next"></A>
 <A HREF="index.html"><IMG SRC="toc.gif" ALT="Contents"></A>
 
-<H1 ALIGN=CENTER>5.5&nbsp;&nbsp;�߼� I/O<BR><BR>
+<H1 ALIGN=CENTER>5.5&nbsp;&nbsp;高级 I/O<BR><BR>
 </H1>
 
 <UL>
-    <LI><P>Linux ��ֱ�ӵ� I/O �˿ڶ�д</LI>
-    <LI><P>��¼����</LI>
-    <LI><P>������ I/O</LI>
-    <LI><P>I/O �๤</LI>
-    <LI><P>�첽 I/O</LI>
-    <LI><P>�ڴ�ӳ��</LI>
+    <LI><P>Linux 中直接的 I/O 端口读写</LI>
+    <LI><P>记录锁定</LI>
+    <LI><P>非阻塞 I/O</LI>
+    <LI><P>I/O 多工</LI>
+    <LI><P>异步 I/O</LI>
+    <LI><P>内存映射</LI>
 </UL>
 
-<H3>5.5.1&nbsp;&nbsp;Linux ��ֱ�ӵ� I/O �˿ڶ�д</H3>
+<H3>5.5.1&nbsp;&nbsp;Linux 中直接的 I/O 端口读写</H3>
 <UL>
-    <LI>ֻ�� root ���̲���ֱ�ӷ��� I/O �˿�</LI>
-    <LI>����Ҫȡ�ö˿ڵķ���Ȩ��: ioperm, iopl</LI>
-    <LI>Ȼ������� inb �� outb</LI>
-    <LI>inb �� outb ����Ƕ��������ʽʵ��, ���Ҫ�� -O �� -O2 ѡ�����</LI>
+    <LI>只有 root 进程才能直接访问 I/O 端口</LI>
+    <LI>首先要取得端口的访问权限: ioperm, iopl</LI>
+    <LI>然后才能用 inb 和 outb</LI>
+    <LI>inb 和 outb 以内嵌函数的形式实现, 因此要用 -O 或 -O2 选项编译</LI>
 </UL>
 
 <PRE>
@@ -86,23 +86,23 @@ EXAMPLE:
 ===============================================================================
 </PRE>
 
-<H3>5.5.2&nbsp;&nbsp;��¼����</H3>
+<H3>5.5.2&nbsp;&nbsp;记录锁定</H3>
 <UL>
-    <LI>��������</LI>
-    <LI>#��ѧ#</LI>
+    <LI>基本概念</LI>
+    <LI>#自学#</LI>
 </UL>
 
-<H3>5.5.3&nbsp;&nbsp;������ I/O</H3>
+<H3>5.5.3&nbsp;&nbsp;非阻塞 I/O</H3>
 <UL>
-    <LI>��������</LI>
-    <LI>open ʱ��ָ�� O_NONBLOCK (O_NDELAY)</LI>
-    <LI>�� fcntl ������������־���ı�Ϊ������</LI>
+    <LI>基本概念</LI>
+    <LI>open 时可指定 O_NONBLOCK (O_NDELAY)</LI>
+    <LI>用 fcntl 设置描述符标志而改变为非阻塞</LI>
 </UL>
 
-<H3>5.5.4&nbsp;&nbsp;I/O �๤</H3>
+<H3>5.5.4&nbsp;&nbsp;I/O 多工</H3>
 <UL>
-    <LI>��������</LI>
-    <LI>select �� poll</LI>
+    <LI>基本概念</LI>
+    <LI>select 和 poll</LI>
 </UL>
 
 <PRE>
@@ -129,10 +129,10 @@ EXAMPLE:
                        short revents;    /* returned events */
                };
 -------------------------------------------------------------------------------
-   * select �е� n �����ȴ��ļ�������������ֵ�� 1.
+   * select 中的 n 是所等待文件描述符中最大的值加 1.
 -------------------------------------------------------------------------------
 EXAMPLE 1:
-       /* �� Virtual Console on MiniGUI ��, ������ poll �ȴ���α�ն��ϵ����� */
+       /* 在 Virtual Console on MiniGUI 中, 我们用 poll 等待主伪终端上的数据 */
 
         void ReadMasterPty (PCONINFO con)
         {
@@ -154,7 +154,7 @@ EXAMPLE 1:
             }
         }
 
-       /* ���û������, ���Ǵ��� MiniGUI ����Ϣ, �������̺�����¼� */
+       /* 如果没有数据, 我们处理 MiniGUI 的消息, 包括键盘和鼠标事件 */
 
             ...
 
@@ -176,11 +176,11 @@ EXAMPLE 1:
 
             ...
 
-       /* ����Ҳ�����÷����� I/O ʵ�� ReadMasterPty, �����ַ����ǳ����� CPU ��Դ */
+       /* 我们也可以用非阻塞 I/O 实现 ReadMasterPty, 但这种方法非常消耗 CPU 资源 */
 
 -------------------------------------------------------------------------------
 EXAMPLE 1:
-       /* SVGALib �� select ����ʵ�� vga_waitevent �����ȴ����̺�����¼� */
+       /* SVGALib 用 select 函数实现 vga_waitevent 函数等待键盘和鼠标事件 */
 
         int vga_waitevent(int which, fd_set * in, fd_set * out, fd_set * except,
                           struct timeval *timeout)
@@ -234,15 +234,15 @@ EXAMPLE 1:
 </PRE>
 
 
-<H3>5.5.4&nbsp;&nbsp;�첽 I/O</H3>
+<H3>5.5.4&nbsp;&nbsp;异步 I/O</H3>
 <UL>
-    <LI>��������</LI>
-    <LI>#��ѧ#</LI>
+    <LI>基本概念</LI>
+    <LI>#自学#</LI>
 </UL>
 
-<H3>5.5.5&nbsp;&nbsp;�ڴ�ӳ��</H3>
+<H3>5.5.5&nbsp;&nbsp;内存映射</H3>
 <UL>
-    <LI>��������</LI>
+    <LI>基本概念</LI>
     <LI>mmap/unmmap</LI>
 <PRE>
 ===============================================================================
@@ -256,13 +256,13 @@ EXAMPLE 1:
 
        #endif
 -------------------------------------------------------------------------------
-    * mmap �� start һ����Ϊ 0, ��ϵͳ����ѡ��ʲô��ַ��Ϊ��ʼ��ӳ���ַ.
-    * prot ��ȡֵ����� fd �Ĵ򿪱�־һֱ.
-    * дʱ���Ƶĺ���.
+    * mmap 的 start 一般设为 0, 由系统决定选择什么地址作为起始的映射地址.
+    * prot 的取值必须和 fd 的打开标志一直.
+    * 写时复制的含义.
 -------------------------------------------------------------------------------
 SAMPLE:
-        /* ��һ���ļ�, ���� mmap ���ļ����򱣴�
-           Ϊ�����, ֻ�����ļ���ǰ 10 ���ַ� */
+        /* 打开一个文件, 利用 mmap 将文件反序保存
+           为简单起见, 只处理文件的前 10 个字符 */
 
         #include &lt;stdio.h&gt;
         #include &lt;unistd.h&gt;

@@ -1,12 +1,12 @@
-                         AKA��ȫɳ������CISSPѧϰС��
+                         AKA安全沙龙成立CISSP学习小组
 
-    AKA��ȫɳ����������ķ�չ���������˲������簲ȫר����רҵ��Ա�������ǡ���
-������Ա�����飬AKA��ȫɳ��׼������CISSP����ѧϰС��(cissp_beijing)�����ǻ�ӭ
-��CISSP����Ȥ�������Ǽ���С�飬���һ�����ۡ�ѧϰ��
+    AKA安全沙龙经过半年的发展，已吸引了不少网络安全专家与专业人员加入我们。经
+部分人员的提议，AKA安全沙龙准备成立CISSP北京学习小组(cissp_beijing)，我们欢迎
+对CISSP感兴趣的朋友们加入小组，大家一起讨论、学习。
 
-    CISSP����Certified Information Systems Security Professional���Ƿ�Ӯ����˾
-ISC2(http://www.isc2.org/)����Ϣϵͳ��ȫ��ҵ��Ա���е�רҵ��֤��ISC2�����˰�ȫ
-��CBK(Common Body of Knowledge)��������ȫ�ֳ���ʮ����
+    CISSP，即Certified Information Systems Security Professional，是非赢利公司
+ISC2(http://www.isc2.org/)对信息系统安全从业人员进行的专业认证。ISC2定义了安全
+的CBK(Common Body of Knowledge)，即将安全分成了十个域：
 	* Security Management Practices 
 	* Security Architecture and Models 
 	* Access Control Systems & Methodology 
@@ -17,18 +17,18 @@ ISC2(http://www.isc2.org/)����Ϣϵͳ��ȫ��ҵ��Ա���е�רҵ��֤��ISC2�����˰�ȫ
 	* Telecommunications, Network & Internet Security 
 	* Business Continuity Planning 
 	* Law, Investigations & Ethics 
-ÿ�������ַ�Ϊ�ܶ಻ͬ��֪ʶ�㣬��ϸ���ܿɼ���CISSP Study Guide�����ĵ�����1991
-�꿪ʼ������10�����ҵķ�չ��ȫ���CISSP������ǧ�ˡ�
+每个域中又分为很多不同的知识点，详细介绍可见《CISSP Study Guide》等文档。从1991
+年开始，经过10年左右的发展，全球的CISSP已有数千人。
 
-    CISSP����ѧϰС�鲻�շѣ�С���Ա��Ҫ���ھۻᣬѧϰ������CISSP��׼�����ϣ�
-AKA��ȫɳ��Ҳ��Ƕ��ڵ���һЩר�����ʹ��һ��ۻᡣ
+    CISSP北京学习小组不收费，小组成员需要定期聚会，学习，交流CISSP的准备材料，
+AKA安全沙龙也会非定期地请一些专家来和大家一起聚会。
 
-    ���ǻ�ӭ��ȫרҵ��Ա����CISSP����ѧϰС��(С����������������)�����������
-������Ա���ţ�
+    我们欢迎安全专业人员加入CISSP北京学习小组(小组人数会有所限制)，有意者请给
+下列人员发信：
 	
 	Daniel Yu (yu_daniel@sohu.com)
-	κ�̳� (david_wei@getjob.com.cn)
-	Kevin Wang (star_wang@sina.com)��
+	魏继超 (david_wei@getjob.com.cn)
+	Kevin Wang (star_wang@sina.com)。
 
      
   

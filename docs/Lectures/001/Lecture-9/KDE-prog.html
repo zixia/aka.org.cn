@@ -4,11 +4,11 @@
     <TITLE>KDE programming Introduction</TITLE>
 </HEAD>
 <BODY>
-<P><A HREF="KDE.html">ÉÏÒ»Ò³</A>
-ÏÂÒ»Ò³
-<P><B><FONT SIZE=+3>KDE±à³Ì¼ò½é</FONT></B><P>
+<P><A HREF="KDE.html">ä¸Šä¸€é¡µ</A>
+ä¸‹ä¸€é¡µ
+<P><B><FONT SIZE=+3>KDEç¼–ç¨‹ç®€ä»‹</FONT></B><P>
 
-<P><B><FONT SIZE=+2>QtµÄÀı×Ó</FONT></B><P>
+<P><B><FONT SIZE=+2>Qtçš„ä¾‹å­</FONT></B><P>
 
 <PRE>
 #include <qapplication.h>
@@ -30,7 +30,7 @@ int main( int argc, char **argv )
 } 
 </PRE>
 
-<P><B><FONT SIZE=+2>KDEµÄÀı×Ó</FONT></B><P>
+<P><B><FONT SIZE=+2>KDEçš„ä¾‹å­</FONT></B><P>
 <PRE>
 #include <kapp.h>
 #include <kfiledialog.h>
@@ -108,7 +108,7 @@ void MainWindow::fileSave()
 }
 
 </PRE>
-<P><B><FONT SIZE=+2>DCOPµÄÀı×Ó</FONT></B><P>
+<P><B><FONT SIZE=+2>DCOPçš„ä¾‹å­</FONT></B><P>
 <P><B>DCOP requestor</B><P>
 <PRE>
     DCOPClient *client = kapp->dcopClient();
@@ -129,7 +129,7 @@ void MainWindow::fileSave()
    		insertItem ( new QListViewItem ( this , s ) );
 	}; 
 </PRE>
-<P><B>Interface¶¨Òå</B><P>
+<P><B>Interfaceå®šä¹‰</B><P>
 <PRE>
 #include <dcopobject.h>
 #include <qstring.h>
@@ -145,7 +145,7 @@ k_dcop:
 };
 
 </PRE>
-<P><B>Í·ÎÄ¼ş¶¨Òå</B><P>
+<P><B>å¤´æ–‡ä»¶å®šä¹‰</B><P>
 <PRE>
 class MainList : public QListView, virtual public Iface
 {
@@ -177,7 +177,7 @@ server = Server("http://localhost:" + port +"/p6")
 server.bookmarkList.add(auth, "http://www.kde.org")  
 
 </PRE>
-<P><A HREF="KDE.html">ÉÏÒ»Ò³</A>
-ÏÂÒ»Ò³
+<P><A HREF="KDE.html">ä¸Šä¸€é¡µ</A>
+ä¸‹ä¸€é¡µ
 </BODY>
 </HTML>

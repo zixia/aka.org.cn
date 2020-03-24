@@ -5,84 +5,84 @@
 </head>
 
 <body bgcolor="#FFFFFF">
-<h2 align="center"><b>���� CGI �İ�ȫ�� </b></h2>
-<p><span class="text">�����ڼ�������򡪡�������Internet�ϡ������ܴ󲿷�Web����������ĳ��򶼾����ܱ����Լ������ݲ����ֺ�����ֻҪCGI�ű�����һ�㰲ȫ�����ʧ��--�����ļ���˽�����ݡ��Լ��κζ���������ʹ�������ܷ��ʼ��������ѭһЩ�򵥵Ĺ��򲢱��־�����ʹ�Լ���CGI�ű������ֺ����Ӷ����Ա����Լ���Ȩ�档<br>
+<h2 align="center"><b>关于 CGI 的安全性 </b></h2>
+<p><span class="text">　　在计算机领域——尤其在Internet上——尽管大部分Web服务器所编的程序都尽可能保护自己的内容不受侵害，但只要CGI脚本中有一点安全方面的失误--口令文件、私有数据、以及任何东西，就能使入侵者能访问计算机。遵循一些简单的规则并保持警惕能使自己的CGI脚本免受侵害，从而可以保护自己的权益。<br>
   <br>
-  1. �ű��ͳ���<br>
+  1. 脚本和程序<br>
   <br>
-  &nbsp;&nbsp;&nbsp; �ڿ�ʼ�������ú������Ա�дCGI�ű�ʱӦ���Ǽ������أ�����֮һӦ�ǰ�ȫ�ԡ�Shell �ű���Perl�����C��ִ�г�����CGI�ű�����õ���ʽ���Ӱ�ȫ�ԽǶ���˵ÿ�ֶ�������ȱ������û����һ������õ�--������������Ŀ��ǣ����ٶȺͿ�������--ÿ�ֶ���ʵ�õ�����<br>
+  &nbsp;&nbsp;&nbsp; 在开始决定采用何种语言编写CGI脚本时应考虑几个因素，其中之一应是安全性。Shell 脚本，Perl程序和C可执行程序是CGI脚本最常采用的形式，从安全性角度来说每种都备有优缺。尽管没有哪一种是最好的--基于其他方面的考虑，如速度和可重用性--每种都有实用的领域。<br>
   <br>
-  &nbsp;&nbsp;&nbsp; Shell�ű�һ������С�ġ����ٵ�������������Ͳ�Ҫ��CGI������ˣ���д����ʱ���������ǰ�ȫ�ԡ�����������Ե���һЩȱ�ݣ�ʹ�ý���ϵͳ����һ��֪ʶ����Ҳ�ܽ���ϵͳ�����߶���<br>
-  &nbsp;&nbsp;&nbsp; ����Shell CGI ����������д������ֻ��ƴ��һ�¼��ɣ�����������ȴ�����ѣ���Ϊ����һ����ͨ��ִ���ⲿ��������������ɹ����ġ���͵���һЩ���ܵ�������CGI 
-  �����̳��κ���ʹ�õĳ���İ�ȫ���⡣<br>
-  &nbsp;&nbsp;&nbsp; ���磬����UNIXʵ�ó��� awk�������ܴ��������ݵ�������һЩ�൱�ϸ����ơ������CGI�ű���ʹ��awk����ô�ó���Ҳ������ͬ�������ơ�Perl��Shell�ű�����һ����Perl����CGI����кܶ��ŵ㣬�����൱��ȫ����Perl�ܸ�CGI 
-  �����ṩ�㹻������ԴӶ����¶԰�ȫ�ԵĴ���о������磬Perl�ǽ����͵ġ�����ζ����ʵ���ڵ���ʱ���ȱ��룬Ȼ��ÿ��ִ��һ������ͺ�����ʹ�ò���ȷ���û����ݱ�����������Ϊ�����һ���֣��Ӷ�����ؽ��н��ͣ��γɳ�����ֹԭ��<br>
-  &nbsp;&nbsp;&nbsp; ���̸̸C��CѸ�ٳ�Ϊ��׼Ӧ�ÿ������ԣ��������е�UNIX��windows NTϵͳ�������������ġ��Ӱ�ȫ�ԵĽǶ�����C 
-  �ƺ��Ǻܲ��������������������ԣ����ĺü��ְ�ȫ�������ѹ�Ϊ��֪������Щ����Ҳ�ܺ����׵ر������á�<br>
-  &nbsp;&nbsp;&nbsp; ���磬C �Դ������ǳ���������κ��Զ��Ķ�λ���������ñ�����Լ������������顣�ڴ�����ʱ���󲿷�C ����Ա���Ǽ򵥵ؽ���һ��Ԥ����Ŀռ䲢ϣ�����㹻���Ա㴦���û�������κ����ݡ�<br>
-  ��Ȼ��Shell�ű���Perl��C ���ǽ��еı�дCGI�ű����ԡ�ʵ���ϣ��κο��԰�Ԥ����ķ�ʽ��Web���������н����ļ�������Զ��������ڱ�дCGI������UNIX��Windows 
-  NT�������ϣ�������ͨ�����������ͱ�׼����(stdin) �����ű��ģ������κ��ܴ�����������Դ��ȡ��д���׼���(sidout)�����Զ������ڴ���CGI:awk��FORTRAN��C++��Basic��COBOL���ȡ�windows�ĳ���Ա����ʹ�����е�Visual 
-  Basic������ζ���о����VB����Ա����ȥѧһ�������ԡ�Macintoshʹ��AppleEvents����AppleScript��CGI�������ͨ�ţ������κο��Զ�д�����ߵ����Զ���ʹ�á�<br>
-  &nbsp;&nbsp;&nbsp; ������Shell�ű�(����ʹ������Shell)��Perl��C����������Ϊ�ı�дCGI�ű������ԡ��Ⲣ����˵����ʹ�������ˣ�ֻ��˵�󲿳���Ŀ⡪�����󲿷־������Եİ�ȫ�Ŀ⡪�����������������Ա�д�ġ�����Լ���ѡ��CGI������ԣ�����ǽ��ǰ�˵ľ��顣<br>
+  &nbsp;&nbsp;&nbsp; Shell脚本一般用于小的、快速的甚至可以用完就不要的CGI程序，因此，编写它们时常常不考虑安全性。这种疏忽可以导致一些缺陷，使得仅对系统具有一般知识的人也能进入系统任意走动。<br>
+  &nbsp;&nbsp;&nbsp; 尽管Shell CGI 程序最容易写，甚至只需拼凑一下即可，但控制它们却很困难，因为它们一般是通过执行外部的其他程序来完成工作的。这就导致一些可能的隐患，CGI 
+  程序会继承任何它使用的程序的安全问题。<br>
+  &nbsp;&nbsp;&nbsp; 例如，常用UNIX实用程序 awk对于它能处理的数据的数量有一些相当严格限制。如果在CGI脚本中使用awk，那么该程序也就有了同样的限制。Perl比Shell脚本更进一步。Perl用于CGI编程有很多优点，并且相当安全。但Perl能给CGI 
+  作者提供足够的灵活性从而导致对安全性的错误感觉。例如，Perl是解释型的。这意味着它实际在调用时是先编译，然后每次执行一步。这就很容易使得不正确的用户数据被包括进来作为代码的一部分，从而错误地进行解释，形成程序中止原因。<br>
+  &nbsp;&nbsp;&nbsp; 最后谈谈C。C迅速成为标准应用开发语言，几乎所有的UNIX和windows NT系统都是用它开发的。从安全性的角度来看C 
+  似乎是很不错，但由于它的流行性，它的好几种安全性问题已广为人知，而这些问题也能很容易地被人利用。<br>
+  &nbsp;&nbsp;&nbsp; 例如，C 对串处理非常差。它不做任何自动的定位或清理而让编程者自己处理所有事情。在处理串时，大部分C 程序员都是简单地建立一个预定义的空间并希望它足够大以便处理用户输入的任何内容。<br>
+  当然，Shell脚本、Perl和C 不是仅有的编写CGI脚本语言。实际上，任何可以按预定义的方式与Web服务器进行交互的计算机语言都可以用于编写CGI程序。在UNIX和Windows 
+  NT服务器上，数据是通过环境变量和标准输入(stdin) 传给脚本的，所以任何能从这两种数据源读取并写入标准输出(sidout)的语言都能用于创建CGI:awk、FORTRAN、C++、Basic和COBOL，等。windows的程序员可以使用流行的Visual 
+  Basic，这意味着有经验的VB程序员不必去学一门新语言。Macintosh使用AppleEvents、和AppleScript与CGI程序进行通信，所以任何可以读写这两者的语言都可使用。<br>
+  &nbsp;&nbsp;&nbsp; 不过，Shell脚本(不管使用那种Shell)、Perl和C仍是最流行为的编写CGI脚本的语言。这并不是说必须使用它们了；只是说大部程序的库——即大部分经过测试的安全的库——都是用这三种语言编写的。如果自己来选择CGI编程语言，最好是借鉴前人的经验。<br>
   <br>
-  2. ˭Ҳ����<br>
+  2. 谁也不信<br>
   <br>
-  &nbsp;&nbsp;&nbsp; �������е�CGI ��ȫ���ⶼ�������û��Ľ��������������ⲿ����Դ������֮��һ���򵥵ġ���Ԥ����CGI����ͻȻ��෽����չ��ÿ�����涼��������С�ķ�϶ʹ�á��ڿ͡�������������������û������ֽ�������ͨ���������ļ�·�������Ÿ�����CGI 
-  �ű�������������ͬʱҲʹ�����ǳ���������Web�������ϵ���Ǳ�ڵ�Σ�ղ��֡�<br>
-  &nbsp;&nbsp;&nbsp; ��д��ȫ��CGI �ű��ܴ�̶����Ǵ����Ժ�����Ľ�ϡ���д�߱������㹻�Ĵ����Բ����뵽�û�ʹ�õģ�����������ػ��Ǳ�����еĿ���������������ķ������ݵķ�ʽ�����ұ����е����룬��Ϊ�п��ܲ�֪��ʲôʱ��ʲô�ط������ǽ���һһ�������顣<br>
+  &nbsp;&nbsp;&nbsp; 几乎所有的CGI 安全问题都来自与用户的交互。接收来自外部数据源的输入之后一个简单的、可预见的CGI程序突然向多方向伸展，每个方面都可能有最小的缝隙使得“黑客”可以溜进来。正是与用户的这种交互——通过表单或文件路径——才给予了CGI 
+  脚本这种能力，但同时也使得它们成了运行在Web服务器上的最潜在的危险部分。<br>
+  &nbsp;&nbsp;&nbsp; 编写安全的CGI 脚本很大程度上是创造性和妄想的结合。编写者必须有足够的创造性才能想到用户使用的，不管是无意地还是别的所有的可能隐含导致问题的发送数据的方式。而且必须有点妄想，因为有可能不知道什么时候、什么地方、他们将会一一加以试验。<br>
   <br>
-  2.1 ���ֵ�������ķ�ʽ<br>
+  2.1 两种导致问题的方式<br>
   <br>
-  &nbsp;&nbsp;&nbsp; ���û���¼����Web վ�㲢��ʼ���н�������ʱ�������������ַ�ʽ���鷳��һ���ǲ����ع���������Υ��ҳ���н�����ÿ�����ƻ�Լ��;��һ�ַ�ʽ�ǰ�Ҫ��ȥ����<br>
-  �󲿷�CGI �ű�����ΪHTML�����ĺ�̨���еģ����������û��������Ϣ���ṩĳ�ֶ��Ƶ��������Ϊ����������£��󲿷�CGI �ű���дʱ���ȴ�ĳ�������ʽ�����ݡ����������û���������ƥ���ռ���������Ϣ�ı������������鲢�������������û������������ְ취�ƹ���ЩԤ����ĸ�ʽ�����ű�����һЩ����������������ݡ�CGI 
-  �������Դ�����׼����<br>
-  ��Σ��û����Ը�CGI �ű��������������������ͣ���Ԥ�ڵ���ʽ�ڱ���������ÿ���ֶΡ��������͵��ύ�����������е�����ĳ����վ�㽻����������û���Ҳ��������ĳ������ġ��ڿ͡���ƾ�����йز���ϵͳ��Web 
-  ������������֪ʶ�����ó����ı�̴�����Щ���֣�������һ�ж�������ȴ����Σ�յġ����Ѽ�������Web վ�㰲ȫ���������������ֵķ�ֹ��<br>
+  &nbsp;&nbsp;&nbsp; 当用户登录进入Web 站点并开始进行交互访问时，他们能以两种方式惹麻烦。一种是不遵守规则，歪曲或违反页面中建立的每个限制或约束;另一种方式是按要求去做。<br>
+  大部分CGI 脚本是作为HTML表单的后台运行的，负责处理由用户输入的信息并提供某种定制的输出。因为在这种情况下，大部分CGI 脚本编写时都等待某种特殊格式的数据。它们期望用户的输入能匹配收集并发送信息的表单。不过事情并不总是这样。用户可以有许多种办法绕过这些预定义的格式而给脚本发送一些看起来是随机的数据。CGI 
+  程序必须对此有所准备。<br>
+  其次，用户可以给CGI 脚本发送所期望的数据类型，按预期的形式在表单中填入每个字段。这种类型的提交可以是想像中的来自某个与站点交互的无意的用户，也可能来自某个恶意的“黑客”，凭借他有关操作系统和Web 
+  服务器软件的知识并利用常见的编程错误。这些入侵，表面上一切都正常，却是最危险的、最难检测出来。Web 站点安全性依赖干这种入侵的防止。<br>
   <br>
-  2.2 ��Ҫ���ű�������<br>
+  2.2 不要相信表单数据<br>
   <br>
-  &nbsp;&nbsp;&nbsp; ��CGI ���������İ�ȫʧ��������Ŵӱ��������ű������ݣ��û���δ֪��һ����ˣ����������ҵ�һЩ�����Ա����û�뵽���ķ������ݵķ���--�����ǳ���Ա��Ϊ���������ܵķ�����<br>
-  �ű��������Щ���Կ��ǡ����磬������Щ���ζ��ǿ��ܵ�:<br>
-  1)��һ�鵥��ѡ��ť��ѡ��Ľ�����ܲ��Ǳ������ṩ��ѡ��֮һ��<br>
-  2)����ĳ���ı��ֶε����ݳ��ȿ��ܴ���MAXLENGTH�ֶ������ĳ��ȡ�<br>
-  3)�ֶα��������ֿ����������ָ���Ĳ������<br>
+  &nbsp;&nbsp;&nbsp; 在CGI 编程中最常见的安全失误就是相信从表单传到脚本的数据，用户是未知的一大堆人，他们总能找到一些编程人员从来没想到过的发送数据的方法--而且是程序员认为几乎不可能的方法。<br>
+  脚本必须对这些加以考虑。例如，下面这些情形都是可能的:<br>
+  1)从一组单单选按钮中选择的结果可能不是表单中提供的选项之一。<br>
+  2)来自某个文本字段的数据长度可能大于MAXLENGTH字段允许的长度。<br>
+  3)字段本身的名字可能与表单中指定的不相符。<br>
   <br>
-  2.3 ���������ݵ���Դ<br>
+  2.3 不合理数据的来源<br>
   <br>
-  &nbsp;&nbsp;&nbsp; ��Щ����Ļ��������ԭ�򣬵����Լ��Ľű����յ���֪�����ȥ���������ݣ��п��ܵ��·�Ԥ�ڵġ���ͬʱ��Σ�յġ�����Ϊ��<br>
-  &nbsp;&nbsp;&nbsp; ����Ĵ���ʵ����һ�ֱ�������ĳ������yahoo�����ݿ��CGI�ű����������ýű���Ƶúܺò��Һܰ�ȫ����Ϊ�������˲���ʶ�����롣 
+  &nbsp;&nbsp;&nbsp; 因—些无意的或是有意的原因，导致自己的脚本接收到不知道如何去处理的数据，有可能导致非预期的——同时很危险的——行为。<br>
+  &nbsp;&nbsp;&nbsp; 下面的代码实现了一种表单并向某个搜索yahoo！数据库的CGI脚本送垃圾。该脚本设计得很好并且很安全，因为它忽略了不认识的输入。 
   </span></p>
 <ul>
   <p><span class="text">&lt;FORM METHOD="POST" ACTION="http://search.yahoo.com/bin/search"&gt;<br>
-    Enter your name��first then last:<br>
+    Enter your name，first then last:<br>
     &lt;INPUT TYPE="TEXT" NAME="first"&gt;<br>
     &lt;INPUT TYPE="TEXT" NAME="last"&gt;<br>
     &lt;/FORM</span></p>
 </ul>
-<p><span class="text">&nbsp;&nbsp;&nbsp; Ҳ���û�����(������ʶ��)��URL�༭Ϊ���CGI�ű������������CGI�����ύ����ʱ��Ҫ�򵥵ؽ���������е���������CGI��URL��(����GET 
-  METHODS)�������û����Ժ����׵ؽ�Webҳ���ַ���뵽���������һ�����û�Ҳ�����Լ��޸ķ��͸�����ű������ݡ�<br>
-  ���磬�����������ϵ�Submit��ťʱ��Netscape��һ�������ַ�����Location�ֶΣ��ô���CGI��URL���һ��������ɣ��󲿷ֿ�����������ж����NAMES��VALUES�����Ը��Ļ����������ɵر༭Location�ֶε����ݲ����Լ�����Ը�޸�����:���ӱ�����û�е��ֶΣ���չ��MAXLENGTHѡ�����Ƶ��ı����ݣ����߼����κζ���������ʾ��ĳCGI�ű�Ԥ�ڴӱ������ύ��URL��<br>
+<p><span class="text">&nbsp;&nbsp;&nbsp; 也许用户碰巧(或者意识地)将URL编辑为这个CGI脚本。当浏览器向CGI程序提交数据时，要简单地将输入表单中的数据连到CGI的URL上(用于GET 
+  METHODS)，就像用户可以很容易地将Web页面地址输入到他的浏览器一样，用户也可以自己修改发送给这个脚本的数据。<br>
+  例如，当单击表单上的Submit按钮时，Netscape将一个长串字符放入Location字段，该串由CGI的URL后接一串数据组成，大部分看起来像表单中定义的NAMES和VALUES。如果愿意的话，可以自由地编辑Location字段的内容并按自己的意愿修改数据:增加表单中没有的字段，扩展由MAXLENGTH选项限制的文本数据，或者几乎任何对象。以下显示了某CGI脚本预期从表单中提交的URL。<br>
   <br>
   http://www.altavista.digit.com/cgi-bin?pg=q&amp;what=web&amp;imt=&amp;q=%22An+Entirely+Other%22<br>
   <br>
-  &nbsp;&nbsp;&nbsp; �û������޸�ͬһURL��CGI�ű��Ա����ã������ڽ��յ��Ƿ�Ԥ�ڵ����ݡ�Ϊ�˱�֤��ȫ���ýű�Ӧ���ڱ�дʱ�����Ϊ�ܽ���������ʶ��Ϊ����Ҫ������ݲ����Ծܾ���<br>
+  &nbsp;&nbsp;&nbsp; 用户可以修改同一URL，CGI脚本仍被调用，但现在接收的是非预期的数据。为了保证安全，该脚本应该在编写时就设计为能将这种输入识别为不被要求的数据并加以拒绝。<br>
   <br>
-  &nbsp;&nbsp;&nbsp; ���ĳ����Ұ�ĵ�"�ڿ�"Ҳ����дһ����������Web�ϵķ���������װ��һ��Web��������ó��������һЩ�κ�һ��������web�������δ�������£������CGI�ű����ͳɰ����ֽڵ����ݡ����CGI�ű������ƴ�POST 
-  METHOD��ȡ���ݣ�����ô�죿���п��ܻ������Ҳ�������Ǹ�������ϵͳ���˷���ϵͳ��<br>
+  &nbsp;&nbsp;&nbsp; 最后，某个有野心的"黑客"也许会写一个程序连到Web上的服务器并假装是一个Web浏览器。该程序可能做一些任何一个真正的web浏览器从未做过的事，例如给CGI脚本发送成百兆字节的数据。如果CGI脚本不限制从POST 
+  METHOD读取数据，那怎么办？它有可能会崩溃，也许允许那个崩溃了系统的人访问系统。<br>
   <br>
-  2.4 �ܾ�����Ҫ��ı�������<br>
+  2.4 拒绝不合要求的表单数据<br>
   <br>
-  &nbsp;&nbsp;&nbsp; CGI�ű������м��ַ�ʽ�ܾ������ύ�����ķ�Ԥ�ڵ����롣��дCGIʱӦ��ʹ������һЩ���ɻ�������Щ���ɡ�<br>
-  &nbsp;&nbsp;&nbsp; ���ȣ�CGI �ű�Ӧ���ý��ն������ݵ����ƣ��������������ύ��Ҳ�����ύ�е�ÿ��NAME/VALUE�ԡ����磬CGI�ű���ȡPOST 
-  METHOD�����CONTENT-LENGTH���������Ĵ�С��ȷ��ĳ�����ǲ��Ǻ�����Ԥ�����롣���CGI �ű���ƽ��յ�Ψһ������ĳ�˵���������ô���CONTENT-LENGTH����100�ֽڣ���Ӧ�������ɷ���һ������û���ĸ�������������ô����ͨ���������ƣ�����ʹ�ű�����äĿ�ض�ȡ���͸��������ݡ�</span></p>
+  &nbsp;&nbsp;&nbsp; CGI脚本可以有几种方式拒绝接收提交给它的非预期的输入。编写CGI时应该使用其中一些技巧或所有这些技巧。<br>
+  &nbsp;&nbsp;&nbsp; 首先，CGI 脚本应设置接收多少数据的限制，不仅限制整个提交，也限制提交中的每个NAME/VALUE对。例如，CGI脚本读取POST 
+  METHOD，检查CONTENT-LENGTH环境变量的大小来确定某输入是不是合理的预期输入。如果CGI 脚本设计接收的唯一数据是某人的姓名，那么如果CONTENT-LENGTH大于100字节，就应该有理由返回一个错误。没有哪个合理的姓有那么长，通过设置限制，就能使脚本不再盲目地读取发送给它的内容。</span></p>
 <blockquote> 
   <p><span class="text"><br>
-    ע��<br>
-    ���˸��˵��ǣ����ص���ȥ����ͨ��POST�����ύ�����ݡ�GET�������ƵĲ��Ҳ�����ű����Ͷ���1KB�����ݡ��������Զ����Ʒ���QUERY-STRING���������е����ݵĴ�С����������GET���͸�CGI�������Ϣ��</span></p>
+    注意<br>
+    令人高兴的是，不必担心去限制通过POST方法提交的数据。GET是自限制的并且不会向脚本发送多于1KB的数据。服务器自动限制放人QUERY-STRING环境变量中的数据的大小，而这正是GET发送给CGI程序的信息。</span></p>
 </blockquote>
-<p><span class="text">&nbsp;&nbsp;&nbsp; ��Ȼ��"�ڿ�"�ǿ��Ժ����׵ؽ�������GET��ΪPUT�Ӷ��ƹ��������õ����ơ����٣�����Ӧ�ü��һ�������Ƿ�����Ԥ�ڵķ����ύ��;���������ȷ�Ұ�ȫ�ش������ַ�����<br>
+<p><span class="text">&nbsp;&nbsp;&nbsp; 当然，"黑客"们可以很容易地将表单由GET改为PUT从而绕过这种内置的限制。至少，程序应该检查一下数据是否是用预期的方法提交的;最好是能正确且安全地处理两种方法。<br>
   <br>
-  &nbsp;&nbsp;&nbsp; ��һ����Ӧ��֤�ű�֪���ڽ��յ�����ʶ�������ʱ����ô�죬���磬���ĳ����Ҫ���û�ѡ��������ѡ��ť֮һ���ű��Ͳ�Ӧ�ü�����Ϊһ����ťδ��ѡ����һ����һ����ѡ���ˡ������Perl����ͷ��������Ĵ���:<br>
+  &nbsp;&nbsp;&nbsp; 下一步，应保证脚本知道在接收到不能识别的数据时该怎么办，例如，如果某表单要求用户选择两个单选按钮之一，脚本就不应该假设因为一个按钮未被选择，另一个就一定被选择了。下面的Perl代码就犯了这样的错误:<br>
   </span>
 <ul>
   <p><span class="text">if ($form_Data{"radio_choice"} eq "button_one"){<br>
@@ -90,9 +90,9 @@
     else {<br>
     # Button Two has been clicked }</span></p>
 </ul>
-<p><span class="text">&nbsp;&nbsp;&nbsp; ��δ���ٶ���Ϊ�������ṩ������ѡ�����һ��δ��ѡ�У���ô�ڶ���Ϳ϶���ѡ���ˡ��ⲻһ������ġ�����ǰ�������û��ʲô����������ĳЩ����������ļ�����ܺ�Σ�ա�<br>
+<p><span class="text">&nbsp;&nbsp;&nbsp; 这段代码假定因为表单仅提供了两个选项，而第一项未被选中，那么第二项就肯定被选中了。这不一定是真的。尽管前面的例子没有什么害处，但在某些情况下这样的假设可能很危险。<br>
   <br>
-  &nbsp;&nbsp;&nbsp; CGI�ű�Ӧ����Ԥ���������ζ���Ӧ�ؽ��д��������磬�������һЩ��Ԥ�ڵĻ�"������"�����Σ����Դ�ӡһ��������������:<br>
+  &nbsp;&nbsp;&nbsp; CGI脚本应该能预期这种情形而相应地进行处理。例如，如果出现一些非预期的或"不可能"的情形，可以打印一个错误，如下所述:<br>
   </span>
 <ul>
   <p><span class="text">If ($form_Data{"radio_choice"} eq "button_one") {<br>
@@ -102,11 +102,11 @@
     else {<br>
     #Error }</span></p>
 </ul>
-<p><span class="text">&nbsp;&nbsp;&nbsp; ͨ������ڶ���if��䣭����ʽ���"radio_choice"ʵ������"button_two"���������ű�����ȫ��;�������������ˡ�<br>
-  &nbsp;&nbsp;&nbsp; ��Ȼ������һ���������ű�����Щ���������ɵġ���Щ�ű�����С�ģ���֤ÿ���ֶΣ���ʹ������΢�ķ�Ԥ�����ݶ����ɴ�����Ϣ������������ɨ�û����ˡ���CGI 
-  �ű�ʶ���Ԥ������Ȼ���ӵ����������Զ�ѡ��һ��ȱʡֵҲ���ԡ�<br>
+<p><span class="text">&nbsp;&nbsp;&nbsp; 通过加入第二个if语句－－显式检查"radio_choice"实际上是"button_two"－－这样脚本更安全了;它不再做假设了。<br>
+  &nbsp;&nbsp;&nbsp; 当然，错误不一定是期望脚本在这些情形下生成的。有些脚本过于小心，验证每个字段，即使是最轻微的非预期数据都生成错误信息，这样往往很扫用户的兴。让CGI 
+  脚本识别非预期数据然后扔掉它，并且自动选择一个缺省值也可以。<br>
   <br>
-  &nbsp;&nbsp;&nbsp; ��һ���棬�ű����ɰ����û�������������Ǽ򵥵ط�һ��������Ϣ������һ��ȱʡֵ���������Ҫ���û�����������֣��ű�Ӧ���ڽ��бȽ�֮ǰ�Զ����������еĿհ��ַ������漴��һ����ɴ˹��ܵ�Perl����Ƭ�Ρ�<br>
+  &nbsp;&nbsp;&nbsp; 另一方面，脚本还可帮助用户纠正错误而不是简单地发一条错误消息或设置一个缺省值。如果表单要求用户输入机密文字，脚本应能在进行比较之前自动跳过输入中的空白字符。下面即是一个完成此功能的Perl程序片段。<br>
   </span>
 <ul>
   <p><span class="text">$user_input =~ s/\s//;<br>
@@ -114,14 +114,14 @@
     if ($user_input eq $secret_Word) {<br>
     #Match! }</span></p>
 </ul>
-<p><span class="text">&nbsp;&nbsp;&nbsp; ��󣬿��Ը���һ������CGI�ű��ܴ��������ܶ�Ĳ�ͬ��������������ܲ�����Ԥ�ڵ����ܷ��͸�CGI������������ݣ�����ĳ���ض�����һ�㾭���м��ֳ��õķ�ʽ��������������顣<br>
-  &nbsp;&nbsp;&nbsp; ���磬������Ϊ��д�ı���ʹ��POST������CGI�ű��ύ���ݣ�������ζ�����ݱ��밴���ַ���������Ӧ�ü��REQUEET_METHOD����������ȷ����ʹ����GET����POST��������Ӧ�ض�ȡ���ݣ������Ǽٶ����ݶ�������Ԥ�ڵı�׼����(stdin)��һ��������д�ɹ���CGI�ű��ܽ�������ʹ��ʲô�����ύ�����ݲ��ڴ��������кܰ�ȫ�����³����嵥������Perl��д��һ�����ӡ�<br>
+<p><span class="text">&nbsp;&nbsp;&nbsp; 最后，可以更进一步，让CGI脚本能处理尽可能多的不同的输入表单。尽管不可能预期到可能发送给CGI程序的所有内容，但对某个特定方面一般经常有几种常用的方式，因而可以逐个检查。<br>
+  &nbsp;&nbsp;&nbsp; 例如，仅仅因为所写的表单使用POST方法向CGI脚本提交数据，并不意味着数据必须按那种方法进来。应该检查REQUEET_METHOD环境变量来确定是使用了GET还是POST方法并相应地读取数据，而不是假定数据都是来自预期的标准输入(stdin)。一个真正编写成功的CGI脚本能接收无论使用什么方法提交的数据并在处理过程中很安全。以下程序清单即是用Perl编写的一个例子。<br>
   <br>
-  �����嵥 CGI_READ.PL һ�����������Ķ�ȡ��ʽ����ĳ���<br>
+  程序清单 CGI_READ.PL 一个充满活力的读取格式输入的程序<br>
   </span>
 <ul>
   <p><span class="text">#Takes the maximum length allowed as a parameter<br>
-    #Returns 1 and the raw form data��or "0" and the error text<br>
+    #Returns 1 and the raw form data，or "0" and the error text<br>
     sub cgi_Read<br>
     {<br>
     local($input_Max)=1024 unless $input_Max=$_[0];<br>
@@ -151,14 +151,14 @@
     return (0,"METHOD not GET POST");<br>
     }</span></p>
 </ul>
-<p><span class="text">&nbsp;&nbsp;&nbsp; �ܶ���֮���ű�Ӧ�ò��Խ��յı������ݽ��м��裬Ӧ������Ԥ������֮������β���ȷ�ش�������ȷ�Ļ������������ݡ���ʹ������֮ǰӦ�������ܶ�ķ�ʽ���������ܾ������������벢��ӡһ��������Ϣ�����ĳ�������©��Ӧ�Զ�ѡ��һ��ȱʡֵ������������ͼ��������б����Գ�Ϊ����ĺ��������롣ѡ�����ַ�ʽ�������Լ��뻨�Ѷ���ʱ��;�����������ס��ԶҲ��ҪäĿ���մ���CGI������������Ϣ��<br>
+<p><span class="text">&nbsp;&nbsp;&nbsp; 总而言之，脚本应该不对接收的表单数据进行假设，应尽可能预计意料之外的情形并正确地处理不正确的或错误的输入数据。在使用数据之前应按尽可能多的方式测试它；拒绝不合理的输入并打印一条错误消息；如果某项出错或漏了应自动选择一个缺省值；甚至可以试图对输入进行编码以成为程序的合理的输入。选择哪种方式依赖于自己想花费多少时间和精力，不过记住永远也不要盲目接收传给CGI脚来的所有信息。<br>
   <br>
-  2.5��Ҫ����·������<br>
+  2.5不要相信路径数据<br>
   <br>
-  &nbsp;&nbsp;&nbsp; �û����޸ĵ���һ����������PATH_INTO�ķ����������������ñ�����CGI URL�н����ڽű��ļ���֮����κ�·����Ϣ���ġ����磬���foobar.sh��һ��CGl 
-  shell�ű�����ô��foobar.sh����ʱ��URL http://www.server.com/cgi-bin/foobar.sh/extra/path/info������/extra/path/info���Ž�PATH_INFO���������С�<br>
-  &nbsp;&nbsp;&nbsp; ���ʹ�����PATH_INFO�����������ͱ���С�ĵ���ȫ��֤�������ݡ���������������������ַ�ʽ���޸�һ����PATH_INFOҲ�����޸ġ�äĿ�ظ���PATH_INFO����ָ����·���ļ����в�����CGI�ű����ܻ��ö�����û��Է���������˺���<br>
-  &nbsp;&nbsp;&nbsp; ���磬���ĳ��CGI����������ڼ򵥵ش�ӡ��PATH_INFO�����õ��ļ�����ô�༭��CGI URL���û��Ϳ��Զ�ȡ�����ϵļ��������ļ���������ʾ:<br>
+  &nbsp;&nbsp;&nbsp; 用户能修改的另一类型数据是PATH_INTO的服务器环境变量。该变量由CGI URL中紧跟在脚本文件名之后的任何路径信息填充的。例如，如果foobar.sh是一个CGl 
+  shell脚本，那么当foobar.sh运行时，URL http://www.server.com/cgi-bin/foobar.sh/extra/path/info将导致/extra/path/info被放进PATH_INFO环境变量中。<br>
+  &nbsp;&nbsp;&nbsp; 如果使用这个PATH_INFO环境变量，就必须小心地完全验证它的内容。就像表单数据能以许多种方式被修改一样，PATH_INFO也可以修改。盲目地根据PATH_INFO的中指定的路径文件进行操作的CGI脚本可能会让恶意的用户对服务器造成伤害。<br>
+  &nbsp;&nbsp;&nbsp; 例如，如果某个CGI脚来设计用于简单地打印出PATH_INFO中引用的文件，那么编辑该CGI URL的用户就可以读取机器上的几乎所有文件，如下所示:<br>
   </span>
 <ul>
   <p><span class="text">#!/bin/sh<br>
@@ -173,37 +173,37 @@
     cat $PATH_INFO<br>
     echo "&lt;/PRE&gt;&lt;/BODY&gt;&lt;HIML&gt;"</span></p>
 </ul>
-<p><span class="text">&nbsp;&nbsp;&nbsp; �������û�ֻ����Ԥ���������(��http://www.server.com/cgi-bin/foobar.sh/public/faq.txt)ʱ���ýű���������������һ�����д����Ե�(������)�û����ܻ����������շ������ϵ��κ��ļ�������������http://www.server.com/cgi-bin/foobar.sh/etc/passwd��ǰ��Ľű���ܸ��˵ط��ػ����Ŀ����ļ���������ǲ�ϣ���������¡�<br>
-  &nbsp;&nbsp;&nbsp; ��һ�ְ�ȫ�ö�ķ�ʽ���ڿ���ʱʹ��PATH_TRANSLATED�����������������еķ�������֧�ָñ��������Խű�����������������������еĻ��������ṩ��ȫ���ε�·��������������PATH_INFO�ṩ�����URL��<br>
-  ������ĳ�������£������CGI�ű���ʹ��PATH_TRANSLATED�Ļ�������Է���ͨ����������ܷ��ʵ����ļ���Ӧ��֪����㼰����Ӧ�á�<br>
-  &nbsp;&nbsp;&nbsp; �ڴ󲿷�UNIX�������ϣ�htaccess�ļ�����λ���ĵ�����ÿ����Ŀ¼���������˭�ܹ����ʸ�Ŀ¼�е������ļ���������������������һ��Webҳ��ֻ����˾��Ա����<br>
-  ��Ȼ������֪����ν���.htaccess���Ӷ�֪���������˭�ܻ��ǲ��ܿ���Щҳ�棬CGI�ű�ȴ��֪����ʹ��PATH_TRANSLATED�����ļ����������ļ��ĳ����п������ɸ����˷������ṩ�ı�����<br>
-  &nbsp;&nbsp;&nbsp; ����ʹ��PATH_INFO����PATH_TRANSLATED����һ����Ҫ�Ĳ�������֤·����ȷ����������һ�����������·�������ǽű��Ͽɵļ���׼ȷ�ġ�Ԥ֪��·��֮һ������Ԥ����·�����ű����򵥵ؽ��ṩ���������Ͽɿ���ʹ�õ��ļ����ڲ��嵥���бȽϣ������˵�������ļ����޸�·��ʱ�������±���ű�������ȫ��ȴ���˱��ϡ�ֻ�ʼ��û�ѡ�񼸸�Ԥ������ļ����������û�ָ��ʵ�ʵ�·�����ļ�����<br>
-  �����Ǵ����������ṩ��·��ʱӦ��ѭ��һЩ����<br>
-  &nbsp;&nbsp;&nbsp; 1)���·������б�߿�ͷ��б����ζ��"����ڸ�"�����·��������еĻ���CGI�ű�Ҳ�Ǻ�����Ҫ����Web��֮������ݡ���������ʹ�õ�·�����������Web��Ŀ¼�������Ǿ���·����Ӧ�ܾ��κ���б�߿�ʼ�����ݡ�<br>
-  &nbsp;&nbsp;&nbsp; 2)��·���е�����(.)��������(..)������Ҳ�����⺬�塣������ζ�Ŷ�"���ڵ�ǰĿ¼",��˫����ζ��"����ڵ�ǰĿ¼�ĸ�Ŀ¼"�������ĺڿͿ��Խ�����../../../etc/passwd�����Ĵ��������㣬Ȼ�����½���/etc/passwd�ļ���Ӧ�ܾ��κΰ���˫�����е����ݡ�<br>
-  &nbsp;&nbsp;&nbsp; 3)����NT������ʹ����������ĸ�ĸ��������ô��̾��������������������õ�·������һ����ĸ����һ��ð�ſ�ͷ��Ӧ�ܾ��κ���ð��Ϊ�ڶ����ַ������ݡ�<br>
-  &nbsp;&nbsp;&nbsp; 4)����NT�ķ�������֧��Univesal Naming Conventions(UNC)���á�һ��UNC�ļ����ָ����������һ�������㣬���ಿ����ָ�������ϵ�ָ���Ĺ������йء�UNC�ļ����������������б�߿�ͷ��Ӧ�ܾ��κ�UNC·����<br>
+<p><span class="text">&nbsp;&nbsp;&nbsp; 尽管在用户只单击预定义的链接(即http://www.server.com/cgi-bin/foobar.sh/public/faq.txt)时，该脚本正常工作，但是一个更有创造性的(或恶意的)用户可能会利用它接收服务器上的任何文件。如果他想进入http://www.server.com/cgi-bin/foobar.sh/etc/passwd，前面的脚本会很高兴地返回机器的口令文件——这可是不希望发生的事。<br>
+  &nbsp;&nbsp;&nbsp; 另一种安全得多的方式是在可能时使用PATH_TRANSLATED环境变量。不是所有的服务器都支持该变量，所以脚本不能依赖于它。不过如果有的话，它能提供完全修饰的路径名，而不是像PATH_INFO提供的相对URL。<br>
+  不过在某种情形下，如果在CGI脚本中使用PATH_TRANSLATED的话，则可以访问通过浏览器不能访问到的文件。应该知道这点及它的应用。<br>
+  &nbsp;&nbsp;&nbsp; 在大部分UNIX服务器上，htaccess文件可以位于文档树的每个子目录，负责控制谁能够访问该目录中的特殊文件。例如它可以用于限制一组Web页面只给公司雇员看。<br>
+  虽然服务器知道如何解释.htaccess，从而知道如何限制谁能还是不能看这些页面，CGI脚本却不知道。使用PATH_TRANSLATED访问文件树中任意文件的程序有可能碰巧覆盖了服务器提供的保护。<br>
+  &nbsp;&nbsp;&nbsp; 无论使用PATH_INFO还是PATH_TRANSLATED，另一个重要的步骤是验证路径以确保它或者是一个真正的相对路径或者是脚本认可的几个准确的、预知的路径之一。对于预定的路径，脚本将简单地将提供的数据与认可可以使用的文件的内部清单进行比较，这就是说在增加文件或修改路径时必须重新编译脚本，但安全性却有了保障。只允计用户选择几个预定义的文件而不允许用户指定实际的路径和文件名。<br>
+  下面是处理访问者提供的路径时应遵循的一些规则。<br>
+  &nbsp;&nbsp;&nbsp; 1)相对路径不以斜线开头。斜线意味着"相对于根"或绝对路径。如果有的话，CGI脚本也是很少需要访问Web根之外的数据。这样它们使用的路径就是相对于Web根目录，而不是绝对路径。应拒绝任何以斜线开始的内容。<br>
+  &nbsp;&nbsp;&nbsp; 2)在路径中单个点(.)和两个点(..)的序列也有特殊含义。单点意味着对"对于当前目录",而双点意味着"相对于当前目录的父目录"。聪明的黑客可以建立象../../../etc/passwd这样的串逆向三层，然后向下进入/etc/passwd文件。应拒绝任何包含双点序列的内容。<br>
+  &nbsp;&nbsp;&nbsp; 3)基于NT服务器使用驱动器字母的概念来引用磁盘卷。包含对驱动器的引用的路径都以一个字母加上一个冒号开头。应拒绝任何以冒号为第二个字符的内容。<br>
+  &nbsp;&nbsp;&nbsp; 4)基于NT的服务器还支持Univesal Naming Conventions(UNC)引用。一个UNC文件规格指定机器名和一个共享点，其余部分与指定机器上的指定的共享点有关。UNC文件规格总是以两个反斜线开头。应拒绝任何UNC路径。<br>
   <br>
-  2.6һ�п�������������������<br>
+  2.6一切看起来都正常，不过…<br>
   <br>
-  &nbsp;&nbsp;&nbsp; �����Ѿ�֪�����û��ܸ�CGI�ű��ṩ��Ԥ�ڵ����ݵļ��ַ�ʽ�Լ���ζԸ������ˣ����µĸ��������������֤�û��ύ�ĺϷ����ݡ�<br>
-  &nbsp;&nbsp;&nbsp; �󲿷�����£���ȷ�������ر�д�ı����ύ�ᵼ�±�Խ�����ݸ�������⡣�������������������ף���ȷ���Ϸ��ġ���ȷ��ʽ������᲻�ᵼ�������Ҫ���ѵöࡣ��ΪCGI�ű��ǳ�����������������������κ����飬���԰�ȫ�����һ����Сʧ�������ܱ������Ƶؼ������á�������������Σ�յĵط���<br>
+  &nbsp;&nbsp;&nbsp; 现在已经知道了用户能给CGI脚本提供非预期的数据的几种方式以及如何对付它们了，余下的更大问题是如何验证用户提交的合法数据。<br>
+  &nbsp;&nbsp;&nbsp; 大部分情况下，正确但聪明地编写的表单提交会导致比越界数据更多的问题。忽略无意义的输入很容易，但确定合法的、正确格式的输入会不会导致问题就要困难得多。因为CGI脚本非常灵活，几乎可做计算机能做的任何事情，所以安全方面的一个很小失误往往能被无限制地加以利用——而这正是最危险的地方。<br>
   <br>
-  2.7 �����ļ���<br>
+  2.7 处理文件名<br>
   <br>
-  &nbsp;&nbsp;&nbsp; �ļ������ύ��CGI�ű��ļ����ݣ��������С�ĵĻ���ȴ�ܵ��������鷳������û�����������а���·�����أ���Ŀ¼б�ܺ�˫�㣬����������������һ���򵥵��ļ���--����file.txt--�����ȴ������/file.txt��../../../file.txt������Web�������İ�װ�Լ����ύ���ļ�����ʲô������ϵͳ�е������ļ����п��ܶ���¶����һ�������ĺڿ͡�<br>
-  &nbsp;&nbsp;&nbsp; ��һ��������û�������һ�������ļ������ֻ���һ����ϵͳ�����к���Ҫ���ļ�������ô�죿����������������/etc/passwd��C:\WINNT\SYSTEM32\KRNL32.DLL��ô�죿������CGI�ű��ж���Щ�ļ�����ʲô�����������п��ܱ����͸��û����߱����������ˡ���Windows 
-  95��Windows NT�£��������鷴б���ַ�(\)�����ܻ�����Web �����ͨ��UNC�ļ��������������ڸ�Web�����ϵ��ļ���<br>
-  &nbsp;&nbsp;&nbsp; ����û����ļ����������˲��Ϸ����ַ���ô�죿��UNIX�£��κ��Ծ��(.)��ͷ���ļ������ǲ��ɼ��ġ���Windows��б��(/)�ͷ�б��(\)����Ŀ¼�ָ������ܿ��ܲ�С��д��һ��Perl���򣬵��ļ����Թ�(pipe)(|)��ͷʱ�������Լ���Ϊ�����Ǵ���һ���ļ���ʵ����ȴ��ִ����һ���ⲿ��������û�֪����ô��Ļ����������԰ѿ����ַ�(����Escape����Return��)��Ϊ�ļ�����һ�����͸��ű���<br>
-  &nbsp;&nbsp;&nbsp; ����������ǣ���shell�ű��У��ֺ����ڽ���һ�������ʼ��һ���������ű����Ŀ����cat�û�������ļ����û���������file.txt;rm-rf/��Ϊ�ļ��������·���fi1e.txt��Ȼ���������Ӳ�̶������κ�ȷ�ϡ�<br>
+  &nbsp;&nbsp;&nbsp; 文件名是提交给CGI脚本的简单数据，但如果不小心的话，却能导致许多麻烦。如果用户输入的名字中包含路径因素，如目录斜杠和双点，尽管期望的是输入一个简单的文件名--例如file.txt--但结果却可能是/file.txt或../../../file.txt。根据Web服务器的安装以及对提交的文件名做什么操作，系统中的所有文件就有可能都暴露给了一个聪明的黑客。<br>
+  &nbsp;&nbsp;&nbsp; 进一步，如果用户输入了一个已有文件的名字或者一个对系统的运行很重要的文件名，怎么办？对如果输入的名字是/etc/passwd或C:\WINNT\SYSTEM32\KRNL32.DLL怎么办？根据在CGI脚本中对这些文件进行什么操作，它们有可能被发送给用户或者被垃圾覆盖了。在Windows 
+  95和Windows NT下，如果不检查反斜杠字符(\)，可能会允许Web 浏览器通过UNC文件名访问甚至不在该Web机器上的文件。<br>
+  &nbsp;&nbsp;&nbsp; 如果用户在文件名中输入了不合法的字符怎么办？在UNIX下，任何以句点(.)开头的文件名都是不可见的。在Windows下斜杠(/)和反斜杠(\)都是目录分隔符。很可能不小心写了一个Perl程序，当文件名以管(pipe)(|)开头时，尽管自己以为仅仅是打开了一个文件，实际上却是执行了一个外部程序。如果用户知道怎么办的话，甚至可以把控制字符(例如Escape键或Return键)作为文件名的一部分送给脚本。<br>
+  &nbsp;&nbsp;&nbsp; 更坏的情况是，在shell脚本中，分号用于结束一条命令并开始另一条命令。如果脚本设计目的是cat用户输入的文件，用户可能输入file.txt;rm-rf/作为文件名，导致返回fi1e.txt，然后清除整个硬盘而不经任何确认。<br>
   <br>
-  2.8 ������������ȴ������<br>
+  2.8 输入合理，输出却不合理<br>
   <br>
-  &nbsp;&nbsp;&nbsp; Ϊ�˱���������Щ���⣬�ر������Ǵ򿪵����а�ȫ��϶������û������ÿ���ļ���������ȷ���������ǳ���Ԥ�ڵ����롣<br>
-  &nbsp;&nbsp;&nbsp; ����������ð취�ǽ�������ļ�����ÿ���ַ���ɽ����ַ����嵥���бȽϣ������ƥ��ͷ���һ���������ά��һ�����кϷ��ַ����嵥���Ƚ�����Ҫ��ȫ�öࡪ��Ҫ����ʲô�ַ����̫�����ˡ�<br>
-  &nbsp;&nbsp;&nbsp; ���³����嵥����Perl���������ֱȽϵ����ӡ��������κ��ַ���ĸ(��д��Сд��)���κ����֡��»��ߺ;�㡣�������м����ȷ���ļ������Ծ�㿪ͷ���������öδ���Ͳ��������Ըı�Ŀ¼��б�ܣ����������Խ������������һ�еķֺţ������ƻ�Perl��Open()���õ�Pipes�ˡ�<br>
-  �����嵥 ��֤�����ַ����ǺϷ���<br>
+  &nbsp;&nbsp;&nbsp; 为了避免所有这些问题，关闭由它们打开的所有安全缝隙，检查用户输入的每个文件名。必须确保输入正是程序预期的输入。<br>
+  &nbsp;&nbsp;&nbsp; 这样做的最好办法是将输入的文件名的每个字符与可接收字符的清单进行比较，如果不匹配就返回一个错误。这比维持一个所有合法字符的清单并比较它们要安全得多——要想让什么字符溜掉太容易了。<br>
+  &nbsp;&nbsp;&nbsp; 以下程序清单是用Perl如何完成这种比较的例子。它允许任何字符字母(大写或小写调)、任何数字、下划线和句点。它还进行检查以确保文件名不以句点开头。这样，该段代码就不允许可以改变目录的斜杠，不允许可以将多条命令放在一行的分号，或者破坏Perl的Open()调用的Pipes了。<br>
+  程序清单 保证所有字符都是合法的<br>
   </span>
 <ul>
   <p><span class="text">if (($file_Name =~ /[^a-zA-Z_\.]/) || ($file_Name =~ /^\./)) 
@@ -212,110 +212,110 @@
     }</span></p>
 </ul>
 <blockquote> 
-  <p><span class="text">����<br>
-    &nbsp;&nbsp;&nbsp; �������������嵥�еĴ�������˴󲿷ֲ��Ϸ����ļ�����������ϵ���ܻ���һЩ���ƣ����ô���û�и��ǵ������磬�ļ������������ֿ�ͷ�𣿻������»��߿�ͷ������ļ��а�����������߾�����������ַ���ô�죿�����ļ����㹻�̵��������ļ�ϵͳ��������<br>
-    &nbsp;&nbsp;&nbsp; ���벻�����Լ�����������⡣��дCGI�ű�ʱ��Σ�յ�������Ϊ�û�������ָ���ʵ�û��ǲ���ġ���֤�û����������Ǳ�����Լ����¡�</span></p>
+  <p><span class="text">警告<br>
+    &nbsp;&nbsp;&nbsp; 尽管上述程序清单中的代码清除了大部分不合法的文件名，但操作系可能还有一些限制，而该代码没有覆盖到。例如，文件名可以用数字开头吗？或者以下划线开头？如果文件中包含多个句点或者句点后多于三个字符怎么办？整个文件名足够短得能满足文件系统的限制吗？<br>
+    &nbsp;&nbsp;&nbsp; 必须不断向自己提出这种问题。在写CGI脚本时最危险的事是认为用户会遵守指令。其实用户是不会的。保证用户不犯错误是编程者自己的事。</span></p>
 </blockquote>
-<p><span class="text">2.9 ����HTML<br>
+<p><span class="text">2.9 处理HTML<br>
   <br>
-  &nbsp;&nbsp;&nbsp; ����һ�ֿ������޺��ĵ�ȴ�ܵ��ºܴ��鷳���������������û������ı���Ϣʱ�õ���HTML�����µĳ����嵥��һ��Perl����Ƭ�Σ������κ���$user_Name������������һ�����ֵ���,����John 
-  Smith,�����ʺ���Ϣ��<br>
+  &nbsp;&nbsp;&nbsp; 另外一种看起来无害的但却能导致很大麻烦的输入是在请求用户输入文本信息时得到的HTML。以下的程序清单是一个Perl程序片段；它向任何在$user_Name变量中输入了一个名字的人,例如John 
+  Smith,发出问候信息。<br>
   <br>
-  �����嵥 �������Ƶ��ʺ�ű�<br>
+  程序清单 发出定制的问候脚本<br>
   </span>
 <ul>
   <p><span class="text">print ("&lt;HTML&gt;&lt;TITLE&gt;Greetings!&lt;TITLE&gt;&lt;BODY&gt;\n");<br>
     print ("Hello,$user_Name! It's good to see you!\n");<br>
     print ("&lt;/BODY&gt;&lt;HTML&gt;\n");</span></p>
 </ul>
-<p><span class="text">&nbsp;&nbsp;&nbsp; ����һ�£�����û����ǽ�������һ�����֣�����������&lt;HR&gt;&lt;H1&gt;&lt;P 
-  ALIGN="CENTER"&gt;John Smith&lt;/P&gt;&lt;H1&gt;&lt;HR&gt;������һ�µ��ű�ϣ���õ��û���ʱ���ڿ�������&lt;IMG 
-  SRC="/secret/cutekid.gif"&gt;������ǹ����˱��ñ��ܵ���Ϣ����������HTML���ܺ�Σ�ա�<br>
+<p><span class="text">&nbsp;&nbsp;&nbsp; 想像一下，如果用户不是仅仅输入一个名字，而是输入了&lt;HR&gt;&lt;H1&gt;&lt;P 
+  ALIGN="CENTER"&gt;John Smith&lt;/P&gt;&lt;H1&gt;&lt;HR&gt;或想像一下当脚本希望得到用户名时，黑客输入了&lt;IMG 
+  SRC="/secret/cutekid.gif"&gt;，结果是公开了本该保密的信息。允许输入HTML可能很危险。<br>
   <br>
-  &nbsp;&nbsp;&nbsp; ������򵥵�HTML�޸�ҳ�����ʻ����Σ�յ��Ƕ���ĺڿͿ�������һ���������˵�includeָ����web����������Ϊ���ӷ�������include���û��Ϳ�������<br>
+  &nbsp;&nbsp;&nbsp; 比输入简单的HTML修改页面或访问画面更危险的是恶意的黑客可能输入一条服务器端的include指令。如果web服务器设置为服从服务器端include，用户就可以输入<br>
   &lt;!--#include file="/secret/project/p1an.txt"--&gt;<br>
-  �������������֣��Ա㿴�����ܼƻ���ȫ���ı�,�����û���������&lt;!--#inc1ude fi1e-"/etc/passwd"--&gt;����ȡ�����Ŀ����ļ��������������ǺڿͿ�������&lt;!--#exec 
-  cmd="rm-rf/"--&gt;�������������֡��������������嵥�еĴ����ɾ��Ӳ���ϼ����������ݡ�<br>
+  而不是他的名字，以便看到秘密计划的全部文本,或者用户可以输入&lt;!--#inc1ude fi1e-"/etc/passwd"--&gt;来获取机器的口令文件。可能最坏的情况是黑客可能输入&lt;!--#exec 
+  cmd="rm-rf/"--&gt;而不是他的名字。这样上述程序清单中的代码会删掉硬盘上几乎所有内容。<br>
   <br>
   </span></p>
 <blockquote> 
-  <p><span class="text">����<br>
-    &nbsp;&nbsp;&nbsp; ���ھ����������ʹ�ã��������˵�include��������ֹʹ���Ա���վ�������ֺ������ڼٶ���Щ��û���⡣��ʹ�ر��˷������˵�include���Ҳ������û��ܿ����Լ�Ӳ���ϵ��κ�ͼƬ���߸ı�ҳ����ʾ����ۣ�Ҳ��Ȼ������--��������Ա���ߵģ�������������û���<br>
+  <p><span class="text">警告<br>
+    &nbsp;&nbsp;&nbsp; 由于经常被恶意地使用，服务器端的include经常被禁止使用以保护站点免受侵害。现在假定这些都没问题。即使关闭了服务器端的include并且不介意用户能看到自己硬盘上的任何图片或者改变页面显示的外观，也仍然有问题--不仅是针对编程者的，而且针对其他用户。<br>
     </span></p>
 </blockquote>
-<p><span class="text">&nbsp;&nbsp;&nbsp; CGI�ű���һ��ͨ����;��������(guestbook):����վ��Ĺ˿Ϳ���ǩ�������ñ���֪�������Ѿ����Ƕ��ˡ�һ��������û��򵥵������������֣������ֻ��ڷ������嵥�г��֡����ǣ������The 
-  last signee��&lt;FORM&gt;&lt;SELECT&gt;��Ϊ�û���������ô��?&lt;SELECT&gt;��ǽ�����Web���������λ��&lt;SELECT&gt;��һ�������ڵ�&lt;/SELECT&gt;֮����������ݣ������Ժ��嵥�м�����κ����֡���ʹ��10����ǩ����������ǰ3������ʾ��������Ϊ���������ְ���һ��&lt;FORM&gt;��һ��&lt;SELECT&gt;��ǡ���Ϊ������ǩ����������������ʹ����HTML��ǣ���������κ����ֶ�������ʾ������<br>
-  &nbsp;&nbsp;&nbsp; �����û�����HTML��������ͨ���ı�����������ֽ���취:<br>
-  1)���ٵ��Ƚϴֲڵİ취�ǲ�����С�ں�(&lt;)�ʹ��ں�(&gt;)����Ϊ����HTML��Ǳ���������������ַ��У������������(��������������Ǿͷ���һ������)��һ�ַ�ֹHTML���ύ�����صļ򵥵İ취������һ��Perl����򵥵�������������ַ�:$user_Input=~s/&lt;&gt;//g;<br>
-  2)����ϸһ��İ취�ǽ��������ַ�ת�������ǵ�HTML����--��������Ĵ��룬���ڱ�ʾÿ���ַ�����ʹ�ø��ַ�����������Ĵ���ͨ��ȫ����&amp;lt;�滻��С�ڷ��ţ���&amp;gt;�滻�˴��ڷ��ţ��Ӷ������ת��:<br>
+<p><span class="text">&nbsp;&nbsp;&nbsp; CGI脚本的一个通常用途是留名册(guestbook):访问站点的顾客可能签个名，让别人知道他们已经在那儿了。一般情况下用户简单地输入他的名字，该名字会在访问者清单中出现。但是，如果将The 
+  last signee！&lt;FORM&gt;&lt;SELECT&gt;作为用户名输入怎么办?&lt;SELECT&gt;标记将导致Web浏览器忽略位于&lt;SELECT&gt;和一个不存在的&lt;/SELECT&gt;之间的所有内容，包括以后清单中加入的任何名字。即使有10个人签了名，仅有前3个会显示出来，因为第三个名字包含一个&lt;FORM&gt;和一个&lt;SELECT&gt;标记。因为第三个签名者在他的名字中使用了HTML标记，他后面的任何名字都不会显示出来。<br>
+  &nbsp;&nbsp;&nbsp; 对于用户输入HTML而不是普通的文本的情况有两种解决办法:<br>
+  1)快速但比较粗糙的办法是不允许小于号(&lt;)和大于号(&gt;)，因为所有HTML标记必须包含在这两个字符中，所以清除它们(或者如果碰到它们就返回一个错误)是一种防止HTML被提交并返回的简单的办法。下面一行Perl代码简单地清除了这两个字符:$user_Input=~s/&lt;&gt;//g;<br>
+  2)更精细一点的办法是将这两个字符转换成它们的HTML换码--—种特殊的代码，用于表示每个字符而不使用该字符本身。下面的代码通过全部用&amp;lt;替换了小于符号，用&amp;gt;替换了大于符号，从而完成了转换:<br>
   </span>
 <ul>
   <p><span class="text">$user_Input=~s/&lt;/&amp;1t;/g;<br>
     $user_Input=~s/&gt;/&amp;gt;/g;</span></p>
 </ul>
-<p><span class="text">2.10 �����ⲿ����<br>
+<p><span class="text">2.10 处理外部进程<br>
   <br>
-  &nbsp;&nbsp;&nbsp; ���CGI�ű����������ⲿ���̵��û�����򽻵���Ӧ�þ������һ������Ϊִ��һ��λ���Լ���CGI�ű�֮��ĳ�����ζ���޷���������ʲô�����뾡���Ŭ����ִ�п�ʼǰ��֤���͸��������롣<br>
-  &nbsp;&nbsp;&nbsp; ���磬shell�ű���������ؽ�һ�������г���ͱ����������һ��ִ�С�����û��������Ҫ��һ�ж�ͦ�����������п��ܻ������������Ƿ�ִ�С�<br>
-  &nbsp;&nbsp;&nbsp; ���漴��һ�����������ִ���Ľű�������:<br>
+  &nbsp;&nbsp;&nbsp; 最后，CGI脚本如何与带有外部过程的用户输入打交道是应该警惕的另一区域。因为执行一个位于自己的CGI脚本之外的程序意味着无法控制它做什么，必须尽最大努力在执行开始前验证发送给它的输入。<br>
+  &nbsp;&nbsp;&nbsp; 例如，shell脚本经常错误地将一个命令行程序和表单输入合在一起执行。如果用户输入符合要求，一切都挺正常，但是有可能会加入其它命令并非法执行。<br>
+  &nbsp;&nbsp;&nbsp; 下面即是一个产生了这种错误的脚本的例子:<br>
   </span>
 <ul>
   <p><span class="text">FINGER_OUTPUT='finger$USER_INPUT'<br>
     echo $FINGER_OUTPUT</span></p>
 </ul>
-<p><span class="text">&nbsp;&nbsp;&nbsp; ����û�����ò�ظ�finger������ĳ�˵�e-mail��ַ��һ�ж����������������������������һ��e-mail��ַ�������ٸ�һ���ֺź���һ�������ô������Ҳ�ᱻִ�У�����û�������webmaster@www.server.com;rm-rf/�����鷳�ɾʹ��ˡ�<br>
-  ��ʹû��ʲô���ص���������û����ݣ�������������Ҳ���ܴ����鷳�����磬����Ĵ����л����һ������֮��Ľ�������г�Ŀ¼�е������ļ���������û�������һ���ǺŵĻ���<br>
+<p><span class="text">&nbsp;&nbsp;&nbsp; 如果用户很礼貌地给finger输入了某人的e-mail地址，一切都会正常工作，但是如果他输入了一个e-mail地址，后面再跟一个分号和另一条命令，那么该命令也会被执行，如果用户输入了webmaster@www.server.com;rm-rf/，那麻烦可就大了。<br>
+  即使没有什么隐藏的命令被加入用户数据，无意的输入错误也可能带来麻烦。例如，下面的代码行会产生一个意料之外的结果——列出目录中的所有文件——如果用户输入是一个星号的话。<br>
   echo "Your input:"$USER_INPUT<br>
-  &nbsp;&nbsp;&nbsp; ��ͨ��shell�����û�����ʱ������ǰ��Ĵ���Ƭ����������������ü��һ��shell��meta-character(Ԫ�ַ�)������Щ���ܻᵼ���������Ϊ��<br>
-  &nbsp;&nbsp;&nbsp; ��Щ�ַ������ֺ�(����һ�����ж�������)���Ǻź��ʺ�(����ļ�ƥ��)����̾��(��csh��ָ���е���ҵ)��������(ִ��һ���������е�����)�ȵȡ���������ļ���һ��,ά��һ���������ַ��嵥һ��Ҫ����ͼ�ҳ�ÿ�����������ַ�����һЩ�������Perl����Ƭ����֤һ��e-mail��ַ:<br>
+  &nbsp;&nbsp;&nbsp; 当通过shell发送用户数据时，就象前面的代码片段所做的那样，最好检查一下shell的meta-character(元字符)——这些可能会导致意外的行为。<br>
+  &nbsp;&nbsp;&nbsp; 这些字符包括分号(允许一行中有多条命令)，星号和问号(完成文件匹配)，感叹号(在csh下指运行的作业)，单引号(执行一条包含其中的命令)等等。就像过滤文件名一样,维护一个允许的字符清单一般要比试图找出每个不允许的字符容易一些。下面的Perl代码片段验证一个e-mail地址:<br>
   </span>
 <ul>
   <p><span class="text">if ($email_Address ~= /[^a-zA-z0-9_\-\+\@\.]) {<br>
     #lllegal character! }<br>
     else { system("finger $email_Address"); }</span></p>
 </ul>
-<p><span class="text">&nbsp;&nbsp;&nbsp; �������������������shellԪ�ַ���Ҳ�а취�����ǰ�ȫһЩ�����ܿ��Լ򵥵ظ�δ��֤���û����������������shell�������ַ����в���������ʵ���ϲ���ʲô���á��뿴�µ����:<br>
+<p><span class="text">&nbsp;&nbsp;&nbsp; 如果决定在输入中允许shell元字符，也有办法让它们安全一些。尽管可以简单地给未验证的用户输入加上引号以免shell按特殊字符进行操作，但这实际上不起什么作用。请看下的语句:<br>
   </span>
 <ul>
   <p><span class="text">echo"Finger information:&lt;HR&gt;&lt;PRE&gt;"<br>
     finger"$USER_INPUT<br>
     echo"&lt;/PRE&gt;</span></p>
 </ul>
-<p><span class="text">&nbsp;&nbsp;&nbsp; ����$USER_INPUT�ϵ����ſ���ʹshell���ٽ���һ���ֺţ��Ӷ��������ڿͼ򵥵ز����һ������,���ýű��������లȫ�����©�������磬���������'rm-rf/'�����е����ſ��Ե���������finger��֪���������ִ�кڿ͵����<br>
-  &nbsp;&nbsp;&nbsp; һ�ִ��������ַ��ĽϺõİ취�Ƕ����ǽ��л��룬�����ű�ֻ��ȡ���ǵ�ֵ�����������ǡ�ͨ�����û�������л��룬���е�shellԪ�ַ��������Բ���Ϊ���ӵ����ݴ������������Perl���뼴�Է���ĸ�����ַ�������ִ�����<br>
+<p><span class="text">&nbsp;&nbsp;&nbsp; 尽管$USER_INPUT上的引号可以使shell不再解释一个分号，从而不允许黑客简单地插进来一条命令,但该脚本仍有许多安全方面的漏洞。例如，输入可能是'rm-rf/'，其中单引号可以导致甚至在finger不知道的情况下执行黑客的命令。<br>
+  &nbsp;&nbsp;&nbsp; 一种处理特殊字符的较好的办法是对它们进行换码，这样脚本只是取它们的值而不解释它们。通过对用户输入进行换码，所有的shell元字符都被忽略并作为增加的数据传给程序。下面的Perl代码即对非字母数字字符完成这种处理。<br>
   $user_Input=~s/([^w])/\\\1/g;<br>
-  &nbsp;&nbsp;&nbsp; ���ڣ�����û��������ĳ������֮��ÿ���ַ����������������ַ�����������shell���͸�finger��<br>
-  �������ס����֤�û����롪�������ŷ��͸��Լ����κ���Ϣ������ʹ�Լ��Ĵ�����׶�����ִ����������ȫ����ò������Ѿ�ִ��������֮����ȥ�Ը��ڿͣ���Ӧ���ſھͶ����ݽ���һ���Եļ�顣<br>
+  &nbsp;&nbsp;&nbsp; 现在，如果用户输入加在某条命令之后，每个字符——即便是特殊字符——都会由shell传送给finger。<br>
+  不过请记住，验证用户输入——不相信发送给自己的任何信息——会使自己的代码更易读并且执行起来更安全。最好不是在已经执行了命令之后再去对付黑客，而应在门口就对数据进行一次性的检查。<br>
   </span>
 <ul>
   <p><span class="text">--------------------------------------------<br>
-    �����ڲ�����<br>
-    &nbsp;&nbsp;&nbsp; ���ڽ��������ԣ�����Shell��Perl������û���������ݲ���ȷ�Ļ����п��ܵ��³������ɱ���û�еĴ�������û����ݱ�����Ϊһ����ִ�д��룬�û�������κ����ݶ�����������ԵĹ��򣬷���ͻ������<br>
-    &nbsp;&nbsp;&nbsp; ���磬�����Perl����Ƭ��Ҳ������������Ҳ�������������ȡ�����û��������ʲô:<br>
+    处理内部函数<br>
+    &nbsp;&nbsp;&nbsp; 对于解释型语言，例如Shell和Perl，如果用户输入的数据不正确的话，有可能导致程序生成本来没有的错误。如果用户数据被解释为一部分执行代码，用户输入的任何内容都必须符合语言的规则，否则就会出错。<br>
+    &nbsp;&nbsp;&nbsp; 例如，下面的Perl代码片段也许会正常工作也许会产生错误，这取决于用户输入的是什么:<br>
     <br>
     if ($search_Text =~ /$user_Pattern/) {<br>
     #Match! }<br>
     <br>
-    &nbsp;&nbsp;&nbsp; ���$user_Pattern��һ����ȷ�ı���ʽ��һ�ж����������������$user_Pattern���Ϸ���Perl�ͻ�ʧ�ܣ�����CGI����ʧ�ܡ����������һ�ֲ���ȫ�ķ�ʽ��Ϊ�˱��������������Perl������Ӧ��eval()�����������������ʽ��ֵ����ִ�����޹أ�����һ����ֵ��ʾ����ʽ����Ч�Ļ�����Ч�ġ�����Ĵ��뼴��ǰ�����ĸĽ��档<br>
+    &nbsp;&nbsp;&nbsp; 如果$user_Pattern是一个正确的表达式，一切都会正常，但是如果$user_Pattern不合法；Perl就会失败，导致CGI程序失败——这可能是一种不安全的方式。为了避免这种情况，在Perl中至少应有eval()操作符，它计算表达式的值并与执行它无关，返回一个码值表示表达式是有效的还是无效的。下面的代码即是前面代码的改进版。<br>
     if (eval{$search_Text =~ /$user_Pattern/}) {<br>
     if ($search_Text =~ /$user_Pattern/) {<br>
     #Match!<br>
     }<br>
     }<br>
-    &nbsp;&nbsp;&nbsp; ���ҵ��ǣ��󲿷�shells(������õģ�/bin/sh)��û���������ļ򵥵İ취��������Ҳ�Ǳ������ǵ���һԭ��<br>
+    &nbsp;&nbsp;&nbsp; 不幸的是，大部分shells(包括最常用的，/bin/sh)都没有像这样的简单的办法检查错误，这也是避免它们的另一原因。<br>
     --------------------------------------------</span></p>
 </ul>
-<p><span class="text">&nbsp;&nbsp;&nbsp; ��ִ���ⲿ����ʱ��������֪�����͸���Щ������û����������Ӱ�����ġ�����߿��Ա����Լ�CGI�ű����ܺڿ��ַ�������������ʵؽ�ĳ���ڿ���������ݴ��͸����ⲿ�������֪����Щ���������ʹ����Щ���ݵģ�Ҳ��ͽ�����档<br>
-  &nbsp;&nbsp;&nbsp; ���磬����CGI�ű���ִ��mail�����ĳ�˷���һ�������û�������Ϣ��e-mail������ܻ�ǳ�Σ�գ���Ϊmail�������ڲ�����κ�һ������п��ܱ��û����뼤����磬�����mail�����û�������ı������ı���һ���Դ��ֺ�(~)��ͷ��mail�Ὣ���е���һ�ַ�����Ϊ����ִ�е���������֮һ�����磬~r/etc/passwd���ᵼ��mail��ȡ�����Ŀ����ļ������͸�������(Ҳ�����Ǻڿ��Լ�)��<br>
-  �������������У�Ӧ��ʹ��sendmail(һ�����ײ���ʼĳ�������������mail������)��������ʹ��mail��UNIX�����Ϸ���e-mail��<br>
-  &nbsp;&nbsp;&nbsp; ��Ϊһ�������ִ���ⲿ����ʱӦ��ʹ�þ����������Լ�Ҫ��ĳ��򣬲����й��಻��Ҫ�Ĺ��ܡ��ⲿ�����ܸɵ���Խ�٣������������ɻ��µĻ����Խ�١�<br>
+<p><span class="text">&nbsp;&nbsp;&nbsp; 在执行外部程序时，还必须知道传送给那些程序的用户输入是如何影响程序的。编程者可以保护自己CGI脚本不受黑客侵犯，但是如果轻率地将某个黑客输入的内容传送给了外部程序而不知道那些程序是如何使用这些数据的，也会徒劳无益。<br>
+  &nbsp;&nbsp;&nbsp; 例如，许多CGI脚本会执行mail程序给某人发送一个包含用户输入信息的e-mail。这可能会非常危险，因为mail有许多内部命令，任何一个命令都有可能被用户输入激活。例如，如果用mail发送用户输入的文本而该文本有一行以代字号(~)开头，mail会将该行的下一字符解释为它能执行的许多命令之一。例如，~r/etc/passwd，会导致mail读取机器的口令文件并发送给收信人(也许正是黑客自己)。<br>
+  在这样的例子中，应该使用sendmail(一个更底层的邮寄程序，它少了许多mail的特性)，而不是使用mail在UNIX机器上发送e-mail。<br>
+  &nbsp;&nbsp;&nbsp; 作为一般规则，在执行外部程序时应该使用尽可能贴近自己要求的程序，不必有过多不必要的功能。外部程序能干的事越少，它被利用来干坏事的机会就越少。<br>
   <br>
   </span></p>
 <blockquote> 
-  <p><span class="text">����<br>
-    &nbsp;&nbsp;&nbsp; ������ʹ��mail��sendmail����һ������:���뱣֤���͸�mailϵͳ����һ���Ϸ���e-mail��ַ������mailϵͳ�������"|"��ͷ��e-mail��ַ��ΪҪִ�е�����Ӷ�Ϊ��������һ����ַ�ĺڿʹ򿪷���֮�ţ�����һ�μ�סҪ��֤���ݡ�</span></p>
+  <p><span class="text">警告<br>
+    &nbsp;&nbsp;&nbsp; 下面是使用mail和sendmail的另一个问题:必须保证发送给mail系统的是一个合法的e-mail地址。许多mail系统都会把以"|"开头的e-mail地址作为要执行的命令，从而为输入这样一个地址的黑客打开方便之门，请再一次记住要验证数据。</span></p>
 </blockquote>
-<p><span class="text">&nbsp;&nbsp;&nbsp; �������ܸ��õ��˽��ⲿ�����Ա���Ч��ʹ�����ǵ���һ��������grep��grep��һ���򵥵�������ʵ�ó��������ļ�������һ�����ñ���ʽ������ʽ������һ���򵥵Ĵ�Ҳ�����Ǹ��ӵ��ַ����С��󲿷��˻�˵ʹ��grep�����ʲô���⣬���Ǿ���grep���ܲ������ʲô��ʧ����ȴ�ܱ���Ū�����潫˵��������ô����Ū�ģ�������Ĵ�����ʾ�����ٶ��������ļ�����ɶ��û�����������ִ�Сд��������<br>
+<p><span class="text">&nbsp;&nbsp;&nbsp; 怎样才能更好地了解外部程序以便有效地使用它们的另一个例子是grep。grep是一个简单的命令行实用程序，它在文件中搜索一个常用表达式，表达式可以是一个简单的串也可以是复杂的字符序列。大部分人会说使用grep不会出什么问题，但是尽管grep可能不会造成什么损失，它却能被愚弄，下面将说明它是怎么被愚弄的，如下面的代码所示。它假定在许多文件中完成对用户输入项的区分大小写的搜索。<br>
   </span>
 <ul>
   <p><span class="text">print("The following lines contain your term:&lt;HR&gt;&lt;PRE&gt;");<br>
@@ -324,44 +324,44 @@
     print(&lt;"PRE&gt;");<br>
     </span></p>
 </ul>
-<p><span class=text>&nbsp;&nbsp;&nbsp; ��һ�п�����ͦ�ã����ǿ��ǵ��û����ܻ�����-i�������ᱻ������������Ϊ��grep���л��������κ������ַ���ͷ������һ������ᵼ��grep������ȴ��������Ĵ������׼��������𣬻������-i������ݱ�����Ϊ�����л��ַ�ʱ�������󡣺��������ⲻ�Ǳ���߱�������ͼ�������������������̫Σ�գ��������������ȴ�п��ܡ���ס��û��ʲô�޺��������ÿ���������Ӹ����Ƕ���ϸ���ǡ�<br>
-  &nbsp;&nbsp;&nbsp; һ������£�Ӧ�þ�������Ϥ�Լ���CGI�ű�ִ�е�ÿ���ⲿ���򡣶Գ���֪����Խ�࣬��Խ�ܱ����������������ƻ�����һ������Լ������ݣ���һ������Խ�ֹĳЩѡ������ԡ��ⲿ���򾭳�������CGI���������һ�ֿ��ٷ���Ľ���취�������Ƕ������˲��ԣ����Եõ���������������������Ҳ���Գ�Ϊ�ڿ����ֵķ���֮�š���Ҫ����ʹ���ⲿ���򡪡����Ǿ��������CGI������ĳ�ֹ��ܵ�Ψһ�취��������Ҫ֪�����ǿ��ܴ�����Σ����<br>
+<p><span class=text>&nbsp;&nbsp;&nbsp; 这一切看起来挺好，除非考虑到用户可能会输入-i。它不会被搜索，而是作为与grep的切换，就像任何以连字符开头的输入一样。这会导致grep或者因等待将搜索的串输入标准输入而挂起，或者如果-i后的内容被解释为其他切换字符时产生错误。毫无疑问这不是编程者本来的意图。在这种情况下它还不太危险，但在其他情况下却有可能。记住，没有什么无害的命令，对每条命令部必须从各个角度仔细考虑。<br>
+  &nbsp;&nbsp;&nbsp; 一般情况下，应该尽可能熟悉自己的CGI脚本执行的每个外部程序。对程序知道得越多，就越能保护它们免受数据破坏－－一方面可以监视数据，另一方面可以禁止某些选项或特性。外部程序经常是许多CGI程序问题的一种快速方便的解决办法——它们都经过了测试，可以得到，并且灵活多样。但它们也可以成为黑客入侵的方便之门。不要害怕使用外部程序——它们经常是完成CGI程序中某种功能的唯一办法——但是要知道它们可能带来的危害。<br>
   <br>
   </span><span 
-                  class=title3>3 �ڲ��˺�</span> 
+                  class=title3>3 内部伤害</span> 
 <br>
 <br>
-&nbsp;&nbsp;&nbsp; ��ĿǰΪֹ������������ͨ��Web����վ����ˡ����Ӽ�ǧ��֮�⡪�����ܴ�����Ǳ�ڵİ�ȫΣ�ա���ʵ���ϻ�������һ����ø�����Σ�����ء�<br>
-&nbsp;&nbsp;&nbsp; ��CGI��ȫ�����ϳ�����һ�ִ����������˱����û�������ͨ��Web���վ����˲�Ӱ�챾�ذ�ȫ�����ļ������������ߣ���Web�������ı����û�ȴ��������������������Ŭ����ֹ��Щ���֡��󲿷ֶ��û�ϵͳ�ϣ���UNIX��Web����������Ϊһ���������еģ��������Ա�������ʹ�������������顣������ΪΪĳ�����Լ�һ����������Լ���ѧУ������ζ�����ܵ���ס�ջ󣬶���ȥ����Web��װ�Ӷ��������⡣<br>
+&nbsp;&nbsp;&nbsp; 到目前为止，仅仅考虑了通过Web例览站点的人——从几千里之外——可能带来的潜在的安全危险。但实际上还存在另一种离得更近的危险因素。<br>
+&nbsp;&nbsp;&nbsp; 在CGI安全问题上常犯的一种错误是忘记了本地用户。尽管通过Web浏览站点的人不影响本地安全，如文件保护和所有者，但Web服务器的本地用户却能这样，必须做出更多努力防止这些入侵。大部分多用户系统上，如UNIX，Web服务器是作为一个程序运行的，而机器仍被许多人使用做着许多事情。仅仅因为为某人与自己一起工作或访问自己的学校并不意味着他能抵制住诱惑，而不去捣鼓Web安装从而引起问题。<br>
 <br>
-3.1 CGI�ű��û�<br>
+3.1 CGI脚本用户<br>
 <br>
-&nbsp;&nbsp;&nbsp; �󲿷�Web����������Ϊ����CGI�ű��������û�����װ�ġ�������CGI��������ʱӵ�и�CGI������û�����������ӵ�е�Ȩ�������Ƹýű�����ʲô���顣<br>
-&nbsp;&nbsp;&nbsp; ��UNIX�£��������Լ�Ҳ����Ϊroot(ϵͳ�ĳ����û������Ա)���еģ���������ʹ�ö˿�80��Ϊ�������֮ͨ�ŵĵط�(ֻ��root��ʹ����Щ����Ϊ"������"�˿�0��1023;�����û�������ʹ������Ķ˿�)����������ִ��CGI����ʱ���󲿷�Web��������������Ϊ������һ���û�������Web���������������иó��򡪡����ܲ������з�����������ô����<br>
-&nbsp;&nbsp;&nbsp; ��CGI�ű���Ϊroot�����Ǻ�Σ�յģ�������Ӧ����Ϊ����һ����ͨ�û����糣�õ�nobody������CGI�ű����û�Ȩ��ԽС�����е�CGI�ű�����ɵ�Σ����ԽС��<br>
+&nbsp;&nbsp;&nbsp; 大部分Web服务器是作为运行CGI脚本的特殊用户而安装的。这是在CGI程序运行时拥有该CGI程序的用户，并且他所拥有的权限能限制该脚本能做什么事情。<br>
+&nbsp;&nbsp;&nbsp; 在UNIX下，服务器自己也是作为root(系统的超级用户或管理员)运行的，并允许它使用端口80作为浏览器与之通信的地方(只有root能使用这些被称为"保留的"端口0到1023;所有用户都可以使用其余的端口)。当服务器执行CGI程序时，大部分Web服务器都能设置为以另外一个用户而不是Web服务器本身来运行该程序——尽管不是所有服务器都能这么做。<br>
+&nbsp;&nbsp;&nbsp; 将CGI脚本作为root运行是很危险的！服务器应被设为利用一个普通用户，如常用的nobody来运行CGI脚本。用户权限越小，运行的CGI脚本能造成的危害就越小。<br>
 <br>
-3.2 Setuid Σ��<br>
+3.2 Setuid 危险<br>
 <br>
-&nbsp;&nbsp;&nbsp; ����߻�Ӧ֪���Լ���UNIX CGI�ű����Ƿ�����Setuidλ�������ĳ����ִ���ļ�������ѡ�����ʹ�ó�����ӵ�и��ļ����û���ͬ��Ȩ�ޣ�������ִ�������û�������Լ���CGI�ű�������setuidλ�����۷�������Ϊʲô�û���������������Ȩ�޶���ͬ�ڸ��ļ���ӵ���ߡ��⵱Ȼ�кܴ������--���ܻ������Ȩ�����нű����û�ʧȥ���ơ����˵���Setuidλ�����ױ���ֹ��������CGI�ű�ִ��chmod 
-a-s���ܹر����е�setuid����������������Ȩ�����С�<br>
-&nbsp;&nbsp;&nbsp; ��Ȼ����ĳЩ�����Ҳ��ϣ������setuidλ--��������ű���Ҫ�������û������������Է���һ�����ݿ⡣����������£�����ӱ�С��ȷ���ó���������ļ������ܽ����Է��������û�������������Χ�ڡ�<br>
+&nbsp;&nbsp;&nbsp; 编程者还应知道自己的UNIX CGI脚本中是否设置Setuid位。如果对某个可执行文件允许该选项，将能使该程序与拥有该文件的用户有同样权限，而不是执行它的用户。如果自己的CGI脚本上设置setuid位，无论服务器作为什么用户来运行它，它的权限都等同于该文件的拥有者。这当然有很大的隐患--可能会对以其权限运行脚本的用户失去控制。幸运的是Setuid位很容易被禁止。对所有CGI脚本执行chmod 
+a-s即能关闭所有的setuid，程序即能以允许的权限运行。<br>
+&nbsp;&nbsp;&nbsp; 当然，在某些情况下也许希望设置setuid位--例如如果脚本需要以特殊用户身份来运行以访问一个数据库。在这种情况下，必须加倍小心确保该程序的其他文件保护能将可以访问它的用户限制在允许范围内。<br>
 <br>
-3.3 "Community" Web������<br>
+3.3 "Community" Web服务器<br>
 <br>
-&nbsp;&nbsp;&nbsp; ��ʹWeb��������һ�����õ��û���ִ�нű�������һ��Ǳ�ڵ����⣬�Ǿ���һ���˲��������ܿ��Ʒ���������������˹�ͬ���Ʒ�������ÿ���˶����Խ�CGI�ű���װ��Ϊnobody�û������С����ʹ��Щ�˵��κ�һ������������CGI�����������ԭ�Ȳ��ܷ��ʵĵط�������Щ�ط���nobody��������ġ�<br>
-&nbsp;&nbsp;&nbsp; Ҳ��Ǳ�ڵİ�ȫ����Ľ���취�ǽ�CGI�Ŀ�������Ϊһ���ˡ���ĳЩ����¾������ƺ��Ǻ����ģ����Խϴ�վ��ȴ������̫���ܡ����磬һ����ѧ�м��ٸ�ѧ����ÿ��ѧ����������ȥ��д����װCGI�ű���<br>
+&nbsp;&nbsp;&nbsp; 即使Web服务器以一个常用的用户来执行脚本，仍有一个潜在的问题，那就是一个人并不总是能控制服务器。如果许多人共同控制服务器，每个人都可以将CGI脚本安装作为nobody用户来运行。这就使这些人的任何一个都可以利用CGI程序访问他们原先不能访问的地方，而这些地方是nobody允许进入的。<br>
+&nbsp;&nbsp;&nbsp; 也许潜在的安全问题的解决办法是将CGI的控制限制为一个人。在某些情况下尽管这似乎是合理的，但对较大站点却经常不太可能。例如，一个大学有几百个学生，每个学生都想试着去编写并安装CGI脚本。<br>
 <br>
-3.4 ʹ��CGI Wrap<br>
+3.4 使用CGI Wrap<br>
 <br>
-&nbsp;&nbsp;&nbsp; ���ж���û����Է���CGIʱ������ȷ���ű���ʲô�û����е������һ���ϺõĽ���취��CGI wrap����CGI Wrap��������using 
-CGI Webվ�����ҵ�����һ���򵥵İ�װ������ӵ�и��ļ����û������Ƿ�����ָ�����û�������CGI�ű������ּ򵥵�Ԥ����ʩʹ�ű�ӵ���߶������ܵ�Σ������<br>
-&nbsp;&nbsp;&nbsp; ��ΪCGI wrapʹ��CGI�ű������߸��������Լ��Ľű�Ȩ�ޣ�������������һ������������ӵ�е���Ҫ�ļ��������Ĺ��ߣ������Ǵ�ʹ���Ǳ�д��ȫ�Ľű��������Ĺ��ߡ�ֻ�������Լ����ļ��ᴦ��Σ��֮�У���������ʵ�Խű����߻��Ǽ���Ĵٽ���<br>
+&nbsp;&nbsp;&nbsp; 当有多个用户可以访问CGI时，对于确定脚本以什么用户运行的问题的一个较好的解决办法是CGI wrap程序。CGI Wrap，可以在using 
+CGI Web站点中找到，是一个简单的包装，它以拥有该文件的用户而不是服务器指定的用户来运行CGI脚本。这种简单的预防措施使脚本拥有者对它可能的危害负责。<br>
+&nbsp;&nbsp;&nbsp; 因为CGI wrap使得CGI脚本的作者负责他们自己的脚本权限，所以它不仅是一个保护其他人拥有的重要文件的有力的工具，而且是促使人们编写安全的脚本的有力的工具。只有他们自己的文件会处于危险之中，这样的现实对脚本作者会是极大的促进。<br>
 <br>
-3.5 CGI�ű�Ȩ��<br>
+3.5 CGI脚本权限<br>
 <br>
-&nbsp;&nbsp;&nbsp; ��Ӧ������˽�CGI�ű����ĸ��û�ӵ���Լ��ű��������ļ�Ȩ�ޡ������ű���Ŀ¼��Ȩ��Ҳ�ǳ���Ҫ��<br>
-&nbsp;&nbsp;&nbsp; ���磬���Web�������ϵ�cgi-binĿ¼�������˿�д�ģ����κα����û�����ɾ��CGI�ű�������һ�������档����ű������������˿�д�Ļ�����ô�κ��˽����޸Ľű�����κ����顣<br>
-�뿴��������޺���UNIX CGI�ű�:<br>
+&nbsp;&nbsp;&nbsp; 还应该清楚了解CGI脚本被哪个用户拥有以及脚本自身的文件权限。包含脚本的目录的权限也非常重要。<br>
+&nbsp;&nbsp;&nbsp; 例如，如果Web服务器上的cgi-bin目录是所有人可写的，那任何本地用户将能删除CGI脚本并用另一个来代替。如果脚本本身是所有人可写的话，那么任何人将能修改脚本完成任何事情。<br>
+请看下面这段无害的UNIX CGI脚本:<br>
 <ul>
   <p><span class="text">#!/bin/sh<br>
     #Send the header<br>
@@ -373,7 +373,7 @@ CGI Webվ�����ҵ�����һ���򵥵İ�װ������ӵ�и��ļ����û������Ƿ�����ָ�����û��
     forune<br>
     echo"&lt;/BODY&gt;&lt;HIML&gt;"</span></p>
 </ul>
-<p><span class="text">&nbsp;&nbsp;&nbsp; ���ڣ�����ű������õ�Ȩ������ĳ��������û�������ı�����:<br>
+<p><span class="text">&nbsp;&nbsp;&nbsp; 现在，如果脚本上设置的权限允许某个恶意的用户将程序改变如下:<br>
   </span>
 <ul>
   <p><span class="text">#!/bin/sh<br>
@@ -385,19 +385,19 @@ CGI Webվ�����ҵ�����һ���򵥵İ�װ������ӵ�и��ļ����û������Ƿ�����ָ�����û��
     echo"&lt;HTML&gt;&lt;TITLE&gt;Got you! &lt;TITLE&gt;&lt;BODY&gt;"<br>
     echO"&lt;H1&gt;Ha ha!&lt;H1&gt;&lt;/BODY&gt;&lt;/HTML&gt;"</span></p>
 </ul>
-<p><span class="text">&nbsp;&nbsp;&nbsp; ��ô��һ����Web�Ϸ��ʸýű����û���ʹ��û��ʲô����Ҳ�ᵼ�´������⡣��Web�ϼ���û�����������Ժ���Ҫ��������Ҫ���Ǳ�֤�ű�����δ���޸��Ҳ��ܱ��޸ġ�<br>
+<p><span class="text">&nbsp;&nbsp;&nbsp; 那么下一个在Web上访问该脚本的用户即使他没做什么坏事也会导致大量问题。在Web上检查用户输入的完整性很重要，但更重要的是保证脚本本身未被修改且不能被修改。<br>
   <br>
-  3.6 �����ļ���ȫ<br>
+  3.6 本地文件安全<br>
   <br>
-  &nbsp;&nbsp;&nbsp; �ű��ڱ���Ӳ���ϴ������ļ���������Ҳͬ����Ҫ���ڵõ�Web�û������һ���������ļ���֮��ʹ�ø��ļ�����ʲôҲ����Ҫ������Web���������еĲ���ϵͳ��Ȩ�޺�ӵ������Ϣ�������ļ��е�����һ������ļ��ϡ�<br>
-  &nbsp;&nbsp;&nbsp; ���磬UNIXϵͳ�ܼ�¼�ļ�����Ȩ�ޣ������������ļ����û���Ȩ�ޡ�ͬ���û���Ȩ�ޡ��Լ�ϵͳ�����˵�Ȩ�ޡ�windows 
-  NTʹ�õ���һ�������ӷ��ʿ����嵥ϵͳ������ɵĹ��ܴ�����ͬ��������Щ��־�������Լ�������ֹʲôȨ�ޣ�Web�������������û�Ҳ���������鷳��<br>
-  &nbsp;&nbsp;&nbsp; ���磬�ڴ���һ���ļ�ʱ��Ӧ֪���������õ�Ȩ�ޡ��󲿷�Web������������umask��Ȩ������Ϊ0000����ζ�ſ��Դ���һ���κ��˿ɶ�д���ļ��������ļ��ϵ�Ȩ�����ö���Web��������˿���ûʲô��ͬ�������ط��ʵ��û�ȴ�����ò��ϸ��Ȩ���������Σ��������������ʵ��Ӧ�þ������ϸ�������ļ�Ȩ�ޡ�<br>
-  &nbsp;&nbsp;&nbsp; ��֤ÿ�����ļ��ĵ��ö���һ����С���Ƽ��ϵ���򵥵İ취�����ýű���umask��umask()��һ��UNIX���ã����ܶ�ÿ���������ļ���������Ȩ�ޡ�umask()�Ĳ�����һ�����֣����ڶԺ������ļ�������Ȩ����������Ρ����umaskΪ0022���򲻹��ڴ��ļ�ʱ�����û��������û�������ʲô��ʽ��Ȩ�ޣ��������´������ļ����ܱ��û��Լ�д����ʹ�Ѿ�������umask�������ļ�ʱҲӦ����ʽָ��Ȩ�ޡ����ֻ��CGI�ű��ܷ����ļ�����ôֻ������CGI������û����ܷ��ʸ��ļ�����Ȩ��Ϊ0600�������һ��������Ҫ���ʸ��ļ�������ʹ�ó����ӵ���߳�Ϊ��CGI�ű�ͬһ����û�������ֻ���������û�Ȩ�ޡ���Ȩ��Ϊ0660����������������˶��ܷ��ʸ��ļ���Ӧʹ���ļ�ֻ�ܶ�������д����Ȩ��Ϊ0644��<br>
+  &nbsp;&nbsp;&nbsp; 脚本在本地硬盘上创建的文件的完整性也同样重要。在得到Web用户输入的一个合理的文件名之后，使用该文件名干什么也很重要。根据Web服务器运行的操作系统，权限和拥有者信息可以与文件中的数据一起存在文件上。<br>
+  &nbsp;&nbsp;&nbsp; 例如，UNIX系统能记录文件访问权限，包括创建该文件的用户的权限、同组用户的权限、以及系统其他人的权限。windows 
+  NT使用的是一个更复杂访问控制清单系统，但完成的功能大致相同。根据这些标志如设置以及授予或禁止什么权限，Web服务器机器的用户也可能引起麻烦。<br>
+  &nbsp;&nbsp;&nbsp; 例如，在创建一个文件时就应知道给它设置的权限。大部分Web服务器软件将umask或权限码设为0000，意味着可以创建一个任何人可读写的文件。尽管文件上的权限设置对在Web上浏览的人可能没什么不同，但本地访问的用户却能利用不严格的权限设置造成危害。基于这种现实，应该尽可能严格地限制文件权限。<br>
+  &nbsp;&nbsp;&nbsp; 保证每个打开文件的调用都有一个最小限制集合的最简单的办法是设置脚本的umask。umask()是一个UNIX调用，它能对每个后续的文件创建限制权限。umask()的参数是一个数字，用于对后续的文件创建的权限码进行屏蔽。如果umask为0022，则不管在打开文件时给组用户和其他用户赋予了什么显式的权限，都将导致创建的文件仅能被用户自己写。即使已经设置了umask，创建文件时也应该显式指定权限。如果只有CGI脚本能访问文件，那么只有运行CGI程序的用户才能访问该文件——权限为0600。如果另一个程序需要访问该文件，可以使该程序的拥有者成为与CGI脚本同一组的用户，这样只需设置组用户权限——权限为0660。如果必须让所有人都能访问该文件，应使该文件只能读，不能写——权限为0644。<br>
   <br>
-  3.7 ʹ����ʽ·��<br>
+  3.7 使用显式路径<br>
   <br>
-  &nbsp;&nbsp;&nbsp; ��󣬱����û����������һ�ַ�ʽ����Web������������ƭ������������д��һ���ⲿ���򣬶�����������CGI�ű���ָ���ĳ���������һ���򵥵ĳ��򣬴�UNIX��fortune������Կ���������߻��Ƚϴ�����<br>
+  &nbsp;&nbsp;&nbsp; 最后，本地用户还可以最后一种方式攻击Web服务器——欺骗服务器运行他写的一个外部程序，而不是运行在CGI脚本中指定的程序。下面是一个简单的程序，从UNIX的fortune命令可以看出该浏览者还比较聪明。<br>
   </span>
 <ul>
   <p><span class="text">#!/bin/sh<br>
@@ -410,44 +410,44 @@ CGI Webվ�����ҵ�����һ���򵥵İ�װ������ӵ�и��ļ����û������Ƿ�����ָ�����û��
     fortune<br>
     echo "&lt;/PRE&gt;&lt;BODY&gt;&lt;/HTML&gt;"</span></p>
 </ul>
-<p><span class=text>&nbsp;&nbsp;&nbsp; �ýű���������һ��û�к��������������û����룬�����û����ܼ��˸�ʲô��Ϸ����Ϊ������Web���������У����Խű�������Ȩ�����ÿ��Էǳ��ϸ񣬿��Է�ֹ�κ�����ͼ�ı����û��޸���������Ըýű����ڵ�Ŀ¼Ҳ��������ȷ��Ȩ�޵Ļ�����������ûʲô�ط����Գ������ˣ��ǲ��ǣ�<br>
-  ��Ȼ�������⡣��ס��Ҫ�е�ƫ����<br>
-  &nbsp;&nbsp;&nbsp; ���������嵥�������ⲿ�����ڱ�������echo��fortune����Ϊ��Щ�ű�û������ʽ·��ָ��������Ӳ���ϵ�λ�ã���shell��ʹ��PATH�����������ҵ����ǣ��ӱ����е�ÿһ�����Ҫִ�еĳ�������ܺ�Σ�ա����磬���fortune����װ��/usr/games�У���PATH������֮ǰ�г���/TMP����ô�κ���������Ϊ"fortune"��λ����ʱĿ¼�ĳ��򶼻ᱻִ�У�������������fortune��<br>
-  &nbsp;&nbsp;&nbsp; �ó�����������Ĵ������������κ����飬����ɾ���ļ���Ҳ���ԵǼ��й�������Ϣ�������ݴ���������fortune����ʹ�û��ͱ����˭Ҳ����������CGI�ű��������ⲿ����ʱһ��Ҫָ����ʽ��·����PATH���������кܴ����ã���������������һ��Ҳ�ܱ��Ƿ�ʹ�á�<br>
+<p><span class=text>&nbsp;&nbsp;&nbsp; 该脚本看起来可一点没有害处。它不接收用户输入，所以用户不能籍此搞什么把戏。因为它仅由Web服务器运行，所以脚本本身的权限设置可以非常严格，可以防止任何有企图的本地用户修改它。如果对该脚本所在的目录也设置了正确的权限的话，看起来就没什么地方可以出问题了，是不是？<br>
+  当然还有问题。记住得要有点偏激。<br>
+  &nbsp;&nbsp;&nbsp; 上述程序清单调用了外部程序，在本例中是echo和fortune。因为这些脚本没有用显式路径指明它们在硬盘上的位置，该shell即使用PATH环境变量来找到它们，从变量中的每一项查找要执行的程序。这可能很危险。例如，如果fortune程序安装在/usr/games中，但PATH中在它之前列出了/TMP，那么任何碰巧命名为"fortune"并位于临时目录的程序都会被执行，而不是真正的fortune。<br>
+  &nbsp;&nbsp;&nbsp; 该程序可以做它的创建者想做的任何事情，可以删除文件，也可以登记有关请求信息并将数据传给真正的fortune——使用户和编程者谁也不聪明。在CGI脚本中运行外部程序时一定要指定显式的路径。PATH环境变量有很大作用，但它与其他变量一样也能被非法使用。<br>
   <br>
   </span><span 
-                  class=title3>4 ʹ������CGI�ű�ʱ��ע������</span> 
+                  class=title3>4 使用他人CGI脚本时的注意事项</span> 
 <br>
 <br>
-&nbsp;&nbsp;&nbsp; ����CGI�����ԴӺܶ�ط������Ϣ������Internet�ϣ���ѧУͼ����У����������������У�UseNet�����Լ����Ѻ�ͬ���С�����Щ�ط��������Ի����Ϣ�������Եõ�ʵ�ʵĳ���Ϳ⡣��Щ����Ϳ�����Ѿ�����������Ϊʲô�Լ���Ҫ��ͷ����һ���أ���������äĿ���ӱ��˵����һ��������������ƣ���μݳ����������еı�ķ��棬ͬ����Ҳ�������Լ��ķ�������äĿ���������ӵĴ��롣��Net�ϵõ��Ľű�Ҳ���������ǺܺõĽű�����Ҳ�������ǡ���Щʱ�俼��һ�½ű�����Դ�Լ���ȡ����վ��Ŀɿ�����ֵ�õġ�<br>
+&nbsp;&nbsp;&nbsp; 关于CGI，可以从很多地方获得信息——从Internet上，从学校图书馆中，从像本书这样的书中，UseNet组中以及朋友和同事中。从这些地方不仅可以获得信息，还可以得到实际的程序和库。有些程序和库如果已经有人做过了为什么自己还要从头再做一遍呢？但就像不能盲目听从别人的意见一样，关于如何理财，如何驾车或者生活中的别的方面，同样，也不能在自己的服务器上盲目地运行另从的代码。从Net上得到的脚本也可能真正是很好的脚本。但也许并不是。花些时间考察一下脚本的来源以及获取它的站点的可靠性是值得的。<br>
 <br>
-4.1 ׷����Դ<br>
+4.1 追根求源<br>
 <br>
-&nbsp;&nbsp;&nbsp; ĳЩWebӵ���ߡ�������ܿ������о�Դ����Ļ���������������������һ�������ġ���ѵĻ���ҵ�ԵĽű���������е�ƫ�������ĳ�������ܺõĹ�˾����һ���ĵ���ϸ�ҹ�Ϊʹ�õĽű����ýű�Ӧ�ñ��Լ�д�Ľű�����ȫһЩ��ԭ���ж������ȣ�רҵ�˲�֪�����ܱ���һЩ�����İ�ȫ©������Σ���˾��Ϊ����Ǯ�������⣬��������Դγ�û�������Щ����Ĳ�Ʒ�Ͳ�����������׬Ǯ�ˡ�<br>
-&nbsp;&nbsp;&nbsp; ����һ�������������UseNet���п���һ������õĿ�ִ���ļ�����һ����û��˵�����ˣ�û��ʲô�ĵ����Կ���Ҳû�иó�����û����Խ�����������ô�ڽ��������Լ��ķ�����֮ǰһ��Ҫ��ϸ���ǡ�Ҳ�п�����������һ�����Լ�һ������һ��CGI����ߵ���ȫ�Ϸ��Ĺ��ף�Ŀ��������ȫ���繲�����ı�̳ɹ�������Ҳ��������ĳ������ģ����б�̬��Ĭ�еģ�ֻ�뿴���Լ���ʹ���������̵��ˡ�<br>
-�����۹����������������ҵ������ʱ��Ӧ����������Щ����: 
+&nbsp;&nbsp;&nbsp; 某些Web拥有者。如果不能看到并研究源代码的话，他们甚至都不会运行一个公共的、免费的或商业性的脚本。这可能有点偏激。如果某个声誉很好的公司销售一个文档详细且广为使用的脚本，该脚本应该比自己写的脚本更安全一些。原因有二。首先，专业人才知道并能避免一些常见的安全漏洞；其次，公司是为了嫌钱而做生意，如果他们以次充好或销售那些恶意的产品就不能再做生意赚钱了。<br>
+&nbsp;&nbsp;&nbsp; 从另一方面来看，如果UseNet组中看到一个编译好的可执行文件出自一个从没听说过的人，没有什么文档可以看，也没有该程序的用户可以交流交流，那么在将它放入自己的服务器之前一定要仔细考虑。也有可能这是来自一个像自己一样的另一个CGI编程者的完全合法的贡献，目的是想让全世界共享他的编程成果。但它也可能来自某个恶意的，具有变态幽默感的，只想看到自己能使多少人清盘的人。<br>
+在评价公共的免费软件或商业性软件时，应考虑下面这些方面: 
 <ol>
-  <li><span class="text">�ýű�����һ�������õ�վ���𣿸�վ����ںܳ�һ��ʱ��������ά���ú���Webӵ�����ڷ����ļ�ǰ���м���� 
+  <li><span class="text">该脚本来自一个声誉好的站点吗？该站点存在很长一段时间了吗？它维护得好吗？Web拥有者在发布文件前进行检查吗？ 
     </span>
-  <li><span class="text">��û���㹻���ĵ�˵���ó�����ι����Լ��û����ʹ�õ���Ϣ�� </span>
-  <li><span class="text">�ж������Ѿ������˸ýű�����վ��Ը���ṩ�˿�������(����������ʱ��ȥѯ�ʣ�Webӵ���߲�������ȥ�ش��������⡣) 
+  <li><span class="text">有没有足够的文档说明该程序如何工作以及用户如何使用等信息？ </span>
+  <li><span class="text">有多少人已经下载了该脚本？该站点愿意提供顾客名单吗？(仅在有疑问时才去询问；Web拥有者不会整天去回答这类问题。) 
     </span>
-  <li><span class="text">������UseNet�����۸ýű���?����У�����˵�û��ǲ��ã����û���ᵽ�ýű����Խ�һ��������˵ļ��⡣һ���ܻ�������Ӧ�ġ� 
+  <li><span class="text">有人在UseNet上讨论该脚本吗?如果有，他们说好还是不好？如果没人提到该脚本可以进一步请求别人的见解。一般总会有人响应的。 
     </span></li>
 </ol>
 <blockquote> 
-  <p><span class="text">��ʾ<br>
-    &nbsp;&nbsp;&nbsp; �����۽ű�ʱ���������ЩuseNet��: comp.security.announce,comp.securiy.unix,�Լ�comp.infosystem.www.authority.cgi�����⻹���Է���λ��ftp.cert.org��Computer<br>
-    Emergency Response Team�����˽ⰲȫ�������ʷ���йع����Լ���ȫ������������</span></p>
+  <p><span class="text">提示<br>
+    &nbsp;&nbsp;&nbsp; 在评价脚本时检查下面这些useNet组: comp.security.announce,comp.securiy.unix,以及comp.infosystem.www.authority.cgi。另外还可以访问位于ftp.cert.org的Computer<br>
+    Emergency Response Team，以了解安全问题的历史及有关工作以及安全保护的软件。</span></p>
 </blockquote>
-<p><span class="text">5)�ýű���������û��һЩ��ĺ������Ľű���<br>
-  6)Դ�����ܵõ�����ѵĻ��м۵Ķ��С�<br>
-  7)�ó����ǲ��ǹ���������������������ǣ��������һ��������֡�<br>
-  8)��վ���Լ������˸ýű������û�У�Ϊʲô�����ҵ����վ�����иýű��𣿹���ƫ���Լ�ʱ������<br>
-  ��������ȡ��Web�����д����Ǹ������⣬��Ҫ���Ѻܶ�ʱ�䣬�ر��ǵ�����Ƚϸ���ʱ������ˡ�<br>
+<p><span class="text">5)该脚本的作者有没有一些别的好名声的脚本？<br>
+  6)源代码能得到吗？免费的或有价的都行。<br>
+  7)该程序是不是过份宣传它的能力？如果是，这可能是一个编程新手。<br>
+  8)该站点自己运行了该脚本吗？如果没有，为什么？能找到别的站点运行该脚本吗？过分偏激以及时间限制<br>
+  尽管游览取自Web的所有代码是个好主意，但要花费很多时间，特别是当代码比较复杂时更是如此。<br>
   <br>
-  &nbsp;&nbsp;&nbsp; ���磬NCSA HTTPd��̫���ˣ�һ���û�������һ����ȥ�������Ǵ�������վ��http://www.ncsa.uiuc.edu������ȴ�ܱ�֤���õ������ԣ������κ��û�����Ҫ��ʵ���ϣ��κδ�NCSA���صĶ��������б��ϵġ�<br>
-  ʵ���ϣ�Web�ϵ�����������վ���Ѿ�Ϊ�û����˴󲿷ֵļ���ƫ���Ĵ����鹤���������������ش����ǿ������õ���һ����һ�㱣������Щվ�������<br>
+  &nbsp;&nbsp;&nbsp; 例如，NCSA HTTPd就太大了，一般用户不可能一行行去读，但是从它的主站点http://www.ncsa.uiuc.edu下载它却能保证极好的完整性，满足任何用户的需要。实际上，任何从NCSA下载的东西都是有保障的。<br>
+  实际上，Web上的许多著名的站点已经为用户做了大部分的几乎偏激的代码检查工作。从它闪中下载代码是可能利用的另一层另一层保护。这些站点包括：<br>
   </span>
 <ul>
   <p><span class="text">ftp://ftp.ncsa.uiuc.edu/Web/httpd/Unix/ncsa_httpd/cgi(the 
@@ -457,15 +457,15 @@ CGI Webվ�����ҵ�����һ���򵥵İ�װ������ӵ�и��ļ����û������Ƿ�����ָ�����û��
     http://sweetbay.will.uiuc.edu/cgi++(cgi++)<br>
     http://www.aee.com/wdw(the Web Developers Warehouse)</span></p>
 </ul>
-<p><span class="text">4.2 ע����ò<br>
+<p><span class="text">4.2 注意礼貌<br>
   <br>
-  &nbsp;&nbsp;&nbsp; ������ȷʵϣ����Web������һЩCGI���룬����������ʹ���������������Լ���д�ĸ�������һ���֣���Ӧ�˽�һЩ���顣<br>
-  &nbsp;&nbsp;&nbsp; �������÷ѵĲ�����ζ�ſ������ɵ��������Լ��������κ����顣ͨ������Ϳ��ǽ�ֹ�����ģ����ԭʼ����û�з������Ȩ�����������������ʹ�øó������磬���߿��ܽ�ֹ��ɢ�ýű�������ֹ������Ľű���һ���֡�<br>
-  &nbsp;&nbsp;&nbsp; һ����˵����ʹ�ñ��˵Ĵ���֮ǰ(��ʹ�Ѿ�ȷ�����ǰ�ȫ��)����������߽�����ϵȡ�����ɡ������������Ƚ�����ò�����󲿷�����£����߻�ܸ������Ĵ����ܱ��������á���Ȼ��������Լ�����ĳ��Ƭ�δ�ע��ԭʼ���߽��Ǻ���ò�ġ�</span></p>
-<p><span class=text>ԭ���ߣ�Jeffry Dwight, Michael Erwin, Robert Nile<br>
-  ����ת����</span><span class=title3>��</span><a 
+  &nbsp;&nbsp;&nbsp; 最后，如果确实希望从Web上下载一些CGI代码，或者完整地使用它，或者用作自己编写的更大程序的一部分，还应了解一些事情。<br>
+  &nbsp;&nbsp;&nbsp; 代码是兔费的并不意味着可以自由地用它作自己想做的任何事情。通常程序和库是禁止拷贝的，如果原始作者没有放弃这个权力，他即能限制如何使用该程序。例如，作者可能禁止拆散该脚本，及禁止用作别的脚本的一部分。<br>
+  &nbsp;&nbsp;&nbsp; 一跟来说，在使用别人的代码之前(即使已经确定它是安全的)，最好与作者进行联系取得许可。至少这样做比较有礼貌。而大部分情况下，作者会很高兴他的代码能被别人利用。当然，如果在自己程序某个片段处注明原始作者将是很礼貌的。</span></p>
+<p><span class=text>原作者：Jeffry Dwight, Michael Erwin, Robert Nile<br>
+  本文转载自</span><span class=title3>《</span><a 
                   href="http://jz-dev.hb.cninfo.net/~rabbits/cgi-guide/" 
-                  target=_blank>CGI ָ��</a>��</p>
+                  target=_blank>CGI 指南</a>》</p>
 <p>&nbsp; </p>
 </body>
 </html>

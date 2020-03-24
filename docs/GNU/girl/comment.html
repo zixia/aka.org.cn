@@ -1,26 +1,26 @@
 <html>
-<head><title>GIRLԴ�ļ��е�ע�ͺͺ��滻</title></head>
+<head><title>GIRL源文件中的注释和宏替换</title></head>
 <body>
-<h1 align=center>GIRLԴ�ļ��е�ע�ͺͺ��滻</h1>
+<h1 align=center>GIRL源文件中的注释和宏替换</h1>
 <hr>
-<p>��GIRLԴ�ļ����κεط����ַ����������⣩�������Բ���ע�͡�ע�͵���ʽ��C/C++��ע����ʽ
-��ȫ��ͬ�������˵������������ʽ��
+<p>在GIRL源文件的任何地方（字符串常量除外），都可以插入注释。注释的形式和C/C++的注释形式
+完全相同，具体地说有如下两种形式：
 <ul>
-<li>�ԡ�/*����ͷ���ԡ�*/�������Ĳ��֣�
-<li>�ԡ�//����ͷ���Իس������Ĳ��֡�
+<li>以“/*”开头，以“*/”结束的部分；
+<li>以“//”开头，以回车结束的部分。
 </ul>
-<p>�����ڡ�%{���͡�%}��֮��ģ��ԡ�//����ͷ��ע�ͣ������Զ��滻�ɡ�/*��...��*/������ʽ����
-����C���Զ�ע�͵�Ҫ��
+<p>出现在“%{”和“%}”之间的，以“//”开头的注释，将被自动替换成“/*”...“*/”的形式，以
+符合C语言对注释的要求。
 <p>
-<p>��GIRL�п���ʹ�ú������ͷ�ļ����á�����ʽ��C/C++����������ĺ������ͷ�ļ����ù�����ȫ
-һ�¡�GIRL����ϵͳ�ṩ�ĺ괦������cpp����ɺ������ͷ�ļ����õĹ��������ں������ͷ�ļ�
-���õĹ��򣬲μ�C/C++��̵�˵����
+<p>在GIRL中可以使用宏代换、头文件引用。其形式和C/C++语言所定义的宏代换、头文件引用规则完全
+一致。GIRL调用系统提供的宏处理程序“cpp”完成宏代换和头文件引用的工作。关于宏代换、头文件
+引用的规则，参见C/C++编程的说明。
 <hr>
 <table align=center width=100% border=2><tr>
-<td><center><a href="index.html">������ҳ</a></center>
-<td><center><a href="module.html">��һҳ��GIRL��ģ���֧��</a></center>
-<td><center><a href="typedef.html">��һҳ��GIRL�����Ͷ���</a></center>
-<td><center><a href="malito:blazing@263.net">������ϵ</a></center>
+<td><center><a href="index.html">返回首页</a></center>
+<td><center><a href="module.html">上一页：GIRL对模块的支持</a></center>
+<td><center><a href="typedef.html">下一页：GIRL的类型定义</a></center>
+<td><center><a href="malito:blazing@263.net">与我联系</a></center>
 </tr></table>
 </body>
 </html>
